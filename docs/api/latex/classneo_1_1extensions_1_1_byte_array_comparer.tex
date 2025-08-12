@@ -1,0 +1,387 @@
+\doxysection{neo\+::extensions\+::Byte\+Array\+Comparer Class Reference}
+\hypertarget{classneo_1_1extensions_1_1_byte_array_comparer}{}\label{classneo_1_1extensions_1_1_byte_array_comparer}\index{neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}}
+
+
+\doxylink{classneo_1_1extensions_1_1_utility}{Utility} class for comparing byte arrays.  
+
+
+
+
+{\ttfamily \#include $<$byte\+\_\+array\+\_\+comparer.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_comparer_1_1_equal}{Equal}}
+\begin{DoxyCompactList}\small\item\em Functor for equality comparison. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_comparer_1_1_hash}{Hash}}
+\begin{DoxyCompactList}\small\item\em Functor for hash generation. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_comparer_1_1_less}{Less}}
+\begin{DoxyCompactList}\small\item\em Functor for using as std\+::map or std\+::set comparator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_ab6fa9628798b318f04ca7bab53ff85d8}{Compare}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&left, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&right)
+\begin{DoxyCompactList}\small\item\em Compare two byte spans lexicographically. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_a5df6b1b500491b78b3d4f608044010f6}{Compare}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&left, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&right)
+\begin{DoxyCompactList}\small\item\em Compare two byte vectors lexicographically. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_addd1a38a865fccccf5a43a32a0f5e707}{Compare}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&left, const std\+::vector$<$ uint8\+\_\+t $>$ \&right)
+\begin{DoxyCompactList}\small\item\em Compare two std\+::vector$<$uint8\+\_\+t$>$ lexicographically. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_ae4f3b876779a3e985b0e086476aa9187}{Equals}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&left, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&right)
+\begin{DoxyCompactList}\small\item\em Check if two byte spans are equal. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_adbe3dc73c7dde6034ccf07c3e99eb4d7}{Equals}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&left, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&right)
+\begin{DoxyCompactList}\small\item\em Check if two byte vectors are equal. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_a831356e17946362c9c98048516688433}{Equals}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&left, const std\+::vector$<$ uint8\+\_\+t $>$ \&right)
+\begin{DoxyCompactList}\small\item\em Check if two std\+::vector$<$uint8\+\_\+t$>$ are equal. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_a5f53910ca548286df09a78a2da5466d0}{Starts\+With}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&left, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&right)
+\begin{DoxyCompactList}\small\item\em Check if left array starts with right array. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_a5662d0c75aabb05bf4c25e4b74a3736b}{Ends\+With}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&left, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&right)
+\begin{DoxyCompactList}\small\item\em Check if left array ends with right array. \end{DoxyCompactList}\item 
+static size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_a73d36cc70170be545f93687d97e0a131}{Get\+Hash\+Code}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Generate hash code for byte span. \end{DoxyCompactList}\item 
+static size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_a048f19c59fe2fef6e40f811b72ac9b91}{Get\+Hash\+Code}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data)
+\begin{DoxyCompactList}\small\item\em Generate hash code for byte vector. \end{DoxyCompactList}\item 
+static size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_a55a3ee74d7ab7de23c2c67c5f9a708e4}{Find\+First}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&pattern)
+\begin{DoxyCompactList}\small\item\em Find first occurrence of pattern in data. \end{DoxyCompactList}\item 
+static size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_a1a78897b09b3d337a0c3fb0a8b64e4c6}{Find\+Last}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&pattern)
+\begin{DoxyCompactList}\small\item\em Find last occurrence of pattern in data. \end{DoxyCompactList}\item 
+static const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_a88c000b001b28ce11e131d8e475c7def}{Min}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&left, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&right)
+\begin{DoxyCompactList}\small\item\em Get minimum of two byte arrays. \end{DoxyCompactList}\item 
+static const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_ab6a5a6481ff358e381bd03ec4d9fa089}{Max}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&left, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&right)
+\begin{DoxyCompactList}\small\item\em Get maximum of two byte arrays. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1extensions_1_1_utility}{Utility} class for comparing byte arrays. 
+
+\hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_autotoc_md14}{}\doxysubsubsection{\texorpdfstring{Overview}{Overview}}\label{classneo_1_1extensions_1_1_byte_array_comparer_autotoc_md14}
+Provides comprehensive comparison functions for byte arrays, vectors, and spans. Supports lexicographic ordering, equality checking, and custom comparison operations.\hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_autotoc_md15}{}\doxysubsubsection{\texorpdfstring{API Reference}{API Reference}}\label{classneo_1_1extensions_1_1_byte_array_comparer_autotoc_md15}
+
+\begin{DoxyItemize}
+\item {\bfseries{Equality}}\+: Compare for exact byte-\/by-\/byte equality
+\item {\bfseries{Ordering}}\+: Lexicographic comparison for sorting
+\item {\bfseries{Utilities}}\+: \doxylink{structneo_1_1extensions_1_1_byte_array_comparer_1_1_hash}{Hash} code generation, prefix matching
+\end{DoxyItemize}\hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_autotoc_md16}{}\doxysubsubsection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{classneo_1_1extensions_1_1_byte_array_comparer_autotoc_md16}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Compare\ two\ byte\ vectors}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ result\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_ab6fa9628798b318f04ca7bab53ff85d8}{ByteArrayComparer::Compare}}(vec1,\ vec2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Check\ equality}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ equal\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_ae4f3b876779a3e985b0e086476aa9187}{ByteArrayComparer::Equals}}(span1,\ span2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Generate\ hash\ code}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ \mbox{\hyperlink{namespacedetail_a9dd43d16a6a490b032ceaca358755a29}{hash}}\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_comparer_a73d36cc70170be545f93687d97e0a131}{ByteArrayComparer::GetHashCode}}(data);}
+
+\end{DoxyCode}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_ab6fa9628798b318f04ca7bab53ff85d8}\index{neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}!Compare@{Compare}}
+\index{Compare@{Compare}!neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}}
+\doxysubsubsection{\texorpdfstring{Compare()}{Compare()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_comparer_ab6fa9628798b318f04ca7bab53ff85d8} 
+int neo\+::extensions\+::\+Byte\+Array\+Comparer\+::\+Compare (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{left}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Compare two byte spans lexicographically. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First byte span \\
+\hline
+{\em right} & Second byte span \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if left \texorpdfstring{$<$}{<} right, 0 if equal, 1 if left \texorpdfstring{$>$}{>} right 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_a5df6b1b500491b78b3d4f608044010f6}\index{neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}!Compare@{Compare}}
+\index{Compare@{Compare}!neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}}
+\doxysubsubsection{\texorpdfstring{Compare()}{Compare()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_comparer_a5df6b1b500491b78b3d4f608044010f6} 
+int neo\+::extensions\+::\+Byte\+Array\+Comparer\+::\+Compare (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{left}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Compare two byte vectors lexicographically. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First byte vector \\
+\hline
+{\em right} & Second byte vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if left \texorpdfstring{$<$}{<} right, 0 if equal, 1 if left \texorpdfstring{$>$}{>} right 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_addd1a38a865fccccf5a43a32a0f5e707}\index{neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}!Compare@{Compare}}
+\index{Compare@{Compare}!neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}}
+\doxysubsubsection{\texorpdfstring{Compare()}{Compare()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_comparer_addd1a38a865fccccf5a43a32a0f5e707} 
+int neo\+::extensions\+::\+Byte\+Array\+Comparer\+::\+Compare (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{left}{, }\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Compare two std\+::vector$<$uint8\+\_\+t$>$ lexicographically. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First vector \\
+\hline
+{\em right} & Second vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if left \texorpdfstring{$<$}{<} right, 0 if equal, 1 if left \texorpdfstring{$>$}{>} right 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_a5662d0c75aabb05bf4c25e4b74a3736b}\index{neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}!EndsWith@{EndsWith}}
+\index{EndsWith@{EndsWith}!neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}}
+\doxysubsubsection{\texorpdfstring{EndsWith()}{EndsWith()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_comparer_a5662d0c75aabb05bf4c25e4b74a3736b} 
+bool neo\+::extensions\+::\+Byte\+Array\+Comparer\+::\+Ends\+With (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{left}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if left array ends with right array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & Array to check \\
+\hline
+{\em right} & Suffix to look for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if left ends with right 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_ae4f3b876779a3e985b0e086476aa9187}\index{neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}!Equals@{Equals}}
+\index{Equals@{Equals}!neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}}
+\doxysubsubsection{\texorpdfstring{Equals()}{Equals()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_comparer_ae4f3b876779a3e985b0e086476aa9187} 
+bool neo\+::extensions\+::\+Byte\+Array\+Comparer\+::\+Equals (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{left}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if two byte spans are equal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First byte span \\
+\hline
+{\em right} & Second byte span \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if equal, false otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_adbe3dc73c7dde6034ccf07c3e99eb4d7}\index{neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}!Equals@{Equals}}
+\index{Equals@{Equals}!neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}}
+\doxysubsubsection{\texorpdfstring{Equals()}{Equals()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_comparer_adbe3dc73c7dde6034ccf07c3e99eb4d7} 
+bool neo\+::extensions\+::\+Byte\+Array\+Comparer\+::\+Equals (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{left}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if two byte vectors are equal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First byte vector \\
+\hline
+{\em right} & Second byte vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if equal, false otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_a831356e17946362c9c98048516688433}\index{neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}!Equals@{Equals}}
+\index{Equals@{Equals}!neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}}
+\doxysubsubsection{\texorpdfstring{Equals()}{Equals()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_comparer_a831356e17946362c9c98048516688433} 
+bool neo\+::extensions\+::\+Byte\+Array\+Comparer\+::\+Equals (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{left}{, }\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if two std\+::vector$<$uint8\+\_\+t$>$ are equal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First vector \\
+\hline
+{\em right} & Second vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if equal, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_a55a3ee74d7ab7de23c2c67c5f9a708e4}\index{neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}!FindFirst@{FindFirst}}
+\index{FindFirst@{FindFirst}!neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}}
+\doxysubsubsection{\texorpdfstring{FindFirst()}{FindFirst()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_comparer_a55a3ee74d7ab7de23c2c67c5f9a708e4} 
+size\+\_\+t neo\+::extensions\+::\+Byte\+Array\+Comparer\+::\+Find\+First (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{pattern}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Find first occurrence of pattern in data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Data to search in \\
+\hline
+{\em pattern} & Pattern to find \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Index of first occurrence, or SIZE\+\_\+\+MAX if not found 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_a1a78897b09b3d337a0c3fb0a8b64e4c6}\index{neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}!FindLast@{FindLast}}
+\index{FindLast@{FindLast}!neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}}
+\doxysubsubsection{\texorpdfstring{FindLast()}{FindLast()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_comparer_a1a78897b09b3d337a0c3fb0a8b64e4c6} 
+size\+\_\+t neo\+::extensions\+::\+Byte\+Array\+Comparer\+::\+Find\+Last (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{pattern}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Find last occurrence of pattern in data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Data to search in \\
+\hline
+{\em pattern} & Pattern to find \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Index of last occurrence, or SIZE\+\_\+\+MAX if not found 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_a73d36cc70170be545f93687d97e0a131}\index{neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_comparer_a73d36cc70170be545f93687d97e0a131} 
+size\+\_\+t neo\+::extensions\+::\+Byte\+Array\+Comparer\+::\+Get\+Hash\+Code (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generate hash code for byte span. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Byte span to hash \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structneo_1_1extensions_1_1_byte_array_comparer_1_1_hash}{Hash} code 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_a048f19c59fe2fef6e40f811b72ac9b91}\index{neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_comparer_a048f19c59fe2fef6e40f811b72ac9b91} 
+size\+\_\+t neo\+::extensions\+::\+Byte\+Array\+Comparer\+::\+Get\+Hash\+Code (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generate hash code for byte vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Byte vector to hash \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structneo_1_1extensions_1_1_byte_array_comparer_1_1_hash}{Hash} code 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_ab6a5a6481ff358e381bd03ec4d9fa089}\index{neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}!Max@{Max}}
+\index{Max@{Max}!neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}}
+\doxysubsubsection{\texorpdfstring{Max()}{Max()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_comparer_ab6a5a6481ff358e381bd03ec4d9fa089} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::extensions\+::\+Byte\+Array\+Comparer\+::\+Max (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{left}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get maximum of two byte arrays. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First array \\
+\hline
+{\em right} & Second array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the larger array 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_a88c000b001b28ce11e131d8e475c7def}\index{neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}!Min@{Min}}
+\index{Min@{Min}!neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}}
+\doxysubsubsection{\texorpdfstring{Min()}{Min()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_comparer_a88c000b001b28ce11e131d8e475c7def} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::extensions\+::\+Byte\+Array\+Comparer\+::\+Min (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{left}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get minimum of two byte arrays. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First array \\
+\hline
+{\em right} & Second array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the smaller array 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_comparer_a5f53910ca548286df09a78a2da5466d0}\index{neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}!StartsWith@{StartsWith}}
+\index{StartsWith@{StartsWith}!neo::extensions::ByteArrayComparer@{neo::extensions::ByteArrayComparer}}
+\doxysubsubsection{\texorpdfstring{StartsWith()}{StartsWith()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_comparer_a5f53910ca548286df09a78a2da5466d0} 
+bool neo\+::extensions\+::\+Byte\+Array\+Comparer\+::\+Starts\+With (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{left}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if left array starts with right array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & Array to check \\
+\hline
+{\em right} & Prefix to look for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if left starts with right 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/extensions/\mbox{\hyperlink{byte__array__comparer_8h}{byte\+\_\+array\+\_\+comparer.\+h}}\item 
+src/extensions/\mbox{\hyperlink{byte__array__comparer_8cpp}{byte\+\_\+array\+\_\+comparer.\+cpp}}\end{DoxyCompactItemize}

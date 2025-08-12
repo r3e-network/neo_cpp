@@ -1,0 +1,33 @@
+\doxysection{merkletree.\+h}
+\hypertarget{merkletree_8h_source}{}\label{merkletree_8h_source}\index{include/neo/cryptography/merkletree.h@{include/neo/cryptography/merkletree.h}}
+\mbox{\hyperlink{merkletree_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cryptography}{neo::cryptography}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1_merkle_tree}{MerkleTree}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{static}\ std::optional<io::UInt256>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_merkle_tree_a3492b2be41a5d8355d18094b0b05df89}{ComputeRootOptional}}(\textcolor{keyword}{const}\ std::vector<io::UInt256>\&\ hashes);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<io::UInt256>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_merkle_tree_adfd125fede5eb5a5791bdbd453b93824}{ComputePath}}(\textcolor{keyword}{const}\ std::vector<io::UInt256>\&\ hashes,\ \textcolor{keywordtype}{size\_t}\ index);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_merkle_tree_a5f309d4f5f950337235c61e830f23ed0}{VerifyPath}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ leaf,\ \textcolor{keyword}{const}\ std::vector<io::UInt256>\&\ path,\ \textcolor{keywordtype}{size\_t}\ index,}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ root);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_merkle_tree_a7ff59d2461b31524567790673ba5e7cc}{ComputeRoot}}(std::vector<io::UInt256>\ hashes);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_merkle_tree_a3c921ec593629214541ff6d5a6654f44}{ComputeParent}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ right);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<io::UInt256>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_merkle_tree_a2ace479e156ff9d991ced12579c4bf14}{GetProof}}(\textcolor{keyword}{const}\ std::vector<io::UInt256>\&\ hashes,\ \textcolor{keywordtype}{size\_t}\ index);}
+\DoxyCodeLine{00066\ \};}
+\DoxyCodeLine{00067\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cryptography}}
+
+\end{DoxyCode}

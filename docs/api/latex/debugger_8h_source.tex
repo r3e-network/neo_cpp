@@ -1,0 +1,39 @@
+\doxysection{debugger.\+h}
+\hypertarget{debugger_8h_source}{}\label{debugger_8h_source}\index{include/neo/vm/debugger.h@{include/neo/vm/debugger.h}}
+\mbox{\hyperlink{debugger_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{execution__engine_8h}{neo/vm/execution\_engine.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_debugger_af40efc70bb2769d5310df44f1cc87024}{Debugger}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_af40efc70bb2769d5310df44f1cc87024}{Debugger}}(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{ExecutionEngine}}\&\ engine);}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_ab12a2898a19c6c820cd44c699041fc3d}{Execute}}();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_a5418500fde0e95c4fcd47e36e95e3d61}{StepInto}}();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_afafac2a4026fa92f6a7b02c2cbf8ed64}{StepOver}}();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_ae46c2b6101f5d5be8d8c0120c0f56788}{StepOut}}();}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_af226b48da8e4c496c81f6232da5d5bf2}{AddBreakPoint}}(\textcolor{keywordtype}{int}\ position);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_ae932b748e39df9c01bb39ae6bcef2fb0}{RemoveBreakPoint}}(\textcolor{keywordtype}{int}\ position);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_a6b4384b0449583dae84faf36f18d8643}{ClearBreakPoints}}();}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{ExecutionEngine}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_a25b9948ffa45e55ed6366bb10974c0ba}{engine\_}};}
+\DoxyCodeLine{00064\ \ \ \ \ std::unordered\_set<int>\ \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_a7a58606ba3b85b961f75f78106d3bcbd}{breakpoints\_}};}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_ab5e695fa2a9c65a78272ceed915019fd}{initialContextCount\_}}\ =\ 0;}
+\DoxyCodeLine{00066\ \};}
+\DoxyCodeLine{00067\ \}\ \ \textcolor{comment}{//\ namespace\ neo::vm}}
+
+\end{DoxyCode}

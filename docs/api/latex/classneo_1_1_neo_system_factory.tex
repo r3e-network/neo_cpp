@@ -1,0 +1,96 @@
+\doxysection{neo\+::Neo\+System\+Factory Class Reference}
+\hypertarget{classneo_1_1_neo_system_factory}{}\label{classneo_1_1_neo_system_factory}\index{neo::NeoSystemFactory@{neo::NeoSystemFactory}}
+
+
+Factory class for creating \doxylink{classneo_1_1_neo_system}{Neo\+System} instances with proper shared\+\_\+ptr management.  
+
+
+
+
+{\ttfamily \#include $<$neo\+\_\+system\+\_\+factory.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1_neo_system}{Neo\+System}} $>$ \mbox{\hyperlink{classneo_1_1_neo_system_factory_a500791f4d862b82d70f9cf3cfec3e6e5}{Create}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} $>$ settings, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider}{persistence\+::\+IStore\+Provider}} $>$ storage\+\_\+provider, const std\+::string \&storage\+\_\+path="{}"{})
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{classneo_1_1_neo_system}{Neo\+System} instance with the specified settings and storage provider. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1_neo_system}{Neo\+System}} $>$ \mbox{\hyperlink{classneo_1_1_neo_system_factory_aa05c37816c279ac46286d66aeb577395}{Create}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} $>$ settings, const std\+::string \&storage\+\_\+provider\+\_\+name="{}memory"{}, const std\+::string \&storage\+\_\+path="{}"{})
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{classneo_1_1_neo_system}{Neo\+System} instance with the specified settings and storage provider name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1_neo_system_factory_ad66e8e0f2518644f0c0df09459d7899f}{Neo\+System\+Factory}} ()=delete
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Factory class for creating \doxylink{classneo_1_1_neo_system}{Neo\+System} instances with proper shared\+\_\+ptr management. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1_neo_system_factory_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1_neo_system_factory_ad66e8e0f2518644f0c0df09459d7899f}\index{neo::NeoSystemFactory@{neo::NeoSystemFactory}!NeoSystemFactory@{NeoSystemFactory}}
+\index{NeoSystemFactory@{NeoSystemFactory}!neo::NeoSystemFactory@{neo::NeoSystemFactory}}
+\doxysubsubsection{\texorpdfstring{NeoSystemFactory()}{NeoSystemFactory()}}
+{\footnotesize\ttfamily \label{classneo_1_1_neo_system_factory_ad66e8e0f2518644f0c0df09459d7899f} 
+neo\+::\+Neo\+System\+Factory\+::\+Neo\+System\+Factory (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1_neo_system_factory_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1_neo_system_factory_aa05c37816c279ac46286d66aeb577395}\index{neo::NeoSystemFactory@{neo::NeoSystemFactory}!Create@{Create}}
+\index{Create@{Create}!neo::NeoSystemFactory@{neo::NeoSystemFactory}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1_neo_system_factory_aa05c37816c279ac46286d66aeb577395} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1_neo_system}{Neo\+System}} $>$ neo\+::\+Neo\+System\+Factory\+::\+Create (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} $>$}]{settings}{, }\item[{const std\+::string \&}]{storage\+\_\+provider\+\_\+name}{ = {\ttfamily "{}memory"{}}, }\item[{const std\+::string \&}]{storage\+\_\+path}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \doxylink{classneo_1_1_neo_system}{Neo\+System} instance with the specified settings and storage provider name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em settings} & The protocol settings for this Neo system \\
+\hline
+{\em storage\+\_\+provider\+\_\+name} & The name of the storage provider to use (default\+: "{}memory"{}) \\
+\hline
+{\em storage\+\_\+path} & The path for persistent storage (ignored for memory provider) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Shared pointer to the created \doxylink{classneo_1_1_neo_system}{Neo\+System} 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1_neo_system_factory_a500791f4d862b82d70f9cf3cfec3e6e5}\index{neo::NeoSystemFactory@{neo::NeoSystemFactory}!Create@{Create}}
+\index{Create@{Create}!neo::NeoSystemFactory@{neo::NeoSystemFactory}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1_neo_system_factory_a500791f4d862b82d70f9cf3cfec3e6e5} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1_neo_system}{Neo\+System}} $>$ neo\+::\+Neo\+System\+Factory\+::\+Create (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} $>$}]{settings}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider}{persistence\+::\+IStore\+Provider}} $>$}]{storage\+\_\+provider}{, }\item[{const std\+::string \&}]{storage\+\_\+path}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \doxylink{classneo_1_1_neo_system}{Neo\+System} instance with the specified settings and storage provider. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em settings} & The protocol settings for this Neo system \\
+\hline
+{\em storage\+\_\+provider} & The storage provider to use \\
+\hline
+{\em storage\+\_\+path} & The path for persistent storage \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Shared pointer to the created \doxylink{classneo_1_1_neo_system}{Neo\+System} 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{neo__system__factory_8h}{neo\+\_\+system\+\_\+factory.\+h}}\item 
+src/core/\mbox{\hyperlink{neo__system__factory_8cpp}{neo\+\_\+system\+\_\+factory.\+cpp}}\end{DoxyCompactItemize}

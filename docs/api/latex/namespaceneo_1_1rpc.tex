@@ -1,0 +1,267 @@
+\doxysection{neo\+::rpc Namespace Reference}
+\hypertarget{namespaceneo_1_1rpc}{}\label{namespaceneo_1_1rpc}\index{neo::rpc@{neo::rpc}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client}{IHttp\+Client}}
+\begin{DoxyCompactList}\small\item\em HTTP client interface for making HTTP requests. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1rpc_1_1_method_rate_limiter}{Method\+Rate\+Limiter}}
+\begin{DoxyCompactList}\small\item\em Method-\/specific rate limiter with different limits per method. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter}{Rate\+Limiter}}
+\begin{DoxyCompactList}\small\item\em Token bucket rate limiter for RPC endpoints. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client}{Rpc\+Client}}
+\begin{DoxyCompactList}\small\item\em RPC client for making calls to Neo nodes. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1rpc_1_1_rpc_config}{Rpc\+Config}}
+\begin{DoxyCompactList}\small\item\em RPC server configuration. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods}{RPCMethods}}
+\begin{DoxyCompactList}\small\item\em Provides RPC methods. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request}{Rpc\+Request}}
+\begin{DoxyCompactList}\small\item\em Represents an RPC request. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response}}
+\begin{DoxyCompactList}\small\item\em Represents an RPC response. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{Rpc\+Server}}
+\begin{DoxyCompactList}\small\item\em JSON-\/\+RPC 2.\+0 server implementation for Neo. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl}{Rpc\+Server\+Impl}}
+\item 
+class \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_session_manager}{Rpc\+Session\+Manager}}
+\item 
+class \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_validation}{Rpc\+Validation}}
+\begin{DoxyCompactList}\small\item\em RPC parameter validation utilities. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1rpc_1_1_simple_http_client}{Simple\+Http\+Client}}
+\begin{DoxyCompactList}\small\item\em Simple HTTP client implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1rpc_ae59496dacbfe510de572856b2cc6bf5f}{Rpc\+Method\+Handler}} = std\+::function$<$\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}}(const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}}\& params)$>$
+\begin{DoxyCompactList}\small\item\em RPC method handler function type. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespaceneo_1_1rpc_a32244ac70068079f000691d1ba129402}{json}} = nlohmann\+::json
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444df}{Rpc\+Error}} \+: int \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfae41199faa7290c167f70f314c5e6c165}{Parse\+Error}} = -\/32700
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfad544eb3da2f68d24cf92a8519ed53a31}{Invalid\+Request}} = -\/32600
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa011fb1f694f7b928964b898fc5d0ca5c}{Method\+Not\+Found}} = -\/32601
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfad4c4700b7580ce00c94ddf7b363de696}{Invalid\+Params}} = -\/32602
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa8462b58246e70e5c83e5b939a9332cb5}{Internal\+Error}} = -\/32603
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa16461fe6ee0203b1459e0dfde67ad6aa}{Invalid\+Block\+Index}} = -\/100
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa005a7ef5c05d0f5144c5ae4c13e3c07a}{Invalid\+Block\+Hash}} = -\/101
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfab27dafdc5272249d05bf3747fcf45572}{Invalid\+Transaction\+Hash}} = -\/102
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa37ee560e952dca34f4454d8eadf39d10}{Invalid\+Contract\+Hash}} = -\/103
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfae73c6fdc0c9755fd108e7105f5ae5984}{Unknown\+Block}} = -\/104
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa1b2cfd4159b25f1e06ebd7003c788985}{Unknown\+Transaction}} = -\/105
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfabf21bb521a33136f645325635cc5da1b}{Unknown\+Contract}} = -\/106
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa09d9ff5c9cf461998dc29f4c90f2c60c}{Insufficient\+Funds}} = -\/107
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa351caf723532f9ba7a371b5dfa868eed}{Invalid\+Signature}} = -\/108
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfac7c6ed78835571574206e575db1c719b}{Invalid\+Script}} = -\/109
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa49069827e26a70a158193ed0595b485b}{Invalid\+Attribute}} = -\/110
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa29a1c64a7b67b37c3dc14b57f058b6db}{Invalid\+Witness}} = -\/111
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa57cf8a557bcdf4ee3d16eda354d95bfa}{Policy\+Failed}} = -\/112
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa88183b946cc5f0e8c96b2e66e1c74a7e}{Unknown}} = -\/113
+ \}
+\begin{DoxyCompactList}\small\item\em JSON-\/\+RPC error codes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_session_manager}{Rpc\+Session\+Manager}} $>$ \mbox{\hyperlink{namespaceneo_1_1rpc_a0e255d6e95e32967de8f4a799f9cb5f7}{Get\+Rpc\+Session\+Manager}} ()
+\item 
+nlohmann\+::json \mbox{\hyperlink{namespaceneo_1_1rpc_a9d00ff7fab9f5024fd83ba6816cbb84c}{Convert\+Stack\+Item\+To\+Json}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ item)
+\item 
+void \mbox{\hyperlink{namespaceneo_1_1rpc_a6c6e726b117d6aab99c3c11ab9f5c52a}{Log\+Session\+Termination}} (const std\+::string \&session\+Id)
+\item 
+static nlohmann\+::json \mbox{\hyperlink{namespaceneo_1_1rpc_acbb1c92e76a6ba40f2a56e6da8d44316}{Transaction\+To\+Json}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} $>$ tx, bool verbose)
+\item 
+static nlohmann\+::json \mbox{\hyperlink{namespaceneo_1_1rpc_a4d5e850f59de0d4e7d8582b1a7c2f19b}{Block\+To\+Json}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ block, bool verbose)
+\item 
+static nlohmann\+::json \mbox{\hyperlink{namespaceneo_1_1rpc_a6eeea40090eb7bb4253705bceb284511}{Contract\+To\+Json}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{smartcontract\+::\+Contract\+State}} $>$ contract)
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl}{Rpc\+Server\+Impl}} $>$ \mbox{\hyperlink{namespaceneo_1_1rpc_aa8b3691a02a3cd02186a432177e6e2b4}{Create\+Rpc\+Server}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ neo\+System, uint16\+\_\+t port, bool enable\+Cors, bool enable\+Auth, const std\+::string \&username, const std\+::string \&password)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_session_manager}{Rpc\+Session\+Manager}} $>$ \mbox{\hyperlink{namespaceneo_1_1rpc_ab40808d84a22f388e60a76491188fa5f}{g\+\_\+rpc\+\_\+session\+\_\+manager}} = std\+::make\+\_\+shared$<$\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_session_manager}{Rpc\+Session\+Manager}}$>$()
+\end{DoxyCompactItemize}
+
+
+\label{doc-typedef-members}
+\Hypertarget{namespaceneo_1_1rpc_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{namespaceneo_1_1rpc_a32244ac70068079f000691d1ba129402}\index{neo::rpc@{neo::rpc}!json@{json}}
+\index{json@{json}!neo::rpc@{neo::rpc}}
+\doxysubsubsection{\texorpdfstring{json}{json}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1rpc_a32244ac70068079f000691d1ba129402} 
+using \mbox{\hyperlink{namespaceneo_1_1rpc_a32244ac70068079f000691d1ba129402}{neo\+::rpc\+::json}} = nlohmann\+::json}
+
+\Hypertarget{namespaceneo_1_1rpc_ae59496dacbfe510de572856b2cc6bf5f}\index{neo::rpc@{neo::rpc}!RpcMethodHandler@{RpcMethodHandler}}
+\index{RpcMethodHandler@{RpcMethodHandler}!neo::rpc@{neo::rpc}}
+\doxysubsubsection{\texorpdfstring{RpcMethodHandler}{RpcMethodHandler}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1rpc_ae59496dacbfe510de572856b2cc6bf5f} 
+using \mbox{\hyperlink{namespaceneo_1_1rpc_ae59496dacbfe510de572856b2cc6bf5f}{neo\+::rpc\+::\+Rpc\+Method\+Handler}} = std\+::function$<$\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}}(const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}}\& params)$>$}
+
+
+
+RPC method handler function type. 
+
+
+
+\label{doc-enum-members}
+\Hypertarget{namespaceneo_1_1rpc_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444df}\index{neo::rpc@{neo::rpc}!RpcError@{RpcError}}
+\index{RpcError@{RpcError}!neo::rpc@{neo::rpc}}
+\doxysubsubsection{\texorpdfstring{RpcError}{RpcError}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444df} 
+enum class \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444df}{neo\+::rpc\+::\+Rpc\+Error}} \+: int\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+JSON-\/\+RPC error codes. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ParseError@{ParseError}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!ParseError@{ParseError}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfae41199faa7290c167f70f314c5e6c165}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfae41199faa7290c167f70f314c5e6c165} 
+Parse\+Error&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidRequest@{InvalidRequest}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!InvalidRequest@{InvalidRequest}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfad544eb3da2f68d24cf92a8519ed53a31}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfad544eb3da2f68d24cf92a8519ed53a31} 
+Invalid\+Request&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MethodNotFound@{MethodNotFound}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!MethodNotFound@{MethodNotFound}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa011fb1f694f7b928964b898fc5d0ca5c}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa011fb1f694f7b928964b898fc5d0ca5c} 
+Method\+Not\+Found&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidParams@{InvalidParams}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!InvalidParams@{InvalidParams}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfad4c4700b7580ce00c94ddf7b363de696}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfad4c4700b7580ce00c94ddf7b363de696} 
+Invalid\+Params&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InternalError@{InternalError}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!InternalError@{InternalError}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa8462b58246e70e5c83e5b939a9332cb5}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa8462b58246e70e5c83e5b939a9332cb5} 
+Internal\+Error&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidBlockIndex@{InvalidBlockIndex}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!InvalidBlockIndex@{InvalidBlockIndex}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa16461fe6ee0203b1459e0dfde67ad6aa}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa16461fe6ee0203b1459e0dfde67ad6aa} 
+Invalid\+Block\+Index&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidBlockHash@{InvalidBlockHash}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!InvalidBlockHash@{InvalidBlockHash}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa005a7ef5c05d0f5144c5ae4c13e3c07a}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa005a7ef5c05d0f5144c5ae4c13e3c07a} 
+Invalid\+Block\+Hash&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidTransactionHash@{InvalidTransactionHash}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!InvalidTransactionHash@{InvalidTransactionHash}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfab27dafdc5272249d05bf3747fcf45572}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfab27dafdc5272249d05bf3747fcf45572} 
+Invalid\+Transaction\+Hash&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidContractHash@{InvalidContractHash}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!InvalidContractHash@{InvalidContractHash}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa37ee560e952dca34f4454d8eadf39d10}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa37ee560e952dca34f4454d8eadf39d10} 
+Invalid\+Contract\+Hash&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UnknownBlock@{UnknownBlock}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!UnknownBlock@{UnknownBlock}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfae73c6fdc0c9755fd108e7105f5ae5984}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfae73c6fdc0c9755fd108e7105f5ae5984} 
+Unknown\+Block&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UnknownTransaction@{UnknownTransaction}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!UnknownTransaction@{UnknownTransaction}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa1b2cfd4159b25f1e06ebd7003c788985}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa1b2cfd4159b25f1e06ebd7003c788985} 
+Unknown\+Transaction&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UnknownContract@{UnknownContract}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!UnknownContract@{UnknownContract}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfabf21bb521a33136f645325635cc5da1b}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfabf21bb521a33136f645325635cc5da1b} 
+Unknown\+Contract&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InsufficientFunds@{InsufficientFunds}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!InsufficientFunds@{InsufficientFunds}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa09d9ff5c9cf461998dc29f4c90f2c60c}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa09d9ff5c9cf461998dc29f4c90f2c60c} 
+Insufficient\+Funds&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidSignature@{InvalidSignature}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!InvalidSignature@{InvalidSignature}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa351caf723532f9ba7a371b5dfa868eed}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa351caf723532f9ba7a371b5dfa868eed} 
+Invalid\+Signature&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidScript@{InvalidScript}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!InvalidScript@{InvalidScript}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfac7c6ed78835571574206e575db1c719b}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfac7c6ed78835571574206e575db1c719b} 
+Invalid\+Script&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidAttribute@{InvalidAttribute}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!InvalidAttribute@{InvalidAttribute}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa49069827e26a70a158193ed0595b485b}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa49069827e26a70a158193ed0595b485b} 
+Invalid\+Attribute&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidWitness@{InvalidWitness}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!InvalidWitness@{InvalidWitness}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa29a1c64a7b67b37c3dc14b57f058b6db}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa29a1c64a7b67b37c3dc14b57f058b6db} 
+Invalid\+Witness&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PolicyFailed@{PolicyFailed}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!PolicyFailed@{PolicyFailed}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa57cf8a557bcdf4ee3d16eda354d95bfa}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa57cf8a557bcdf4ee3d16eda354d95bfa} 
+Policy\+Failed&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Unknown@{Unknown}!neo::rpc@{neo::rpc}}\index{neo::rpc@{neo::rpc}!Unknown@{Unknown}}}\Hypertarget{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa88183b946cc5f0e8c96b2e66e1c74a7e}\label{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa88183b946cc5f0e8c96b2e66e1c74a7e} 
+Unknown&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{namespaceneo_1_1rpc_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceneo_1_1rpc_a4d5e850f59de0d4e7d8582b1a7c2f19b}\index{neo::rpc@{neo::rpc}!BlockToJson@{BlockToJson}}
+\index{BlockToJson@{BlockToJson}!neo::rpc@{neo::rpc}}
+\doxysubsubsection{\texorpdfstring{BlockToJson()}{BlockToJson()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1rpc_a4d5e850f59de0d4e7d8582b1a7c2f19b} 
+nlohmann\+::json neo\+::rpc\+::\+Block\+To\+Json (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$}]{block}{, }\item[{bool}]{verbose}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{namespaceneo_1_1rpc_a6eeea40090eb7bb4253705bceb284511}\index{neo::rpc@{neo::rpc}!ContractToJson@{ContractToJson}}
+\index{ContractToJson@{ContractToJson}!neo::rpc@{neo::rpc}}
+\doxysubsubsection{\texorpdfstring{ContractToJson()}{ContractToJson()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1rpc_a6eeea40090eb7bb4253705bceb284511} 
+nlohmann\+::json neo\+::rpc\+::\+Contract\+To\+Json (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{smartcontract\+::\+Contract\+State}} $>$}]{contract}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{namespaceneo_1_1rpc_a9d00ff7fab9f5024fd83ba6816cbb84c}\index{neo::rpc@{neo::rpc}!ConvertStackItemToJson@{ConvertStackItemToJson}}
+\index{ConvertStackItemToJson@{ConvertStackItemToJson}!neo::rpc@{neo::rpc}}
+\doxysubsubsection{\texorpdfstring{ConvertStackItemToJson()}{ConvertStackItemToJson()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1rpc_a9d00ff7fab9f5024fd83ba6816cbb84c} 
+nlohmann\+::json neo\+::rpc\+::\+Convert\+Stack\+Item\+To\+Json (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{namespaceneo_1_1rpc_aa8b3691a02a3cd02186a432177e6e2b4}\index{neo::rpc@{neo::rpc}!CreateRpcServer@{CreateRpcServer}}
+\index{CreateRpcServer@{CreateRpcServer}!neo::rpc@{neo::rpc}}
+\doxysubsubsection{\texorpdfstring{CreateRpcServer()}{CreateRpcServer()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1rpc_aa8b3691a02a3cd02186a432177e6e2b4} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl}{Rpc\+Server\+Impl}} $>$ neo\+::rpc\+::\+Create\+Rpc\+Server (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$}]{neo\+System}{, }\item[{uint16\+\_\+t}]{port}{, }\item[{bool}]{enable\+Cors}{, }\item[{bool}]{enable\+Auth}{, }\item[{const std\+::string \&}]{username}{, }\item[{const std\+::string \&}]{password}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceneo_1_1rpc_a0e255d6e95e32967de8f4a799f9cb5f7}\index{neo::rpc@{neo::rpc}!GetRpcSessionManager@{GetRpcSessionManager}}
+\index{GetRpcSessionManager@{GetRpcSessionManager}!neo::rpc@{neo::rpc}}
+\doxysubsubsection{\texorpdfstring{GetRpcSessionManager()}{GetRpcSessionManager()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1rpc_a0e255d6e95e32967de8f4a799f9cb5f7} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_session_manager}{Rpc\+Session\+Manager}} $>$ neo\+::rpc\+::\+Get\+Rpc\+Session\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceneo_1_1rpc_a6c6e726b117d6aab99c3c11ab9f5c52a}\index{neo::rpc@{neo::rpc}!LogSessionTermination@{LogSessionTermination}}
+\index{LogSessionTermination@{LogSessionTermination}!neo::rpc@{neo::rpc}}
+\doxysubsubsection{\texorpdfstring{LogSessionTermination()}{LogSessionTermination()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1rpc_a6c6e726b117d6aab99c3c11ab9f5c52a} 
+void neo\+::rpc\+::\+Log\+Session\+Termination (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{session\+Id}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceneo_1_1rpc_acbb1c92e76a6ba40f2a56e6da8d44316}\index{neo::rpc@{neo::rpc}!TransactionToJson@{TransactionToJson}}
+\index{TransactionToJson@{TransactionToJson}!neo::rpc@{neo::rpc}}
+\doxysubsubsection{\texorpdfstring{TransactionToJson()}{TransactionToJson()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1rpc_acbb1c92e76a6ba40f2a56e6da8d44316} 
+nlohmann\+::json neo\+::rpc\+::\+Transaction\+To\+Json (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} $>$}]{tx}{, }\item[{bool}]{verbose}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-var-members}
+\Hypertarget{namespaceneo_1_1rpc_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceneo_1_1rpc_ab40808d84a22f388e60a76491188fa5f}\index{neo::rpc@{neo::rpc}!g\_rpc\_session\_manager@{g\_rpc\_session\_manager}}
+\index{g\_rpc\_session\_manager@{g\_rpc\_session\_manager}!neo::rpc@{neo::rpc}}
+\doxysubsubsection{\texorpdfstring{g\_rpc\_session\_manager}{g\_rpc\_session\_manager}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1rpc_ab40808d84a22f388e60a76491188fa5f} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_session_manager}{Rpc\+Session\+Manager}}$>$ neo\+::rpc\+::g\+\_\+rpc\+\_\+session\+\_\+manager = std\+::make\+\_\+shared$<$\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_session_manager}{Rpc\+Session\+Manager}}$>$()\hspace{0.3cm}{\ttfamily [static]}}
+

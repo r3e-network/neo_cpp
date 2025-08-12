@@ -1,0 +1,333 @@
+\doxysection{neo\+::cryptography\+::neo\+\_\+signatures Namespace Reference}
+\hypertarget{namespaceneo_1_1cryptography_1_1neo__signatures}{}\label{namespaceneo_1_1cryptography_1_1neo__signatures}\index{neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}}
+
+
+Neo-\/specific cryptographic signature operations.  
+
+
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a1aea7d06e1aad26e2757eca9a8fa8afd}{Create\+Single\+Signature\+Redeem\+Script}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Neo-\/specific cryptographic signature operations header. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a5d8bc32b2245a59ca85e6d2c9eb113cf}{Create\+Multi\+Signature\+Redeem\+Script}} (int m, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} $>$ \&public\+Keys)
+\begin{DoxyCompactList}\small\item\em Creates a Neo-\/style multi-\/signature redeem script. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_ad3dffba1699027176fc91bc5294fa386}{Sign\+Message\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&message\+Hash, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Signs a message hash using \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} with secp256r1 curve. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_ae0bc8ad86bfe5fcfde6cf569112358f5}{Verify\+Message\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&message\+Hash, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&signature, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Verifies an \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} signature using secp256r1 curve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a823cd7b4ad5e7266ea3dbcb48d2e73d5}{Compute\+Script\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&redeem\+Script)
+\begin{DoxyCompactList}\small\item\em Computes the script hash (Hash160) for a redeem script. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a6ccfa85b9ca27a686c5d449684724003}{Create\+Verification\+Script}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash)
+\begin{DoxyCompactList}\small\item\em Creates a verification script for a given script hash. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a62a662eff77131538bbc8a34c90b9c21}{Derive\+Public\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Derives a public key from a private key using secp256r1. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a69c7ccfc91ce492165817e3d42962dac}{Validate\+Public\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Validates that a public key is valid on the secp256r1 curve. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Neo-\/specific cryptographic signature operations. 
+
+This file provides the exact cryptographic signature operations used by the Neo blockchain, ensuring 100\% compatibility with the C\# Neo node implementation. 
+
+\label{doc-func-members}
+\Hypertarget{namespaceneo_1_1cryptography_1_1neo__signatures_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceneo_1_1cryptography_1_1neo__signatures_a823cd7b4ad5e7266ea3dbcb48d2e73d5}\index{neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}!ComputeScriptHash@{ComputeScriptHash}}
+\index{ComputeScriptHash@{ComputeScriptHash}!neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}}
+\doxysubsubsection{\texorpdfstring{ComputeScriptHash()}{ComputeScriptHash()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1neo__signatures_a823cd7b4ad5e7266ea3dbcb48d2e73d5} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::cryptography\+::neo\+\_\+signatures\+::\+Compute\+Script\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{redeem\+Script}{}\end{DoxyParamCaption})}
+
+
+
+Computes the script hash (Hash160) for a redeem script. 
+
+Computes Hash160 (SHA256 followed by RIPEMD160) of the redeem script. This is used to create script hash addresses in Neo.
+
+
+\begin{DoxyParams}{Parameters}
+{\em redeem\+Script} & The redeem script bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 20-\/byte script hash
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em redeem\+Script} & The redeem script bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 20-\/byte script hash 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{namespaceneo_1_1cryptography_1_1neo__signatures_a5d8bc32b2245a59ca85e6d2c9eb113cf}\index{neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}!CreateMultiSignatureRedeemScript@{CreateMultiSignatureRedeemScript}}
+\index{CreateMultiSignatureRedeemScript@{CreateMultiSignatureRedeemScript}!neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}}
+\doxysubsubsection{\texorpdfstring{CreateMultiSignatureRedeemScript()}{CreateMultiSignatureRedeemScript()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1neo__signatures_a5d8bc32b2245a59ca85e6d2c9eb113cf} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::neo\+\_\+signatures\+::\+Create\+Multi\+Signature\+Redeem\+Script (\begin{DoxyParamCaption}\item[{int}]{m}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} $>$ \&}]{public\+Keys}{}\end{DoxyParamCaption})}
+
+
+
+Creates a Neo-\/style multi-\/signature redeem script. 
+
+Creates a multi-\/signature redeem script that requires m signatures out of n public keys. This follows Neo\textquotesingle{}s multi-\/signature format.
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & Minimum number of signatures required (1-\/16) \\
+\hline
+{\em public\+Keys} & Vector of public keys (each 33 bytes compressed, max 16 keys) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The multi-\/signature redeem script bytes 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if parameters are invalid\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em m} & Minimum number of signatures required \\
+\hline
+{\em public\+Keys} & Vector of public keys (each 33 bytes compressed) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The redeem script bytes 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{namespaceneo_1_1cryptography_1_1neo__signatures_a1aea7d06e1aad26e2757eca9a8fa8afd}\index{neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}!CreateSingleSignatureRedeemScript@{CreateSingleSignatureRedeemScript}}
+\index{CreateSingleSignatureRedeemScript@{CreateSingleSignatureRedeemScript}!neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}}
+\doxysubsubsection{\texorpdfstring{CreateSingleSignatureRedeemScript()}{CreateSingleSignatureRedeemScript()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1neo__signatures_a1aea7d06e1aad26e2757eca9a8fa8afd} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::neo\+\_\+signatures\+::\+Create\+Single\+Signature\+Redeem\+Script (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{public\+Key}{}\end{DoxyParamCaption})}
+
+
+
+Neo-\/specific cryptographic signature operations header. 
+
+Creates a Neo-\/style signature redeem script for a single public key.
+
+This header provides the exact cryptographic signature operations used by the Neo blockchain, ensuring 100\% compatibility with the C\# Neo node implementation.
+
+Creates a Neo-\/style signature redeem script for a single public key.
+
+This function creates a redeem script that can be used to verify a single signature. The format matches Neo\textquotesingle{}s standard signature verification script.
+
+
+\begin{DoxyParams}{Parameters}
+{\em public\+Key} & The 33-\/byte compressed public key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The redeem script bytes (35 bytes total) 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if public\+Key is not 33 bytes\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em public\+Key} & The public key (33 bytes compressed) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The redeem script bytes 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{namespaceneo_1_1cryptography_1_1neo__signatures_a6ccfa85b9ca27a686c5d449684724003}\index{neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}!CreateVerificationScript@{CreateVerificationScript}}
+\index{CreateVerificationScript@{CreateVerificationScript}!neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}}
+\doxysubsubsection{\texorpdfstring{CreateVerificationScript()}{CreateVerificationScript()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1neo__signatures_a6ccfa85b9ca27a686c5d449684724003} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::neo\+\_\+signatures\+::\+Create\+Verification\+Script (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{}\end{DoxyParamCaption})}
+
+
+
+Creates a verification script for a given script hash. 
+
+Creates a verification script that pushes the script hash and calls CHECKSIG. This is used in certain Neo transaction verification scenarios.
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The 20-\/byte script hash \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The verification script bytes
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The 20-\/byte script hash \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The verification script bytes 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{namespaceneo_1_1cryptography_1_1neo__signatures_a62a662eff77131538bbc8a34c90b9c21}\index{neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}!DerivePublicKey@{DerivePublicKey}}
+\index{DerivePublicKey@{DerivePublicKey}!neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}}
+\doxysubsubsection{\texorpdfstring{DerivePublicKey()}{DerivePublicKey()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1neo__signatures_a62a662eff77131538bbc8a34c90b9c21} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::neo\+\_\+signatures\+::\+Derive\+Public\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{private\+Key}{}\end{DoxyParamCaption})}
+
+
+
+Derives a public key from a private key using secp256r1. 
+
+Computes the corresponding public key for a given private key using Neo\textquotesingle{}s standard secp256r1 curve. Returns compressed format.
+
+
+\begin{DoxyParams}{Parameters}
+{\em private\+Key} & The 32-\/byte private key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 33-\/byte compressed public key 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if private key size is wrong \\
+\hline
+{\em std\+::runtime\+\_\+error} & if key derivation fails\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em private\+Key} & The 32-\/byte private key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 33-\/byte compressed public key 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{namespaceneo_1_1cryptography_1_1neo__signatures_ad3dffba1699027176fc91bc5294fa386}\index{neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}!SignMessageHash@{SignMessageHash}}
+\index{SignMessageHash@{SignMessageHash}!neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}}
+\doxysubsubsection{\texorpdfstring{SignMessageHash()}{SignMessageHash()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1neo__signatures_ad3dffba1699027176fc91bc5294fa386} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::neo\+\_\+signatures\+::\+Sign\+Message\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{message\+Hash}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{private\+Key}{}\end{DoxyParamCaption})}
+
+
+
+Signs a message hash using \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} with secp256r1 curve. 
+
+Signs a message hash using \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} with the secp256r1 curve (Neo\textquotesingle{}s standard).
+
+This function performs \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} signing using Neo\textquotesingle{}s standard curve (secp256r1) and returns the signature in Neo\textquotesingle{}s expected format (64 bytes\+: r + s).
+
+
+\begin{DoxyParams}{Parameters}
+{\em message\+Hash} & The 32-\/byte message hash to sign \\
+\hline
+{\em private\+Key} & The 32-\/byte private key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 64-\/byte signature (32 bytes r + 32 bytes s) 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if key size is wrong \\
+\hline
+{\em std\+::runtime\+\_\+error} & if signing fails\\
+\hline
+\end{DoxyExceptions}
+
+\begin{DoxyParams}{Parameters}
+{\em message\+Hash} & The 32-\/byte message hash \\
+\hline
+{\em private\+Key} & The 32-\/byte private key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 64-\/byte signature (r + s) 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{namespaceneo_1_1cryptography_1_1neo__signatures_a69c7ccfc91ce492165817e3d42962dac}\index{neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}!ValidatePublicKey@{ValidatePublicKey}}
+\index{ValidatePublicKey@{ValidatePublicKey}!neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}}
+\doxysubsubsection{\texorpdfstring{ValidatePublicKey()}{ValidatePublicKey()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1neo__signatures_a69c7ccfc91ce492165817e3d42962dac} 
+bool neo\+::cryptography\+::neo\+\_\+signatures\+::\+Validate\+Public\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{public\+Key}{}\end{DoxyParamCaption})}
+
+
+
+Validates that a public key is valid on the secp256r1 curve. 
+
+Validates that a public key is on the secp256r1 curve.
+
+Checks if the given public key is valid\+:
+\begin{DoxyItemize}
+\item Correct size (33 bytes compressed)
+\item Point is on the secp256r1 curve
+\item Point is not at infinity
+\end{DoxyItemize}
+
+
+\begin{DoxyParams}{Parameters}
+{\em public\+Key} & The 33-\/byte compressed public key to validate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the public key is valid, false otherwise
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em public\+Key} & The 33-\/byte compressed public key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if valid, false otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{namespaceneo_1_1cryptography_1_1neo__signatures_ae0bc8ad86bfe5fcfde6cf569112358f5}\index{neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}!VerifyMessageHash@{VerifyMessageHash}}
+\index{VerifyMessageHash@{VerifyMessageHash}!neo::cryptography::neo\_signatures@{neo::cryptography::neo\_signatures}}
+\doxysubsubsection{\texorpdfstring{VerifyMessageHash()}{VerifyMessageHash()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1neo__signatures_ae0bc8ad86bfe5fcfde6cf569112358f5} 
+bool neo\+::cryptography\+::neo\+\_\+signatures\+::\+Verify\+Message\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{message\+Hash}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{signature}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{public\+Key}{}\end{DoxyParamCaption})}
+
+
+
+Verifies an \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} signature using secp256r1 curve. 
+
+Verifies an \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} signature using the secp256r1 curve.
+
+Verifies a signature created with Sign\+Message\+Hash using the corresponding public key. Uses Neo\textquotesingle{}s standard secp256r1 curve.
+
+
+\begin{DoxyParams}{Parameters}
+{\em message\+Hash} & The 32-\/byte message hash that was signed \\
+\hline
+{\em signature} & The 64-\/byte signature (r + s format) \\
+\hline
+{\em public\+Key} & The 33-\/byte compressed public key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if signature is valid, false otherwise
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em message\+Hash} & The 32-\/byte message hash \\
+\hline
+{\em signature} & The 64-\/byte signature (r + s) \\
+\hline
+{\em public\+Key} & The 33-\/byte compressed public key \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if signature is valid, false otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7

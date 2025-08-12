@@ -1,0 +1,482 @@
+\doxysection{neo\+::cli\+::Main\+Service Class Reference}
+\hypertarget{classneo_1_1cli_1_1_main_service}{}\label{classneo_1_1cli_1_1_main_service}\index{neo::cli::MainService@{neo::cli::MainService}}
+
+
+Main service for the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}.  
+
+
+
+
+{\ttfamily \#include $<$main\+\_\+service.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cli_1_1_main_service_aa97deb908c51521abceae828f9b9b5b1}{Main\+Service}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1cli_1_1_main_service}{Main\+Service}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a44e9f48bddbae102155650fb610239ff}{\texorpdfstring{$\sim$}{\string~}\+Main\+Service}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a9cd9d8f09f3ade713544a5bf2d527824}{Run}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Runs the service with the specified arguments. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_ab9b67a29c985eaaa1cf880ed6612b0a2}{Start}} (const \mbox{\hyperlink{classneo_1_1cli_1_1_command_line_options}{Command\+Line\+Options}} \&options)
+\begin{DoxyCompactList}\small\item\em Starts the service with the specified options. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_aaff046a5d4f0b6274c6d66fbd868ac4e}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stops the service. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a87500bf72b8db7033c327dd0a562b1a8}{Register\+Command}} (const std\+::string \&name, const \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler}{Command\+Handler}} \&handler, const std\+::string \&category="{}"{})
+\begin{DoxyCompactList}\small\item\em Registers a command. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a4fed03627cec237d6ac47cd7710a8c07}{Register\+Type\+Converter}} (const std\+::string \&type\+Name, const \mbox{\hyperlink{namespaceneo_1_1cli_aced5a9d3ca7228bbcb5059f2cb3b728f}{Type\+Converter}} \&converter)
+\begin{DoxyCompactList}\small\item\em Registers a type converter. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_afecad2ad69cd306cb6832bcc2ad34424}{Get\+Neo\+System}} () const
+\begin{DoxyCompactList}\small\item\em Gets the Neo system. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{wallets\+::\+Wallet}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a572949014875a785307cdcbf9b673148}{Get\+Current\+Wallet}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current wallet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_ac20a3e12e0083e5c37058b825f99fefc}{On\+Command}} (const std\+::string \&command)
+\begin{DoxyCompactList}\small\item\em Handles a command. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a19572dd54891614436ed6619e22a4ac2}{On\+Start\+With\+Command\+Line}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a9faf8096fde3bc89a82fb4a264e1fc4d}{On\+Help}} (const std\+::string \&category="{}"{})
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_af0d4250c361e2c5731c8fb9e4d9110bb}{On\+Exit}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a6ccba4bb805efb0645494a1e904a5a11}{On\+Clear}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_ace61304af1f9a0aff1b3e31774c19801}{On\+Version}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a1bf4923635dfb1d93260232bf82aecc5}{On\+Show\+Block}} (const std\+::string \&index\+Or\+Hash)
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a68248538cdbabd4e62043b5bb3740b9e}{On\+Show\+Header}} (const std\+::string \&index\+Or\+Hash)
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a9f09d356d8753dfd841a1ac27f367501}{On\+Show\+Transaction}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_ac678464ba7a2d5a0f756f6ffc017fbf7}{On\+Show\+State}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a7a72be4d9671a7baf17c5afae90f093a}{On\+Show\+Pool}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_aff87a0a3cde9685e2f56262ed1fbedbd}{On\+Show\+Peers}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_aab25aa43c59976bb4227ab9e9a29450c}{On\+Open\+Wallet}} (const std\+::string \&path, const std\+::string \&password)
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a51a015ba97c3183cd58e5e3cc61d5766}{On\+Close\+Wallet}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a2d19641126a93c359d617b7eea0b6dad}{On\+Show\+Balance}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a8b2045bb62078924afeb6b6c35f8dae5}{Run\+Console}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a9a7830733f81a719858024af2b4a70ac}{Initialize\+Commands}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_afb67bf94eafa499626928ce0b1ee816c}{Initialize\+Type\+Converters}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_adc83915216c0a062001cfdb4c568b07e}{Initialize\+Blockchain\+Commands}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_ac4f21727dea19c617d531addbd10b335}{Initialize\+Node\+Commands}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a43c254bae6a99ba89d09528d7421bef7}{Initialize\+Wallet\+Commands}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_afd60469018b4b44924dd2095c68da874}{neo\+System\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{wallets\+::\+Wallet}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a5e987bd13924786bb8b2bef490567f58}{current\+Wallet\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a92e55f1c04af829ffdcd26484b5d06e7}{rpc\+Server\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler}{Command\+Handler}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_abd4e68eea72ea37b5c1aaf100bf44d5b}{commands\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler}{Command\+Handler}} $>$ $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_aa6609bd1813d95950a85827000cad310}{commands\+By\+Category\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{namespaceneo_1_1cli_aced5a9d3ca7228bbcb5059f2cb3b728f}{Type\+Converter}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a6599f7664ee38f7ce4e3f0dccdd5aec9}{type\+Converters\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_acb63aa50f181345ddbc27cc6c676e323}{running\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a3981f81fa72b7a9e54646e935b75b2ae}{console\+Thread\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a1f8bfbae967e72588bdab698c178cf87}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Main service for the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cli_1_1_main_service_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cli_1_1_main_service_aa97deb908c51521abceae828f9b9b5b1}\index{neo::cli::MainService@{neo::cli::MainService}!MainService@{MainService}}
+\index{MainService@{MainService}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{MainService()}{MainService()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_aa97deb908c51521abceae828f9b9b5b1} 
+neo\+::cli\+::\+Main\+Service\+::\+Main\+Service (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1cli_1_1_main_service}{Main\+Service}. 
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1cli_1_1_main_service_a44e9f48bddbae102155650fb610239ff}\index{neo::cli::MainService@{neo::cli::MainService}!````~MainService@{\texorpdfstring{$\sim$}{\string~}MainService}}
+\index{````~MainService@{\texorpdfstring{$\sim$}{\string~}MainService}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MainService()}{\string~MainService()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a44e9f48bddbae102155650fb610239ff} 
+neo\+::cli\+::\+Main\+Service\+::\texorpdfstring{$\sim$}{\string~}\+Main\+Service (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cli_1_1_main_service_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cli_1_1_main_service_a572949014875a785307cdcbf9b673148}\index{neo::cli::MainService@{neo::cli::MainService}!GetCurrentWallet@{GetCurrentWallet}}
+\index{GetCurrentWallet@{GetCurrentWallet}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{GetCurrentWallet()}{GetCurrentWallet()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a572949014875a785307cdcbf9b673148} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{wallets\+::\+Wallet}} $>$ neo\+::cli\+::\+Main\+Service\+::\+Get\+Current\+Wallet (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the current wallet. 
+
+\begin{DoxyReturn}{Returns}
+The current wallet. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_main_service_afecad2ad69cd306cb6832bcc2ad34424}\index{neo::cli::MainService@{neo::cli::MainService}!GetNeoSystem@{GetNeoSystem}}
+\index{GetNeoSystem@{GetNeoSystem}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{GetNeoSystem()}{GetNeoSystem()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_afecad2ad69cd306cb6832bcc2ad34424} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ neo\+::cli\+::\+Main\+Service\+::\+Get\+Neo\+System (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the Neo system. 
+
+\begin{DoxyReturn}{Returns}
+The Neo system. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_main_service_adc83915216c0a062001cfdb4c568b07e}\index{neo::cli::MainService@{neo::cli::MainService}!InitializeBlockchainCommands@{InitializeBlockchainCommands}}
+\index{InitializeBlockchainCommands@{InitializeBlockchainCommands}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{InitializeBlockchainCommands()}{InitializeBlockchainCommands()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_adc83915216c0a062001cfdb4c568b07e} 
+void neo\+::cli\+::\+Main\+Service\+::\+Initialize\+Blockchain\+Commands (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cli_1_1_main_service_a9a7830733f81a719858024af2b4a70ac}\index{neo::cli::MainService@{neo::cli::MainService}!InitializeCommands@{InitializeCommands}}
+\index{InitializeCommands@{InitializeCommands}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{InitializeCommands()}{InitializeCommands()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a9a7830733f81a719858024af2b4a70ac} 
+void neo\+::cli\+::\+Main\+Service\+::\+Initialize\+Commands (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1cli_1_1_main_service_ac4f21727dea19c617d531addbd10b335}\index{neo::cli::MainService@{neo::cli::MainService}!InitializeNodeCommands@{InitializeNodeCommands}}
+\index{InitializeNodeCommands@{InitializeNodeCommands}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{InitializeNodeCommands()}{InitializeNodeCommands()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_ac4f21727dea19c617d531addbd10b335} 
+void neo\+::cli\+::\+Main\+Service\+::\+Initialize\+Node\+Commands (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1cli_1_1_main_service_afb67bf94eafa499626928ce0b1ee816c}\index{neo::cli::MainService@{neo::cli::MainService}!InitializeTypeConverters@{InitializeTypeConverters}}
+\index{InitializeTypeConverters@{InitializeTypeConverters}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{InitializeTypeConverters()}{InitializeTypeConverters()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_afb67bf94eafa499626928ce0b1ee816c} 
+void neo\+::cli\+::\+Main\+Service\+::\+Initialize\+Type\+Converters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1cli_1_1_main_service_a43c254bae6a99ba89d09528d7421bef7}\index{neo::cli::MainService@{neo::cli::MainService}!InitializeWalletCommands@{InitializeWalletCommands}}
+\index{InitializeWalletCommands@{InitializeWalletCommands}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{InitializeWalletCommands()}{InitializeWalletCommands()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a43c254bae6a99ba89d09528d7421bef7} 
+void neo\+::cli\+::\+Main\+Service\+::\+Initialize\+Wallet\+Commands (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1cli_1_1_main_service_a6ccba4bb805efb0645494a1e904a5a11}\index{neo::cli::MainService@{neo::cli::MainService}!OnClear@{OnClear}}
+\index{OnClear@{OnClear}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{OnClear()}{OnClear()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a6ccba4bb805efb0645494a1e904a5a11} 
+void neo\+::cli\+::\+Main\+Service\+::\+On\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_main_service_a51a015ba97c3183cd58e5e3cc61d5766}\index{neo::cli::MainService@{neo::cli::MainService}!OnCloseWallet@{OnCloseWallet}}
+\index{OnCloseWallet@{OnCloseWallet}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{OnCloseWallet()}{OnCloseWallet()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a51a015ba97c3183cd58e5e3cc61d5766} 
+void neo\+::cli\+::\+Main\+Service\+::\+On\+Close\+Wallet (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1cli_1_1_main_service_ac20a3e12e0083e5c37058b825f99fefc}\index{neo::cli::MainService@{neo::cli::MainService}!OnCommand@{OnCommand}}
+\index{OnCommand@{OnCommand}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{OnCommand()}{OnCommand()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_ac20a3e12e0083e5c37058b825f99fefc} 
+void neo\+::cli\+::\+Main\+Service\+::\+On\+Command (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{command}{}\end{DoxyParamCaption})}
+
+
+
+Handles a command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The command. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1cli_1_1_main_service_af0d4250c361e2c5731c8fb9e4d9110bb}\index{neo::cli::MainService@{neo::cli::MainService}!OnExit@{OnExit}}
+\index{OnExit@{OnExit}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{OnExit()}{OnExit()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_af0d4250c361e2c5731c8fb9e4d9110bb} 
+void neo\+::cli\+::\+Main\+Service\+::\+On\+Exit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_main_service_a9faf8096fde3bc89a82fb4a264e1fc4d}\index{neo::cli::MainService@{neo::cli::MainService}!OnHelp@{OnHelp}}
+\index{OnHelp@{OnHelp}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{OnHelp()}{OnHelp()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a9faf8096fde3bc89a82fb4a264e1fc4d} 
+void neo\+::cli\+::\+Main\+Service\+::\+On\+Help (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{category}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1cli_1_1_main_service_aab25aa43c59976bb4227ab9e9a29450c}\index{neo::cli::MainService@{neo::cli::MainService}!OnOpenWallet@{OnOpenWallet}}
+\index{OnOpenWallet@{OnOpenWallet}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{OnOpenWallet()}{OnOpenWallet()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_aab25aa43c59976bb4227ab9e9a29450c} 
+void neo\+::cli\+::\+Main\+Service\+::\+On\+Open\+Wallet (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{, }\item[{const std\+::string \&}]{password}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1cli_1_1_main_service_a2d19641126a93c359d617b7eea0b6dad}\index{neo::cli::MainService@{neo::cli::MainService}!OnShowBalance@{OnShowBalance}}
+\index{OnShowBalance@{OnShowBalance}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{OnShowBalance()}{OnShowBalance()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a2d19641126a93c359d617b7eea0b6dad} 
+void neo\+::cli\+::\+Main\+Service\+::\+On\+Show\+Balance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1cli_1_1_main_service_a1bf4923635dfb1d93260232bf82aecc5}\index{neo::cli::MainService@{neo::cli::MainService}!OnShowBlock@{OnShowBlock}}
+\index{OnShowBlock@{OnShowBlock}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{OnShowBlock()}{OnShowBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a1bf4923635dfb1d93260232bf82aecc5} 
+void neo\+::cli\+::\+Main\+Service\+::\+On\+Show\+Block (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{index\+Or\+Hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1cli_1_1_main_service_a68248538cdbabd4e62043b5bb3740b9e}\index{neo::cli::MainService@{neo::cli::MainService}!OnShowHeader@{OnShowHeader}}
+\index{OnShowHeader@{OnShowHeader}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{OnShowHeader()}{OnShowHeader()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a68248538cdbabd4e62043b5bb3740b9e} 
+void neo\+::cli\+::\+Main\+Service\+::\+On\+Show\+Header (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{index\+Or\+Hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1cli_1_1_main_service_aff87a0a3cde9685e2f56262ed1fbedbd}\index{neo::cli::MainService@{neo::cli::MainService}!OnShowPeers@{OnShowPeers}}
+\index{OnShowPeers@{OnShowPeers}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{OnShowPeers()}{OnShowPeers()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_aff87a0a3cde9685e2f56262ed1fbedbd} 
+void neo\+::cli\+::\+Main\+Service\+::\+On\+Show\+Peers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1cli_1_1_main_service_a7a72be4d9671a7baf17c5afae90f093a}\index{neo::cli::MainService@{neo::cli::MainService}!OnShowPool@{OnShowPool}}
+\index{OnShowPool@{OnShowPool}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{OnShowPool()}{OnShowPool()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a7a72be4d9671a7baf17c5afae90f093a} 
+void neo\+::cli\+::\+Main\+Service\+::\+On\+Show\+Pool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1cli_1_1_main_service_ac678464ba7a2d5a0f756f6ffc017fbf7}\index{neo::cli::MainService@{neo::cli::MainService}!OnShowState@{OnShowState}}
+\index{OnShowState@{OnShowState}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{OnShowState()}{OnShowState()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_ac678464ba7a2d5a0f756f6ffc017fbf7} 
+void neo\+::cli\+::\+Main\+Service\+::\+On\+Show\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1cli_1_1_main_service_a9f09d356d8753dfd841a1ac27f367501}\index{neo::cli::MainService@{neo::cli::MainService}!OnShowTransaction@{OnShowTransaction}}
+\index{OnShowTransaction@{OnShowTransaction}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{OnShowTransaction()}{OnShowTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a9f09d356d8753dfd841a1ac27f367501} 
+void neo\+::cli\+::\+Main\+Service\+::\+On\+Show\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1cli_1_1_main_service_a19572dd54891614436ed6619e22a4ac2}\index{neo::cli::MainService@{neo::cli::MainService}!OnStartWithCommandLine@{OnStartWithCommandLine}}
+\index{OnStartWithCommandLine@{OnStartWithCommandLine}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{OnStartWithCommandLine()}{OnStartWithCommandLine()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a19572dd54891614436ed6619e22a4ac2} 
+void neo\+::cli\+::\+Main\+Service\+::\+On\+Start\+With\+Command\+Line (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1cli_1_1_main_service_ace61304af1f9a0aff1b3e31774c19801}\index{neo::cli::MainService@{neo::cli::MainService}!OnVersion@{OnVersion}}
+\index{OnVersion@{OnVersion}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{OnVersion()}{OnVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_ace61304af1f9a0aff1b3e31774c19801} 
+void neo\+::cli\+::\+Main\+Service\+::\+On\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1cli_1_1_main_service_a87500bf72b8db7033c327dd0a562b1a8}\index{neo::cli::MainService@{neo::cli::MainService}!RegisterCommand@{RegisterCommand}}
+\index{RegisterCommand@{RegisterCommand}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{RegisterCommand()}{RegisterCommand()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a87500bf72b8db7033c327dd0a562b1a8} 
+void neo\+::cli\+::\+Main\+Service\+::\+Register\+Command (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{const \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler}{Command\+Handler}} \&}]{handler}{, }\item[{const std\+::string \&}]{category}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
+
+
+
+Registers a command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The command name. \\
+\hline
+{\em handler} & The command handler. \\
+\hline
+{\em category} & The command category. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1cli_1_1_main_service_a4fed03627cec237d6ac47cd7710a8c07}\index{neo::cli::MainService@{neo::cli::MainService}!RegisterTypeConverter@{RegisterTypeConverter}}
+\index{RegisterTypeConverter@{RegisterTypeConverter}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{RegisterTypeConverter()}{RegisterTypeConverter()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a4fed03627cec237d6ac47cd7710a8c07} 
+void neo\+::cli\+::\+Main\+Service\+::\+Register\+Type\+Converter (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type\+Name}{, }\item[{const \mbox{\hyperlink{namespaceneo_1_1cli_aced5a9d3ca7228bbcb5059f2cb3b728f}{Type\+Converter}} \&}]{converter}{}\end{DoxyParamCaption})}
+
+
+
+Registers a type converter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Name} & The type name. \\
+\hline
+{\em converter} & The converter. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1cli_1_1_main_service_a9cd9d8f09f3ade713544a5bf2d527824}\index{neo::cli::MainService@{neo::cli::MainService}!Run@{Run}}
+\index{Run@{Run}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a9cd9d8f09f3ade713544a5bf2d527824} 
+void neo\+::cli\+::\+Main\+Service\+::\+Run (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Runs the service with the specified arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1cli_1_1_main_service_a8b2045bb62078924afeb6b6c35f8dae5}\index{neo::cli::MainService@{neo::cli::MainService}!RunConsole@{RunConsole}}
+\index{RunConsole@{RunConsole}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{RunConsole()}{RunConsole()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a8b2045bb62078924afeb6b6c35f8dae5} 
+void neo\+::cli\+::\+Main\+Service\+::\+Run\+Console (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1cli_1_1_main_service_ab9b67a29c985eaaa1cf880ed6612b0a2}\index{neo::cli::MainService@{neo::cli::MainService}!Start@{Start}}
+\index{Start@{Start}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_ab9b67a29c985eaaa1cf880ed6612b0a2} 
+void neo\+::cli\+::\+Main\+Service\+::\+Start (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cli_1_1_command_line_options}{Command\+Line\+Options}} \&}]{options}{}\end{DoxyParamCaption})}
+
+
+
+Starts the service with the specified options. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em options} & The options. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{classneo_1_1cli_1_1_main_service_aaff046a5d4f0b6274c6d66fbd868ac4e}\index{neo::cli::MainService@{neo::cli::MainService}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_aaff046a5d4f0b6274c6d66fbd868ac4e} 
+void neo\+::cli\+::\+Main\+Service\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the service. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cli_1_1_main_service_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cli_1_1_main_service_abd4e68eea72ea37b5c1aaf100bf44d5b}\index{neo::cli::MainService@{neo::cli::MainService}!commands\_@{commands\_}}
+\index{commands\_@{commands\_}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{commands\_}{commands\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_abd4e68eea72ea37b5c1aaf100bf44d5b} 
+std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler}{Command\+Handler}}$>$ neo\+::cli\+::\+Main\+Service\+::commands\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_main_service_aa6609bd1813d95950a85827000cad310}\index{neo::cli::MainService@{neo::cli::MainService}!commandsByCategory\_@{commandsByCategory\_}}
+\index{commandsByCategory\_@{commandsByCategory\_}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{commandsByCategory\_}{commandsByCategory\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_aa6609bd1813d95950a85827000cad310} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler}{Command\+Handler}}$>$ $>$ neo\+::cli\+::\+Main\+Service\+::commands\+By\+Category\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_main_service_a3981f81fa72b7a9e54646e935b75b2ae}\index{neo::cli::MainService@{neo::cli::MainService}!consoleThread\_@{consoleThread\_}}
+\index{consoleThread\_@{consoleThread\_}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{consoleThread\_}{consoleThread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a3981f81fa72b7a9e54646e935b75b2ae} 
+std\+::thread neo\+::cli\+::\+Main\+Service\+::console\+Thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_main_service_a5e987bd13924786bb8b2bef490567f58}\index{neo::cli::MainService@{neo::cli::MainService}!currentWallet\_@{currentWallet\_}}
+\index{currentWallet\_@{currentWallet\_}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{currentWallet\_}{currentWallet\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a5e987bd13924786bb8b2bef490567f58} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{wallets\+::\+Wallet}}$>$ neo\+::cli\+::\+Main\+Service\+::current\+Wallet\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_main_service_a1f8bfbae967e72588bdab698c178cf87}\index{neo::cli::MainService@{neo::cli::MainService}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a1f8bfbae967e72588bdab698c178cf87} 
+std\+::mutex neo\+::cli\+::\+Main\+Service\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_main_service_afd60469018b4b44924dd2095c68da874}\index{neo::cli::MainService@{neo::cli::MainService}!neoSystem\_@{neoSystem\_}}
+\index{neoSystem\_@{neoSystem\_}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{neoSystem\_}{neoSystem\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_afd60469018b4b44924dd2095c68da874} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}}$>$ neo\+::cli\+::\+Main\+Service\+::neo\+System\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_main_service_a92e55f1c04af829ffdcd26484b5d06e7}\index{neo::cli::MainService@{neo::cli::MainService}!rpcServer\_@{rpcServer\_}}
+\index{rpcServer\_@{rpcServer\_}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{rpcServer\_}{rpcServer\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a92e55f1c04af829ffdcd26484b5d06e7} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}}$>$ neo\+::cli\+::\+Main\+Service\+::rpc\+Server\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_main_service_acb63aa50f181345ddbc27cc6c676e323}\index{neo::cli::MainService@{neo::cli::MainService}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_acb63aa50f181345ddbc27cc6c676e323} 
+std\+::atomic$<$bool$>$ neo\+::cli\+::\+Main\+Service\+::running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_main_service_a6599f7664ee38f7ce4e3f0dccdd5aec9}\index{neo::cli::MainService@{neo::cli::MainService}!typeConverters\_@{typeConverters\_}}
+\index{typeConverters\_@{typeConverters\_}!neo::cli::MainService@{neo::cli::MainService}}
+\doxysubsubsection{\texorpdfstring{typeConverters\_}{typeConverters\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_main_service_a6599f7664ee38f7ce4e3f0dccdd5aec9} 
+std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{namespaceneo_1_1cli_aced5a9d3ca7228bbcb5059f2cb3b728f}{Type\+Converter}}$>$ neo\+::cli\+::\+Main\+Service\+::type\+Converters\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cli/\mbox{\hyperlink{main__service_8h}{main\+\_\+service.\+h}}\item 
+src/cli/\mbox{\hyperlink{main__service_8cpp}{main\+\_\+service.\+cpp}}\item 
+src/cli/\mbox{\hyperlink{main__service__blockchain_8cpp}{main\+\_\+service\+\_\+blockchain.\+cpp}}\item 
+src/cli/\mbox{\hyperlink{main__service__node_8cpp}{main\+\_\+service\+\_\+node.\+cpp}}\item 
+src/cli/\mbox{\hyperlink{main__service__wallet_8cpp}{main\+\_\+service\+\_\+wallet.\+cpp}}\end{DoxyCompactItemize}

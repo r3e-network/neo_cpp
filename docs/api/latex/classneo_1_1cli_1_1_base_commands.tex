@@ -1,0 +1,164 @@
+\doxysection{neo\+::cli\+::Base\+Commands Class Reference}
+\hypertarget{classneo_1_1cli_1_1_base_commands}{}\label{classneo_1_1cli_1_1_base_commands}\index{neo::cli::BaseCommands@{neo::cli::BaseCommands}}
+
+
+Base commands for the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}.  
+
+
+
+
+{\ttfamily \#include $<$base\+\_\+commands.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::cli\+::Base\+Commands\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cli_1_1_base_commands_a8adb6955ce2cfc6c204b2963b251062a}{Base\+Commands}} (\mbox{\hyperlink{classneo_1_1cli_1_1_main_service}{Main\+Service}} \&service)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1cli_1_1_base_commands}{Base\+Commands}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_base_commands_a185390fb99137c72a1ee8f1c67427736}{Register\+Commands}} ()
+\begin{DoxyCompactList}\small\item\em Registers the commands. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_base_commands_aaca1d88e0246e26e7fab9d992cf39ee3}{Handle\+Help}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the help command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_base_commands_a38a5a08e45dd95fccad9fbd86593ec79}{Handle\+Exit}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the exit command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_base_commands_a6af76683abd95a0429f68867b1dc1501}{Handle\+Clear}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the clear command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_base_commands_ab2733feb26b2332b75543b64462ec291}{Handle\+Version}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the version command. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cli_1_1_main_service}{Main\+Service}} \& \mbox{\hyperlink{classneo_1_1cli_1_1_base_commands_ae00c0839ec2c96c513f66fb15ee378cc}{service\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base commands for the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cli_1_1_base_commands_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cli_1_1_base_commands_a8adb6955ce2cfc6c204b2963b251062a}\index{neo::cli::BaseCommands@{neo::cli::BaseCommands}!BaseCommands@{BaseCommands}}
+\index{BaseCommands@{BaseCommands}!neo::cli::BaseCommands@{neo::cli::BaseCommands}}
+\doxysubsubsection{\texorpdfstring{BaseCommands()}{BaseCommands()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_base_commands_a8adb6955ce2cfc6c204b2963b251062a} 
+neo\+::cli\+::\+Base\+Commands\+::\+Base\+Commands (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1cli_1_1_main_service}{Main\+Service}} \&}]{service}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1cli_1_1_base_commands}{Base\+Commands}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em service} & The main service. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cli_1_1_base_commands_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cli_1_1_base_commands_a6af76683abd95a0429f68867b1dc1501}\index{neo::cli::BaseCommands@{neo::cli::BaseCommands}!HandleClear@{HandleClear}}
+\index{HandleClear@{HandleClear}!neo::cli::BaseCommands@{neo::cli::BaseCommands}}
+\doxysubsubsection{\texorpdfstring{HandleClear()}{HandleClear()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_base_commands_a6af76683abd95a0429f68867b1dc1501} 
+bool neo\+::cli\+::\+Base\+Commands\+::\+Handle\+Clear (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the clear command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_base_commands_a38a5a08e45dd95fccad9fbd86593ec79}\index{neo::cli::BaseCommands@{neo::cli::BaseCommands}!HandleExit@{HandleExit}}
+\index{HandleExit@{HandleExit}!neo::cli::BaseCommands@{neo::cli::BaseCommands}}
+\doxysubsubsection{\texorpdfstring{HandleExit()}{HandleExit()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_base_commands_a38a5a08e45dd95fccad9fbd86593ec79} 
+bool neo\+::cli\+::\+Base\+Commands\+::\+Handle\+Exit (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the exit command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_base_commands_aaca1d88e0246e26e7fab9d992cf39ee3}\index{neo::cli::BaseCommands@{neo::cli::BaseCommands}!HandleHelp@{HandleHelp}}
+\index{HandleHelp@{HandleHelp}!neo::cli::BaseCommands@{neo::cli::BaseCommands}}
+\doxysubsubsection{\texorpdfstring{HandleHelp()}{HandleHelp()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_base_commands_aaca1d88e0246e26e7fab9d992cf39ee3} 
+bool neo\+::cli\+::\+Base\+Commands\+::\+Handle\+Help (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the help command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_base_commands_ab2733feb26b2332b75543b64462ec291}\index{neo::cli::BaseCommands@{neo::cli::BaseCommands}!HandleVersion@{HandleVersion}}
+\index{HandleVersion@{HandleVersion}!neo::cli::BaseCommands@{neo::cli::BaseCommands}}
+\doxysubsubsection{\texorpdfstring{HandleVersion()}{HandleVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_base_commands_ab2733feb26b2332b75543b64462ec291} 
+bool neo\+::cli\+::\+Base\+Commands\+::\+Handle\+Version (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the version command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_base_commands_a185390fb99137c72a1ee8f1c67427736}\index{neo::cli::BaseCommands@{neo::cli::BaseCommands}!RegisterCommands@{RegisterCommands}}
+\index{RegisterCommands@{RegisterCommands}!neo::cli::BaseCommands@{neo::cli::BaseCommands}}
+\doxysubsubsection{\texorpdfstring{RegisterCommands()}{RegisterCommands()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_base_commands_a185390fb99137c72a1ee8f1c67427736} 
+void neo\+::cli\+::\+Base\+Commands\+::\+Register\+Commands (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Registers the commands. 
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cli_1_1_base_commands_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cli_1_1_base_commands_ae00c0839ec2c96c513f66fb15ee378cc}\index{neo::cli::BaseCommands@{neo::cli::BaseCommands}!service\_@{service\_}}
+\index{service\_@{service\_}!neo::cli::BaseCommands@{neo::cli::BaseCommands}}
+\doxysubsubsection{\texorpdfstring{service\_}{service\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_base_commands_ae00c0839ec2c96c513f66fb15ee378cc} 
+\mbox{\hyperlink{classneo_1_1cli_1_1_main_service}{Main\+Service}}\& neo\+::cli\+::\+Base\+Commands\+::service\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cli/\mbox{\hyperlink{base__commands_8h}{base\+\_\+commands.\+h}}\item 
+src/cli/\mbox{\hyperlink{base__commands_8cpp}{base\+\_\+commands.\+cpp}}\end{DoxyCompactItemize}

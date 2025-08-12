@@ -1,0 +1,154 @@
+\doxysection{neo\+::core\+::Network\+Config Class Reference}
+\hypertarget{classneo_1_1core_1_1_network_config}{}\label{classneo_1_1core_1_1_network_config}\index{neo::core::NetworkConfig@{neo::core::NetworkConfig}}
+
+
+Network configuration constants and utilities.  
+
+
+
+
+{\ttfamily \#include $<$network\+\_\+config.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings}{Network\+Settings}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static const \mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings}{Network\+Settings}} \& \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a5ca45bd926f8fd64e281cd719dce77c9}{Get\+Network\+Settings}} (const std\+::string \&network)
+\begin{DoxyCompactList}\small\item\em Get network settings by name. \end{DoxyCompactList}\item 
+static uint32\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a720929151e03175cde68a89e2330b382}{Get\+Network\+Magic}} (const std\+::string \&network)
+\begin{DoxyCompactList}\small\item\em Get network magic number by name. \end{DoxyCompactList}\item 
+static uint16\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a85a2f6e26217f944fb517e129d2a0851}{Get\+Default\+Port}} (const std\+::string \&network, const std\+::string \&service)
+\begin{DoxyCompactList}\small\item\em Get default port for service on network. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a3471906edaa1844190aed041e9830137}{Is\+Valid\+Network}} (const std\+::string \&network)
+\begin{DoxyCompactList}\small\item\em Check if network name is valid. \end{DoxyCompactList}\item 
+static std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1core_1_1_network_config_addadad2d5d06f0408009627e37322b4c}{Get\+Available\+Networks}} ()
+\begin{DoxyCompactList}\small\item\em Get all available network names. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings}{Network\+Settings}} $>$ \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a8ce2b2be45144e8d9e52f75b62188217}{network\+\_\+settings\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Network configuration constants and utilities. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1core_1_1_network_config_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1core_1_1_network_config_addadad2d5d06f0408009627e37322b4c}\index{neo::core::NetworkConfig@{neo::core::NetworkConfig}!GetAvailableNetworks@{GetAvailableNetworks}}
+\index{GetAvailableNetworks@{GetAvailableNetworks}!neo::core::NetworkConfig@{neo::core::NetworkConfig}}
+\doxysubsubsection{\texorpdfstring{GetAvailableNetworks()}{GetAvailableNetworks()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_network_config_addadad2d5d06f0408009627e37322b4c} 
+std\+::vector$<$ std\+::string $>$ neo\+::core\+::\+Network\+Config\+::\+Get\+Available\+Networks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get all available network names. 
+
+\begin{DoxyReturn}{Returns}
+Vector of network names 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_network_config_a85a2f6e26217f944fb517e129d2a0851}\index{neo::core::NetworkConfig@{neo::core::NetworkConfig}!GetDefaultPort@{GetDefaultPort}}
+\index{GetDefaultPort@{GetDefaultPort}!neo::core::NetworkConfig@{neo::core::NetworkConfig}}
+\doxysubsubsection{\texorpdfstring{GetDefaultPort()}{GetDefaultPort()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_network_config_a85a2f6e26217f944fb517e129d2a0851} 
+uint16\+\_\+t neo\+::core\+::\+Network\+Config\+::\+Get\+Default\+Port (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{network}{, }\item[{const std\+::string \&}]{service}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get default port for service on network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em network} & Network name \\
+\hline
+{\em service} & Service type (p2p, rpc, ws) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Default port 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1core_1_1_network_config_a720929151e03175cde68a89e2330b382}\index{neo::core::NetworkConfig@{neo::core::NetworkConfig}!GetNetworkMagic@{GetNetworkMagic}}
+\index{GetNetworkMagic@{GetNetworkMagic}!neo::core::NetworkConfig@{neo::core::NetworkConfig}}
+\doxysubsubsection{\texorpdfstring{GetNetworkMagic()}{GetNetworkMagic()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_network_config_a720929151e03175cde68a89e2330b382} 
+uint32\+\_\+t neo\+::core\+::\+Network\+Config\+::\+Get\+Network\+Magic (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{network}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get network magic number by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em network} & Network name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Magic number 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1core_1_1_network_config_a5ca45bd926f8fd64e281cd719dce77c9}\index{neo::core::NetworkConfig@{neo::core::NetworkConfig}!GetNetworkSettings@{GetNetworkSettings}}
+\index{GetNetworkSettings@{GetNetworkSettings}!neo::core::NetworkConfig@{neo::core::NetworkConfig}}
+\doxysubsubsection{\texorpdfstring{GetNetworkSettings()}{GetNetworkSettings()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_network_config_a5ca45bd926f8fd64e281cd719dce77c9} 
+const \mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings}{Network\+Settings}} \& neo\+::core\+::\+Network\+Config\+::\+Get\+Network\+Settings (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{network}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get network settings by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em network} & Network name (mainnet, testnet, privnet) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Network settings 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if network not found \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1core_1_1_network_config_a3471906edaa1844190aed041e9830137}\index{neo::core::NetworkConfig@{neo::core::NetworkConfig}!IsValidNetwork@{IsValidNetwork}}
+\index{IsValidNetwork@{IsValidNetwork}!neo::core::NetworkConfig@{neo::core::NetworkConfig}}
+\doxysubsubsection{\texorpdfstring{IsValidNetwork()}{IsValidNetwork()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_network_config_a3471906edaa1844190aed041e9830137} 
+bool neo\+::core\+::\+Network\+Config\+::\+Is\+Valid\+Network (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{network}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if network name is valid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em network} & Network name to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if valid 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1core_1_1_network_config_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1core_1_1_network_config_a8ce2b2be45144e8d9e52f75b62188217}\index{neo::core::NetworkConfig@{neo::core::NetworkConfig}!network\_settings\_@{network\_settings\_}}
+\index{network\_settings\_@{network\_settings\_}!neo::core::NetworkConfig@{neo::core::NetworkConfig}}
+\doxysubsubsection{\texorpdfstring{network\_settings\_}{network\_settings\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_network_config_a8ce2b2be45144e8d9e52f75b62188217} 
+const std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings}{Network\+Config\+::\+Network\+Settings}} $>$ neo\+::core\+::\+Network\+Config\+::network\+\_\+settings\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{network__config_8h}{network\+\_\+config.\+h}}\end{DoxyCompactItemize}

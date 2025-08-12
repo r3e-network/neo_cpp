@@ -1,0 +1,481 @@
+\doxysection{neo\+::ledger\+::Neo\+System Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_neo_system}{}\label{classneo_1_1ledger_1_1_neo_system}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+
+
+Core Neo system class that manages blockchain, mempool, and network components.  
+
+
+
+
+{\ttfamily \#include $<$neo\+\_\+system.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_ae24f1bcaf3a3a59da3fd8f8cc0f61862}{Neo\+System}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings}{config\+::\+Protocol\+Settings}} $>$ settings)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{classneo_1_1ledger_1_1_neo_system}{Neo\+System} with the specified settings. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a356371e2740536cbe56f1bcf12a7e42e}{\texorpdfstring{$\sim$}{\string~}\+Neo\+System}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a18345922cbc166a80796334924868383}{Get\+Blockchain}} () const
+\begin{DoxyCompactList}\small\item\em Gets the blockchain instance. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{Memory\+Pool}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_accbae5ce8c631b037fee8ffdcced2d43}{Get\+Memory\+Pool}} () const
+\begin{DoxyCompactList}\small\item\em Gets the memory pool instance. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{network\+::p2p\+::\+Local\+Node}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_ab1b86464587095d432257111b09ddd8f}{Get\+Local\+Node}} () const
+\begin{DoxyCompactList}\small\item\em Gets the local network node. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings}{config\+::\+Protocol\+Settings}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a44913728070ceae0b4ddf1b37ff3e3ce}{Get\+Settings}} () const
+\begin{DoxyCompactList}\small\item\em Gets the protocol settings. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a99d4ff3d58b5ea8387701d3f1d9f7042}{Get\+Store\+View}} () const
+\begin{DoxyCompactList}\small\item\em Gets a snapshot of the current store state. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract}{smartcontract\+::native\+::\+Ledger\+Contract}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a4b6f056fa90ede969b2188b30ee1e91e}{Get\+Ledger\+Contract}} () const
+\begin{DoxyCompactList}\small\item\em Gets the ledger contract instance. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{smartcontract\+::native\+::\+Neo\+Token}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a5c14980966466250d00fa99f7522f15a}{Get\+Neo\+Token}} () const
+\begin{DoxyCompactList}\small\item\em Gets the NEO token contract instance. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token}{smartcontract\+::native\+::\+Gas\+Token}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a9018bcc677df6ea6716fe1046cf71b5d}{Get\+Gas\+Token}} () const
+\begin{DoxyCompactList}\small\item\em Gets the GAS token contract instance. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management}{smartcontract\+::native\+::\+Role\+Management}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a55a365afef875bf4b66636ac139a38a3}{Get\+Role\+Management}} () const
+\begin{DoxyCompactList}\small\item\em Gets the role management contract instance. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_aca8906dbe73cdd7e1d128d5079197535}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Starts the Neo system. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a80afc9d1abfdd4d20e132792b561a978}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stops the Neo system. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a82699100025c1e55f593f9ea3ba1fad7}{Is\+Running}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the system is running. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a4f65719acfcceada9985c6dd024abd4a}{Dispose}} ()
+\begin{DoxyCompactList}\small\item\em Disposes of system resources. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a51c5244dbdaffebedccd93e5585ee7ce}{Get\+Genesis\+Block}} () const
+\begin{DoxyCompactList}\small\item\em Gets the genesis block. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{smartcontract\+::native\+::\+Native\+Contract}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_af86e242ca0dd69ef77b0b0ef20b8dc61}{Get\+Native\+Contract}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets a native contract by script hash. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a13f0ece3fb5a8c815582a1bb15cb0b18}{Get\+Max\+Traceable\+Blocks}} () const
+\begin{DoxyCompactList}\small\item\em Gets the maximum number of traceable blocks. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_ad8ea6529f4efc9edee9d503bf43337ff}{Get\+Snapshot}} () const
+\begin{DoxyCompactList}\small\item\em Gets a snapshot of the current state. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_a82fb011281bf128e44d66f3926b104cc}{Contains\+Transaction\+Type}} \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_ac67d39f6f40f095331518769db6f5064}{Contains\+Transaction}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Checks if the system contains a transaction. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_aa4f1c0623c98be5619e24cdb4023ea5c}{Contains\+Conflict\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \&signers) const
+\begin{DoxyCompactList}\small\item\em Checks if the system contains a conflict hash. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_ae047581c392e841c6f8604f96fc0439a}{Initialize\+Components}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a3c31f91c20ef1df40315a4d7ea08dfd0}{Initialize\+Blockchain}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a8185fd7e1eb00edb233a641217316455}{Initialize\+Memory\+Pool}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a318ba069bf8f9f8c9063adfe22f8b29e}{Initialize\+Local\+Node}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_ab884065746ecf5c5f21188fcef715412}{Initialize\+Ledger\+Contract}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings}{config\+::\+Protocol\+Settings}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a52cb4d99489db6d660f12eb61a236a28}{settings\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a220cdf6f2073a4b4fe5ead0cfe1bf4b0}{blockchain\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{Memory\+Pool}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_ad89132d5a640326a8aac230b4650397f}{memory\+\_\+pool\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{network\+::p2p\+::\+Local\+Node}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a9bb020d2e8c28560b8418e1b88db8ab0}{local\+\_\+node\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract}{smartcontract\+::native\+::\+Ledger\+Contract}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a0adf197bb047edc0039da9072e85d128}{ledger\+\_\+contract\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a3fce2afb0db016d2b3f079e2e6007539}{is\+\_\+running\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a4aa5b3661b44a4b10787df07242b45ac}{is\+\_\+disposed\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Core Neo system class that manages blockchain, mempool, and network components. 
+
+\hypertarget{classneo_1_1ledger_1_1_neo_system_autotoc_md42}{}\doxysubsubsection{\texorpdfstring{Overview}{Overview}}\label{classneo_1_1ledger_1_1_neo_system_autotoc_md42}
+The \doxylink{classneo_1_1ledger_1_1_neo_system}{Neo\+System} class is the central coordinator for all Neo blockchain operations. It manages the blockchain state, transaction pool, network connections, and provides access to native contracts and protocol settings.\hypertarget{classneo_1_1ledger_1_1_neo_system_autotoc_md43}{}\doxysubsubsection{\texorpdfstring{API Reference}{API Reference}}\label{classneo_1_1ledger_1_1_neo_system_autotoc_md43}
+
+\begin{DoxyItemize}
+\item {\bfseries{\doxylink{classneo_1_1ledger_1_1_blockchain}{Blockchain} Access}}\+: \doxylink{classneo_1_1ledger_1_1_neo_system_a18345922cbc166a80796334924868383}{Get\+Blockchain()}, \doxylink{classneo_1_1ledger_1_1_neo_system_a99d4ff3d58b5ea8387701d3f1d9f7042}{Get\+Store\+View()}
+\item {\bfseries{Memory Pool}}\+: \doxylink{classneo_1_1ledger_1_1_neo_system_accbae5ce8c631b037fee8ffdcced2d43}{Get\+Memory\+Pool()}
+\item {\bfseries{Network}}\+: \doxylink{classneo_1_1ledger_1_1_neo_system_ab1b86464587095d432257111b09ddd8f}{Get\+Local\+Node()}
+\item {\bfseries{\doxylink{classneo_1_1_settings}{Settings}}}\+: \doxylink{classneo_1_1ledger_1_1_neo_system_a44913728070ceae0b4ddf1b37ff3e3ce}{Get\+Settings()}
+\item {\bfseries{Native Contracts}}\+: \doxylink{classneo_1_1ledger_1_1_neo_system_a4b6f056fa90ede969b2188b30ee1e91e}{Get\+Ledger\+Contract()}
+\end{DoxyItemize}\hypertarget{classneo_1_1ledger_1_1_neo_system_autotoc_md44}{}\doxysubsubsection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{classneo_1_1ledger_1_1_neo_system_autotoc_md44}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ system\ =\ std::make\_shared<NeoSystem>(settings);}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ blockchain\ =\ system-\/>GetBlockchain();}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ mempool\ =\ system-\/>GetMemoryPool();}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ snapshot\ =\ system-\/>GetStoreView();}
+
+\end{DoxyCode}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_ae24f1bcaf3a3a59da3fd8f8cc0f61862}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!NeoSystem@{NeoSystem}}
+\index{NeoSystem@{NeoSystem}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{NeoSystem()}{NeoSystem()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_ae24f1bcaf3a3a59da3fd8f8cc0f61862} 
+neo\+::ledger\+::\+Neo\+System\+::\+Neo\+System (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings}{config\+::\+Protocol\+Settings}} $>$}]{settings}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a new \doxylink{classneo_1_1ledger_1_1_neo_system}{Neo\+System} with the specified settings. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em settings} & Protocol settings for the Neo network \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a356371e2740536cbe56f1bcf12a7e42e}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!````~NeoSystem@{\texorpdfstring{$\sim$}{\string~}NeoSystem}}
+\index{````~NeoSystem@{\texorpdfstring{$\sim$}{\string~}NeoSystem}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}NeoSystem()}{\string~NeoSystem()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a356371e2740536cbe56f1bcf12a7e42e} 
+neo\+::ledger\+::\+Neo\+System\+::\texorpdfstring{$\sim$}{\string~}\+Neo\+System (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_aa4f1c0623c98be5619e24cdb4023ea5c}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!ContainsConflictHash@{ContainsConflictHash}}
+\index{ContainsConflictHash@{ContainsConflictHash}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{ContainsConflictHash()}{ContainsConflictHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_aa4f1c0623c98be5619e24cdb4023ea5c} 
+bool neo\+::ledger\+::\+Neo\+System\+::\+Contains\+Conflict\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \&}]{signers}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the system contains a conflict hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The transaction hash \\
+\hline
+{\em signers} & The transaction signers \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if conflict exists, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_ac67d39f6f40f095331518769db6f5064}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!ContainsTransaction@{ContainsTransaction}}
+\index{ContainsTransaction@{ContainsTransaction}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{ContainsTransaction()}{ContainsTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_ac67d39f6f40f095331518769db6f5064} 
+\mbox{\hyperlink{namespaceneo_a82fb011281bf128e44d66f3926b104cc}{Contains\+Transaction\+Type}} neo\+::ledger\+::\+Neo\+System\+::\+Contains\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the system contains a transaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The transaction hash \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The transaction containment status 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a4f65719acfcceada9985c6dd024abd4a}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!Dispose@{Dispose}}
+\index{Dispose@{Dispose}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{Dispose()}{Dispose()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a4f65719acfcceada9985c6dd024abd4a} 
+void neo\+::ledger\+::\+Neo\+System\+::\+Dispose (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Disposes of system resources. 
+
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a18345922cbc166a80796334924868383}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!GetBlockchain@{GetBlockchain}}
+\index{GetBlockchain@{GetBlockchain}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{GetBlockchain()}{GetBlockchain()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a18345922cbc166a80796334924868383} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$ neo\+::ledger\+::\+Neo\+System\+::\+Get\+Blockchain (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the blockchain instance. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the blockchain 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a9018bcc677df6ea6716fe1046cf71b5d}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!GetGasToken@{GetGasToken}}
+\index{GetGasToken@{GetGasToken}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{GetGasToken()}{GetGasToken()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a9018bcc677df6ea6716fe1046cf71b5d} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token}{smartcontract\+::native\+::\+Gas\+Token}} $>$ neo\+::ledger\+::\+Neo\+System\+::\+Get\+Gas\+Token (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the GAS token contract instance. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the GAS token contract 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a51c5244dbdaffebedccd93e5585ee7ce}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!GetGenesisBlock@{GetGenesisBlock}}
+\index{GetGenesisBlock@{GetGenesisBlock}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{GetGenesisBlock()}{GetGenesisBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a51c5244dbdaffebedccd93e5585ee7ce} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ neo\+::ledger\+::\+Neo\+System\+::\+Get\+Genesis\+Block (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the genesis block. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the genesis block 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a4b6f056fa90ede969b2188b30ee1e91e}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!GetLedgerContract@{GetLedgerContract}}
+\index{GetLedgerContract@{GetLedgerContract}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{GetLedgerContract()}{GetLedgerContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a4b6f056fa90ede969b2188b30ee1e91e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract}{smartcontract\+::native\+::\+Ledger\+Contract}} $>$ neo\+::ledger\+::\+Neo\+System\+::\+Get\+Ledger\+Contract (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the ledger contract instance. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the ledger contract 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_ab1b86464587095d432257111b09ddd8f}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!GetLocalNode@{GetLocalNode}}
+\index{GetLocalNode@{GetLocalNode}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{GetLocalNode()}{GetLocalNode()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_ab1b86464587095d432257111b09ddd8f} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{network\+::p2p\+::\+Local\+Node}} $>$ neo\+::ledger\+::\+Neo\+System\+::\+Get\+Local\+Node (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the local network node. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the local node 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a13f0ece3fb5a8c815582a1bb15cb0b18}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!GetMaxTraceableBlocks@{GetMaxTraceableBlocks}}
+\index{GetMaxTraceableBlocks@{GetMaxTraceableBlocks}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{GetMaxTraceableBlocks()}{GetMaxTraceableBlocks()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a13f0ece3fb5a8c815582a1bb15cb0b18} 
+uint32\+\_\+t neo\+::ledger\+::\+Neo\+System\+::\+Get\+Max\+Traceable\+Blocks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the maximum number of traceable blocks. 
+
+\begin{DoxyReturn}{Returns}
+Maximum traceable blocks 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_accbae5ce8c631b037fee8ffdcced2d43}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!GetMemoryPool@{GetMemoryPool}}
+\index{GetMemoryPool@{GetMemoryPool}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{GetMemoryPool()}{GetMemoryPool()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_accbae5ce8c631b037fee8ffdcced2d43} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{Memory\+Pool}} $>$ neo\+::ledger\+::\+Neo\+System\+::\+Get\+Memory\+Pool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the memory pool instance. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the memory pool 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_af86e242ca0dd69ef77b0b0ef20b8dc61}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!GetNativeContract@{GetNativeContract}}
+\index{GetNativeContract@{GetNativeContract}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{GetNativeContract()}{GetNativeContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_af86e242ca0dd69ef77b0b0ef20b8dc61} 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{smartcontract\+::native\+::\+Native\+Contract}} \texorpdfstring{$\ast$}{*} neo\+::ledger\+::\+Neo\+System\+::\+Get\+Native\+Contract (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a native contract by script hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The script hash of the contract \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the native contract or nullptr if not found 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a5c14980966466250d00fa99f7522f15a}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!GetNeoToken@{GetNeoToken}}
+\index{GetNeoToken@{GetNeoToken}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{GetNeoToken()}{GetNeoToken()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a5c14980966466250d00fa99f7522f15a} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{smartcontract\+::native\+::\+Neo\+Token}} $>$ neo\+::ledger\+::\+Neo\+System\+::\+Get\+Neo\+Token (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the NEO token contract instance. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the NEO token contract 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a55a365afef875bf4b66636ac139a38a3}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!GetRoleManagement@{GetRoleManagement}}
+\index{GetRoleManagement@{GetRoleManagement}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{GetRoleManagement()}{GetRoleManagement()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a55a365afef875bf4b66636ac139a38a3} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management}{smartcontract\+::native\+::\+Role\+Management}} $>$ neo\+::ledger\+::\+Neo\+System\+::\+Get\+Role\+Management (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the role management contract instance. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the role management contract 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a44913728070ceae0b4ddf1b37ff3e3ce}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!GetSettings@{GetSettings}}
+\index{GetSettings@{GetSettings}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{GetSettings()}{GetSettings()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a44913728070ceae0b4ddf1b37ff3e3ce} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings}{config\+::\+Protocol\+Settings}} $>$ neo\+::ledger\+::\+Neo\+System\+::\+Get\+Settings (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the protocol settings. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the protocol settings 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_ad8ea6529f4efc9edee9d503bf43337ff}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!GetSnapshot@{GetSnapshot}}
+\index{GetSnapshot@{GetSnapshot}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{GetSnapshot()}{GetSnapshot()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_ad8ea6529f4efc9edee9d503bf43337ff} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ neo\+::ledger\+::\+Neo\+System\+::\+Get\+Snapshot (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a snapshot of the current state. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the data cache snapshot 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a99d4ff3d58b5ea8387701d3f1d9f7042}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!GetStoreView@{GetStoreView}}
+\index{GetStoreView@{GetStoreView}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{GetStoreView()}{GetStoreView()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a99d4ff3d58b5ea8387701d3f1d9f7042} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ neo\+::ledger\+::\+Neo\+System\+::\+Get\+Store\+View (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a snapshot of the current store state. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the data cache snapshot 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a3c31f91c20ef1df40315a4d7ea08dfd0}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!InitializeBlockchain@{InitializeBlockchain}}
+\index{InitializeBlockchain@{InitializeBlockchain}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{InitializeBlockchain()}{InitializeBlockchain()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a3c31f91c20ef1df40315a4d7ea08dfd0} 
+void neo\+::ledger\+::\+Neo\+System\+::\+Initialize\+Blockchain (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_ae047581c392e841c6f8604f96fc0439a}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!InitializeComponents@{InitializeComponents}}
+\index{InitializeComponents@{InitializeComponents}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{InitializeComponents()}{InitializeComponents()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_ae047581c392e841c6f8604f96fc0439a} 
+void neo\+::ledger\+::\+Neo\+System\+::\+Initialize\+Components (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_ab884065746ecf5c5f21188fcef715412}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!InitializeLedgerContract@{InitializeLedgerContract}}
+\index{InitializeLedgerContract@{InitializeLedgerContract}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{InitializeLedgerContract()}{InitializeLedgerContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_ab884065746ecf5c5f21188fcef715412} 
+void neo\+::ledger\+::\+Neo\+System\+::\+Initialize\+Ledger\+Contract (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a318ba069bf8f9f8c9063adfe22f8b29e}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!InitializeLocalNode@{InitializeLocalNode}}
+\index{InitializeLocalNode@{InitializeLocalNode}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{InitializeLocalNode()}{InitializeLocalNode()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a318ba069bf8f9f8c9063adfe22f8b29e} 
+void neo\+::ledger\+::\+Neo\+System\+::\+Initialize\+Local\+Node (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a8185fd7e1eb00edb233a641217316455}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!InitializeMemoryPool@{InitializeMemoryPool}}
+\index{InitializeMemoryPool@{InitializeMemoryPool}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{InitializeMemoryPool()}{InitializeMemoryPool()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a8185fd7e1eb00edb233a641217316455} 
+void neo\+::ledger\+::\+Neo\+System\+::\+Initialize\+Memory\+Pool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a82699100025c1e55f593f9ea3ba1fad7}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!IsRunning@{IsRunning}}
+\index{IsRunning@{IsRunning}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{IsRunning()}{IsRunning()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a82699100025c1e55f593f9ea3ba1fad7} 
+bool neo\+::ledger\+::\+Neo\+System\+::\+Is\+Running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the system is running. 
+
+\begin{DoxyReturn}{Returns}
+True if running, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_aca8906dbe73cdd7e1d128d5079197535}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!Start@{Start}}
+\index{Start@{Start}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_aca8906dbe73cdd7e1d128d5079197535} 
+void neo\+::ledger\+::\+Neo\+System\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Starts the Neo system. 
+
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a80afc9d1abfdd4d20e132792b561a978}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a80afc9d1abfdd4d20e132792b561a978} 
+void neo\+::ledger\+::\+Neo\+System\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the Neo system. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a220cdf6f2073a4b4fe5ead0cfe1bf4b0}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!blockchain\_@{blockchain\_}}
+\index{blockchain\_@{blockchain\_}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{blockchain\_}{blockchain\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a220cdf6f2073a4b4fe5ead0cfe1bf4b0} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}}$>$ neo\+::ledger\+::\+Neo\+System\+::blockchain\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a4aa5b3661b44a4b10787df07242b45ac}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!is\_disposed\_@{is\_disposed\_}}
+\index{is\_disposed\_@{is\_disposed\_}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{is\_disposed\_}{is\_disposed\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a4aa5b3661b44a4b10787df07242b45ac} 
+bool neo\+::ledger\+::\+Neo\+System\+::is\+\_\+disposed\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a3fce2afb0db016d2b3f079e2e6007539}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!is\_running\_@{is\_running\_}}
+\index{is\_running\_@{is\_running\_}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{is\_running\_}{is\_running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a3fce2afb0db016d2b3f079e2e6007539} 
+bool neo\+::ledger\+::\+Neo\+System\+::is\+\_\+running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a0adf197bb047edc0039da9072e85d128}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!ledger\_contract\_@{ledger\_contract\_}}
+\index{ledger\_contract\_@{ledger\_contract\_}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{ledger\_contract\_}{ledger\_contract\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a0adf197bb047edc0039da9072e85d128} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract}{smartcontract\+::native\+::\+Ledger\+Contract}}$>$ neo\+::ledger\+::\+Neo\+System\+::ledger\+\_\+contract\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a9bb020d2e8c28560b8418e1b88db8ab0}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!local\_node\_@{local\_node\_}}
+\index{local\_node\_@{local\_node\_}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{local\_node\_}{local\_node\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a9bb020d2e8c28560b8418e1b88db8ab0} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{network\+::p2p\+::\+Local\+Node}}$>$ neo\+::ledger\+::\+Neo\+System\+::local\+\_\+node\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_ad89132d5a640326a8aac230b4650397f}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!memory\_pool\_@{memory\_pool\_}}
+\index{memory\_pool\_@{memory\_pool\_}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{memory\_pool\_}{memory\_pool\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_ad89132d5a640326a8aac230b4650397f} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{Memory\+Pool}}$>$ neo\+::ledger\+::\+Neo\+System\+::memory\+\_\+pool\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_neo_system_a52cb4d99489db6d660f12eb61a236a28}\index{neo::ledger::NeoSystem@{neo::ledger::NeoSystem}!settings\_@{settings\_}}
+\index{settings\_@{settings\_}!neo::ledger::NeoSystem@{neo::ledger::NeoSystem}}
+\doxysubsubsection{\texorpdfstring{settings\_}{settings\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_neo_system_a52cb4d99489db6d660f12eb61a236a28} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings}{config\+::\+Protocol\+Settings}}$>$ neo\+::ledger\+::\+Neo\+System\+::settings\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{ledger_2neo__system_8h}{neo\+\_\+system.\+h}}\end{DoxyCompactItemize}

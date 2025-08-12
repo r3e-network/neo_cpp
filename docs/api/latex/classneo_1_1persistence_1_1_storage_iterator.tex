@@ -1,0 +1,97 @@
+\doxysection{neo\+::persistence\+::Storage\+Iterator Class Reference}
+\hypertarget{classneo_1_1persistence_1_1_storage_iterator}{}\label{classneo_1_1persistence_1_1_storage_iterator}\index{neo::persistence::StorageIterator@{neo::persistence::StorageIterator}}
+
+
+Iterator for storage items.  
+
+
+
+
+{\ttfamily \#include $<$store\+\_\+view.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_iterator_af131a231f2429c76a9a3c6920946a614}{\texorpdfstring{$\sim$}{\string~}\+Storage\+Iterator}} ()=default
+\item 
+virtual bool \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_iterator_a8f6ed13fa763a77f2c204e239ee7b333}{Valid}} () const =0
+\begin{DoxyCompactList}\small\item\em Checks if the iterator is valid. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_iterator_a92d7ce37da8b080a8f5a95bbb029a467}{Key}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the current key. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_iterator_ad03c9d64292dbfc75fe698c4b2aae473}{Value}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the current value. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_iterator_ad59ede99b242c24c2a9696b87d71c5f1}{Next}} ()=0
+\begin{DoxyCompactList}\small\item\em Moves to the next item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Iterator for storage items. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1persistence_1_1_storage_iterator_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_storage_iterator_af131a231f2429c76a9a3c6920946a614}\index{neo::persistence::StorageIterator@{neo::persistence::StorageIterator}!````~StorageIterator@{\texorpdfstring{$\sim$}{\string~}StorageIterator}}
+\index{````~StorageIterator@{\texorpdfstring{$\sim$}{\string~}StorageIterator}!neo::persistence::StorageIterator@{neo::persistence::StorageIterator}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}StorageIterator()}{\string~StorageIterator()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_iterator_af131a231f2429c76a9a3c6920946a614} 
+virtual neo\+::persistence\+::\+Storage\+Iterator\+::\texorpdfstring{$\sim$}{\string~}\+Storage\+Iterator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1persistence_1_1_storage_iterator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_storage_iterator_a92d7ce37da8b080a8f5a95bbb029a467}\index{neo::persistence::StorageIterator@{neo::persistence::StorageIterator}!Key@{Key}}
+\index{Key@{Key}!neo::persistence::StorageIterator@{neo::persistence::StorageIterator}}
+\doxysubsubsection{\texorpdfstring{Key()}{Key()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_iterator_a92d7ce37da8b080a8f5a95bbb029a467} 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} neo\+::persistence\+::\+Storage\+Iterator\+::\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the current key. 
+
+\begin{DoxyReturn}{Returns}
+The current key. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1persistence_1_1_storage_iterator_ad59ede99b242c24c2a9696b87d71c5f1}\index{neo::persistence::StorageIterator@{neo::persistence::StorageIterator}!Next@{Next}}
+\index{Next@{Next}!neo::persistence::StorageIterator@{neo::persistence::StorageIterator}}
+\doxysubsubsection{\texorpdfstring{Next()}{Next()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_iterator_ad59ede99b242c24c2a9696b87d71c5f1} 
+virtual void neo\+::persistence\+::\+Storage\+Iterator\+::\+Next (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Moves to the next item. 
+
+\Hypertarget{classneo_1_1persistence_1_1_storage_iterator_a8f6ed13fa763a77f2c204e239ee7b333}\index{neo::persistence::StorageIterator@{neo::persistence::StorageIterator}!Valid@{Valid}}
+\index{Valid@{Valid}!neo::persistence::StorageIterator@{neo::persistence::StorageIterator}}
+\doxysubsubsection{\texorpdfstring{Valid()}{Valid()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_iterator_a8f6ed13fa763a77f2c204e239ee7b333} 
+virtual bool neo\+::persistence\+::\+Storage\+Iterator\+::\+Valid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Checks if the iterator is valid. 
+
+\begin{DoxyReturn}{Returns}
+True if valid, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1persistence_1_1_storage_iterator_ad03c9d64292dbfc75fe698c4b2aae473}\index{neo::persistence::StorageIterator@{neo::persistence::StorageIterator}!Value@{Value}}
+\index{Value@{Value}!neo::persistence::StorageIterator@{neo::persistence::StorageIterator}}
+\doxysubsubsection{\texorpdfstring{Value()}{Value()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_iterator_ad03c9d64292dbfc75fe698c4b2aae473} 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} neo\+::persistence\+::\+Storage\+Iterator\+::\+Value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the current value. 
+
+\begin{DoxyReturn}{Returns}
+The current value. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/persistence/\mbox{\hyperlink{store__view_8h}{store\+\_\+view.\+h}}\end{DoxyCompactItemize}

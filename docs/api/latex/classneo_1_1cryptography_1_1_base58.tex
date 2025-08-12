@@ -1,0 +1,284 @@
+\doxysection{neo\+::cryptography\+::Base58 Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1_base58}{}\label{classneo_1_1cryptography_1_1_base58}\index{neo::cryptography::Base58@{neo::cryptography::Base58}}
+
+
+\doxylink{classneo_1_1cryptography_1_1_base58}{Base58} encoding and decoding functionality for Neo.  
+
+
+
+
+{\ttfamily \#include $<$base58.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a49f77f0e94585ee10b21838a3026e3fd}{Encode}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Encode bytes to \doxylink{classneo_1_1cryptography_1_1_base58}{Base58} string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a84d6cb228f34603fdd44843b46c0df60}{Encode}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo\+::io\+::\+Byte\+Vector}} \&data)
+\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_aade589455f7490af90b5d14d3c7db341}{Encode}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{neo\+::io\+::\+Byte\+Span}} \&data)
+\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a063133b21ab7c5bf5f7ed7fc153015b0}{Decode}} (const std\+::string \&encoded)
+\begin{DoxyCompactList}\small\item\em Decode \doxylink{classneo_1_1cryptography_1_1_base58}{Base58} string to bytes. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo\+::io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a0064605a1faa6071a5bf627a6ec9b6a8}{Decode\+To\+Byte\+Vector}} (const std\+::string \&encoded)
+\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_aad9bf1248544b85ed8d9d01b1583bc30}{Encode\+Check}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Encode bytes to Base58\+Check string (with checksum). \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a5e5cd0dedd7f4d651aab7b31b46f212b}{Encode\+Check}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo\+::io\+::\+Byte\+Vector}} \&data)
+\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a74392e3fa40148c959bcf73048371346}{Encode\+Check}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{neo\+::io\+::\+Byte\+Span}} \&data)
+\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a32b3e9ad71e884888d968a2451028a4a}{Encode\+With\+Checksum}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{neo\+::io\+::\+Byte\+Span}} \&data)
+\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a513281f3ec39ac6d265a272f23f52bf1}{Decode\+Check}} (const std\+::string \&encoded)
+\begin{DoxyCompactList}\small\item\em Decode Base58\+Check string to bytes (verifies checksum). \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo\+::io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a2e9e9c7b86ae93e90449145b119f4bee}{Decode\+Check\+To\+Byte\+Vector}} (const std\+::string \&encoded)
+\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo\+::io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a13d062c7e6bee59c8d495a0b0cb6bec3}{Decode\+With\+Checksum}} (const std\+::string \&encoded)
+\item 
+static bool \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_aadac28e9fe85742239cb89bd57aacf5f}{Is\+Valid}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Verify if a string is valid \doxylink{classneo_1_1cryptography_1_1_base58}{Base58}. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_aa3efc73c09ca63cc945c641ba660a646}{Is\+Valid\+Check}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Verify if a string is valid Base58\+Check. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_ad90529cf8e6bc33c8273b9df02155c95}{Calculate\+Checksum}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Calculate SHA256 double hash for checksum. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a69e349bec522cafed2a2d771f1cfd3c1}{ALPHABET}} = "{}123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1cryptography_1_1_base58}{Base58} encoding and decoding functionality for Neo. 
+
+Provides \doxylink{classneo_1_1cryptography_1_1_base58}{Base58} and Base58\+Check encoding/decoding used by Neo for addresses and other human-\/readable representations. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1_base58_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_base58_ad90529cf8e6bc33c8273b9df02155c95}\index{neo::cryptography::Base58@{neo::cryptography::Base58}!CalculateChecksum@{CalculateChecksum}}
+\index{CalculateChecksum@{CalculateChecksum}!neo::cryptography::Base58@{neo::cryptography::Base58}}
+\doxysubsubsection{\texorpdfstring{CalculateChecksum()}{CalculateChecksum()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base58_ad90529cf8e6bc33c8273b9df02155c95} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::cryptography\+::\+Base58\+::\+Calculate\+Checksum (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Calculate SHA256 double hash for checksum. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Input data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+First 4 bytes of SHA256(\+SHA256(data)) 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1cryptography_1_1_base58_a063133b21ab7c5bf5f7ed7fc153015b0}\index{neo::cryptography::Base58@{neo::cryptography::Base58}!Decode@{Decode}}
+\index{Decode@{Decode}!neo::cryptography::Base58@{neo::cryptography::Base58}}
+\doxysubsubsection{\texorpdfstring{Decode()}{Decode()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base58_a063133b21ab7c5bf5f7ed7fc153015b0} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::cryptography\+::\+Base58\+::\+Decode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{encoded}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Decode \doxylink{classneo_1_1cryptography_1_1_base58}{Base58} string to bytes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em encoded} & The \doxylink{classneo_1_1cryptography_1_1_base58}{Base58} encoded string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Decoded bytes 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1_base58_a513281f3ec39ac6d265a272f23f52bf1}\index{neo::cryptography::Base58@{neo::cryptography::Base58}!DecodeCheck@{DecodeCheck}}
+\index{DecodeCheck@{DecodeCheck}!neo::cryptography::Base58@{neo::cryptography::Base58}}
+\doxysubsubsection{\texorpdfstring{DecodeCheck()}{DecodeCheck()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base58_a513281f3ec39ac6d265a272f23f52bf1} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::cryptography\+::\+Base58\+::\+Decode\+Check (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{encoded}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Decode Base58\+Check string to bytes (verifies checksum). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em encoded} & The Base58\+Check encoded string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Decoded bytes (without checksum) 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if checksum is invalid \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cryptography_1_1_base58_a2e9e9c7b86ae93e90449145b119f4bee}\index{neo::cryptography::Base58@{neo::cryptography::Base58}!DecodeCheckToByteVector@{DecodeCheckToByteVector}}
+\index{DecodeCheckToByteVector@{DecodeCheckToByteVector}!neo::cryptography::Base58@{neo::cryptography::Base58}}
+\doxysubsubsection{\texorpdfstring{DecodeCheckToByteVector()}{DecodeCheckToByteVector()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base58_a2e9e9c7b86ae93e90449145b119f4bee} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo\+::io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Base58\+::\+Decode\+Check\+To\+Byte\+Vector (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{encoded}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cryptography_1_1_base58_a0064605a1faa6071a5bf627a6ec9b6a8}\index{neo::cryptography::Base58@{neo::cryptography::Base58}!DecodeToByteVector@{DecodeToByteVector}}
+\index{DecodeToByteVector@{DecodeToByteVector}!neo::cryptography::Base58@{neo::cryptography::Base58}}
+\doxysubsubsection{\texorpdfstring{DecodeToByteVector()}{DecodeToByteVector()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base58_a0064605a1faa6071a5bf627a6ec9b6a8} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo\+::io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Base58\+::\+Decode\+To\+Byte\+Vector (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{encoded}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1cryptography_1_1_base58_a13d062c7e6bee59c8d495a0b0cb6bec3}\index{neo::cryptography::Base58@{neo::cryptography::Base58}!DecodeWithChecksum@{DecodeWithChecksum}}
+\index{DecodeWithChecksum@{DecodeWithChecksum}!neo::cryptography::Base58@{neo::cryptography::Base58}}
+\doxysubsubsection{\texorpdfstring{DecodeWithChecksum()}{DecodeWithChecksum()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base58_a13d062c7e6bee59c8d495a0b0cb6bec3} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo\+::io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Base58\+::\+Decode\+With\+Checksum (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{encoded}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1cryptography_1_1_base58_aade589455f7490af90b5d14d3c7db341}\index{neo::cryptography::Base58@{neo::cryptography::Base58}!Encode@{Encode}}
+\index{Encode@{Encode}!neo::cryptography::Base58@{neo::cryptography::Base58}}
+\doxysubsubsection{\texorpdfstring{Encode()}{Encode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base58_aade589455f7490af90b5d14d3c7db341} 
+std\+::string neo\+::cryptography\+::\+Base58\+::\+Encode (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{neo\+::io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1cryptography_1_1_base58_a84d6cb228f34603fdd44843b46c0df60}\index{neo::cryptography::Base58@{neo::cryptography::Base58}!Encode@{Encode}}
+\index{Encode@{Encode}!neo::cryptography::Base58@{neo::cryptography::Base58}}
+\doxysubsubsection{\texorpdfstring{Encode()}{Encode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base58_a84d6cb228f34603fdd44843b46c0df60} 
+std\+::string neo\+::cryptography\+::\+Base58\+::\+Encode (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo\+::io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1cryptography_1_1_base58_a49f77f0e94585ee10b21838a3026e3fd}\index{neo::cryptography::Base58@{neo::cryptography::Base58}!Encode@{Encode}}
+\index{Encode@{Encode}!neo::cryptography::Base58@{neo::cryptography::Base58}}
+\doxysubsubsection{\texorpdfstring{Encode()}{Encode()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base58_a49f77f0e94585ee10b21838a3026e3fd} 
+std\+::string neo\+::cryptography\+::\+Base58\+::\+Encode (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Encode bytes to \doxylink{classneo_1_1cryptography_1_1_base58}{Base58} string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The bytes to encode \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{classneo_1_1cryptography_1_1_base58}{Base58} encoded string 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1_base58_a74392e3fa40148c959bcf73048371346}\index{neo::cryptography::Base58@{neo::cryptography::Base58}!EncodeCheck@{EncodeCheck}}
+\index{EncodeCheck@{EncodeCheck}!neo::cryptography::Base58@{neo::cryptography::Base58}}
+\doxysubsubsection{\texorpdfstring{EncodeCheck()}{EncodeCheck()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base58_a74392e3fa40148c959bcf73048371346} 
+std\+::string neo\+::cryptography\+::\+Base58\+::\+Encode\+Check (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{neo\+::io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1cryptography_1_1_base58_a5e5cd0dedd7f4d651aab7b31b46f212b}\index{neo::cryptography::Base58@{neo::cryptography::Base58}!EncodeCheck@{EncodeCheck}}
+\index{EncodeCheck@{EncodeCheck}!neo::cryptography::Base58@{neo::cryptography::Base58}}
+\doxysubsubsection{\texorpdfstring{EncodeCheck()}{EncodeCheck()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base58_a5e5cd0dedd7f4d651aab7b31b46f212b} 
+std\+::string neo\+::cryptography\+::\+Base58\+::\+Encode\+Check (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo\+::io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1cryptography_1_1_base58_aad9bf1248544b85ed8d9d01b1583bc30}\index{neo::cryptography::Base58@{neo::cryptography::Base58}!EncodeCheck@{EncodeCheck}}
+\index{EncodeCheck@{EncodeCheck}!neo::cryptography::Base58@{neo::cryptography::Base58}}
+\doxysubsubsection{\texorpdfstring{EncodeCheck()}{EncodeCheck()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base58_aad9bf1248544b85ed8d9d01b1583bc30} 
+std\+::string neo\+::cryptography\+::\+Base58\+::\+Encode\+Check (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Encode bytes to Base58\+Check string (with checksum). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The bytes to encode \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Base58\+Check encoded string 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1cryptography_1_1_base58_a32b3e9ad71e884888d968a2451028a4a}\index{neo::cryptography::Base58@{neo::cryptography::Base58}!EncodeWithChecksum@{EncodeWithChecksum}}
+\index{EncodeWithChecksum@{EncodeWithChecksum}!neo::cryptography::Base58@{neo::cryptography::Base58}}
+\doxysubsubsection{\texorpdfstring{EncodeWithChecksum()}{EncodeWithChecksum()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base58_a32b3e9ad71e884888d968a2451028a4a} 
+std\+::string neo\+::cryptography\+::\+Base58\+::\+Encode\+With\+Checksum (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{neo\+::io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1cryptography_1_1_base58_aadac28e9fe85742239cb89bd57aacf5f}\index{neo::cryptography::Base58@{neo::cryptography::Base58}!IsValid@{IsValid}}
+\index{IsValid@{IsValid}!neo::cryptography::Base58@{neo::cryptography::Base58}}
+\doxysubsubsection{\texorpdfstring{IsValid()}{IsValid()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base58_aadac28e9fe85742239cb89bd57aacf5f} 
+bool neo\+::cryptography\+::\+Base58\+::\+Is\+Valid (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Verify if a string is valid \doxylink{classneo_1_1cryptography_1_1_base58}{Base58}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & The string to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if valid \doxylink{classneo_1_1cryptography_1_1_base58}{Base58}, false otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1cryptography_1_1_base58_aa3efc73c09ca63cc945c641ba660a646}\index{neo::cryptography::Base58@{neo::cryptography::Base58}!IsValidCheck@{IsValidCheck}}
+\index{IsValidCheck@{IsValidCheck}!neo::cryptography::Base58@{neo::cryptography::Base58}}
+\doxysubsubsection{\texorpdfstring{IsValidCheck()}{IsValidCheck()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base58_aa3efc73c09ca63cc945c641ba660a646} 
+bool neo\+::cryptography\+::\+Base58\+::\+Is\+Valid\+Check (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Verify if a string is valid Base58\+Check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & The string to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if valid Base58\+Check, false otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cryptography_1_1_base58_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_base58_a69e349bec522cafed2a2d771f1cfd3c1}\index{neo::cryptography::Base58@{neo::cryptography::Base58}!ALPHABET@{ALPHABET}}
+\index{ALPHABET@{ALPHABET}!neo::cryptography::Base58@{neo::cryptography::Base58}}
+\doxysubsubsection{\texorpdfstring{ALPHABET}{ALPHABET}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base58_a69e349bec522cafed2a2d771f1cfd3c1} 
+const char\texorpdfstring{$\ast$}{*} neo\+::cryptography\+::\+Base58\+::\+ALPHABET = "{}123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/\mbox{\hyperlink{base58_8h}{base58.\+h}}\item 
+src/cryptography/\mbox{\hyperlink{base58_8cpp}{base58.\+cpp}}\end{DoxyCompactItemize}

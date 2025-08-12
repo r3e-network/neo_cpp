@@ -1,0 +1,63 @@
+\doxysection{ipaddress\+\_\+extensions.\+h}
+\hypertarget{ipaddress__extensions_8h_source}{}\label{ipaddress__extensions_8h_source}\index{include/neo/extensions/ipaddress\_extensions.h@{include/neo/extensions/ipaddress\_extensions.h}}
+\mbox{\hyperlink{ipaddress__extensions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1extensions}{neo::extensions}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions}{IpAddressExtensions}}}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a8f85fe95f249bab979d9de542a724d03}{IsValidIPv4}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a5b774a7e02849975dd03e26f9346328f}{IsValidIPv6}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{static}\ std::array<uint8\_t,\ 4>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a2f0dd287af69c52a869a5d9dd8e8d49b}{ParseIPv4}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{static}\ std::array<uint8\_t,\ 16>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a537e942b556de57bb446efc477355c5c}{ParseIPv6}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a96b7c9971ba99acef3b20fb7c3a48c55}{IPv4ToString}}(\textcolor{keyword}{const}\ std::array<uint8\_t,\ 4>\&\ bytes);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a5a5a43b67797c1950178dd41d4314efa}{IPv6ToString}}(\textcolor{keyword}{const}\ std::array<uint8\_t,\ 16>\&\ bytes);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a66b21b504f8cc5309668e6e83693bbd0}{IsPrivateIPv4}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a71f6bdd4550e685ce94137d56c0b369f}{IsLoopbackIPv4}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_aa4e2d8b6e7c80010042c9e16ef8edd0a}{IsMulticastIPv4}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_addf2800f297a5e50fd2362e644d38f62}{IsLinkLocalIPv4}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a21c11d4f048fa5217ea0f07bbf55bba5}{IsLoopbackIPv6}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_afe60979fbce63dc3532cf604108a15f6}{IsLinkLocalIPv6}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a8e423502d0ea5752da70f8786221aa69}{GetNetworkAddressIPv4}}(\textcolor{keyword}{const}\ std::string\&\ address,\ \textcolor{keyword}{const}\ std::string\&\ subnetMask);}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_afe9764907a1742304613b4eb3ac0d679}{GetBroadcastAddressIPv4}}(\textcolor{keyword}{const}\ std::string\&\ address,\ \textcolor{keyword}{const}\ std::string\&\ subnetMask);}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a8c15ff61f9564025cfa34a88053e2c2a}{IsInSameSubnetIPv4}}(\textcolor{keyword}{const}\ std::string\&\ address1,\ \textcolor{keyword}{const}\ std::string\&\ address2,}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ subnetMask);}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a407f44aab0a242bbf21bade2ee046059}{IPv4ToUInt32}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a2ad7876c3b8d9daa93df9ba14bae66c0}{UInt32ToIPv4}}(uint32\_t\ value);}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_ab4f6bc2a832bbb7207ea281b05bf25ed}{ExpandIPv6}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_aa42a4570ee62aa0839e20a85363cd75b}{CompressIPv6}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a4f4b1060200ad96068ca954b91616f50}{IsValidIPv4Octet}}(\textcolor{keyword}{const}\ std::string\&\ octet);}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a10686eb4d35640aa3d2016796222625e}{IsValidIPv6Hextet}}(\textcolor{keyword}{const}\ std::string\&\ hextet);}
+\DoxyCodeLine{00191\ \};}
+\DoxyCodeLine{00192\ \}\ \ \textcolor{comment}{//\ namespace\ neo::extensions}}
+
+\end{DoxyCode}

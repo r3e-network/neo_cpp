@@ -1,0 +1,147 @@
+\doxysection{node.\+h}
+\hypertarget{node_8h_source}{}\label{node_8h_source}\index{include/neo/cryptography/mpttrie/node.h@{include/neo/cryptography/mpttrie/node.h}}
+\mbox{\hyperlink{node_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{node__type_8h}{neo/cryptography/mpttrie/node\_type.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{serializable_8h}{neo/io/serializable.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <span>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cryptography_1_1mpttrie}{neo::cryptography::mpttrie}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a286212fd26ee271980008a9d2692d827}{Node}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{io::ISerializable}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ad0087a90181dabe290a1d3dd374e2021}{BranchChildCount}}\ =\ 17;}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a333cefdbf74ac2503681c112753122e8}{MaxKeyLength}}\ =\ 1024;}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a847d9515a47ffea68d5e48c6580c9b3a}{MaxValueLength}}\ =\ 1024\ *\ 1024;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a286212fd26ee271980008a9d2692d827}{Node}}();}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a286212fd26ee271980008a9d2692d827}{Node}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a286212fd26ee271980008a9d2692d827}{Node}}\&\ other);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a286212fd26ee271980008a9d2692d827}{Node}}(\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a286212fd26ee271980008a9d2692d827}{Node}}\&\&\ other)\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a286212fd26ee271980008a9d2692d827}{Node}}\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ad5968eb95deac8d36a11128b32228f64}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a286212fd26ee271980008a9d2692d827}{Node}}\&\ other);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a286212fd26ee271980008a9d2692d827}{Node}}\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ad5968eb95deac8d36a11128b32228f64}{operator=}}(\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a286212fd26ee271980008a9d2692d827}{Node}}\&\&\ other)\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae55b6bfe5dc1a964fe43b5ffd2aa7964}{\string~Node}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406}{NodeType}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3bb1da9ffaa29d7abca39938c5cb687f}{GetType}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_add3a93dbde550ada68290b21cae72c42}{GetHash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_aba9a659cb1bd05f9b1e268ddddc6d293}{IsEmpty}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a011c2c00e6563292c15609628bc76863}{GetReference}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a072068eb99355d12700b7cd5c2d53107}{SetReference}}(\textcolor{keywordtype}{int}\ reference);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae8c60d7ce5104a8d41aabb4d259df233}{SetDirty}}();}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a684b865e28fde78f8d00c6f8c7054324}{GetSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a7efad64d065556b1472506194d16f60b}{GetSizeAsChild}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00105\ \ \ \ \ std::unique\_ptr<Node>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a13f0c773f4955fce9ed148e34d90c97f}{Clone}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00111\ \ \ \ \ std::unique\_ptr<Node>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae89a4fded8f8e2650d5a94ab747e5d84}{CloneAsChild}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00117\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3a1fec22d764e4435f17f34bf2b0c6ef}{ToArray}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00123\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a288143f050acaed572b778ad3e173601}{ToArrayWithoutReference}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_adfb5e6d4923ce0b61c56919c7514957f}{SerializeAsChild}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{comment}{//\ ISerializable\ implementation}}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ab9e4021936e9cdd4912d88036620c7ca}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_afe12e230777bdc3ecf3f9019f6f538d7}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{comment}{//\ Static\ factory\ methods}}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keyword}{static}\ std::unique\_ptr<Node>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_aaa85b6cb2b2bf1733d724ba06094920e}{NewBranch}}();}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keyword}{static}\ std::unique\_ptr<Node>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ac7463e65659916cfc6fbdfebda65dbfb}{NewExtension}}(std::span<const\ uint8\_t>\ key,\ std::unique\_ptr<Node>\ next);}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keyword}{static}\ std::unique\_ptr<Node>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a2ae9ce9519fe589e7f48576a0a361b0c}{NewLeaf}}(std::span<const\ uint8\_t>\ value);}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keyword}{static}\ std::unique\_ptr<Node>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a189b8e8359ec10e0244696dd6eb4538c}{NewHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash);}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{comment}{//\ Branch\ node\ accessors}}
+\DoxyCodeLine{00169\ \ \ \ \ std::vector<std::unique\_ptr<Node>>\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_aed1e3df5cc441e07b94846dc8ddeac3e}{GetChildren}}();}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::unique\_ptr<Node>>\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_aed1e3df5cc441e07b94846dc8ddeac3e}{GetChildren}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{comment}{//\ Extension\ node\ accessors}}
+\DoxyCodeLine{00182\ \ \ \ \ std::span<const\ uint8\_t>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_af2d645ebce6d3b9d4e44f204c77545eb}{GetKey}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae19fd10b692436638d0f168d4f691cca}{SetKey}}(std::span<const\ uint8\_t>\ key);}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00194\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a286212fd26ee271980008a9d2692d827}{Node}}\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a4e418df5a15bb1b47add825ce64f2938}{GetNext}}();}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a286212fd26ee271980008a9d2692d827}{Node}}\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a4e418df5a15bb1b47add825ce64f2938}{GetNext}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00206\ \ \ \ \ std::unique\_ptr<Node>\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a1bf8fa5d01db94df746b0f236437316f}{GetNextPtr}}();}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keyword}{const}\ std::unique\_ptr<Node>\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a1bf8fa5d01db94df746b0f236437316f}{GetNextPtr}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3aa40811f5069d42249fd3a07affb881}{SetNext}}(std::unique\_ptr<Node>\ next);}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{comment}{//\ Leaf\ node\ accessors}}
+\DoxyCodeLine{00225\ \ \ \ \ std::span<const\ uint8\_t>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_af2bb9e40a326f911b18f76b43eb52492}{GetValue}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a0baa8eef7f21b9039421dfdf0459e8b0}{SetValue}}(std::span<const\ uint8\_t>\ value);}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{comment}{//\ Hash\ node\ accessors}}
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a6de89e5c6fb45089e7fcac323469d08a}{GetStoredHash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00241\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406}{NodeType}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a9caa96819a46ee9c64dbd07f090a13b0}{type\_}};}
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keyword}{mutable}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_aa0fdfeabb356210c5a1826532bbd3392}{hash\_}};}
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keyword}{mutable}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_aabffba657b09697507a1874ed31890b7}{hash\_dirty\_}};}
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_aee7fa9bba6197f3ed72fc28ac03d65f9}{reference\_}};}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{comment}{//\ Branch\ node\ data}}
+\DoxyCodeLine{00247\ \ \ \ \ std::vector<std::unique\_ptr<Node>>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a69488d1fb98a53305b050cdf42bd271c}{children\_}};}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{comment}{//\ Extension\ node\ data}}
+\DoxyCodeLine{00250\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ada017139bddba0177f99efe0c2e1e0ad}{key\_}};}
+\DoxyCodeLine{00251\ \ \ \ \ std::unique\_ptr<Node>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a308011a7828c6595dd49053fc4fc3b14}{next\_}};}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00253\ \ \ \ \ \textcolor{comment}{//\ Leaf\ node\ data}}
+\DoxyCodeLine{00254\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a346a67bdd90ea2166a5775866973e3f6}{value\_}};}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{comment}{//\ Hash\ node\ data}}
+\DoxyCodeLine{00257\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3956bb2290f9e78eae0cdc92908f2f9b}{stored\_hash\_}};}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00263\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_afe37f541d7f7a96e96b87001f3d58693}{CalculateHash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00269\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a88b2e3a96aa7f1390ad2b4f92b258424}{SerializeBranch}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_aad0d121a1e02d919c6ea47b6524ef11b}{DeserializeBranch}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader);}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00281\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae17e5c831670db685158341a987c9bd8}{SerializeExtension}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00287\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a5b3124a3122cc280aaceb1a2a002f432}{DeserializeExtension}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader);}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00293\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_acd2200b9daa03fbc23569e43bacdec18}{SerializeLeaf}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00294\ }
+\DoxyCodeLine{00299\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ac91c4398313dd5df51ab24b50aa7be74}{DeserializeLeaf}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader);}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00305\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a9dd4ab664002fca8fdf39add7b1b3081}{GetBranchSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00311\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_adca8f272f61a24aad12d5ef56f3ee388}{GetExtensionSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00312\ }
+\DoxyCodeLine{00317\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3b6327fdc59deec28d9851bf4f0ecad9}{GetLeafSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00323\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae62ff60b6a2f8603442304dac41f0622}{GetHashSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00324\ \};}
+\DoxyCodeLine{00325\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cryptography::mpttrie}}
+
+\end{DoxyCode}

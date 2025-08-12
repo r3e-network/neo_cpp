@@ -1,0 +1,138 @@
+\doxysection{include/neo/core/validation.h File Reference}
+\hypertarget{validation_8h}{}\label{validation_8h}\index{include/neo/core/validation.h@{include/neo/core/validation.h}}
+{\ttfamily \#include $<$neo/core/exceptions.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/byte\+\_\+span.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/uint160.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/uint256.\+h$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$limits$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for validation.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_validator}{neo\+::core\+::\+Validator}}
+\begin{DoxyCompactList}\small\item\em Comprehensive validation framework for Neo C++ implementation. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{neo\+::core\+::\+Validator\+::\+Validation\+Result}}
+\begin{DoxyCompactList}\small\item\em Validation result containing success status and error details. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1core}{neo\+::core}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{validation_8h_af7a7964aed05da5e4e19174efcdc49bf}{VALIDATE\+\_\+\+NOT\+\_\+\+NULL}}(ptr)
+\item 
+\#define \mbox{\hyperlink{validation_8h_aef1ec984733d1989388ffa8f3b38631d}{VALIDATE\+\_\+\+NOT\+\_\+\+EMPTY}}(value)
+\item 
+\#define \mbox{\hyperlink{validation_8h_a86e07f9eb40b99b5eb151f4b7daf15be}{VALIDATE\+\_\+\+RANGE}}(value,  min\+\_\+val,  max\+\_\+val)
+\item 
+\#define \mbox{\hyperlink{validation_8h_a5a9ad96b9acff87d38a8cc7ac3aedf31}{VALIDATE\+\_\+\+POSITIVE}}(value)
+\item 
+\#define \mbox{\hyperlink{validation_8h_a0e5026308e3d3a0975c9ecb0f3cbe78c}{VALIDATE\+\_\+\+SIZE}}(actual,  expected)
+\item 
+\#define \mbox{\hyperlink{validation_8h_a9b5e04235eff96b340b14818b86567d8}{VALIDATE\+\_\+\+HEX\+\_\+\+STRING}}(hex)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{validation_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{validation_8h_a9b5e04235eff96b340b14818b86567d8}\index{validation.h@{validation.h}!VALIDATE\_HEX\_STRING@{VALIDATE\_HEX\_STRING}}
+\index{VALIDATE\_HEX\_STRING@{VALIDATE\_HEX\_STRING}!validation.h@{validation.h}}
+\doxysubsubsection{\texorpdfstring{VALIDATE\_HEX\_STRING}{VALIDATE\_HEX\_STRING}}
+{\footnotesize\ttfamily \label{validation_8h_a9b5e04235eff96b340b14818b86567d8} 
+\#define VALIDATE\+\_\+\+HEX\+\_\+\+STRING(\begin{DoxyParamCaption}\item[{}]{hex}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{do}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \_\_result\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a422c7f7562efcc4da9a7d3b52c4257a4}{neo::core::Validator::ValidateHexString}}(hex,\ \#hex);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ if\ (!\_\_result)\ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{neo::core::NeoException}}(\_\_result.error\_code,\ \_\_result.error\_message);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{while}\ (0)}
+
+\end{DoxyCode}
+\Hypertarget{validation_8h_aef1ec984733d1989388ffa8f3b38631d}\index{validation.h@{validation.h}!VALIDATE\_NOT\_EMPTY@{VALIDATE\_NOT\_EMPTY}}
+\index{VALIDATE\_NOT\_EMPTY@{VALIDATE\_NOT\_EMPTY}!validation.h@{validation.h}}
+\doxysubsubsection{\texorpdfstring{VALIDATE\_NOT\_EMPTY}{VALIDATE\_NOT\_EMPTY}}
+{\footnotesize\ttfamily \label{validation_8h_aef1ec984733d1989388ffa8f3b38631d} 
+\#define VALIDATE\+\_\+\+NOT\+\_\+\+EMPTY(\begin{DoxyParamCaption}\item[{}]{value}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{do}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \_\_result\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a7f8d8632a5910f983a055c77c40dcb2b}{neo::core::Validator::ValidateNotEmpty}}(value,\ \#value);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ if\ (!\_\_result)\ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{neo::core::NeoException}}(\_\_result.error\_code,\ \_\_result.error\_message);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{while}\ (0)}
+
+\end{DoxyCode}
+\Hypertarget{validation_8h_af7a7964aed05da5e4e19174efcdc49bf}\index{validation.h@{validation.h}!VALIDATE\_NOT\_NULL@{VALIDATE\_NOT\_NULL}}
+\index{VALIDATE\_NOT\_NULL@{VALIDATE\_NOT\_NULL}!validation.h@{validation.h}}
+\doxysubsubsection{\texorpdfstring{VALIDATE\_NOT\_NULL}{VALIDATE\_NOT\_NULL}}
+{\footnotesize\ttfamily \label{validation_8h_af7a7964aed05da5e4e19174efcdc49bf} 
+\#define VALIDATE\+\_\+\+NOT\+\_\+\+NULL(\begin{DoxyParamCaption}\item[{}]{ptr}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{do}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \_\_result\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a29082367c504a93d5cd11161167fae0c}{neo::core::Validator::ValidateNotNull}}(ptr,\ \#ptr);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ if\ (!\_\_result)\ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{neo::core::NeoException}}(\_\_result.error\_code,\ \_\_result.error\_message);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{while}\ (0)}
+
+\end{DoxyCode}
+\Hypertarget{validation_8h_a5a9ad96b9acff87d38a8cc7ac3aedf31}\index{validation.h@{validation.h}!VALIDATE\_POSITIVE@{VALIDATE\_POSITIVE}}
+\index{VALIDATE\_POSITIVE@{VALIDATE\_POSITIVE}!validation.h@{validation.h}}
+\doxysubsubsection{\texorpdfstring{VALIDATE\_POSITIVE}{VALIDATE\_POSITIVE}}
+{\footnotesize\ttfamily \label{validation_8h_a5a9ad96b9acff87d38a8cc7ac3aedf31} 
+\#define VALIDATE\+\_\+\+POSITIVE(\begin{DoxyParamCaption}\item[{}]{value}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{do}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \_\_result\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_ac5d2fff3c1b6ebdcddbe8a9e3c219519}{neo::core::Validator::ValidatePositive}}(value,\ \#value);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ if\ (!\_\_result)\ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{neo::core::NeoException}}(\_\_result.error\_code,\ \_\_result.error\_message);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{while}\ (0)}
+
+\end{DoxyCode}
+\Hypertarget{validation_8h_a86e07f9eb40b99b5eb151f4b7daf15be}\index{validation.h@{validation.h}!VALIDATE\_RANGE@{VALIDATE\_RANGE}}
+\index{VALIDATE\_RANGE@{VALIDATE\_RANGE}!validation.h@{validation.h}}
+\doxysubsubsection{\texorpdfstring{VALIDATE\_RANGE}{VALIDATE\_RANGE}}
+{\footnotesize\ttfamily \label{validation_8h_a86e07f9eb40b99b5eb151f4b7daf15be} 
+\#define VALIDATE\+\_\+\+RANGE(\begin{DoxyParamCaption}\item[{}]{value}{, }\item[{}]{min\+\_\+val}{, }\item[{}]{max\+\_\+val}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{do}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \_\_result\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_af474c5c496d142040aa019ee0783cb74}{neo::core::Validator::ValidateRange}}(value,\ min\_val,\ max\_val,\ \#value);\ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ if\ (!\_\_result)\ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{neo::core::NeoException}}(\_\_result.error\_code,\ \_\_result.error\_message);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{while}\ (0)}
+
+\end{DoxyCode}
+\Hypertarget{validation_8h_a0e5026308e3d3a0975c9ecb0f3cbe78c}\index{validation.h@{validation.h}!VALIDATE\_SIZE@{VALIDATE\_SIZE}}
+\index{VALIDATE\_SIZE@{VALIDATE\_SIZE}!validation.h@{validation.h}}
+\doxysubsubsection{\texorpdfstring{VALIDATE\_SIZE}{VALIDATE\_SIZE}}
+{\footnotesize\ttfamily \label{validation_8h_a0e5026308e3d3a0975c9ecb0f3cbe78c} 
+\#define VALIDATE\+\_\+\+SIZE(\begin{DoxyParamCaption}\item[{}]{actual}{, }\item[{}]{expected}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{do}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ \_\_result\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a4bb4d85ac391d7522edce4cd50605bc9}{neo::core::Validator::ValidateSize}}(actual,\ expected,\ \#actual);\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ if\ (!\_\_result)\ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{neo::core::NeoException}}(\_\_result.error\_code,\ \_\_result.error\_message);\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{while}\ (0)}
+
+\end{DoxyCode}

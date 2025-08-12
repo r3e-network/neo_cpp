@@ -1,0 +1,134 @@
+\doxysection{string\+\_\+intern.\+h}
+\hypertarget{string__intern_8h_source}{}\label{string__intern_8h_source}\index{include/neo/core/string\_intern.h@{include/neo/core/string\_intern.h}}
+\mbox{\hyperlink{string__intern_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string\_view>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1core}{neo::core}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a470d4cc9edf17c9cbbd9ad13aa2064cb}{InternedString}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a470d4cc9edf17c9cbbd9ad13aa2064cb}{InternedString}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a377bf5f029b743570e751259ea9a9cc6}{str}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}}\ ?\ *\mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}}\ :\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_ae2beafa5a78015afd262b5f0c278c4da}{empty\_string}}();\ \}}
+\DoxyCodeLine{00020\ \ \ \ \ std::string\_view\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_ab2acc0c5bfb7a1a053df98a4dba18698}{view}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}}\ ?\ std::string\_view(*\mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}})\ :\ std::string\_view();\ \}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a117dd748852d15efe6605b22641baad1}{c\_str}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}}\ ?\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}}-\/>c\_str()\ :\ \textcolor{stringliteral}{"{}"{}};\ \}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_adee5c4dd59bcbbc502fc8fd971860a16}{size}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}}\ ?\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}}-\/>size()\ :\ 0;\ \}}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_ae17e8ea0ab12ba16627cf7bea804f4d4}{empty}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ !\mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}}\ ||\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}}-\/>empty();\ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{comment}{//\ Fast\ pointer\ comparison\ for\ equality}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a9bcdace27adf6dce529b3a48aabfd5d1}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a470d4cc9edf17c9cbbd9ad13aa2064cb}{InternedString}}\&\ other)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}}\ ==\ other.\mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}};\ \}}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a82f5a5b657abf59489ad85ef8cf3d1a0}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a470d4cc9edf17c9cbbd9ad13aa2064cb}{InternedString}}\&\ other)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}}\ !=\ other.\mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}};\ \}}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a34b7f8480fc7dc8671b6be55a83abe83}{operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a470d4cc9edf17c9cbbd9ad13aa2064cb}{InternedString}}\&\ other)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}}\ <\ other.\mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}};\ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ String\ comparison}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a0edab4e48860b6aeab286b6af10c290c}{operator==}}(std::string\_view\ other)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_ab2acc0c5bfb7a1a053df98a4dba18698}{view}}()\ ==\ other;\ \}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_ab784362cf9bf66436eedb4bb19638cde}{operator!=}}(std::string\_view\ other)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_ab2acc0c5bfb7a1a053df98a4dba18698}{view}}()\ !=\ other;\ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{explicit}\ \textcolor{keyword}{operator}\ bool()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}}\ !=\ \textcolor{keyword}{nullptr};\ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_interned_string_aa43ad6916b87177856e649fa2108b7bf}{StringInterner}};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a5b79762cb57ec88b1fc6d533ec40f668}{InternedString}}(std::shared\_ptr<const\ std::string>\ ptr)\ :\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}}(\mbox{\hyperlink{namespacestd}{std}}::move(ptr))\ \{\}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_ae2beafa5a78015afd262b5f0c278c4da}{empty\_string}}()}
+\DoxyCodeLine{00041\ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::string\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_ae17e8ea0ab12ba16627cf7bea804f4d4}{empty}};}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_ae17e8ea0ab12ba16627cf7bea804f4d4}{empty}};}
+\DoxyCodeLine{00044\ \ \ \ \ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ std::shared\_ptr<const\ std::string>\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\_}};}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00052\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a9c0f934ef4165700c0af41f2b12e14ba}{StringInterner}}}
+\DoxyCodeLine{00053\ \{}
+\DoxyCodeLine{00054\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a9c0f934ef4165700c0af41f2b12e14ba}{StringInterner}}\&\ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_aed49bd93e056970dd33af35fe81a492d}{instance}}()}
+\DoxyCodeLine{00056\ \ \ \ \ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a9c0f934ef4165700c0af41f2b12e14ba}{StringInterner}}\ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_aed49bd93e056970dd33af35fe81a492d}{instance}};}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_aed49bd93e056970dd33af35fe81a492d}{instance}};}
+\DoxyCodeLine{00059\ \ \ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string}{InternedString}}\ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a3b99fa165ee337db6734846c51b70d0a}{intern}}(std::string\_view\ str)}
+\DoxyCodeLine{00067\ \ \ \ \ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (str.empty())\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string}{InternedString}}();}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_string_interner_aec2f622867718e7eee78138016f00c78}{mutex\_}});}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Try\ to\ find\ existing\ string\ by\ creating\ a\ temporary\ shared\_ptr\ for\ lookup}}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ temp\ =\ std::make\_shared<const\ std::string>(str);}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a554b90d871a06a6eb2b24cb9427d33a9}{pool\_}}.find(temp);}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a554b90d871a06a6eb2b24cb9427d33a9}{pool\_}}.end())}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string}{InternedString}}(*it);}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Not\ found,\ insert\ the\ new\ string}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a554b90d871a06a6eb2b24cb9427d33a9}{pool\_}}.insert(temp);}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string}{InternedString}}(temp);}
+\DoxyCodeLine{00083\ \ \ \ \ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a978beb9647f04eacf1cd7c74c1aa753f}{size}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00090\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_string_interner_aec2f622867718e7eee78138016f00c78}{mutex\_}});}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a554b90d871a06a6eb2b24cb9427d33a9}{pool\_}}.size();}
+\DoxyCodeLine{00093\ \ \ \ \ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_ad87dca512246c458e0f95b90f9fc8046}{clear}}()}
+\DoxyCodeLine{00099\ \ \ \ \ \{}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_string_interner_aec2f622867718e7eee78138016f00c78}{mutex\_}});}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a554b90d871a06a6eb2b24cb9427d33a9}{pool\_}}.clear();}
+\DoxyCodeLine{00102\ \ \ \ \ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a360ee6e19b9c42af3c9c67b686ea0eab}{report\_stats}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00110\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a9c0f934ef4165700c0af41f2b12e14ba}{StringInterner}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_ptr_hash}{StringPtrHash}}}
+\DoxyCodeLine{00113\ \ \ \ \ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_ptr_hash_a6d112a413398bddf71c3cb18e82189ad}{operator()}}(\textcolor{keyword}{const}\ std::shared\_ptr<const\ std::string>\&\ ptr)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00115\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::hash<std::string>()(*ptr);}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00118\ \ \ \ \ \};}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_ptr_equal}{StringPtrEqual}}}
+\DoxyCodeLine{00121\ \ \ \ \ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_ptr_equal_a5a1e380c6be2371a38757b0bc993a89c}{operator()}}(\textcolor{keyword}{const}\ std::shared\_ptr<const\ std::string>\&\ a,\ \textcolor{keyword}{const}\ std::shared\_ptr<const\ std::string>\&\ b)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00123\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *a\ ==\ *b;}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00126\ \ \ \ \ \};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{comment}{//\ Custom\ comparator\ for\ string\_view\ lookup}}
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_view_equal}{StringViewEqual}}}
+\DoxyCodeLine{00130\ \ \ \ \ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_view_equal_a859c2fd0371b9d25d23b6a22ae7ade66}{is\_transparent}}\ =\ void;}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_view_equal_a86ec8bb2a3f2fd518439b86bf098defd}{operator()}}(\textcolor{keyword}{const}\ std::shared\_ptr<const\ std::string>\&\ a,\ std::string\_view\ b)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ *a\ ==\ b;\ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_view_equal_a2f9b5e301cbbdb0fe25be6bfeb0c74c9}{operator()}}(std::string\_view\ a,\ \textcolor{keyword}{const}\ std::shared\_ptr<const\ std::string>\&\ b)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ a\ ==\ *b;\ \}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_view_equal_a458da5c4f250ca6a7c9e8be0a862d93c}{operator()}}(\textcolor{keyword}{const}\ std::shared\_ptr<const\ std::string>\&\ a,\ \textcolor{keyword}{const}\ std::shared\_ptr<const\ std::string>\&\ b)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00138\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *a\ ==\ *b;}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00141\ \ \ \ \ \};}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_aec2f622867718e7eee78138016f00c78}{mutex\_}};}
+\DoxyCodeLine{00144\ \ \ \ \ std::unordered\_set<std::shared\_ptr<const\ std::string>,\ \mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_ptr_hash}{StringPtrHash}},\ \mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_view_equal}{StringViewEqual}}>\ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a554b90d871a06a6eb2b24cb9427d33a9}{pool\_}};}
+\DoxyCodeLine{00145\ \};}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00150\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string}{InternedString}}\ \mbox{\hyperlink{namespaceneo_1_1core_ae4895e65de74c3c5f9b92ca3e50dc863}{intern}}(std::string\_view\ str)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_aed49bd93e056970dd33af35fe81a492d}{StringInterner::instance}}().\mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a3b99fa165ee337db6734846c51b70d0a}{intern}}(str);\ \}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00152\ \}\ \ \textcolor{comment}{//\ namespace\ neo::core}}
+
+\end{DoxyCode}

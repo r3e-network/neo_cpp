@@ -1,0 +1,281 @@
+\doxysection{neo\+::cryptography\+::ecc\+::Key\+Pair Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{}\label{classneo_1_1cryptography_1_1ecc_1_1_key_pair}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+
+
+Represents a cryptographic key pair (private key + public key)  
+
+
+
+
+{\ttfamily \#include $<$keypair.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::cryptography\+::ecc\+::Key\+Pair\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a34c5b0f773fd3cbaf8625906820767ac}{Key\+Pair}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Constructor with private key. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_aca87841382179ed89184dede624ed47f}{Get\+Private\+Key}} () const
+\begin{DoxyCompactList}\small\item\em Get the private key. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a08278325a5a2ffd9a6cd12bbb55f37c0}{Private\+Key}} () const
+\begin{DoxyCompactList}\small\item\em Get the private key (alias for C\# compatibility) \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_af1c306f23e889783b07111caedd8feba}{Get\+Public\+Key}} () const
+\begin{DoxyCompactList}\small\item\em Get the public key. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a5e9ac8ff21676be0a703ab9e0ff8999f}{Public\+Key}} () const
+\begin{DoxyCompactList}\small\item\em Get the public key (alias for C\# compatibility) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a2e09703bed4e95cbb7297a08f45ba65b}{Get\+Script\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Get the script hash for this key pair. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a619de6c80f2b38856720950ec87be998}{To\+WIF}} () const
+\begin{DoxyCompactList}\small\item\em Export private key to WIF format. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_afcf7b734df5ece3274587000e1143901}{Sign}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data) const
+\begin{DoxyCompactList}\small\item\em Sign data with this key pair. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a434aa823cbd739e66b4dfe506c109d2d}{Verify}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&signature) const
+\begin{DoxyCompactList}\small\item\em Verify signature with this key pair\textquotesingle{}s public key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_ad2585779d8818baf155e7ead1e3f0128}{\texorpdfstring{$\sim$}{\string~}\+Key\+Pair}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a6a974d0265c71d45c1f2ecc441c9701b}{Key\+Pair}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} \&)=delete
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a88e3c04aed98d513ba92485cd43a0f0f}{operator=}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} \&)=delete
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a3e7daf23278fdeb2ff79dfce7e5dc5d1}{Key\+Pair}} (\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} \&\&) noexcept=default
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a54996a9a27d3c5b89f27aa781c664106}{operator=}} (\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} \&\&) noexcept=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a1e6c175d8e75dcdf18a5521ae7beea77}{Generate}} ()
+\begin{DoxyCompactList}\small\item\em Generate a new random key pair. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a928b5164bfbdb155513a1e3ff270158a}{From\+WIF}} (const std\+::string \&wif)
+\begin{DoxyCompactList}\small\item\em Create key pair from WIF (Wallet Import Format) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_ad8f0da3e2f2542468b8bad11c8abddae}{Compute\+Public\+Key}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_ad66d3931b3a6b89ab2925608b33994fb}{private\+Key\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a56a7c9484a50a30d49602fcf360f2f54}{public\+Key\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a cryptographic key pair (private key + public key) 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a34c5b0f773fd3cbaf8625906820767ac}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!KeyPair@{KeyPair}}
+\index{KeyPair@{KeyPair}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{KeyPair()}{KeyPair()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a34c5b0f773fd3cbaf8625906820767ac} 
+neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::\+Key\+Pair (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{private\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor with private key. 
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_ad2585779d8818baf155e7ead1e3f0128}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!````~KeyPair@{\texorpdfstring{$\sim$}{\string~}KeyPair}}
+\index{````~KeyPair@{\texorpdfstring{$\sim$}{\string~}KeyPair}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}KeyPair()}{\string~KeyPair()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_ad2585779d8818baf155e7ead1e3f0128} 
+neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::\texorpdfstring{$\sim$}{\string~}\+Key\+Pair (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Destructor. 
+
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a6a974d0265c71d45c1f2ecc441c9701b}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!KeyPair@{KeyPair}}
+\index{KeyPair@{KeyPair}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{KeyPair()}{KeyPair()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a6a974d0265c71d45c1f2ecc441c9701b} 
+neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::\+Key\+Pair (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a3e7daf23278fdeb2ff79dfce7e5dc5d1}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!KeyPair@{KeyPair}}
+\index{KeyPair@{KeyPair}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{KeyPair()}{KeyPair()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a3e7daf23278fdeb2ff79dfce7e5dc5d1} 
+neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::\+Key\+Pair (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} \&\&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_ad8f0da3e2f2542468b8bad11c8abddae}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!ComputePublicKey@{ComputePublicKey}}
+\index{ComputePublicKey@{ComputePublicKey}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{ComputePublicKey()}{ComputePublicKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_ad8f0da3e2f2542468b8bad11c8abddae} 
+void neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::\+Compute\+Public\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a928b5164bfbdb155513a1e3ff270158a}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!FromWIF@{FromWIF}}
+\index{FromWIF@{FromWIF}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{FromWIF()}{FromWIF()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a928b5164bfbdb155513a1e3ff270158a} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} $>$ neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::\+From\+WIF (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{wif}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create key pair from WIF (Wallet Import Format) 
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a1e6c175d8e75dcdf18a5521ae7beea77}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!Generate@{Generate}}
+\index{Generate@{Generate}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{Generate()}{Generate()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a1e6c175d8e75dcdf18a5521ae7beea77} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} $>$ neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::\+Generate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generate a new random key pair. 
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_aca87841382179ed89184dede624ed47f}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!GetPrivateKey@{GetPrivateKey}}
+\index{GetPrivateKey@{GetPrivateKey}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{GetPrivateKey()}{GetPrivateKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_aca87841382179ed89184dede624ed47f} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::\+Get\+Private\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the private key. 
+
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_af1c306f23e889783b07111caedd8feba}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!GetPublicKey@{GetPublicKey}}
+\index{GetPublicKey@{GetPublicKey}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{GetPublicKey()}{GetPublicKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_af1c306f23e889783b07111caedd8feba} 
+const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \& neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::\+Get\+Public\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the public key. 
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a2e09703bed4e95cbb7297a08f45ba65b}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!GetScriptHash@{GetScriptHash}}
+\index{GetScriptHash@{GetScriptHash}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{GetScriptHash()}{GetScriptHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a2e09703bed4e95cbb7297a08f45ba65b} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::\+Get\+Script\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the script hash for this key pair. 
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a88e3c04aed98d513ba92485cd43a0f0f}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a88e3c04aed98d513ba92485cd43a0f0f} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} \& neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a54996a9a27d3c5b89f27aa781c664106}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a54996a9a27d3c5b89f27aa781c664106} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} \& neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} \&\&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a08278325a5a2ffd9a6cd12bbb55f37c0}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!PrivateKey@{PrivateKey}}
+\index{PrivateKey@{PrivateKey}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{PrivateKey()}{PrivateKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a08278325a5a2ffd9a6cd12bbb55f37c0} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::\+Private\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the private key (alias for C\# compatibility) 
+
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a5e9ac8ff21676be0a703ab9e0ff8999f}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!PublicKey@{PublicKey}}
+\index{PublicKey@{PublicKey}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{PublicKey()}{PublicKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a5e9ac8ff21676be0a703ab9e0ff8999f} 
+const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \& neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::\+Public\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the public key (alias for C\# compatibility) 
+
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_afcf7b734df5ece3274587000e1143901}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!Sign@{Sign}}
+\index{Sign@{Sign}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{Sign()}{Sign()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_afcf7b734df5ece3274587000e1143901} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::\+Sign (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption}) const}
+
+
+
+Sign data with this key pair. 
+
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a619de6c80f2b38856720950ec87be998}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!ToWIF@{ToWIF}}
+\index{ToWIF@{ToWIF}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{ToWIF()}{ToWIF()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a619de6c80f2b38856720950ec87be998} 
+std\+::string neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::\+To\+WIF (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Export private key to WIF format. 
+
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a434aa823cbd739e66b4dfe506c109d2d}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!Verify@{Verify}}
+\index{Verify@{Verify}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a434aa823cbd739e66b4dfe506c109d2d} 
+bool neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::\+Verify (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{signature}{}\end{DoxyParamCaption}) const}
+
+
+
+Verify signature with this key pair\textquotesingle{}s public key. 
+
+Here is the call graph for this function\+:
+% FIG 15
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_ad66d3931b3a6b89ab2925608b33994fb}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!privateKey\_@{privateKey\_}}
+\index{privateKey\_@{privateKey\_}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{privateKey\_}{privateKey\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_ad66d3931b3a6b89ab2925608b33994fb} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::private\+Key\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a56a7c9484a50a30d49602fcf360f2f54}\index{neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}!publicKey\_@{publicKey\_}}
+\index{publicKey\_@{publicKey\_}!neo::cryptography::ecc::KeyPair@{neo::cryptography::ecc::KeyPair}}
+\doxysubsubsection{\texorpdfstring{publicKey\_}{publicKey\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_key_pair_a56a7c9484a50a30d49602fcf360f2f54} 
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}}$>$ neo\+::cryptography\+::ecc\+::\+Key\+Pair\+::public\+Key\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/ecc/\mbox{\hyperlink{keypair_8h}{keypair.\+h}}\item 
+src/cryptography/ecc/\mbox{\hyperlink{keypair_8cpp}{keypair.\+cpp}}\end{DoxyCompactItemize}

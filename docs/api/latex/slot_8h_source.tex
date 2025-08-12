@@ -1,0 +1,48 @@
+\doxysection{slot.\+h}
+\hypertarget{slot_8h_source}{}\label{slot_8h_source}\index{include/neo/vm/slot.h@{include/neo/vm/slot.h}}
+\mbox{\hyperlink{slot_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stack__item_8h}{neo/vm/stack\_item.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_slot_aba9cf742895a80f5fd933eb52f116e7c}{Slot}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00016\ \ \ \ \ std::vector<std::shared\_ptr<StackItem>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a8cb2bb0f6814df9548942f5c5e483cd0}{items\_}};}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_aba9cf742895a80f5fd933eb52f116e7c}{Slot}}(\textcolor{keywordtype}{size\_t}\ capacity);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a8823356d4a00413945a9c2f1c4f861f9}{Slot}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_abc126510117732f4badaff4289f03688}{\string~Slot}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00040\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_aafc9f5ed7f7572922e9cb4b70e7493f9}{Get}}(\textcolor{keywordtype}{size\_t}\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a75e49e59a5be2aa46f08a8eb3df170cf}{Set}}(\textcolor{keywordtype}{size\_t}\ index,\ std::shared\_ptr<StackItem>\ item);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_aa3c228e768a1a8d820c1d915cd175b73}{Count}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a8cb2bb0f6814df9548942f5c5e483cd0}{items\_}}.size();\ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a2f412b7429edfd91f4024688c8d9ca25}{IsValidIndex}}(\textcolor{keywordtype}{size\_t}\ index)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ index\ <\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a8cb2bb0f6814df9548942f5c5e483cd0}{items\_}}.size();\ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a523da05f36d0bc88992b13d744110d85}{Clear}}();}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a213a529f643210b1aa46889f3b08b09a}{Resize}}(\textcolor{keywordtype}{size\_t}\ new\_size);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<StackItem>>\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a5cfb56a633aa33ccb327579af16639ce}{GetItems}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a8cb2bb0f6814df9548942f5c5e483cd0}{items\_}};\ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{comment}{//\ Iterator\ support}}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_aaf0bb4b3582938f8a5c99a7cd9dfe9e5}{begin}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a8cb2bb0f6814df9548942f5c5e483cd0}{items\_}}.begin();\ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_ae5de71b2c0d784ae5058bda8641cf5c4}{end}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a8cb2bb0f6814df9548942f5c5e483cd0}{items\_}}.end();\ \}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a84a4b172bcf49f20319b1eece425c6a7}{begin}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a8cb2bb0f6814df9548942f5c5e483cd0}{items\_}}.begin();\ \}}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_ac2b90cdbe89b1d6b55b1832536d35e72}{end}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a8cb2bb0f6814df9548942f5c5e483cd0}{items\_}}.end();\ \}}
+\DoxyCodeLine{00084\ \};}
+\DoxyCodeLine{00085\ \}\ \ \textcolor{comment}{//\ namespace\ neo::vm}}
+
+\end{DoxyCode}

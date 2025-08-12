@@ -1,0 +1,196 @@
+\doxysection{neo\+::core\+::Interned\+String Class Reference}
+\hypertarget{classneo_1_1core_1_1_interned_string}{}\label{classneo_1_1core_1_1_interned_string}\index{neo::core::InternedString@{neo::core::InternedString}}
+
+
+Interned string handle for efficient string comparison and storage.  
+
+
+
+
+{\ttfamily \#include $<$string\+\_\+intern.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a470d4cc9edf17c9cbbd9ad13aa2064cb}{Interned\+String}} ()=default
+\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a377bf5f029b743570e751259ea9a9cc6}{str}} () const
+\item 
+std\+::string\+\_\+view \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_ab2acc0c5bfb7a1a053df98a4dba18698}{view}} () const
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a117dd748852d15efe6605b22641baad1}{c\+\_\+str}} () const
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_adee5c4dd59bcbbc502fc8fd971860a16}{size}} () const
+\item 
+bool \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_ae17e8ea0ab12ba16627cf7bea804f4d4}{empty}} () const
+\item 
+bool \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a9bcdace27adf6dce529b3a48aabfd5d1}{operator==}} (const \mbox{\hyperlink{classneo_1_1core_1_1_interned_string}{Interned\+String}} \&other) const
+\item 
+bool \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a82f5a5b657abf59489ad85ef8cf3d1a0}{operator!=}} (const \mbox{\hyperlink{classneo_1_1core_1_1_interned_string}{Interned\+String}} \&other) const
+\item 
+bool \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a34b7f8480fc7dc8671b6be55a83abe83}{operator$<$}} (const \mbox{\hyperlink{classneo_1_1core_1_1_interned_string}{Interned\+String}} \&other) const
+\item 
+bool \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a0edab4e48860b6aeab286b6af10c290c}{operator==}} (std\+::string\+\_\+view other) const
+\item 
+bool \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_ab784362cf9bf66436eedb4bb19638cde}{operator!=}} (std\+::string\+\_\+view other) const
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_interned_string_aafd03e36da0ada3618a0c966bd96c91a}{operator bool}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a5b79762cb57ec88b1fc6d533ec40f668}{Interned\+String}} (std\+::shared\+\_\+ptr$<$ const std\+::string $>$ ptr)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static const std\+::string \& \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_ae2beafa5a78015afd262b5f0c278c4da}{empty\+\_\+string}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ const std\+::string $>$ \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}{ptr\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_interned_string_aa43ad6916b87177856e649fa2108b7bf}{String\+Interner}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interned string handle for efficient string comparison and storage. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1core_1_1_interned_string_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1core_1_1_interned_string_a470d4cc9edf17c9cbbd9ad13aa2064cb}\index{neo::core::InternedString@{neo::core::InternedString}!InternedString@{InternedString}}
+\index{InternedString@{InternedString}!neo::core::InternedString@{neo::core::InternedString}}
+\doxysubsubsection{\texorpdfstring{InternedString()}{InternedString()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_interned_string_a470d4cc9edf17c9cbbd9ad13aa2064cb} 
+neo\+::core\+::\+Interned\+String\+::\+Interned\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+\Hypertarget{classneo_1_1core_1_1_interned_string_a5b79762cb57ec88b1fc6d533ec40f668}\index{neo::core::InternedString@{neo::core::InternedString}!InternedString@{InternedString}}
+\index{InternedString@{InternedString}!neo::core::InternedString@{neo::core::InternedString}}
+\doxysubsubsection{\texorpdfstring{InternedString()}{InternedString()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_interned_string_a5b79762cb57ec88b1fc6d533ec40f668} 
+neo\+::core\+::\+Interned\+String\+::\+Interned\+String (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ const std\+::string $>$}]{ptr}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}, {\ttfamily [private]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1core_1_1_interned_string_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1core_1_1_interned_string_a117dd748852d15efe6605b22641baad1}\index{neo::core::InternedString@{neo::core::InternedString}!c\_str@{c\_str}}
+\index{c\_str@{c\_str}!neo::core::InternedString@{neo::core::InternedString}}
+\doxysubsubsection{\texorpdfstring{c\_str()}{c\_str()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_interned_string_a117dd748852d15efe6605b22641baad1} 
+const char \texorpdfstring{$\ast$}{*} neo\+::core\+::\+Interned\+String\+::c\+\_\+str (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1core_1_1_interned_string_ae17e8ea0ab12ba16627cf7bea804f4d4}\index{neo::core::InternedString@{neo::core::InternedString}!empty@{empty}}
+\index{empty@{empty}!neo::core::InternedString@{neo::core::InternedString}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_interned_string_ae17e8ea0ab12ba16627cf7bea804f4d4} 
+bool neo\+::core\+::\+Interned\+String\+::empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1core_1_1_interned_string_ae2beafa5a78015afd262b5f0c278c4da}\index{neo::core::InternedString@{neo::core::InternedString}!empty\_string@{empty\_string}}
+\index{empty\_string@{empty\_string}!neo::core::InternedString@{neo::core::InternedString}}
+\doxysubsubsection{\texorpdfstring{empty\_string()}{empty\_string()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_interned_string_ae2beafa5a78015afd262b5f0c278c4da} 
+const std\+::string \& neo\+::core\+::\+Interned\+String\+::empty\+\_\+string (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1core_1_1_interned_string_aafd03e36da0ada3618a0c966bd96c91a}\index{neo::core::InternedString@{neo::core::InternedString}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!neo::core::InternedString@{neo::core::InternedString}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_interned_string_aafd03e36da0ada3618a0c966bd96c91a} 
+neo\+::core\+::\+Interned\+String\+::operator bool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classneo_1_1core_1_1_interned_string_a82f5a5b657abf59489ad85ef8cf3d1a0}\index{neo::core::InternedString@{neo::core::InternedString}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::core::InternedString@{neo::core::InternedString}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_interned_string_a82f5a5b657abf59489ad85ef8cf3d1a0} 
+bool neo\+::core\+::\+Interned\+String\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1core_1_1_interned_string}{Interned\+String}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1core_1_1_interned_string_ab784362cf9bf66436eedb4bb19638cde}\index{neo::core::InternedString@{neo::core::InternedString}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::core::InternedString@{neo::core::InternedString}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_interned_string_ab784362cf9bf66436eedb4bb19638cde} 
+bool neo\+::core\+::\+Interned\+String\+::operator!= (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1core_1_1_interned_string_a34b7f8480fc7dc8671b6be55a83abe83}\index{neo::core::InternedString@{neo::core::InternedString}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!neo::core::InternedString@{neo::core::InternedString}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_interned_string_a34b7f8480fc7dc8671b6be55a83abe83} 
+bool neo\+::core\+::\+Interned\+String\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1core_1_1_interned_string}{Interned\+String}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1core_1_1_interned_string_a9bcdace27adf6dce529b3a48aabfd5d1}\index{neo::core::InternedString@{neo::core::InternedString}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::core::InternedString@{neo::core::InternedString}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_interned_string_a9bcdace27adf6dce529b3a48aabfd5d1} 
+bool neo\+::core\+::\+Interned\+String\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1core_1_1_interned_string}{Interned\+String}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1core_1_1_interned_string_a0edab4e48860b6aeab286b6af10c290c}\index{neo::core::InternedString@{neo::core::InternedString}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::core::InternedString@{neo::core::InternedString}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_interned_string_a0edab4e48860b6aeab286b6af10c290c} 
+bool neo\+::core\+::\+Interned\+String\+::operator== (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1core_1_1_interned_string_adee5c4dd59bcbbc502fc8fd971860a16}\index{neo::core::InternedString@{neo::core::InternedString}!size@{size}}
+\index{size@{size}!neo::core::InternedString@{neo::core::InternedString}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_interned_string_adee5c4dd59bcbbc502fc8fd971860a16} 
+size\+\_\+t neo\+::core\+::\+Interned\+String\+::size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1core_1_1_interned_string_a377bf5f029b743570e751259ea9a9cc6}\index{neo::core::InternedString@{neo::core::InternedString}!str@{str}}
+\index{str@{str}!neo::core::InternedString@{neo::core::InternedString}}
+\doxysubsubsection{\texorpdfstring{str()}{str()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_interned_string_a377bf5f029b743570e751259ea9a9cc6} 
+const std\+::string \& neo\+::core\+::\+Interned\+String\+::str (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1core_1_1_interned_string_ab2acc0c5bfb7a1a053df98a4dba18698}\index{neo::core::InternedString@{neo::core::InternedString}!view@{view}}
+\index{view@{view}!neo::core::InternedString@{neo::core::InternedString}}
+\doxysubsubsection{\texorpdfstring{view()}{view()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_interned_string_ab2acc0c5bfb7a1a053df98a4dba18698} 
+std\+::string\+\_\+view neo\+::core\+::\+Interned\+String\+::view (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-related-members}
+\Hypertarget{classneo_1_1core_1_1_interned_string_doc-related-members}
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classneo_1_1core_1_1_interned_string_aa43ad6916b87177856e649fa2108b7bf}\index{neo::core::InternedString@{neo::core::InternedString}!StringInterner@{StringInterner}}
+\index{StringInterner@{StringInterner}!neo::core::InternedString@{neo::core::InternedString}}
+\doxysubsubsection{\texorpdfstring{StringInterner}{StringInterner}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_interned_string_aa43ad6916b87177856e649fa2108b7bf} 
+friend class \mbox{\hyperlink{classneo_1_1core_1_1_string_interner}{String\+Interner}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1core_1_1_interned_string_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a}\index{neo::core::InternedString@{neo::core::InternedString}!ptr\_@{ptr\_}}
+\index{ptr\_@{ptr\_}!neo::core::InternedString@{neo::core::InternedString}}
+\doxysubsubsection{\texorpdfstring{ptr\_}{ptr\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_interned_string_a74f1b0aa35ff4e2623d88b11351b850a} 
+std\+::shared\+\_\+ptr$<$const std\+::string$>$ neo\+::core\+::\+Interned\+String\+::ptr\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{string__intern_8h}{string\+\_\+intern.\+h}}\end{DoxyCompactItemize}

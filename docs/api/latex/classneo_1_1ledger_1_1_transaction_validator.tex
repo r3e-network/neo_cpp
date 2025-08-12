@@ -1,0 +1,252 @@
+\doxysection{neo\+::ledger\+::Transaction\+Validator Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_transaction_validator}{}\label{classneo_1_1ledger_1_1_transaction_validator}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57}{Validation\+Result}} \{ \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a3ac705f2acd51a4613f9188c05c91d0d}{Valid}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57ade236a235b4e8ffc9141676624753b2d}{Invalid\+Format}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57aa5cffdcd7892a263ff87df5783c0d6b6}{Invalid\+Size}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a49069827e26a70a158193ed0595b485b}{Invalid\+Attribute}}
+, \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57ac7c6ed78835571574206e575db1c719b}{Invalid\+Script}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a29a1c64a7b67b37c3dc14b57f058b6db}{Invalid\+Witness}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a09d9ff5c9cf461998dc29f4c90f2c60c}{Insufficient\+Funds}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a351caf723532f9ba7a371b5dfa868eed}{Invalid\+Signature}}
+, \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a89b69484680b18e9179e826c6e023805}{Already\+Exists}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a24fe48030f7d3097d5882535b04c3fa8}{Expired}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57ac4b2bc7efbe9ea7ba2012571fbd1a1cc}{Invalid\+System\+Fee}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57afb239e3d4fa9ba41dcecfe5848cd55b2}{Invalid\+Network\+Fee}}
+, \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57aaee43f65108573ca863298db0692a4f1}{Policy\+Violation}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a88183b946cc5f0e8c96b2e66e1c74a7e}{Unknown}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57}{Validation\+Result}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a6b3b8940071525b1ead4ab6091087b0c}{Validate\+Transaction}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&tx, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$ blockchain, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{Memory\+Pool}} $>$ mempool=nullptr)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57}{Validation\+Result}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_af0878c3960a0d8c2aaa60bff3066d52c}{Validate\+Format}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&tx)
+\item 
+static \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57}{Validation\+Result}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3d7d8a59659ea46c0768bd65e3451f0a}{Validate\+Fees}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&tx, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$ blockchain)
+\item 
+static \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57}{Validation\+Result}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a731a0044e64923c493d4d6b9875172f5}{Validate\+Attributes}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&tx, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$ blockchain)
+\item 
+static \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57}{Validation\+Result}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a0bb9dc8bca039eaa5d5a0383626f64ae}{Validate\+Script}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&tx, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$ blockchain)
+\item 
+static \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57}{Validation\+Result}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_adcdfb4a45a1270ee244dc8a1edd43c72}{Validate\+Witnesses}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&tx, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$ blockchain)
+\item 
+static uint64\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a59315bfabd6948aac87d7e7757e84ace}{Calculate\+Minimum\+Network\+Fee}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&tx, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$ blockchain)
+\item 
+static bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a49bcbdaa3720028c0cf8484e10c5d2b0}{Has\+Sufficient\+Balance}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&tx, uint64\+\_\+t required\+Amount, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$ blockchain)
+\item 
+static bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a03b611af76a158654b25140ba090feb5}{Validate\+High\+Priority\+Attribute}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&tx, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$ blockchain)
+\item 
+static bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_ad1514233540a02644e6519bf5ba51cb6}{Validate\+Oracle\+Response\+Attribute}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}} $>$ attr, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$ blockchain)
+\item 
+static bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a49f83582789321a2d463d8fd7bcd93bd}{Validate\+Not\+Valid\+Before\+Attribute}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}} $>$ attr, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$ blockchain)
+\item 
+static bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_aa9720975b1882a159b402d6fcfdbd064}{Validate\+Conflicts\+Attribute}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}} $>$ attr, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$ blockchain)
+\item 
+static bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a04eb29a611e01d8269b95dec5f7aa4e4}{Contains\+Forbidden\+Opcodes}} (const \mbox{\hyperlink{classneo_1_1vm_1_1_script}{vm\+::\+Script}} \&script)
+\item 
+static bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a243851268d5460dfb58aee470c290baf}{Verify\+Script\+Limits}} (const \mbox{\hyperlink{classneo_1_1vm_1_1_script}{vm\+::\+Script}} \&script)
+\item 
+static bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a768bc2ca69f7b4175a07735bc13e42eb}{Verify\+Witness}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&tx, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{Signer}} $>$ signer, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{Witness}} $>$ witness, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$ blockchain)
+\end{DoxyCompactItemize}
+
+
+\label{doc-enum-members}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!ValidationResult@{ValidationResult}}
+\index{ValidationResult@{ValidationResult}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection{\texorpdfstring{ValidationResult}{ValidationResult}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57} 
+enum class \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57}{neo\+::ledger\+::\+Transaction\+Validator\+::\+Validation\+Result}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Valid@{Valid}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!Valid@{Valid}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a3ac705f2acd51a4613f9188c05c91d0d}\label{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a3ac705f2acd51a4613f9188c05c91d0d} 
+Valid&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidFormat@{InvalidFormat}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!InvalidFormat@{InvalidFormat}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57ade236a235b4e8ffc9141676624753b2d}\label{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57ade236a235b4e8ffc9141676624753b2d} 
+Invalid\+Format&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidSize@{InvalidSize}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!InvalidSize@{InvalidSize}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57aa5cffdcd7892a263ff87df5783c0d6b6}\label{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57aa5cffdcd7892a263ff87df5783c0d6b6} 
+Invalid\+Size&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidAttribute@{InvalidAttribute}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!InvalidAttribute@{InvalidAttribute}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a49069827e26a70a158193ed0595b485b}\label{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a49069827e26a70a158193ed0595b485b} 
+Invalid\+Attribute&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidScript@{InvalidScript}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!InvalidScript@{InvalidScript}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57ac7c6ed78835571574206e575db1c719b}\label{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57ac7c6ed78835571574206e575db1c719b} 
+Invalid\+Script&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidWitness@{InvalidWitness}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!InvalidWitness@{InvalidWitness}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a29a1c64a7b67b37c3dc14b57f058b6db}\label{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a29a1c64a7b67b37c3dc14b57f058b6db} 
+Invalid\+Witness&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InsufficientFunds@{InsufficientFunds}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!InsufficientFunds@{InsufficientFunds}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a09d9ff5c9cf461998dc29f4c90f2c60c}\label{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a09d9ff5c9cf461998dc29f4c90f2c60c} 
+Insufficient\+Funds&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidSignature@{InvalidSignature}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!InvalidSignature@{InvalidSignature}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a351caf723532f9ba7a371b5dfa868eed}\label{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a351caf723532f9ba7a371b5dfa868eed} 
+Invalid\+Signature&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{AlreadyExists@{AlreadyExists}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!AlreadyExists@{AlreadyExists}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a89b69484680b18e9179e826c6e023805}\label{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a89b69484680b18e9179e826c6e023805} 
+Already\+Exists&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Expired@{Expired}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!Expired@{Expired}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a24fe48030f7d3097d5882535b04c3fa8}\label{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a24fe48030f7d3097d5882535b04c3fa8} 
+Expired&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidSystemFee@{InvalidSystemFee}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!InvalidSystemFee@{InvalidSystemFee}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57ac4b2bc7efbe9ea7ba2012571fbd1a1cc}\label{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57ac4b2bc7efbe9ea7ba2012571fbd1a1cc} 
+Invalid\+System\+Fee&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvalidNetworkFee@{InvalidNetworkFee}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!InvalidNetworkFee@{InvalidNetworkFee}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57afb239e3d4fa9ba41dcecfe5848cd55b2}\label{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57afb239e3d4fa9ba41dcecfe5848cd55b2} 
+Invalid\+Network\+Fee&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PolicyViolation@{PolicyViolation}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!PolicyViolation@{PolicyViolation}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57aaee43f65108573ca863298db0692a4f1}\label{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57aaee43f65108573ca863298db0692a4f1} 
+Policy\+Violation&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Unknown@{Unknown}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!Unknown@{Unknown}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a88183b946cc5f0e8c96b2e66e1c74a7e}\label{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57a88183b946cc5f0e8c96b2e66e1c74a7e} 
+Unknown&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a59315bfabd6948aac87d7e7757e84ace}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!CalculateMinimumNetworkFee@{CalculateMinimumNetworkFee}}
+\index{CalculateMinimumNetworkFee@{CalculateMinimumNetworkFee}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection{\texorpdfstring{CalculateMinimumNetworkFee()}{CalculateMinimumNetworkFee()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_validator_a59315bfabd6948aac87d7e7757e84ace} 
+uint64\+\_\+t neo\+::ledger\+::\+Transaction\+Validator\+::\+Calculate\+Minimum\+Network\+Fee (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&}]{tx}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$}]{blockchain}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a04eb29a611e01d8269b95dec5f7aa4e4}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!ContainsForbiddenOpcodes@{ContainsForbiddenOpcodes}}
+\index{ContainsForbiddenOpcodes@{ContainsForbiddenOpcodes}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection{\texorpdfstring{ContainsForbiddenOpcodes()}{ContainsForbiddenOpcodes()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_validator_a04eb29a611e01d8269b95dec5f7aa4e4} 
+bool neo\+::ledger\+::\+Transaction\+Validator\+::\+Contains\+Forbidden\+Opcodes (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1_script}{vm\+::\+Script}} \&}]{script}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a49bcbdaa3720028c0cf8484e10c5d2b0}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!HasSufficientBalance@{HasSufficientBalance}}
+\index{HasSufficientBalance@{HasSufficientBalance}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection{\texorpdfstring{HasSufficientBalance()}{HasSufficientBalance()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_validator_a49bcbdaa3720028c0cf8484e10c5d2b0} 
+bool neo\+::ledger\+::\+Transaction\+Validator\+::\+Has\+Sufficient\+Balance (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&}]{tx}{, }\item[{uint64\+\_\+t}]{required\+Amount}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$}]{blockchain}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a731a0044e64923c493d4d6b9875172f5}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!ValidateAttributes@{ValidateAttributes}}
+\index{ValidateAttributes@{ValidateAttributes}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection{\texorpdfstring{ValidateAttributes()}{ValidateAttributes()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_validator_a731a0044e64923c493d4d6b9875172f5} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57}{Validation\+Result}} neo\+::ledger\+::\+Transaction\+Validator\+::\+Validate\+Attributes (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&}]{tx}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$}]{blockchain}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_aa9720975b1882a159b402d6fcfdbd064}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!ValidateConflictsAttribute@{ValidateConflictsAttribute}}
+\index{ValidateConflictsAttribute@{ValidateConflictsAttribute}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection{\texorpdfstring{ValidateConflictsAttribute()}{ValidateConflictsAttribute()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_validator_aa9720975b1882a159b402d6fcfdbd064} 
+bool neo\+::ledger\+::\+Transaction\+Validator\+::\+Validate\+Conflicts\+Attribute (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}} $>$}]{attr}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$}]{blockchain}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a3d7d8a59659ea46c0768bd65e3451f0a}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!ValidateFees@{ValidateFees}}
+\index{ValidateFees@{ValidateFees}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection{\texorpdfstring{ValidateFees()}{ValidateFees()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_validator_a3d7d8a59659ea46c0768bd65e3451f0a} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57}{Validation\+Result}} neo\+::ledger\+::\+Transaction\+Validator\+::\+Validate\+Fees (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&}]{tx}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$}]{blockchain}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_af0878c3960a0d8c2aaa60bff3066d52c}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!ValidateFormat@{ValidateFormat}}
+\index{ValidateFormat@{ValidateFormat}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection{\texorpdfstring{ValidateFormat()}{ValidateFormat()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_validator_af0878c3960a0d8c2aaa60bff3066d52c} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57}{Validation\+Result}} neo\+::ledger\+::\+Transaction\+Validator\+::\+Validate\+Format (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&}]{tx}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a03b611af76a158654b25140ba090feb5}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!ValidateHighPriorityAttribute@{ValidateHighPriorityAttribute}}
+\index{ValidateHighPriorityAttribute@{ValidateHighPriorityAttribute}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection{\texorpdfstring{ValidateHighPriorityAttribute()}{ValidateHighPriorityAttribute()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_validator_a03b611af76a158654b25140ba090feb5} 
+bool neo\+::ledger\+::\+Transaction\+Validator\+::\+Validate\+High\+Priority\+Attribute (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&}]{tx}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$}]{blockchain}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a49f83582789321a2d463d8fd7bcd93bd}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!ValidateNotValidBeforeAttribute@{ValidateNotValidBeforeAttribute}}
+\index{ValidateNotValidBeforeAttribute@{ValidateNotValidBeforeAttribute}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection{\texorpdfstring{ValidateNotValidBeforeAttribute()}{ValidateNotValidBeforeAttribute()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_validator_a49f83582789321a2d463d8fd7bcd93bd} 
+bool neo\+::ledger\+::\+Transaction\+Validator\+::\+Validate\+Not\+Valid\+Before\+Attribute (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}} $>$}]{attr}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$}]{blockchain}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_ad1514233540a02644e6519bf5ba51cb6}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!ValidateOracleResponseAttribute@{ValidateOracleResponseAttribute}}
+\index{ValidateOracleResponseAttribute@{ValidateOracleResponseAttribute}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection{\texorpdfstring{ValidateOracleResponseAttribute()}{ValidateOracleResponseAttribute()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_validator_ad1514233540a02644e6519bf5ba51cb6} 
+bool neo\+::ledger\+::\+Transaction\+Validator\+::\+Validate\+Oracle\+Response\+Attribute (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}} $>$}]{attr}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$}]{blockchain}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a0bb9dc8bca039eaa5d5a0383626f64ae}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!ValidateScript@{ValidateScript}}
+\index{ValidateScript@{ValidateScript}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection{\texorpdfstring{ValidateScript()}{ValidateScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_validator_a0bb9dc8bca039eaa5d5a0383626f64ae} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57}{Validation\+Result}} neo\+::ledger\+::\+Transaction\+Validator\+::\+Validate\+Script (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&}]{tx}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$}]{blockchain}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a6b3b8940071525b1ead4ab6091087b0c}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!ValidateTransaction@{ValidateTransaction}}
+\index{ValidateTransaction@{ValidateTransaction}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection{\texorpdfstring{ValidateTransaction()}{ValidateTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_validator_a6b3b8940071525b1ead4ab6091087b0c} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57}{Validation\+Result}} neo\+::ledger\+::\+Transaction\+Validator\+::\+Validate\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&}]{tx}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$}]{blockchain}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{Memory\+Pool}} $>$}]{mempool}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_adcdfb4a45a1270ee244dc8a1edd43c72}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!ValidateWitnesses@{ValidateWitnesses}}
+\index{ValidateWitnesses@{ValidateWitnesses}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection{\texorpdfstring{ValidateWitnesses()}{ValidateWitnesses()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_validator_adcdfb4a45a1270ee244dc8a1edd43c72} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_validator_a3b05d3cea0929750e13de700b4232c57}{Validation\+Result}} neo\+::ledger\+::\+Transaction\+Validator\+::\+Validate\+Witnesses (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&}]{tx}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$}]{blockchain}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a243851268d5460dfb58aee470c290baf}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!VerifyScriptLimits@{VerifyScriptLimits}}
+\index{VerifyScriptLimits@{VerifyScriptLimits}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection{\texorpdfstring{VerifyScriptLimits()}{VerifyScriptLimits()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_validator_a243851268d5460dfb58aee470c290baf} 
+bool neo\+::ledger\+::\+Transaction\+Validator\+::\+Verify\+Script\+Limits (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1_script}{vm\+::\+Script}} \&}]{script}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1ledger_1_1_transaction_validator_a768bc2ca69f7b4175a07735bc13e42eb}\index{neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}!VerifyWitness@{VerifyWitness}}
+\index{VerifyWitness@{VerifyWitness}!neo::ledger::TransactionValidator@{neo::ledger::TransactionValidator}}
+\doxysubsubsection{\texorpdfstring{VerifyWitness()}{VerifyWitness()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_validator_a768bc2ca69f7b4175a07735bc13e42eb} 
+bool neo\+::ledger\+::\+Transaction\+Validator\+::\+Verify\+Witness (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&}]{tx}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{Signer}} $>$}]{signer}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{Witness}} $>$}]{witness}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} $>$}]{blockchain}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 10
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/ledger/\mbox{\hyperlink{transaction__validator_8cpp}{transaction\+\_\+validator.\+cpp}}\end{DoxyCompactItemize}

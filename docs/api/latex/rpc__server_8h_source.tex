@@ -1,0 +1,161 @@
+\doxysection{rpc\+\_\+server.\+h}
+\hypertarget{rpc__server_8h_source}{}\label{rpc__server_8h_source}\index{include/neo/rpc/rpc\_server.h@{include/neo/rpc/rpc\_server.h}}
+\mbox{\hyperlink{rpc__server_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{core_2logging_8h}{neo/core/logging.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2json_8h}{neo/io/json.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{transaction__pool__manager_8h}{neo/ledger/transaction\_pool\_manager.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{local__node_8h}{neo/network/p2p/local\_node.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{data__cache_8h}{neo/persistence/data\_cache.h}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1rpc}{neo::rpc}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1rpc_1_1_rpc_config}{RpcConfig}}}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1rpc_1_1_rpc_config_a4933435c52ced6175f087f9c659f0a04}{bind\_address}}\{\textcolor{stringliteral}{"{}127.0.0.1"{}}\};}
+\DoxyCodeLine{00026\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structneo_1_1rpc_1_1_rpc_config_a04e1a1a20c69a0cb40ef95ff7b2a25ac}{port}}\{10332\};}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1rpc_1_1_rpc_config_a188ebe2f1beb4413ce6149b5f64df0a1}{max\_concurrent\_requests}}\{100\};}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1rpc_1_1_rpc_config_a437b2bf2f2388c864922a056ee2fd11e}{max\_request\_size}}\{10\ *\ 1024\ *\ 1024\};\ \ \textcolor{comment}{//\ 10MB}}
+\DoxyCodeLine{00029\ \ \ \ \ std::chrono::seconds\ \mbox{\hyperlink{structneo_1_1rpc_1_1_rpc_config_aeb8e283099024d83116ca5484ad1dfd8}{request\_timeout}}\{30\};}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1rpc_1_1_rpc_config_a297789796d6ce66ee6653ee302377e76}{enable\_cors}}\{\textcolor{keyword}{true}\};}
+\DoxyCodeLine{00031\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{structneo_1_1rpc_1_1_rpc_config_ab4e2d673378b9daf3b1340453132a5f1}{allowed\_origins}}\{\textcolor{stringliteral}{"{}*"{}}\};}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1rpc_1_1_rpc_config_adb251b83d0bdd567f4b8d9679b66423a}{enable\_authentication}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00033\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1rpc_1_1_rpc_config_ab06616855c8b5647eaee3cc6a0220c9f}{username}};}
+\DoxyCodeLine{00034\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1rpc_1_1_rpc_config_a78c3b487be3d6938899d01fbb1aa306a}{password}};}
+\DoxyCodeLine{00035\ \};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00040\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceneo_1_1rpc_ae59496dacbfe510de572856b2cc6bf5f}{RpcMethodHandler}}\ =\ std::function<\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params)>;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_ac61c1bf3536bcec78a50d6fc25d0dd9a}{RpcServer}}}
+\DoxyCodeLine{00046\ \{}
+\DoxyCodeLine{00047\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{structneo_1_1rpc_1_1_rpc_config}{RpcConfig}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a715a540a2fbaf8488d0f11a96bc0912d}{config\_}};}
+\DoxyCodeLine{00049\ \ \ \ \ std::shared\_ptr<core::Logger>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a617e31a85f01318a0a6e47409e6a2c7c}{logger\_}};}
+\DoxyCodeLine{00050\ \ \ \ \ std::atomic<bool>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a68563360a743a2298107fb1a082b9720}{running\_}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00051\ \ \ \ \ std::thread\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a86e54c2cb40f5231dfbbc464cc6f3d4e}{server\_thread\_}};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{//\ Method\ handlers}}
+\DoxyCodeLine{00054\ \ \ \ \ std::unordered\_map<std::string,\ RpcMethodHandler>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a53b5e2addc3e91ac7a651777b2e6e966}{method\_handlers\_}};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ Dependencies}}
+\DoxyCodeLine{00057\ \ \ \ \ std::shared\_ptr<persistence::DataCache>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a79557c70f711b0ec055eaf9e701f381c}{blockchain\_}};}
+\DoxyCodeLine{00058\ \ \ \ \ std::shared\_ptr<network::p2p::LocalNode>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_abf7d9e7c5df47c0fe9d125eeb388195f}{local\_node\_}};}
+\DoxyCodeLine{00059\ \ \ \ \ std::shared\_ptr<ledger::TransactionPoolManager>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_ab57ffbbcf05637894e1f8aa1b1a4f62c}{transaction\_pool\_}};\ \ \textcolor{comment}{//\ C\#\ Neo\ compatibility}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//\ Statistics}}
+\DoxyCodeLine{00062\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a3b65502423cc104810857692cc815e8e}{total\_requests\_}}\{0\};}
+\DoxyCodeLine{00063\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a65b7e51b21e5bd11037b20bdb4da3b44}{failed\_requests\_}}\{0\};}
+\DoxyCodeLine{00064\ \ \ \ \ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a143e5bce4df9b81ffaa562fd7dfc56dd}{start\_time\_}};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_ac61c1bf3536bcec78a50d6fc25d0dd9a}{RpcServer}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1rpc_1_1_rpc_config}{RpcConfig}}\&\ \mbox{\hyperlink{namespaceneo_1_1config}{config}});}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_afe1ac4d561ac2d73b2422820d90a9bb6}{\string~RpcServer}}();}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a27436903ea339cd1b1cc81065bfbb228}{Start}}();}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_ac06e14873ddae4ae8fd7db5d5bf3aaa8}{Stop}}();}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a74bfe9a1942eadaf27f26034757f30a2}{SetBlockchain}}(std::shared\_ptr<persistence::DataCache>\ blockchain)\ \{\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a79557c70f711b0ec055eaf9e701f381c}{blockchain\_}}\ =\ blockchain;\ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a105124d862a1801f5329a9d79927e338}{SetLocalNode}}(std::shared\_ptr<network::p2p::LocalNode>\ \mbox{\hyperlink{namespaceneo_1_1node}{node}})\ \{\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_abf7d9e7c5df47c0fe9d125eeb388195f}{local\_node\_}}\ =\ \mbox{\hyperlink{namespaceneo_1_1node}{node}};\ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a04026d6ccec930c0845e585f95a3c6f5}{SetTransactionPool}}(std::shared\_ptr<ledger::TransactionPoolManager>\ pool)\ \{\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_ab57ffbbcf05637894e1f8aa1b1a4f62c}{transaction\_pool\_}}\ =\ pool;\ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_ab7b55c5c1f6b96b9bc7ef3804c0c6f2d}{GetStatistics}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a384f661db83e87fd85d8f585a7c9cb64}{InitializeHandlers}}();}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_ae72dcac85f93ce985b8ab643b58f9006}{ServerLoop}}();}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00121\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a9b2952bcac562c9b6eff6a94957d0fdb}{ProcessRequest}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ request);}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00128\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_ac0203c0490582f9e6037b4437ec81e6d}{ValidateRequest}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ request);}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00137\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a2f95badf290d5d0785822edde690da69}{CreateErrorResponse}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}*\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{int}\ code,\ \textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_ac8cf05dfec98a820f361602bfffbd072}{CreateSuccessResponse}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}*\ \textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ result);}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{comment}{//\ RPC\ Method\ Implementations}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00152\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_aaff48efbe0cc35e59da13184b4e80979}{GetBlock}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00157\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a0a065f0841d4db07fb387ebb919345b0}{GetBlockCount}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00162\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a21b577d41b2498b870f5b62e4bbdfdb2}{GetBlockHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00167\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a49d50ff176b0ad944ca0760aa7591afe}{GetBlockHeader}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00172\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a772cd36fb32e47157f1656b4be65f2fe}{GetTransaction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00177\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a89766448b7b2e98af583b71c2cdf9758}{GetContractState}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00182\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a6ebb96d8e80bd2aa66e4ac1125403bd7}{GetStorage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00187\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_afa9063240fb8a9fe074ae10c5662b9da}{GetTransactionHeight}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00192\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a6eabdd24584ab2a99c45328e28cf3170}{GetNextBlockValidators}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00197\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a14e84ea54d91943069794e8cc3c702c9}{GetCommittee}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00202\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a9af7a91678acdcb3277fa933b531d9a8}{InvokeFunction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00207\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_ab0e9e99f36417ff3f27c8a5486bec119}{InvokeScript}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00212\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a300e258e81b6111ce4ec3d7f30003780}{GetUnclaimedGas}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00217\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a404c890f416d0721c9c79a46e6d13e62}{ListPlugins}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00222\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a1a0067a27fbc04b8ab8b03e207694e20}{SendRawTransaction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00227\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a11bb2588999a6a3a3570076f5f771871}{SubmitBlock}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00232\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_aab56f895a00ca1d07cadf2721f249ee7}{GetConnectionCount}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00237\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a75d891367be4a1472f31bc417173f0aa}{GetPeers}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00242\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_adc5d84cddf0ca220ec96e0e1f330fa13}{GetVersion}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00247\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_a1300fd0e495640841efd921e179e9c54}{ValidateAddress}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ params);}
+\DoxyCodeLine{00248\ \};}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00253\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444df}{RpcError}}\ :\ \textcolor{keywordtype}{int}}
+\DoxyCodeLine{00254\ \{}
+\DoxyCodeLine{00255\ \ \ \ \ \textcolor{comment}{//\ Standard\ JSON-\/RPC\ 2.0\ errors}}
+\DoxyCodeLine{00256\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfae41199faa7290c167f70f314c5e6c165}{ParseError}}\ =\ -\/32700,}
+\DoxyCodeLine{00257\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfad544eb3da2f68d24cf92a8519ed53a31}{InvalidRequest}}\ =\ -\/32600,}
+\DoxyCodeLine{00258\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa011fb1f694f7b928964b898fc5d0ca5c}{MethodNotFound}}\ =\ -\/32601,}
+\DoxyCodeLine{00259\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfad4c4700b7580ce00c94ddf7b363de696}{InvalidParams}}\ =\ -\/32602,}
+\DoxyCodeLine{00260\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa8462b58246e70e5c83e5b939a9332cb5}{InternalError}}\ =\ -\/32603,}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \ \ \ \ \textcolor{comment}{//\ Custom\ Neo\ errors}}
+\DoxyCodeLine{00263\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa16461fe6ee0203b1459e0dfde67ad6aa}{InvalidBlockIndex}}\ =\ -\/100,}
+\DoxyCodeLine{00264\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa005a7ef5c05d0f5144c5ae4c13e3c07a}{InvalidBlockHash}}\ =\ -\/101,}
+\DoxyCodeLine{00265\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfab27dafdc5272249d05bf3747fcf45572}{InvalidTransactionHash}}\ =\ -\/102,}
+\DoxyCodeLine{00266\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa37ee560e952dca34f4454d8eadf39d10}{InvalidContractHash}}\ =\ -\/103,}
+\DoxyCodeLine{00267\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfae73c6fdc0c9755fd108e7105f5ae5984}{UnknownBlock}}\ =\ -\/104,}
+\DoxyCodeLine{00268\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa1b2cfd4159b25f1e06ebd7003c788985}{UnknownTransaction}}\ =\ -\/105,}
+\DoxyCodeLine{00269\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfabf21bb521a33136f645325635cc5da1b}{UnknownContract}}\ =\ -\/106,}
+\DoxyCodeLine{00270\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa09d9ff5c9cf461998dc29f4c90f2c60c}{InsufficientFunds}}\ =\ -\/107,}
+\DoxyCodeLine{00271\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa351caf723532f9ba7a371b5dfa868eed}{InvalidSignature}}\ =\ -\/108,}
+\DoxyCodeLine{00272\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfac7c6ed78835571574206e575db1c719b}{InvalidScript}}\ =\ -\/109,}
+\DoxyCodeLine{00273\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa49069827e26a70a158193ed0595b485b}{InvalidAttribute}}\ =\ -\/110,}
+\DoxyCodeLine{00274\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa29a1c64a7b67b37c3dc14b57f058b6db}{InvalidWitness}}\ =\ -\/111,}
+\DoxyCodeLine{00275\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa57cf8a557bcdf4ee3d16eda354d95bfa}{PolicyFailed}}\ =\ -\/112,}
+\DoxyCodeLine{00276\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa88183b946cc5f0e8c96b2e66e1c74a7e}{Unknown}}\ =\ -\/113}
+\DoxyCodeLine{00277\ \};}
+\DoxyCodeLine{00278\ \}\ \ \textcolor{comment}{//\ namespace\ neo::rpc}}
+
+\end{DoxyCode}

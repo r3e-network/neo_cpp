@@ -1,0 +1,282 @@
+\doxysection{neo\+::ledger\+::Witness\+Rule Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_witness_rule}{}\label{classneo_1_1ledger_1_1_witness_rule}\index{neo::ledger::WitnessRule@{neo::ledger::WitnessRule}}
+
+
+Represents a witness rule used to describe the scope of the witness.  
+
+
+
+
+{\ttfamily \#include $<$witness\+\_\+rule.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::ledger\+::Witness\+Rule\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::ledger\+::Witness\+Rule\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a9c2157efd0422c9234c4cbd11d4e7fff}{Witness\+Rule}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_af62fe20474a6ab3bfc9261f73e381676}{Witness\+Rule}} (\mbox{\hyperlink{namespaceneo_1_1ledger_a7d8879256a79ec4790b74fe9c40c3bac}{Witness\+Rule\+Action}} action, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition}{Witness\+Condition}} $>$ condition)
+\begin{DoxyCompactList}\small\item\em Constructor with action and condition. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_ab4c13abc272c4c5976c8c00bfe2363f1}{\texorpdfstring{$\sim$}{\string~}\+Witness\+Rule}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1ledger_a7d8879256a79ec4790b74fe9c40c3bac}{Witness\+Rule\+Action}} \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a57e1de38e493b293e9879500bbc40580}{Get\+Action}} () const
+\begin{DoxyCompactList}\small\item\em Gets the action. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a80191bed4d830bd8924316431e94ce94}{Set\+Action}} (\mbox{\hyperlink{namespaceneo_1_1ledger_a7d8879256a79ec4790b74fe9c40c3bac}{Witness\+Rule\+Action}} action)
+\begin{DoxyCompactList}\small\item\em Sets the action. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition}{Witness\+Condition}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a2e87d14ffff8665f8232da4a8970dc7c}{Get\+Condition}} () const
+\begin{DoxyCompactList}\small\item\em Gets the condition. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_aab8eeac269684aab458ddf7dbb0ffc81}{Set\+Condition}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition}{Witness\+Condition}} $>$ condition)
+\begin{DoxyCompactList}\small\item\em Sets the condition. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_ae0f6e83658ada680cf6d27f068ea3a2c}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes to binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a064584b1983d9a4ee6c8f6444bf57a58}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes from binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_ae6a4e5a282a68cd4dbadabcf533ba356}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes to JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_acc0b5e96fcd50d217659a4d76e4e114b}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes from JSON. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a27b85a416d0c2b78fc7e7a050dcce496}{operator==}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule}{Witness\+Rule}} \&other) const
+\begin{DoxyCompactList}\small\item\em Equality operator. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a5722f026e95af289f3c0017d5c779d53}{operator!=}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule}{Witness\+Rule}} \&other) const
+\begin{DoxyCompactList}\small\item\em Inequality operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1ledger_a7d8879256a79ec4790b74fe9c40c3bac}{Witness\+Rule\+Action}} \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_afb546e734474616ce9a5a0561c086ed5}{action\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition}{Witness\+Condition}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a550e6b31850935dcc2a9d18ebf988b0e}{condition\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a witness rule used to describe the scope of the witness. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_a9c2157efd0422c9234c4cbd11d4e7fff}\index{neo::ledger::WitnessRule@{neo::ledger::WitnessRule}!WitnessRule@{WitnessRule}}
+\index{WitnessRule@{WitnessRule}!neo::ledger::WitnessRule@{neo::ledger::WitnessRule}}
+\doxysubsubsection{\texorpdfstring{WitnessRule()}{WitnessRule()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_witness_rule_a9c2157efd0422c9234c4cbd11d4e7fff} 
+neo\+::ledger\+::\+Witness\+Rule\+::\+Witness\+Rule (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_af62fe20474a6ab3bfc9261f73e381676}\index{neo::ledger::WitnessRule@{neo::ledger::WitnessRule}!WitnessRule@{WitnessRule}}
+\index{WitnessRule@{WitnessRule}!neo::ledger::WitnessRule@{neo::ledger::WitnessRule}}
+\doxysubsubsection{\texorpdfstring{WitnessRule()}{WitnessRule()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_witness_rule_af62fe20474a6ab3bfc9261f73e381676} 
+neo\+::ledger\+::\+Witness\+Rule\+::\+Witness\+Rule (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1ledger_a7d8879256a79ec4790b74fe9c40c3bac}{Witness\+Rule\+Action}}}]{action}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition}{Witness\+Condition}} $>$}]{condition}{}\end{DoxyParamCaption})}
+
+
+
+Constructor with action and condition. 
+
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_ab4c13abc272c4c5976c8c00bfe2363f1}\index{neo::ledger::WitnessRule@{neo::ledger::WitnessRule}!````~WitnessRule@{\texorpdfstring{$\sim$}{\string~}WitnessRule}}
+\index{````~WitnessRule@{\texorpdfstring{$\sim$}{\string~}WitnessRule}!neo::ledger::WitnessRule@{neo::ledger::WitnessRule}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}WitnessRule()}{\string~WitnessRule()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_witness_rule_ab4c13abc272c4c5976c8c00bfe2363f1} 
+virtual neo\+::ledger\+::\+Witness\+Rule\+::\texorpdfstring{$\sim$}{\string~}\+Witness\+Rule (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_a064584b1983d9a4ee6c8f6444bf57a58}\index{neo::ledger::WitnessRule@{neo::ledger::WitnessRule}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::ledger::WitnessRule@{neo::ledger::WitnessRule}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_witness_rule_a064584b1983d9a4ee6c8f6444bf57a58} 
+void neo\+::ledger\+::\+Witness\+Rule\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes from binary reader. 
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_acc0b5e96fcd50d217659a4d76e4e114b}\index{neo::ledger::WitnessRule@{neo::ledger::WitnessRule}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::ledger::WitnessRule@{neo::ledger::WitnessRule}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_witness_rule_acc0b5e96fcd50d217659a4d76e4e114b} 
+void neo\+::ledger\+::\+Witness\+Rule\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes from JSON. 
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_a57e1de38e493b293e9879500bbc40580}\index{neo::ledger::WitnessRule@{neo::ledger::WitnessRule}!GetAction@{GetAction}}
+\index{GetAction@{GetAction}!neo::ledger::WitnessRule@{neo::ledger::WitnessRule}}
+\doxysubsubsection{\texorpdfstring{GetAction()}{GetAction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_witness_rule_a57e1de38e493b293e9879500bbc40580} 
+\mbox{\hyperlink{namespaceneo_1_1ledger_a7d8879256a79ec4790b74fe9c40c3bac}{Witness\+Rule\+Action}} neo\+::ledger\+::\+Witness\+Rule\+::\+Get\+Action (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the action. 
+
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_a2e87d14ffff8665f8232da4a8970dc7c}\index{neo::ledger::WitnessRule@{neo::ledger::WitnessRule}!GetCondition@{GetCondition}}
+\index{GetCondition@{GetCondition}!neo::ledger::WitnessRule@{neo::ledger::WitnessRule}}
+\doxysubsubsection{\texorpdfstring{GetCondition()}{GetCondition()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_witness_rule_a2e87d14ffff8665f8232da4a8970dc7c} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition}{Witness\+Condition}} $>$ neo\+::ledger\+::\+Witness\+Rule\+::\+Get\+Condition (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the condition. 
+
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_a5722f026e95af289f3c0017d5c779d53}\index{neo::ledger::WitnessRule@{neo::ledger::WitnessRule}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::ledger::WitnessRule@{neo::ledger::WitnessRule}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_witness_rule_a5722f026e95af289f3c0017d5c779d53} 
+bool neo\+::ledger\+::\+Witness\+Rule\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule}{Witness\+Rule}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Inequality operator. 
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_a27b85a416d0c2b78fc7e7a050dcce496}\index{neo::ledger::WitnessRule@{neo::ledger::WitnessRule}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::ledger::WitnessRule@{neo::ledger::WitnessRule}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_witness_rule_a27b85a416d0c2b78fc7e7a050dcce496} 
+bool neo\+::ledger\+::\+Witness\+Rule\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule}{Witness\+Rule}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Equality operator. 
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_ae0f6e83658ada680cf6d27f068ea3a2c}\index{neo::ledger::WitnessRule@{neo::ledger::WitnessRule}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::ledger::WitnessRule@{neo::ledger::WitnessRule}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_witness_rule_ae0f6e83658ada680cf6d27f068ea3a2c} 
+void neo\+::ledger\+::\+Witness\+Rule\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes to binary writer. 
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_ae6a4e5a282a68cd4dbadabcf533ba356}\index{neo::ledger::WitnessRule@{neo::ledger::WitnessRule}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::ledger::WitnessRule@{neo::ledger::WitnessRule}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_witness_rule_ae6a4e5a282a68cd4dbadabcf533ba356} 
+void neo\+::ledger\+::\+Witness\+Rule\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes to JSON. 
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_a80191bed4d830bd8924316431e94ce94}\index{neo::ledger::WitnessRule@{neo::ledger::WitnessRule}!SetAction@{SetAction}}
+\index{SetAction@{SetAction}!neo::ledger::WitnessRule@{neo::ledger::WitnessRule}}
+\doxysubsubsection{\texorpdfstring{SetAction()}{SetAction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_witness_rule_a80191bed4d830bd8924316431e94ce94} 
+void neo\+::ledger\+::\+Witness\+Rule\+::\+Set\+Action (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1ledger_a7d8879256a79ec4790b74fe9c40c3bac}{Witness\+Rule\+Action}}}]{action}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the action. 
+
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_aab8eeac269684aab458ddf7dbb0ffc81}\index{neo::ledger::WitnessRule@{neo::ledger::WitnessRule}!SetCondition@{SetCondition}}
+\index{SetCondition@{SetCondition}!neo::ledger::WitnessRule@{neo::ledger::WitnessRule}}
+\doxysubsubsection{\texorpdfstring{SetCondition()}{SetCondition()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_witness_rule_aab8eeac269684aab458ddf7dbb0ffc81} 
+void neo\+::ledger\+::\+Witness\+Rule\+::\+Set\+Condition (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition}{Witness\+Condition}} $>$}]{condition}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the condition. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_afb546e734474616ce9a5a0561c086ed5}\index{neo::ledger::WitnessRule@{neo::ledger::WitnessRule}!action\_@{action\_}}
+\index{action\_@{action\_}!neo::ledger::WitnessRule@{neo::ledger::WitnessRule}}
+\doxysubsubsection{\texorpdfstring{action\_}{action\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_witness_rule_afb546e734474616ce9a5a0561c086ed5} 
+\mbox{\hyperlink{namespaceneo_1_1ledger_a7d8879256a79ec4790b74fe9c40c3bac}{Witness\+Rule\+Action}} neo\+::ledger\+::\+Witness\+Rule\+::action\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_witness_rule_a550e6b31850935dcc2a9d18ebf988b0e}\index{neo::ledger::WitnessRule@{neo::ledger::WitnessRule}!condition\_@{condition\_}}
+\index{condition\_@{condition\_}!neo::ledger::WitnessRule@{neo::ledger::WitnessRule}}
+\doxysubsubsection{\texorpdfstring{condition\_}{condition\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_witness_rule_a550e6b31850935dcc2a9d18ebf988b0e} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition}{Witness\+Condition}}$>$ neo\+::ledger\+::\+Witness\+Rule\+::condition\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{witness__rule_8h}{witness\+\_\+rule.\+h}}\item 
+src/ledger/\mbox{\hyperlink{witness__rule_8cpp}{witness\+\_\+rule.\+cpp}}\end{DoxyCompactItemize}

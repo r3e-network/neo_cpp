@@ -1,0 +1,102 @@
+\doxysection{jtoken.\+h}
+\hypertarget{jtoken_8h_source}{}\label{jtoken_8h_source}\index{include/neo/json/jtoken.h@{include/neo/json/jtoken.h}}
+\mbox{\hyperlink{jtoken_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cmath>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <limits>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json_8hpp}{nlohmann/json.hpp}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1json}{neo::json}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespaceneo_1_1json_afc636cefa75119dde9ec4c7058ab605c}{JTokenType}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1json_afc636cefa75119dde9ec4c7058ab605cabbb93ef26e3c101ff11cdd21cab08a94}{Null}},}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1json_afc636cefa75119dde9ec4c7058ab605ca27226c864bac7454a8504f8edb15d95b}{Boolean}},}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1json_afc636cefa75119dde9ec4c7058ab605cab2ee912b91d69b435159c7c3f6df7f5f}{Number}},}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1json_afc636cefa75119dde9ec4c7058ab605ca27118326006d3829667a400ad23d5d98}{String}},}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1json_afc636cefa75119dde9ec4c7058ab605ca4410ec34d9e6c1a68100ca0ce033fb17}{Array}},}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1json_afc636cefa75119dde9ec4c7058ab605ca497031794414a552435f90151ac3b54b}{Object}}}
+\DoxyCodeLine{00021\ \};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ Forward\ declarations}}
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }JArray;}
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }JObject;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}}}
+\DoxyCodeLine{00031\ \{}
+\DoxyCodeLine{00032\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::shared\_ptr<JToken>\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a30a35aa6ba3f794842e08ccfa98b8863}{Null}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a5d9f6c0845587eaff048a37312cdbbbf}{\string~JToken}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{namespaceneo_1_1json_afc636cefa75119dde9ec4c7058ab605c}{JTokenType}}\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a7ddf451a867dd8855212eb5a6d4667ef}{GetType}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{virtual}\ std::shared\_ptr<JToken>\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a0a9ed56f1f28c0720e11820915170e1b}{operator[]}}(\textcolor{keywordtype}{int}\ index)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00053\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Index\ access\ not\ supported"{}});}
+\DoxyCodeLine{00055\ \ \ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{virtual}\ std::shared\_ptr<JToken>\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a09467c3b4853cd918c45a8030c237553}{operator[]}}(\textcolor{keyword}{const}\ std::string\&\ key)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00064\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Key\ access\ not\ supported"{}});}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{virtual}\ std::shared\_ptr<JToken>\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a85568ef627871ffc66c30a41179c32e1}{operator[]}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ key)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a85568ef627871ffc66c30a41179c32e1}{operator[]}}(std::string(key));\ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_aefe75d06c0767387b11b76b244ba3126}{AsBoolean}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_ad4a6eb6f88363bd5b24300f0f7826dd9}{AsNumber}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ std::numeric\_limits<double>::quiet\_NaN();\ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_af71c278113c54dd73bb000c693931e97}{AsString}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a42d1e592f73864c798a0e37b04ae1de7}{ToString}}();\ \}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a65f32bfdc482e4f8b7e6c10691ed0e3f}{GetBoolean}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Token\ is\ not\ a\ boolean"{}});\ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a5b033737332d8f3d847192a1832d43f9}{GetInt32}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00108\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ d\ =\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a57552d677e367b04dfc54125fc469070}{GetNumber}}();}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::fmod(d,\ 1.0)\ !=\ 0.0)\ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Number\ is\ not\ an\ integer"{}});}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (d\ <\ std::numeric\_limits<int>::min()\ ||\ d\ >\ std::numeric\_limits<int>::max())}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::overflow\_error(\textcolor{stringliteral}{"{}Number\ is\ out\ of\ range\ for\ int32"{}});}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(d);}
+\DoxyCodeLine{00114\ \ \ \ \ \}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a57552d677e367b04dfc54125fc469070}{GetNumber}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Token\ is\ not\ a\ number"{}});\ \}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_adcd32e1127833068175eab6cfd2e2e26}{GetString}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Token\ is\ not\ a\ string"{}});\ \}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<JToken>\ Parse(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{namespaceneo_1_1json}{json}},\ \textcolor{keywordtype}{int}\ max\_nest\ =\ 64);}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<JToken>\ ParseJsonValue(\textcolor{keyword}{const}\ nlohmann::json\&\ j);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00146\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a42d1e592f73864c798a0e37b04ae1de7}{ToString}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a42d1e592f73864c798a0e37b04ae1de7}{ToString}}(\textcolor{keywordtype}{bool}\ indented)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keyword}{virtual}\ std::shared\_ptr<JToken>\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_acf002ab2913b85ace931c514d69c439d}{Clone}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_aee9c9291f435ac35aceec3a91e5362cc}{Equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}}\&\ other)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{operator}\ bool()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{operator}\ std::string()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{operator}\ int()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keyword}{operator}\ double()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a0b2728b236992fa90ba16d5888129a7f}{WriteJson}}(std::string\&\ output,\ \textcolor{keywordtype}{bool}\ indented\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{int}\ indent\_level\ =\ 0)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a1a8e9b1d2fe1b4e1aab211373ad5e42a}{AddIndentation}}(std::string\&\ output,\ \textcolor{keywordtype}{int}\ indent\_level);}
+\DoxyCodeLine{00210\ \};}
+\DoxyCodeLine{00211\ \}\ \ \textcolor{comment}{//\ namespace\ neo::json}}
+
+\end{DoxyCode}

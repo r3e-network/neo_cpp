@@ -1,0 +1,195 @@
+\doxysection{neo\+::network\+::Timeout\+Manager Class Reference}
+\hypertarget{classneo_1_1network_1_1_timeout_manager}{}\label{classneo_1_1network_1_1_timeout_manager}\index{neo::network::TimeoutManager@{neo::network::TimeoutManager}}
+
+
+Connection timeout manager.  
+
+
+
+
+{\ttfamily \#include $<$connection\+\_\+manager.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1network_1_1_timeout_manager_1_1_timeout_entry}{Timeout\+Entry}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a0f524a1cc08a6eaafc73bdae403c0a70}{Timeout\+Callback}} = std\+::function$<$void()$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a896912285348c027ef10359635204373}{Schedule}} (std\+::chrono\+::milliseconds duration, \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a0f524a1cc08a6eaafc73bdae403c0a70}{Timeout\+Callback}} callback)
+\begin{DoxyCompactList}\small\item\em Schedule a timeout. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a57eb787b06862193b451ffc25be9d5ed}{Cancel}} (uint64\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Cancel a scheduled timeout. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a046525bf7c2baf7780831e784a19970b}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Start the timeout manager. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aec6221fc1967ec3a00b0a903513501af}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stop the timeout manager. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a8554c339e9a6afaff9e8b6cb439bc4bf}{\texorpdfstring{$\sim$}{\string~}\+Timeout\+Manager}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a417a6b2327a7be166627ee2d7d76ae2a}{Worker\+Loop}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ uint64\+\_\+t, \mbox{\hyperlink{structneo_1_1network_1_1_timeout_manager_1_1_timeout_entry}{Timeout\+Entry}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aeb59f185c99ac69ceeae590befa2821b}{timeouts\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_ac966023b1f2912d0c372cee674d8f620}{next\+Id\+\_\+}} = 1
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a24199399f7944d90685335b9796ef2bb}{mutex\+\_\+}}
+\item 
+std\+::condition\+\_\+variable \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aadeda4960a5dab0154d5fcd9ea62f313}{cv\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a253676be33dca732d25a090ab94d39c1}{running\+\_\+}} \{false\}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a5978afdc128493a5de7fa0144a3ce046}{worker\+Thread\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Connection timeout manager. 
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_a0f524a1cc08a6eaafc73bdae403c0a70}\index{neo::network::TimeoutManager@{neo::network::TimeoutManager}!TimeoutCallback@{TimeoutCallback}}
+\index{TimeoutCallback@{TimeoutCallback}!neo::network::TimeoutManager@{neo::network::TimeoutManager}}
+\doxysubsubsection{\texorpdfstring{TimeoutCallback}{TimeoutCallback}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_timeout_manager_a0f524a1cc08a6eaafc73bdae403c0a70} 
+using \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a0f524a1cc08a6eaafc73bdae403c0a70}{neo\+::network\+::\+Timeout\+Manager\+::\+Timeout\+Callback}} = std\+::function$<$void()$>$}
+
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_a8554c339e9a6afaff9e8b6cb439bc4bf}\index{neo::network::TimeoutManager@{neo::network::TimeoutManager}!````~TimeoutManager@{\texorpdfstring{$\sim$}{\string~}TimeoutManager}}
+\index{````~TimeoutManager@{\texorpdfstring{$\sim$}{\string~}TimeoutManager}!neo::network::TimeoutManager@{neo::network::TimeoutManager}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TimeoutManager()}{\string~TimeoutManager()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_timeout_manager_a8554c339e9a6afaff9e8b6cb439bc4bf} 
+neo\+::network\+::\+Timeout\+Manager\+::\texorpdfstring{$\sim$}{\string~}\+Timeout\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_a57eb787b06862193b451ffc25be9d5ed}\index{neo::network::TimeoutManager@{neo::network::TimeoutManager}!Cancel@{Cancel}}
+\index{Cancel@{Cancel}!neo::network::TimeoutManager@{neo::network::TimeoutManager}}
+\doxysubsubsection{\texorpdfstring{Cancel()}{Cancel()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_timeout_manager_a57eb787b06862193b451ffc25be9d5ed} 
+void neo\+::network\+::\+Timeout\+Manager\+::\+Cancel (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Cancel a scheduled timeout. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & Timeout ID \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_a896912285348c027ef10359635204373}\index{neo::network::TimeoutManager@{neo::network::TimeoutManager}!Schedule@{Schedule}}
+\index{Schedule@{Schedule}!neo::network::TimeoutManager@{neo::network::TimeoutManager}}
+\doxysubsubsection{\texorpdfstring{Schedule()}{Schedule()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_timeout_manager_a896912285348c027ef10359635204373} 
+uint64\+\_\+t neo\+::network\+::\+Timeout\+Manager\+::\+Schedule (\begin{DoxyParamCaption}\item[{std\+::chrono\+::milliseconds}]{duration}{, }\item[{\mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a0f524a1cc08a6eaafc73bdae403c0a70}{Timeout\+Callback}}}]{callback}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Schedule a timeout. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em duration} & Timeout duration \\
+\hline
+{\em callback} & Callback to execute on timeout \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Timeout ID for cancellation 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_a046525bf7c2baf7780831e784a19970b}\index{neo::network::TimeoutManager@{neo::network::TimeoutManager}!Start@{Start}}
+\index{Start@{Start}!neo::network::TimeoutManager@{neo::network::TimeoutManager}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_timeout_manager_a046525bf7c2baf7780831e784a19970b} 
+void neo\+::network\+::\+Timeout\+Manager\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Start the timeout manager. 
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_aec6221fc1967ec3a00b0a903513501af}\index{neo::network::TimeoutManager@{neo::network::TimeoutManager}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::network::TimeoutManager@{neo::network::TimeoutManager}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_timeout_manager_aec6221fc1967ec3a00b0a903513501af} 
+void neo\+::network\+::\+Timeout\+Manager\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Stop the timeout manager. 
+
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_a417a6b2327a7be166627ee2d7d76ae2a}\index{neo::network::TimeoutManager@{neo::network::TimeoutManager}!WorkerLoop@{WorkerLoop}}
+\index{WorkerLoop@{WorkerLoop}!neo::network::TimeoutManager@{neo::network::TimeoutManager}}
+\doxysubsubsection{\texorpdfstring{WorkerLoop()}{WorkerLoop()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_timeout_manager_a417a6b2327a7be166627ee2d7d76ae2a} 
+void neo\+::network\+::\+Timeout\+Manager\+::\+Worker\+Loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_aadeda4960a5dab0154d5fcd9ea62f313}\index{neo::network::TimeoutManager@{neo::network::TimeoutManager}!cv\_@{cv\_}}
+\index{cv\_@{cv\_}!neo::network::TimeoutManager@{neo::network::TimeoutManager}}
+\doxysubsubsection{\texorpdfstring{cv\_}{cv\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_timeout_manager_aadeda4960a5dab0154d5fcd9ea62f313} 
+std\+::condition\+\_\+variable neo\+::network\+::\+Timeout\+Manager\+::cv\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_a24199399f7944d90685335b9796ef2bb}\index{neo::network::TimeoutManager@{neo::network::TimeoutManager}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::network::TimeoutManager@{neo::network::TimeoutManager}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_timeout_manager_a24199399f7944d90685335b9796ef2bb} 
+std\+::mutex neo\+::network\+::\+Timeout\+Manager\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_ac966023b1f2912d0c372cee674d8f620}\index{neo::network::TimeoutManager@{neo::network::TimeoutManager}!nextId\_@{nextId\_}}
+\index{nextId\_@{nextId\_}!neo::network::TimeoutManager@{neo::network::TimeoutManager}}
+\doxysubsubsection{\texorpdfstring{nextId\_}{nextId\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_timeout_manager_ac966023b1f2912d0c372cee674d8f620} 
+uint64\+\_\+t neo\+::network\+::\+Timeout\+Manager\+::next\+Id\+\_\+ = 1\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_a253676be33dca732d25a090ab94d39c1}\index{neo::network::TimeoutManager@{neo::network::TimeoutManager}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::network::TimeoutManager@{neo::network::TimeoutManager}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_timeout_manager_a253676be33dca732d25a090ab94d39c1} 
+std\+::atomic$<$bool$>$ neo\+::network\+::\+Timeout\+Manager\+::running\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_aeb59f185c99ac69ceeae590befa2821b}\index{neo::network::TimeoutManager@{neo::network::TimeoutManager}!timeouts\_@{timeouts\_}}
+\index{timeouts\_@{timeouts\_}!neo::network::TimeoutManager@{neo::network::TimeoutManager}}
+\doxysubsubsection{\texorpdfstring{timeouts\_}{timeouts\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_timeout_manager_aeb59f185c99ac69ceeae590befa2821b} 
+std\+::unordered\+\_\+map$<$uint64\+\_\+t, \mbox{\hyperlink{structneo_1_1network_1_1_timeout_manager_1_1_timeout_entry}{Timeout\+Entry}}$>$ neo\+::network\+::\+Timeout\+Manager\+::timeouts\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_timeout_manager_a5978afdc128493a5de7fa0144a3ce046}\index{neo::network::TimeoutManager@{neo::network::TimeoutManager}!workerThread\_@{workerThread\_}}
+\index{workerThread\_@{workerThread\_}!neo::network::TimeoutManager@{neo::network::TimeoutManager}}
+\doxysubsubsection{\texorpdfstring{workerThread\_}{workerThread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_timeout_manager_a5978afdc128493a5de7fa0144a3ce046} 
+std\+::thread neo\+::network\+::\+Timeout\+Manager\+::worker\+Thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/\mbox{\hyperlink{connection__manager_8h}{connection\+\_\+manager.\+h}}\end{DoxyCompactItemize}

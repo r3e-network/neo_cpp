@@ -1,0 +1,393 @@
+\doxysection{neo\+::network\+::p2p\+::payloads\+::Filter\+Load\+Payload Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+
+
+Represents a filter load payload for SPV protocol.  
+
+
+
+
+{\ttfamily \#include $<$filter\+\_\+load\+\_\+payload.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::p2p\+::payloads\+::Filter\+Load\+Payload\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::payloads\+::Filter\+Load\+Payload\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a2843dd9c183b15448b0cd9d07ac7be3d}{Filter\+Load\+Payload}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{Filter\+Load\+Payload}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a0f9210948702d15593e50c43a5a66f6f}{Filter\+Load\+Payload}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&filter, uint8\+\_\+t k, uint32\+\_\+t tweak, uint8\+\_\+t flags)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{Filter\+Load\+Payload} with the specified parameters. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_ad8d24a2a4da8cb3d09d590c46749e211}{Get\+Filter}} () const
+\begin{DoxyCompactList}\small\item\em Gets the bloom filter data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a3a429a4516d208bdfa6543d853d8b822}{Set\+Filter}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&filter)
+\begin{DoxyCompactList}\small\item\em Sets the bloom filter data. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a686fd0bc05495c61b3ffea08e9434c0a}{GetK}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of hash functions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_aeeaf29c483c55d0e48910727f5dbc9dd}{SetK}} (uint8\+\_\+t k)
+\begin{DoxyCompactList}\small\item\em Sets the number of hash functions. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a62aabbce92d8e4f6e58634d5d447b27a}{Get\+Tweak}} () const
+\begin{DoxyCompactList}\small\item\em Gets the random tweak value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_aa8e2bf68fd4866f693d0c43e67185242}{Set\+Tweak}} (uint32\+\_\+t tweak)
+\begin{DoxyCompactList}\small\item\em Sets the random tweak value. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_ac38cd0995470f6254a258d8d1e3c8f1c}{Get\+Flags}} () const
+\begin{DoxyCompactList}\small\item\em Gets the filter flags. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a733668e917e6e8e403ab30179bb99005}{Set\+Flags}} (uint8\+\_\+t flags)
+\begin{DoxyCompactList}\small\item\em Sets the filter flags. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_ab5cc51e23d86d1bfea445594183533a4}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{Filter\+Load\+Payload} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a2cba66d3469c5d23b6ab75faa8848c1e}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{Filter\+Load\+Payload} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a028f43da160a47c5fdfd6b2030cfdd33}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{Filter\+Load\+Payload} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a74bd85ad476f9032a837910b421794f7}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader)
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{Filter\+Load\+Payload} from a JSON reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{neo\+::network\+::p2p\+::\+IPayload}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload_a1702136f068aff6bbc90418bc0259c9f}{\texorpdfstring{$\sim$}{\string~}\+IPayload}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a8951ca1fc01ee076c94d5e443bc5a914}{Max\+Filter\+Size}} = 36000
+\begin{DoxyCompactList}\small\item\em Maximum filter size in bytes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_ad21a2859cc0e769bc18ed2f1a85d52bd}{filter\+\_\+}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a8a37b876f5d9855334e0cfae17db54b7}{k\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_abba7b1738644b22450624fe924731f20}{tweak\+\_\+}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a2d6d8f02869c5b59d106bedce3b2c073}{flags\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a filter load payload for SPV protocol. 
+
+This message is used to set a new bloom filter on the connection. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a2843dd9c183b15448b0cd9d07ac7be3d}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!FilterLoadPayload@{FilterLoadPayload}}
+\index{FilterLoadPayload@{FilterLoadPayload}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{FilterLoadPayload()}{FilterLoadPayload()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a2843dd9c183b15448b0cd9d07ac7be3d} 
+neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::\+Filter\+Load\+Payload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{Filter\+Load\+Payload}. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a0f9210948702d15593e50c43a5a66f6f}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!FilterLoadPayload@{FilterLoadPayload}}
+\index{FilterLoadPayload@{FilterLoadPayload}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{FilterLoadPayload()}{FilterLoadPayload()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a0f9210948702d15593e50c43a5a66f6f} 
+neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::\+Filter\+Load\+Payload (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{filter}{, }\item[{uint8\+\_\+t}]{k}{, }\item[{uint32\+\_\+t}]{tweak}{, }\item[{uint8\+\_\+t}]{flags}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{Filter\+Load\+Payload} with the specified parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filter} & The bloom filter data. \\
+\hline
+{\em k} & The number of hash functions. \\
+\hline
+{\em tweak} & A random value to add to the seed value. \\
+\hline
+{\em flags} & The filter flags. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a2cba66d3469c5d23b6ab75faa8848c1e}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a2cba66d3469c5d23b6ab75faa8848c1e} 
+void neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{Filter\+Load\+Payload} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a74bd85ad476f9032a837910b421794f7}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a74bd85ad476f9032a837910b421794f7} 
+void neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{Filter\+Load\+Payload} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_ad8d24a2a4da8cb3d09d590c46749e211}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!GetFilter@{GetFilter}}
+\index{GetFilter@{GetFilter}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{GetFilter()}{GetFilter()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_ad8d24a2a4da8cb3d09d590c46749e211} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::\+Get\+Filter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the bloom filter data. 
+
+\begin{DoxyReturn}{Returns}
+The bloom filter data. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_ac38cd0995470f6254a258d8d1e3c8f1c}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!GetFlags@{GetFlags}}
+\index{GetFlags@{GetFlags}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{GetFlags()}{GetFlags()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_ac38cd0995470f6254a258d8d1e3c8f1c} 
+uint8\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::\+Get\+Flags (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the filter flags. 
+
+\begin{DoxyReturn}{Returns}
+The filter flags. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a686fd0bc05495c61b3ffea08e9434c0a}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!GetK@{GetK}}
+\index{GetK@{GetK}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{GetK()}{GetK()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a686fd0bc05495c61b3ffea08e9434c0a} 
+uint8\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::\+GetK (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of hash functions. 
+
+\begin{DoxyReturn}{Returns}
+The number of hash functions. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a62aabbce92d8e4f6e58634d5d447b27a}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!GetTweak@{GetTweak}}
+\index{GetTweak@{GetTweak}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{GetTweak()}{GetTweak()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a62aabbce92d8e4f6e58634d5d447b27a} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::\+Get\+Tweak (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the random tweak value. 
+
+\begin{DoxyReturn}{Returns}
+The random tweak value. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_ab5cc51e23d86d1bfea445594183533a4}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_ab5cc51e23d86d1bfea445594183533a4} 
+void neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{Filter\+Load\+Payload} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a028f43da160a47c5fdfd6b2030cfdd33}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a028f43da160a47c5fdfd6b2030cfdd33} 
+void neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{Filter\+Load\+Payload} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a3a429a4516d208bdfa6543d853d8b822}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!SetFilter@{SetFilter}}
+\index{SetFilter@{SetFilter}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{SetFilter()}{SetFilter()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a3a429a4516d208bdfa6543d853d8b822} 
+void neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::\+Set\+Filter (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{filter}{}\end{DoxyParamCaption})}
+
+
+
+Sets the bloom filter data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em filter} & The bloom filter data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a733668e917e6e8e403ab30179bb99005}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!SetFlags@{SetFlags}}
+\index{SetFlags@{SetFlags}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{SetFlags()}{SetFlags()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a733668e917e6e8e403ab30179bb99005} 
+void neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::\+Set\+Flags (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{flags}{}\end{DoxyParamCaption})}
+
+
+
+Sets the filter flags. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flags} & The filter flags. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_aeeaf29c483c55d0e48910727f5dbc9dd}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!SetK@{SetK}}
+\index{SetK@{SetK}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{SetK()}{SetK()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_aeeaf29c483c55d0e48910727f5dbc9dd} 
+void neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::\+SetK (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{k}{}\end{DoxyParamCaption})}
+
+
+
+Sets the number of hash functions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em k} & The number of hash functions. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_aa8e2bf68fd4866f693d0c43e67185242}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!SetTweak@{SetTweak}}
+\index{SetTweak@{SetTweak}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{SetTweak()}{SetTweak()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_aa8e2bf68fd4866f693d0c43e67185242} 
+void neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::\+Set\+Tweak (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{tweak}{}\end{DoxyParamCaption})}
+
+
+
+Sets the random tweak value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tweak} & The random tweak value. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_ad21a2859cc0e769bc18ed2f1a85d52bd}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!filter\_@{filter\_}}
+\index{filter\_@{filter\_}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{filter\_}{filter\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_ad21a2859cc0e769bc18ed2f1a85d52bd} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::filter\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a2d6d8f02869c5b59d106bedce3b2c073}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!flags\_@{flags\_}}
+\index{flags\_@{flags\_}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{flags\_}{flags\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a2d6d8f02869c5b59d106bedce3b2c073} 
+uint8\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::flags\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a8a37b876f5d9855334e0cfae17db54b7}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!k\_@{k\_}}
+\index{k\_@{k\_}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{k\_}{k\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a8a37b876f5d9855334e0cfae17db54b7} 
+uint8\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::k\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a8951ca1fc01ee076c94d5e443bc5a914}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!MaxFilterSize@{MaxFilterSize}}
+\index{MaxFilterSize@{MaxFilterSize}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{MaxFilterSize}{MaxFilterSize}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a8951ca1fc01ee076c94d5e443bc5a914} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::\+Max\+Filter\+Size = 36000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Maximum filter size in bytes. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_abba7b1738644b22450624fe924731f20}\index{neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}!tweak\_@{tweak\_}}
+\index{tweak\_@{tweak\_}!neo::network::p2p::payloads::FilterLoadPayload@{neo::network::p2p::payloads::FilterLoadPayload}}
+\doxysubsubsection{\texorpdfstring{tweak\_}{tweak\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_abba7b1738644b22450624fe924731f20} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload\+::tweak\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/payloads/\mbox{\hyperlink{filter__load__payload_8h}{filter\+\_\+load\+\_\+payload.\+h}}\item 
+src/network/p2p/payloads/\mbox{\hyperlink{filter__load__payload_8cpp}{filter\+\_\+load\+\_\+payload.\+cpp}}\end{DoxyCompactItemize}

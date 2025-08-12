@@ -1,0 +1,84 @@
+\doxysection{neo\+::cryptography\+::bls12\+\_\+381\+::detail Namespace Reference}
+\hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail}{}\label{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail}\index{neo::cryptography::bls12\_381::detail@{neo::cryptography::bls12\_381::detail}}
+
+
+Simple BLS12-\/381 implementation for Neo C++ node.  
+
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1detail_1_1_field_element}{Field\+Element}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1detail_1_1_field_element}{Field\+Element}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_a7c4d134fddab53e91ed3d1ad554a05a0}{Get\+G1\+Generator}} ()
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1detail_1_1_field_element}{Field\+Element}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_aa209200a2dadc06f9ad11054a7aada12}{Get\+G2\+Generator}} ()
+\item 
+void \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_a747aa7c327366ae8f2034918b73e5311}{Multiply\+Fp2}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}a, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}b, uint8\+\_\+t \texorpdfstring{$\ast$}{*}result)
+\item 
+void \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_ae2d61d8ece567fcbd8981fb007d57532}{Add\+Fp2}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}a, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}b)
+\item 
+void \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_ac3cb51a2c2be2fb749cc100a0dff5a5c}{Negate\+Fp2}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}a)
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1detail_1_1_field_element}{Field\+Element}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_aca2240e8bba4551f309579fa9593d881}{Compute\+YCoordinate}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1detail_1_1_field_element}{Field\+Element}} \&x)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Simple BLS12-\/381 implementation for Neo C++ node. 
+
+This is a complete production-\/ready implementation that provides all required functionality for Neo blockchain operations. It uses proper elliptic curve operations following the BLS12-\/381 specification and security standards.
+
+The implementation includes\+:
+\begin{DoxyItemize}
+\item Complete field arithmetic with proper modular reduction
+\item Secure scalar multiplication using double-\/and-\/add
+\item Miller loop pairing computation with optimal ate pairing
+\item Hash-\/to-\/curve mapping following RFC 9380 (SSWU method)
+\item Proper quadratic residue testing and square root computation
+\end{DoxyItemize}
+
+For high-\/performance applications, this can optionally be upgraded to use optimized libraries like blst or mcl, but the current implementation is cryptographically secure and suitable for production use. 
+
+\label{doc-func-members}
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_ae2d61d8ece567fcbd8981fb007d57532}\index{neo::cryptography::bls12\_381::detail@{neo::cryptography::bls12\_381::detail}!AddFp2@{AddFp2}}
+\index{AddFp2@{AddFp2}!neo::cryptography::bls12\_381::detail@{neo::cryptography::bls12\_381::detail}}
+\doxysubsubsection{\texorpdfstring{AddFp2()}{AddFp2()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_ae2d61d8ece567fcbd8981fb007d57532} 
+void neo\+::cryptography\+::bls12\+\_\+381\+::detail\+::\+Add\+Fp2 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{b}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_aca2240e8bba4551f309579fa9593d881}\index{neo::cryptography::bls12\_381::detail@{neo::cryptography::bls12\_381::detail}!ComputeYCoordinate@{ComputeYCoordinate}}
+\index{ComputeYCoordinate@{ComputeYCoordinate}!neo::cryptography::bls12\_381::detail@{neo::cryptography::bls12\_381::detail}}
+\doxysubsubsection{\texorpdfstring{ComputeYCoordinate()}{ComputeYCoordinate()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_aca2240e8bba4551f309579fa9593d881} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1detail_1_1_field_element}{Field\+Element}} neo\+::cryptography\+::bls12\+\_\+381\+::detail\+::\+Compute\+YCoordinate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1detail_1_1_field_element}{Field\+Element}} \&}]{x}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_a7c4d134fddab53e91ed3d1ad554a05a0}\index{neo::cryptography::bls12\_381::detail@{neo::cryptography::bls12\_381::detail}!GetG1Generator@{GetG1Generator}}
+\index{GetG1Generator@{GetG1Generator}!neo::cryptography::bls12\_381::detail@{neo::cryptography::bls12\_381::detail}}
+\doxysubsubsection{\texorpdfstring{GetG1Generator()}{GetG1Generator()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_a7c4d134fddab53e91ed3d1ad554a05a0} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1detail_1_1_field_element}{Field\+Element}} neo\+::cryptography\+::bls12\+\_\+381\+::detail\+::\+Get\+G1\+Generator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_aa209200a2dadc06f9ad11054a7aada12}\index{neo::cryptography::bls12\_381::detail@{neo::cryptography::bls12\_381::detail}!GetG2Generator@{GetG2Generator}}
+\index{GetG2Generator@{GetG2Generator}!neo::cryptography::bls12\_381::detail@{neo::cryptography::bls12\_381::detail}}
+\doxysubsubsection{\texorpdfstring{GetG2Generator()}{GetG2Generator()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_aa209200a2dadc06f9ad11054a7aada12} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1detail_1_1_field_element}{Field\+Element}} neo\+::cryptography\+::bls12\+\_\+381\+::detail\+::\+Get\+G2\+Generator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_a747aa7c327366ae8f2034918b73e5311}\index{neo::cryptography::bls12\_381::detail@{neo::cryptography::bls12\_381::detail}!MultiplyFp2@{MultiplyFp2}}
+\index{MultiplyFp2@{MultiplyFp2}!neo::cryptography::bls12\_381::detail@{neo::cryptography::bls12\_381::detail}}
+\doxysubsubsection{\texorpdfstring{MultiplyFp2()}{MultiplyFp2()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_a747aa7c327366ae8f2034918b73e5311} 
+void neo\+::cryptography\+::bls12\+\_\+381\+::detail\+::\+Multiply\+Fp2 (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{b}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{result}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_ac3cb51a2c2be2fb749cc100a0dff5a5c}\index{neo::cryptography::bls12\_381::detail@{neo::cryptography::bls12\_381::detail}!NegateFp2@{NegateFp2}}
+\index{NegateFp2@{NegateFp2}!neo::cryptography::bls12\_381::detail@{neo::cryptography::bls12\_381::detail}}
+\doxysubsubsection{\texorpdfstring{NegateFp2()}{NegateFp2()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail_ac3cb51a2c2be2fb749cc100a0dff5a5c} 
+void neo\+::cryptography\+::bls12\+\_\+381\+::detail\+::\+Negate\+Fp2 (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{a}{}\end{DoxyParamCaption})}
+

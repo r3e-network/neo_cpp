@@ -1,0 +1,97 @@
+\doxysection{neo\+::Relay\+Cache Class Reference}
+\hypertarget{classneo_1_1_relay_cache}{}\label{classneo_1_1_relay_cache}\index{neo::RelayCache@{neo::RelayCache}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1_relay_cache_1_1_cache_entry}{Cache\+Entry}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1_relay_cache_a775c38a2e049b32e63b864b874c3cc62}{Relay\+Cache}} (size\+\_\+t max\+\_\+size)
+\item 
+bool \mbox{\hyperlink{classneo_1_1_relay_cache_a1f89cdea11e580491e915a91115f11c6}{contains}} (const std\+::string \&hash\+\_\+str)
+\item 
+void \mbox{\hyperlink{classneo_1_1_relay_cache_a310cb3677a09ddffb70864dba1d84855}{add}} (const std\+::string \&hash\+\_\+str)
+\item 
+void \mbox{\hyperlink{classneo_1_1_relay_cache_af7632c80d346d3926b1210c2fb3a43fa}{clear}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::list$<$ \mbox{\hyperlink{structneo_1_1_relay_cache_1_1_cache_entry}{Cache\+Entry}} $>$\+::iterator $>$ \mbox{\hyperlink{classneo_1_1_relay_cache_a7c0dc14e25f1e1c2e22afd742b0e4b21}{cache\+\_\+map\+\_\+}}
+\item 
+std\+::list$<$ \mbox{\hyperlink{structneo_1_1_relay_cache_1_1_cache_entry}{Cache\+Entry}} $>$ \mbox{\hyperlink{classneo_1_1_relay_cache_adf1f51a82dadab9f355e0f0e05fa3aa3}{lru\+\_\+list\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1_relay_cache_a5176b185a19f4fae1690c31075322ae4}{mutex\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1_relay_cache_a7cbad054bf8c7e2de346c1abe6aa892d}{max\+\_\+size\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1_relay_cache_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1_relay_cache_a775c38a2e049b32e63b864b874c3cc62}\index{neo::RelayCache@{neo::RelayCache}!RelayCache@{RelayCache}}
+\index{RelayCache@{RelayCache}!neo::RelayCache@{neo::RelayCache}}
+\doxysubsubsection{\texorpdfstring{RelayCache()}{RelayCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1_relay_cache_a775c38a2e049b32e63b864b874c3cc62} 
+neo\+::\+Relay\+Cache\+::\+Relay\+Cache (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{max\+\_\+size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1_relay_cache_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1_relay_cache_a310cb3677a09ddffb70864dba1d84855}\index{neo::RelayCache@{neo::RelayCache}!add@{add}}
+\index{add@{add}!neo::RelayCache@{neo::RelayCache}}
+\doxysubsubsection{\texorpdfstring{add()}{add()}}
+{\footnotesize\ttfamily \label{classneo_1_1_relay_cache_a310cb3677a09ddffb70864dba1d84855} 
+void neo\+::\+Relay\+Cache\+::add (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hash\+\_\+str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1_relay_cache_af7632c80d346d3926b1210c2fb3a43fa}\index{neo::RelayCache@{neo::RelayCache}!clear@{clear}}
+\index{clear@{clear}!neo::RelayCache@{neo::RelayCache}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1_relay_cache_af7632c80d346d3926b1210c2fb3a43fa} 
+void neo\+::\+Relay\+Cache\+::clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1_relay_cache_a1f89cdea11e580491e915a91115f11c6}\index{neo::RelayCache@{neo::RelayCache}!contains@{contains}}
+\index{contains@{contains}!neo::RelayCache@{neo::RelayCache}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily \label{classneo_1_1_relay_cache_a1f89cdea11e580491e915a91115f11c6} 
+bool neo\+::\+Relay\+Cache\+::contains (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hash\+\_\+str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1_relay_cache_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1_relay_cache_a7c0dc14e25f1e1c2e22afd742b0e4b21}\index{neo::RelayCache@{neo::RelayCache}!cache\_map\_@{cache\_map\_}}
+\index{cache\_map\_@{cache\_map\_}!neo::RelayCache@{neo::RelayCache}}
+\doxysubsubsection{\texorpdfstring{cache\_map\_}{cache\_map\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_relay_cache_a7c0dc14e25f1e1c2e22afd742b0e4b21} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::list$<$\mbox{\hyperlink{structneo_1_1_relay_cache_1_1_cache_entry}{Cache\+Entry}}$>$\+::iterator$>$ neo\+::\+Relay\+Cache\+::cache\+\_\+map\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1_relay_cache_adf1f51a82dadab9f355e0f0e05fa3aa3}\index{neo::RelayCache@{neo::RelayCache}!lru\_list\_@{lru\_list\_}}
+\index{lru\_list\_@{lru\_list\_}!neo::RelayCache@{neo::RelayCache}}
+\doxysubsubsection{\texorpdfstring{lru\_list\_}{lru\_list\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_relay_cache_adf1f51a82dadab9f355e0f0e05fa3aa3} 
+std\+::list$<$\mbox{\hyperlink{structneo_1_1_relay_cache_1_1_cache_entry}{Cache\+Entry}}$>$ neo\+::\+Relay\+Cache\+::lru\+\_\+list\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1_relay_cache_a7cbad054bf8c7e2de346c1abe6aa892d}\index{neo::RelayCache@{neo::RelayCache}!max\_size\_@{max\_size\_}}
+\index{max\_size\_@{max\_size\_}!neo::RelayCache@{neo::RelayCache}}
+\doxysubsubsection{\texorpdfstring{max\_size\_}{max\_size\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_relay_cache_a7cbad054bf8c7e2de346c1abe6aa892d} 
+size\+\_\+t neo\+::\+Relay\+Cache\+::max\+\_\+size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1_relay_cache_a5176b185a19f4fae1690c31075322ae4}\index{neo::RelayCache@{neo::RelayCache}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::RelayCache@{neo::RelayCache}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_relay_cache_a5176b185a19f4fae1690c31075322ae4} 
+std\+::mutex neo\+::\+Relay\+Cache\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/core/\mbox{\hyperlink{core_2neo__system_8cpp}{neo\+\_\+system.\+cpp}}\end{DoxyCompactItemize}

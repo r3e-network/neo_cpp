@@ -1,0 +1,56 @@
+\doxysection{transaction\+\_\+output.\+h}
+\hypertarget{transaction__output_8h_source}{}\label{transaction__output_8h_source}\index{include/neo/ledger/transaction\_output.h@{include/neo/ledger/transaction\_output.h}}
+\mbox{\hyperlink{transaction__output_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{core_2fixed8_8h}{neo/core/fixed8.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ijson__serializable_8h}{neo/io/ijson\_serializable.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{iserializable_8h}{neo/io/iserializable.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a8c10503771276bc8066e0c8766c01dec}{TransactionOutput}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{io::ISerializable}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{io::IJsonSerializable}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a348f1b7659bf44e40cb6dc82fa128c23}{assetId\_}};}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_fixed8}{core::Fixed8}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a045c612a4cd9722dd61b56f06638bcdf}{value\_}};}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a4fca8ad9b0101489aeb07cb27930a4e8}{scriptHash\_}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a8c10503771276bc8066e0c8766c01dec}{TransactionOutput}}();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a8c10503771276bc8066e0c8766c01dec}{TransactionOutput}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ assetId,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_fixed8}{core::Fixed8}}\&\ value,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ scriptHash);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a08e37c3e856fc20f0c944f62cbbc382b}{GetAssetId}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_ad2310e80ee1a01603aa8dcebb338c751}{SetAssetId}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ assetId);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_fixed8}{core::Fixed8}}\&\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_aef0816f7f2418bb75a6e1250d8268489}{GetValue}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a92119c87761afd1ef82668c2b34a328f}{SetValue}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_fixed8}{core::Fixed8}}\&\ value);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a2a16bca6b88fa4c14ab37a9e409501a4}{GetScriptHash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a0aa9a7d29a235858d71602c21159eb3a}{SetScriptHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ scriptHash);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{comment}{//\ ISerializable\ interface}}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_aa88c02eca8c922cc4b5c4e560ca11e42}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_ad26cfc9288af690a2dd60e90301b24e0}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_adacdb33e35ba281fb68b025709c59e68}{GetSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{comment}{//\ IJsonSerializable\ interface}}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a97edec72a9a0135901e3b655a2354cfc}{SerializeJson}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io::JsonWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_aa58c0344d8b6676559532cf1b4aec740}{DeserializeJson}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io::JsonReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a1da00d5fc70c01c5da3e0668651c9d7f}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a8c10503771276bc8066e0c8766c01dec}{TransactionOutput}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_ad1b53133f77c4f8e9212cfa4f9b57e80}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a8c10503771276bc8066e0c8766c01dec}{TransactionOutput}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00096\ \};}
+\DoxyCodeLine{00097\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}

@@ -1,0 +1,598 @@
+\doxysection{neo\+::wallets\+::Wallet Class Reference}
+\hypertarget{classneo_1_1wallets_1_1_wallet}{}\label{classneo_1_1wallets_1_1_wallet}\index{neo::wallets::Wallet@{neo::wallets::Wallet}}
+
+
+Represents a wallet.  
+
+
+
+
+{\ttfamily \#include $<$wallet.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::wallets\+::Wallet\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::wallets\+::Wallet\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a2c62cab46ad536921093a5b4916c2adf}{Wallet}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1wallets_1_1_wallet}{Wallet}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ab8bc88df76396aed45cd8d054728e181}{Wallet}} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1wallets_1_1_wallet}{Wallet} with the specified path. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a7692c3be1d49fd4f2c04d0507792b9fa}{Get\+Path}} () const
+\begin{DoxyCompactList}\small\item\em Gets the path. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a20ee7e7cd030d675cdd4f83e8997af5a}{Set\+Path}} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Sets the path. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_aca8466405a8044e17fb58538fcb22185}{Get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Gets the name. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a35d9284fb0865a2a0e7c382fbb140b75}{Set\+Name}} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Sets the name. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ae51dfa12a9c5f9aa5a8c068faf92da82}{Get\+Version}} () const
+\begin{DoxyCompactList}\small\item\em Gets the version. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ab2a1bb7419e8c7441ffc6092a30d8706}{Set\+Version}} (int32\+\_\+t version)
+\begin{DoxyCompactList}\small\item\em Sets the version. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ad88ab06bc6becbfa50983de2dab7a27f}{Get\+Accounts}} () const
+\begin{DoxyCompactList}\small\item\em Gets the accounts. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ab90bef4c617ba60e29cd477c7430e9c2}{Get\+Default\+Account}} () const
+\begin{DoxyCompactList}\small\item\em Gets the default account. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ac6ea75a20339a5dcd35b2a445c587fcb}{Set\+Default\+Account}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ account)
+\begin{DoxyCompactList}\small\item\em Sets the default account. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a8b9ed149b5034d115deda80ae65e281b}{Get\+Account}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash) const
+\begin{DoxyCompactList}\small\item\em Gets an account by script hash. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a630af7c4f5afce2f000f5589db4fe00b}{Get\+Account}} (const std\+::string \&address) const
+\begin{DoxyCompactList}\small\item\em Gets an account by address. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ab892fe4e34d0ac997678188c97f1bf3b}{Create\+Account}} ()
+\begin{DoxyCompactList}\small\item\em Creates a new account. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ae3d183377a5c566662e2b1d941ebd28c}{Create\+Account}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Creates a new account with the specified private key. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a174708a6a0a3ed772eb95195c438c0c2}{Create\+Account}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{cryptography\+::ecc\+::\+Key\+Pair}} \&key\+Pair)
+\begin{DoxyCompactList}\small\item\em Creates a new account with the specified key pair. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a7d3ae688828c1cae1c14b80aac105069}{Create\+Account\+From\+WIF}} (const std\+::string \&wif)
+\begin{DoxyCompactList}\small\item\em Creates a new account with the specified WIF. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a559c23494f138588a966883ffe3da5db}{Create\+Account}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash)
+\begin{DoxyCompactList}\small\item\em Creates a new account with the specified script hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ae556a83f47da99d20e810980225a2e33}{Add\+Account}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ account)
+\begin{DoxyCompactList}\small\item\em Adds an account. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a1693239f6425007a3200b0b7dd03ed5d}{Remove\+Account}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash)
+\begin{DoxyCompactList}\small\item\em Removes an account. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a83212de2207d8c22dc542cb6544c1639}{Remove\+Account}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Removes an account. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a6c39b18c049b41fb2e64649e69308da6}{Save}} ()
+\begin{DoxyCompactList}\small\item\em Saves the wallet. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_afccda849c652bc50cfe772601d0bdaf8}{Save\+As}} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Saves the wallet to the specified path. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_aa4c6ad71e7dbb7e7102e33a0d79db128}{Load}} ()
+\begin{DoxyCompactList}\small\item\em Loads the wallet. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_aaf4db51574aaea5793a132b369225445}{Load\+From}} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Loads the wallet from the specified path. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ad22dfd462e56e65ed760028721c02118}{To\+Json}} () const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1wallets_1_1_wallet}{Wallet} to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a81ff3b7aac263cc40b115f0dc8cb89fc}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}}) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1wallets_1_1_wallet}{Wallet} from a JSON object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable}{neo\+::io\+::\+Json\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_ae7dd2d7bd2b036df8dc47c8df95b66f0}{\texorpdfstring{$\sim$}{\string~}\+Json\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_a1f7a1b4f0576d1bcf90ddf88c05d0e45}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_a4f9aff66b2ffc198345b53e597811363}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a4048de04bf8443bc5b80d0b438780a96}{path\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a37f7ec25d3cfc36d6c48c53de1473a31}{name\+\_\+}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a722e17422f8ad09208f8dbb6a1db5b93}{version\+\_\+}}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a9060daedb09197c7040e4deb7baf0a34}{accounts\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a5bbeffa9c55cb83baead85c0d0fb1155}{default\+Account\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a18133f92f40d1b9cfb741935665628e5}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a wallet. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a2c62cab46ad536921093a5b4916c2adf}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!Wallet@{Wallet}}
+\index{Wallet@{Wallet}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{Wallet()}{Wallet()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a2c62cab46ad536921093a5b4916c2adf} 
+neo\+::wallets\+::\+Wallet\+::\+Wallet (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1wallets_1_1_wallet}{Wallet}. 
+
+\Hypertarget{classneo_1_1wallets_1_1_wallet_ab8bc88df76396aed45cd8d054728e181}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!Wallet@{Wallet}}
+\index{Wallet@{Wallet}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{Wallet()}{Wallet()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_ab8bc88df76396aed45cd8d054728e181} 
+neo\+::wallets\+::\+Wallet\+::\+Wallet (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1wallets_1_1_wallet}{Wallet} with the specified path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_ae556a83f47da99d20e810980225a2e33}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!AddAccount@{AddAccount}}
+\index{AddAccount@{AddAccount}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{AddAccount()}{AddAccount()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_ae556a83f47da99d20e810980225a2e33} 
+void neo\+::wallets\+::\+Wallet\+::\+Add\+Account (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$}]{account}{}\end{DoxyParamCaption})}
+
+
+
+Adds an account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em account} & The account. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_ab892fe4e34d0ac997678188c97f1bf3b}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!CreateAccount@{CreateAccount}}
+\index{CreateAccount@{CreateAccount}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{CreateAccount()}{CreateAccount()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_ab892fe4e34d0ac997678188c97f1bf3b} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ neo\+::wallets\+::\+Wallet\+::\+Create\+Account (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Creates a new account. 
+
+\begin{DoxyReturn}{Returns}
+The new account. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a174708a6a0a3ed772eb95195c438c0c2}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!CreateAccount@{CreateAccount}}
+\index{CreateAccount@{CreateAccount}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{CreateAccount()}{CreateAccount()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a174708a6a0a3ed772eb95195c438c0c2} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ neo\+::wallets\+::\+Wallet\+::\+Create\+Account (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{cryptography\+::ecc\+::\+Key\+Pair}} \&}]{key\+Pair}{}\end{DoxyParamCaption})}
+
+
+
+Creates a new account with the specified key pair. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key\+Pair} & The key pair. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new account. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a559c23494f138588a966883ffe3da5db}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!CreateAccount@{CreateAccount}}
+\index{CreateAccount@{CreateAccount}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{CreateAccount()}{CreateAccount()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a559c23494f138588a966883ffe3da5db} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ neo\+::wallets\+::\+Wallet\+::\+Create\+Account (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{}\end{DoxyParamCaption})}
+
+
+
+Creates a new account with the specified script hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The script hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new account. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_ae3d183377a5c566662e2b1d941ebd28c}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!CreateAccount@{CreateAccount}}
+\index{CreateAccount@{CreateAccount}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{CreateAccount()}{CreateAccount()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_ae3d183377a5c566662e2b1d941ebd28c} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ neo\+::wallets\+::\+Wallet\+::\+Create\+Account (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{private\+Key}{}\end{DoxyParamCaption})}
+
+
+
+Creates a new account with the specified private key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em private\+Key} & The private key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new account. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a7d3ae688828c1cae1c14b80aac105069}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!CreateAccountFromWIF@{CreateAccountFromWIF}}
+\index{CreateAccountFromWIF@{CreateAccountFromWIF}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{CreateAccountFromWIF()}{CreateAccountFromWIF()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a7d3ae688828c1cae1c14b80aac105069} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ neo\+::wallets\+::\+Wallet\+::\+Create\+Account\+From\+WIF (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{wif}{}\end{DoxyParamCaption})}
+
+
+
+Creates a new account with the specified WIF. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em wif} & The WIF. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new account. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a81ff3b7aac263cc40b115f0dc8cb89fc}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!FromJson@{FromJson}}
+\index{FromJson@{FromJson}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{FromJson()}{FromJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a81ff3b7aac263cc40b115f0dc8cb89fc} 
+void neo\+::wallets\+::\+Wallet\+::\+From\+Json (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1wallets_1_1_wallet}{Wallet} from a JSON object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & The JSON object. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_a21a577bd492fc899597f33618a1da2eb}{neo\+::io\+::\+Json\+Serializable}}.
+
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a8b9ed149b5034d115deda80ae65e281b}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!GetAccount@{GetAccount}}
+\index{GetAccount@{GetAccount}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{GetAccount()}{GetAccount()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a8b9ed149b5034d115deda80ae65e281b} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ neo\+::wallets\+::\+Wallet\+::\+Get\+Account (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets an account by script hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The script hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The account, or nullptr if not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a630af7c4f5afce2f000f5589db4fe00b}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!GetAccount@{GetAccount}}
+\index{GetAccount@{GetAccount}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{GetAccount()}{GetAccount()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a630af7c4f5afce2f000f5589db4fe00b} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ neo\+::wallets\+::\+Wallet\+::\+Get\+Account (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets an account by address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The address. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The account, or nullptr if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1wallets_1_1_wallet_ad88ab06bc6becbfa50983de2dab7a27f}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!GetAccounts@{GetAccounts}}
+\index{GetAccounts@{GetAccounts}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{GetAccounts()}{GetAccounts()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_ad88ab06bc6becbfa50983de2dab7a27f} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ $>$ \& neo\+::wallets\+::\+Wallet\+::\+Get\+Accounts (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the accounts. 
+
+\begin{DoxyReturn}{Returns}
+The accounts. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_ab90bef4c617ba60e29cd477c7430e9c2}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!GetDefaultAccount@{GetDefaultAccount}}
+\index{GetDefaultAccount@{GetDefaultAccount}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{GetDefaultAccount()}{GetDefaultAccount()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_ab90bef4c617ba60e29cd477c7430e9c2} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$ neo\+::wallets\+::\+Wallet\+::\+Get\+Default\+Account (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the default account. 
+
+\begin{DoxyReturn}{Returns}
+The default account. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_aca8466405a8044e17fb58538fcb22185}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!GetName@{GetName}}
+\index{GetName@{GetName}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_aca8466405a8044e17fb58538fcb22185} 
+const std\+::string \& neo\+::wallets\+::\+Wallet\+::\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the name. 
+
+\begin{DoxyReturn}{Returns}
+The name. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a7692c3be1d49fd4f2c04d0507792b9fa}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!GetPath@{GetPath}}
+\index{GetPath@{GetPath}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{GetPath()}{GetPath()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a7692c3be1d49fd4f2c04d0507792b9fa} 
+const std\+::string \& neo\+::wallets\+::\+Wallet\+::\+Get\+Path (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the path. 
+
+\begin{DoxyReturn}{Returns}
+The path. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_ae51dfa12a9c5f9aa5a8c068faf92da82}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!GetVersion@{GetVersion}}
+\index{GetVersion@{GetVersion}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{GetVersion()}{GetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_ae51dfa12a9c5f9aa5a8c068faf92da82} 
+int32\+\_\+t neo\+::wallets\+::\+Wallet\+::\+Get\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the version. 
+
+\begin{DoxyReturn}{Returns}
+The version. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_aa4c6ad71e7dbb7e7102e33a0d79db128}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!Load@{Load}}
+\index{Load@{Load}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{Load()}{Load()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_aa4c6ad71e7dbb7e7102e33a0d79db128} 
+bool neo\+::wallets\+::\+Wallet\+::\+Load (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Loads the wallet. 
+
+\begin{DoxyReturn}{Returns}
+True if the wallet was loaded, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1wallets_1_1_wallet_aaf4db51574aaea5793a132b369225445}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!LoadFrom@{LoadFrom}}
+\index{LoadFrom@{LoadFrom}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{LoadFrom()}{LoadFrom()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_aaf4db51574aaea5793a132b369225445} 
+bool neo\+::wallets\+::\+Wallet\+::\+Load\+From (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Loads the wallet from the specified path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the wallet was loaded, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a1693239f6425007a3200b0b7dd03ed5d}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!RemoveAccount@{RemoveAccount}}
+\index{RemoveAccount@{RemoveAccount}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{RemoveAccount()}{RemoveAccount()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a1693239f6425007a3200b0b7dd03ed5d} 
+bool neo\+::wallets\+::\+Wallet\+::\+Remove\+Account (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{}\end{DoxyParamCaption})}
+
+
+
+Removes an account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The script hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the account was removed, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a83212de2207d8c22dc542cb6544c1639}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!RemoveAccount@{RemoveAccount}}
+\index{RemoveAccount@{RemoveAccount}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{RemoveAccount()}{RemoveAccount()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a83212de2207d8c22dc542cb6544c1639} 
+bool neo\+::wallets\+::\+Wallet\+::\+Remove\+Account (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})}
+
+
+
+Removes an account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The address. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the account was removed, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a6c39b18c049b41fb2e64649e69308da6}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!Save@{Save}}
+\index{Save@{Save}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{Save()}{Save()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a6c39b18c049b41fb2e64649e69308da6} 
+bool neo\+::wallets\+::\+Wallet\+::\+Save (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Saves the wallet. 
+
+\begin{DoxyReturn}{Returns}
+True if the wallet was saved, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1wallets_1_1_wallet_afccda849c652bc50cfe772601d0bdaf8}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!SaveAs@{SaveAs}}
+\index{SaveAs@{SaveAs}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{SaveAs()}{SaveAs()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_afccda849c652bc50cfe772601d0bdaf8} 
+bool neo\+::wallets\+::\+Wallet\+::\+Save\+As (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Saves the wallet to the specified path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the wallet was saved, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1wallets_1_1_wallet_ac6ea75a20339a5dcd35b2a445c587fcb}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!SetDefaultAccount@{SetDefaultAccount}}
+\index{SetDefaultAccount@{SetDefaultAccount}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{SetDefaultAccount()}{SetDefaultAccount()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_ac6ea75a20339a5dcd35b2a445c587fcb} 
+void neo\+::wallets\+::\+Wallet\+::\+Set\+Default\+Account (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}} $>$}]{account}{}\end{DoxyParamCaption})}
+
+
+
+Sets the default account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em account} & The default account. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a35d9284fb0865a2a0e7c382fbb140b75}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!SetName@{SetName}}
+\index{SetName@{SetName}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{SetName()}{SetName()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a35d9284fb0865a2a0e7c382fbb140b75} 
+void neo\+::wallets\+::\+Wallet\+::\+Set\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Sets the name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a20ee7e7cd030d675cdd4f83e8997af5a}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!SetPath@{SetPath}}
+\index{SetPath@{SetPath}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{SetPath()}{SetPath()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a20ee7e7cd030d675cdd4f83e8997af5a} 
+void neo\+::wallets\+::\+Wallet\+::\+Set\+Path (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Sets the path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_ab2a1bb7419e8c7441ffc6092a30d8706}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!SetVersion@{SetVersion}}
+\index{SetVersion@{SetVersion}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{SetVersion()}{SetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_ab2a1bb7419e8c7441ffc6092a30d8706} 
+void neo\+::wallets\+::\+Wallet\+::\+Set\+Version (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{version}{}\end{DoxyParamCaption})}
+
+
+
+Sets the version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em version} & The version. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_ad22dfd462e56e65ed760028721c02118}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!ToJson@{ToJson}}
+\index{ToJson@{ToJson}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{ToJson()}{ToJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_ad22dfd462e56e65ed760028721c02118} 
+nlohmann\+::json neo\+::wallets\+::\+Wallet\+::\+To\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1wallets_1_1_wallet}{Wallet} to a JSON object. 
+
+\begin{DoxyReturn}{Returns}
+The JSON object. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_a3fc4f510ac608ac070cb3c3f85b09113}{neo\+::io\+::\+Json\+Serializable}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a9060daedb09197c7040e4deb7baf0a34}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!accounts\_@{accounts\_}}
+\index{accounts\_@{accounts\_}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{accounts\_}{accounts\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a9060daedb09197c7040e4deb7baf0a34} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}}$>$ $>$ neo\+::wallets\+::\+Wallet\+::accounts\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a5bbeffa9c55cb83baead85c0d0fb1155}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!defaultAccount\_@{defaultAccount\_}}
+\index{defaultAccount\_@{defaultAccount\_}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{defaultAccount\_}{defaultAccount\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a5bbeffa9c55cb83baead85c0d0fb1155} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}}$>$ neo\+::wallets\+::\+Wallet\+::default\+Account\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a18133f92f40d1b9cfb741935665628e5}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a18133f92f40d1b9cfb741935665628e5} 
+std\+::mutex neo\+::wallets\+::\+Wallet\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a37f7ec25d3cfc36d6c48c53de1473a31}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!name\_@{name\_}}
+\index{name\_@{name\_}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{name\_}{name\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a37f7ec25d3cfc36d6c48c53de1473a31} 
+std\+::string neo\+::wallets\+::\+Wallet\+::name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a4048de04bf8443bc5b80d0b438780a96}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!path\_@{path\_}}
+\index{path\_@{path\_}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{path\_}{path\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a4048de04bf8443bc5b80d0b438780a96} 
+std\+::string neo\+::wallets\+::\+Wallet\+::path\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1_wallet_a722e17422f8ad09208f8dbb6a1db5b93}\index{neo::wallets::Wallet@{neo::wallets::Wallet}!version\_@{version\_}}
+\index{version\_@{version\_}!neo::wallets::Wallet@{neo::wallets::Wallet}}
+\doxysubsubsection{\texorpdfstring{version\_}{version\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_a722e17422f8ad09208f8dbb6a1db5b93} 
+int32\+\_\+t neo\+::wallets\+::\+Wallet\+::version\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/wallets/\mbox{\hyperlink{wallet_8h}{wallet.\+h}}\item 
+src/wallets/\mbox{\hyperlink{wallet_8cpp}{wallet.\+cpp}}\end{DoxyCompactItemize}

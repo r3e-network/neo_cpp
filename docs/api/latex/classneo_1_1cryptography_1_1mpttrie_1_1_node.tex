@@ -1,0 +1,1012 @@
+\doxysection{neo\+::cryptography\+::mpttrie\+::Node Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node}{}\label{classneo_1_1cryptography_1_1mpttrie_1_1_node}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+
+
+\doxylink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node} in the Merkle Patricia \doxylink{classneo_1_1cryptography_1_1mpttrie_1_1_trie}{Trie}.  
+
+
+
+
+{\ttfamily \#include $<$node.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::cryptography\+::mpttrie\+::Node\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::cryptography\+::mpttrie\+::Node\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a286212fd26ee271980008a9d2692d827}{Node}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor creates an empty node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3b9e8687b5b5d4229cbd9e37d8b2ec8c}{Node}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a7e11c479ee7cdcf7b6108926ad4b05ad}{Node}} (\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} \&\&other) noexcept
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ad5968eb95deac8d36a11128b32228f64}{operator=}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} \&other)
+\begin{DoxyCompactList}\small\item\em Assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a29301ce265e36582f48edf3f2bd8a57c}{operator=}} (\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} \&\&other) noexcept
+\begin{DoxyCompactList}\small\item\em Move assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae55b6bfe5dc1a964fe43b5ffd2aa7964}{\texorpdfstring{$\sim$}{\string~}\+Node}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406}{Node\+Type}} \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3bb1da9ffaa29d7abca39938c5cb687f}{Get\+Type}} () const
+\begin{DoxyCompactList}\small\item\em Gets the node type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_add3a93dbde550ada68290b21cae72c42}{Get\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the hash of this node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_aba9a659cb1bd05f9b1e268ddddc6d293}{Is\+Empty}} () const
+\begin{DoxyCompactList}\small\item\em Checks if this is an empty node. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a011c2c00e6563292c15609628bc76863}{Get\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em Gets the reference count. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a072068eb99355d12700b7cd5c2d53107}{Set\+Reference}} (int reference)
+\begin{DoxyCompactList}\small\item\em Sets the reference count. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae8c60d7ce5104a8d41aabb4d259df233}{Set\+Dirty}} ()
+\begin{DoxyCompactList}\small\item\em Marks the node as dirty (hash needs recalculation). \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a684b865e28fde78f8d00c6f8c7054324}{Get\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the size of this node when serialized. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a7efad64d065556b1472506194d16f60b}{Get\+Size\+As\+Child}} () const
+\begin{DoxyCompactList}\small\item\em Gets the size of this node when used as a child. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a13f0c773f4955fce9ed148e34d90c97f}{Clone}} () const
+\begin{DoxyCompactList}\small\item\em Clones this node. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae89a4fded8f8e2650d5a94ab747e5d84}{Clone\+As\+Child}} () const
+\begin{DoxyCompactList}\small\item\em Clones this node as a child reference. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3a1fec22d764e4435f17f34bf2b0c6ef}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the node to a byte array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a288143f050acaed572b778ad3e173601}{To\+Array\+Without\+Reference}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the node to a byte array without reference count. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_adfb5e6d4923ce0b61c56919c7514957f}{Serialize\+As\+Child}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const
+\begin{DoxyCompactList}\small\item\em Serializes this node as a child. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ab9e4021936e9cdd4912d88036620c7ca}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_afe12e230777bdc3ecf3f9019f6f538d7}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a binary reader. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_aed1e3df5cc441e07b94846dc8ddeac3e}{Get\+Children}} ()
+\begin{DoxyCompactList}\small\item\em Gets the children array (for branch nodes). \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a670fb4927532ceb33ef4bcfbdfef1f62}{Get\+Children}} () const
+\begin{DoxyCompactList}\small\item\em Gets the children array (for branch nodes, const version). \end{DoxyCompactList}\item 
+std\+::span$<$ const uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_af2d645ebce6d3b9d4e44f204c77545eb}{Get\+Key}} () const
+\begin{DoxyCompactList}\small\item\em Gets the key (for extension nodes). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae19fd10b692436638d0f168d4f691cca}{Set\+Key}} (std\+::span$<$ const uint8\+\_\+t $>$ key)
+\begin{DoxyCompactList}\small\item\em Sets the key (for extension nodes). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a4e418df5a15bb1b47add825ce64f2938}{Get\+Next}} ()
+\begin{DoxyCompactList}\small\item\em Gets the next node (for extension nodes). \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a31ff8535a435f4836641f7101913e355}{Get\+Next}} () const
+\begin{DoxyCompactList}\small\item\em Gets the next node (for extension nodes, const version). \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ \& \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a1bf8fa5d01db94df746b0f236437316f}{Get\+Next\+Ptr}} ()
+\begin{DoxyCompactList}\small\item\em Gets the next node pointer (for extension nodes). \end{DoxyCompactList}\item 
+const std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ \& \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a9997d9b9c74f03edf6b4d95d8a99a553}{Get\+Next\+Ptr}} () const
+\begin{DoxyCompactList}\small\item\em Gets the next node pointer (for extension nodes, const version). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3aa40811f5069d42249fd3a07affb881}{Set\+Next}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ next)
+\begin{DoxyCompactList}\small\item\em Sets the next node (for extension nodes). \end{DoxyCompactList}\item 
+std\+::span$<$ const uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_af2bb9e40a326f911b18f76b43eb52492}{Get\+Value}} () const
+\begin{DoxyCompactList}\small\item\em Gets the value (for leaf nodes). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a0baa8eef7f21b9039421dfdf0459e8b0}{Set\+Value}} (std\+::span$<$ const uint8\+\_\+t $>$ value)
+\begin{DoxyCompactList}\small\item\em Sets the value (for leaf nodes). \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a6de89e5c6fb45089e7fcac323469d08a}{Get\+Stored\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the stored hash (for hash nodes). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_aaa85b6cb2b2bf1733d724ba06094920e}{New\+Branch}} ()
+\begin{DoxyCompactList}\small\item\em Creates a new branch node. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ac7463e65659916cfc6fbdfebda65dbfb}{New\+Extension}} (std\+::span$<$ const uint8\+\_\+t $>$ key, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ next)
+\begin{DoxyCompactList}\small\item\em Creates a new extension node. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a2ae9ce9519fe589e7f48576a0a361b0c}{New\+Leaf}} (std\+::span$<$ const uint8\+\_\+t $>$ value)
+\begin{DoxyCompactList}\small\item\em Creates a new leaf node. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a189b8e8359ec10e0244696dd6eb4538c}{New\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Creates a new hash node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ad0087a90181dabe290a1d3dd374e2021}{Branch\+Child\+Count}} = 17
+\item 
+static constexpr int \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a333cefdbf74ac2503681c112753122e8}{Max\+Key\+Length}} = 1024
+\item 
+static constexpr int \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a847d9515a47ffea68d5e48c6580c9b3a}{Max\+Value\+Length}} = 1024 \texorpdfstring{$\ast$}{*} 1024
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_afe37f541d7f7a96e96b87001f3d58693}{Calculate\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Calculates the hash of this node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a88b2e3a96aa7f1390ad2b4f92b258424}{Serialize\+Branch}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const
+\begin{DoxyCompactList}\small\item\em Serializes branch node data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_aad0d121a1e02d919c6ea47b6524ef11b}{Deserialize\+Branch}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader)
+\begin{DoxyCompactList}\small\item\em Deserializes branch node data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae17e5c831670db685158341a987c9bd8}{Serialize\+Extension}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const
+\begin{DoxyCompactList}\small\item\em Serializes extension node data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a5b3124a3122cc280aaceb1a2a002f432}{Deserialize\+Extension}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader)
+\begin{DoxyCompactList}\small\item\em Deserializes extension node data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_acd2200b9daa03fbc23569e43bacdec18}{Serialize\+Leaf}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const
+\begin{DoxyCompactList}\small\item\em Serializes leaf node data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ac91c4398313dd5df51ab24b50aa7be74}{Deserialize\+Leaf}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader)
+\begin{DoxyCompactList}\small\item\em Deserializes leaf node data. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a9dd4ab664002fca8fdf39add7b1b3081}{Get\+Branch\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the size of branch node data. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_adca8f272f61a24aad12d5ef56f3ee388}{Get\+Extension\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the size of extension node data. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3b6327fdc59deec28d9851bf4f0ecad9}{Get\+Leaf\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the size of leaf node data. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae62ff60b6a2f8603442304dac41f0622}{Get\+Hash\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the size of hash node data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406}{Node\+Type}} \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a9caa96819a46ee9c64dbd07f090a13b0}{type\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_aa0fdfeabb356210c5a1826532bbd3392}{hash\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_aabffba657b09697507a1874ed31890b7}{hash\+\_\+dirty\+\_\+}}
+\item 
+int \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_aee7fa9bba6197f3ed72fc28ac03d65f9}{reference\+\_\+}}
+\item 
+std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a69488d1fb98a53305b050cdf42bd271c}{children\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_ada017139bddba0177f99efe0c2e1e0ad}{key\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a308011a7828c6595dd49053fc4fc3b14}{next\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a346a67bdd90ea2166a5775866973e3f6}{value\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3956bb2290f9e78eae0cdc92908f2f9b}{stored\+\_\+hash\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node} in the Merkle Patricia \doxylink{classneo_1_1cryptography_1_1mpttrie_1_1_trie}{Trie}. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a286212fd26ee271980008a9d2692d827}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!Node@{Node}}
+\index{Node@{Node}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a286212fd26ee271980008a9d2692d827} 
+neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Node (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor creates an empty node. 
+
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3b9e8687b5b5d4229cbd9e37d8b2ec8c}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!Node@{Node}}
+\index{Node@{Node}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3b9e8687b5b5d4229cbd9e37d8b2ec8c} 
+neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a7e11c479ee7cdcf7b6108926ad4b05ad}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!Node@{Node}}
+\index{Node@{Node}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{Node()}{Node()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a7e11c479ee7cdcf7b6108926ad4b05ad} 
+neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} \&\&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Move constructor. 
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae55b6bfe5dc1a964fe43b5ffd2aa7964}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!````~Node@{\texorpdfstring{$\sim$}{\string~}Node}}
+\index{````~Node@{\texorpdfstring{$\sim$}{\string~}Node}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Node()}{\string~Node()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae55b6bfe5dc1a964fe43b5ffd2aa7964} 
+neo\+::cryptography\+::mpttrie\+::\+Node\+::\texorpdfstring{$\sim$}{\string~}\+Node (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Destructor. 
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_afe37f541d7f7a96e96b87001f3d58693}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!CalculateHash@{CalculateHash}}
+\index{CalculateHash@{CalculateHash}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{CalculateHash()}{CalculateHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_afe37f541d7f7a96e96b87001f3d58693} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Calculate\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculates the hash of this node. 
+
+\begin{DoxyReturn}{Returns}
+The calculated hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a13f0c773f4955fce9ed148e34d90c97f}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!Clone@{Clone}}
+\index{Clone@{Clone}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{Clone()}{Clone()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a13f0c773f4955fce9ed148e34d90c97f} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Clone (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Clones this node. 
+
+\begin{DoxyReturn}{Returns}
+A cloned node. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae89a4fded8f8e2650d5a94ab747e5d84}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!CloneAsChild@{CloneAsChild}}
+\index{CloneAsChild@{CloneAsChild}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{CloneAsChild()}{CloneAsChild()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae89a4fded8f8e2650d5a94ab747e5d84} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Clone\+As\+Child (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Clones this node as a child reference. 
+
+\begin{DoxyReturn}{Returns}
+A cloned node. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_afe12e230777bdc3ecf3f9019f6f538d7}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_afe12e230777bdc3ecf3f9019f6f538d7} 
+void neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_aad0d121a1e02d919c6ea47b6524ef11b}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!DeserializeBranch@{DeserializeBranch}}
+\index{DeserializeBranch@{DeserializeBranch}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{DeserializeBranch()}{DeserializeBranch()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_aad0d121a1e02d919c6ea47b6524ef11b} 
+void neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Deserialize\+Branch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Deserializes branch node data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a5b3124a3122cc280aaceb1a2a002f432}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!DeserializeExtension@{DeserializeExtension}}
+\index{DeserializeExtension@{DeserializeExtension}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{DeserializeExtension()}{DeserializeExtension()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a5b3124a3122cc280aaceb1a2a002f432} 
+void neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Deserialize\+Extension (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Deserializes extension node data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_ac91c4398313dd5df51ab24b50aa7be74}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!DeserializeLeaf@{DeserializeLeaf}}
+\index{DeserializeLeaf@{DeserializeLeaf}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{DeserializeLeaf()}{DeserializeLeaf()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_ac91c4398313dd5df51ab24b50aa7be74} 
+void neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Deserialize\+Leaf (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Deserializes leaf node data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a9dd4ab664002fca8fdf39add7b1b3081}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetBranchSize@{GetBranchSize}}
+\index{GetBranchSize@{GetBranchSize}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetBranchSize()}{GetBranchSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a9dd4ab664002fca8fdf39add7b1b3081} 
+size\+\_\+t neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Branch\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the size of branch node data. 
+
+\begin{DoxyReturn}{Returns}
+The size in bytes. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_aed1e3df5cc441e07b94846dc8ddeac3e}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetChildren@{GetChildren}}
+\index{GetChildren@{GetChildren}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetChildren()}{GetChildren()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_aed1e3df5cc441e07b94846dc8ddeac3e} 
+std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ $>$ \& neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Children (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the children array (for branch nodes). 
+
+\begin{DoxyReturn}{Returns}
+The children array. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a670fb4927532ceb33ef4bcfbdfef1f62}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetChildren@{GetChildren}}
+\index{GetChildren@{GetChildren}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetChildren()}{GetChildren()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a670fb4927532ceb33ef4bcfbdfef1f62} 
+const std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ $>$ \& neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Children (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the children array (for branch nodes, const version). 
+
+\begin{DoxyReturn}{Returns}
+The children array. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_adca8f272f61a24aad12d5ef56f3ee388}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetExtensionSize@{GetExtensionSize}}
+\index{GetExtensionSize@{GetExtensionSize}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetExtensionSize()}{GetExtensionSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_adca8f272f61a24aad12d5ef56f3ee388} 
+size\+\_\+t neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Extension\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the size of extension node data. 
+
+\begin{DoxyReturn}{Returns}
+The size in bytes. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_add3a93dbde550ada68290b21cae72c42}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetHash@{GetHash}}
+\index{GetHash@{GetHash}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetHash()}{GetHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_add3a93dbde550ada68290b21cae72c42} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the hash of this node. 
+
+\begin{DoxyReturn}{Returns}
+The hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae62ff60b6a2f8603442304dac41f0622}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetHashSize@{GetHashSize}}
+\index{GetHashSize@{GetHashSize}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetHashSize()}{GetHashSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae62ff60b6a2f8603442304dac41f0622} 
+size\+\_\+t neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Hash\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the size of hash node data. 
+
+\begin{DoxyReturn}{Returns}
+The size in bytes. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_af2d645ebce6d3b9d4e44f204c77545eb}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetKey@{GetKey}}
+\index{GetKey@{GetKey}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetKey()}{GetKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_af2d645ebce6d3b9d4e44f204c77545eb} 
+std\+::span$<$ const uint8\+\_\+t $>$ neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the key (for extension nodes). 
+
+\begin{DoxyReturn}{Returns}
+The key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3b6327fdc59deec28d9851bf4f0ecad9}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetLeafSize@{GetLeafSize}}
+\index{GetLeafSize@{GetLeafSize}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetLeafSize()}{GetLeafSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3b6327fdc59deec28d9851bf4f0ecad9} 
+size\+\_\+t neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Leaf\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the size of leaf node data. 
+
+\begin{DoxyReturn}{Returns}
+The size in bytes. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a4e418df5a15bb1b47add825ce64f2938}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetNext@{GetNext}}
+\index{GetNext@{GetNext}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetNext()}{GetNext()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a4e418df5a15bb1b47add825ce64f2938} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} \& neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Next (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the next node (for extension nodes). 
+
+\begin{DoxyReturn}{Returns}
+The next node. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a31ff8535a435f4836641f7101913e355}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetNext@{GetNext}}
+\index{GetNext@{GetNext}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetNext()}{GetNext()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a31ff8535a435f4836641f7101913e355} 
+const \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} \& neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Next (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the next node (for extension nodes, const version). 
+
+\begin{DoxyReturn}{Returns}
+The next node. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a1bf8fa5d01db94df746b0f236437316f}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetNextPtr@{GetNextPtr}}
+\index{GetNextPtr@{GetNextPtr}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetNextPtr()}{GetNextPtr()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a1bf8fa5d01db94df746b0f236437316f} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ \& neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Next\+Ptr (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the next node pointer (for extension nodes). 
+
+\begin{DoxyReturn}{Returns}
+The next node pointer. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a9997d9b9c74f03edf6b4d95d8a99a553}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetNextPtr@{GetNextPtr}}
+\index{GetNextPtr@{GetNextPtr}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetNextPtr()}{GetNextPtr()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a9997d9b9c74f03edf6b4d95d8a99a553} 
+const std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ \& neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Next\+Ptr (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the next node pointer (for extension nodes, const version). 
+
+\begin{DoxyReturn}{Returns}
+The next node pointer. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 23
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a011c2c00e6563292c15609628bc76863}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetReference@{GetReference}}
+\index{GetReference@{GetReference}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetReference()}{GetReference()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a011c2c00e6563292c15609628bc76863} 
+int neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Reference (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the reference count. 
+
+\begin{DoxyReturn}{Returns}
+The reference count. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 24
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a684b865e28fde78f8d00c6f8c7054324}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a684b865e28fde78f8d00c6f8c7054324} 
+size\+\_\+t neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the size of this node when serialized. 
+
+\begin{DoxyReturn}{Returns}
+The size in bytes. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 25
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a7efad64d065556b1472506194d16f60b}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetSizeAsChild@{GetSizeAsChild}}
+\index{GetSizeAsChild@{GetSizeAsChild}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetSizeAsChild()}{GetSizeAsChild()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a7efad64d065556b1472506194d16f60b} 
+size\+\_\+t neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Size\+As\+Child (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the size of this node when used as a child. 
+
+\begin{DoxyReturn}{Returns}
+The size in bytes. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 26
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a6de89e5c6fb45089e7fcac323469d08a}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetStoredHash@{GetStoredHash}}
+\index{GetStoredHash@{GetStoredHash}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetStoredHash()}{GetStoredHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a6de89e5c6fb45089e7fcac323469d08a} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Stored\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the stored hash (for hash nodes). 
+
+\begin{DoxyReturn}{Returns}
+The stored hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 27
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3bb1da9ffaa29d7abca39938c5cb687f}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetType@{GetType}}
+\index{GetType@{GetType}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3bb1da9ffaa29d7abca39938c5cb687f} 
+\mbox{\hyperlink{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406}{Node\+Type}} neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the node type. 
+
+\begin{DoxyReturn}{Returns}
+The node type. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 28
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_af2bb9e40a326f911b18f76b43eb52492}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!GetValue@{GetValue}}
+\index{GetValue@{GetValue}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{GetValue()}{GetValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_af2bb9e40a326f911b18f76b43eb52492} 
+std\+::span$<$ const uint8\+\_\+t $>$ neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Get\+Value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the value (for leaf nodes). 
+
+\begin{DoxyReturn}{Returns}
+The value. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 29
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_aba9a659cb1bd05f9b1e268ddddc6d293}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!IsEmpty@{IsEmpty}}
+\index{IsEmpty@{IsEmpty}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{IsEmpty()}{IsEmpty()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_aba9a659cb1bd05f9b1e268ddddc6d293} 
+bool neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Is\+Empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this is an empty node. 
+
+\begin{DoxyReturn}{Returns}
+True if empty, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 30
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_aaa85b6cb2b2bf1733d724ba06094920e}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!NewBranch@{NewBranch}}
+\index{NewBranch@{NewBranch}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{NewBranch()}{NewBranch()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_aaa85b6cb2b2bf1733d724ba06094920e} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ neo\+::cryptography\+::mpttrie\+::\+Node\+::\+New\+Branch (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a new branch node. 
+
+\begin{DoxyReturn}{Returns}
+A new branch node. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 31
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_ac7463e65659916cfc6fbdfebda65dbfb}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!NewExtension@{NewExtension}}
+\index{NewExtension@{NewExtension}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{NewExtension()}{NewExtension()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_ac7463e65659916cfc6fbdfebda65dbfb} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ neo\+::cryptography\+::mpttrie\+::\+Node\+::\+New\+Extension (\begin{DoxyParamCaption}\item[{std\+::span$<$ const uint8\+\_\+t $>$}]{key}{, }\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$}]{next}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a new extension node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+{\em next} & The next node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new extension node. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 32
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a189b8e8359ec10e0244696dd6eb4538c}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!NewHash@{NewHash}}
+\index{NewHash@{NewHash}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{NewHash()}{NewHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a189b8e8359ec10e0244696dd6eb4538c} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ neo\+::cryptography\+::mpttrie\+::\+Node\+::\+New\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a new hash node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new hash node. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 33
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a2ae9ce9519fe589e7f48576a0a361b0c}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!NewLeaf@{NewLeaf}}
+\index{NewLeaf@{NewLeaf}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{NewLeaf()}{NewLeaf()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a2ae9ce9519fe589e7f48576a0a361b0c} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ neo\+::cryptography\+::mpttrie\+::\+Node\+::\+New\+Leaf (\begin{DoxyParamCaption}\item[{std\+::span$<$ const uint8\+\_\+t $>$}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a new leaf node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new leaf node. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 34
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_ad5968eb95deac8d36a11128b32228f64}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_ad5968eb95deac8d36a11128b32228f64} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} \& neo\+::cryptography\+::mpttrie\+::\+Node\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Assignment operator. 
+
+Here is the call graph for this function\+:
+% FIG 35
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a29301ce265e36582f48edf3f2bd8a57c}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a29301ce265e36582f48edf3f2bd8a57c} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} \& neo\+::cryptography\+::mpttrie\+::\+Node\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} \&\&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Move assignment operator. 
+
+Here is the call graph for this function\+:
+% FIG 36
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_ab9e4021936e9cdd4912d88036620c7ca}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_ab9e4021936e9cdd4912d88036620c7ca} 
+void neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 37
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_adfb5e6d4923ce0b61c56919c7514957f}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!SerializeAsChild@{SerializeAsChild}}
+\index{SerializeAsChild@{SerializeAsChild}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{SerializeAsChild()}{SerializeAsChild()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_adfb5e6d4923ce0b61c56919c7514957f} 
+void neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Serialize\+As\+Child (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const}
+
+
+
+Serializes this node as a child. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 38
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a88b2e3a96aa7f1390ad2b4f92b258424}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!SerializeBranch@{SerializeBranch}}
+\index{SerializeBranch@{SerializeBranch}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{SerializeBranch()}{SerializeBranch()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a88b2e3a96aa7f1390ad2b4f92b258424} 
+void neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Serialize\+Branch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Serializes branch node data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 39
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae17e5c831670db685158341a987c9bd8}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!SerializeExtension@{SerializeExtension}}
+\index{SerializeExtension@{SerializeExtension}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{SerializeExtension()}{SerializeExtension()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae17e5c831670db685158341a987c9bd8} 
+void neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Serialize\+Extension (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Serializes extension node data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 40
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_acd2200b9daa03fbc23569e43bacdec18}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!SerializeLeaf@{SerializeLeaf}}
+\index{SerializeLeaf@{SerializeLeaf}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{SerializeLeaf()}{SerializeLeaf()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_acd2200b9daa03fbc23569e43bacdec18} 
+void neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Serialize\+Leaf (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Serializes leaf node data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 41
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae8c60d7ce5104a8d41aabb4d259df233}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!SetDirty@{SetDirty}}
+\index{SetDirty@{SetDirty}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{SetDirty()}{SetDirty()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae8c60d7ce5104a8d41aabb4d259df233} 
+void neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Set\+Dirty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Marks the node as dirty (hash needs recalculation). 
+
+Here is the call graph for this function\+:
+% FIG 42
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae19fd10b692436638d0f168d4f691cca}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!SetKey@{SetKey}}
+\index{SetKey@{SetKey}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{SetKey()}{SetKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_ae19fd10b692436638d0f168d4f691cca} 
+void neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Set\+Key (\begin{DoxyParamCaption}\item[{std\+::span$<$ const uint8\+\_\+t $>$}]{key}{}\end{DoxyParamCaption})}
+
+
+
+Sets the key (for extension nodes). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 43
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3aa40811f5069d42249fd3a07affb881}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!SetNext@{SetNext}}
+\index{SetNext@{SetNext}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{SetNext()}{SetNext()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3aa40811f5069d42249fd3a07affb881} 
+void neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Set\+Next (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$}]{next}{}\end{DoxyParamCaption})}
+
+
+
+Sets the next node (for extension nodes). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em next} & The next node. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 44
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a072068eb99355d12700b7cd5c2d53107}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!SetReference@{SetReference}}
+\index{SetReference@{SetReference}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{SetReference()}{SetReference()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a072068eb99355d12700b7cd5c2d53107} 
+void neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Set\+Reference (\begin{DoxyParamCaption}\item[{int}]{reference}{}\end{DoxyParamCaption})}
+
+
+
+Sets the reference count. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reference} & The reference count. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 45
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a0baa8eef7f21b9039421dfdf0459e8b0}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!SetValue@{SetValue}}
+\index{SetValue@{SetValue}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{SetValue()}{SetValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a0baa8eef7f21b9039421dfdf0459e8b0} 
+void neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Set\+Value (\begin{DoxyParamCaption}\item[{std\+::span$<$ const uint8\+\_\+t $>$}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Sets the value (for leaf nodes). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 46
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3a1fec22d764e4435f17f34bf2b0c6ef}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!ToArray@{ToArray}}
+\index{ToArray@{ToArray}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{ToArray()}{ToArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3a1fec22d764e4435f17f34bf2b0c6ef} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::mpttrie\+::\+Node\+::\+To\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Serializes the node to a byte array. 
+
+\begin{DoxyReturn}{Returns}
+The serialized data. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 47
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a288143f050acaed572b778ad3e173601}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!ToArrayWithoutReference@{ToArrayWithoutReference}}
+\index{ToArrayWithoutReference@{ToArrayWithoutReference}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{ToArrayWithoutReference()}{ToArrayWithoutReference()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a288143f050acaed572b778ad3e173601} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::mpttrie\+::\+Node\+::\+To\+Array\+Without\+Reference (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Serializes the node to a byte array without reference count. 
+
+\begin{DoxyReturn}{Returns}
+The serialized data. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 48
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_ad0087a90181dabe290a1d3dd374e2021}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!BranchChildCount@{BranchChildCount}}
+\index{BranchChildCount@{BranchChildCount}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{BranchChildCount}{BranchChildCount}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_ad0087a90181dabe290a1d3dd374e2021} 
+int neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Branch\+Child\+Count = 17\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a69488d1fb98a53305b050cdf42bd271c}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!children\_@{children\_}}
+\index{children\_@{children\_}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{children\_}{children\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a69488d1fb98a53305b050cdf42bd271c} 
+std\+::vector$<$std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}}$>$ $>$ neo\+::cryptography\+::mpttrie\+::\+Node\+::children\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_aa0fdfeabb356210c5a1826532bbd3392}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!hash\_@{hash\_}}
+\index{hash\_@{hash\_}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{hash\_}{hash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_aa0fdfeabb356210c5a1826532bbd3392} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::cryptography\+::mpttrie\+::\+Node\+::hash\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_aabffba657b09697507a1874ed31890b7}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!hash\_dirty\_@{hash\_dirty\_}}
+\index{hash\_dirty\_@{hash\_dirty\_}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{hash\_dirty\_}{hash\_dirty\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_aabffba657b09697507a1874ed31890b7} 
+bool neo\+::cryptography\+::mpttrie\+::\+Node\+::hash\+\_\+dirty\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_ada017139bddba0177f99efe0c2e1e0ad}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!key\_@{key\_}}
+\index{key\_@{key\_}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{key\_}{key\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_ada017139bddba0177f99efe0c2e1e0ad} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::mpttrie\+::\+Node\+::key\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a333cefdbf74ac2503681c112753122e8}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!MaxKeyLength@{MaxKeyLength}}
+\index{MaxKeyLength@{MaxKeyLength}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{MaxKeyLength}{MaxKeyLength}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a333cefdbf74ac2503681c112753122e8} 
+int neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Max\+Key\+Length = 1024\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a847d9515a47ffea68d5e48c6580c9b3a}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!MaxValueLength@{MaxValueLength}}
+\index{MaxValueLength@{MaxValueLength}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{MaxValueLength}{MaxValueLength}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a847d9515a47ffea68d5e48c6580c9b3a} 
+int neo\+::cryptography\+::mpttrie\+::\+Node\+::\+Max\+Value\+Length = 1024 \texorpdfstring{$\ast$}{*} 1024\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a308011a7828c6595dd49053fc4fc3b14}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!next\_@{next\_}}
+\index{next\_@{next\_}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{next\_}{next\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a308011a7828c6595dd49053fc4fc3b14} 
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}}$>$ neo\+::cryptography\+::mpttrie\+::\+Node\+::next\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_aee7fa9bba6197f3ed72fc28ac03d65f9}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!reference\_@{reference\_}}
+\index{reference\_@{reference\_}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{reference\_}{reference\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_aee7fa9bba6197f3ed72fc28ac03d65f9} 
+int neo\+::cryptography\+::mpttrie\+::\+Node\+::reference\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3956bb2290f9e78eae0cdc92908f2f9b}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!stored\_hash\_@{stored\_hash\_}}
+\index{stored\_hash\_@{stored\_hash\_}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{stored\_hash\_}{stored\_hash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a3956bb2290f9e78eae0cdc92908f2f9b} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::cryptography\+::mpttrie\+::\+Node\+::stored\+\_\+hash\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a9caa96819a46ee9c64dbd07f090a13b0}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!type\_@{type\_}}
+\index{type\_@{type\_}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{type\_}{type\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a9caa96819a46ee9c64dbd07f090a13b0} 
+\mbox{\hyperlink{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406}{Node\+Type}} neo\+::cryptography\+::mpttrie\+::\+Node\+::type\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_node_a346a67bdd90ea2166a5775866973e3f6}\index{neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}!value\_@{value\_}}
+\index{value\_@{value\_}!neo::cryptography::mpttrie::Node@{neo::cryptography::mpttrie::Node}}
+\doxysubsubsection{\texorpdfstring{value\_}{value\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_node_a346a67bdd90ea2166a5775866973e3f6} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::mpttrie\+::\+Node\+::value\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/mpttrie/\mbox{\hyperlink{node_8h}{node.\+h}}\item 
+src/cryptography/mpttrie/\mbox{\hyperlink{node_8cpp}{node.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,205 @@
+\doxysection{stack\+\_\+item.\+h}
+\hypertarget{stack__item_8h_source}{}\label{stack__item_8h_source}\index{include/neo/vm/stack\_item.h@{include/neo/vm/stack\_item.h}}
+\mbox{\hyperlink{stack__item_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{vm_2internal_2byte__vector_8h}{neo/vm/internal/byte\_vector.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stack__item__types_8h}{neo/vm/stack\_item\_types.h}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <cstddef>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ Forward\ declarations}}
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{ReferenceCounter}};}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_i_reference_counter}{IReferenceCounter}};}
+\DoxyCodeLine{00021\ \}\ \ \textcolor{comment}{//\ namespace\ neo::vm}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1io}{neo::io}}}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{BinaryReader}};}
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{BinaryWriter}};}
+\DoxyCodeLine{00027\ \}\ \ \textcolor{comment}{//\ namespace\ neo::io}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1core}{neo::core}}}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \textcolor{keyword}{class\ }BigDecimal;}
+\DoxyCodeLine{00032\ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ Forward\ declarations}}
+\DoxyCodeLine{00037\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm_1_1types}{types}}}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00039\ \textcolor{keyword}{class\ }\mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a4410ec34d9e6c1a68100ca0ce033fb17}{Array}};}
+\DoxyCodeLine{00040\ \textcolor{keyword}{class\ }\mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a27226c864bac7454a8504f8edb15d95b}{Boolean}};}
+\DoxyCodeLine{00041\ \textcolor{keyword}{class\ }\mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a7e62bc342f41c946868f0ea6f0b712d8}{Buffer}};}
+\DoxyCodeLine{00042\ \textcolor{keyword}{class\ }\mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a58efa9e8b8491c4a42cbf3bead1b06b6}{ByteString}};}
+\DoxyCodeLine{00043\ \textcolor{keyword}{class\ }CompoundType;}
+\DoxyCodeLine{00044\ \textcolor{keyword}{class\ }\mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7aa0faef0851b4294c06f2b94bb1cb2044}{Integer}};}
+\DoxyCodeLine{00045\ \textcolor{keyword}{class\ }\mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a9474c5b69f6d5fd10b26a56d38e6c5c5}{InteropInterface}};}
+\DoxyCodeLine{00046\ \textcolor{keyword}{class\ }\mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a46f3ea056caa3126b91f3f70beea068c}{Map}};}
+\DoxyCodeLine{00047\ \textcolor{keyword}{class\ }\mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7abbb93ef26e3c101ff11cdd21cab08a94}{Null}};}
+\DoxyCodeLine{00048\ \textcolor{keyword}{class\ }\mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a61cf8510205077b6f5491d38cd44c0f7}{Pointer}};}
+\DoxyCodeLine{00049\ \textcolor{keyword}{class\ }PrimitiveType;}
+\DoxyCodeLine{00050\ \textcolor{keyword}{class\ }\mbox{\hyperlink{namespaceneo_1_1vm_a43faf876f054d0c6da8b213ea630d520}{Struct}};}
+\DoxyCodeLine{00051\ \}\ \ \textcolor{comment}{//\ namespace\ types}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{StackItem}};}
+\DoxyCodeLine{00054\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_boolean_item}{BooleanItem}};}
+\DoxyCodeLine{00055\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_integer_item}{IntegerItem}};}
+\DoxyCodeLine{00056\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_byte_string_item}{ByteStringItem}};}
+\DoxyCodeLine{00057\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_buffer_item}{BufferItem}};}
+\DoxyCodeLine{00058\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_array_item}{ArrayItem}};}
+\DoxyCodeLine{00059\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_struct_item}{StructItem}};}
+\DoxyCodeLine{00060\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_map_item}{MapItem}};}
+\DoxyCodeLine{00061\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_interop_interface_item}{InteropInterfaceItem}};}
+\DoxyCodeLine{00062\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_pointer_item}{PointerItem}};}
+\DoxyCodeLine{00063\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_null_item}{NullItem}};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00068\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{StackItem}}\ :\ \textcolor{keyword}{public}\ std::enable\_shared\_from\_this<StackItem>}
+\DoxyCodeLine{00069\ \{}
+\DoxyCodeLine{00070\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{comment}{//\ Tarjan\ algorithm\ fields}}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a6ea20e827f63f54a471a2b7a91c7ab1a}{dfn\_}}\ =\ -\/1;}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a24354065569524e2e9187187018bfbbc}{low\_link\_}}\ =\ -\/1;}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a41fae22d720d28901434ad33cc14b4e4}{on\_stack\_}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ae67dbcd2e5263da80d851dfd1ae4fde5}{\string~StackItem}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7}{StackItemType}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af69a470d18df4bb1d0e23c25eca1dcb9}{GetType}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a23bb087d9e8d1dd20ab637dc5a1e8923}{GetBoolean}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_afffadf49ff4e45676deabbaaf03e33fb}{IsBoolean}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af69a470d18df4bb1d0e23c25eca1dcb9}{GetType}}()\ ==\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a27226c864bac7454a8504f8edb15d95b}{StackItemType::Boolean}};\ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a29bd275f27cf80f90d8ae29348f9f4f0}{IsInteger}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af69a470d18df4bb1d0e23c25eca1dcb9}{GetType}}()\ ==\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7aa0faef0851b4294c06f2b94bb1cb2044}{StackItemType::Integer}};\ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a93a4be2050941d877547f2169f120020}{IsByteString}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af69a470d18df4bb1d0e23c25eca1dcb9}{GetType}}()\ ==\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a58efa9e8b8491c4a42cbf3bead1b06b6}{StackItemType::ByteString}};\ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ad0f8516989edea184512d6385ee8bcf4}{IsMap}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af69a470d18df4bb1d0e23c25eca1dcb9}{GetType}}()\ ==\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a46f3ea056caa3126b91f3f70beea068c}{StackItemType::Map}};\ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af4c4f1d07164f3f4d9e91f9a6ef7db61}{IsInteropInterface}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af69a470d18df4bb1d0e23c25eca1dcb9}{GetType}}()\ ==\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a9474c5b69f6d5fd10b26a56d38e6c5c5}{StackItemType::InteropInterface}};\ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keyword}{virtual}\ int64\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ab300ce1082756cf80ce38a2f4af50df9}{GetInteger}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a8ea62b4f6e48851a53fad2e8d9f534cb}{GetByteArray}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a14570034610f1b954d8ce7494901744c}{GetString}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keyword}{virtual}\ std::vector<std::shared\_ptr<StackItem>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a52ab4bb74a996a39eff1e3539b5f57f8}{GetArray}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keyword}{virtual}\ std::map<std::shared\_ptr<StackItem>,\ std::shared\_ptr<StackItem>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_acab5dae942ea4b3ca24cce3196eebf82}{GetMap}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{virtual}\ std::shared\_ptr<void>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a2ba82d05aec598c1166f5ef65255e7cf}{GetInterface}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a6b9613ea6cb8f93c42f34611ae43f132}{Size}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keyword}{virtual}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a9c148d1c9b2476e34a48a516fae5811f}{ConvertTo}}(\mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7}{StackItemType}}\ type)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a6b1491762edda12fd3909115db2e056a}{GetHashCode}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a401a2be3dc406cbdb84f64272bac005d}{Equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{StackItem}}\&\ other)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ad9442436737f0c53d647109722c8747f}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{StackItem}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ac3f69e95ee1e4ebb378a970901f75f9b}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{StackItem}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a18d3a264473a0af2f3f9c225fbf803a7}{CompareTo}}(\textcolor{keyword}{const}\ std::shared\_ptr<StackItem>\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keyword}{virtual}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a2af9cc675ac11e3c4240e0c8d95e59df}{DeepCopy}}(\mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{ReferenceCounter}}*\ refCounter\ =\ \textcolor{keyword}{nullptr},\ \textcolor{keywordtype}{bool}\ asImmutable\ =\ \textcolor{keyword}{false})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a41eab819e0624411b89321d0c45a6633}{IsNull}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a4c1b105b3ef0242cf516bd1da31094cc}{IsInterop}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a2c109d3ee1d19ad24d9830d6c6223090}{IsArray}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af6313a6cf868d9475e264a0276522f73}{IsStruct}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ae8449cc5805f5135af34bfe230aa4c7e}{Null}}();}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00250\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ac5c88a02b66663d80e61942bb425391c}{True}}();}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a759c1a70f6481936eb089083a5fa2d4e}{False}}();}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a1d67a8c02d58d56410378b997c2e7855}{Create}}(\textcolor{keywordtype}{bool}\ value);}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00270\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a1d67a8c02d58d56410378b997c2e7855}{Create}}(int64\_t\ value);}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a1d67a8c02d58d56410378b997c2e7855}{Create}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ value);}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a1d67a8c02d58d56410378b997c2e7855}{Create}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ value);}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00291\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a1d67a8c02d58d56410378b997c2e7855}{Create}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00292\ }
+\DoxyCodeLine{00298\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a1d67a8c02d58d56410378b997c2e7855}{Create}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ value);}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00305\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a1d67a8c02d58d56410378b997c2e7855}{Create}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ value);}
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00312\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a1d67a8c02d58d56410378b997c2e7855}{Create}}(\textcolor{keyword}{const}\ std::vector<std::shared\_ptr<StackItem>>\&\ value);}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00318\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a2ba794fbfc9ad0852de36981a96c4593}{CreateArray}}();}
+\DoxyCodeLine{00319\ }
+\DoxyCodeLine{00325\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a2ba794fbfc9ad0852de36981a96c4593}{CreateArray}}(\textcolor{keyword}{const}\ std::vector<std::shared\_ptr<StackItem>>\&\ items);}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00332\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ad82f8631848a9820462ac383539b4c02}{CreateStruct}}(\mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{ReferenceCounter}}\&\ refCounter);}
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00340\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ad82f8631848a9820462ac383539b4c02}{CreateStruct}}(\textcolor{keyword}{const}\ std::vector<std::shared\_ptr<StackItem>>\&\ items,}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{ReferenceCounter}}\&\ refCounter);}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00347\ \ \ \ \ \textcolor{keyword}{virtual}\ std::vector<std::shared\_ptr<StackItem>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af03f90016b8876aaf089b60902529e3a}{GetStruct}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00353\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a7089cf2947ec796c6abafa8ddb352603}{Add}}(std::shared\_ptr<StackItem>\ item);}
+\DoxyCodeLine{00354\ }
+\DoxyCodeLine{00360\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ad53916cdf9046eeafb85aded7fa80616}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader);}
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00367\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_afedb5faf8be4db1e6e986a8de9147f06}{Serialize}}(std::shared\_ptr<StackItem>\ item,\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer);}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00372\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a35c7fe907c1a65e3f19677da2dd4ab4e}{Reset}}();}
+\DoxyCodeLine{00373\ }
+\DoxyCodeLine{00378\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a2caf28664339770af9586a341041bd62}{GetDFN}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00379\ }
+\DoxyCodeLine{00384\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a1e9c32cf6e216d7249f8836d792d84b8}{SetDFN}}(\textcolor{keywordtype}{int}\ dfn);}
+\DoxyCodeLine{00385\ }
+\DoxyCodeLine{00390\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a5cd952862c3cbcb907d213d04d7e3b33}{GetLowLink}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00391\ }
+\DoxyCodeLine{00396\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a00f41e977f14597c0a410d9a1aa0d7ee}{SetLowLink}}(\textcolor{keywordtype}{int}\ low\_link);}
+\DoxyCodeLine{00397\ }
+\DoxyCodeLine{00402\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a55405e9b3369fdc99f8e6f907e41ad3a}{IsOnStack}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00403\ }
+\DoxyCodeLine{00408\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a45ac8b771dac0d62f372467597123d10}{SetOnStack}}(\textcolor{keywordtype}{bool}\ on\_stack);}
+\DoxyCodeLine{00409\ }
+\DoxyCodeLine{00414\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a24983213004ba8218578fd4a98ce69b9}{CreateMap}}();}
+\DoxyCodeLine{00415\ }
+\DoxyCodeLine{00421\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ad28e4e1c003592828468235ec9b9b7a2}{CreateByteString}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ data);}
+\DoxyCodeLine{00422\ }
+\DoxyCodeLine{00428\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a8a521a92f84823d71206a6af80354e0f}{CreateBoolean}}(\textcolor{keywordtype}{bool}\ value);}
+\DoxyCodeLine{00429\ }
+\DoxyCodeLine{00435\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a25e058bee6e716b3b2689557f412e546}{CreateBuffer}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ data);}
+\DoxyCodeLine{00436\ }
+\DoxyCodeLine{00441\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a5e7b65eb4239c2bb19b26986d002a1d5}{SetValue}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ \textcolor{comment}{/*\ value\ */})\ \{\}}
+\DoxyCodeLine{00442\ }
+\DoxyCodeLine{00447\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af0d302fdce5dc7caa59df36816197247}{SetValue}}(std::shared\_ptr<StackItem>\ \textcolor{comment}{/*\ other\ */})\ \{\}}
+\DoxyCodeLine{00448\ }
+\DoxyCodeLine{00454\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af4ea34abb2b1ce2258c9454c178b7a0a}{CreateInteropInterface}}(\textcolor{keywordtype}{void}*\ value);}
+\DoxyCodeLine{00455\ }
+\DoxyCodeLine{00462\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00463\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af7903efef89110ce46446740007a515d}{CreateInteropInterface}}(std::shared\_ptr<T>\ value)}
+\DoxyCodeLine{00464\ \ \ \ \ \{}
+\DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af4ea34abb2b1ce2258c9454c178b7a0a}{CreateInteropInterface}}(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{void}*\textcolor{keyword}{>}(value.get()));}
+\DoxyCodeLine{00466\ \ \ \ \ \}}
+\DoxyCodeLine{00467\ \};}
+\DoxyCodeLine{00468\ \}\ \ \textcolor{comment}{//\ namespace\ neo::vm}}
+
+\end{DoxyCode}

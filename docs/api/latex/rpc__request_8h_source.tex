@@ -1,0 +1,48 @@
+\doxysection{rpc\+\_\+request.\+h}
+\hypertarget{rpc__request_8h_source}{}\label{rpc__request_8h_source}\index{include/neo/rpc/rpc\_request.h@{include/neo/rpc/rpc\_request.h}}
+\mbox{\hyperlink{rpc__request_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json_8hpp}{nlohmann/json.hpp}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1rpc}{neo::rpc}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_a688ecf2802865706ecd9bbda0cfc6c73}{RpcRequest}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_a688ecf2802865706ecd9bbda0cfc6c73}{RpcRequest}}();}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_a688ecf2802865706ecd9bbda0cfc6c73}{RpcRequest}}(\textcolor{keyword}{const}\ std::string\&\ jsonrpc,\ \textcolor{keyword}{const}\ std::string\&\ method,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params,}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ nlohmann::json\&\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_afa6400f9f8b8adc4ac1cf98628fcca0b}{GetJsonRpc}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_ab2d67278cbb71d916de85a9989f2c285}{SetJsonRpc}}(\textcolor{keyword}{const}\ std::string\&\ jsonrpc);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_aba3551099f90858e84a3859655544a61}{GetMethod}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_a89366cf65f196a280c7b2816797882f5}{SetMethod}}(\textcolor{keyword}{const}\ std::string\&\ method);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{const}\ nlohmann::json\&\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_ae1896e1513820000d0e0f3f7fd5f31c8}{GetParams}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_a08565a2b09f0bc890b744195e6b43ac5}{SetParams}}(\textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{const}\ nlohmann::json\&\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_a055e96db6690fed1322fd067bf541779}{GetId}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_ab01927a1a69f94cb9fa90134db3cb01e}{SetId}}(\textcolor{keyword}{const}\ nlohmann::json\&\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00081\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_ae65a270d9d18f29bcebedd1b5fe91934}{ToJson}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_a688ecf2802865706ecd9bbda0cfc6c73}{RpcRequest}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_a3252a53d93748a5264bcf4da04bdc0c5}{FromJson}}(\textcolor{keyword}{const}\ nlohmann::json\&\ \mbox{\hyperlink{namespaceneo_1_1rpc_a32244ac70068079f000691d1ba129402}{json}});}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00091\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_a4c3255ee85cc9e64cb5289bbb76f3b20}{jsonrpc\_}};}
+\DoxyCodeLine{00092\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_aa0caa940df8129f17468a2b58df04cd4}{method\_}};}
+\DoxyCodeLine{00093\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_a62f2a620936f2fafe5a1822bc9f0034d}{params\_}};}
+\DoxyCodeLine{00094\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request_a1b3f23e8148a1dcccf12e46109607a42}{id\_}};}
+\DoxyCodeLine{00095\ \};}
+\DoxyCodeLine{00096\ \}\ \ \textcolor{comment}{//\ namespace\ neo::rpc}}
+
+\end{DoxyCode}

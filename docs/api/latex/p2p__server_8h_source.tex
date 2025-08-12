@@ -1,0 +1,142 @@
+\doxysection{p2p\+\_\+server.\+h}
+\hypertarget{p2p__server_8h_source}{}\label{p2p__server_8h_source}\index{include/neo/network/p2p\_server.h@{include/neo/network/p2p\_server.h}}
+\mbox{\hyperlink{p2p__server_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{inventory__type_8h}{neo/network/inventory\_type.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{message_8h}{neo/network/p2p/message.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{peer__discovery__service_8h}{neo/network/peer\_discovery\_service.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{tcp__client_8h}{neo/network/tcp\_client.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{tcp__server_8h}{neo/network/tcp\_server.h}}>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <boost/asio/io\_context.hpp>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network}{neo::network}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a579a44a36aa29b8d28c4f5d43c78f601}{P2PPeer}}}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a579a44a36aa29b8d28c4f5d43c78f601}{P2PPeer}}(std::shared\_ptr<TcpConnection>\ connection);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ \ \ \ \ std::shared\_ptr<TcpConnection>\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_ac84ce78ef0eec52e7ce6a45c9c85ebab}{GetConnection}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a7c49e8885668402d195ec3861f9a2338}{GetVersion}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a0d9ac9e8a2addb3e282571521f6b6abe}{SetVersion}}(uint32\_t\ version);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00057\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a7542107844ec5622b43a52635d8bbb1c}{GetServices}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_aad248c4854a97cbe59f980b7a2e785ca}{SetServices}}(uint64\_t\ services);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a4906dfc88396b86d9e6adc2ca88fcf86}{GetUserAgent}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_aed1f8820a61bcc9a2cc1e346aaf2e1d9}{SetUserAgent}}(\textcolor{keyword}{const}\ std::string\&\ userAgent);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00081\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a67402bcb92b99c379ed6188558f791f5}{GetStartHeight}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a175c63fdec4451809171179390b82b2d}{SetStartHeight}}(uint32\_t\ startHeight);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a470416cf054fc925fbebac1aa85ec6f1}{GetRelay}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a57f982529862c978f449d7034cb68699}{SetRelay}}(\textcolor{keywordtype}{bool}\ relay);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00105\ \ \ \ \ std::chrono::system\_clock::time\_point\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a32fccb17cf353105aeb5fdbcc1acef5e}{GetLastSeen}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_ac7569bc02320fc95382617e398bb16e1}{UpdateLastSeen}}();}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a5741880e1bb05d961523e98855596a8a}{IsConnected}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_ae45b96bc5e1a21f429ce291165cb84ed}{Disconnect}}();}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_af98d7c765a3775c6e6b5117683051b7a}{Send}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p::Message}}\&\ message);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00130\ \ \ \ \ std::shared\_ptr<TcpConnection>\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_afbe54e9af7011684f7fc5bb10c148481}{connection\_}};}
+\DoxyCodeLine{00131\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a045e317101a4d54dc34d2c399e2bcc75}{version\_}};}
+\DoxyCodeLine{00132\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a6d9b318d00305c0e66fe0c6c86028db1}{services\_}};}
+\DoxyCodeLine{00133\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a1010bd013e323a9526c903c57355d167}{userAgent\_}};}
+\DoxyCodeLine{00134\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a7255338fd98715a06ce727b01dded127}{startHeight\_}};}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a6006b826bc23a03167195fe90264036e}{relay\_}};}
+\DoxyCodeLine{00136\ \ \ \ \ std::chrono::system\_clock::time\_point\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_ad43c9dfeec7cb5ebc29c0d370827b75d}{lastSeen\_}};}
+\DoxyCodeLine{00137\ \};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00142\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_af706616e972b0de80bb5a097bce2927b}{P2PServer}}\ :\ \textcolor{keyword}{public}\ std::enable\_shared\_from\_this<P2PServer>}
+\DoxyCodeLine{00143\ \{}
+\DoxyCodeLine{00144\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00152\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_af706616e972b0de80bb5a097bce2927b}{P2PServer}}(boost::asio::io\_context\&\ ioContext,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEndPoint}}\&\ endpoint,\ \textcolor{keyword}{const}\ std::string\&\ userAgent,}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ startHeight);}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00159\ \ \ \ \ std::shared\_ptr<PeerDiscoveryService>\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a7e855be9c33b4ec3923a95be315ac1fd}{GetPeerDiscovery}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00164\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a21256f0d4283e0a76b33f4fcfbe8c950}{\string~P2PServer}}();}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a38d3bd80cdac520632b338403a3b9aaf}{Start}}();}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_aaa2a629d37af97187826e8f54e81ffde}{Stop}}();}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEndPoint}}\&\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a9133636e959d67aa8834f611ff4a853c}{GetEndpoint}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a44a54a528a69440194c86f6a90eb2356}{GetUserAgent}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00192\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a8d2cbd2238d82dc9e3f593e3ebcb9189}{GetStartHeight}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a727248430b7bb132a918ac00b6e587ff}{SetStartHeight}}(uint32\_t\ startHeight);}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00205\ \ \ \ \ std::shared\_ptr<P2PPeer>\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_aeade0cf0ff544c4e55a7ccd663ae80af}{ConnectToPeer}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEndPoint}}\&\ endpoint);}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00211\ \ \ \ \ std::vector<std::shared\_ptr<P2PPeer>>\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_acb2f6a3e4bc98c4c98d408451d597562}{GetConnectedPeers}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_aa959bece4be5c25eb27a8ededf7fccb7}{GetConnectedPeersCount}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00223\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a751fe7f1e3d70206697bbc7ca99bc6c9}{GetPort}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00229\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_aaabf16a38342fa51033ea40a8d72340a}{GetNonce}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_ac3b64e8b4314e24aef34f51ba412455f}{Broadcast}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p::Message}}\&\ message);}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a73629fd27fe5c9570462783a6112264e}{SetInventoryReceivedCallback}}(}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<P2PPeer>,\ \mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{InventoryType}},\ \textcolor{keyword}{const}\ std::vector<io::UInt256>\&)>\ callback);}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00244\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00245\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEndPoint}}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a8038bfd18e7dfc770460b485a1b4348e}{endpoint\_}};}
+\DoxyCodeLine{00246\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a8bb68e9f0fecfc2279a669e79b7a7205}{userAgent\_}};}
+\DoxyCodeLine{00247\ \ \ \ \ std::atomic<uint32\_t>\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_ab739af5040596c3b7c5d99d4cf087db9}{startHeight\_}};}
+\DoxyCodeLine{00248\ \ \ \ \ std::unique\_ptr<TcpServer>\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_aabeffdda02d208bfc4d957f8b7bcb977}{server\_}};}
+\DoxyCodeLine{00249\ \ \ \ \ std::unique\_ptr<TcpClient>\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a9f4251449ab38124be9ad22c984418ef}{client\_}};}
+\DoxyCodeLine{00250\ \ \ \ \ std::shared\_ptr<PeerDiscoveryService>\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a4a130f1d03aa21d876d6f8b72ba51480}{peerDiscovery\_}};}
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a89ea90b142b0202e44ae23c983a54436}{peersMutex\_}};}
+\DoxyCodeLine{00252\ \ \ \ \ std::unordered\_map<std::string,\ std::shared\_ptr<P2PPeer>>\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a56732aadb0c8c5f3830f318df5e3d9d2}{peers\_}};}
+\DoxyCodeLine{00253\ \ \ \ \ std::function<void(std::shared\_ptr<P2PPeer>,\ \mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{InventoryType}},\ \textcolor{keyword}{const}\ std::vector<io::UInt256>\&)>}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_aec49a6e29186f53646298e952412141a}{inventoryReceivedCallback\_}};}
+\DoxyCodeLine{00255\ \ \ \ \ boost::asio::io\_context\&\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_ab69472d735c1d882be0b9c8d454a5246}{ioContext\_}};}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a0ad6ea8e104c83348b0205fd74d37f6a}{HandleConnectionAccepted}}(std::shared\_ptr<TcpConnection>\ connection);}
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a22636c91ca7f51457d6e0eca1c553f4f}{HandleMessageReceived}}(std::shared\_ptr<P2PPeer>\ peer,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p::Message}}\&\ message);}
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_abba7af77028a538012ed32360c2fa50f}{HandleVersionMessage}}(std::shared\_ptr<P2PPeer>\ peer,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p::Message}}\&\ message);}
+\DoxyCodeLine{00260\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a220ee6acf8158792d2f884c685bc5343}{HandleVerackMessage}}(std::shared\_ptr<P2PPeer>\ peer,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p::Message}}\&\ message);}
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a9645d8e48e8f3a099c59c5658233cc7b}{HandleInventoryMessage}}(std::shared\_ptr<P2PPeer>\ peer,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p::Message}}\&\ message);}
+\DoxyCodeLine{00262\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_aca638945e92d54f713e15f2ef7d91e6b}{HandleGetDataMessage}}(std::shared\_ptr<P2PPeer>\ peer,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p::Message}}\&\ message);}
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a45d2bf256ce53ddba77c875bf4085afb}{HandlePingMessage}}(std::shared\_ptr<P2PPeer>\ peer,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p::Message}}\&\ message);}
+\DoxyCodeLine{00264\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_aaa41a76bd1ae9d30e38d4f769f77e5a4}{HandlePongMessage}}(std::shared\_ptr<P2PPeer>\ peer,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p::Message}}\&\ message);}
+\DoxyCodeLine{00269\ \ \ \ \ std::shared\_ptr<PeerDiscoveryService>\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_ade3f9f3e77510cf8f8358ee22f2f5f40}{GetPeerDiscoveryService}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00272\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a0a6a825110f5de244cb93548c70758b1}{HandleGetAddrMessage}}(std::shared\_ptr<P2PPeer>\ peer,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p::Message}}\&\ message);}
+\DoxyCodeLine{00273\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a500dca268a1e3e9f201c42cad6cd27f1}{HandleAddrMessage}}(std::shared\_ptr<P2PPeer>\ peer,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p::Message}}\&\ message);}
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a065b2d3da88f9efaf27b7eb5716a7b2a}{RequestAddresses}}(std::shared\_ptr<P2PPeer>\ peer);}
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server_a2579e41a8f9395f978ce5fc4e6b6d824}{SendVersionMessage}}(std::shared\_ptr<P2PPeer>\ peer);}
+\DoxyCodeLine{00276\ \};}
+\DoxyCodeLine{00277\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network}}
+
+\end{DoxyCode}

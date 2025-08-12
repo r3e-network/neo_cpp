@@ -1,0 +1,222 @@
+\doxysection{neo\+::core\+::Plugin Class Reference}
+\hypertarget{classneo_1_1core_1_1_plugin}{}\label{classneo_1_1core_1_1_plugin}\index{neo::core::Plugin@{neo::core::Plugin}}
+
+
+Base class for Neo plugins.  
+
+
+
+
+{\ttfamily \#include $<$plugin.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::core\+::Plugin\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config}{Config}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1core_1_1_plugin}{Plugin} configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_plugin_aa9b385178d0c3ff75463d0219814f1a1}{Plugin}} (const \mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config}{Config}} \&config)
+\begin{DoxyCompactList}\small\item\em Construct a new \doxylink{classneo_1_1core_1_1_plugin}{Plugin}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a13b256927b0e96e6553fd1771826ed68}{\texorpdfstring{$\sim$}{\string~}\+Plugin}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a685daca4988a003aa8b69c9b0f62f1c2}{Get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Get plugin name. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1core_1_1_plugin_abbf314b62b296ee567734d1d30621812}{Get\+Version}} () const
+\begin{DoxyCompactList}\small\item\em Get plugin version. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1core_1_1_plugin_aa58b4046cc58db73ddce4a1b98bd6d85}{Get\+Description}} () const
+\begin{DoxyCompactList}\small\item\em Get plugin description. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1core_1_1_plugin_ac1bcb4ab1af3f74a109b488fcab6d4c4}{Get\+Author}} () const
+\begin{DoxyCompactList}\small\item\em Get plugin author. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a391d989a6796242163e5075fa9359be9}{Is\+Enabled}} () const
+\begin{DoxyCompactList}\small\item\em Check if plugin is enabled. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a55c59e8a228988be743826cea75c9c65}{Initialize}} ()=0
+\begin{DoxyCompactList}\small\item\em Initialize the plugin. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a1b93efd03e212e7a166c97b1c21fbbd6}{Start}} ()=0
+\begin{DoxyCompactList}\small\item\em Start the plugin. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a374d1886a5f64c53e8037d4817e08681}{Stop}} ()=0
+\begin{DoxyCompactList}\small\item\em Stop the plugin. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1core_1_1_plugin_ac68843692752da8a447ad138d9a3169e}{On\+Config\+Changed}} (const \mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config}{Config}} \&new\+Config)
+\begin{DoxyCompactList}\small\item\em Handle configuration changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config}{Config}} \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a31a4d4f16f358d074a92ad1a7835ea9f}{config\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for Neo plugins. 
+
+Plugins extend the functionality of the Neo node by providing additional services, monitoring, or protocol extensions. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1core_1_1_plugin_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1core_1_1_plugin_aa9b385178d0c3ff75463d0219814f1a1}\index{neo::core::Plugin@{neo::core::Plugin}!Plugin@{Plugin}}
+\index{Plugin@{Plugin}!neo::core::Plugin@{neo::core::Plugin}}
+\doxysubsubsection{\texorpdfstring{Plugin()}{Plugin()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_plugin_aa9b385178d0c3ff75463d0219814f1a1} 
+neo\+::core\+::\+Plugin\+::\+Plugin (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config}{Config}} \&}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Construct a new \doxylink{classneo_1_1core_1_1_plugin}{Plugin}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & \doxylink{classneo_1_1core_1_1_plugin}{Plugin} configuration \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1core_1_1_plugin_a13b256927b0e96e6553fd1771826ed68}\index{neo::core::Plugin@{neo::core::Plugin}!````~Plugin@{\texorpdfstring{$\sim$}{\string~}Plugin}}
+\index{````~Plugin@{\texorpdfstring{$\sim$}{\string~}Plugin}!neo::core::Plugin@{neo::core::Plugin}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Plugin()}{\string~Plugin()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_plugin_a13b256927b0e96e6553fd1771826ed68} 
+virtual neo\+::core\+::\+Plugin\+::\texorpdfstring{$\sim$}{\string~}\+Plugin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1core_1_1_plugin_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1core_1_1_plugin_ac1bcb4ab1af3f74a109b488fcab6d4c4}\index{neo::core::Plugin@{neo::core::Plugin}!GetAuthor@{GetAuthor}}
+\index{GetAuthor@{GetAuthor}!neo::core::Plugin@{neo::core::Plugin}}
+\doxysubsubsection{\texorpdfstring{GetAuthor()}{GetAuthor()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_plugin_ac1bcb4ab1af3f74a109b488fcab6d4c4} 
+const std\+::string \& neo\+::core\+::\+Plugin\+::\+Get\+Author (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get plugin author. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{classneo_1_1core_1_1_plugin}{Plugin} author 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_plugin_aa58b4046cc58db73ddce4a1b98bd6d85}\index{neo::core::Plugin@{neo::core::Plugin}!GetDescription@{GetDescription}}
+\index{GetDescription@{GetDescription}!neo::core::Plugin@{neo::core::Plugin}}
+\doxysubsubsection{\texorpdfstring{GetDescription()}{GetDescription()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_plugin_aa58b4046cc58db73ddce4a1b98bd6d85} 
+const std\+::string \& neo\+::core\+::\+Plugin\+::\+Get\+Description (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get plugin description. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{classneo_1_1core_1_1_plugin}{Plugin} description 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_plugin_a685daca4988a003aa8b69c9b0f62f1c2}\index{neo::core::Plugin@{neo::core::Plugin}!GetName@{GetName}}
+\index{GetName@{GetName}!neo::core::Plugin@{neo::core::Plugin}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_plugin_a685daca4988a003aa8b69c9b0f62f1c2} 
+const std\+::string \& neo\+::core\+::\+Plugin\+::\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get plugin name. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{classneo_1_1core_1_1_plugin}{Plugin} name 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_plugin_abbf314b62b296ee567734d1d30621812}\index{neo::core::Plugin@{neo::core::Plugin}!GetVersion@{GetVersion}}
+\index{GetVersion@{GetVersion}!neo::core::Plugin@{neo::core::Plugin}}
+\doxysubsubsection{\texorpdfstring{GetVersion()}{GetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_plugin_abbf314b62b296ee567734d1d30621812} 
+const std\+::string \& neo\+::core\+::\+Plugin\+::\+Get\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get plugin version. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{classneo_1_1core_1_1_plugin}{Plugin} version 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_plugin_a55c59e8a228988be743826cea75c9c65}\index{neo::core::Plugin@{neo::core::Plugin}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neo::core::Plugin@{neo::core::Plugin}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_plugin_a55c59e8a228988be743826cea75c9c65} 
+virtual bool neo\+::core\+::\+Plugin\+::\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Initialize the plugin. 
+
+\begin{DoxyReturn}{Returns}
+true if initialization successful, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_plugin_a391d989a6796242163e5075fa9359be9}\index{neo::core::Plugin@{neo::core::Plugin}!IsEnabled@{IsEnabled}}
+\index{IsEnabled@{IsEnabled}!neo::core::Plugin@{neo::core::Plugin}}
+\doxysubsubsection{\texorpdfstring{IsEnabled()}{IsEnabled()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_plugin_a391d989a6796242163e5075fa9359be9} 
+bool neo\+::core\+::\+Plugin\+::\+Is\+Enabled (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if plugin is enabled. 
+
+\begin{DoxyReturn}{Returns}
+true if enabled, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_plugin_ac68843692752da8a447ad138d9a3169e}\index{neo::core::Plugin@{neo::core::Plugin}!OnConfigChanged@{OnConfigChanged}}
+\index{OnConfigChanged@{OnConfigChanged}!neo::core::Plugin@{neo::core::Plugin}}
+\doxysubsubsection{\texorpdfstring{OnConfigChanged()}{OnConfigChanged()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_plugin_ac68843692752da8a447ad138d9a3169e} 
+virtual void neo\+::core\+::\+Plugin\+::\+On\+Config\+Changed (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config}{Config}} \&}]{new\+Config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Handle configuration changes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Config} & New configuration \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1core_1_1_plugin_a1b93efd03e212e7a166c97b1c21fbbd6}\index{neo::core::Plugin@{neo::core::Plugin}!Start@{Start}}
+\index{Start@{Start}!neo::core::Plugin@{neo::core::Plugin}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_plugin_a1b93efd03e212e7a166c97b1c21fbbd6} 
+virtual bool neo\+::core\+::\+Plugin\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Start the plugin. 
+
+\begin{DoxyReturn}{Returns}
+true if started successfully, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_plugin_a374d1886a5f64c53e8037d4817e08681}\index{neo::core::Plugin@{neo::core::Plugin}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::core::Plugin@{neo::core::Plugin}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_plugin_a374d1886a5f64c53e8037d4817e08681} 
+virtual void neo\+::core\+::\+Plugin\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Stop the plugin. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1core_1_1_plugin_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1core_1_1_plugin_a31a4d4f16f358d074a92ad1a7835ea9f}\index{neo::core::Plugin@{neo::core::Plugin}!config\_@{config\_}}
+\index{config\_@{config\_}!neo::core::Plugin@{neo::core::Plugin}}
+\doxysubsubsection{\texorpdfstring{config\_}{config\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_plugin_a31a4d4f16f358d074a92ad1a7835ea9f} 
+\mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config}{Config}} neo\+::core\+::\+Plugin\+::config\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{core_2plugin_8h}{plugin.\+h}}\end{DoxyCompactItemize}

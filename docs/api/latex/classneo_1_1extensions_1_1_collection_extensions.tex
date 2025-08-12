@@ -1,0 +1,392 @@
+\doxysection{neo\+::extensions\+::Collection\+Extensions Class Reference}
+\hypertarget{classneo_1_1extensions_1_1_collection_extensions}{}\label{classneo_1_1extensions_1_1_collection_extensions}\index{neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}}
+
+
+Extensions for STL collections.  
+
+
+
+
+{\ttfamily \#include $<$collection\+\_\+extensions.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Container, typename Predicate$>$ }\\static Container \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_a1cdafc036546d85dbfe18749aa31075d}{Where}} (const Container \&container, Predicate predicate)
+\begin{DoxyCompactList}\small\item\em Filter elements by predicate. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container, typename Selector, typename Result\+Type = std\+::invoke\+\_\+result\+\_\+t$<$\+Selector, typename Container\+::value\+\_\+type$>$$>$ }\\static std\+::vector$<$ Result\+Type $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_ae71ba71076ee20b9171a83e1a57a3c36}{Select}} (const Container \&container, Selector selector)
+\begin{DoxyCompactList}\small\item\em Transform elements using selector function. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container, typename Predicate$>$ }\\static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_ae4483f97d83e2c1a1d1d9f8a11836c5e}{Any}} (const Container \&container, Predicate predicate)
+\begin{DoxyCompactList}\small\item\em Check if any element satisfies predicate. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container, typename Predicate$>$ }\\static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_ac3f236639d5968eee08376ef9773f449}{All}} (const Container \&container, Predicate predicate)
+\begin{DoxyCompactList}\small\item\em Check if all elements satisfy predicate. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container, typename Predicate$>$ }\\static size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_a0776666d2838bf9767cc4cf74eb66ebc}{Count}} (const Container \&container, Predicate predicate)
+\begin{DoxyCompactList}\small\item\em Count elements that satisfy predicate. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container$>$ }\\static std\+::vector$<$ typename Container\+::value\+\_\+type $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_a8cd7759569ef99997ddc162ec5c5ff47}{To\+Vector}} (const Container \&container)
+\begin{DoxyCompactList}\small\item\em Convert container to vector. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container$>$ }\\static std\+::set$<$ typename Container\+::value\+\_\+type $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_a40f0430e919a041e152849575a839f23}{To\+Set}} (const Container \&container)
+\begin{DoxyCompactList}\small\item\em Convert container to set. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container, typename Range$>$ }\\static void \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_ae8a14943307675ec8f3841eb90a2269b}{Add\+Range}} (Container \&container, const Range \&range)
+\begin{DoxyCompactList}\small\item\em Add range of elements to container. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container, typename Predicate$>$ }\\static size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_a0828d51f3e77a8da7d67e38afbdccf3b}{Remove\+Where}} (Container \&container, Predicate predicate)
+\begin{DoxyCompactList}\small\item\em Remove elements that satisfy predicate. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container, typename Predicate$>$ }\\static Container\+::const\+\_\+iterator \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_ab8709930c039a60fc11c7ec235dc137a}{First\+Or\+Default}} (const Container \&container, Predicate predicate)
+\begin{DoxyCompactList}\small\item\em Find first element that satisfies predicate. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container, typename T$>$ }\\static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_af2860464620790c15d3652c6bdbbe5b0}{Contains}} (const Container \&container, const T \&element)
+\begin{DoxyCompactList}\small\item\em Check if container contains element. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container$>$ }\\static std\+::vector$<$ typename Container\+::value\+\_\+type $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_a60da8bad3ab40aae4e940adb5f2a8df6}{Distinct}} (const Container \&container)
+\begin{DoxyCompactList}\small\item\em Get distinct elements from container. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Extensions for STL collections. 
+
+\hypertarget{classneo_1_1extensions_1_1_collection_extensions_autotoc_md20}{}\doxysubsubsection{\texorpdfstring{Overview}{Overview}}\label{classneo_1_1extensions_1_1_collection_extensions_autotoc_md20}
+Provides utility methods for common collection operations that extend the functionality of standard STL containers.\hypertarget{classneo_1_1extensions_1_1_collection_extensions_autotoc_md21}{}\doxysubsubsection{\texorpdfstring{API Reference}{API Reference}}\label{classneo_1_1extensions_1_1_collection_extensions_autotoc_md21}
+
+\begin{DoxyItemize}
+\item {\bfseries{Filtering}}\+: Where, Select operations
+\item {\bfseries{Aggregation}}\+: Any, All, Count operations
+\item {\bfseries{Conversion}}\+: To\+Vector, To\+Set operations
+\item {\bfseries{Manipulation}}\+: Add\+Range, Remove\+Where operations
+\end{DoxyItemize}\hypertarget{classneo_1_1extensions_1_1_collection_extensions_autotoc_md22}{}\doxysubsubsection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{classneo_1_1extensions_1_1_collection_extensions_autotoc_md22}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::vector<int>\ numbers\ =\ \{1,\ 2,\ 3,\ 4,\ 5\};}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ evens\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_a1cdafc036546d85dbfe18749aa31075d}{CollectionExtensions::Where}}(numbers,\ [](\textcolor{keywordtype}{int}\ x)\ \{\ \textcolor{keywordflow}{return}\ x\ \%\ 2\ ==\ 0;\ \});}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ hasPositive\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_ae4483f97d83e2c1a1d1d9f8a11836c5e}{CollectionExtensions::Any}}(numbers,\ [](\textcolor{keywordtype}{int}\ x)\ \{\ \textcolor{keywordflow}{return}\ x\ >\ 0;\ \});}
+
+\end{DoxyCode}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1extensions_1_1_collection_extensions_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_collection_extensions_ae8a14943307675ec8f3841eb90a2269b}\index{neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}!AddRange@{AddRange}}
+\index{AddRange@{AddRange}!neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}}
+\doxysubsubsection{\texorpdfstring{AddRange()}{AddRange()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_collection_extensions_ae8a14943307675ec8f3841eb90a2269b} 
+template$<$typename Container, typename Range$>$ \\
+void neo\+::extensions\+::\+Collection\+Extensions\+::\+Add\+Range (\begin{DoxyParamCaption}\item[{Container \&}]{container}{, }\item[{const Range \&}]{range}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Add range of elements to container. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & The target container type \\
+\hline
+{\em Range} & The source range type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em container} & The target container \\
+\hline
+{\em range} & The source range \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1extensions_1_1_collection_extensions_ac3f236639d5968eee08376ef9773f449}\index{neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}!All@{All}}
+\index{All@{All}!neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}}
+\doxysubsubsection{\texorpdfstring{All()}{All()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_collection_extensions_ac3f236639d5968eee08376ef9773f449} 
+template$<$typename Container, typename Predicate$>$ \\
+bool neo\+::extensions\+::\+Collection\+Extensions\+::\+All (\begin{DoxyParamCaption}\item[{const Container \&}]{container}{, }\item[{Predicate}]{predicate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if all elements satisfy predicate. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & The container type \\
+\hline
+{\em Predicate} & The predicate function type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em container} & The input container \\
+\hline
+{\em predicate} & The test predicate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if all elements satisfy predicate 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_collection_extensions_ae4483f97d83e2c1a1d1d9f8a11836c5e}\index{neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}!Any@{Any}}
+\index{Any@{Any}!neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}}
+\doxysubsubsection{\texorpdfstring{Any()}{Any()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_collection_extensions_ae4483f97d83e2c1a1d1d9f8a11836c5e} 
+template$<$typename Container, typename Predicate$>$ \\
+bool neo\+::extensions\+::\+Collection\+Extensions\+::\+Any (\begin{DoxyParamCaption}\item[{const Container \&}]{container}{, }\item[{Predicate}]{predicate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if any element satisfies predicate. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & The container type \\
+\hline
+{\em Predicate} & The predicate function type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em container} & The input container \\
+\hline
+{\em predicate} & The test predicate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if any element satisfies predicate 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_collection_extensions_af2860464620790c15d3652c6bdbbe5b0}\index{neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}!Contains@{Contains}}
+\index{Contains@{Contains}!neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_collection_extensions_af2860464620790c15d3652c6bdbbe5b0} 
+template$<$typename Container, typename T$>$ \\
+bool neo\+::extensions\+::\+Collection\+Extensions\+::\+Contains (\begin{DoxyParamCaption}\item[{const Container \&}]{container}{, }\item[{const T \&}]{element}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if container contains element. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & The container type \\
+\hline
+{\em T} & The element type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em container} & The input container \\
+\hline
+{\em element} & The element to find \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if element is found 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_collection_extensions_a0776666d2838bf9767cc4cf74eb66ebc}\index{neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}!Count@{Count}}
+\index{Count@{Count}!neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}}
+\doxysubsubsection{\texorpdfstring{Count()}{Count()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_collection_extensions_a0776666d2838bf9767cc4cf74eb66ebc} 
+template$<$typename Container, typename Predicate$>$ \\
+size\+\_\+t neo\+::extensions\+::\+Collection\+Extensions\+::\+Count (\begin{DoxyParamCaption}\item[{const Container \&}]{container}{, }\item[{Predicate}]{predicate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Count elements that satisfy predicate. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & The container type \\
+\hline
+{\em Predicate} & The predicate function type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em container} & The input container \\
+\hline
+{\em predicate} & The counting predicate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of elements satisfying predicate 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_collection_extensions_a60da8bad3ab40aae4e940adb5f2a8df6}\index{neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}!Distinct@{Distinct}}
+\index{Distinct@{Distinct}!neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}}
+\doxysubsubsection{\texorpdfstring{Distinct()}{Distinct()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_collection_extensions_a60da8bad3ab40aae4e940adb5f2a8df6} 
+template$<$typename Container$>$ \\
+std\+::vector$<$ typename Container\+::value\+\_\+type $>$ neo\+::extensions\+::\+Collection\+Extensions\+::\+Distinct (\begin{DoxyParamCaption}\item[{const Container \&}]{container}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get distinct elements from container. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & The container type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em container} & The input container \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector with unique elements 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_collection_extensions_ab8709930c039a60fc11c7ec235dc137a}\index{neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}!FirstOrDefault@{FirstOrDefault}}
+\index{FirstOrDefault@{FirstOrDefault}!neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}}
+\doxysubsubsection{\texorpdfstring{FirstOrDefault()}{FirstOrDefault()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_collection_extensions_ab8709930c039a60fc11c7ec235dc137a} 
+template$<$typename Container, typename Predicate$>$ \\
+Container\+::const\+\_\+iterator neo\+::extensions\+::\+Collection\+Extensions\+::\+First\+Or\+Default (\begin{DoxyParamCaption}\item[{const Container \&}]{container}{, }\item[{Predicate}]{predicate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Find first element that satisfies predicate. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & The container type \\
+\hline
+{\em Predicate} & The predicate function type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em container} & The input container \\
+\hline
+{\em predicate} & The search predicate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Iterator to found element or end() 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_collection_extensions_a0828d51f3e77a8da7d67e38afbdccf3b}\index{neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}!RemoveWhere@{RemoveWhere}}
+\index{RemoveWhere@{RemoveWhere}!neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}}
+\doxysubsubsection{\texorpdfstring{RemoveWhere()}{RemoveWhere()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_collection_extensions_a0828d51f3e77a8da7d67e38afbdccf3b} 
+template$<$typename Container, typename Predicate$>$ \\
+size\+\_\+t neo\+::extensions\+::\+Collection\+Extensions\+::\+Remove\+Where (\begin{DoxyParamCaption}\item[{Container \&}]{container}{, }\item[{Predicate}]{predicate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Remove elements that satisfy predicate. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & The container type \\
+\hline
+{\em Predicate} & The predicate function type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em container} & The container to modify \\
+\hline
+{\em predicate} & The removal predicate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of elements removed 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_collection_extensions_ae71ba71076ee20b9171a83e1a57a3c36}\index{neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}!Select@{Select}}
+\index{Select@{Select}!neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}}
+\doxysubsubsection{\texorpdfstring{Select()}{Select()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_collection_extensions_ae71ba71076ee20b9171a83e1a57a3c36} 
+template$<$typename Container, typename Selector, typename Result\+Type = std\+::invoke\+\_\+result\+\_\+t$<$\+Selector, typename Container\+::value\+\_\+type$>$$>$ \\
+std\+::vector$<$ Result\+Type $>$ neo\+::extensions\+::\+Collection\+Extensions\+::\+Select (\begin{DoxyParamCaption}\item[{const Container \&}]{container}{, }\item[{Selector}]{selector}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Transform elements using selector function. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & The input container type \\
+\hline
+{\em Selector} & The selector function type \\
+\hline
+{\em Result\+Type} & The result element type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em container} & The input container \\
+\hline
+{\em selector} & The transformation function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector with transformed elements 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_collection_extensions_a40f0430e919a041e152849575a839f23}\index{neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}!ToSet@{ToSet}}
+\index{ToSet@{ToSet}!neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}}
+\doxysubsubsection{\texorpdfstring{ToSet()}{ToSet()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_collection_extensions_a40f0430e919a041e152849575a839f23} 
+template$<$typename Container$>$ \\
+std\+::set$<$ typename Container\+::value\+\_\+type $>$ neo\+::extensions\+::\+Collection\+Extensions\+::\+To\+Set (\begin{DoxyParamCaption}\item[{const Container \&}]{container}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Convert container to set. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & The input container type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em container} & The input container \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Set with unique elements 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_collection_extensions_a8cd7759569ef99997ddc162ec5c5ff47}\index{neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}!ToVector@{ToVector}}
+\index{ToVector@{ToVector}!neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}}
+\doxysubsubsection{\texorpdfstring{ToVector()}{ToVector()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_collection_extensions_a8cd7759569ef99997ddc162ec5c5ff47} 
+template$<$typename Container$>$ \\
+std\+::vector$<$ typename Container\+::value\+\_\+type $>$ neo\+::extensions\+::\+Collection\+Extensions\+::\+To\+Vector (\begin{DoxyParamCaption}\item[{const Container \&}]{container}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Convert container to vector. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & The input container type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em container} & The input container \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector with same elements 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_collection_extensions_a1cdafc036546d85dbfe18749aa31075d}\index{neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}!Where@{Where}}
+\index{Where@{Where}!neo::extensions::CollectionExtensions@{neo::extensions::CollectionExtensions}}
+\doxysubsubsection{\texorpdfstring{Where()}{Where()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_collection_extensions_a1cdafc036546d85dbfe18749aa31075d} 
+template$<$typename Container, typename Predicate$>$ \\
+Container neo\+::extensions\+::\+Collection\+Extensions\+::\+Where (\begin{DoxyParamCaption}\item[{const Container \&}]{container}{, }\item[{Predicate}]{predicate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Filter elements by predicate. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & The container type \\
+\hline
+{\em Predicate} & The predicate function type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em container} & The input container \\
+\hline
+{\em predicate} & The filtering predicate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Container with filtered elements 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/extensions/\mbox{\hyperlink{collection__extensions_8h}{collection\+\_\+extensions.\+h}}\end{DoxyCompactItemize}

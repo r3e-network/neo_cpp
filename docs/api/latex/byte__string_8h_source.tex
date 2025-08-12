@@ -1,0 +1,48 @@
+\doxysection{byte\+\_\+string.\+h}
+\hypertarget{byte__string_8h_source}{}\label{byte__string_8h_source}\index{include/neo/io/byte\_string.h@{include/neo/io/byte\_string.h}}
+\mbox{\hyperlink{byte__string_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__span_8h}{neo/io/byte\_span.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1io}{neo::io}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a51bbfd3b506a03808dc7813e0f826ec5}{ByteString}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a51bbfd3b506a03808dc7813e0f826ec5}{ByteString}}()\ :\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc}{data\_}}(\mbox{\hyperlink{namespacestd}{std}}::make\_shared<\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}>())\ \{\}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a4eaf333d4782c7c5df1d82dec1dca279}{ByteString}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{ByteSpan}}\&\ data)\ :\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc}{data\_}}(\mbox{\hyperlink{namespacestd}{std}}::make\_shared<\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}>(data))\ \{\}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_add70d7ab8f6be4f5ff795bde5a380fe3}{ByteString}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\&\ data)\ :\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc}{data\_}}(\mbox{\hyperlink{namespacestd}{std}}::make\_shared<\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}>(data))\ \{\}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a94bed0c6268981516c002b95e9930ffd}{ByteString}}(std::initializer\_list<uint8\_t>\ data)\ :\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc}{data\_}}(\mbox{\hyperlink{namespacestd}{std}}::make\_shared<\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}>(data))\ \{\}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_aa2d3173e6b5219cf9da020d34f58cdbe}{Size}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc}{data\_}}-\/>Size();\ \}}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a1c77d8ecd183cab47a2a40f8ffbe2a70}{Data}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc}{data\_}}-\/>Data();\ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00058\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_afd3d0b5617a5b1f83eb9a5cdeb8dad17}{operator[]}}(\textcolor{keywordtype}{size\_t}\ index)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ (*\mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc}{data\_}})[index];\ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{ByteSpan}}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_ad689bfb6589b43a271c2fd7240ab6bfb}{AsSpan}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc}{data\_}}-\/>AsSpan();\ \}}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00070\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a653e544b5499a1c100a97d9e7f6e7d19}{ToHexString}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc}{data\_}}-\/>ToHexString();\ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_abef4eb3a3badbe1417fac059635ced12}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a51bbfd3b506a03808dc7813e0f826ec5}{ByteString}}\&\ other)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc}{data\_}}\ ==\ *other.\mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc}{data\_}};\ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a8dbd86f59732452880e46d69cffba477}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a51bbfd3b506a03808dc7813e0f826ec5}{ByteString}}\&\ other)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc}{data\_}}\ !=\ *other.\mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc}{data\_}};\ \}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a51bbfd3b506a03808dc7813e0f826ec5}{ByteString}}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a01fabb2faeba5282d87c731676f72454}{Parse}}(\textcolor{keyword}{const}\ std::string\&\ hex)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a51bbfd3b506a03808dc7813e0f826ec5}{ByteString}}(\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a242d1da5fa393beea8d3f0a8cd14497b}{ByteVector::Parse}}(hex));\ \}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00094\ \ \ \ \ std::shared\_ptr<ByteVector>\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc}{data\_}};}
+\DoxyCodeLine{00095\ \};}
+\DoxyCodeLine{00096\ \}\ \ \textcolor{comment}{//\ namespace\ neo::io}}
+
+\end{DoxyCode}

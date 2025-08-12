@@ -1,0 +1,374 @@
+\doxysection{neo\+::rpc\+::Rpc\+Validation Class Reference}
+\hypertarget{classneo_1_1rpc_1_1_rpc_validation}{}\label{classneo_1_1rpc_1_1_rpc_validation}\index{neo::rpc::RpcValidation@{neo::rpc::RpcValidation}}
+
+
+RPC parameter validation utilities.  
+
+
+
+
+{\ttfamily \#include $<$rpc\+\_\+validation.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_validation_a64dccc0505d3b165bb90232dc755656a}{Is\+Valid\+Hex\+String}} (const std\+::string \&hex, size\+\_\+t expected\+Length=0)
+\begin{DoxyCompactList}\small\item\em Validate a hex string. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_validation_a83995da1ade9f24bf356a948add4beb3}{Validate\+Block\+Hash}} (const std\+::string \&hash)
+\begin{DoxyCompactList}\small\item\em Validate a block hash. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_validation_a81c8a6759ac8c909b178e3cf4a22f487}{Validate\+Transaction\+Hash}} (const std\+::string \&hash)
+\begin{DoxyCompactList}\small\item\em Validate a transaction hash. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_validation_a87bbcd1c0b6e47ed58085d9f726a2bf9}{Validate\+Script\+Hash}} (const std\+::string \&hash)
+\begin{DoxyCompactList}\small\item\em Validate a script hash. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_validation_a5503e68558c08210f2094ab4cb7c4546}{Validate\+Public\+Key}} (const std\+::string \&pubkey)
+\begin{DoxyCompactList}\small\item\em Validate a public key. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_validation_a19df6716cd9ee3ebe3ade479283f79c1}{Validate\+Block\+Index}} (uint32\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Validate a block index. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_validation_a9db5b43cd159f8bc3c35cc5d0a98879b}{Validate\+Address}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Validate a Neo address. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_validation_a7ab0f41430cec63299de5f467e43802f}{Validate\+Script}} (const std\+::string \&script)
+\begin{DoxyCompactList}\small\item\em Validate script for invocation. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_validation_a1f739241eb8d09b560e6e811f0168a05}{Validate\+Param\+Count}} (const nlohmann\+::json \&params, size\+\_\+t min\+Count, size\+\_\+t max\+Count)
+\begin{DoxyCompactList}\small\item\em Validate JSON parameters array. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_validation_a2ada7f5ac3510926219302f6f4cf3e30}{Get\+String\+Param}} (const nlohmann\+::json \&params, size\+\_\+t index, const std\+::string \&param\+Name)
+\begin{DoxyCompactList}\small\item\em Extract and validate string parameter. \end{DoxyCompactList}\item 
+static int64\+\_\+t \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_validation_aa3286a6d5fa92d4c6ec0a33a0f3e3f73}{Get\+Int\+Param}} (const nlohmann\+::json \&params, size\+\_\+t index, const std\+::string \&param\+Name)
+\begin{DoxyCompactList}\small\item\em Extract and validate integer parameter. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_validation_aa80772850fa8c9d02d166aaec43c65ee}{Get\+Bool\+Param}} (const nlohmann\+::json \&params, size\+\_\+t index, const std\+::string \&param\+Name)
+\begin{DoxyCompactList}\small\item\em Extract and validate boolean parameter. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_validation_ab87ab6b9c924bff6d2b9246b31a0af38}{Get\+Optional\+String\+Param}} (const nlohmann\+::json \&params, size\+\_\+t index, const std\+::string \&default\+Value="{}"{})
+\begin{DoxyCompactList}\small\item\em Extract and validate optional string parameter. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_validation_a4d683cc48a50ef122d582b6a62d83687}{Validate\+Gas\+Amount}} (const std\+::string \&gas)
+\begin{DoxyCompactList}\small\item\em Validate gas amount. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+RPC parameter validation utilities. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_validation_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_validation_aa80772850fa8c9d02d166aaec43c65ee}\index{neo::rpc::RpcValidation@{neo::rpc::RpcValidation}!GetBoolParam@{GetBoolParam}}
+\index{GetBoolParam@{GetBoolParam}!neo::rpc::RpcValidation@{neo::rpc::RpcValidation}}
+\doxysubsubsection{\texorpdfstring{GetBoolParam()}{GetBoolParam()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_validation_aa80772850fa8c9d02d166aaec43c65ee} 
+bool neo\+::rpc\+::\+Rpc\+Validation\+::\+Get\+Bool\+Param (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{params}{, }\item[{size\+\_\+t}]{index}{, }\item[{const std\+::string \&}]{param\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Extract and validate boolean parameter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em params} & Parameter array \\
+\hline
+{\em index} & Parameter index \\
+\hline
+{\em param\+Name} & Parameter name for error messages \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The boolean value 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if invalid \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_validation_aa3286a6d5fa92d4c6ec0a33a0f3e3f73}\index{neo::rpc::RpcValidation@{neo::rpc::RpcValidation}!GetIntParam@{GetIntParam}}
+\index{GetIntParam@{GetIntParam}!neo::rpc::RpcValidation@{neo::rpc::RpcValidation}}
+\doxysubsubsection{\texorpdfstring{GetIntParam()}{GetIntParam()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_validation_aa3286a6d5fa92d4c6ec0a33a0f3e3f73} 
+int64\+\_\+t neo\+::rpc\+::\+Rpc\+Validation\+::\+Get\+Int\+Param (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{params}{, }\item[{size\+\_\+t}]{index}{, }\item[{const std\+::string \&}]{param\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Extract and validate integer parameter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em params} & Parameter array \\
+\hline
+{\em index} & Parameter index \\
+\hline
+{\em param\+Name} & Parameter name for error messages \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The integer value 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if invalid \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_validation_ab87ab6b9c924bff6d2b9246b31a0af38}\index{neo::rpc::RpcValidation@{neo::rpc::RpcValidation}!GetOptionalStringParam@{GetOptionalStringParam}}
+\index{GetOptionalStringParam@{GetOptionalStringParam}!neo::rpc::RpcValidation@{neo::rpc::RpcValidation}}
+\doxysubsubsection{\texorpdfstring{GetOptionalStringParam()}{GetOptionalStringParam()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_validation_ab87ab6b9c924bff6d2b9246b31a0af38} 
+std\+::string neo\+::rpc\+::\+Rpc\+Validation\+::\+Get\+Optional\+String\+Param (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{params}{, }\item[{size\+\_\+t}]{index}{, }\item[{const std\+::string \&}]{default\+Value}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Extract and validate optional string parameter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em params} & Parameter array \\
+\hline
+{\em index} & Parameter index \\
+\hline
+{\em default\+Value} & Default value if not present \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The string value or default 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_validation_a2ada7f5ac3510926219302f6f4cf3e30}\index{neo::rpc::RpcValidation@{neo::rpc::RpcValidation}!GetStringParam@{GetStringParam}}
+\index{GetStringParam@{GetStringParam}!neo::rpc::RpcValidation@{neo::rpc::RpcValidation}}
+\doxysubsubsection{\texorpdfstring{GetStringParam()}{GetStringParam()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_validation_a2ada7f5ac3510926219302f6f4cf3e30} 
+std\+::string neo\+::rpc\+::\+Rpc\+Validation\+::\+Get\+String\+Param (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{params}{, }\item[{size\+\_\+t}]{index}{, }\item[{const std\+::string \&}]{param\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Extract and validate string parameter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em params} & Parameter array \\
+\hline
+{\em index} & Parameter index \\
+\hline
+{\em param\+Name} & Parameter name for error messages \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The string value 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if invalid \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_validation_a64dccc0505d3b165bb90232dc755656a}\index{neo::rpc::RpcValidation@{neo::rpc::RpcValidation}!IsValidHexString@{IsValidHexString}}
+\index{IsValidHexString@{IsValidHexString}!neo::rpc::RpcValidation@{neo::rpc::RpcValidation}}
+\doxysubsubsection{\texorpdfstring{IsValidHexString()}{IsValidHexString()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_validation_a64dccc0505d3b165bb90232dc755656a} 
+bool neo\+::rpc\+::\+Rpc\+Validation\+::\+Is\+Valid\+Hex\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{, }\item[{size\+\_\+t}]{expected\+Length}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Validate a hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The hex string to validate \\
+\hline
+{\em expected\+Length} & Expected byte length (0 for any length) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if valid 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_validation_a9db5b43cd159f8bc3c35cc5d0a98879b}\index{neo::rpc::RpcValidation@{neo::rpc::RpcValidation}!ValidateAddress@{ValidateAddress}}
+\index{ValidateAddress@{ValidateAddress}!neo::rpc::RpcValidation@{neo::rpc::RpcValidation}}
+\doxysubsubsection{\texorpdfstring{ValidateAddress()}{ValidateAddress()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_validation_a9db5b43cd159f8bc3c35cc5d0a98879b} 
+void neo\+::rpc\+::\+Rpc\+Validation\+::\+Validate\+Address (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Validate a Neo address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The address to validate \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if invalid \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_validation_a83995da1ade9f24bf356a948add4beb3}\index{neo::rpc::RpcValidation@{neo::rpc::RpcValidation}!ValidateBlockHash@{ValidateBlockHash}}
+\index{ValidateBlockHash@{ValidateBlockHash}!neo::rpc::RpcValidation@{neo::rpc::RpcValidation}}
+\doxysubsubsection{\texorpdfstring{ValidateBlockHash()}{ValidateBlockHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_validation_a83995da1ade9f24bf356a948add4beb3} 
+void neo\+::rpc\+::\+Rpc\+Validation\+::\+Validate\+Block\+Hash (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Validate a block hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash to validate \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if invalid \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1rpc_1_1_rpc_validation_a19df6716cd9ee3ebe3ade479283f79c1}\index{neo::rpc::RpcValidation@{neo::rpc::RpcValidation}!ValidateBlockIndex@{ValidateBlockIndex}}
+\index{ValidateBlockIndex@{ValidateBlockIndex}!neo::rpc::RpcValidation@{neo::rpc::RpcValidation}}
+\doxysubsubsection{\texorpdfstring{ValidateBlockIndex()}{ValidateBlockIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_validation_a19df6716cd9ee3ebe3ade479283f79c1} 
+void neo\+::rpc\+::\+Rpc\+Validation\+::\+Validate\+Block\+Index (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Validate a block index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index to validate \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if invalid \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_validation_a4d683cc48a50ef122d582b6a62d83687}\index{neo::rpc::RpcValidation@{neo::rpc::RpcValidation}!ValidateGasAmount@{ValidateGasAmount}}
+\index{ValidateGasAmount@{ValidateGasAmount}!neo::rpc::RpcValidation@{neo::rpc::RpcValidation}}
+\doxysubsubsection{\texorpdfstring{ValidateGasAmount()}{ValidateGasAmount()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_validation_a4d683cc48a50ef122d582b6a62d83687} 
+void neo\+::rpc\+::\+Rpc\+Validation\+::\+Validate\+Gas\+Amount (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{gas}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Validate gas amount. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gas} & Gas amount as string \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if invalid \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1rpc_1_1_rpc_validation_a1f739241eb8d09b560e6e811f0168a05}\index{neo::rpc::RpcValidation@{neo::rpc::RpcValidation}!ValidateParamCount@{ValidateParamCount}}
+\index{ValidateParamCount@{ValidateParamCount}!neo::rpc::RpcValidation@{neo::rpc::RpcValidation}}
+\doxysubsubsection{\texorpdfstring{ValidateParamCount()}{ValidateParamCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_validation_a1f739241eb8d09b560e6e811f0168a05} 
+void neo\+::rpc\+::\+Rpc\+Validation\+::\+Validate\+Param\+Count (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{params}{, }\item[{size\+\_\+t}]{min\+Count}{, }\item[{size\+\_\+t}]{max\+Count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Validate JSON parameters array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em params} & The parameters to validate \\
+\hline
+{\em min\+Count} & Minimum number of parameters \\
+\hline
+{\em max\+Count} & Maximum number of parameters \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if invalid \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_validation_a5503e68558c08210f2094ab4cb7c4546}\index{neo::rpc::RpcValidation@{neo::rpc::RpcValidation}!ValidatePublicKey@{ValidatePublicKey}}
+\index{ValidatePublicKey@{ValidatePublicKey}!neo::rpc::RpcValidation@{neo::rpc::RpcValidation}}
+\doxysubsubsection{\texorpdfstring{ValidatePublicKey()}{ValidatePublicKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_validation_a5503e68558c08210f2094ab4cb7c4546} 
+void neo\+::rpc\+::\+Rpc\+Validation\+::\+Validate\+Public\+Key (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{pubkey}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Validate a public key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pubkey} & The public key to validate \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if invalid \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1rpc_1_1_rpc_validation_a7ab0f41430cec63299de5f467e43802f}\index{neo::rpc::RpcValidation@{neo::rpc::RpcValidation}!ValidateScript@{ValidateScript}}
+\index{ValidateScript@{ValidateScript}!neo::rpc::RpcValidation@{neo::rpc::RpcValidation}}
+\doxysubsubsection{\texorpdfstring{ValidateScript()}{ValidateScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_validation_a7ab0f41430cec63299de5f467e43802f} 
+void neo\+::rpc\+::\+Rpc\+Validation\+::\+Validate\+Script (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{script}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Validate script for invocation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & The script hex string \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if invalid \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1rpc_1_1_rpc_validation_a87bbcd1c0b6e47ed58085d9f726a2bf9}\index{neo::rpc::RpcValidation@{neo::rpc::RpcValidation}!ValidateScriptHash@{ValidateScriptHash}}
+\index{ValidateScriptHash@{ValidateScriptHash}!neo::rpc::RpcValidation@{neo::rpc::RpcValidation}}
+\doxysubsubsection{\texorpdfstring{ValidateScriptHash()}{ValidateScriptHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_validation_a87bbcd1c0b6e47ed58085d9f726a2bf9} 
+void neo\+::rpc\+::\+Rpc\+Validation\+::\+Validate\+Script\+Hash (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Validate a script hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash to validate \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if invalid \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1rpc_1_1_rpc_validation_a81c8a6759ac8c909b178e3cf4a22f487}\index{neo::rpc::RpcValidation@{neo::rpc::RpcValidation}!ValidateTransactionHash@{ValidateTransactionHash}}
+\index{ValidateTransactionHash@{ValidateTransactionHash}!neo::rpc::RpcValidation@{neo::rpc::RpcValidation}}
+\doxysubsubsection{\texorpdfstring{ValidateTransactionHash()}{ValidateTransactionHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_validation_a81c8a6759ac8c909b178e3cf4a22f487} 
+void neo\+::rpc\+::\+Rpc\+Validation\+::\+Validate\+Transaction\+Hash (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Validate a transaction hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash to validate \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if invalid \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 5
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/rpc/\mbox{\hyperlink{rpc__validation_8h}{rpc\+\_\+validation.\+h}}\end{DoxyCompactItemize}

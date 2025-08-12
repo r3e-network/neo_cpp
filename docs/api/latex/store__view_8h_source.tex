@@ -1,0 +1,65 @@
+\doxysection{store\+\_\+view.\+h}
+\hypertarget{store__view_8h_source}{}\label{store__view_8h_source}\index{include/neo/persistence/store\_view.h@{include/neo/persistence/store\_view.h}}
+\mbox{\hyperlink{store__view_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{persistence_2storage__item_8h}{neo/persistence/storage\_item.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{persistence_2storage__key_8h}{neo/persistence/storage\_key.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1persistence}{neo::persistence}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_iterator}{StorageIterator}}}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_iterator_af131a231f2429c76a9a3c6920946a614}{\string~StorageIterator}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_iterator_a8f6ed13fa763a77f2c204e239ee7b333}{Valid}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{StorageKey}}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_iterator_a92d7ce37da8b080a8f5a95bbb029a467}{Key}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{StorageItem}}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_iterator_ad03c9d64292dbfc75fe698c4b2aae473}{Value}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_iterator_ad59ede99b242c24c2a9696b87d71c5f1}{Next}}()\ =\ 0;}
+\DoxyCodeLine{00046\ \};}
+\DoxyCodeLine{00047\ \}\ \ \textcolor{comment}{//\ namespace\ neo::persistence}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1persistence}{neo::persistence}}}
+\DoxyCodeLine{00050\ \{}
+\DoxyCodeLine{00054\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_a471eec4a9fb0600ca0178202f3966e4f}{StoreView}}}
+\DoxyCodeLine{00055\ \{}
+\DoxyCodeLine{00056\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_a471eec4a9fb0600ca0178202f3966e4f}{StoreView}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_a49a00f60203e4d62797ef45a7313c5ad}{\string~StoreView}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{virtual}\ std::optional<StorageItem>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_acbd18190cacb6e807fb87f41aa0bb1ac}{TryGet}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{StorageKey}}\&\ key)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{virtual}\ std::shared\_ptr<StorageItem>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_ae8d99e5bf1222b649716a4f1b542ccb8}{TryGet}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{StorageKey}}\&\ key)\ =\ 0;}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{virtual}\ std::shared\_ptr<StorageItem>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_a7541930dc86d8935761fde5359ca6b82}{GetAndChange}}(}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{StorageKey}}\&\ key,\ std::function<std::shared\_ptr<StorageItem>()>\ factory\ =\ \textcolor{keyword}{nullptr})\ =\ 0;}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_a153d917929e5621719a1a637c077a865}{Add}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{StorageKey}}\&\ key,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{StorageItem}}\&\ item)\ =\ 0;}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_af57ac843f5fcbf63f8f89ebf3357de67}{Delete}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{StorageKey}}\&\ key)\ =\ 0;}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keyword}{virtual}\ std::vector<std::pair<StorageKey,\ StorageItem>>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_abc3a45388dcc4a58d9a19fe35dcee678}{Find}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{StorageKey}}*\ prefix\ =\ \textcolor{keyword}{nullptr})\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keyword}{virtual}\ std::unique\_ptr<StorageIterator>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_a41ae313dfb75b256c33846a16978a88e}{Seek}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{StorageKey}}\&\ prefix)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_a53d2963f4ff65b3c4681da83aa4813a4}{Commit}}()\ =\ 0;}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keyword}{virtual}\ std::shared\_ptr<StoreView>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_a184cb585aff9bf2daec4a4be842e9db3}{CreateSnapshot}}()\ =\ 0;}
+\DoxyCodeLine{00127\ \};}
+\DoxyCodeLine{00128\ \}\ \ \textcolor{comment}{//\ namespace\ neo::persistence}}
+
+\end{DoxyCode}

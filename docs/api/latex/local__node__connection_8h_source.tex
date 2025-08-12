@@ -1,0 +1,37 @@
+\doxysection{local\+\_\+node\+\_\+connection.\+h}
+\hypertarget{local__node__connection_8h_source}{}\label{local__node__connection_8h_source}\index{include/neo/network/p2p/local\_node\_connection.h@{include/neo/network/p2p/local\_node\_connection.h}}
+\mbox{\hyperlink{local__node__connection_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{remote__node_8h}{neo/network/p2p/remote\_node.h}}"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p}{neo::network::p2p}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_connection_adf13bf760df933e800689245bc5abdd8}{LocalNodeConnection}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_connection_adf13bf760df933e800689245bc5abdd8}{LocalNodeConnection}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_connection_a32283c850c34145877b99bdbba313ba8}{\string~LocalNodeConnection}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{comment}{//\ Connection\ management}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_connection_a34b2101ac8b7185ff1a4f9de0609ed91}{Connect}}(\textcolor{keyword}{const}\ std::string\&\ address,\ uint16\_t\ port)\ =\ 0;}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_connection_a5291404c6c9efc8366161b365b76bf51}{Disconnect}}()\ =\ 0;}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_connection_a86ddda4147086def53ba5e2c62265a6d}{IsConnected}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{comment}{//\ Message\ handling}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_connection_a7e06103f738ecc1d380a62b14f7327b4}{SendMessage}}(\textcolor{keyword}{const}\ std::shared\_ptr<Message>\&\ message)\ =\ 0;}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_connection_ad789dd42d4d5b194ab1d6e7f08e616a1}{SetMessageHandler}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{const}\ std::shared\_ptr<Message>\&)>\ handler)\ =\ 0;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//\ Connection\ info}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_connection_a5d4ac2b857a0c431e92462d813c25472}{GetRemoteEndpoint}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{virtual}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_connection_a71ce0c4ef94974bf76c00b25ad4b09ea}{GetLastActivityTime}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00032\ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p}}
+
+\end{DoxyCode}

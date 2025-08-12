@@ -1,0 +1,47 @@
+\doxysection{neo\+\_\+token\+\_\+committee.\+h}
+\hypertarget{neo__token__committee_8h_source}{}\label{neo__token__committee_8h_source}\index{include/neo/smartcontract/native/neo\_token\_committee.h@{include/neo/smartcontract/native/neo\_token\_committee.h}}
+\mbox{\hyperlink{neo__token__committee_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{neo__token_8h}{neo/smartcontract/native/neo\_token.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native}{neo::smartcontract::native}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee}{NeoTokenCommittee}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<cryptography::ecc::ECPoint>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a7f66d04633ff6d18f7f2e1dcd5fe3182}{GetCommittee}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{NeoToken}}\&\ token,}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<persistence::DataCache>\ snapshot);}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<cryptography::ecc::ECPoint>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a517e2c498c75efdc7ac61cf30881ecd8}{GetValidators}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{NeoToken}}\&\ token,}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<persistence::DataCache>\ snapshot);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<cryptography::ecc::ECPoint>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a0b53fb06768099602932eaa98456417f}{GetNextBlockValidators}}(}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{NeoToken}}\&\ token,\ std::shared\_ptr<persistence::DataCache>\ snapshot,\ int32\_t\ validatorsCount);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<cryptography::ecc::ECPoint>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a56f278dfee4a310d083c70d3f3b5570b}{ComputeCommitteeMembers}}(}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{NeoToken}}\&\ token,\ std::shared\_ptr<persistence::DataCache>\ snapshot,\ int32\_t\ committeeSize);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a686133c6593f7dfdbce6d4c02e8bb388}{ShouldRefreshCommittee}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{NeoToken}}\&\ token,\ uint32\_t\ blockIndex,\ int32\_t\ committeeSize);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<NeoToken::CommitteeMember>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a17ccdb6d3ce332273edfc571a8a6e8d3}{GetCommitteeFromCache}}(}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{NeoToken}}\&\ token,\ std::shared\_ptr<persistence::DataCache>\ snapshot);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a60c656cfb0f72a6590792602ef71caa3}{GetCommitteeAddress}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{NeoToken}}\&\ token,\ std::shared\_ptr<persistence::DataCache>\ snapshot);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_aa1a3c1ec6c97089b02e5192f3bf130c8}{OnGetValidators}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{NeoToken}}\&\ token,}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a569108d83d1fe8f79e26fed312083a9a}{OnGetCommittee}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{NeoToken}}\&\ token,}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a4fb04cdab5b42143ca98c6d98241eb5e}{OnGetNextBlockValidators}}(}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{NeoToken}}\&\ token,\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00109\ \};}
+\DoxyCodeLine{00110\ \}\ \ \textcolor{comment}{//\ namespace\ neo::smartcontract::native}}
+
+\end{DoxyCode}

@@ -1,0 +1,712 @@
+\doxysection{neo\+::smartcontract\+::native\+::Ledger\+Contract Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract}{}\label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+
+
+Represents the ledger native contract.  
+
+
+
+
+{\ttfamily \#include $<$ledger\+\_\+contract.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::smartcontract\+::native\+::Ledger\+Contract\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::smartcontract\+::native\+::Ledger\+Contract\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ad7b225feaedac98d4457abced41bb148}{Ledger\+Contract}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract}{Ledger\+Contract}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ae0e54c3ec1169379f73f339e89faca20}{Is\+Initialized}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot) const
+\begin{DoxyCompactList}\small\item\em Checks if the contract is initialized. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a50aece401effa302a644114ef226a56a}{Is\+Traceable\+Block}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, uint32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Checks if a block is traceable. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a319a1a95ce1928991d2d2e7ef7e1186e}{Is\+Traceable\+Block}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, uint32\+\_\+t index, uint32\+\_\+t max\+Traceable\+Blocks) const
+\begin{DoxyCompactList}\small\item\em Checks if a block is traceable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ab12872aadf86b59c0f2668f1c75eaad4}{Get\+Current\+Hash}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot) const
+\begin{DoxyCompactList}\small\item\em Gets the current block hash. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_af60a0d089fc43379c050bd00dd1999d7}{Get\+Current\+Index}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot) const
+\begin{DoxyCompactList}\small\item\em Gets the current block index. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a0a55f0427e7584a355d72bf4b4038859}{Get\+Block\+Hash}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, uint32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets the block hash for the specified index. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a3194e243d9cd12784d6bda5a48caccbe}{Get\+Block}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets the block for the specified hash. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a6a0794abb67b276127fd791e895def9f}{Get\+Transaction}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets the transaction for the specified hash. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_aae742000ab45882e5043ea99ad641523}{Get\+Transaction\+Height}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets the transaction height for the specified hash. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a84b9facd10b658912e8357b7f89e6d65}{On\+Persist}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine)
+\begin{DoxyCompactList}\small\item\em Handles the On\+Persist event. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a005a055d56c8052e88201af7f8624de6}{Post\+Persist}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine)
+\begin{DoxyCompactList}\small\item\em Handles the Post\+Persist event. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a60667ade06e1b9a3c3ef7e2c6a68a632}{Native\+Contract}} (const std\+::string \&name, uint32\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{Native\+Contract}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_ae37e44a3d146975a024466fc40a8dc53}{\texorpdfstring{$\sim$}{\string~}\+Native\+Contract}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a36ffe7bef8e2b15c1992c7fd51735e04}{Get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Gets the name. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a514770635cb55d0e5c59a8d2b5231ea3}{Get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Gets the ID. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_adee5386515d940f614d7f680b5d0edb7}{Get\+Script\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script hash. \end{DoxyCompactList}\item 
+const std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}}, std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&)$>$ $>$ $>$ \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aefb916eb8825a724a48d75e9c5c69acf}{Get\+Methods}} () const
+\begin{DoxyCompactList}\small\item\em Gets the methods. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a3ed2d00b721434cf15b180038e4fa4f2}{Invoke}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::string \&method, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags)
+\begin{DoxyCompactList}\small\item\em Invokes a method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_acbf33ca368ff4d13541b9c12e0a34cad}{Call}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::string \&method, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Calls a method on the contract (alias for Invoke). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aef8498874e1b666ab258a891c2f05a56}{Check\+Call\+Flags}} (const std\+::string \&method, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags) const
+\begin{DoxyCompactList}\small\item\em Checks if the contract has the specified call flags. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a6d9998fc6c7dbedcc447f403fddb6d08}{Get\+Storage\+Prefix}} () const
+\begin{DoxyCompactList}\small\item\em Gets the storage prefix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aaa080efcc4d7deced7aded7bb968cd9c}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a44c7d768e39be1ed6933cdcf2350a2e8}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a50c32e2fa8e736183a0135b44ac5438d}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a2a46f86ca8b2d541f8623821d389eb8b}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aa8eed221a7bf2bce103f7e1fef187e6c}{Get\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a88e6f4aa548d073c5740d1eb0f59f91e}{Put\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value) const
+\begin{DoxyCompactList}\small\item\em Puts the storage value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a041e040e9fbf45d8d8ba9c0dcf87afe4}{Delete\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Deletes the storage value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a5a9ec24cc4c1584fb00fdf32f614dbd8}{Create\+Storage\+Key}} (uint8\+\_\+t prefix) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aacd0961fef8aaa618f43294e4561a72a}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_ac60e9957320d04ffd697e023f94bf233}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a4c42d353f5328c9fbc06f5fd38e406cd}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a8221750790b1aa223a4351bb81ec8a59}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, uint32\+\_\+t key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract}{Ledger\+Contract}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a0925f03421a7e30f9ff85dc189913e7e}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets the instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ab6672b8ccb55629c0ae98f9189e404f4}{ID}} = -\/4
+\begin{DoxyCompactList}\small\item\em The contract ID. \end{DoxyCompactList}\item 
+static constexpr const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a3bfefca555d5923658a8179f501d4409}{NAME}} = "{}Ledger"{}
+\begin{DoxyCompactList}\small\item\em The contract name. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_abcfae632e9126afca2249a026a42bcd4}{PREFIX\+\_\+\+BLOCK\+\_\+\+HASH}} = 9
+\begin{DoxyCompactList}\small\item\em The storage prefix for block hash. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a5de42ffb714d62039806902a2114ab87}{PREFIX\+\_\+\+CURRENT\+\_\+\+BLOCK}} = 12
+\begin{DoxyCompactList}\small\item\em The storage prefix for current block. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ae08c4e7cde13feef2e4457a13d10486a}{PREFIX\+\_\+\+BLOCK}} = 5
+\begin{DoxyCompactList}\small\item\em The storage prefix for block. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a5b6166105f7f517236e353a584768fa7}{PREFIX\+\_\+\+TRANSACTION}} = 11
+\begin{DoxyCompactList}\small\item\em The storage prefix for transaction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ae828e4bac40e5681eb9f52253b423eff}{Initialize}} () override
+\begin{DoxyCompactList}\small\item\em Initializes the contract. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a26af9bcd266b59f910293081ef334993}{Register\+Method}} (const std\+::string \&name, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags, std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&)$>$ handler)
+\begin{DoxyCompactList}\small\item\em Registers a method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a072d1d4da03147c3760c19afd8702e87}{On\+Get\+Hash}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the get\+Hash method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_abc4d0668091634031e7f3489a1f2df0e}{On\+Get\+Block}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the get\+Block method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_aa7420f43ab96ab31e736e653ed3b9ef1}{On\+Get\+Transaction}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the get\+Transaction method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a69810b8b7ae500dd7da211fae55d2f8a}{On\+Get\+Transaction\+Height}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the get\+Transaction\+Height method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_aecc86bf8b6b931b3a935ff86bbdb6d60}{On\+Get\+Current\+Index}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the get\+Current\+Index method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_af831fafe63971eaef2f643579eb175fb}{On\+Get\+Current\+Hash}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the get\+Current\+Hash method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a0ae8493abd3821e256cbd8b2d4a56b84}{Block\+To\+Stack\+Item}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ block) const
+\begin{DoxyCompactList}\small\item\em Converts a block to a stack item. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ab706d1441ffc6cc46d0674c61ba9af66}{Transaction\+To\+Stack\+Item}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ tx) const
+\begin{DoxyCompactList}\small\item\em Converts a transaction to a stack item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a53cf5f0375bdbfe63ac4ee1273e23bdb}{current\+Block\+Key\+\_\+}}
+\begin{DoxyCompactList}\small\item\em The current block storage key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a42ea0ca50925a8d114e2eb1370923f22}{Native\+Contract\+Test}}
+\item 
+class \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a8137db3e5f3c42d010cbc4d06f2603db}{Ledger\+Contract\+Test}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the ledger native contract. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ad7b225feaedac98d4457abced41bb148}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!LedgerContract@{LedgerContract}}
+\index{LedgerContract@{LedgerContract}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{LedgerContract()}{LedgerContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ad7b225feaedac98d4457abced41bb148} 
+neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+Ledger\+Contract (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract}{Ledger\+Contract}. 
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a0ae8493abd3821e256cbd8b2d4a56b84}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!BlockToStackItem@{BlockToStackItem}}
+\index{BlockToStackItem@{BlockToStackItem}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{BlockToStackItem()}{BlockToStackItem()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a0ae8493abd3821e256cbd8b2d4a56b84} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+Block\+To\+Stack\+Item (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$}]{block}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Converts a block to a stack item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The stack item. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a3194e243d9cd12784d6bda5a48caccbe}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!GetBlock@{GetBlock}}
+\index{GetBlock@{GetBlock}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{GetBlock()}{GetBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a3194e243d9cd12784d6bda5a48caccbe} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+Get\+Block (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the block for the specified hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em hash} & The block hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a0a55f0427e7584a355d72bf4b4038859}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!GetBlockHash@{GetBlockHash}}
+\index{GetBlockHash@{GetBlockHash}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{GetBlockHash()}{GetBlockHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a0a55f0427e7584a355d72bf4b4038859} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+Get\+Block\+Hash (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the block hash for the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em index} & The block index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ab12872aadf86b59c0f2668f1c75eaad4}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!GetCurrentHash@{GetCurrentHash}}
+\index{GetCurrentHash@{GetCurrentHash}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{GetCurrentHash()}{GetCurrentHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ab12872aadf86b59c0f2668f1c75eaad4} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+Get\+Current\+Hash (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the current block hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The current block hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_af60a0d089fc43379c050bd00dd1999d7}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!GetCurrentIndex@{GetCurrentIndex}}
+\index{GetCurrentIndex@{GetCurrentIndex}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{GetCurrentIndex()}{GetCurrentIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_af60a0d089fc43379c050bd00dd1999d7} 
+uint32\+\_\+t neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+Get\+Current\+Index (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the current block index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The current block index. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a0925f03421a7e30f9ff85dc189913e7e}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a0925f03421a7e30f9ff85dc189913e7e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract}{Ledger\+Contract}} $>$ neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the instance. 
+
+\begin{DoxyReturn}{Returns}
+The instance. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a6a0794abb67b276127fd791e895def9f}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!GetTransaction@{GetTransaction}}
+\index{GetTransaction@{GetTransaction}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{GetTransaction()}{GetTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a6a0794abb67b276127fd791e895def9f} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+Get\+Transaction (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the transaction for the specified hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em hash} & The transaction hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The transaction. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_aae742000ab45882e5043ea99ad641523}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!GetTransactionHeight@{GetTransactionHeight}}
+\index{GetTransactionHeight@{GetTransactionHeight}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{GetTransactionHeight()}{GetTransactionHeight()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_aae742000ab45882e5043ea99ad641523} 
+int32\+\_\+t neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+Get\+Transaction\+Height (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the transaction height for the specified hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em hash} & The transaction hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The transaction height. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ae828e4bac40e5681eb9f52253b423eff}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ae828e4bac40e5681eb9f52253b423eff} 
+void neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Initializes the contract. 
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a427aae1fe42c2264c5f6979a84092a5d}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}.
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ae0e54c3ec1169379f73f339e89faca20}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!IsInitialized@{IsInitialized}}
+\index{IsInitialized@{IsInitialized}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{IsInitialized()}{IsInitialized()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ae0e54c3ec1169379f73f339e89faca20} 
+bool neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+Is\+Initialized (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the contract is initialized. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the contract is initialized, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a50aece401effa302a644114ef226a56a}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!IsTraceableBlock@{IsTraceableBlock}}
+\index{IsTraceableBlock@{IsTraceableBlock}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{IsTraceableBlock()}{IsTraceableBlock()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a50aece401effa302a644114ef226a56a} 
+bool neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+Is\+Traceable\+Block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if a block is traceable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em index} & The block index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the block is traceable, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a319a1a95ce1928991d2d2e7ef7e1186e}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!IsTraceableBlock@{IsTraceableBlock}}
+\index{IsTraceableBlock@{IsTraceableBlock}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{IsTraceableBlock()}{IsTraceableBlock()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a319a1a95ce1928991d2d2e7ef7e1186e} 
+bool neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+Is\+Traceable\+Block (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{uint32\+\_\+t}]{index}{, }\item[{uint32\+\_\+t}]{max\+Traceable\+Blocks}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if a block is traceable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em index} & The block index. \\
+\hline
+{\em max\+Traceable\+Blocks} & The maximum number of traceable blocks. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the block is traceable, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_abc4d0668091634031e7f3489a1f2df0e}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!OnGetBlock@{OnGetBlock}}
+\index{OnGetBlock@{OnGetBlock}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{OnGetBlock()}{OnGetBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_abc4d0668091634031e7f3489a1f2df0e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+On\+Get\+Block (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the get\+Block method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_af831fafe63971eaef2f643579eb175fb}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!OnGetCurrentHash@{OnGetCurrentHash}}
+\index{OnGetCurrentHash@{OnGetCurrentHash}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{OnGetCurrentHash()}{OnGetCurrentHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_af831fafe63971eaef2f643579eb175fb} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+On\+Get\+Current\+Hash (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the get\+Current\+Hash method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_aecc86bf8b6b931b3a935ff86bbdb6d60}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!OnGetCurrentIndex@{OnGetCurrentIndex}}
+\index{OnGetCurrentIndex@{OnGetCurrentIndex}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{OnGetCurrentIndex()}{OnGetCurrentIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_aecc86bf8b6b931b3a935ff86bbdb6d60} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+On\+Get\+Current\+Index (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the get\+Current\+Index method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a072d1d4da03147c3760c19afd8702e87}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!OnGetHash@{OnGetHash}}
+\index{OnGetHash@{OnGetHash}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{OnGetHash()}{OnGetHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a072d1d4da03147c3760c19afd8702e87} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+On\+Get\+Hash (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the get\+Hash method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_aa7420f43ab96ab31e736e653ed3b9ef1}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!OnGetTransaction@{OnGetTransaction}}
+\index{OnGetTransaction@{OnGetTransaction}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{OnGetTransaction()}{OnGetTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_aa7420f43ab96ab31e736e653ed3b9ef1} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+On\+Get\+Transaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the get\+Transaction method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a69810b8b7ae500dd7da211fae55d2f8a}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!OnGetTransactionHeight@{OnGetTransactionHeight}}
+\index{OnGetTransactionHeight@{OnGetTransactionHeight}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{OnGetTransactionHeight()}{OnGetTransactionHeight()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a69810b8b7ae500dd7da211fae55d2f8a} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+On\+Get\+Transaction\+Height (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the get\+Transaction\+Height method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a84b9facd10b658912e8357b7f89e6d65}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!OnPersist@{OnPersist}}
+\index{OnPersist@{OnPersist}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{OnPersist()}{OnPersist()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a84b9facd10b658912e8357b7f89e6d65} 
+bool neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+On\+Persist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})}
+
+
+
+Handles the On\+Persist event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a005a055d56c8052e88201af7f8624de6}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!PostPersist@{PostPersist}}
+\index{PostPersist@{PostPersist}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{PostPersist()}{PostPersist()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a005a055d56c8052e88201af7f8624de6} 
+bool neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+Post\+Persist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})}
+
+
+
+Handles the Post\+Persist event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ab706d1441ffc6cc46d0674c61ba9af66}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!TransactionToStackItem@{TransactionToStackItem}}
+\index{TransactionToStackItem@{TransactionToStackItem}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{TransactionToStackItem()}{TransactionToStackItem()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ab706d1441ffc6cc46d0674c61ba9af66} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+Transaction\+To\+Stack\+Item (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$}]{tx}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Converts a transaction to a stack item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tx} & The transaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The stack item. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 22
+
+
+\label{doc-related-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_doc-related-members}
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a8137db3e5f3c42d010cbc4d06f2603db}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!LedgerContractTest@{LedgerContractTest}}
+\index{LedgerContractTest@{LedgerContractTest}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{LedgerContractTest}{LedgerContractTest}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a8137db3e5f3c42d010cbc4d06f2603db} 
+friend class Ledger\+Contract\+Test\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a42ea0ca50925a8d114e2eb1370923f22}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!NativeContractTest@{NativeContractTest}}
+\index{NativeContractTest@{NativeContractTest}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{NativeContractTest}{NativeContractTest}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a42ea0ca50925a8d114e2eb1370923f22} 
+friend class Native\+Contract\+Test\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a53cf5f0375bdbfe63ac4ee1273e23bdb}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!currentBlockKey\_@{currentBlockKey\_}}
+\index{currentBlockKey\_@{currentBlockKey\_}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{currentBlockKey\_}{currentBlockKey\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a53cf5f0375bdbfe63ac4ee1273e23bdb} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::current\+Block\+Key\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The current block storage key. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ab6672b8ccb55629c0ae98f9189e404f4}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!ID@{ID}}
+\index{ID@{ID}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{ID}{ID}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ab6672b8ccb55629c0ae98f9189e404f4} 
+int32\+\_\+t neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+ID = -\/4\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The contract ID. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a3bfefca555d5923658a8179f501d4409}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!NAME@{NAME}}
+\index{NAME@{NAME}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{NAME}{NAME}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a3bfefca555d5923658a8179f501d4409} 
+const char\texorpdfstring{$\ast$}{*} neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+NAME = "{}Ledger"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The contract name. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ae08c4e7cde13feef2e4457a13d10486a}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!PREFIX\_BLOCK@{PREFIX\_BLOCK}}
+\index{PREFIX\_BLOCK@{PREFIX\_BLOCK}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_BLOCK}{PREFIX\_BLOCK}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_ae08c4e7cde13feef2e4457a13d10486a} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+PREFIX\+\_\+\+BLOCK = 5\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for block. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_abcfae632e9126afca2249a026a42bcd4}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!PREFIX\_BLOCK\_HASH@{PREFIX\_BLOCK\_HASH}}
+\index{PREFIX\_BLOCK\_HASH@{PREFIX\_BLOCK\_HASH}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_BLOCK\_HASH}{PREFIX\_BLOCK\_HASH}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_abcfae632e9126afca2249a026a42bcd4} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+PREFIX\+\_\+\+BLOCK\+\_\+\+HASH = 9\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for block hash. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a5de42ffb714d62039806902a2114ab87}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!PREFIX\_CURRENT\_BLOCK@{PREFIX\_CURRENT\_BLOCK}}
+\index{PREFIX\_CURRENT\_BLOCK@{PREFIX\_CURRENT\_BLOCK}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_CURRENT\_BLOCK}{PREFIX\_CURRENT\_BLOCK}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a5de42ffb714d62039806902a2114ab87} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+PREFIX\+\_\+\+CURRENT\+\_\+\+BLOCK = 12\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for current block. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a5b6166105f7f517236e353a584768fa7}\index{neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}!PREFIX\_TRANSACTION@{PREFIX\_TRANSACTION}}
+\index{PREFIX\_TRANSACTION@{PREFIX\_TRANSACTION}!neo::smartcontract::native::LedgerContract@{neo::smartcontract::native::LedgerContract}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_TRANSACTION}{PREFIX\_TRANSACTION}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_ledger_contract_a5b6166105f7f517236e353a584768fa7} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Ledger\+Contract\+::\+PREFIX\+\_\+\+TRANSACTION = 11\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for transaction. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/native/\mbox{\hyperlink{ledger__contract_8h}{ledger\+\_\+contract.\+h}}\item 
+src/smartcontract/native/\mbox{\hyperlink{ledger__contract_8cpp}{ledger\+\_\+contract.\+cpp}}\end{DoxyCompactItemize}

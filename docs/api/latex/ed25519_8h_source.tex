@@ -1,0 +1,73 @@
+\doxysection{ed25519.\+h}
+\hypertarget{ed25519_8h_source}{}\label{ed25519_8h_source}\index{include/neo/cryptography/ed25519.h@{include/neo/cryptography/ed25519.h}}
+\mbox{\hyperlink{ed25519_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__span_8h}{neo/io/byte\_span.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cryptography}{neo::cryptography}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ Forward\ declarations}}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519}{Ed25519}};}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519}{Ed25519}}}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_a55de8977292b22807c27dc979915a8cd}{PRIVATE\_KEY\_SIZE}}\ =\ 32;}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_a9882426d077281634fc66e9e733a1fab}{PUBLIC\_KEY\_SIZE}}\ =\ 32;}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_a0ce3cefa89222961e6bc9aaced85bb02}{SIGNATURE\_SIZE}}\ =\ 64;}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_a4201a3c5e81eab0d985dd5e835c71e9b}{SEED\_SIZE}}\ =\ 32;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ Forward\ declaration}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key}{PublicKey}};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_a5fab8056a57b909fbfaf5bbda42e4233}{PrivateKey}}}
+\DoxyCodeLine{00037\ \ \ \ \ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_a5fab8056a57b909fbfaf5bbda42e4233}{PrivateKey}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ key\_data);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_a5fab8056a57b909fbfaf5bbda42e4233}{PrivateKey}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_aa0cc15db43d92189ef7131a241a18a0c}{Generate}}();}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_a61ddc9ca63018472edb99fc1a0549d5f}{GetBytes}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key}{PublicKey}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_ac7aa39cb5898e8c4e6b3a874cc42e3cb}{GetPublicKey}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_af954f45d6cc45067fa4adbc25fdbcf34}{Sign}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ message)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ std::array<uint8\_t,\ PRIVATE\_KEY\_SIZE>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_aa618d5b4f536853c4f7ec6f655cb549a}{key\_data\_}};}
+\DoxyCodeLine{00072\ \ \ \ \ \};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_a1e9838b4702ccb1e87e629c279370254}{PublicKey}}}
+\DoxyCodeLine{00078\ \ \ \ \ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_a1e9838b4702ccb1e87e629c279370254}{PublicKey}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ key\_data);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_a7a111a7d3e2e5b608a2eadf6434774a6}{GetBytes}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_ad97a5816b972ad4feb4a41fa8edca78e}{Verify}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ message,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ signature)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_ad9fcce6c1a2da733f71aad391333de07}{ToHex}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_a1e9838b4702ccb1e87e629c279370254}{PublicKey}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_ae98ddab07f06ba1eb15ec108641a9510}{FromHex}}(\textcolor{keyword}{const}\ std::string\&\ hex);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ std::array<uint8\_t,\ PUBLIC\_KEY\_SIZE>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_a3f64f28d3e940fcbc528d1615b0316c3}{key\_data\_}};}
+\DoxyCodeLine{00115\ \ \ \ \ \};}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keyword}{static}\ std::pair<PrivateKey,\ PublicKey>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_ae9b5c5c6741db5784acaefa750c1ed9f}{GenerateKeyPair}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ seed);}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keyword}{static}\ std::pair<PrivateKey,\ PublicKey>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_ae9b5c5c6741db5784acaefa750c1ed9f}{GenerateKeyPair}}();}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_ac5e5bc08465e86c5c8ef997eeb79b6bf}{Verify}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ message,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ signature,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ public\_key);}
+\DoxyCodeLine{00138\ \};}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cryptography}}
+
+\end{DoxyCode}

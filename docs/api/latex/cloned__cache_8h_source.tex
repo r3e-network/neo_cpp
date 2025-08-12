@@ -1,0 +1,374 @@
+\doxysection{cloned\+\_\+cache.\+h}
+\hypertarget{cloned__cache_8h_source}{}\label{cloned__cache_8h_source}\index{include/neo/persistence/cloned\_cache.h@{include/neo/persistence/cloned\_cache.h}}
+\mbox{\hyperlink{cloned__cache_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{data__cache_8h}{neo/persistence/data\_cache.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1persistence}{neo::persistence}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue>}
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8ac623ed5ea45386f7838b24dcc76603}{ClonedCache}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8ac623ed5ea45386f7838b24dcc76603}{ClonedCache}}(std::shared\_ptr<DataCache>\ inner);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a52a09e61d05b51177cec3103bfa41d2c}{\string~ClonedCache}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ Basic\ cache\ operations}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_aa16c66ab93ab308c502a4ed66f2a33f7}{Add}}(\textcolor{keyword}{const}\ TKey\&\ key,\ \textcolor{keyword}{const}\ TValue\&\ value);}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a49dbfd6c1567ea05c53af18ee8c1ab6c}{Delete}}(\textcolor{keyword}{const}\ TKey\&\ key);}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a2e740e6317ec37037cbeda8328fffaad}{Contains}}(\textcolor{keyword}{const}\ TKey\&\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00034\ \ \ \ \ TValue\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_aa524e3b651afee6da3cd39abdfdd1343}{Get}}(\textcolor{keyword}{const}\ TKey\&\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a1408f7d3caacd1d2b3c5dfeb03915b23}{TryGet}}(\textcolor{keyword}{const}\ TKey\&\ key,\ TValue\&\ value)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_ab19be8b94b6a3ae37b24c658d2f022af}{Update}}(\textcolor{keyword}{const}\ TKey\&\ key,\ \textcolor{keyword}{const}\ TValue\&\ value);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ std::vector<std::pair<TKey,\ TValue>>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_afd514a19936cf0982f595a90918bc0ed}{Find}}(std::span<const\ uint8\_t>\ key\_prefix\ =\ \{\})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a04fcbf7ccfff16613085a3ebced1d453}{Commit}}();}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a6a8f1ee80abf132b4cea47169778429a}{Count}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_afd2bf94b94f3aef2390f763a2e737d8d}{IsReadOnly}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00057\ \ \ \ \ std::shared\_ptr<DataCache>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a2d36f834755a87d29d3cc7f441c1f454}{GetInner}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00060\ \ \ \ \ std::shared\_ptr<DataCache>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}};}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{mutable}\ std::unordered\_map<TKey,\ TValue>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7}{cloned\_items\_}};}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{mutable}\ std::unordered\_set<TKey>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}};}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{mutable}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a0ec517f4505672fccaae506a29d56cb8}{is\_cloned\_}};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a5ad4fe4766ae43a2b8869e990079a1a6}{EnsureCloned}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a24f9c23b37d5de531c70137a6df0dd80}{CloneItem}}(\textcolor{keyword}{const}\ TKey\&\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00075\ \};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \textcolor{comment}{//\ Template\ implementation}}
+\DoxyCodeLine{00078\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue>}
+\DoxyCodeLine{00079\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8ac623ed5ea45386f7838b24dcc76603}{ClonedCache<TKey,\ TValue>::ClonedCache}}(std::shared\_ptr<DataCache>\ inner)\ :\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}}(inner),\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a0ec517f4505672fccaae506a29d56cb8}{is\_cloned\_}}(false)}
+\DoxyCodeLine{00080\ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}})}
+\DoxyCodeLine{00082\ \ \ \ \ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Inner\ cache\ cannot\ be\ null"{}});}
+\DoxyCodeLine{00084\ \ \ \ \ \}}
+\DoxyCodeLine{00085\ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue>}
+\DoxyCodeLine{00088\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_aa16c66ab93ab308c502a4ed66f2a33f7}{ClonedCache<TKey,\ TValue>::Add}}(\textcolor{keyword}{const}\ TKey\&\ key,\ \textcolor{keyword}{const}\ TValue\&\ value)}
+\DoxyCodeLine{00089\ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_afd2bf94b94f3aef2390f763a2e737d8d}{IsReadOnly}}())}
+\DoxyCodeLine{00091\ \ \ \ \ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Cache\ is\ read-\/only"{}});}
+\DoxyCodeLine{00093\ \ \ \ \ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a2e740e6317ec37037cbeda8328fffaad}{Contains}}(key))}
+\DoxyCodeLine{00096\ \ \ \ \ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Key\ already\ exists"{}});}
+\DoxyCodeLine{00098\ \ \ \ \ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a5ad4fe4766ae43a2b8869e990079a1a6}{EnsureCloned}}();}
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7}{cloned\_items\_}}[key]\ =\ value;}
+\DoxyCodeLine{00102\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}}.erase(key);}
+\DoxyCodeLine{00103\ \}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue>}
+\DoxyCodeLine{00106\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a49dbfd6c1567ea05c53af18ee8c1ab6c}{ClonedCache<TKey,\ TValue>::Delete}}(\textcolor{keyword}{const}\ TKey\&\ key)}
+\DoxyCodeLine{00107\ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_afd2bf94b94f3aef2390f763a2e737d8d}{IsReadOnly}}())}
+\DoxyCodeLine{00109\ \ \ \ \ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Cache\ is\ read-\/only"{}});}
+\DoxyCodeLine{00111\ \ \ \ \ \}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a5ad4fe4766ae43a2b8869e990079a1a6}{EnsureCloned}}();}
+\DoxyCodeLine{00114\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}}.insert(key);}
+\DoxyCodeLine{00115\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7}{cloned\_items\_}}.erase(key);}
+\DoxyCodeLine{00116\ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue>}
+\DoxyCodeLine{00119\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a2e740e6317ec37037cbeda8328fffaad}{ClonedCache<TKey,\ TValue>::Contains}}(\textcolor{keyword}{const}\ TKey\&\ key)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00120\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00121\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a5ad4fe4766ae43a2b8869e990079a1a6}{EnsureCloned}}();}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}}.count(key)\ >\ 0)}
+\DoxyCodeLine{00124\ \ \ \ \ \{}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00126\ \ \ \ \ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7}{cloned\_items\_}}.count(key)\ >\ 0)}
+\DoxyCodeLine{00129\ \ \ \ \ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00131\ \ \ \ \ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{comment}{//\ Check\ inner\ cache\ -\/\ cast\ key\ to\ StorageKey\ for\ DataCache\ interface}}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<TKey,\ StorageKey>)}
+\DoxyCodeLine{00135\ \ \ \ \ \{}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ storage\_item\ =\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}}-\/>TryGet(key);}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ storage\_item\ !=\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00138\ \ \ \ \ \}}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00141\ \}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue>}
+\DoxyCodeLine{00144\ TValue\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_aa524e3b651afee6da3cd39abdfdd1343}{ClonedCache<TKey,\ TValue>::Get}}(\textcolor{keyword}{const}\ TKey\&\ key)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00145\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00146\ \ \ \ \ TValue\ value;}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a1408f7d3caacd1d2b3c5dfeb03915b23}{TryGet}}(key,\ value))}
+\DoxyCodeLine{00148\ \ \ \ \ \{}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{00150\ \ \ \ \ \}}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Key\ not\ found"{}});}
+\DoxyCodeLine{00152\ \}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue>}
+\DoxyCodeLine{00155\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a1408f7d3caacd1d2b3c5dfeb03915b23}{ClonedCache<TKey,\ TValue>::TryGet}}(\textcolor{keyword}{const}\ TKey\&\ key,\ TValue\&\ value)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00156\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00157\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a5ad4fe4766ae43a2b8869e990079a1a6}{EnsureCloned}}();}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}}.count(key)\ >\ 0)}
+\DoxyCodeLine{00160\ \ \ \ \ \{}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00162\ \ \ \ \ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7}{cloned\_items\_}}.find(key);}
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7}{cloned\_items\_}}.end())}
+\DoxyCodeLine{00166\ \ \ \ \ \{}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ value\ =\ it-\/>second;}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00169\ \ \ \ \ \}}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{comment}{//\ Try\ to\ get\ from\ inner\ cache}}
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<TKey,\ StorageKey>\ \&\&\ std::is\_same\_v<TValue,\ StorageItem>)}
+\DoxyCodeLine{00173\ \ \ \ \ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ storage\_item\ =\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}}-\/>TryGet(key);}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (storage\_item)}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ value\ =\ *storage\_item;}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00180\ \ \ \ \ \}}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00183\ \}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue>}
+\DoxyCodeLine{00186\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_ab19be8b94b6a3ae37b24c658d2f022af}{ClonedCache<TKey,\ TValue>::Update}}(\textcolor{keyword}{const}\ TKey\&\ key,\ \textcolor{keyword}{const}\ TValue\&\ value)}
+\DoxyCodeLine{00187\ \{}
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_afd2bf94b94f3aef2390f763a2e737d8d}{IsReadOnly}}())}
+\DoxyCodeLine{00189\ \ \ \ \ \{}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Cache\ is\ read-\/only"{}});}
+\DoxyCodeLine{00191\ \ \ \ \ \}}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a2e740e6317ec37037cbeda8328fffaad}{Contains}}(key))}
+\DoxyCodeLine{00194\ \ \ \ \ \{}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Key\ not\ found"{}});}
+\DoxyCodeLine{00196\ \ \ \ \ \}}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a5ad4fe4766ae43a2b8869e990079a1a6}{EnsureCloned}}();}
+\DoxyCodeLine{00199\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7}{cloned\_items\_}}[key]\ =\ value;}
+\DoxyCodeLine{00200\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}}.erase(key);}
+\DoxyCodeLine{00201\ \}}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue>}
+\DoxyCodeLine{00204\ std::vector<std::pair<TKey,\ TValue>>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_afd514a19936cf0982f595a90918bc0ed}{ClonedCache<TKey,\ TValue>::Find}}(std::span<const\ uint8\_t>\ key\_prefix)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00205\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00206\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a5ad4fe4766ae43a2b8869e990079a1a6}{EnsureCloned}}();}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \ \ std::vector<std::pair<TKey,\ TValue>>\ result;}
+\DoxyCodeLine{00209\ \ \ \ \ std::unordered\_set<TKey>\ processed\_keys;}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{comment}{//\ Add\ items\ from\ cloned\ cache}}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [key,\ value]\ :\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7}{cloned\_items\_}})}
+\DoxyCodeLine{00213\ \ \ \ \ \{}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}}.count(key)\ ==\ 0)}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ result.emplace\_back(key,\ value);}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ processed\_keys.insert(key);}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00219\ \ \ \ \ \}}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{comment}{//\ Add\ items\ from\ inner\ cache\ that\ aren't\ overridden\ or\ deleted}}
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<TKey,\ StorageKey>\ \&\&\ std::is\_same\_v<TValue,\ StorageItem>)}
+\DoxyCodeLine{00223\ \ \ \ \ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ inner\_items\ =\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}}-\/>Find(\textcolor{keyword}{nullptr});\ \ \textcolor{comment}{//\ Get\ all\ items}}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [key,\ value]\ :\ inner\_items)}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (processed\_keys.count(key)\ ==\ 0\ \&\&\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}}.count(key)\ ==\ 0)}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.emplace\_back(key,\ value);}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00232\ \ \ \ \ \}}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00235\ \}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue>}
+\DoxyCodeLine{00238\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a04fcbf7ccfff16613085a3ebced1d453}{ClonedCache<TKey,\ TValue>::Commit}}()}
+\DoxyCodeLine{00239\ \{}
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_afd2bf94b94f3aef2390f763a2e737d8d}{IsReadOnly}}())}
+\DoxyCodeLine{00241\ \ \ \ \ \{}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00243\ \ \ \ \ \}}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{comment}{//\ Apply\ changes\ to\ inner\ cache}}
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<TKey,\ StorageKey>\ \&\&\ std::is\_same\_v<TValue,\ StorageItem>)}
+\DoxyCodeLine{00247\ \ \ \ \ \{}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add/update\ items}}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [key,\ value]\ :\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7}{cloned\_items\_}})}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}}.count(key)\ ==\ 0)}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ item\ exists\ in\ inner\ cache}}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ existing\ =\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}}-\/>TryGet(key);}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (existing)}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ StoreCache,\ we\ need\ to\ properly\ update\ the\ item}}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ First\ delete\ the\ old\ item,\ then\ add\ the\ new\ one}}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}}-\/>Delete(key);}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}}-\/>Add(key,\ value);}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ new\ item}}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}}-\/>Add(key,\ value);}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Delete\ items}}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ key\ :\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}})}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}}-\/>Delete(key);}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Commit\ inner\ cache}}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}}-\/>Commit();}
+\DoxyCodeLine{00278\ \ \ \ \ \}}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ \ \ \ \ \textcolor{comment}{//\ Clear\ local\ changes}}
+\DoxyCodeLine{00281\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7}{cloned\_items\_}}.clear();}
+\DoxyCodeLine{00282\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}}.clear();}
+\DoxyCodeLine{00283\ \}}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00285\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue>}
+\DoxyCodeLine{00286\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a6a8f1ee80abf132b4cea47169778429a}{ClonedCache<TKey,\ TValue>::Count}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00287\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00288\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a5ad4fe4766ae43a2b8869e990079a1a6}{EnsureCloned}}();}
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00290\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ count\ =\ 0;}
+\DoxyCodeLine{00291\ \ \ \ \ std::unordered\_set<TKey>\ processed\_keys;}
+\DoxyCodeLine{00292\ }
+\DoxyCodeLine{00293\ \ \ \ \ \textcolor{comment}{//\ Count\ items\ from\ cloned\ cache}}
+\DoxyCodeLine{00294\ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [key,\ value]\ :\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7}{cloned\_items\_}})}
+\DoxyCodeLine{00295\ \ \ \ \ \{}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}}.count(key)\ ==\ 0)}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ count++;}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ processed\_keys.insert(key);}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00301\ \ \ \ \ \}}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ \ \ \ \ \textcolor{comment}{//\ Count\ items\ from\ inner\ cache\ that\ aren't\ overridden\ or\ deleted}}
+\DoxyCodeLine{00304\ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<TKey,\ StorageKey>\ \&\&\ std::is\_same\_v<TValue,\ StorageItem>)}
+\DoxyCodeLine{00305\ \ \ \ \ \{}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ inner\_items\ =\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}}-\/>Find(\textcolor{keyword}{nullptr});\ \ \textcolor{comment}{//\ Get\ all\ items}}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [key,\ value]\ :\ inner\_items)}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (processed\_keys.count(key)\ ==\ 0\ \&\&\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}}.count(key)\ ==\ 0)}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ count++;}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00314\ \ \ \ \ \}}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00316\ \ \ \ \ \textcolor{keywordflow}{return}\ count;}
+\DoxyCodeLine{00317\ \}}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00319\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue>}
+\DoxyCodeLine{00320\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_afd2bf94b94f3aef2390f763a2e737d8d}{ClonedCache<TKey,\ TValue>::IsReadOnly}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00321\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00322\ \ \ \ \ \textcolor{comment}{//\ Complete\ read-\/only\ state\ implementation}}
+\DoxyCodeLine{00323\ \ \ \ \ \textcolor{comment}{//\ A\ cloned\ cache\ is\ read-\/only\ if:}}
+\DoxyCodeLine{00324\ \ \ \ \ \textcolor{comment}{//\ 1.\ The\ inner\ cache\ is\ read-\/only,\ OR}}
+\DoxyCodeLine{00325\ \ \ \ \ \textcolor{comment}{//\ 2.\ This\ cache\ has\ been\ specifically\ marked\ as\ read-\/only}}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00327\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}})}
+\DoxyCodeLine{00328\ \ \ \ \ \{}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \ \textcolor{comment}{//\ No\ inner\ cache\ means\ read-\/only}}
+\DoxyCodeLine{00330\ \ \ \ \ \}}
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00332\ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ inner\ cache\ is\ read-\/only}}
+\DoxyCodeLine{00333\ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}}-\/>IsReadOnly())}
+\DoxyCodeLine{00334\ \ \ \ \ \{}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00336\ \ \ \ \ \}}
+\DoxyCodeLine{00337\ }
+\DoxyCodeLine{00338\ \ \ \ \ \textcolor{comment}{//\ Cloned\ caches\ provide\ isolated\ read/write\ operations}}
+\DoxyCodeLine{00339\ \ \ \ \ \textcolor{comment}{//\ They\ maintain\ isolation\ from\ the\ parent\ cache\ until\ committed}}
+\DoxyCodeLine{00340\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00341\ \}}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00343\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue>}
+\DoxyCodeLine{00344\ std::shared\_ptr<DataCache>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a2d36f834755a87d29d3cc7f441c1f454}{ClonedCache<TKey,\ TValue>::GetInner}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00345\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00346\ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}};}
+\DoxyCodeLine{00347\ \}}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue>}
+\DoxyCodeLine{00350\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a5ad4fe4766ae43a2b8869e990079a1a6}{ClonedCache<TKey,\ TValue>::EnsureCloned}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00351\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00352\ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a0ec517f4505672fccaae506a29d56cb8}{is\_cloned\_}})}
+\DoxyCodeLine{00353\ \ \ \ \ \{}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a0ec517f4505672fccaae506a29d56cb8}{is\_cloned\_}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00355\ \ \ \ \ \}}
+\DoxyCodeLine{00356\ \}}
+\DoxyCodeLine{00357\ }
+\DoxyCodeLine{00358\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue>}
+\DoxyCodeLine{00359\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a24f9c23b37d5de531c70137a6df0dd80}{ClonedCache<TKey,\ TValue>::CloneItem}}(\textcolor{keyword}{const}\ TKey\&\ key)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00360\ \textcolor{keyword}{}\{}
+\DoxyCodeLine{00361\ \ \ \ \ \textcolor{comment}{//\ Complete\ inner\ cache\ integration\ for\ cloning\ items}}
+\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00363\ \ \ \ \ \{}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Don't\ clone\ if\ already\ cloned\ or\ deleted}}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7}{cloned\_items\_}}.find(key)\ !=\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7}{cloned\_items\_}}.end()\ ||\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}}.find(key)\ !=\ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}}.end())}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};\ \ \textcolor{comment}{//\ Already\ handled}}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00369\ }
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Don't\ clone\ if\ no\ inner\ cache}}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}})}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00375\ }
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Try\ to\ get\ the\ item\ from\ the\ inner\ cache}}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ TValue\ value;}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\_}}-\/>TryGet(key,\ value))}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Successfully\ retrieved\ from\ inner\ cache\ -\/\ clone\ it}}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7}{cloned\_items\_}}[key]\ =\ value;}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a0ec517f4505672fccaae506a29d56cb8}{is\_cloned\_}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Item\ doesn't\ exist\ in\ inner\ cache}}
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Mark\ as\ deleted\ so\ we\ don't\ try\ to\ clone\ it\ again}}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}}.insert(key);}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00390\ \ \ \ \ \}}
+\DoxyCodeLine{00391\ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&\ e)}
+\DoxyCodeLine{00392\ \ \ \ \ \{}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Error\ during\ cloning\ -\/\ don't\ crash\ but\ don't\ clone\ either}}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ prevents\ infinite\ retry\ loops}}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\_items\_}}.insert(key);}
+\DoxyCodeLine{00396\ \ \ \ \ \}}
+\DoxyCodeLine{00397\ \}}
+\DoxyCodeLine{00398\ \}\ \ \textcolor{comment}{//\ namespace\ neo::persistence}}
+
+\end{DoxyCode}

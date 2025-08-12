@@ -1,0 +1,56 @@
+\doxysection{script.\+h}
+\hypertarget{script_8h_source}{}\label{script_8h_source}\index{include/neo/vm/script.h@{include/neo/vm/script.h}}
+\mbox{\hyperlink{script_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{instruction_8h}{neo/vm/instruction.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{vm_2internal_2byte__span_8h}{neo/vm/internal/byte\_span.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{vm_2internal_2byte__vector_8h}{neo/vm/internal/byte\_vector.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_script_a8239f409134e2b06866dfdd973d1050a}{Script}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_a8239f409134e2b06866dfdd973d1050a}{Script}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_a8239f409134e2b06866dfdd973d1050a}{Script}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_vector}{internal::ByteVector}}\&\ script);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_a8239f409134e2b06866dfdd973d1050a}{Script}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span}{internal::ByteSpan}}\&\ script);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_vector}{internal::ByteVector}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_ab2940794ce4bcda2c68c3d414d5a9011}{GetScript}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_aa5a98520c6d23a6dc7fb3d5d8c99e682}{GetLength}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00057\ \ \ \ \ std::shared\_ptr<Instruction>\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_a3935360f54e5b2652b1de036f9d53f66}{GetInstruction}}(int32\_t\ position)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00064\ \ \ \ \ std::shared\_ptr<Instruction>\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_a76070cb81560532399666c93d56c1df9}{GetNextInstruction}}(int32\_t\&\ position)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00072\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_a6a1ceef439be7d04d73882e3f9d1e781}{GetJumpDestination}}(int32\_t\ position,\ int32\_t\ offset)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_a1dc84891bc3d70a35b0d802cb28132e8}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_a8239f409134e2b06866dfdd973d1050a}{Script}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_aa85fc8b8abee8b16c3b9f0e791e55d74}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_a8239f409134e2b06866dfdd973d1050a}{Script}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_adb7253d9f75055a73a4049461f5a3fa3}{GetOperandSize}}(\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{OpCode}}\ opcode);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{static}\ int64\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_a8902e19afd00f37b5f4d1c8dd178b617}{GetPrice}}(\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{OpCode}}\ opcode);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_a1f63750c7ebb7c026f9aa6208f10fd33}{GetOpCodeName}}(\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{OpCode}}\ opcode);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00110\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_vector}{internal::ByteVector}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_a3cf771f5f8d7a37a6386096cd45d0886}{script\_}};}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keyword}{mutable}\ std::unordered\_map<int32\_t,\ std::shared\_ptr<Instruction>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_afa2ce50d8fbbef9a22ec08b657500f26}{instructions\_}};}
+\DoxyCodeLine{00112\ \};}
+\DoxyCodeLine{00113\ \}\ \ \textcolor{comment}{//\ namespace\ neo::vm}}
+
+\end{DoxyCode}

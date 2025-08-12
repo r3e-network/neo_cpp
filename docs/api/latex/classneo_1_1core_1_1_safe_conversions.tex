@@ -1,0 +1,326 @@
+\doxysection{neo\+::core\+::Safe\+Conversions Class Reference}
+\hypertarget{classneo_1_1core_1_1_safe_conversions}{}\label{classneo_1_1core_1_1_safe_conversions}\index{neo::core::SafeConversions@{neo::core::SafeConversions}}
+
+
+Safe string to number conversion utilities.  
+
+
+
+
+{\ttfamily \#include $<$safe\+\_\+conversions.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int32\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_safe_conversions_a5d2de8d66410881dae14377d64ac207c}{Safe\+To\+Int32}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Safely convert string to int32\+\_\+t. \end{DoxyCompactList}\item 
+static uint32\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_safe_conversions_a80061c20c91e6bb45cb1f0baca8f0688}{Safe\+To\+UInt32}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Safely convert string to uint32\+\_\+t. \end{DoxyCompactList}\item 
+static int64\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_safe_conversions_aa6fa4e91656fa706053cf888ee3f28d5}{Safe\+To\+Int64}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Safely convert string to int64\+\_\+t. \end{DoxyCompactList}\item 
+static uint64\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_safe_conversions_a2c59e5306c492ac50fdd0335cc9f125c}{Safe\+To\+UInt64}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Safely convert string to uint64\+\_\+t. \end{DoxyCompactList}\item 
+static double \mbox{\hyperlink{classneo_1_1core_1_1_safe_conversions_a62bc03678309d8f3fe7011d1b08f91c7}{Safe\+To\+Double}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Safely convert string to double. \end{DoxyCompactList}\item 
+static uint16\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_safe_conversions_a8d7368b1d5a7c26e7b14679b5cc60ec0}{Safe\+To\+Port}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Safely convert string to port number (1-\/65535) \end{DoxyCompactList}\item 
+static std\+::optional$<$ int32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1core_1_1_safe_conversions_a1378932a0e76a74c6600bcc62cf3d0a4}{Try\+To\+Int32}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Try to convert string to int32\+\_\+t. \end{DoxyCompactList}\item 
+static std\+::optional$<$ uint32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1core_1_1_safe_conversions_a5959a5a442dff8aea30ba58891da6c44}{Try\+To\+UInt32}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Try to convert string to uint32\+\_\+t. \end{DoxyCompactList}\item 
+static std\+::optional$<$ int64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1core_1_1_safe_conversions_a6cdd73e4331c42ac4b44fdd9e48db78d}{Try\+To\+Int64}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Try to convert string to int64\+\_\+t. \end{DoxyCompactList}\item 
+static std\+::optional$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1core_1_1_safe_conversions_a8fac27b30366750cbd2d27d94e731221}{Try\+To\+UInt64}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Try to convert string to uint64\+\_\+t. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1core_1_1_safe_conversions_ae7445e2d2bd7303c08d3781a3c3d2b9f}{Is\+Valid\+Neo\+Address}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Try to convert string to double. \end{DoxyCompactList}\item 
+static std\+::optional$<$ double $>$ \mbox{\hyperlink{classneo_1_1core_1_1_safe_conversions_a6192e2c2cf3d8c50654ce29a4e06cbd8}{Try\+To\+Double}} (const std\+::string \&str)
+\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1core_1_1_safe_conversions_ab8772b851f22357571f28bd34ed46788}{Validate\+Hex\+String}} (const std\+::string \&hex, size\+\_\+t expected\+Length=0)
+\begin{DoxyCompactList}\small\item\em Validate and sanitize hex string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Safe string to number conversion utilities. 
+
+These functions provide safe conversions from strings to numeric types with proper error handling and bounds checking. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1core_1_1_safe_conversions_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1core_1_1_safe_conversions_ae7445e2d2bd7303c08d3781a3c3d2b9f}\index{neo::core::SafeConversions@{neo::core::SafeConversions}!IsValidNeoAddress@{IsValidNeoAddress}}
+\index{IsValidNeoAddress@{IsValidNeoAddress}!neo::core::SafeConversions@{neo::core::SafeConversions}}
+\doxysubsubsection{\texorpdfstring{IsValidNeoAddress()}{IsValidNeoAddress()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_safe_conversions_ae7445e2d2bd7303c08d3781a3c3d2b9f} 
+bool neo\+::core\+::\+Safe\+Conversions\+::\+Is\+Valid\+Neo\+Address (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Try to convert string to double. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & Input string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Optional containing value if successful 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_safe_conversions_a62bc03678309d8f3fe7011d1b08f91c7}\index{neo::core::SafeConversions@{neo::core::SafeConversions}!SafeToDouble@{SafeToDouble}}
+\index{SafeToDouble@{SafeToDouble}!neo::core::SafeConversions@{neo::core::SafeConversions}}
+\doxysubsubsection{\texorpdfstring{SafeToDouble()}{SafeToDouble()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_safe_conversions_a62bc03678309d8f3fe7011d1b08f91c7} 
+double neo\+::core\+::\+Safe\+Conversions\+::\+Safe\+To\+Double (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Safely convert string to double. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & Input string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Parsed value 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & on conversion failure \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1core_1_1_safe_conversions_a5d2de8d66410881dae14377d64ac207c}\index{neo::core::SafeConversions@{neo::core::SafeConversions}!SafeToInt32@{SafeToInt32}}
+\index{SafeToInt32@{SafeToInt32}!neo::core::SafeConversions@{neo::core::SafeConversions}}
+\doxysubsubsection{\texorpdfstring{SafeToInt32()}{SafeToInt32()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_safe_conversions_a5d2de8d66410881dae14377d64ac207c} 
+int32\+\_\+t neo\+::core\+::\+Safe\+Conversions\+::\+Safe\+To\+Int32 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Safely convert string to int32\+\_\+t. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & Input string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Parsed value 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & on conversion failure \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1core_1_1_safe_conversions_aa6fa4e91656fa706053cf888ee3f28d5}\index{neo::core::SafeConversions@{neo::core::SafeConversions}!SafeToInt64@{SafeToInt64}}
+\index{SafeToInt64@{SafeToInt64}!neo::core::SafeConversions@{neo::core::SafeConversions}}
+\doxysubsubsection{\texorpdfstring{SafeToInt64()}{SafeToInt64()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_safe_conversions_aa6fa4e91656fa706053cf888ee3f28d5} 
+int64\+\_\+t neo\+::core\+::\+Safe\+Conversions\+::\+Safe\+To\+Int64 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Safely convert string to int64\+\_\+t. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & Input string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Parsed value 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & on conversion failure \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1core_1_1_safe_conversions_a8d7368b1d5a7c26e7b14679b5cc60ec0}\index{neo::core::SafeConversions@{neo::core::SafeConversions}!SafeToPort@{SafeToPort}}
+\index{SafeToPort@{SafeToPort}!neo::core::SafeConversions@{neo::core::SafeConversions}}
+\doxysubsubsection{\texorpdfstring{SafeToPort()}{SafeToPort()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_safe_conversions_a8d7368b1d5a7c26e7b14679b5cc60ec0} 
+uint16\+\_\+t neo\+::core\+::\+Safe\+Conversions\+::\+Safe\+To\+Port (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Safely convert string to port number (1-\/65535) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & Input string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Port number 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & on conversion failure or invalid port \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1core_1_1_safe_conversions_a80061c20c91e6bb45cb1f0baca8f0688}\index{neo::core::SafeConversions@{neo::core::SafeConversions}!SafeToUInt32@{SafeToUInt32}}
+\index{SafeToUInt32@{SafeToUInt32}!neo::core::SafeConversions@{neo::core::SafeConversions}}
+\doxysubsubsection{\texorpdfstring{SafeToUInt32()}{SafeToUInt32()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_safe_conversions_a80061c20c91e6bb45cb1f0baca8f0688} 
+uint32\+\_\+t neo\+::core\+::\+Safe\+Conversions\+::\+Safe\+To\+UInt32 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Safely convert string to uint32\+\_\+t. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & Input string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Parsed value 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & on conversion failure \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1core_1_1_safe_conversions_a2c59e5306c492ac50fdd0335cc9f125c}\index{neo::core::SafeConversions@{neo::core::SafeConversions}!SafeToUInt64@{SafeToUInt64}}
+\index{SafeToUInt64@{SafeToUInt64}!neo::core::SafeConversions@{neo::core::SafeConversions}}
+\doxysubsubsection{\texorpdfstring{SafeToUInt64()}{SafeToUInt64()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_safe_conversions_a2c59e5306c492ac50fdd0335cc9f125c} 
+uint64\+\_\+t neo\+::core\+::\+Safe\+Conversions\+::\+Safe\+To\+UInt64 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Safely convert string to uint64\+\_\+t. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & Input string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Parsed value 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & on conversion failure \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1core_1_1_safe_conversions_a6192e2c2cf3d8c50654ce29a4e06cbd8}\index{neo::core::SafeConversions@{neo::core::SafeConversions}!TryToDouble@{TryToDouble}}
+\index{TryToDouble@{TryToDouble}!neo::core::SafeConversions@{neo::core::SafeConversions}}
+\doxysubsubsection{\texorpdfstring{TryToDouble()}{TryToDouble()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_safe_conversions_a6192e2c2cf3d8c50654ce29a4e06cbd8} 
+std\+::optional$<$ double $>$ neo\+::core\+::\+Safe\+Conversions\+::\+Try\+To\+Double (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1core_1_1_safe_conversions_a1378932a0e76a74c6600bcc62cf3d0a4}\index{neo::core::SafeConversions@{neo::core::SafeConversions}!TryToInt32@{TryToInt32}}
+\index{TryToInt32@{TryToInt32}!neo::core::SafeConversions@{neo::core::SafeConversions}}
+\doxysubsubsection{\texorpdfstring{TryToInt32()}{TryToInt32()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_safe_conversions_a1378932a0e76a74c6600bcc62cf3d0a4} 
+std\+::optional$<$ int32\+\_\+t $>$ neo\+::core\+::\+Safe\+Conversions\+::\+Try\+To\+Int32 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Try to convert string to int32\+\_\+t. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & Input string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Optional containing value if successful 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1core_1_1_safe_conversions_a6cdd73e4331c42ac4b44fdd9e48db78d}\index{neo::core::SafeConversions@{neo::core::SafeConversions}!TryToInt64@{TryToInt64}}
+\index{TryToInt64@{TryToInt64}!neo::core::SafeConversions@{neo::core::SafeConversions}}
+\doxysubsubsection{\texorpdfstring{TryToInt64()}{TryToInt64()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_safe_conversions_a6cdd73e4331c42ac4b44fdd9e48db78d} 
+std\+::optional$<$ int64\+\_\+t $>$ neo\+::core\+::\+Safe\+Conversions\+::\+Try\+To\+Int64 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Try to convert string to int64\+\_\+t. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & Input string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Optional containing value if successful 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1core_1_1_safe_conversions_a5959a5a442dff8aea30ba58891da6c44}\index{neo::core::SafeConversions@{neo::core::SafeConversions}!TryToUInt32@{TryToUInt32}}
+\index{TryToUInt32@{TryToUInt32}!neo::core::SafeConversions@{neo::core::SafeConversions}}
+\doxysubsubsection{\texorpdfstring{TryToUInt32()}{TryToUInt32()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_safe_conversions_a5959a5a442dff8aea30ba58891da6c44} 
+std\+::optional$<$ uint32\+\_\+t $>$ neo\+::core\+::\+Safe\+Conversions\+::\+Try\+To\+UInt32 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Try to convert string to uint32\+\_\+t. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & Input string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Optional containing value if successful 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1core_1_1_safe_conversions_a8fac27b30366750cbd2d27d94e731221}\index{neo::core::SafeConversions@{neo::core::SafeConversions}!TryToUInt64@{TryToUInt64}}
+\index{TryToUInt64@{TryToUInt64}!neo::core::SafeConversions@{neo::core::SafeConversions}}
+\doxysubsubsection{\texorpdfstring{TryToUInt64()}{TryToUInt64()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_safe_conversions_a8fac27b30366750cbd2d27d94e731221} 
+std\+::optional$<$ uint64\+\_\+t $>$ neo\+::core\+::\+Safe\+Conversions\+::\+Try\+To\+UInt64 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Try to convert string to uint64\+\_\+t. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & Input string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Optional containing value if successful 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1core_1_1_safe_conversions_ab8772b851f22357571f28bd34ed46788}\index{neo::core::SafeConversions@{neo::core::SafeConversions}!ValidateHexString@{ValidateHexString}}
+\index{ValidateHexString@{ValidateHexString}!neo::core::SafeConversions@{neo::core::SafeConversions}}
+\doxysubsubsection{\texorpdfstring{ValidateHexString()}{ValidateHexString()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_safe_conversions_ab8772b851f22357571f28bd34ed46788} 
+std\+::string neo\+::core\+::\+Safe\+Conversions\+::\+Validate\+Hex\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{, }\item[{size\+\_\+t}]{expected\+Length}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Validate and sanitize hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & Input hex string (may have 0x prefix) \\
+\hline
+{\em expected\+Length} & Expected byte length (0 for any length) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Sanitized hex string without 0x prefix 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & on validation failure \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{safe__conversions_8h}{safe\+\_\+conversions.\+h}}\end{DoxyCompactItemize}

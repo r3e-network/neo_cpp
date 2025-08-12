@@ -1,0 +1,46 @@
+\doxysection{blockchain\+\_\+callbacks.\+h}
+\hypertarget{blockchain__callbacks_8h_source}{}\label{blockchain__callbacks_8h_source}\index{include/neo/ledger/blockchain\_callbacks.h@{include/neo/ledger/blockchain\_callbacks.h}}
+\mbox{\hyperlink{blockchain__callbacks_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2block_8h}{neo/ledger/block.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2transaction_8h}{neo/ledger/transaction.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a4c1e15e721197c21492f7e87b28f03cf}{BlockchainCallbacks}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a01f188b765a71c560d7d79632e3bd6a3}{BlockPersistenceCallback}}\ =\ std::function<void(std::shared\_ptr<Block>)>;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_aaca42d4869078e46b52f5df855e00bc1}{TransactionExecutionCallback}}\ =\ std::function<void(std::shared\_ptr<Transaction>)>;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a4c1e15e721197c21492f7e87b28f03cf}{BlockchainCallbacks}}();}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00039\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_ada454a5277e9d3d787a2aeba2d42a507}{RegisterBlockPersistenceCallback}}(\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a01f188b765a71c560d7d79632e3bd6a3}{BlockPersistenceCallback}}\ callback);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a57b1ab0c9cab45639dda8e2110e82e40}{UnregisterBlockPersistenceCallback}}(int32\_t\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00052\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_aff47788267c94e26f0d61015b23353fa}{RegisterTransactionExecutionCallback}}(\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_aaca42d4869078e46b52f5df855e00bc1}{TransactionExecutionCallback}}\ callback);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_aa3f9f07778f20965b1d5b8e59e908ba5}{UnregisterTransactionExecutionCallback}}(int32\_t\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a9fb4f98f76eaa580d7f4b2e260494a56}{NotifyBlockPersistence}}(std::shared\_ptr<Block>\ block);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_ad7255556d55ac6ee37a8edc0d2d236a3}{NotifyTransactionExecution}}(std::shared\_ptr<Transaction>\ transaction);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a788081b6a9f8054bc7e71213d8f0b25d}{mutex\_}};}
+\DoxyCodeLine{00074\ \ \ \ \ std::unordered\_map<int32\_t,\ BlockPersistenceCallback>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a7795998686b60378aa315801a957f63e}{blockPersistenceCallbacks\_}};}
+\DoxyCodeLine{00075\ \ \ \ \ std::unordered\_map<int32\_t,\ TransactionExecutionCallback>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a67dd9a81f56167053e72184fb064331e}{transactionExecutionCallbacks\_}};}
+\DoxyCodeLine{00076\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a92e2786410b959f2adeb9af5c1c18603}{nextCallbackId\_}};}
+\DoxyCodeLine{00077\ \};}
+\DoxyCodeLine{00078\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}

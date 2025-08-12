@@ -1,0 +1,47 @@
+\doxysection{addr\+\_\+payload.\+h}
+\hypertarget{addr__payload_8h_source}{}\label{addr__payload_8h_source}\index{include/neo/network/p2p/payloads/addr\_payload.h@{include/neo/network/p2p/payloads/addr\_payload.h}}
+\mbox{\hyperlink{addr__payload_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__reader_8h}{neo/io/binary\_reader.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__writer_8h}{neo/io/binary\_writer.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__reader_8h}{neo/io/json\_reader.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__writer_8h}{neo/io/json\_writer.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{p2p_2ipayload_8h}{neo/network/p2p/ipayload.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{payloads_2network__address__with__time_8h}{neo/network/p2p/payloads/network\_address\_with\_time.h}}>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads}{neo::network::p2p::payloads}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload_ab46109c464f6598eec9caaeb755e0665}{AddrPayload}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{IPayload}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload_aadc39909caf45d3fa9dc87fa11ce140c}{MaxCountToSend}}\ =\ 200;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload_ab46109c464f6598eec9caaeb755e0665}{AddrPayload}}();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload_ab46109c464f6598eec9caaeb755e0665}{AddrPayload}}(\textcolor{keyword}{const}\ std::vector<NetworkAddressWithTime>\&\ addresses);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<NetworkAddressWithTime>\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload_ad50d95353499ee9fe81076bf6def3444}{GetAddressList}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload_aaec8bcbf954bd39ce833e3cef15ce23d}{SetAddressList}}(\textcolor{keyword}{const}\ std::vector<NetworkAddressWithTime>\&\ addresses);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload_aa494eae77984e62a5cb587e39e5f9d87}{GetSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload_a3d267d4f72d83f477ebddbdf659d619b}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload_af849c319819af1ec0389ad69da9b2f28}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload_acf0f8da45fd52f2ef4bcf10e5e6eb05e}{SerializeJson}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io::JsonWriter}}\&\ writer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload_a197cdc86c1efe7f8cb8ea0e192aab36f}{DeserializeJson}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io::JsonReader}}\&\ reader);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00082\ \ \ \ \ std::vector<NetworkAddressWithTime>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload_a626e4f4fc306c39277ebce70300c9f79}{addressList\_}};}
+\DoxyCodeLine{00083\ \};}
+\DoxyCodeLine{00084\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p::payloads}}
+
+\end{DoxyCode}

@@ -1,0 +1,55 @@
+\doxysection{not\+\_\+valid\+\_\+before.\+h}
+\hypertarget{not__valid__before_8h_source}{}\label{not__valid__before_8h_source}\index{include/neo/network/p2p/payloads/not\_valid\_before.h@{include/neo/network/p2p/payloads/not\_valid\_before.h}}
+\mbox{\hyperlink{not__valid__before_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__reader_8h}{neo/io/binary\_reader.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__writer_8h}{neo/io/binary\_writer.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__reader_8h}{neo/io/json\_reader.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__writer_8h}{neo/io/json\_writer.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{transaction__attribute_8h}{neo/ledger/transaction\_attribute.h}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads}{neo::network::p2p::payloads}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_a19be3c30ccb431e0e379bd10f7634d64}{NotValidBefore}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger::TransactionAttribute}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00019\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_a88df7cdabdd3ea3cb02e6b26751372ae}{height\_}};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_a19be3c30ccb431e0e379bd10f7634d64}{NotValidBefore}}();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_a19be3c30ccb431e0e379bd10f7634d64}{NotValidBefore}}(uint32\_t\ height);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_ac647fcb214f6f6c11c353371ab6bd570}{GetHeight}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_ac8036d3ca47b9fd97f9fd36c45016c63}{SetHeight}}(uint32\_t\ height);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adf}{ledger::TransactionAttribute::Usage}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_afd754b28e42ea00feac42804defdd601}{GetType}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_a410ee96698acecfab70c3c39aba79424}{AllowMultiple}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_a4924df613e449754945bd56231f95dee}{GetSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_accd3bddf9b177ea31f9290ea518a0cf2}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_a9f3644662d2ee85946b1f2216a232079}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_abb4ef1fc9ca3e9bac5ae3c2bfe4c7ef3}{SerializeJson}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io::JsonWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_a49d49a2a8a0e30763d1f2e0e057378c5}{DeserializeJson}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io::JsonReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_a5aa161af41fdd1db060224de4311597b}{Verify}}(\textcolor{comment}{/*\ DataCache\&\ snapshot,\ const\ Transaction\&\ transaction\ */})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00101\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_a9ce335306d6e7b1dd0af3b34de2cf179}{CalculateNetworkFee}}(\textcolor{comment}{/*\ DataCache\&\ snapshot,\ const\ Transaction\&\ transaction\ */})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_a7e358311d08b8a333da99e0aa9ba049a}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_a19be3c30ccb431e0e379bd10f7634d64}{NotValidBefore}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_ac89e90c2affaa961204607261d3ff6c3}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_a19be3c30ccb431e0e379bd10f7634d64}{NotValidBefore}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00116\ \};}
+\DoxyCodeLine{00117\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p::payloads}}
+
+\end{DoxyCode}

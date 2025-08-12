@@ -1,0 +1,123 @@
+\doxysection{notary.\+h}
+\hypertarget{notary_8h_source}{}\label{notary_8h_source}\index{include/neo/smartcontract/native/notary.h@{include/neo/smartcontract/native/notary.h}}
+\mbox{\hyperlink{notary_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ecpoint_8h}{neo/cryptography/ecc/ecpoint.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{store__view_8h}{neo/persistence/store\_view.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{native_2native__contract_8h}{neo/smartcontract/native/native\_contract.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{iinteroperable_8h}{neo/vm/iinteroperable.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ireference__counter_8h}{neo/vm/ireference\_counter.h}}>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stack__item_8h}{neo/vm/stack\_item.h}}>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ Forward\ declarations}}
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract}{neo::smartcontract}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}};}
+\DoxyCodeLine{00018\ \}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native}{neo::smartcontract::native}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a208986d70f50cb96eda422a6d684f869}{Notary}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a60667ade06e1b9a3c3ef7e2c6a68a632}{NativeContract}}}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//\ Forward\ declaration}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_1_1_deposit}{Deposit}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int32\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_ad7bbceb77b2025e3b461442d9d2667e0}{ID}}\ =\ -\/10;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a8e5cb049aea6ea5f92fb9c0a79e910e1}{DEFAULT\_MAX\_NOT\_VALID\_BEFORE\_DELTA}}\ =\ 140;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_ad2ddd0c9a9bbe4e419635495081e76aa}{DEFAULT\_DEPOSIT\_DELTA\_TILL}}\ =\ 5760;}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_ade89f41552a519bb8b44606174e5e865}{PREFIX\_DEPOSIT}}\ =\ 1;}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a30d6d32d7cf4588e53915f58be2b7d8e}{PREFIX\_MAX\_NOT\_VALID\_BEFORE\_DELTA}}\ =\ 10;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a208986d70f50cb96eda422a6d684f869}{Notary}}();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<Notary>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a65c2b739b0f132b03fe73ec911a98e2e}{GetInstance}}();}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_abd19afd8c7bb69271211faff803b9764}{GetActiveInHardfork}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a19d36673a0ac9a075b2f077ea64ed168}{InitializeContract}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,\ uint32\_t\ hardfork);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a61c53f3faf65ba2bb911c462510be460a0be127da4aa5d9457320f86ac56a213d}{OnPersist}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a61c53f3faf65ba2bb911c462510be460a14fc0d4444079c6efd0036ffc5ef562c}{PostPersist}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00102\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_ad201b185dffe017e713d25b03b6b77ae}{GetMaxNotValidBeforeDelta}}(std::shared\_ptr<persistence::StoreView>\ snapshot)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a17136c3d1df927c763e55d85e41eef94}{SetMaxNotValidBeforeDelta}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,\ uint32\_t\ value);}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00118\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_aef6dbb84457583743e99509ca8e179e5}{ExpirationOf}}(std::shared\_ptr<persistence::StoreView>\ snapshot,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ account)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00126\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_ae3735437b732b3833e62fdc4482e91da}{BalanceOf}}(std::shared\_ptr<persistence::StoreView>\ snapshot,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ account)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a141262f7ce5ec7d6fdd6a58e3adb90a2}{LockDepositUntil}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{ApplicationEngine}}\&\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ account,\ uint32\_t\ till);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_abd9e2f13654c9eb0bdb770b105dd2880}{Withdraw}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{ApplicationEngine}}\&\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ from,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ to);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_ad36cc333b49d13fd1d8d3aa21c49b599}{Verify}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{ApplicationEngine}}\&\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ signature);}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_ad61da4f31af89dfae2d5a227e5253ba8}{Initialize}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a23f1a4a1ed8a30f8349ec3bd5ec8fbd7}{OnNEP17Payment}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{ApplicationEngine}}\&\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ from,\ int64\_t\ amount,}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<vm::StackItem>\ data);}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{comment}{//\ Method\ adapters\ for\ RegisterMethod\ calls}}
+\DoxyCodeLine{00171\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_afc9adc62f022400e4c38049f8e24acfd}{OnGetMaxNotValidBeforeDelta}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00173\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a3ffed7f2eb7a18b7faf5a975ca5ec3ad}{OnSetMaxNotValidBeforeDelta}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00175\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a1f7d82b6e15ecf79f791401302a5894f}{OnExpirationOf}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00177\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a400eebb3e25bec892cd71987c212d85b}{OnBalanceOf}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00179\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a284f23687d5475f6841d01e865ff7371}{OnLockDepositUntil}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00181\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a87cf0dd1755e202f2ef199f0c80bf466}{OnWithdraw}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00183\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a44d7a7234b7d9420503e9a6d654ebf76}{OnVerify}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00185\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a71d4fbe236ad8f05396f2b613fbd2f6f}{OnNEP17PaymentAdapter}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00193\ \ \ \ \ std::vector<cryptography::ecc::ECPoint>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a79c597cc855b5de12aa3b4342fb13571}{GetNotaryNodes}}(std::shared\_ptr<persistence::StoreView>\ snapshot)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00202\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a6257e43830712fec71ed49ce0188227c}{CalculateNotaryReward}}(std::shared\_ptr<persistence::StoreView>\ snapshot,\ int64\_t\ nFees,\ \textcolor{keywordtype}{int}\ nNotaries)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00210\ \ \ \ \ std::shared\_ptr<Deposit>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a9986d1ea4cd7b93948fcc4776b97d0db}{GetDepositFor}}(std::shared\_ptr<persistence::StoreView>\ snapshot,}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ account)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_adee3695f93e0c3f2cf184ade4c34dd10}{PutDepositFor}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{ApplicationEngine}}\&\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ account,\ std::shared\_ptr<Deposit>\ deposit);}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a2ad953d1616039208f97ae656e6d6301}{RemoveDepositFor}}(std::shared\_ptr<persistence::StoreView>\ snapshot,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ account);}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_1_1_deposit_a7e83e851c72414297b7eb1d0b4fc2e97}{Deposit}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1vm_1_1_i_interoperable}{vm::IInteroperable}}}
+\DoxyCodeLine{00233\ \ \ \ \ \{}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_1_1_deposit_adfb4d0863c2a9a8e0a02220c4751fd76}{Amount}};}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_1_1_deposit_a35fb65ff1bf2fb18049d66a2f15ad745}{Till}};}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_1_1_deposit_a7e83e851c72414297b7eb1d0b4fc2e97}{Deposit}}();}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_1_1_deposit_a7e83e851c72414297b7eb1d0b4fc2e97}{Deposit}}(int64\_t\ amount,\ uint32\_t\ till);}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_1_1_deposit_ad6763ae086c58f6f5d1a65471eba7a18}{FromStackItem}}(std::shared\_ptr<vm::StackItem>\ stackItem)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_1_1_deposit_a7d85fb4dfb3f71c6d0f7c2a6f5ea0066}{ToStackItem}}(\mbox{\hyperlink{classneo_1_1vm_1_1_i_reference_counter}{vm::IReferenceCounter}}*\ referenceCounter)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00269\ \ \ \ \ \};}
+\DoxyCodeLine{00270\ \};}
+\DoxyCodeLine{00271\ \}\ \ \textcolor{comment}{//\ namespace\ neo::smartcontract::native}}
+
+\end{DoxyCode}

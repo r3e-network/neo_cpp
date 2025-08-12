@@ -1,0 +1,25 @@
+var classneo_1_1plugins_1_1_plugin_base =
+[
+    [ "PluginBase", "classneo_1_1plugins_1_1_plugin_base.html#ae2713af7147395e3f7230925418aa28d", null ],
+    [ "~PluginBase", "classneo_1_1plugins_1_1_plugin_base.html#ad52bbcbde275ae0dc3fde4a92f10bde6", null ],
+    [ "GetAuthor", "classneo_1_1plugins_1_1_plugin_base.html#ae185958e6ee4d9b509aad4a04b2845be", null ],
+    [ "GetDescription", "classneo_1_1plugins_1_1_plugin_base.html#a44eff3017b07b2d8c46b21abaf1dabf4", null ],
+    [ "GetName", "classneo_1_1plugins_1_1_plugin_base.html#add9eee171ca11e6d15bd9b024f92f7dd", null ],
+    [ "GetNeoSystem", "classneo_1_1plugins_1_1_plugin_base.html#af9916e44d745847ea6a2c847b55fffb1", null ],
+    [ "GetRPCServer", "classneo_1_1plugins_1_1_plugin_base.html#a79fc4101cc2a9af9cd4155ac2c07802f", null ],
+    [ "GetVersion", "classneo_1_1plugins_1_1_plugin_base.html#a1060247300f8288aded7ce8487947546", null ],
+    [ "Initialize", "classneo_1_1plugins_1_1_plugin_base.html#aa09dbaf0a4a281ed5098cb04bee9a614", null ],
+    [ "IsRunning", "classneo_1_1plugins_1_1_plugin_base.html#a37cd2ae749afcc1dafc56ba9e37d5e4d", null ],
+    [ "OnInitialize", "classneo_1_1plugins_1_1_plugin_base.html#a73e21bf341eaf38562a3e45452013152", null ],
+    [ "OnStart", "classneo_1_1plugins_1_1_plugin_base.html#a6792009d892718fdb3d605c8d4cb01d6", null ],
+    [ "OnStop", "classneo_1_1plugins_1_1_plugin_base.html#af88eee48057086589f386ff78e20d09f", null ],
+    [ "Start", "classneo_1_1plugins_1_1_plugin_base.html#a247def5567cf352878b0d393e2fe18f8", null ],
+    [ "Stop", "classneo_1_1plugins_1_1_plugin_base.html#abc80c400e1460dabf596acd8406c81bf", null ],
+    [ "author_", "classneo_1_1plugins_1_1_plugin_base.html#a76ec8d70b61cbaaf4094ffe13d81c798", null ],
+    [ "description_", "classneo_1_1plugins_1_1_plugin_base.html#abd3c59a4c8459dd5d8801a5c787702e0", null ],
+    [ "name_", "classneo_1_1plugins_1_1_plugin_base.html#ab11013ec99fbb7ec02546a3c215841ba", null ],
+    [ "neoSystem_", "classneo_1_1plugins_1_1_plugin_base.html#a1252a82a62bb8b0242259704286b8ac7", null ],
+    [ "rpcServer_", "classneo_1_1plugins_1_1_plugin_base.html#ad1d6075a799530e86aa68e1686524126", null ],
+    [ "running_", "classneo_1_1plugins_1_1_plugin_base.html#a8b93bbe8ed93133419889ebcb976f91b", null ],
+    [ "version_", "classneo_1_1plugins_1_1_plugin_base.html#a3505040204541826fa05110345c3dcdd", null ]
+];

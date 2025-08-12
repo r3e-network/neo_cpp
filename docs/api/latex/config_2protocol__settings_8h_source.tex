@@ -1,0 +1,50 @@
+\doxysection{protocol\+\_\+settings.\+h}
+\hypertarget{config_2protocol__settings_8h_source}{}\label{config_2protocol__settings_8h_source}\index{include/neo/config/protocol\_settings.h@{include/neo/config/protocol\_settings.h}}
+\mbox{\hyperlink{config_2protocol__settings_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1config}{neo::config}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings}{ProtocolSettings}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a963f731f40507e2a4b715d6693747437}{Network}}\ =\ 860833102;}
+\DoxyCodeLine{00015\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_ab7ea8e367bc186cd73cc1f4e41a1a914}{AddressVersion}}\ =\ 53;}
+\DoxyCodeLine{00016\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a77dc1ea086de78da5a732816b9b2d687}{MillisecondsPerBlock}}\ =\ 15000;}
+\DoxyCodeLine{00017\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a5b6b60da2547b35729965eefc6e6d61a}{MaxTransactionsPerBlock}}\ =\ 512;}
+\DoxyCodeLine{00018\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a2a910dce11878108adf8449bf4970e6c}{MemoryPoolMaxTransactions}}\ =\ 50000;}
+\DoxyCodeLine{00019\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a2d5e68d1a6d04d4e1f1ecc92493ba952}{MaxTraceableBlocks}}\ =\ 2102400;}
+\DoxyCodeLine{00020\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a2d161dcdb024dcb5b99617f9a578b618}{InitialGasDistribution}}\ =\ 5200000000000000;}
+\DoxyCodeLine{00021\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a654c47d1866b23617a69719e5d0fe13b}{ValidatorsCount}}\ =\ 7;}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a4ea4551f2097ec7c0889a08a70adb437}{StandbyCommittee}};}
+\DoxyCodeLine{00024\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a73d774db32c6513e390acbfe5c37a92f}{SeedList}};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings}{ProtocolSettings}}\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a6a52e80185bbab1f3a2800481b4087ec}{GetDefault}}()}
+\DoxyCodeLine{00030\ \ \ \ \ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings}{ProtocolSettings}}\ settings;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ settings.\mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a963f731f40507e2a4b715d6693747437}{Network}}\ =\ 860833102;}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ settings.\mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_ab7ea8e367bc186cd73cc1f4e41a1a914}{AddressVersion}}\ =\ 53;}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ settings.\mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a77dc1ea086de78da5a732816b9b2d687}{MillisecondsPerBlock}}\ =\ 15000;}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ settings.\mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a5b6b60da2547b35729965eefc6e6d61a}{MaxTransactionsPerBlock}}\ =\ 512;}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ settings.\mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a2a910dce11878108adf8449bf4970e6c}{MemoryPoolMaxTransactions}}\ =\ 50000;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ settings.\mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a2d5e68d1a6d04d4e1f1ecc92493ba952}{MaxTraceableBlocks}}\ =\ 2102400;}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ settings.\mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a2d161dcdb024dcb5b99617f9a578b618}{InitialGasDistribution}}\ =\ 5200000000000000;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ settings.\mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a654c47d1866b23617a69719e5d0fe13b}{ValidatorsCount}}\ =\ 7;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Default\ seed\ list}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ settings.\mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a73d774db32c6513e390acbfe5c37a92f}{SeedList}}\ =\ \{\textcolor{stringliteral}{"{}seed1.neo.org:10333"{}},\ \textcolor{stringliteral}{"{}seed2.neo.org:10333"{}},\ \textcolor{stringliteral}{"{}seed3.neo.org:10333"{}},\ \textcolor{stringliteral}{"{}seed4.neo.org:10333"{}},}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}seed5.neo.org:10333"{}}\};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ settings;}
+\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00051\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_aaa2a107a0723ca78ad4443aa435306b3}{GetNetwork}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings_a963f731f40507e2a4b715d6693747437}{Network}};\ \}}
+\DoxyCodeLine{00052\ \};}
+\DoxyCodeLine{00053\ \}\ \ \textcolor{comment}{//\ namespace\ neo::config}}
+
+\end{DoxyCode}

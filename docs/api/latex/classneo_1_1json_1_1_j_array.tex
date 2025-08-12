@@ -1,0 +1,513 @@
+\doxysection{neo\+::json\+::JArray Class Reference}
+\hypertarget{classneo_1_1json_1_1_j_array}{}\label{classneo_1_1json_1_1_j_array}\index{neo::json::JArray@{neo::json::JArray}}
+
+
+Represents a JSON array.  
+
+
+
+
+{\ttfamily \#include $<$jarray.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::json\+::JArray\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::json\+::JArray\+:
+% FIG 1
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1json_1_1_j_array_ade864cda36281ccfa4546b37bae5ec6e}{Items}} = std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}}$>$$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1json_1_1_j_array_a52d83eda8e44e95a1ccbfb5782a7f758}{JArray}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1json_1_1_j_array_a3bd943eac3991c9518668a96bc61e98a}{JArray}} (const \mbox{\hyperlink{classneo_1_1json_1_1_j_array_ade864cda36281ccfa4546b37bae5ec6e}{Items}} \&items)
+\begin{DoxyCompactList}\small\item\em Constructor with initial items. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1json_1_1_j_array_aa1df1defbe183f57506db6e058a16aa0}{JArray}} (std\+::initializer\+\_\+list$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ $>$ items)
+\begin{DoxyCompactList}\small\item\em Constructor with initializer list. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1json_afc636cefa75119dde9ec4c7058ab605c}{JToken\+Type}} \mbox{\hyperlink{classneo_1_1json_1_1_j_array_ac6e0dd5d9c4a8a5e554c935fcebb8619}{Get\+Type}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the type of this token. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ \mbox{\hyperlink{classneo_1_1json_1_1_j_array_a8c65f5aed009852f6aecef3df606902a}{operator\mbox{[}$\,$\mbox{]}}} (int index) const override
+\begin{DoxyCompactList}\small\item\em Gets or sets the child token at the specified index. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1json_1_1_j_array_af8f316c90e01d2221f54139ed5e46c1b}{To\+String}} () const override
+\begin{DoxyCompactList}\small\item\em Converts this token to a string representation. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ \mbox{\hyperlink{classneo_1_1json_1_1_j_array_acf10023c81ff19c5131ec868eaa52579}{Clone}} () const override
+\begin{DoxyCompactList}\small\item\em Clones this token. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1json_1_1_j_array_a5eec695361176640941d9a48321b5e09}{Equals}} (const \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} \&other) const override
+\begin{DoxyCompactList}\small\item\em Checks if this token equals another token. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1json_1_1_j_array_a481d886207829242f0529c9f5effac55}{Add}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ item)
+\begin{DoxyCompactList}\small\item\em Adds an item to the array. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1json_1_1_j_array_a100993345b7fcee09fe7b290561644f1}{Remove\+At}} (int index)
+\begin{DoxyCompactList}\small\item\em Removes an item at the specified index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1json_1_1_j_array_acc76787002283385bf2306dfce5ded83}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears all items from the array. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1json_1_1_j_array_a9ac73e148505d5611f79f4e652974e84}{Count}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of items in the array. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1json_1_1_j_array_ae627b86b1cf9cc3df7653b29ccdb6ad2}{Is\+Empty}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the array is empty. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1json_1_1_j_array_ade864cda36281ccfa4546b37bae5ec6e}{Items}} \& \mbox{\hyperlink{classneo_1_1json_1_1_j_array_a7c5e3f94d1592fd5ce4d77666b896fd2}{Get\+Items}} () const
+\begin{DoxyCompactList}\small\item\em Gets the items. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1json_1_1_j_array_ade864cda36281ccfa4546b37bae5ec6e}{Items}} \& \mbox{\hyperlink{classneo_1_1json_1_1_j_array_a587bb391540bca2280273455c9b40f26}{Get\+Items}} ()
+\begin{DoxyCompactList}\small\item\em Gets the items (mutable). \end{DoxyCompactList}\item 
+Items\+::iterator \mbox{\hyperlink{classneo_1_1json_1_1_j_array_ab083611ca8cc595e99437160e6bed507}{begin}} ()
+\begin{DoxyCompactList}\small\item\em Gets an iterator to the beginning. \end{DoxyCompactList}\item 
+Items\+::iterator \mbox{\hyperlink{classneo_1_1json_1_1_j_array_a6a0f2c99ca637785090536ef039de86f}{end}} ()
+\begin{DoxyCompactList}\small\item\em Gets an iterator to the end. \end{DoxyCompactList}\item 
+Items\+::const\+\_\+iterator \mbox{\hyperlink{classneo_1_1json_1_1_j_array_a59c55518fec1a8cdbd2965e57a858a29}{begin}} () const
+\begin{DoxyCompactList}\small\item\em Gets a const iterator to the beginning. \end{DoxyCompactList}\item 
+Items\+::const\+\_\+iterator \mbox{\hyperlink{classneo_1_1json_1_1_j_array_a3487d50650d383a48ad17443bae57d8c}{end}} () const
+\begin{DoxyCompactList}\small\item\em Gets a const iterator to the end. \end{DoxyCompactList}\item 
+Items\+::const\+\_\+iterator \mbox{\hyperlink{classneo_1_1json_1_1_j_array_ab7b7b2843a0bc42359d01ce3023659ee}{cbegin}} () const
+\begin{DoxyCompactList}\small\item\em Gets a const iterator to the beginning. \end{DoxyCompactList}\item 
+Items\+::const\+\_\+iterator \mbox{\hyperlink{classneo_1_1json_1_1_j_array_ab1b7f0d51d94baf76bd7e9efe3ac7d38}{cend}} () const
+\begin{DoxyCompactList}\small\item\em Gets a const iterator to the end. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{neo\+::json\+::\+JToken}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a5d9f6c0845587eaff048a37312cdbbbf}{\texorpdfstring{$\sim$}{\string~}\+JToken}} ()=default
+\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a09467c3b4853cd918c45a8030c237553}{operator\mbox{[}$\,$\mbox{]}}} (const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Gets or sets the properties of the JSON object. \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a85568ef627871ffc66c30a41179c32e1}{operator\mbox{[}$\,$\mbox{]}}} (const char \texorpdfstring{$\ast$}{*}key) const
+\begin{DoxyCompactList}\small\item\em Gets or sets the properties of the JSON object. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1json_1_1_j_token_aefe75d06c0767387b11b76b244ba3126}{As\+Boolean}} () const
+\begin{DoxyCompactList}\small\item\em Converts the current JSON token to a boolean value. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classneo_1_1json_1_1_j_token_ad4a6eb6f88363bd5b24300f0f7826dd9}{As\+Number}} () const
+\begin{DoxyCompactList}\small\item\em Converts the current JSON token to a floating point number. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classneo_1_1json_1_1_j_token_af71c278113c54dd73bb000c693931e97}{As\+String}} () const
+\begin{DoxyCompactList}\small\item\em Converts the current JSON token to a string. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a65f32bfdc482e4f8b7e6c10691ed0e3f}{Get\+Boolean}} () const
+\begin{DoxyCompactList}\small\item\em Converts the current JSON token to a boolean value. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a5b033737332d8f3d847192a1832d43f9}{Get\+Int32}} () const
+\begin{DoxyCompactList}\small\item\em Converts the current JSON token to a 32-\/bit signed integer. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a57552d677e367b04dfc54125fc469070}{Get\+Number}} () const
+\begin{DoxyCompactList}\small\item\em Converts the current JSON token to a floating point number. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classneo_1_1json_1_1_j_token_adcd32e1127833068175eab6cfd2e2e26}{Get\+String}} () const
+\begin{DoxyCompactList}\small\item\em Converts the current JSON token to a string. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a47644200ec64d269a31396deafa8c3f2}{To\+String}} (bool indented) const
+\begin{DoxyCompactList}\small\item\em Converts this token to a string representation. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a11424901e92e2c5a78cd115403cbc729}{operator bool}} () const
+\begin{DoxyCompactList}\small\item\em Implicit conversion to bool. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a9f5e1e2bf3cf23085844ce7e572bda83}{operator std\+::string}} () const
+\begin{DoxyCompactList}\small\item\em Implicit conversion to string. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a495d3df1ba8f0da57df06873b4b32f5c}{operator int}} () const
+\begin{DoxyCompactList}\small\item\em Implicit conversion to int. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1json_1_1_j_token_aeb835c697ffe9ee39e6a412cb8ce445a}{operator double}} () const
+\begin{DoxyCompactList}\small\item\em Implicit conversion to double. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1json_1_1_j_array_abe6d4896d45ed810ca0b441ed9b9fdea}{Write\+Json}} (std\+::string \&output, bool indented=false, int indent\+\_\+level=0) const override
+\begin{DoxyCompactList}\small\item\em Writes this token to JSON output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1json_1_1_j_array_ade864cda36281ccfa4546b37bae5ec6e}{Items}} \mbox{\hyperlink{classneo_1_1json_1_1_j_array_a5822e4b2a0c6ed73f8468581b6f4a3bc}{items\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{neo\+::json\+::\+JToken}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a2274871f837dca04468b48209fa05993}{Parse}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}}, int max\+\_\+nest=64)
+\begin{DoxyCompactList}\small\item\em Parses a JSON string into a \doxylink{classneo_1_1json_1_1_j_token}{JToken}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{neo\+::json\+::\+JToken}}}
+\begin{DoxyCompactItemize}
+\item 
+static const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a30a35aa6ba3f794842e08ccfa98b8863}{Null}} = nullptr
+\begin{DoxyCompactList}\small\item\em Represents a null token. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Protected Member Functions inherited from \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{neo\+::json\+::\+JToken}}}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a1a8e9b1d2fe1b4e1aab211373ad5e42a}{Add\+Indentation}} (std\+::string \&output, int indent\+\_\+level)
+\begin{DoxyCompactList}\small\item\em Helper function to add indentation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a JSON array. 
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1json_1_1_j_array_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1json_1_1_j_array_ade864cda36281ccfa4546b37bae5ec6e}\index{neo::json::JArray@{neo::json::JArray}!Items@{Items}}
+\index{Items@{Items}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{Items}{Items}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_ade864cda36281ccfa4546b37bae5ec6e} 
+using neo\+::json\+::\+JArray\+::\+Items = std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}}$>$$>$}
+
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1json_1_1_j_array_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1json_1_1_j_array_a52d83eda8e44e95a1ccbfb5782a7f758}\index{neo::json::JArray@{neo::json::JArray}!JArray@{JArray}}
+\index{JArray@{JArray}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{JArray()}{JArray()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_a52d83eda8e44e95a1ccbfb5782a7f758} 
+neo\+::json\+::\+JArray\+::\+JArray (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+\Hypertarget{classneo_1_1json_1_1_j_array_a3bd943eac3991c9518668a96bc61e98a}\index{neo::json::JArray@{neo::json::JArray}!JArray@{JArray}}
+\index{JArray@{JArray}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{JArray()}{JArray()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_a3bd943eac3991c9518668a96bc61e98a} 
+neo\+::json\+::\+JArray\+::\+JArray (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1json_1_1_j_array_ade864cda36281ccfa4546b37bae5ec6e}{Items}} \&}]{items}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor with initial items. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em items} & The initial items. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1json_1_1_j_array_aa1df1defbe183f57506db6e058a16aa0}\index{neo::json::JArray@{neo::json::JArray}!JArray@{JArray}}
+\index{JArray@{JArray}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{JArray()}{JArray()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_aa1df1defbe183f57506db6e058a16aa0} 
+neo\+::json\+::\+JArray\+::\+JArray (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ $>$}]{items}{}\end{DoxyParamCaption})}
+
+
+
+Constructor with initializer list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em items} & The initial items. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1json_1_1_j_array_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1json_1_1_j_array_a481d886207829242f0529c9f5effac55}\index{neo::json::JArray@{neo::json::JArray}!Add@{Add}}
+\index{Add@{Add}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_a481d886207829242f0529c9f5effac55} 
+void neo\+::json\+::\+JArray\+::\+Add (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Adds an item to the array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item to add. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1json_1_1_j_array_ab083611ca8cc595e99437160e6bed507}\index{neo::json::JArray@{neo::json::JArray}!begin@{begin}}
+\index{begin@{begin}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_ab083611ca8cc595e99437160e6bed507} 
+JArray\+::\+Items\+::iterator neo\+::json\+::\+JArray\+::begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets an iterator to the beginning. 
+
+\begin{DoxyReturn}{Returns}
+Iterator to the beginning. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_j_array_a59c55518fec1a8cdbd2965e57a858a29}\index{neo::json::JArray@{neo::json::JArray}!begin@{begin}}
+\index{begin@{begin}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_a59c55518fec1a8cdbd2965e57a858a29} 
+JArray\+::\+Items\+::const\+\_\+iterator neo\+::json\+::\+JArray\+::begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a const iterator to the beginning. 
+
+\begin{DoxyReturn}{Returns}
+Const iterator to the beginning. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_j_array_ab7b7b2843a0bc42359d01ce3023659ee}\index{neo::json::JArray@{neo::json::JArray}!cbegin@{cbegin}}
+\index{cbegin@{cbegin}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{cbegin()}{cbegin()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_ab7b7b2843a0bc42359d01ce3023659ee} 
+JArray\+::\+Items\+::const\+\_\+iterator neo\+::json\+::\+JArray\+::cbegin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a const iterator to the beginning. 
+
+\begin{DoxyReturn}{Returns}
+Const iterator to the beginning. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_j_array_ab1b7f0d51d94baf76bd7e9efe3ac7d38}\index{neo::json::JArray@{neo::json::JArray}!cend@{cend}}
+\index{cend@{cend}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{cend()}{cend()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_ab1b7f0d51d94baf76bd7e9efe3ac7d38} 
+JArray\+::\+Items\+::const\+\_\+iterator neo\+::json\+::\+JArray\+::cend (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a const iterator to the end. 
+
+\begin{DoxyReturn}{Returns}
+Const iterator to the end. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_j_array_acc76787002283385bf2306dfce5ded83}\index{neo::json::JArray@{neo::json::JArray}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_acc76787002283385bf2306dfce5ded83} 
+void neo\+::json\+::\+JArray\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clears all items from the array. 
+
+\Hypertarget{classneo_1_1json_1_1_j_array_acf10023c81ff19c5131ec868eaa52579}\index{neo::json::JArray@{neo::json::JArray}!Clone@{Clone}}
+\index{Clone@{Clone}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{Clone()}{Clone()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_acf10023c81ff19c5131ec868eaa52579} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ neo\+::json\+::\+JArray\+::\+Clone (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Clones this token. 
+
+\begin{DoxyReturn}{Returns}
+A clone of this token. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1json_1_1_j_token_acf002ab2913b85ace931c514d69c439d}{neo\+::json\+::\+JToken}}.
+
+\Hypertarget{classneo_1_1json_1_1_j_array_a9ac73e148505d5611f79f4e652974e84}\index{neo::json::JArray@{neo::json::JArray}!Count@{Count}}
+\index{Count@{Count}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{Count()}{Count()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_a9ac73e148505d5611f79f4e652974e84} 
+size\+\_\+t neo\+::json\+::\+JArray\+::\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of items in the array. 
+
+\begin{DoxyReturn}{Returns}
+The number of items. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_j_array_a6a0f2c99ca637785090536ef039de86f}\index{neo::json::JArray@{neo::json::JArray}!end@{end}}
+\index{end@{end}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_a6a0f2c99ca637785090536ef039de86f} 
+JArray\+::\+Items\+::iterator neo\+::json\+::\+JArray\+::end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets an iterator to the end. 
+
+\begin{DoxyReturn}{Returns}
+Iterator to the end. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_j_array_a3487d50650d383a48ad17443bae57d8c}\index{neo::json::JArray@{neo::json::JArray}!end@{end}}
+\index{end@{end}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_a3487d50650d383a48ad17443bae57d8c} 
+JArray\+::\+Items\+::const\+\_\+iterator neo\+::json\+::\+JArray\+::end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a const iterator to the end. 
+
+\begin{DoxyReturn}{Returns}
+Const iterator to the end. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_j_array_a5eec695361176640941d9a48321b5e09}\index{neo::json::JArray@{neo::json::JArray}!Equals@{Equals}}
+\index{Equals@{Equals}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{Equals()}{Equals()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_a5eec695361176640941d9a48321b5e09} 
+bool neo\+::json\+::\+JArray\+::\+Equals (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Checks if this token equals another token. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other token. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if equal, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1json_1_1_j_token_aee9c9291f435ac35aceec3a91e5362cc}{neo\+::json\+::\+JToken}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1json_1_1_j_array_a587bb391540bca2280273455c9b40f26}\index{neo::json::JArray@{neo::json::JArray}!GetItems@{GetItems}}
+\index{GetItems@{GetItems}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{GetItems()}{GetItems()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_a587bb391540bca2280273455c9b40f26} 
+\mbox{\hyperlink{classneo_1_1json_1_1_j_array_ade864cda36281ccfa4546b37bae5ec6e}{JArray\+::\+Items}} \& neo\+::json\+::\+JArray\+::\+Get\+Items (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the items (mutable). 
+
+\begin{DoxyReturn}{Returns}
+The items. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_j_array_a7c5e3f94d1592fd5ce4d77666b896fd2}\index{neo::json::JArray@{neo::json::JArray}!GetItems@{GetItems}}
+\index{GetItems@{GetItems}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{GetItems()}{GetItems()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_a7c5e3f94d1592fd5ce4d77666b896fd2} 
+const \mbox{\hyperlink{classneo_1_1json_1_1_j_array_ade864cda36281ccfa4546b37bae5ec6e}{JArray\+::\+Items}} \& neo\+::json\+::\+JArray\+::\+Get\+Items (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the items. 
+
+\begin{DoxyReturn}{Returns}
+The items. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_j_array_ac6e0dd5d9c4a8a5e554c935fcebb8619}\index{neo::json::JArray@{neo::json::JArray}!GetType@{GetType}}
+\index{GetType@{GetType}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_ac6e0dd5d9c4a8a5e554c935fcebb8619} 
+\mbox{\hyperlink{namespaceneo_1_1json_afc636cefa75119dde9ec4c7058ab605c}{JToken\+Type}} neo\+::json\+::\+JArray\+::\+Get\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the type of this token. 
+
+\begin{DoxyReturn}{Returns}
+JToken\+Type\+::\+Array. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a7ddf451a867dd8855212eb5a6d4667ef}{neo\+::json\+::\+JToken}}.
+
+\Hypertarget{classneo_1_1json_1_1_j_array_ae627b86b1cf9cc3df7653b29ccdb6ad2}\index{neo::json::JArray@{neo::json::JArray}!IsEmpty@{IsEmpty}}
+\index{IsEmpty@{IsEmpty}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{IsEmpty()}{IsEmpty()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_ae627b86b1cf9cc3df7653b29ccdb6ad2} 
+bool neo\+::json\+::\+JArray\+::\+Is\+Empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the array is empty. 
+
+\begin{DoxyReturn}{Returns}
+True if empty, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_j_array_a8c65f5aed009852f6aecef3df606902a}\index{neo::json::JArray@{neo::json::JArray}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_a8c65f5aed009852f6aecef3df606902a} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ neo\+::json\+::\+JArray\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets or sets the child token at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The zero-\/based index of the child token to get or set. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The child token at the specified index. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & if index is invalid. \\
+\hline
+\end{DoxyExceptions}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a0a9ed56f1f28c0720e11820915170e1b}{neo\+::json\+::\+JToken}}.
+
+\Hypertarget{classneo_1_1json_1_1_j_array_a100993345b7fcee09fe7b290561644f1}\index{neo::json::JArray@{neo::json::JArray}!RemoveAt@{RemoveAt}}
+\index{RemoveAt@{RemoveAt}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{RemoveAt()}{RemoveAt()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_a100993345b7fcee09fe7b290561644f1} 
+void neo\+::json\+::\+JArray\+::\+Remove\+At (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Removes an item at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the item to remove. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & if index is invalid. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1json_1_1_j_array_af8f316c90e01d2221f54139ed5e46c1b}\index{neo::json::JArray@{neo::json::JArray}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_af8f316c90e01d2221f54139ed5e46c1b} 
+std\+::string neo\+::json\+::\+JArray\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Converts this token to a string representation. 
+
+\begin{DoxyReturn}{Returns}
+The JSON string representation. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a42d1e592f73864c798a0e37b04ae1de7}{neo\+::json\+::\+JToken}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1json_1_1_j_array_abe6d4896d45ed810ca0b441ed9b9fdea}\index{neo::json::JArray@{neo::json::JArray}!WriteJson@{WriteJson}}
+\index{WriteJson@{WriteJson}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{WriteJson()}{WriteJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_abe6d4896d45ed810ca0b441ed9b9fdea} 
+void neo\+::json\+::\+JArray\+::\+Write\+Json (\begin{DoxyParamCaption}\item[{std\+::string \&}]{output}{, }\item[{bool}]{indented}{ = {\ttfamily false}, }\item[{int}]{indent\+\_\+level}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Writes this token to JSON output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output} & The output string. \\
+\hline
+{\em indented} & Whether to use indented formatting. \\
+\hline
+{\em indent\+\_\+level} & The indentation level. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a0b2728b236992fa90ba16d5888129a7f}{neo\+::json\+::\+JToken}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1json_1_1_j_array_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1json_1_1_j_array_a5822e4b2a0c6ed73f8468581b6f4a3bc}\index{neo::json::JArray@{neo::json::JArray}!items\_@{items\_}}
+\index{items\_@{items\_}!neo::json::JArray@{neo::json::JArray}}
+\doxysubsubsection{\texorpdfstring{items\_}{items\_}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_array_a5822e4b2a0c6ed73f8468581b6f4a3bc} 
+\mbox{\hyperlink{classneo_1_1json_1_1_j_array_ade864cda36281ccfa4546b37bae5ec6e}{Items}} neo\+::json\+::\+JArray\+::items\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/json/\mbox{\hyperlink{jarray_8h}{jarray.\+h}}\item 
+src/json/\mbox{\hyperlink{jarray_8cpp}{jarray.\+cpp}}\end{DoxyCompactItemize}

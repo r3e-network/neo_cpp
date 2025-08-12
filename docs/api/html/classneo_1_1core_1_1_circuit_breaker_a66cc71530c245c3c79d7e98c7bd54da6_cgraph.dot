@@ -1,0 +1,26 @@
+digraph "neo::core::CircuitBreaker::Execute"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::core::CircuitBreaker\l::Execute",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Execute a function through the circuit breaker."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::core::CircuitBreaker\l::AllowRequest",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1core_1_1_circuit_breaker.html#a4d27a4aa30297d396155edf69ce48279",tooltip=" "];
+  Node2 -> Node3 [id="edge2_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::core::CircuitBreaker\l::TransitionTo",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1core_1_1_circuit_breaker.html#a8de617feb98b2947db68da679bc745ef",tooltip=" "];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::core::CircuitBreaker\l::RecordFailure",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1core_1_1_circuit_breaker.html#aa2cb389e122224ed86d8a6304869cd08",tooltip=" "];
+  Node4 -> Node5 [id="edge4_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::core::CircuitBreaker\l::ShouldTrip",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1core_1_1_circuit_breaker.html#aed8caf2cb36af81eb6d51e817bb10025",tooltip=" "];
+  Node4 -> Node3 [id="edge5_Node000004_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node4 -> Node6 [id="edge6_Node000004_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::core::CircuitBreaker\l::UpdateResponseTime",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1core_1_1_circuit_breaker.html#a8b4f99b4a38b4abecd9a8639e1893da8",tooltip=" "];
+  Node1 -> Node7 [id="edge7_Node000001_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::core::CircuitBreaker\l::RecordSuccess",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1core_1_1_circuit_breaker.html#acee7e88c13d432eacb63091de7badda4",tooltip=" "];
+  Node7 -> Node8 [id="edge8_Node000007_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="neo::core::CircuitBreaker\l::CleanOldMetrics",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1core_1_1_circuit_breaker.html#a6799dfc5afb45efeac1ad47eee26deb8",tooltip=" "];
+  Node7 -> Node3 [id="edge9_Node000007_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node7 -> Node6 [id="edge10_Node000007_Node000006",color="steelblue1",style="solid",tooltip=" "];
+}

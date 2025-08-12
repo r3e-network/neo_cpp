@@ -1,0 +1,60 @@
+\doxysection{transaction\+\_\+router.\+h}
+\hypertarget{transaction__router_8h_source}{}\label{transaction__router_8h_source}\index{include/neo/network/p2p/transaction\_router.h@{include/neo/network/p2p/transaction\_router.h}}
+\mbox{\hyperlink{transaction__router_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{blockchain_8h}{neo/ledger/blockchain.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{mempool_8h}{neo/ledger/mempool.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{neo3__transaction_8h}{neo/network/p2p/payloads/neo3\_transaction.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <condition\_variable>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p}{neo::network::p2p}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ Use\ Neo3Transaction\ from\ payloads\ namespace}}
+\DoxyCodeLine{00019\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_afde96583829abe492ef2a702eb352a21}{Neo3Transaction}}\ =\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{payloads::Neo3Transaction}};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_aaed5a26106ae42b8165005b4bcb7d3ca}{TransactionRouter}}}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_aaed5a26106ae42b8165005b4bcb7d3ca}{TransactionRouter}}(std::shared\_ptr<ledger::Blockchain>\ blockchain,\ std::shared\_ptr<ledger::MemoryPool>\ memPool);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_a29ea0c04d5489d70ab1999d09ef442d3}{\string~TransactionRouter}}();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_abce8eca6407826d684f157b4806cb54b}{Start}}();}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_a937da23c25fb6c3b951bee21128b6a9a}{Stop}}();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_af83ec18fa7e94396943b90e5ccde14c9}{IsRunning}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_ab3d96d6ad09431ffe7fc6182e7bb7f55}{AddTransaction}}(std::shared\_ptr<Neo3Transaction>\ transaction);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00066\ \ \ \ \ std::vector<std::shared\_ptr<Neo3Transaction>>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_a161ecb9a408b0b6d0b27427beaf4546d}{GetTransactions}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_acedf6f813b80986a7ed89bd9f6d24a43}{RemoveTransaction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00076\ \ \ \ \ std::shared\_ptr<ledger::Blockchain>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_a8934618022356e0b2bed98c22961b519}{blockchain\_}};}
+\DoxyCodeLine{00077\ \ \ \ \ std::shared\_ptr<ledger::MemoryPool>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_aa8dd143f7f886acfbd08f30e5bdd1ab1}{memPool\_}};}
+\DoxyCodeLine{00078\ \ \ \ \ std::unordered\_map<io::UInt256,\ std::shared\_ptr<Neo3Transaction>>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_ac70a139824deae0fc4d62ff4d496e1d8}{transactions\_}};}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_a3b247a66e934d5fa8398338ba6580407}{transactionsMutex\_}};}
+\DoxyCodeLine{00080\ \ \ \ \ std::atomic<bool>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_ad6b8d4df34c83b8d996c36286cbb7e94}{running\_}};}
+\DoxyCodeLine{00081\ \ \ \ \ std::thread\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_a2f92dff0542f396cbb53d271265f64bd}{routerThread\_}};}
+\DoxyCodeLine{00082\ \ \ \ \ std::condition\_variable\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_a8f8edd216f8e4fb7182877ed4c3d5f16}{routerCondition\_}};}
+\DoxyCodeLine{00083\ \ \ \ \ std::mutex\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_adef2a7b7aca42fe79c8c06b8ffb3c8e5}{routerMutex\_}};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_abef07671f37c1d18a7bf03bc4fc0569f}{ProcessTransactions}}();}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_ae5b698c808370d876922b7f5bb1ab09c}{CleanupExpiredTransactions}}();}
+\DoxyCodeLine{00094\ \};}
+\DoxyCodeLine{00095\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p}}
+
+\end{DoxyCode}

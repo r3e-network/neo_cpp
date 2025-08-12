@@ -1,0 +1,325 @@
+\doxysection{neo\+::vm\+::Buffer\+Item Class Reference}
+\hypertarget{classneo_1_1vm_1_1_buffer_item}{}\label{classneo_1_1vm_1_1_buffer_item}\index{neo::vm::BufferItem@{neo::vm::BufferItem}}
+
+
+Represents a buffer stack item.  
+
+
+
+
+{\ttfamily \#include $<$primitive\+\_\+items.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::vm\+::Buffer\+Item\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::vm\+::Buffer\+Item\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_buffer_item_a1ebfc9442d34f31d3a81313fd8893f41}{Buffer\+Item}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1vm_1_1_buffer_item}{Buffer\+Item}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_buffer_item_a6b90b9b02b16bb0d910c2811d2613e38}{Buffer\+Item}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&value)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1vm_1_1_buffer_item}{Buffer\+Item}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_buffer_item_a776f411bf14ad51f2dc31cc59542d7c7}{operator std\+::shared\+\_\+ptr$<$ Stack\+Item $>$}} () const
+\begin{DoxyCompactList}\small\item\em Conversion operator to std\+::shared\+\_\+ptr$<$\+Stack\+Item$>$. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7}{Stack\+Item\+Type}} \mbox{\hyperlink{classneo_1_1vm_1_1_buffer_item_a054dd3c1d9e7751be2a43475ec8d3b4d}{Get\+Type}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the type of the stack item. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_buffer_item_a8e01dde1e15881a49b3b66c33bf51a5a}{Get\+Boolean}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the boolean value of the stack item. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1vm_1_1_buffer_item_a309dd1cf4e8b570776fe3baa5e622684}{Get\+Byte\+Array}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the byte array value of the stack item. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1vm_1_1_buffer_item_ad3cdfb5e44070ebfa7cd8b3ce647560a}{Get\+String}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the string value of the stack item. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_buffer_item_a1a99da9708bc54837f2561fc8af3399a}{Equals}} (const \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} \&other) const override
+\begin{DoxyCompactList}\small\item\em Checks if this stack item is equal to another stack item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{neo\+::vm\+::\+Stack\+Item}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ae67dbcd2e5263da80d851dfd1ae4fde5}{\texorpdfstring{$\sim$}{\string~}\+Stack\+Item}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_afffadf49ff4e45676deabbaaf03e33fb}{Is\+Boolean}} () const
+\begin{DoxyCompactList}\small\item\em Checks if this stack item is a boolean. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a29bd275f27cf80f90d8ae29348f9f4f0}{Is\+Integer}} () const
+\begin{DoxyCompactList}\small\item\em Checks if this stack item is an integer. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a93a4be2050941d877547f2169f120020}{Is\+Byte\+String}} () const
+\begin{DoxyCompactList}\small\item\em Checks if this stack item is a byte string. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ad0f8516989edea184512d6385ee8bcf4}{Is\+Map}} () const
+\begin{DoxyCompactList}\small\item\em Checks if this stack item is a map. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af4c4f1d07164f3f4d9e91f9a6ef7db61}{Is\+Interop\+Interface}} () const
+\begin{DoxyCompactList}\small\item\em Checks if this stack item is an interop interface. \end{DoxyCompactList}\item 
+virtual int64\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ab300ce1082756cf80ce38a2f4af50df9}{Get\+Integer}} () const
+\begin{DoxyCompactList}\small\item\em Gets the integer value of the stack item. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a52ab4bb74a996a39eff1e3539b5f57f8}{Get\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Gets the array value of the stack item. \end{DoxyCompactList}\item 
+virtual std\+::map$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_acab5dae942ea4b3ca24cce3196eebf82}{Get\+Map}} () const
+\begin{DoxyCompactList}\small\item\em Gets the map value of the stack item. \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ void $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a2ba82d05aec598c1166f5ef65255e7cf}{Get\+Interface}} () const
+\begin{DoxyCompactList}\small\item\em Gets the interop interface value of the stack item. \end{DoxyCompactList}\item 
+virtual size\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a6b9613ea6cb8f93c42f34611ae43f132}{Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the size of the stack item. \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a9c148d1c9b2476e34a48a516fae5811f}{Convert\+To}} (\mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7}{Stack\+Item\+Type}} type) const
+\begin{DoxyCompactList}\small\item\em Converts the stack item to the specified type. \end{DoxyCompactList}\item 
+virtual size\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a6b1491762edda12fd3909115db2e056a}{Get\+Hash\+Code}} () const
+\begin{DoxyCompactList}\small\item\em Gets the hash code of the stack item. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ad9442436737f0c53d647109722c8747f}{operator==}} (const \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this stack item is equal to another stack item. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ac3f69e95ee1e4ebb378a970901f75f9b}{operator!=}} (const \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this stack item is not equal to another stack item. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a18d3a264473a0af2f3f9c225fbf803a7}{Compare\+To}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em Compares this stack item to another stack item. \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a2af9cc675ac11e3c4240e0c8d95e59df}{Deep\+Copy}} (\mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{Reference\+Counter}} \texorpdfstring{$\ast$}{*}ref\+Counter=nullptr, bool as\+Immutable=false) const
+\begin{DoxyCompactList}\small\item\em Creates a deep copy of the stack item. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a41eab819e0624411b89321d0c45a6633}{Is\+Null}} () const
+\begin{DoxyCompactList}\small\item\em Checks if this stack item is null. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a4c1b105b3ef0242cf516bd1da31094cc}{Is\+Interop}} () const
+\begin{DoxyCompactList}\small\item\em Checks if this stack item is an interop interface. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a2c109d3ee1d19ad24d9830d6c6223090}{Is\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Checks if this stack item is an array. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af6313a6cf868d9475e264a0276522f73}{Is\+Struct}} () const
+\begin{DoxyCompactList}\small\item\em Checks if this stack item is a struct. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af03f90016b8876aaf089b60902529e3a}{Get\+Struct}} () const
+\begin{DoxyCompactList}\small\item\em Gets the struct value of the stack item. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a7089cf2947ec796c6abafa8ddb352603}{Add}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item)
+\begin{DoxyCompactList}\small\item\em Adds an item to this stack item (if it\textquotesingle{}s an array or struct). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a35c7fe907c1a65e3f19677da2dd4ab4e}{Reset}} ()
+\begin{DoxyCompactList}\small\item\em Resets the Tarjan algorithm fields. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a2caf28664339770af9586a341041bd62}{Get\+DFN}} () const
+\begin{DoxyCompactList}\small\item\em Gets the DFN (Depth-\/\+First Number) of the stack item. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a1e9c32cf6e216d7249f8836d792d84b8}{Set\+DFN}} (int dfn)
+\begin{DoxyCompactList}\small\item\em Sets the DFN (Depth-\/\+First Number) of the stack item. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a5cd952862c3cbcb907d213d04d7e3b33}{Get\+Low\+Link}} () const
+\begin{DoxyCompactList}\small\item\em Gets the low link value of the stack item. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a00f41e977f14597c0a410d9a1aa0d7ee}{Set\+Low\+Link}} (int low\+\_\+link)
+\begin{DoxyCompactList}\small\item\em Sets the low link value of the stack item. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a55405e9b3369fdc99f8e6f907e41ad3a}{Is\+On\+Stack}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the stack item is on the stack. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a45ac8b771dac0d62f372467597123d10}{Set\+On\+Stack}} (bool on\+\_\+stack)
+\begin{DoxyCompactList}\small\item\em Sets whether the stack item is on the stack. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a5e7b65eb4239c2bb19b26986d002a1d5}{Set\+Value}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&)
+\begin{DoxyCompactList}\small\item\em Sets the value of the stack item. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af0d302fdce5dc7caa59df36816197247}{Set\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$)
+\begin{DoxyCompactList}\small\item\em Sets the value of the stack item from another stack item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1vm_1_1_buffer_item_a7d364f5d595cc9212fa97744e61fbe85}{value\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{neo\+::vm\+::\+Stack\+Item}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ae8449cc5805f5135af34bfe230aa4c7e}{Null}} ()
+\begin{DoxyCompactList}\small\item\em Gets the null stack item. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ac5c88a02b66663d80e61942bb425391c}{True}} ()
+\begin{DoxyCompactList}\small\item\em Gets the true stack item. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a759c1a70f6481936eb089083a5fa2d4e}{False}} ()
+\begin{DoxyCompactList}\small\item\em Gets the false stack item. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a1d67a8c02d58d56410378b997c2e7855}{Create}} (bool value)
+\begin{DoxyCompactList}\small\item\em Creates a primitive stack item. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a8b55d2bfd2d8ee487b8e904ae9380bce}{Create}} (int64\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Creates a primitive stack item. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ae85b83587bba09c4f02b109ed42475ef}{Create}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value)
+\begin{DoxyCompactList}\small\item\em Creates a primitive stack item. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a7b49aa4f8a0252588b2a68709d755de4}{Create}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&value)
+\begin{DoxyCompactList}\small\item\em Creates a primitive stack item. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a70e149b639b413df055166a51c19768d}{Create}} (const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Creates a primitive stack item. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a730aa90ffbafdd70147ae3edd78b0043}{Create}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&value)
+\begin{DoxyCompactList}\small\item\em Creates a primitive stack item. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a2042345ca77050471feb6826f6d47fc7}{Create}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&value)
+\begin{DoxyCompactList}\small\item\em Creates a primitive stack item. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a1b87461af95b8ca7647b7e56f7f84217}{Create}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \&value)
+\begin{DoxyCompactList}\small\item\em Creates a stack item from an array of stack items. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a2ba794fbfc9ad0852de36981a96c4593}{Create\+Array}} ()
+\begin{DoxyCompactList}\small\item\em Creates an empty array stack item. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a1706aea76b348b8781209bbe8b64ccbc}{Create\+Array}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \&items)
+\begin{DoxyCompactList}\small\item\em Creates an array stack item from a vector of stack items. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ad82f8631848a9820462ac383539b4c02}{Create\+Struct}} (\mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{Reference\+Counter}} \&ref\+Counter)
+\begin{DoxyCompactList}\small\item\em Creates an empty struct stack item. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ad62f9ce7056b6cdc6a45933c2666231c}{Create\+Struct}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \&items, \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{Reference\+Counter}} \&ref\+Counter)
+\begin{DoxyCompactList}\small\item\em Creates a struct stack item from a vector of stack items. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ad53916cdf9046eeafb85aded7fa80616}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader)
+\begin{DoxyCompactList}\small\item\em Deserializes a \doxylink{classneo_1_1vm_1_1_stack_item}{Stack\+Item} from a binary reader. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_afedb5faf8be4db1e6e986a8de9147f06}{Serialize}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item, \mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer)
+\begin{DoxyCompactList}\small\item\em Serializes a \doxylink{classneo_1_1vm_1_1_stack_item}{Stack\+Item} to a binary writer. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a24983213004ba8218578fd4a98ce69b9}{Create\+Map}} ()
+\begin{DoxyCompactList}\small\item\em Creates a map stack item. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ad28e4e1c003592828468235ec9b9b7a2}{Create\+Byte\+String}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Creates a byte string stack item. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a8a521a92f84823d71206a6af80354e0f}{Create\+Boolean}} (bool value)
+\begin{DoxyCompactList}\small\item\em Creates a boolean stack item. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a25e058bee6e716b3b2689557f412e546}{Create\+Buffer}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data)
+\begin{DoxyCompactList}\small\item\em Creates a buffer stack item. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af4ea34abb2b1ce2258c9454c178b7a0a}{Create\+Interop\+Interface}} (void \texorpdfstring{$\ast$}{*}value)
+\begin{DoxyCompactList}\small\item\em Creates an interop interface wrapper for an object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af7903efef89110ce46446740007a515d}{Create\+Interop\+Interface}} (std\+::shared\+\_\+ptr$<$ T $>$ value)
+\begin{DoxyCompactList}\small\item\em Creates an interop interface wrapper for a typed object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a buffer stack item. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1vm_1_1_buffer_item_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1vm_1_1_buffer_item_a1ebfc9442d34f31d3a81313fd8893f41}\index{neo::vm::BufferItem@{neo::vm::BufferItem}!BufferItem@{BufferItem}}
+\index{BufferItem@{BufferItem}!neo::vm::BufferItem@{neo::vm::BufferItem}}
+\doxysubsubsection{\texorpdfstring{BufferItem()}{BufferItem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_buffer_item_a1ebfc9442d34f31d3a81313fd8893f41} 
+neo\+::vm\+::\+Buffer\+Item\+::\+Buffer\+Item (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1vm_1_1_buffer_item}{Buffer\+Item}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_buffer_item_a6b90b9b02b16bb0d910c2811d2613e38}\index{neo::vm::BufferItem@{neo::vm::BufferItem}!BufferItem@{BufferItem}}
+\index{BufferItem@{BufferItem}!neo::vm::BufferItem@{neo::vm::BufferItem}}
+\doxysubsubsection{\texorpdfstring{BufferItem()}{BufferItem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_buffer_item_a6b90b9b02b16bb0d910c2811d2613e38} 
+neo\+::vm\+::\+Buffer\+Item\+::\+Buffer\+Item (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1vm_1_1_buffer_item}{Buffer\+Item}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1vm_1_1_buffer_item_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1vm_1_1_buffer_item_a1a99da9708bc54837f2561fc8af3399a}\index{neo::vm::BufferItem@{neo::vm::BufferItem}!Equals@{Equals}}
+\index{Equals@{Equals}!neo::vm::BufferItem@{neo::vm::BufferItem}}
+\doxysubsubsection{\texorpdfstring{Equals()}{Equals()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_buffer_item_a1a99da9708bc54837f2561fc8af3399a} 
+bool neo\+::vm\+::\+Buffer\+Item\+::\+Equals (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Checks if this stack item is equal to another stack item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other stack item. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the stack items are equal, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a401a2be3dc406cbdb84f64272bac005d}{neo\+::vm\+::\+Stack\+Item}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1vm_1_1_buffer_item_a8e01dde1e15881a49b3b66c33bf51a5a}\index{neo::vm::BufferItem@{neo::vm::BufferItem}!GetBoolean@{GetBoolean}}
+\index{GetBoolean@{GetBoolean}!neo::vm::BufferItem@{neo::vm::BufferItem}}
+\doxysubsubsection{\texorpdfstring{GetBoolean()}{GetBoolean()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_buffer_item_a8e01dde1e15881a49b3b66c33bf51a5a} 
+bool neo\+::vm\+::\+Buffer\+Item\+::\+Get\+Boolean (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the boolean value of the stack item. 
+
+\begin{DoxyReturn}{Returns}
+The boolean value of the stack item. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a23bb087d9e8d1dd20ab637dc5a1e8923}{neo\+::vm\+::\+Stack\+Item}}.
+
+\Hypertarget{classneo_1_1vm_1_1_buffer_item_a309dd1cf4e8b570776fe3baa5e622684}\index{neo::vm::BufferItem@{neo::vm::BufferItem}!GetByteArray@{GetByteArray}}
+\index{GetByteArray@{GetByteArray}!neo::vm::BufferItem@{neo::vm::BufferItem}}
+\doxysubsubsection{\texorpdfstring{GetByteArray()}{GetByteArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_buffer_item_a309dd1cf4e8b570776fe3baa5e622684} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::vm\+::\+Buffer\+Item\+::\+Get\+Byte\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the byte array value of the stack item. 
+
+\begin{DoxyReturn}{Returns}
+The byte array value of the stack item. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a8ea62b4f6e48851a53fad2e8d9f534cb}{neo\+::vm\+::\+Stack\+Item}}.
+
+\Hypertarget{classneo_1_1vm_1_1_buffer_item_ad3cdfb5e44070ebfa7cd8b3ce647560a}\index{neo::vm::BufferItem@{neo::vm::BufferItem}!GetString@{GetString}}
+\index{GetString@{GetString}!neo::vm::BufferItem@{neo::vm::BufferItem}}
+\doxysubsubsection{\texorpdfstring{GetString()}{GetString()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_buffer_item_ad3cdfb5e44070ebfa7cd8b3ce647560a} 
+std\+::string neo\+::vm\+::\+Buffer\+Item\+::\+Get\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the string value of the stack item. 
+
+\begin{DoxyReturn}{Returns}
+The string value of the stack item. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_a14570034610f1b954d8ce7494901744c}{neo\+::vm\+::\+Stack\+Item}}.
+
+\Hypertarget{classneo_1_1vm_1_1_buffer_item_a054dd3c1d9e7751be2a43475ec8d3b4d}\index{neo::vm::BufferItem@{neo::vm::BufferItem}!GetType@{GetType}}
+\index{GetType@{GetType}!neo::vm::BufferItem@{neo::vm::BufferItem}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_buffer_item_a054dd3c1d9e7751be2a43475ec8d3b4d} 
+\mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7}{Stack\+Item\+Type}} neo\+::vm\+::\+Buffer\+Item\+::\+Get\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the type of the stack item. 
+
+\begin{DoxyReturn}{Returns}
+The type of the stack item. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_af69a470d18df4bb1d0e23c25eca1dcb9}{neo\+::vm\+::\+Stack\+Item}}.
+
+\Hypertarget{classneo_1_1vm_1_1_buffer_item_a776f411bf14ad51f2dc31cc59542d7c7}\index{neo::vm::BufferItem@{neo::vm::BufferItem}!operator std::shared\_ptr$<$ StackItem $>$@{operator std::shared\_ptr$<$ StackItem $>$}}
+\index{operator std::shared\_ptr$<$ StackItem $>$@{operator std::shared\_ptr$<$ StackItem $>$}!neo::vm::BufferItem@{neo::vm::BufferItem}}
+\doxysubsubsection{\texorpdfstring{operator std::shared\_ptr$<$ StackItem $>$()}{operator std::shared\_ptr< StackItem >()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_buffer_item_a776f411bf14ad51f2dc31cc59542d7c7} 
+neo\+::vm\+::\+Buffer\+Item\+::operator std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Conversion operator to std\+::shared\+\_\+ptr$<$\+Stack\+Item$>$. 
+
+\begin{DoxyReturn}{Returns}
+A shared pointer to the base \doxylink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1vm_1_1_buffer_item_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1vm_1_1_buffer_item_a7d364f5d595cc9212fa97744e61fbe85}\index{neo::vm::BufferItem@{neo::vm::BufferItem}!value\_@{value\_}}
+\index{value\_@{value\_}!neo::vm::BufferItem@{neo::vm::BufferItem}}
+\doxysubsubsection{\texorpdfstring{value\_}{value\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_buffer_item_a7d364f5d595cc9212fa97744e61fbe85} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::vm\+::\+Buffer\+Item\+::value\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/vm/\mbox{\hyperlink{primitive__items_8h}{primitive\+\_\+items.\+h}}\item 
+src/vm/\mbox{\hyperlink{primitive__items_8cpp}{primitive\+\_\+items.\+cpp}}\end{DoxyCompactItemize}

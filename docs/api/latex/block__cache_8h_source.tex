@@ -1,0 +1,87 @@
+\doxysection{block\+\_\+cache.\+h}
+\hypertarget{block__cache_8h_source}{}\label{block__cache_8h_source}\index{include/neo/io/caching/block\_cache.h@{include/neo/io/caching/block\_cache.h}}
+\mbox{\hyperlink{block__cache_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{caching_2lru__cache_8h}{neo/io/caching/lru\_cache.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2block_8h}{neo/ledger/block.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1io_1_1caching}{neo::io::caching}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a019ca403f6485665eae331e0d316007b}{BlockCache}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a019ca403f6485665eae331e0d316007b}{BlockCache}}(\textcolor{keywordtype}{size\_t}\ capacity)\ :\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_ac3bdbad9b70afe61ae8e3e331aeeb6c8}{hashCache\_}}(capacity),\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a82cf7c0e892bc2607d54cf1a1a42f460}{indexCache\_}}(capacity)\ \{\}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a4ff336ba7ac4433ba2487b7bd63087d7}{Add}}(std::shared\_ptr<ledger::Block>\ block)}
+\DoxyCodeLine{00028\ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!block)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ to\ hash\ cache}}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_ac3bdbad9b70afe61ae8e3e331aeeb6c8}{hashCache\_}}.Add(block-\/>GetHash(),\ block);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ to\ index\ cache}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a82cf7c0e892bc2607d54cf1a1a42f460}{indexCache\_}}.Add(block-\/>GetIndex(),\ block);}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00043\ \ \ \ \ std::optional<std::shared\_ptr<ledger::Block>>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a278123170e8e3d91e9c4ea3b4dcd0051}{GetByHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}}\&\ hash)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_ac3bdbad9b70afe61ae8e3e331aeeb6c8}{hashCache\_}}.Get(hash);\ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00050\ \ \ \ \ std::optional<std::shared\_ptr<ledger::Block>>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_aabb04d9c9d40734956add645b527b093}{GetByIndex}}(uint32\_t\ index)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a82cf7c0e892bc2607d54cf1a1a42f460}{indexCache\_}}.Get(index);\ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_accb131a6eb4bbb3e5b25b81ebe9335f3}{TryGetByHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}}\&\ hash,\ std::shared\_ptr<ledger::Block>\&\ block)}
+\DoxyCodeLine{00059\ \ \ \ \ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_ac3bdbad9b70afe61ae8e3e331aeeb6c8}{hashCache\_}}.TryGet(hash,\ block);}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a845c08e29bc8dceeeff0b9bdbe18841c}{TryGetByIndex}}(uint32\_t\ index,\ std::shared\_ptr<ledger::Block>\&\ block)}
+\DoxyCodeLine{00070\ \ \ \ \ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a82cf7c0e892bc2607d54cf1a1a42f460}{indexCache\_}}.TryGet(index,\ block);}
+\DoxyCodeLine{00072\ \ \ \ \ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a2ef9c95cbd098a2d4d8b2797b9cd09d2}{RemoveByHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}}\&\ hash)}
+\DoxyCodeLine{00080\ \ \ \ \ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ block}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ block\ =\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_ac3bdbad9b70afe61ae8e3e331aeeb6c8}{hashCache\_}}.Get(hash);}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!block)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Remove\ from\ index\ cache}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a82cf7c0e892bc2607d54cf1a1a42f460}{indexCache\_}}.Remove(block.value()-\/>GetIndex());}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Remove\ from\ hash\ cache}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_ac3bdbad9b70afe61ae8e3e331aeeb6c8}{hashCache\_}}.Remove(hash);}
+\DoxyCodeLine{00090\ \ \ \ \ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a936f288756bcd8b8ba991ecabf66d2f5}{RemoveByIndex}}(uint32\_t\ index)}
+\DoxyCodeLine{00098\ \ \ \ \ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Get\ the\ block}}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ block\ =\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a82cf7c0e892bc2607d54cf1a1a42f460}{indexCache\_}}.Get(index);}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!block)\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Remove\ from\ hash\ cache}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_ac3bdbad9b70afe61ae8e3e331aeeb6c8}{hashCache\_}}.Remove(block.value()-\/>GetHash());}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Remove\ from\ index\ cache}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a82cf7c0e892bc2607d54cf1a1a42f460}{indexCache\_}}.Remove(index);}
+\DoxyCodeLine{00108\ \ \ \ \ \}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_ad739506a929bc88f2b27def14be5ed9f}{Clear}}()}
+\DoxyCodeLine{00114\ \ \ \ \ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_ac3bdbad9b70afe61ae8e3e331aeeb6c8}{hashCache\_}}.Clear();}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a82cf7c0e892bc2607d54cf1a1a42f460}{indexCache\_}}.Clear();}
+\DoxyCodeLine{00117\ \ \ \ \ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a9c637fc4448c2f3ef5bbc0d64f57da4d}{Size}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_ac3bdbad9b70afe61ae8e3e331aeeb6c8}{hashCache\_}}.Size();\ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a7d0f643aa32e0f74e2a881cda18bf90b}{Capacity}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_ac3bdbad9b70afe61ae8e3e331aeeb6c8}{hashCache\_}}.Capacity();\ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00132\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache<UInt256,\ std::shared\_ptr<ledger::Block>}}>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_ac3bdbad9b70afe61ae8e3e331aeeb6c8}{hashCache\_}};}
+\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache<uint32\_t,\ std::shared\_ptr<ledger::Block>}}>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a82cf7c0e892bc2607d54cf1a1a42f460}{indexCache\_}};}
+\DoxyCodeLine{00134\ \};}
+\DoxyCodeLine{00135\ \}\ \ \textcolor{comment}{//\ namespace\ neo::io::caching}}
+
+\end{DoxyCode}

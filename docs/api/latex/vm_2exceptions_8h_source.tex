@@ -1,0 +1,85 @@
+\doxysection{exceptions.\+h}
+\hypertarget{vm_2exceptions_8h_source}{}\label{vm_2exceptions_8h_source}\index{include/neo/vm/exceptions.h@{include/neo/vm/exceptions.h}}
+\mbox{\hyperlink{vm_2exceptions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}\ :\ \textcolor{keyword}{public}\ std::runtime\_error}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}(\textcolor{keyword}{const}\ std::string\&\ message)\ :\ \mbox{\hyperlink{namespacestd}{std}}::runtime\_error(message)\ \{\}}
+\DoxyCodeLine{00019\ \};}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_bad_script_exception_a930acef7581b527343fb22c1c1c93809}{BadScriptException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00026\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_bad_script_exception_a930acef7581b527343fb22c1c1c93809}{BadScriptException}}(\textcolor{keyword}{const}\ std::string\&\ message)\ :\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}(message)\ \{\}}
+\DoxyCodeLine{00032\ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_invalid_operation_exception_ab96d025abb7add5f1f6efa5da0ac6a8e}{InvalidOperationException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}}
+\DoxyCodeLine{00038\ \{}
+\DoxyCodeLine{00039\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_invalid_operation_exception_ab96d025abb7add5f1f6efa5da0ac6a8e}{InvalidOperationException}}(\textcolor{keyword}{const}\ std::string\&\ message)\ :\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}(message)\ \{\}}
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00050\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_stack_overflow_exception_ab42ae1a9745b12af8c7e8a03f5ca2f86}{StackOverflowException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}}
+\DoxyCodeLine{00051\ \{}
+\DoxyCodeLine{00052\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_overflow_exception_ab42ae1a9745b12af8c7e8a03f5ca2f86}{StackOverflowException}}(\textcolor{keyword}{const}\ std::string\&\ message)\ :\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}(message)\ \{\}}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00063\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_stack_underflow_exception_a6a3a30a09937ab8d67fc65743900cebf}{StackUnderflowException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}}
+\DoxyCodeLine{00064\ \{}
+\DoxyCodeLine{00065\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_underflow_exception_a6a3a30a09937ab8d67fc65743900cebf}{StackUnderflowException}}(\textcolor{keyword}{const}\ std::string\&\ message)\ :\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}(message)\ \{\}}
+\DoxyCodeLine{00071\ \};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00076\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_invalid_cast_exception_a357d5a0898d4853eb06592d7c9ff3cbd}{InvalidCastException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}}
+\DoxyCodeLine{00077\ \{}
+\DoxyCodeLine{00078\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_invalid_cast_exception_a357d5a0898d4853eb06592d7c9ff3cbd}{InvalidCastException}}(\textcolor{keyword}{const}\ std::string\&\ message)\ :\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}(message)\ \{\}}
+\DoxyCodeLine{00084\ \};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00089\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_not_supported_exception_a2e50a7336f2eacb1183f65700ef94770}{NotSupportedException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}}
+\DoxyCodeLine{00090\ \{}
+\DoxyCodeLine{00091\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_not_supported_exception_a2e50a7336f2eacb1183f65700ef94770}{NotSupportedException}}(\textcolor{keyword}{const}\ std::string\&\ message)\ :\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}(message)\ \{\}}
+\DoxyCodeLine{00097\ \};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00102\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_argument_exception_a1557d3562ea0bb85a1012c5637855aab}{ArgumentException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}}
+\DoxyCodeLine{00103\ \{}
+\DoxyCodeLine{00104\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_argument_exception_a1557d3562ea0bb85a1012c5637855aab}{ArgumentException}}(\textcolor{keyword}{const}\ std::string\&\ message)\ :\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}(message)\ \{\}}
+\DoxyCodeLine{00110\ \};}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00115\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_argument_out_of_range_exception_a283b20f01292dbd56324a316810ded7c}{ArgumentOutOfRangeException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1vm_1_1_argument_exception_a1557d3562ea0bb85a1012c5637855aab}{ArgumentException}}}
+\DoxyCodeLine{00116\ \{}
+\DoxyCodeLine{00117\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_argument_out_of_range_exception_a283b20f01292dbd56324a316810ded7c}{ArgumentOutOfRangeException}}(\textcolor{keyword}{const}\ std::string\&\ message)\ :\ \mbox{\hyperlink{classneo_1_1vm_1_1_argument_exception_a1557d3562ea0bb85a1012c5637855aab}{ArgumentException}}(message)\ \{\}}
+\DoxyCodeLine{00123\ \};}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00128\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_argument_null_exception_a9fd0f7882415967ef6e9d6730deeb25a}{ArgumentNullException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1vm_1_1_argument_exception_a1557d3562ea0bb85a1012c5637855aab}{ArgumentException}}}
+\DoxyCodeLine{00129\ \{}
+\DoxyCodeLine{00130\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_argument_null_exception_a9fd0f7882415967ef6e9d6730deeb25a}{ArgumentNullException}}(\textcolor{keyword}{const}\ std::string\&\ message)\ :\ \mbox{\hyperlink{classneo_1_1vm_1_1_argument_exception_a1557d3562ea0bb85a1012c5637855aab}{ArgumentException}}(message)\ \{\}}
+\DoxyCodeLine{00136\ \};}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00141\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_catchable_exception_a623fdf6329fcb84f02057e918b480dfe}{CatchableException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}}
+\DoxyCodeLine{00142\ \{}
+\DoxyCodeLine{00143\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_catchable_exception_a623fdf6329fcb84f02057e918b480dfe}{CatchableException}}(\textcolor{keyword}{const}\ std::string\&\ message)\ :\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}(message)\ \{\}}
+\DoxyCodeLine{00149\ \};}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00154\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_divide_by_zero_exception_a1e382a6a916991f0129e36e8fe421288}{DivideByZeroException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}}
+\DoxyCodeLine{00155\ \{}
+\DoxyCodeLine{00156\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_divide_by_zero_exception_a1e382a6a916991f0129e36e8fe421288}{DivideByZeroException}}(\textcolor{keyword}{const}\ std::string\&\ message\ =\ \textcolor{stringliteral}{"{}Division\ by\ zero"{}})\ :\ \mbox{\hyperlink{classneo_1_1vm_1_1_v_m_exception_a483e73729701385387a469aa1de980cc}{VMException}}(message)\ \{\}}
+\DoxyCodeLine{00162\ \};}
+\DoxyCodeLine{00163\ \}\ \ \textcolor{comment}{//\ namespace\ neo::vm}}
+
+\end{DoxyCode}

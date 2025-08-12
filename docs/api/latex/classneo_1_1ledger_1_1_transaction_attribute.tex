@@ -1,0 +1,597 @@
+\doxysection{neo\+::ledger\+::Transaction\+Attribute Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_transaction_attribute}{}\label{classneo_1_1ledger_1_1_transaction_attribute}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+
+
+Represents a transaction attribute.  
+
+
+
+
+{\ttfamily \#include $<$transaction\+\_\+attribute.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::ledger\+::Transaction\+Attribute\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::ledger\+::Transaction\+Attribute\+:
+% FIG 1
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adf}{Usage}} \+: uint8\+\_\+t \{ \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa4c5432423a96073bc0f172e893bd2e08}{High\+Priority}} = 0x01
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa6057d0d267c9f73f422ce08dc2420c25}{Oracle\+Response}} = 0x11
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfafd588339c2ae71f4e9a8ecb41b6da6dc}{Not\+Valid\+Before}} = 0x20
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfad35cef9595a935771f5e8158f387227b}{Conflicts}} = 0x21
+, \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa4358541e8065a4f65f406f0fb783fe7f}{Notary\+Assisted}} = 0x22
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa5a3d51657d021d1b4212c90df2f20fd1}{Contract\+Hash}} = 0x00
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa0e0bcdb4b9f0da4fe6156ed328391977}{ECDH02}} = 0x02
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaac1a9b48301d2956db26f59f3a0400e8}{ECDH03}} = 0x03
+, \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaf907e651164789346ae0a1e257c462d8}{Script}} = 0x20
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa7f319b8ccad7e92033b9492ddbc4b522}{Vote}} = 0x30
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa6c5f0fe97e8456ac241da5feff0cc70b}{Description\+Url}} = 0x81
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfab5a7adde1af5c87d7fd797b6245c2a39}{Description}} = 0x90
+, \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa6efda8bf83ebcf7c934a98ff6aa43397}{Hash1}} = 0xa1
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa8951ae32eeff8db5367e2ab49c3aaab7}{Hash2}} = 0xa2
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfad8cde00c2cd1106366846a7505d05458}{Hash3}} = 0xa3
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa18c621df5c5f12e187c11cfd21339692}{Hash4}} = 0xa4
+, \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa3f4e11d7061795f5db7a4b12dadfe81a}{Hash5}} = 0xa5
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa515fadfe09a8a360a05a7a5b2ba297ef}{Hash6}} = 0xa6
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa10dafab85633ea265397f6580634f30b}{Hash7}} = 0xa7
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfab012c20c349c5d69e39e67ebef1ebf28}{Hash8}} = 0xa8
+, \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaec5deb1d33bd29a1b96269a81c3a1406}{Hash9}} = 0xa9
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaff4927b9346abc5f14667ac924c4f0ba}{Hash10}} = 0xaa
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa88c2041ccd2b4eedc1777b0b0d63a5a2}{Hash11}} = 0xab
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa2734d10217a572fbf1718094ebfadaf3}{Hash12}} = 0xac
+, \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa0080479943a1407ca978eac032b98d22}{Hash13}} = 0xad
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfae24606724c9fb5ef271ada07791ab987}{Hash14}} = 0xae
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa25b57a3a663793be50953c1a18eb5bda}{Hash15}} = 0xaf
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa91921ada405fd6ba65dff028df047cb6}{Remark}} = 0xf0
+, \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa9b35ada01f9c5421c85174692490d321}{Remark1}} = 0xf1
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa68792aba2faa097897207166b45d01f0}{Remark2}} = 0xf2
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa613d9649ab1b17814817848158d361f1}{Remark3}} = 0xf3
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfabc2f827001713aa91a2eed827ad32774}{Remark4}} = 0xf4
+, \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa7244200192f665ed1f4bfff601b51feb}{Remark5}} = 0xf5
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaf841877b96d7427643f39b5c927dcb81}{Remark6}} = 0xf6
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfafb0a17a384d4c74db8296a20ecef0e62}{Remark7}} = 0xf7
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfad1a2da8e66b5981ab0dac4bf17a23de0}{Remark8}} = 0xf8
+, \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa1f4242c18f3f3f88e14e05cc5a100da4}{Remark9}} = 0xf9
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa07eb2364aadf60a49f7446fe7e341948}{Remark10}} = 0xfa
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa59094c3149d7ceb36c04d722180f85f8}{Remark11}} = 0xfb
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa81f0bf43cd9720e3e479ef25b70aee1e}{Remark12}} = 0xfc
+, \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfadc606de45d917f1c77f8c50776cded50}{Remark13}} = 0xfd
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaf8254add1228e830dde253e8cb4d787f}{Remark14}} = 0xfe
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaf36232435ef393bf4254c1f60116b17b}{Remark15}} = 0xff
+ \}
+\begin{DoxyCompactList}\small\item\em Enum for transaction attribute usage (Neo N3 \doxylink{namespaceneo_1_1ledger_aea5b06a37f6a35c035ae9375d13830f0}{Transaction\+Attribute\+Type}). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_af93e5abcd8e3d4bf4bffc2d66c26b0eb}{Transaction\+Attribute}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_a865fafed26afca0d134188cbfac2717e}{Transaction\+Attribute}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adf}{Usage}} usage, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute} with the specified usage and data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adf}{Usage}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_a41a7c5dfca800c2c30859ac1fa8d46ef}{Get\+Usage}} () const
+\begin{DoxyCompactList}\small\item\em Gets the usage. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adf}{Usage}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_ad4a5477b9b142126531525c21b614aee}{Get\+Type}} () const
+\begin{DoxyCompactList}\small\item\em Gets the type (alias for Get\+Usage for RPC compatibility). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_a84dc4936b16274fbcfe57ace03f33198}{Set\+Usage}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adf}{Usage}} usage)
+\begin{DoxyCompactList}\small\item\em Sets the usage. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_aa6f40c5fca4332604c4de03c49c45aa3}{Get\+Data}} () const
+\begin{DoxyCompactList}\small\item\em Gets the data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_a6ab6383e1059f3d907987d8d628be540}{Set\+Data}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data)
+\begin{DoxyCompactList}\small\item\em Sets the data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_a7774571d8cc135fd8468460be6b0de80}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_aa0339b417ac520be21c09373655ce88a}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_ac4fafdf9d03ffb86c3501dbaeb9404f7}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_a6503d86729d8f97f6c470ae083befdd5}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute} from a JSON reader. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_a38747ec5b889b54a0aadf9dcc25a2246}{operator==}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute} is equal to another \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_aa51d0ecb1bd5abd6c92470664c9153c5}{operator!=}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute} is not equal to another \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adf}{Usage}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_a5ccf3b246af4b54d976693cc8d8b6b2d}{usage\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_aeed34a30985fa8d1930a23074e1e03b9}{data\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a transaction attribute. 
+
+\label{doc-enum-members}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adf}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Usage@{Usage}}
+\index{Usage@{Usage}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+\doxysubsubsection{\texorpdfstring{Usage}{Usage}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adf} 
+enum class \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adf}{neo\+::ledger\+::\+Transaction\+Attribute\+::\+Usage}} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Enum for transaction attribute usage (Neo N3 \doxylink{namespaceneo_1_1ledger_aea5b06a37f6a35c035ae9375d13830f0}{Transaction\+Attribute\+Type}). 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HighPriority@{HighPriority}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!HighPriority@{HighPriority}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa4c5432423a96073bc0f172e893bd2e08}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa4c5432423a96073bc0f172e893bd2e08} 
+High\+Priority&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OracleResponse@{OracleResponse}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!OracleResponse@{OracleResponse}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa6057d0d267c9f73f422ce08dc2420c25}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa6057d0d267c9f73f422ce08dc2420c25} 
+Oracle\+Response&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NotValidBefore@{NotValidBefore}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!NotValidBefore@{NotValidBefore}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfafd588339c2ae71f4e9a8ecb41b6da6dc}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfafd588339c2ae71f4e9a8ecb41b6da6dc} 
+Not\+Valid\+Before&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Conflicts@{Conflicts}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Conflicts@{Conflicts}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfad35cef9595a935771f5e8158f387227b}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfad35cef9595a935771f5e8158f387227b} 
+Conflicts&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NotaryAssisted@{NotaryAssisted}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!NotaryAssisted@{NotaryAssisted}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa4358541e8065a4f65f406f0fb783fe7f}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa4358541e8065a4f65f406f0fb783fe7f} 
+Notary\+Assisted&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ContractHash@{ContractHash}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!ContractHash@{ContractHash}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa5a3d51657d021d1b4212c90df2f20fd1}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa5a3d51657d021d1b4212c90df2f20fd1} 
+Contract\+Hash&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ECDH02@{ECDH02}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!ECDH02@{ECDH02}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa0e0bcdb4b9f0da4fe6156ed328391977}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa0e0bcdb4b9f0da4fe6156ed328391977} 
+ECDH02&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ECDH03@{ECDH03}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!ECDH03@{ECDH03}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaac1a9b48301d2956db26f59f3a0400e8}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaac1a9b48301d2956db26f59f3a0400e8} 
+ECDH03&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Script@{Script}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Script@{Script}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaf907e651164789346ae0a1e257c462d8}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaf907e651164789346ae0a1e257c462d8} 
+Script&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Vote@{Vote}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Vote@{Vote}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa7f319b8ccad7e92033b9492ddbc4b522}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa7f319b8ccad7e92033b9492ddbc4b522} 
+Vote&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DescriptionUrl@{DescriptionUrl}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!DescriptionUrl@{DescriptionUrl}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa6c5f0fe97e8456ac241da5feff0cc70b}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa6c5f0fe97e8456ac241da5feff0cc70b} 
+Description\+Url&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Description@{Description}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Description@{Description}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfab5a7adde1af5c87d7fd797b6245c2a39}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfab5a7adde1af5c87d7fd797b6245c2a39} 
+Description&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hash1@{Hash1}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Hash1@{Hash1}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa6efda8bf83ebcf7c934a98ff6aa43397}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa6efda8bf83ebcf7c934a98ff6aa43397} 
+Hash1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hash2@{Hash2}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Hash2@{Hash2}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa8951ae32eeff8db5367e2ab49c3aaab7}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa8951ae32eeff8db5367e2ab49c3aaab7} 
+Hash2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hash3@{Hash3}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Hash3@{Hash3}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfad8cde00c2cd1106366846a7505d05458}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfad8cde00c2cd1106366846a7505d05458} 
+Hash3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hash4@{Hash4}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Hash4@{Hash4}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa18c621df5c5f12e187c11cfd21339692}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa18c621df5c5f12e187c11cfd21339692} 
+Hash4&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hash5@{Hash5}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Hash5@{Hash5}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa3f4e11d7061795f5db7a4b12dadfe81a}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa3f4e11d7061795f5db7a4b12dadfe81a} 
+Hash5&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hash6@{Hash6}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Hash6@{Hash6}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa515fadfe09a8a360a05a7a5b2ba297ef}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa515fadfe09a8a360a05a7a5b2ba297ef} 
+Hash6&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hash7@{Hash7}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Hash7@{Hash7}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa10dafab85633ea265397f6580634f30b}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa10dafab85633ea265397f6580634f30b} 
+Hash7&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hash8@{Hash8}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Hash8@{Hash8}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfab012c20c349c5d69e39e67ebef1ebf28}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfab012c20c349c5d69e39e67ebef1ebf28} 
+Hash8&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hash9@{Hash9}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Hash9@{Hash9}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaec5deb1d33bd29a1b96269a81c3a1406}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaec5deb1d33bd29a1b96269a81c3a1406} 
+Hash9&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hash10@{Hash10}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Hash10@{Hash10}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaff4927b9346abc5f14667ac924c4f0ba}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaff4927b9346abc5f14667ac924c4f0ba} 
+Hash10&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hash11@{Hash11}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Hash11@{Hash11}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa88c2041ccd2b4eedc1777b0b0d63a5a2}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa88c2041ccd2b4eedc1777b0b0d63a5a2} 
+Hash11&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hash12@{Hash12}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Hash12@{Hash12}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa2734d10217a572fbf1718094ebfadaf3}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa2734d10217a572fbf1718094ebfadaf3} 
+Hash12&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hash13@{Hash13}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Hash13@{Hash13}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa0080479943a1407ca978eac032b98d22}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa0080479943a1407ca978eac032b98d22} 
+Hash13&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hash14@{Hash14}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Hash14@{Hash14}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfae24606724c9fb5ef271ada07791ab987}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfae24606724c9fb5ef271ada07791ab987} 
+Hash14&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Hash15@{Hash15}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Hash15@{Hash15}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa25b57a3a663793be50953c1a18eb5bda}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa25b57a3a663793be50953c1a18eb5bda} 
+Hash15&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remark@{Remark}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Remark@{Remark}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa91921ada405fd6ba65dff028df047cb6}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa91921ada405fd6ba65dff028df047cb6} 
+Remark&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remark1@{Remark1}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Remark1@{Remark1}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa9b35ada01f9c5421c85174692490d321}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa9b35ada01f9c5421c85174692490d321} 
+Remark1&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remark2@{Remark2}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Remark2@{Remark2}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa68792aba2faa097897207166b45d01f0}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa68792aba2faa097897207166b45d01f0} 
+Remark2&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remark3@{Remark3}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Remark3@{Remark3}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa613d9649ab1b17814817848158d361f1}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa613d9649ab1b17814817848158d361f1} 
+Remark3&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remark4@{Remark4}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Remark4@{Remark4}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfabc2f827001713aa91a2eed827ad32774}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfabc2f827001713aa91a2eed827ad32774} 
+Remark4&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remark5@{Remark5}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Remark5@{Remark5}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa7244200192f665ed1f4bfff601b51feb}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa7244200192f665ed1f4bfff601b51feb} 
+Remark5&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remark6@{Remark6}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Remark6@{Remark6}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaf841877b96d7427643f39b5c927dcb81}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaf841877b96d7427643f39b5c927dcb81} 
+Remark6&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remark7@{Remark7}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Remark7@{Remark7}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfafb0a17a384d4c74db8296a20ecef0e62}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfafb0a17a384d4c74db8296a20ecef0e62} 
+Remark7&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remark8@{Remark8}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Remark8@{Remark8}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfad1a2da8e66b5981ab0dac4bf17a23de0}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfad1a2da8e66b5981ab0dac4bf17a23de0} 
+Remark8&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remark9@{Remark9}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Remark9@{Remark9}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa1f4242c18f3f3f88e14e05cc5a100da4}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa1f4242c18f3f3f88e14e05cc5a100da4} 
+Remark9&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remark10@{Remark10}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Remark10@{Remark10}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa07eb2364aadf60a49f7446fe7e341948}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa07eb2364aadf60a49f7446fe7e341948} 
+Remark10&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remark11@{Remark11}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Remark11@{Remark11}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa59094c3149d7ceb36c04d722180f85f8}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa59094c3149d7ceb36c04d722180f85f8} 
+Remark11&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remark12@{Remark12}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Remark12@{Remark12}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa81f0bf43cd9720e3e479ef25b70aee1e}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfa81f0bf43cd9720e3e479ef25b70aee1e} 
+Remark12&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remark13@{Remark13}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Remark13@{Remark13}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfadc606de45d917f1c77f8c50776cded50}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfadc606de45d917f1c77f8c50776cded50} 
+Remark13&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remark14@{Remark14}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Remark14@{Remark14}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaf8254add1228e830dde253e8cb4d787f}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaf8254add1228e830dde253e8cb4d787f} 
+Remark14&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Remark15@{Remark15}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Remark15@{Remark15}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaf36232435ef393bf4254c1f60116b17b}\label{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adfaf36232435ef393bf4254c1f60116b17b} 
+Remark15&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_af93e5abcd8e3d4bf4bffc2d66c26b0eb}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!TransactionAttribute@{TransactionAttribute}}
+\index{TransactionAttribute@{TransactionAttribute}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+\doxysubsubsection{\texorpdfstring{TransactionAttribute()}{TransactionAttribute()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_af93e5abcd8e3d4bf4bffc2d66c26b0eb} 
+Transaction\+Attribute\+::\+Transaction\+Attribute (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}. 
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_a865fafed26afca0d134188cbfac2717e}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!TransactionAttribute@{TransactionAttribute}}
+\index{TransactionAttribute@{TransactionAttribute}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+\doxysubsubsection{\texorpdfstring{TransactionAttribute()}{TransactionAttribute()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_a865fafed26afca0d134188cbfac2717e} 
+Transaction\+Attribute\+::\+Transaction\+Attribute (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adf}{Usage}}}]{usage}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute} with the specified usage and data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em usage} & The usage. \\
+\hline
+{\em data} & The data. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_aa0339b417ac520be21c09373655ce88a}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_aa0339b417ac520be21c09373655ce88a} 
+void Transaction\+Attribute\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_a6503d86729d8f97f6c470ae083befdd5}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_a6503d86729d8f97f6c470ae083befdd5} 
+void Transaction\+Attribute\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_aa6f40c5fca4332604c4de03c49c45aa3}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!GetData@{GetData}}
+\index{GetData@{GetData}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+\doxysubsubsection{\texorpdfstring{GetData()}{GetData()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_aa6f40c5fca4332604c4de03c49c45aa3} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& Transaction\+Attribute\+::\+Get\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the data. 
+
+\begin{DoxyReturn}{Returns}
+The data. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_ad4a5477b9b142126531525c21b614aee}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!GetType@{GetType}}
+\index{GetType@{GetType}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_ad4a5477b9b142126531525c21b614aee} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adf}{Usage}} neo\+::ledger\+::\+Transaction\+Attribute\+::\+Get\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the type (alias for Get\+Usage for RPC compatibility). 
+
+\begin{DoxyReturn}{Returns}
+The usage/type. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_a41a7c5dfca800c2c30859ac1fa8d46ef}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!GetUsage@{GetUsage}}
+\index{GetUsage@{GetUsage}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+\doxysubsubsection{\texorpdfstring{GetUsage()}{GetUsage()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_a41a7c5dfca800c2c30859ac1fa8d46ef} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adf}{Transaction\+Attribute\+::\+Usage}} Transaction\+Attribute\+::\+Get\+Usage (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the usage. 
+
+\begin{DoxyReturn}{Returns}
+The usage. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_aa51d0ecb1bd5abd6c92470664c9153c5}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_aa51d0ecb1bd5abd6c92470664c9153c5} 
+bool Transaction\+Attribute\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute} is not equal to another \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Transaction\+Attributes are not equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_a38747ec5b889b54a0aadf9dcc25a2246}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_a38747ec5b889b54a0aadf9dcc25a2246} 
+bool Transaction\+Attribute\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute} is equal to another \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Transaction\+Attributes are equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_a7774571d8cc135fd8468460be6b0de80}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_a7774571d8cc135fd8468460be6b0de80} 
+void Transaction\+Attribute\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_ac4fafdf9d03ffb86c3501dbaeb9404f7}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_ac4fafdf9d03ffb86c3501dbaeb9404f7} 
+void Transaction\+Attribute\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1ledger_1_1_transaction_attribute}{Transaction\+Attribute} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_a6ab6383e1059f3d907987d8d628be540}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!SetData@{SetData}}
+\index{SetData@{SetData}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+\doxysubsubsection{\texorpdfstring{SetData()}{SetData()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_a6ab6383e1059f3d907987d8d628be540} 
+void Transaction\+Attribute\+::\+Set\+Data (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Sets the data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_a84dc4936b16274fbcfe57ace03f33198}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!SetUsage@{SetUsage}}
+\index{SetUsage@{SetUsage}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+\doxysubsubsection{\texorpdfstring{SetUsage()}{SetUsage()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_a84dc4936b16274fbcfe57ace03f33198} 
+void Transaction\+Attribute\+::\+Set\+Usage (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adf}{Usage}}}]{usage}{}\end{DoxyParamCaption})}
+
+
+
+Sets the usage. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em usage} & The usage. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_aeed34a30985fa8d1930a23074e1e03b9}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!data\_@{data\_}}
+\index{data\_@{data\_}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_aeed34a30985fa8d1930a23074e1e03b9} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::ledger\+::\+Transaction\+Attribute\+::data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_a5ccf3b246af4b54d976693cc8d8b6b2d}\index{neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}!usage\_@{usage\_}}
+\index{usage\_@{usage\_}!neo::ledger::TransactionAttribute@{neo::ledger::TransactionAttribute}}
+\doxysubsubsection{\texorpdfstring{usage\_}{usage\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_a5ccf3b246af4b54d976693cc8d8b6b2d} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adf}{Usage}} neo\+::ledger\+::\+Transaction\+Attribute\+::usage\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{transaction__attribute_8h}{transaction\+\_\+attribute.\+h}}\item 
+src/ledger/\mbox{\hyperlink{transaction__attribute_8cpp}{transaction\+\_\+attribute.\+cpp}}\item 
+src/ledger/\mbox{\hyperlink{transaction__json_8cpp}{transaction\+\_\+json.\+cpp}}\end{DoxyCompactItemize}

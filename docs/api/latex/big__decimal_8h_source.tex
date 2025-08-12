@@ -1,0 +1,114 @@
+\doxysection{big\+\_\+decimal.\+h}
+\hypertarget{big__decimal_8h_source}{}\label{big__decimal_8h_source}\index{include/neo/core/big\_decimal.h@{include/neo/core/big\_decimal.h}}
+\mbox{\hyperlink{big__decimal_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Copyright\ (C)\ 2015-\/2025\ The\ Neo\ Project.}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ big\_decimal.h\ file\ belongs\ to\ the\ neo\ project\ and\ is\ free}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ software\ distributed\ under\ the\ MIT\ software\ license,\ see\ the}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ accompanying\ file\ LICENSE\ in\ the\ main\ directory\ of\ the}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ repository\ or\ http://www.opensource.org/licenses/mit-\/license.php}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ for\ more\ details.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Redistribution\ and\ use\ in\ source\ and\ binary\ forms\ with\ or\ without}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ modifications\ are\ permitted.}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ NEO\_CORE\_BIG\_DECIMAL\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ NEO\_CORE\_BIG\_DECIMAL\_H}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <boost/multiprecision/cpp\_int.hpp>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <compare>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo}{neo}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1_big_decimal_a3916c64ca0374e8a2d4ee5898f0271b0}{BigDecimal}}}
+\DoxyCodeLine{00031\ \{}
+\DoxyCodeLine{00032\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{BigInteger}}\ =\ boost::multiprecision::cpp\_int;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{BigInteger}}\ \mbox{\hyperlink{classneo_1_1_big_decimal_a6c78bce9b08bb013cb98aed6ecc2d7ea}{value\_}};}
+\DoxyCodeLine{00037\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1_big_decimal_af8dcd9fb11fb6503f14343e0da40ce37}{decimals\_}};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal_a3916c64ca0374e8a2d4ee5898f0271b0}{BigDecimal}}()\ :\ \mbox{\hyperlink{classneo_1_1_big_decimal_a6c78bce9b08bb013cb98aed6ecc2d7ea}{value\_}}(0),\ \mbox{\hyperlink{classneo_1_1_big_decimal_af8dcd9fb11fb6503f14343e0da40ce37}{decimals\_}}(0)\ \{\}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal_a3916c64ca0374e8a2d4ee5898f0271b0}{BigDecimal}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{BigInteger}}\&\ \mbox{\hyperlink{classneo_1_1_big_decimal_ace79a09b93edd014178bec687ffb8013}{value}},\ uint8\_t\ \mbox{\hyperlink{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c}{decimals}});}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1_big_decimal_a3916c64ca0374e8a2d4ee5898f0271b0}{BigDecimal}}(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{classneo_1_1_big_decimal_ace79a09b93edd014178bec687ffb8013}{value}});}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal_a3916c64ca0374e8a2d4ee5898f0271b0}{BigDecimal}}(\textcolor{keywordtype}{double}\ \mbox{\hyperlink{classneo_1_1_big_decimal_ace79a09b93edd014178bec687ffb8013}{value}},\ uint8\_t\ \mbox{\hyperlink{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c}{decimals}});}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal_a68ee4c6d5688a56e252ede0386f0e7bd}{BigDecimal}}(T\ \mbox{\hyperlink{classneo_1_1_big_decimal_ace79a09b93edd014178bec687ffb8013}{value}},\ uint8\_t\ \mbox{\hyperlink{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c}{decimals}}\ =\ 0)}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keyword}{requires}\ \mbox{\hyperlink{namespacestd}{std}}::is\_integral\_v<T>}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1_big_decimal_a6c78bce9b08bb013cb98aed6ecc2d7ea}{value\_}}(\mbox{\hyperlink{classneo_1_1_big_decimal_ace79a09b93edd014178bec687ffb8013}{value}}),\ \mbox{\hyperlink{classneo_1_1_big_decimal_af8dcd9fb11fb6503f14343e0da40ce37}{decimals\_}}(\mbox{\hyperlink{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c}{decimals}})}
+\DoxyCodeLine{00074\ \ \ \ \ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{comment}{//\ Accessors}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{BigInteger}}\&\ \mbox{\hyperlink{classneo_1_1_big_decimal_ace79a09b93edd014178bec687ffb8013}{value}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1_big_decimal_a6c78bce9b08bb013cb98aed6ecc2d7ea}{value\_}};\ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00088\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c}{decimals}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1_big_decimal_af8dcd9fb11fb6503f14343e0da40ce37}{decimals\_}};\ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1_big_decimal_af74a3e45f68b4e40e9d4ad9731903fa5}{sign}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{comment}{//\ Operations}}
+\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\ \mbox{\hyperlink{classneo_1_1_big_decimal_a7b5fb7d805a4d000834f2312a7fdcb56}{change\_decimals}}(uint8\_t\ \mbox{\hyperlink{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c}{decimals}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00109\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1_big_decimal_a24beb3d4823daa80e3a5e4891cf23751}{to\_string}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classneo_1_1_big_decimal_a4beef9ba3cd228d9c68e1a39e10da620}{ToDouble}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{comment}{//\ Static\ parsing\ methods}}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\ \mbox{\hyperlink{classneo_1_1_big_decimal_ac466b1d51053a2781fb2978cce897cc6}{parse}}(\textcolor{keyword}{const}\ std::string\&\ s,\ uint8\_t\ \mbox{\hyperlink{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c}{decimals}});}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keyword}{static}\ std::optional<BigDecimal>\ \mbox{\hyperlink{classneo_1_1_big_decimal_a21f9c76f79cd2d7fd0cbe15b1157f764}{try\_parse}}(\textcolor{keyword}{const}\ std::string\&\ s,\ uint8\_t\ \mbox{\hyperlink{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c}{decimals}});}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{comment}{//\ Arithmetic\ operators}}
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\ \mbox{\hyperlink{classneo_1_1_big_decimal_ae36d8241914d1e18b1c0a34d832519c4}{operator+}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00137\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\ \mbox{\hyperlink{classneo_1_1_big_decimal_aa783ec1d9fa789d9d4b095dd09dfcd0e}{operator-\/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00138\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\ \mbox{\hyperlink{classneo_1_1_big_decimal_a3e46dd37935e273a657f6fe49d23e418}{operator*}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00139\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\ \mbox{\hyperlink{classneo_1_1_big_decimal_a4e48a546b9775f068093038ef926752b}{operator/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00140\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\ \mbox{\hyperlink{classneo_1_1_big_decimal_abc2472983a3b4ba6f9c87856ac2a675d}{operator\%}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ \mbox{\hyperlink{classneo_1_1_big_decimal_a5aaacf46e17d1bd502bc6be311641924}{operator+=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ other);}
+\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ \mbox{\hyperlink{classneo_1_1_big_decimal_aa28101dec21a538e6816c06582e5a967}{operator-\/=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ other);}
+\DoxyCodeLine{00144\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ \mbox{\hyperlink{classneo_1_1_big_decimal_a1b03ed15ed05813e59aee85f97c59881}{operator*=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ other);}
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ \mbox{\hyperlink{classneo_1_1_big_decimal_a3f8ddd89dab52ff54dec279004cededf}{operator/=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ other);}
+\DoxyCodeLine{00146\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ \mbox{\hyperlink{classneo_1_1_big_decimal_a173e33a2e4821c668233ca2a57315fe6}{operator\%=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ other);}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\ \mbox{\hyperlink{classneo_1_1_big_decimal_aa783ec1d9fa789d9d4b095dd09dfcd0e}{operator-\/}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{comment}{//\ Comparison\ operators}}
+\DoxyCodeLine{00151\ \ \ \ \ std::strong\_ordering\ \mbox{\hyperlink{classneo_1_1_big_decimal_a3333653c232ccf10e5ae8dd4f252d19b}{operator<=>}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1_big_decimal_a3003fef452390694e3f5d49a27944896}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{comment}{//\ Hash\ support}}
+\DoxyCodeLine{00155\ \ \ \ \ std::size\_t\ \mbox{\hyperlink{classneo_1_1_big_decimal_ae0508663a4b2291bec547228e3bd05f4}{hash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keyword}{static}\ std::pair<BigInteger,\ BigInteger>\ \mbox{\hyperlink{classneo_1_1_big_decimal_a32850fb45a85d4588f0979227c6c3733}{normalize}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal}{BigDecimal}}\&\ right);}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{BigInteger}}\ \mbox{\hyperlink{classneo_1_1_big_decimal_a0a22bb99e8462309061611ba38b19236}{pow10}}(\textcolor{keywordtype}{int}\ exponent);}
+\DoxyCodeLine{00172\ \};}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \}\ \ \textcolor{comment}{//\ namespace\ neo}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \textcolor{comment}{//\ Hash\ specialization\ for\ std::hash}}
+\DoxyCodeLine{00177\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespacestd}{std}}}
+\DoxyCodeLine{00178\ \{}
+\DoxyCodeLine{00179\ \textcolor{keyword}{template}\ <>}
+\DoxyCodeLine{00180\ \textcolor{keyword}{struct\ }hash<\mbox{\hyperlink{namespaceneo}{neo}}::BigDecimal>}
+\DoxyCodeLine{00181\ \{}
+\DoxyCodeLine{00182\ \ \ \ \ std::size\_t\ \mbox{\hyperlink{structstd_1_1hash_3_01neo_1_1_big_decimal_01_4_abc39118731927b4606942c7e81297260}{operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1_big_decimal}{neo::BigDecimal}}\&\ bd)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ bd.\mbox{\hyperlink{classneo_1_1_big_decimal_ae0508663a4b2291bec547228e3bd05f4}{hash}}();\ \}}
+\DoxyCodeLine{00183\ \};}
+\DoxyCodeLine{00184\ \}\ \ \textcolor{comment}{//\ namespace\ std}}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ NEO\_CORE\_BIG\_DECIMAL\_H}}
+
+\end{DoxyCode}

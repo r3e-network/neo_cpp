@@ -1,0 +1,377 @@
+\doxysection{neo\+::cli\+::CLI Class Reference}
+\hypertarget{classneo_1_1cli_1_1_c_l_i}{}\label{classneo_1_1cli_1_1_c_l_i}\index{neo::cli::CLI@{neo::cli::CLI}}
+
+
+Represents a \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI} (Command Line Interface).  
+
+
+
+
+{\ttfamily \#include $<$cli.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a20f0f49edb6ab1797c8f81f057ccfb74}{CLI}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ neo\+System, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}} $>$ rpc\+Server)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a6c050ff29aa88afce300c5e5872b8e72}{\texorpdfstring{$\sim$}{\string~}\+CLI}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a89964c75e32fb62943a2914fb97b9729}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Starts the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a65bb1b23cfb2899465941ca22c731ea7}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stops the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a71eb53f8c115511f30b842f6bd6842f7}{Is\+Running}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI} is running. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_ae617a863f4c27472e301d81b19b72680}{Get\+Neo\+System}} () const
+\begin{DoxyCompactList}\small\item\em Gets the Neo system. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a284c11f864e5b030c3d584d3e372f3f7}{Get\+RPCServer}} () const
+\begin{DoxyCompactList}\small\item\em Gets the RPC server. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{wallets\+::\+Wallet}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a45e8da051c8277f82e955aaf6638b4d0}{Get\+Wallet}} () const
+\begin{DoxyCompactList}\small\item\em Gets the wallet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_afa99cba9c8acffeb7c9ab001cb2a57f4}{Set\+Wallet}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{wallets\+::\+Wallet}} $>$ wallet)
+\begin{DoxyCompactList}\small\item\em Sets the wallet. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_ac21c334d0a0472194fccea8aba4720c1}{Register\+Command}} (const std\+::string \&command, std\+::function$<$ bool(const std\+::vector$<$ std\+::string $>$ \&)$>$ handler, const std\+::string \&help)
+\begin{DoxyCompactList}\small\item\em Registers a command. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a70e1364e41ced86aa3cb25a1945f38c0}{Unregister\+Command}} (const std\+::string \&command)
+\begin{DoxyCompactList}\small\item\em Unregisters a command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a92ac70c1e698610594b04271884aa694}{Execute\+Command}} (const std\+::string \&command)
+\begin{DoxyCompactList}\small\item\em Executes a command. \end{DoxyCompactList}\item 
+const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \& \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a9bc37f34130b6be01f26d040916f513d}{Get\+Command\+Help}} () const
+\begin{DoxyCompactList}\small\item\em Gets the command help. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a3791ec754518c332c923014c5d8c45d3}{Run\+CLI}} ()
+\begin{DoxyCompactList}\small\item\em Runs the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a7affc0f93617b81d58ec709020afefbf}{Initialize\+Commands}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the commands. \end{DoxyCompactList}\item 
+std\+::pair$<$ std\+::string, std\+::vector$<$ std\+::string $>$ $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a92c83e076527e398c54ae3d2a16a7b5e}{Parse\+Command}} (const std\+::string \&command)
+\begin{DoxyCompactList}\small\item\em Parses a command. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a4fcfa375290fb19bb305960a4b7fc33f}{neo\+System\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_ad4d932e2d269d4ff09b72b82339b63d8}{rpc\+Server\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler}{Command\+Handler}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a174fde45c53923e4aa2a0d4657226131}{command\+Handler\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_afdd180f5d0d3750ebedb3272a0f5e3d9}{running\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_ab556dd9c056cad43f5f8056baac7e3c8}{cli\+Thread\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a6034aadb7afab418ef06288d6047b29b}{mutex\+\_\+}}
+\item 
+std\+::condition\+\_\+variable \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_a89a2f8046e6096ba2a05aa263a06fd54}{condition\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::function$<$ bool(const std\+::vector$<$ std\+::string $>$ \&)$>$ $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_afa8d6ddff8a31974e365a145d4c44313}{commands\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i_adc22b378d0227854ad64fffeb72b7098}{command\+Help\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI} (Command Line Interface). 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a20f0f49edb6ab1797c8f81f057ccfb74}\index{neo::cli::CLI@{neo::cli::CLI}!CLI@{CLI}}
+\index{CLI@{CLI}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{CLI()}{CLI()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a20f0f49edb6ab1797c8f81f057ccfb74} 
+neo\+::cli\+::\+CLI\+::\+CLI (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$}]{neo\+System}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}} $>$}]{rpc\+Server}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neo\+System} & The Neo system. \\
+\hline
+{\em rpc\+Server} & The RPC server. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a6c050ff29aa88afce300c5e5872b8e72}\index{neo::cli::CLI@{neo::cli::CLI}!````~CLI@{\texorpdfstring{$\sim$}{\string~}CLI}}
+\index{````~CLI@{\texorpdfstring{$\sim$}{\string~}CLI}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}CLI()}{\string~CLI()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a6c050ff29aa88afce300c5e5872b8e72} 
+neo\+::cli\+::\+CLI\+::\texorpdfstring{$\sim$}{\string~}\+CLI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a92ac70c1e698610594b04271884aa694}\index{neo::cli::CLI@{neo::cli::CLI}!ExecuteCommand@{ExecuteCommand}}
+\index{ExecuteCommand@{ExecuteCommand}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{ExecuteCommand()}{ExecuteCommand()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a92ac70c1e698610594b04271884aa694} 
+bool neo\+::cli\+::\+CLI\+::\+Execute\+Command (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{command}{}\end{DoxyParamCaption})}
+
+
+
+Executes a command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The command. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a9bc37f34130b6be01f26d040916f513d}\index{neo::cli::CLI@{neo::cli::CLI}!GetCommandHelp@{GetCommandHelp}}
+\index{GetCommandHelp@{GetCommandHelp}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{GetCommandHelp()}{GetCommandHelp()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a9bc37f34130b6be01f26d040916f513d} 
+const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \& neo\+::cli\+::\+CLI\+::\+Get\+Command\+Help (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the command help. 
+
+\begin{DoxyReturn}{Returns}
+The command help. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_ae617a863f4c27472e301d81b19b72680}\index{neo::cli::CLI@{neo::cli::CLI}!GetNeoSystem@{GetNeoSystem}}
+\index{GetNeoSystem@{GetNeoSystem}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{GetNeoSystem()}{GetNeoSystem()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_ae617a863f4c27472e301d81b19b72680} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ neo\+::cli\+::\+CLI\+::\+Get\+Neo\+System (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the Neo system. 
+
+\begin{DoxyReturn}{Returns}
+The Neo system. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a284c11f864e5b030c3d584d3e372f3f7}\index{neo::cli::CLI@{neo::cli::CLI}!GetRPCServer@{GetRPCServer}}
+\index{GetRPCServer@{GetRPCServer}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{GetRPCServer()}{GetRPCServer()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a284c11f864e5b030c3d584d3e372f3f7} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}} $>$ neo\+::cli\+::\+CLI\+::\+Get\+RPCServer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the RPC server. 
+
+\begin{DoxyReturn}{Returns}
+The RPC server. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a45e8da051c8277f82e955aaf6638b4d0}\index{neo::cli::CLI@{neo::cli::CLI}!GetWallet@{GetWallet}}
+\index{GetWallet@{GetWallet}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{GetWallet()}{GetWallet()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a45e8da051c8277f82e955aaf6638b4d0} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{wallets\+::\+Wallet}} $>$ neo\+::cli\+::\+CLI\+::\+Get\+Wallet (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the wallet. 
+
+\begin{DoxyReturn}{Returns}
+The wallet. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a7affc0f93617b81d58ec709020afefbf}\index{neo::cli::CLI@{neo::cli::CLI}!InitializeCommands@{InitializeCommands}}
+\index{InitializeCommands@{InitializeCommands}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{InitializeCommands()}{InitializeCommands()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a7affc0f93617b81d58ec709020afefbf} 
+void neo\+::cli\+::\+CLI\+::\+Initialize\+Commands (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Initializes the commands. 
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a71eb53f8c115511f30b842f6bd6842f7}\index{neo::cli::CLI@{neo::cli::CLI}!IsRunning@{IsRunning}}
+\index{IsRunning@{IsRunning}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{IsRunning()}{IsRunning()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a71eb53f8c115511f30b842f6bd6842f7} 
+bool neo\+::cli\+::\+CLI\+::\+Is\+Running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI} is running. 
+
+\begin{DoxyReturn}{Returns}
+True if the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI} is running, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a92c83e076527e398c54ae3d2a16a7b5e}\index{neo::cli::CLI@{neo::cli::CLI}!ParseCommand@{ParseCommand}}
+\index{ParseCommand@{ParseCommand}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{ParseCommand()}{ParseCommand()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a92c83e076527e398c54ae3d2a16a7b5e} 
+std\+::pair$<$ std\+::string, std\+::vector$<$ std\+::string $>$ $>$ neo\+::cli\+::\+CLI\+::\+Parse\+Command (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{command}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Parses a command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The command. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The command and arguments. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_ac21c334d0a0472194fccea8aba4720c1}\index{neo::cli::CLI@{neo::cli::CLI}!RegisterCommand@{RegisterCommand}}
+\index{RegisterCommand@{RegisterCommand}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{RegisterCommand()}{RegisterCommand()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_ac21c334d0a0472194fccea8aba4720c1} 
+void neo\+::cli\+::\+CLI\+::\+Register\+Command (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{command}{, }\item[{std\+::function$<$ bool(const std\+::vector$<$ std\+::string $>$ \&)$>$}]{handler}{, }\item[{const std\+::string \&}]{help}{}\end{DoxyParamCaption})}
+
+
+
+Registers a command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The command. \\
+\hline
+{\em handler} & The handler. \\
+\hline
+{\em help} & The help text. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a3791ec754518c332c923014c5d8c45d3}\index{neo::cli::CLI@{neo::cli::CLI}!RunCLI@{RunCLI}}
+\index{RunCLI@{RunCLI}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{RunCLI()}{RunCLI()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a3791ec754518c332c923014c5d8c45d3} 
+void neo\+::cli\+::\+CLI\+::\+Run\+CLI (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Runs the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}. 
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_afa99cba9c8acffeb7c9ab001cb2a57f4}\index{neo::cli::CLI@{neo::cli::CLI}!SetWallet@{SetWallet}}
+\index{SetWallet@{SetWallet}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{SetWallet()}{SetWallet()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_afa99cba9c8acffeb7c9ab001cb2a57f4} 
+void neo\+::cli\+::\+CLI\+::\+Set\+Wallet (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{wallets\+::\+Wallet}} $>$}]{wallet}{}\end{DoxyParamCaption})}
+
+
+
+Sets the wallet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em wallet} & The wallet. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a89964c75e32fb62943a2914fb97b9729}\index{neo::cli::CLI@{neo::cli::CLI}!Start@{Start}}
+\index{Start@{Start}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a89964c75e32fb62943a2914fb97b9729} 
+void neo\+::cli\+::\+CLI\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Starts the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}. 
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a65bb1b23cfb2899465941ca22c731ea7}\index{neo::cli::CLI@{neo::cli::CLI}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a65bb1b23cfb2899465941ca22c731ea7} 
+void neo\+::cli\+::\+CLI\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}. 
+
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a70e1364e41ced86aa3cb25a1945f38c0}\index{neo::cli::CLI@{neo::cli::CLI}!UnregisterCommand@{UnregisterCommand}}
+\index{UnregisterCommand@{UnregisterCommand}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{UnregisterCommand()}{UnregisterCommand()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a70e1364e41ced86aa3cb25a1945f38c0} 
+void neo\+::cli\+::\+CLI\+::\+Unregister\+Command (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{command}{}\end{DoxyParamCaption})}
+
+
+
+Unregisters a command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The command. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_ab556dd9c056cad43f5f8056baac7e3c8}\index{neo::cli::CLI@{neo::cli::CLI}!cliThread\_@{cliThread\_}}
+\index{cliThread\_@{cliThread\_}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{cliThread\_}{cliThread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_ab556dd9c056cad43f5f8056baac7e3c8} 
+std\+::thread neo\+::cli\+::\+CLI\+::cli\+Thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a174fde45c53923e4aa2a0d4657226131}\index{neo::cli::CLI@{neo::cli::CLI}!commandHandler\_@{commandHandler\_}}
+\index{commandHandler\_@{commandHandler\_}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{commandHandler\_}{commandHandler\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a174fde45c53923e4aa2a0d4657226131} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1cli_1_1_command_handler}{Command\+Handler}}$>$ neo\+::cli\+::\+CLI\+::command\+Handler\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_adc22b378d0227854ad64fffeb72b7098}\index{neo::cli::CLI@{neo::cli::CLI}!commandHelp\_@{commandHelp\_}}
+\index{commandHelp\_@{commandHelp\_}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{commandHelp\_}{commandHelp\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_adc22b378d0227854ad64fffeb72b7098} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::string$>$ neo\+::cli\+::\+CLI\+::command\+Help\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_afa8d6ddff8a31974e365a145d4c44313}\index{neo::cli::CLI@{neo::cli::CLI}!commands\_@{commands\_}}
+\index{commands\_@{commands\_}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{commands\_}{commands\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_afa8d6ddff8a31974e365a145d4c44313} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::function$<$bool(const std\+::vector$<$std\+::string$>$\&)$>$ $>$ neo\+::cli\+::\+CLI\+::commands\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a89a2f8046e6096ba2a05aa263a06fd54}\index{neo::cli::CLI@{neo::cli::CLI}!condition\_@{condition\_}}
+\index{condition\_@{condition\_}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{condition\_}{condition\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a89a2f8046e6096ba2a05aa263a06fd54} 
+std\+::condition\+\_\+variable neo\+::cli\+::\+CLI\+::condition\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a6034aadb7afab418ef06288d6047b29b}\index{neo::cli::CLI@{neo::cli::CLI}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a6034aadb7afab418ef06288d6047b29b} 
+std\+::mutex neo\+::cli\+::\+CLI\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_a4fcfa375290fb19bb305960a4b7fc33f}\index{neo::cli::CLI@{neo::cli::CLI}!neoSystem\_@{neoSystem\_}}
+\index{neoSystem\_@{neoSystem\_}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{neoSystem\_}{neoSystem\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_a4fcfa375290fb19bb305960a4b7fc33f} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}}$>$ neo\+::cli\+::\+CLI\+::neo\+System\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_ad4d932e2d269d4ff09b72b82339b63d8}\index{neo::cli::CLI@{neo::cli::CLI}!rpcServer\_@{rpcServer\_}}
+\index{rpcServer\_@{rpcServer\_}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{rpcServer\_}{rpcServer\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_ad4d932e2d269d4ff09b72b82339b63d8} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}}$>$ neo\+::cli\+::\+CLI\+::rpc\+Server\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_c_l_i_afdd180f5d0d3750ebedb3272a0f5e3d9}\index{neo::cli::CLI@{neo::cli::CLI}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::cli::CLI@{neo::cli::CLI}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_c_l_i_afdd180f5d0d3750ebedb3272a0f5e3d9} 
+std\+::atomic$<$bool$>$ neo\+::cli\+::\+CLI\+::running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cli/\mbox{\hyperlink{cli_8h}{cli.\+h}}\item 
+src/cli/\mbox{\hyperlink{cli_8cpp}{cli.\+cpp}}\end{DoxyCompactItemize}

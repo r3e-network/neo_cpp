@@ -1,0 +1,65 @@
+\doxysection{transfer\+\_\+output.\+h}
+\hypertarget{transfer__output_8h_source}{}\label{transfer__output_8h_source}\index{include/neo/wallets/transfer\_output.h@{include/neo/wallets/transfer\_output.h}}
+\mbox{\hyperlink{transfer__output_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1wallets}{neo::wallets}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a751e5ade33bb3cacc775da84bc724c93}{TransferOutput}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a751e5ade33bb3cacc775da84bc724c93}{TransferOutput}}();}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a751e5ade33bb3cacc775da84bc724c93}{TransferOutput}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ asset\_id,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ script\_hash,\ int64\_t\ amount,}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ data\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a04e6b5b81e00f515f83a4c357a1a7245}{\string~TransferOutput}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_aaef0f0a366430119daf4e16d7a3405e9}{TransferOutput}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a751e5ade33bb3cacc775da84bc724c93}{TransferOutput}}\&\ other)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a7b8744b4f1e81e70cccebfbc2e84adc2}{TransferOutput}}(\mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a751e5ade33bb3cacc775da84bc724c93}{TransferOutput}}\&\&\ other)\ \textcolor{keyword}{noexcept}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a751e5ade33bb3cacc775da84bc724c93}{TransferOutput}}\&\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_af673250ee49dc966c1ee31404b915a3f}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a751e5ade33bb3cacc775da84bc724c93}{TransferOutput}}\&\ other)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a751e5ade33bb3cacc775da84bc724c93}{TransferOutput}}\&\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a2f8adffc62706d177e556a98e32c1a80}{operator=}}(\mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a751e5ade33bb3cacc775da84bc724c93}{TransferOutput}}\&\&\ other)\ \textcolor{keyword}{noexcept}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a508e14613ff98003a5e25e2fb9edc3fc}{GetAssetId}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_abc6c769034b9fc407e48ab6f050e2786}{SetAssetId}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ asset\_id);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_ac578898f6fb372d844d5df9321c9d131}{GetScriptHash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a6ae3fd397c150b1be219ea74ef895fb2}{SetScriptHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ script\_hash);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00091\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_aa835bf14090e75affcb80b7085d86cc8}{GetAmount}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a7804fa12a6511bdc8cd34f91d5cce00d}{SetAmount}}(int64\_t\ amount);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_af5fcd0534a4b2f660856350c97854619}{GetData}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a4bb1af470bc7f79d7665c4138a2d24a9}{SetData}}(\textcolor{keyword}{const}\ std::string\&\ data);}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_ab0bff1a71b530f9744614085369a2d5b}{IsValid}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_adeab0bce07d8fa4e6aab95326e5f9ddf}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a751e5ade33bb3cacc775da84bc724c93}{TransferOutput}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_ae01df3ecea4a1df63839c03fee09f06c}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a751e5ade33bb3cacc775da84bc724c93}{TransferOutput}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00135\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a54f38c3a96da5aabf8ca12b88e3b9f00}{ToString}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00138\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_aae3d1bc5a616e1d751121fb45495e3c4}{asset\_id\_}};}
+\DoxyCodeLine{00139\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_ac754afd7ccd72b5ba26cc8c04af3f9a6}{script\_hash\_}};}
+\DoxyCodeLine{00140\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_aa9f2a5dd65030861e72269944113fb9b}{amount\_}};}
+\DoxyCodeLine{00141\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1wallets_1_1_transfer_output_a13e4f0154e3f35f0f3e64e84478c898b}{data\_}};}
+\DoxyCodeLine{00142\ \};}
+\DoxyCodeLine{00143\ \}\ \ \textcolor{comment}{//\ namespace\ neo::wallets}}
+
+\end{DoxyCode}

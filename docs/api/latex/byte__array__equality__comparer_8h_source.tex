@@ -1,0 +1,61 @@
+\doxysection{byte\+\_\+array\+\_\+equality\+\_\+comparer.\+h}
+\hypertarget{byte__array__equality__comparer_8h_source}{}\label{byte__array__equality__comparer_8h_source}\index{include/neo/extensions/byte\_array\_equality\_comparer.h@{include/neo/extensions/byte\_array\_equality\_comparer.h}}
+\mbox{\hyperlink{byte__array__equality__comparer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__span_8h}{neo/io/byte\_span.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1extensions}{neo::extensions}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00036\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer}{ByteArrayEqualityComparer}}}
+\DoxyCodeLine{00037\ \{}
+\DoxyCodeLine{00038\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_ae4560c4ea0bd31eb05a156933615c41b}{Equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ right);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_ae4560c4ea0bd31eb05a156933615c41b}{Equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ right);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_ae4560c4ea0bd31eb05a156933615c41b}{Equals}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ left,\ \textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ right);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_aff9b2dc8d8b23ef0f5b413d5adc8314b}{GetHashCode}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ data);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_aff9b2dc8d8b23ef0f5b413d5adc8314b}{GetHashCode}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ data);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_aff9b2dc8d8b23ef0f5b413d5adc8314b}{GetHashCode}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ data);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_equal}{Equal}}}
+\DoxyCodeLine{00088\ \ \ \ \ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_equal_a5aaa89241ef9bc6671686429434439e3}{operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ right)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_ae4560c4ea0bd31eb05a156933615c41b}{Equals}}(left,\ right);\ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_equal_a2e910dc34d1b7416dc343aa452eefd77}{operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ right)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_ae4560c4ea0bd31eb05a156933615c41b}{Equals}}(left,\ right);\ \}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_equal_a982cb4c498567cac2ecaa53f8ab944cd}{operator()}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ left,\ \textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ right)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00094\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_ae4560c4ea0bd31eb05a156933615c41b}{Equals}}(left,\ right);}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00097\ \ \ \ \ \};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_hash}{Hash}}}
+\DoxyCodeLine{00103\ \ \ \ \ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_hash_a31db3e0e0a5317f84adfb4d649b44aba}{operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ data)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_aff9b2dc8d8b23ef0f5b413d5adc8314b}{GetHashCode}}(data);\ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_hash_a1244670dfa7b6c922358b31658cfc067}{operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ data)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_aff9b2dc8d8b23ef0f5b413d5adc8314b}{GetHashCode}}(data);\ \}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_hash_a93ab6a529b1fbd210e13be606957ec10}{operator()}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ data)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_aff9b2dc8d8b23ef0f5b413d5adc8314b}{GetHashCode}}(data);\ \}}
+\DoxyCodeLine{00109\ \ \ \ \ \};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_hash_equal}{HashEqual}}}
+\DoxyCodeLine{00115\ \ \ \ \ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_hash_equal_a7d089ddd617264a0a6d3d412ac3f1ce3}{operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ data)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_aff9b2dc8d8b23ef0f5b413d5adc8314b}{GetHashCode}}(data);\ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_hash_equal_af2bea4d518c30cf1d15d1ff2ed4c68ce}{operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ left,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ right)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_ae4560c4ea0bd31eb05a156933615c41b}{Equals}}(left,\ right);\ \}}
+\DoxyCodeLine{00119\ \ \ \ \ \};}
+\DoxyCodeLine{00120\ \};}
+\DoxyCodeLine{00121\ \}\ \ \textcolor{comment}{//\ namespace\ neo::extensions}}
+
+\end{DoxyCode}

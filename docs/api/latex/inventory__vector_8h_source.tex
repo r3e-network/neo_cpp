@@ -1,0 +1,52 @@
+\doxysection{inventory\+\_\+vector.\+h}
+\hypertarget{inventory__vector_8h_source}{}\label{inventory__vector_8h_source}\index{include/neo/network/inventory\_vector.h@{include/neo/network/inventory\_vector.h}}
+\mbox{\hyperlink{inventory__vector_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{iserializable_8h}{neo/io/iserializable.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{inventory__type_8h}{neo/network/inventory\_type.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network}{neo::network}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_ae797efa812e404e4b548e1448d215d5d}{InventoryVector}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{io::ISerializable}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_ae797efa812e404e4b548e1448d215d5d}{InventoryVector}}()\ :\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a87cbdb5ea7020e5b6b357157fde38b5e}{type\_}}(\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{InventoryType}}::\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3da1b0ffaae3973401f71cd000ab9f7856e}{Transaction}})\ \{\}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_adc08e966823821d45838a59db5c24e73}{InventoryVector}}(\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{InventoryType}}\ type,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ :\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a87cbdb5ea7020e5b6b357157fde38b5e}{type\_}}(type),\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_aa71cdeb0ce915298bbda0ae6ef67c4c3}{hash\_}}(hash)\ \{\}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{InventoryType}}\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a50535171f66f06822edd960b68981458}{GetType}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a87cbdb5ea7020e5b6b357157fde38b5e}{type\_}};\ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_afdd933d9336a3277dcf29fe550d8cf74}{SetType}}(\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{InventoryType}}\ type)\ \{\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a87cbdb5ea7020e5b6b357157fde38b5e}{type\_}}\ =\ type;\ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_ae1138a4d7973196d8174973787bf8f5b}{GetHash}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_aa71cdeb0ce915298bbda0ae6ef67c4c3}{hash\_}};\ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a4b465c78a15be13331b186c40160e3b2}{SetHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \{\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_aa71cdeb0ce915298bbda0ae6ef67c4c3}{hash\_}}\ =\ hash;\ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a533a74ef1151bdc0706f0169f02e0e50}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\textcolor{keyword}{\ const\ override}}
+\DoxyCodeLine{00057\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ writer.\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer_ac50767ade20a9099ba7e6b6ed684ef45}{Write}}(\textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(\mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a87cbdb5ea7020e5b6b357157fde38b5e}{type\_}}));}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ writer.\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer_ac50767ade20a9099ba7e6b6ed684ef45}{Write}}(\mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_aa71cdeb0ce915298bbda0ae6ef67c4c3}{hash\_}});}
+\DoxyCodeLine{00060\ \ \ \ \ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a5e2620ac1bbe1e9ff9e856f852a6f722}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00067\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a87cbdb5ea7020e5b6b357157fde38b5e}{type\_}}\ =\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{InventoryType}}\textcolor{keyword}{>}(reader.\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a3b93ff9ad86d70fb5091267936092a59}{ReadUInt8}}());}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_aa71cdeb0ce915298bbda0ae6ef67c4c3}{hash\_}}\ =\ reader.\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_adfdd39b482480819e993cc3c39a77ec2}{ReadSerializable}}<\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}>();}
+\DoxyCodeLine{00070\ \ \ \ \ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a562392c376ede9c0bb1b6f4488d84256}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_ae797efa812e404e4b548e1448d215d5d}{InventoryVector}}\&\ other)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a87cbdb5ea7020e5b6b357157fde38b5e}{type\_}}\ ==\ other.\mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a87cbdb5ea7020e5b6b357157fde38b5e}{type\_}}\ \&\&\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_aa71cdeb0ce915298bbda0ae6ef67c4c3}{hash\_}}\ ==\ other.\mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_aa71cdeb0ce915298bbda0ae6ef67c4c3}{hash\_}};\ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_aee2c8f66e3105cb393e86f9c8cef4fe4}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_ae797efa812e404e4b548e1448d215d5d}{InventoryVector}}\&\ other)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ !(*\textcolor{keyword}{this}\ ==\ other);\ \}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{InventoryType}}\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a87cbdb5ea7020e5b6b357157fde38b5e}{type\_}};}
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_aa71cdeb0ce915298bbda0ae6ef67c4c3}{hash\_}};}
+\DoxyCodeLine{00089\ \};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network}}
+
+\end{DoxyCode}

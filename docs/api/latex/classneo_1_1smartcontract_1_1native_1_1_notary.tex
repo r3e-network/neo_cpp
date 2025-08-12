@@ -1,0 +1,691 @@
+\doxysection{neo\+::smartcontract\+::native\+::Notary Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary}{}\label{classneo_1_1smartcontract_1_1native_1_1_notary}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+
+
+The \doxylink{classneo_1_1smartcontract_1_1native_1_1_notary}{Notary} native contract used for multisignature transactions forming assistance.  
+
+
+
+
+{\ttfamily \#include $<$notary.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::smartcontract\+::native\+::Notary\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::smartcontract\+::native\+::Notary\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_1_1_deposit}{Deposit}}
+\begin{DoxyCompactList}\small\item\em The deposit class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a208986d70f50cb96eda422a6d684f869}{Notary}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_notary}{Notary}. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_abd19afd8c7bb69271211faff803b9764}{Get\+Active\+In\+Hardfork}} () const
+\begin{DoxyCompactList}\small\item\em Gets the active in hardfork. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a19d36673a0ac9a075b2f077ea64ed168}{Initialize\+Contract}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&engine, uint32\+\_\+t hardfork)
+\begin{DoxyCompactList}\small\item\em Initializes the contract. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_aaf809305fe93c176b7b01c037b10673c}{On\+Persist}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&engine)
+\begin{DoxyCompactList}\small\item\em Handles the On\+Persist event. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a6a3abcbda07e5e59b4de05bb85b02b53}{Post\+Persist}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&engine)
+\begin{DoxyCompactList}\small\item\em Handles the Post\+Persist event. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_ad201b185dffe017e713d25b03b6b77ae}{Get\+Max\+Not\+Valid\+Before\+Delta}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot) const
+\begin{DoxyCompactList}\small\item\em Gets the maximum Not\+Valid\+Before delta. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a17136c3d1df927c763e55d85e41eef94}{Set\+Max\+Not\+Valid\+Before\+Delta}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&engine, uint32\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Sets the maximum Not\+Valid\+Before delta. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_aef6dbb84457583743e99509ca8e179e5}{Expiration\+Of}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account) const
+\begin{DoxyCompactList}\small\item\em Gets the expiration of the deposit for the specified account. \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_ae3735437b732b3833e62fdc4482e91da}{Balance\+Of}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account) const
+\begin{DoxyCompactList}\small\item\em Gets the balance of the deposit for the specified account. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a141262f7ce5ec7d6fdd6a58e3adb90a2}{Lock\+Deposit\+Until}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account, uint32\+\_\+t till)
+\begin{DoxyCompactList}\small\item\em Locks the deposit until the specified height. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_abd9e2f13654c9eb0bdb770b105dd2880}{Withdraw}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&from, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&to)
+\begin{DoxyCompactList}\small\item\em Withdraws the deposit. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_ad36cc333b49d13fd1d8d3aa21c49b599}{Verify}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&signature)
+\begin{DoxyCompactList}\small\item\em Verifies the signature. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a60667ade06e1b9a3c3ef7e2c6a68a632}{Native\+Contract}} (const std\+::string \&name, uint32\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{Native\+Contract}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_ae37e44a3d146975a024466fc40a8dc53}{\texorpdfstring{$\sim$}{\string~}\+Native\+Contract}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a36ffe7bef8e2b15c1992c7fd51735e04}{Get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Gets the name. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a514770635cb55d0e5c59a8d2b5231ea3}{Get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Gets the ID. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_adee5386515d940f614d7f680b5d0edb7}{Get\+Script\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script hash. \end{DoxyCompactList}\item 
+const std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}}, std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&)$>$ $>$ $>$ \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aefb916eb8825a724a48d75e9c5c69acf}{Get\+Methods}} () const
+\begin{DoxyCompactList}\small\item\em Gets the methods. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a3ed2d00b721434cf15b180038e4fa4f2}{Invoke}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::string \&method, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags)
+\begin{DoxyCompactList}\small\item\em Invokes a method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_acbf33ca368ff4d13541b9c12e0a34cad}{Call}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::string \&method, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Calls a method on the contract (alias for Invoke). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aef8498874e1b666ab258a891c2f05a56}{Check\+Call\+Flags}} (const std\+::string \&method, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags) const
+\begin{DoxyCompactList}\small\item\em Checks if the contract has the specified call flags. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a6d9998fc6c7dbedcc447f403fddb6d08}{Get\+Storage\+Prefix}} () const
+\begin{DoxyCompactList}\small\item\em Gets the storage prefix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aaa080efcc4d7deced7aded7bb968cd9c}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a44c7d768e39be1ed6933cdcf2350a2e8}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a50c32e2fa8e736183a0135b44ac5438d}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a2a46f86ca8b2d541f8623821d389eb8b}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aa8eed221a7bf2bce103f7e1fef187e6c}{Get\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a88e6f4aa548d073c5740d1eb0f59f91e}{Put\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value) const
+\begin{DoxyCompactList}\small\item\em Puts the storage value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a041e040e9fbf45d8d8ba9c0dcf87afe4}{Delete\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Deletes the storage value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a5a9ec24cc4c1584fb00fdf32f614dbd8}{Create\+Storage\+Key}} (uint8\+\_\+t prefix) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aacd0961fef8aaa618f43294e4561a72a}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_ac60e9957320d04ffd697e023f94bf233}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a4c42d353f5328c9fbc06f5fd38e406cd}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a8221750790b1aa223a4351bb81ec8a59}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, uint32\+\_\+t key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary}{Notary}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a65c2b739b0f132b03fe73ec911a98e2e}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets the instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_ad7bbceb77b2025e3b461442d9d2667e0}{ID}} = -\/10
+\begin{DoxyCompactList}\small\item\em The contract ID. \end{DoxyCompactList}\item 
+static constexpr int \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a8e5cb049aea6ea5f92fb9c0a79e910e1}{DEFAULT\+\_\+\+MAX\+\_\+\+NOT\+\_\+\+VALID\+\_\+\+BEFORE\+\_\+\+DELTA}} = 140
+\begin{DoxyCompactList}\small\item\em A default value for maximum allowed Not\+Valid\+Before\+Delta. It is set to be 20 rounds for 7 validators, a little more than half an hour for 15-\/seconds blocks. \end{DoxyCompactList}\item 
+static constexpr int \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_ad2ddd0c9a9bbe4e419635495081e76aa}{DEFAULT\+\_\+\+DEPOSIT\+\_\+\+DELTA\+\_\+\+TILL}} = 5760
+\begin{DoxyCompactList}\small\item\em A default value for deposit lock period. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_ade89f41552a519bb8b44606174e5e865}{PREFIX\+\_\+\+DEPOSIT}} = 1
+\begin{DoxyCompactList}\small\item\em The storage prefix for deposits. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a30d6d32d7cf4588e53915f58be2b7d8e}{PREFIX\+\_\+\+MAX\+\_\+\+NOT\+\_\+\+VALID\+\_\+\+BEFORE\+\_\+\+DELTA}} = 10
+\begin{DoxyCompactList}\small\item\em The storage prefix for max not valid before delta. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_ad61da4f31af89dfae2d5a227e5253ba8}{Initialize}} () override
+\begin{DoxyCompactList}\small\item\em Initializes the contract. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a23f1a4a1ed8a30f8349ec3bd5ec8fbd7}{On\+NEP17\+Payment}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&from, int64\+\_\+t amount, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ data)
+\begin{DoxyCompactList}\small\item\em Called when a NEP-\/17 payment is received. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_afc9adc62f022400e4c38049f8e24acfd}{On\+Get\+Max\+Not\+Valid\+Before\+Delta}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a3ffed7f2eb7a18b7faf5a975ca5ec3ad}{On\+Set\+Max\+Not\+Valid\+Before\+Delta}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a1f7d82b6e15ecf79f791401302a5894f}{On\+Expiration\+Of}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a400eebb3e25bec892cd71987c212d85b}{On\+Balance\+Of}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a284f23687d5475f6841d01e865ff7371}{On\+Lock\+Deposit\+Until}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a87cf0dd1755e202f2ef199f0c80bf466}{On\+Withdraw}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a44d7a7234b7d9420503e9a6d654ebf76}{On\+Verify}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a71d4fbe236ad8f05396f2b613fbd2f6f}{On\+NEP17\+Payment\+Adapter}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a79c597cc855b5de12aa3b4342fb13571}{Get\+Notary\+Nodes}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot) const
+\begin{DoxyCompactList}\small\item\em Gets the notary nodes. \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a6257e43830712fec71ed49ce0188227c}{Calculate\+Notary\+Reward}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, int64\+\_\+t n\+Fees, int n\+Notaries) const
+\begin{DoxyCompactList}\small\item\em Calculates the notary reward. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_1_1_deposit}{Deposit}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a9986d1ea4cd7b93948fcc4776b97d0db}{Get\+Deposit\+For}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account) const
+\begin{DoxyCompactList}\small\item\em Gets the deposit for the specified account. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_adee3695f93e0c3f2cf184ade4c34dd10}{Put\+Deposit\+For}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_1_1_deposit}{Deposit}} $>$ deposit)
+\begin{DoxyCompactList}\small\item\em Puts the deposit for the specified account. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_a2ad953d1616039208f97ae656e6d6301}{Remove\+Deposit\+For}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account)
+\begin{DoxyCompactList}\small\item\em Removes the deposit for the specified account. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a26af9bcd266b59f910293081ef334993}{Register\+Method}} (const std\+::string \&name, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags, std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&)$>$ handler)
+\begin{DoxyCompactList}\small\item\em Registers a method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The \doxylink{classneo_1_1smartcontract_1_1native_1_1_notary}{Notary} native contract used for multisignature transactions forming assistance. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a208986d70f50cb96eda422a6d684f869}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!Notary@{Notary}}
+\index{Notary@{Notary}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{Notary()}{Notary()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a208986d70f50cb96eda422a6d684f869} 
+neo\+::smartcontract\+::native\+::\+Notary\+::\+Notary (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_notary}{Notary}. 
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_ae3735437b732b3833e62fdc4482e91da}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!BalanceOf@{BalanceOf}}
+\index{BalanceOf@{BalanceOf}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{BalanceOf()}{BalanceOf()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_ae3735437b732b3833e62fdc4482e91da} 
+int64\+\_\+t neo\+::smartcontract\+::native\+::\+Notary\+::\+Balance\+Of (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the balance of the deposit for the specified account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em account} & The account. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The balance. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a6257e43830712fec71ed49ce0188227c}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!CalculateNotaryReward@{CalculateNotaryReward}}
+\index{CalculateNotaryReward@{CalculateNotaryReward}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{CalculateNotaryReward()}{CalculateNotaryReward()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a6257e43830712fec71ed49ce0188227c} 
+int64\+\_\+t neo\+::smartcontract\+::native\+::\+Notary\+::\+Calculate\+Notary\+Reward (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{int64\+\_\+t}]{n\+Fees}{, }\item[{int}]{n\+Notaries}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Calculates the notary reward. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em n\+Fees} & The number of fees. \\
+\hline
+{\em n\+Notaries} & The number of notaries. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The notary reward. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_aef6dbb84457583743e99509ca8e179e5}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!ExpirationOf@{ExpirationOf}}
+\index{ExpirationOf@{ExpirationOf}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{ExpirationOf()}{ExpirationOf()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_aef6dbb84457583743e99509ca8e179e5} 
+uint32\+\_\+t neo\+::smartcontract\+::native\+::\+Notary\+::\+Expiration\+Of (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the expiration of the deposit for the specified account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em account} & The account. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The expiration. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_abd19afd8c7bb69271211faff803b9764}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!GetActiveInHardfork@{GetActiveInHardfork}}
+\index{GetActiveInHardfork@{GetActiveInHardfork}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{GetActiveInHardfork()}{GetActiveInHardfork()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_abd19afd8c7bb69271211faff803b9764} 
+uint32\+\_\+t neo\+::smartcontract\+::native\+::\+Notary\+::\+Get\+Active\+In\+Hardfork (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the active in hardfork. 
+
+\begin{DoxyReturn}{Returns}
+The active in hardfork. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a9986d1ea4cd7b93948fcc4776b97d0db}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!GetDepositFor@{GetDepositFor}}
+\index{GetDepositFor@{GetDepositFor}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{GetDepositFor()}{GetDepositFor()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a9986d1ea4cd7b93948fcc4776b97d0db} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_1_1_deposit}{Notary\+::\+Deposit}} $>$ neo\+::smartcontract\+::native\+::\+Notary\+::\+Get\+Deposit\+For (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Gets the deposit for the specified account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em account} & The account. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The deposit. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a65c2b739b0f132b03fe73ec911a98e2e}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a65c2b739b0f132b03fe73ec911a98e2e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary}{Notary}} $>$ neo\+::smartcontract\+::native\+::\+Notary\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the instance. 
+
+\begin{DoxyReturn}{Returns}
+The instance. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_ad201b185dffe017e713d25b03b6b77ae}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!GetMaxNotValidBeforeDelta@{GetMaxNotValidBeforeDelta}}
+\index{GetMaxNotValidBeforeDelta@{GetMaxNotValidBeforeDelta}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{GetMaxNotValidBeforeDelta()}{GetMaxNotValidBeforeDelta()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_ad201b185dffe017e713d25b03b6b77ae} 
+uint32\+\_\+t neo\+::smartcontract\+::native\+::\+Notary\+::\+Get\+Max\+Not\+Valid\+Before\+Delta (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the maximum Not\+Valid\+Before delta. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The maximum Not\+Valid\+Before delta. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a79c597cc855b5de12aa3b4342fb13571}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!GetNotaryNodes@{GetNotaryNodes}}
+\index{GetNotaryNodes@{GetNotaryNodes}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{GetNotaryNodes()}{GetNotaryNodes()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a79c597cc855b5de12aa3b4342fb13571} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ neo\+::smartcontract\+::native\+::\+Notary\+::\+Get\+Notary\+Nodes (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Gets the notary nodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The notary nodes. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_ad61da4f31af89dfae2d5a227e5253ba8}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_ad61da4f31af89dfae2d5a227e5253ba8} 
+void neo\+::smartcontract\+::native\+::\+Notary\+::\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Initializes the contract. 
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a427aae1fe42c2264c5f6979a84092a5d}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}.
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a19d36673a0ac9a075b2f077ea64ed168}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!InitializeContract@{InitializeContract}}
+\index{InitializeContract@{InitializeContract}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{InitializeContract()}{InitializeContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a19d36673a0ac9a075b2f077ea64ed168} 
+bool neo\+::smartcontract\+::native\+::\+Notary\+::\+Initialize\+Contract (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&}]{engine}{, }\item[{uint32\+\_\+t}]{hardfork}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the contract. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em hardfork} & The hardfork version. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a141262f7ce5ec7d6fdd6a58e3adb90a2}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!LockDepositUntil@{LockDepositUntil}}
+\index{LockDepositUntil@{LockDepositUntil}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{LockDepositUntil()}{LockDepositUntil()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a141262f7ce5ec7d6fdd6a58e3adb90a2} 
+bool neo\+::smartcontract\+::native\+::\+Notary\+::\+Lock\+Deposit\+Until (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{, }\item[{uint32\+\_\+t}]{till}{}\end{DoxyParamCaption})}
+
+
+
+Locks the deposit until the specified height. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em account} & The account. \\
+\hline
+{\em till} & The height. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a400eebb3e25bec892cd71987c212d85b}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!OnBalanceOf@{OnBalanceOf}}
+\index{OnBalanceOf@{OnBalanceOf}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{OnBalanceOf()}{OnBalanceOf()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a400eebb3e25bec892cd71987c212d85b} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Notary\+::\+On\+Balance\+Of (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a1f7d82b6e15ecf79f791401302a5894f}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!OnExpirationOf@{OnExpirationOf}}
+\index{OnExpirationOf@{OnExpirationOf}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{OnExpirationOf()}{OnExpirationOf()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a1f7d82b6e15ecf79f791401302a5894f} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Notary\+::\+On\+Expiration\+Of (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_afc9adc62f022400e4c38049f8e24acfd}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!OnGetMaxNotValidBeforeDelta@{OnGetMaxNotValidBeforeDelta}}
+\index{OnGetMaxNotValidBeforeDelta@{OnGetMaxNotValidBeforeDelta}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{OnGetMaxNotValidBeforeDelta()}{OnGetMaxNotValidBeforeDelta()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_afc9adc62f022400e4c38049f8e24acfd} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Notary\+::\+On\+Get\+Max\+Not\+Valid\+Before\+Delta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a284f23687d5475f6841d01e865ff7371}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!OnLockDepositUntil@{OnLockDepositUntil}}
+\index{OnLockDepositUntil@{OnLockDepositUntil}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{OnLockDepositUntil()}{OnLockDepositUntil()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a284f23687d5475f6841d01e865ff7371} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Notary\+::\+On\+Lock\+Deposit\+Until (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a23f1a4a1ed8a30f8349ec3bd5ec8fbd7}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!OnNEP17Payment@{OnNEP17Payment}}
+\index{OnNEP17Payment@{OnNEP17Payment}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{OnNEP17Payment()}{OnNEP17Payment()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a23f1a4a1ed8a30f8349ec3bd5ec8fbd7} 
+void neo\+::smartcontract\+::native\+::\+Notary\+::\+On\+NEP17\+Payment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{from}{, }\item[{int64\+\_\+t}]{amount}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Called when a NEP-\/17 payment is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em from} & The from account. \\
+\hline
+{\em amount} & The amount. \\
+\hline
+{\em data} & The data. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a71d4fbe236ad8f05396f2b613fbd2f6f}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!OnNEP17PaymentAdapter@{OnNEP17PaymentAdapter}}
+\index{OnNEP17PaymentAdapter@{OnNEP17PaymentAdapter}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{OnNEP17PaymentAdapter()}{OnNEP17PaymentAdapter()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a71d4fbe236ad8f05396f2b613fbd2f6f} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Notary\+::\+On\+NEP17\+Payment\+Adapter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_aaf809305fe93c176b7b01c037b10673c}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!OnPersist@{OnPersist}}
+\index{OnPersist@{OnPersist}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{OnPersist()}{OnPersist()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_aaf809305fe93c176b7b01c037b10673c} 
+bool neo\+::smartcontract\+::native\+::\+Notary\+::\+On\+Persist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})}
+
+
+
+Handles the On\+Persist event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a3ffed7f2eb7a18b7faf5a975ca5ec3ad}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!OnSetMaxNotValidBeforeDelta@{OnSetMaxNotValidBeforeDelta}}
+\index{OnSetMaxNotValidBeforeDelta@{OnSetMaxNotValidBeforeDelta}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{OnSetMaxNotValidBeforeDelta()}{OnSetMaxNotValidBeforeDelta()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a3ffed7f2eb7a18b7faf5a975ca5ec3ad} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Notary\+::\+On\+Set\+Max\+Not\+Valid\+Before\+Delta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a44d7a7234b7d9420503e9a6d654ebf76}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!OnVerify@{OnVerify}}
+\index{OnVerify@{OnVerify}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{OnVerify()}{OnVerify()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a44d7a7234b7d9420503e9a6d654ebf76} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Notary\+::\+On\+Verify (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a87cf0dd1755e202f2ef199f0c80bf466}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!OnWithdraw@{OnWithdraw}}
+\index{OnWithdraw@{OnWithdraw}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{OnWithdraw()}{OnWithdraw()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a87cf0dd1755e202f2ef199f0c80bf466} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Notary\+::\+On\+Withdraw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a6a3abcbda07e5e59b4de05bb85b02b53}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!PostPersist@{PostPersist}}
+\index{PostPersist@{PostPersist}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{PostPersist()}{PostPersist()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a6a3abcbda07e5e59b4de05bb85b02b53} 
+bool neo\+::smartcontract\+::native\+::\+Notary\+::\+Post\+Persist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})}
+
+
+
+Handles the Post\+Persist event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_adee3695f93e0c3f2cf184ade4c34dd10}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!PutDepositFor@{PutDepositFor}}
+\index{PutDepositFor@{PutDepositFor}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{PutDepositFor()}{PutDepositFor()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_adee3695f93e0c3f2cf184ade4c34dd10} 
+void neo\+::smartcontract\+::native\+::\+Notary\+::\+Put\+Deposit\+For (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_1_1_deposit}{Deposit}} $>$}]{deposit}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Puts the deposit for the specified account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em account} & The account. \\
+\hline
+{\em deposit} & The deposit. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a2ad953d1616039208f97ae656e6d6301}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!RemoveDepositFor@{RemoveDepositFor}}
+\index{RemoveDepositFor@{RemoveDepositFor}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{RemoveDepositFor()}{RemoveDepositFor()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a2ad953d1616039208f97ae656e6d6301} 
+void neo\+::smartcontract\+::native\+::\+Notary\+::\+Remove\+Deposit\+For (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Removes the deposit for the specified account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em account} & The account. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 23
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a17136c3d1df927c763e55d85e41eef94}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!SetMaxNotValidBeforeDelta@{SetMaxNotValidBeforeDelta}}
+\index{SetMaxNotValidBeforeDelta@{SetMaxNotValidBeforeDelta}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{SetMaxNotValidBeforeDelta()}{SetMaxNotValidBeforeDelta()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a17136c3d1df927c763e55d85e41eef94} 
+bool neo\+::smartcontract\+::native\+::\+Notary\+::\+Set\+Max\+Not\+Valid\+Before\+Delta (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&}]{engine}{, }\item[{uint32\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Sets the maximum Not\+Valid\+Before delta. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em value} & The value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 24
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_ad36cc333b49d13fd1d8d3aa21c49b599}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!Verify@{Verify}}
+\index{Verify@{Verify}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_ad36cc333b49d13fd1d8d3aa21c49b599} 
+bool neo\+::smartcontract\+::native\+::\+Notary\+::\+Verify (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{signature}{}\end{DoxyParamCaption})}
+
+
+
+Verifies the signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em signature} & The signature. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 25
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_abd9e2f13654c9eb0bdb770b105dd2880}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!Withdraw@{Withdraw}}
+\index{Withdraw@{Withdraw}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{Withdraw()}{Withdraw()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_abd9e2f13654c9eb0bdb770b105dd2880} 
+bool neo\+::smartcontract\+::native\+::\+Notary\+::\+Withdraw (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{from}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{to}{}\end{DoxyParamCaption})}
+
+
+
+Withdraws the deposit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em from} & The from account. \\
+\hline
+{\em to} & The to account. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 26
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_ad2ddd0c9a9bbe4e419635495081e76aa}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!DEFAULT\_DEPOSIT\_DELTA\_TILL@{DEFAULT\_DEPOSIT\_DELTA\_TILL}}
+\index{DEFAULT\_DEPOSIT\_DELTA\_TILL@{DEFAULT\_DEPOSIT\_DELTA\_TILL}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_DEPOSIT\_DELTA\_TILL}{DEFAULT\_DEPOSIT\_DELTA\_TILL}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_ad2ddd0c9a9bbe4e419635495081e76aa} 
+int neo\+::smartcontract\+::native\+::\+Notary\+::\+DEFAULT\+\_\+\+DEPOSIT\+\_\+\+DELTA\+\_\+\+TILL = 5760\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+A default value for deposit lock period. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a8e5cb049aea6ea5f92fb9c0a79e910e1}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!DEFAULT\_MAX\_NOT\_VALID\_BEFORE\_DELTA@{DEFAULT\_MAX\_NOT\_VALID\_BEFORE\_DELTA}}
+\index{DEFAULT\_MAX\_NOT\_VALID\_BEFORE\_DELTA@{DEFAULT\_MAX\_NOT\_VALID\_BEFORE\_DELTA}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_MAX\_NOT\_VALID\_BEFORE\_DELTA}{DEFAULT\_MAX\_NOT\_VALID\_BEFORE\_DELTA}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a8e5cb049aea6ea5f92fb9c0a79e910e1} 
+int neo\+::smartcontract\+::native\+::\+Notary\+::\+DEFAULT\+\_\+\+MAX\+\_\+\+NOT\+\_\+\+VALID\+\_\+\+BEFORE\+\_\+\+DELTA = 140\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+A default value for maximum allowed Not\+Valid\+Before\+Delta. It is set to be 20 rounds for 7 validators, a little more than half an hour for 15-\/seconds blocks. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_ad7bbceb77b2025e3b461442d9d2667e0}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!ID@{ID}}
+\index{ID@{ID}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{ID}{ID}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_ad7bbceb77b2025e3b461442d9d2667e0} 
+int32\+\_\+t neo\+::smartcontract\+::native\+::\+Notary\+::\+ID = -\/10\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The contract ID. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_ade89f41552a519bb8b44606174e5e865}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!PREFIX\_DEPOSIT@{PREFIX\_DEPOSIT}}
+\index{PREFIX\_DEPOSIT@{PREFIX\_DEPOSIT}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_DEPOSIT}{PREFIX\_DEPOSIT}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_ade89f41552a519bb8b44606174e5e865} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Notary\+::\+PREFIX\+\_\+\+DEPOSIT = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for deposits. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_notary_a30d6d32d7cf4588e53915f58be2b7d8e}\index{neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}!PREFIX\_MAX\_NOT\_VALID\_BEFORE\_DELTA@{PREFIX\_MAX\_NOT\_VALID\_BEFORE\_DELTA}}
+\index{PREFIX\_MAX\_NOT\_VALID\_BEFORE\_DELTA@{PREFIX\_MAX\_NOT\_VALID\_BEFORE\_DELTA}!neo::smartcontract::native::Notary@{neo::smartcontract::native::Notary}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_MAX\_NOT\_VALID\_BEFORE\_DELTA}{PREFIX\_MAX\_NOT\_VALID\_BEFORE\_DELTA}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_notary_a30d6d32d7cf4588e53915f58be2b7d8e} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Notary\+::\+PREFIX\+\_\+\+MAX\+\_\+\+NOT\+\_\+\+VALID\+\_\+\+BEFORE\+\_\+\+DELTA = 10\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for max not valid before delta. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/native/\mbox{\hyperlink{notary_8h}{notary.\+h}}\item 
+src/smartcontract/native/\mbox{\hyperlink{notary_8cpp}{notary.\+cpp}}\end{DoxyCompactItemize}

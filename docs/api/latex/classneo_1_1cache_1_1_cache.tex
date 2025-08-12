@@ -1,0 +1,290 @@
+\doxysection{neo\+::cache\+::Cache\texorpdfstring{$<$}{<} Key, Value \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classneo_1_1cache_1_1_cache}{}\label{classneo_1_1cache_1_1_cache}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+
+
+Generic cache interface for Neo components.  
+
+
+
+
+{\ttfamily \#include $<$cache.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1cache_1_1_cache_1_1_cache_entry}{Cache\+Entry}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1cache_1_1_cache_a3de87136992f3c0b80b110914eace4f7}{Key\+Type}} = Key
+\item 
+using \mbox{\hyperlink{classneo_1_1cache_1_1_cache_a6e378fad7e4b99d829ba900c9f0ffb17}{Value\+Type}} = Value
+\item 
+using \mbox{\hyperlink{classneo_1_1cache_1_1_cache_a5aba63dd453553f9dfd0fb47d07d1583}{Time\+Point}} = std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cache_1_1_cache_a0f96d41d43d0ad758886d9210c136bd4}{Cache}} (size\+\_\+t max\+Size=1000, uint64\+\_\+t default\+Ttl=300000)
+\begin{DoxyCompactList}\small\item\em Constructor with maximum size and default TTL. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ Value $>$ \mbox{\hyperlink{classneo_1_1cache_1_1_cache_ae3accbfbf1737c006f419573b1a529da}{Get}} (const Key \&key)
+\begin{DoxyCompactList}\small\item\em Get value from cache. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cache_1_1_cache_ae599b31f32912660ad419e5e6f944f41}{Put}} (const Key \&key, const Value \&value)
+\begin{DoxyCompactList}\small\item\em Put value in cache with default TTL. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cache_1_1_cache_a583d74e5564fc745dee24ddb1e5b113d}{Put}} (const Key \&key, const Value \&value, std\+::chrono\+::milliseconds ttl)
+\begin{DoxyCompactList}\small\item\em Put value in cache with custom TTL. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cache_1_1_cache_a448678e1ac85a6834cd296bf598c050f}{Remove}} (const Key \&key)
+\begin{DoxyCompactList}\small\item\em Remove entry from cache. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cache_1_1_cache_aacc79226435552097859a16edba11438}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clear all entries from cache. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cache_1_1_cache_a488c0d7d7f539c0d4043dafbb56f1c89}{Size}} () const
+\begin{DoxyCompactList}\small\item\em Get current cache size. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cache_1_1_cache_af01311eb5cf7bd3dd244f70aa2d1bb95}{Contains}} (const Key \&key)
+\begin{DoxyCompactList}\small\item\em Check if cache contains key. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cache_1_1_cache_a385f05249ceab9bd31cbc35848485fff}{Cleanup\+Expired}} ()
+\begin{DoxyCompactList}\small\item\em Clean up expired entries. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1cache_1_1_cache_ac3fb93a0c1bc61bcf9d7ddf7fcd05686}{mutex\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ Key, \mbox{\hyperlink{structneo_1_1cache_1_1_cache_1_1_cache_entry}{Cache\+Entry}} $>$ \mbox{\hyperlink{classneo_1_1cache_1_1_cache_a85f9d66f5ea87573056c6c896bf6f97e}{cache\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cache_1_1_cache_a3a141694f858f213a3696ea87d9f78f9}{max\+Size\+\_\+}}
+\item 
+std\+::chrono\+::milliseconds \mbox{\hyperlink{classneo_1_1cache_1_1_cache_a489fcbb051d622d51cf8c24e1398151c}{default\+Ttl\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Key, typename Value$>$\newline
+class neo\+::cache\+::\+Cache$<$ Key, Value $>$}
+Generic cache interface for Neo components. 
+
+Provides thread-\/safe caching functionality with TTL support for transaction verification and other blockchain operations. 
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1cache_1_1_cache_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1cache_1_1_cache_a3de87136992f3c0b80b110914eace4f7}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}!KeyType@{KeyType}}
+\index{KeyType@{KeyType}!neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{KeyType}{KeyType}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_cache_a3de87136992f3c0b80b110914eace4f7} 
+template$<$typename Key, typename Value$>$ \\
+using \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache}}$<$ Key, Value $>$\+::\+Key\+Type = Key}
+
+\Hypertarget{classneo_1_1cache_1_1_cache_a5aba63dd453553f9dfd0fb47d07d1583}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}!TimePoint@{TimePoint}}
+\index{TimePoint@{TimePoint}!neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{TimePoint}{TimePoint}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_cache_a5aba63dd453553f9dfd0fb47d07d1583} 
+template$<$typename Key, typename Value$>$ \\
+using \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache}}$<$ Key, Value $>$\+::\+Time\+Point = std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point}
+
+\Hypertarget{classneo_1_1cache_1_1_cache_a6e378fad7e4b99d829ba900c9f0ffb17}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}!ValueType@{ValueType}}
+\index{ValueType@{ValueType}!neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{ValueType}{ValueType}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_cache_a6e378fad7e4b99d829ba900c9f0ffb17} 
+template$<$typename Key, typename Value$>$ \\
+using \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache}}$<$ Key, Value $>$\+::\+Value\+Type = Value}
+
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cache_1_1_cache_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cache_1_1_cache_a0f96d41d43d0ad758886d9210c136bd4}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}!Cache@{Cache}}
+\index{Cache@{Cache}!neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{Cache()}{Cache()}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_cache_a0f96d41d43d0ad758886d9210c136bd4} 
+template$<$typename Key, typename Value$>$ \\
+\mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache}}$<$ Key, Value $>$\+::\+Cache (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{max\+Size}{ = {\ttfamily 1000}, }\item[{uint64\+\_\+t}]{default\+Ttl}{ = {\ttfamily 300000}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructor with maximum size and default TTL. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+Size} & Maximum number of entries (0 = unlimited) \\
+\hline
+{\em default\+Ttl} & Default time-\/to-\/live in milliseconds \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cache_1_1_cache_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cache_1_1_cache_a385f05249ceab9bd31cbc35848485fff}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}!CleanupExpired@{CleanupExpired}}
+\index{CleanupExpired@{CleanupExpired}!neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{CleanupExpired()}{CleanupExpired()}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_cache_a385f05249ceab9bd31cbc35848485fff} 
+template$<$typename Key, typename Value$>$ \\
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache}}$<$ Key, Value $>$\+::\+Cleanup\+Expired (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clean up expired entries. 
+
+\begin{DoxyReturn}{Returns}
+Number of entries removed 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cache_1_1_cache_aacc79226435552097859a16edba11438}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_cache_aacc79226435552097859a16edba11438} 
+template$<$typename Key, typename Value$>$ \\
+void \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache}}$<$ Key, Value $>$\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clear all entries from cache. 
+
+\Hypertarget{classneo_1_1cache_1_1_cache_af01311eb5cf7bd3dd244f70aa2d1bb95}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}!Contains@{Contains}}
+\index{Contains@{Contains}!neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_cache_af01311eb5cf7bd3dd244f70aa2d1bb95} 
+template$<$typename Key, typename Value$>$ \\
+bool \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache}}$<$ Key, Value $>$\+::\+Contains (\begin{DoxyParamCaption}\item[{const Key \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if cache contains key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if key exists and not expired 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cache_1_1_cache_ae3accbfbf1737c006f419573b1a529da}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}!Get@{Get}}
+\index{Get@{Get}!neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_cache_ae3accbfbf1737c006f419573b1a529da} 
+template$<$typename Key, typename Value$>$ \\
+std\+::shared\+\_\+ptr$<$ Value $>$ \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache}}$<$ Key, Value $>$\+::\+Get (\begin{DoxyParamCaption}\item[{const Key \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get value from cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to look up \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to value if found and not expired, nullptr otherwise 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cache_1_1_cache_ae599b31f32912660ad419e5e6f944f41}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}!Put@{Put}}
+\index{Put@{Put}!neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{Put()}{Put()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_cache_ae599b31f32912660ad419e5e6f944f41} 
+template$<$typename Key, typename Value$>$ \\
+void \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache}}$<$ Key, Value $>$\+::\+Put (\begin{DoxyParamCaption}\item[{const Key \&}]{key}{, }\item[{const Value \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Put value in cache with default TTL. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key \\
+\hline
+{\em value} & The value \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1cache_1_1_cache_a583d74e5564fc745dee24ddb1e5b113d}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}!Put@{Put}}
+\index{Put@{Put}!neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{Put()}{Put()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_cache_a583d74e5564fc745dee24ddb1e5b113d} 
+template$<$typename Key, typename Value$>$ \\
+void \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache}}$<$ Key, Value $>$\+::\+Put (\begin{DoxyParamCaption}\item[{const Key \&}]{key}{, }\item[{const Value \&}]{value}{, }\item[{std\+::chrono\+::milliseconds}]{ttl}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Put value in cache with custom TTL. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key \\
+\hline
+{\em value} & The value \\
+\hline
+{\em ttl} & Time-\/to-\/live duration \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1cache_1_1_cache_a448678e1ac85a6834cd296bf598c050f}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}!Remove@{Remove}}
+\index{Remove@{Remove}!neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{Remove()}{Remove()}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_cache_a448678e1ac85a6834cd296bf598c050f} 
+template$<$typename Key, typename Value$>$ \\
+bool \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache}}$<$ Key, Value $>$\+::\+Remove (\begin{DoxyParamCaption}\item[{const Key \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Remove entry from cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to remove \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if entry was found and removed 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cache_1_1_cache_a488c0d7d7f539c0d4043dafbb56f1c89}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}!Size@{Size}}
+\index{Size@{Size}!neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_cache_a488c0d7d7f539c0d4043dafbb56f1c89} 
+template$<$typename Key, typename Value$>$ \\
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache}}$<$ Key, Value $>$\+::\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get current cache size. 
+
+\begin{DoxyReturn}{Returns}
+Number of entries in cache 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cache_1_1_cache_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cache_1_1_cache_a85f9d66f5ea87573056c6c896bf6f97e}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}!cache\_@{cache\_}}
+\index{cache\_@{cache\_}!neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{cache\_}{cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_cache_a85f9d66f5ea87573056c6c896bf6f97e} 
+template$<$typename Key, typename Value$>$ \\
+std\+::unordered\+\_\+map$<$Key, \mbox{\hyperlink{structneo_1_1cache_1_1_cache_1_1_cache_entry}{Cache\+Entry}}$>$ \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache}}$<$ Key, Value $>$\+::cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cache_1_1_cache_a489fcbb051d622d51cf8c24e1398151c}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}!defaultTtl\_@{defaultTtl\_}}
+\index{defaultTtl\_@{defaultTtl\_}!neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{defaultTtl\_}{defaultTtl\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_cache_a489fcbb051d622d51cf8c24e1398151c} 
+template$<$typename Key, typename Value$>$ \\
+std\+::chrono\+::milliseconds \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache}}$<$ Key, Value $>$\+::default\+Ttl\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cache_1_1_cache_a3a141694f858f213a3696ea87d9f78f9}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}!maxSize\_@{maxSize\_}}
+\index{maxSize\_@{maxSize\_}!neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{maxSize\_}{maxSize\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_cache_a3a141694f858f213a3696ea87d9f78f9} 
+template$<$typename Key, typename Value$>$ \\
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache}}$<$ Key, Value $>$\+::max\+Size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cache_1_1_cache_ac3fb93a0c1bc61bcf9d7ddf7fcd05686}\index{neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::cache::Cache$<$ Key, Value $>$@{neo::cache::Cache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_cache_ac3fb93a0c1bc61bcf9d7ddf7fcd05686} 
+template$<$typename Key, typename Value$>$ \\
+std\+::mutex \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache}}$<$ Key, Value $>$\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cache/\mbox{\hyperlink{cache_2cache_8h}{cache.\+h}}\end{DoxyCompactItemize}

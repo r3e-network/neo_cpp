@@ -1,0 +1,259 @@
+\doxysection{neo\+::monitoring Namespace Reference}
+\hypertarget{namespaceneo_1_1monitoring}{}\label{namespaceneo_1_1monitoring}\index{neo::monitoring@{neo::monitoring}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_blockchain_health_check}{Blockchain\+Health\+Check}}
+\begin{DoxyCompactList}\small\item\em Health check that verifies blockchain sync status. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_blockchain_sync_health_check}{Blockchain\+Sync\+Health\+Check}}
+\begin{DoxyCompactList}\small\item\em Blockchain sync health check. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_consensus_health_check}{Consensus\+Health\+Check}}
+\begin{DoxyCompactList}\small\item\em Consensus health check. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter}{Counter}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1monitoring_1_1_counter}{Counter} metric -\/ monotonically increasing value. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_database_health_check}{Database\+Health\+Check}}
+\begin{DoxyCompactList}\small\item\em Database health check. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_disk_space_health_check}{Disk\+Space\+Health\+Check}}
+\begin{DoxyCompactList}\small\item\em Disk space health check. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge}{Gauge}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1monitoring_1_1_gauge}{Gauge} metric -\/ value that can go up or down. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check}{Health\+Check}}
+\begin{DoxyCompactList}\small\item\em Base class for health checks. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager}{Health\+Check\+Manager}}
+\begin{DoxyCompactList}\small\item\em Health check manager. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry}{Health\+Check\+Registry}}
+\begin{DoxyCompactList}\small\item\em Health check registry. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{Health\+Check\+Result}}
+\begin{DoxyCompactList}\small\item\em Health check result. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram}{Histogram}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1monitoring_1_1_histogram}{Histogram} metric -\/ distribution of values. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_i_health_check}{IHealth\+Check}}
+\begin{DoxyCompactList}\small\item\em Health check interface. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric}{Labeled\+Metric}}
+\begin{DoxyCompactList}\small\item\em Labeled metric wrapper. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_memory_health_check}{Memory\+Health\+Check}}
+\begin{DoxyCompactList}\small\item\em Health check for memory usage. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{Metric}}
+\begin{DoxyCompactList}\small\item\em Base class for all metrics. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry}{Metrics\+Registry}}
+\begin{DoxyCompactList}\small\item\em Metrics registry for managing all metrics. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_network_health_check}{Network\+Health\+Check}}
+\begin{DoxyCompactList}\small\item\em Network connectivity health check. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_p2_p_health_check}{P2\+PHealth\+Check}}
+\begin{DoxyCompactList}\small\item\em Health check for P2P connectivity. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter}{Prometheus\+Exporter}}
+\begin{DoxyCompactList}\small\item\em Prometheus metrics exporter. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_timer}{Timer}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1monitoring_1_1_timer}{Timer} for measuring durations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{Health\+Status}} \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6af068ebe4133e3e6563080836268ea979}{HEALTHY}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed}{DEGRADED}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{UNHEALTHY}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a396d45b57c2fbe3318e7b93272a2686b}{Healthy}}
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6aaa95669cd5732a57e8f6467705f06642}{Degraded}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a2b329fc84084b45754e42488aca3114b}{Unhealthy}}
+ \}
+\begin{DoxyCompactList}\small\item\em Health check status. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a64d129224a5377b63e9727479ec987d9}{Counter}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a948f0edf37b92d0717053d38e5ea12c2}{Gauge}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35ac00e3b8460f0592cacf813fd68988ed4}{Histogram}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a290612199861c31d1036b185b4e69b75}{Summary}}
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a125e831262b4dbbd68c6878c5d3759f6}{COUNTER}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a6a91e159ac40f39402ef860163318744}{GAUGE}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a7f33aef6b28f7abec2f5d804ab1343c8}{HISTOGRAM}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a36cbecb886c3fb994669cd10cdbd9f5f}{SUMMARY}}
+ \}
+\begin{DoxyCompactList}\small\item\em Metric types supported. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{Health\+Status}} \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6af068ebe4133e3e6563080836268ea979}{HEALTHY}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed}{DEGRADED}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{UNHEALTHY}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a396d45b57c2fbe3318e7b93272a2686b}{Healthy}}
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6aaa95669cd5732a57e8f6467705f06642}{Degraded}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a2b329fc84084b45754e42488aca3114b}{Unhealthy}}
+ \}
+\begin{DoxyCompactList}\small\item\em Health check status. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a64d129224a5377b63e9727479ec987d9}{Counter}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a948f0edf37b92d0717053d38e5ea12c2}{Gauge}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35ac00e3b8460f0592cacf813fd68988ed4}{Histogram}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a290612199861c31d1036b185b4e69b75}{Summary}}
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a125e831262b4dbbd68c6878c5d3759f6}{COUNTER}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a6a91e159ac40f39402ef860163318744}{GAUGE}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a7f33aef6b28f7abec2f5d804ab1343c8}{HISTOGRAM}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a36cbecb886c3fb994669cd10cdbd9f5f}{SUMMARY}}
+ \}
+\begin{DoxyCompactList}\small\item\em Prometheus metric types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-enum-members}
+\Hypertarget{namespaceneo_1_1monitoring_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}\index{neo::monitoring@{neo::monitoring}!HealthStatus@{HealthStatus}}
+\index{HealthStatus@{HealthStatus}!neo::monitoring@{neo::monitoring}}
+\doxysubsubsection{\texorpdfstring{HealthStatus}{HealthStatus}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6} 
+enum class \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{neo\+::monitoring\+::\+Health\+Status}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Health check status. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HEALTHY@{HEALTHY}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!HEALTHY@{HEALTHY}}}\Hypertarget{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6af068ebe4133e3e6563080836268ea979}\label{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6af068ebe4133e3e6563080836268ea979} 
+HEALTHY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DEGRADED@{DEGRADED}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!DEGRADED@{DEGRADED}}}\Hypertarget{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed}\label{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed} 
+DEGRADED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UNHEALTHY@{UNHEALTHY}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!UNHEALTHY@{UNHEALTHY}}}\Hypertarget{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}\label{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47} 
+UNHEALTHY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Healthy@{Healthy}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!Healthy@{Healthy}}}\Hypertarget{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a396d45b57c2fbe3318e7b93272a2686b}\label{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a396d45b57c2fbe3318e7b93272a2686b} 
+Healthy&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Degraded@{Degraded}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!Degraded@{Degraded}}}\Hypertarget{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6aaa95669cd5732a57e8f6467705f06642}\label{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6aaa95669cd5732a57e8f6467705f06642} 
+Degraded&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Unhealthy@{Unhealthy}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!Unhealthy@{Unhealthy}}}\Hypertarget{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a2b329fc84084b45754e42488aca3114b}\label{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a2b329fc84084b45754e42488aca3114b} 
+Unhealthy&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}\index{neo::monitoring@{neo::monitoring}!HealthStatus@{HealthStatus}}
+\index{HealthStatus@{HealthStatus}!neo::monitoring@{neo::monitoring}}
+\doxysubsubsection{\texorpdfstring{HealthStatus}{HealthStatus}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6} 
+enum class \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{neo\+::monitoring\+::\+Health\+Status}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Health check status. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HEALTHY@{HEALTHY}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!HEALTHY@{HEALTHY}}}\Hypertarget{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6af068ebe4133e3e6563080836268ea979}\label{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6af068ebe4133e3e6563080836268ea979} 
+HEALTHY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DEGRADED@{DEGRADED}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!DEGRADED@{DEGRADED}}}\Hypertarget{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed}\label{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed} 
+DEGRADED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UNHEALTHY@{UNHEALTHY}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!UNHEALTHY@{UNHEALTHY}}}\Hypertarget{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}\label{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47} 
+UNHEALTHY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Healthy@{Healthy}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!Healthy@{Healthy}}}\Hypertarget{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a396d45b57c2fbe3318e7b93272a2686b}\label{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a396d45b57c2fbe3318e7b93272a2686b} 
+Healthy&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Degraded@{Degraded}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!Degraded@{Degraded}}}\Hypertarget{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6aaa95669cd5732a57e8f6467705f06642}\label{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6aaa95669cd5732a57e8f6467705f06642} 
+Degraded&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Unhealthy@{Unhealthy}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!Unhealthy@{Unhealthy}}}\Hypertarget{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a2b329fc84084b45754e42488aca3114b}\label{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a2b329fc84084b45754e42488aca3114b} 
+Unhealthy&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}\index{neo::monitoring@{neo::monitoring}!MetricType@{MetricType}}
+\index{MetricType@{MetricType}!neo::monitoring@{neo::monitoring}}
+\doxysubsubsection{\texorpdfstring{MetricType}{MetricType}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35} 
+enum class \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{neo\+::monitoring\+::\+Metric\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+\doxylink{classneo_1_1monitoring_1_1_metric}{Metric} types supported. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Counter@{Counter}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!Counter@{Counter}}}\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a64d129224a5377b63e9727479ec987d9}\label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a64d129224a5377b63e9727479ec987d9} 
+Counter&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Gauge@{Gauge}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!Gauge@{Gauge}}}\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a948f0edf37b92d0717053d38e5ea12c2}\label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a948f0edf37b92d0717053d38e5ea12c2} 
+Gauge&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Histogram@{Histogram}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!Histogram@{Histogram}}}\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35ac00e3b8460f0592cacf813fd68988ed4}\label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35ac00e3b8460f0592cacf813fd68988ed4} 
+Histogram&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Summary@{Summary}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!Summary@{Summary}}}\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a290612199861c31d1036b185b4e69b75}\label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a290612199861c31d1036b185b4e69b75} 
+Summary&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COUNTER@{COUNTER}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!COUNTER@{COUNTER}}}\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a125e831262b4dbbd68c6878c5d3759f6}\label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a125e831262b4dbbd68c6878c5d3759f6} 
+COUNTER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GAUGE@{GAUGE}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!GAUGE@{GAUGE}}}\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a6a91e159ac40f39402ef860163318744}\label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a6a91e159ac40f39402ef860163318744} 
+GAUGE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HISTOGRAM@{HISTOGRAM}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!HISTOGRAM@{HISTOGRAM}}}\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a7f33aef6b28f7abec2f5d804ab1343c8}\label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a7f33aef6b28f7abec2f5d804ab1343c8} 
+HISTOGRAM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SUMMARY@{SUMMARY}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!SUMMARY@{SUMMARY}}}\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a36cbecb886c3fb994669cd10cdbd9f5f}\label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a36cbecb886c3fb994669cd10cdbd9f5f} 
+SUMMARY&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}\index{neo::monitoring@{neo::monitoring}!MetricType@{MetricType}}
+\index{MetricType@{MetricType}!neo::monitoring@{neo::monitoring}}
+\doxysubsubsection{\texorpdfstring{MetricType}{MetricType}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35} 
+enum class \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{neo\+::monitoring\+::\+Metric\+Type}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Prometheus metric types. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Counter@{Counter}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!Counter@{Counter}}}\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a64d129224a5377b63e9727479ec987d9}\label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a64d129224a5377b63e9727479ec987d9} 
+Counter&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Gauge@{Gauge}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!Gauge@{Gauge}}}\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a948f0edf37b92d0717053d38e5ea12c2}\label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a948f0edf37b92d0717053d38e5ea12c2} 
+Gauge&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Histogram@{Histogram}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!Histogram@{Histogram}}}\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35ac00e3b8460f0592cacf813fd68988ed4}\label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35ac00e3b8460f0592cacf813fd68988ed4} 
+Histogram&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Summary@{Summary}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!Summary@{Summary}}}\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a290612199861c31d1036b185b4e69b75}\label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a290612199861c31d1036b185b4e69b75} 
+Summary&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{COUNTER@{COUNTER}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!COUNTER@{COUNTER}}}\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a125e831262b4dbbd68c6878c5d3759f6}\label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a125e831262b4dbbd68c6878c5d3759f6} 
+COUNTER&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GAUGE@{GAUGE}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!GAUGE@{GAUGE}}}\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a6a91e159ac40f39402ef860163318744}\label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a6a91e159ac40f39402ef860163318744} 
+GAUGE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HISTOGRAM@{HISTOGRAM}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!HISTOGRAM@{HISTOGRAM}}}\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a7f33aef6b28f7abec2f5d804ab1343c8}\label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a7f33aef6b28f7abec2f5d804ab1343c8} 
+HISTOGRAM&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SUMMARY@{SUMMARY}!neo::monitoring@{neo::monitoring}}\index{neo::monitoring@{neo::monitoring}!SUMMARY@{SUMMARY}}}\Hypertarget{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a36cbecb886c3fb994669cd10cdbd9f5f}\label{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a36cbecb886c3fb994669cd10cdbd9f5f} 
+SUMMARY&\\
+\hline
+
+\end{DoxyEnumFields}

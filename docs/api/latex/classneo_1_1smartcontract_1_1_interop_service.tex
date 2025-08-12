@@ -1,0 +1,521 @@
+\doxysection{neo\+::smartcontract\+::Interop\+Service Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1_interop_service}{}\label{classneo_1_1smartcontract_1_1_interop_service}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+
+
+Provides interoperable services for the Neo virtual machine.  
+
+
+
+
+{\ttfamily \#include $<$interop\+\_\+service.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::unordered\+\_\+map$<$ uint32\+\_\+t, \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{Interop\+Descriptor}} $>$ \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a51247451a7715147503a3fcc2fede584}{services}} () const
+\begin{DoxyCompactList}\small\item\em Gets all registered interop services. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{Interop\+Descriptor}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_aae09565dcf767d9099590b60c16aa487}{get\+\_\+descriptor}} (uint32\+\_\+t hash) const
+\begin{DoxyCompactList}\small\item\em Gets an interop descriptor by hash. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service}{Interop\+Service}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a1babe5a613ea34fab9613e7edbd08a0c}{instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets the singleton instance of \doxylink{classneo_1_1smartcontract_1_1_interop_service}{Interop\+Service}. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_af32972386702bd0526ed86aee72dd7d2}{initialize}} ()
+\begin{DoxyCompactList}\small\item\em Initializes all interop services. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{Interop\+Descriptor}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_ae4bd3054762f237f9623f2853232cd0d}{register\+\_\+service}} (const std\+::string \&name, std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&)$>$ handler, int64\+\_\+t fixed\+\_\+price, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} required\+\_\+call\+\_\+flags)
+\begin{DoxyCompactList}\small\item\em Registers an interop service. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a997e4b81f39766731bd0e1deaa31f344}{runtime\+\_\+platform}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_aa4a6b74c6e31f4ad601764a8d379c670}{runtime\+\_\+get\+\_\+network}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a7f082ce5b18130a061a8cf16a6c95615}{runtime\+\_\+get\+\_\+address\+\_\+version}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a70c84890957d641d8ffe7a180350fdc5}{runtime\+\_\+get\+\_\+trigger}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a25a877d127d5d8827964f72924b6a2ec}{runtime\+\_\+get\+\_\+time}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a6d2d7c759072ca951f1aec43be7eb198}{runtime\+\_\+get\+\_\+script\+\_\+container}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a27d4e0baf2fdbfb2c68e5f69f6d26878}{runtime\+\_\+get\+\_\+executing\+\_\+script\+\_\+hash}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a399d4f4f24d5dbaa48cd7227d046c994}{runtime\+\_\+get\+\_\+calling\+\_\+script\+\_\+hash}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a4ab3287a3d57690f9ca183c0fda2f943}{runtime\+\_\+get\+\_\+entry\+\_\+script\+\_\+hash}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_afdb9700d82a580cf9405d046373dba4e}{runtime\+\_\+load\+\_\+script}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a829fc0128a0dfc1ada93980b92975a2f}{runtime\+\_\+check\+\_\+witness}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a7748ce3832dbd39a1b933ad46cdc1510}{runtime\+\_\+get\+\_\+invocation\+\_\+counter}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a1c2055ab9e6ccb00d81c9846cb095cbf}{runtime\+\_\+get\+\_\+random}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a62037bb93e331384dcfb37ea0c97a8e1}{runtime\+\_\+log}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_aa42d5a559107f296d65e8003e6c72a41}{runtime\+\_\+notify}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a6de76147ce36d9cc54a71f69a197aa43}{runtime\+\_\+get\+\_\+notifications}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a25eeb002dbac4f46a6d3e1640122ec43}{runtime\+\_\+gas\+\_\+left}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a885d617a56d43690f1fdd5a1af49114b}{runtime\+\_\+burn\+\_\+gas}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_aa3d1cf589c85731fd37d6569549b0ff3}{runtime\+\_\+current\+\_\+signers}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_ae2a6608527d200a8676b71ac91dcde36}{crypto\+\_\+check\+\_\+sig}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a909b2c288379e230a5b9c31d36983e96}{crypto\+\_\+check\+\_\+multisig}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_afc549fa791e54097aef6a1dfd887dfb6}{contract\+\_\+call}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_abfdc4e06135b76f2917578a777aed25b}{contract\+\_\+call\+\_\+native}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a324ee559ff870c23f086ccc86b899d7e}{contract\+\_\+get\+\_\+call\+\_\+flags}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a53c4a2c5aa888d5f254f82cbf8351500}{contract\+\_\+create\+\_\+standard\+\_\+account}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_aae9c86625244e3d5f74a2447a6657ed1}{contract\+\_\+create\+\_\+multisig\+\_\+account}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a90547e3045072ffcf9a9ea8a8aed08ef}{contract\+\_\+native\+\_\+on\+\_\+persist}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_aa66ef7ccfd610cb0a8f9a945b796351f}{contract\+\_\+native\+\_\+post\+\_\+persist}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a1f6f2572406f1a1f066b9dff3704931d}{storage\+\_\+get\+\_\+context}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_af1b0acddb364cfe7379ef2e10ea5e2db}{storage\+\_\+get\+\_\+readonly\+\_\+context}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_abd16100f01cd9dc908ec759b58692f8d}{storage\+\_\+as\+\_\+readonly}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a82b069a3a1a9d1bf30a048e8b41732be}{storage\+\_\+get}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a50d983005e16ea9752253c3b901264c7}{storage\+\_\+find}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a34fac5d6291ae605261e49272fd2c6e8}{storage\+\_\+put}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a13c5c69790d2cc15ffea87e6c3b1dc38}{storage\+\_\+delete}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a44cb1d04715a5d1a0e578284bf83f3bf}{iterator\+\_\+next}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_aadb80030b88c823c2c94a188c0abb5d3}{iterator\+\_\+value}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a4e2744d5854d2283a6f41081acabf54a}{Interop\+Service}} ()=default
+\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_ac68da804a6e6c08d773a67eb88686eb6}{register\+\_\+builtin\+\_\+services}} ()
+\begin{DoxyCompactList}\small\item\em Registers all built-\/in interop services. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a0eb360f201ab4abde92ee93ff1ef411c}{register\+\_\+service\+\_\+internal}} (const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{Interop\+Descriptor}} \&descriptor)
+\begin{DoxyCompactList}\small\item\em Helper function to register a service. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ uint32\+\_\+t, \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{Interop\+Descriptor}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a1d2ce18adc77f7b3528d7b05ecd4c3c6}{services\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides interoperable services for the Neo virtual machine. 
+
+The \doxylink{classneo_1_1smartcontract_1_1_interop_service}{Interop\+Service} class manages all system calls and interoperable services that can be invoked from smart contracts running on the Neo VM. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a4e2744d5854d2283a6f41081acabf54a}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!InteropService@{InteropService}}
+\index{InteropService@{InteropService}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{InteropService()}{InteropService()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a4e2744d5854d2283a6f41081acabf54a} 
+neo\+::smartcontract\+::\+Interop\+Service\+::\+Interop\+Service (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_afc549fa791e54097aef6a1dfd887dfb6}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!contract\_call@{contract\_call}}
+\index{contract\_call@{contract\_call}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{contract\_call()}{contract\_call()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_afc549fa791e54097aef6a1dfd887dfb6} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::contract\+\_\+call (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_abfdc4e06135b76f2917578a777aed25b}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!contract\_call\_native@{contract\_call\_native}}
+\index{contract\_call\_native@{contract\_call\_native}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{contract\_call\_native()}{contract\_call\_native()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_abfdc4e06135b76f2917578a777aed25b} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::contract\+\_\+call\+\_\+native (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_aae9c86625244e3d5f74a2447a6657ed1}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!contract\_create\_multisig\_account@{contract\_create\_multisig\_account}}
+\index{contract\_create\_multisig\_account@{contract\_create\_multisig\_account}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{contract\_create\_multisig\_account()}{contract\_create\_multisig\_account()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_aae9c86625244e3d5f74a2447a6657ed1} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::contract\+\_\+create\+\_\+multisig\+\_\+account (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a53c4a2c5aa888d5f254f82cbf8351500}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!contract\_create\_standard\_account@{contract\_create\_standard\_account}}
+\index{contract\_create\_standard\_account@{contract\_create\_standard\_account}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{contract\_create\_standard\_account()}{contract\_create\_standard\_account()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a53c4a2c5aa888d5f254f82cbf8351500} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::contract\+\_\+create\+\_\+standard\+\_\+account (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a324ee559ff870c23f086ccc86b899d7e}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!contract\_get\_call\_flags@{contract\_get\_call\_flags}}
+\index{contract\_get\_call\_flags@{contract\_get\_call\_flags}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{contract\_get\_call\_flags()}{contract\_get\_call\_flags()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a324ee559ff870c23f086ccc86b899d7e} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::contract\+\_\+get\+\_\+call\+\_\+flags (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a90547e3045072ffcf9a9ea8a8aed08ef}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!contract\_native\_on\_persist@{contract\_native\_on\_persist}}
+\index{contract\_native\_on\_persist@{contract\_native\_on\_persist}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{contract\_native\_on\_persist()}{contract\_native\_on\_persist()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a90547e3045072ffcf9a9ea8a8aed08ef} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::contract\+\_\+native\+\_\+on\+\_\+persist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_aa66ef7ccfd610cb0a8f9a945b796351f}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!contract\_native\_post\_persist@{contract\_native\_post\_persist}}
+\index{contract\_native\_post\_persist@{contract\_native\_post\_persist}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{contract\_native\_post\_persist()}{contract\_native\_post\_persist()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_aa66ef7ccfd610cb0a8f9a945b796351f} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::contract\+\_\+native\+\_\+post\+\_\+persist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a909b2c288379e230a5b9c31d36983e96}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!crypto\_check\_multisig@{crypto\_check\_multisig}}
+\index{crypto\_check\_multisig@{crypto\_check\_multisig}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{crypto\_check\_multisig()}{crypto\_check\_multisig()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a909b2c288379e230a5b9c31d36983e96} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::crypto\+\_\+check\+\_\+multisig (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_ae2a6608527d200a8676b71ac91dcde36}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!crypto\_check\_sig@{crypto\_check\_sig}}
+\index{crypto\_check\_sig@{crypto\_check\_sig}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{crypto\_check\_sig()}{crypto\_check\_sig()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_ae2a6608527d200a8676b71ac91dcde36} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::crypto\+\_\+check\+\_\+sig (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_aae09565dcf767d9099590b60c16aa487}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!get\_descriptor@{get\_descriptor}}
+\index{get\_descriptor@{get\_descriptor}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{get\_descriptor()}{get\_descriptor()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_aae09565dcf767d9099590b60c16aa487} 
+const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{Interop\+Descriptor}} \texorpdfstring{$\ast$}{*} neo\+::smartcontract\+::\+Interop\+Service\+::get\+\_\+descriptor (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets an interop descriptor by hash. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_af32972386702bd0526ed86aee72dd7d2}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!initialize@{initialize}}
+\index{initialize@{initialize}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_af32972386702bd0526ed86aee72dd7d2} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Initializes all interop services. 
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a1babe5a613ea34fab9613e7edbd08a0c}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!instance@{instance}}
+\index{instance@{instance}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{instance()}{instance()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a1babe5a613ea34fab9613e7edbd08a0c} 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service}{Interop\+Service}} \& neo\+::smartcontract\+::\+Interop\+Service\+::instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the singleton instance of \doxylink{classneo_1_1smartcontract_1_1_interop_service}{Interop\+Service}. 
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a44cb1d04715a5d1a0e578284bf83f3bf}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!iterator\_next@{iterator\_next}}
+\index{iterator\_next@{iterator\_next}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{iterator\_next()}{iterator\_next()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a44cb1d04715a5d1a0e578284bf83f3bf} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::iterator\+\_\+next (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_aadb80030b88c823c2c94a188c0abb5d3}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!iterator\_value@{iterator\_value}}
+\index{iterator\_value@{iterator\_value}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{iterator\_value()}{iterator\_value()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_aadb80030b88c823c2c94a188c0abb5d3} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::iterator\+\_\+value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_ac68da804a6e6c08d773a67eb88686eb6}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!register\_builtin\_services@{register\_builtin\_services}}
+\index{register\_builtin\_services@{register\_builtin\_services}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{register\_builtin\_services()}{register\_builtin\_services()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_ac68da804a6e6c08d773a67eb88686eb6} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::register\+\_\+builtin\+\_\+services (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Registers all built-\/in interop services. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_ae4bd3054762f237f9623f2853232cd0d}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!register\_service@{register\_service}}
+\index{register\_service@{register\_service}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{register\_service()}{register\_service()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_ae4bd3054762f237f9623f2853232cd0d} 
+\mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{Interop\+Descriptor}} neo\+::smartcontract\+::\+Interop\+Service\+::register\+\_\+service (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&)$>$}]{handler}{, }\item[{int64\+\_\+t}]{fixed\+\_\+price}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}}}]{required\+\_\+call\+\_\+flags}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Registers an interop service. 
+
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a0eb360f201ab4abde92ee93ff1ef411c}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!register\_service\_internal@{register\_service\_internal}}
+\index{register\_service\_internal@{register\_service\_internal}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{register\_service\_internal()}{register\_service\_internal()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a0eb360f201ab4abde92ee93ff1ef411c} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::register\+\_\+service\+\_\+internal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{Interop\+Descriptor}} \&}]{descriptor}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Helper function to register a service. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a885d617a56d43690f1fdd5a1af49114b}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_burn\_gas@{runtime\_burn\_gas}}
+\index{runtime\_burn\_gas@{runtime\_burn\_gas}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_burn\_gas()}{runtime\_burn\_gas()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a885d617a56d43690f1fdd5a1af49114b} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+burn\+\_\+gas (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a829fc0128a0dfc1ada93980b92975a2f}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_check\_witness@{runtime\_check\_witness}}
+\index{runtime\_check\_witness@{runtime\_check\_witness}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_check\_witness()}{runtime\_check\_witness()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a829fc0128a0dfc1ada93980b92975a2f} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+check\+\_\+witness (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_aa3d1cf589c85731fd37d6569549b0ff3}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_current\_signers@{runtime\_current\_signers}}
+\index{runtime\_current\_signers@{runtime\_current\_signers}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_current\_signers()}{runtime\_current\_signers()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_aa3d1cf589c85731fd37d6569549b0ff3} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+current\+\_\+signers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a25eeb002dbac4f46a6d3e1640122ec43}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_gas\_left@{runtime\_gas\_left}}
+\index{runtime\_gas\_left@{runtime\_gas\_left}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_gas\_left()}{runtime\_gas\_left()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a25eeb002dbac4f46a6d3e1640122ec43} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+gas\+\_\+left (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a7f082ce5b18130a061a8cf16a6c95615}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_get\_address\_version@{runtime\_get\_address\_version}}
+\index{runtime\_get\_address\_version@{runtime\_get\_address\_version}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_get\_address\_version()}{runtime\_get\_address\_version()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a7f082ce5b18130a061a8cf16a6c95615} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+get\+\_\+address\+\_\+version (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a399d4f4f24d5dbaa48cd7227d046c994}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_get\_calling\_script\_hash@{runtime\_get\_calling\_script\_hash}}
+\index{runtime\_get\_calling\_script\_hash@{runtime\_get\_calling\_script\_hash}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_get\_calling\_script\_hash()}{runtime\_get\_calling\_script\_hash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a399d4f4f24d5dbaa48cd7227d046c994} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+get\+\_\+calling\+\_\+script\+\_\+hash (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a4ab3287a3d57690f9ca183c0fda2f943}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_get\_entry\_script\_hash@{runtime\_get\_entry\_script\_hash}}
+\index{runtime\_get\_entry\_script\_hash@{runtime\_get\_entry\_script\_hash}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_get\_entry\_script\_hash()}{runtime\_get\_entry\_script\_hash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a4ab3287a3d57690f9ca183c0fda2f943} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+get\+\_\+entry\+\_\+script\+\_\+hash (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a27d4e0baf2fdbfb2c68e5f69f6d26878}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_get\_executing\_script\_hash@{runtime\_get\_executing\_script\_hash}}
+\index{runtime\_get\_executing\_script\_hash@{runtime\_get\_executing\_script\_hash}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_get\_executing\_script\_hash()}{runtime\_get\_executing\_script\_hash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a27d4e0baf2fdbfb2c68e5f69f6d26878} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+get\+\_\+executing\+\_\+script\+\_\+hash (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a7748ce3832dbd39a1b933ad46cdc1510}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_get\_invocation\_counter@{runtime\_get\_invocation\_counter}}
+\index{runtime\_get\_invocation\_counter@{runtime\_get\_invocation\_counter}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_get\_invocation\_counter()}{runtime\_get\_invocation\_counter()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a7748ce3832dbd39a1b933ad46cdc1510} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+get\+\_\+invocation\+\_\+counter (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_aa4a6b74c6e31f4ad601764a8d379c670}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_get\_network@{runtime\_get\_network}}
+\index{runtime\_get\_network@{runtime\_get\_network}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_get\_network()}{runtime\_get\_network()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_aa4a6b74c6e31f4ad601764a8d379c670} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+get\+\_\+network (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a6de76147ce36d9cc54a71f69a197aa43}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_get\_notifications@{runtime\_get\_notifications}}
+\index{runtime\_get\_notifications@{runtime\_get\_notifications}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_get\_notifications()}{runtime\_get\_notifications()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a6de76147ce36d9cc54a71f69a197aa43} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+get\+\_\+notifications (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a1c2055ab9e6ccb00d81c9846cb095cbf}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_get\_random@{runtime\_get\_random}}
+\index{runtime\_get\_random@{runtime\_get\_random}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_get\_random()}{runtime\_get\_random()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a1c2055ab9e6ccb00d81c9846cb095cbf} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+get\+\_\+random (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 23
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a6d2d7c759072ca951f1aec43be7eb198}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_get\_script\_container@{runtime\_get\_script\_container}}
+\index{runtime\_get\_script\_container@{runtime\_get\_script\_container}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_get\_script\_container()}{runtime\_get\_script\_container()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a6d2d7c759072ca951f1aec43be7eb198} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+get\+\_\+script\+\_\+container (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 24
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a25a877d127d5d8827964f72924b6a2ec}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_get\_time@{runtime\_get\_time}}
+\index{runtime\_get\_time@{runtime\_get\_time}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_get\_time()}{runtime\_get\_time()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a25a877d127d5d8827964f72924b6a2ec} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+get\+\_\+time (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 25
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a70c84890957d641d8ffe7a180350fdc5}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_get\_trigger@{runtime\_get\_trigger}}
+\index{runtime\_get\_trigger@{runtime\_get\_trigger}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_get\_trigger()}{runtime\_get\_trigger()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a70c84890957d641d8ffe7a180350fdc5} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+get\+\_\+trigger (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 26
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_afdb9700d82a580cf9405d046373dba4e}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_load\_script@{runtime\_load\_script}}
+\index{runtime\_load\_script@{runtime\_load\_script}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_load\_script()}{runtime\_load\_script()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_afdb9700d82a580cf9405d046373dba4e} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+load\+\_\+script (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 27
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a62037bb93e331384dcfb37ea0c97a8e1}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_log@{runtime\_log}}
+\index{runtime\_log@{runtime\_log}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_log()}{runtime\_log()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a62037bb93e331384dcfb37ea0c97a8e1} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+log (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 28
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_aa42d5a559107f296d65e8003e6c72a41}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_notify@{runtime\_notify}}
+\index{runtime\_notify@{runtime\_notify}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_notify()}{runtime\_notify()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_aa42d5a559107f296d65e8003e6c72a41} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+notify (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 29
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a997e4b81f39766731bd0e1deaa31f344}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!runtime\_platform@{runtime\_platform}}
+\index{runtime\_platform@{runtime\_platform}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{runtime\_platform()}{runtime\_platform()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a997e4b81f39766731bd0e1deaa31f344} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::runtime\+\_\+platform (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 30
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a51247451a7715147503a3fcc2fede584}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!services@{services}}
+\index{services@{services}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{services()}{services()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a51247451a7715147503a3fcc2fede584} 
+const std\+::unordered\+\_\+map$<$ uint32\+\_\+t, \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{Interop\+Descriptor}} $>$ \& neo\+::smartcontract\+::\+Interop\+Service\+::services (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets all registered interop services. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_abd16100f01cd9dc908ec759b58692f8d}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!storage\_as\_readonly@{storage\_as\_readonly}}
+\index{storage\_as\_readonly@{storage\_as\_readonly}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{storage\_as\_readonly()}{storage\_as\_readonly()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_abd16100f01cd9dc908ec759b58692f8d} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::storage\+\_\+as\+\_\+readonly (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 31
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a13c5c69790d2cc15ffea87e6c3b1dc38}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!storage\_delete@{storage\_delete}}
+\index{storage\_delete@{storage\_delete}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{storage\_delete()}{storage\_delete()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a13c5c69790d2cc15ffea87e6c3b1dc38} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::storage\+\_\+delete (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 32
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a50d983005e16ea9752253c3b901264c7}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!storage\_find@{storage\_find}}
+\index{storage\_find@{storage\_find}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{storage\_find()}{storage\_find()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a50d983005e16ea9752253c3b901264c7} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::storage\+\_\+find (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 33
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a82b069a3a1a9d1bf30a048e8b41732be}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!storage\_get@{storage\_get}}
+\index{storage\_get@{storage\_get}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{storage\_get()}{storage\_get()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a82b069a3a1a9d1bf30a048e8b41732be} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::storage\+\_\+get (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 34
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a1f6f2572406f1a1f066b9dff3704931d}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!storage\_get\_context@{storage\_get\_context}}
+\index{storage\_get\_context@{storage\_get\_context}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{storage\_get\_context()}{storage\_get\_context()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a1f6f2572406f1a1f066b9dff3704931d} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::storage\+\_\+get\+\_\+context (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 35
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_af1b0acddb364cfe7379ef2e10ea5e2db}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!storage\_get\_readonly\_context@{storage\_get\_readonly\_context}}
+\index{storage\_get\_readonly\_context@{storage\_get\_readonly\_context}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{storage\_get\_readonly\_context()}{storage\_get\_readonly\_context()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_af1b0acddb364cfe7379ef2e10ea5e2db} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::storage\+\_\+get\+\_\+readonly\+\_\+context (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 36
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a34fac5d6291ae605261e49272fd2c6e8}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!storage\_put@{storage\_put}}
+\index{storage\_put@{storage\_put}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{storage\_put()}{storage\_put()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a34fac5d6291ae605261e49272fd2c6e8} 
+void neo\+::smartcontract\+::\+Interop\+Service\+::storage\+\_\+put (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 37
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_service_a1d2ce18adc77f7b3528d7b05ecd4c3c6}\index{neo::smartcontract::InteropService@{neo::smartcontract::InteropService}!services\_@{services\_}}
+\index{services\_@{services\_}!neo::smartcontract::InteropService@{neo::smartcontract::InteropService}}
+\doxysubsubsection{\texorpdfstring{services\_}{services\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_service_a1d2ce18adc77f7b3528d7b05ecd4c3c6} 
+std\+::unordered\+\_\+map$<$uint32\+\_\+t, \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{Interop\+Descriptor}}$>$ neo\+::smartcontract\+::\+Interop\+Service\+::services\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/\mbox{\hyperlink{interop__service_8h}{interop\+\_\+service.\+h}}\item 
+src/smartcontract/\mbox{\hyperlink{interop__service_8cpp}{interop\+\_\+service.\+cpp}}\end{DoxyCompactItemize}

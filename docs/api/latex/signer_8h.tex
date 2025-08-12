@@ -1,0 +1,59 @@
+\doxysection{include/neo/ledger/signer.h File Reference}
+\hypertarget{signer_8h}{}\label{signer_8h}\index{include/neo/ledger/signer.h@{include/neo/ledger/signer.h}}
+{\ttfamily \#include $<$neo/cryptography/ecc/ecpoint.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/binary\+\_\+reader.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/binary\+\_\+writer.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/ijson\+\_\+serializable.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/iserializable.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/json\+\_\+reader.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/json\+\_\+writer.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/uint160.\+h$>$}\newline
+{\ttfamily \#include $<$neo/ledger/witness\+\_\+rule.\+h$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for signer.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{neo\+::ledger\+::\+Signer}}
+\begin{DoxyCompactList}\small\item\em Represents a transaction signer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1ledger}{neo\+::ledger}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{neo\+::ledger\+::\+Witness\+Scope}} \+: uint8\+\_\+t \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adfa6adf97f83acf6453d4a6a4b1070f3754}{neo\+::ledger\+::\+None}} = 0x00
+, \mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adfa32eb81c8766434800c20866b73452d5d}{neo\+::ledger\+::\+Called\+By\+Entry}} = 0x01
+, \mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adfa080e3a2e14bb1dd5917806a6ba7fde86}{neo\+::ledger\+::\+Custom\+Contracts}} = 0x10
+, \mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adfac38fcd3b1068123ad637765df407ce10}{neo\+::ledger\+::\+Custom\+Groups}} = 0x20
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adfab69aaab35dfe0d1d0cd48b5686efcd13}{neo\+::ledger\+::\+Witness\+Rules}} = 0x40
+, \mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adfa4cc6684df7b4a92b1dec6fce3264fac8}{neo\+::ledger\+::\+Global}} = 0x80
+ \}
+\begin{DoxyCompactList}\small\item\em Represents witness scopes for a signer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} \mbox{\hyperlink{namespaceneo_1_1ledger_a0213a94f5c99f880d11eb9e4983be2d6}{neo\+::ledger\+::operator\&}} (\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} lhs, \mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} rhs)
+\item 
+\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} \mbox{\hyperlink{namespaceneo_1_1ledger_aa19ea138a830643d28287d5479f89848}{neo\+::ledger\+::operator\texorpdfstring{$\vert$}{|}}} (\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} lhs, \mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} rhs)
+\item 
+\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} \mbox{\hyperlink{namespaceneo_1_1ledger_ad0608632365452be2baff80d5d7ebdba}{neo\+::ledger\+::operator\texorpdfstring{$^\wedge$}{\string^}}} (\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} lhs, \mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} rhs)
+\item 
+\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} \mbox{\hyperlink{namespaceneo_1_1ledger_a293829d4c1c1cb46d212038284ceb3da}{neo\+::ledger\+::operator\texorpdfstring{$\sim$}{\string~}}} (\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} scope)
+\item 
+\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} \& \mbox{\hyperlink{namespaceneo_1_1ledger_af9032cbce36ba103c2e4d5a054339d85}{neo\+::ledger\+::operator\&=}} (\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} \&lhs, \mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} rhs)
+\item 
+\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} \& \mbox{\hyperlink{namespaceneo_1_1ledger_a0235c568d2a77f6a2f1e66f5483255f9}{neo\+::ledger\+::operator\texorpdfstring{$\vert$}{|}=}} (\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} \&lhs, \mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} rhs)
+\item 
+\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} \& \mbox{\hyperlink{namespaceneo_1_1ledger_a356b3daa3020a7fa458ed8b347bc5d46}{neo\+::ledger\+::operator\texorpdfstring{$^\wedge$}{\string^}=}} (\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} \&lhs, \mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} rhs)
+\end{DoxyCompactItemize}

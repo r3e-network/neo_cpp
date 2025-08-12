@@ -1,0 +1,53 @@
+\doxysection{console\+\_\+command\+\_\+method.\+h}
+\hypertarget{console__command__method_8h_source}{}\label{console__command__method_8h_source}\index{include/neo/console\_service/console\_command\_method.h@{include/neo/console\_service/console\_command\_method.h}}
+\mbox{\hyperlink{console__command__method_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1console__service}{neo::console\_service}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a450a3e78a1ca9128319ab4bfcf0a0906}{ConsoleCommandMethod}}}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a9d6cb35921acc2121d03e0126ce0def8}{CommandFunction}}\ =\ std::function<std::string(\textcolor{keyword}{const}\ std::vector<std::string>\&)>;}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00042\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a406b113c52b6435cc8a6785335c0725f}{key}};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00047\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a6bea442c3c97d7e3a110aaeddf89e8ac}{help\_category}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00052\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a3fa1392a148092fa1e58a11b11190571}{help\_message}};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a450a3e78a1ca9128319ab4bfcf0a0906}{ConsoleCommandMethod}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a88ccfd241333c86c624d989c7b00dd2d}{ConsoleCommandMethod}}(\textcolor{keyword}{const}\ std::string\&\ cmd\_key,\ \textcolor{keyword}{const}\ std::string\&\ category,\ \textcolor{keyword}{const}\ std::string\&\ message,}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a9d6cb35921acc2121d03e0126ce0def8}{CommandFunction}}\ func)}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a406b113c52b6435cc8a6785335c0725f}{key}}(cmd\_key),\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a6bea442c3c97d7e3a110aaeddf89e8ac}{help\_category}}(category),\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a3fa1392a148092fa1e58a11b11190571}{help\_message}}(message),\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a2c5c0c4cb3b22530477a59ac98d349b0}{function\_}}(func)}
+\DoxyCodeLine{00069\ \ \ \ \ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00077\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a56c579654f6178f633a38772ac2ce7a1}{Execute}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ args)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00078\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a2c5c0c4cb3b22530477a59ac98d349b0}{function\_}})}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a2c5c0c4cb3b22530477a59ac98d349b0}{function\_}}(args);}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Command\ '"{}}\ +\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a406b113c52b6435cc8a6785335c0725f}{key}}\ +\ \textcolor{stringliteral}{"{}'\ has\ no\ implementation"{}});}
+\DoxyCodeLine{00084\ \ \ \ \ \}}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a1007f6c165375ce935c5a23433a6b565}{IsImplemented}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{bool}\textcolor{keyword}{>}(\mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a2c5c0c4cb3b22530477a59ac98d349b0}{function\_}});\ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00096\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_ad0b5d0382e6cb17eeca68b93e2d55c3e}{GetHelp}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a406b113c52b6435cc8a6785335c0725f}{key}}\ +\ \textcolor{stringliteral}{"{}\ -\/\ "{}}\ +\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a3fa1392a148092fa1e58a11b11190571}{help\_message}}\ +\ \textcolor{stringliteral}{"{}\ (Category:\ "{}}\ +\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a6bea442c3c97d7e3a110aaeddf89e8ac}{help\_category}}\ +\ \textcolor{stringliteral}{"{})"{}};\ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_aa16605ec97fd20dc3eb93e7ca6c6c751}{SetFunction}}(\mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a9d6cb35921acc2121d03e0126ce0def8}{CommandFunction}}\ func)\ \{\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a2c5c0c4cb3b22530477a59ac98d349b0}{function\_}}\ =\ func;\ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00105\ \ \ \ \ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a9d6cb35921acc2121d03e0126ce0def8}{CommandFunction}}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a2c5c0c4cb3b22530477a59ac98d349b0}{function\_}};}
+\DoxyCodeLine{00106\ \};}
+\DoxyCodeLine{00107\ \}\ \ \textcolor{comment}{//\ namespace\ neo::console\_service}}
+
+\end{DoxyCode}

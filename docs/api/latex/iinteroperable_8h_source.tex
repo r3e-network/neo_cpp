@@ -1,0 +1,26 @@
+\doxysection{iinteroperable.\+h}
+\hypertarget{iinteroperable_8h_source}{}\label{iinteroperable_8h_source}\index{include/neo/vm/iinteroperable.h@{include/neo/vm/iinteroperable.h}}
+\mbox{\hyperlink{iinteroperable_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ Forward\ declarations}}
+\DoxyCodeLine{00008\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{StackItem}};}
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_i_reference_counter}{IReferenceCounter}};}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_i_interoperable}{IInteroperable}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1vm_1_1_i_interoperable_a311df6665fbba201898b8ef32e1782e8}{\string~IInteroperable}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{virtual}\ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_i_interoperable_acf9cc44a430d44a5777cdc0dd9966de6}{ToStackItem}}(\mbox{\hyperlink{classneo_1_1vm_1_1_i_reference_counter}{IReferenceCounter}}*\ referenceCounter)\ =\ 0;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_i_interoperable_ad96624e3ce8e86e6fa61b290e47574e3}{FromStackItem}}(std::shared\_ptr<StackItem>\ stackItem)\ =\ 0;}
+\DoxyCodeLine{00034\ \};}
+\DoxyCodeLine{00035\ \}\ \ \textcolor{comment}{//\ namespace\ neo::vm}}
+
+\end{DoxyCode}

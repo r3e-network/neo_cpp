@@ -1,0 +1,270 @@
+\doxysection{neo\+::console\+\_\+service\+::Command\+Token Class Reference}
+\hypertarget{classneo_1_1console__service_1_1_command_token}{}\label{classneo_1_1console__service_1_1_command_token}\index{neo::console\_service::CommandToken@{neo::console\_service::CommandToken}}
+
+
+Base class for command tokens.  
+
+
+
+
+{\ttfamily \#include $<$command\+\_\+token.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::console\+\_\+service\+::Command\+Token\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1console__service_1_1_command_token_a2a2978ec8ea00bb15cb4915ec80f3c4d}{Command\+Token}} (\mbox{\hyperlink{namespaceneo_1_1console__service_a542235d803e4433114d9c1419356fc8b}{Command\+Token\+Type}} type, int offset)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token_acc59d84703767c3130e282d0eb9c64f5}{\texorpdfstring{$\sim$}{\string~}\+Command\+Token}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1console__service_a542235d803e4433114d9c1419356fc8b}{Command\+Token\+Type}} \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token_aae310fa913cf32898c53f856fc7a4802}{Get\+Type}} () const
+\begin{DoxyCompactList}\small\item\em Gets the token type. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token_a06599c6d5f5cc353b2ab4df3a7c95b7e}{Get\+Offset}} () const
+\begin{DoxyCompactList}\small\item\em Gets the offset. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token_ab16f77cd7e6bdece487195555bc2d8a2}{Get\+Value}} () const
+\begin{DoxyCompactList}\small\item\em Gets the value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token_aac83ad22e0ce8bb6aa2c7bca0ba98ac0}{Set\+Value}} (const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Sets the value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token}{Command\+Token}} $>$ $>$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token_a0755450b19601975f05bd4afe6200b6e}{Parse}} (const std\+::string \&command\+\_\+line)
+\begin{DoxyCompactList}\small\item\em Parses a command line into tokens. \end{DoxyCompactList}\item 
+static std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token_a1bbcd48bfec130254746b8d0dab60a1b}{To\+Arguments}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token}{Command\+Token}} $>$ $>$ \&tokens, bool remove\+\_\+escape=true)
+\begin{DoxyCompactList}\small\item\em Creates string arguments from tokens. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token_a2ddaad1927999c1c993abd9c6e68ed34}{To\+String}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token}{Command\+Token}} $>$ $>$ \&tokens)
+\begin{DoxyCompactList}\small\item\em Creates a string from token list. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token_a1af7bab5ec5b491c4ea53a10738c6a64}{Trim}} (std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token}{Command\+Token}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Trims space tokens from the beginning and end. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token_a0ee83319926e3e0dc87b452ccfe61b87}{Read\+String}} (std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token}{Command\+Token}} $>$ $>$ \&args, bool consume\+\_\+all)
+\begin{DoxyCompactList}\small\item\em Reads a string from the token list. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1console__service_a542235d803e4433114d9c1419356fc8b}{Command\+Token\+Type}} \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token_a24d0f10dcf0f7a8b451f5b47861e9698}{type\+\_\+}}
+\item 
+int \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token_a0e6012af6c7b81adfcd871ce1af273f6}{offset\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token_a128cd2818d2774a125e39e95502e332e}{value\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for command tokens. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1console__service_1_1_command_token_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1console__service_1_1_command_token_a2a2978ec8ea00bb15cb4915ec80f3c4d}\index{neo::console\_service::CommandToken@{neo::console\_service::CommandToken}!CommandToken@{CommandToken}}
+\index{CommandToken@{CommandToken}!neo::console\_service::CommandToken@{neo::console\_service::CommandToken}}
+\doxysubsubsection{\texorpdfstring{CommandToken()}{CommandToken()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_command_token_a2a2978ec8ea00bb15cb4915ec80f3c4d} 
+neo\+::console\+\_\+service\+::\+Command\+Token\+::\+Command\+Token (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1console__service_a542235d803e4433114d9c1419356fc8b}{Command\+Token\+Type}}}]{type}{, }\item[{int}]{offset}{}\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The token type. \\
+\hline
+{\em offset} & The offset in the command line. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1console__service_1_1_command_token_acc59d84703767c3130e282d0eb9c64f5}\index{neo::console\_service::CommandToken@{neo::console\_service::CommandToken}!````~CommandToken@{\texorpdfstring{$\sim$}{\string~}CommandToken}}
+\index{````~CommandToken@{\texorpdfstring{$\sim$}{\string~}CommandToken}!neo::console\_service::CommandToken@{neo::console\_service::CommandToken}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}CommandToken()}{\string~CommandToken()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_command_token_acc59d84703767c3130e282d0eb9c64f5} 
+virtual neo\+::console\+\_\+service\+::\+Command\+Token\+::\texorpdfstring{$\sim$}{\string~}\+Command\+Token (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1console__service_1_1_command_token_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1console__service_1_1_command_token_a06599c6d5f5cc353b2ab4df3a7c95b7e}\index{neo::console\_service::CommandToken@{neo::console\_service::CommandToken}!GetOffset@{GetOffset}}
+\index{GetOffset@{GetOffset}!neo::console\_service::CommandToken@{neo::console\_service::CommandToken}}
+\doxysubsubsection{\texorpdfstring{GetOffset()}{GetOffset()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_command_token_a06599c6d5f5cc353b2ab4df3a7c95b7e} 
+int neo\+::console\+\_\+service\+::\+Command\+Token\+::\+Get\+Offset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the offset. 
+
+\begin{DoxyReturn}{Returns}
+The offset. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1console__service_1_1_command_token_aae310fa913cf32898c53f856fc7a4802}\index{neo::console\_service::CommandToken@{neo::console\_service::CommandToken}!GetType@{GetType}}
+\index{GetType@{GetType}!neo::console\_service::CommandToken@{neo::console\_service::CommandToken}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_command_token_aae310fa913cf32898c53f856fc7a4802} 
+\mbox{\hyperlink{namespaceneo_1_1console__service_a542235d803e4433114d9c1419356fc8b}{Command\+Token\+Type}} neo\+::console\+\_\+service\+::\+Command\+Token\+::\+Get\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the token type. 
+
+\begin{DoxyReturn}{Returns}
+The token type. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1console__service_1_1_command_token_ab16f77cd7e6bdece487195555bc2d8a2}\index{neo::console\_service::CommandToken@{neo::console\_service::CommandToken}!GetValue@{GetValue}}
+\index{GetValue@{GetValue}!neo::console\_service::CommandToken@{neo::console\_service::CommandToken}}
+\doxysubsubsection{\texorpdfstring{GetValue()}{GetValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_command_token_ab16f77cd7e6bdece487195555bc2d8a2} 
+const std\+::string \& neo\+::console\+\_\+service\+::\+Command\+Token\+::\+Get\+Value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the value. 
+
+\begin{DoxyReturn}{Returns}
+The value. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1console__service_1_1_command_token_a0755450b19601975f05bd4afe6200b6e}\index{neo::console\_service::CommandToken@{neo::console\_service::CommandToken}!Parse@{Parse}}
+\index{Parse@{Parse}!neo::console\_service::CommandToken@{neo::console\_service::CommandToken}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_command_token_a0755450b19601975f05bd4afe6200b6e} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token}{Command\+Token}} $>$ $>$ neo\+::console\+\_\+service\+::\+Command\+Token\+::\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{command\+\_\+line}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Parses a command line into tokens. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command\+\_\+line} & The command line to parse. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The parsed tokens. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1console__service_1_1_command_token_a0ee83319926e3e0dc87b452ccfe61b87}\index{neo::console\_service::CommandToken@{neo::console\_service::CommandToken}!ReadString@{ReadString}}
+\index{ReadString@{ReadString}!neo::console\_service::CommandToken@{neo::console\_service::CommandToken}}
+\doxysubsubsection{\texorpdfstring{ReadString()}{ReadString()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_command_token_a0ee83319926e3e0dc87b452ccfe61b87} 
+std\+::string neo\+::console\+\_\+service\+::\+Command\+Token\+::\+Read\+String (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token}{Command\+Token}} $>$ $>$ \&}]{args}{, }\item[{bool}]{consume\+\_\+all}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Reads a string from the token list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The token list. \\
+\hline
+{\em consume\+\_\+all} & Whether to consume all tokens if not quoted. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The read string, or empty string if none. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1console__service_1_1_command_token_aac83ad22e0ce8bb6aa2c7bca0ba98ac0}\index{neo::console\_service::CommandToken@{neo::console\_service::CommandToken}!SetValue@{SetValue}}
+\index{SetValue@{SetValue}!neo::console\_service::CommandToken@{neo::console\_service::CommandToken}}
+\doxysubsubsection{\texorpdfstring{SetValue()}{SetValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_command_token_aac83ad22e0ce8bb6aa2c7bca0ba98ac0} 
+void neo\+::console\+\_\+service\+::\+Command\+Token\+::\+Set\+Value (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Sets the value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1console__service_1_1_command_token_a1bbcd48bfec130254746b8d0dab60a1b}\index{neo::console\_service::CommandToken@{neo::console\_service::CommandToken}!ToArguments@{ToArguments}}
+\index{ToArguments@{ToArguments}!neo::console\_service::CommandToken@{neo::console\_service::CommandToken}}
+\doxysubsubsection{\texorpdfstring{ToArguments()}{ToArguments()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_command_token_a1bbcd48bfec130254746b8d0dab60a1b} 
+std\+::vector$<$ std\+::string $>$ neo\+::console\+\_\+service\+::\+Command\+Token\+::\+To\+Arguments (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token}{Command\+Token}} $>$ $>$ \&}]{tokens}{, }\item[{bool}]{remove\+\_\+escape}{ = {\ttfamily true}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates string arguments from tokens. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokens} & The tokens. \\
+\hline
+{\em remove\+\_\+escape} & Whether to remove escape characters. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The string arguments. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1console__service_1_1_command_token_a2ddaad1927999c1c993abd9c6e68ed34}\index{neo::console\_service::CommandToken@{neo::console\_service::CommandToken}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::console\_service::CommandToken@{neo::console\_service::CommandToken}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_command_token_a2ddaad1927999c1c993abd9c6e68ed34} 
+std\+::string neo\+::console\+\_\+service\+::\+Command\+Token\+::\+To\+String (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token}{Command\+Token}} $>$ $>$ \&}]{tokens}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a string from token list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokens} & The tokens. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The concatenated string. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1console__service_1_1_command_token_a1af7bab5ec5b491c4ea53a10738c6a64}\index{neo::console\_service::CommandToken@{neo::console\_service::CommandToken}!Trim@{Trim}}
+\index{Trim@{Trim}!neo::console\_service::CommandToken@{neo::console\_service::CommandToken}}
+\doxysubsubsection{\texorpdfstring{Trim()}{Trim()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_command_token_a1af7bab5ec5b491c4ea53a10738c6a64} 
+void neo\+::console\+\_\+service\+::\+Command\+Token\+::\+Trim (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token}{Command\+Token}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Trims space tokens from the beginning and end. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The token list to trim. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1console__service_1_1_command_token_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1console__service_1_1_command_token_a0e6012af6c7b81adfcd871ce1af273f6}\index{neo::console\_service::CommandToken@{neo::console\_service::CommandToken}!offset\_@{offset\_}}
+\index{offset\_@{offset\_}!neo::console\_service::CommandToken@{neo::console\_service::CommandToken}}
+\doxysubsubsection{\texorpdfstring{offset\_}{offset\_}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_command_token_a0e6012af6c7b81adfcd871ce1af273f6} 
+int neo\+::console\+\_\+service\+::\+Command\+Token\+::offset\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classneo_1_1console__service_1_1_command_token_a24d0f10dcf0f7a8b451f5b47861e9698}\index{neo::console\_service::CommandToken@{neo::console\_service::CommandToken}!type\_@{type\_}}
+\index{type\_@{type\_}!neo::console\_service::CommandToken@{neo::console\_service::CommandToken}}
+\doxysubsubsection{\texorpdfstring{type\_}{type\_}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_command_token_a24d0f10dcf0f7a8b451f5b47861e9698} 
+\mbox{\hyperlink{namespaceneo_1_1console__service_a542235d803e4433114d9c1419356fc8b}{Command\+Token\+Type}} neo\+::console\+\_\+service\+::\+Command\+Token\+::type\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classneo_1_1console__service_1_1_command_token_a128cd2818d2774a125e39e95502e332e}\index{neo::console\_service::CommandToken@{neo::console\_service::CommandToken}!value\_@{value\_}}
+\index{value\_@{value\_}!neo::console\_service::CommandToken@{neo::console\_service::CommandToken}}
+\doxysubsubsection{\texorpdfstring{value\_}{value\_}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_command_token_a128cd2818d2774a125e39e95502e332e} 
+std\+::string neo\+::console\+\_\+service\+::\+Command\+Token\+::value\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/console\+\_\+service/\mbox{\hyperlink{command__token_8h}{command\+\_\+token.\+h}}\item 
+src/console\+\_\+service/\mbox{\hyperlink{command__token_8cpp}{command\+\_\+token.\+cpp}}\end{DoxyCompactItemize}

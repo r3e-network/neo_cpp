@@ -1,0 +1,88 @@
+\doxysection{include/neo/common/logging.h File Reference}
+\hypertarget{common_2logging_8h}{}\label{common_2logging_8h}\index{include/neo/common/logging.h@{include/neo/common/logging.h}}
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+Include dependency graph for logging.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1common_1_1_logger}{neo\+::common\+::\+Logger}}
+\begin{DoxyCompactList}\small\item\em Simple logging class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1common}{neo\+::common}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{common_2logging_8h_ac46a99e063237586d68106159f7c2b41}{NEO\+\_\+\+DEBUG}}~\mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972adc30ec20708ef7b0f641ef78b7880a15}{neo\+::common\+::\+Log\+Level\+::\+DEBUG}}
+\item 
+\#define \mbox{\hyperlink{common_2logging_8h_a6e0f9f8d022435d80fe13faa2d316b5d}{NEO\+\_\+\+INFO}}~\mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972a551b723eafd6a31d444fcb2f5920fbd3}{neo\+::common\+::\+Log\+Level\+::\+INFO}}
+\item 
+\#define \mbox{\hyperlink{common_2logging_8h_acb8fa08332eecac3b3991180992f8983}{NEO\+\_\+\+WARNING}}~\mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972a059e9861e0400dfbe05c98a841f3f96b}{neo\+::common\+::\+Log\+Level\+::\+WARNING}}
+\item 
+\#define \mbox{\hyperlink{common_2logging_8h_a77292d46c180604e96b5e61d6e431753}{NEO\+\_\+\+ERROR}}~\mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972a0e9c70bbf331f239047470632224f90f}{neo\+::common\+::\+Log\+Level\+::\+ERROR\+\_\+\+LEVEL}}
+\item 
+\#define \mbox{\hyperlink{common_2logging_8h_a8bfea3765e4e42289562c7113999cef5}{NEO\+\_\+\+LOG}}(level,  message)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972}{neo\+::common\+::\+Log\+Level}} \{ \mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972adc30ec20708ef7b0f641ef78b7880a15}{neo\+::common\+::\+DEBUG}} = 0
+, \mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972a551b723eafd6a31d444fcb2f5920fbd3}{neo\+::common\+::\+INFO}} = 1
+, \mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972a059e9861e0400dfbe05c98a841f3f96b}{neo\+::common\+::\+WARNING}} = 2
+, \mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972a0e9c70bbf331f239047470632224f90f}{neo\+::common\+::\+ERROR\+\_\+\+LEVEL}} = 3
+ \}
+\begin{DoxyCompactList}\small\item\em Log levels for the logging system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{common_2logging_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{common_2logging_8h_ac46a99e063237586d68106159f7c2b41}\index{logging.h@{logging.h}!NEO\_DEBUG@{NEO\_DEBUG}}
+\index{NEO\_DEBUG@{NEO\_DEBUG}!logging.h@{logging.h}}
+\doxysubsubsection{\texorpdfstring{NEO\_DEBUG}{NEO\_DEBUG}}
+{\footnotesize\ttfamily \label{common_2logging_8h_ac46a99e063237586d68106159f7c2b41} 
+\#define NEO\+\_\+\+DEBUG~\mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972adc30ec20708ef7b0f641ef78b7880a15}{neo\+::common\+::\+Log\+Level\+::\+DEBUG}}}
+
+\Hypertarget{common_2logging_8h_a77292d46c180604e96b5e61d6e431753}\index{logging.h@{logging.h}!NEO\_ERROR@{NEO\_ERROR}}
+\index{NEO\_ERROR@{NEO\_ERROR}!logging.h@{logging.h}}
+\doxysubsubsection{\texorpdfstring{NEO\_ERROR}{NEO\_ERROR}}
+{\footnotesize\ttfamily \label{common_2logging_8h_a77292d46c180604e96b5e61d6e431753} 
+\#define NEO\+\_\+\+ERROR~\mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972a0e9c70bbf331f239047470632224f90f}{neo\+::common\+::\+Log\+Level\+::\+ERROR\+\_\+\+LEVEL}}}
+
+\Hypertarget{common_2logging_8h_a6e0f9f8d022435d80fe13faa2d316b5d}\index{logging.h@{logging.h}!NEO\_INFO@{NEO\_INFO}}
+\index{NEO\_INFO@{NEO\_INFO}!logging.h@{logging.h}}
+\doxysubsubsection{\texorpdfstring{NEO\_INFO}{NEO\_INFO}}
+{\footnotesize\ttfamily \label{common_2logging_8h_a6e0f9f8d022435d80fe13faa2d316b5d} 
+\#define NEO\+\_\+\+INFO~\mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972a551b723eafd6a31d444fcb2f5920fbd3}{neo\+::common\+::\+Log\+Level\+::\+INFO}}}
+
+\Hypertarget{common_2logging_8h_a8bfea3765e4e42289562c7113999cef5}\index{logging.h@{logging.h}!NEO\_LOG@{NEO\_LOG}}
+\index{NEO\_LOG@{NEO\_LOG}!logging.h@{logging.h}}
+\doxysubsubsection{\texorpdfstring{NEO\_LOG}{NEO\_LOG}}
+{\footnotesize\ttfamily \label{common_2logging_8h_a8bfea3765e4e42289562c7113999cef5} 
+\#define NEO\+\_\+\+LOG(\begin{DoxyParamCaption}\item[{}]{level}{, }\item[{}]{message}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{do}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::ostringstream\ oss;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ oss\ <<\ message;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ neo::common::Logger::Log(level,\ oss.str());\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{while}\ (0)}
+
+\end{DoxyCode}
+\Hypertarget{common_2logging_8h_acb8fa08332eecac3b3991180992f8983}\index{logging.h@{logging.h}!NEO\_WARNING@{NEO\_WARNING}}
+\index{NEO\_WARNING@{NEO\_WARNING}!logging.h@{logging.h}}
+\doxysubsubsection{\texorpdfstring{NEO\_WARNING}{NEO\_WARNING}}
+{\footnotesize\ttfamily \label{common_2logging_8h_acb8fa08332eecac3b3991180992f8983} 
+\#define NEO\+\_\+\+WARNING~\mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972a059e9861e0400dfbe05c98a841f3f96b}{neo\+::common\+::\+Log\+Level\+::\+WARNING}}}
+

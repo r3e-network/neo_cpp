@@ -1,0 +1,32 @@
+\doxysection{src/vm/syscalls.cpp File Reference}
+\hypertarget{syscalls_8cpp}{}\label{syscalls_8cpp}\index{src/vm/syscalls.cpp@{src/vm/syscalls.cpp}}
+{\ttfamily \#include $<$neo/smartcontract/application\+\_\+engine.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/interop\+\_\+service.\+h$>$}\newline
+{\ttfamily \#include $<$neo/vm/execution\+\_\+engine.\+h$>$}\newline
+{\ttfamily \#include $<$neo/vm/stack\+\_\+item.\+h$>$}\newline
+{\ttfamily \#include $<$neo/vm/syscalls.\+h$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+Include dependency graph for syscalls.\+cpp\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1vm_1_1_syscall_handler}{neo\+::vm\+::\+Syscall\+Handler}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1vm}{neo\+::vm}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1vm_1_1_syscall_handler}{Syscall\+Handler}} \& \mbox{\hyperlink{namespaceneo_1_1vm_a77d32f500cf2ac4560cad876265d49c5}{neo\+::vm\+::\+Get\+Syscall\+Handler}} ()
+\item 
+void \mbox{\hyperlink{namespaceneo_1_1vm_a6e308479c9ae8fea5db3e9429014c55d}{neo\+::vm\+::\+Register\+Syscall}} (uint32\+\_\+t id, std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine}} \&)$>$ handler)
+\begin{DoxyCompactList}\small\item\em Register a system call handler. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceneo_1_1vm_a1f2ff8e02acb5c0def9906c5c6677003}{neo\+::vm\+::\+Handle\+Syscall}} (\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine}} \&engine, uint32\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Handle a system call. \end{DoxyCompactList}\end{DoxyCompactItemize}

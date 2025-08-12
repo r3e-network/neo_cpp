@@ -1,0 +1,19 @@
+digraph "neo::consensus::ConsensusService::OnPrepareResponseMessage"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::consensus::Consensus\lService::OnPrepareResponseMessage",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Handles a prepare response message."];
+  Node1 -> Node2 [id="edge6_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::consensus::Consensus\lService::HasReceivedEnoughPrepare\lResponses",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1consensus_1_1_consensus_service.html#add0dc219e8a5ace02e8fa909e02174a8",tooltip="Checks if the node has received enough prepare responses."];
+  Node1 -> Node3 [id="edge7_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::consensus::Consensus\lService::SendCommit",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1consensus_1_1_consensus_service.html#ab42217a451445c8e62f9276da994e0a2",tooltip="Sends a commit."];
+  Node3 -> Node4 [id="edge8_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::consensus::Consensus\lService::BroadcastMessage",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1consensus_1_1_consensus_service.html#a8ed426660e58a0c403a4eaff8f551b25",tooltip="Broadcasts a message."];
+  Node3 -> Node5 [id="edge9_Node000003_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::consensus::Consensus\lService::CreateBlock",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1consensus_1_1_consensus_service.html#ae69077344a347c0dca7f21252afa44bf",tooltip="Creates a block."];
+  Node5 -> Node6 [id="edge10_Node000005_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::consensus::Consensus\lService::GetPrimaryIndex",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1consensus_1_1_consensus_service.html#a720cf307f8a925e9f83995c076f9339c",tooltip="Gets the primary index."];
+}

@@ -1,0 +1,142 @@
+\doxysection{neo\+::cryptography\+::Ed25519 Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1_ed25519}{}\label{classneo_1_1cryptography_1_1_ed25519}\index{neo::cryptography::Ed25519@{neo::cryptography::Ed25519}}
+
+
+\doxylink{classneo_1_1cryptography_1_1_ed25519}{Ed25519} signature scheme implementation.  
+
+
+
+
+{\ttfamily \#include $<$ed25519.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key}{Private\+Key}}
+\begin{DoxyCompactList}\small\item\em Represents an \doxylink{classneo_1_1cryptography_1_1_ed25519}{Ed25519} private key. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key}{Public\+Key}}
+\begin{DoxyCompactList}\small\item\em Represents an \doxylink{classneo_1_1cryptography_1_1_ed25519}{Ed25519} public key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::pair$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key}{Private\+Key}}, \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key}{Public\+Key}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_a22a65ad563e3ae188fc2459824ccbc20}{Generate\+Key\+Pair}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&seed)
+\begin{DoxyCompactList}\small\item\em Generates a key pair from a seed. \end{DoxyCompactList}\item 
+static std\+::pair$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key}{Private\+Key}}, \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key}{Public\+Key}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_ae9b5c5c6741db5784acaefa750c1ed9f}{Generate\+Key\+Pair}} ()
+\begin{DoxyCompactList}\small\item\em Generates a random key pair. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_ac5e5bc08465e86c5c8ef997eeb79b6bf}{Verify}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&message, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&signature, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&public\+\_\+key)
+\begin{DoxyCompactList}\small\item\em Verifies a signature without requiring a \doxylink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key}{Public\+Key} object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_a55de8977292b22807c27dc979915a8cd}{PRIVATE\+\_\+\+KEY\+\_\+\+SIZE}} = 32
+\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_a9882426d077281634fc66e9e733a1fab}{PUBLIC\+\_\+\+KEY\+\_\+\+SIZE}} = 32
+\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_a0ce3cefa89222961e6bc9aaced85bb02}{SIGNATURE\+\_\+\+SIZE}} = 64
+\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_a4201a3c5e81eab0d985dd5e835c71e9b}{SEED\+\_\+\+SIZE}} = 32
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1cryptography_1_1_ed25519}{Ed25519} signature scheme implementation. 
+
+This class provides \doxylink{classneo_1_1cryptography_1_1_ed25519}{Ed25519} digital signature functionality following RFC 8032. \doxylink{classneo_1_1cryptography_1_1_ed25519}{Ed25519} is a high-\/speed, high-\/security signature scheme that is widely used in blockchain and cryptographic applications. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_ae9b5c5c6741db5784acaefa750c1ed9f}\index{neo::cryptography::Ed25519@{neo::cryptography::Ed25519}!GenerateKeyPair@{GenerateKeyPair}}
+\index{GenerateKeyPair@{GenerateKeyPair}!neo::cryptography::Ed25519@{neo::cryptography::Ed25519}}
+\doxysubsubsection{\texorpdfstring{GenerateKeyPair()}{GenerateKeyPair()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_ae9b5c5c6741db5784acaefa750c1ed9f} 
+std\+::pair$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key}{Ed25519\+::\+Private\+Key}}, \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key}{Ed25519\+::\+Public\+Key}} $>$ neo\+::cryptography\+::\+Ed25519\+::\+Generate\+Key\+Pair (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generates a random key pair. 
+
+\begin{DoxyReturn}{Returns}
+A pair of (private\+\_\+key, public\+\_\+key). 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_a22a65ad563e3ae188fc2459824ccbc20}\index{neo::cryptography::Ed25519@{neo::cryptography::Ed25519}!GenerateKeyPair@{GenerateKeyPair}}
+\index{GenerateKeyPair@{GenerateKeyPair}!neo::cryptography::Ed25519@{neo::cryptography::Ed25519}}
+\doxysubsubsection{\texorpdfstring{GenerateKeyPair()}{GenerateKeyPair()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_a22a65ad563e3ae188fc2459824ccbc20} 
+std\+::pair$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key}{Ed25519\+::\+Private\+Key}}, \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key}{Ed25519\+::\+Public\+Key}} $>$ neo\+::cryptography\+::\+Ed25519\+::\+Generate\+Key\+Pair (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{seed}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generates a key pair from a seed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seed} & The 32-\/byte seed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pair of (private\+\_\+key, public\+\_\+key). 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_ac5e5bc08465e86c5c8ef997eeb79b6bf}\index{neo::cryptography::Ed25519@{neo::cryptography::Ed25519}!Verify@{Verify}}
+\index{Verify@{Verify}!neo::cryptography::Ed25519@{neo::cryptography::Ed25519}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_ac5e5bc08465e86c5c8ef997eeb79b6bf} 
+bool neo\+::cryptography\+::\+Ed25519\+::\+Verify (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{message}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{signature}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{public\+\_\+key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Verifies a signature without requiring a \doxylink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key}{Public\+Key} object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The original message. \\
+\hline
+{\em signature} & The signature to verify. \\
+\hline
+{\em public\+\_\+key} & The public key bytes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the signature is valid, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_a55de8977292b22807c27dc979915a8cd}\index{neo::cryptography::Ed25519@{neo::cryptography::Ed25519}!PRIVATE\_KEY\_SIZE@{PRIVATE\_KEY\_SIZE}}
+\index{PRIVATE\_KEY\_SIZE@{PRIVATE\_KEY\_SIZE}!neo::cryptography::Ed25519@{neo::cryptography::Ed25519}}
+\doxysubsubsection{\texorpdfstring{PRIVATE\_KEY\_SIZE}{PRIVATE\_KEY\_SIZE}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_a55de8977292b22807c27dc979915a8cd} 
+size\+\_\+t neo\+::cryptography\+::\+Ed25519\+::\+PRIVATE\+\_\+\+KEY\+\_\+\+SIZE = 32\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_a9882426d077281634fc66e9e733a1fab}\index{neo::cryptography::Ed25519@{neo::cryptography::Ed25519}!PUBLIC\_KEY\_SIZE@{PUBLIC\_KEY\_SIZE}}
+\index{PUBLIC\_KEY\_SIZE@{PUBLIC\_KEY\_SIZE}!neo::cryptography::Ed25519@{neo::cryptography::Ed25519}}
+\doxysubsubsection{\texorpdfstring{PUBLIC\_KEY\_SIZE}{PUBLIC\_KEY\_SIZE}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_a9882426d077281634fc66e9e733a1fab} 
+size\+\_\+t neo\+::cryptography\+::\+Ed25519\+::\+PUBLIC\+\_\+\+KEY\+\_\+\+SIZE = 32\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_a4201a3c5e81eab0d985dd5e835c71e9b}\index{neo::cryptography::Ed25519@{neo::cryptography::Ed25519}!SEED\_SIZE@{SEED\_SIZE}}
+\index{SEED\_SIZE@{SEED\_SIZE}!neo::cryptography::Ed25519@{neo::cryptography::Ed25519}}
+\doxysubsubsection{\texorpdfstring{SEED\_SIZE}{SEED\_SIZE}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_a4201a3c5e81eab0d985dd5e835c71e9b} 
+size\+\_\+t neo\+::cryptography\+::\+Ed25519\+::\+SEED\+\_\+\+SIZE = 32\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_a0ce3cefa89222961e6bc9aaced85bb02}\index{neo::cryptography::Ed25519@{neo::cryptography::Ed25519}!SIGNATURE\_SIZE@{SIGNATURE\_SIZE}}
+\index{SIGNATURE\_SIZE@{SIGNATURE\_SIZE}!neo::cryptography::Ed25519@{neo::cryptography::Ed25519}}
+\doxysubsubsection{\texorpdfstring{SIGNATURE\_SIZE}{SIGNATURE\_SIZE}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_a0ce3cefa89222961e6bc9aaced85bb02} 
+size\+\_\+t neo\+::cryptography\+::\+Ed25519\+::\+SIGNATURE\+\_\+\+SIZE = 64\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/\mbox{\hyperlink{ed25519_8h}{ed25519.\+h}}\item 
+src/cryptography/\mbox{\hyperlink{ed25519_8cpp}{ed25519.\+cpp}}\end{DoxyCompactItemize}

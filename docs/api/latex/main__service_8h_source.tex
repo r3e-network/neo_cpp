@@ -1,0 +1,94 @@
+\doxysection{main\+\_\+service.\+h}
+\hypertarget{main__service_8h_source}{}\label{main__service_8h_source}\index{include/neo/cli/main\_service.h@{include/neo/cli/main\_service.h}}
+\mbox{\hyperlink{main__service_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{command__line__options_8h}{neo/cli/command\_line\_options.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{cli_2console__command__attribute_8h}{neo/cli/console\_command\_attribute.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{cli_2console__helper_8h}{neo/cli/console\_helper.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{type__converters_8h}{neo/cli/type\_converters.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{node_2neo__system_8h}{neo/node/neo\_system.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{rpc__server_8h}{neo/rpc/rpc\_server.h}}>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{wallet_8h}{neo/wallets/wallet.h}}>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cli}{neo::cli}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00025\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceneo_1_1cli_aced5a9d3ca7228bbcb5059f2cb3b728f}{TypeConverter}}\ =\ std::function<\textcolor{keywordtype}{void}*(\textcolor{keyword}{const}\ std::vector<std::string>\&,\ bool)>;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1cli_1_1_command_handler}{CommandHandler}}\ =\ std::function<bool(\textcolor{keyword}{const}\ std::vector<std::string>\&)>;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cli_1_1_main_service_aa97deb908c51521abceae828f9b9b5b1}{MainService}}}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00037\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_aa97deb908c51521abceae828f9b9b5b1}{MainService}}();}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a44e9f48bddbae102155650fb610239ff}{\string~MainService}}();}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a9cd9d8f09f3ade713544a5bf2d527824}{Run}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ args);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_ab9b67a29c985eaaa1cf880ed6612b0a2}{Start}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cli_1_1_command_line_options}{CommandLineOptions}}\&\ options);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_aaff046a5d4f0b6274c6d66fbd868ac4e}{Stop}}();}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a87500bf72b8db7033c327dd0a562b1a8}{RegisterCommand}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler}{CommandHandler}}\&\ handler,\ \textcolor{keyword}{const}\ std::string\&\ category\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a4fed03627cec237d6ac47cd7710a8c07}{RegisterTypeConverter}}(\textcolor{keyword}{const}\ std::string\&\ typeName,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceneo_1_1cli_aced5a9d3ca7228bbcb5059f2cb3b728f}{TypeConverter}}\&\ converter);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00084\ \ \ \ \ std::shared\_ptr<node::NeoSystem>\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_afecad2ad69cd306cb6832bcc2ad34424}{GetNeoSystem}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00090\ \ \ \ \ std::shared\_ptr<wallets::Wallet>\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a572949014875a785307cdcbf9b673148}{GetCurrentWallet}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_ac20a3e12e0083e5c37058b825f99fefc}{OnCommand}}(\textcolor{keyword}{const}\ std::string\&\ command);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00099\ \ \ \ \ std::shared\_ptr<node::NeoSystem>\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_afd60469018b4b44924dd2095c68da874}{neoSystem\_}};}
+\DoxyCodeLine{00100\ \ \ \ \ std::shared\_ptr<wallets::Wallet>\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a5e987bd13924786bb8b2bef490567f58}{currentWallet\_}};}
+\DoxyCodeLine{00101\ \ \ \ \ std::shared\_ptr<rpc::RpcServer>\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a92e55f1c04af829ffdcd26484b5d06e7}{rpcServer\_}};}
+\DoxyCodeLine{00102\ \ \ \ \ std::unordered\_map<std::string,\ CommandHandler>\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_abd4e68eea72ea37b5c1aaf100bf44d5b}{commands\_}};}
+\DoxyCodeLine{00103\ \ \ \ \ std::unordered\_map<std::string,\ std::unordered\_map<std::string,\ CommandHandler>>\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_aa6609bd1813d95950a85827000cad310}{commandsByCategory\_}};}
+\DoxyCodeLine{00104\ \ \ \ \ std::unordered\_map<std::string,\ TypeConverter>\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a6599f7664ee38f7ce4e3f0dccdd5aec9}{typeConverters\_}};}
+\DoxyCodeLine{00105\ \ \ \ \ std::atomic<bool>\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_acb63aa50f181345ddbc27cc6c676e323}{running\_}};}
+\DoxyCodeLine{00106\ \ \ \ \ std::thread\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a3981f81fa72b7a9e54646e935b75b2ae}{consoleThread\_}};}
+\DoxyCodeLine{00107\ \ \ \ \ std::mutex\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a1f8bfbae967e72588bdab698c178cf87}{mutex\_}};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a19572dd54891614436ed6619e22a4ac2}{OnStartWithCommandLine}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ args);}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a9faf8096fde3bc89a82fb4a264e1fc4d}{OnHelp}}(\textcolor{keyword}{const}\ std::string\&\ category\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_af0d4250c361e2c5731c8fb9e4d9110bb}{OnExit}}();}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a6ccba4bb805efb0645494a1e904a5a11}{OnClear}}();}
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_ace61304af1f9a0aff1b3e31774c19801}{OnVersion}}();}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{comment}{//\ Blockchain\ Commands}}
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a1bf4923635dfb1d93260232bf82aecc5}{OnShowBlock}}(\textcolor{keyword}{const}\ std::string\&\ indexOrHash);}
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a68248538cdbabd4e62043b5bb3740b9e}{OnShowHeader}}(\textcolor{keyword}{const}\ std::string\&\ indexOrHash);}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a9f09d356d8753dfd841a1ac27f367501}{OnShowTransaction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash);}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{comment}{//\ Node\ Commands}}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_ac678464ba7a2d5a0f756f6ffc017fbf7}{OnShowState}}();}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a7a72be4d9671a7baf17c5afae90f093a}{OnShowPool}}();}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_aff87a0a3cde9685e2f56262ed1fbedbd}{OnShowPeers}}();}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{comment}{//\ Wallet\ Commands}}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_aab25aa43c59976bb4227ab9e9a29450c}{OnOpenWallet}}(\textcolor{keyword}{const}\ std::string\&\ path,\ \textcolor{keyword}{const}\ std::string\&\ password);}
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a51a015ba97c3183cd58e5e3cc61d5766}{OnCloseWallet}}();}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a2d19641126a93c359d617b7eea0b6dad}{OnShowBalance}}();}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a8b2045bb62078924afeb6b6c35f8dae5}{RunConsole}}();}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a9a7830733f81a719858024af2b4a70ac}{InitializeCommands}}();}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_afb67bf94eafa499626928ce0b1ee816c}{InitializeTypeConverters}}();}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_adc83915216c0a062001cfdb4c568b07e}{InitializeBlockchainCommands}}();}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_ac4f21727dea19c617d531addbd10b335}{InitializeNodeCommands}}();}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_main_service_a43c254bae6a99ba89d09528d7421bef7}{InitializeWalletCommands}}();}
+\DoxyCodeLine{00136\ \};}
+\DoxyCodeLine{00137\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cli}}
+
+\end{DoxyCode}

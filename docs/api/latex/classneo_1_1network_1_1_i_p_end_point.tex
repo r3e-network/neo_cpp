@@ -1,0 +1,313 @@
+\doxysection{neo\+::network\+::IPEnd\+Point Class Reference}
+\hypertarget{classneo_1_1network_1_1_i_p_end_point}{}\label{classneo_1_1network_1_1_i_p_end_point}\index{neo::network::IPEndPoint@{neo::network::IPEndPoint}}
+
+
+Represents an IP endpoint (address and port).  
+
+
+
+
+{\ttfamily \#include $<$ip\+\_\+endpoint.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::IPEnd\+Point\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::IPEnd\+Point\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point_a3f3041858fe7612148a0bff73a45136f}{IPEnd\+Point}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point_a4cea72f9c82b02e83d4f6cc73822fe68}{IPEnd\+Point}} (const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \&address, uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point} from an address and port. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point_a409bff295cbd3f91acb6f2962e7c4431}{IPEnd\+Point}} (const std\+::string \&address, uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point} from an address string and port. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \& \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point_a08d57372e0bf689a4ae319e8f718cc63}{Get\+Address}} () const
+\begin{DoxyCompactList}\small\item\em Gets the IP address. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point_ae80788bd2539a9d116716cc3f0651b27}{Get\+Port}} () const
+\begin{DoxyCompactList}\small\item\em Gets the port. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point_a73cb18ad85826a51d853471504256602}{To\+String}} () const
+\begin{DoxyCompactList}\small\item\em Gets the IP endpoint as a string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point_a4d696650ba0c2c7cf770135f32fc65ec}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point_a11799ae00ca4ce518295d434c49676cd}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point} from a binary reader. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point_ac90180a1235767c037efbf7f75c6881e}{operator==}} (const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point} is equal to another \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point_a895cfe47f48f016a48e79a787dff34d1}{operator!=}} (const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point} is not equal to another \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}} \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point_aff74e1c5187dc7d10652dbc7d60459ce}{Parse}} (const std\+::string \&endpoint)
+\begin{DoxyCompactList}\small\item\em Parses an IP endpoint string. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point_a3b3d156cf5fcb0e451b3cb7bed9c90f1}{Try\+Parse}} (const std\+::string \&endpoint, \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}} \&result)
+\begin{DoxyCompactList}\small\item\em Tries to parse an IP endpoint string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point_a519a4b7c1cbc4dd01282e0b891332a19}{address\+\_\+}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point_a5d077d2ed6c5cabdbf8e7bcc4fceaa4b}{port\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an IP endpoint (address and port). 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_a3f3041858fe7612148a0bff73a45136f}\index{neo::network::IPEndPoint@{neo::network::IPEndPoint}!IPEndPoint@{IPEndPoint}}
+\index{IPEndPoint@{IPEndPoint}!neo::network::IPEndPoint@{neo::network::IPEndPoint}}
+\doxysubsubsection{\texorpdfstring{IPEndPoint()}{IPEndPoint()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_end_point_a3f3041858fe7612148a0bff73a45136f} 
+neo\+::network\+::\+IPEnd\+Point\+::\+IPEnd\+Point (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}. 
+
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_a4cea72f9c82b02e83d4f6cc73822fe68}\index{neo::network::IPEndPoint@{neo::network::IPEndPoint}!IPEndPoint@{IPEndPoint}}
+\index{IPEndPoint@{IPEndPoint}!neo::network::IPEndPoint@{neo::network::IPEndPoint}}
+\doxysubsubsection{\texorpdfstring{IPEndPoint()}{IPEndPoint()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_end_point_a4cea72f9c82b02e83d4f6cc73822fe68} 
+neo\+::network\+::\+IPEnd\+Point\+::\+IPEnd\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \&}]{address}{, }\item[{uint16\+\_\+t}]{port}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point} from an address and port. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The IP address. \\
+\hline
+{\em port} & The port. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_a409bff295cbd3f91acb6f2962e7c4431}\index{neo::network::IPEndPoint@{neo::network::IPEndPoint}!IPEndPoint@{IPEndPoint}}
+\index{IPEndPoint@{IPEndPoint}!neo::network::IPEndPoint@{neo::network::IPEndPoint}}
+\doxysubsubsection{\texorpdfstring{IPEndPoint()}{IPEndPoint()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_end_point_a409bff295cbd3f91acb6f2962e7c4431} 
+neo\+::network\+::\+IPEnd\+Point\+::\+IPEnd\+Point (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{, }\item[{uint16\+\_\+t}]{port}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point} from an address string and port. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The IP address string. \\
+\hline
+{\em port} & The port. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_a11799ae00ca4ce518295d434c49676cd}\index{neo::network::IPEndPoint@{neo::network::IPEndPoint}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::IPEndPoint@{neo::network::IPEndPoint}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_end_point_a11799ae00ca4ce518295d434c49676cd} 
+void neo\+::network\+::\+IPEnd\+Point\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_a08d57372e0bf689a4ae319e8f718cc63}\index{neo::network::IPEndPoint@{neo::network::IPEndPoint}!GetAddress@{GetAddress}}
+\index{GetAddress@{GetAddress}!neo::network::IPEndPoint@{neo::network::IPEndPoint}}
+\doxysubsubsection{\texorpdfstring{GetAddress()}{GetAddress()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_end_point_a08d57372e0bf689a4ae319e8f718cc63} 
+const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \& neo\+::network\+::\+IPEnd\+Point\+::\+Get\+Address (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the IP address. 
+
+\begin{DoxyReturn}{Returns}
+The IP address. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_ae80788bd2539a9d116716cc3f0651b27}\index{neo::network::IPEndPoint@{neo::network::IPEndPoint}!GetPort@{GetPort}}
+\index{GetPort@{GetPort}!neo::network::IPEndPoint@{neo::network::IPEndPoint}}
+\doxysubsubsection{\texorpdfstring{GetPort()}{GetPort()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_end_point_ae80788bd2539a9d116716cc3f0651b27} 
+uint16\+\_\+t neo\+::network\+::\+IPEnd\+Point\+::\+Get\+Port (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the port. 
+
+\begin{DoxyReturn}{Returns}
+The port. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_a895cfe47f48f016a48e79a787dff34d1}\index{neo::network::IPEndPoint@{neo::network::IPEndPoint}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::network::IPEndPoint@{neo::network::IPEndPoint}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_end_point_a895cfe47f48f016a48e79a787dff34d1} 
+bool neo\+::network\+::\+IPEnd\+Point\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point} is not equal to another \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the IPEnd\+Points are not equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_ac90180a1235767c037efbf7f75c6881e}\index{neo::network::IPEndPoint@{neo::network::IPEndPoint}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::network::IPEndPoint@{neo::network::IPEndPoint}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_end_point_ac90180a1235767c037efbf7f75c6881e} 
+bool neo\+::network\+::\+IPEnd\+Point\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point} is equal to another \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the IPEnd\+Points are equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_aff74e1c5187dc7d10652dbc7d60459ce}\index{neo::network::IPEndPoint@{neo::network::IPEndPoint}!Parse@{Parse}}
+\index{Parse@{Parse}!neo::network::IPEndPoint@{neo::network::IPEndPoint}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_end_point_aff74e1c5187dc7d10652dbc7d60459ce} 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}} neo\+::network\+::\+IPEnd\+Point\+::\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{endpoint}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Parses an IP endpoint string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & The IP endpoint string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The parsed \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_a4d696650ba0c2c7cf770135f32fc65ec}\index{neo::network::IPEndPoint@{neo::network::IPEndPoint}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::IPEndPoint@{neo::network::IPEndPoint}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_end_point_a4d696650ba0c2c7cf770135f32fc65ec} 
+void neo\+::network\+::\+IPEnd\+Point\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_a73cb18ad85826a51d853471504256602}\index{neo::network::IPEndPoint@{neo::network::IPEndPoint}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::network::IPEndPoint@{neo::network::IPEndPoint}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_end_point_a73cb18ad85826a51d853471504256602} 
+std\+::string neo\+::network\+::\+IPEnd\+Point\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the IP endpoint as a string. 
+
+\begin{DoxyReturn}{Returns}
+The IP endpoint as a string. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_a3b3d156cf5fcb0e451b3cb7bed9c90f1}\index{neo::network::IPEndPoint@{neo::network::IPEndPoint}!TryParse@{TryParse}}
+\index{TryParse@{TryParse}!neo::network::IPEndPoint@{neo::network::IPEndPoint}}
+\doxysubsubsection{\texorpdfstring{TryParse()}{TryParse()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_end_point_a3b3d156cf5fcb0e451b3cb7bed9c90f1} 
+bool neo\+::network\+::\+IPEnd\+Point\+::\+Try\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{endpoint}{, }\item[{\mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}} \&}]{result}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Tries to parse an IP endpoint string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & The IP endpoint string. \\
+\hline
+{\em result} & The parsed \doxylink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the parsing was successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_a519a4b7c1cbc4dd01282e0b891332a19}\index{neo::network::IPEndPoint@{neo::network::IPEndPoint}!address\_@{address\_}}
+\index{address\_@{address\_}!neo::network::IPEndPoint@{neo::network::IPEndPoint}}
+\doxysubsubsection{\texorpdfstring{address\_}{address\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_end_point_a519a4b7c1cbc4dd01282e0b891332a19} 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} neo\+::network\+::\+IPEnd\+Point\+::address\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_i_p_end_point_a5d077d2ed6c5cabdbf8e7bcc4fceaa4b}\index{neo::network::IPEndPoint@{neo::network::IPEndPoint}!port\_@{port\_}}
+\index{port\_@{port\_}!neo::network::IPEndPoint@{neo::network::IPEndPoint}}
+\doxysubsubsection{\texorpdfstring{port\_}{port\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_end_point_a5d077d2ed6c5cabdbf8e7bcc4fceaa4b} 
+uint16\+\_\+t neo\+::network\+::\+IPEnd\+Point\+::port\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/\mbox{\hyperlink{ip__endpoint_8h}{ip\+\_\+endpoint.\+h}}\item 
+src/network/\mbox{\hyperlink{ip__endpoint_8cpp}{ip\+\_\+endpoint.\+cpp}}\end{DoxyCompactItemize}

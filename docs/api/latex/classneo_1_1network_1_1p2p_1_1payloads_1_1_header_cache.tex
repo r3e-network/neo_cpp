@@ -1,0 +1,241 @@
+\doxysection{neo\+::network\+::p2p\+::payloads\+::Header\+Cache Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache}{}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache}\index{neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}}
+
+
+\doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header} cache for efficient blockchain header synchronization. This matches the C\# \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache}{Header\+Cache} functionality for P2P header sync.  
+
+
+
+
+{\ttfamily \#include $<$header\+\_\+cache.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_abb6474f9fa0b28ce3bce9332ed764282}{Header\+Cache}} (size\+\_\+t max\+\_\+size=10000)
+\begin{DoxyCompactList}\small\item\em Constructs a header cache. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a51c95863839cd98a8c9d8f025386071c}{\texorpdfstring{$\sim$}{\string~}\+Header\+Cache}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_ad0c2a3d0dc34057aaba3be2127b857ce}{Add}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} $>$ header)
+\begin{DoxyCompactList}\small\item\em Adds a header to the cache. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a0a4001b00296df5430b73eac7dc3380a}{Get}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets a header by hash. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a9c63c5ea954a36c13e6a2d1ea340de74}{Get}} (uint32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets a header by index. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a720ef6488efdb2de46ce5ae065b53b9b}{Get\+Last}} () const
+\begin{DoxyCompactList}\small\item\em Gets the last header in the cache. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a03fae9c9b1e2d38a55e9a6a845936b27}{Is\+Full}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the cache is full. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a18296b3f29d7067831957823888ebf33}{Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of headers in the cache. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_ab50d96922829970c8fb15238bed6ced2}{Try\+Remove\+First}} ()
+\begin{DoxyCompactList}\small\item\em Tries to remove the first header from the cache. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a1f6376a7a1c4473025a83839aa254f05}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears all headers from the cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+mutex \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a3959e6d757266a0ded61dd050bd31cd4}{mutex\+\_\+}}
+\item 
+std\+::deque$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_ae9bb5de95a45ff6217ceed292efae993}{headers\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_af8a921f2953405e58b8d3766d13640ca}{hash\+\_\+index\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ uint32\+\_\+t, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a1e67bf0ce57a8a3da7baeea36cbba38e}{height\+\_\+index\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a4d956d358615a9ce30ce4a0b3e457722}{max\+\_\+size\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header} cache for efficient blockchain header synchronization. This matches the C\# \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache}{Header\+Cache} functionality for P2P header sync. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_abb6474f9fa0b28ce3bce9332ed764282}\index{neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}!HeaderCache@{HeaderCache}}
+\index{HeaderCache@{HeaderCache}!neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{HeaderCache()}{HeaderCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_abb6474f9fa0b28ce3bce9332ed764282} 
+neo\+::network\+::p2p\+::payloads\+::\+Header\+Cache\+::\+Header\+Cache (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{max\+\_\+size}{ = {\ttfamily 10000}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a header cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+\_\+size} & Maximum number of headers to cache. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a51c95863839cd98a8c9d8f025386071c}\index{neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}!````~HeaderCache@{\texorpdfstring{$\sim$}{\string~}HeaderCache}}
+\index{````~HeaderCache@{\texorpdfstring{$\sim$}{\string~}HeaderCache}!neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}HeaderCache()}{\string~HeaderCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a51c95863839cd98a8c9d8f025386071c} 
+neo\+::network\+::p2p\+::payloads\+::\+Header\+Cache\+::\texorpdfstring{$\sim$}{\string~}\+Header\+Cache (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_ad0c2a3d0dc34057aaba3be2127b857ce}\index{neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}!Add@{Add}}
+\index{Add@{Add}!neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_ad0c2a3d0dc34057aaba3be2127b857ce} 
+bool neo\+::network\+::p2p\+::payloads\+::\+Header\+Cache\+::\+Add (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} $>$}]{header}{}\end{DoxyParamCaption})}
+
+
+
+Adds a header to the cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em header} & The header to add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if added successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a1f6376a7a1c4473025a83839aa254f05}\index{neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a1f6376a7a1c4473025a83839aa254f05} 
+void neo\+::network\+::p2p\+::payloads\+::\+Header\+Cache\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clears all headers from the cache. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a0a4001b00296df5430b73eac7dc3380a}\index{neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}!Get@{Get}}
+\index{Get@{Get}!neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a0a4001b00296df5430b73eac7dc3380a} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} $>$ neo\+::network\+::p2p\+::payloads\+::\+Header\+Cache\+::\+Get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a header by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the header. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The header, or nullptr if not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a9c63c5ea954a36c13e6a2d1ea340de74}\index{neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}!Get@{Get}}
+\index{Get@{Get}!neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a9c63c5ea954a36c13e6a2d1ea340de74} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} $>$ neo\+::network\+::p2p\+::payloads\+::\+Header\+Cache\+::\+Get (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a header by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the header. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The header, or nullptr if not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a720ef6488efdb2de46ce5ae065b53b9b}\index{neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}!GetLast@{GetLast}}
+\index{GetLast@{GetLast}!neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{GetLast()}{GetLast()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a720ef6488efdb2de46ce5ae065b53b9b} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} $>$ neo\+::network\+::p2p\+::payloads\+::\+Header\+Cache\+::\+Get\+Last (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the last header in the cache. 
+
+\begin{DoxyReturn}{Returns}
+The last header, or nullptr if cache is empty. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a03fae9c9b1e2d38a55e9a6a845936b27}\index{neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}!IsFull@{IsFull}}
+\index{IsFull@{IsFull}!neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{IsFull()}{IsFull()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a03fae9c9b1e2d38a55e9a6a845936b27} 
+bool neo\+::network\+::p2p\+::payloads\+::\+Header\+Cache\+::\+Is\+Full (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the cache is full. 
+
+\begin{DoxyReturn}{Returns}
+True if full, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a18296b3f29d7067831957823888ebf33}\index{neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}!Size@{Size}}
+\index{Size@{Size}!neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a18296b3f29d7067831957823888ebf33} 
+size\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Header\+Cache\+::\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of headers in the cache. 
+
+\begin{DoxyReturn}{Returns}
+The number of headers. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_ab50d96922829970c8fb15238bed6ced2}\index{neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}!TryRemoveFirst@{TryRemoveFirst}}
+\index{TryRemoveFirst@{TryRemoveFirst}!neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{TryRemoveFirst()}{TryRemoveFirst()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_ab50d96922829970c8fb15238bed6ced2} 
+bool neo\+::network\+::p2p\+::payloads\+::\+Header\+Cache\+::\+Try\+Remove\+First (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Tries to remove the first header from the cache. 
+
+\begin{DoxyReturn}{Returns}
+True if removed, false if cache is empty. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_af8a921f2953405e58b8d3766d13640ca}\index{neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}!hash\_index\_@{hash\_index\_}}
+\index{hash\_index\_@{hash\_index\_}!neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{hash\_index\_}{hash\_index\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_af8a921f2953405e58b8d3766d13640ca} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}}$>$ $>$ neo\+::network\+::p2p\+::payloads\+::\+Header\+Cache\+::hash\+\_\+index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_ae9bb5de95a45ff6217ceed292efae993}\index{neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}!headers\_@{headers\_}}
+\index{headers\_@{headers\_}!neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{headers\_}{headers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_ae9bb5de95a45ff6217ceed292efae993} 
+std\+::deque$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}}$>$ $>$ neo\+::network\+::p2p\+::payloads\+::\+Header\+Cache\+::headers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a1e67bf0ce57a8a3da7baeea36cbba38e}\index{neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}!height\_index\_@{height\_index\_}}
+\index{height\_index\_@{height\_index\_}!neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{height\_index\_}{height\_index\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a1e67bf0ce57a8a3da7baeea36cbba38e} 
+std\+::unordered\+\_\+map$<$uint32\+\_\+t, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}}$>$ $>$ neo\+::network\+::p2p\+::payloads\+::\+Header\+Cache\+::height\+\_\+index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a4d956d358615a9ce30ce4a0b3e457722}\index{neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}!max\_size\_@{max\_size\_}}
+\index{max\_size\_@{max\_size\_}!neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{max\_size\_}{max\_size\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a4d956d358615a9ce30ce4a0b3e457722} 
+size\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Header\+Cache\+::max\+\_\+size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a3959e6d757266a0ded61dd050bd31cd4}\index{neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::network::p2p::payloads::HeaderCache@{neo::network::p2p::payloads::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache_a3959e6d757266a0ded61dd050bd31cd4} 
+std\+::shared\+\_\+mutex neo\+::network\+::p2p\+::payloads\+::\+Header\+Cache\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/payloads/\mbox{\hyperlink{network_2p2p_2payloads_2header__cache_8h}{header\+\_\+cache.\+h}}\end{DoxyCompactItemize}

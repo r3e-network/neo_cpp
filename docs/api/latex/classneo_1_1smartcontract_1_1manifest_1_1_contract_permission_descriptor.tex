@@ -1,0 +1,320 @@
+\doxysection{neo\+::smartcontract\+::manifest\+::Contract\+Permission\+Descriptor Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}{}\label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+
+
+Represents a contract permission descriptor.  
+
+
+
+
+{\ttfamily \#include $<$contract\+\_\+permission.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::smartcontract\+::manifest\+::Contract\+Permission\+Descriptor\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::smartcontract\+::manifest\+::Contract\+Permission\+Descriptor\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a8fe469dfbadca33d1eebffb5105e2e41}{Contract\+Permission\+Descriptor}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}{Contract\+Permission\+Descriptor}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a9d4a00d83f3b7a164228b87bcf167426}{Contract\+Permission\+Descriptor}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&hash)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}{Contract\+Permission\+Descriptor} with a hash. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_ac8cba16951584f0e086a2bba266d95fe}{Contract\+Permission\+Descriptor}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&group)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}{Contract\+Permission\+Descriptor} with a group. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_ab5b5c26d4fd15a37b6053c99625f2bd2}{Get\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the hash. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a95cb29c82391599b3464f3bc4ecd26e5}{Get\+Group}} () const
+\begin{DoxyCompactList}\small\item\em Gets the group. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_aa7bbae2bd1a6113c4dddcd1272251b24}{Is\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Determines whether the descriptor is a hash. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_aef5f9f8c1358d754246a5096f2d3d0f6}{Is\+Group}} () const
+\begin{DoxyCompactList}\small\item\em Determines whether the descriptor is a group. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_ae71c0972ac7aaae4773986175c12491b}{Is\+Wildcard}} () const
+\begin{DoxyCompactList}\small\item\em Determines whether the descriptor is a wildcard. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a5757762bced5510ed0cf7628f5581cc7}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_aa9c2f8d1cfd66061b1377ccee5dfa533}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}{Contract\+Permission\+Descriptor}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a696a393c0e9f882209cd718c54ae0f61}{Create\+Wildcard}} ()
+\begin{DoxyCompactList}\small\item\em Creates a wildcard descriptor. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}{Contract\+Permission\+Descriptor}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_ad38914eb1b34009aed4124c51d72e175}{Create}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&hash)
+\begin{DoxyCompactList}\small\item\em Creates a descriptor with a hash. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}{Contract\+Permission\+Descriptor}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a3240e20d1c9f1123e80351e41ce8b490}{Create}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&group)
+\begin{DoxyCompactList}\small\item\em Creates a descriptor with a group. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a3953338520e9c3de12458dd1ca5e1858}{hash\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a9774ea0cdf7f3c893976eadf34f0b4de}{group\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a6b2c2253a6c736ddf1d34216f1dad99b}{is\+Wildcard\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a contract permission descriptor. 
+
+Indicates which contracts are authorized to be called. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a8fe469dfbadca33d1eebffb5105e2e41}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}!ContractPermissionDescriptor@{ContractPermissionDescriptor}}
+\index{ContractPermissionDescriptor@{ContractPermissionDescriptor}!neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+\doxysubsubsection{\texorpdfstring{ContractPermissionDescriptor()}{ContractPermissionDescriptor()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a8fe469dfbadca33d1eebffb5105e2e41} 
+neo\+::smartcontract\+::manifest\+::\+Contract\+Permission\+Descriptor\+::\+Contract\+Permission\+Descriptor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}{Contract\+Permission\+Descriptor}. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a9d4a00d83f3b7a164228b87bcf167426}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}!ContractPermissionDescriptor@{ContractPermissionDescriptor}}
+\index{ContractPermissionDescriptor@{ContractPermissionDescriptor}!neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+\doxysubsubsection{\texorpdfstring{ContractPermissionDescriptor()}{ContractPermissionDescriptor()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a9d4a00d83f3b7a164228b87bcf167426} 
+neo\+::smartcontract\+::manifest\+::\+Contract\+Permission\+Descriptor\+::\+Contract\+Permission\+Descriptor (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}{Contract\+Permission\+Descriptor} with a hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_ac8cba16951584f0e086a2bba266d95fe}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}!ContractPermissionDescriptor@{ContractPermissionDescriptor}}
+\index{ContractPermissionDescriptor@{ContractPermissionDescriptor}!neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+\doxysubsubsection{\texorpdfstring{ContractPermissionDescriptor()}{ContractPermissionDescriptor()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_ac8cba16951584f0e086a2bba266d95fe} 
+neo\+::smartcontract\+::manifest\+::\+Contract\+Permission\+Descriptor\+::\+Contract\+Permission\+Descriptor (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{group}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}{Contract\+Permission\+Descriptor} with a group. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em group} & The group. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a3240e20d1c9f1123e80351e41ce8b490}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}!Create@{Create}}
+\index{Create@{Create}!neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a3240e20d1c9f1123e80351e41ce8b490} 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}{Contract\+Permission\+Descriptor}} neo\+::smartcontract\+::manifest\+::\+Contract\+Permission\+Descriptor\+::\+Create (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{group}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a descriptor with a group. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em group} & The group. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The descriptor. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_ad38914eb1b34009aed4124c51d72e175}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}!Create@{Create}}
+\index{Create@{Create}!neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_ad38914eb1b34009aed4124c51d72e175} 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}{Contract\+Permission\+Descriptor}} neo\+::smartcontract\+::manifest\+::\+Contract\+Permission\+Descriptor\+::\+Create (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a descriptor with a hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The descriptor. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a696a393c0e9f882209cd718c54ae0f61}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}!CreateWildcard@{CreateWildcard}}
+\index{CreateWildcard@{CreateWildcard}!neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+\doxysubsubsection{\texorpdfstring{CreateWildcard()}{CreateWildcard()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a696a393c0e9f882209cd718c54ae0f61} 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}{Contract\+Permission\+Descriptor}} neo\+::smartcontract\+::manifest\+::\+Contract\+Permission\+Descriptor\+::\+Create\+Wildcard (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a wildcard descriptor. 
+
+\begin{DoxyReturn}{Returns}
+The wildcard descriptor. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_aa9c2f8d1cfd66061b1377ccee5dfa533}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_aa9c2f8d1cfd66061b1377ccee5dfa533} 
+void neo\+::smartcontract\+::manifest\+::\+Contract\+Permission\+Descriptor\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a95cb29c82391599b3464f3bc4ecd26e5}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}!GetGroup@{GetGroup}}
+\index{GetGroup@{GetGroup}!neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+\doxysubsubsection{\texorpdfstring{GetGroup()}{GetGroup()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a95cb29c82391599b3464f3bc4ecd26e5} 
+const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \& neo\+::smartcontract\+::manifest\+::\+Contract\+Permission\+Descriptor\+::\+Get\+Group (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the group. 
+
+\begin{DoxyReturn}{Returns}
+The group. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_ab5b5c26d4fd15a37b6053c99625f2bd2}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}!GetHash@{GetHash}}
+\index{GetHash@{GetHash}!neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+\doxysubsubsection{\texorpdfstring{GetHash()}{GetHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_ab5b5c26d4fd15a37b6053c99625f2bd2} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& neo\+::smartcontract\+::manifest\+::\+Contract\+Permission\+Descriptor\+::\+Get\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the hash. 
+
+\begin{DoxyReturn}{Returns}
+The hash. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_aef5f9f8c1358d754246a5096f2d3d0f6}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}!IsGroup@{IsGroup}}
+\index{IsGroup@{IsGroup}!neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+\doxysubsubsection{\texorpdfstring{IsGroup()}{IsGroup()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_aef5f9f8c1358d754246a5096f2d3d0f6} 
+bool neo\+::smartcontract\+::manifest\+::\+Contract\+Permission\+Descriptor\+::\+Is\+Group (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Determines whether the descriptor is a group. 
+
+\begin{DoxyReturn}{Returns}
+True if the descriptor is a group, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_aa7bbae2bd1a6113c4dddcd1272251b24}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}!IsHash@{IsHash}}
+\index{IsHash@{IsHash}!neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+\doxysubsubsection{\texorpdfstring{IsHash()}{IsHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_aa7bbae2bd1a6113c4dddcd1272251b24} 
+bool neo\+::smartcontract\+::manifest\+::\+Contract\+Permission\+Descriptor\+::\+Is\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Determines whether the descriptor is a hash. 
+
+\begin{DoxyReturn}{Returns}
+True if the descriptor is a hash, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_ae71c0972ac7aaae4773986175c12491b}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}!IsWildcard@{IsWildcard}}
+\index{IsWildcard@{IsWildcard}!neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+\doxysubsubsection{\texorpdfstring{IsWildcard()}{IsWildcard()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_ae71c0972ac7aaae4773986175c12491b} 
+bool neo\+::smartcontract\+::manifest\+::\+Contract\+Permission\+Descriptor\+::\+Is\+Wildcard (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Determines whether the descriptor is a wildcard. 
+
+\begin{DoxyReturn}{Returns}
+True if the descriptor is a wildcard, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a5757762bced5510ed0cf7628f5581cc7}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a5757762bced5510ed0cf7628f5581cc7} 
+void neo\+::smartcontract\+::manifest\+::\+Contract\+Permission\+Descriptor\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a9774ea0cdf7f3c893976eadf34f0b4de}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}!group\_@{group\_}}
+\index{group\_@{group\_}!neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+\doxysubsubsection{\texorpdfstring{group\_}{group\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a9774ea0cdf7f3c893976eadf34f0b4de} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} neo\+::smartcontract\+::manifest\+::\+Contract\+Permission\+Descriptor\+::group\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a3953338520e9c3de12458dd1ca5e1858}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}!hash\_@{hash\_}}
+\index{hash\_@{hash\_}!neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+\doxysubsubsection{\texorpdfstring{hash\_}{hash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a3953338520e9c3de12458dd1ca5e1858} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::smartcontract\+::manifest\+::\+Contract\+Permission\+Descriptor\+::hash\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a6b2c2253a6c736ddf1d34216f1dad99b}\index{neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}!isWildcard\_@{isWildcard\_}}
+\index{isWildcard\_@{isWildcard\_}!neo::smartcontract::manifest::ContractPermissionDescriptor@{neo::smartcontract::manifest::ContractPermissionDescriptor}}
+\doxysubsubsection{\texorpdfstring{isWildcard\_}{isWildcard\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a6b2c2253a6c736ddf1d34216f1dad99b} 
+bool neo\+::smartcontract\+::manifest\+::\+Contract\+Permission\+Descriptor\+::is\+Wildcard\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/manifest/\mbox{\hyperlink{contract__permission_8h}{contract\+\_\+permission.\+h}}\item 
+src/smartcontract/manifest/\mbox{\hyperlink{contract__permission_8cpp}{contract\+\_\+permission.\+cpp}}\end{DoxyCompactItemize}

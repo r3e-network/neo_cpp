@@ -1,0 +1,22 @@
+digraph "neo::network::UPnP::GetServiceUrl"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::network::UPnP\l::GetServiceUrl",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Gets the service URL from the UPnP device description."];
+  Node1 -> Node2 [id="edge8_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::network::UPnP\l::CombineUrls",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1_u_pn_p.html#a5ea02217fae1f2192483ddf03321a4f3",tooltip="Combines two URLs."];
+  Node1 -> Node3 [id="edge9_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::logging::Logger\l::Error",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1logging_1_1_logger.html#ab2af17208a339e979fef8368a7ea05cc",tooltip="Log an error message."];
+  Node1 -> Node4 [id="edge10_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::logging::Logger\l::Instance",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1logging_1_1_logger.html#ae6d1d8d54985e37831b0f0e66b61be87",tooltip="Get the singleton logger instance (alias for GetDefault)"];
+  Node4 -> Node5 [id="edge11_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::logging::Logger\l::GetDefault",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1logging_1_1_logger.html#abff18ad1faab25601174fa98b85159b9",tooltip="Get the default logger instance."];
+  Node5 -> Node6 [id="edge12_Node000005_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::logging::Logger\l::Logger",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1logging_1_1_logger.html#a8e3e3c0db70c7a54b526744fc406eb55",tooltip="Constructor."];
+  Node4 -> Node6 [id="edge13_Node000004_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node7 [id="edge14_Node000001_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::logging::Logger\l::Warning",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1logging_1_1_logger.html#a1a2d08946a4595c714c95eeef473ca5d",tooltip="Log a warning message (alias for Warn)"];
+}

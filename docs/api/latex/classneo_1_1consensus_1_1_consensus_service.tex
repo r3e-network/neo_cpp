@@ -1,0 +1,971 @@
+\doxysection{neo\+::consensus\+::Consensus\+Service Class Reference}
+\hypertarget{classneo_1_1consensus_1_1_consensus_service}{}\label{classneo_1_1consensus_1_1_consensus_service}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+
+
+Represents the consensus service.  
+
+
+
+
+{\ttfamily \#include $<$consensus\+\_\+service.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a9f4b4636f2664961df7c3dbc00889b79}{Consensus\+Service}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ neo\+System, const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{cryptography\+::ecc\+::\+Key\+Pair}} \&key\+Pair)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1consensus_1_1_consensus_service}{Consensus\+Service}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_abf865c20f9a694e4a0c9041290ebc02e}{\texorpdfstring{$\sim$}{\string~}\+Consensus\+Service}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a068cfe89621f8a8bfd751c100fc4635e}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Starts the service. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_aeeb617982cdf6e0c20c9b8e8b800365f}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stops the service. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_aa140fff2e88697f197dd2d2dbaa6afbc}{Is\+Running}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the service is running. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \& \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_adb37a17e0d22c9123c2e558c1785f264}{Get\+Validators}} () const
+\begin{DoxyCompactList}\small\item\em Gets the validators. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_ac49a28f8a457876dd3824ffc7346566d}{Get\+Validator\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Gets the validator index. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a720cf307f8a925e9f83995c076f9339c}{Get\+Primary\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Gets the primary index. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_aa6ee1b85a188576b72a7465b7905d95a}{Get\+View\+Number}} () const
+\begin{DoxyCompactList}\small\item\em Gets the view number. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a3cbb80d986feca7cd51b3f492513bebd}{Get\+Block\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Gets the block index. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{cryptography\+::ecc\+::\+Key\+Pair}} \& \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a487a42647622a815706d3c8c5def3693}{Get\+Key\+Pair}} () const
+\begin{DoxyCompactList}\small\item\em Gets the key pair. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a25625b04dcf62daddedfe592368a6ca7}{Get\+Neo\+System}} () const
+\begin{DoxyCompactList}\small\item\em Gets the Neo system. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a53c1dc6fa38daa97c2be93a3bfc1837e}{On\+Prepare\+Request\+Received}} (const \mbox{\hyperlink{namespaceneo_1_1consensus_aed5c6243594d76ea9fe4ad10bc57dea6}{Prepare\+Request}} \&request)
+\begin{DoxyCompactList}\small\item\em Handles received prepare request message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a0bbd579b4e33b127bb71bb496b8ee7ef}{On\+Prepare\+Response\+Received}} (const \mbox{\hyperlink{namespaceneo_1_1consensus_aa91ad7e4dd3969cbc2685eb001bc8baa}{Prepare\+Response}} \&response)
+\begin{DoxyCompactList}\small\item\em Handles received prepare response message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a578e748d1344e11c22e5916e9872f9a2}{On\+Change\+View\+Received}} (const \mbox{\hyperlink{namespaceneo_1_1consensus_ac98cd7545831399ea9075416af6efc16}{Change\+View\+Message}} \&message)
+\begin{DoxyCompactList}\small\item\em Handles received change view message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a071c4fd21be3c8b15760fbe9ba374b1b}{On\+Commit\+Received}} (const \mbox{\hyperlink{classneo_1_1consensus_1_1_commit_message}{Commit\+Message}} \&commit)
+\begin{DoxyCompactList}\small\item\em Handles received commit message. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a426cc8ed34fc5e1e56e611305acc7249}{Validate\+Block}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ block)
+\begin{DoxyCompactList}\small\item\em Validates a block. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_ac32ca5a08869bee2a0e6d2f4c57ec6ac}{Initialize}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the consensus. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a6624731a1571b1081c315079c36dfbc5}{Run\+Consensus}} ()
+\begin{DoxyCompactList}\small\item\em Runs the consensus. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a1f0b52bfdfd8940b63ecc1097a027111}{On\+Message}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message}{Consensus\+Message}} $>$ message, const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&sender)
+\begin{DoxyCompactList}\small\item\em Handles a message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_aa29dd61ffa21e214682792d81036deba}{On\+Change\+View\+Message}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_ac98cd7545831399ea9075416af6efc16}{Change\+View\+Message}} $>$ message, const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&sender)
+\begin{DoxyCompactList}\small\item\em Handles a change view message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a98ba22c37a83599e81ca98147fdee189}{On\+Prepare\+Request\+Message}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_aed5c6243594d76ea9fe4ad10bc57dea6}{Prepare\+Request}} $>$ message, const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&sender)
+\begin{DoxyCompactList}\small\item\em Handles a prepare request message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a13de0b791af7dd155edd1e6810d039ce}{On\+Prepare\+Response\+Message}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_aa91ad7e4dd3969cbc2685eb001bc8baa}{Prepare\+Response}} $>$ message, const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&sender)
+\begin{DoxyCompactList}\small\item\em Handles a prepare response message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a83a72be5c8d1b89009b67b747a797a6f}{On\+Commit\+Message}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_commit_message}{Commit\+Message}} $>$ message, const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&sender)
+\begin{DoxyCompactList}\small\item\em Handles a commit message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a12bba4d81f9822ad26a1c0e03bbbe52d}{On\+Recovery\+Message}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message}{Recovery\+Message}} $>$ message, const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&sender)
+\begin{DoxyCompactList}\small\item\em Handles a recovery message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a899f9d7c8eba5acaa11d6e136e89ab8b}{On\+Recovery\+Request\+Message}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_a15616904aa168d646f1e18dbdc4b5061}{Recovery\+Request}} $>$ message, const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&sender)
+\begin{DoxyCompactList}\small\item\em Handles a recovery request message. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a6e9d22a631e101084577ccca884691db}{Is\+Primary}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the node is primary. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_acb8307b48e7f2606bb33c5981f2937ca}{Is\+Backup}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the node is backup. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a465cb2fbfa4d45a5ee4b31986e5fcf65}{Get\+Primary\+Index}} (uint8\+\_\+t view\+Number) const
+\begin{DoxyCompactList}\small\item\em Gets the primary index for the specified view. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_ac0163ec948a54eaa65999d77dff25b8d}{Should\+Change\+View}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the node should change view. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a82b5913a52e59ed2a29da4dea363ea64}{Has\+Received\+Enough\+Change\+View\+Messages}} (uint8\+\_\+t view\+Number) const
+\begin{DoxyCompactList}\small\item\em Checks if the node has received enough change view messages. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_add0dc219e8a5ace02e8fa909e02174a8}{Has\+Received\+Enough\+Prepare\+Responses}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the node has received enough prepare responses. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a24ddc6439dfe2ba8371c08e5704c6083}{Has\+Received\+Enough\+Commits}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the node has received enough commits. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_ac66ef05873799cfbd89e0e8d0853f1c4}{Change\+View}} (uint8\+\_\+t view\+Number)
+\begin{DoxyCompactList}\small\item\em Changes the view. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a74be43c133e6d2cdd397c8e852eadc0e}{Send\+Change\+View}} ()
+\begin{DoxyCompactList}\small\item\em Sends a change view message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_ab2c0694585b01af03f7675f0ff3f26c1}{Send\+Prepare\+Request}} ()
+\begin{DoxyCompactList}\small\item\em Sends a prepare request. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_af315e249764d847e32c9f264f016258a}{Send\+Prepare\+Response}} ()
+\begin{DoxyCompactList}\small\item\em Sends a prepare response. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_ab42217a451445c8e62f9276da994e0a2}{Send\+Commit}} ()
+\begin{DoxyCompactList}\small\item\em Sends a commit. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a90f628e0ea2ce57d088340645167dc89}{Send\+Recovery\+Request}} ()
+\begin{DoxyCompactList}\small\item\em Sends a recovery request. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a5bc4ad75b3c1c920637ddd9e46bfa147}{Send\+Recovery\+Message}} (uint16\+\_\+t validator\+Index)
+\begin{DoxyCompactList}\small\item\em Sends a recovery message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a8ed426660e58a0c403a4eaff8f551b25}{Broadcast\+Message}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message}{Consensus\+Message}} $>$ message)
+\begin{DoxyCompactList}\small\item\em Broadcasts a message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a53af6cee403bee67cd16d4018fe2364f}{Send\+Message}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message}{Consensus\+Message}} $>$ message, uint16\+\_\+t validator\+Index)
+\begin{DoxyCompactList}\small\item\em Sends a message to a validator. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_ae69077344a347c0dca7f21252afa44bf}{Create\+Block}} ()
+\begin{DoxyCompactList}\small\item\em Creates a block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a6d6efb68deb24013a7b35e4f11e7b41a}{Process\+Block}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ block)
+\begin{DoxyCompactList}\small\item\em Processes the block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_afa9f0c06d6216ef759e1519eb0258e43}{Reset}} ()
+\begin{DoxyCompactList}\small\item\em Resets the consensus. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_aeaa66e6c15fb6e4e573581534cffb842}{Initialize\+Validators}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the validators. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_aedb439ce9277df384ff3b06ffedb26c5}{Get\+Current\+Timestamp}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current timestamp. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_adbae1745888d87fbab40b6d4f4f4f1b8}{Get\+Timeout}} (uint8\+\_\+t view\+Number) const
+\begin{DoxyCompactList}\small\item\em Gets the timeout for the specified view. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a6d0aa47f14f8142f960054412c2c2ba1}{neo\+System\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{cryptography\+::ecc\+::\+Key\+Pair}} \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a2c67ec6afd43c9a40d3228c6a6b07b0d}{key\+Pair\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context}{Consensus\+Context}} $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_ac96d71a20a7ac657a5374164bd7ff1ee}{context\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ uint8\+\_\+t, std\+::unordered\+\_\+map$<$ uint16\+\_\+t, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_ac98cd7545831399ea9075416af6efc16}{Change\+View\+Message}} $>$ $>$ $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_ad53d4cb09891b656160dcd5ad1b39d41}{pending\+Change\+View\+Messages\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ uint8\+\_\+t, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_aed5c6243594d76ea9fe4ad10bc57dea6}{Prepare\+Request}} $>$ $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a746501a95cb113d05fc26b6d9d5cc0dc}{pending\+Prepare\+Requests\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ uint8\+\_\+t, std\+::unordered\+\_\+map$<$ uint16\+\_\+t, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_aa91ad7e4dd3969cbc2685eb001bc8baa}{Prepare\+Response}} $>$ $>$ $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a5c5f7e2cc1f2a755d4d8fa4e58fc5c42}{pending\+Prepare\+Responses\+\_\+}}
+\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_ac91272f6f4f94921a7bf9d979a085164}{known\+Hashes\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a9e80ca27b762d54dc67fae96fd8db4f0}{running\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_aa3aeaea7e0da6570a952dc7ef727291c}{consensus\+Thread\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_ab83a0168156a359f97fc4308a99ac32d}{mutex\+\_\+}}
+\item 
+std\+::condition\+\_\+variable \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a6363d92105d8f1b7e384628862461a03}{condition\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a5daa40484d98bc59677831c1488ca516}{last\+Change\+View\+Time\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_a9933ad7cac1de583df8e9f3036e6124b}{last\+Prepare\+Request\+Time\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service_ac958e4f4a226eda7f3132f0001749bd5}{last\+Block\+Time\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the consensus service. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a9f4b4636f2664961df7c3dbc00889b79}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!ConsensusService@{ConsensusService}}
+\index{ConsensusService@{ConsensusService}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{ConsensusService()}{ConsensusService()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a9f4b4636f2664961df7c3dbc00889b79} 
+neo\+::consensus\+::\+Consensus\+Service\+::\+Consensus\+Service (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$}]{neo\+System}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{cryptography\+::ecc\+::\+Key\+Pair}} \&}]{key\+Pair}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1consensus_1_1_consensus_service}{Consensus\+Service}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neo\+System} & The Neo system. \\
+\hline
+{\em key\+Pair} & The key pair. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_abf865c20f9a694e4a0c9041290ebc02e}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!````~ConsensusService@{\texorpdfstring{$\sim$}{\string~}ConsensusService}}
+\index{````~ConsensusService@{\texorpdfstring{$\sim$}{\string~}ConsensusService}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ConsensusService()}{\string~ConsensusService()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_abf865c20f9a694e4a0c9041290ebc02e} 
+neo\+::consensus\+::\+Consensus\+Service\+::\texorpdfstring{$\sim$}{\string~}\+Consensus\+Service (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a8ed426660e58a0c403a4eaff8f551b25}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!BroadcastMessage@{BroadcastMessage}}
+\index{BroadcastMessage@{BroadcastMessage}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{BroadcastMessage()}{BroadcastMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a8ed426660e58a0c403a4eaff8f551b25} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+Broadcast\+Message (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message}{Consensus\+Message}} $>$}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Broadcasts a message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_ac66ef05873799cfbd89e0e8d0853f1c4}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!ChangeView@{ChangeView}}
+\index{ChangeView@{ChangeView}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{ChangeView()}{ChangeView()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_ac66ef05873799cfbd89e0e8d0853f1c4} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+Change\+View (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{view\+Number}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Changes the view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Number} & The view number. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_ae69077344a347c0dca7f21252afa44bf}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!CreateBlock@{CreateBlock}}
+\index{CreateBlock@{CreateBlock}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{CreateBlock()}{CreateBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_ae69077344a347c0dca7f21252afa44bf} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ neo\+::consensus\+::\+Consensus\+Service\+::\+Create\+Block (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Creates a block. 
+
+\begin{DoxyReturn}{Returns}
+The block. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a3cbb80d986feca7cd51b3f492513bebd}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!GetBlockIndex@{GetBlockIndex}}
+\index{GetBlockIndex@{GetBlockIndex}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{GetBlockIndex()}{GetBlockIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a3cbb80d986feca7cd51b3f492513bebd} 
+uint32\+\_\+t neo\+::consensus\+::\+Consensus\+Service\+::\+Get\+Block\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the block index. 
+
+\begin{DoxyReturn}{Returns}
+The block index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_aedb439ce9277df384ff3b06ffedb26c5}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!GetCurrentTimestamp@{GetCurrentTimestamp}}
+\index{GetCurrentTimestamp@{GetCurrentTimestamp}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{GetCurrentTimestamp()}{GetCurrentTimestamp()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_aedb439ce9277df384ff3b06ffedb26c5} 
+uint64\+\_\+t neo\+::consensus\+::\+Consensus\+Service\+::\+Get\+Current\+Timestamp (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the current timestamp. 
+
+\begin{DoxyReturn}{Returns}
+The current timestamp. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a487a42647622a815706d3c8c5def3693}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!GetKeyPair@{GetKeyPair}}
+\index{GetKeyPair@{GetKeyPair}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{GetKeyPair()}{GetKeyPair()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a487a42647622a815706d3c8c5def3693} 
+const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{cryptography\+::ecc\+::\+Key\+Pair}} \& neo\+::consensus\+::\+Consensus\+Service\+::\+Get\+Key\+Pair (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the key pair. 
+
+\begin{DoxyReturn}{Returns}
+The key pair. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a25625b04dcf62daddedfe592368a6ca7}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!GetNeoSystem@{GetNeoSystem}}
+\index{GetNeoSystem@{GetNeoSystem}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{GetNeoSystem()}{GetNeoSystem()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a25625b04dcf62daddedfe592368a6ca7} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ neo\+::consensus\+::\+Consensus\+Service\+::\+Get\+Neo\+System (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the Neo system. 
+
+\begin{DoxyReturn}{Returns}
+The Neo system. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a720cf307f8a925e9f83995c076f9339c}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!GetPrimaryIndex@{GetPrimaryIndex}}
+\index{GetPrimaryIndex@{GetPrimaryIndex}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{GetPrimaryIndex()}{GetPrimaryIndex()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a720cf307f8a925e9f83995c076f9339c} 
+uint16\+\_\+t neo\+::consensus\+::\+Consensus\+Service\+::\+Get\+Primary\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the primary index. 
+
+\begin{DoxyReturn}{Returns}
+The primary index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a465cb2fbfa4d45a5ee4b31986e5fcf65}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!GetPrimaryIndex@{GetPrimaryIndex}}
+\index{GetPrimaryIndex@{GetPrimaryIndex}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{GetPrimaryIndex()}{GetPrimaryIndex()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a465cb2fbfa4d45a5ee4b31986e5fcf65} 
+uint16\+\_\+t neo\+::consensus\+::\+Consensus\+Service\+::\+Get\+Primary\+Index (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{view\+Number}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the primary index for the specified view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Number} & The view number. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The primary index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_adbae1745888d87fbab40b6d4f4f4f1b8}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!GetTimeout@{GetTimeout}}
+\index{GetTimeout@{GetTimeout}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{GetTimeout()}{GetTimeout()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_adbae1745888d87fbab40b6d4f4f4f1b8} 
+uint64\+\_\+t neo\+::consensus\+::\+Consensus\+Service\+::\+Get\+Timeout (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{view\+Number}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the timeout for the specified view. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Number} & The view number. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The timeout. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_ac49a28f8a457876dd3824ffc7346566d}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!GetValidatorIndex@{GetValidatorIndex}}
+\index{GetValidatorIndex@{GetValidatorIndex}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{GetValidatorIndex()}{GetValidatorIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_ac49a28f8a457876dd3824ffc7346566d} 
+uint16\+\_\+t neo\+::consensus\+::\+Consensus\+Service\+::\+Get\+Validator\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the validator index. 
+
+\begin{DoxyReturn}{Returns}
+The validator index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_adb37a17e0d22c9123c2e558c1785f264}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!GetValidators@{GetValidators}}
+\index{GetValidators@{GetValidators}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{GetValidators()}{GetValidators()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_adb37a17e0d22c9123c2e558c1785f264} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \& neo\+::consensus\+::\+Consensus\+Service\+::\+Get\+Validators (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the validators. 
+
+\begin{DoxyReturn}{Returns}
+The validators. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_aa6ee1b85a188576b72a7465b7905d95a}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!GetViewNumber@{GetViewNumber}}
+\index{GetViewNumber@{GetViewNumber}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{GetViewNumber()}{GetViewNumber()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_aa6ee1b85a188576b72a7465b7905d95a} 
+uint8\+\_\+t neo\+::consensus\+::\+Consensus\+Service\+::\+Get\+View\+Number (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the view number. 
+
+\begin{DoxyReturn}{Returns}
+The view number. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a82b5913a52e59ed2a29da4dea363ea64}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!HasReceivedEnoughChangeViewMessages@{HasReceivedEnoughChangeViewMessages}}
+\index{HasReceivedEnoughChangeViewMessages@{HasReceivedEnoughChangeViewMessages}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{HasReceivedEnoughChangeViewMessages()}{HasReceivedEnoughChangeViewMessages()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a82b5913a52e59ed2a29da4dea363ea64} 
+bool neo\+::consensus\+::\+Consensus\+Service\+::\+Has\+Received\+Enough\+Change\+View\+Messages (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{view\+Number}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if the node has received enough change view messages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Number} & The view number. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the node has received enough change view messages, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a24ddc6439dfe2ba8371c08e5704c6083}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!HasReceivedEnoughCommits@{HasReceivedEnoughCommits}}
+\index{HasReceivedEnoughCommits@{HasReceivedEnoughCommits}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{HasReceivedEnoughCommits()}{HasReceivedEnoughCommits()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a24ddc6439dfe2ba8371c08e5704c6083} 
+bool neo\+::consensus\+::\+Consensus\+Service\+::\+Has\+Received\+Enough\+Commits (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if the node has received enough commits. 
+
+\begin{DoxyReturn}{Returns}
+True if the node has received enough commits, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_add0dc219e8a5ace02e8fa909e02174a8}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!HasReceivedEnoughPrepareResponses@{HasReceivedEnoughPrepareResponses}}
+\index{HasReceivedEnoughPrepareResponses@{HasReceivedEnoughPrepareResponses}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{HasReceivedEnoughPrepareResponses()}{HasReceivedEnoughPrepareResponses()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_add0dc219e8a5ace02e8fa909e02174a8} 
+bool neo\+::consensus\+::\+Consensus\+Service\+::\+Has\+Received\+Enough\+Prepare\+Responses (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if the node has received enough prepare responses. 
+
+\begin{DoxyReturn}{Returns}
+True if the node has received enough prepare responses, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_ac32ca5a08869bee2a0e6d2f4c57ec6ac}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_ac32ca5a08869bee2a0e6d2f4c57ec6ac} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Initializes the consensus. 
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_aeaa66e6c15fb6e4e573581534cffb842}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!InitializeValidators@{InitializeValidators}}
+\index{InitializeValidators@{InitializeValidators}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{InitializeValidators()}{InitializeValidators()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_aeaa66e6c15fb6e4e573581534cffb842} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+Initialize\+Validators (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Initializes the validators. 
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_acb8307b48e7f2606bb33c5981f2937ca}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!IsBackup@{IsBackup}}
+\index{IsBackup@{IsBackup}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{IsBackup()}{IsBackup()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_acb8307b48e7f2606bb33c5981f2937ca} 
+bool neo\+::consensus\+::\+Consensus\+Service\+::\+Is\+Backup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if the node is backup. 
+
+\begin{DoxyReturn}{Returns}
+True if the node is backup, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a6e9d22a631e101084577ccca884691db}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!IsPrimary@{IsPrimary}}
+\index{IsPrimary@{IsPrimary}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{IsPrimary()}{IsPrimary()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a6e9d22a631e101084577ccca884691db} 
+bool neo\+::consensus\+::\+Consensus\+Service\+::\+Is\+Primary (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if the node is primary. 
+
+\begin{DoxyReturn}{Returns}
+True if the node is primary, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_aa140fff2e88697f197dd2d2dbaa6afbc}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!IsRunning@{IsRunning}}
+\index{IsRunning@{IsRunning}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{IsRunning()}{IsRunning()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_aa140fff2e88697f197dd2d2dbaa6afbc} 
+bool neo\+::consensus\+::\+Consensus\+Service\+::\+Is\+Running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the service is running. 
+
+\begin{DoxyReturn}{Returns}
+True if the service is running, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_aa29dd61ffa21e214682792d81036deba}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!OnChangeViewMessage@{OnChangeViewMessage}}
+\index{OnChangeViewMessage@{OnChangeViewMessage}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{OnChangeViewMessage()}{OnChangeViewMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_aa29dd61ffa21e214682792d81036deba} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+On\+Change\+View\+Message (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_ac98cd7545831399ea9075416af6efc16}{Change\+View\+Message}} $>$}]{message}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{sender}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles a change view message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message. \\
+\hline
+{\em sender} & The sender. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a578e748d1344e11c22e5916e9872f9a2}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!OnChangeViewReceived@{OnChangeViewReceived}}
+\index{OnChangeViewReceived@{OnChangeViewReceived}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{OnChangeViewReceived()}{OnChangeViewReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a578e748d1344e11c22e5916e9872f9a2} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+On\+Change\+View\+Received (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1consensus_ac98cd7545831399ea9075416af6efc16}{Change\+View\+Message}} \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Handles received change view message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The change view message. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a83a72be5c8d1b89009b67b747a797a6f}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!OnCommitMessage@{OnCommitMessage}}
+\index{OnCommitMessage@{OnCommitMessage}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{OnCommitMessage()}{OnCommitMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a83a72be5c8d1b89009b67b747a797a6f} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+On\+Commit\+Message (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_commit_message}{Commit\+Message}} $>$}]{message}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{sender}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles a commit message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message. \\
+\hline
+{\em sender} & The sender. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a071c4fd21be3c8b15760fbe9ba374b1b}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!OnCommitReceived@{OnCommitReceived}}
+\index{OnCommitReceived@{OnCommitReceived}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{OnCommitReceived()}{OnCommitReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a071c4fd21be3c8b15760fbe9ba374b1b} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+On\+Commit\+Received (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1consensus_1_1_commit_message}{Commit\+Message}} \&}]{commit}{}\end{DoxyParamCaption})}
+
+
+
+Handles received commit message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em commit} & The commit message. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a1f0b52bfdfd8940b63ecc1097a027111}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!OnMessage@{OnMessage}}
+\index{OnMessage@{OnMessage}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{OnMessage()}{OnMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a1f0b52bfdfd8940b63ecc1097a027111} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+On\+Message (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message}{Consensus\+Message}} $>$}]{message}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{sender}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles a message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message. \\
+\hline
+{\em sender} & The sender. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a98ba22c37a83599e81ca98147fdee189}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!OnPrepareRequestMessage@{OnPrepareRequestMessage}}
+\index{OnPrepareRequestMessage@{OnPrepareRequestMessage}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{OnPrepareRequestMessage()}{OnPrepareRequestMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a98ba22c37a83599e81ca98147fdee189} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+On\+Prepare\+Request\+Message (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_aed5c6243594d76ea9fe4ad10bc57dea6}{Prepare\+Request}} $>$}]{message}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{sender}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles a prepare request message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message. \\
+\hline
+{\em sender} & The sender. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a53c1dc6fa38daa97c2be93a3bfc1837e}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!OnPrepareRequestReceived@{OnPrepareRequestReceived}}
+\index{OnPrepareRequestReceived@{OnPrepareRequestReceived}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{OnPrepareRequestReceived()}{OnPrepareRequestReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a53c1dc6fa38daa97c2be93a3bfc1837e} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+On\+Prepare\+Request\+Received (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1consensus_aed5c6243594d76ea9fe4ad10bc57dea6}{Prepare\+Request}} \&}]{request}{}\end{DoxyParamCaption})}
+
+
+
+Handles received prepare request message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request} & The prepare request message. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a13de0b791af7dd155edd1e6810d039ce}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!OnPrepareResponseMessage@{OnPrepareResponseMessage}}
+\index{OnPrepareResponseMessage@{OnPrepareResponseMessage}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{OnPrepareResponseMessage()}{OnPrepareResponseMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a13de0b791af7dd155edd1e6810d039ce} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+On\+Prepare\+Response\+Message (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_aa91ad7e4dd3969cbc2685eb001bc8baa}{Prepare\+Response}} $>$}]{message}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{sender}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles a prepare response message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message. \\
+\hline
+{\em sender} & The sender. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a0bbd579b4e33b127bb71bb496b8ee7ef}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!OnPrepareResponseReceived@{OnPrepareResponseReceived}}
+\index{OnPrepareResponseReceived@{OnPrepareResponseReceived}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{OnPrepareResponseReceived()}{OnPrepareResponseReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a0bbd579b4e33b127bb71bb496b8ee7ef} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+On\+Prepare\+Response\+Received (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1consensus_aa91ad7e4dd3969cbc2685eb001bc8baa}{Prepare\+Response}} \&}]{response}{}\end{DoxyParamCaption})}
+
+
+
+Handles received prepare response message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em response} & The prepare response message. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a12bba4d81f9822ad26a1c0e03bbbe52d}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!OnRecoveryMessage@{OnRecoveryMessage}}
+\index{OnRecoveryMessage@{OnRecoveryMessage}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{OnRecoveryMessage()}{OnRecoveryMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a12bba4d81f9822ad26a1c0e03bbbe52d} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+On\+Recovery\+Message (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message}{Recovery\+Message}} $>$}]{message}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{sender}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles a recovery message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message. \\
+\hline
+{\em sender} & The sender. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a899f9d7c8eba5acaa11d6e136e89ab8b}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!OnRecoveryRequestMessage@{OnRecoveryRequestMessage}}
+\index{OnRecoveryRequestMessage@{OnRecoveryRequestMessage}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{OnRecoveryRequestMessage()}{OnRecoveryRequestMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a899f9d7c8eba5acaa11d6e136e89ab8b} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+On\+Recovery\+Request\+Message (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_a15616904aa168d646f1e18dbdc4b5061}{Recovery\+Request}} $>$}]{message}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{sender}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles a recovery request message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message. \\
+\hline
+{\em sender} & The sender. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a6d6efb68deb24013a7b35e4f11e7b41a}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!ProcessBlock@{ProcessBlock}}
+\index{ProcessBlock@{ProcessBlock}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{ProcessBlock()}{ProcessBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a6d6efb68deb24013a7b35e4f11e7b41a} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+Process\+Block (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$}]{block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Processes the block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_afa9f0c06d6216ef759e1519eb0258e43}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!Reset@{Reset}}
+\index{Reset@{Reset}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{Reset()}{Reset()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_afa9f0c06d6216ef759e1519eb0258e43} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+Reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Resets the consensus. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a6624731a1571b1081c315079c36dfbc5}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!RunConsensus@{RunConsensus}}
+\index{RunConsensus@{RunConsensus}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{RunConsensus()}{RunConsensus()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a6624731a1571b1081c315079c36dfbc5} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+Run\+Consensus (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Runs the consensus. 
+
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a74be43c133e6d2cdd397c8e852eadc0e}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!SendChangeView@{SendChangeView}}
+\index{SendChangeView@{SendChangeView}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{SendChangeView()}{SendChangeView()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a74be43c133e6d2cdd397c8e852eadc0e} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+Send\+Change\+View (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sends a change view message. 
+
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_ab42217a451445c8e62f9276da994e0a2}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!SendCommit@{SendCommit}}
+\index{SendCommit@{SendCommit}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{SendCommit()}{SendCommit()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_ab42217a451445c8e62f9276da994e0a2} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+Send\+Commit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sends a commit. 
+
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a53af6cee403bee67cd16d4018fe2364f}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!SendMessage@{SendMessage}}
+\index{SendMessage@{SendMessage}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{SendMessage()}{SendMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a53af6cee403bee67cd16d4018fe2364f} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+Send\+Message (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message}{Consensus\+Message}} $>$}]{message}{, }\item[{uint16\+\_\+t}]{validator\+Index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sends a message to a validator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message. \\
+\hline
+{\em validator\+Index} & The validator index. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_ab2c0694585b01af03f7675f0ff3f26c1}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!SendPrepareRequest@{SendPrepareRequest}}
+\index{SendPrepareRequest@{SendPrepareRequest}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{SendPrepareRequest()}{SendPrepareRequest()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_ab2c0694585b01af03f7675f0ff3f26c1} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+Send\+Prepare\+Request (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sends a prepare request. 
+
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_af315e249764d847e32c9f264f016258a}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!SendPrepareResponse@{SendPrepareResponse}}
+\index{SendPrepareResponse@{SendPrepareResponse}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{SendPrepareResponse()}{SendPrepareResponse()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_af315e249764d847e32c9f264f016258a} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+Send\+Prepare\+Response (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sends a prepare response. 
+
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a5bc4ad75b3c1c920637ddd9e46bfa147}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!SendRecoveryMessage@{SendRecoveryMessage}}
+\index{SendRecoveryMessage@{SendRecoveryMessage}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{SendRecoveryMessage()}{SendRecoveryMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a5bc4ad75b3c1c920637ddd9e46bfa147} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+Send\+Recovery\+Message (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{validator\+Index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sends a recovery message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em validator\+Index} & The validator index. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 23
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a90f628e0ea2ce57d088340645167dc89}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!SendRecoveryRequest@{SendRecoveryRequest}}
+\index{SendRecoveryRequest@{SendRecoveryRequest}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{SendRecoveryRequest()}{SendRecoveryRequest()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a90f628e0ea2ce57d088340645167dc89} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+Send\+Recovery\+Request (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Sends a recovery request. 
+
+Here is the call graph for this function\+:
+% FIG 24
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_ac0163ec948a54eaa65999d77dff25b8d}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!ShouldChangeView@{ShouldChangeView}}
+\index{ShouldChangeView@{ShouldChangeView}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{ShouldChangeView()}{ShouldChangeView()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_ac0163ec948a54eaa65999d77dff25b8d} 
+bool neo\+::consensus\+::\+Consensus\+Service\+::\+Should\+Change\+View (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if the node should change view. 
+
+\begin{DoxyReturn}{Returns}
+True if the node should change view, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 25
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a068cfe89621f8a8bfd751c100fc4635e}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!Start@{Start}}
+\index{Start@{Start}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a068cfe89621f8a8bfd751c100fc4635e} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Starts the service. 
+
+Here is the call graph for this function\+:
+% FIG 26
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_aeeb617982cdf6e0c20c9b8e8b800365f}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_aeeb617982cdf6e0c20c9b8e8b800365f} 
+void neo\+::consensus\+::\+Consensus\+Service\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the service. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a426cc8ed34fc5e1e56e611305acc7249}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!ValidateBlock@{ValidateBlock}}
+\index{ValidateBlock@{ValidateBlock}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{ValidateBlock()}{ValidateBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a426cc8ed34fc5e1e56e611305acc7249} 
+bool neo\+::consensus\+::\+Consensus\+Service\+::\+Validate\+Block (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$}]{block}{}\end{DoxyParamCaption})}
+
+
+
+Validates a block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block to validate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the block is valid, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 27
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a6363d92105d8f1b7e384628862461a03}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!condition\_@{condition\_}}
+\index{condition\_@{condition\_}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{condition\_}{condition\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a6363d92105d8f1b7e384628862461a03} 
+std\+::condition\+\_\+variable neo\+::consensus\+::\+Consensus\+Service\+::condition\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_aa3aeaea7e0da6570a952dc7ef727291c}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!consensusThread\_@{consensusThread\_}}
+\index{consensusThread\_@{consensusThread\_}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{consensusThread\_}{consensusThread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_aa3aeaea7e0da6570a952dc7ef727291c} 
+std\+::thread neo\+::consensus\+::\+Consensus\+Service\+::consensus\+Thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_ac96d71a20a7ac657a5374164bd7ff1ee}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!context\_@{context\_}}
+\index{context\_@{context\_}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{context\_}{context\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_ac96d71a20a7ac657a5374164bd7ff1ee} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context}{Consensus\+Context}}$>$ neo\+::consensus\+::\+Consensus\+Service\+::context\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a2c67ec6afd43c9a40d3228c6a6b07b0d}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!keyPair\_@{keyPair\_}}
+\index{keyPair\_@{keyPair\_}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{keyPair\_}{keyPair\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a2c67ec6afd43c9a40d3228c6a6b07b0d} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{cryptography\+::ecc\+::\+Key\+Pair}} neo\+::consensus\+::\+Consensus\+Service\+::key\+Pair\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_ac91272f6f4f94921a7bf9d979a085164}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!knownHashes\_@{knownHashes\_}}
+\index{knownHashes\_@{knownHashes\_}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{knownHashes\_}{knownHashes\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_ac91272f6f4f94921a7bf9d979a085164} 
+std\+::unordered\+\_\+set$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}$>$ neo\+::consensus\+::\+Consensus\+Service\+::known\+Hashes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_ac958e4f4a226eda7f3132f0001749bd5}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!lastBlockTime\_@{lastBlockTime\_}}
+\index{lastBlockTime\_@{lastBlockTime\_}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{lastBlockTime\_}{lastBlockTime\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_ac958e4f4a226eda7f3132f0001749bd5} 
+uint64\+\_\+t neo\+::consensus\+::\+Consensus\+Service\+::last\+Block\+Time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a5daa40484d98bc59677831c1488ca516}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!lastChangeViewTime\_@{lastChangeViewTime\_}}
+\index{lastChangeViewTime\_@{lastChangeViewTime\_}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{lastChangeViewTime\_}{lastChangeViewTime\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a5daa40484d98bc59677831c1488ca516} 
+uint64\+\_\+t neo\+::consensus\+::\+Consensus\+Service\+::last\+Change\+View\+Time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a9933ad7cac1de583df8e9f3036e6124b}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!lastPrepareRequestTime\_@{lastPrepareRequestTime\_}}
+\index{lastPrepareRequestTime\_@{lastPrepareRequestTime\_}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{lastPrepareRequestTime\_}{lastPrepareRequestTime\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a9933ad7cac1de583df8e9f3036e6124b} 
+uint64\+\_\+t neo\+::consensus\+::\+Consensus\+Service\+::last\+Prepare\+Request\+Time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_ab83a0168156a359f97fc4308a99ac32d}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_ab83a0168156a359f97fc4308a99ac32d} 
+std\+::mutex neo\+::consensus\+::\+Consensus\+Service\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a6d0aa47f14f8142f960054412c2c2ba1}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!neoSystem\_@{neoSystem\_}}
+\index{neoSystem\_@{neoSystem\_}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{neoSystem\_}{neoSystem\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a6d0aa47f14f8142f960054412c2c2ba1} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}}$>$ neo\+::consensus\+::\+Consensus\+Service\+::neo\+System\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_ad53d4cb09891b656160dcd5ad1b39d41}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!pendingChangeViewMessages\_@{pendingChangeViewMessages\_}}
+\index{pendingChangeViewMessages\_@{pendingChangeViewMessages\_}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{pendingChangeViewMessages\_}{pendingChangeViewMessages\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_ad53d4cb09891b656160dcd5ad1b39d41} 
+std\+::unordered\+\_\+map$<$uint8\+\_\+t, std\+::unordered\+\_\+map$<$uint16\+\_\+t, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1consensus_ac98cd7545831399ea9075416af6efc16}{Change\+View\+Message}}$>$ $>$ $>$ neo\+::consensus\+::\+Consensus\+Service\+::pending\+Change\+View\+Messages\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a746501a95cb113d05fc26b6d9d5cc0dc}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!pendingPrepareRequests\_@{pendingPrepareRequests\_}}
+\index{pendingPrepareRequests\_@{pendingPrepareRequests\_}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{pendingPrepareRequests\_}{pendingPrepareRequests\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a746501a95cb113d05fc26b6d9d5cc0dc} 
+std\+::unordered\+\_\+map$<$uint8\+\_\+t, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1consensus_aed5c6243594d76ea9fe4ad10bc57dea6}{Prepare\+Request}}$>$ $>$ neo\+::consensus\+::\+Consensus\+Service\+::pending\+Prepare\+Requests\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a5c5f7e2cc1f2a755d4d8fa4e58fc5c42}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!pendingPrepareResponses\_@{pendingPrepareResponses\_}}
+\index{pendingPrepareResponses\_@{pendingPrepareResponses\_}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{pendingPrepareResponses\_}{pendingPrepareResponses\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a5c5f7e2cc1f2a755d4d8fa4e58fc5c42} 
+std\+::unordered\+\_\+map$<$uint8\+\_\+t, std\+::unordered\+\_\+map$<$uint16\+\_\+t, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1consensus_aa91ad7e4dd3969cbc2685eb001bc8baa}{Prepare\+Response}}$>$ $>$ $>$ neo\+::consensus\+::\+Consensus\+Service\+::pending\+Prepare\+Responses\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_service_a9e80ca27b762d54dc67fae96fd8db4f0}\index{neo::consensus::ConsensusService@{neo::consensus::ConsensusService}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::consensus::ConsensusService@{neo::consensus::ConsensusService}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_service_a9e80ca27b762d54dc67fae96fd8db4f0} 
+std\+::atomic$<$bool$>$ neo\+::consensus\+::\+Consensus\+Service\+::running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/consensus/\mbox{\hyperlink{consensus__service_8h}{consensus\+\_\+service.\+h}}\item 
+src/consensus/\mbox{\hyperlink{consensus__block__processing_8cpp}{consensus\+\_\+block\+\_\+processing.\+cpp}}\item 
+src/consensus/\mbox{\hyperlink{consensus__message__handlers_8cpp}{consensus\+\_\+message\+\_\+handlers.\+cpp}}\item 
+src/consensus/\mbox{\hyperlink{consensus__message__senders_8cpp}{consensus\+\_\+message\+\_\+senders.\+cpp}}\item 
+src/consensus/\mbox{\hyperlink{consensus__service_8cpp}{consensus\+\_\+service.\+cpp}}\end{DoxyCompactItemize}

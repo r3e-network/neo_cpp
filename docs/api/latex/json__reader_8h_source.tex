@@ -1,0 +1,111 @@
+\doxysection{json\+\_\+reader.\+h}
+\hypertarget{json__reader_8h_source}{}\label{json__reader_8h_source}\index{include/neo/io/json\_reader.h@{include/neo/io/json\_reader.h}}
+\mbox{\hyperlink{json__reader_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2fixed8_8h}{neo/io/fixed8.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json_8hpp}{nlohmann/json.hpp}}>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1io}{neo::io}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{IJsonSerializable}};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a83a9c671b033295095b4749e4b089d2b}{JsonReader}}}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a83a9c671b033295095b4749e4b089d2b}{JsonReader}}(\textcolor{keyword}{const}\ nlohmann::json\&\ \mbox{\hyperlink{namespaceneo_1_1json}{json}});}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a8c4d8de0848d1bedb38008260d536e5f}{ReadBool}}(\textcolor{keyword}{const}\ std::string\&\ key,\ \textcolor{keywordtype}{bool}\ defaultValue\ =\ \textcolor{keyword}{false})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00045\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a9d3b1ba50bf4022c8c8b5e11077c92c4}{ReadUInt8}}(\textcolor{keyword}{const}\ std::string\&\ key,\ uint8\_t\ defaultValue\ =\ 0)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00053\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a3bcdbb00de258d271a3ac007fe97343b}{ReadUInt16}}(\textcolor{keyword}{const}\ std::string\&\ key,\ uint16\_t\ defaultValue\ =\ 0)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00061\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a84942f70d9e3196fb447a71d1c51a200}{ReadUInt32}}(\textcolor{keyword}{const}\ std::string\&\ key,\ uint32\_t\ defaultValue\ =\ 0)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00069\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ae978cb75a319b20d6eafd40220700834}{ReadUInt64}}(\textcolor{keyword}{const}\ std::string\&\ key,\ uint64\_t\ defaultValue\ =\ 0)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00077\ \ \ \ \ int8\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a5909f135bc1360e7dbf4bd04b785aca8}{ReadInt8}}(\textcolor{keyword}{const}\ std::string\&\ key,\ int8\_t\ defaultValue\ =\ 0)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00085\ \ \ \ \ int16\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a11624522c2aed41a98c0defc7cf870df}{ReadInt16}}(\textcolor{keyword}{const}\ std::string\&\ key,\ int16\_t\ defaultValue\ =\ 0)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00093\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a26a50e4580529f1bbbf2e94ade9b0fbb}{ReadInt32}}(\textcolor{keyword}{const}\ std::string\&\ key,\ int32\_t\ defaultValue\ =\ 0)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00101\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_af8dce636399cafa85a8f20b187a62920}{ReadInt64}}(\textcolor{keyword}{const}\ std::string\&\ key,\ int64\_t\ defaultValue\ =\ 0)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00109\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_abee15c3ce4f6e37ff476a804bd037372}{ReadString}}(\textcolor{keyword}{const}\ std::string\&\ key,\ \textcolor{keyword}{const}\ std::string\&\ defaultValue\ =\ \textcolor{stringliteral}{"{}"{}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a9c841273975b9e942c1d1a1fb1fbe633}{ReadBase64String}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_adad1fbc94a434de86af05a7e2fc674ae}{ReadNumber}}(\textcolor{keyword}{const}\ std::string\&\ key,\ \textcolor{keywordtype}{double}\ defaultValue\ =\ 0.0)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00131\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a1a2320cd9f71543030ddaf7cb7b781bd}{ReadBytes}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00138\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a8f5bca32942a51055c062486ac28ff07}{ReadUInt160}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ac64e5dd59840f79e757a66e0ba3f7d3e}{ReadUInt256}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00152\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{Fixed8}}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_abe438cb1da2ea82c4238c792241d40ba}{ReadFixed8}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00159\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a23efe34d564aba433f4270fdb6067fef}{ReadObject}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00166\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a2286a2af4ba8fd609d753cfd2b19f5ec}{ReadArray}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00175\ \ \ \ \ std::optional<T>\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a4bfa9de68dd8c793803113a177b00fb3}{ReadSerializable}}(\textcolor{keyword}{const}\ std::string\&\ key)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00176\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_base\_of<IJsonSerializable,\ T>::value,\ \textcolor{stringliteral}{"{}T\ must\ derive\ from\ IJsonSerializable"{}});}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_default\_constructible<T>::value,\ \textcolor{stringliteral}{"{}T\ must\ be\ default\ constructible"{}});}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ae9b3593d026f8640d5a2e03abda22320}{json\_}}.contains(key)\ ||\ !\mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ae9b3593d026f8640d5a2e03abda22320}{json\_}}[key].is\_object())\ \textcolor{keywordflow}{return}\ std::nullopt;}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ T\ obj;}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a83a9c671b033295095b4749e4b089d2b}{JsonReader}}\ reader(\mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ae9b3593d026f8640d5a2e03abda22320}{json\_}}[key]);}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ obj.DeserializeJson(reader);}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ obj;}
+\DoxyCodeLine{00186\ \ \ \ \ \}}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00195\ \ \ \ \ std::vector<T>\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ad93f0ab1687b6553eea05366a6062952}{ReadVector}}(\textcolor{keyword}{const}\ std::string\&\ key)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00196\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_base\_of<IJsonSerializable,\ T>::value,\ \textcolor{stringliteral}{"{}T\ must\ derive\ from\ IJsonSerializable"{}});}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_default\_constructible<T>::value,\ \textcolor{stringliteral}{"{}T\ must\ be\ default\ constructible"{}});}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ae9b3593d026f8640d5a2e03abda22320}{json\_}}.contains(key)\ ||\ !\mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ae9b3593d026f8640d5a2e03abda22320}{json\_}}[key].is\_array())\ \textcolor{keywordflow}{return}\ \{\};}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ std::vector<T>\ result;}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ item\ :\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ae9b3593d026f8640d5a2e03abda22320}{json\_}}[key])}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ T\ obj;}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a83a9c671b033295095b4749e4b089d2b}{JsonReader}}\ reader(item);}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ obj.DeserializeJson(reader);}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(obj);}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00212\ \ \ \ \ \}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keyword}{const}\ nlohmann::json\&\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a14db70fd3bfbcc09eafb91bcc5d0d7e0}{GetJson}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ae9b3593d026f8640d5a2e03abda22320}{json\_}};\ \}}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ad2a7890156bf4a23baf63a1a4b95060f}{HasKey}}(\textcolor{keyword}{const}\ std::string\&\ key)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ae9b3593d026f8640d5a2e03abda22320}{json\_}}.contains(key);\ \}}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a298f852ae1eb1f9921fd7cb9653add7f}{ReadStartObject}}()\textcolor{keyword}{\ const\ }\{\}}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_aac2ae2b1e638dc8dcbc59026746371d7}{ReadEndObject}}()\textcolor{keyword}{\ const\ }\{\}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keyword}{const}\ nlohmann::json\&\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ae9b3593d026f8640d5a2e03abda22320}{json\_}};}
+\DoxyCodeLine{00239\ \};}
+\DoxyCodeLine{00240\ \}\ \ \textcolor{comment}{//\ namespace\ neo::io}}
+
+\end{DoxyCode}

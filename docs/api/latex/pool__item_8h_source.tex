@@ -1,0 +1,77 @@
+\doxysection{pool\+\_\+item.\+h}
+\hypertarget{pool__item_8h_source}{}\label{pool__item_8h_source}\index{include/neo/ledger/pool\_item.h@{include/neo/ledger/pool\_item.h}}
+\mbox{\hyperlink{pool__item_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2transaction_8h}{neo/ledger/transaction.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a889731516273afa60bd2cfe15876613c}{PoolItem}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a889731516273afa60bd2cfe15876613c}{PoolItem}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a889731516273afa60bd2cfe15876613c}{PoolItem}}(std::shared\_ptr<Transaction>\ transaction);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a9855de5e13810935636b423cc747d0d4}{\string~PoolItem}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \ \ \ \ std::shared\_ptr<Transaction>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a46b4766c54c0dfd2bf6b6067c65d4a8e}{GetTransaction}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \ \ \ \ std::chrono::system\_clock::time\_point\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_aa296614d475696f7071f83ed9504ee3d}{GetTimestamp}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_af8008e8a866dc9e64a258924d865ffee}{GetHash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_ab6b9a41fd326b31d5f66e53b03205a57}{GetFeePerByte}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_af7a68a8c3869345bff4f25415560908f}{GetNetworkFee}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a5452f2d3a03dc90f86156ef42870935e}{GetSystemFee}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a2bf16f4374ccb7dcddedd960c41d858f}{GetSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_af249b7750d63f18bdce5ea08e05f3569}{ConflictsWith}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a889731516273afa60bd2cfe15876613c}{PoolItem}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a0173aaafaf9531a63f6bf6312e7b3a72}{HasHigherPriorityThan}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a889731516273afa60bd2cfe15876613c}{PoolItem}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a27695aaddd3b90fa2b20cb0877912752}{operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a889731516273afa60bd2cfe15876613c}{PoolItem}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a846c661769aa54e78811444568c7029c}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a889731516273afa60bd2cfe15876613c}{PoolItem}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_aeae4cdd8ff6eba3c72f5e3fa741b405a}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a889731516273afa60bd2cfe15876613c}{PoolItem}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00111\ \ \ \ \ std::shared\_ptr<Transaction>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a25a7f3ad096b82429f8118f532c3b9a6}{transaction\_}};}
+\DoxyCodeLine{00112\ \ \ \ \ std::chrono::system\_clock::time\_point\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a4a9557df295e60f862d1c201688c147d}{timestamp\_}};}
+\DoxyCodeLine{00113\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_aa094ce1da652149e51c7c5b544377d93}{fee\_per\_byte\_}};}
+\DoxyCodeLine{00114\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a579eaa585620acd83c4f2fa95c199bdb}{hash\_}};\ \ \textcolor{comment}{//\ Cached\ hash}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00120\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a7a585766b40b01199e6a86abbc342d71}{CalculateFeePerByte}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00121\ \};}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00127\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args_a4f166ce17c3be3e4738bfde977c9432a}{TransactionRemovedEventArgs}}}
+\DoxyCodeLine{00128\ \{}
+\DoxyCodeLine{00129\ \ \ \ \ std::shared\_ptr<Transaction>\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args_acc89ea2c84af808c7768950cd446e959}{transaction}};}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args_a377a2407688a727ef1cc0995b36ad8bd}{Reason}}}
+\DoxyCodeLine{00132\ \ \ \ \ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args_a377a2407688a727ef1cc0995b36ad8bda24fe48030f7d3097d5882535b04c3fa8}{Expired}},}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args_a377a2407688a727ef1cc0995b36ad8bda0fc33710ab0ebbd6d1fcff0bc6cc7f3d}{LowPriority}},}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args_a377a2407688a727ef1cc0995b36ad8bdab3f23170be598de0771ac94684114f94}{Replaced}},}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args_a377a2407688a727ef1cc0995b36ad8bda7c57bd0cd9e764e09c35a986225b119b}{InvalidTransaction}},}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args_a377a2407688a727ef1cc0995b36ad8bda09d9ff5c9cf461998dc29f4c90f2c60c}{InsufficientFunds}},}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args_a377a2407688a727ef1cc0995b36ad8bdaaee43f65108573ca863298db0692a4f1}{PolicyViolation}},}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args_a377a2407688a727ef1cc0995b36ad8bda984ceac16fab685fc50b8d8a5eabf7de}{Included}}}
+\DoxyCodeLine{00140\ \ \ \ \ \}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args_abbe3572f8ceb60f7b42baf8bb3af07e7}{reason}};}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args_a4f166ce17c3be3e4738bfde977c9432a}{TransactionRemovedEventArgs}}(std::shared\_ptr<Transaction>\ tx,\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args_a377a2407688a727ef1cc0995b36ad8bd}{Reason}}\ r)\ :\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args_acc89ea2c84af808c7768950cd446e959}{transaction}}(tx),\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args_abbe3572f8ceb60f7b42baf8bb3af07e7}{reason}}(r)\ \{\}}
+\DoxyCodeLine{00143\ \};}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}

@@ -1,0 +1,495 @@
+\doxysection{neo\+::console\+\_\+service\+::Console\+Service\+Base Class Reference}
+\hypertarget{classneo_1_1console__service_1_1_console_service_base}{}\label{classneo_1_1console__service_1_1_console_service_base}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+
+
+Base class for console services.  
+
+
+
+
+{\ttfamily \#include $<$console\+\_\+service\+\_\+base.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a9f98c83e37704c31c38f3a3634f9ecbe}{Console\+Service\+Base}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a165f8da2a07bbcff5bee64f5323c4bba}{\texorpdfstring{$\sim$}{\string~}\+Console\+Service\+Base}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_af28af92b7882cf923d7b9aadd6effd6b}{Get\+Service\+Name}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the service name. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_aa62d49bab736fbe55b4e5ea17104276b}{Get\+Depends}} () const
+\begin{DoxyCompactList}\small\item\em Gets the service dependencies. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a4bd88f99ad25e2393010bd81e8b6e773}{Get\+Prompt}} () const
+\begin{DoxyCompactList}\small\item\em Gets the prompt string. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a26d25cfda101f278e65130237bdc5019}{Get\+Show\+Prompt}} () const
+\begin{DoxyCompactList}\small\item\em Gets whether to show the prompt. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a10c809b5e79d63f6d7a28585dea13dbc}{Set\+Show\+Prompt}} (bool show\+\_\+prompt)
+\begin{DoxyCompactList}\small\item\em Sets whether to show the prompt. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a052bd858f5e0856a6848d197537f8e99}{On\+Start}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Called when the service starts. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a036e72e58cb88bdfeea1cfcd81532b5e}{On\+Stop}} ()
+\begin{DoxyCompactList}\small\item\em Called when the service stops. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_acf3bd224eea8b9fb0b763f81a6ed83ec}{Run}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Runs the service. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_abacd3ce4c2574e5d66bd9a19be90caa5}{Register\+Command}} (std\+::shared\+\_\+ptr$<$ void $>$ instance, const std\+::string \&name="{}"{})
+\begin{DoxyCompactList}\small\item\em Registers a command handler. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a21cfb445a572abb165fd9845b4887ccf}{Register\+Command\+Handler}} (std\+::function$<$ T(std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token}{Command\+Token}} $>$ $>$ \&, bool)$>$ handler)
+\begin{DoxyCompactList}\small\item\em Registers a type handler for command parsing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_aa85cee40c02ad268a90c9e0969382d1b}{On\+Command}} (const std\+::string \&command\+\_\+line)
+\begin{DoxyCompactList}\small\item\em Processes a command. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_ae1c7b4bc0d16ed2699e341056add3756}{On\+Help\+Command}} (const std\+::string \&key="{}"{})
+\begin{DoxyCompactList}\small\item\em Processes the "{}help"{} command. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a861cfdacc2699533b89056f0b29531e6}{On\+Clear}} ()
+\begin{DoxyCompactList}\small\item\em Processes the "{}clear"{} command. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_afbfe7361800b63daa8bdce7779797010}{On\+Version}} ()
+\begin{DoxyCompactList}\small\item\em Processes the "{}version"{} command. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a2d0ec961fd1d4034034b0b32d4e72b84}{On\+Exit}} ()
+\begin{DoxyCompactList}\small\item\em Processes the "{}exit"{} command. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a0cf9b80793a332a5b7cdad0d0c64d338}{Run\+Console}} ()
+\begin{DoxyCompactList}\small\item\em Runs the console loop. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a8f84cbcc2567f9001d79e68f61b83d0e}{Read\+Task}} ()
+\begin{DoxyCompactList}\small\item\em Reads a command from the console. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a6ad841c9e98c5c6275b9c1b8442aae92}{Try\+Process\+Value}} (const std\+::type\+\_\+info \&parameter\+\_\+type, std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token}{Command\+Token}} $>$ $>$ \&args, bool can\+\_\+consume\+\_\+all, void \texorpdfstring{$\ast$}{*}\&value)
+\begin{DoxyCompactList}\small\item\em Tries to process a value from tokens. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_acf01b451aa8f33452886882ac45c3063}{Trigger\+Graceful\+Shutdown}} ()
+\begin{DoxyCompactList}\small\item\em Triggers graceful shutdown. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a36c6177f84cb69a9e2e3abb97f3700f3}{Register\+Default\+Handlers}} ()
+\begin{DoxyCompactList}\small\item\em Registers default command handlers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_af7acbabab548c7b924cd8ec2346aea8c}{Sig\+Term\+Event\+Handler}} (int signal)
+\begin{DoxyCompactList}\small\item\em Signal handler for SIGTERM. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a15fedfd6368585bd027d4e9e0cd1468f}{Cancel\+Handler}} (int signal)
+\begin{DoxyCompactList}\small\item\em Signal handler for SIGINT (Ctrl+C). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a96560cc718a9d05344bb45f749c313ee}{show\+\_\+prompt\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_aa70ed48641ab7b4fb719df81c1ec24f9}{running\+\_\+}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_ad64ae8d66aed12f940fbd11c94e4aee9}{command\+\_\+history\+\_\+}}
+\item 
+std\+::map$<$ std\+::string, std\+::vector$<$ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method}{Console\+Command\+Method}} $>$ $>$ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a9f24549f8da6e3589edb43139a95520c}{verbs\+\_\+}}
+\item 
+std\+::map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ void $>$ $>$ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_af797ca8ffa6a1c2e3933a68e43641e6d}{instances\+\_\+}}
+\item 
+std\+::map$<$ const std\+::type\+\_\+info \texorpdfstring{$\ast$}{*}, std\+::function$<$ void \texorpdfstring{$\ast$}{*}(std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token}{Command\+Token}} $>$ $>$ \&, bool)$>$ $>$ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a98f92d1b07ca08069583e7d809b51561}{handlers\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_ae8a592cd0c4a6d684d9824005987301b}{History\+Size}} = 100
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for console services. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a9f98c83e37704c31c38f3a3634f9ecbe}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!ConsoleServiceBase@{ConsoleServiceBase}}
+\index{ConsoleServiceBase@{ConsoleServiceBase}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{ConsoleServiceBase()}{ConsoleServiceBase()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a9f98c83e37704c31c38f3a3634f9ecbe} 
+neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+Console\+Service\+Base (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a165f8da2a07bbcff5bee64f5323c4bba}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!````~ConsoleServiceBase@{\texorpdfstring{$\sim$}{\string~}ConsoleServiceBase}}
+\index{````~ConsoleServiceBase@{\texorpdfstring{$\sim$}{\string~}ConsoleServiceBase}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ConsoleServiceBase()}{\string~ConsoleServiceBase()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a165f8da2a07bbcff5bee64f5323c4bba} 
+virtual neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\texorpdfstring{$\sim$}{\string~}\+Console\+Service\+Base (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a15fedfd6368585bd027d4e9e0cd1468f}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!CancelHandler@{CancelHandler}}
+\index{CancelHandler@{CancelHandler}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{CancelHandler()}{CancelHandler()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a15fedfd6368585bd027d4e9e0cd1468f} 
+void neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+Cancel\+Handler (\begin{DoxyParamCaption}\item[{int}]{signal}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Signal handler for SIGINT (Ctrl+C). 
+
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_aa62d49bab736fbe55b4e5ea17104276b}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!GetDepends@{GetDepends}}
+\index{GetDepends@{GetDepends}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{GetDepends()}{GetDepends()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_aa62d49bab736fbe55b4e5ea17104276b} 
+std\+::string neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+Get\+Depends (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Gets the service dependencies. 
+
+\begin{DoxyReturn}{Returns}
+The dependencies string, or empty if none. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a4bd88f99ad25e2393010bd81e8b6e773}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!GetPrompt@{GetPrompt}}
+\index{GetPrompt@{GetPrompt}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{GetPrompt()}{GetPrompt()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a4bd88f99ad25e2393010bd81e8b6e773} 
+std\+::string neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+Get\+Prompt (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Gets the prompt string. 
+
+\begin{DoxyReturn}{Returns}
+The prompt string. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_af28af92b7882cf923d7b9aadd6effd6b}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!GetServiceName@{GetServiceName}}
+\index{GetServiceName@{GetServiceName}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{GetServiceName()}{GetServiceName()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_af28af92b7882cf923d7b9aadd6effd6b} 
+virtual std\+::string neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+Get\+Service\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the service name. 
+
+\begin{DoxyReturn}{Returns}
+The service name. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a26d25cfda101f278e65130237bdc5019}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!GetShowPrompt@{GetShowPrompt}}
+\index{GetShowPrompt@{GetShowPrompt}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{GetShowPrompt()}{GetShowPrompt()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a26d25cfda101f278e65130237bdc5019} 
+bool neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+Get\+Show\+Prompt (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets whether to show the prompt. 
+
+\begin{DoxyReturn}{Returns}
+True if prompt should be shown. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a861cfdacc2699533b89056f0b29531e6}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!OnClear@{OnClear}}
+\index{OnClear@{OnClear}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{OnClear()}{OnClear()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a861cfdacc2699533b89056f0b29531e6} 
+void neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+On\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Processes the "{}clear"{} command. 
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_aa85cee40c02ad268a90c9e0969382d1b}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!OnCommand@{OnCommand}}
+\index{OnCommand@{OnCommand}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{OnCommand()}{OnCommand()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_aa85cee40c02ad268a90c9e0969382d1b} 
+bool neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+On\+Command (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{command\+\_\+line}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Processes a command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command\+\_\+line} & The command line to process. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was processed successfully. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a2d0ec961fd1d4034034b0b32d4e72b84}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!OnExit@{OnExit}}
+\index{OnExit@{OnExit}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{OnExit()}{OnExit()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a2d0ec961fd1d4034034b0b32d4e72b84} 
+void neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+On\+Exit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Processes the "{}exit"{} command. 
+
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_ae1c7b4bc0d16ed2699e341056add3756}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!OnHelpCommand@{OnHelpCommand}}
+\index{OnHelpCommand@{OnHelpCommand}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{OnHelpCommand()}{OnHelpCommand()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_ae1c7b4bc0d16ed2699e341056add3756} 
+void neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+On\+Help\+Command (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Processes the "{}help"{} command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Optional key to get help for specific command. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a052bd858f5e0856a6848d197537f8e99}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!OnStart@{OnStart}}
+\index{OnStart@{OnStart}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{OnStart()}{OnStart()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a052bd858f5e0856a6848d197537f8e99} 
+bool neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+On\+Start (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Called when the service starts. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Command line arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if startup was successful. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a036e72e58cb88bdfeea1cfcd81532b5e}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!OnStop@{OnStop}}
+\index{OnStop@{OnStop}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{OnStop()}{OnStop()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a036e72e58cb88bdfeea1cfcd81532b5e} 
+void neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+On\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Called when the service stops. 
+
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_afbfe7361800b63daa8bdce7779797010}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!OnVersion@{OnVersion}}
+\index{OnVersion@{OnVersion}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{OnVersion()}{OnVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_afbfe7361800b63daa8bdce7779797010} 
+void neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+On\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Processes the "{}version"{} command. 
+
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a8f84cbcc2567f9001d79e68f61b83d0e}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!ReadTask@{ReadTask}}
+\index{ReadTask@{ReadTask}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{ReadTask()}{ReadTask()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a8f84cbcc2567f9001d79e68f61b83d0e} 
+std\+::string neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+Read\+Task (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Reads a command from the console. 
+
+\begin{DoxyReturn}{Returns}
+The command string, or empty string to exit. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_abacd3ce4c2574e5d66bd9a19be90caa5}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!RegisterCommand@{RegisterCommand}}
+\index{RegisterCommand@{RegisterCommand}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{RegisterCommand()}{RegisterCommand()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_abacd3ce4c2574e5d66bd9a19be90caa5} 
+void neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+Register\+Command (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ void $>$}]{instance}{, }\item[{const std\+::string \&}]{name}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
+
+
+
+Registers a command handler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em instance} & The instance containing the command methods. \\
+\hline
+{\em name} & Optional name for the instance. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a21cfb445a572abb165fd9845b4887ccf}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!RegisterCommandHandler@{RegisterCommandHandler}}
+\index{RegisterCommandHandler@{RegisterCommandHandler}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{RegisterCommandHandler()}{RegisterCommandHandler()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a21cfb445a572abb165fd9845b4887ccf} 
+template$<$typename T$>$ \\
+void neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+Register\+Command\+Handler (\begin{DoxyParamCaption}\item[{std\+::function$<$ T(std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token}{Command\+Token}} $>$ $>$ \&, bool)$>$}]{handler}{}\end{DoxyParamCaption})}
+
+
+
+Registers a type handler for command parsing. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type to register a handler for. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & The handler function. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a36c6177f84cb69a9e2e3abb97f3700f3}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!RegisterDefaultHandlers@{RegisterDefaultHandlers}}
+\index{RegisterDefaultHandlers@{RegisterDefaultHandlers}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{RegisterDefaultHandlers()}{RegisterDefaultHandlers()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a36c6177f84cb69a9e2e3abb97f3700f3} 
+void neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+Register\+Default\+Handlers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Registers default command handlers. 
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_acf3bd224eea8b9fb0b763f81a6ed83ec}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!Run@{Run}}
+\index{Run@{Run}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_acf3bd224eea8b9fb0b763f81a6ed83ec} 
+void neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+Run (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Runs the service. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Command line arguments. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a0cf9b80793a332a5b7cdad0d0c64d338}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!RunConsole@{RunConsole}}
+\index{RunConsole@{RunConsole}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{RunConsole()}{RunConsole()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a0cf9b80793a332a5b7cdad0d0c64d338} 
+void neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+Run\+Console (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Runs the console loop. 
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a10c809b5e79d63f6d7a28585dea13dbc}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!SetShowPrompt@{SetShowPrompt}}
+\index{SetShowPrompt@{SetShowPrompt}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{SetShowPrompt()}{SetShowPrompt()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a10c809b5e79d63f6d7a28585dea13dbc} 
+void neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+Set\+Show\+Prompt (\begin{DoxyParamCaption}\item[{bool}]{show\+\_\+prompt}{}\end{DoxyParamCaption})}
+
+
+
+Sets whether to show the prompt. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em show\+\_\+prompt} & Whether to show the prompt. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_af7acbabab548c7b924cd8ec2346aea8c}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!SigTermEventHandler@{SigTermEventHandler}}
+\index{SigTermEventHandler@{SigTermEventHandler}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{SigTermEventHandler()}{SigTermEventHandler()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_af7acbabab548c7b924cd8ec2346aea8c} 
+void neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+Sig\+Term\+Event\+Handler (\begin{DoxyParamCaption}\item[{int}]{signal}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Signal handler for SIGTERM. 
+
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_acf01b451aa8f33452886882ac45c3063}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!TriggerGracefulShutdown@{TriggerGracefulShutdown}}
+\index{TriggerGracefulShutdown@{TriggerGracefulShutdown}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{TriggerGracefulShutdown()}{TriggerGracefulShutdown()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_acf01b451aa8f33452886882ac45c3063} 
+void neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+Trigger\+Graceful\+Shutdown (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Triggers graceful shutdown. 
+
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a6ad841c9e98c5c6275b9c1b8442aae92}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!TryProcessValue@{TryProcessValue}}
+\index{TryProcessValue@{TryProcessValue}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{TryProcessValue()}{TryProcessValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a6ad841c9e98c5c6275b9c1b8442aae92} 
+bool neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+Try\+Process\+Value (\begin{DoxyParamCaption}\item[{const std\+::type\+\_\+info \&}]{parameter\+\_\+type}{, }\item[{std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1console__service_1_1_command_token}{Command\+Token}} $>$ $>$ \&}]{args}{, }\item[{bool}]{can\+\_\+consume\+\_\+all}{, }\item[{void \texorpdfstring{$\ast$}{*}\&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Tries to process a value from tokens. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parameter\+\_\+type} & The expected parameter type. \\
+\hline
+{\em args} & The token arguments. \\
+\hline
+{\em can\+\_\+consume\+\_\+all} & Whether this parameter can consume all remaining tokens. \\
+\hline
+{\em value} & Output parameter for the parsed value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if parsing was successful. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_ad64ae8d66aed12f940fbd11c94e4aee9}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!command\_history\_@{command\_history\_}}
+\index{command\_history\_@{command\_history\_}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{command\_history\_}{command\_history\_}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_ad64ae8d66aed12f940fbd11c94e4aee9} 
+std\+::vector$<$std\+::string$>$ neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::command\+\_\+history\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a98f92d1b07ca08069583e7d809b51561}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!handlers\_@{handlers\_}}
+\index{handlers\_@{handlers\_}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{handlers\_}{handlers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a98f92d1b07ca08069583e7d809b51561} 
+std\+::map$<$const std\+::type\+\_\+info\texorpdfstring{$\ast$}{*}, std\+::function$<$void\texorpdfstring{$\ast$}{*}(std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1console__service_1_1_command_token}{Command\+Token}}$>$$>$\&, bool)$>$ $>$ neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::handlers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_ae8a592cd0c4a6d684d9824005987301b}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!HistorySize@{HistorySize}}
+\index{HistorySize@{HistorySize}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{HistorySize}{HistorySize}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_ae8a592cd0c4a6d684d9824005987301b} 
+int neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::\+History\+Size = 100\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_af797ca8ffa6a1c2e3933a68e43641e6d}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!instances\_@{instances\_}}
+\index{instances\_@{instances\_}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{instances\_}{instances\_}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_af797ca8ffa6a1c2e3933a68e43641e6d} 
+std\+::map$<$std\+::string, std\+::shared\+\_\+ptr$<$void$>$ $>$ neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::instances\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_aa70ed48641ab7b4fb719df81c1ec24f9}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_aa70ed48641ab7b4fb719df81c1ec24f9} 
+std\+::atomic$<$bool$>$ neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a96560cc718a9d05344bb45f749c313ee}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!show\_prompt\_@{show\_prompt\_}}
+\index{show\_prompt\_@{show\_prompt\_}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{show\_prompt\_}{show\_prompt\_}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a96560cc718a9d05344bb45f749c313ee} 
+bool neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::show\+\_\+prompt\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1console__service_1_1_console_service_base_a9f24549f8da6e3589edb43139a95520c}\index{neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}!verbs\_@{verbs\_}}
+\index{verbs\_@{verbs\_}!neo::console\_service::ConsoleServiceBase@{neo::console\_service::ConsoleServiceBase}}
+\doxysubsubsection{\texorpdfstring{verbs\_}{verbs\_}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_service_base_a9f24549f8da6e3589edb43139a95520c} 
+std\+::map$<$std\+::string, std\+::vector$<$\mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method}{Console\+Command\+Method}}$>$ $>$ neo\+::console\+\_\+service\+::\+Console\+Service\+Base\+::verbs\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/console\+\_\+service/\mbox{\hyperlink{console__service__base_8h}{console\+\_\+service\+\_\+base.\+h}}\item 
+src/console\+\_\+service/\mbox{\hyperlink{console__service__base_8cpp}{console\+\_\+service\+\_\+base.\+cpp}}\end{DoxyCompactItemize}

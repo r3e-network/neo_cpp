@@ -1,0 +1,249 @@
+\doxysection{neo\+::rpc\+::Rpc\+Server\+Impl Class Reference}
+\hypertarget{classneo_1_1rpc_1_1_rpc_server_impl}{}\label{classneo_1_1rpc_1_1_rpc_server_impl}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_af62665a7373e4fdc2d160e17118e075b}{Rpc\+Server\+Impl}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ neo\+System, uint16\+\_\+t port, bool enable\+Cors, bool enable\+Auth, const std\+::string \&username, const std\+::string \&password)
+\item 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_af33c8edb84d4c04a908231cf0d7714c1}{\texorpdfstring{$\sim$}{\string~}\+Rpc\+Server\+Impl}} ()
+\item 
+bool \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a4cc7acf0bb27cefa1166c32e80289e5f}{Start}} ()
+\item 
+bool \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_acd7e449975506946b926d6ebc44b4f6c}{Stop}} ()
+\item 
+bool \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_aa3c27a30fc97e3a173c2af1f30e3260f}{Is\+Running}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a364ae1d30ce752ebdced6588d7f6b077}{Initialize\+Routes}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a60cdc5b1e5303496e4ee5ac7bbe806bc}{Handle\+Rpc\+Request}} (const httplib\+::\+Request \&req, httplib\+::\+Response \&res)
+\item 
+bool \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a45a376a70ccf3bc0f8ecf54d16b37f19}{Authenticate\+Request}} (const httplib\+::\+Request \&req)
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a2d51ca3342879a7effd515e244dd6485}{Validate\+Request}} (const nlohmann\+::json \&request)
+\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a39ffe3c34e684c1fdf3a8bd2b41ea2c4}{Process\+Request}} (const nlohmann\+::json \&request)
+\item 
+void \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a905b4544db250ffaf2e403179dc6f49f}{Register\+Methods}} ()
+\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a91f6328431c5d23a52babb07d110a8fc}{Get\+Metrics}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a97bf1e22d4db2ffe80e28a34e9fff878}{neo\+System\+\_\+}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a0a7d48de18adf4a8132ca3faab0bdaad}{port\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a736eef65f43df80364a6303e802c450f}{enable\+Cors\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a70b19abcd38d0451defa2018036efe90}{enable\+Auth\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_ae18e74f2a61ef04dffa5c560e9fb64bc}{username\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a4358e790ff1647212fa6043e7ae2655a}{password\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ httplib\+::\+Server $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a6eb0d6186a4c4337d7c8659d891aabb1}{http\+Server\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a9beecbeca3e1a4b46daf6900cccdc8d6}{server\+Thread\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_ac3937bd69503ecb7c1aa5049339314e9}{is\+Running\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::function$<$ nlohmann\+::json(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$, const nlohmann\+::json \&)$>$ $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a74ae67468c47df75d1b17e62c3066fd8}{methods\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter}{Rate\+Limiter}} $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_af42f94924f33906ce8618bef6113375c}{rate\+Limiter\+\_\+}}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a90d1b3b7848a2f14cff2a2f3aba4e4e1}{request\+Count\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a987d3e723c65f260167ed93aa8c841dd}{error\+Count\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server_impl_a487bd9fcb8053c59dccd6630a9cf09a4}{rate\+Limit\+Hits\+\_\+}} \{0\}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_af62665a7373e4fdc2d160e17118e075b}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!RpcServerImpl@{RpcServerImpl}}
+\index{RpcServerImpl@{RpcServerImpl}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{RpcServerImpl()}{RpcServerImpl()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_af62665a7373e4fdc2d160e17118e075b} 
+neo\+::rpc\+::\+Rpc\+Server\+Impl\+::\+Rpc\+Server\+Impl (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$}]{neo\+System}{, }\item[{uint16\+\_\+t}]{port}{, }\item[{bool}]{enable\+Cors}{, }\item[{bool}]{enable\+Auth}{, }\item[{const std\+::string \&}]{username}{, }\item[{const std\+::string \&}]{password}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_af33c8edb84d4c04a908231cf0d7714c1}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!````~RpcServerImpl@{\texorpdfstring{$\sim$}{\string~}RpcServerImpl}}
+\index{````~RpcServerImpl@{\texorpdfstring{$\sim$}{\string~}RpcServerImpl}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RpcServerImpl()}{\string~RpcServerImpl()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_af33c8edb84d4c04a908231cf0d7714c1} 
+neo\+::rpc\+::\+Rpc\+Server\+Impl\+::\texorpdfstring{$\sim$}{\string~}\+Rpc\+Server\+Impl (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a45a376a70ccf3bc0f8ecf54d16b37f19}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!AuthenticateRequest@{AuthenticateRequest}}
+\index{AuthenticateRequest@{AuthenticateRequest}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{AuthenticateRequest()}{AuthenticateRequest()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a45a376a70ccf3bc0f8ecf54d16b37f19} 
+bool neo\+::rpc\+::\+Rpc\+Server\+Impl\+::\+Authenticate\+Request (\begin{DoxyParamCaption}\item[{const httplib\+::\+Request \&}]{req}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a91f6328431c5d23a52babb07d110a8fc}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!GetMetrics@{GetMetrics}}
+\index{GetMetrics@{GetMetrics}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{GetMetrics()}{GetMetrics()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a91f6328431c5d23a52babb07d110a8fc} 
+nlohmann\+::json neo\+::rpc\+::\+Rpc\+Server\+Impl\+::\+Get\+Metrics (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a60cdc5b1e5303496e4ee5ac7bbe806bc}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!HandleRpcRequest@{HandleRpcRequest}}
+\index{HandleRpcRequest@{HandleRpcRequest}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{HandleRpcRequest()}{HandleRpcRequest()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a60cdc5b1e5303496e4ee5ac7bbe806bc} 
+void neo\+::rpc\+::\+Rpc\+Server\+Impl\+::\+Handle\+Rpc\+Request (\begin{DoxyParamCaption}\item[{const httplib\+::\+Request \&}]{req}{, }\item[{httplib\+::\+Response \&}]{res}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a364ae1d30ce752ebdced6588d7f6b077}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!InitializeRoutes@{InitializeRoutes}}
+\index{InitializeRoutes@{InitializeRoutes}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{InitializeRoutes()}{InitializeRoutes()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a364ae1d30ce752ebdced6588d7f6b077} 
+void neo\+::rpc\+::\+Rpc\+Server\+Impl\+::\+Initialize\+Routes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_aa3c27a30fc97e3a173c2af1f30e3260f}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!IsRunning@{IsRunning}}
+\index{IsRunning@{IsRunning}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{IsRunning()}{IsRunning()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_aa3c27a30fc97e3a173c2af1f30e3260f} 
+bool neo\+::rpc\+::\+Rpc\+Server\+Impl\+::\+Is\+Running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a39ffe3c34e684c1fdf3a8bd2b41ea2c4}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!ProcessRequest@{ProcessRequest}}
+\index{ProcessRequest@{ProcessRequest}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{ProcessRequest()}{ProcessRequest()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a39ffe3c34e684c1fdf3a8bd2b41ea2c4} 
+nlohmann\+::json neo\+::rpc\+::\+Rpc\+Server\+Impl\+::\+Process\+Request (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a905b4544db250ffaf2e403179dc6f49f}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!RegisterMethods@{RegisterMethods}}
+\index{RegisterMethods@{RegisterMethods}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{RegisterMethods()}{RegisterMethods()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a905b4544db250ffaf2e403179dc6f49f} 
+void neo\+::rpc\+::\+Rpc\+Server\+Impl\+::\+Register\+Methods (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a4cc7acf0bb27cefa1166c32e80289e5f}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!Start@{Start}}
+\index{Start@{Start}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a4cc7acf0bb27cefa1166c32e80289e5f} 
+bool neo\+::rpc\+::\+Rpc\+Server\+Impl\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_acd7e449975506946b926d6ebc44b4f6c}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_acd7e449975506946b926d6ebc44b4f6c} 
+bool neo\+::rpc\+::\+Rpc\+Server\+Impl\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a2d51ca3342879a7effd515e244dd6485}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!ValidateRequest@{ValidateRequest}}
+\index{ValidateRequest@{ValidateRequest}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{ValidateRequest()}{ValidateRequest()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a2d51ca3342879a7effd515e244dd6485} 
+std\+::string neo\+::rpc\+::\+Rpc\+Server\+Impl\+::\+Validate\+Request (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{request}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a70b19abcd38d0451defa2018036efe90}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!enableAuth\_@{enableAuth\_}}
+\index{enableAuth\_@{enableAuth\_}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{enableAuth\_}{enableAuth\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a70b19abcd38d0451defa2018036efe90} 
+bool neo\+::rpc\+::\+Rpc\+Server\+Impl\+::enable\+Auth\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a736eef65f43df80364a6303e802c450f}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!enableCors\_@{enableCors\_}}
+\index{enableCors\_@{enableCors\_}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{enableCors\_}{enableCors\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a736eef65f43df80364a6303e802c450f} 
+bool neo\+::rpc\+::\+Rpc\+Server\+Impl\+::enable\+Cors\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a987d3e723c65f260167ed93aa8c841dd}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!errorCount\_@{errorCount\_}}
+\index{errorCount\_@{errorCount\_}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{errorCount\_}{errorCount\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a987d3e723c65f260167ed93aa8c841dd} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::rpc\+::\+Rpc\+Server\+Impl\+::error\+Count\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a6eb0d6186a4c4337d7c8659d891aabb1}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!httpServer\_@{httpServer\_}}
+\index{httpServer\_@{httpServer\_}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{httpServer\_}{httpServer\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a6eb0d6186a4c4337d7c8659d891aabb1} 
+std\+::unique\+\_\+ptr$<$httplib\+::\+Server$>$ neo\+::rpc\+::\+Rpc\+Server\+Impl\+::http\+Server\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_ac3937bd69503ecb7c1aa5049339314e9}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!isRunning\_@{isRunning\_}}
+\index{isRunning\_@{isRunning\_}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{isRunning\_}{isRunning\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_ac3937bd69503ecb7c1aa5049339314e9} 
+std\+::atomic$<$bool$>$ neo\+::rpc\+::\+Rpc\+Server\+Impl\+::is\+Running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a74ae67468c47df75d1b17e62c3066fd8}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!methods\_@{methods\_}}
+\index{methods\_@{methods\_}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{methods\_}{methods\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a74ae67468c47df75d1b17e62c3066fd8} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::function$<$nlohmann\+::json(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}}$>$, const nlohmann\+::json\&)$>$ $>$ neo\+::rpc\+::\+Rpc\+Server\+Impl\+::methods\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a97bf1e22d4db2ffe80e28a34e9fff878}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!neoSystem\_@{neoSystem\_}}
+\index{neoSystem\_@{neoSystem\_}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{neoSystem\_}{neoSystem\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a97bf1e22d4db2ffe80e28a34e9fff878} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}}$>$ neo\+::rpc\+::\+Rpc\+Server\+Impl\+::neo\+System\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a4358e790ff1647212fa6043e7ae2655a}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!password\_@{password\_}}
+\index{password\_@{password\_}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{password\_}{password\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a4358e790ff1647212fa6043e7ae2655a} 
+std\+::string neo\+::rpc\+::\+Rpc\+Server\+Impl\+::password\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a0a7d48de18adf4a8132ca3faab0bdaad}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!port\_@{port\_}}
+\index{port\_@{port\_}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{port\_}{port\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a0a7d48de18adf4a8132ca3faab0bdaad} 
+uint16\+\_\+t neo\+::rpc\+::\+Rpc\+Server\+Impl\+::port\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_af42f94924f33906ce8618bef6113375c}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!rateLimiter\_@{rateLimiter\_}}
+\index{rateLimiter\_@{rateLimiter\_}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{rateLimiter\_}{rateLimiter\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_af42f94924f33906ce8618bef6113375c} 
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter}{Rate\+Limiter}}$>$ neo\+::rpc\+::\+Rpc\+Server\+Impl\+::rate\+Limiter\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a487bd9fcb8053c59dccd6630a9cf09a4}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!rateLimitHits\_@{rateLimitHits\_}}
+\index{rateLimitHits\_@{rateLimitHits\_}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{rateLimitHits\_}{rateLimitHits\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a487bd9fcb8053c59dccd6630a9cf09a4} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::rpc\+::\+Rpc\+Server\+Impl\+::rate\+Limit\+Hits\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a90d1b3b7848a2f14cff2a2f3aba4e4e1}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!requestCount\_@{requestCount\_}}
+\index{requestCount\_@{requestCount\_}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{requestCount\_}{requestCount\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a90d1b3b7848a2f14cff2a2f3aba4e4e1} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::rpc\+::\+Rpc\+Server\+Impl\+::request\+Count\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_a9beecbeca3e1a4b46daf6900cccdc8d6}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!serverThread\_@{serverThread\_}}
+\index{serverThread\_@{serverThread\_}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{serverThread\_}{serverThread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_a9beecbeca3e1a4b46daf6900cccdc8d6} 
+std\+::thread neo\+::rpc\+::\+Rpc\+Server\+Impl\+::server\+Thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_server_impl_ae18e74f2a61ef04dffa5c560e9fb64bc}\index{neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}!username\_@{username\_}}
+\index{username\_@{username\_}!neo::rpc::RpcServerImpl@{neo::rpc::RpcServerImpl}}
+\doxysubsubsection{\texorpdfstring{username\_}{username\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_server_impl_ae18e74f2a61ef04dffa5c560e9fb64bc} 
+std\+::string neo\+::rpc\+::\+Rpc\+Server\+Impl\+::username\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/rpc/\mbox{\hyperlink{rpc__server__unified_8cpp}{rpc\+\_\+server\+\_\+unified.\+cpp}}\end{DoxyCompactItemize}

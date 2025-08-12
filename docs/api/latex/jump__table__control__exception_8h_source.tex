@@ -1,0 +1,28 @@
+\doxysection{jump\+\_\+table\+\_\+control\+\_\+exception.\+h}
+\hypertarget{jump__table__control__exception_8h_source}{}\label{jump__table__control__exception_8h_source}\index{include/neo/vm/jump\_table\_control\_exception.h@{include/neo/vm/jump\_table\_control\_exception.h}}
+\mbox{\hyperlink{jump__table__control__exception_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{jump__table_8h}{neo/vm/jump\_table.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_jump_table_control_exception}{JumpTableControlException}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{comment}{//\ Exception\ handling\ operations}}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_jump_table_control_exception_a6be0f3a733d990f51f06203260f7b57d}{LEAVE}}(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{ExecutionEngine}}\&\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}}\&\ instruction);}
+\DoxyCodeLine{00015\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_jump_table_control_exception_ad3f3cd28e3c29f7813c27324e2095f2f}{LEAVE\_L}}(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{ExecutionEngine}}\&\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}}\&\ instruction);}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8d12a2ca7e5a64036d7251a3eda51a38}{ABORT}}(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{ExecutionEngine}}\&\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}}\&\ instruction);}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a1edce3bd99a335da00a27703a24f3dfc}{ASSERT}}(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{ExecutionEngine}}\&\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}}\&\ instruction);}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a655474de4674aba7a436a73cd8d9a906}{THROW}}(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{ExecutionEngine}}\&\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}}\&\ instruction);}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a59dfb83f7cac4e3c8ee91700ef2ad90d}{TRY}}(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{ExecutionEngine}}\&\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}}\&\ instruction);}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ae1f987976ed4442295b1b7b50d994cbc}{TRY\_L}}(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{ExecutionEngine}}\&\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}}\&\ instruction);}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aae17e3dd93509fb03a7052c9700efab7}{ENDTRY}}(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{ExecutionEngine}}\&\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}}\&\ instruction);}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8acfd8a07e5120a5fa23e3c6ab4b4c468e}{ENDTRY\_L}}(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{ExecutionEngine}}\&\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}}\&\ instruction);}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8afa5f5f4db9a3a5ff9761b775dd414a79}{ENDFINALLY}}(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{ExecutionEngine}}\&\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}}\&\ instruction);}
+\DoxyCodeLine{00024\ \};}
+\DoxyCodeLine{00025\ \}\ \ \textcolor{comment}{//\ namespace\ neo::vm}}
+
+\end{DoxyCode}

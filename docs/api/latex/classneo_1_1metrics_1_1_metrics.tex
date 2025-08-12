@@ -1,0 +1,286 @@
+\doxysection{neo\+::metrics\+::Metrics Class Reference}
+\hypertarget{classneo_1_1metrics_1_1_metrics}{}\label{classneo_1_1metrics_1_1_metrics}\index{neo::metrics::Metrics@{neo::metrics::Metrics}}
+
+
+Simple metrics collection for Neo node.  
+
+
+
+
+{\ttfamily \#include $<$metrics.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a38dca2d1ff910c81cfa06aff1b6d888a}{Increment\+Transactions\+Processed}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a456d2c18689e358b121fec2f01fd458b}{Increment\+Transactions\+Verified}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a3938032d7d614ebc6fb2907db5bbd678}{Increment\+Transactions\+Failed}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a00bcdf60175c570801d69d3585d2703c}{Increment\+Blocks\+Processed}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a4e1f8c17b754ab354a2455e49abeb737}{Increment\+Blocks\+Verified}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_af29c0613613bfd7073713ce98906f6d3}{Increment\+Blocks\+Failed}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_af021d62ec2cb34782df58ebbbd127b51}{Increment\+Peers\+Connected}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a9a1124c711c9b30bd3eedd60584c6217}{Increment\+Peers\+Disconnected}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a544a09058e9e91133f7691d38565f06a}{Increment\+Messages\+Received}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a2e6120f376eb7e0500d99ef426f7b3c5}{Increment\+Messages\+Sent}} ()
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a1c25d29e12d73ca8c7ff8764d880e817}{Get\+Transactions\+Processed}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a16713aa19a3f69ac02e5f38b5c141ff4}{Get\+Transactions\+Verified}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a82bc615ae9024c40f4077af471e89427}{Get\+Transactions\+Failed}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a59beb57bf9bad4b29886cf2c4c1c97bb}{Get\+Blocks\+Processed}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_ac12fcc7fdd24dff495f3ad9172734e19}{Get\+Blocks\+Verified}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_ac7d7c9389f446647fff49acf9cad9633}{Get\+Blocks\+Failed}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a6c3cc4be761b4634c7c71c1651aeb07f}{Get\+Peers\+Connected}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a9bfe781db133ee97d43586f931886458}{Get\+Peers\+Disconnected}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_acabb83b87fdd5bb040a7a3c0359b57cf}{Get\+Messages\+Received}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_afc74127e9618511f05c93bda5d363467}{Get\+Messages\+Sent}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics}{Metrics}} \& \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a3c605adcc494c8a5d0fde16002cb4fa6}{Get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_ac8a45ca5982aebdb49d2a105d5f77dc6}{transactions\+Processed\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a5ed3b596b0ea0640e5a48d00153de74e}{transactions\+Verified\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_aff711a7ce6fd34d0efd3807e3b9abb8c}{transactions\+Failed\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a12d0210b15b42babb9f5a852ddf6666c}{blocks\+Processed\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_ac47ca0b83a74a8f90ec4e002b0708dee}{blocks\+Verified\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a96c8bda8491566a8e4380dd082e6144f}{blocks\+Failed\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a3665320e3b625cf018f62671c09402f8}{peers\+Connected\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a5f2a4b3c6a74b4eda2ee8231dd0c0955}{peers\+Disconnected\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a4450fa5c629f0afb4a7f3ab11767c8b3}{messages\+Received\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_aa656eb462715af3824e25f3974733533}{messages\+Sent\+\_\+}} \{0\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Simple metrics collection for Neo node. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1metrics_1_1_metrics_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1metrics_1_1_metrics_ac7d7c9389f446647fff49acf9cad9633}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!GetBlocksFailed@{GetBlocksFailed}}
+\index{GetBlocksFailed@{GetBlocksFailed}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{GetBlocksFailed()}{GetBlocksFailed()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_ac7d7c9389f446647fff49acf9cad9633} 
+uint64\+\_\+t neo\+::metrics\+::\+Metrics\+::\+Get\+Blocks\+Failed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a59beb57bf9bad4b29886cf2c4c1c97bb}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!GetBlocksProcessed@{GetBlocksProcessed}}
+\index{GetBlocksProcessed@{GetBlocksProcessed}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{GetBlocksProcessed()}{GetBlocksProcessed()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a59beb57bf9bad4b29886cf2c4c1c97bb} 
+uint64\+\_\+t neo\+::metrics\+::\+Metrics\+::\+Get\+Blocks\+Processed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_ac12fcc7fdd24dff495f3ad9172734e19}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!GetBlocksVerified@{GetBlocksVerified}}
+\index{GetBlocksVerified@{GetBlocksVerified}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{GetBlocksVerified()}{GetBlocksVerified()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_ac12fcc7fdd24dff495f3ad9172734e19} 
+uint64\+\_\+t neo\+::metrics\+::\+Metrics\+::\+Get\+Blocks\+Verified (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a3c605adcc494c8a5d0fde16002cb4fa6}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a3c605adcc494c8a5d0fde16002cb4fa6} 
+\mbox{\hyperlink{classneo_1_1metrics_1_1_metrics}{Metrics}} \& neo\+::metrics\+::\+Metrics\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_acabb83b87fdd5bb040a7a3c0359b57cf}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!GetMessagesReceived@{GetMessagesReceived}}
+\index{GetMessagesReceived@{GetMessagesReceived}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{GetMessagesReceived()}{GetMessagesReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_acabb83b87fdd5bb040a7a3c0359b57cf} 
+uint64\+\_\+t neo\+::metrics\+::\+Metrics\+::\+Get\+Messages\+Received (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_afc74127e9618511f05c93bda5d363467}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!GetMessagesSent@{GetMessagesSent}}
+\index{GetMessagesSent@{GetMessagesSent}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{GetMessagesSent()}{GetMessagesSent()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_afc74127e9618511f05c93bda5d363467} 
+uint64\+\_\+t neo\+::metrics\+::\+Metrics\+::\+Get\+Messages\+Sent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a6c3cc4be761b4634c7c71c1651aeb07f}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!GetPeersConnected@{GetPeersConnected}}
+\index{GetPeersConnected@{GetPeersConnected}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{GetPeersConnected()}{GetPeersConnected()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a6c3cc4be761b4634c7c71c1651aeb07f} 
+uint64\+\_\+t neo\+::metrics\+::\+Metrics\+::\+Get\+Peers\+Connected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a9bfe781db133ee97d43586f931886458}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!GetPeersDisconnected@{GetPeersDisconnected}}
+\index{GetPeersDisconnected@{GetPeersDisconnected}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{GetPeersDisconnected()}{GetPeersDisconnected()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a9bfe781db133ee97d43586f931886458} 
+uint64\+\_\+t neo\+::metrics\+::\+Metrics\+::\+Get\+Peers\+Disconnected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a82bc615ae9024c40f4077af471e89427}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!GetTransactionsFailed@{GetTransactionsFailed}}
+\index{GetTransactionsFailed@{GetTransactionsFailed}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{GetTransactionsFailed()}{GetTransactionsFailed()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a82bc615ae9024c40f4077af471e89427} 
+uint64\+\_\+t neo\+::metrics\+::\+Metrics\+::\+Get\+Transactions\+Failed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a1c25d29e12d73ca8c7ff8764d880e817}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!GetTransactionsProcessed@{GetTransactionsProcessed}}
+\index{GetTransactionsProcessed@{GetTransactionsProcessed}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{GetTransactionsProcessed()}{GetTransactionsProcessed()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a1c25d29e12d73ca8c7ff8764d880e817} 
+uint64\+\_\+t neo\+::metrics\+::\+Metrics\+::\+Get\+Transactions\+Processed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a16713aa19a3f69ac02e5f38b5c141ff4}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!GetTransactionsVerified@{GetTransactionsVerified}}
+\index{GetTransactionsVerified@{GetTransactionsVerified}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{GetTransactionsVerified()}{GetTransactionsVerified()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a16713aa19a3f69ac02e5f38b5c141ff4} 
+uint64\+\_\+t neo\+::metrics\+::\+Metrics\+::\+Get\+Transactions\+Verified (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_af29c0613613bfd7073713ce98906f6d3}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!IncrementBlocksFailed@{IncrementBlocksFailed}}
+\index{IncrementBlocksFailed@{IncrementBlocksFailed}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{IncrementBlocksFailed()}{IncrementBlocksFailed()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_af29c0613613bfd7073713ce98906f6d3} 
+void neo\+::metrics\+::\+Metrics\+::\+Increment\+Blocks\+Failed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a00bcdf60175c570801d69d3585d2703c}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!IncrementBlocksProcessed@{IncrementBlocksProcessed}}
+\index{IncrementBlocksProcessed@{IncrementBlocksProcessed}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{IncrementBlocksProcessed()}{IncrementBlocksProcessed()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a00bcdf60175c570801d69d3585d2703c} 
+void neo\+::metrics\+::\+Metrics\+::\+Increment\+Blocks\+Processed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a4e1f8c17b754ab354a2455e49abeb737}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!IncrementBlocksVerified@{IncrementBlocksVerified}}
+\index{IncrementBlocksVerified@{IncrementBlocksVerified}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{IncrementBlocksVerified()}{IncrementBlocksVerified()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a4e1f8c17b754ab354a2455e49abeb737} 
+void neo\+::metrics\+::\+Metrics\+::\+Increment\+Blocks\+Verified (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a544a09058e9e91133f7691d38565f06a}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!IncrementMessagesReceived@{IncrementMessagesReceived}}
+\index{IncrementMessagesReceived@{IncrementMessagesReceived}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{IncrementMessagesReceived()}{IncrementMessagesReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a544a09058e9e91133f7691d38565f06a} 
+void neo\+::metrics\+::\+Metrics\+::\+Increment\+Messages\+Received (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a2e6120f376eb7e0500d99ef426f7b3c5}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!IncrementMessagesSent@{IncrementMessagesSent}}
+\index{IncrementMessagesSent@{IncrementMessagesSent}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{IncrementMessagesSent()}{IncrementMessagesSent()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a2e6120f376eb7e0500d99ef426f7b3c5} 
+void neo\+::metrics\+::\+Metrics\+::\+Increment\+Messages\+Sent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_af021d62ec2cb34782df58ebbbd127b51}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!IncrementPeersConnected@{IncrementPeersConnected}}
+\index{IncrementPeersConnected@{IncrementPeersConnected}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{IncrementPeersConnected()}{IncrementPeersConnected()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_af021d62ec2cb34782df58ebbbd127b51} 
+void neo\+::metrics\+::\+Metrics\+::\+Increment\+Peers\+Connected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a9a1124c711c9b30bd3eedd60584c6217}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!IncrementPeersDisconnected@{IncrementPeersDisconnected}}
+\index{IncrementPeersDisconnected@{IncrementPeersDisconnected}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{IncrementPeersDisconnected()}{IncrementPeersDisconnected()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a9a1124c711c9b30bd3eedd60584c6217} 
+void neo\+::metrics\+::\+Metrics\+::\+Increment\+Peers\+Disconnected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a3938032d7d614ebc6fb2907db5bbd678}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!IncrementTransactionsFailed@{IncrementTransactionsFailed}}
+\index{IncrementTransactionsFailed@{IncrementTransactionsFailed}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{IncrementTransactionsFailed()}{IncrementTransactionsFailed()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a3938032d7d614ebc6fb2907db5bbd678} 
+void neo\+::metrics\+::\+Metrics\+::\+Increment\+Transactions\+Failed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a38dca2d1ff910c81cfa06aff1b6d888a}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!IncrementTransactionsProcessed@{IncrementTransactionsProcessed}}
+\index{IncrementTransactionsProcessed@{IncrementTransactionsProcessed}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{IncrementTransactionsProcessed()}{IncrementTransactionsProcessed()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a38dca2d1ff910c81cfa06aff1b6d888a} 
+void neo\+::metrics\+::\+Metrics\+::\+Increment\+Transactions\+Processed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a456d2c18689e358b121fec2f01fd458b}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!IncrementTransactionsVerified@{IncrementTransactionsVerified}}
+\index{IncrementTransactionsVerified@{IncrementTransactionsVerified}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{IncrementTransactionsVerified()}{IncrementTransactionsVerified()}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a456d2c18689e358b121fec2f01fd458b} 
+void neo\+::metrics\+::\+Metrics\+::\+Increment\+Transactions\+Verified (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1metrics_1_1_metrics_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a96c8bda8491566a8e4380dd082e6144f}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!blocksFailed\_@{blocksFailed\_}}
+\index{blocksFailed\_@{blocksFailed\_}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{blocksFailed\_}{blocksFailed\_}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a96c8bda8491566a8e4380dd082e6144f} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::metrics\+::\+Metrics\+::blocks\+Failed\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a12d0210b15b42babb9f5a852ddf6666c}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!blocksProcessed\_@{blocksProcessed\_}}
+\index{blocksProcessed\_@{blocksProcessed\_}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{blocksProcessed\_}{blocksProcessed\_}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a12d0210b15b42babb9f5a852ddf6666c} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::metrics\+::\+Metrics\+::blocks\+Processed\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_ac47ca0b83a74a8f90ec4e002b0708dee}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!blocksVerified\_@{blocksVerified\_}}
+\index{blocksVerified\_@{blocksVerified\_}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{blocksVerified\_}{blocksVerified\_}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_ac47ca0b83a74a8f90ec4e002b0708dee} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::metrics\+::\+Metrics\+::blocks\+Verified\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a4450fa5c629f0afb4a7f3ab11767c8b3}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!messagesReceived\_@{messagesReceived\_}}
+\index{messagesReceived\_@{messagesReceived\_}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{messagesReceived\_}{messagesReceived\_}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a4450fa5c629f0afb4a7f3ab11767c8b3} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::metrics\+::\+Metrics\+::messages\+Received\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_aa656eb462715af3824e25f3974733533}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!messagesSent\_@{messagesSent\_}}
+\index{messagesSent\_@{messagesSent\_}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{messagesSent\_}{messagesSent\_}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_aa656eb462715af3824e25f3974733533} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::metrics\+::\+Metrics\+::messages\+Sent\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a3665320e3b625cf018f62671c09402f8}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!peersConnected\_@{peersConnected\_}}
+\index{peersConnected\_@{peersConnected\_}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{peersConnected\_}{peersConnected\_}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a3665320e3b625cf018f62671c09402f8} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::metrics\+::\+Metrics\+::peers\+Connected\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a5f2a4b3c6a74b4eda2ee8231dd0c0955}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!peersDisconnected\_@{peersDisconnected\_}}
+\index{peersDisconnected\_@{peersDisconnected\_}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{peersDisconnected\_}{peersDisconnected\_}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a5f2a4b3c6a74b4eda2ee8231dd0c0955} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::metrics\+::\+Metrics\+::peers\+Disconnected\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_aff711a7ce6fd34d0efd3807e3b9abb8c}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!transactionsFailed\_@{transactionsFailed\_}}
+\index{transactionsFailed\_@{transactionsFailed\_}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{transactionsFailed\_}{transactionsFailed\_}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_aff711a7ce6fd34d0efd3807e3b9abb8c} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::metrics\+::\+Metrics\+::transactions\+Failed\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_ac8a45ca5982aebdb49d2a105d5f77dc6}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!transactionsProcessed\_@{transactionsProcessed\_}}
+\index{transactionsProcessed\_@{transactionsProcessed\_}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{transactionsProcessed\_}{transactionsProcessed\_}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_ac8a45ca5982aebdb49d2a105d5f77dc6} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::metrics\+::\+Metrics\+::transactions\+Processed\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1metrics_1_1_metrics_a5ed3b596b0ea0640e5a48d00153de74e}\index{neo::metrics::Metrics@{neo::metrics::Metrics}!transactionsVerified\_@{transactionsVerified\_}}
+\index{transactionsVerified\_@{transactionsVerified\_}!neo::metrics::Metrics@{neo::metrics::Metrics}}
+\doxysubsubsection{\texorpdfstring{transactionsVerified\_}{transactionsVerified\_}}
+{\footnotesize\ttfamily \label{classneo_1_1metrics_1_1_metrics_a5ed3b596b0ea0640e5a48d00153de74e} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::metrics\+::\+Metrics\+::transactions\+Verified\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/metrics/\mbox{\hyperlink{metrics_2metrics_8h}{metrics.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,70 @@
+\doxysection{script\+\_\+builder.\+h}
+\hypertarget{script__builder_8h_source}{}\label{script__builder_8h_source}\index{include/neo/vm/script\_builder.h@{include/neo/vm/script\_builder.h}}
+\mbox{\hyperlink{script__builder_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__writer_8h}{neo/io/binary\_writer.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__span_8h}{neo/io/byte\_span.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{vm_2internal_2byte__vector_8h}{neo/vm/internal/byte\_vector.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{opcode_8h}{neo/vm/opcode.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{script_8h}{neo/vm/script.h}}>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}(\textcolor{keywordtype}{size\_t}\ initialCapacity\ =\ 0);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_ab1877cdf9881d1a79f2286688ec2c562}{Emit}}(\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{OpCode}}\ opcode,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ operand\ =\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}());}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_af209c5f1f8732dcebb85025175018acd}{EmitCall}}(int32\_t\ offset);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a856c9ff0f78c0dc911b41ff0796f51ff}{EmitJump}}(\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{OpCode}}\ opcode,\ int32\_t\ offset);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a9c3a57dae9d66ad4d9e9200b66a0ddb7}{EmitPush}}(int64\_t\ value);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a9c3a57dae9d66ad4d9e9200b66a0ddb7}{EmitPush}}(\textcolor{keywordtype}{bool}\ value);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a9c3a57dae9d66ad4d9e9200b66a0ddb7}{EmitPush}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ data);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a9c3a57dae9d66ad4d9e9200b66a0ddb7}{EmitPush}}(\textcolor{keyword}{const}\ std::string\&\ data);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00086\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a9c3a57dae9d66ad4d9e9200b66a0ddb7}{EmitPush}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ data);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a9329f0fa0e8108ea816cad3a5ff68119}{EmitRaw}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ script\ =\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}());}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_ad107af0b6cc1c8927b6650844d4afc95}{EmitSysCall}}(uint32\_t\ api);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00107\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_ad107af0b6cc1c8927b6650844d4afc95}{EmitSysCall}}(\textcolor{keyword}{const}\ std::string\&\ api);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00113\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a5528baaa67d1cb2c8641773dbd80ddfb}{ToArray}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00119\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a5ccf1bf50cd1b8049e2dda2e7196389e}{ToScript}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00126\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_af8f36da39599ac35aa52d319a057ef47}{EmitPushData}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ data)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a9c3a57dae9d66ad4d9e9200b66a0ddb7}{EmitPush}}(data);\ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a3d3282243b237a1b63d01292da655b36}{EmitPushData}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ data)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a9c3a57dae9d66ad4d9e9200b66a0ddb7}{EmitPush}}(data.\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a95791d958ed4ec88d32e811b51d90451}{AsSpan}}());\ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00140\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a1c7a4df9f158ec42bec0d8cd63953fff}{EmitPushNumber}}(int64\_t\ value)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a9c3a57dae9d66ad4d9e9200b66a0ddb7}{EmitPush}}(value);\ \}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00147\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_adc7f4b380ba70c96e947dd7f69b57ce8}{EmitPushNumber}}(int32\_t\ value)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a9c3a57dae9d66ad4d9e9200b66a0ddb7}{EmitPush}}(\textcolor{keyword}{static\_cast<}int64\_t\textcolor{keyword}{>}(value));\ \}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00154\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{ScriptBuilder}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a19d48946c578e5465f348f28cda6aca2}{EmitPushNumber}}(\textcolor{keywordtype}{size\_t}\ value)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a9c3a57dae9d66ad4d9e9200b66a0ddb7}{EmitPush}}(\textcolor{keyword}{static\_cast<}int64\_t\textcolor{keyword}{>}(value));\ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00157\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a6f92a13d0036398e85cf424bf21d2fea}{script\_}};}
+\DoxyCodeLine{00158\ \ \ \ \ std::shared\_ptr<std::stringstream>\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_afd25a3ceea0854beca912ec1200e5c3d}{stream\_}};}
+\DoxyCodeLine{00159\ \ \ \ \ std::unique\_ptr<io::BinaryWriter>\ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_abeb06cd11e56e257e8304acf9f4f8f2d}{writer\_}};}
+\DoxyCodeLine{00160\ \};}
+\DoxyCodeLine{00161\ \}\ \ \textcolor{comment}{//\ namespace\ neo::vm}}
+
+\end{DoxyCode}

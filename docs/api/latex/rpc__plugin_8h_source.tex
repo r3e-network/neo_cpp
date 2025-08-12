@@ -1,0 +1,47 @@
+\doxysection{rpc\+\_\+plugin.\+h}
+\hypertarget{rpc__plugin_8h_source}{}\label{rpc__plugin_8h_source}\index{include/neo/plugins/rpc\_plugin.h@{include/neo/plugins/rpc\_plugin.h}}
+\mbox{\hyperlink{rpc__plugin_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{plugin__base_8h}{neo/plugins/plugin\_base.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{rpc__request_8h}{neo/rpc/rpc\_request.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{rpc__response_8h}{neo/rpc/rpc\_response.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{rpc__server_8h}{neo/rpc/rpc\_server.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1plugins}{neo::plugins}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1plugins_1_1_r_p_c_plugin_aff0ca7e63aa89061ef65b0210250e780}{RPCPlugin}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_ae2713af7147395e3f7230925418aa28d}{PluginBase}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classneo_1_1plugins_1_1_r_p_c_plugin_aff0ca7e63aa89061ef65b0210250e780}{RPCPlugin}}();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_r_p_c_plugin_a8432e776a298df915bac8bc8f83a87e2}{\string~RPCPlugin}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_r_p_c_plugin_a98cea6e5e41562e36d636400606c412a}{OnInitialize}}(\textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::string>\&\ settings)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_r_p_c_plugin_a0ceebcd4becb1fa6e6bc82785185bfac}{OnStart}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_r_p_c_plugin_a6b16964c8d32c77c28ee2ca2b8144614}{OnStop}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_r_p_c_plugin_a151e520233628abbf83986b3ff78ce0b}{RegisterMethod}}(\textcolor{keyword}{const}\ std::string\&\ name,\ std::function<nlohmann::json(\textcolor{keyword}{const}\ std::vector<std::string>\&)>\ method);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00059\ \ \ \ \ std::unordered\_map<std::string,\ std::function<nlohmann::json(\textcolor{keyword}{const}\ std::vector<std::string>\&)>>\ \mbox{\hyperlink{classneo_1_1plugins_1_1_r_p_c_plugin_ad74aaaed555588e5f9ba2747b589845b}{methods\_}};}
+\DoxyCodeLine{00060\ \ \ \ \ std::vector<int32\_t>\ \mbox{\hyperlink{classneo_1_1plugins_1_1_r_p_c_plugin_a5825ffa9fd48a23345b4d79b56ae6138}{callbackIds\_}};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response}{rpc::RpcResponse}}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_r_p_c_plugin_ab9b02128eb377d0ad3cce7ace7e62aea}{OnRequest}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request}{rpc::RpcRequest}}\&\ request);}
+\DoxyCodeLine{00068\ \};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00073\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1plugins_1_1_r_p_c_plugin_factory}{RPCPluginFactory}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory_base}{PluginFactoryBase}}<RPCPlugin>}
+\DoxyCodeLine{00074\ \{}
+\DoxyCodeLine{00075\ \};}
+\DoxyCodeLine{00076\ \}\ \ \textcolor{comment}{//\ namespace\ neo::plugins}}
+
+\end{DoxyCode}

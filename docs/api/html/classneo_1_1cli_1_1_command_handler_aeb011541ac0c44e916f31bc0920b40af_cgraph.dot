@@ -1,0 +1,21 @@
+digraph "neo::cli::CommandHandler::HandleOpenWallet"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::cli::CommandHandler\l::HandleOpenWallet",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Handles the open wallet command."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::wallets::WalletFactory\lManager::GetInstance",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1wallets_1_1_wallet_factory_manager.html#af9da082261ad4bab022fee39ac271e22",tooltip="Gets the singleton instance of the WalletFactoryManager."];
+  Node2 -> Node3 [id="edge2_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::wallets::WalletFactory\lManager::WalletFactoryManager",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1wallets_1_1_wallet_factory_manager.html#a5b530023d39f7431e98f5d0d840b8c6a",tooltip=" "];
+  Node3 -> Node4 [id="edge3_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::wallets::nep6\l::NEP6WalletFactory\l::GetInstance",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory.html#a1ac22eff7f9a3f37cb735ef73c1f211b",tooltip="Gets the singleton instance of the NEP6WalletFactory."];
+  Node3 -> Node5 [id="edge4_Node000003_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::wallets::WalletFactory\lManager::RegisterFactory",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1wallets_1_1_wallet_factory_manager.html#ad9de26823a776647f0f21eddd9041c39",tooltip="Registers a wallet factory."];
+  Node1 -> Node6 [id="edge5_Node000001_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::wallets::WalletFactory\lManager::OpenWallet",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1wallets_1_1_wallet_factory_manager.html#a6fa573598a220e3ed9414fd2d3173583",tooltip="Opens an existing wallet."];
+  Node6 -> Node7 [id="edge6_Node000006_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::wallets::WalletFactory\lManager::GetFactory",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1wallets_1_1_wallet_factory_manager.html#ae4a44ad01f9602c7b71a8c07722b2c68",tooltip="Gets a factory that can handle the specified path."];
+}

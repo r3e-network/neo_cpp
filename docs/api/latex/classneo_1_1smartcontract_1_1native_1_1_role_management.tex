@@ -1,0 +1,468 @@
+\doxysection{neo\+::smartcontract\+::native\+::Role\+Management Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management}{}\label{classneo_1_1smartcontract_1_1native_1_1_role_management}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+
+
+Represents the role management native contract.  
+
+
+
+
+{\ttfamily \#include $<$role\+\_\+management.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::smartcontract\+::native\+::Role\+Management\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::smartcontract\+::native\+::Role\+Management\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_a55f385c6ceffc5d68a9ee49063e1b9e5}{Role\+Management}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_role_management}{Role\+Management}. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_a88f9123d65182e86557fc66e4ee0db7e}{Get\+Designated\+By\+Role}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_af98732b0f34a921769590f9fb97d2867}{Role}} role, uint32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets the designated by role. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_a0051ab01a9362515bd1bf7f2970395ca}{Designate\+As\+Role}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_af98732b0f34a921769590f9fb97d2867}{Role}} role, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \&nodes)
+\begin{DoxyCompactList}\small\item\em Designates nodes for a role. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_a7b9d0c964ffaf9e62e2f37bc15d7acbe}{Create\+Storage\+Key}} (uint8\+\_\+t role) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key for a role. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_ae011ee0917fbbd381f7746cf0a4b4427}{Create\+Storage\+Key}} (uint8\+\_\+t role, uint32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key for a role and index. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_ad3490b7634eb70d18d0ecb1331836b7f}{Check\+Committee}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine) const
+\begin{DoxyCompactList}\small\item\em Checks if the caller is a committee member. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_abc30246b54532f8607031b380f3893eb}{Initialize\+Contract}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, uint32\+\_\+t hardfork)
+\begin{DoxyCompactList}\small\item\em Initializes the contract. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_ad0089fd73b7be4194a7fee945f642c45}{On\+Persist}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine)
+\begin{DoxyCompactList}\small\item\em Handles the On\+Persist event. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_acb84eaa424d26e9ac26a3dfac8bf442c}{Post\+Persist}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine)
+\begin{DoxyCompactList}\small\item\em Handles the Post\+Persist event. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a60667ade06e1b9a3c3ef7e2c6a68a632}{Native\+Contract}} (const std\+::string \&name, uint32\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{Native\+Contract}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_ae37e44a3d146975a024466fc40a8dc53}{\texorpdfstring{$\sim$}{\string~}\+Native\+Contract}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a36ffe7bef8e2b15c1992c7fd51735e04}{Get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Gets the name. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a514770635cb55d0e5c59a8d2b5231ea3}{Get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Gets the ID. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_adee5386515d940f614d7f680b5d0edb7}{Get\+Script\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script hash. \end{DoxyCompactList}\item 
+const std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}}, std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&)$>$ $>$ $>$ \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aefb916eb8825a724a48d75e9c5c69acf}{Get\+Methods}} () const
+\begin{DoxyCompactList}\small\item\em Gets the methods. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a3ed2d00b721434cf15b180038e4fa4f2}{Invoke}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::string \&method, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags)
+\begin{DoxyCompactList}\small\item\em Invokes a method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_acbf33ca368ff4d13541b9c12e0a34cad}{Call}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::string \&method, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Calls a method on the contract (alias for Invoke). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aef8498874e1b666ab258a891c2f05a56}{Check\+Call\+Flags}} (const std\+::string \&method, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags) const
+\begin{DoxyCompactList}\small\item\em Checks if the contract has the specified call flags. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a6d9998fc6c7dbedcc447f403fddb6d08}{Get\+Storage\+Prefix}} () const
+\begin{DoxyCompactList}\small\item\em Gets the storage prefix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aaa080efcc4d7deced7aded7bb968cd9c}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a44c7d768e39be1ed6933cdcf2350a2e8}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a50c32e2fa8e736183a0135b44ac5438d}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a2a46f86ca8b2d541f8623821d389eb8b}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aa8eed221a7bf2bce103f7e1fef187e6c}{Get\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a88e6f4aa548d073c5740d1eb0f59f91e}{Put\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value) const
+\begin{DoxyCompactList}\small\item\em Puts the storage value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a041e040e9fbf45d8d8ba9c0dcf87afe4}{Delete\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Deletes the storage value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a5a9ec24cc4c1584fb00fdf32f614dbd8}{Create\+Storage\+Key}} (uint8\+\_\+t prefix) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aacd0961fef8aaa618f43294e4561a72a}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_ac60e9957320d04ffd697e023f94bf233}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a4c42d353f5328c9fbc06f5fd38e406cd}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a8221750790b1aa223a4351bb81ec8a59}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, uint32\+\_\+t key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management}{Role\+Management}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_aee152ede5f087bb9b7d7f95e660de811}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets the instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_afe2a59fb0073a3bdfa07feeb080dbc7a}{ID}} = -\/8
+\begin{DoxyCompactList}\small\item\em The contract ID. \end{DoxyCompactList}\item 
+static constexpr const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_a47f8f0ce7c3c3bb2774cca8f2203b6da}{NAME}} = "{}Role\+Management"{}
+\begin{DoxyCompactList}\small\item\em The contract name. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_aa6808bb34c85a9a8d0a8722ee15514ad}{PREFIX\+\_\+\+ROLE}} = 33
+\begin{DoxyCompactList}\small\item\em The storage prefix for roles. \end{DoxyCompactList}\item 
+static constexpr \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_af98732b0f34a921769590f9fb97d2867}{Role}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_ace81afc9fc95d8e37e534b139c8475da}{ROLE\+\_\+\+STATE\+\_\+\+COMMITTEE}} = \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_af98732b0f34a921769590f9fb97d2867abf1361dc08fb32739598decb4fd59013}{Role\+::\+State\+Validator}}
+\begin{DoxyCompactList}\small\item\em \doxylink{namespaceneo_1_1smartcontract_1_1native_af98732b0f34a921769590f9fb97d2867}{Role} state constants for committee. \end{DoxyCompactList}\item 
+static constexpr \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_af98732b0f34a921769590f9fb97d2867}{Role}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_a075efaa365d8f9183817c98cfaa18109}{ROLE\+\_\+\+STATE\+\_\+\+VALIDATOR}} = \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_af98732b0f34a921769590f9fb97d2867abf1361dc08fb32739598decb4fd59013}{Role\+::\+State\+Validator}}
+\begin{DoxyCompactList}\small\item\em \doxylink{namespaceneo_1_1smartcontract_1_1native_af98732b0f34a921769590f9fb97d2867}{Role} state constants for validators. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_ab31216a50169be5f476b8742ce54fa61}{Initialize}} () override
+\begin{DoxyCompactList}\small\item\em Initializes the contract. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a26af9bcd266b59f910293081ef334993}{Register\+Method}} (const std\+::string \&name, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags, std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&)$>$ handler)
+\begin{DoxyCompactList}\small\item\em Registers a method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_a6818d021732d4cd8f74dedf9599f94fb}{On\+Get\+Designated\+By\+Role}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the get\+Designated\+By\+Role method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_afd8311a6b935b8835627d1868c27e916}{On\+Designate\+As\+Role}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the designate\+As\+Role method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_a42ea0ca50925a8d114e2eb1370923f22}{Native\+Contract\+Test}}
+\item 
+class \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management_af2ba12053996cf368cd80493e87f2ec1}{Role\+Management\+Test}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the role management native contract. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_a55f385c6ceffc5d68a9ee49063e1b9e5}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!RoleManagement@{RoleManagement}}
+\index{RoleManagement@{RoleManagement}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{RoleManagement()}{RoleManagement()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_a55f385c6ceffc5d68a9ee49063e1b9e5} 
+neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+Role\+Management (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_role_management}{Role\+Management}. 
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_ad3490b7634eb70d18d0ecb1331836b7f}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!CheckCommittee@{CheckCommittee}}
+\index{CheckCommittee@{CheckCommittee}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{CheckCommittee()}{CheckCommittee()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_ad3490b7634eb70d18d0ecb1331836b7f} 
+bool neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+Check\+Committee (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the caller is a committee member. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the caller is a committee member, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_a7b9d0c964ffaf9e62e2f37bc15d7acbe}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!CreateStorageKey@{CreateStorageKey}}
+\index{CreateStorageKey@{CreateStorageKey}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{CreateStorageKey()}{CreateStorageKey()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_a7b9d0c964ffaf9e62e2f37bc15d7acbe} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+Create\+Storage\+Key (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{role}{}\end{DoxyParamCaption}) const}
+
+
+
+Creates a storage key for a role. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em role} & The role. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_ae011ee0917fbbd381f7746cf0a4b4427}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!CreateStorageKey@{CreateStorageKey}}
+\index{CreateStorageKey@{CreateStorageKey}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{CreateStorageKey()}{CreateStorageKey()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_ae011ee0917fbbd381f7746cf0a4b4427} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+Create\+Storage\+Key (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{role}{, }\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Creates a storage key for a role and index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em role} & The role. \\
+\hline
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_a0051ab01a9362515bd1bf7f2970395ca}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!DesignateAsRole@{DesignateAsRole}}
+\index{DesignateAsRole@{DesignateAsRole}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{DesignateAsRole()}{DesignateAsRole()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_a0051ab01a9362515bd1bf7f2970395ca} 
+void neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+Designate\+As\+Role (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_af98732b0f34a921769590f9fb97d2867}{Role}}}]{role}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \&}]{nodes}{}\end{DoxyParamCaption})}
+
+
+
+Designates nodes for a role. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em role} & The role. \\
+\hline
+{\em nodes} & The nodes. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_a88f9123d65182e86557fc66e4ee0db7e}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!GetDesignatedByRole@{GetDesignatedByRole}}
+\index{GetDesignatedByRole@{GetDesignatedByRole}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{GetDesignatedByRole()}{GetDesignatedByRole()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_a88f9123d65182e86557fc66e4ee0db7e} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+Get\+Designated\+By\+Role (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_af98732b0f34a921769590f9fb97d2867}{Role}}}]{role}{, }\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the designated by role. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em role} & The role. \\
+\hline
+{\em index} & The index of the block to be queried. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The designated by role. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_aee152ede5f087bb9b7d7f95e660de811}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_aee152ede5f087bb9b7d7f95e660de811} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management}{Role\+Management}} $>$ neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the instance. 
+
+\begin{DoxyReturn}{Returns}
+The instance. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_ab31216a50169be5f476b8742ce54fa61}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_ab31216a50169be5f476b8742ce54fa61} 
+void neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Initializes the contract. 
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a427aae1fe42c2264c5f6979a84092a5d}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}.
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_abc30246b54532f8607031b380f3893eb}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!InitializeContract@{InitializeContract}}
+\index{InitializeContract@{InitializeContract}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{InitializeContract()}{InitializeContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_abc30246b54532f8607031b380f3893eb} 
+bool neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+Initialize\+Contract (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{uint32\+\_\+t}]{hardfork}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the contract. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em hardfork} & The hardfork version. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_afd8311a6b935b8835627d1868c27e916}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!OnDesignateAsRole@{OnDesignateAsRole}}
+\index{OnDesignateAsRole@{OnDesignateAsRole}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{OnDesignateAsRole()}{OnDesignateAsRole()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_afd8311a6b935b8835627d1868c27e916} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+On\+Designate\+As\+Role (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the designate\+As\+Role method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_a6818d021732d4cd8f74dedf9599f94fb}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!OnGetDesignatedByRole@{OnGetDesignatedByRole}}
+\index{OnGetDesignatedByRole@{OnGetDesignatedByRole}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{OnGetDesignatedByRole()}{OnGetDesignatedByRole()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_a6818d021732d4cd8f74dedf9599f94fb} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+On\+Get\+Designated\+By\+Role (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the get\+Designated\+By\+Role method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_ad0089fd73b7be4194a7fee945f642c45}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!OnPersist@{OnPersist}}
+\index{OnPersist@{OnPersist}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{OnPersist()}{OnPersist()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_ad0089fd73b7be4194a7fee945f642c45} 
+bool neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+On\+Persist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})}
+
+
+
+Handles the On\+Persist event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_acb84eaa424d26e9ac26a3dfac8bf442c}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!PostPersist@{PostPersist}}
+\index{PostPersist@{PostPersist}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{PostPersist()}{PostPersist()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_acb84eaa424d26e9ac26a3dfac8bf442c} 
+bool neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+Post\+Persist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})}
+
+
+
+Handles the Post\+Persist event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+
+
+\label{doc-related-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_doc-related-members}
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_a42ea0ca50925a8d114e2eb1370923f22}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!NativeContractTest@{NativeContractTest}}
+\index{NativeContractTest@{NativeContractTest}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{NativeContractTest}{NativeContractTest}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_a42ea0ca50925a8d114e2eb1370923f22} 
+friend class Native\+Contract\+Test\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_af2ba12053996cf368cd80493e87f2ec1}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!RoleManagementTest@{RoleManagementTest}}
+\index{RoleManagementTest@{RoleManagementTest}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{RoleManagementTest}{RoleManagementTest}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_af2ba12053996cf368cd80493e87f2ec1} 
+friend class Role\+Management\+Test\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_afe2a59fb0073a3bdfa07feeb080dbc7a}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!ID@{ID}}
+\index{ID@{ID}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{ID}{ID}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_afe2a59fb0073a3bdfa07feeb080dbc7a} 
+int32\+\_\+t neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+ID = -\/8\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The contract ID. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_a47f8f0ce7c3c3bb2774cca8f2203b6da}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!NAME@{NAME}}
+\index{NAME@{NAME}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{NAME}{NAME}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_a47f8f0ce7c3c3bb2774cca8f2203b6da} 
+const char\texorpdfstring{$\ast$}{*} neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+NAME = "{}Role\+Management"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The contract name. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_aa6808bb34c85a9a8d0a8722ee15514ad}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!PREFIX\_ROLE@{PREFIX\_ROLE}}
+\index{PREFIX\_ROLE@{PREFIX\_ROLE}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_ROLE}{PREFIX\_ROLE}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_aa6808bb34c85a9a8d0a8722ee15514ad} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+PREFIX\+\_\+\+ROLE = 33\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for roles. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_ace81afc9fc95d8e37e534b139c8475da}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!ROLE\_STATE\_COMMITTEE@{ROLE\_STATE\_COMMITTEE}}
+\index{ROLE\_STATE\_COMMITTEE@{ROLE\_STATE\_COMMITTEE}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{ROLE\_STATE\_COMMITTEE}{ROLE\_STATE\_COMMITTEE}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_ace81afc9fc95d8e37e534b139c8475da} 
+\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_af98732b0f34a921769590f9fb97d2867}{Role}} neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+ROLE\+\_\+\+STATE\+\_\+\+COMMITTEE = \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_af98732b0f34a921769590f9fb97d2867abf1361dc08fb32739598decb4fd59013}{Role\+::\+State\+Validator}}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+\doxylink{namespaceneo_1_1smartcontract_1_1native_af98732b0f34a921769590f9fb97d2867}{Role} state constants for committee. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_role_management_a075efaa365d8f9183817c98cfaa18109}\index{neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}!ROLE\_STATE\_VALIDATOR@{ROLE\_STATE\_VALIDATOR}}
+\index{ROLE\_STATE\_VALIDATOR@{ROLE\_STATE\_VALIDATOR}!neo::smartcontract::native::RoleManagement@{neo::smartcontract::native::RoleManagement}}
+\doxysubsubsection{\texorpdfstring{ROLE\_STATE\_VALIDATOR}{ROLE\_STATE\_VALIDATOR}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_role_management_a075efaa365d8f9183817c98cfaa18109} 
+\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_af98732b0f34a921769590f9fb97d2867}{Role}} neo\+::smartcontract\+::native\+::\+Role\+Management\+::\+ROLE\+\_\+\+STATE\+\_\+\+VALIDATOR = \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_af98732b0f34a921769590f9fb97d2867abf1361dc08fb32739598decb4fd59013}{Role\+::\+State\+Validator}}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+\doxylink{namespaceneo_1_1smartcontract_1_1native_af98732b0f34a921769590f9fb97d2867}{Role} state constants for validators. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/native/\mbox{\hyperlink{role__management_8h}{role\+\_\+management.\+h}}\item 
+src/smartcontract/native/\mbox{\hyperlink{role__management_8cpp}{role\+\_\+management.\+cpp}}\end{DoxyCompactItemize}

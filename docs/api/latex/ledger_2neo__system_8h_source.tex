@@ -1,0 +1,105 @@
+\doxysection{neo\+\_\+system.\+h}
+\hypertarget{ledger_2neo__system_8h_source}{}\label{ledger_2neo__system_8h_source}\index{include/neo/ledger/neo\_system.h@{include/neo/ledger/neo\_system.h}}
+\mbox{\hyperlink{ledger_2neo__system_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{config_2protocol__settings_8h}{neo/config/protocol\_settings.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{blockchain_8h}{neo/ledger/blockchain.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2memory__pool_8h}{neo/ledger/memory\_pool.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{data__cache_8h}{neo/persistence/data\_cache.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ \#include\ <neo/network/p2p/local\_node.h>\ //\ Disabled\ until\ network\ module\ is\ enabled}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{contains__transaction__type_8h}{neo/common/contains\_transaction\_type.h}}>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{gas__token_8h}{neo/smartcontract/native/gas\_token.h}}>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger__contract_8h}{neo/smartcontract/native/ledger\_contract.h}}>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{neo__token_8h}{neo/smartcontract/native/neo\_token.h}}>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{role__management_8h}{neo/smartcontract/native/role\_management.h}}>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ Forward\ declarations}}
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{MemoryPool}};}
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}};}
+\DoxyCodeLine{00023\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p}{neo::network::p2p}}}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{LocalNode}};}
+\DoxyCodeLine{00028\ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native}{neo::smartcontract::native}}}
+\DoxyCodeLine{00031\ \{}
+\DoxyCodeLine{00032\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_ledger_contract}{LedgerContract}};}
+\DoxyCodeLine{00033\ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00060\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_ae24f1bcaf3a3a59da3fd8f8cc0f61862}{NeoSystem}}}
+\DoxyCodeLine{00061\ \{}
+\DoxyCodeLine{00062\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_ae24f1bcaf3a3a59da3fd8f8cc0f61862}{NeoSystem}}(std::shared\_ptr<config::ProtocolSettings>\ settings);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a356371e2740536cbe56f1bcf12a7e42e}{\string~NeoSystem}}();}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00078\ \ \ \ \ std::shared\_ptr<Blockchain>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a18345922cbc166a80796334924868383}{GetBlockchain}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00084\ \ \ \ \ std::shared\_ptr<MemoryPool>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_accbae5ce8c631b037fee8ffdcced2d43}{GetMemoryPool}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00090\ \ \ \ \ std::shared\_ptr<network::p2p::LocalNode>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_ab1b86464587095d432257111b09ddd8f}{GetLocalNode}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00096\ \ \ \ \ std::shared\_ptr<config::ProtocolSettings>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a44913728070ceae0b4ddf1b37ff3e3ce}{GetSettings}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00102\ \ \ \ \ std::shared\_ptr<persistence::DataCache>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a99d4ff3d58b5ea8387701d3f1d9f7042}{GetStoreView}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00108\ \ \ \ \ std::shared\_ptr<smartcontract::native::LedgerContract>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a4b6f056fa90ede969b2188b30ee1e91e}{GetLedgerContract}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00114\ \ \ \ \ std::shared\_ptr<smartcontract::native::NeoToken>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a5c14980966466250d00fa99f7522f15a}{GetNeoToken}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00120\ \ \ \ \ std::shared\_ptr<smartcontract::native::GasToken>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a9018bcc677df6ea6716fe1046cf71b5d}{GetGasToken}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00126\ \ \ \ \ std::shared\_ptr<smartcontract::native::RoleManagement>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a55a365afef875bf4b66636ac139a38a3}{GetRoleManagement}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_aca8906dbe73cdd7e1d128d5079197535}{Start}}();}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a80afc9d1abfdd4d20e132792b561a978}{Stop}}();}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a82699100025c1e55f593f9ea3ba1fad7}{IsRunning}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a4f65719acfcceada9985c6dd024abd4a}{Dispose}}();}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00153\ \ \ \ \ std::shared\_ptr<Block>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a51c5244dbdaffebedccd93e5585ee7ce}{GetGenesisBlock}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00160\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{smartcontract::native::NativeContract}}*\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_af86e242ca0dd69ef77b0b0ef20b8dc61}{GetNativeContract}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00166\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a13f0ece3fb5a8c815582a1bb15cb0b18}{GetMaxTraceableBlocks}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00172\ \ \ \ \ std::shared\_ptr<persistence::DataCache>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_ad8ea6529f4efc9edee9d503bf43337ff}{GetSnapshot}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00179\ \ \ \ \ \mbox{\hyperlink{namespaceneo_a82fb011281bf128e44d66f3926b104cc}{ContainsTransactionType}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_ac67d39f6f40f095331518769db6f5064}{ContainsTransaction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_aa4f1c0623c98be5619e24cdb4023ea5c}{ContainsConflictHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash,\ \textcolor{keyword}{const}\ std::vector<io::UInt160>\&\ signers)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00190\ \ \ \ \ std::shared\_ptr<config::ProtocolSettings>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a52cb4d99489db6d660f12eb61a236a28}{settings\_}};}
+\DoxyCodeLine{00191\ \ \ \ \ std::shared\_ptr<Blockchain>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a220cdf6f2073a4b4fe5ead0cfe1bf4b0}{blockchain\_}};}
+\DoxyCodeLine{00192\ \ \ \ \ std::shared\_ptr<MemoryPool>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_ad89132d5a640326a8aac230b4650397f}{memory\_pool\_}};}
+\DoxyCodeLine{00193\ \ \ \ \ std::shared\_ptr<network::p2p::LocalNode>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a9bb020d2e8c28560b8418e1b88db8ab0}{local\_node\_}};}
+\DoxyCodeLine{00194\ \ \ \ \ std::shared\_ptr<smartcontract::native::LedgerContract>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a0adf197bb047edc0039da9072e85d128}{ledger\_contract\_}};}
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a3fce2afb0db016d2b3f079e2e6007539}{is\_running\_}};}
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a4aa5b3661b44a4b10787df07242b45ac}{is\_disposed\_}};}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{comment}{//\ Initialize\ components}}
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_ae047581c392e841c6f8604f96fc0439a}{InitializeComponents}}();}
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a3c31f91c20ef1df40315a4d7ea08dfd0}{InitializeBlockchain}}();}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a8185fd7e1eb00edb233a641217316455}{InitializeMemoryPool}}();}
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_a318ba069bf8f9f8c9063adfe22f8b29e}{InitializeLocalNode}}();}
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system_ab884065746ecf5c5f21188fcef715412}{InitializeLedgerContract}}();}
+\DoxyCodeLine{00204\ \};}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}

@@ -1,0 +1,597 @@
+\doxysection{neo\+::network\+::p2p\+::Connection Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1_connection}{}\label{classneo_1_1network_1_1p2p_1_1_connection}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+
+
+Represents a connection to a remote node.  
+
+
+
+
+{\ttfamily \#include $<$connection.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::p2p\+::Connection\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_abbaa3d1a3313f798fbf91c2193f3d8cb}{Connection}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_connection}{Connection}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a65eb2936b77107f3b0fdfb65ef136b2b}{\texorpdfstring{$\sim$}{\string~}\+Connection}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a0040628ae8225db19c6534c4c81d3630}{Get\+Remote\+End\+Point}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the remote endpoint. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_ac092953c5db7d02ec069b80a6de6b7d3}{Get\+Local\+End\+Point}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the local endpoint. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_aa754b916ed734a50cc951f49697c400f}{Get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Gets the connection ID. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_ab31d03671ed27f6946aa3a1e75807f88}{Get\+Last\+Message\+Received}} () const
+\begin{DoxyCompactList}\small\item\em Gets the time of the last message received. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a970a73d9380dd552787e28950ae8c810}{Get\+Last\+Message\+Sent}} () const
+\begin{DoxyCompactList}\small\item\em Gets the time of the last message sent. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_aa289b63e4deec9c95a41339b1fa94fc7}{Get\+Last\+Ping\+Sent}} () const
+\begin{DoxyCompactList}\small\item\em Gets the time of the last ping sent. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a5356a20fd8b4c04baf9b263c183a6c08}{Get\+Last\+Ping\+Received}} () const
+\begin{DoxyCompactList}\small\item\em Gets the time of the last ping received. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_ac09124caf46363e518ceb230c04179f8}{Get\+Ping\+Time}} () const
+\begin{DoxyCompactList}\small\item\em Gets the ping time. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a38fc85af49780f7e05aad296b142c70f}{Get\+Bytes\+Sent}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of bytes sent. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a09bf252968496af51c99da508d69abe2}{Get\+Bytes\+Received}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of bytes received. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a14f32d80f17175eb274d152932a3ef28}{Get\+Messages\+Sent}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of messages sent. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a3f3d39d2eef1cd6fd4d60a543638030b}{Get\+Messages\+Received}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of messages received. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_af3f0297bc860a27a0f50a74a0ba1e4eb}{Send}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message, bool enable\+Compression=true)=0
+\begin{DoxyCompactList}\small\item\em Sends a message to the remote node. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_acba0bb4104068cff928b8b15efb26722}{Disconnect}} ()=0
+\begin{DoxyCompactList}\small\item\em Disconnects from the remote node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a8588c0291cd859b21eac916eabaf340f}{Set\+Message\+Received\+Callback}} (std\+::function$<$ void(const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a2bee7580ac90855e8f6d86b2f2a2f8a8}{Set\+Disconnected\+Callback}} (std\+::function$<$ void()$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the disconnected callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a37462d9ca84fd7982e04e564761ec9ad}{Update\+Ping\+Time}} (uint32\+\_\+t ping\+Time)
+\begin{DoxyCompactList}\small\item\em Updates the ping time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_abd8fbf27b813438feb5291675006e2d4}{On\+Message\+Received}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\begin{DoxyCompactList}\small\item\em Called when a message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_abf1fd278093a903e6111c68f6fc98161}{On\+Disconnected}} ()
+\begin{DoxyCompactList}\small\item\em Called when the connection is disconnected. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a6abdc25772eeb241701cfa23ba382e36}{Update\+Last\+Message\+Received}} ()
+\begin{DoxyCompactList}\small\item\em Updates the last message received time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_acadd3723665461e30840529edc7c7ee3}{Update\+Last\+Message\+Sent}} ()
+\begin{DoxyCompactList}\small\item\em Updates the last message sent time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a882166a86cfced89345ff2fb9a806801}{Update\+Last\+Ping\+Sent}} ()
+\begin{DoxyCompactList}\small\item\em Updates the last ping sent time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a748428f18c56e09d6dcf4c11e0b5ca64}{Update\+Last\+Ping\+Received}} ()
+\begin{DoxyCompactList}\small\item\em Updates the last ping received time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a9222aad0638aba991862f58053483e3a}{Update\+Bytes\+Sent}} (uint64\+\_\+t bytes)
+\begin{DoxyCompactList}\small\item\em Updates the bytes sent. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_afc523b5dc5f6f18512fb9551f1bd262c}{Update\+Bytes\+Received}} (uint64\+\_\+t bytes)
+\begin{DoxyCompactList}\small\item\em Updates the bytes received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a012f89c4d01693e697f2cedfe2c1410b}{Update\+Messages\+Sent}} ()
+\begin{DoxyCompactList}\small\item\em Updates the messages sent. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a01ab02f175e0e187c6772eef339e85c3}{Update\+Messages\+Received}} ()
+\begin{DoxyCompactList}\small\item\em Updates the messages received. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a99e588d55412e7011428052aca9b9c30}{id\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_ac7a2b89884b7d3c1c9fdfd81fbdf8949}{last\+Message\+Received\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_afdc172448b2bbaa7533a4d9985155f42}{last\+Message\+Sent\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a3b480a6b0451ca188644635aef9eb28e}{last\+Ping\+Sent\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a439579c6c9be6e4ea0577cab16f53fb0}{last\+Ping\+Received\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a2c63506147403a35d05ee6d8df0694ef}{ping\+Time\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a61d11eaf85ed41d1d3e56b3f2bc5037d}{bytes\+Sent\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_acbd5ccd2a9c5b96af5679871b2e74e5b}{bytes\+Received\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a766e65e79470592f7878b38d0f971497}{messages\+Sent\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a463cba19b277adebb93d8e6825ba7d02}{messages\+Received\+\_\+}}
+\item 
+std\+::function$<$ void(const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_ab7b4da950f7e3c15de877fc6242827b9}{message\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void()$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_aba144a062b2b2190b0d154fa38f1cfdf}{disconnected\+Callback\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_a53f979d121ccec0303b2e808fa276c17}{next\+Id\+\_\+}} = 1
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a connection to a remote node. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_abbaa3d1a3313f798fbf91c2193f3d8cb}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!Connection@{Connection}}
+\index{Connection@{Connection}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{Connection()}{Connection()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_abbaa3d1a3313f798fbf91c2193f3d8cb} 
+neo\+::network\+::p2p\+::\+Connection\+::\+Connection (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_connection}{Connection}. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a65eb2936b77107f3b0fdfb65ef136b2b}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!````~Connection@{\texorpdfstring{$\sim$}{\string~}Connection}}
+\index{````~Connection@{\texorpdfstring{$\sim$}{\string~}Connection}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Connection()}{\string~Connection()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a65eb2936b77107f3b0fdfb65ef136b2b} 
+virtual neo\+::network\+::p2p\+::\+Connection\+::\texorpdfstring{$\sim$}{\string~}\+Connection (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_acba0bb4104068cff928b8b15efb26722}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!Disconnect@{Disconnect}}
+\index{Disconnect@{Disconnect}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{Disconnect()}{Disconnect()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_acba0bb4104068cff928b8b15efb26722} 
+virtual void neo\+::network\+::p2p\+::\+Connection\+::\+Disconnect (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Disconnects from the remote node. 
+
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_acb68bd163d9e0a4df4f66866f8bdd465}{neo\+::network\+::p2p\+::\+Tcp\+Connection}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a09bf252968496af51c99da508d69abe2}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!GetBytesReceived@{GetBytesReceived}}
+\index{GetBytesReceived@{GetBytesReceived}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{GetBytesReceived()}{GetBytesReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a09bf252968496af51c99da508d69abe2} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::\+Get\+Bytes\+Received (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of bytes received. 
+
+\begin{DoxyReturn}{Returns}
+The number of bytes received. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a38fc85af49780f7e05aad296b142c70f}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!GetBytesSent@{GetBytesSent}}
+\index{GetBytesSent@{GetBytesSent}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{GetBytesSent()}{GetBytesSent()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a38fc85af49780f7e05aad296b142c70f} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::\+Get\+Bytes\+Sent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of bytes sent. 
+
+\begin{DoxyReturn}{Returns}
+The number of bytes sent. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_aa754b916ed734a50cc951f49697c400f}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!GetId@{GetId}}
+\index{GetId@{GetId}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{GetId()}{GetId()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_aa754b916ed734a50cc951f49697c400f} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::\+Get\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the connection ID. 
+
+\begin{DoxyReturn}{Returns}
+The connection ID. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_ab31d03671ed27f6946aa3a1e75807f88}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!GetLastMessageReceived@{GetLastMessageReceived}}
+\index{GetLastMessageReceived@{GetLastMessageReceived}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{GetLastMessageReceived()}{GetLastMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_ab31d03671ed27f6946aa3a1e75807f88} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::\+Get\+Last\+Message\+Received (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the time of the last message received. 
+
+\begin{DoxyReturn}{Returns}
+The time of the last message received. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a970a73d9380dd552787e28950ae8c810}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!GetLastMessageSent@{GetLastMessageSent}}
+\index{GetLastMessageSent@{GetLastMessageSent}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{GetLastMessageSent()}{GetLastMessageSent()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a970a73d9380dd552787e28950ae8c810} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::\+Get\+Last\+Message\+Sent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the time of the last message sent. 
+
+\begin{DoxyReturn}{Returns}
+The time of the last message sent. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a5356a20fd8b4c04baf9b263c183a6c08}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!GetLastPingReceived@{GetLastPingReceived}}
+\index{GetLastPingReceived@{GetLastPingReceived}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{GetLastPingReceived()}{GetLastPingReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a5356a20fd8b4c04baf9b263c183a6c08} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::\+Get\+Last\+Ping\+Received (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the time of the last ping received. 
+
+\begin{DoxyReturn}{Returns}
+The time of the last ping received. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_aa289b63e4deec9c95a41339b1fa94fc7}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!GetLastPingSent@{GetLastPingSent}}
+\index{GetLastPingSent@{GetLastPingSent}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{GetLastPingSent()}{GetLastPingSent()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_aa289b63e4deec9c95a41339b1fa94fc7} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::\+Get\+Last\+Ping\+Sent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the time of the last ping sent. 
+
+\begin{DoxyReturn}{Returns}
+The time of the last ping sent. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_ac092953c5db7d02ec069b80a6de6b7d3}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!GetLocalEndPoint@{GetLocalEndPoint}}
+\index{GetLocalEndPoint@{GetLocalEndPoint}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{GetLocalEndPoint()}{GetLocalEndPoint()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_ac092953c5db7d02ec069b80a6de6b7d3} 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} neo\+::network\+::p2p\+::\+Connection\+::\+Get\+Local\+End\+Point (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the local endpoint. 
+
+\begin{DoxyReturn}{Returns}
+The local endpoint. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_aeb62645eb30af244225a8661129a3783}{neo\+::network\+::p2p\+::\+Tcp\+Connection}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a3f3d39d2eef1cd6fd4d60a543638030b}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!GetMessagesReceived@{GetMessagesReceived}}
+\index{GetMessagesReceived@{GetMessagesReceived}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{GetMessagesReceived()}{GetMessagesReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a3f3d39d2eef1cd6fd4d60a543638030b} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::\+Get\+Messages\+Received (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of messages received. 
+
+\begin{DoxyReturn}{Returns}
+The number of messages received. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a14f32d80f17175eb274d152932a3ef28}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!GetMessagesSent@{GetMessagesSent}}
+\index{GetMessagesSent@{GetMessagesSent}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{GetMessagesSent()}{GetMessagesSent()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a14f32d80f17175eb274d152932a3ef28} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::\+Get\+Messages\+Sent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of messages sent. 
+
+\begin{DoxyReturn}{Returns}
+The number of messages sent. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_ac09124caf46363e518ceb230c04179f8}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!GetPingTime@{GetPingTime}}
+\index{GetPingTime@{GetPingTime}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{GetPingTime()}{GetPingTime()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_ac09124caf46363e518ceb230c04179f8} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::\+Get\+Ping\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the ping time. 
+
+\begin{DoxyReturn}{Returns}
+The ping time. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a0040628ae8225db19c6534c4c81d3630}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!GetRemoteEndPoint@{GetRemoteEndPoint}}
+\index{GetRemoteEndPoint@{GetRemoteEndPoint}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{GetRemoteEndPoint()}{GetRemoteEndPoint()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a0040628ae8225db19c6534c4c81d3630} 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} neo\+::network\+::p2p\+::\+Connection\+::\+Get\+Remote\+End\+Point (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the remote endpoint. 
+
+\begin{DoxyReturn}{Returns}
+The remote endpoint. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_af645d6d03afb82ac5a6b5721cae67d61}{neo\+::network\+::p2p\+::\+Tcp\+Connection}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_abf1fd278093a903e6111c68f6fc98161}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!OnDisconnected@{OnDisconnected}}
+\index{OnDisconnected@{OnDisconnected}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{OnDisconnected()}{OnDisconnected()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_abf1fd278093a903e6111c68f6fc98161} 
+void neo\+::network\+::p2p\+::\+Connection\+::\+On\+Disconnected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Called when the connection is disconnected. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_abd8fbf27b813438feb5291675006e2d4}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!OnMessageReceived@{OnMessageReceived}}
+\index{OnMessageReceived@{OnMessageReceived}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{OnMessageReceived()}{OnMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_abd8fbf27b813438feb5291675006e2d4} 
+void neo\+::network\+::p2p\+::\+Connection\+::\+On\+Message\+Received (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Called when a message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_af3f0297bc860a27a0f50a74a0ba1e4eb}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!Send@{Send}}
+\index{Send@{Send}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{Send()}{Send()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_af3f0297bc860a27a0f50a74a0ba1e4eb} 
+virtual bool neo\+::network\+::p2p\+::\+Connection\+::\+Send (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{, }\item[{bool}]{enable\+Compression}{ = {\ttfamily true}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Sends a message to the remote node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to send. \\
+\hline
+{\em enable\+Compression} & Whether to enable compression. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the message was sent successfully, false otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_a067d31a1fbf1db4fb44192bbb371b25a}{neo\+::network\+::p2p\+::\+Tcp\+Connection}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a2bee7580ac90855e8f6d86b2f2a2f8a8}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!SetDisconnectedCallback@{SetDisconnectedCallback}}
+\index{SetDisconnectedCallback@{SetDisconnectedCallback}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{SetDisconnectedCallback()}{SetDisconnectedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a2bee7580ac90855e8f6d86b2f2a2f8a8} 
+void neo\+::network\+::p2p\+::\+Connection\+::\+Set\+Disconnected\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void()$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the disconnected callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a8588c0291cd859b21eac916eabaf340f}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!SetMessageReceivedCallback@{SetMessageReceivedCallback}}
+\index{SetMessageReceivedCallback@{SetMessageReceivedCallback}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{SetMessageReceivedCallback()}{SetMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a8588c0291cd859b21eac916eabaf340f} 
+void neo\+::network\+::p2p\+::\+Connection\+::\+Set\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_afc523b5dc5f6f18512fb9551f1bd262c}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!UpdateBytesReceived@{UpdateBytesReceived}}
+\index{UpdateBytesReceived@{UpdateBytesReceived}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{UpdateBytesReceived()}{UpdateBytesReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_afc523b5dc5f6f18512fb9551f1bd262c} 
+void neo\+::network\+::p2p\+::\+Connection\+::\+Update\+Bytes\+Received (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{bytes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Updates the bytes received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & The number of bytes received. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a9222aad0638aba991862f58053483e3a}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!UpdateBytesSent@{UpdateBytesSent}}
+\index{UpdateBytesSent@{UpdateBytesSent}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{UpdateBytesSent()}{UpdateBytesSent()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a9222aad0638aba991862f58053483e3a} 
+void neo\+::network\+::p2p\+::\+Connection\+::\+Update\+Bytes\+Sent (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{bytes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Updates the bytes sent. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & The number of bytes sent. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a6abdc25772eeb241701cfa23ba382e36}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!UpdateLastMessageReceived@{UpdateLastMessageReceived}}
+\index{UpdateLastMessageReceived@{UpdateLastMessageReceived}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{UpdateLastMessageReceived()}{UpdateLastMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a6abdc25772eeb241701cfa23ba382e36} 
+void neo\+::network\+::p2p\+::\+Connection\+::\+Update\+Last\+Message\+Received (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Updates the last message received time. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_acadd3723665461e30840529edc7c7ee3}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!UpdateLastMessageSent@{UpdateLastMessageSent}}
+\index{UpdateLastMessageSent@{UpdateLastMessageSent}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{UpdateLastMessageSent()}{UpdateLastMessageSent()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_acadd3723665461e30840529edc7c7ee3} 
+void neo\+::network\+::p2p\+::\+Connection\+::\+Update\+Last\+Message\+Sent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Updates the last message sent time. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a748428f18c56e09d6dcf4c11e0b5ca64}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!UpdateLastPingReceived@{UpdateLastPingReceived}}
+\index{UpdateLastPingReceived@{UpdateLastPingReceived}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{UpdateLastPingReceived()}{UpdateLastPingReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a748428f18c56e09d6dcf4c11e0b5ca64} 
+void neo\+::network\+::p2p\+::\+Connection\+::\+Update\+Last\+Ping\+Received (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Updates the last ping received time. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a882166a86cfced89345ff2fb9a806801}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!UpdateLastPingSent@{UpdateLastPingSent}}
+\index{UpdateLastPingSent@{UpdateLastPingSent}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{UpdateLastPingSent()}{UpdateLastPingSent()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a882166a86cfced89345ff2fb9a806801} 
+void neo\+::network\+::p2p\+::\+Connection\+::\+Update\+Last\+Ping\+Sent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Updates the last ping sent time. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a01ab02f175e0e187c6772eef339e85c3}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!UpdateMessagesReceived@{UpdateMessagesReceived}}
+\index{UpdateMessagesReceived@{UpdateMessagesReceived}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{UpdateMessagesReceived()}{UpdateMessagesReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a01ab02f175e0e187c6772eef339e85c3} 
+void neo\+::network\+::p2p\+::\+Connection\+::\+Update\+Messages\+Received (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Updates the messages received. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a012f89c4d01693e697f2cedfe2c1410b}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!UpdateMessagesSent@{UpdateMessagesSent}}
+\index{UpdateMessagesSent@{UpdateMessagesSent}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{UpdateMessagesSent()}{UpdateMessagesSent()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a012f89c4d01693e697f2cedfe2c1410b} 
+void neo\+::network\+::p2p\+::\+Connection\+::\+Update\+Messages\+Sent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Updates the messages sent. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a37462d9ca84fd7982e04e564761ec9ad}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!UpdatePingTime@{UpdatePingTime}}
+\index{UpdatePingTime@{UpdatePingTime}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{UpdatePingTime()}{UpdatePingTime()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a37462d9ca84fd7982e04e564761ec9ad} 
+void neo\+::network\+::p2p\+::\+Connection\+::\+Update\+Ping\+Time (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{ping\+Time}{}\end{DoxyParamCaption})}
+
+
+
+Updates the ping time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ping\+Time} & The ping time. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_acbd5ccd2a9c5b96af5679871b2e74e5b}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!bytesReceived\_@{bytesReceived\_}}
+\index{bytesReceived\_@{bytesReceived\_}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{bytesReceived\_}{bytesReceived\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_acbd5ccd2a9c5b96af5679871b2e74e5b} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::bytes\+Received\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a61d11eaf85ed41d1d3e56b3f2bc5037d}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!bytesSent\_@{bytesSent\_}}
+\index{bytesSent\_@{bytesSent\_}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{bytesSent\_}{bytesSent\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a61d11eaf85ed41d1d3e56b3f2bc5037d} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::bytes\+Sent\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_aba144a062b2b2190b0d154fa38f1cfdf}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!disconnectedCallback\_@{disconnectedCallback\_}}
+\index{disconnectedCallback\_@{disconnectedCallback\_}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{disconnectedCallback\_}{disconnectedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_aba144a062b2b2190b0d154fa38f1cfdf} 
+std\+::function$<$void()$>$ neo\+::network\+::p2p\+::\+Connection\+::disconnected\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a99e588d55412e7011428052aca9b9c30}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!id\_@{id\_}}
+\index{id\_@{id\_}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{id\_}{id\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a99e588d55412e7011428052aca9b9c30} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_ac7a2b89884b7d3c1c9fdfd81fbdf8949}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!lastMessageReceived\_@{lastMessageReceived\_}}
+\index{lastMessageReceived\_@{lastMessageReceived\_}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{lastMessageReceived\_}{lastMessageReceived\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_ac7a2b89884b7d3c1c9fdfd81fbdf8949} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::last\+Message\+Received\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_afdc172448b2bbaa7533a4d9985155f42}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!lastMessageSent\_@{lastMessageSent\_}}
+\index{lastMessageSent\_@{lastMessageSent\_}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{lastMessageSent\_}{lastMessageSent\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_afdc172448b2bbaa7533a4d9985155f42} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::last\+Message\+Sent\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a439579c6c9be6e4ea0577cab16f53fb0}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!lastPingReceived\_@{lastPingReceived\_}}
+\index{lastPingReceived\_@{lastPingReceived\_}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{lastPingReceived\_}{lastPingReceived\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a439579c6c9be6e4ea0577cab16f53fb0} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::last\+Ping\+Received\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a3b480a6b0451ca188644635aef9eb28e}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!lastPingSent\_@{lastPingSent\_}}
+\index{lastPingSent\_@{lastPingSent\_}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{lastPingSent\_}{lastPingSent\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a3b480a6b0451ca188644635aef9eb28e} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::last\+Ping\+Sent\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_ab7b4da950f7e3c15de877fc6242827b9}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!messageReceivedCallback\_@{messageReceivedCallback\_}}
+\index{messageReceivedCallback\_@{messageReceivedCallback\_}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{messageReceivedCallback\_}{messageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_ab7b4da950f7e3c15de877fc6242827b9} 
+std\+::function$<$void(const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&)$>$ neo\+::network\+::p2p\+::\+Connection\+::message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a463cba19b277adebb93d8e6825ba7d02}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!messagesReceived\_@{messagesReceived\_}}
+\index{messagesReceived\_@{messagesReceived\_}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{messagesReceived\_}{messagesReceived\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a463cba19b277adebb93d8e6825ba7d02} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::messages\+Received\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a766e65e79470592f7878b38d0f971497}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!messagesSent\_@{messagesSent\_}}
+\index{messagesSent\_@{messagesSent\_}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{messagesSent\_}{messagesSent\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a766e65e79470592f7878b38d0f971497} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::messages\+Sent\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a53f979d121ccec0303b2e808fa276c17}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!nextId\_@{nextId\_}}
+\index{nextId\_@{nextId\_}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{nextId\_}{nextId\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a53f979d121ccec0303b2e808fa276c17} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::next\+Id\+\_\+ = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_a2c63506147403a35d05ee6d8df0694ef}\index{neo::network::p2p::Connection@{neo::network::p2p::Connection}!pingTime\_@{pingTime\_}}
+\index{pingTime\_@{pingTime\_}!neo::network::p2p::Connection@{neo::network::p2p::Connection}}
+\doxysubsubsection{\texorpdfstring{pingTime\_}{pingTime\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_a2c63506147403a35d05ee6d8df0694ef} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Connection\+::ping\+Time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/\mbox{\hyperlink{connection_8h}{connection.\+h}}\item 
+src/network/p2p/\mbox{\hyperlink{connection_8cpp}{connection.\+cpp}}\end{DoxyCompactItemize}

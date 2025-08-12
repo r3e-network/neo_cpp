@@ -1,0 +1,1891 @@
+\doxysection{neo\+::network\+::p2p\+::Local\+Node Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1_local_node}{}\label{classneo_1_1network_1_1p2p_1_1_local_node}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+
+
+Represents the local node in the P2P network.  
+
+
+
+
+{\ttfamily \#include $<$local\+\_\+node.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::Local\+Node\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a5ce8699011fa6081a6cfb2259c484cdd}{\texorpdfstring{$\sim$}{\string~}\+Local\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_af2f5afac6c82018371c169b6ee7576b5}{Get\+User\+Agent}} () const
+\begin{DoxyCompactList}\small\item\em Gets the user agent of the local node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_abff506cd55818f12667fc31496b968f9}{Set\+User\+Agent}} (const std\+::string \&user\+Agent)
+\begin{DoxyCompactList}\small\item\em Sets the user agent of the local node. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_abe5f7b4ad722402029bcc6a7a6a07e5d}{Get\+Capabilities}} () const
+\begin{DoxyCompactList}\small\item\em Gets the capabilities of the local node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a334b3c2b77cfad9f570fed2d5b8c78f4}{Set\+Capabilities}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \&capabilities)
+\begin{DoxyCompactList}\small\item\em Sets the capabilities of the local node. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a94a3789be74691be52c90ba3764c942f}{Get\+Last\+Block\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Gets the last block index of the local node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a0058f91b13600f06de0cb9661bd24d2b}{Set\+Last\+Block\+Index}} (uint32\+\_\+t last\+Block\+Index)
+\begin{DoxyCompactList}\small\item\em Sets the last block index of the local node. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ab2cb5982ee58b98a3c3332d77ad81067}{Get\+Nonce}} () const
+\begin{DoxyCompactList}\small\item\em Gets the nonce of the local node. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a433b581de16cb26ac99f9a01835898d7}{Get\+Connected\+Nodes}} () const
+\begin{DoxyCompactList}\small\item\em Gets the connected remote nodes. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ae91fb0a3a9e555714a1852a24dad4342}{Get\+Connected\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of connected remote nodes. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload}{payloads\+::\+Version\+Payload}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_afc2c6e95d4cf1f54fd4ea57ffc83c2d3}{Create\+Version\+Payload}} () const
+\begin{DoxyCompactList}\small\item\em Creates a version payload for the local node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a758caf540eb9f306e76deb447f480df7}{Start}} (uint16\+\_\+t port, size\+\_\+t max\+Connections=10)
+\begin{DoxyCompactList}\small\item\em Starts the local node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a793f8ada3ef5c67417d71fdd49e192ae}{Start}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config}{Channels\+Config}} \&config)
+\begin{DoxyCompactList}\small\item\em Starts the local node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a5ea205a3e6c24c03fb5bf3588a5397b5}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stops the local node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a7f8e481ee56c7a52665ea5aaeca54511}{Connect}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&endpoint)
+\begin{DoxyCompactList}\small\item\em Connects to a remote node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a7d0f44128485b0f689caa2e9119e4a73}{Broadcast}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message, bool enable\+Compression=true)
+\begin{DoxyCompactList}\small\item\em Broadcasts a message to all connected remote nodes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a2170d8e168a73eb0f5f10fdd0862e81d}{Broadcast\+Inv}} (\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a16679b1d56245299fcef623d2997dddc}{Inventory\+Type}} type, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&hashes)
+\begin{DoxyCompactList}\small\item\em Broadcasts an inv message to all connected remote nodes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a157658cbfc7274b36e2a93b395e007d4}{Set\+Version\+Message\+Received\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload}{payloads\+::\+Version\+Payload}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the version message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ab3a3d7d53ad8704bc677669ae5ab35d2}{Set\+Ping\+Message\+Received\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{payloads\+::\+Ping\+Payload}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the ping message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a8796eec3e1b436372c571a8fcc2ba29a}{Set\+Pong\+Message\+Received\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{payloads\+::\+Ping\+Payload}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the pong message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ac8dff941ae41a8272a2f87406484ff88}{Set\+Addr\+Message\+Received\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload}{payloads\+::\+Addr\+Payload}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the addr message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a35f49ca7ab1303b4e429b2473f8b175e}{Set\+Inv\+Message\+Received\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_inv_payload}{payloads\+::\+Inv\+Payload}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the inv message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a30e94e3c3ff77dfcf1c8dada59aec33a}{Set\+Get\+Data\+Message\+Received\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_data_payload}{payloads\+::\+Get\+Data\+Payload}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the getdata message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a88f90dce84b2c518552edfd0a729238f}{Set\+Get\+Blocks\+Message\+Received\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_blocks_payload}{payloads\+::\+Get\+Blocks\+Payload}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the getblocks message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a4b01aa2cf9f777d6fb19c9571d222c12}{Set\+Get\+Block\+By\+Index\+Message\+Received\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_block_by_index_payload}{payloads\+::\+Get\+Block\+By\+Index\+Payload}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the getblockbyindex message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a1f0667695c5161804b01a37624de1dd4}{Set\+Get\+Headers\+Message\+Received\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_blocks_payload}{payloads\+::\+Get\+Blocks\+Payload}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the getheaders message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a70aa7031a525d402646ad8a64cff53e8}{Set\+Headers\+Message\+Received\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{payloads\+::\+Headers\+Payload}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the headers message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a013fbf0c016c042c517f67e3ed3f7dae}{Set\+Mempool\+Message\+Received\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_mempool_payload}{payloads\+::\+Mempool\+Payload}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the mempool message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ace3eb7c27719cf4a0ac0862ff2a7756a}{Set\+Filter\+Add\+Message\+Received\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_add_payload}{payloads\+::\+Filter\+Add\+Payload}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the filteradd message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a90580f62806d6e890a6ea03c8610b160}{Set\+Filter\+Clear\+Message\+Received\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_clear_payload}{payloads\+::\+Filter\+Clear\+Payload}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the filterclear message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a4116151630306940e8efb7d09f81a37f}{Set\+Filter\+Load\+Message\+Received\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{payloads\+::\+Filter\+Load\+Payload}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the filterload message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a9a6f1062fce1ac63dd93f7a85b2f18cb}{Set\+Remote\+Node\+Connected\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*})$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the remote node connected callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a993f48b6181caba0e8581bfdb00ae589}{Set\+Remote\+Node\+Disconnected\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*})$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the remote node disconnected callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a10cdb4a25222b9a4cbcaf9a65367ed22}{Set\+Remote\+Node\+Handshaked\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*})$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the remote node handshaked callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a06a1c49914c9530c3c719521554eeac3}{Set\+Block\+Message\+Received\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the block message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_abf4f9d8df205c2f2a5f74a584dc7d38c}{On\+Version\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload}{payloads\+::\+Version\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when a version message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a8504a0e01763db90e23682859371950c}{On\+Ping\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{payloads\+::\+Ping\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when a ping message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a0681a13030873347cc0c5f691c07fc3a}{On\+Pong\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{payloads\+::\+Ping\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when a pong message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a944934fe25a45559a4055ad4c685e172}{On\+Addr\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload}{payloads\+::\+Addr\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when an addr message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a369ec55f909eb9259bc1a04f4132cd70}{On\+Inv\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_inv_payload}{payloads\+::\+Inv\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when an inv message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_aa4a5bd7346d4455abf68361b5c0cdd29}{On\+Get\+Data\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_data_payload}{payloads\+::\+Get\+Data\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when a getdata message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a5250ac607c8332ee94794e94133ef403}{On\+Get\+Blocks\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_blocks_payload}{payloads\+::\+Get\+Blocks\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when a getblocks message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ae84e5647731349f439bb32dd59d6de41}{On\+Get\+Block\+By\+Index\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_block_by_index_payload}{payloads\+::\+Get\+Block\+By\+Index\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when a getblockbyindex message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ada5c081cd5499571e8d2849b59af1571}{On\+Get\+Headers\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_blocks_payload}{payloads\+::\+Get\+Blocks\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when a getheaders message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a756e98ca29270d7688a1aa8fd26742e1}{On\+Headers\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{payloads\+::\+Headers\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when a headers message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_af9e766e82b49a4b5f6391cbb3bf2b8ec}{On\+Mempool\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_mempool_payload}{payloads\+::\+Mempool\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when a mempool message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_aeb681a7bf3e6f6a86884e2f47c10566f}{On\+Filter\+Add\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_add_payload}{payloads\+::\+Filter\+Add\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when a filteradd message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a4cb5bf9a18d5b31169472c3769f1bce0}{On\+Filter\+Clear\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_clear_payload}{payloads\+::\+Filter\+Clear\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when a filterclear message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_acfc1eb22570b82152cda8d00ca2abb77}{On\+Filter\+Load\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{payloads\+::\+Filter\+Load\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when a filterload message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a02cb776bf075cbcda66477a9f79e7043}{On\+Block\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{payloads\+::\+Block\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when a block message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a73ee90eaeb8af25995993432bdf20fdd}{On\+Transaction\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload}{payloads\+::\+Transaction\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when a transaction message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a4592e6c521eeb4bbfdbd865d414c8073}{On\+Extensible\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload}{payloads\+::\+Extensible\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when an extensible message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a383d6fbd3ded307ccc92fc6d889952a3}{On\+Get\+Addr\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node)
+\begin{DoxyCompactList}\small\item\em Called when a Get\+Addr message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a4e99220b6bbf14f0903a9d3e6bd475c0}{On\+Verack\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node)
+\begin{DoxyCompactList}\small\item\em Called when a Verack message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a429e4fe76df5fbca03e5f655eb037a32}{On\+Remote\+Node\+Connected}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node)
+\begin{DoxyCompactList}\small\item\em Called when a remote node is connected. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a0ba1317d68bc1ac600bfdc59a0593ae6}{On\+Remote\+Node\+Disconnected}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node)
+\begin{DoxyCompactList}\small\item\em Called when a remote node is disconnected. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a6a30efee7a2aab3f57108dc5ab9e3097}{On\+Remote\+Node\+Handshaked}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node)
+\begin{DoxyCompactList}\small\item\em Called when a remote node is handshaked. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a432f36cc00164eb738e10a3a0849aa36}{On\+Transaction\+Received}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{IPayload}} $>$ payload)
+\begin{DoxyCompactList}\small\item\em Called when a transaction is received from a remote node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a4be5713a5267c227defd722131e394a1}{On\+Block\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ block)
+\begin{DoxyCompactList}\small\item\em Called when a block is received from a remote node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ad50ab15217a830852f01d1587efe46f5}{Set\+Peer\+List\+Path}} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Sets the peer list file path. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_list}{Peer\+List}} \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a73a8b454a34d8022001253fe5e711b82}{Get\+Peer\+List}} ()
+\begin{DoxyCompactList}\small\item\em Gets the peer list. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ab505a72cc4a9cb01b52a9ad326eb4cfb}{Save\+Peer\+List}} ()
+\begin{DoxyCompactList}\small\item\em Saves the peer list to a file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a804d2a4c82b175decca302a17d0e4568}{Load\+Peer\+List}} ()
+\begin{DoxyCompactList}\small\item\em Loads the peer list from a file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a9a4e8de28e36688b53ea4046db737b19}{Add\+Peer}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&endpoint)
+\begin{DoxyCompactList}\small\item\em Adds a peer to the peer list. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a92c53f4f2707c43b60f94067f6e80224}{Add\+Peer}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer}{Peer}} \&peer)
+\begin{DoxyCompactList}\small\item\em Adds a peer to the peer list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ab0e31f62fde1b2aa34177503e486a24a}{Add\+Peers}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} $>$ \&endpoints)
+\begin{DoxyCompactList}\small\item\em Adds peers to the peer list. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a6722c6b3d1c060a83259a208c55202eb}{Remove\+Peer}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&endpoint)
+\begin{DoxyCompactList}\small\item\em Removes a peer from the peer list. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a3f9aba43257700cd46a7f9695170d9c5}{Mark\+Peer\+Connected}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&endpoint)
+\begin{DoxyCompactList}\small\item\em Marks a peer as connected. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ab2789444c49043f23e009e736f5dfaa2}{Mark\+Peer\+Disconnected}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&endpoint)
+\begin{DoxyCompactList}\small\item\em Marks a peer as disconnected. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_af60cd5c3e6564b98587419f23dd3b7a3}{Mark\+Peer\+Bad}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&endpoint)
+\begin{DoxyCompactList}\small\item\em Marks a peer as bad. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ae4f093322b419445fb6bb48eb325c0c3}{Start\+Connection\+Lifecycle}} ()
+\begin{DoxyCompactList}\small\item\em Starts the connection lifecycle management. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ab47a70d45b50856f50cf3edf28a4729f}{Stop\+Connection\+Lifecycle}} ()
+\begin{DoxyCompactList}\small\item\em Stops the connection lifecycle management. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a14eaa23831a50ef9e430d40ba33b2923}{Manage\+Connection\+Lifecycle}} ()
+\begin{DoxyCompactList}\small\item\em Manages the connection lifecycle. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ae10ee61056bee8298f7128b68da53347}{Set\+Block\+Received\+Callback}} (std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Set callbacks for block and transaction events. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ac2c28cb63b52b21b655726ec4bcf1855}{Set\+Transaction\+Received\+Callback}} (std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$)$>$ callback)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a5019d74b876397754a595f789f298cbc}{Get\+Blockchain}} () const
+\begin{DoxyCompactList}\small\item\em Get blockchain and mempool instances. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{ledger\+::\+Memory\+Pool}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a575af27c8a42142cdd3bea07a011d097}{Get\+Memory\+Pool}} () const
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a94eb9dab5bfc670c3b0a396296c6a9be}{Set\+Blockchain}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}} $>$ blockchain)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a3a1b50bf93429ca39b22d28323c3cdce}{Set\+Memory\+Pool}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{ledger\+::\+Memory\+Pool}} $>$ mempool)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a8137ef2e42746b0b519eb98e2be6b3ef}{Relay\+Block}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ block)
+\begin{DoxyCompactList}\small\item\em Relay methods for block and transaction propagation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a265fe0c9dc11d69d72732b62fe4173c3}{Relay\+Transaction}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ transaction)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ad2dfe779337c08d8eece3d6a4b43d346}{Request\+Blocks}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node)
+\begin{DoxyCompactList}\small\item\em Request blocks from a remote node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ab60e28dc0d89e0f4c3f06541f9d086a3}{Process\+Consensus\+Message}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload}{payloads\+::\+Extensible\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Process consensus and state service messages. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_afdee2a07d6b08bb5f0554fdc1e8fe705}{Process\+State\+Service\+Message}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload}{payloads\+::\+Extensible\+Payload}} \&payload)
+\item 
+std\+::shared\+\_\+ptr$<$ class Consensus\+Service $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ac3131de467f07275dc4f8cd92c4b0393}{Get\+Consensus\+Service}} () const
+\begin{DoxyCompactList}\small\item\em Get consensus and state services. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ class \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a72fb3e827a7fdfe22cda766f67bc94cbac7ff9e5b810ed0f95c73a34def1ab31e}{State\+Service}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a77b9377565e03bcb426c07badb08ca00}{Get\+State\+Service}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{Local\+Node}} \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ac4381e1a9bd4e2ee1b9053c562edab5a}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets the singleton instance of the \doxylink{classneo_1_1network_1_1p2p_1_1_local_node}{Local\+Node}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ae1bc10754038fc508c6698f565bf6a04}{Local\+Node}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_adbccd5d61e22344752ad523f7609b3fd}{Start\+Accept}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a83c67c76ea1955ac9d202c070ec1bfec}{Handle\+Accept}} (const std\+::error\+\_\+code \&error, boost\+::asio\+::ip\+::tcp\+::socket socket)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a72785e913cb78befdccb1b4d12342368}{Handle\+Connect}} (const std\+::error\+\_\+code \&error, boost\+::asio\+::ip\+::tcp\+::socket socket, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&endpoint)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a6b33e097298e139e6ffff6e4b60a4ccf}{Add\+Connected\+Node}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$ remote\+Node)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a8d8bbd2ff00ed5314ffa23f8cf3193a9}{Remove\+Connected\+Node}} (const std\+::string \&key)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a8212a59a001e5a661f06962b8ac0ad65}{user\+Agent\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a6a3f7e596303c981038721e0007e158a}{capabilities\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ac113054cffad6f5069c0613f996150e7}{last\+Block\+Index\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a2e55a5e2d302525b06b75b6200eadf83}{nonce\+\_\+}}
+\item 
+boost\+::asio\+::io\+\_\+context \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ac7d1be0a27c15718eb7bba8acb5da14b}{io\+Context\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ boost\+::asio\+::executor\+\_\+work\+\_\+guard$<$ boost\+::asio\+::io\+\_\+context\+::executor\+\_\+type $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a9fa265db190ad9a95d451106e82b7288}{work\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ boost\+::asio\+::ip\+::tcp\+::acceptor $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_afd0014ba0cd9493c44d875aa643d86ee}{acceptor\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a2714cbc46946b73d6b3ef4252971a5e4}{io\+Thread\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ac4c4a1fbb206862356b24e45048ba1e6}{connected\+Nodes\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ab94e49a72e53cec50dba1f006af52db1}{connected\+Nodes\+Mutex\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a4b9112c17fa9e911118738fc19aeab09}{max\+Connections\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ class Consensus\+Service $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a54e5080b712bc47c257da8e9ffc10f6d}{consensus\+Service\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ class \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a72fb3e827a7fdfe22cda766f67bc94cbac7ff9e5b810ed0f95c73a34def1ab31e}{State\+Service}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_af890cde07417668b98b2923d0dfd6665}{state\+Service\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a3d7b77ae0b92ab0676b8377ecf2ed612}{running\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_list}{Peer\+List}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_aecd3033dd8e7602855ea06c9b02d58fe}{peer\+List\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a6863e4c483988b996b79754c607e96fe}{peer\+List\+Path\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ae756a586c1e2f81facbb8e39f0d41882}{connection\+Lifecycle\+Thread\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a9ce35277f2bc96f598a74d0700fbc016}{connection\+Lifecycle\+Running\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload}{payloads\+::\+Version\+Payload}} \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ab56c8fc08aec5e0f99d28f426221305a}{version\+Message\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{payloads\+::\+Ping\+Payload}} \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a775a6c668095a184d16a0df227c68f50}{ping\+Message\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{payloads\+::\+Ping\+Payload}} \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a130ae7e639e1d746b20eaa259eea76ec}{pong\+Message\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload}{payloads\+::\+Addr\+Payload}} \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ac5ffb3150cb09a7e3860376e23a3d733}{addr\+Message\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_inv_payload}{payloads\+::\+Inv\+Payload}} \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a8fd3de9f2e97840764da2fbeb41214ba}{inv\+Message\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_data_payload}{payloads\+::\+Get\+Data\+Payload}} \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_afbb0a7a821ec5636c059f0e337276701}{get\+Data\+Message\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_blocks_payload}{payloads\+::\+Get\+Blocks\+Payload}} \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a023d9b73cc4a3ca4e55cae67c19b6ec3}{get\+Blocks\+Message\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_block_by_index_payload}{payloads\+::\+Get\+Block\+By\+Index\+Payload}} \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ac8748afd4322095510e40d004b90ca2e}{get\+Block\+By\+Index\+Message\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_blocks_payload}{payloads\+::\+Get\+Blocks\+Payload}} \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a72f60445f4c37075e030c5e252a45efe}{get\+Headers\+Message\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{payloads\+::\+Headers\+Payload}} \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a4f690d7e9511d73c36603fccf78e80f0}{headers\+Message\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_mempool_payload}{payloads\+::\+Mempool\+Payload}} \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_aad39db8bc09a07271d6db7bbc4b5b1ac}{mempool\+Message\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_add_payload}{payloads\+::\+Filter\+Add\+Payload}} \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a1a87a7348b9cbecf3be6dc028ae1a457}{filter\+Add\+Message\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_clear_payload}{payloads\+::\+Filter\+Clear\+Payload}} \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a0b0c0e70637f4489e50a15c138e0599a}{filter\+Clear\+Message\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{payloads\+::\+Filter\+Load\+Payload}} \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a51c97c59f21823087518754a2000b7de}{filter\+Load\+Message\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*})$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_aa8c7c607fe4a283d5c68aeb0fe77d56d}{remote\+Node\+Connected\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*})$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_acd126d6ed928bfef1898ad9fea5b93f9}{remote\+Node\+Disconnected\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*})$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ac6fe2d6cf3ee670aafca04ed6ce11728}{remote\+Node\+Handshaked\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a5e83cfe2d8ef31c67d3633acf9f3bca1}{block\+Message\+Received\+Callback\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_ab18376d39279daa29c5879a74cd3c088}{blockchain\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{ledger\+::\+Memory\+Pool}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a07454ab8a4febce87e2127fcb68a3b39}{mempool\+\_\+}}
+\item 
+std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a4696d9c0e4b63b21b912670daa0131a9}{block\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node_a065c533ec08c959e87eb335335737061}{transaction\+Received\+Callback\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the local node in the P2P network. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a5ce8699011fa6081a6cfb2259c484cdd}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!````~LocalNode@{\texorpdfstring{$\sim$}{\string~}LocalNode}}
+\index{````~LocalNode@{\texorpdfstring{$\sim$}{\string~}LocalNode}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}LocalNode()}{\string~LocalNode()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a5ce8699011fa6081a6cfb2259c484cdd} 
+neo\+::network\+::p2p\+::\+Local\+Node\+::\texorpdfstring{$\sim$}{\string~}\+Local\+Node (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ae1bc10754038fc508c6698f565bf6a04}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!LocalNode@{LocalNode}}
+\index{LocalNode@{LocalNode}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{LocalNode()}{LocalNode()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ae1bc10754038fc508c6698f565bf6a04} 
+neo\+::network\+::p2p\+::\+Local\+Node\+::\+Local\+Node (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a6b33e097298e139e6ffff6e4b60a4ccf}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!AddConnectedNode@{AddConnectedNode}}
+\index{AddConnectedNode@{AddConnectedNode}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{AddConnectedNode()}{AddConnectedNode()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a6b33e097298e139e6ffff6e4b60a4ccf} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Add\+Connected\+Node (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$}]{remote\+Node}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a9a4e8de28e36688b53ea4046db737b19}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!AddPeer@{AddPeer}}
+\index{AddPeer@{AddPeer}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{AddPeer()}{AddPeer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a9a4e8de28e36688b53ea4046db737b19} 
+bool neo\+::network\+::p2p\+::\+Local\+Node\+::\+Add\+Peer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&}]{endpoint}{}\end{DoxyParamCaption})}
+
+
+
+Adds a peer to the peer list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & The endpoint of the peer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the peer was added, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a92c53f4f2707c43b60f94067f6e80224}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!AddPeer@{AddPeer}}
+\index{AddPeer@{AddPeer}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{AddPeer()}{AddPeer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a92c53f4f2707c43b60f94067f6e80224} 
+bool neo\+::network\+::p2p\+::\+Local\+Node\+::\+Add\+Peer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer}{Peer}} \&}]{peer}{}\end{DoxyParamCaption})}
+
+
+
+Adds a peer to the peer list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em peer} & The peer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the peer was added, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ab0e31f62fde1b2aa34177503e486a24a}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!AddPeers@{AddPeers}}
+\index{AddPeers@{AddPeers}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{AddPeers()}{AddPeers()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ab0e31f62fde1b2aa34177503e486a24a} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Add\+Peers (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} $>$ \&}]{endpoints}{}\end{DoxyParamCaption})}
+
+
+
+Adds peers to the peer list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoints} & The endpoints of the peers. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a7d0f44128485b0f689caa2e9119e4a73}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!Broadcast@{Broadcast}}
+\index{Broadcast@{Broadcast}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{Broadcast()}{Broadcast()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a7d0f44128485b0f689caa2e9119e4a73} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Broadcast (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{, }\item[{bool}]{enable\+Compression}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+
+
+
+Broadcasts a message to all connected remote nodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to broadcast. \\
+\hline
+{\em enable\+Compression} & Whether to enable compression. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a2170d8e168a73eb0f5f10fdd0862e81d}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!BroadcastInv@{BroadcastInv}}
+\index{BroadcastInv@{BroadcastInv}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{BroadcastInv()}{BroadcastInv()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a2170d8e168a73eb0f5f10fdd0862e81d} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Broadcast\+Inv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a16679b1d56245299fcef623d2997dddc}{Inventory\+Type}}}]{type}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&}]{hashes}{}\end{DoxyParamCaption})}
+
+
+
+Broadcasts an inv message to all connected remote nodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of inventory. \\
+\hline
+{\em hashes} & The hashes of the inventory items. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a7f8e481ee56c7a52665ea5aaeca54511}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!Connect@{Connect}}
+\index{Connect@{Connect}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{Connect()}{Connect()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a7f8e481ee56c7a52665ea5aaeca54511} 
+bool neo\+::network\+::p2p\+::\+Local\+Node\+::\+Connect (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&}]{endpoint}{}\end{DoxyParamCaption})}
+
+
+
+Connects to a remote node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & The endpoint of the remote node. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the connection was established successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_afc2c6e95d4cf1f54fd4ea57ffc83c2d3}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!CreateVersionPayload@{CreateVersionPayload}}
+\index{CreateVersionPayload@{CreateVersionPayload}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{CreateVersionPayload()}{CreateVersionPayload()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_afc2c6e95d4cf1f54fd4ea57ffc83c2d3} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload}{payloads\+::\+Version\+Payload}} $>$ neo\+::network\+::p2p\+::\+Local\+Node\+::\+Create\+Version\+Payload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Creates a version payload for the local node. 
+
+\begin{DoxyReturn}{Returns}
+The version payload. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a5019d74b876397754a595f789f298cbc}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!GetBlockchain@{GetBlockchain}}
+\index{GetBlockchain@{GetBlockchain}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{GetBlockchain()}{GetBlockchain()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a5019d74b876397754a595f789f298cbc} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}} $>$ neo\+::network\+::p2p\+::\+Local\+Node\+::\+Get\+Blockchain (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get blockchain and mempool instances. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_abe5f7b4ad722402029bcc6a7a6a07e5d}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!GetCapabilities@{GetCapabilities}}
+\index{GetCapabilities@{GetCapabilities}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{GetCapabilities()}{GetCapabilities()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_abe5f7b4ad722402029bcc6a7a6a07e5d} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \& neo\+::network\+::p2p\+::\+Local\+Node\+::\+Get\+Capabilities (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the capabilities of the local node. 
+
+\begin{DoxyReturn}{Returns}
+The capabilities. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ae91fb0a3a9e555714a1852a24dad4342}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!GetConnectedCount@{GetConnectedCount}}
+\index{GetConnectedCount@{GetConnectedCount}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{GetConnectedCount()}{GetConnectedCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ae91fb0a3a9e555714a1852a24dad4342} 
+size\+\_\+t neo\+::network\+::p2p\+::\+Local\+Node\+::\+Get\+Connected\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of connected remote nodes. 
+
+\begin{DoxyReturn}{Returns}
+The number of connected remote nodes. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a433b581de16cb26ac99f9a01835898d7}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!GetConnectedNodes@{GetConnectedNodes}}
+\index{GetConnectedNodes@{GetConnectedNodes}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{GetConnectedNodes()}{GetConnectedNodes()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a433b581de16cb26ac99f9a01835898d7} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*} $>$ neo\+::network\+::p2p\+::\+Local\+Node\+::\+Get\+Connected\+Nodes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the connected remote nodes. 
+
+\begin{DoxyReturn}{Returns}
+The connected remote nodes. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ac3131de467f07275dc4f8cd92c4b0393}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!GetConsensusService@{GetConsensusService}}
+\index{GetConsensusService@{GetConsensusService}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{GetConsensusService()}{GetConsensusService()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ac3131de467f07275dc4f8cd92c4b0393} 
+std\+::shared\+\_\+ptr$<$ class Consensus\+Service $>$ neo\+::network\+::p2p\+::\+Local\+Node\+::\+Get\+Consensus\+Service (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get consensus and state services. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ac4381e1a9bd4e2ee1b9053c562edab5a}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ac4381e1a9bd4e2ee1b9053c562edab5a} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{Local\+Node}} \& neo\+::network\+::p2p\+::\+Local\+Node\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the singleton instance of the \doxylink{classneo_1_1network_1_1p2p_1_1_local_node}{Local\+Node}. 
+
+\begin{DoxyReturn}{Returns}
+The singleton instance. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a94a3789be74691be52c90ba3764c942f}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!GetLastBlockIndex@{GetLastBlockIndex}}
+\index{GetLastBlockIndex@{GetLastBlockIndex}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{GetLastBlockIndex()}{GetLastBlockIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a94a3789be74691be52c90ba3764c942f} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Local\+Node\+::\+Get\+Last\+Block\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the last block index of the local node. 
+
+\begin{DoxyReturn}{Returns}
+The last block index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a575af27c8a42142cdd3bea07a011d097}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!GetMemoryPool@{GetMemoryPool}}
+\index{GetMemoryPool@{GetMemoryPool}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{GetMemoryPool()}{GetMemoryPool()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a575af27c8a42142cdd3bea07a011d097} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{ledger\+::\+Memory\+Pool}} $>$ neo\+::network\+::p2p\+::\+Local\+Node\+::\+Get\+Memory\+Pool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ab2cb5982ee58b98a3c3332d77ad81067}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!GetNonce@{GetNonce}}
+\index{GetNonce@{GetNonce}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{GetNonce()}{GetNonce()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ab2cb5982ee58b98a3c3332d77ad81067} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Local\+Node\+::\+Get\+Nonce (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the nonce of the local node. 
+
+\begin{DoxyReturn}{Returns}
+The nonce. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a73a8b454a34d8022001253fe5e711b82}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!GetPeerList@{GetPeerList}}
+\index{GetPeerList@{GetPeerList}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{GetPeerList()}{GetPeerList()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a73a8b454a34d8022001253fe5e711b82} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_list}{Peer\+List}} \& neo\+::network\+::p2p\+::\+Local\+Node\+::\+Get\+Peer\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the peer list. 
+
+\begin{DoxyReturn}{Returns}
+The peer list. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a77b9377565e03bcb426c07badb08ca00}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!GetStateService@{GetStateService}}
+\index{GetStateService@{GetStateService}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{GetStateService()}{GetStateService()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a77b9377565e03bcb426c07badb08ca00} 
+std\+::shared\+\_\+ptr$<$ class \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a72fb3e827a7fdfe22cda766f67bc94cbac7ff9e5b810ed0f95c73a34def1ab31e}{State\+Service}} $>$ neo\+::network\+::p2p\+::\+Local\+Node\+::\+Get\+State\+Service (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_af2f5afac6c82018371c169b6ee7576b5}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!GetUserAgent@{GetUserAgent}}
+\index{GetUserAgent@{GetUserAgent}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{GetUserAgent()}{GetUserAgent()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_af2f5afac6c82018371c169b6ee7576b5} 
+const std\+::string \& neo\+::network\+::p2p\+::\+Local\+Node\+::\+Get\+User\+Agent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the user agent of the local node. 
+
+\begin{DoxyReturn}{Returns}
+The user agent. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a83c67c76ea1955ac9d202c070ec1bfec}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!HandleAccept@{HandleAccept}}
+\index{HandleAccept@{HandleAccept}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{HandleAccept()}{HandleAccept()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a83c67c76ea1955ac9d202c070ec1bfec} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Handle\+Accept (\begin{DoxyParamCaption}\item[{const std\+::error\+\_\+code \&}]{error}{, }\item[{boost\+::asio\+::ip\+::tcp\+::socket}]{socket}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a72785e913cb78befdccb1b4d12342368}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!HandleConnect@{HandleConnect}}
+\index{HandleConnect@{HandleConnect}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{HandleConnect()}{HandleConnect()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a72785e913cb78befdccb1b4d12342368} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Handle\+Connect (\begin{DoxyParamCaption}\item[{const std\+::error\+\_\+code \&}]{error}{, }\item[{boost\+::asio\+::ip\+::tcp\+::socket}]{socket}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&}]{endpoint}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a804d2a4c82b175decca302a17d0e4568}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!LoadPeerList@{LoadPeerList}}
+\index{LoadPeerList@{LoadPeerList}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{LoadPeerList()}{LoadPeerList()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a804d2a4c82b175decca302a17d0e4568} 
+bool neo\+::network\+::p2p\+::\+Local\+Node\+::\+Load\+Peer\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Loads the peer list from a file. 
+
+\begin{DoxyReturn}{Returns}
+True if the peer list was loaded, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a14eaa23831a50ef9e430d40ba33b2923}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!ManageConnectionLifecycle@{ManageConnectionLifecycle}}
+\index{ManageConnectionLifecycle@{ManageConnectionLifecycle}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{ManageConnectionLifecycle()}{ManageConnectionLifecycle()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a14eaa23831a50ef9e430d40ba33b2923} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Manage\+Connection\+Lifecycle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Manages the connection lifecycle. 
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_af60cd5c3e6564b98587419f23dd3b7a3}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!MarkPeerBad@{MarkPeerBad}}
+\index{MarkPeerBad@{MarkPeerBad}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{MarkPeerBad()}{MarkPeerBad()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_af60cd5c3e6564b98587419f23dd3b7a3} 
+bool neo\+::network\+::p2p\+::\+Local\+Node\+::\+Mark\+Peer\+Bad (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&}]{endpoint}{}\end{DoxyParamCaption})}
+
+
+
+Marks a peer as bad. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & The endpoint of the peer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the peer was marked as bad, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a3f9aba43257700cd46a7f9695170d9c5}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!MarkPeerConnected@{MarkPeerConnected}}
+\index{MarkPeerConnected@{MarkPeerConnected}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{MarkPeerConnected()}{MarkPeerConnected()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a3f9aba43257700cd46a7f9695170d9c5} 
+bool neo\+::network\+::p2p\+::\+Local\+Node\+::\+Mark\+Peer\+Connected (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&}]{endpoint}{}\end{DoxyParamCaption})}
+
+
+
+Marks a peer as connected. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & The endpoint of the peer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the peer was marked as connected, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ab2789444c49043f23e009e736f5dfaa2}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!MarkPeerDisconnected@{MarkPeerDisconnected}}
+\index{MarkPeerDisconnected@{MarkPeerDisconnected}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{MarkPeerDisconnected()}{MarkPeerDisconnected()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ab2789444c49043f23e009e736f5dfaa2} 
+bool neo\+::network\+::p2p\+::\+Local\+Node\+::\+Mark\+Peer\+Disconnected (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&}]{endpoint}{}\end{DoxyParamCaption})}
+
+
+
+Marks a peer as disconnected. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & The endpoint of the peer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the peer was marked as disconnected, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a944934fe25a45559a4055ad4c685e172}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnAddrMessageReceived@{OnAddrMessageReceived}}
+\index{OnAddrMessageReceived@{OnAddrMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnAddrMessageReceived()}{OnAddrMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a944934fe25a45559a4055ad4c685e172} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Addr\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload}{payloads\+::\+Addr\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when an addr message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The addr payload. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a02cb776bf075cbcda66477a9f79e7043}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnBlockMessageReceived@{OnBlockMessageReceived}}
+\index{OnBlockMessageReceived@{OnBlockMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnBlockMessageReceived()}{OnBlockMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a02cb776bf075cbcda66477a9f79e7043} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Block\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{payloads\+::\+Block\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when a block message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The block payload. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a4be5713a5267c227defd722131e394a1}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnBlockReceived@{OnBlockReceived}}
+\index{OnBlockReceived@{OnBlockReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnBlockReceived()}{OnBlockReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a4be5713a5267c227defd722131e394a1} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Block\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$}]{block}{}\end{DoxyParamCaption})}
+
+
+
+Called when a block is received from a remote node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node that sent the block. \\
+\hline
+{\em block} & The block received. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a4592e6c521eeb4bbfdbd865d414c8073}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnExtensibleMessageReceived@{OnExtensibleMessageReceived}}
+\index{OnExtensibleMessageReceived@{OnExtensibleMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnExtensibleMessageReceived()}{OnExtensibleMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a4592e6c521eeb4bbfdbd865d414c8073} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Extensible\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload}{payloads\+::\+Extensible\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when an extensible message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The extensible payload. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_aeb681a7bf3e6f6a86884e2f47c10566f}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnFilterAddMessageReceived@{OnFilterAddMessageReceived}}
+\index{OnFilterAddMessageReceived@{OnFilterAddMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnFilterAddMessageReceived()}{OnFilterAddMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_aeb681a7bf3e6f6a86884e2f47c10566f} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Filter\+Add\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_add_payload}{payloads\+::\+Filter\+Add\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when a filteradd message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The filteradd payload. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a4cb5bf9a18d5b31169472c3769f1bce0}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnFilterClearMessageReceived@{OnFilterClearMessageReceived}}
+\index{OnFilterClearMessageReceived@{OnFilterClearMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnFilterClearMessageReceived()}{OnFilterClearMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a4cb5bf9a18d5b31169472c3769f1bce0} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Filter\+Clear\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_clear_payload}{payloads\+::\+Filter\+Clear\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when a filterclear message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The filterclear payload. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_acfc1eb22570b82152cda8d00ca2abb77}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnFilterLoadMessageReceived@{OnFilterLoadMessageReceived}}
+\index{OnFilterLoadMessageReceived@{OnFilterLoadMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnFilterLoadMessageReceived()}{OnFilterLoadMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_acfc1eb22570b82152cda8d00ca2abb77} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Filter\+Load\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{payloads\+::\+Filter\+Load\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when a filterload message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The filterload payload. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a383d6fbd3ded307ccc92fc6d889952a3}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnGetAddrMessageReceived@{OnGetAddrMessageReceived}}
+\index{OnGetAddrMessageReceived@{OnGetAddrMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnGetAddrMessageReceived()}{OnGetAddrMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a383d6fbd3ded307ccc92fc6d889952a3} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Get\+Addr\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{}\end{DoxyParamCaption})}
+
+
+
+Called when a Get\+Addr message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ae84e5647731349f439bb32dd59d6de41}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnGetBlockByIndexMessageReceived@{OnGetBlockByIndexMessageReceived}}
+\index{OnGetBlockByIndexMessageReceived@{OnGetBlockByIndexMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnGetBlockByIndexMessageReceived()}{OnGetBlockByIndexMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ae84e5647731349f439bb32dd59d6de41} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Get\+Block\+By\+Index\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_block_by_index_payload}{payloads\+::\+Get\+Block\+By\+Index\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when a getblockbyindex message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The getblockbyindex payload. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a5250ac607c8332ee94794e94133ef403}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnGetBlocksMessageReceived@{OnGetBlocksMessageReceived}}
+\index{OnGetBlocksMessageReceived@{OnGetBlocksMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnGetBlocksMessageReceived()}{OnGetBlocksMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a5250ac607c8332ee94794e94133ef403} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Get\+Blocks\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_blocks_payload}{payloads\+::\+Get\+Blocks\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when a getblocks message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The getblocks payload. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_aa4a5bd7346d4455abf68361b5c0cdd29}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnGetDataMessageReceived@{OnGetDataMessageReceived}}
+\index{OnGetDataMessageReceived@{OnGetDataMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnGetDataMessageReceived()}{OnGetDataMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_aa4a5bd7346d4455abf68361b5c0cdd29} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Get\+Data\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_data_payload}{payloads\+::\+Get\+Data\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when a getdata message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The getdata payload. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ada5c081cd5499571e8d2849b59af1571}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnGetHeadersMessageReceived@{OnGetHeadersMessageReceived}}
+\index{OnGetHeadersMessageReceived@{OnGetHeadersMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnGetHeadersMessageReceived()}{OnGetHeadersMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ada5c081cd5499571e8d2849b59af1571} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Get\+Headers\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_blocks_payload}{payloads\+::\+Get\+Blocks\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when a getheaders message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The getheaders payload. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a756e98ca29270d7688a1aa8fd26742e1}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnHeadersMessageReceived@{OnHeadersMessageReceived}}
+\index{OnHeadersMessageReceived@{OnHeadersMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnHeadersMessageReceived()}{OnHeadersMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a756e98ca29270d7688a1aa8fd26742e1} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Headers\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{payloads\+::\+Headers\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when a headers message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The headers payload. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a369ec55f909eb9259bc1a04f4132cd70}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnInvMessageReceived@{OnInvMessageReceived}}
+\index{OnInvMessageReceived@{OnInvMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnInvMessageReceived()}{OnInvMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a369ec55f909eb9259bc1a04f4132cd70} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Inv\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_inv_payload}{payloads\+::\+Inv\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when an inv message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The inv payload. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_af9e766e82b49a4b5f6391cbb3bf2b8ec}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnMempoolMessageReceived@{OnMempoolMessageReceived}}
+\index{OnMempoolMessageReceived@{OnMempoolMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnMempoolMessageReceived()}{OnMempoolMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_af9e766e82b49a4b5f6391cbb3bf2b8ec} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Mempool\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_mempool_payload}{payloads\+::\+Mempool\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when a mempool message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The mempool payload. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a8504a0e01763db90e23682859371950c}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnPingMessageReceived@{OnPingMessageReceived}}
+\index{OnPingMessageReceived@{OnPingMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnPingMessageReceived()}{OnPingMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a8504a0e01763db90e23682859371950c} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Ping\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{payloads\+::\+Ping\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when a ping message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The ping payload. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a0681a13030873347cc0c5f691c07fc3a}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnPongMessageReceived@{OnPongMessageReceived}}
+\index{OnPongMessageReceived@{OnPongMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnPongMessageReceived()}{OnPongMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a0681a13030873347cc0c5f691c07fc3a} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Pong\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{payloads\+::\+Ping\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when a pong message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The pong payload. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a429e4fe76df5fbca03e5f655eb037a32}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnRemoteNodeConnected@{OnRemoteNodeConnected}}
+\index{OnRemoteNodeConnected@{OnRemoteNodeConnected}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnRemoteNodeConnected()}{OnRemoteNodeConnected()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a429e4fe76df5fbca03e5f655eb037a32} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Remote\+Node\+Connected (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{}\end{DoxyParamCaption})}
+
+
+
+Called when a remote node is connected. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a0ba1317d68bc1ac600bfdc59a0593ae6}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnRemoteNodeDisconnected@{OnRemoteNodeDisconnected}}
+\index{OnRemoteNodeDisconnected@{OnRemoteNodeDisconnected}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnRemoteNodeDisconnected()}{OnRemoteNodeDisconnected()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a0ba1317d68bc1ac600bfdc59a0593ae6} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Remote\+Node\+Disconnected (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{}\end{DoxyParamCaption})}
+
+
+
+Called when a remote node is disconnected. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a6a30efee7a2aab3f57108dc5ab9e3097}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnRemoteNodeHandshaked@{OnRemoteNodeHandshaked}}
+\index{OnRemoteNodeHandshaked@{OnRemoteNodeHandshaked}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnRemoteNodeHandshaked()}{OnRemoteNodeHandshaked()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a6a30efee7a2aab3f57108dc5ab9e3097} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Remote\+Node\+Handshaked (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{}\end{DoxyParamCaption})}
+
+
+
+Called when a remote node is handshaked. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a73ee90eaeb8af25995993432bdf20fdd}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnTransactionMessageReceived@{OnTransactionMessageReceived}}
+\index{OnTransactionMessageReceived@{OnTransactionMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnTransactionMessageReceived()}{OnTransactionMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a73ee90eaeb8af25995993432bdf20fdd} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Transaction\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload}{payloads\+::\+Transaction\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when a transaction message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The transaction payload. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a432f36cc00164eb738e10a3a0849aa36}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnTransactionReceived@{OnTransactionReceived}}
+\index{OnTransactionReceived@{OnTransactionReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnTransactionReceived()}{OnTransactionReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a432f36cc00164eb738e10a3a0849aa36} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Transaction\+Received (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{IPayload}} $>$}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when a transaction is received from a remote node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em payload} & The transaction payload. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a4e99220b6bbf14f0903a9d3e6bd475c0}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnVerackMessageReceived@{OnVerackMessageReceived}}
+\index{OnVerackMessageReceived@{OnVerackMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnVerackMessageReceived()}{OnVerackMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a4e99220b6bbf14f0903a9d3e6bd475c0} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Verack\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{}\end{DoxyParamCaption})}
+
+
+
+Called when a Verack message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_abf4f9d8df205c2f2a5f74a584dc7d38c}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!OnVersionMessageReceived@{OnVersionMessageReceived}}
+\index{OnVersionMessageReceived@{OnVersionMessageReceived}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{OnVersionMessageReceived()}{OnVersionMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_abf4f9d8df205c2f2a5f74a584dc7d38c} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+On\+Version\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload}{payloads\+::\+Version\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when a version message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The version payload. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ab60e28dc0d89e0f4c3f06541f9d086a3}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!ProcessConsensusMessage@{ProcessConsensusMessage}}
+\index{ProcessConsensusMessage@{ProcessConsensusMessage}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{ProcessConsensusMessage()}{ProcessConsensusMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ab60e28dc0d89e0f4c3f06541f9d086a3} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Process\+Consensus\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload}{payloads\+::\+Extensible\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Process consensus and state service messages. 
+
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_afdee2a07d6b08bb5f0554fdc1e8fe705}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!ProcessStateServiceMessage@{ProcessStateServiceMessage}}
+\index{ProcessStateServiceMessage@{ProcessStateServiceMessage}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{ProcessStateServiceMessage()}{ProcessStateServiceMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_afdee2a07d6b08bb5f0554fdc1e8fe705} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Process\+State\+Service\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload}{payloads\+::\+Extensible\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a8137ef2e42746b0b519eb98e2be6b3ef}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!RelayBlock@{RelayBlock}}
+\index{RelayBlock@{RelayBlock}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{RelayBlock()}{RelayBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a8137ef2e42746b0b519eb98e2be6b3ef} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Relay\+Block (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$}]{block}{}\end{DoxyParamCaption})}
+
+
+
+Relay methods for block and transaction propagation. 
+
+Here is the call graph for this function\+:
+% FIG 23
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a265fe0c9dc11d69d72732b62fe4173c3}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!RelayTransaction@{RelayTransaction}}
+\index{RelayTransaction@{RelayTransaction}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{RelayTransaction()}{RelayTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a265fe0c9dc11d69d72732b62fe4173c3} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Relay\+Transaction (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$}]{transaction}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 24
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a8d8bbd2ff00ed5314ffa23f8cf3193a9}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!RemoveConnectedNode@{RemoveConnectedNode}}
+\index{RemoveConnectedNode@{RemoveConnectedNode}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{RemoveConnectedNode()}{RemoveConnectedNode()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a8d8bbd2ff00ed5314ffa23f8cf3193a9} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Remove\+Connected\+Node (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 25
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a6722c6b3d1c060a83259a208c55202eb}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!RemovePeer@{RemovePeer}}
+\index{RemovePeer@{RemovePeer}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{RemovePeer()}{RemovePeer()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a6722c6b3d1c060a83259a208c55202eb} 
+bool neo\+::network\+::p2p\+::\+Local\+Node\+::\+Remove\+Peer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&}]{endpoint}{}\end{DoxyParamCaption})}
+
+
+
+Removes a peer from the peer list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & The endpoint of the peer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the peer was removed, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ad2dfe779337c08d8eece3d6a4b43d346}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!RequestBlocks@{RequestBlocks}}
+\index{RequestBlocks@{RequestBlocks}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{RequestBlocks()}{RequestBlocks()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ad2dfe779337c08d8eece3d6a4b43d346} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Request\+Blocks (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{}\end{DoxyParamCaption})}
+
+
+
+Request blocks from a remote node. 
+
+Here is the call graph for this function\+:
+% FIG 26
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ab505a72cc4a9cb01b52a9ad326eb4cfb}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SavePeerList@{SavePeerList}}
+\index{SavePeerList@{SavePeerList}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SavePeerList()}{SavePeerList()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ab505a72cc4a9cb01b52a9ad326eb4cfb} 
+bool neo\+::network\+::p2p\+::\+Local\+Node\+::\+Save\+Peer\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Saves the peer list to a file. 
+
+\begin{DoxyReturn}{Returns}
+True if the peer list was saved, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ac8dff941ae41a8272a2f87406484ff88}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetAddrMessageReceivedCallback@{SetAddrMessageReceivedCallback}}
+\index{SetAddrMessageReceivedCallback@{SetAddrMessageReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetAddrMessageReceivedCallback()}{SetAddrMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ac8dff941ae41a8272a2f87406484ff88} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Addr\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload}{payloads\+::\+Addr\+Payload}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the addr message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a94eb9dab5bfc670c3b0a396296c6a9be}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetBlockchain@{SetBlockchain}}
+\index{SetBlockchain@{SetBlockchain}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetBlockchain()}{SetBlockchain()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a94eb9dab5bfc670c3b0a396296c6a9be} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Blockchain (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}} $>$}]{blockchain}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a06a1c49914c9530c3c719521554eeac3}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetBlockMessageReceivedCallback@{SetBlockMessageReceivedCallback}}
+\index{SetBlockMessageReceivedCallback@{SetBlockMessageReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetBlockMessageReceivedCallback()}{SetBlockMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a06a1c49914c9530c3c719521554eeac3} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Block\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the block message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ae10ee61056bee8298f7128b68da53347}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetBlockReceivedCallback@{SetBlockReceivedCallback}}
+\index{SetBlockReceivedCallback@{SetBlockReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetBlockReceivedCallback()}{SetBlockReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ae10ee61056bee8298f7128b68da53347} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Block\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Set callbacks for block and transaction events. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a334b3c2b77cfad9f570fed2d5b8c78f4}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetCapabilities@{SetCapabilities}}
+\index{SetCapabilities@{SetCapabilities}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetCapabilities()}{SetCapabilities()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a334b3c2b77cfad9f570fed2d5b8c78f4} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Capabilities (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \&}]{capabilities}{}\end{DoxyParamCaption})}
+
+
+
+Sets the capabilities of the local node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em capabilities} & The capabilities. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ace3eb7c27719cf4a0ac0862ff2a7756a}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetFilterAddMessageReceivedCallback@{SetFilterAddMessageReceivedCallback}}
+\index{SetFilterAddMessageReceivedCallback@{SetFilterAddMessageReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetFilterAddMessageReceivedCallback()}{SetFilterAddMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ace3eb7c27719cf4a0ac0862ff2a7756a} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Filter\+Add\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_add_payload}{payloads\+::\+Filter\+Add\+Payload}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the filteradd message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a90580f62806d6e890a6ea03c8610b160}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetFilterClearMessageReceivedCallback@{SetFilterClearMessageReceivedCallback}}
+\index{SetFilterClearMessageReceivedCallback@{SetFilterClearMessageReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetFilterClearMessageReceivedCallback()}{SetFilterClearMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a90580f62806d6e890a6ea03c8610b160} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Filter\+Clear\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_clear_payload}{payloads\+::\+Filter\+Clear\+Payload}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the filterclear message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a4116151630306940e8efb7d09f81a37f}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetFilterLoadMessageReceivedCallback@{SetFilterLoadMessageReceivedCallback}}
+\index{SetFilterLoadMessageReceivedCallback@{SetFilterLoadMessageReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetFilterLoadMessageReceivedCallback()}{SetFilterLoadMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a4116151630306940e8efb7d09f81a37f} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Filter\+Load\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{payloads\+::\+Filter\+Load\+Payload}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the filterload message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a4b01aa2cf9f777d6fb19c9571d222c12}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetGetBlockByIndexMessageReceivedCallback@{SetGetBlockByIndexMessageReceivedCallback}}
+\index{SetGetBlockByIndexMessageReceivedCallback@{SetGetBlockByIndexMessageReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetGetBlockByIndexMessageReceivedCallback()}{SetGetBlockByIndexMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a4b01aa2cf9f777d6fb19c9571d222c12} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Get\+Block\+By\+Index\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_block_by_index_payload}{payloads\+::\+Get\+Block\+By\+Index\+Payload}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the getblockbyindex message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a88f90dce84b2c518552edfd0a729238f}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetGetBlocksMessageReceivedCallback@{SetGetBlocksMessageReceivedCallback}}
+\index{SetGetBlocksMessageReceivedCallback@{SetGetBlocksMessageReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetGetBlocksMessageReceivedCallback()}{SetGetBlocksMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a88f90dce84b2c518552edfd0a729238f} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Get\+Blocks\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_blocks_payload}{payloads\+::\+Get\+Blocks\+Payload}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the getblocks message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a30e94e3c3ff77dfcf1c8dada59aec33a}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetGetDataMessageReceivedCallback@{SetGetDataMessageReceivedCallback}}
+\index{SetGetDataMessageReceivedCallback@{SetGetDataMessageReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetGetDataMessageReceivedCallback()}{SetGetDataMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a30e94e3c3ff77dfcf1c8dada59aec33a} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Get\+Data\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_data_payload}{payloads\+::\+Get\+Data\+Payload}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the getdata message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a1f0667695c5161804b01a37624de1dd4}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetGetHeadersMessageReceivedCallback@{SetGetHeadersMessageReceivedCallback}}
+\index{SetGetHeadersMessageReceivedCallback@{SetGetHeadersMessageReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetGetHeadersMessageReceivedCallback()}{SetGetHeadersMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a1f0667695c5161804b01a37624de1dd4} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Get\+Headers\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_blocks_payload}{payloads\+::\+Get\+Blocks\+Payload}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the getheaders message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a70aa7031a525d402646ad8a64cff53e8}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetHeadersMessageReceivedCallback@{SetHeadersMessageReceivedCallback}}
+\index{SetHeadersMessageReceivedCallback@{SetHeadersMessageReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetHeadersMessageReceivedCallback()}{SetHeadersMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a70aa7031a525d402646ad8a64cff53e8} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Headers\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{payloads\+::\+Headers\+Payload}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the headers message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a35f49ca7ab1303b4e429b2473f8b175e}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetInvMessageReceivedCallback@{SetInvMessageReceivedCallback}}
+\index{SetInvMessageReceivedCallback@{SetInvMessageReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetInvMessageReceivedCallback()}{SetInvMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a35f49ca7ab1303b4e429b2473f8b175e} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Inv\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_inv_payload}{payloads\+::\+Inv\+Payload}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the inv message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a0058f91b13600f06de0cb9661bd24d2b}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetLastBlockIndex@{SetLastBlockIndex}}
+\index{SetLastBlockIndex@{SetLastBlockIndex}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetLastBlockIndex()}{SetLastBlockIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a0058f91b13600f06de0cb9661bd24d2b} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Last\+Block\+Index (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{last\+Block\+Index}{}\end{DoxyParamCaption})}
+
+
+
+Sets the last block index of the local node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em last\+Block\+Index} & The last block index. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a3a1b50bf93429ca39b22d28323c3cdce}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetMemoryPool@{SetMemoryPool}}
+\index{SetMemoryPool@{SetMemoryPool}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetMemoryPool()}{SetMemoryPool()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a3a1b50bf93429ca39b22d28323c3cdce} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Memory\+Pool (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{ledger\+::\+Memory\+Pool}} $>$}]{mempool}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a013fbf0c016c042c517f67e3ed3f7dae}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetMempoolMessageReceivedCallback@{SetMempoolMessageReceivedCallback}}
+\index{SetMempoolMessageReceivedCallback@{SetMempoolMessageReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetMempoolMessageReceivedCallback()}{SetMempoolMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a013fbf0c016c042c517f67e3ed3f7dae} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Mempool\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_mempool_payload}{payloads\+::\+Mempool\+Payload}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the mempool message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ad50ab15217a830852f01d1587efe46f5}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetPeerListPath@{SetPeerListPath}}
+\index{SetPeerListPath@{SetPeerListPath}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetPeerListPath()}{SetPeerListPath()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ad50ab15217a830852f01d1587efe46f5} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Peer\+List\+Path (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption})}
+
+
+
+Sets the peer list file path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to the peer list file. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ab3a3d7d53ad8704bc677669ae5ab35d2}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetPingMessageReceivedCallback@{SetPingMessageReceivedCallback}}
+\index{SetPingMessageReceivedCallback@{SetPingMessageReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetPingMessageReceivedCallback()}{SetPingMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ab3a3d7d53ad8704bc677669ae5ab35d2} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Ping\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{payloads\+::\+Ping\+Payload}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the ping message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a8796eec3e1b436372c571a8fcc2ba29a}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetPongMessageReceivedCallback@{SetPongMessageReceivedCallback}}
+\index{SetPongMessageReceivedCallback@{SetPongMessageReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetPongMessageReceivedCallback()}{SetPongMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a8796eec3e1b436372c571a8fcc2ba29a} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Pong\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{payloads\+::\+Ping\+Payload}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the pong message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a9a6f1062fce1ac63dd93f7a85b2f18cb}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetRemoteNodeConnectedCallback@{SetRemoteNodeConnectedCallback}}
+\index{SetRemoteNodeConnectedCallback@{SetRemoteNodeConnectedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetRemoteNodeConnectedCallback()}{SetRemoteNodeConnectedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a9a6f1062fce1ac63dd93f7a85b2f18cb} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Remote\+Node\+Connected\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*})$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the remote node connected callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a993f48b6181caba0e8581bfdb00ae589}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetRemoteNodeDisconnectedCallback@{SetRemoteNodeDisconnectedCallback}}
+\index{SetRemoteNodeDisconnectedCallback@{SetRemoteNodeDisconnectedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetRemoteNodeDisconnectedCallback()}{SetRemoteNodeDisconnectedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a993f48b6181caba0e8581bfdb00ae589} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Remote\+Node\+Disconnected\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*})$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the remote node disconnected callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a10cdb4a25222b9a4cbcaf9a65367ed22}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetRemoteNodeHandshakedCallback@{SetRemoteNodeHandshakedCallback}}
+\index{SetRemoteNodeHandshakedCallback@{SetRemoteNodeHandshakedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetRemoteNodeHandshakedCallback()}{SetRemoteNodeHandshakedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a10cdb4a25222b9a4cbcaf9a65367ed22} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Remote\+Node\+Handshaked\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*})$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the remote node handshaked callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ac2c28cb63b52b21b655726ec4bcf1855}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetTransactionReceivedCallback@{SetTransactionReceivedCallback}}
+\index{SetTransactionReceivedCallback@{SetTransactionReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetTransactionReceivedCallback()}{SetTransactionReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ac2c28cb63b52b21b655726ec4bcf1855} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Transaction\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_abff506cd55818f12667fc31496b968f9}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetUserAgent@{SetUserAgent}}
+\index{SetUserAgent@{SetUserAgent}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetUserAgent()}{SetUserAgent()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_abff506cd55818f12667fc31496b968f9} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+User\+Agent (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{user\+Agent}{}\end{DoxyParamCaption})}
+
+
+
+Sets the user agent of the local node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+Agent} & The user agent. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a157658cbfc7274b36e2a93b395e007d4}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!SetVersionMessageReceivedCallback@{SetVersionMessageReceivedCallback}}
+\index{SetVersionMessageReceivedCallback@{SetVersionMessageReceivedCallback}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{SetVersionMessageReceivedCallback()}{SetVersionMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a157658cbfc7274b36e2a93b395e007d4} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Set\+Version\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload}{payloads\+::\+Version\+Payload}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the version message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a793f8ada3ef5c67417d71fdd49e192ae}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!Start@{Start}}
+\index{Start@{Start}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a793f8ada3ef5c67417d71fdd49e192ae} 
+bool neo\+::network\+::p2p\+::\+Local\+Node\+::\+Start (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config}{Channels\+Config}} \&}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Starts the local node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & The channels configuration. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the local node was started successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 27
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a758caf540eb9f306e76deb447f480df7}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!Start@{Start}}
+\index{Start@{Start}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a758caf540eb9f306e76deb447f480df7} 
+bool neo\+::network\+::p2p\+::\+Local\+Node\+::\+Start (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{port}{, }\item[{size\+\_\+t}]{max\+Connections}{ = {\ttfamily 10}}\end{DoxyParamCaption})}
+
+
+
+Starts the local node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & The port to listen on. \\
+\hline
+{\em max\+Connections} & The maximum number of connections. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the local node was started successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 28
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_adbccd5d61e22344752ad523f7609b3fd}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!StartAccept@{StartAccept}}
+\index{StartAccept@{StartAccept}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{StartAccept()}{StartAccept()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_adbccd5d61e22344752ad523f7609b3fd} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Start\+Accept (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 29
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ae4f093322b419445fb6bb48eb325c0c3}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!StartConnectionLifecycle@{StartConnectionLifecycle}}
+\index{StartConnectionLifecycle@{StartConnectionLifecycle}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{StartConnectionLifecycle()}{StartConnectionLifecycle()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ae4f093322b419445fb6bb48eb325c0c3} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Start\+Connection\+Lifecycle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Starts the connection lifecycle management. 
+
+Here is the call graph for this function\+:
+% FIG 30
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a5ea205a3e6c24c03fb5bf3588a5397b5}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a5ea205a3e6c24c03fb5bf3588a5397b5} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the local node. 
+
+Here is the call graph for this function\+:
+% FIG 31
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ab47a70d45b50856f50cf3edf28a4729f}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!StopConnectionLifecycle@{StopConnectionLifecycle}}
+\index{StopConnectionLifecycle@{StopConnectionLifecycle}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{StopConnectionLifecycle()}{StopConnectionLifecycle()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ab47a70d45b50856f50cf3edf28a4729f} 
+void neo\+::network\+::p2p\+::\+Local\+Node\+::\+Stop\+Connection\+Lifecycle (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the connection lifecycle management. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_afd0014ba0cd9493c44d875aa643d86ee}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!acceptor\_@{acceptor\_}}
+\index{acceptor\_@{acceptor\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{acceptor\_}{acceptor\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_afd0014ba0cd9493c44d875aa643d86ee} 
+std\+::unique\+\_\+ptr$<$boost\+::asio\+::ip\+::tcp\+::acceptor$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::acceptor\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ac5ffb3150cb09a7e3860376e23a3d733}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!addrMessageReceivedCallback\_@{addrMessageReceivedCallback\_}}
+\index{addrMessageReceivedCallback\_@{addrMessageReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{addrMessageReceivedCallback\_}{addrMessageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ac5ffb3150cb09a7e3860376e23a3d733} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload}{payloads\+::\+Addr\+Payload}}\&)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::addr\+Message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ab18376d39279daa29c5879a74cd3c088}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!blockchain\_@{blockchain\_}}
+\index{blockchain\_@{blockchain\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{blockchain\_}{blockchain\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ab18376d39279daa29c5879a74cd3c088} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}}$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::blockchain\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a5e83cfe2d8ef31c67d3633acf9f3bca1}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!blockMessageReceivedCallback\_@{blockMessageReceivedCallback\_}}
+\index{blockMessageReceivedCallback\_@{blockMessageReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{blockMessageReceivedCallback\_}{blockMessageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a5e83cfe2d8ef31c67d3633acf9f3bca1} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}}$>$)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::block\+Message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a4696d9c0e4b63b21b912670daa0131a9}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!blockReceivedCallback\_@{blockReceivedCallback\_}}
+\index{blockReceivedCallback\_@{blockReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{blockReceivedCallback\_}{blockReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a4696d9c0e4b63b21b912670daa0131a9} 
+std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}}$>$)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::block\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a6a3f7e596303c981038721e0007e158a}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!capabilities\_@{capabilities\_}}
+\index{capabilities\_@{capabilities\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{capabilities\_}{capabilities\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a6a3f7e596303c981038721e0007e158a} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}}$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::capabilities\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ac4c4a1fbb206862356b24e45048ba1e6}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!connectedNodes\_@{connectedNodes\_}}
+\index{connectedNodes\_@{connectedNodes\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{connectedNodes\_}{connectedNodes\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ac4c4a1fbb206862356b24e45048ba1e6} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}$>$ $>$ neo\+::network\+::p2p\+::\+Local\+Node\+::connected\+Nodes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ab94e49a72e53cec50dba1f006af52db1}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!connectedNodesMutex\_@{connectedNodesMutex\_}}
+\index{connectedNodesMutex\_@{connectedNodesMutex\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{connectedNodesMutex\_}{connectedNodesMutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ab94e49a72e53cec50dba1f006af52db1} 
+std\+::mutex neo\+::network\+::p2p\+::\+Local\+Node\+::connected\+Nodes\+Mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a9ce35277f2bc96f598a74d0700fbc016}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!connectionLifecycleRunning\_@{connectionLifecycleRunning\_}}
+\index{connectionLifecycleRunning\_@{connectionLifecycleRunning\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{connectionLifecycleRunning\_}{connectionLifecycleRunning\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a9ce35277f2bc96f598a74d0700fbc016} 
+std\+::atomic$<$bool$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::connection\+Lifecycle\+Running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ae756a586c1e2f81facbb8e39f0d41882}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!connectionLifecycleThread\_@{connectionLifecycleThread\_}}
+\index{connectionLifecycleThread\_@{connectionLifecycleThread\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{connectionLifecycleThread\_}{connectionLifecycleThread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ae756a586c1e2f81facbb8e39f0d41882} 
+std\+::thread neo\+::network\+::p2p\+::\+Local\+Node\+::connection\+Lifecycle\+Thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a54e5080b712bc47c257da8e9ffc10f6d}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!consensusService\_@{consensusService\_}}
+\index{consensusService\_@{consensusService\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{consensusService\_}{consensusService\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a54e5080b712bc47c257da8e9ffc10f6d} 
+std\+::shared\+\_\+ptr$<$class Consensus\+Service$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::consensus\+Service\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a1a87a7348b9cbecf3be6dc028ae1a457}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!filterAddMessageReceivedCallback\_@{filterAddMessageReceivedCallback\_}}
+\index{filterAddMessageReceivedCallback\_@{filterAddMessageReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{filterAddMessageReceivedCallback\_}{filterAddMessageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a1a87a7348b9cbecf3be6dc028ae1a457} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_add_payload}{payloads\+::\+Filter\+Add\+Payload}}\&)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::filter\+Add\+Message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a0b0c0e70637f4489e50a15c138e0599a}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!filterClearMessageReceivedCallback\_@{filterClearMessageReceivedCallback\_}}
+\index{filterClearMessageReceivedCallback\_@{filterClearMessageReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{filterClearMessageReceivedCallback\_}{filterClearMessageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a0b0c0e70637f4489e50a15c138e0599a} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_clear_payload}{payloads\+::\+Filter\+Clear\+Payload}}\&)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::filter\+Clear\+Message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a51c97c59f21823087518754a2000b7de}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!filterLoadMessageReceivedCallback\_@{filterLoadMessageReceivedCallback\_}}
+\index{filterLoadMessageReceivedCallback\_@{filterLoadMessageReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{filterLoadMessageReceivedCallback\_}{filterLoadMessageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a51c97c59f21823087518754a2000b7de} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload}{payloads\+::\+Filter\+Load\+Payload}}\&)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::filter\+Load\+Message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ac8748afd4322095510e40d004b90ca2e}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!getBlockByIndexMessageReceivedCallback\_@{getBlockByIndexMessageReceivedCallback\_}}
+\index{getBlockByIndexMessageReceivedCallback\_@{getBlockByIndexMessageReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{getBlockByIndexMessageReceivedCallback\_}{getBlockByIndexMessageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ac8748afd4322095510e40d004b90ca2e} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_block_by_index_payload}{payloads\+::\+Get\+Block\+By\+Index\+Payload}}\&)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::get\+Block\+By\+Index\+Message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a023d9b73cc4a3ca4e55cae67c19b6ec3}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!getBlocksMessageReceivedCallback\_@{getBlocksMessageReceivedCallback\_}}
+\index{getBlocksMessageReceivedCallback\_@{getBlocksMessageReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{getBlocksMessageReceivedCallback\_}{getBlocksMessageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a023d9b73cc4a3ca4e55cae67c19b6ec3} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_blocks_payload}{payloads\+::\+Get\+Blocks\+Payload}}\&)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::get\+Blocks\+Message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_afbb0a7a821ec5636c059f0e337276701}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!getDataMessageReceivedCallback\_@{getDataMessageReceivedCallback\_}}
+\index{getDataMessageReceivedCallback\_@{getDataMessageReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{getDataMessageReceivedCallback\_}{getDataMessageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_afbb0a7a821ec5636c059f0e337276701} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_data_payload}{payloads\+::\+Get\+Data\+Payload}}\&)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::get\+Data\+Message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a72f60445f4c37075e030c5e252a45efe}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!getHeadersMessageReceivedCallback\_@{getHeadersMessageReceivedCallback\_}}
+\index{getHeadersMessageReceivedCallback\_@{getHeadersMessageReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{getHeadersMessageReceivedCallback\_}{getHeadersMessageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a72f60445f4c37075e030c5e252a45efe} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_blocks_payload}{payloads\+::\+Get\+Blocks\+Payload}}\&)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::get\+Headers\+Message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a4f690d7e9511d73c36603fccf78e80f0}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!headersMessageReceivedCallback\_@{headersMessageReceivedCallback\_}}
+\index{headersMessageReceivedCallback\_@{headersMessageReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{headersMessageReceivedCallback\_}{headersMessageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a4f690d7e9511d73c36603fccf78e80f0} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{payloads\+::\+Headers\+Payload}}\&)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::headers\+Message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a8fd3de9f2e97840764da2fbeb41214ba}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!invMessageReceivedCallback\_@{invMessageReceivedCallback\_}}
+\index{invMessageReceivedCallback\_@{invMessageReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{invMessageReceivedCallback\_}{invMessageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a8fd3de9f2e97840764da2fbeb41214ba} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_inv_payload}{payloads\+::\+Inv\+Payload}}\&)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::inv\+Message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ac7d1be0a27c15718eb7bba8acb5da14b}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!ioContext\_@{ioContext\_}}
+\index{ioContext\_@{ioContext\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{ioContext\_}{ioContext\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ac7d1be0a27c15718eb7bba8acb5da14b} 
+boost\+::asio\+::io\+\_\+context neo\+::network\+::p2p\+::\+Local\+Node\+::io\+Context\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a2714cbc46946b73d6b3ef4252971a5e4}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!ioThread\_@{ioThread\_}}
+\index{ioThread\_@{ioThread\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{ioThread\_}{ioThread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a2714cbc46946b73d6b3ef4252971a5e4} 
+std\+::thread neo\+::network\+::p2p\+::\+Local\+Node\+::io\+Thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ac113054cffad6f5069c0613f996150e7}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!lastBlockIndex\_@{lastBlockIndex\_}}
+\index{lastBlockIndex\_@{lastBlockIndex\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{lastBlockIndex\_}{lastBlockIndex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ac113054cffad6f5069c0613f996150e7} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Local\+Node\+::last\+Block\+Index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a4b9112c17fa9e911118738fc19aeab09}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!maxConnections\_@{maxConnections\_}}
+\index{maxConnections\_@{maxConnections\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{maxConnections\_}{maxConnections\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a4b9112c17fa9e911118738fc19aeab09} 
+size\+\_\+t neo\+::network\+::p2p\+::\+Local\+Node\+::max\+Connections\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a07454ab8a4febce87e2127fcb68a3b39}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!mempool\_@{mempool\_}}
+\index{mempool\_@{mempool\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{mempool\_}{mempool\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a07454ab8a4febce87e2127fcb68a3b39} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{ledger\+::\+Memory\+Pool}}$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::mempool\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_aad39db8bc09a07271d6db7bbc4b5b1ac}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!mempoolMessageReceivedCallback\_@{mempoolMessageReceivedCallback\_}}
+\index{mempoolMessageReceivedCallback\_@{mempoolMessageReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{mempoolMessageReceivedCallback\_}{mempoolMessageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_aad39db8bc09a07271d6db7bbc4b5b1ac} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_mempool_payload}{payloads\+::\+Mempool\+Payload}}\&)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::mempool\+Message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a2e55a5e2d302525b06b75b6200eadf83}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!nonce\_@{nonce\_}}
+\index{nonce\_@{nonce\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{nonce\_}{nonce\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a2e55a5e2d302525b06b75b6200eadf83} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Local\+Node\+::nonce\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_aecd3033dd8e7602855ea06c9b02d58fe}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!peerList\_@{peerList\_}}
+\index{peerList\_@{peerList\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{peerList\_}{peerList\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_aecd3033dd8e7602855ea06c9b02d58fe} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_list}{Peer\+List}} neo\+::network\+::p2p\+::\+Local\+Node\+::peer\+List\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a6863e4c483988b996b79754c607e96fe}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!peerListPath\_@{peerListPath\_}}
+\index{peerListPath\_@{peerListPath\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{peerListPath\_}{peerListPath\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a6863e4c483988b996b79754c607e96fe} 
+std\+::string neo\+::network\+::p2p\+::\+Local\+Node\+::peer\+List\+Path\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a775a6c668095a184d16a0df227c68f50}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!pingMessageReceivedCallback\_@{pingMessageReceivedCallback\_}}
+\index{pingMessageReceivedCallback\_@{pingMessageReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{pingMessageReceivedCallback\_}{pingMessageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a775a6c668095a184d16a0df227c68f50} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{payloads\+::\+Ping\+Payload}}\&)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::ping\+Message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a130ae7e639e1d746b20eaa259eea76ec}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!pongMessageReceivedCallback\_@{pongMessageReceivedCallback\_}}
+\index{pongMessageReceivedCallback\_@{pongMessageReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{pongMessageReceivedCallback\_}{pongMessageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a130ae7e639e1d746b20eaa259eea76ec} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{payloads\+::\+Ping\+Payload}}\&)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::pong\+Message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_aa8c7c607fe4a283d5c68aeb0fe77d56d}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!remoteNodeConnectedCallback\_@{remoteNodeConnectedCallback\_}}
+\index{remoteNodeConnectedCallback\_@{remoteNodeConnectedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{remoteNodeConnectedCallback\_}{remoteNodeConnectedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_aa8c7c607fe4a283d5c68aeb0fe77d56d} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*})$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::remote\+Node\+Connected\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_acd126d6ed928bfef1898ad9fea5b93f9}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!remoteNodeDisconnectedCallback\_@{remoteNodeDisconnectedCallback\_}}
+\index{remoteNodeDisconnectedCallback\_@{remoteNodeDisconnectedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{remoteNodeDisconnectedCallback\_}{remoteNodeDisconnectedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_acd126d6ed928bfef1898ad9fea5b93f9} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*})$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::remote\+Node\+Disconnected\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ac6fe2d6cf3ee670aafca04ed6ce11728}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!remoteNodeHandshakedCallback\_@{remoteNodeHandshakedCallback\_}}
+\index{remoteNodeHandshakedCallback\_@{remoteNodeHandshakedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{remoteNodeHandshakedCallback\_}{remoteNodeHandshakedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ac6fe2d6cf3ee670aafca04ed6ce11728} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*})$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::remote\+Node\+Handshaked\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a3d7b77ae0b92ab0676b8377ecf2ed612}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a3d7b77ae0b92ab0676b8377ecf2ed612} 
+std\+::atomic$<$bool$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_af890cde07417668b98b2923d0dfd6665}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!stateService\_@{stateService\_}}
+\index{stateService\_@{stateService\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{stateService\_}{stateService\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_af890cde07417668b98b2923d0dfd6665} 
+std\+::shared\+\_\+ptr$<$class \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a72fb3e827a7fdfe22cda766f67bc94cbac7ff9e5b810ed0f95c73a34def1ab31e}{State\+Service}}$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::state\+Service\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a065c533ec08c959e87eb335335737061}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!transactionReceivedCallback\_@{transactionReceivedCallback\_}}
+\index{transactionReceivedCallback\_@{transactionReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{transactionReceivedCallback\_}{transactionReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a065c533ec08c959e87eb335335737061} 
+std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}}$>$)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::transaction\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a8212a59a001e5a661f06962b8ac0ad65}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!userAgent\_@{userAgent\_}}
+\index{userAgent\_@{userAgent\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{userAgent\_}{userAgent\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a8212a59a001e5a661f06962b8ac0ad65} 
+std\+::string neo\+::network\+::p2p\+::\+Local\+Node\+::user\+Agent\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_ab56c8fc08aec5e0f99d28f426221305a}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!versionMessageReceivedCallback\_@{versionMessageReceivedCallback\_}}
+\index{versionMessageReceivedCallback\_@{versionMessageReceivedCallback\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{versionMessageReceivedCallback\_}{versionMessageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_ab56c8fc08aec5e0f99d28f426221305a} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}\texorpdfstring{$\ast$}{*}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload}{payloads\+::\+Version\+Payload}}\&)$>$ neo\+::network\+::p2p\+::\+Local\+Node\+::version\+Message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_local_node_a9fa265db190ad9a95d451106e82b7288}\index{neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}!work\_@{work\_}}
+\index{work\_@{work\_}!neo::network::p2p::LocalNode@{neo::network::p2p::LocalNode}}
+\doxysubsubsection{\texorpdfstring{work\_}{work\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_local_node_a9fa265db190ad9a95d451106e82b7288} 
+std\+::unique\+\_\+ptr$<$boost\+::asio\+::executor\+\_\+work\+\_\+guard$<$boost\+::asio\+::io\+\_\+context\+::executor\+\_\+type$>$ $>$ neo\+::network\+::p2p\+::\+Local\+Node\+::work\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/\mbox{\hyperlink{local__node_8h}{local\+\_\+node.\+h}}\item 
+src/network/p2p/\mbox{\hyperlink{local__node_8cpp}{local\+\_\+node.\+cpp}}\item 
+src/network/p2p/\mbox{\hyperlink{local__node__handlers_8cpp}{local\+\_\+node\+\_\+handlers.\+cpp}}\item 
+src/network/p2p/\mbox{\hyperlink{local__node__messaging_8cpp}{local\+\_\+node\+\_\+messaging.\+cpp}}\end{DoxyCompactItemize}

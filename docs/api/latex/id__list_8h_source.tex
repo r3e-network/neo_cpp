@@ -1,0 +1,44 @@
+\doxysection{id\+\_\+list.\+h}
+\hypertarget{id__list_8h_source}{}\label{id__list_8h_source}\index{include/neo/smartcontract/native/id\_list.h@{include/neo/smartcontract/native/id\_list.h}}
+\mbox{\hyperlink{id__list_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__reader_8h}{neo/io/binary\_reader.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__writer_8h}{neo/io/binary\_writer.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stack__item_8h}{neo/vm/stack\_item.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native}{neo::smartcontract::native}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_id_list_a64cac32f246018612d37e1101d39a893}{IdList}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_id_list_a64cac32f246018612d37e1101d39a893}{IdList}}();}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_id_list_a2fd7388d67f4efe7fad54285d0b427c5}{GetCount}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_id_list_a5fb5ef8f1ed6ad00ccea8acc15fe8a2a}{Add}}(uint64\_t\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_id_list_a23a27d5d85f3a7593aa8f7e592d072e4}{Remove}}(uint64\_t\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_id_list_aa7c7c143277fe1202507cbc97459d8a2}{Contains}}(uint64\_t\ \textcolor{keywordtype}{id})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<uint64\_t>\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_id_list_a392bd1aaff78aab96d000729e988239d}{GetIds}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00059\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_id_list_af98bda2219d666fbcdd5ac8b1029a550}{ToStackItem}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_id_list_a4ac9fbfa4434f1343dbc430ef519a2ee}{FromStackItem}}(\textcolor{keyword}{const}\ std::shared\_ptr<vm::StackItem>\&\ item);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_id_list_a13aa03d1fb30344c26e5ef5b00846587}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_id_list_ac25ce82d93a521101026591e370c4f60}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00080\ \ \ \ \ std::vector<uint64\_t>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_id_list_a6f7a28975dda69292c611348dc3eb501}{ids\_}};}
+\DoxyCodeLine{00081\ \};}
+\DoxyCodeLine{00082\ \}\ \ \textcolor{comment}{//\ namespace\ neo::smartcontract::native}}
+
+\end{DoxyCode}

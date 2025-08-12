@@ -1,0 +1,40 @@
+\doxysection{json\+\_\+serializer.\+h}
+\hypertarget{json__serializer_8h_source}{}\label{json__serializer_8h_source}\index{include/neo/smartcontract/json\_serializer.h@{include/neo/smartcontract/json\_serializer.h}}
+\mbox{\hyperlink{json__serializer_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stack__item_8h}{neo/vm/stack\_item.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json_8hpp}{nlohmann/json.hpp}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract}{neo::smartcontract}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1_json_serializer}{JsonSerializer}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_json_serializer_abcc3811d55d0ac1c0518667ee8f38230}{Serialize}}(std::shared\_ptr<vm::StackItem>\ item);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_json_serializer_a1784e1422a2b1e0134fe108ac67185c0}{SerializeToByteArray}}(std::shared\_ptr<vm::StackItem>\ item,\ int64\_t\ maxSize\ =\ 2048);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_json_serializer_a802564e2ef6e499168031f1e675fa3f3}{Deserialize}}(\textcolor{keyword}{const}\ nlohmann::json\&\ \mbox{\hyperlink{namespaceneo_1_1json}{json}},\ int64\_t\ maxSize\ =\ 2048,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int64\_t\ maxItems\ =\ 2048);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_json_serializer_a802564e2ef6e499168031f1e675fa3f3}{Deserialize}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ data,\ int64\_t\ maxSize\ =\ 2048,}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int64\_t\ maxItems\ =\ 2048);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_json_serializer_ab7509a1b1dcfa8050403f5b21f042310}{SerializeStackItem}}(std::shared\_ptr<vm::StackItem>\ item,\ int64\_t\&\ itemCount);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_json_serializer_a8ce8c16b56fa497931ec79a2bd47c744}{DeserializeStackItem}}(\textcolor{keyword}{const}\ nlohmann::json\&\ \mbox{\hyperlink{namespaceneo_1_1json}{json}},\ int64\_t\ maxSize,}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int64\_t\ maxItems,\ int64\_t\&\ itemCount);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_json_serializer_ac3f315a7ffb6f3a13b1a7c0e6c5a521b}{MAX\_SAFE\_INTEGER}}\ =\ 9007199254740991LL;}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_json_serializer_a1a826758d4325bb989d225854f74bc67}{MIN\_SAFE\_INTEGER}}\ =\ -\/9007199254740991LL;}
+\DoxyCodeLine{00083\ \};}
+\DoxyCodeLine{00084\ \}\ \ \textcolor{comment}{//\ namespace\ neo::smartcontract}}
+
+\end{DoxyCode}

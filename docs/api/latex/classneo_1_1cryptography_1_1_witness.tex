@@ -1,0 +1,225 @@
+\doxysection{neo\+::cryptography\+::Witness Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1_witness}{}\label{classneo_1_1cryptography_1_1_witness}\index{neo::cryptography::Witness@{neo::cryptography::Witness}}
+
+
+Represents a witness for transaction validation.  
+
+
+
+
+{\ttfamily \#include $<$witness.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::cryptography\+::Witness\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::cryptography\+::Witness\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1_witness_a52f556874e4a3e91b54921c5656854fb}{Witness}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1_witness_af131260730f18c3835cc9454a45912dd}{Witness}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&invocation, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&verification)
+\begin{DoxyCompactList}\small\item\em Constructor with scripts. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness_aa7d1f139b99aba0b3118c72bee56f208}{Get\+Invocation\+Script}} () const
+\begin{DoxyCompactList}\small\item\em Get invocation script. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness_a925edfa3d4e8fe81b233ecf9a6a6e131}{Set\+Invocation\+Script}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&script)
+\begin{DoxyCompactList}\small\item\em Set invocation script. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness_a7a162f4b18b7e2dcd5a8481f4bad3b72}{Get\+Verification\+Script}} () const
+\begin{DoxyCompactList}\small\item\em Get verification script. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness_a1c775bc6dce6c1c1d25442c40ced9cd2}{Set\+Verification\+Script}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&script)
+\begin{DoxyCompactList}\small\item\em Set verification script. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness_ad7667189527d5d481e2b7738a0e31000}{Get\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Get size in bytes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness_a42e20d2152ed4032dd6a04c91c9ec29e}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness_a190e69eabf8d57b5add5f66ca9b8a4c4}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a binary reader. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness_a1262f4abeff7f18ab9d04524b660d1bd}{operator==}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness}{Witness}} \&other) const
+\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness_af94f84d59a2fa789ba28198f78e48e73}{operator!=}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness}{Witness}} \&other) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness_a280f058af939b627e803290e957b859d}{invocation\+\_\+script\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness_a98ea4ec69ff6ad611516f96e5ca09b43}{verification\+\_\+script\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a witness for transaction validation. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cryptography_1_1_witness_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_witness_a52f556874e4a3e91b54921c5656854fb}\index{neo::cryptography::Witness@{neo::cryptography::Witness}!Witness@{Witness}}
+\index{Witness@{Witness}!neo::cryptography::Witness@{neo::cryptography::Witness}}
+\doxysubsubsection{\texorpdfstring{Witness()}{Witness()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_witness_a52f556874e4a3e91b54921c5656854fb} 
+neo\+::cryptography\+::\+Witness\+::\+Witness (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor. 
+
+\Hypertarget{classneo_1_1cryptography_1_1_witness_af131260730f18c3835cc9454a45912dd}\index{neo::cryptography::Witness@{neo::cryptography::Witness}!Witness@{Witness}}
+\index{Witness@{Witness}!neo::cryptography::Witness@{neo::cryptography::Witness}}
+\doxysubsubsection{\texorpdfstring{Witness()}{Witness()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_witness_af131260730f18c3835cc9454a45912dd} 
+neo\+::cryptography\+::\+Witness\+::\+Witness (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{invocation}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{verification}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor with scripts. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1_witness_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_witness_a190e69eabf8d57b5add5f66ca9b8a4c4}\index{neo::cryptography::Witness@{neo::cryptography::Witness}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::cryptography::Witness@{neo::cryptography::Witness}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_witness_a190e69eabf8d57b5add5f66ca9b8a4c4} 
+void neo\+::cryptography\+::\+Witness\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+\Hypertarget{classneo_1_1cryptography_1_1_witness_aa7d1f139b99aba0b3118c72bee56f208}\index{neo::cryptography::Witness@{neo::cryptography::Witness}!GetInvocationScript@{GetInvocationScript}}
+\index{GetInvocationScript@{GetInvocationScript}!neo::cryptography::Witness@{neo::cryptography::Witness}}
+\doxysubsubsection{\texorpdfstring{GetInvocationScript()}{GetInvocationScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_witness_aa7d1f139b99aba0b3118c72bee56f208} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::cryptography\+::\+Witness\+::\+Get\+Invocation\+Script (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get invocation script. 
+
+\Hypertarget{classneo_1_1cryptography_1_1_witness_ad7667189527d5d481e2b7738a0e31000}\index{neo::cryptography::Witness@{neo::cryptography::Witness}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::cryptography::Witness@{neo::cryptography::Witness}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_witness_ad7667189527d5d481e2b7738a0e31000} 
+size\+\_\+t neo\+::cryptography\+::\+Witness\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get size in bytes. 
+
+\Hypertarget{classneo_1_1cryptography_1_1_witness_a7a162f4b18b7e2dcd5a8481f4bad3b72}\index{neo::cryptography::Witness@{neo::cryptography::Witness}!GetVerificationScript@{GetVerificationScript}}
+\index{GetVerificationScript@{GetVerificationScript}!neo::cryptography::Witness@{neo::cryptography::Witness}}
+\doxysubsubsection{\texorpdfstring{GetVerificationScript()}{GetVerificationScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_witness_a7a162f4b18b7e2dcd5a8481f4bad3b72} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::cryptography\+::\+Witness\+::\+Get\+Verification\+Script (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get verification script. 
+
+\Hypertarget{classneo_1_1cryptography_1_1_witness_af94f84d59a2fa789ba28198f78e48e73}\index{neo::cryptography::Witness@{neo::cryptography::Witness}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::cryptography::Witness@{neo::cryptography::Witness}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_witness_af94f84d59a2fa789ba28198f78e48e73} 
+bool neo\+::cryptography\+::\+Witness\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness}{Witness}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cryptography_1_1_witness_a1262f4abeff7f18ab9d04524b660d1bd}\index{neo::cryptography::Witness@{neo::cryptography::Witness}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::cryptography::Witness@{neo::cryptography::Witness}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_witness_a1262f4abeff7f18ab9d04524b660d1bd} 
+bool neo\+::cryptography\+::\+Witness\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness}{Witness}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1cryptography_1_1_witness_a42e20d2152ed4032dd6a04c91c9ec29e}\index{neo::cryptography::Witness@{neo::cryptography::Witness}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::cryptography::Witness@{neo::cryptography::Witness}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_witness_a42e20d2152ed4032dd6a04c91c9ec29e} 
+void neo\+::cryptography\+::\+Witness\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+\Hypertarget{classneo_1_1cryptography_1_1_witness_a925edfa3d4e8fe81b233ecf9a6a6e131}\index{neo::cryptography::Witness@{neo::cryptography::Witness}!SetInvocationScript@{SetInvocationScript}}
+\index{SetInvocationScript@{SetInvocationScript}!neo::cryptography::Witness@{neo::cryptography::Witness}}
+\doxysubsubsection{\texorpdfstring{SetInvocationScript()}{SetInvocationScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_witness_a925edfa3d4e8fe81b233ecf9a6a6e131} 
+void neo\+::cryptography\+::\+Witness\+::\+Set\+Invocation\+Script (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{script}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set invocation script. 
+
+\Hypertarget{classneo_1_1cryptography_1_1_witness_a1c775bc6dce6c1c1d25442c40ced9cd2}\index{neo::cryptography::Witness@{neo::cryptography::Witness}!SetVerificationScript@{SetVerificationScript}}
+\index{SetVerificationScript@{SetVerificationScript}!neo::cryptography::Witness@{neo::cryptography::Witness}}
+\doxysubsubsection{\texorpdfstring{SetVerificationScript()}{SetVerificationScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_witness_a1c775bc6dce6c1c1d25442c40ced9cd2} 
+void neo\+::cryptography\+::\+Witness\+::\+Set\+Verification\+Script (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{script}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set verification script. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cryptography_1_1_witness_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_witness_a280f058af939b627e803290e957b859d}\index{neo::cryptography::Witness@{neo::cryptography::Witness}!invocation\_script\_@{invocation\_script\_}}
+\index{invocation\_script\_@{invocation\_script\_}!neo::cryptography::Witness@{neo::cryptography::Witness}}
+\doxysubsubsection{\texorpdfstring{invocation\_script\_}{invocation\_script\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_witness_a280f058af939b627e803290e957b859d} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Witness\+::invocation\+\_\+script\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1_witness_a98ea4ec69ff6ad611516f96e5ca09b43}\index{neo::cryptography::Witness@{neo::cryptography::Witness}!verification\_script\_@{verification\_script\_}}
+\index{verification\_script\_@{verification\_script\_}!neo::cryptography::Witness@{neo::cryptography::Witness}}
+\doxysubsubsection{\texorpdfstring{verification\_script\_}{verification\_script\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_witness_a98ea4ec69ff6ad611516f96e5ca09b43} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Witness\+::verification\+\_\+script\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/\mbox{\hyperlink{cryptography_2witness_8h}{witness.\+h}}\end{DoxyCompactItemize}

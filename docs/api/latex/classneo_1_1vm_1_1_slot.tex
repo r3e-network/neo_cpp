@@ -1,0 +1,239 @@
+\doxysection{neo\+::vm\+::Slot Class Reference}
+\hypertarget{classneo_1_1vm_1_1_slot}{}\label{classneo_1_1vm_1_1_slot}\index{neo::vm::Slot@{neo::vm::Slot}}
+
+
+VM slot for local variables, arguments, or static fields.  
+
+
+
+
+{\ttfamily \#include $<$slot.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_slot_aba9cf742895a80f5fd933eb52f116e7c}{Slot}} (size\+\_\+t capacity)
+\begin{DoxyCompactList}\small\item\em Constructor with capacity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_slot_a8823356d4a00413945a9c2f1c4f861f9}{Slot}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1vm_1_1_slot_abc126510117732f4badaff4289f03688}{\texorpdfstring{$\sim$}{\string~}\+Slot}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_aafc9f5ed7f7572922e9cb4b70e7493f9}{Get}} (size\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Get item at index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a75e49e59a5be2aa46f08a8eb3df170cf}{Set}} (size\+\_\+t index, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item)
+\begin{DoxyCompactList}\small\item\em Set item at index. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_slot_aa3c228e768a1a8d820c1d915cd175b73}{Count}} () const
+\begin{DoxyCompactList}\small\item\em Get slot count. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a2f412b7429edfd91f4024688c8d9ca25}{Is\+Valid\+Index}} (size\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Check if index is valid. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a523da05f36d0bc88992b13d744110d85}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clear all slots. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a213a529f643210b1aa46889f3b08b09a}{Resize}} (size\+\_\+t new\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Resize slot container. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a5cfb56a633aa33ccb327579af16639ce}{Get\+Items}} () const
+\begin{DoxyCompactList}\small\item\em Get all items (for debugging) \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{classneo_1_1vm_1_1_slot_aaf0bb4b3582938f8a5c99a7cd9dfe9e5}{begin}} ()
+\item 
+auto \mbox{\hyperlink{classneo_1_1vm_1_1_slot_ae5de71b2c0d784ae5058bda8641cf5c4}{end}} ()
+\item 
+auto \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a84a4b172bcf49f20319b1eece425c6a7}{begin}} () const
+\item 
+auto \mbox{\hyperlink{classneo_1_1vm_1_1_slot_ac2b90cdbe89b1d6b55b1832536d35e72}{end}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_slot_a8cb2bb0f6814df9548942f5c5e483cd0}{items\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+VM slot for local variables, arguments, or static fields. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1vm_1_1_slot_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1vm_1_1_slot_aba9cf742895a80f5fd933eb52f116e7c}\index{neo::vm::Slot@{neo::vm::Slot}!Slot@{Slot}}
+\index{Slot@{Slot}!neo::vm::Slot@{neo::vm::Slot}}
+\doxysubsubsection{\texorpdfstring{Slot()}{Slot()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_slot_aba9cf742895a80f5fd933eb52f116e7c} 
+neo\+::vm\+::\+Slot\+::\+Slot (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{capacity}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor with capacity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em capacity} & Number of slots \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_slot_a8823356d4a00413945a9c2f1c4f861f9}\index{neo::vm::Slot@{neo::vm::Slot}!Slot@{Slot}}
+\index{Slot@{Slot}!neo::vm::Slot@{neo::vm::Slot}}
+\doxysubsubsection{\texorpdfstring{Slot()}{Slot()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_slot_a8823356d4a00413945a9c2f1c4f861f9} 
+neo\+::vm\+::\+Slot\+::\+Slot (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor. 
+
+\Hypertarget{classneo_1_1vm_1_1_slot_abc126510117732f4badaff4289f03688}\index{neo::vm::Slot@{neo::vm::Slot}!````~Slot@{\texorpdfstring{$\sim$}{\string~}Slot}}
+\index{````~Slot@{\texorpdfstring{$\sim$}{\string~}Slot}!neo::vm::Slot@{neo::vm::Slot}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Slot()}{\string~Slot()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_slot_abc126510117732f4badaff4289f03688} 
+virtual neo\+::vm\+::\+Slot\+::\texorpdfstring{$\sim$}{\string~}\+Slot (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1vm_1_1_slot_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1vm_1_1_slot_aaf0bb4b3582938f8a5c99a7cd9dfe9e5}\index{neo::vm::Slot@{neo::vm::Slot}!begin@{begin}}
+\index{begin@{begin}!neo::vm::Slot@{neo::vm::Slot}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_slot_aaf0bb4b3582938f8a5c99a7cd9dfe9e5} 
+auto neo\+::vm\+::\+Slot\+::begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1vm_1_1_slot_a84a4b172bcf49f20319b1eece425c6a7}\index{neo::vm::Slot@{neo::vm::Slot}!begin@{begin}}
+\index{begin@{begin}!neo::vm::Slot@{neo::vm::Slot}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_slot_a84a4b172bcf49f20319b1eece425c6a7} 
+auto neo\+::vm\+::\+Slot\+::begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1vm_1_1_slot_a523da05f36d0bc88992b13d744110d85}\index{neo::vm::Slot@{neo::vm::Slot}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::vm::Slot@{neo::vm::Slot}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_slot_a523da05f36d0bc88992b13d744110d85} 
+void neo\+::vm\+::\+Slot\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clear all slots. 
+
+\Hypertarget{classneo_1_1vm_1_1_slot_aa3c228e768a1a8d820c1d915cd175b73}\index{neo::vm::Slot@{neo::vm::Slot}!Count@{Count}}
+\index{Count@{Count}!neo::vm::Slot@{neo::vm::Slot}}
+\doxysubsubsection{\texorpdfstring{Count()}{Count()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_slot_aa3c228e768a1a8d820c1d915cd175b73} 
+size\+\_\+t neo\+::vm\+::\+Slot\+::\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get slot count. 
+
+\begin{DoxyReturn}{Returns}
+Number of slots 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_slot_ae5de71b2c0d784ae5058bda8641cf5c4}\index{neo::vm::Slot@{neo::vm::Slot}!end@{end}}
+\index{end@{end}!neo::vm::Slot@{neo::vm::Slot}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_slot_ae5de71b2c0d784ae5058bda8641cf5c4} 
+auto neo\+::vm\+::\+Slot\+::end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1vm_1_1_slot_ac2b90cdbe89b1d6b55b1832536d35e72}\index{neo::vm::Slot@{neo::vm::Slot}!end@{end}}
+\index{end@{end}!neo::vm::Slot@{neo::vm::Slot}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_slot_ac2b90cdbe89b1d6b55b1832536d35e72} 
+auto neo\+::vm\+::\+Slot\+::end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1vm_1_1_slot_aafc9f5ed7f7572922e9cb4b70e7493f9}\index{neo::vm::Slot@{neo::vm::Slot}!Get@{Get}}
+\index{Get@{Get}!neo::vm::Slot@{neo::vm::Slot}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_slot_aafc9f5ed7f7572922e9cb4b70e7493f9} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ neo\+::vm\+::\+Slot\+::\+Get (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Get item at index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & \doxylink{classneo_1_1vm_1_1_slot}{Slot} index \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Stack item at index 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_slot_a5cfb56a633aa33ccb327579af16639ce}\index{neo::vm::Slot@{neo::vm::Slot}!GetItems@{GetItems}}
+\index{GetItems@{GetItems}!neo::vm::Slot@{neo::vm::Slot}}
+\doxysubsubsection{\texorpdfstring{GetItems()}{GetItems()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_slot_a5cfb56a633aa33ccb327579af16639ce} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \& neo\+::vm\+::\+Slot\+::\+Get\+Items (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get all items (for debugging) 
+
+\begin{DoxyReturn}{Returns}
+Vector of all items 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_slot_a2f412b7429edfd91f4024688c8d9ca25}\index{neo::vm::Slot@{neo::vm::Slot}!IsValidIndex@{IsValidIndex}}
+\index{IsValidIndex@{IsValidIndex}!neo::vm::Slot@{neo::vm::Slot}}
+\doxysubsubsection{\texorpdfstring{IsValidIndex()}{IsValidIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_slot_a2f412b7429edfd91f4024688c8d9ca25} 
+bool neo\+::vm\+::\+Slot\+::\+Is\+Valid\+Index (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if index is valid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Index to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if index is valid 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_slot_a213a529f643210b1aa46889f3b08b09a}\index{neo::vm::Slot@{neo::vm::Slot}!Resize@{Resize}}
+\index{Resize@{Resize}!neo::vm::Slot@{neo::vm::Slot}}
+\doxysubsubsection{\texorpdfstring{Resize()}{Resize()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_slot_a213a529f643210b1aa46889f3b08b09a} 
+void neo\+::vm\+::\+Slot\+::\+Resize (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{new\+\_\+size}{}\end{DoxyParamCaption})}
+
+
+
+Resize slot container. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+size} & New size \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_slot_a75e49e59a5be2aa46f08a8eb3df170cf}\index{neo::vm::Slot@{neo::vm::Slot}!Set@{Set}}
+\index{Set@{Set}!neo::vm::Slot@{neo::vm::Slot}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_slot_a75e49e59a5be2aa46f08a8eb3df170cf} 
+void neo\+::vm\+::\+Slot\+::\+Set (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Set item at index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & \doxylink{classneo_1_1vm_1_1_slot}{Slot} index \\
+\hline
+{\em item} & Stack item to set \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1vm_1_1_slot_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1vm_1_1_slot_a8cb2bb0f6814df9548942f5c5e483cd0}\index{neo::vm::Slot@{neo::vm::Slot}!items\_@{items\_}}
+\index{items\_@{items\_}!neo::vm::Slot@{neo::vm::Slot}}
+\doxysubsubsection{\texorpdfstring{items\_}{items\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_slot_a8cb2bb0f6814df9548942f5c5e483cd0} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}}$>$ $>$ neo\+::vm\+::\+Slot\+::items\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/vm/\mbox{\hyperlink{slot_8h}{slot.\+h}}\end{DoxyCompactItemize}

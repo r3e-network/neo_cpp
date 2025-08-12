@@ -1,0 +1,43 @@
+digraph "neo::smartcontract::native::NeoToken::RegisterCandidate"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::smartcontract\l::native::NeoToken::\lRegisterCandidate",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Registers a candidate."];
+  Node1 -> Node2 [id="edge19_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::smartcontract\l::native::NeoTokenCandidate\l::RegisterCandidate",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_neo_token_candidate.html#a557eae54d8fda077016358ec2065145c",tooltip="Registers a candidate."];
+  Node2 -> Node3 [id="edge20_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::smartcontract\l::native::NativeContract\l::CreateStorageKey",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_native_contract.html#a5a9ec24cc4c1584fb00fdf32f614dbd8",tooltip="Creates a storage key with the specified prefix."];
+  Node3 -> Node4 [id="edge21_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::persistence::Storage\lKey::Create",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#ae7001770e96642cfdb2f878c6264bf51",tooltip="Creates a storage key with contract ID and prefix."];
+  Node4 -> Node5 [id="edge22_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::persistence::Storage\lKey::FillHeader",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#a4a6ee8a47d7cfb0b3802d3697ddf571f",tooltip="Fills the header (contract ID + prefix) into a span."];
+  Node4 -> Node6 [id="edge23_Node000004_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::persistence::Storage\lKey::StorageKey",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#a26e71bde9629f81837c84d69d83fd75a",tooltip="Constructs an empty StorageKey."];
+  Node2 -> Node7 [id="edge24_Node000002_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::smartcontract\l::native::NeoTokenCandidate\l::GetCandidateState",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_neo_token_candidate.html#a8b1144886bf0a59b007b4e1bf406aeb9",tooltip="Gets the candidate state."];
+  Node7 -> Node3 [id="edge25_Node000007_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node7 -> Node8 [id="edge26_Node000007_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="neo::smartcontract\l::native::NeoToken::\lCandidateState::Deserialize",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_candidate_state.html#a4b3588cff845e246d112020fcd7b7974",tooltip=" "];
+  Node8 -> Node9 [id="edge27_Node000008_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="neo::io::BinaryReader\l::ReadBool",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_reader.html#a94aba9dfe2eb624fd626466227ccf3a8",tooltip="Reads a boolean value from the stream."];
+  Node9 -> Node10 [id="edge28_Node000009_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="neo::io::BinaryReader\l::ReadUInt8",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_reader.html#a3b93ff9ad86d70fb5091267936092a59",tooltip="Reads an 8-bit unsigned integer from the stream."];
+  Node8 -> Node11 [id="edge29_Node000008_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="neo::io::BinaryReader\l::ReadInt64",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_reader.html#aa8429b0320e5dee44f55d511457eb9bb",tooltip="Reads a 64-bit signed integer from the stream."];
+  Node11 -> Node12 [id="edge30_Node000011_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="neo::io::BinaryReader\l::ReadRawBytes",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_reader.html#a890faf334a0500b4474a6b2f91e63e51",tooltip="Helper method to read raw bytes from either stream or memory."];
+  Node12 -> Node13 [id="edge31_Node000012_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node13 [id="Node000013",label="neo::io::BinaryReader\l::EnsureAvailable",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_reader.html#a2bfd19e979fbdb9b340cc8dd78a9ca72",tooltip="Checks if enough bytes are available to read."];
+  Node7 -> Node14 [id="edge32_Node000007_Node000014",color="steelblue1",style="solid",tooltip=" "];
+  Node14 [id="Node000014",label="neo::cryptography::\lecc::ECPoint::ToArray",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cryptography_1_1ecc_1_1_e_c_point.html#ac78e405cf844e51af4f0830b2b392368",tooltip="Converts this point to a byte array (compressed format). This method matches the C# ECPoint...."];
+  Node14 -> Node15 [id="edge33_Node000014_Node000015",color="steelblue1",style="solid",tooltip=" "];
+  Node15 [id="Node000015",label="neo::cryptography::\lecc::ECPoint::ToBytes",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cryptography_1_1ecc_1_1_e_c_point.html#acaf3aa20394e9261354877c0e64c8f37",tooltip="Converts this point to a byte array."];
+  Node15 -> Node16 [id="edge34_Node000015_Node000016",color="steelblue1",style="solid",tooltip=" "];
+  Node16 [id="Node000016",label="neo::io::ByteVector\l::Data",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#a971af50d2778c4435c924cf4b839e8a1",tooltip="Gets a pointer to the data."];
+  Node2 -> Node17 [id="edge35_Node000002_Node000017",color="steelblue1",style="solid",tooltip=" "];
+  Node17 [id="Node000017",label="neo::cryptography::\lecc::ECPoint::IsInfinity",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cryptography_1_1ecc_1_1_e_c_point.html#a635b1f023273b7557e605b238d9fecea",tooltip="Checks if this point is at infinity."];
+  Node2 -> Node14 [id="edge36_Node000002_Node000014",color="steelblue1",style="solid",tooltip=" "];
+}

@@ -1,0 +1,101 @@
+\doxysection{include/neo/config/configuration\+\_\+manager.h File Reference}
+\hypertarget{configuration__manager_8h}{}\label{configuration__manager_8h}\index{include/neo/config/configuration\_manager.h@{include/neo/config/configuration\_manager.h}}
+{\ttfamily \#include $<$neo/core/logging.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/json/jobject.\+h$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+Include dependency graph for configuration\+\_\+manager.\+h\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source}{neo\+::config\+::\+IConfiguration\+Source}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1config_1_1_configuration}{Configuration} source interface. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source}{neo\+::config\+::\+Json\+File\+Config\+Source}}
+\begin{DoxyCompactList}\small\item\em JSON file configuration source. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source}{neo\+::config\+::\+Environment\+Config\+Source}}
+\begin{DoxyCompactList}\small\item\em Environment variables configuration source. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1config_1_1_command_line_config_source}{neo\+::config\+::\+Command\+Line\+Config\+Source}}
+\begin{DoxyCompactList}\small\item\em Command line arguments configuration source. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager}{neo\+::config\+::\+Configuration\+Manager}}
+\begin{DoxyCompactList}\small\item\em Global configuration instance. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1config_1_1_config_validator}{neo\+::config\+::\+Config\+Validator}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1config_1_1_configuration}{Configuration} validation rules. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1config_1_1_config_validator_1_1_rule}{neo\+::config\+::\+Config\+Validator\+::\+Rule}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1config}{neo\+::config}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{configuration__manager_8h_a9e4f3d0b206d1d12d18e597d649e84b9}{CONFIG\+\_\+\+GET}}(key)
+\item 
+\#define \mbox{\hyperlink{configuration__manager_8h_adf01ea7dbf126644817dd5c05e05b9e3}{CONFIG\+\_\+\+GET\+\_\+\+INT}}(key)
+\item 
+\#define \mbox{\hyperlink{configuration__manager_8h_a680f26fa7361a2519724a27e6ef9f88f}{CONFIG\+\_\+\+GET\+\_\+\+BOOL}}(key)
+\item 
+\#define \mbox{\hyperlink{configuration__manager_8h_a0147d53b34eb0335a4a6385abc13a5ca}{CONFIG\+\_\+\+GET\+\_\+\+DOUBLE}}(key)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1config_a6ee4d76b6cf8f4d1270e434ec44272cd}{neo\+::config\+::\+Config\+Change\+Callback}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1config_1_1_configuration}{Configuration} change callback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{configuration__manager_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{configuration__manager_8h_a9e4f3d0b206d1d12d18e597d649e84b9}\index{configuration\_manager.h@{configuration\_manager.h}!CONFIG\_GET@{CONFIG\_GET}}
+\index{CONFIG\_GET@{CONFIG\_GET}!configuration\_manager.h@{configuration\_manager.h}}
+\doxysubsubsection{\texorpdfstring{CONFIG\_GET}{CONFIG\_GET}}
+{\footnotesize\ttfamily \label{configuration__manager_8h_a9e4f3d0b206d1d12d18e597d649e84b9} 
+\#define CONFIG\+\_\+\+GET(\begin{DoxyParamCaption}\item[{}]{key}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a71a4e4feea25de4b617d186d13cdc09e}{neo::config::ConfigurationManager::GetInstance}}()-\/>\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a2acb6dfe4ed8c11f4ec61780e3f47625}{Get}}(key)}
+
+\end{DoxyCode}
+\Hypertarget{configuration__manager_8h_a680f26fa7361a2519724a27e6ef9f88f}\index{configuration\_manager.h@{configuration\_manager.h}!CONFIG\_GET\_BOOL@{CONFIG\_GET\_BOOL}}
+\index{CONFIG\_GET\_BOOL@{CONFIG\_GET\_BOOL}!configuration\_manager.h@{configuration\_manager.h}}
+\doxysubsubsection{\texorpdfstring{CONFIG\_GET\_BOOL}{CONFIG\_GET\_BOOL}}
+{\footnotesize\ttfamily \label{configuration__manager_8h_a680f26fa7361a2519724a27e6ef9f88f} 
+\#define CONFIG\+\_\+\+GET\+\_\+\+BOOL(\begin{DoxyParamCaption}\item[{}]{key}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a71a4e4feea25de4b617d186d13cdc09e}{neo::config::ConfigurationManager::GetInstance}}()-\/>\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a3b23d2e17016587834a64709628ca22e}{GetBool}}(key)}
+
+\end{DoxyCode}
+\Hypertarget{configuration__manager_8h_a0147d53b34eb0335a4a6385abc13a5ca}\index{configuration\_manager.h@{configuration\_manager.h}!CONFIG\_GET\_DOUBLE@{CONFIG\_GET\_DOUBLE}}
+\index{CONFIG\_GET\_DOUBLE@{CONFIG\_GET\_DOUBLE}!configuration\_manager.h@{configuration\_manager.h}}
+\doxysubsubsection{\texorpdfstring{CONFIG\_GET\_DOUBLE}{CONFIG\_GET\_DOUBLE}}
+{\footnotesize\ttfamily \label{configuration__manager_8h_a0147d53b34eb0335a4a6385abc13a5ca} 
+\#define CONFIG\+\_\+\+GET\+\_\+\+DOUBLE(\begin{DoxyParamCaption}\item[{}]{key}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a71a4e4feea25de4b617d186d13cdc09e}{neo::config::ConfigurationManager::GetInstance}}()-\/>\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a7b6e78b1283dd6512823332b99e926ec}{GetDouble}}(key)}
+
+\end{DoxyCode}
+\Hypertarget{configuration__manager_8h_adf01ea7dbf126644817dd5c05e05b9e3}\index{configuration\_manager.h@{configuration\_manager.h}!CONFIG\_GET\_INT@{CONFIG\_GET\_INT}}
+\index{CONFIG\_GET\_INT@{CONFIG\_GET\_INT}!configuration\_manager.h@{configuration\_manager.h}}
+\doxysubsubsection{\texorpdfstring{CONFIG\_GET\_INT}{CONFIG\_GET\_INT}}
+{\footnotesize\ttfamily \label{configuration__manager_8h_adf01ea7dbf126644817dd5c05e05b9e3} 
+\#define CONFIG\+\_\+\+GET\+\_\+\+INT(\begin{DoxyParamCaption}\item[{}]{key}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a71a4e4feea25de4b617d186d13cdc09e}{neo::config::ConfigurationManager::GetInstance}}()-\/>\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a3305226d425e4efadf211682aeb0bc8b}{GetInt}}(key)}
+
+\end{DoxyCode}

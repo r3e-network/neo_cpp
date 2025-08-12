@@ -1,0 +1,53 @@
+\doxysection{transaction\+\_\+verification\+\_\+context.\+h}
+\hypertarget{transaction__verification__context_8h_source}{}\label{transaction__verification__context_8h_source}\index{include/neo/ledger/transaction\_verification\_context.h@{include/neo/ledger/transaction\_verification\_context.h}}
+\mbox{\hyperlink{transaction__verification__context_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2transaction_8h}{neo/ledger/transaction.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{verify__result_8h}{neo/ledger/verify\_result.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00036\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a0f82ab73a4989a972d0c0d1d1113ba0e}{TransactionVerificationContext}}}
+\DoxyCodeLine{00037\ \{}
+\DoxyCodeLine{00038\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a0f82ab73a4989a972d0c0d1d1113ba0e}{TransactionVerificationContext}}();}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a828f745dc93cffec0c1dd1116117f62a}{\string~TransactionVerificationContext}}();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a36a5322a3bea4c92c686982ffa6a6a55}{CheckTransaction}}(std::shared\_ptr<Transaction>\ transaction);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a99478e00e32a74e21f90a37d9549b23a}{AddTransaction}}(std::shared\_ptr<Transaction>\ transaction);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a406352044b656351e1a6ff44ad4d8b43}{IsConflicted}}(std::shared\_ptr<Transaction>\ transaction)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a7efda288aae3b7658b30fc78e65968f6}{Reset}}();}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_aa3828e2a37265a7224b7d8856fb64eae}{Clear}}();}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_aa971518b515484911f7be21f21d58336}{GetTransactionCount}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{comment}{//\ Track\ account\ conflicts\ (account\ -\/>\ transaction\ hash)}}
+\DoxyCodeLine{00087\ \ \ \ \ std::unordered\_map<io::UInt160,\ io::UInt256>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_aa78fc9654efa35773de37a69f9606d77}{account\_conflicts\_}};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{//\ Set\ of\ transaction\ hashes\ in\ this\ context}}
+\DoxyCodeLine{00090\ \ \ \ \ std::unordered\_set<io::UInt256>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_ae3342a3aff1070faa6f4482b6d7e892c}{transaction\_hashes\_}};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{comment}{//\ Helper\ methods\ (Neo\ N3\ uses\ account-\/based\ model)}}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a2d651dda99651b26dff6eec4b28954a4}{HasOutputConflict}}(std::shared\_ptr<Transaction>\ transaction)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a778531bd55d2b891bbe02d5156651f0f}{HasAccountConflict}}(std::shared\_ptr<Transaction>\ transaction)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00095\ \};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{comment}{//\ TransactionRemovedEventArgs\ is\ defined\ in\ memory\_pool.h}}
+\DoxyCodeLine{00098\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}

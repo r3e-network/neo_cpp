@@ -1,0 +1,196 @@
+\doxysection{transaction\+\_\+verifier.\+h}
+\hypertarget{transaction__verifier_8h_source}{}\label{transaction__verifier_8h_source}\index{include/neo/smartcontract/transaction\_verifier.h@{include/neo/smartcontract/transaction\_verifier.h}}
+\mbox{\hyperlink{transaction__verifier_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{cache_2cache_8h}{neo/cache/cache.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2transaction_8h}{neo/ledger/transaction.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{logger_8h}{neo/logging/logger.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{metrics_2metrics_8h}{neo/metrics/metrics.h}}>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{data__cache_8h}{neo/persistence/data\_cache.h}}>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{application__engine_8h}{neo/smartcontract/application\_engine.h}}>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract}{neo::smartcontract}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00022\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{VerificationResult}}}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9aa6c3f75313c0227d7828d5c0ece9fa7d}{Succeed}},}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9ad7c8c85bf79bbe1b7188497c32c3b0ca}{Failed}},}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a4bbb8f967da6d1a610596d7257179c2b}{Invalid}},}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a351caf723532f9ba7a371b5dfa868eed}{InvalidSignature}},}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a82d1add8ae3d392a5fab58994bb1947b}{PolicyFail}},}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a09d9ff5c9cf461998dc29f4c90f2c60c}{InsufficientFunds}},}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a89b69484680b18e9179e826c6e023805}{AlreadyExists}},}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a890e26b772933624a04f7e16f9222927}{AlreadyInPool}},}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9ab498327feeb51430af73e07deac268fd}{OutOfMemory}},}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a710ae8fdf26bc4ed61c68be7c4a6f539}{UnableToVerify}},}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a24fe48030f7d3097d5882535b04c3fa8}{Expired}},}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9ac0c3b9b8686544ecb0f564a91fb3dc9d}{InsufficientNetworkFee}},}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9aa58fc443ef37aa89d2704c2d10f112ac}{InsufficientSystemFee}}}
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00044\ \textcolor{keyword}{inline}\ std::string\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a6e44b9c80f6e18588aa8d2e5ceb90481}{VerificationResultToString}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{VerificationResult}}\ result)}
+\DoxyCodeLine{00045\ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordflow}{switch}\ (result)}
+\DoxyCodeLine{00047\ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9aa6c3f75313c0227d7828d5c0ece9fa7d}{VerificationResult::Succeed}}:}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Succeed"{}};}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9ad7c8c85bf79bbe1b7188497c32c3b0ca}{VerificationResult::Failed}}:}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Failed"{}};}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a4bbb8f967da6d1a610596d7257179c2b}{VerificationResult::Invalid}}:}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Invalid"{}};}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a351caf723532f9ba7a371b5dfa868eed}{VerificationResult::InvalidSignature}}:}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}InvalidSignature"{}};}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a82d1add8ae3d392a5fab58994bb1947b}{VerificationResult::PolicyFail}}:}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}PolicyFail"{}};}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a09d9ff5c9cf461998dc29f4c90f2c60c}{VerificationResult::InsufficientFunds}}:}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}InsufficientFunds"{}};}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a89b69484680b18e9179e826c6e023805}{VerificationResult::AlreadyExists}}:}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}AlreadyExists"{}};}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a890e26b772933624a04f7e16f9222927}{VerificationResult::AlreadyInPool}}:}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}AlreadyInPool"{}};}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9ab498327feeb51430af73e07deac268fd}{VerificationResult::OutOfMemory}}:}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}OutOfMemory"{}};}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a710ae8fdf26bc4ed61c68be7c4a6f539}{VerificationResult::UnableToVerify}}:}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}UnableToVerify"{}};}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a24fe48030f7d3097d5882535b04c3fa8}{VerificationResult::Expired}}:}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Expired"{}};}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9ac0c3b9b8686544ecb0f564a91fb3dc9d}{VerificationResult::InsufficientNetworkFee}}:}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}InsufficientNetworkFee"{}};}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9aa58fc443ef37aa89d2704c2d10f112ac}{VerificationResult::InsufficientSystemFee}}:}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}InsufficientSystemFee"{}};}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Unknown"{}};}
+\DoxyCodeLine{00076\ \ \ \ \ \}}
+\DoxyCodeLine{00077\ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00082\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_a77a4a3888a6421e399532e3adfb7b115}{VerificationContext}}}
+\DoxyCodeLine{00083\ \{}
+\DoxyCodeLine{00087\ \ \ \ \ std::shared\_ptr<persistence::DataCache>\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_aa8aed9892e1311d5a3b41ad7cd668ecd}{snapshot}};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger::Block}}*\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_a88c049c4679a338af437b0e05add5916}{persistingBlock}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00097\ \ \ \ \ int64\_t\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_a99fca514f4e130bdf44ab90e9c2264cd}{maxGas}}\ =\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine_a443172cc81dcdaccacfe59f0a66bb2ba}{ApplicationEngine::TestModeGas}};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_a41f25cf13f062401dbb7882d53c8880b}{skipSignatureVerification}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_af307b08e36a3a1ee2e2f788aa9727f28}{skipWitnessVerification}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00117\ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_a77a4a3888a6421e399532e3adfb7b115}{VerificationContext}}(std::shared\_ptr<persistence::DataCache>\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_aa8aed9892e1311d5a3b41ad7cd668ecd}{snapshot}},}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger::Block}}*\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_a88c049c4679a338af437b0e05add5916}{persistingBlock}}\ =\ \textcolor{keyword}{nullptr},\ int64\_t\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_a99fca514f4e130bdf44ab90e9c2264cd}{maxGas}}\ =\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine_a443172cc81dcdaccacfe59f0a66bb2ba}{ApplicationEngine::TestModeGas}},}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_a41f25cf13f062401dbb7882d53c8880b}{skipSignatureVerification}}\ =\ \textcolor{keyword}{false},\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_af307b08e36a3a1ee2e2f788aa9727f28}{skipWitnessVerification}}\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_aa8aed9892e1311d5a3b41ad7cd668ecd}{snapshot}}(\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_aa8aed9892e1311d5a3b41ad7cd668ecd}{snapshot}}),}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_a88c049c4679a338af437b0e05add5916}{persistingBlock}}(\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_a88c049c4679a338af437b0e05add5916}{persistingBlock}}),}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_a99fca514f4e130bdf44ab90e9c2264cd}{maxGas}}(\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_a99fca514f4e130bdf44ab90e9c2264cd}{maxGas}}),}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_a41f25cf13f062401dbb7882d53c8880b}{skipSignatureVerification}}(\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_a41f25cf13f062401dbb7882d53c8880b}{skipSignatureVerification}}),}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_af307b08e36a3a1ee2e2f788aa9727f28}{skipWitnessVerification}}(\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context_af307b08e36a3a1ee2e2f788aa9727f28}{skipWitnessVerification}})}
+\DoxyCodeLine{00125\ \ \ \ \ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \}}
+\DoxyCodeLine{00127\ \};}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00132\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output_a9a89e389a767e05c6457684463db0e53}{VerificationOutput}}}
+\DoxyCodeLine{00133\ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{VerificationResult}}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output_a26a1f93a942ab34b33adc611d4568104}{result}};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00142\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output_af85a88324b8da41a12daa30bdf990e33}{errorMessage}};}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00147\ \ \ \ \ int64\_t\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output_a2af7fea2c169149ef058ecd9d649e443}{gasConsumed}}\ =\ 0;}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00152\ \ \ \ \ std::unique\_ptr<ApplicationEngine>\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output_a84dedac0032d88997589cc1c8f577852}{engine}};}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00161\ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output_a9a89e389a767e05c6457684463db0e53}{VerificationOutput}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{VerificationResult}}\ result\_,\ \textcolor{keyword}{const}\ std::string\&\ errorMessage\_\ =\ \textcolor{stringliteral}{"{}"{}},\ int64\_t\ gasConsumed\_\ =\ 0,}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<ApplicationEngine>\ engine\_\ =\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output_a26a1f93a942ab34b33adc611d4568104}{result}}(result\_),\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output_af85a88324b8da41a12daa30bdf990e33}{errorMessage}}(errorMessage\_),\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output_a2af7fea2c169149ef058ecd9d649e443}{gasConsumed}}(gasConsumed\_),\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output_a84dedac0032d88997589cc1c8f577852}{engine}}(\mbox{\hyperlink{namespacestd}{std}}::move(engine\_))}
+\DoxyCodeLine{00164\ \ \ \ \ \{}
+\DoxyCodeLine{00165\ \ \ \ \ \}}
+\DoxyCodeLine{00166\ \};}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00173\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_abf659be16cf0982c8ac41ccbf43ae74a}{TransactionVerifier}}}
+\DoxyCodeLine{00174\ \{}
+\DoxyCodeLine{00175\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_abf659be16cf0982c8ac41ccbf43ae74a}{TransactionVerifier}}\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a94d0ee7bc5a799f524bf2515d0f60ef9}{Instance}}();}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00188\ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output}{VerificationOutput}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_ad4b27ed92d969401df44993193dcf643}{VerifyTransaction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger::Transaction}}\&\ transaction,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{VerificationContext}}\&\ context);}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00196\ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output}{VerificationOutput}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_ae8269311a9ff8ae5c10bc9cfbe0553b8}{VerifySignature}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger::Transaction}}\&\ transaction,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{VerificationContext}}\&\ context);}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00204\ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output}{VerificationOutput}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a1bb67f3b54426afded100f9e50a10997}{VerifyWitness}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger::Transaction}}\&\ transaction,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{VerificationContext}}\&\ context);}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00212\ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output}{VerificationOutput}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_aa985c42b2dc0bc674617fc9deb077d97}{VerifyNetworkFee}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger::Transaction}}\&\ transaction,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{VerificationContext}}\&\ context);}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00220\ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output}{VerificationOutput}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_ab306f84db2b27bc59d8eb6caa5c1be53}{VerifySystemFee}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger::Transaction}}\&\ transaction,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{VerificationContext}}\&\ context);}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00228\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_af16e4df1b38cdfa53560451e842a7fa7}{CalculateNetworkFee}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger::Transaction}}\&\ transaction,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{VerificationContext}}\&\ context);}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00236\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a58a5010132cde192f9d1eaebf2891591}{CalculateSystemFee}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger::Transaction}}\&\ transaction,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{VerificationContext}}\&\ context);}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00238\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00239\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_abf659be16cf0982c8ac41ccbf43ae74a}{TransactionVerifier}}();}
+\DoxyCodeLine{00240\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a10baf9bfff275d0339987452995f3bd4}{\string~TransactionVerifier}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00241\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_ab20b5548f1b1f91e87c5f7d0babcd1d5}{TransactionVerifier}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_abf659be16cf0982c8ac41ccbf43ae74a}{TransactionVerifier}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00242\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_abf659be16cf0982c8ac41ccbf43ae74a}{TransactionVerifier}}\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a65d0e9af295308d5c485d99425b70e35}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_abf659be16cf0982c8ac41ccbf43ae74a}{TransactionVerifier}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00250\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a7d716712c7bc4ef3a82ed733a259d49a}{CalculateWitnessVerificationFee}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger::Transaction}}\&\ transaction,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{VerificationContext}}\&\ context);}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a6f2df29150fa7987d0b5ca50edf23723}{IsSignatureContract}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ script);}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00264\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a9b95dcb53073998190daddff99daf233}{IsMultiSignatureContract}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ script);}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00272\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{VerificationResult}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a76711adfd0aefc699feef80717f8312e}{VerifyTransactionSignature}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger::Transaction}}\&\ transaction,}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{VerificationContext}}\&\ context);}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00281\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{VerificationResult}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_ae07163846b0e4ff89f17a6cd9409d77b}{VerifyTransactionWitness}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger::Transaction}}\&\ transaction,}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{VerificationContext}}\&\ context);}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{comment}{//\ Complete\ cache\ and\ metrics\ implementation\ for\ performance\ optimization}}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00286\ \ \ \ \ \textcolor{comment}{//\ Verification\ result\ cache\ (UInt256\ hash\ -\/>\ VerificationResult)}}
+\DoxyCodeLine{00287\ \ \ \ \ \textcolor{comment}{//\ LRU\ cache\ to\ avoid\ re-\/verifying\ the\ same\ transactions}}
+\DoxyCodeLine{00288\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_cache_entry}{VerificationCacheEntry}}}
+\DoxyCodeLine{00289\ \ \ \ \ \{}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{VerificationResult}}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_cache_entry_a74849dd5548ec5c9837625540e4d5dae}{result}};}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_cache_entry_a2b791649e715e2a7f506698ad152b0bf}{timestamp}};}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_cache_entry_a92557d33fb7eda50a561a21e733f181a}{block\_height}};\ \ \textcolor{comment}{//\ For\ cache\ invalidation\ when\ blockchain\ changes}}
+\DoxyCodeLine{00293\ \ \ \ \ \};}
+\DoxyCodeLine{00294\ \ \ \ \ \textcolor{keyword}{mutable}\ std::unordered\_map<io::UInt256,\ VerificationCacheEntry>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a78df6cb01c262bf371009d53fb3d4fe6}{verificationCache\_}};}
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keyword}{mutable}\ std::list<io::UInt256>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a3e835a72d630f44dabbfd02707b7c700}{cacheOrder\_}};\ \ \textcolor{comment}{//\ For\ LRU\ eviction}}
+\DoxyCodeLine{00296\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_adc4da6d6ae2c1a242cb7a1051066892f}{MAX\_CACHE\_SIZE}}\ =\ 10000;}
+\DoxyCodeLine{00297\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ std::chrono::minutes\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_afe63287db77ef5766f8d9a9561337c17}{CACHE\_TTL}}\{30\};\ \ \textcolor{comment}{//\ Cache\ entries\ expire\ after\ 30\ minutes}}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \ \ \ \ \textcolor{comment}{//\ Performance\ metrics}}
+\DoxyCodeLine{00300\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_metrics_a515658950521142a867cc949e76c1686}{VerificationMetrics}}}
+\DoxyCodeLine{00301\ \ \ \ \ \{}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_metrics_a322b434eb7ef8a2bb6202d282802bf4a}{totalVerifications}}\{0\};}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_metrics_abce13c8ff43b69691d859e4a10ff9ced}{successfulVerifications}}\{0\};}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_metrics_a64d853030cb1dcf2660bbb336933cb7b}{failedVerifications}}\{0\};}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_metrics_a76b8346955e8bae015ed7e57e20b2b23}{cacheHits}}\{0\};}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_metrics_a1aa42439dfda5998f1f5c3aba360db65}{cacheMisses}}\{0\};}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_metrics_a0ab7d237ef031b77d5ba0a681406f526}{startTime}};}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_metrics_a0036d3c4ad42de08ff91f78fad0ce7bc}{timingMutex}};}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ std::vector<std::chrono::microseconds>\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_metrics_a2035f1434e6566a5d54410128d84c2c0}{verificationTimes}};\ \ \textcolor{comment}{//\ For\ histogram}}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_metrics_a515658950521142a867cc949e76c1686}{VerificationMetrics}}()\ :\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_metrics_a0ab7d237ef031b77d5ba0a681406f526}{startTime}}(\mbox{\hyperlink{namespacestd}{std}}::chrono::steady\_clock::now())\ \{\}}
+\DoxyCodeLine{00312\ \ \ \ \ \};}
+\DoxyCodeLine{00313\ \ \ \ \ \textcolor{keyword}{mutable}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_metrics}{VerificationMetrics}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_ac2f152cc52cf0c1d1fc445531a2e9c82}{metrics\_}};}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \ \ \ \ \textcolor{comment}{//\ Cache\ management\ methods}}
+\DoxyCodeLine{00316\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a5b0fe0d467cc6c8606648883a2872d0d}{IsCacheEntryValid}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_cache_entry}{VerificationCacheEntry}}\&\ entry,\ \textcolor{keywordtype}{size\_t}\ current\_block\_height)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00317\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a3f9431fd808461fdd2af60951d82fa0d}{AddToCache}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash,\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{VerificationResult}}\ result,\ \textcolor{keywordtype}{size\_t}\ block\_height)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00318\ \ \ \ \ std::optional<VerificationResult>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_ad661f8af03f398aaa2191909dc49aab5}{GetFromCache}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash,\ \textcolor{keywordtype}{size\_t}\ current\_block\_height)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00319\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_ac886cc97ff7936f35e18700c7667ab63}{EvictOldCacheEntries}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00320\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a6fd3f64f5acd079445419544e1da3913}{RecordVerificationTime}}(\textcolor{keyword}{const}\ std::chrono::microseconds\&\ duration)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00321\ \ \ \ \ std::shared\_ptr<void>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_aaba17186a05b64a1a7d50728461d7eeb}{verificationGasHistogram\_}};}
+\DoxyCodeLine{00322\ \};}
+\DoxyCodeLine{00323\ }
+\DoxyCodeLine{00328\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier}{TransactionVerifier}}\&\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_acf2953769644a8f31004bda7f1e714f9}{Verifier}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a94d0ee7bc5a799f524bf2515d0f60ef9}{TransactionVerifier::Instance}}();\ \}}
+\DoxyCodeLine{00329\ \}\ \ \textcolor{comment}{//\ namespace\ neo::smartcontract}}
+
+\end{DoxyCode}

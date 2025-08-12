@@ -1,0 +1,306 @@
+\doxysection{neo\+::cryptography\+::ecc\+::Secp256r1 Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1}{}\label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+
+
+secp256r1 elliptic curve operations  
+
+
+
+
+{\ttfamily \#include $<$secp256r1.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a68619d8a6a8dbc87ab36d89cd6df7e72}{Generate\+Private\+Key}} ()
+\begin{DoxyCompactList}\small\item\em Generate a random private key. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a3e5301458e139b8c19c3341ac02f81f8}{Compute\+Public\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Compute public key from private key. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a2683a8a59cbea726108d7234a5cbc601}{Sign}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Sign data with private key. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_acb49e30c8324200be47e8faed07507a0}{Verify}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&signature, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Verify signature with public key. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_aaa9d4700c82e1f69d64e647cc3bd11ff}{Is\+Valid\+Private\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Validate private key. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a37e115c256fd5da176e3a0021a3a8a3e}{Is\+Valid\+Public\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Validate public key. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_abfc4622ec600fe6facea733370e06313}{Is\+Zero}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value)
+\begin{DoxyCompactList}\small\item\em Check if byte vector is all zeros. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a3bea0804ef8ef77d0f178ee5fac4efef}{Is\+On\+Curve}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Verify public key is on secp256r1 curve. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a6d2bbd77c421a6d9d43cb0b99464365a}{Generate\+Key\+Pair}} ()
+\begin{DoxyCompactList}\small\item\em Generate a key pair. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a0267502301ecac58d88587895e8ea580}{From\+Private\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Create key pair from private key. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_afcf9a32da1aa037af496d1708860f425}{From\+WIF}} (const std\+::string \&wif)
+\begin{DoxyCompactList}\small\item\em Create key pair from WIF. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a462662358f00a59d57275173a6800305}{To\+WIF}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&private\+Key, bool compressed=true)
+\begin{DoxyCompactList}\small\item\em Convert private key to WIF format. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a8563367ac57392149dd95c1fa7eda732}{Decrypt\+Private\+Key}} (const std\+::string \&wif)
+\begin{DoxyCompactList}\small\item\em Decrypt private key from WIF format. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a220f08938e0267c918ce9fc525563f3a}{Decrypt\+Private\+Key}} (const std\+::string \&nep2, const std\+::string \&passphrase)
+\begin{DoxyCompactList}\small\item\em Decrypt private key from NEP2 format. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a832c6b2a348b0e053bcb5813cd71a96f}{Decrypt\+Private\+Key}} (const std\+::string \&nep2, const std\+::string \&passphrase, int scryptN, int scryptR, int scryptP)
+\begin{DoxyCompactList}\small\item\em Decrypt private key from NEP2 format with custom scrypt parameters. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a1db8644441097aa4aaf508e9140ecc3e}{To\+NEP2}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&private\+Key, const std\+::string \&passphrase, int scryptN=16384, int scryptR=8, int scryptP=8)
+\begin{DoxyCompactList}\small\item\em Convert private key to NEP2 format (encrypted) \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_aae542d30ec1b56f0215817fffb7d61de}{From\+NEP2}} (const std\+::string \&nep2, const std\+::string \&passphrase)
+\begin{DoxyCompactList}\small\item\em Create private key from NEP2 format (decrypt) \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_aa7a9520a5d627598b05962929eabf2d2}{From\+NEP2}} (const std\+::string \&nep2, const std\+::string \&passphrase, int scryptN, int scryptR, int scryptP)
+\begin{DoxyCompactList}\small\item\em Create private key from NEP2 format (decrypt) with custom scrypt parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_ad4df1f33d7d147aaf0836a3fd4a72e7c}{PRIVATE\+\_\+\+KEY\+\_\+\+SIZE}} = 32
+\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a13892b7b9a6a3fa764dfb244687bf1a5}{PUBLIC\+\_\+\+KEY\+\_\+\+SIZE}} = 33
+\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_aa3cc921cc3aab40dc44ad37535029460}{SIGNATURE\+\_\+\+SIZE}} = 64
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+secp256r1 elliptic curve operations 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a3e5301458e139b8c19c3341ac02f81f8}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!ComputePublicKey@{ComputePublicKey}}
+\index{ComputePublicKey@{ComputePublicKey}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{ComputePublicKey()}{ComputePublicKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a3e5301458e139b8c19c3341ac02f81f8} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+Compute\+Public\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{private\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Compute public key from private key. 
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a220f08938e0267c918ce9fc525563f3a}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!DecryptPrivateKey@{DecryptPrivateKey}}
+\index{DecryptPrivateKey@{DecryptPrivateKey}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{DecryptPrivateKey()}{DecryptPrivateKey()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a220f08938e0267c918ce9fc525563f3a} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+Decrypt\+Private\+Key (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{nep2}{, }\item[{const std\+::string \&}]{passphrase}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Decrypt private key from NEP2 format. 
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a832c6b2a348b0e053bcb5813cd71a96f}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!DecryptPrivateKey@{DecryptPrivateKey}}
+\index{DecryptPrivateKey@{DecryptPrivateKey}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{DecryptPrivateKey()}{DecryptPrivateKey()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a832c6b2a348b0e053bcb5813cd71a96f} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+Decrypt\+Private\+Key (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{nep2}{, }\item[{const std\+::string \&}]{passphrase}{, }\item[{int}]{scryptN}{, }\item[{int}]{scryptR}{, }\item[{int}]{scryptP}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Decrypt private key from NEP2 format with custom scrypt parameters. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a8563367ac57392149dd95c1fa7eda732}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!DecryptPrivateKey@{DecryptPrivateKey}}
+\index{DecryptPrivateKey@{DecryptPrivateKey}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{DecryptPrivateKey()}{DecryptPrivateKey()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a8563367ac57392149dd95c1fa7eda732} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+Decrypt\+Private\+Key (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{wif}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Decrypt private key from WIF format. 
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_aae542d30ec1b56f0215817fffb7d61de}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!FromNEP2@{FromNEP2}}
+\index{FromNEP2@{FromNEP2}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{FromNEP2()}{FromNEP2()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_aae542d30ec1b56f0215817fffb7d61de} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+From\+NEP2 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{nep2}{, }\item[{const std\+::string \&}]{passphrase}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create private key from NEP2 format (decrypt) 
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_aa7a9520a5d627598b05962929eabf2d2}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!FromNEP2@{FromNEP2}}
+\index{FromNEP2@{FromNEP2}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{FromNEP2()}{FromNEP2()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_aa7a9520a5d627598b05962929eabf2d2} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+From\+NEP2 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{nep2}{, }\item[{const std\+::string \&}]{passphrase}{, }\item[{int}]{scryptN}{, }\item[{int}]{scryptR}{, }\item[{int}]{scryptP}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create private key from NEP2 format (decrypt) with custom scrypt parameters. 
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a0267502301ecac58d88587895e8ea580}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!FromPrivateKey@{FromPrivateKey}}
+\index{FromPrivateKey@{FromPrivateKey}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{FromPrivateKey()}{FromPrivateKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a0267502301ecac58d88587895e8ea580} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+From\+Private\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{private\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create key pair from private key. 
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_afcf9a32da1aa037af496d1708860f425}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!FromWIF@{FromWIF}}
+\index{FromWIF@{FromWIF}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{FromWIF()}{FromWIF()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_afcf9a32da1aa037af496d1708860f425} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+From\+WIF (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{wif}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create key pair from WIF. 
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a6d2bbd77c421a6d9d43cb0b99464365a}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!GenerateKeyPair@{GenerateKeyPair}}
+\index{GenerateKeyPair@{GenerateKeyPair}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{GenerateKeyPair()}{GenerateKeyPair()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a6d2bbd77c421a6d9d43cb0b99464365a} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{Key\+Pair}} neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+Generate\+Key\+Pair (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generate a key pair. 
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a68619d8a6a8dbc87ab36d89cd6df7e72}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!GeneratePrivateKey@{GeneratePrivateKey}}
+\index{GeneratePrivateKey@{GeneratePrivateKey}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{GeneratePrivateKey()}{GeneratePrivateKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a68619d8a6a8dbc87ab36d89cd6df7e72} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+Generate\+Private\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generate a random private key. 
+
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a3bea0804ef8ef77d0f178ee5fac4efef}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!IsOnCurve@{IsOnCurve}}
+\index{IsOnCurve@{IsOnCurve}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{IsOnCurve()}{IsOnCurve()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a3bea0804ef8ef77d0f178ee5fac4efef} 
+bool neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+Is\+On\+Curve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{public\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Verify public key is on secp256r1 curve. 
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_aaa9d4700c82e1f69d64e647cc3bd11ff}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!IsValidPrivateKey@{IsValidPrivateKey}}
+\index{IsValidPrivateKey@{IsValidPrivateKey}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{IsValidPrivateKey()}{IsValidPrivateKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_aaa9d4700c82e1f69d64e647cc3bd11ff} 
+bool neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+Is\+Valid\+Private\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{private\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Validate private key. 
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a37e115c256fd5da176e3a0021a3a8a3e}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!IsValidPublicKey@{IsValidPublicKey}}
+\index{IsValidPublicKey@{IsValidPublicKey}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{IsValidPublicKey()}{IsValidPublicKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a37e115c256fd5da176e3a0021a3a8a3e} 
+bool neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+Is\+Valid\+Public\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{public\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Validate public key. 
+
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_abfc4622ec600fe6facea733370e06313}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!IsZero@{IsZero}}
+\index{IsZero@{IsZero}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{IsZero()}{IsZero()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_abfc4622ec600fe6facea733370e06313} 
+bool neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+Is\+Zero (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if byte vector is all zeros. 
+
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a2683a8a59cbea726108d7234a5cbc601}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!Sign@{Sign}}
+\index{Sign@{Sign}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{Sign()}{Sign()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a2683a8a59cbea726108d7234a5cbc601} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+Sign (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{private\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Sign data with private key. 
+
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a1db8644441097aa4aaf508e9140ecc3e}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!ToNEP2@{ToNEP2}}
+\index{ToNEP2@{ToNEP2}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{ToNEP2()}{ToNEP2()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a1db8644441097aa4aaf508e9140ecc3e} 
+std\+::string neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+To\+NEP2 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{private\+Key}{, }\item[{const std\+::string \&}]{passphrase}{, }\item[{int}]{scryptN}{ = {\ttfamily 16384}, }\item[{int}]{scryptR}{ = {\ttfamily 8}, }\item[{int}]{scryptP}{ = {\ttfamily 8}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert private key to NEP2 format (encrypted) 
+
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a462662358f00a59d57275173a6800305}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!ToWIF@{ToWIF}}
+\index{ToWIF@{ToWIF}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{ToWIF()}{ToWIF()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a462662358f00a59d57275173a6800305} 
+std\+::string neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+To\+WIF (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{private\+Key}{, }\item[{bool}]{compressed}{ = {\ttfamily true}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert private key to WIF format. 
+
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_acb49e30c8324200be47e8faed07507a0}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!Verify@{Verify}}
+\index{Verify@{Verify}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_acb49e30c8324200be47e8faed07507a0} 
+bool neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+Verify (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{signature}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{public\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Verify signature with public key. 
+
+Here is the call graph for this function\+:
+% FIG 13
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_ad4df1f33d7d147aaf0836a3fd4a72e7c}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!PRIVATE\_KEY\_SIZE@{PRIVATE\_KEY\_SIZE}}
+\index{PRIVATE\_KEY\_SIZE@{PRIVATE\_KEY\_SIZE}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{PRIVATE\_KEY\_SIZE}{PRIVATE\_KEY\_SIZE}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_ad4df1f33d7d147aaf0836a3fd4a72e7c} 
+size\+\_\+t neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+PRIVATE\+\_\+\+KEY\+\_\+\+SIZE = 32\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a13892b7b9a6a3fa764dfb244687bf1a5}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!PUBLIC\_KEY\_SIZE@{PUBLIC\_KEY\_SIZE}}
+\index{PUBLIC\_KEY\_SIZE@{PUBLIC\_KEY\_SIZE}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{PUBLIC\_KEY\_SIZE}{PUBLIC\_KEY\_SIZE}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_a13892b7b9a6a3fa764dfb244687bf1a5} 
+size\+\_\+t neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+PUBLIC\+\_\+\+KEY\+\_\+\+SIZE = 33\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_aa3cc921cc3aab40dc44ad37535029460}\index{neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}!SIGNATURE\_SIZE@{SIGNATURE\_SIZE}}
+\index{SIGNATURE\_SIZE@{SIGNATURE\_SIZE}!neo::cryptography::ecc::Secp256r1@{neo::cryptography::ecc::Secp256r1}}
+\doxysubsubsection{\texorpdfstring{SIGNATURE\_SIZE}{SIGNATURE\_SIZE}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_secp256r1_aa3cc921cc3aab40dc44ad37535029460} 
+size\+\_\+t neo\+::cryptography\+::ecc\+::\+Secp256r1\+::\+SIGNATURE\+\_\+\+SIZE = 64\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/ecc/\mbox{\hyperlink{secp256r1_8h}{secp256r1.\+h}}\item 
+src/cryptography/ecc/\mbox{\hyperlink{secp256r1_8cpp}{secp256r1.\+cpp}}\item 
+src/cryptography/ecc/\mbox{\hyperlink{secp256r1__proper_8cpp}{secp256r1\+\_\+proper.\+cpp}}\item 
+src/cryptography/ecc/\mbox{\hyperlink{secp256r1__simple_8cpp}{secp256r1\+\_\+simple.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,369 @@
+\doxysection{neo\+::network\+::Tcp\+Connection Class Reference}
+\hypertarget{classneo_1_1network_1_1_tcp_connection}{}\label{classneo_1_1network_1_1_tcp_connection}\index{neo::network::TcpConnection@{neo::network::TcpConnection}}
+
+
+Represents a TCP connection.  
+
+
+
+
+{\ttfamily \#include $<$tcp\+\_\+connection.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::Tcp\+Connection\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::Tcp\+Connection\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a6644e4a6c994adb502e2cbaeec2d1e10}{Tcp\+Connection}} (boost\+::asio\+::io\+\_\+context \&io\+Context)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1_tcp_connection}{Tcp\+Connection}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_ae7c00fbc102128816487c11dbe3ba8d7}{\texorpdfstring{$\sim$}{\string~}\+Tcp\+Connection}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+boost\+::asio\+::ip\+::tcp\+::socket \& \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a4de6a932e547905ba1e7d282af891bfd}{Get\+Socket}} ()
+\begin{DoxyCompactList}\small\item\em Gets the socket. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}} \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a85e9672c300fc6aa51ee8cf81b8af6dd}{Get\+Remote\+Endpoint}} () const
+\begin{DoxyCompactList}\small\item\em Gets the remote endpoint. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a40d9a3ed72afedb9b3da02139802df60}{Get\+Remote\+Endpoint\+String}} () const
+\begin{DoxyCompactList}\small\item\em Gets a string representation of the remote endpoint. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a1ed80fcc2a3a204345debdb1ee60ce1d}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Starts the connection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a512cf8d4b6b6446172564a8b8998cdcf}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stops the connection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a39ff664fd3608383acf4d960438c82e4}{Close}} ()
+\begin{DoxyCompactList}\small\item\em Closes the connection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_acc74b29b11536e34efa7f082f547c1a4}{Send}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p\+::\+Message}} \&message)
+\begin{DoxyCompactList}\small\item\em Sends a message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_abfacc228d3c70095432feec54eaca74a}{Set\+Message\+Received\+Callback}} (std\+::function$<$ void(const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p\+::\+Message}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the message received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a3d7d70d95c69f5da4f40f10122d6fc7b}{Set\+Connection\+Closed\+Callback}} (std\+::function$<$ void()$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the connection closed callback. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_ad53e10702c8cc457703496e2872b7f9c}{Read\+Message}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a25f8996a90b10576287e47c7a64754dd}{Handle\+Read\+Header}} (const std\+::error\+\_\+code \&error, size\+\_\+t bytes\+Transferred)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_ab0113d15a752e32dc7861e84db2eeba4}{Read\+Payload}} (\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{p2p\+::\+Message\+Command}} command, uint32\+\_\+t payload\+Length, uint32\+\_\+t checksum, \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a806f27dd59399fa07bb0e0d17c3b172e}{p2p\+::\+Message\+Flags}} flags)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a2bf181ee05e7874522baae5b4aa7102a}{Handle\+Read\+Payload}} (const std\+::error\+\_\+code \&error, size\+\_\+t bytes\+Transferred, \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{p2p\+::\+Message\+Command}} command, uint32\+\_\+t expected\+Length, uint32\+\_\+t checksum, \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a806f27dd59399fa07bb0e0d17c3b172e}{p2p\+::\+Message\+Flags}} flags)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_acf5b5e41b8dc83e84fd27d776180877d}{Process\+Send\+Queue}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a538dd6636cc65a4f4981d6f93e1940c9}{Handle\+Write}} (const std\+::error\+\_\+code \&error, size\+\_\+t bytes\+Transferred)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a2ffb126529397fef670c9c81a298f6a9}{Handle\+Error}} (const std\+::error\+\_\+code \&error)
+\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a76b7326af757d30cdc05bf14bd98b9b3}{Validate\+Checksum}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&payload, uint32\+\_\+t expected\+Checksum)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+boost\+::asio\+::ip\+::tcp\+::socket \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a4bf6bc41283d827146dffee7c46cd3c8}{socket\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a6865804ccce1c0b0f4ec66132d0f085b}{running\+\_\+}}
+\item 
+std\+::function$<$ void(const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p\+::\+Message}} \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_acc1a895b872c75bd02dc347a0cda9c62}{message\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void()$>$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a5a978d3a0386e1df3a2761086343129c}{connection\+Closed\+Callback\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a36afb88cb4ae62f8c56ebeb65f980667}{send\+Mutex\+\_\+}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_a7e108b6dbbab3eaa52f7e926e55433c2}{receive\+Buffer\+\_\+}} \mbox{[}8192\mbox{]}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue}{Thread\+Safe\+Queue}}$<$ std\+::vector$<$ uint8\+\_\+t $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_ae4f9d3a90eb29cea48e69a94b24c3fa7}{send\+Queue\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection_aa6252315fa40f53bd679c36655981f1a}{sending\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a TCP connection. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a6644e4a6c994adb502e2cbaeec2d1e10}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!TcpConnection@{TcpConnection}}
+\index{TcpConnection@{TcpConnection}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{TcpConnection()}{TcpConnection()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a6644e4a6c994adb502e2cbaeec2d1e10} 
+neo\+::network\+::\+Tcp\+Connection\+::\+Tcp\+Connection (\begin{DoxyParamCaption}\item[{boost\+::asio\+::io\+\_\+context \&}]{io\+Context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1_tcp_connection}{Tcp\+Connection}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em io\+Context} & The IO context. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_ae7c00fbc102128816487c11dbe3ba8d7}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!````~TcpConnection@{\texorpdfstring{$\sim$}{\string~}TcpConnection}}
+\index{````~TcpConnection@{\texorpdfstring{$\sim$}{\string~}TcpConnection}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TcpConnection()}{\string~TcpConnection()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_ae7c00fbc102128816487c11dbe3ba8d7} 
+neo\+::network\+::\+Tcp\+Connection\+::\texorpdfstring{$\sim$}{\string~}\+Tcp\+Connection (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a39ff664fd3608383acf4d960438c82e4}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!Close@{Close}}
+\index{Close@{Close}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a39ff664fd3608383acf4d960438c82e4} 
+void neo\+::network\+::\+Tcp\+Connection\+::\+Close (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Closes the connection. 
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a85e9672c300fc6aa51ee8cf81b8af6dd}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!GetRemoteEndpoint@{GetRemoteEndpoint}}
+\index{GetRemoteEndpoint@{GetRemoteEndpoint}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{GetRemoteEndpoint()}{GetRemoteEndpoint()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a85e9672c300fc6aa51ee8cf81b8af6dd} 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}} neo\+::network\+::\+Tcp\+Connection\+::\+Get\+Remote\+Endpoint (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the remote endpoint. 
+
+\begin{DoxyReturn}{Returns}
+The remote endpoint. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a40d9a3ed72afedb9b3da02139802df60}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!GetRemoteEndpointString@{GetRemoteEndpointString}}
+\index{GetRemoteEndpointString@{GetRemoteEndpointString}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{GetRemoteEndpointString()}{GetRemoteEndpointString()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a40d9a3ed72afedb9b3da02139802df60} 
+std\+::string neo\+::network\+::\+Tcp\+Connection\+::\+Get\+Remote\+Endpoint\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a string representation of the remote endpoint. 
+
+\begin{DoxyReturn}{Returns}
+A string representation of the remote endpoint. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a4de6a932e547905ba1e7d282af891bfd}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!GetSocket@{GetSocket}}
+\index{GetSocket@{GetSocket}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{GetSocket()}{GetSocket()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a4de6a932e547905ba1e7d282af891bfd} 
+boost\+::asio\+::ip\+::tcp\+::socket \& neo\+::network\+::\+Tcp\+Connection\+::\+Get\+Socket (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the socket. 
+
+\begin{DoxyReturn}{Returns}
+The socket. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a2ffb126529397fef670c9c81a298f6a9}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!HandleError@{HandleError}}
+\index{HandleError@{HandleError}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{HandleError()}{HandleError()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a2ffb126529397fef670c9c81a298f6a9} 
+void neo\+::network\+::\+Tcp\+Connection\+::\+Handle\+Error (\begin{DoxyParamCaption}\item[{const std\+::error\+\_\+code \&}]{error}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a25f8996a90b10576287e47c7a64754dd}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!HandleReadHeader@{HandleReadHeader}}
+\index{HandleReadHeader@{HandleReadHeader}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{HandleReadHeader()}{HandleReadHeader()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a25f8996a90b10576287e47c7a64754dd} 
+void neo\+::network\+::\+Tcp\+Connection\+::\+Handle\+Read\+Header (\begin{DoxyParamCaption}\item[{const std\+::error\+\_\+code \&}]{error}{, }\item[{size\+\_\+t}]{bytes\+Transferred}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a2bf181ee05e7874522baae5b4aa7102a}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!HandleReadPayload@{HandleReadPayload}}
+\index{HandleReadPayload@{HandleReadPayload}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{HandleReadPayload()}{HandleReadPayload()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a2bf181ee05e7874522baae5b4aa7102a} 
+void neo\+::network\+::\+Tcp\+Connection\+::\+Handle\+Read\+Payload (\begin{DoxyParamCaption}\item[{const std\+::error\+\_\+code \&}]{error}{, }\item[{size\+\_\+t}]{bytes\+Transferred}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{p2p\+::\+Message\+Command}}}]{command}{, }\item[{uint32\+\_\+t}]{expected\+Length}{, }\item[{uint32\+\_\+t}]{checksum}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a806f27dd59399fa07bb0e0d17c3b172e}{p2p\+::\+Message\+Flags}}}]{flags}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a538dd6636cc65a4f4981d6f93e1940c9}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!HandleWrite@{HandleWrite}}
+\index{HandleWrite@{HandleWrite}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{HandleWrite()}{HandleWrite()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a538dd6636cc65a4f4981d6f93e1940c9} 
+void neo\+::network\+::\+Tcp\+Connection\+::\+Handle\+Write (\begin{DoxyParamCaption}\item[{const std\+::error\+\_\+code \&}]{error}{, }\item[{size\+\_\+t}]{bytes\+Transferred}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_acf5b5e41b8dc83e84fd27d776180877d}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!ProcessSendQueue@{ProcessSendQueue}}
+\index{ProcessSendQueue@{ProcessSendQueue}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{ProcessSendQueue()}{ProcessSendQueue()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_acf5b5e41b8dc83e84fd27d776180877d} 
+void neo\+::network\+::\+Tcp\+Connection\+::\+Process\+Send\+Queue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_ad53e10702c8cc457703496e2872b7f9c}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!ReadMessage@{ReadMessage}}
+\index{ReadMessage@{ReadMessage}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{ReadMessage()}{ReadMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_ad53e10702c8cc457703496e2872b7f9c} 
+void neo\+::network\+::\+Tcp\+Connection\+::\+Read\+Message (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_ab0113d15a752e32dc7861e84db2eeba4}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!ReadPayload@{ReadPayload}}
+\index{ReadPayload@{ReadPayload}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{ReadPayload()}{ReadPayload()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_ab0113d15a752e32dc7861e84db2eeba4} 
+void neo\+::network\+::\+Tcp\+Connection\+::\+Read\+Payload (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{p2p\+::\+Message\+Command}}}]{command}{, }\item[{uint32\+\_\+t}]{payload\+Length}{, }\item[{uint32\+\_\+t}]{checksum}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a806f27dd59399fa07bb0e0d17c3b172e}{p2p\+::\+Message\+Flags}}}]{flags}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_acc74b29b11536e34efa7f082f547c1a4}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!Send@{Send}}
+\index{Send@{Send}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{Send()}{Send()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_acc74b29b11536e34efa7f082f547c1a4} 
+void neo\+::network\+::\+Tcp\+Connection\+::\+Send (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p\+::\+Message}} \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Sends a message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a3d7d70d95c69f5da4f40f10122d6fc7b}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!SetConnectionClosedCallback@{SetConnectionClosedCallback}}
+\index{SetConnectionClosedCallback@{SetConnectionClosedCallback}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{SetConnectionClosedCallback()}{SetConnectionClosedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a3d7d70d95c69f5da4f40f10122d6fc7b} 
+void neo\+::network\+::\+Tcp\+Connection\+::\+Set\+Connection\+Closed\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void()$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the connection closed callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_abfacc228d3c70095432feec54eaca74a}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!SetMessageReceivedCallback@{SetMessageReceivedCallback}}
+\index{SetMessageReceivedCallback@{SetMessageReceivedCallback}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{SetMessageReceivedCallback()}{SetMessageReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_abfacc228d3c70095432feec54eaca74a} 
+void neo\+::network\+::\+Tcp\+Connection\+::\+Set\+Message\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p\+::\+Message}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the message received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a1ed80fcc2a3a204345debdb1ee60ce1d}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!Start@{Start}}
+\index{Start@{Start}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a1ed80fcc2a3a204345debdb1ee60ce1d} 
+void neo\+::network\+::\+Tcp\+Connection\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Starts the connection. 
+
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a512cf8d4b6b6446172564a8b8998cdcf}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a512cf8d4b6b6446172564a8b8998cdcf} 
+void neo\+::network\+::\+Tcp\+Connection\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the connection. 
+
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a76b7326af757d30cdc05bf14bd98b9b3}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!ValidateChecksum@{ValidateChecksum}}
+\index{ValidateChecksum@{ValidateChecksum}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{ValidateChecksum()}{ValidateChecksum()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a76b7326af757d30cdc05bf14bd98b9b3} 
+bool neo\+::network\+::\+Tcp\+Connection\+::\+Validate\+Checksum (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{payload}{, }\item[{uint32\+\_\+t}]{expected\+Checksum}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 15
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a5a978d3a0386e1df3a2761086343129c}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!connectionClosedCallback\_@{connectionClosedCallback\_}}
+\index{connectionClosedCallback\_@{connectionClosedCallback\_}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{connectionClosedCallback\_}{connectionClosedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a5a978d3a0386e1df3a2761086343129c} 
+std\+::function$<$void()$>$ neo\+::network\+::\+Tcp\+Connection\+::connection\+Closed\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_acc1a895b872c75bd02dc347a0cda9c62}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!messageReceivedCallback\_@{messageReceivedCallback\_}}
+\index{messageReceivedCallback\_@{messageReceivedCallback\_}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{messageReceivedCallback\_}{messageReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_acc1a895b872c75bd02dc347a0cda9c62} 
+std\+::function$<$void(const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p\+::\+Message}}\&)$>$ neo\+::network\+::\+Tcp\+Connection\+::message\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a7e108b6dbbab3eaa52f7e926e55433c2}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!receiveBuffer\_@{receiveBuffer\_}}
+\index{receiveBuffer\_@{receiveBuffer\_}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{receiveBuffer\_}{receiveBuffer\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a7e108b6dbbab3eaa52f7e926e55433c2} 
+uint8\+\_\+t neo\+::network\+::\+Tcp\+Connection\+::receive\+Buffer\+\_\+\mbox{[}8192\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a6865804ccce1c0b0f4ec66132d0f085b}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a6865804ccce1c0b0f4ec66132d0f085b} 
+std\+::atomic$<$bool$>$ neo\+::network\+::\+Tcp\+Connection\+::running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_aa6252315fa40f53bd679c36655981f1a}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!sending\_@{sending\_}}
+\index{sending\_@{sending\_}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{sending\_}{sending\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_aa6252315fa40f53bd679c36655981f1a} 
+std\+::atomic$<$bool$>$ neo\+::network\+::\+Tcp\+Connection\+::sending\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a36afb88cb4ae62f8c56ebeb65f980667}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!sendMutex\_@{sendMutex\_}}
+\index{sendMutex\_@{sendMutex\_}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{sendMutex\_}{sendMutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a36afb88cb4ae62f8c56ebeb65f980667} 
+std\+::mutex neo\+::network\+::\+Tcp\+Connection\+::send\+Mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_ae4f9d3a90eb29cea48e69a94b24c3fa7}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!sendQueue\_@{sendQueue\_}}
+\index{sendQueue\_@{sendQueue\_}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{sendQueue\_}{sendQueue\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_ae4f9d3a90eb29cea48e69a94b24c3fa7} 
+\mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue}{Thread\+Safe\+Queue}}$<$std\+::vector$<$uint8\+\_\+t$>$ $>$ neo\+::network\+::\+Tcp\+Connection\+::send\+Queue\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_tcp_connection_a4bf6bc41283d827146dffee7c46cd3c8}\index{neo::network::TcpConnection@{neo::network::TcpConnection}!socket\_@{socket\_}}
+\index{socket\_@{socket\_}!neo::network::TcpConnection@{neo::network::TcpConnection}}
+\doxysubsubsection{\texorpdfstring{socket\_}{socket\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_connection_a4bf6bc41283d827146dffee7c46cd3c8} 
+boost\+::asio\+::ip\+::tcp\+::socket neo\+::network\+::\+Tcp\+Connection\+::socket\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/\mbox{\hyperlink{tcp__connection_8h}{tcp\+\_\+connection.\+h}}\item 
+src/network/\mbox{\hyperlink{tcp__connection_8cpp}{tcp\+\_\+connection.\+cpp}}\end{DoxyCompactItemize}

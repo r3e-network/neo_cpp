@@ -1,0 +1,49 @@
+\doxysection{logging.\+h}
+\hypertarget{common_2logging_8h_source}{}\label{common_2logging_8h_source}\index{include/neo/common/logging.h@{include/neo/common/logging.h}}
+\mbox{\hyperlink{common_2logging_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1common}{neo::common}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972}{LogLevel}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972adc30ec20708ef7b0f641ef78b7880a15}{DEBUG}}\ =\ 0,}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972a551b723eafd6a31d444fcb2f5920fbd3}{INFO}}\ =\ 1,}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972a059e9861e0400dfbe05c98a841f3f96b}{WARNING}}\ =\ 2,}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972a0e9c70bbf331f239047470632224f90f}{ERROR\_LEVEL}}\ =\ 3}
+\DoxyCodeLine{00018\ \};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1common_1_1_logger}{Logger}}}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1common_1_1_logger_a7fba4d8ad77aa581aeed4926bc67be09}{Log}}(\mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972}{LogLevel}}\ level,\ \textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1common_1_1_logger_a4890667b1aadd8658c435f0bca1d0a3c}{GetLevelString}}(\mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972}{LogLevel}}\ level);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1common_1_1_logger_a9c86174d66e6d91897e4370d87ed40b5}{SetMinLevel}}(\mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972}{LogLevel}}\ level);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{namespaceneo_1_1common_add71eef7677859c371cebc7b170a0972}{LogLevel}}\ \mbox{\hyperlink{classneo_1_1common_1_1_logger_ad724aace11baa7e766b7c3a05bfca626}{minLevel\_}};}
+\DoxyCodeLine{00048\ \};}
+\DoxyCodeLine{00049\ \}\ \ \textcolor{comment}{//\ namespace\ neo::common}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ Convenience\ macros\ for\ logging}}
+\DoxyCodeLine{00052\ \textcolor{preprocessor}{\#define\ NEO\_DEBUG\ neo::common::LogLevel::DEBUG}}
+\DoxyCodeLine{00053\ \textcolor{preprocessor}{\#define\ NEO\_INFO\ neo::common::LogLevel::INFO}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#define\ NEO\_WARNING\ neo::common::LogLevel::WARNING}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ NEO\_ERROR\ neo::common::LogLevel::ERROR\_LEVEL}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \textcolor{preprocessor}{\#define\ NEO\_LOG(level,\ message)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ std::ostringstream\ oss;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00061\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ oss\ <<\ message;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ neo::common::Logger::Log(level,\ oss.str());\ \(\backslash\)}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (0)}}
+
+\end{DoxyCode}

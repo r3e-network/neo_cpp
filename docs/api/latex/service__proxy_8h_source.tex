@@ -1,0 +1,83 @@
+\doxysection{service\+\_\+proxy.\+h}
+\hypertarget{service__proxy_8h_source}{}\label{service__proxy_8h_source}\index{include/neo/console\_service/service\_proxy.h@{include/neo/console\_service/service\_proxy.h}}
+\mbox{\hyperlink{service__proxy_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Forward\ declarations}}
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1node}{neo::node}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{NeoSystem}};}
+\DoxyCodeLine{00013\ \}}
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1persistence}{neo::persistence}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{DataCache}};}
+\DoxyCodeLine{00017\ \}}
+\DoxyCodeLine{00018\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1io}{neo::io}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}};}
+\DoxyCodeLine{00021\ \}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1console__service}{neo::console\_service}}}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00049\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_aba7985714eabf1cd1c5eb9ebac7fc6d8}{ServiceProxy}}}
+\DoxyCodeLine{00050\ \{}
+\DoxyCodeLine{00051\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_aba7985714eabf1cd1c5eb9ebac7fc6d8}{ServiceProxy}}(std::shared\_ptr<neo::node::NeoSystem>\ system);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_a5a56ef453b903c67fd81d85ccb926320}{\string~ServiceProxy}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<ServiceProxy>\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_abb46aa29ee6c43b9393227550fa48809}{Create}}(std::shared\_ptr<neo::node::NeoSystem>\ system);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00074\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_a897037b78900be83cb62886c489d56d6}{GetBlockchainHeight}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_a10dbef64cc6de0a45c1be1d67407c43a}{IsNodeRunning}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_a6e768babf80e3d30248bea6cd91896ee}{GetPeerCount}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00092\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_a62d5cdcc21a6e62fbbefe5d610ee69f4}{GetSystemStatus}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_a2b384f701d3c159ce27eb3d12f44b214}{StartNode}}();}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_a71621f610d14ad84584075190a81efe8}{StopNode}}();}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00112\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_a5795fec684aa294f49b864dce02a8fe3}{ExecuteCommand}}(\textcolor{keyword}{const}\ std::string\&\ command,\ \textcolor{keyword}{const}\ std::vector<std::string>\&\ args);}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00118\ \ \ \ \ std::shared\_ptr<neo::node::NeoSystem>\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_adeb9068f8af8ad99d34f45c5a8d45123}{GetNeoSystem}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_af3e33bcb341fbf5f6e534131ca590ba5}{SetEventCallback}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{const}\ std::string\&)>\ callback);}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_ad9abbc9f54def48fbde6de1a45cd2654}{NotifyEvent}}(\textcolor{keyword}{const}\ std::string\&\ event);}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00134\ \ \ \ \ std::shared\_ptr<neo::node::NeoSystem>\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_ade7f66cce290e868bca08c219d2e0344}{neoSystem\_}};}
+\DoxyCodeLine{00135\ \ \ \ \ std::function<void(\textcolor{keyword}{const}\ std::string\&)>\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_ac98a2e826221671ad7e94bd0736c52b5}{eventCallback\_}};}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{comment}{//\ Command\ execution\ helper\ methods}}
+\DoxyCodeLine{00138\ \ \ \ \ std::optional<std::string>\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_af70f055a16f275f47ca834f07ea7fbf4}{ExecuteGenericCommand}}(\textcolor{keyword}{const}\ std::string\&\ cmd,\ \textcolor{keyword}{const}\ std::vector<std::string>\&\ args);}
+\DoxyCodeLine{00139\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_a5b8bdb44db3e4698d55c77dee2bdfb6d}{ExecuteBlockchainQuery}}(\textcolor{keyword}{const}\ std::string\&\ cmd,\ \textcolor{keyword}{const}\ std::vector<std::string>\&\ args);}
+\DoxyCodeLine{00140\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_a654b63fcfed209f4ab2c626be89d9f85}{ExecuteNetworkCommand}}(\textcolor{keyword}{const}\ std::string\&\ cmd,\ \textcolor{keyword}{const}\ std::vector<std::string>\&\ args);}
+\DoxyCodeLine{00141\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_a1031633cc1b473a4c2ed5bc291405df5}{ExecuteSystemCommand}}(\textcolor{keyword}{const}\ std::string\&\ cmd,\ \textcolor{keyword}{const}\ std::vector<std::string>\&\ args);}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{comment}{//\ Specific\ command\ handlers}}
+\DoxyCodeLine{00144\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_ad67685e2a62b75857c646ea93df3c90b}{HandleWalletCommands}}(\textcolor{keyword}{const}\ std::string\&\ command);}
+\DoxyCodeLine{00145\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_a4b360923883f6208ca567f37d0a32eab}{HandleContractCommands}}(\textcolor{keyword}{const}\ std::string\&\ command);}
+\DoxyCodeLine{00146\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_a293935a60a16570e5a420a7230a77374}{HandleTransactionCommands}}(\textcolor{keyword}{const}\ std::string\&\ command);}
+\DoxyCodeLine{00147\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_af8d8ba9fd0cfaa0e6f9e7a92502655ce}{HandleConsensusCommands}}(\textcolor{keyword}{const}\ std::string\&\ command);}
+\DoxyCodeLine{00148\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_a9b82217ddbe063d20697148d0a1a881a}{HandlePluginCommands}}(\textcolor{keyword}{const}\ std::string\&\ command);}
+\DoxyCodeLine{00149\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_af355c3d207e9d50b023e8854c8e040db}{HandleConfigCommands}}(\textcolor{keyword}{const}\ std::string\&\ command);}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{comment}{//\ Helper\ methods}}
+\DoxyCodeLine{00152\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1console__service_1_1_service_proxy_adb98080312f0f6c0d3fed924bbe82e91}{GetTokenBalance}}(std::shared\_ptr<persistence::DataCache>\ snapshot,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ scriptHash,}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ tokenSymbol);}
+\DoxyCodeLine{00154\ \};}
+\DoxyCodeLine{00155\ \}\ \ \textcolor{comment}{//\ namespace\ neo::console\_service}}
+
+\end{DoxyCode}

@@ -1,0 +1,183 @@
+\doxysection{neo\+::network\+::p2p\+::payloads\+::Ver\+Ack\+Payload Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload}{}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload}\index{neo::network::p2p::payloads::VerAckPayload@{neo::network::p2p::payloads::VerAckPayload}}
+
+
+Represents a verack message payload.  
+
+
+
+
+{\ttfamily \#include $<$verack\+\_\+payload.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::p2p\+::payloads\+::Ver\+Ack\+Payload\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::payloads\+::Ver\+Ack\+Payload\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_ae5c751d6c74b8ffdf39ae0842c04782f}{Ver\+Ack\+Payload}} ()=default
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload}{Ver\+Ack\+Payload}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_a530b89903781681421c0875525793e7f}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload}{Ver\+Ack\+Payload} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_a31ca0df1a13790cf432460fe8a3c9f56}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload}{Ver\+Ack\+Payload} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_ac1362a409f0eddcd1c6cf85944efbc1d}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload}{Ver\+Ack\+Payload} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_a2d83f563492dedb479cae91e4c380ed9}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader)
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload}{Ver\+Ack\+Payload} from a JSON reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{neo\+::network\+::p2p\+::\+IPayload}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload_a1702136f068aff6bbc90418bc0259c9f}{\texorpdfstring{$\sim$}{\string~}\+IPayload}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a verack message payload. 
+
+This is an empty payload used to acknowledge a version message. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_ae5c751d6c74b8ffdf39ae0842c04782f}\index{neo::network::p2p::payloads::VerAckPayload@{neo::network::p2p::payloads::VerAckPayload}!VerAckPayload@{VerAckPayload}}
+\index{VerAckPayload@{VerAckPayload}!neo::network::p2p::payloads::VerAckPayload@{neo::network::p2p::payloads::VerAckPayload}}
+\doxysubsubsection{\texorpdfstring{VerAckPayload()}{VerAckPayload()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_ae5c751d6c74b8ffdf39ae0842c04782f} 
+neo\+::network\+::p2p\+::payloads\+::\+Ver\+Ack\+Payload\+::\+Ver\+Ack\+Payload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload}{Ver\+Ack\+Payload}. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_a31ca0df1a13790cf432460fe8a3c9f56}\index{neo::network::p2p::payloads::VerAckPayload@{neo::network::p2p::payloads::VerAckPayload}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::p2p::payloads::VerAckPayload@{neo::network::p2p::payloads::VerAckPayload}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_a31ca0df1a13790cf432460fe8a3c9f56} 
+void neo\+::network\+::p2p\+::payloads\+::\+Ver\+Ack\+Payload\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload}{Ver\+Ack\+Payload} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_a2d83f563492dedb479cae91e4c380ed9}\index{neo::network::p2p::payloads::VerAckPayload@{neo::network::p2p::payloads::VerAckPayload}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::p2p::payloads::VerAckPayload@{neo::network::p2p::payloads::VerAckPayload}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_a2d83f563492dedb479cae91e4c380ed9} 
+void neo\+::network\+::p2p\+::payloads\+::\+Ver\+Ack\+Payload\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload}{Ver\+Ack\+Payload} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_a530b89903781681421c0875525793e7f}\index{neo::network::p2p::payloads::VerAckPayload@{neo::network::p2p::payloads::VerAckPayload}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::p2p::payloads::VerAckPayload@{neo::network::p2p::payloads::VerAckPayload}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_a530b89903781681421c0875525793e7f} 
+void neo\+::network\+::p2p\+::payloads\+::\+Ver\+Ack\+Payload\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload}{Ver\+Ack\+Payload} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_ac1362a409f0eddcd1c6cf85944efbc1d}\index{neo::network::p2p::payloads::VerAckPayload@{neo::network::p2p::payloads::VerAckPayload}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::p2p::payloads::VerAckPayload@{neo::network::p2p::payloads::VerAckPayload}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_ac1362a409f0eddcd1c6cf85944efbc1d} 
+void neo\+::network\+::p2p\+::payloads\+::\+Ver\+Ack\+Payload\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload}{Ver\+Ack\+Payload} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/payloads/\mbox{\hyperlink{verack__payload_8h}{verack\+\_\+payload.\+h}}\item 
+src/network/p2p/payloads/\mbox{\hyperlink{verack__payload_8cpp}{verack\+\_\+payload.\+cpp}}\end{DoxyCompactItemize}

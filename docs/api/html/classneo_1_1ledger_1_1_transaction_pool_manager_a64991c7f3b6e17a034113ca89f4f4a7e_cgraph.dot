@@ -1,0 +1,43 @@
+digraph "neo::ledger::TransactionPoolManager::CleanupThread"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::ledger::Transaction\lPoolManager::CleanupThread",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Background cleanup thread function."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::logging::Logger\l::Debug",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1logging_1_1_logger.html#a93c1f33b6b290b2e6220e599d0afc9f1",tooltip="Log a debug message."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::ledger::Transaction\lPoolManager::DetectAndResolve\lConflicts",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1ledger_1_1_transaction_pool_manager.html#a047e86afdad3c52e6fbb1b17f0a68fb8",tooltip="Detect and handle conflicting transactions."];
+  Node3 -> Node4 [id="edge3_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::logging::Logger\l::Info",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1logging_1_1_logger.html#a7b9d24c31fd3a110a8abb3d32ab9e800",tooltip="Log an info message."];
+  Node3 -> Node5 [id="edge4_Node000003_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::logging::Logger\l::Instance",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1logging_1_1_logger.html#ae6d1d8d54985e37831b0f0e66b61be87",tooltip="Get the singleton logger instance (alias for GetDefault)"];
+  Node5 -> Node6 [id="edge5_Node000005_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::logging::Logger\l::GetDefault",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1logging_1_1_logger.html#abff18ad1faab25601174fa98b85159b9",tooltip="Get the default logger instance."];
+  Node6 -> Node7 [id="edge6_Node000006_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::logging::Logger\l::Logger",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1logging_1_1_logger.html#a8e3e3c0db70c7a54b526744fc406eb55",tooltip="Constructor."];
+  Node5 -> Node7 [id="edge7_Node000005_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node3 -> Node8 [id="edge8_Node000003_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="neo::ledger::Transaction\lPoolManager::RemoveTransaction",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1ledger_1_1_transaction_pool_manager.html#a12f0d27d2c5db2c26815c5bc14ee2d07",tooltip="Remove a transaction from the pool."];
+  Node8 -> Node4 [id="edge9_Node000008_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node8 -> Node5 [id="edge10_Node000008_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node9 [id="edge11_Node000001_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="neo::ledger::Transaction\lPoolManager::GetStatistics",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1ledger_1_1_transaction_pool_manager.html#af8f7f4a93ff65debcc8848e96bbc7d30",tooltip="Get current pool statistics."];
+  Node1 -> Node4 [id="edge12_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node5 [id="edge13_Node000001_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node10 [id="edge14_Node000001_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="neo::ledger::Transaction\lPoolManager::RemoveExpiredTransactions",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1ledger_1_1_transaction_pool_manager.html#abc89127d0ffecae93bd7ea382e361fe9",tooltip="Remove expired transactions."];
+  Node10 -> Node4 [id="edge15_Node000010_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node10 -> Node5 [id="edge16_Node000010_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node10 -> Node8 [id="edge17_Node000010_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node11 [id="edge18_Node000001_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="neo::ledger::Transaction\lPoolManager::UpdateMetrics",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1ledger_1_1_transaction_pool_manager.html#a99b1cd8310ec8550af3a7fa269fa0c23",tooltip="Update internal metrics."];
+  Node1 -> Node12 [id="edge19_Node000001_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="neo::ledger::Transaction\lPoolManager::ValidateUnverified\lTransactions",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1ledger_1_1_transaction_pool_manager.html#a0d863d2957b2a813c251f52f45e1b6f8",tooltip="Validate all unverified transactions."];
+  Node12 -> Node2 [id="edge20_Node000012_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node12 -> Node5 [id="edge21_Node000012_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node12 -> Node13 [id="edge22_Node000012_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node13 [id="Node000013",label="neo::ledger::Transaction\lPoolManager::IsInUnverifiedPool",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1ledger_1_1_transaction_pool_manager.html#a57e543568e9f838e02dfc89529cc7013",tooltip="Check if transaction is in unverified pool (C# compatibility)"];
+}

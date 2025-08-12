@@ -1,0 +1,108 @@
+\doxysection{neo\+::smartcontract\+::native\+::Neo\+Token\+Vote Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_vote}{}\label{classneo_1_1smartcontract_1_1native_1_1_neo_token_vote}\index{neo::smartcontract::native::NeoTokenVote@{neo::smartcontract::native::NeoTokenVote}}
+
+
+Vote-\/related methods for the NEO token.  
+
+
+
+
+{\ttfamily \#include $<$neo\+\_\+token\+\_\+vote.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_vote_a9c33f9f84c45eb0716c9cab12306f800}{Vote}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \&pub\+Keys)
+\begin{DoxyCompactList}\small\item\em Votes for a candidate. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_vote_ac4d88888e685714f2d797500b30cb6cb}{On\+Vote}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the vote method. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_vote_a83b4437469e972033d82e3c8ef36bf6c}{On\+Un\+Vote}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the un\+Vote method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Vote-\/related methods for the NEO token. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_vote_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_vote_a83b4437469e972033d82e3c8ef36bf6c}\index{neo::smartcontract::native::NeoTokenVote@{neo::smartcontract::native::NeoTokenVote}!OnUnVote@{OnUnVote}}
+\index{OnUnVote@{OnUnVote}!neo::smartcontract::native::NeoTokenVote@{neo::smartcontract::native::NeoTokenVote}}
+\doxysubsubsection{\texorpdfstring{OnUnVote()}{OnUnVote()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_vote_a83b4437469e972033d82e3c8ef36bf6c} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Vote\+::\+On\+Un\+Vote (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Handles the un\+Vote method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_vote_ac4d88888e685714f2d797500b30cb6cb}\index{neo::smartcontract::native::NeoTokenVote@{neo::smartcontract::native::NeoTokenVote}!OnVote@{OnVote}}
+\index{OnVote@{OnVote}!neo::smartcontract::native::NeoTokenVote@{neo::smartcontract::native::NeoTokenVote}}
+\doxysubsubsection{\texorpdfstring{OnVote()}{OnVote()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_vote_ac4d88888e685714f2d797500b30cb6cb} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Vote\+::\+On\+Vote (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Handles the vote method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_vote_a9c33f9f84c45eb0716c9cab12306f800}\index{neo::smartcontract::native::NeoTokenVote@{neo::smartcontract::native::NeoTokenVote}!Vote@{Vote}}
+\index{Vote@{Vote}!neo::smartcontract::native::NeoTokenVote@{neo::smartcontract::native::NeoTokenVote}}
+\doxysubsubsection{\texorpdfstring{Vote()}{Vote()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_vote_a9c33f9f84c45eb0716c9cab12306f800} 
+bool neo\+::smartcontract\+::native\+::\+Neo\+Token\+Vote\+::\+Vote (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \&}]{pub\+Keys}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Votes for a candidate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+{\em account} & The account. \\
+\hline
+{\em pub\+Keys} & The public keys. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the vote was successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/native/\mbox{\hyperlink{neo__token__vote_8h}{neo\+\_\+token\+\_\+vote.\+h}}\item 
+src/smartcontract/native/\mbox{\hyperlink{neo__token__vote_8cpp}{neo\+\_\+token\+\_\+vote.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,331 @@
+\doxysection{neo\+::ledger\+::State\+Root Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_state_root}{}\label{classneo_1_1ledger_1_1_state_root}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+
+
+State root for MPT (Merkle Patricia Trie) state tracking.  
+
+
+
+
+{\ttfamily \#include $<$state\+\_\+root.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::ledger\+::State\+Root\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_aaf0e2a4033600157ddfafb59aa6388d1}{State\+Root}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a98f65e4ac3279551140ca75eecc6da94}{State\+Root}} (uint8\+\_\+t version, uint32\+\_\+t index, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&root\+\_\+hash)
+\begin{DoxyCompactList}\small\item\em Constructor with parameters. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_adc79e204d3c58c5437fccc15e20b8b67}{Get\+Version}} () const
+\begin{DoxyCompactList}\small\item\em Get state root version. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_aca839ea5cc4f554b9c6fa1b59287d6be}{Set\+Version}} (uint8\+\_\+t version)
+\begin{DoxyCompactList}\small\item\em Set state root version. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a988cdc0c9b2e75cde4f146ce0f311195}{Get\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Get block index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a4470e4114d854fb79763432dabf498f1}{Set\+Index}} (uint32\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Set block index. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_aebfde5af1593208c0ec51c9687661c52}{Get\+Root}} () const
+\begin{DoxyCompactList}\small\item\em Get MPT root hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_af9b305f62feede08a704170a194e5ff8}{Set\+Root}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&root)
+\begin{DoxyCompactList}\small\item\em Set MPT root hash. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \& \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_acc6fe5e3092aca18311474fc9fab702d}{Get\+Witnesses}} () const
+\begin{DoxyCompactList}\small\item\em Get witness signatures. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_aefede514848bad1d7b74fe37b6484da4}{Add\+Witness}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&witness)
+\begin{DoxyCompactList}\small\item\em Add witness signature. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_ae3dc6f6c47a2da7a2002fe7bf3910a6f}{Clear\+Witnesses}} ()
+\begin{DoxyCompactList}\small\item\em Clear all witnesses. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a50b1c19da64e5dc4423a93648a4827e9}{Get\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Calculate hash of this state root. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a4da11634118993e6b50c4e0ca46a5aa5}{Verify}} () const
+\begin{DoxyCompactList}\small\item\em Verify witness signatures. \end{DoxyCompactList}\item 
+std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_aa29fa7bc80ab73e5813b4b26984c0fdb}{To\+Byte\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serialize to byte array. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a5458d57a3bedeae8e0977b7f7f639704}{From\+Byte\+Array}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Deserialize from byte array. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a6ad8f0e79deb49a5542bfe6eb4c8c15d}{Is\+Valid}} () const
+\begin{DoxyCompactList}\small\item\em Check if state root is valid. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a89a0c4fc0766f81a07673b5906ac5011}{version\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a56b67f90bb624dddee96f4227a908fb3}{index\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a44d06cb99a52e1eab0d8c46cb61b0fcd}{root\+\_\+hash\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a7e79beb18384b5d6acea7cec3a05488e}{witnesses\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+State root for MPT (Merkle Patricia Trie) state tracking. 
+
+This class represents a state root in the Neo blockchain, which is used to track the state of the blockchain at a specific height. It follows the C\# Neo implementation for compatibility. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_aaf0e2a4033600157ddfafb59aa6388d1}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!StateRoot@{StateRoot}}
+\index{StateRoot@{StateRoot}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{StateRoot()}{StateRoot()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_aaf0e2a4033600157ddfafb59aa6388d1} 
+neo\+::ledger\+::\+State\+Root\+::\+State\+Root (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor. 
+
+\Hypertarget{classneo_1_1ledger_1_1_state_root_a98f65e4ac3279551140ca75eecc6da94}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!StateRoot@{StateRoot}}
+\index{StateRoot@{StateRoot}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{StateRoot()}{StateRoot()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_a98f65e4ac3279551140ca75eecc6da94} 
+neo\+::ledger\+::\+State\+Root\+::\+State\+Root (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{version}{, }\item[{uint32\+\_\+t}]{index}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{root\+\_\+hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor with parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em version} & State root version \\
+\hline
+{\em index} & \doxylink{classneo_1_1ledger_1_1_block}{Block} index \\
+\hline
+{\em root\+\_\+hash} & MPT root hash \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_aefede514848bad1d7b74fe37b6484da4}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!AddWitness@{AddWitness}}
+\index{AddWitness@{AddWitness}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{AddWitness()}{AddWitness()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_aefede514848bad1d7b74fe37b6484da4} 
+void neo\+::ledger\+::\+State\+Root\+::\+Add\+Witness (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{witness}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add witness signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em witness} & \doxylink{classneo_1_1ledger_1_1_witness}{Witness} signature to add \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_ae3dc6f6c47a2da7a2002fe7bf3910a6f}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!ClearWitnesses@{ClearWitnesses}}
+\index{ClearWitnesses@{ClearWitnesses}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{ClearWitnesses()}{ClearWitnesses()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_ae3dc6f6c47a2da7a2002fe7bf3910a6f} 
+void neo\+::ledger\+::\+State\+Root\+::\+Clear\+Witnesses (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clear all witnesses. 
+
+\Hypertarget{classneo_1_1ledger_1_1_state_root_a5458d57a3bedeae8e0977b7f7f639704}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!FromByteArray@{FromByteArray}}
+\index{FromByteArray@{FromByteArray}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{FromByteArray()}{FromByteArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_a5458d57a3bedeae8e0977b7f7f639704} 
+bool neo\+::ledger\+::\+State\+Root\+::\+From\+Byte\+Array (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Deserialize from byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Byte array to deserialize \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_a50b1c19da64e5dc4423a93648a4827e9}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!GetHash@{GetHash}}
+\index{GetHash@{GetHash}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{GetHash()}{GetHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_a50b1c19da64e5dc4423a93648a4827e9} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::ledger\+::\+State\+Root\+::\+Get\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Calculate hash of this state root. 
+
+\begin{DoxyReturn}{Returns}
+Hash value 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_a988cdc0c9b2e75cde4f146ce0f311195}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!GetIndex@{GetIndex}}
+\index{GetIndex@{GetIndex}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{GetIndex()}{GetIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_a988cdc0c9b2e75cde4f146ce0f311195} 
+uint32\+\_\+t neo\+::ledger\+::\+State\+Root\+::\+Get\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get block index. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{classneo_1_1ledger_1_1_block}{Block} index/height 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_aebfde5af1593208c0ec51c9687661c52}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!GetRoot@{GetRoot}}
+\index{GetRoot@{GetRoot}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{GetRoot()}{GetRoot()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_aebfde5af1593208c0ec51c9687661c52} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& neo\+::ledger\+::\+State\+Root\+::\+Get\+Root (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get MPT root hash. 
+
+\begin{DoxyReturn}{Returns}
+Root hash 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_adc79e204d3c58c5437fccc15e20b8b67}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!GetVersion@{GetVersion}}
+\index{GetVersion@{GetVersion}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{GetVersion()}{GetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_adc79e204d3c58c5437fccc15e20b8b67} 
+uint8\+\_\+t neo\+::ledger\+::\+State\+Root\+::\+Get\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get state root version. 
+
+\begin{DoxyReturn}{Returns}
+Version number 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_acc6fe5e3092aca18311474fc9fab702d}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!GetWitnesses@{GetWitnesses}}
+\index{GetWitnesses@{GetWitnesses}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{GetWitnesses()}{GetWitnesses()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_acc6fe5e3092aca18311474fc9fab702d} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \& neo\+::ledger\+::\+State\+Root\+::\+Get\+Witnesses (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get witness signatures. 
+
+\begin{DoxyReturn}{Returns}
+Vector of witness signatures 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_a6ad8f0e79deb49a5542bfe6eb4c8c15d}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!IsValid@{IsValid}}
+\index{IsValid@{IsValid}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{IsValid()}{IsValid()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_a6ad8f0e79deb49a5542bfe6eb4c8c15d} 
+bool neo\+::ledger\+::\+State\+Root\+::\+Is\+Valid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if state root is valid. 
+
+\begin{DoxyReturn}{Returns}
+True if valid 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_a4470e4114d854fb79763432dabf498f1}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!SetIndex@{SetIndex}}
+\index{SetIndex@{SetIndex}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{SetIndex()}{SetIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_a4470e4114d854fb79763432dabf498f1} 
+void neo\+::ledger\+::\+State\+Root\+::\+Set\+Index (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set block index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & \doxylink{classneo_1_1ledger_1_1_block}{Block} index/height \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_af9b305f62feede08a704170a194e5ff8}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!SetRoot@{SetRoot}}
+\index{SetRoot@{SetRoot}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{SetRoot()}{SetRoot()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_af9b305f62feede08a704170a194e5ff8} 
+void neo\+::ledger\+::\+State\+Root\+::\+Set\+Root (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{root}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set MPT root hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root} & Root hash \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_aca839ea5cc4f554b9c6fa1b59287d6be}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!SetVersion@{SetVersion}}
+\index{SetVersion@{SetVersion}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{SetVersion()}{SetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_aca839ea5cc4f554b9c6fa1b59287d6be} 
+void neo\+::ledger\+::\+State\+Root\+::\+Set\+Version (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{version}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set state root version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em version} & Version number \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_aa29fa7bc80ab73e5813b4b26984c0fdb}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!ToByteArray@{ToByteArray}}
+\index{ToByteArray@{ToByteArray}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{ToByteArray()}{ToByteArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_aa29fa7bc80ab73e5813b4b26984c0fdb} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::ledger\+::\+State\+Root\+::\+To\+Byte\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Serialize to byte array. 
+
+\begin{DoxyReturn}{Returns}
+Serialized bytes 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_a4da11634118993e6b50c4e0ca46a5aa5}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!Verify@{Verify}}
+\index{Verify@{Verify}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_a4da11634118993e6b50c4e0ca46a5aa5} 
+bool neo\+::ledger\+::\+State\+Root\+::\+Verify (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Verify witness signatures. 
+
+\begin{DoxyReturn}{Returns}
+True if all witnesses are valid 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_state_root_a56b67f90bb624dddee96f4227a908fb3}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!index\_@{index\_}}
+\index{index\_@{index\_}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{index\_}{index\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_a56b67f90bb624dddee96f4227a908fb3} 
+uint32\+\_\+t neo\+::ledger\+::\+State\+Root\+::index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_root_a44d06cb99a52e1eab0d8c46cb61b0fcd}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!root\_hash\_@{root\_hash\_}}
+\index{root\_hash\_@{root\_hash\_}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{root\_hash\_}{root\_hash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_a44d06cb99a52e1eab0d8c46cb61b0fcd} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::ledger\+::\+State\+Root\+::root\+\_\+hash\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_root_a89a0c4fc0766f81a07673b5906ac5011}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!version\_@{version\_}}
+\index{version\_@{version\_}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{version\_}{version\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_a89a0c4fc0766f81a07673b5906ac5011} 
+uint8\+\_\+t neo\+::ledger\+::\+State\+Root\+::version\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_root_a7e79beb18384b5d6acea7cec3a05488e}\index{neo::ledger::StateRoot@{neo::ledger::StateRoot}!witnesses\_@{witnesses\_}}
+\index{witnesses\_@{witnesses\_}!neo::ledger::StateRoot@{neo::ledger::StateRoot}}
+\doxysubsubsection{\texorpdfstring{witnesses\_}{witnesses\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_root_a7e79beb18384b5d6acea7cec3a05488e} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}}$>$ neo\+::ledger\+::\+State\+Root\+::witnesses\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{state__root_8h}{state\+\_\+root.\+h}}\end{DoxyCompactItemize}

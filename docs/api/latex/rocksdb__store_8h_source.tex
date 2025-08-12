@@ -1,0 +1,169 @@
+\doxysection{rocksdb\+\_\+store.\+h}
+\hypertarget{rocksdb__store_8h_source}{}\label{rocksdb__store_8h_source}\index{include/neo/persistence/rocksdb\_store.h@{include/neo/persistence/rocksdb\_store.h}}
+\mbox{\hyperlink{rocksdb__store_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{core_2logging_8h}{neo/core/logging.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{istore_8h}{neo/persistence/istore.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{persistence_2storage__item_8h}{neo/persistence/storage\_item.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{persistence_2storage__key_8h}{neo/persistence/storage\_key.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifdef\ NEO\_HAS\_ROCKSDB}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <rocksdb/db.h>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <rocksdb/filter\_policy.h>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <rocksdb/options.h>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <rocksdb/table.h>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <rocksdb/write\_batch.h>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1persistence}{neo::persistence}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00025\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config}{RocksDbConfig}}}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_a868aa5277f08ece0e4ec12d0dc0cc6a4}{db\_path}}\{\textcolor{stringliteral}{"{}./data/rocksdb"{}}\};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//\ Performance\ options}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_aac24275940ee5890e2d8fd768e507358}{write\_buffer\_size}}\{128\ *\ 1024\ *\ 1024\};\ \ \textcolor{comment}{//\ 128MB}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_a1dd023b2780d0cb7278f991620174b54}{max\_write\_buffer\_number}}\{4\};}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_ab0a03e99ec5421dcd8209a14b1257adb}{target\_file\_size\_base}}\{128\ *\ 1024\ *\ 1024\};\ \ \textcolor{comment}{//\ 128MB}}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_a5187f8859f919c2618fba5f748703657}{max\_background\_compactions}}\{4\};}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_af76f54fe64c6db4dd89df3934782984e}{max\_background\_flushes}}\{2\};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{comment}{//\ Cache\ options}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_ad64ce1f028105bfebe9da47be5d6aa77}{block\_cache\_size}}\{1024\ *\ 1024\ *\ 1024\};\ \ \textcolor{comment}{//\ 1GB}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_af11e2a6a7dad0bbc7b942852bfbbc458}{block\_size}}\{16\ *\ 1024\};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 16KB}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{//\ Compression}}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_ae22b2ce4f5accf285c2eba040600e33f}{compression\_enabled}}\{\textcolor{keyword}{true}\};}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_aeb611204ef6fb7119256c7c19ac41177}{compression\_level}}\{-\/1\};\ \ \textcolor{comment}{//\ Default\ compression}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//\ Bloom\ filter}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_ac1bdf850ce7f3f26f710c1297faf756e}{use\_bloom\_filter}}\{\textcolor{keyword}{true}\};}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_a2ff5af392262bbc9eb67c02603ccd4b1}{bloom\_bits\_per\_key}}\{10\};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{comment}{//\ Write\ options}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_a6b4bc2bcbb4492247b059d705616bac8}{sync\_writes}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_a61a9439dd49c3bc37ac6e3755f6a2de5}{disable\_wal}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{comment}{//\ Read\ options}}
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_a9c21b93b6dd196650dc0f0debd75b35f}{verify\_checksums}}\{\textcolor{keyword}{true}\};}
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_abb9042ed399d3c2179b99427d1fc35b5}{fill\_cache}}\{\textcolor{keyword}{true}\};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ Advanced\ options}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_a34943fe72660f69930a169e3cd69b462}{num\_levels}}\{7\};}
+\DoxyCodeLine{00058\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_af1d813531a8042a78e7df562be6f2482}{max\_open\_files}}\{5000\};}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_a395a8063300c65b2177dca367d08f577}{optimize\_for\_point\_lookup}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config_abb7e6e939eb2e092e503effc456b2d2a}{optimize\_for\_point\_lookup\_cache\_size}}\{0\};}
+\DoxyCodeLine{00061\ \};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#ifdef\ NEO\_HAS\_ROCKSDB}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00070\ \textcolor{keyword}{class\ }RocksDbStore\ :\ \textcolor{keyword}{public}\ IStore}
+\DoxyCodeLine{00071\ \{}
+\DoxyCodeLine{00072\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00073\ \ \ \ \ RocksDbConfig\ config\_;}
+\DoxyCodeLine{00074\ \ \ \ \ std::unique\_ptr<rocksdb::DB>\ db\_;}
+\DoxyCodeLine{00075\ \ \ \ \ std::unique\_ptr<rocksdb::Options>\ options\_;}
+\DoxyCodeLine{00076\ \ \ \ \ std::unique\_ptr<rocksdb::BlockBasedTableOptions>\ table\_options\_;}
+\DoxyCodeLine{00077\ \ \ \ \ std::shared\_ptr<core::Logger>\ logger\_;}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ mutex\_;}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{comment}{//\ Column\ families\ for\ different\ data\ types}}
+\DoxyCodeLine{00081\ \ \ \ \ std::vector<rocksdb::ColumnFamilyHandle*>\ cf\_handles\_;}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{comment}{//\ Batch\ operations}}
+\DoxyCodeLine{00084\ \ \ \ \ std::unique\_ptr<rocksdb::WriteBatch>\ current\_batch\_;}
+\DoxyCodeLine{00085\ \ \ \ \ std::mutex\ batch\_mutex\_;}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ batch\_size\_\{0\};}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ MAX\_BATCH\_SIZE\ =\ 1000;}
+\DoxyCodeLine{00088\ \ \ \ \ rocksdb::ColumnFamilyHandle*\ default\_cf\_\{\textcolor{keyword}{nullptr}\};}
+\DoxyCodeLine{00089\ \ \ \ \ rocksdb::ColumnFamilyHandle*\ blocks\_cf\_\{\textcolor{keyword}{nullptr}\};}
+\DoxyCodeLine{00090\ \ \ \ \ rocksdb::ColumnFamilyHandle*\ transactions\_cf\_\{\textcolor{keyword}{nullptr}\};}
+\DoxyCodeLine{00091\ \ \ \ \ rocksdb::ColumnFamilyHandle*\ contracts\_cf\_\{\textcolor{keyword}{nullptr}\};}
+\DoxyCodeLine{00092\ \ \ \ \ rocksdb::ColumnFamilyHandle*\ storage\_cf\_\{\textcolor{keyword}{nullptr}\};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{comment}{//\ Statistics}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{mutable}\ std::atomic<uint64\_t>\ read\_count\_\{0\};}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{mutable}\ std::atomic<uint64\_t>\ write\_count\_\{0\};}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{mutable}\ std::atomic<uint64\_t>\ delete\_count\_\{0\};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{explicit}\ RocksDbStore(\textcolor{keyword}{const}\ RocksDbConfig\&\ config);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \string~RocksDbStore()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{bool}\ Open();}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{void}\ Close();}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{bool}\ IsOpen()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ db\_\ !=\ \textcolor{keyword}{nullptr};\ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{comment}{//\ IStore\ interface\ implementation}}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{void}\ Put(\textcolor{keyword}{const}\ io::ByteVector\&\ key,\ \textcolor{keyword}{const}\ io::ByteVector\&\ value)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{void}\ Delete(\textcolor{keyword}{const}\ io::ByteVector\&\ key)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00127\ \ \ \ \ std::optional<io::ByteVector>\ TryGet(\textcolor{keyword}{const}\ io::ByteVector\&\ key)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{bool}\ Contains(\textcolor{keyword}{const}\ io::ByteVector\&\ key)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00129\ \ \ \ \ std::vector<std::pair<io::ByteVector,\ io::ByteVector>>\ Find(}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ io::ByteVector*\ prefix\ =\ \textcolor{keyword}{nullptr},\ SeekDirection\ direction\ =\ SeekDirection::Forward)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keyword}{class\ }WriteBatch}
+\DoxyCodeLine{00136\ \ \ \ \ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ rocksdb::WriteBatch\ batch\_;}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ RocksDbStore*\ store\_;}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ WriteBatch(RocksDbStore*\ store)\ :\ store\_(\mbox{\hyperlink{namespacedetail_a7c070b2bf3d61e3d8b8013f6fb18d592a8cd892b7b97ef9489ae4479d3f4ef0fc}{store}})\ \{\}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Put(\textcolor{keyword}{const}\ io::ByteVector\&\ key,\ \textcolor{keyword}{const}\ io::ByteVector\&\ value);}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Delete(\textcolor{keyword}{const}\ io::ByteVector\&\ key);}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a59d5b10c3a447f036d85cb5ce524c96c}{Commit}}();}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ Clear();}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ GetDataSize()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00149\ \ \ \ \ \};}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00154\ \ \ \ \ std::unique\_ptr<WriteBatch>\ CreateWriteBatch();}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00159\ \ \ \ \ std::string\ GetStatistics()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00164\ \ \ \ \ std::string\ GetProperty(\textcolor{keyword}{const}\ std::string\&\ property)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordtype}{void}\ Compact();}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordtype}{bool}\ CreateCheckpoint(\textcolor{keyword}{const}\ std::string\&\ checkpoint\_path);}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keywordtype}{void}\ Flush();}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00186\ \ \ \ \ rocksdb::ColumnFamilyHandle*\ GetColumnFamily(\textcolor{keyword}{const}\ io::ByteVector\&\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keywordtype}{bool}\ InitializeColumnFamilies();}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00197\ \ \ \ \ std::string\ ToDbKey(\textcolor{keyword}{const}\ io::ByteVector\&\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00202\ \ \ \ \ io::ByteVector\ FromDbKey(\textcolor{keyword}{const}\ rocksdb::Slice\&\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00207\ \ \ \ \ std::string\ ToDbValue(\textcolor{keyword}{const}\ io::ByteVector\&\ value)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00212\ \ \ \ \ io::ByteVector\ FromDbValue(\textcolor{keyword}{const}\ rocksdb::Slice\&\ value)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00217\ \ \ \ \ rocksdb::Options\ GetOptions()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00222\ \ \ \ \ rocksdb::ReadOptions\ GetReadOptions()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00227\ \ \ \ \ rocksdb::WriteOptions\ GetWriteOptions(\textcolor{keywordtype}{bool}\ sync\ =\ \textcolor{keyword}{false})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00228\ \};}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \textcolor{comment}{//\ Alias\ for\ compatibility}}
+\DoxyCodeLine{00231\ \textcolor{keyword}{using\ }RocksDBStore\ =\ RocksDbStore;}
+\DoxyCodeLine{00232\ \textcolor{keyword}{using\ }LevelDBStore\ =\ RocksDbStore;\ \ \textcolor{comment}{//\ Alias\ for\ LevelDB\ compatibility}}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ NEO\_HAS\_ROCKSDB}}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \}\ \ \textcolor{comment}{//\ namespace\ neo::persistence}}
+
+\end{DoxyCode}

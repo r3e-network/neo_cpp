@@ -1,0 +1,47 @@
+\doxysection{ip\+\_\+address.\+h}
+\hypertarget{ip__address_8h_source}{}\label{ip__address_8h_source}\index{include/neo/network/ip\_address.h@{include/neo/network/ip\_address.h}}
+\mbox{\hyperlink{ip__address_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network}{neo::network}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_af3841f07eb754ead04973a5b6bb9afba}{IPAddress}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_af3841f07eb754ead04973a5b6bb9afba}{IPAddress}}();}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_af3841f07eb754ead04973a5b6bb9afba}{IPAddress}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_af3841f07eb754ead04973a5b6bb9afba}{IPAddress}}(uint32\_t\ address);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_af3841f07eb754ead04973a5b6bb9afba}{IPAddress}}(\textcolor{keyword}{const}\ uint8\_t*\ address,\ \textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00042\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_ac69227f4906b32be6a1712beff5b897a}{ToString}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_a46700168dc0d5e40a5bfd2f16fb56f93}{GetAddressBytes}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_af7fffdd03c7076b1162ad6729ef247d7}{GetAddressLength}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_ad60b7e6439c656899d98511470ba129f}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_af3841f07eb754ead04973a5b6bb9afba}{IPAddress}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_abb5e28bc266c54b877a48fec3ea3bd47}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_af3841f07eb754ead04973a5b6bb9afba}{IPAddress}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_af3841f07eb754ead04973a5b6bb9afba}{IPAddress}}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_a4895cacec4642d083b972c1913bf7b7b}{Loopback}}();}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_af3841f07eb754ead04973a5b6bb9afba}{IPAddress}}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_a6c88f7623fed2b8f03de6955feecc47a}{Any}}();}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_af3841f07eb754ead04973a5b6bb9afba}{IPAddress}}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_a820906d2b6a5444d97445609bac6e7f0}{Parse}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_acd99b489199839e45dac01d20cbcef64}{TryParse}}(\textcolor{keyword}{const}\ std::string\&\ address,\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_af3841f07eb754ead04973a5b6bb9afba}{IPAddress}}\&\ result);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00098\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_a0bd8a6b072af18069b47c7752f744e51}{address\_}}[16];}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_a106fb022f11e7ceae630735c648587fb}{length\_}};}
+\DoxyCodeLine{00100\ \};}
+\DoxyCodeLine{00101\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network}}
+
+\end{DoxyCode}

@@ -1,0 +1,543 @@
+\doxysection{neo\+::config\+::Configuration\+Manager Class Reference}
+\hypertarget{classneo_1_1config_1_1_configuration_manager}{}\label{classneo_1_1config_1_1_configuration_manager}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+
+
+Global configuration instance.  
+
+
+
+
+{\ttfamily \#include $<$configuration.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a4e7cc4ad9b4a46dd1448cf5a6291217c}{Initialize}} (const std\+::string \&config\+Path)
+\begin{DoxyCompactList}\small\item\em Initialize with configuration file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a3373b9c28d248aa5a0d2d36a6b637ef1}{Initialize}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}} $>$ config)
+\begin{DoxyCompactList}\small\item\em Initialize with configuration. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}} $>$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a0336362502f6b39b07e6c169a864b128}{Get\+Configuration}} () const
+\begin{DoxyCompactList}\small\item\em Get current configuration. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_abe74a5eccfc486af5740d78aeb86d585}{Is\+Initialized}} () const
+\begin{DoxyCompactList}\small\item\em Check if initialized. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a2f951aecaa113a6aa6e3c0ecdbf64c19}{Reload}} ()
+\begin{DoxyCompactList}\small\item\em Reload configuration from file. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a80cf75ce9e28f957fc78a3cf66ec408d}{Add\+Source}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source}{IConfiguration\+Source}} $>$ source)
+\begin{DoxyCompactList}\small\item\em Add configuration source. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a07869ba4bc953aa01b8ca4354bbb356d}{Remove\+Source}} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Remove configuration source by name. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a2f951aecaa113a6aa6e3c0ecdbf64c19}{Reload}} ()
+\begin{DoxyCompactList}\small\item\em Reload all configuration sources. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a2acb6dfe4ed8c11f4ec61780e3f47625}{Get}} (const std\+::string \&key, const std\+::string \&default\+\_\+value="{}"{}) const
+\begin{DoxyCompactList}\small\item\em Get configuration value. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a3305226d425e4efadf211682aeb0bc8b}{Get\+Int}} (const std\+::string \&key, int default\+\_\+value=0) const
+\begin{DoxyCompactList}\small\item\em Get configuration value as integer. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a3b23d2e17016587834a64709628ca22e}{Get\+Bool}} (const std\+::string \&key, bool default\+\_\+value=false) const
+\begin{DoxyCompactList}\small\item\em Get configuration value as boolean. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a7b6e78b1283dd6512823332b99e926ec}{Get\+Double}} (const std\+::string \&key, double default\+\_\+value=0.\+0) const
+\begin{DoxyCompactList}\small\item\em Get configuration value as double. \end{DoxyCompactList}\item 
+json\+::\+JObject \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a17235e1e26d2a3a597ea82f5471ad9df}{Get\+Section}} (const std\+::string \&section) const
+\begin{DoxyCompactList}\small\item\em Get configuration section as JSON. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ac42029f93946272fd42fab1e09b665dc}{Contains}} (const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Check if configuration key exists. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a3d31670cb4ccf3bb4b1a9d7a27b41e73}{Register\+Change\+Callback}} (const std\+::string \&key, \mbox{\hyperlink{namespaceneo_1_1config_a6ee4d76b6cf8f4d1270e434ec44272cd}{Config\+Change\+Callback}} callback)
+\begin{DoxyCompactList}\small\item\em Register callback for configuration changes. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ac762fb6ad38196df46693c7dea7b765e}{Validate}} (const json\+::\+JObject \&schema) const
+\begin{DoxyCompactList}\small\item\em Validate configuration against schema. \end{DoxyCompactList}\item 
+json\+::\+JObject \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a187f1fd54ff6daa11771c94ac40de9e0}{Export}} () const
+\begin{DoxyCompactList}\small\item\em Export current configuration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ac6832055295ddb9f793f9f96162c44c2}{Set\+Cache\+Duration}} (std\+::chrono\+::seconds duration)
+\begin{DoxyCompactList}\small\item\em Set cache duration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager}{Configuration\+Manager}} \& \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a71a4e4feea25de4b617d186d13cdc09e}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Get the singleton instance. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager}{Configuration\+Manager}} $>$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a45fc069fe55d8ca28af02665fc6e1bbf}{Get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a78add4feb633a0543f538f2cb2a79c66}{Configuration\+Manager}} ()=default
+\item 
+\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a30db1284f9da6c696d76d0bb12197e55}{\texorpdfstring{$\sim$}{\string~}\+Configuration\+Manager}} ()=default
+\item 
+\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a09f3cb9a2ecdde81a056a976ce28135c}{Configuration\+Manager}} (const \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager}{Configuration\+Manager}} \&)=delete
+\item 
+\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager}{Configuration\+Manager}} \& \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a377cf8f0479dda40a3072609b4d56234}{operator=}} (const \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager}{Configuration\+Manager}} \&)=delete
+\item 
+\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a0b74e69c1fe87951a055891a8fe31bee}{Configuration\+Manager}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a1c718d2a9a679b0f4812bac29cf5d962}{Clear\+Cache}} ()
+\begin{DoxyCompactList}\small\item\em Clear cache. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a17ff85402da164ae32cbf21271ae884a}{Is\+Cache\+Expired}} () const
+\begin{DoxyCompactList}\small\item\em Check if cache is expired. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ade2ae78acffbc220b206e77436e91148}{Notify\+Change}} (const std\+::string \&key, const std\+::string \&old\+\_\+value, const std\+::string \&new\+\_\+value)
+\begin{DoxyCompactList}\small\item\em Notify change callbacks. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ae23b88412bc22144177a3db750a28926}{Resolve\+Value}} (const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Resolve value from sources. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}} $>$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a686e3f89eefb69478614b85ef823471d}{config\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a12bf299c9bdbeab9eb57ca98b9180c2d}{config\+Path\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a4127308810a8e47db04a138eaa635ce0}{mutex\+\_\+}}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source}{IConfiguration\+Source}} $>$ $>$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_aa3082dae98903e3bb31afd17049e3148}{sources\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1core_1_1_logger}{core\+::\+Logger}} $>$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ac951bd9212e389fe3455cd6fe78e83da}{logger\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ad6746366e3a302adcd3ab2b9404f3644}{cache\+\_\+}}
+\item 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_af2790f71b1b9a61626f92e3d2811a284}{cache\+\_\+expiry\+\_\+}}
+\item 
+std\+::chrono\+::seconds \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ac283679cadd5fcf6e234b73a4ec04b52}{cache\+\_\+duration\+\_\+}} \{60\}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::vector$<$ \mbox{\hyperlink{namespaceneo_1_1config_a6ee4d76b6cf8f4d1270e434ec44272cd}{Config\+Change\+Callback}} $>$ $>$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a7af3f36cd03b297db74bda3e5621f9ce}{callbacks\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager}{Configuration\+Manager}} $>$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_abfb4e69fd2b3db7672deadb8a8d886e9}{instance\+\_\+}}
+\item 
+static std\+::mutex \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a9f93aa56f57bd9f0a858523c430662e8}{instance\+\_\+mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Global configuration instance. 
+
+Production configuration manager.
+
+Manages configuration from multiple sources with priority-\/based override. Supports hot-\/reloading, validation, and change notifications. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a78add4feb633a0543f538f2cb2a79c66}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!ConfigurationManager@{ConfigurationManager}}
+\index{ConfigurationManager@{ConfigurationManager}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{ConfigurationManager()}{ConfigurationManager()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a78add4feb633a0543f538f2cb2a79c66} 
+neo\+::config\+::\+Configuration\+Manager\+::\+Configuration\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a30db1284f9da6c696d76d0bb12197e55}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!````~ConfigurationManager@{\texorpdfstring{$\sim$}{\string~}ConfigurationManager}}
+\index{````~ConfigurationManager@{\texorpdfstring{$\sim$}{\string~}ConfigurationManager}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ConfigurationManager()}{\string~ConfigurationManager()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a30db1284f9da6c696d76d0bb12197e55} 
+neo\+::config\+::\+Configuration\+Manager\+::\texorpdfstring{$\sim$}{\string~}\+Configuration\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a09f3cb9a2ecdde81a056a976ce28135c}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!ConfigurationManager@{ConfigurationManager}}
+\index{ConfigurationManager@{ConfigurationManager}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{ConfigurationManager()}{ConfigurationManager()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a09f3cb9a2ecdde81a056a976ce28135c} 
+neo\+::config\+::\+Configuration\+Manager\+::\+Configuration\+Manager (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager}{Configuration\+Manager}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a0b74e69c1fe87951a055891a8fe31bee}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!ConfigurationManager@{ConfigurationManager}}
+\index{ConfigurationManager@{ConfigurationManager}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{ConfigurationManager()}{ConfigurationManager()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a0b74e69c1fe87951a055891a8fe31bee} 
+neo\+::config\+::\+Configuration\+Manager\+::\+Configuration\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a80cf75ce9e28f957fc78a3cf66ec408d}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!AddSource@{AddSource}}
+\index{AddSource@{AddSource}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{AddSource()}{AddSource()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a80cf75ce9e28f957fc78a3cf66ec408d} 
+void neo\+::config\+::\+Configuration\+Manager\+::\+Add\+Source (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source}{IConfiguration\+Source}} $>$}]{source}{}\end{DoxyParamCaption})}
+
+
+
+Add configuration source. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & \doxylink{classneo_1_1config_1_1_configuration}{Configuration} source to add \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a1c718d2a9a679b0f4812bac29cf5d962}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!ClearCache@{ClearCache}}
+\index{ClearCache@{ClearCache}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{ClearCache()}{ClearCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a1c718d2a9a679b0f4812bac29cf5d962} 
+void neo\+::config\+::\+Configuration\+Manager\+::\+Clear\+Cache (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Clear cache. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_ac42029f93946272fd42fab1e09b665dc}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!Contains@{Contains}}
+\index{Contains@{Contains}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_ac42029f93946272fd42fab1e09b665dc} 
+bool neo\+::config\+::\+Configuration\+Manager\+::\+Contains (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const}
+
+
+
+Check if configuration key exists. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a187f1fd54ff6daa11771c94ac40de9e0}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!Export@{Export}}
+\index{Export@{Export}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{Export()}{Export()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a187f1fd54ff6daa11771c94ac40de9e0} 
+json\+::\+JObject neo\+::config\+::\+Configuration\+Manager\+::\+Export (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Export current configuration. 
+
+\begin{DoxyReturn}{Returns}
+Current configuration as JSON 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a2acb6dfe4ed8c11f4ec61780e3f47625}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!Get@{Get}}
+\index{Get@{Get}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a2acb6dfe4ed8c11f4ec61780e3f47625} 
+std\+::string neo\+::config\+::\+Configuration\+Manager\+::\+Get (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const std\+::string \&}]{default\+\_\+value}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption}) const}
+
+
+
+Get configuration value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & \doxylink{classneo_1_1config_1_1_configuration}{Configuration} key \\
+\hline
+{\em default\+\_\+value} & Default value if key not found \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{classneo_1_1config_1_1_configuration}{Configuration} value 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a3b23d2e17016587834a64709628ca22e}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!GetBool@{GetBool}}
+\index{GetBool@{GetBool}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{GetBool()}{GetBool()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a3b23d2e17016587834a64709628ca22e} 
+bool neo\+::config\+::\+Configuration\+Manager\+::\+Get\+Bool (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{bool}]{default\+\_\+value}{ = {\ttfamily false}}\end{DoxyParamCaption}) const}
+
+
+
+Get configuration value as boolean. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a0336362502f6b39b07e6c169a864b128}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!GetConfiguration@{GetConfiguration}}
+\index{GetConfiguration@{GetConfiguration}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{GetConfiguration()}{GetConfiguration()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a0336362502f6b39b07e6c169a864b128} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}} $>$ neo\+::config\+::\+Configuration\+Manager\+::\+Get\+Configuration (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get current configuration. 
+
+\begin{DoxyReturn}{Returns}
+Current configuration or nullptr if not initialized 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a7b6e78b1283dd6512823332b99e926ec}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!GetDouble@{GetDouble}}
+\index{GetDouble@{GetDouble}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{GetDouble()}{GetDouble()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a7b6e78b1283dd6512823332b99e926ec} 
+double neo\+::config\+::\+Configuration\+Manager\+::\+Get\+Double (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{double}]{default\+\_\+value}{ = {\ttfamily 0.0}}\end{DoxyParamCaption}) const}
+
+
+
+Get configuration value as double. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a71a4e4feea25de4b617d186d13cdc09e}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a71a4e4feea25de4b617d186d13cdc09e} 
+\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager}{Configuration\+Manager}} \& neo\+::config\+::\+Configuration\+Manager\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the singleton instance. 
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a45fc069fe55d8ca28af02665fc6e1bbf}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a45fc069fe55d8ca28af02665fc6e1bbf} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager}{Configuration\+Manager}} $>$ neo\+::config\+::\+Configuration\+Manager\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a3305226d425e4efadf211682aeb0bc8b}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!GetInt@{GetInt}}
+\index{GetInt@{GetInt}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{GetInt()}{GetInt()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a3305226d425e4efadf211682aeb0bc8b} 
+int neo\+::config\+::\+Configuration\+Manager\+::\+Get\+Int (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{int}]{default\+\_\+value}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const}
+
+
+
+Get configuration value as integer. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a17235e1e26d2a3a597ea82f5471ad9df}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!GetSection@{GetSection}}
+\index{GetSection@{GetSection}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{GetSection()}{GetSection()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a17235e1e26d2a3a597ea82f5471ad9df} 
+json\+::\+JObject neo\+::config\+::\+Configuration\+Manager\+::\+Get\+Section (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{section}{}\end{DoxyParamCaption}) const}
+
+
+
+Get configuration section as JSON. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a4e7cc4ad9b4a46dd1448cf5a6291217c}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a4e7cc4ad9b4a46dd1448cf5a6291217c} 
+bool neo\+::config\+::\+Configuration\+Manager\+::\+Initialize (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{config\+Path}{}\end{DoxyParamCaption})}
+
+
+
+Initialize with configuration file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config\+Path} & Path to configuration file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a3373b9c28d248aa5a0d2d36a6b637ef1}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a3373b9c28d248aa5a0d2d36a6b637ef1} 
+bool neo\+::config\+::\+Configuration\+Manager\+::\+Initialize (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}} $>$}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Initialize with configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & \doxylink{classneo_1_1config_1_1_configuration}{Configuration} instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a17ff85402da164ae32cbf21271ae884a}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!IsCacheExpired@{IsCacheExpired}}
+\index{IsCacheExpired@{IsCacheExpired}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{IsCacheExpired()}{IsCacheExpired()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a17ff85402da164ae32cbf21271ae884a} 
+bool neo\+::config\+::\+Configuration\+Manager\+::\+Is\+Cache\+Expired (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Check if cache is expired. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_abe74a5eccfc486af5740d78aeb86d585}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!IsInitialized@{IsInitialized}}
+\index{IsInitialized@{IsInitialized}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{IsInitialized()}{IsInitialized()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_abe74a5eccfc486af5740d78aeb86d585} 
+bool neo\+::config\+::\+Configuration\+Manager\+::\+Is\+Initialized (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Check if initialized. 
+
+\begin{DoxyReturn}{Returns}
+True if initialized 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_ade2ae78acffbc220b206e77436e91148}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!NotifyChange@{NotifyChange}}
+\index{NotifyChange@{NotifyChange}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{NotifyChange()}{NotifyChange()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_ade2ae78acffbc220b206e77436e91148} 
+void neo\+::config\+::\+Configuration\+Manager\+::\+Notify\+Change (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const std\+::string \&}]{old\+\_\+value}{, }\item[{const std\+::string \&}]{new\+\_\+value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Notify change callbacks. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a377cf8f0479dda40a3072609b4d56234}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a377cf8f0479dda40a3072609b4d56234} 
+\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager}{Configuration\+Manager}} \& neo\+::config\+::\+Configuration\+Manager\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager}{Configuration\+Manager}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a3d31670cb4ccf3bb4b1a9d7a27b41e73}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!RegisterChangeCallback@{RegisterChangeCallback}}
+\index{RegisterChangeCallback@{RegisterChangeCallback}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{RegisterChangeCallback()}{RegisterChangeCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a3d31670cb4ccf3bb4b1a9d7a27b41e73} 
+void neo\+::config\+::\+Configuration\+Manager\+::\+Register\+Change\+Callback (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1config_a6ee4d76b6cf8f4d1270e434ec44272cd}{Config\+Change\+Callback}}}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Register callback for configuration changes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & \doxylink{classneo_1_1config_1_1_configuration}{Configuration} key to watch (use "{}\texorpdfstring{$\ast$}{*}"{} for all) \\
+\hline
+{\em callback} & Callback function \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a2f951aecaa113a6aa6e3c0ecdbf64c19}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!Reload@{Reload}}
+\index{Reload@{Reload}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{Reload()}{Reload()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a2f951aecaa113a6aa6e3c0ecdbf64c19} 
+bool neo\+::config\+::\+Configuration\+Manager\+::\+Reload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Reload configuration from file. 
+
+\begin{DoxyReturn}{Returns}
+True if successful 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a2f951aecaa113a6aa6e3c0ecdbf64c19}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!Reload@{Reload}}
+\index{Reload@{Reload}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{Reload()}{Reload()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a2f951aecaa113a6aa6e3c0ecdbf64c19} 
+bool neo\+::config\+::\+Configuration\+Manager\+::\+Reload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Reload all configuration sources. 
+
+\begin{DoxyReturn}{Returns}
+true if all sources loaded successfully 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a07869ba4bc953aa01b8ca4354bbb356d}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!RemoveSource@{RemoveSource}}
+\index{RemoveSource@{RemoveSource}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{RemoveSource()}{RemoveSource()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a07869ba4bc953aa01b8ca4354bbb356d} 
+void neo\+::config\+::\+Configuration\+Manager\+::\+Remove\+Source (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Remove configuration source by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Name of source to remove \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_ae23b88412bc22144177a3db750a28926}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!ResolveValue@{ResolveValue}}
+\index{ResolveValue@{ResolveValue}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{ResolveValue()}{ResolveValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_ae23b88412bc22144177a3db750a28926} 
+std\+::string neo\+::config\+::\+Configuration\+Manager\+::\+Resolve\+Value (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Resolve value from sources. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_ac6832055295ddb9f793f9f96162c44c2}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!SetCacheDuration@{SetCacheDuration}}
+\index{SetCacheDuration@{SetCacheDuration}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{SetCacheDuration()}{SetCacheDuration()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_ac6832055295ddb9f793f9f96162c44c2} 
+void neo\+::config\+::\+Configuration\+Manager\+::\+Set\+Cache\+Duration (\begin{DoxyParamCaption}\item[{std\+::chrono\+::seconds}]{duration}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set cache duration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em duration} & Cache duration in seconds \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_ac762fb6ad38196df46693c7dea7b765e}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!Validate@{Validate}}
+\index{Validate@{Validate}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{Validate()}{Validate()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_ac762fb6ad38196df46693c7dea7b765e} 
+std\+::vector$<$ std\+::string $>$ neo\+::config\+::\+Configuration\+Manager\+::\+Validate (\begin{DoxyParamCaption}\item[{const json\+::\+JObject \&}]{schema}{}\end{DoxyParamCaption}) const}
+
+
+
+Validate configuration against schema. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em schema} & JSON schema \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Validation errors, empty if valid 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_ad6746366e3a302adcd3ab2b9404f3644}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!cache\_@{cache\_}}
+\index{cache\_@{cache\_}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{cache\_}{cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_ad6746366e3a302adcd3ab2b9404f3644} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::string$>$ neo\+::config\+::\+Configuration\+Manager\+::cache\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_ac283679cadd5fcf6e234b73a4ec04b52}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!cache\_duration\_@{cache\_duration\_}}
+\index{cache\_duration\_@{cache\_duration\_}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{cache\_duration\_}{cache\_duration\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_ac283679cadd5fcf6e234b73a4ec04b52} 
+std\+::chrono\+::seconds neo\+::config\+::\+Configuration\+Manager\+::cache\+\_\+duration\+\_\+ \{60\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_af2790f71b1b9a61626f92e3d2811a284}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!cache\_expiry\_@{cache\_expiry\_}}
+\index{cache\_expiry\_@{cache\_expiry\_}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{cache\_expiry\_}{cache\_expiry\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_af2790f71b1b9a61626f92e3d2811a284} 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point neo\+::config\+::\+Configuration\+Manager\+::cache\+\_\+expiry\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a7af3f36cd03b297db74bda3e5621f9ce}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!callbacks\_@{callbacks\_}}
+\index{callbacks\_@{callbacks\_}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{callbacks\_}{callbacks\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a7af3f36cd03b297db74bda3e5621f9ce} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::vector$<$\mbox{\hyperlink{namespaceneo_1_1config_a6ee4d76b6cf8f4d1270e434ec44272cd}{Config\+Change\+Callback}}$>$ $>$ neo\+::config\+::\+Configuration\+Manager\+::callbacks\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a686e3f89eefb69478614b85ef823471d}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!config\_@{config\_}}
+\index{config\_@{config\_}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{config\_}{config\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a686e3f89eefb69478614b85ef823471d} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}}$>$ neo\+::config\+::\+Configuration\+Manager\+::config\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a12bf299c9bdbeab9eb57ca98b9180c2d}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!configPath\_@{configPath\_}}
+\index{configPath\_@{configPath\_}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{configPath\_}{configPath\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a12bf299c9bdbeab9eb57ca98b9180c2d} 
+std\+::string neo\+::config\+::\+Configuration\+Manager\+::config\+Path\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_abfb4e69fd2b3db7672deadb8a8d886e9}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!instance\_@{instance\_}}
+\index{instance\_@{instance\_}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{instance\_}{instance\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_abfb4e69fd2b3db7672deadb8a8d886e9} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager}{Configuration\+Manager}}$>$ neo\+::config\+::\+Configuration\+Manager\+::instance\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a9f93aa56f57bd9f0a858523c430662e8}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!instance\_mutex\_@{instance\_mutex\_}}
+\index{instance\_mutex\_@{instance\_mutex\_}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{instance\_mutex\_}{instance\_mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a9f93aa56f57bd9f0a858523c430662e8} 
+std\+::mutex neo\+::config\+::\+Configuration\+Manager\+::instance\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_ac951bd9212e389fe3455cd6fe78e83da}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!logger\_@{logger\_}}
+\index{logger\_@{logger\_}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{logger\_}{logger\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_ac951bd9212e389fe3455cd6fe78e83da} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1core_1_1_logger}{core\+::\+Logger}}$>$ neo\+::config\+::\+Configuration\+Manager\+::logger\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_a4127308810a8e47db04a138eaa635ce0}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_a4127308810a8e47db04a138eaa635ce0} 
+std\+::mutex neo\+::config\+::\+Configuration\+Manager\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_manager_aa3082dae98903e3bb31afd17049e3148}\index{neo::config::ConfigurationManager@{neo::config::ConfigurationManager}!sources\_@{sources\_}}
+\index{sources\_@{sources\_}!neo::config::ConfigurationManager@{neo::config::ConfigurationManager}}
+\doxysubsubsection{\texorpdfstring{sources\_}{sources\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_manager_aa3082dae98903e3bb31afd17049e3148} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source}{IConfiguration\+Source}}$>$ $>$ neo\+::config\+::\+Configuration\+Manager\+::sources\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/config/\mbox{\hyperlink{configuration_8h}{configuration.\+h}}\item 
+include/neo/config/\mbox{\hyperlink{configuration__manager_8h}{configuration\+\_\+manager.\+h}}\end{DoxyCompactItemize}

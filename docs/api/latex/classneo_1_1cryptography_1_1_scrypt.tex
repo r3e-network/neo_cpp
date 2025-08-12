@@ -1,0 +1,116 @@
+\doxysection{neo\+::cryptography\+::Scrypt Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1_scrypt}{}\label{classneo_1_1cryptography_1_1_scrypt}\index{neo::cryptography::Scrypt@{neo::cryptography::Scrypt}}
+
+
+\doxylink{classneo_1_1cryptography_1_1_scrypt}{Scrypt} password-\/based key derivation function.  
+
+
+
+
+{\ttfamily \#include $<$scrypt.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_scrypt_ace60a229f0dd4c90a19b8c8e01f909e8}{Derive\+Key}} (const std\+::string \&password, const std\+::vector$<$ uint8\+\_\+t $>$ \&salt, uint32\+\_\+t n=16384, uint32\+\_\+t r=8, uint32\+\_\+t p=8, uint32\+\_\+t dk\+Len=64)
+\begin{DoxyCompactList}\small\item\em Derives a key using the scrypt algorithm. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_scrypt_adaaa5468b7c659784d172f9fece6c042}{Derive\+Key}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&password, const std\+::vector$<$ uint8\+\_\+t $>$ \&salt, uint32\+\_\+t n=16384, uint32\+\_\+t r=8, uint32\+\_\+t p=8, uint32\+\_\+t dk\+Len=64)
+\begin{DoxyCompactList}\small\item\em Derives a key using the scrypt algorithm with byte array password. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classneo_1_1cryptography_1_1_scrypt_a4a0b5492069a13dcd1a07cb0ee91f7c4}{Block\+Mix}} (std\+::vector$<$ uint8\+\_\+t $>$ \&B, uint32\+\_\+t r)
+\item 
+static void \mbox{\hyperlink{classneo_1_1cryptography_1_1_scrypt_a713c6d750ba932af1d1b6d669ee55e67}{Salsa20\+\_\+8}} (std\+::vector$<$ uint8\+\_\+t $>$ \&B)
+\item 
+static void \mbox{\hyperlink{classneo_1_1cryptography_1_1_scrypt_a0aaeb37bf9c34fcc2c565a127d8d703d}{Xor\+Bytes}} (std\+::vector$<$ uint8\+\_\+t $>$ \&dest, const std\+::vector$<$ uint8\+\_\+t $>$ \&src)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1cryptography_1_1_scrypt}{Scrypt} password-\/based key derivation function. 
+
+Used by NEP6 wallets for secure password-\/based encryption. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1_scrypt_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_scrypt_a4a0b5492069a13dcd1a07cb0ee91f7c4}\index{neo::cryptography::Scrypt@{neo::cryptography::Scrypt}!BlockMix@{BlockMix}}
+\index{BlockMix@{BlockMix}!neo::cryptography::Scrypt@{neo::cryptography::Scrypt}}
+\doxysubsubsection{\texorpdfstring{BlockMix()}{BlockMix()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_scrypt_a4a0b5492069a13dcd1a07cb0ee91f7c4} 
+void neo\+::cryptography\+::\+Scrypt\+::\+Block\+Mix (\begin{DoxyParamCaption}\item[{std\+::vector$<$ uint8\+\_\+t $>$ \&}]{B}{, }\item[{uint32\+\_\+t}]{r}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1_scrypt_ace60a229f0dd4c90a19b8c8e01f909e8}\index{neo::cryptography::Scrypt@{neo::cryptography::Scrypt}!DeriveKey@{DeriveKey}}
+\index{DeriveKey@{DeriveKey}!neo::cryptography::Scrypt@{neo::cryptography::Scrypt}}
+\doxysubsubsection{\texorpdfstring{DeriveKey()}{DeriveKey()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_scrypt_ace60a229f0dd4c90a19b8c8e01f909e8} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::cryptography\+::\+Scrypt\+::\+Derive\+Key (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{password}{, }\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{salt}{, }\item[{uint32\+\_\+t}]{n}{ = {\ttfamily 16384}, }\item[{uint32\+\_\+t}]{r}{ = {\ttfamily 8}, }\item[{uint32\+\_\+t}]{p}{ = {\ttfamily 8}, }\item[{uint32\+\_\+t}]{dk\+Len}{ = {\ttfamily 64}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Derives a key using the scrypt algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em password} & The password. \\
+\hline
+{\em salt} & The salt. \\
+\hline
+{\em n} & CPU/memory cost parameter. \\
+\hline
+{\em r} & Block size parameter. \\
+\hline
+{\em p} & Parallelization parameter. \\
+\hline
+{\em dk\+Len} & Derived key length. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The derived key. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1_scrypt_adaaa5468b7c659784d172f9fece6c042}\index{neo::cryptography::Scrypt@{neo::cryptography::Scrypt}!DeriveKey@{DeriveKey}}
+\index{DeriveKey@{DeriveKey}!neo::cryptography::Scrypt@{neo::cryptography::Scrypt}}
+\doxysubsubsection{\texorpdfstring{DeriveKey()}{DeriveKey()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_scrypt_adaaa5468b7c659784d172f9fece6c042} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::cryptography\+::\+Scrypt\+::\+Derive\+Key (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{password}{, }\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{salt}{, }\item[{uint32\+\_\+t}]{n}{ = {\ttfamily 16384}, }\item[{uint32\+\_\+t}]{r}{ = {\ttfamily 8}, }\item[{uint32\+\_\+t}]{p}{ = {\ttfamily 8}, }\item[{uint32\+\_\+t}]{dk\+Len}{ = {\ttfamily 64}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Derives a key using the scrypt algorithm with byte array password. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em password} & The password as bytes. \\
+\hline
+{\em salt} & The salt. \\
+\hline
+{\em n} & CPU/memory cost parameter. \\
+\hline
+{\em r} & Block size parameter. \\
+\hline
+{\em p} & Parallelization parameter. \\
+\hline
+{\em dk\+Len} & Derived key length. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The derived key. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1_scrypt_a713c6d750ba932af1d1b6d669ee55e67}\index{neo::cryptography::Scrypt@{neo::cryptography::Scrypt}!Salsa20\_8@{Salsa20\_8}}
+\index{Salsa20\_8@{Salsa20\_8}!neo::cryptography::Scrypt@{neo::cryptography::Scrypt}}
+\doxysubsubsection{\texorpdfstring{Salsa20\_8()}{Salsa20\_8()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_scrypt_a713c6d750ba932af1d1b6d669ee55e67} 
+void neo\+::cryptography\+::\+Scrypt\+::\+Salsa20\+\_\+8 (\begin{DoxyParamCaption}\item[{std\+::vector$<$ uint8\+\_\+t $>$ \&}]{B}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1_scrypt_a0aaeb37bf9c34fcc2c565a127d8d703d}\index{neo::cryptography::Scrypt@{neo::cryptography::Scrypt}!XorBytes@{XorBytes}}
+\index{XorBytes@{XorBytes}!neo::cryptography::Scrypt@{neo::cryptography::Scrypt}}
+\doxysubsubsection{\texorpdfstring{XorBytes()}{XorBytes()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_scrypt_a0aaeb37bf9c34fcc2c565a127d8d703d} 
+void neo\+::cryptography\+::\+Scrypt\+::\+Xor\+Bytes (\begin{DoxyParamCaption}\item[{std\+::vector$<$ uint8\+\_\+t $>$ \&}]{dest}{, }\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{src}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/\mbox{\hyperlink{scrypt_8h}{scrypt.\+h}}\end{DoxyCompactItemize}

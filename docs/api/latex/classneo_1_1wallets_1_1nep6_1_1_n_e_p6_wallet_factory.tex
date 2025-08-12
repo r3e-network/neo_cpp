@@ -1,0 +1,137 @@
+\doxysection{neo\+::wallets\+::nep6\+::NEP6\+Wallet\+Factory Class Reference}
+\hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory}{}\label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory}\index{neo::wallets::nep6::NEP6WalletFactory@{neo::wallets::nep6::NEP6WalletFactory}}
+
+
+Factory for creating NEP6 wallets.  
+
+
+
+
+{\ttfamily \#include $<$nep6\+\_\+wallet\+\_\+factory.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::wallets\+::nep6\+::NEP6\+Wallet\+Factory\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::wallets\+::nep6\+::NEP6\+Wallet\+Factory\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory_adc2258e346289f04034dff38a51ce7ba}{Can\+Handle}} (const std\+::string \&path) const override
+\begin{DoxyCompactList}\small\item\em Checks if the factory can handle the specified path. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{Wallet}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory_a49ba758fd1da6e79cd40d223cfe1a1aa}{Create\+Wallet}} (const std\+::string \&path, const std\+::string \&password, const std\+::string \&name) const override
+\begin{DoxyCompactList}\small\item\em Creates a new wallet. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{Wallet}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory_a3f8d821da16113ecc27c2bfd9470ab08}{Open\+Wallet}} (const std\+::string \&path, const std\+::string \&password) const override
+\begin{DoxyCompactList}\small\item\em Opens an existing wallet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory}{neo\+::wallets\+::\+Wallet\+Factory}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_a4b00e8fc1a9ea91658fca34ef5f79347}{\texorpdfstring{$\sim$}{\string~}\+Wallet\+Factory}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory}{NEP6\+Wallet\+Factory}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory_a1ac22eff7f9a3f37cb735ef73c1f211b}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets the singleton instance of the \doxylink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory}{NEP6\+Wallet\+Factory}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Factory for creating NEP6 wallets. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory_adc2258e346289f04034dff38a51ce7ba}\index{neo::wallets::nep6::NEP6WalletFactory@{neo::wallets::nep6::NEP6WalletFactory}!CanHandle@{CanHandle}}
+\index{CanHandle@{CanHandle}!neo::wallets::nep6::NEP6WalletFactory@{neo::wallets::nep6::NEP6WalletFactory}}
+\doxysubsubsection{\texorpdfstring{CanHandle()}{CanHandle()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory_adc2258e346289f04034dff38a51ce7ba} 
+bool neo\+::wallets\+::nep6\+::\+NEP6\+Wallet\+Factory\+::\+Can\+Handle (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Checks if the factory can handle the specified path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the factory can handle the path, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_abac6194b1ae4fbff09e236bb6ab38179}{neo\+::wallets\+::\+Wallet\+Factory}}.
+
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory_a49ba758fd1da6e79cd40d223cfe1a1aa}\index{neo::wallets::nep6::NEP6WalletFactory@{neo::wallets::nep6::NEP6WalletFactory}!CreateWallet@{CreateWallet}}
+\index{CreateWallet@{CreateWallet}!neo::wallets::nep6::NEP6WalletFactory@{neo::wallets::nep6::NEP6WalletFactory}}
+\doxysubsubsection{\texorpdfstring{CreateWallet()}{CreateWallet()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory_a49ba758fd1da6e79cd40d223cfe1a1aa} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{Wallet}} $>$ neo\+::wallets\+::nep6\+::\+NEP6\+Wallet\+Factory\+::\+Create\+Wallet (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{, }\item[{const std\+::string \&}]{password}{, }\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Creates a new wallet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path. \\
+\hline
+{\em password} & The password. \\
+\hline
+{\em name} & The name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new wallet. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_a4cd447c2b24414ca8a1712dd0ddae48b}{neo\+::wallets\+::\+Wallet\+Factory}}.
+
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory_a1ac22eff7f9a3f37cb735ef73c1f211b}\index{neo::wallets::nep6::NEP6WalletFactory@{neo::wallets::nep6::NEP6WalletFactory}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::wallets::nep6::NEP6WalletFactory@{neo::wallets::nep6::NEP6WalletFactory}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory_a1ac22eff7f9a3f37cb735ef73c1f211b} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory}{NEP6\+Wallet\+Factory}} $>$ neo\+::wallets\+::nep6\+::\+NEP6\+Wallet\+Factory\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the singleton instance of the \doxylink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory}{NEP6\+Wallet\+Factory}. 
+
+\begin{DoxyReturn}{Returns}
+The singleton instance. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory_a3f8d821da16113ecc27c2bfd9470ab08}\index{neo::wallets::nep6::NEP6WalletFactory@{neo::wallets::nep6::NEP6WalletFactory}!OpenWallet@{OpenWallet}}
+\index{OpenWallet@{OpenWallet}!neo::wallets::nep6::NEP6WalletFactory@{neo::wallets::nep6::NEP6WalletFactory}}
+\doxysubsubsection{\texorpdfstring{OpenWallet()}{OpenWallet()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_factory_a3f8d821da16113ecc27c2bfd9470ab08} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{Wallet}} $>$ neo\+::wallets\+::nep6\+::\+NEP6\+Wallet\+Factory\+::\+Open\+Wallet (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{, }\item[{const std\+::string \&}]{password}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Opens an existing wallet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path. \\
+\hline
+{\em password} & The password. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The opened wallet. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_a0877e12449ee4965a9631db760f4d95e}{neo\+::wallets\+::\+Wallet\+Factory}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/wallets/nep6/\mbox{\hyperlink{nep6__wallet__factory_8h}{nep6\+\_\+wallet\+\_\+factory.\+h}}\item 
+src/wallets/nep6/\mbox{\hyperlink{nep6__wallet__factory_8cpp}{nep6\+\_\+wallet\+\_\+factory.\+cpp}}\end{DoxyCompactItemize}

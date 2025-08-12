@@ -1,0 +1,573 @@
+\doxysection{neo\+::network Namespace Reference}
+\hypertarget{namespaceneo_1_1network}{}\label{namespaceneo_1_1network}\index{neo::network@{neo::network}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p}{p2p}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1network_1_1payloads}{payloads}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits}{Connection\+Limits}}
+\begin{DoxyCompactList}\small\item\em Connection limits manager. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{Connection\+Pool}}
+\begin{DoxyCompactList}\small\item\em Connection pool for managing network connections. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector}{Inventory\+Vector}}
+\begin{DoxyCompactList}\small\item\em Represents an inventory vector used in network messages. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}}
+\begin{DoxyCompactList}\small\item\em Represents an IP address. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1_i_payload}{IPayload}}
+\begin{DoxyCompactList}\small\item\em Interface for message payloads. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}}
+\begin{DoxyCompactList}\small\item\em Represents an IP endpoint (address and port). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}}
+\begin{DoxyCompactList}\small\item\em Represents a network address. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer}{P2\+PPeer}}
+\begin{DoxyCompactList}\small\item\em Represents a P2P peer. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server}{P2\+PServer}}
+\begin{DoxyCompactList}\small\item\em Represents a P2P server. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service}{Peer\+Discovery\+Service}}
+\begin{DoxyCompactList}\small\item\em Represents a peer discovery service that manages known peers and connection attempts. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1_tcp_client}{Tcp\+Client}}
+\begin{DoxyCompactList}\small\item\em Represents a TCP client. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection}{Tcp\+Connection}}
+\begin{DoxyCompactList}\small\item\em Represents a TCP connection. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server}{Tcp\+Server}}
+\begin{DoxyCompactList}\small\item\em Represents a TCP server. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue}{Thread\+Safe\+Queue}}
+\begin{DoxyCompactList}\small\item\em Thread-\/safe queue for messages. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager}{Timeout\+Manager}}
+\begin{DoxyCompactList}\small\item\em Connection timeout manager. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p}{UPnP}}
+\begin{DoxyCompactList}\small\item\em Provides methods for interacting with \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} devices. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{Inventory\+Type}} \+: uint8\+\_\+t \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3da1b0ffaae3973401f71cd000ab9f7856e}{Transaction}} = 0x2b
+, \mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3da869036c9d97cf6593c6f1c2ccfd99a49}{TX}} = 0x2b
+, \mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3dae1e4c8c9ccd9fc39c391da4bcd093fb2}{Block}} = 0x2c
+, \mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3dacb9e3624404af6e2ec52e3a39d5358a7}{Extensible}} = 0x2e
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3dac7c29966cedca22d62bc4815410b8f69}{Consensus}} = 0x\+E0
+ \}
+\begin{DoxyCompactList}\small\item\em Represents an inventory type. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{Message\+Command}} \+: uint8\+\_\+t \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a34b6cd75171affba6957e308dcbd92be}{Version}} = 0x00
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a3bda726d477920f8a3d52d09c5c588a1}{Verack}} = 0x01
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a88588f7d078d9191f52db8b88f917a22}{Get\+Addr}} = 0x10
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a3649a5e29ad648f3cfe3eea1a93d2f78}{Addr}} = 0x11
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ab85815d04cec053ce6deb8021f2df1b8}{Ping}} = 0x18
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a4d94412495a32342e1b8c78f7960f2bc}{Pong}} = 0x19
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602abbba311057055f8d35d240e4d8d603df}{Get\+Headers}} = 0x20
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a883d7615c4d2de3fa1218f1298c46d0e}{Headers}} = 0x21
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ac88aa5b0f384e6cc590ff0b587fb0358}{Get\+Blocks}} = 0x24
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a2046ead0bf60e2131e75f7f911503d62}{Mempool}} = 0x25
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602aa7e871520a392b978d3c9e6344c4407f}{Inv}} = 0x27
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a52600e5be768512cc215866649a5eee8}{Get\+Data}} = 0x28
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a6fe46cee0f158e1aefc8eb0ffd4fce46}{Get\+Block\+By\+Index}} = 0x29
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a38c300f4fc9ce8a77aad4a30de05cad8}{Not\+Found}} = 0x2a
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a1b0ffaae3973401f71cd000ab9f7856e}{Transaction}} = 0x2b
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ae1e4c8c9ccd9fc39c391da4bcd093fb2}{Block}} = 0x2c
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602acb9e3624404af6e2ec52e3a39d5358a7}{Extensible}} = 0x2e
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ad98ac12774fca5c3cbaffe276840c55f}{Reject}} = 0x2f
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a9952d795cc94fece435e61bf2fd3efc1}{Filter\+Load}} = 0x30
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ac10019fc11a0669023b2aaa0ceceaca1}{Filter\+Add}} = 0x31
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a9710a80c646e2276cd3965b95b369623}{Filter\+Clear}} = 0x32
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602abc8f486cdfb0c498d4d4c4fa5ce4b692}{Merkle\+Block}} = 0x38
+, \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ab92071d61c88498171928745ca53078b}{Alert}} = 0x40
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration of P2P message commands. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}} \+: uint8\+\_\+t \{ \mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59a6adf97f83acf6453d4a6a4b1070f3754}{None}} = 0x00
+, \mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59a4d602abc0c0f2f7c1a5156d964517e4e}{Compressed}} = 0x01
+ \}
+\begin{DoxyCompactList}\small\item\em Represents the flags of a message. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ff}{Payload\+Type}} \+: uint8\+\_\+t \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa34b6cd75171affba6957e308dcbd92be}{Version}} = 0x00
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa3bda726d477920f8a3d52d09c5c588a1}{Verack}} = 0x01
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa88588f7d078d9191f52db8b88f917a22}{Get\+Addr}} = 0x10
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa3649a5e29ad648f3cfe3eea1a93d2f78}{Addr}} = 0x11
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffab85815d04cec053ce6deb8021f2df1b8}{Ping}} = 0x18
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa4d94412495a32342e1b8c78f7960f2bc}{Pong}} = 0x19
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffabbba311057055f8d35d240e4d8d603df}{Get\+Headers}} = 0x20
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa883d7615c4d2de3fa1218f1298c46d0e}{Headers}} = 0x21
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffac88aa5b0f384e6cc590ff0b587fb0358}{Get\+Blocks}} = 0x24
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa2046ead0bf60e2131e75f7f911503d62}{Mempool}} = 0x25
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa4d604dd8f008145471dc845683399189}{Inventory}} = 0x27
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa52600e5be768512cc215866649a5eee8}{Get\+Data}} = 0x28
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa6fe46cee0f158e1aefc8eb0ffd4fce46}{Get\+Block\+By\+Index}} = 0x29
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa38c300f4fc9ce8a77aad4a30de05cad8}{Not\+Found}} = 0x2a
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa1b0ffaae3973401f71cd000ab9f7856e}{Transaction}} = 0x2b
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffae1e4c8c9ccd9fc39c391da4bcd093fb2}{Block}} = 0x2c
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffac7c29966cedca22d62bc4815410b8f69}{Consensus}} = 0x2d
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffacb9e3624404af6e2ec52e3a39d5358a7}{Extensible}} = 0x2e
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffad98ac12774fca5c3cbaffe276840c55f}{Reject}} = 0x2f
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa9952d795cc94fece435e61bf2fd3efc1}{Filter\+Load}} = 0x30
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffac10019fc11a0669023b2aaa0ceceaca1}{Filter\+Add}} = 0x31
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa9710a80c646e2276cd3965b95b369623}{Filter\+Clear}} = 0x32
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffabc8f486cdfb0c498d4d4c4fa5ce4b692}{Merkle\+Block}} = 0x38
+, \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffab92071d61c88498171928745ca53078b}{Alert}} = 0x40
+ \}
+\begin{DoxyCompactList}\small\item\em Represents the type of a payload. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{namespaceneo_1_1network_ae677732a7587ff182fd6c3610a9af7ed}{Message\+Command\+To\+String}} (\mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{Message\+Command}} command)
+\begin{DoxyCompactList}\small\item\em Convert \doxylink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{Message\+Command} to string representation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{Message\+Command}} \mbox{\hyperlink{namespaceneo_1_1network_a1df4d2e3ed454d26ac81a22d6d219a4c}{String\+To\+Message\+Command}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Parse string to \doxylink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{Message\+Command}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{namespaceneo_1_1network_a55db484499db1c03b214a1b0fc3577bf}{Get\+Command\+Name}} (\mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{Message\+Command}} command)
+\begin{DoxyCompactList}\small\item\em Get the command name as a fixed-\/length string (12 bytes) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceneo_1_1network_aef0661d957d693972520cf1759cbdb33}{Has\+Flag}} (\mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}} flags, \mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}} flag)
+\begin{DoxyCompactList}\small\item\em Checks if a flags value has a specific flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}} \mbox{\hyperlink{namespaceneo_1_1network_af941e270ca79e7ed91758b2cb15cf512}{Set\+Flag}} (\mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}} flags, \mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}} flag)
+\begin{DoxyCompactList}\small\item\em Sets a flag in a flags value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}} \mbox{\hyperlink{namespaceneo_1_1network_a7fa793c35411b8f824c994901608b34e}{Clear\+Flag}} (\mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}} flags, \mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}} flag)
+\begin{DoxyCompactList}\small\item\em Clears a flag in a flags value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr auto \mbox{\hyperlink{namespaceneo_1_1network_a24da996f46bae7861e230f3c96d9291d}{DISCOVERY\+\_\+\+INTERVAL}} = 5min
+\item 
+static constexpr auto \mbox{\hyperlink{namespaceneo_1_1network_afeae6a9ceb66de8215baccf6d6483176}{PEER\+\_\+\+EXPIRATION}} = 7 \texorpdfstring{$\ast$}{*} 24h
+\item 
+static constexpr auto \mbox{\hyperlink{namespaceneo_1_1network_ad799b47dd05a59a17130cbea9111b6c3}{RECONNECT\+\_\+\+DELAY}} = 5min
+\item 
+static constexpr auto \mbox{\hyperlink{namespaceneo_1_1network_a0719e7529ba6a0b39456a9bf762edcc2}{MAX\+\_\+\+FAILED\+\_\+\+ATTEMPTS}} = 5
+\end{DoxyCompactItemize}
+
+
+\label{doc-enum-members}
+\Hypertarget{namespaceneo_1_1network_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}\index{neo::network@{neo::network}!InventoryType@{InventoryType}}
+\index{InventoryType@{InventoryType}!neo::network@{neo::network}}
+\doxysubsubsection{\texorpdfstring{InventoryType}{InventoryType}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d} 
+enum class \mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{neo\+::network\+::\+Inventory\+Type}} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Represents an inventory type. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Transaction@{Transaction}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Transaction@{Transaction}}}\Hypertarget{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3da1b0ffaae3973401f71cd000ab9f7856e}\label{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3da1b0ffaae3973401f71cd000ab9f7856e} 
+Transaction&Transaction inventory. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TX@{TX}!neo::network@{neo::network}}\index{neo::network@{neo::network}!TX@{TX}}}\Hypertarget{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3da869036c9d97cf6593c6f1c2ccfd99a49}\label{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3da869036c9d97cf6593c6f1c2ccfd99a49} 
+TX&Alias for Transaction (backward compatibility). \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Block@{Block}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Block@{Block}}}\Hypertarget{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3dae1e4c8c9ccd9fc39c391da4bcd093fb2}\label{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3dae1e4c8c9ccd9fc39c391da4bcd093fb2} 
+Block&Block inventory. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Extensible@{Extensible}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Extensible@{Extensible}}}\Hypertarget{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3dacb9e3624404af6e2ec52e3a39d5358a7}\label{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3dacb9e3624404af6e2ec52e3a39d5358a7} 
+Extensible&Extensible payload inventory. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Consensus@{Consensus}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Consensus@{Consensus}}}\Hypertarget{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3dac7c29966cedca22d62bc4815410b8f69}\label{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3dac7c29966cedca22d62bc4815410b8f69} 
+Consensus&Consensus inventory (legacy). \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}\index{neo::network@{neo::network}!MessageCommand@{MessageCommand}}
+\index{MessageCommand@{MessageCommand}!neo::network@{neo::network}}
+\doxysubsubsection{\texorpdfstring{MessageCommand}{MessageCommand}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602} 
+enum class \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{neo\+::network\+::\+Message\+Command}} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Enumeration of P2P message commands. 
+
+These commands define the types of messages that can be sent between Neo nodes in the P2P network.
+
+Values match Neo N3 protocol specification. \begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Version@{Version}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Version@{Version}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a34b6cd75171affba6957e308dcbd92be}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a34b6cd75171affba6957e308dcbd92be} 
+Version&Version message -\/ initial handshake. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Verack@{Verack}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Verack@{Verack}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a3bda726d477920f8a3d52d09c5c588a1}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a3bda726d477920f8a3d52d09c5c588a1} 
+Verack&Version acknowledgment. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GetAddr@{GetAddr}!neo::network@{neo::network}}\index{neo::network@{neo::network}!GetAddr@{GetAddr}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a88588f7d078d9191f52db8b88f917a22}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a88588f7d078d9191f52db8b88f917a22} 
+Get\+Addr&Request for peer addresses. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Addr@{Addr}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Addr@{Addr}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a3649a5e29ad648f3cfe3eea1a93d2f78}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a3649a5e29ad648f3cfe3eea1a93d2f78} 
+Addr&Response with peer addresses. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Ping@{Ping}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Ping@{Ping}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ab85815d04cec053ce6deb8021f2df1b8}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ab85815d04cec053ce6deb8021f2df1b8} 
+Ping&Ping message for keepalive. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Pong@{Pong}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Pong@{Pong}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a4d94412495a32342e1b8c78f7960f2bc}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a4d94412495a32342e1b8c78f7960f2bc} 
+Pong&Pong response to ping. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GetHeaders@{GetHeaders}!neo::network@{neo::network}}\index{neo::network@{neo::network}!GetHeaders@{GetHeaders}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602abbba311057055f8d35d240e4d8d603df}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602abbba311057055f8d35d240e4d8d603df} 
+Get\+Headers&Get block headers request. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Headers@{Headers}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Headers@{Headers}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a883d7615c4d2de3fa1218f1298c46d0e}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a883d7615c4d2de3fa1218f1298c46d0e} 
+Headers&Block headers response. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GetBlocks@{GetBlocks}!neo::network@{neo::network}}\index{neo::network@{neo::network}!GetBlocks@{GetBlocks}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ac88aa5b0f384e6cc590ff0b587fb0358}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ac88aa5b0f384e6cc590ff0b587fb0358} 
+Get\+Blocks&Get blocks request. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mempool@{Mempool}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Mempool@{Mempool}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a2046ead0bf60e2131e75f7f911503d62}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a2046ead0bf60e2131e75f7f911503d62} 
+Mempool&Request for memory pool. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Inv@{Inv}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Inv@{Inv}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602aa7e871520a392b978d3c9e6344c4407f}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602aa7e871520a392b978d3c9e6344c4407f} 
+Inv&Inventory message (blocks/transactions) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GetData@{GetData}!neo::network@{neo::network}}\index{neo::network@{neo::network}!GetData@{GetData}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a52600e5be768512cc215866649a5eee8}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a52600e5be768512cc215866649a5eee8} 
+Get\+Data&Get data request. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GetBlockByIndex@{GetBlockByIndex}!neo::network@{neo::network}}\index{neo::network@{neo::network}!GetBlockByIndex@{GetBlockByIndex}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a6fe46cee0f158e1aefc8eb0ffd4fce46}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a6fe46cee0f158e1aefc8eb0ffd4fce46} 
+Get\+Block\+By\+Index&Get block by index request. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NotFound@{NotFound}!neo::network@{neo::network}}\index{neo::network@{neo::network}!NotFound@{NotFound}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a38c300f4fc9ce8a77aad4a30de05cad8}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a38c300f4fc9ce8a77aad4a30de05cad8} 
+Not\+Found&Not found response. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Transaction@{Transaction}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Transaction@{Transaction}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a1b0ffaae3973401f71cd000ab9f7856e}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a1b0ffaae3973401f71cd000ab9f7856e} 
+Transaction&Transaction data. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Block@{Block}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Block@{Block}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ae1e4c8c9ccd9fc39c391da4bcd093fb2}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ae1e4c8c9ccd9fc39c391da4bcd093fb2} 
+Block&Block data. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Extensible@{Extensible}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Extensible@{Extensible}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602acb9e3624404af6e2ec52e3a39d5358a7}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602acb9e3624404af6e2ec52e3a39d5358a7} 
+Extensible&Extensible payload (consensus, etc.) \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Reject@{Reject}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Reject@{Reject}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ad98ac12774fca5c3cbaffe276840c55f}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ad98ac12774fca5c3cbaffe276840c55f} 
+Reject&Reject message. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FilterLoad@{FilterLoad}!neo::network@{neo::network}}\index{neo::network@{neo::network}!FilterLoad@{FilterLoad}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a9952d795cc94fece435e61bf2fd3efc1}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a9952d795cc94fece435e61bf2fd3efc1} 
+Filter\+Load&Filter load message. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FilterAdd@{FilterAdd}!neo::network@{neo::network}}\index{neo::network@{neo::network}!FilterAdd@{FilterAdd}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ac10019fc11a0669023b2aaa0ceceaca1}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ac10019fc11a0669023b2aaa0ceceaca1} 
+Filter\+Add&Filter add message. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FilterClear@{FilterClear}!neo::network@{neo::network}}\index{neo::network@{neo::network}!FilterClear@{FilterClear}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a9710a80c646e2276cd3965b95b369623}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a9710a80c646e2276cd3965b95b369623} 
+Filter\+Clear&Filter clear message. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MerkleBlock@{MerkleBlock}!neo::network@{neo::network}}\index{neo::network@{neo::network}!MerkleBlock@{MerkleBlock}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602abc8f486cdfb0c498d4d4c4fa5ce4b692}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602abc8f486cdfb0c498d4d4c4fa5ce4b692} 
+Merkle\+Block&Merkle block message. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Alert@{Alert}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Alert@{Alert}}}\Hypertarget{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ab92071d61c88498171928745ca53078b}\label{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ab92071d61c88498171928745ca53078b} 
+Alert&Alert message. \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}\index{neo::network@{neo::network}!MessageFlags@{MessageFlags}}
+\index{MessageFlags@{MessageFlags}!neo::network@{neo::network}}
+\doxysubsubsection{\texorpdfstring{MessageFlags}{MessageFlags}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59} 
+enum class \mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{neo\+::network\+::\+Message\+Flags}} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Represents the flags of a message. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{None@{None}!neo::network@{neo::network}}\index{neo::network@{neo::network}!None@{None}}}\Hypertarget{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59a6adf97f83acf6453d4a6a4b1070f3754}\label{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59a6adf97f83acf6453d4a6a4b1070f3754} 
+None&No flags. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Compressed@{Compressed}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Compressed@{Compressed}}}\Hypertarget{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59a4d602abc0c0f2f7c1a5156d964517e4e}\label{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59a4d602abc0c0f2f7c1a5156d964517e4e} 
+Compressed&The message is compressed. \\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ff}\index{neo::network@{neo::network}!PayloadType@{PayloadType}}
+\index{PayloadType@{PayloadType}!neo::network@{neo::network}}
+\doxysubsubsection{\texorpdfstring{PayloadType}{PayloadType}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ff} 
+enum class \mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ff}{neo\+::network\+::\+Payload\+Type}} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Represents the type of a payload. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Version@{Version}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Version@{Version}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa34b6cd75171affba6957e308dcbd92be}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa34b6cd75171affba6957e308dcbd92be} 
+Version&Version payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Verack@{Verack}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Verack@{Verack}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa3bda726d477920f8a3d52d09c5c588a1}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa3bda726d477920f8a3d52d09c5c588a1} 
+Verack&Verack payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GetAddr@{GetAddr}!neo::network@{neo::network}}\index{neo::network@{neo::network}!GetAddr@{GetAddr}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa88588f7d078d9191f52db8b88f917a22}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa88588f7d078d9191f52db8b88f917a22} 
+Get\+Addr&Get\+Addr payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Addr@{Addr}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Addr@{Addr}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa3649a5e29ad648f3cfe3eea1a93d2f78}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa3649a5e29ad648f3cfe3eea1a93d2f78} 
+Addr&Addr payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Ping@{Ping}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Ping@{Ping}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffab85815d04cec053ce6deb8021f2df1b8}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffab85815d04cec053ce6deb8021f2df1b8} 
+Ping&Ping payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Pong@{Pong}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Pong@{Pong}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa4d94412495a32342e1b8c78f7960f2bc}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa4d94412495a32342e1b8c78f7960f2bc} 
+Pong&Pong payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GetHeaders@{GetHeaders}!neo::network@{neo::network}}\index{neo::network@{neo::network}!GetHeaders@{GetHeaders}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffabbba311057055f8d35d240e4d8d603df}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffabbba311057055f8d35d240e4d8d603df} 
+Get\+Headers&Get\+Headers payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Headers@{Headers}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Headers@{Headers}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa883d7615c4d2de3fa1218f1298c46d0e}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa883d7615c4d2de3fa1218f1298c46d0e} 
+Headers&Headers payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GetBlocks@{GetBlocks}!neo::network@{neo::network}}\index{neo::network@{neo::network}!GetBlocks@{GetBlocks}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffac88aa5b0f384e6cc590ff0b587fb0358}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffac88aa5b0f384e6cc590ff0b587fb0358} 
+Get\+Blocks&Get\+Blocks payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Mempool@{Mempool}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Mempool@{Mempool}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa2046ead0bf60e2131e75f7f911503d62}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa2046ead0bf60e2131e75f7f911503d62} 
+Mempool&Mempool payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Inventory@{Inventory}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Inventory@{Inventory}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa4d604dd8f008145471dc845683399189}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa4d604dd8f008145471dc845683399189} 
+Inventory&Inventory payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GetData@{GetData}!neo::network@{neo::network}}\index{neo::network@{neo::network}!GetData@{GetData}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa52600e5be768512cc215866649a5eee8}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa52600e5be768512cc215866649a5eee8} 
+Get\+Data&Get\+Data payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{GetBlockByIndex@{GetBlockByIndex}!neo::network@{neo::network}}\index{neo::network@{neo::network}!GetBlockByIndex@{GetBlockByIndex}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa6fe46cee0f158e1aefc8eb0ffd4fce46}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa6fe46cee0f158e1aefc8eb0ffd4fce46} 
+Get\+Block\+By\+Index&Get\+Block\+By\+Index payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NotFound@{NotFound}!neo::network@{neo::network}}\index{neo::network@{neo::network}!NotFound@{NotFound}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa38c300f4fc9ce8a77aad4a30de05cad8}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa38c300f4fc9ce8a77aad4a30de05cad8} 
+Not\+Found&Not\+Found payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Transaction@{Transaction}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Transaction@{Transaction}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa1b0ffaae3973401f71cd000ab9f7856e}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa1b0ffaae3973401f71cd000ab9f7856e} 
+Transaction&Transaction payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Block@{Block}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Block@{Block}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffae1e4c8c9ccd9fc39c391da4bcd093fb2}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffae1e4c8c9ccd9fc39c391da4bcd093fb2} 
+Block&Block payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Consensus@{Consensus}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Consensus@{Consensus}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffac7c29966cedca22d62bc4815410b8f69}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffac7c29966cedca22d62bc4815410b8f69} 
+Consensus&Consensus payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Extensible@{Extensible}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Extensible@{Extensible}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffacb9e3624404af6e2ec52e3a39d5358a7}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffacb9e3624404af6e2ec52e3a39d5358a7} 
+Extensible&Extensible payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Reject@{Reject}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Reject@{Reject}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffad98ac12774fca5c3cbaffe276840c55f}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffad98ac12774fca5c3cbaffe276840c55f} 
+Reject&Reject payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FilterLoad@{FilterLoad}!neo::network@{neo::network}}\index{neo::network@{neo::network}!FilterLoad@{FilterLoad}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa9952d795cc94fece435e61bf2fd3efc1}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa9952d795cc94fece435e61bf2fd3efc1} 
+Filter\+Load&Filter\+Load payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FilterAdd@{FilterAdd}!neo::network@{neo::network}}\index{neo::network@{neo::network}!FilterAdd@{FilterAdd}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffac10019fc11a0669023b2aaa0ceceaca1}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffac10019fc11a0669023b2aaa0ceceaca1} 
+Filter\+Add&Filter\+Add payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{FilterClear@{FilterClear}!neo::network@{neo::network}}\index{neo::network@{neo::network}!FilterClear@{FilterClear}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa9710a80c646e2276cd3965b95b369623}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffa9710a80c646e2276cd3965b95b369623} 
+Filter\+Clear&Filter\+Clear payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MerkleBlock@{MerkleBlock}!neo::network@{neo::network}}\index{neo::network@{neo::network}!MerkleBlock@{MerkleBlock}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffabc8f486cdfb0c498d4d4c4fa5ce4b692}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffabc8f486cdfb0c498d4d4c4fa5ce4b692} 
+Merkle\+Block&Merkle\+Block payload. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Alert@{Alert}!neo::network@{neo::network}}\index{neo::network@{neo::network}!Alert@{Alert}}}\Hypertarget{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffab92071d61c88498171928745ca53078b}\label{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ffab92071d61c88498171928745ca53078b} 
+Alert&Alert payload. \\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-func-members}
+\Hypertarget{namespaceneo_1_1network_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceneo_1_1network_a7fa793c35411b8f824c994901608b34e}\index{neo::network@{neo::network}!ClearFlag@{ClearFlag}}
+\index{ClearFlag@{ClearFlag}!neo::network@{neo::network}}
+\doxysubsubsection{\texorpdfstring{ClearFlag()}{ClearFlag()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1network_a7fa793c35411b8f824c994901608b34e} 
+\mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}} neo\+::network\+::\+Clear\+Flag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}}}]{flags}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}}}]{flag}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears a flag in a flags value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flags} & The flags value. \\
+\hline
+{\em flag} & The flag to clear. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new flags value. 
+\end{DoxyReturn}
+\Hypertarget{namespaceneo_1_1network_a55db484499db1c03b214a1b0fc3577bf}\index{neo::network@{neo::network}!GetCommandName@{GetCommandName}}
+\index{GetCommandName@{GetCommandName}!neo::network@{neo::network}}
+\doxysubsubsection{\texorpdfstring{GetCommandName()}{GetCommandName()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1network_a55db484499db1c03b214a1b0fc3577bf} 
+std\+::string neo\+::network\+::\+Get\+Command\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{Message\+Command}}}]{command}{}\end{DoxyParamCaption})}
+
+
+
+Get the command name as a fixed-\/length string (12 bytes) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The command to get name for \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Fixed-\/length command name for network protocol 
+\end{DoxyReturn}
+\Hypertarget{namespaceneo_1_1network_aef0661d957d693972520cf1759cbdb33}\index{neo::network@{neo::network}!HasFlag@{HasFlag}}
+\index{HasFlag@{HasFlag}!neo::network@{neo::network}}
+\doxysubsubsection{\texorpdfstring{HasFlag()}{HasFlag()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1network_aef0661d957d693972520cf1759cbdb33} 
+bool neo\+::network\+::\+Has\+Flag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}}}]{flags}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}}}]{flag}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if a flags value has a specific flag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flags} & The flags value. \\
+\hline
+{\em flag} & The flag to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the flags value has the flag, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{namespaceneo_1_1network_ae677732a7587ff182fd6c3610a9af7ed}\index{neo::network@{neo::network}!MessageCommandToString@{MessageCommandToString}}
+\index{MessageCommandToString@{MessageCommandToString}!neo::network@{neo::network}}
+\doxysubsubsection{\texorpdfstring{MessageCommandToString()}{MessageCommandToString()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1network_ae677732a7587ff182fd6c3610a9af7ed} 
+std\+::string neo\+::network\+::\+Message\+Command\+To\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{Message\+Command}}}]{command}{}\end{DoxyParamCaption})}
+
+
+
+Convert \doxylink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{Message\+Command} to string representation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The command to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String representation of the command 
+\end{DoxyReturn}
+\Hypertarget{namespaceneo_1_1network_af941e270ca79e7ed91758b2cb15cf512}\index{neo::network@{neo::network}!SetFlag@{SetFlag}}
+\index{SetFlag@{SetFlag}!neo::network@{neo::network}}
+\doxysubsubsection{\texorpdfstring{SetFlag()}{SetFlag()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1network_af941e270ca79e7ed91758b2cb15cf512} 
+\mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}} neo\+::network\+::\+Set\+Flag (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}}}]{flags}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1network_ab880bcdbc972639dcf43a564e58fbd59}{Message\+Flags}}}]{flag}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets a flag in a flags value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flags} & The flags value. \\
+\hline
+{\em flag} & The flag to set. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new flags value. 
+\end{DoxyReturn}
+\Hypertarget{namespaceneo_1_1network_a1df4d2e3ed454d26ac81a22d6d219a4c}\index{neo::network@{neo::network}!StringToMessageCommand@{StringToMessageCommand}}
+\index{StringToMessageCommand@{StringToMessageCommand}!neo::network@{neo::network}}
+\doxysubsubsection{\texorpdfstring{StringToMessageCommand()}{StringToMessageCommand()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1network_a1df4d2e3ed454d26ac81a22d6d219a4c} 
+\mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{Message\+Command}} neo\+::network\+::\+String\+To\+Message\+Command (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})}
+
+
+
+Parse string to \doxylink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{Message\+Command}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & The string to parse \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The corresponding \doxylink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{Message\+Command} 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if string is not a valid command \\
+\hline
+\end{DoxyExceptions}
+
+
+\label{doc-var-members}
+\Hypertarget{namespaceneo_1_1network_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{namespaceneo_1_1network_a24da996f46bae7861e230f3c96d9291d}\index{neo::network@{neo::network}!DISCOVERY\_INTERVAL@{DISCOVERY\_INTERVAL}}
+\index{DISCOVERY\_INTERVAL@{DISCOVERY\_INTERVAL}!neo::network@{neo::network}}
+\doxysubsubsection{\texorpdfstring{DISCOVERY\_INTERVAL}{DISCOVERY\_INTERVAL}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1network_a24da996f46bae7861e230f3c96d9291d} 
+auto neo\+::network\+::\+DISCOVERY\+\_\+\+INTERVAL = 5min\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespaceneo_1_1network_a0719e7529ba6a0b39456a9bf762edcc2}\index{neo::network@{neo::network}!MAX\_FAILED\_ATTEMPTS@{MAX\_FAILED\_ATTEMPTS}}
+\index{MAX\_FAILED\_ATTEMPTS@{MAX\_FAILED\_ATTEMPTS}!neo::network@{neo::network}}
+\doxysubsubsection{\texorpdfstring{MAX\_FAILED\_ATTEMPTS}{MAX\_FAILED\_ATTEMPTS}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1network_a0719e7529ba6a0b39456a9bf762edcc2} 
+auto neo\+::network\+::\+MAX\+\_\+\+FAILED\+\_\+\+ATTEMPTS = 5\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespaceneo_1_1network_afeae6a9ceb66de8215baccf6d6483176}\index{neo::network@{neo::network}!PEER\_EXPIRATION@{PEER\_EXPIRATION}}
+\index{PEER\_EXPIRATION@{PEER\_EXPIRATION}!neo::network@{neo::network}}
+\doxysubsubsection{\texorpdfstring{PEER\_EXPIRATION}{PEER\_EXPIRATION}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1network_afeae6a9ceb66de8215baccf6d6483176} 
+auto neo\+::network\+::\+PEER\+\_\+\+EXPIRATION = 7 \texorpdfstring{$\ast$}{*} 24h\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{namespaceneo_1_1network_ad799b47dd05a59a17130cbea9111b6c3}\index{neo::network@{neo::network}!RECONNECT\_DELAY@{RECONNECT\_DELAY}}
+\index{RECONNECT\_DELAY@{RECONNECT\_DELAY}!neo::network@{neo::network}}
+\doxysubsubsection{\texorpdfstring{RECONNECT\_DELAY}{RECONNECT\_DELAY}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1network_ad799b47dd05a59a17130cbea9111b6c3} 
+auto neo\+::network\+::\+RECONNECT\+\_\+\+DELAY = 5min\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+

@@ -1,0 +1,45 @@
+\doxysection{include/neo/network/p2p/node\+\_\+capability\+\_\+types.h File Reference}
+\hypertarget{node__capability__types_8h}{}\label{node__capability__types_8h}\index{include/neo/network/p2p/node\_capability\_types.h@{include/neo/network/p2p/node\_capability\_types.h}}
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for node\+\_\+capability\+\_\+types.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1network}{neo\+::network}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p}{neo\+::network\+::p2p}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737b}{neo\+::network\+::p2p\+::\+Node\+Capability\+Type}} \+: uint8\+\_\+t \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737ba694c4ae81e346d37a0e071591a130162}{neo\+::network\+::p2p\+::\+Tcp\+Server}} = 0x01
+, \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737ba9a0207e1193a8ea2ac9b8e5d7226f5e4}{neo\+::network\+::p2p\+::\+Ws\+Server}} = 0x02
+, \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737ba3725f438bb2639f9d471960fec768616}{neo\+::network\+::p2p\+::\+Disable\+Compression}} = 0x03
+, \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737ba7736bb6027d0831de58f9bfada46ef9f}{neo\+::network\+::p2p\+::\+Full\+Node}} = 0x10
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737baaac29cf1df1302a9948e27d5166ac1c4}{neo\+::network\+::p2p\+::\+Archival\+Node}} = 0x11
+, \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737ba8d5aece9f988f64e3cc3e24154e0ed37}{neo\+::network\+::p2p\+::\+Extension0}} = 0xf0
+, \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737ba88183b946cc5f0e8c96b2e66e1c74a7e}{neo\+::network\+::p2p\+::\+Unknown}} = 0x\+FF
+ \}
+\begin{DoxyCompactList}\small\item\em Enumeration of node capability types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_aff1b6b12479e9aac349e2765dd3bbc71}{neo\+::network\+::p2p\+::\+Node\+Capability\+Type\+To\+String}} (\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737b}{Node\+Capability\+Type}} capability)
+\begin{DoxyCompactList}\small\item\em Convert \doxylink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737b}{Node\+Capability\+Type} to string representation. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737b}{Node\+Capability\+Type}} \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a111305a99a4bea6aa531a8d7d63d3241}{neo\+::network\+::p2p\+::\+String\+To\+Node\+Capability\+Type}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Parse string to \doxylink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737b}{Node\+Capability\+Type}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a2a8efaaec89e933629398a222295e5bc}{neo\+::network\+::p2p\+::\+Has\+Capability}} (const std\+::vector$<$ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737b}{Node\+Capability\+Type}} $>$ \&capabilities, \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737b}{Node\+Capability\+Type}} capability)
+\begin{DoxyCompactList}\small\item\em Check if a capability is set in a capabilities vector. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a075c951ede1dd27366d7b1437271d829}{neo\+::network\+::p2p\+::\+Capabilities\+To\+Bitmask}} (const std\+::vector$<$ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737b}{Node\+Capability\+Type}} $>$ \&capabilities)
+\begin{DoxyCompactList}\small\item\em Combine multiple capabilities into a bitmask. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737b}{Node\+Capability\+Type}} $>$ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a45c7c72db2722b4b8e2bc1a39299cd7e}{neo\+::network\+::p2p\+::\+Bitmask\+To\+Capabilities}} (uint32\+\_\+t bitmask)
+\begin{DoxyCompactList}\small\item\em Extract capabilities from a bitmask. \end{DoxyCompactList}\end{DoxyCompactItemize}

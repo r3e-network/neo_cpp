@@ -1,0 +1,38 @@
+\doxysection{server\+\_\+capabilities.\+h}
+\hypertarget{server__capabilities_8h_source}{}\label{server__capabilities_8h_source}\index{include/neo/network/p2p/server\_capabilities.h@{include/neo/network/p2p/server\_capabilities.h}}
+\mbox{\hyperlink{server__capabilities_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p}{neo::network::p2p}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability}{ServerCapability}}\ :\ uint32\_t}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a806f27dd59399fa07bb0e0d17c3b172ea6adf97f83acf6453d4a6a4b1070f3754}{None}}\ =\ 0,}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737ba7736bb6027d0831de58f9bfada46ef9f}{FullNode}}\ =\ 1,}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a72fb3e827a7fdfe22cda766f67bc94cbac7ff9e5b810ed0f95c73a34def1ab31e}{StateService}}\ =\ 0b10,}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a72fb3e827a7fdfe22cda766f67bc94cba41fb08bf09bc0a510b3e48002647a368}{TransactionService}}\ =\ 0b100}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00039\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a2a8efaaec89e933629398a222295e5bc}{HasCapability}}(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability}{ServerCapability}}\ capabilities,\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability}{ServerCapability}}\ capability)}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(capabilities)\ \&\ \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(capability))\ !=\ 0;}
+\DoxyCodeLine{00042\ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00050\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability}{ServerCapability}}\ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_ab2c61317ab4c88fa58e722a49ac5c60e}{SetCapability}}(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability}{ServerCapability}}\ capabilities,\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability}{ServerCapability}}\ capability)}
+\DoxyCodeLine{00051\ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability}{ServerCapability}}\textcolor{keyword}{>}(\textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(capabilities)\ |\ \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(capability));}
+\DoxyCodeLine{00053\ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00061\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability}{ServerCapability}}\ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a0bd4bef207501d5e02567b0beb6958b5}{ClearCapability}}(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability}{ServerCapability}}\ capabilities,\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability}{ServerCapability}}\ capability)}
+\DoxyCodeLine{00062\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability}{ServerCapability}}\textcolor{keyword}{>}(\textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(capabilities)\ \&\ \string~static\_cast<uint32\_t>(capability));}
+\DoxyCodeLine{00064\ \}}
+\DoxyCodeLine{00065\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p}}
+
+\end{DoxyCode}

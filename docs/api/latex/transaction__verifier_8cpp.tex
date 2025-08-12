@@ -1,0 +1,114 @@
+\doxysection{src/smartcontract/transaction\+\_\+verifier.cpp File Reference}
+\hypertarget{transaction__verifier_8cpp}{}\label{transaction__verifier_8cpp}\index{src/smartcontract/transaction\_verifier.cpp@{src/smartcontract/transaction\_verifier.cpp}}
+{\ttfamily \#include $<$neo/core/protocol\+\_\+constants.\+h$>$}\newline
+{\ttfamily \#include $<$neo/cryptography/crypto.\+h$>$}\newline
+{\ttfamily \#include $<$neo/cryptography/ecc/ecpoint.\+h$>$}\newline
+{\ttfamily \#include $<$neo/cryptography/hash.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/binary\+\_\+reader.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/json.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/memory\+\_\+stream.\+h$>$}\newline
+{\ttfamily \#include $<$neo/ledger/signer.\+h$>$}\newline
+{\ttfamily \#include $<$neo/ledger/witness.\+h$>$}\newline
+{\ttfamily \#include $<$neo/logging/logger.\+h$>$}\newline
+{\ttfamily \#include $<$neo/protocol\+\_\+settings.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/application\+\_\+engine.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/system\+\_\+call\+\_\+exception.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/transaction\+\_\+verifier.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/trigger\+\_\+type.\+h$>$}\newline
+{\ttfamily \#include $<$neo/vm/vm\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+Include dependency graph for transaction\+\_\+verifier.\+cpp\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1smartcontract_1_1_verification_cache}{neo\+::smartcontract\+::\+Verification\+Cache}}
+\item 
+class \mbox{\hyperlink{classneo_1_1smartcontract_1_1_verification_counter}{neo\+::smartcontract\+::\+Verification\+Counter}}
+\item 
+class \mbox{\hyperlink{classneo_1_1smartcontract_1_1_verification_histogram}{neo\+::smartcontract\+::\+Verification\+Histogram}}
+\item 
+struct \mbox{\hyperlink{structneo_1_1smartcontract_1_1_multi_sig_params}{neo\+::smartcontract\+::\+Multi\+Sig\+Params}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1smartcontract}{neo\+::smartcontract}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{transaction__verifier_8cpp_ac06cfc686322558f590c50eab8622ebd}{LOG\+\_\+\+DEBUG}}(fmt, ...)
+\item 
+\#define \mbox{\hyperlink{transaction__verifier_8cpp_ae69d735f8291bd2aff230fe6ffb4d4b3}{LOG\+\_\+\+INFO}}(fmt, ...)
+\item 
+\#define \mbox{\hyperlink{transaction__verifier_8cpp_afde44945335adc0c0ae2986fea13438f}{LOG\+\_\+\+WARNING}}(fmt, ...)
+\item 
+\#define \mbox{\hyperlink{transaction__verifier_8cpp_ae6fc70e87e424e7083c63696b8fb9e78}{LOG\+\_\+\+ERROR}}(fmt, ...)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structneo_1_1smartcontract_1_1_multi_sig_params}{Multi\+Sig\+Params}} \mbox{\hyperlink{namespaceneo_1_1smartcontract_a1fea1152bd2034b21f06406e4a815ba7}{neo\+::smartcontract\+::\+Parse\+Multi\+Signature\+Params}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&script)
+\item 
+static \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{Verification\+Result}} \mbox{\hyperlink{namespaceneo_1_1smartcontract_aab4ddf790ae94f2b5c55d662f4fedb13}{neo\+::smartcontract\+::\+Verify\+Multi\+Signature\+Contract}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&transaction, const \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} \&witness, const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&context)
+\item 
+static \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{Verification\+Result}} \mbox{\hyperlink{namespaceneo_1_1smartcontract_a63513e40452bcd7ec05deb7fb4c9720a}{neo\+::smartcontract\+::\+Verify\+Script\+Contract}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&transaction, const \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} \&witness, const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&context)
+\item 
+static bool \mbox{\hyperlink{namespaceneo_1_1smartcontract_a1138ff540300af4c976ce125904db8bb}{neo\+::smartcontract\+::\+Verify\+Witness\+Scope}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&transaction, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&signer, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{transaction__verifier_8cpp_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{transaction__verifier_8cpp_ac06cfc686322558f590c50eab8622ebd}\index{transaction\_verifier.cpp@{transaction\_verifier.cpp}!LOG\_DEBUG@{LOG\_DEBUG}}
+\index{LOG\_DEBUG@{LOG\_DEBUG}!transaction\_verifier.cpp@{transaction\_verifier.cpp}}
+\doxysubsubsection{\texorpdfstring{LOG\_DEBUG}{LOG\_DEBUG}}
+{\footnotesize\ttfamily \label{transaction__verifier_8cpp_ac06cfc686322558f590c50eab8622ebd} 
+\#define LOG\+\_\+\+DEBUG(\begin{DoxyParamCaption}\item[{}]{fmt}{, }\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((void)0)}
+
+\end{DoxyCode}
+\Hypertarget{transaction__verifier_8cpp_ae6fc70e87e424e7083c63696b8fb9e78}\index{transaction\_verifier.cpp@{transaction\_verifier.cpp}!LOG\_ERROR@{LOG\_ERROR}}
+\index{LOG\_ERROR@{LOG\_ERROR}!transaction\_verifier.cpp@{transaction\_verifier.cpp}}
+\doxysubsubsection{\texorpdfstring{LOG\_ERROR}{LOG\_ERROR}}
+{\footnotesize\ttfamily \label{transaction__verifier_8cpp_ae6fc70e87e424e7083c63696b8fb9e78} 
+\#define LOG\+\_\+\+ERROR(\begin{DoxyParamCaption}\item[{}]{fmt}{, }\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((void)0)}
+
+\end{DoxyCode}
+\Hypertarget{transaction__verifier_8cpp_ae69d735f8291bd2aff230fe6ffb4d4b3}\index{transaction\_verifier.cpp@{transaction\_verifier.cpp}!LOG\_INFO@{LOG\_INFO}}
+\index{LOG\_INFO@{LOG\_INFO}!transaction\_verifier.cpp@{transaction\_verifier.cpp}}
+\doxysubsubsection{\texorpdfstring{LOG\_INFO}{LOG\_INFO}}
+{\footnotesize\ttfamily \label{transaction__verifier_8cpp_ae69d735f8291bd2aff230fe6ffb4d4b3} 
+\#define LOG\+\_\+\+INFO(\begin{DoxyParamCaption}\item[{}]{fmt}{, }\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((void)0)}
+
+\end{DoxyCode}
+\Hypertarget{transaction__verifier_8cpp_afde44945335adc0c0ae2986fea13438f}\index{transaction\_verifier.cpp@{transaction\_verifier.cpp}!LOG\_WARNING@{LOG\_WARNING}}
+\index{LOG\_WARNING@{LOG\_WARNING}!transaction\_verifier.cpp@{transaction\_verifier.cpp}}
+\doxysubsubsection{\texorpdfstring{LOG\_WARNING}{LOG\_WARNING}}
+{\footnotesize\ttfamily \label{transaction__verifier_8cpp_afde44945335adc0c0ae2986fea13438f} 
+\#define LOG\+\_\+\+WARNING(\begin{DoxyParamCaption}\item[{}]{fmt}{, }\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{((void)0)}
+
+\end{DoxyCode}

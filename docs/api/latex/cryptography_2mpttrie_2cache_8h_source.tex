@@ -1,0 +1,55 @@
+\doxysection{cache.\+h}
+\hypertarget{cryptography_2mpttrie_2cache_8h_source}{}\label{cryptography_2mpttrie_2cache_8h_source}\index{include/neo/cryptography/mpttrie/cache.h@{include/neo/cryptography/mpttrie/cache.h}}
+\mbox{\hyperlink{cryptography_2mpttrie_2cache_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{node_8h}{neo/cryptography/mpttrie/node.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{istore_8h}{neo/persistence/istore.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{store__view_8h}{neo/persistence/store\_view.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cryptography_1_1mpttrie}{neo::cryptography::mpttrie}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a79c8b50be5ae30f57a1ef62783d948a5}{Cache}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a79c8b50be5ae30f57a1ef62783d948a5}{Cache}}(std::shared\_ptr<persistence::IStoreSnapshot>\ store,\ uint8\_t\ prefix);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a9dd28e43548e4ee302d127f356f5fa21}{\string~Cache}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00036\ \ \ \ \ std::unique\_ptr<Node>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a9be37f25ca58cfd45cc8c2212a30b428}{Resolve}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_af02a0cf7b80a44b26dac1677bd0e48a1}{PutNode}}(std::unique\_ptr<Node>\ \mbox{\hyperlink{namespaceneo_1_1node}{node}});}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a752f56f2c3cddcf1ae309fbdf161d37f}{DeleteNode}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_af9155487ff6bc12eb15f334630095b09}{Commit}}();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082}{TrackState}}\ :\ uint8\_t}
+\DoxyCodeLine{00057\ \ \ \ \ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082a6adf97f83acf6453d4a6a4b1070f3754}{None}},}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082af29ddbfb905eb2593fdcdfb243f9af85}{Added}},}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082a820dbd2b8f606aff866c0bbfb6b737c1}{Changed}},}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082a5fe6005bf6e415c950c011fb65f12b8f}{Deleted}}}
+\DoxyCodeLine{00062\ \ \ \ \ \};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1cryptography_1_1mpttrie_1_1_cache_1_1_trackable}{Trackable}}}
+\DoxyCodeLine{00065\ \ \ \ \ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ std::unique\_ptr<Node>\ \mbox{\hyperlink{structneo_1_1cryptography_1_1mpttrie_1_1_cache_1_1_trackable_af6b78eb77350aab83fc638be1602ed21}{node}};}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082}{TrackState}}\ \mbox{\hyperlink{structneo_1_1cryptography_1_1mpttrie_1_1_cache_1_1_trackable_aa80bdf3e9d4a16d481b9e0c811e035d3}{state}};}
+\DoxyCodeLine{00068\ \ \ \ \ \};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ std::shared\_ptr<persistence::IStoreSnapshot>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_aaae44e9014f6cbafb9313e772e34e294}{store\_}};}
+\DoxyCodeLine{00071\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a9c5cc938a69391724f176ba19cf3c38c}{prefix\_}};}
+\DoxyCodeLine{00072\ \ \ \ \ std::unordered\_map<io::UInt256,\ std::unique\_ptr<Trackable>>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_adceebd928017098ff640def16a5ab844}{cache\_}};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_ae27d19fe685eb0486178ac97f1e08db8}{CreateKey}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00080\ \};}
+\DoxyCodeLine{00081\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cryptography::mpttrie}}
+
+\end{DoxyCode}

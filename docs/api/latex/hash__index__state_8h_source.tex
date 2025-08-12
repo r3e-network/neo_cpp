@@ -1,0 +1,45 @@
+\doxysection{hash\+\_\+index\+\_\+state.\+h}
+\hypertarget{hash__index__state_8h_source}{}\label{hash__index__state_8h_source}\index{include/neo/smartcontract/native/hash\_index\_state.h@{include/neo/smartcontract/native/hash\_index\_state.h}}
+\mbox{\hyperlink{hash__index__state_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__reader_8h}{neo/io/binary\_reader.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__writer_8h}{neo/io/binary\_writer.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stack__item_8h}{neo/vm/stack\_item.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native}{neo::smartcontract::native}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a4ae6739ba9217a44b6ae47d70d8cc0ad}{HashIndexState}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a4ae6739ba9217a44b6ae47d70d8cc0ad}{HashIndexState}}();}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a4ae6739ba9217a44b6ae47d70d8cc0ad}{HashIndexState}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash,\ uint32\_t\ index);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a361a5d6f154bc468fee0f0b5280144af}{GetHash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_ac8509f0e41a92d22391f224d03be8e38}{SetHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00046\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a6e2642b809efca743b1048765464dda3}{GetIndex}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a12c1f9423ae0fcc0d125ccba5225a04e}{SetIndex}}(uint32\_t\ index);}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a0a27f939b81e515e98cb8a604f4ca4f6}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a74fc51e4c97ee5d2479d6c26ed3f9cfb}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00070\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a7c2be04300903670f7d87634f7eb3aac}{ToStackItem}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_aed981b5ea0f2581b8494ee8a62777328}{FromStackItem}}(\textcolor{keyword}{const}\ std::shared\_ptr<vm::StackItem>\&\ item);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_ab7828b02da5c93cd460427b5619c47b8}{hash\_}};}
+\DoxyCodeLine{00080\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_ab8a00ffec024d38aa7e7478300846987}{index\_}};}
+\DoxyCodeLine{00081\ \};}
+\DoxyCodeLine{00082\ \}\ \ \textcolor{comment}{//\ namespace\ neo::smartcontract::native}}
+
+\end{DoxyCode}

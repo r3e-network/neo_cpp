@@ -1,0 +1,117 @@
+\doxysection{include/neo/logging/logger.h File Reference}
+\hypertarget{logger_8h}{}\label{logger_8h}\index{include/neo/logging/logger.h@{include/neo/logging/logger.h}}
+
+
+Simple logging interface for Neo C++ implementation.  
+
+
+{\ttfamily \#include $<$iosfwd$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+Include dependency graph for logger.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1logging_1_1_logger}{neo\+::logging\+::\+Logger}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1logging_1_1_logger}{Logger} class providing structured logging functionality. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1logging}{neo\+::logging}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{logger_8h_aef684dae48c23dade87e2deedc0ede28}{NEO\+\_\+\+LOG\+\_\+\+TRACE}}(msg)
+\item 
+\#define \mbox{\hyperlink{logger_8h_a3c9907d66ed9c2800c5c950fe74e623a}{NEO\+\_\+\+LOG\+\_\+\+DEBUG}}(msg)
+\item 
+\#define \mbox{\hyperlink{logger_8h_a2c9662c01f1d4bdac729628a70f8903b}{NEO\+\_\+\+LOG\+\_\+\+INFO}}(msg)
+\item 
+\#define \mbox{\hyperlink{logger_8h_a7b26f10f135c547ca823d2482ede9837}{NEO\+\_\+\+LOG\+\_\+\+WARN}}(msg)
+\item 
+\#define \mbox{\hyperlink{logger_8h_a8199da713013dafd0bfdf555c4df51ca}{NEO\+\_\+\+LOG\+\_\+\+ERROR}}(msg)
+\item 
+\#define \mbox{\hyperlink{logger_8h_ac213c10ad70e090df09267dbda354069}{NEO\+\_\+\+LOG\+\_\+\+CRITICAL}}(msg)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Simple logging interface for Neo C++ implementation. 
+
+This header provides a basic logging interface compatible with the existing codebase requirements. 
+
+\label{doc-define-members}
+\Hypertarget{logger_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{logger_8h_ac213c10ad70e090df09267dbda354069}\index{logger.h@{logger.h}!NEO\_LOG\_CRITICAL@{NEO\_LOG\_CRITICAL}}
+\index{NEO\_LOG\_CRITICAL@{NEO\_LOG\_CRITICAL}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{NEO\_LOG\_CRITICAL}{NEO\_LOG\_CRITICAL}}
+{\footnotesize\ttfamily \label{logger_8h_ac213c10ad70e090df09267dbda354069} 
+\#define NEO\+\_\+\+LOG\+\_\+\+CRITICAL(\begin{DoxyParamCaption}\item[{}]{msg}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1logging_1_1_logger_abff18ad1faab25601174fa98b85159b9}{neo::logging::Logger::GetDefault}}().\mbox{\hyperlink{classneo_1_1logging_1_1_logger_a57d61dad8a9c03cc8ce47b9c70789e1e}{Critical}}(msg)}
+
+\end{DoxyCode}
+\Hypertarget{logger_8h_a3c9907d66ed9c2800c5c950fe74e623a}\index{logger.h@{logger.h}!NEO\_LOG\_DEBUG@{NEO\_LOG\_DEBUG}}
+\index{NEO\_LOG\_DEBUG@{NEO\_LOG\_DEBUG}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{NEO\_LOG\_DEBUG}{NEO\_LOG\_DEBUG}}
+{\footnotesize\ttfamily \label{logger_8h_a3c9907d66ed9c2800c5c950fe74e623a} 
+\#define NEO\+\_\+\+LOG\+\_\+\+DEBUG(\begin{DoxyParamCaption}\item[{}]{msg}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1logging_1_1_logger_abff18ad1faab25601174fa98b85159b9}{neo::logging::Logger::GetDefault}}().\mbox{\hyperlink{classneo_1_1logging_1_1_logger_a93c1f33b6b290b2e6220e599d0afc9f1}{Debug}}(msg)}
+
+\end{DoxyCode}
+\Hypertarget{logger_8h_a8199da713013dafd0bfdf555c4df51ca}\index{logger.h@{logger.h}!NEO\_LOG\_ERROR@{NEO\_LOG\_ERROR}}
+\index{NEO\_LOG\_ERROR@{NEO\_LOG\_ERROR}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{NEO\_LOG\_ERROR}{NEO\_LOG\_ERROR}}
+{\footnotesize\ttfamily \label{logger_8h_a8199da713013dafd0bfdf555c4df51ca} 
+\#define NEO\+\_\+\+LOG\+\_\+\+ERROR(\begin{DoxyParamCaption}\item[{}]{msg}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1logging_1_1_logger_abff18ad1faab25601174fa98b85159b9}{neo::logging::Logger::GetDefault}}().\mbox{\hyperlink{classneo_1_1logging_1_1_logger_ab2af17208a339e979fef8368a7ea05cc}{Error}}(msg)}
+
+\end{DoxyCode}
+\Hypertarget{logger_8h_a2c9662c01f1d4bdac729628a70f8903b}\index{logger.h@{logger.h}!NEO\_LOG\_INFO@{NEO\_LOG\_INFO}}
+\index{NEO\_LOG\_INFO@{NEO\_LOG\_INFO}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{NEO\_LOG\_INFO}{NEO\_LOG\_INFO}}
+{\footnotesize\ttfamily \label{logger_8h_a2c9662c01f1d4bdac729628a70f8903b} 
+\#define NEO\+\_\+\+LOG\+\_\+\+INFO(\begin{DoxyParamCaption}\item[{}]{msg}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1logging_1_1_logger_abff18ad1faab25601174fa98b85159b9}{neo::logging::Logger::GetDefault}}().\mbox{\hyperlink{classneo_1_1logging_1_1_logger_a7b9d24c31fd3a110a8abb3d32ab9e800}{Info}}(msg)}
+
+\end{DoxyCode}
+\Hypertarget{logger_8h_aef684dae48c23dade87e2deedc0ede28}\index{logger.h@{logger.h}!NEO\_LOG\_TRACE@{NEO\_LOG\_TRACE}}
+\index{NEO\_LOG\_TRACE@{NEO\_LOG\_TRACE}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{NEO\_LOG\_TRACE}{NEO\_LOG\_TRACE}}
+{\footnotesize\ttfamily \label{logger_8h_aef684dae48c23dade87e2deedc0ede28} 
+\#define NEO\+\_\+\+LOG\+\_\+\+TRACE(\begin{DoxyParamCaption}\item[{}]{msg}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1logging_1_1_logger_abff18ad1faab25601174fa98b85159b9}{neo::logging::Logger::GetDefault}}().\mbox{\hyperlink{classneo_1_1logging_1_1_logger_a485ed9afbd0080210414d88d81862b70}{Trace}}(msg)}
+
+\end{DoxyCode}
+\Hypertarget{logger_8h_a7b26f10f135c547ca823d2482ede9837}\index{logger.h@{logger.h}!NEO\_LOG\_WARN@{NEO\_LOG\_WARN}}
+\index{NEO\_LOG\_WARN@{NEO\_LOG\_WARN}!logger.h@{logger.h}}
+\doxysubsubsection{\texorpdfstring{NEO\_LOG\_WARN}{NEO\_LOG\_WARN}}
+{\footnotesize\ttfamily \label{logger_8h_a7b26f10f135c547ca823d2482ede9837} 
+\#define NEO\+\_\+\+LOG\+\_\+\+WARN(\begin{DoxyParamCaption}\item[{}]{msg}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1logging_1_1_logger_abff18ad1faab25601174fa98b85159b9}{neo::logging::Logger::GetDefault}}().\mbox{\hyperlink{classneo_1_1logging_1_1_logger_a64fa223bffb88e3121a11c94e91674e0}{Warn}}(msg)}
+
+\end{DoxyCode}

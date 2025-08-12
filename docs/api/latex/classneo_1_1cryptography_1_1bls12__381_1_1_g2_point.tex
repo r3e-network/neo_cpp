@@ -1,0 +1,366 @@
+\doxysection{neo\+::cryptography\+::bls12\+\_\+381\+::G2\+Point Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{}\label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+
+
+Represents a point on the G2 curve of BLS12-\/381.  
+
+
+
+
+{\ttfamily \#include $<$bls12\+\_\+381.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_1_1_impl}{Impl}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}{G2\+Point}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} at infinity. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_ad47365425f925c83b5ebe0c320daec9d}{\texorpdfstring{$\sim$}{\string~}\+G2\+Point}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a2a7aa4687887289db130e578eca4897d}{G2\+Point}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_aa2d8db827c6a8ca59a2122a047e34791}{operator=}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&other)
+\begin{DoxyCompactList}\small\item\em Assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a56047aae7854c1b505290a12964fa708}{G2\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} from a byte array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_aae77af2bd15fd5072349c73d375517f2}{To\+Bytes}} (bool compressed=true) const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} to a byte array. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_ab0293d41e63bd8c070d2b53a59a9f1df}{To\+Hex}} (bool compressed=true) const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} to a hex string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a4e2ac4368835290d40d5b8b66958edc0}{Add}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&other) const
+\begin{DoxyCompactList}\small\item\em Adds another \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} to this \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_af69df43b165b459c29b8462053ddee80}{Multiply}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&scalar) const
+\begin{DoxyCompactList}\small\item\em Multiplies this \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} by a scalar. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a64dc55f64cf95f37e289e4ee8f098b6f}{operator==}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} is equal to another \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_ae446511c61fddbfc3039b6171dd4bd5f}{operator!=}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} is not equal to another \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a170ae3a425fd91b5c8ca74eaf510f927}{Is\+Infinity}} () const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} is infinity. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a72b964250ac0877ae595d320bf346ed3}{From\+Hex}} (const std\+::string \&hex)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} from a hex string. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_af976176bc43763b4448498ac1286fa2b}{Generator}} ()
+\begin{DoxyCompactList}\small\item\em Gets the generator point of the G2 curve. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_ac58350c33cd1f9a606b5b88a3d89fafb}{Compressed\+Size}} = 96
+\begin{DoxyCompactList}\small\item\em Gets the size of a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} in bytes (compressed). \end{DoxyCompactList}\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a3e77def5cdaa4a23e406a66358522aed}{Uncompressed\+Size}} = 192
+\begin{DoxyCompactList}\small\item\em Gets the size of a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} in bytes (uncompressed). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a2284b3ef2c6c20e41f55149ca89df093}{G2\+Point}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_1_1_impl}{Impl}} $>$ impl)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_1_1_impl}{Impl}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a6669458e17d91f9e006829e8a2014a9c}{impl\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a point on the G2 curve of BLS12-\/381. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!G2Point@{G2Point}}
+\index{G2Point@{G2Point}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{G2Point()}{G2Point()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5} 
+neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::\+G2\+Point (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} at infinity. 
+
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_ad47365425f925c83b5ebe0c320daec9d}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!````~G2Point@{\texorpdfstring{$\sim$}{\string~}G2Point}}
+\index{````~G2Point@{\texorpdfstring{$\sim$}{\string~}G2Point}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}G2Point()}{\string~G2Point()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_ad47365425f925c83b5ebe0c320daec9d} 
+neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::\texorpdfstring{$\sim$}{\string~}\+G2\+Point (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Destructor. 
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a2a7aa4687887289db130e578eca4897d}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!G2Point@{G2Point}}
+\index{G2Point@{G2Point}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{G2Point()}{G2Point()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a2a7aa4687887289db130e578eca4897d} 
+neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::\+G2\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a56047aae7854c1b505290a12964fa708}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!G2Point@{G2Point}}
+\index{G2Point@{G2Point}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{G2Point()}{G2Point()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a56047aae7854c1b505290a12964fa708} 
+neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::\+G2\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} from a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The byte array. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the data is invalid. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a2284b3ef2c6c20e41f55149ca89df093}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!G2Point@{G2Point}}
+\index{G2Point@{G2Point}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{G2Point()}{G2Point()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a2284b3ef2c6c20e41f55149ca89df093} 
+neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::\+G2\+Point (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_1_1_impl}{Impl}} $>$}]{impl}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a4e2ac4368835290d40d5b8b66958edc0}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!Add@{Add}}
+\index{Add@{Add}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a4e2ac4368835290d40d5b8b66958edc0} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::\+Add (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Adds another \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} to this \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of the addition. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a72b964250ac0877ae595d320bf346ed3}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!FromHex@{FromHex}}
+\index{FromHex@{FromHex}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{FromHex()}{FromHex()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a72b964250ac0877ae595d320bf346ed3} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::\+From\+Hex (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Constructs a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} from a hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The hex string. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the hex string is invalid. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_af976176bc43763b4448498ac1286fa2b}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!Generator@{Generator}}
+\index{Generator@{Generator}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{Generator()}{Generator()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_af976176bc43763b4448498ac1286fa2b} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::\+Generator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the generator point of the G2 curve. 
+
+\begin{DoxyReturn}{Returns}
+The generator point. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a170ae3a425fd91b5c8ca74eaf510f927}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!IsInfinity@{IsInfinity}}
+\index{IsInfinity@{IsInfinity}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{IsInfinity()}{IsInfinity()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a170ae3a425fd91b5c8ca74eaf510f927} 
+bool neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::\+Is\+Infinity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} is infinity. 
+
+\begin{DoxyReturn}{Returns}
+True if this \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} is infinity, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_af69df43b165b459c29b8462053ddee80}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!Multiply@{Multiply}}
+\index{Multiply@{Multiply}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{Multiply()}{Multiply()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_af69df43b165b459c29b8462053ddee80} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::\+Multiply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{scalar}{}\end{DoxyParamCaption}) const}
+
+
+
+Multiplies this \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} by a scalar. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scalar} & The scalar. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of the multiplication. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_ae446511c61fddbfc3039b6171dd4bd5f}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_ae446511c61fddbfc3039b6171dd4bd5f} 
+bool neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} is not equal to another \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the G2\+Points are not equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_aa2d8db827c6a8ca59a2122a047e34791}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_aa2d8db827c6a8ca59a2122a047e34791} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \& neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Assignment operator. 
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a64dc55f64cf95f37e289e4ee8f098b6f}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a64dc55f64cf95f37e289e4ee8f098b6f} 
+bool neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} is equal to another \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the G2\+Points are equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_aae77af2bd15fd5072349c73d375517f2}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!ToBytes@{ToBytes}}
+\index{ToBytes@{ToBytes}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{ToBytes()}{ToBytes()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_aae77af2bd15fd5072349c73d375517f2} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::\+To\+Bytes (\begin{DoxyParamCaption}\item[{bool}]{compressed}{ = {\ttfamily true}}\end{DoxyParamCaption}) const}
+
+
+
+Converts the \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} to a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em compressed} & Whether to use compressed format. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The byte array. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_ab0293d41e63bd8c070d2b53a59a9f1df}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!ToHex@{ToHex}}
+\index{ToHex@{ToHex}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{ToHex()}{ToHex()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_ab0293d41e63bd8c070d2b53a59a9f1df} 
+std\+::string neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::\+To\+Hex (\begin{DoxyParamCaption}\item[{bool}]{compressed}{ = {\ttfamily true}}\end{DoxyParamCaption}) const}
+
+
+
+Converts the \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} to a hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em compressed} & Whether to use compressed format. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The hex string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_ac58350c33cd1f9a606b5b88a3d89fafb}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!CompressedSize@{CompressedSize}}
+\index{CompressedSize@{CompressedSize}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{CompressedSize}{CompressedSize}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_ac58350c33cd1f9a606b5b88a3d89fafb} 
+size\+\_\+t neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::\+Compressed\+Size = 96\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Gets the size of a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} in bytes (compressed). 
+
+\begin{DoxyReturn}{Returns}
+The size of a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} in bytes. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a6669458e17d91f9e006829e8a2014a9c}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!impl\_@{impl\_}}
+\index{impl\_@{impl\_}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{impl\_}{impl\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a6669458e17d91f9e006829e8a2014a9c} 
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_1_1_impl}{Impl}}$>$ neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::impl\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a3e77def5cdaa4a23e406a66358522aed}\index{neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}!UncompressedSize@{UncompressedSize}}
+\index{UncompressedSize@{UncompressedSize}!neo::cryptography::bls12\_381::G2Point@{neo::cryptography::bls12\_381::G2Point}}
+\doxysubsubsection{\texorpdfstring{UncompressedSize}{UncompressedSize}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a3e77def5cdaa4a23e406a66358522aed} 
+size\+\_\+t neo\+::cryptography\+::bls12\+\_\+381\+::\+G2\+Point\+::\+Uncompressed\+Size = 192\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Gets the size of a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} in bytes (uncompressed). 
+
+\begin{DoxyReturn}{Returns}
+The size of a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} in bytes. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/\mbox{\hyperlink{bls12__381_8h}{bls12\+\_\+381.\+h}}\item 
+src/cryptography/\mbox{\hyperlink{bls12__381_8cpp}{bls12\+\_\+381.\+cpp}}\item 
+src/cryptography/\mbox{\hyperlink{bls12__381__complete_8cpp}{bls12\+\_\+381\+\_\+complete.\+cpp}}\end{DoxyCompactItemize}

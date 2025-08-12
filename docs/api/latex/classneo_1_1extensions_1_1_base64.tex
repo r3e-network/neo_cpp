@@ -1,0 +1,107 @@
+\doxysection{neo\+::extensions\+::Base64 Class Reference}
+\hypertarget{classneo_1_1extensions_1_1_base64}{}\label{classneo_1_1extensions_1_1_base64}\index{neo::extensions::Base64@{neo::extensions::Base64}}
+
+
+\doxylink{classneo_1_1extensions_1_1_base64}{Base64} encoding and decoding utilities.  
+
+
+
+
+{\ttfamily \#include $<$base64.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_base64_acf22d7b8413d981a4e20b8e0a79c0cf3}{Encode}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Encodes a byte span to a base64 string. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1extensions_1_1_base64_a7ae5c48df0d9fcddadb6da6a61cbdb34}{Decode}} (const std\+::string \&base64)
+\begin{DoxyCompactList}\small\item\em Decodes a base64 string to a byte vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_base64_a06f5d55c4fa99013b96fd0f13e35fb8a}{Is\+Base64}} (unsigned char c)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_base64_ac9877336e1ae79400748fd3ae7251acf}{base64\+\_\+chars}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1extensions_1_1_base64}{Base64} encoding and decoding utilities. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1extensions_1_1_base64_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_base64_a7ae5c48df0d9fcddadb6da6a61cbdb34}\index{neo::extensions::Base64@{neo::extensions::Base64}!Decode@{Decode}}
+\index{Decode@{Decode}!neo::extensions::Base64@{neo::extensions::Base64}}
+\doxysubsubsection{\texorpdfstring{Decode()}{Decode()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_base64_a7ae5c48df0d9fcddadb6da6a61cbdb34} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::extensions\+::\+Base64\+::\+Decode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{base64}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Decodes a base64 string to a byte vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base64} & The base64 string to decode. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The decoded byte vector. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1extensions_1_1_base64_acf22d7b8413d981a4e20b8e0a79c0cf3}\index{neo::extensions::Base64@{neo::extensions::Base64}!Encode@{Encode}}
+\index{Encode@{Encode}!neo::extensions::Base64@{neo::extensions::Base64}}
+\doxysubsubsection{\texorpdfstring{Encode()}{Encode()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_base64_acf22d7b8413d981a4e20b8e0a79c0cf3} 
+std\+::string neo\+::extensions\+::\+Base64\+::\+Encode (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Encodes a byte span to a base64 string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to encode. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The base64 encoded string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1extensions_1_1_base64_a06f5d55c4fa99013b96fd0f13e35fb8a}\index{neo::extensions::Base64@{neo::extensions::Base64}!IsBase64@{IsBase64}}
+\index{IsBase64@{IsBase64}!neo::extensions::Base64@{neo::extensions::Base64}}
+\doxysubsubsection{\texorpdfstring{IsBase64()}{IsBase64()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_base64_a06f5d55c4fa99013b96fd0f13e35fb8a} 
+bool neo\+::extensions\+::\+Base64\+::\+Is\+Base64 (\begin{DoxyParamCaption}\item[{unsigned char}]{c}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1extensions_1_1_base64_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_base64_ac9877336e1ae79400748fd3ae7251acf}\index{neo::extensions::Base64@{neo::extensions::Base64}!base64\_chars@{base64\_chars}}
+\index{base64\_chars@{base64\_chars}!neo::extensions::Base64@{neo::extensions::Base64}}
+\doxysubsubsection{\texorpdfstring{base64\_chars}{base64\_chars}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_base64_ac9877336e1ae79400748fd3ae7251acf} 
+const std\+::string neo\+::extensions\+::\+Base64\+::base64\+\_\+chars\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}ABCDEFGHIJKLMNOPQRSTUVWXYZ"{}}}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}abcdefghijklmnopqrstuvwxyz"{}}}
+\DoxyCodeLine{\ \ \ \ \textcolor{stringliteral}{"{}0123456789+/"{}}}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/extensions/\mbox{\hyperlink{extensions_2base64_8h}{base64.\+h}}\item 
+src/extensions/\mbox{\hyperlink{extensions_2base64_8cpp}{base64.\+cpp}}\end{DoxyCompactItemize}

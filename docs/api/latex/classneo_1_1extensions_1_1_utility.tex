@@ -1,0 +1,1045 @@
+\doxysection{neo\+::extensions\+::Utility Class Reference}
+\hypertarget{classneo_1_1extensions_1_1_utility}{}\label{classneo_1_1extensions_1_1_utility}\index{neo::extensions::Utility@{neo::extensions::Utility}}
+
+
+General utility functions.  
+
+
+
+
+{\ttfamily \#include $<$utility.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+template$<$$>$ std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a572e232f44aba788130cb3f9514a7415}{Format}} (const std\+::string \&format)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a22771dd0f87fa4258a346fdceaf1aa03}{Split}} (const std\+::string \&str, const std\+::string \&delimiter, bool remove\+Empty=true)
+\begin{DoxyCompactList}\small\item\em Split string by delimiter. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_ad6cd1f83310481691b5d42dd90ead44e}{Join}} (const std\+::vector$<$ std\+::string $>$ \&parts, const std\+::string \&delimiter)
+\begin{DoxyCompactList}\small\item\em Join string vector with delimiter. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a32991a0c7431d1561e5255b01cfb9dc3}{Trim}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Trim whitespace from both ends of string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a51f8ddf57191bf24cebaef38d5772967}{Trim\+Left}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Trim whitespace from left end of string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a857c033786cee08f1effb8fd011ce3a8}{Trim\+Right}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Trim whitespace from right end of string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a9f3bb81949486ff05c58daba0393e2d6}{To\+Lower}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Convert string to lowercase. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a0ce813752ca6f57ce72d4b9c4566e39b}{To\+Upper}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Convert string to uppercase. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a4763227514c8fdd27b48e3d391d76ca7}{Starts\+With}} (const std\+::string \&str, const std\+::string \&prefix, bool ignore\+Case=false)
+\begin{DoxyCompactList}\small\item\em Check if string starts with prefix. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a84070a3aab0ae4e5fd3065be16aaff4e}{Ends\+With}} (const std\+::string \&str, const std\+::string \&suffix, bool ignore\+Case=false)
+\begin{DoxyCompactList}\small\item\em Check if string ends with suffix. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a704d70ccdbba1a9411c1d56caa761454}{Contains}} (const std\+::string \&str, const std\+::string \&substring, bool ignore\+Case=false)
+\begin{DoxyCompactList}\small\item\em Check if string contains substring. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a7f6baed99b3806d7486e60f19ddfc0d5}{Replace}} (const std\+::string \&str, const std\+::string \&from, const std\+::string \&to)
+\begin{DoxyCompactList}\small\item\em Replace all occurrences of substring. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a3f232542c7959c0651ef8694c69090ed}{Secure\+Zero\+Memory}} (void \texorpdfstring{$\ast$}{*}ptr, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Safely zero memory (prevents compiler optimization) \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a10567c23ace5906efab097fbca9979cc}{Secure\+Compare\+Memory}} (const void \texorpdfstring{$\ast$}{*}a, const void \texorpdfstring{$\ast$}{*}b, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Secure compare memory (constant time) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container$>$ }\\static size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a5a382ad7e0c066a4e57e2667513a60b4}{Get\+Size}} (const Container \&container)
+\begin{DoxyCompactList}\small\item\em Get size of container. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Container$>$ }\\static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a2b9eec6d7ad292c75a9f035bc7243cfe}{Is\+Empty}} (const Container \&container)
+\begin{DoxyCompactList}\small\item\em Check if container is empty. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_ab8a26240dec9a3965645ae0c53280070}{Try\+Parse}} (const std\+::string \&str, T \&result)
+\begin{DoxyCompactList}\small\item\em Try to parse string to type T. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_aaf20c25fc219a814f63adabe4cf50599}{Parse}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Parse string to type T with exception on failure. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a0f1dc6ffe66b686b75920bd18638e724}{To\+String}} (const T \&value)
+\begin{DoxyCompactList}\small\item\em Convert value to string. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a00bdd18ded64e74ffb873420fb391e71}{Clamp}} (const T \&value, const T \&min, const T \&max)
+\begin{DoxyCompactList}\small\item\em Clamp value between min and max. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a048f48b90adf8fc5de3f5881cbe91a34}{Is\+In\+Range}} (const T \&value, const T \&min, const T \&max)
+\begin{DoxyCompactList}\small\item\em Check if value is in range \mbox{[}min, max\mbox{]}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename To, typename From$>$ }\\static To \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_aff0400ab8bd4a0086234b686294f5da5}{Safe\+Cast}} (const From \&value)
+\begin{DoxyCompactList}\small\item\em Safe cast with range checking. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static const T \& \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a2a5f84b210e1114d04f0234ff2d6a687}{Min}} (const T \&a, const T \&b)
+\begin{DoxyCompactList}\small\item\em Get minimum of two values. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static const T \& \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a60747c57a13d4f40d2abf355608de73e}{Max}} (const T \&a, const T \&b)
+\begin{DoxyCompactList}\small\item\em Get maximum of two values. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static void \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a0eeeb454828ea5811b1e406ffccd0f61}{Swap}} (T \&a, T \&b)
+\begin{DoxyCompactList}\small\item\em Swap two values. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Args$>$ }\\static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_ad03ec9529077284482d2e807e2768b8b}{Format}} (const std\+::string \&format, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Format string with arguments (printf-\/style) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_aec7eb6da9f1fb8386e41b170a7da2712}{Is\+Valid\+Ptr}} (const T \texorpdfstring{$\ast$}{*}ptr)
+\begin{DoxyCompactList}\small\item\em Check if pointer is valid (not null) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_abe6b42900991b3683352c7b4f584aecf}{Is\+Valid\+Ptr}} (const std\+::shared\+\_\+ptr$<$ T $>$ \&ptr)
+\begin{DoxyCompactList}\small\item\em Check if shared\+\_\+ptr is valid. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Func$>$ }\\static auto \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a793fe76f9e5c32cac379677ab3de0d68}{Make\+Guard}} (Func \&\&func) -\/$>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard}{Scope\+Guard}}$<$ Func $>$
+\begin{DoxyCompactList}\small\item\em Create RAII guard for cleanup. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static void \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_ad5edd46cef0ee9f205306e9c9d25dc51}{Hash\+Combine}} (size\+\_\+t \&seed, const T \&value)
+\begin{DoxyCompactList}\small\item\em Hash combine utility (for custom hash functions) \end{DoxyCompactList}\item 
+static uint32\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_ac7ca2d5292e5674e148c981630c7315a}{Next\+Power\+Of2}} (uint32\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Calculate next power of 2. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a2eaad7e483b48a98d945d0e2c4517e2b}{Is\+Power\+Of2}} (uint32\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Check if value is power of 2. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a21fedb11c044fc1339fc3fc201ce5f43}{Reverse\+Bytes}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Reverse bytes in memory. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a5bd7425ed5679adcf644432f08aa15c0}{Bytes\+To\+Hex}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data, bool uppercase=false)
+\begin{DoxyCompactList}\small\item\em Convert bytes to hex string. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a07b9809f419d127f3dd08266df655105}{Hex\+To\+Bytes}} (const std\+::string \&hex)
+\begin{DoxyCompactList}\small\item\em Convert hex string to bytes. \end{DoxyCompactList}\item 
+template$<$$>$ bool \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a1e36bc2f449590aa4110b0d16c01dae9}{Try\+Parse}} (const std\+::string \&str, int \&result)
+\item 
+template$<$$>$ bool \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a9662b8f093cd780d81c423e514f1c4a0}{Try\+Parse}} (const std\+::string \&str, long \&result)
+\item 
+template$<$$>$ bool \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_acf655010700143cf9d74cc14fb7f27d2}{Try\+Parse}} (const std\+::string \&str, long long \&result)
+\item 
+template$<$$>$ bool \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a02eccc4eb9dd6804e177a485a2c2ed04}{Try\+Parse}} (const std\+::string \&str, unsigned int \&result)
+\item 
+template$<$$>$ bool \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a11d2baf70b9bcabb4b06188a713616ea}{Try\+Parse}} (const std\+::string \&str, float \&result)
+\item 
+template$<$$>$ bool \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_aff06fbffb602a28f9519c92d1dde3aa0}{Try\+Parse}} (const std\+::string \&str, double \&result)
+\item 
+template$<$$>$ int \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a4df362f20806fe85aa2a7bcb47e7c74e}{Parse}} (const std\+::string \&str)
+\item 
+template$<$$>$ long \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a217675a89819519e89c78784428f3d7b}{Parse}} (const std\+::string \&str)
+\item 
+template$<$$>$ float \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a22bd0f7a77b40967e0e36371209eb88a}{Parse}} (const std\+::string \&str)
+\item 
+template$<$$>$ double \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a225ecaccd539526efd3139b317f4a7f5}{Parse}} (const std\+::string \&str)
+\item 
+template$<$$>$ std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a5680bde451715ae31b5d3a936a7a5fa7}{To\+String}} (const int \&value)
+\item 
+template$<$$>$ std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a064e6217f3d300e2d0775af7f4313816}{To\+String}} (const long \&value)
+\item 
+template$<$$>$ std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a62a19f8b486364b108d07fe0dff9ea50}{To\+String}} (const float \&value)
+\item 
+template$<$$>$ std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a09d3c1b4f56fc056d1eab81dc947ba9c}{To\+String}} (const double \&value)
+\item 
+template$<$$>$ int32\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_aa946a332b6fd7341e30b49a8d7a4ccb1}{Safe\+Cast}} (const int64\+\_\+t \&value)
+\item 
+template$<$$>$ uint32\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a77c234ab6f2e3a1991356b6b1401eab8}{Safe\+Cast}} (const uint64\+\_\+t \&value)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+General utility functions. 
+
+\hypertarget{classneo_1_1extensions_1_1_utility_autotoc_md39}{}\doxysubsubsection{\texorpdfstring{Overview}{Overview}}\label{classneo_1_1extensions_1_1_utility_autotoc_md39}
+Provides commonly used utility functions for string manipulation, memory operations, type conversions, and general helper methods.\hypertarget{classneo_1_1extensions_1_1_utility_autotoc_md40}{}\doxysubsubsection{\texorpdfstring{API Reference}{API Reference}}\label{classneo_1_1extensions_1_1_utility_autotoc_md40}
+
+\begin{DoxyItemize}
+\item {\bfseries{String Operations}}\+: Split, join, trim, case conversion
+\item {\bfseries{Memory Operations}}\+: Safe memory operations, RAII helpers
+\item {\bfseries{Type Conversion}}\+: Safe casting, parsing utilities
+\item {\bfseries{Validation}}\+: Input validation, range checking
+\end{DoxyItemize}\hypertarget{classneo_1_1extensions_1_1_utility_autotoc_md41}{}\doxysubsubsection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{classneo_1_1extensions_1_1_utility_autotoc_md41}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ String\ operations}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ parts\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a22771dd0f87fa4258a346fdceaf1aa03}{Utility::Split}}(\textcolor{stringliteral}{"{}a,b,c"{}},\ \textcolor{stringliteral}{"{},"{}});}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ joined\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_ad6cd1f83310481691b5d42dd90ead44e}{Utility::Join}}(parts,\ \textcolor{stringliteral}{"{};"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Memory\ operations}}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a3f232542c7959c0651ef8694c69090ed}{Utility::SecureZeroMemory}}(data,\ size);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Type\ conversion}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ \mbox{\hyperlink{namespacedetail_a47b1bb0bbd3596589ed9187059c312efa2063c1608d6e0baf80249c42e2be5804}{value}}\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_ab8a26240dec9a3965645ae0c53280070}{Utility::TryParse<int>}}(\textcolor{stringliteral}{"{}123"{}});}
+
+\end{DoxyCode}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1extensions_1_1_utility_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a5bd7425ed5679adcf644432f08aa15c0}\index{neo::extensions::Utility@{neo::extensions::Utility}!BytesToHex@{BytesToHex}}
+\index{BytesToHex@{BytesToHex}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{BytesToHex()}{BytesToHex()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a5bd7425ed5679adcf644432f08aa15c0} 
+std\+::string neo\+::extensions\+::\+Utility\+::\+Bytes\+To\+Hex (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{, }\item[{bool}]{uppercase}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert bytes to hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Byte data \\
+\hline
+{\em uppercase} & Whether to use uppercase hex \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Hex string 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1extensions_1_1_utility_a00bdd18ded64e74ffb873420fb391e71}\index{neo::extensions::Utility@{neo::extensions::Utility}!Clamp@{Clamp}}
+\index{Clamp@{Clamp}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{Clamp()}{Clamp()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a00bdd18ded64e74ffb873420fb391e71} 
+template$<$typename T$>$ \\
+T neo\+::extensions\+::\+Utility\+::\+Clamp (\begin{DoxyParamCaption}\item[{const T \&}]{value}{, }\item[{const T \&}]{min}{, }\item[{const T \&}]{max}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Clamp value between min and max. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type of value \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Value to clamp \\
+\hline
+{\em min} & Minimum value \\
+\hline
+{\em max} & Maximum value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Clamped value 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a704d70ccdbba1a9411c1d56caa761454}\index{neo::extensions::Utility@{neo::extensions::Utility}!Contains@{Contains}}
+\index{Contains@{Contains}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a704d70ccdbba1a9411c1d56caa761454} 
+bool neo\+::extensions\+::\+Utility\+::\+Contains (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{, }\item[{const std\+::string \&}]{substring}{, }\item[{bool}]{ignore\+Case}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if string contains substring. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to check \\
+\hline
+{\em substring} & Substring to look for \\
+\hline
+{\em ignore\+Case} & Whether to ignore case \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if string contains substring 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1extensions_1_1_utility_a84070a3aab0ae4e5fd3065be16aaff4e}\index{neo::extensions::Utility@{neo::extensions::Utility}!EndsWith@{EndsWith}}
+\index{EndsWith@{EndsWith}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{EndsWith()}{EndsWith()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a84070a3aab0ae4e5fd3065be16aaff4e} 
+bool neo\+::extensions\+::\+Utility\+::\+Ends\+With (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{, }\item[{const std\+::string \&}]{suffix}{, }\item[{bool}]{ignore\+Case}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if string ends with suffix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to check \\
+\hline
+{\em suffix} & Suffix to look for \\
+\hline
+{\em ignore\+Case} & Whether to ignore case \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if string ends with suffix 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1extensions_1_1_utility_a572e232f44aba788130cb3f9514a7415}\index{neo::extensions::Utility@{neo::extensions::Utility}!Format@{Format}}
+\index{Format@{Format}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{Format()}{Format()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a572e232f44aba788130cb3f9514a7415} 
+template$<$$>$ \\
+std\+::string neo\+::extensions\+::\+Utility\+::\+Format (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{format}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classneo_1_1extensions_1_1_utility_ad03ec9529077284482d2e807e2768b8b}\index{neo::extensions::Utility@{neo::extensions::Utility}!Format@{Format}}
+\index{Format@{Format}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{Format()}{Format()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_ad03ec9529077284482d2e807e2768b8b} 
+template$<$typename... Args$>$ \\
+std\+::string neo\+::extensions\+::\+Utility\+::\+Format (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{format}{, }\item[{Args \&\&...}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Format string with arguments (printf-\/style) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em format} & Format string \\
+\hline
+{\em args} & Arguments \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Formatted string 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a5a382ad7e0c066a4e57e2667513a60b4}\index{neo::extensions::Utility@{neo::extensions::Utility}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a5a382ad7e0c066a4e57e2667513a60b4} 
+template$<$typename Container$>$ \\
+size\+\_\+t neo\+::extensions\+::\+Utility\+::\+Get\+Size (\begin{DoxyParamCaption}\item[{const Container \&}]{container}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get size of container. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & Container type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em container} & Container instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Size of container 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_ad5edd46cef0ee9f205306e9c9d25dc51}\index{neo::extensions::Utility@{neo::extensions::Utility}!HashCombine@{HashCombine}}
+\index{HashCombine@{HashCombine}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{HashCombine()}{HashCombine()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_ad5edd46cef0ee9f205306e9c9d25dc51} 
+template$<$typename T$>$ \\
+void neo\+::extensions\+::\+Utility\+::\+Hash\+Combine (\begin{DoxyParamCaption}\item[{size\+\_\+t \&}]{seed}{, }\item[{const T \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Hash combine utility (for custom hash functions) 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type of value \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em seed} & Seed value to combine with \\
+\hline
+{\em value} & Value to hash \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a07b9809f419d127f3dd08266df655105}\index{neo::extensions::Utility@{neo::extensions::Utility}!HexToBytes@{HexToBytes}}
+\index{HexToBytes@{HexToBytes}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{HexToBytes()}{HexToBytes()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a07b9809f419d127f3dd08266df655105} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::extensions\+::\+Utility\+::\+Hex\+To\+Bytes (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert hex string to bytes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & Hex string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Byte vector 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1extensions_1_1_utility_a2b9eec6d7ad292c75a9f035bc7243cfe}\index{neo::extensions::Utility@{neo::extensions::Utility}!IsEmpty@{IsEmpty}}
+\index{IsEmpty@{IsEmpty}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{IsEmpty()}{IsEmpty()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a2b9eec6d7ad292c75a9f035bc7243cfe} 
+template$<$typename Container$>$ \\
+bool neo\+::extensions\+::\+Utility\+::\+Is\+Empty (\begin{DoxyParamCaption}\item[{const Container \&}]{container}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if container is empty. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Container} & Container type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em container} & Container instance \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if container is empty 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a048f48b90adf8fc5de3f5881cbe91a34}\index{neo::extensions::Utility@{neo::extensions::Utility}!IsInRange@{IsInRange}}
+\index{IsInRange@{IsInRange}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{IsInRange()}{IsInRange()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a048f48b90adf8fc5de3f5881cbe91a34} 
+template$<$typename T$>$ \\
+bool neo\+::extensions\+::\+Utility\+::\+Is\+In\+Range (\begin{DoxyParamCaption}\item[{const T \&}]{value}{, }\item[{const T \&}]{min}{, }\item[{const T \&}]{max}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if value is in range \mbox{[}min, max\mbox{]}. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type of value \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Value to check \\
+\hline
+{\em min} & Minimum value (inclusive) \\
+\hline
+{\em max} & Maximum value (inclusive) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if value is in range 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a2eaad7e483b48a98d945d0e2c4517e2b}\index{neo::extensions::Utility@{neo::extensions::Utility}!IsPowerOf2@{IsPowerOf2}}
+\index{IsPowerOf2@{IsPowerOf2}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{IsPowerOf2()}{IsPowerOf2()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a2eaad7e483b48a98d945d0e2c4517e2b} 
+bool neo\+::extensions\+::\+Utility\+::\+Is\+Power\+Of2 (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if value is power of 2. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Value to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if value is power of 2 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_abe6b42900991b3683352c7b4f584aecf}\index{neo::extensions::Utility@{neo::extensions::Utility}!IsValidPtr@{IsValidPtr}}
+\index{IsValidPtr@{IsValidPtr}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{IsValidPtr()}{IsValidPtr()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_abe6b42900991b3683352c7b4f584aecf} 
+template$<$typename T$>$ \\
+bool neo\+::extensions\+::\+Utility\+::\+Is\+Valid\+Ptr (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ T $>$ \&}]{ptr}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if shared\+\_\+ptr is valid. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type of shared\+\_\+ptr \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & Shared pointer to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if shared\+\_\+ptr is not null 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_aec7eb6da9f1fb8386e41b170a7da2712}\index{neo::extensions::Utility@{neo::extensions::Utility}!IsValidPtr@{IsValidPtr}}
+\index{IsValidPtr@{IsValidPtr}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{IsValidPtr()}{IsValidPtr()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_aec7eb6da9f1fb8386e41b170a7da2712} 
+template$<$typename T$>$ \\
+bool neo\+::extensions\+::\+Utility\+::\+Is\+Valid\+Ptr (\begin{DoxyParamCaption}\item[{const T \texorpdfstring{$\ast$}{*}}]{ptr}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if pointer is valid (not null) 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Pointer type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & Pointer to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if pointer is not null 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_ad6cd1f83310481691b5d42dd90ead44e}\index{neo::extensions::Utility@{neo::extensions::Utility}!Join@{Join}}
+\index{Join@{Join}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{Join()}{Join()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_ad6cd1f83310481691b5d42dd90ead44e} 
+std\+::string neo\+::extensions\+::\+Utility\+::\+Join (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{parts}{, }\item[{const std\+::string \&}]{delimiter}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Join string vector with delimiter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parts} & Vector of strings to join \\
+\hline
+{\em delimiter} & Delimiter string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Joined string 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a793fe76f9e5c32cac379677ab3de0d68}\index{neo::extensions::Utility@{neo::extensions::Utility}!MakeGuard@{MakeGuard}}
+\index{MakeGuard@{MakeGuard}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{MakeGuard()}{MakeGuard()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a793fe76f9e5c32cac379677ab3de0d68} 
+template$<$typename Func$>$ \\
+auto neo\+::extensions\+::\+Utility\+::\+Make\+Guard (\begin{DoxyParamCaption}\item[{Func \&\&}]{func}{}\end{DoxyParamCaption}) -\/$>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard}{Scope\+Guard}}$<$Func$>$     \hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Create RAII guard for cleanup. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Func} & Function type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em func} & Cleanup function \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+RAII guard object 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a60747c57a13d4f40d2abf355608de73e}\index{neo::extensions::Utility@{neo::extensions::Utility}!Max@{Max}}
+\index{Max@{Max}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{Max()}{Max()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a60747c57a13d4f40d2abf355608de73e} 
+template$<$typename T$>$ \\
+const T \& neo\+::extensions\+::\+Utility\+::\+Max (\begin{DoxyParamCaption}\item[{const T \&}]{a}{, }\item[{const T \&}]{b}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get maximum of two values. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type of values \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First value \\
+\hline
+{\em b} & Second value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Maximum value 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a2a5f84b210e1114d04f0234ff2d6a687}\index{neo::extensions::Utility@{neo::extensions::Utility}!Min@{Min}}
+\index{Min@{Min}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{Min()}{Min()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a2a5f84b210e1114d04f0234ff2d6a687} 
+template$<$typename T$>$ \\
+const T \& neo\+::extensions\+::\+Utility\+::\+Min (\begin{DoxyParamCaption}\item[{const T \&}]{a}{, }\item[{const T \&}]{b}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get minimum of two values. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type of values \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First value \\
+\hline
+{\em b} & Second value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Minimum value 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_ac7ca2d5292e5674e148c981630c7315a}\index{neo::extensions::Utility@{neo::extensions::Utility}!NextPowerOf2@{NextPowerOf2}}
+\index{NextPowerOf2@{NextPowerOf2}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{NextPowerOf2()}{NextPowerOf2()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_ac7ca2d5292e5674e148c981630c7315a} 
+uint32\+\_\+t neo\+::extensions\+::\+Utility\+::\+Next\+Power\+Of2 (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculate next power of 2. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Input value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Next power of 2 \texorpdfstring{$>$}{>}= value 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_aaf20c25fc219a814f63adabe4cf50599}\index{neo::extensions::Utility@{neo::extensions::Utility}!Parse@{Parse}}
+\index{Parse@{Parse}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_aaf20c25fc219a814f63adabe4cf50599} 
+template$<$typename T$>$ \\
+T neo\+::extensions\+::\+Utility\+::\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Parse string to type T with exception on failure. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type to parse to \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to parse \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Parsed value 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a4df362f20806fe85aa2a7bcb47e7c74e}\index{neo::extensions::Utility@{neo::extensions::Utility}!Parse@{Parse}}
+\index{Parse@{Parse}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a4df362f20806fe85aa2a7bcb47e7c74e} 
+template$<$$>$ \\
+int neo\+::extensions\+::\+Utility\+::\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1extensions_1_1_utility_a217675a89819519e89c78784428f3d7b}\index{neo::extensions::Utility@{neo::extensions::Utility}!Parse@{Parse}}
+\index{Parse@{Parse}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a217675a89819519e89c78784428f3d7b} 
+template$<$$>$ \\
+long neo\+::extensions\+::\+Utility\+::\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1extensions_1_1_utility_a22bd0f7a77b40967e0e36371209eb88a}\index{neo::extensions::Utility@{neo::extensions::Utility}!Parse@{Parse}}
+\index{Parse@{Parse}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a22bd0f7a77b40967e0e36371209eb88a} 
+template$<$$>$ \\
+float neo\+::extensions\+::\+Utility\+::\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1extensions_1_1_utility_a225ecaccd539526efd3139b317f4a7f5}\index{neo::extensions::Utility@{neo::extensions::Utility}!Parse@{Parse}}
+\index{Parse@{Parse}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a225ecaccd539526efd3139b317f4a7f5} 
+template$<$$>$ \\
+double neo\+::extensions\+::\+Utility\+::\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1extensions_1_1_utility_a7f6baed99b3806d7486e60f19ddfc0d5}\index{neo::extensions::Utility@{neo::extensions::Utility}!Replace@{Replace}}
+\index{Replace@{Replace}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{Replace()}{Replace()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a7f6baed99b3806d7486e60f19ddfc0d5} 
+std\+::string neo\+::extensions\+::\+Utility\+::\+Replace (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{, }\item[{const std\+::string \&}]{from}{, }\item[{const std\+::string \&}]{to}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Replace all occurrences of substring. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to modify \\
+\hline
+{\em from} & Substring to replace \\
+\hline
+{\em to} & Replacement string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Modified string 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a21fedb11c044fc1339fc3fc201ce5f43}\index{neo::extensions::Utility@{neo::extensions::Utility}!ReverseBytes@{ReverseBytes}}
+\index{ReverseBytes@{ReverseBytes}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{ReverseBytes()}{ReverseBytes()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a21fedb11c044fc1339fc3fc201ce5f43} 
+void neo\+::extensions\+::\+Utility\+::\+Reverse\+Bytes (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Reverse bytes in memory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Pointer to data \\
+\hline
+{\em size} & Size in bytes \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1extensions_1_1_utility_aff0400ab8bd4a0086234b686294f5da5}\index{neo::extensions::Utility@{neo::extensions::Utility}!SafeCast@{SafeCast}}
+\index{SafeCast@{SafeCast}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{SafeCast()}{SafeCast()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_aff0400ab8bd4a0086234b686294f5da5} 
+template$<$typename To, typename From$>$ \\
+To neo\+::extensions\+::\+Utility\+::\+Safe\+Cast (\begin{DoxyParamCaption}\item[{const From \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Safe cast with range checking. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em To} & Target type \\
+\hline
+{\em From} & Source type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Value to cast \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Casted value 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_aa946a332b6fd7341e30b49a8d7a4ccb1}\index{neo::extensions::Utility@{neo::extensions::Utility}!SafeCast@{SafeCast}}
+\index{SafeCast@{SafeCast}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{SafeCast()}{SafeCast()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_aa946a332b6fd7341e30b49a8d7a4ccb1} 
+template$<$$>$ \\
+int32\+\_\+t neo\+::extensions\+::\+Utility\+::\+Safe\+Cast (\begin{DoxyParamCaption}\item[{const int64\+\_\+t \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1extensions_1_1_utility_a77c234ab6f2e3a1991356b6b1401eab8}\index{neo::extensions::Utility@{neo::extensions::Utility}!SafeCast@{SafeCast}}
+\index{SafeCast@{SafeCast}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{SafeCast()}{SafeCast()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a77c234ab6f2e3a1991356b6b1401eab8} 
+template$<$$>$ \\
+uint32\+\_\+t neo\+::extensions\+::\+Utility\+::\+Safe\+Cast (\begin{DoxyParamCaption}\item[{const uint64\+\_\+t \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1extensions_1_1_utility_a10567c23ace5906efab097fbca9979cc}\index{neo::extensions::Utility@{neo::extensions::Utility}!SecureCompareMemory@{SecureCompareMemory}}
+\index{SecureCompareMemory@{SecureCompareMemory}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{SecureCompareMemory()}{SecureCompareMemory()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a10567c23ace5906efab097fbca9979cc} 
+bool neo\+::extensions\+::\+Utility\+::\+Secure\+Compare\+Memory (\begin{DoxyParamCaption}\item[{const void \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{b}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Secure compare memory (constant time) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First memory block \\
+\hline
+{\em b} & Second memory block \\
+\hline
+{\em size} & Size in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if memory blocks are equal 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a3f232542c7959c0651ef8694c69090ed}\index{neo::extensions::Utility@{neo::extensions::Utility}!SecureZeroMemory@{SecureZeroMemory}}
+\index{SecureZeroMemory@{SecureZeroMemory}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{SecureZeroMemory()}{SecureZeroMemory()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a3f232542c7959c0651ef8694c69090ed} 
+void neo\+::extensions\+::\+Utility\+::\+Secure\+Zero\+Memory (\begin{DoxyParamCaption}\item[{void \texorpdfstring{$\ast$}{*}}]{ptr}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Safely zero memory (prevents compiler optimization) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ptr} & Pointer to memory \\
+\hline
+{\em size} & Size in bytes \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a22771dd0f87fa4258a346fdceaf1aa03}\index{neo::extensions::Utility@{neo::extensions::Utility}!Split@{Split}}
+\index{Split@{Split}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{Split()}{Split()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a22771dd0f87fa4258a346fdceaf1aa03} 
+std\+::vector$<$ std\+::string $>$ neo\+::extensions\+::\+Utility\+::\+Split (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{, }\item[{const std\+::string \&}]{delimiter}{, }\item[{bool}]{remove\+Empty}{ = {\ttfamily true}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Split string by delimiter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to split \\
+\hline
+{\em delimiter} & Delimiter string \\
+\hline
+{\em remove\+Empty} & Whether to remove empty parts \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector of string parts 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a4763227514c8fdd27b48e3d391d76ca7}\index{neo::extensions::Utility@{neo::extensions::Utility}!StartsWith@{StartsWith}}
+\index{StartsWith@{StartsWith}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{StartsWith()}{StartsWith()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a4763227514c8fdd27b48e3d391d76ca7} 
+bool neo\+::extensions\+::\+Utility\+::\+Starts\+With (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{, }\item[{const std\+::string \&}]{prefix}{, }\item[{bool}]{ignore\+Case}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if string starts with prefix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to check \\
+\hline
+{\em prefix} & Prefix to look for \\
+\hline
+{\em ignore\+Case} & Whether to ignore case \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if string starts with prefix 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1extensions_1_1_utility_a0eeeb454828ea5811b1e406ffccd0f61}\index{neo::extensions::Utility@{neo::extensions::Utility}!Swap@{Swap}}
+\index{Swap@{Swap}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{Swap()}{Swap()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a0eeeb454828ea5811b1e406ffccd0f61} 
+template$<$typename T$>$ \\
+void neo\+::extensions\+::\+Utility\+::\+Swap (\begin{DoxyParamCaption}\item[{T \&}]{a}{, }\item[{T \&}]{b}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Swap two values. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type of values \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First value \\
+\hline
+{\em b} & Second value \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1extensions_1_1_utility_a9f3bb81949486ff05c58daba0393e2d6}\index{neo::extensions::Utility@{neo::extensions::Utility}!ToLower@{ToLower}}
+\index{ToLower@{ToLower}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{ToLower()}{ToLower()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a9f3bb81949486ff05c58daba0393e2d6} 
+std\+::string neo\+::extensions\+::\+Utility\+::\+To\+Lower (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert string to lowercase. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Lowercase string 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a09d3c1b4f56fc056d1eab81dc947ba9c}\index{neo::extensions::Utility@{neo::extensions::Utility}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a09d3c1b4f56fc056d1eab81dc947ba9c} 
+template$<$$>$ \\
+std\+::string neo\+::extensions\+::\+Utility\+::\+To\+String (\begin{DoxyParamCaption}\item[{const double \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1extensions_1_1_utility_a62a19f8b486364b108d07fe0dff9ea50}\index{neo::extensions::Utility@{neo::extensions::Utility}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a62a19f8b486364b108d07fe0dff9ea50} 
+template$<$$>$ \\
+std\+::string neo\+::extensions\+::\+Utility\+::\+To\+String (\begin{DoxyParamCaption}\item[{const float \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1extensions_1_1_utility_a5680bde451715ae31b5d3a936a7a5fa7}\index{neo::extensions::Utility@{neo::extensions::Utility}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a5680bde451715ae31b5d3a936a7a5fa7} 
+template$<$$>$ \\
+std\+::string neo\+::extensions\+::\+Utility\+::\+To\+String (\begin{DoxyParamCaption}\item[{const int \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1extensions_1_1_utility_a064e6217f3d300e2d0775af7f4313816}\index{neo::extensions::Utility@{neo::extensions::Utility}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a064e6217f3d300e2d0775af7f4313816} 
+template$<$$>$ \\
+std\+::string neo\+::extensions\+::\+Utility\+::\+To\+String (\begin{DoxyParamCaption}\item[{const long \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1extensions_1_1_utility_a0f1dc6ffe66b686b75920bd18638e724}\index{neo::extensions::Utility@{neo::extensions::Utility}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a0f1dc6ffe66b686b75920bd18638e724} 
+template$<$typename T$>$ \\
+std\+::string neo\+::extensions\+::\+Utility\+::\+To\+String (\begin{DoxyParamCaption}\item[{const T \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert value to string. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type to convert \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Value to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String representation 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a0ce813752ca6f57ce72d4b9c4566e39b}\index{neo::extensions::Utility@{neo::extensions::Utility}!ToUpper@{ToUpper}}
+\index{ToUpper@{ToUpper}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{ToUpper()}{ToUpper()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a0ce813752ca6f57ce72d4b9c4566e39b} 
+std\+::string neo\+::extensions\+::\+Utility\+::\+To\+Upper (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert string to uppercase. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Uppercase string 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a32991a0c7431d1561e5255b01cfb9dc3}\index{neo::extensions::Utility@{neo::extensions::Utility}!Trim@{Trim}}
+\index{Trim@{Trim}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{Trim()}{Trim()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a32991a0c7431d1561e5255b01cfb9dc3} 
+std\+::string neo\+::extensions\+::\+Utility\+::\+Trim (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Trim whitespace from both ends of string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to trim \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Trimmed string 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1extensions_1_1_utility_a51f8ddf57191bf24cebaef38d5772967}\index{neo::extensions::Utility@{neo::extensions::Utility}!TrimLeft@{TrimLeft}}
+\index{TrimLeft@{TrimLeft}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{TrimLeft()}{TrimLeft()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a51f8ddf57191bf24cebaef38d5772967} 
+std\+::string neo\+::extensions\+::\+Utility\+::\+Trim\+Left (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Trim whitespace from left end of string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to trim \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Trimmed string 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a857c033786cee08f1effb8fd011ce3a8}\index{neo::extensions::Utility@{neo::extensions::Utility}!TrimRight@{TrimRight}}
+\index{TrimRight@{TrimRight}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{TrimRight()}{TrimRight()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a857c033786cee08f1effb8fd011ce3a8} 
+std\+::string neo\+::extensions\+::\+Utility\+::\+Trim\+Right (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Trim whitespace from right end of string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to trim \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Trimmed string 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_aff06fbffb602a28f9519c92d1dde3aa0}\index{neo::extensions::Utility@{neo::extensions::Utility}!TryParse@{TryParse}}
+\index{TryParse@{TryParse}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{TryParse()}{TryParse()}\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_aff06fbffb602a28f9519c92d1dde3aa0} 
+template$<$$>$ \\
+bool neo\+::extensions\+::\+Utility\+::\+Try\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{, }\item[{double \&}]{result}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1extensions_1_1_utility_a11d2baf70b9bcabb4b06188a713616ea}\index{neo::extensions::Utility@{neo::extensions::Utility}!TryParse@{TryParse}}
+\index{TryParse@{TryParse}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{TryParse()}{TryParse()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a11d2baf70b9bcabb4b06188a713616ea} 
+template$<$$>$ \\
+bool neo\+::extensions\+::\+Utility\+::\+Try\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{, }\item[{float \&}]{result}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1extensions_1_1_utility_a1e36bc2f449590aa4110b0d16c01dae9}\index{neo::extensions::Utility@{neo::extensions::Utility}!TryParse@{TryParse}}
+\index{TryParse@{TryParse}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{TryParse()}{TryParse()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a1e36bc2f449590aa4110b0d16c01dae9} 
+template$<$$>$ \\
+bool neo\+::extensions\+::\+Utility\+::\+Try\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{, }\item[{int \&}]{result}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1extensions_1_1_utility_a9662b8f093cd780d81c423e514f1c4a0}\index{neo::extensions::Utility@{neo::extensions::Utility}!TryParse@{TryParse}}
+\index{TryParse@{TryParse}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{TryParse()}{TryParse()}\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a9662b8f093cd780d81c423e514f1c4a0} 
+template$<$$>$ \\
+bool neo\+::extensions\+::\+Utility\+::\+Try\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{, }\item[{long \&}]{result}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1extensions_1_1_utility_acf655010700143cf9d74cc14fb7f27d2}\index{neo::extensions::Utility@{neo::extensions::Utility}!TryParse@{TryParse}}
+\index{TryParse@{TryParse}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{TryParse()}{TryParse()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_acf655010700143cf9d74cc14fb7f27d2} 
+template$<$$>$ \\
+bool neo\+::extensions\+::\+Utility\+::\+Try\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{, }\item[{long long \&}]{result}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1extensions_1_1_utility_ab8a26240dec9a3965645ae0c53280070}\index{neo::extensions::Utility@{neo::extensions::Utility}!TryParse@{TryParse}}
+\index{TryParse@{TryParse}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{TryParse()}{TryParse()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_ab8a26240dec9a3965645ae0c53280070} 
+template$<$typename T$>$ \\
+bool neo\+::extensions\+::\+Utility\+::\+Try\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{, }\item[{T \&}]{result}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Try to parse string to type T. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type to parse to \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to parse \\
+\hline
+{\em result} & Output parameter for result \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if parsing succeeded 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_utility_a02eccc4eb9dd6804e177a485a2c2ed04}\index{neo::extensions::Utility@{neo::extensions::Utility}!TryParse@{TryParse}}
+\index{TryParse@{TryParse}!neo::extensions::Utility@{neo::extensions::Utility}}
+\doxysubsubsection{\texorpdfstring{TryParse()}{TryParse()}\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_utility_a02eccc4eb9dd6804e177a485a2c2ed04} 
+template$<$$>$ \\
+bool neo\+::extensions\+::\+Utility\+::\+Try\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{, }\item[{unsigned int \&}]{result}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/extensions/\mbox{\hyperlink{utility_8h}{utility.\+h}}\item 
+src/extensions/\mbox{\hyperlink{utility_8cpp}{utility.\+cpp}}\end{DoxyCompactItemize}

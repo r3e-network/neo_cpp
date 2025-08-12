@@ -1,0 +1,70 @@
+\doxysection{safe\+\_\+type\+\_\+converters.\+h}
+\hypertarget{safe__type__converters_8h_source}{}\label{safe__type__converters_8h_source}\index{include/neo/cli/safe\_type\_converters.h@{include/neo/cli/safe\_type\_converters.h}}
+\mbox{\hyperlink{safe__type__converters_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <any>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <typeinfo>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cli}{neo::cli}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a7fe17714fab09ad461a4895798c5571b}{SafeTypeConverters}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a4687237bfcd4f48347855c7492b5f980}{SafeTypeConverter}}\ =\ std::function<std::any(\textcolor{keyword}{const}\ std::vector<std::string>\&,\ \textcolor{keywordtype}{bool})>;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a7fe17714fab09ad461a4895798c5571b}{SafeTypeConverters}}\&\ \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a21cc3745e87043b19c0dac96d281cba1}{Instance}}()}
+\DoxyCodeLine{00030\ \ \ \ \ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a7fe17714fab09ad461a4895798c5571b}{SafeTypeConverters}}\ instance;}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a4aeb6cc4d04d289a0159c16795b1ef38}{RegisterConverter}}(\textcolor{keyword}{const}\ std::string\&\ typeName,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<T(\textcolor{keyword}{const}\ std::vector<std::string>\&,\ \textcolor{keywordtype}{bool})>\ converter)}
+\DoxyCodeLine{00043\ \ \ \ \ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a7cac8f1b90c8cecdfb997e018a6f70c6}{converters\_}}[typeName]\ =\ [converter](\textcolor{keyword}{const}\ std::vector<std::string>\&\ args,\ \textcolor{keywordtype}{bool}\ canConsumeAll)\ -\/>\ std::any}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \{\ \textcolor{keywordflow}{return}\ std::make\_shared<T>(converter(args,\ canConsumeAll));\ \};}
+\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00056\ \ \ \ \ std::shared\_ptr<T>\ \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_acd50de6501c7ce348b5c88eed23997af}{Convert}}(\textcolor{keyword}{const}\ std::string\&\ typeName,\ \textcolor{keyword}{const}\ std::vector<std::string>\&\ args,}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ canConsumeAll\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00058\ \ \ \ \ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a7cac8f1b90c8cecdfb997e018a6f70c6}{converters\_}}.find(typeName);}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ ==\ \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a7cac8f1b90c8cecdfb997e018a6f70c6}{converters\_}}.end())}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}No\ converter\ found\ for\ type:\ "{}}\ +\ typeName);}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ std::any\ result\ =\ it-\/>second(args,\ canConsumeAll);}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::any\_cast<std::shared\_ptr<T>>(result);}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::bad\_any\_cast\&\ e)}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Type\ mismatch\ in\ converter\ for\ "{}}\ +\ typeName\ +\ \textcolor{stringliteral}{"{}:\ "{}}\ +\ e.what());}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00074\ \ \ \ \ \}}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a4ecdbefd90f6c49adcdd0fb9caf17a95}{HasConverter}}(\textcolor{keyword}{const}\ std::string\&\ typeName)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a7cac8f1b90c8cecdfb997e018a6f70c6}{converters\_}}.find(typeName)\ !=\ \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a7cac8f1b90c8cecdfb997e018a6f70c6}{converters\_}}.end();\ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a108d1534dc56d8095bc6fac7d2791ae9}{InitializeDefaultConverters}}();}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00089\ \ \ \ \ std::unordered\_map<std::string,\ SafeTypeConverter>\ \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a7cac8f1b90c8cecdfb997e018a6f70c6}{converters\_}};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a7fe17714fab09ad461a4895798c5571b}{SafeTypeConverters}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00092\ \};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cli}}
+
+\end{DoxyCode}

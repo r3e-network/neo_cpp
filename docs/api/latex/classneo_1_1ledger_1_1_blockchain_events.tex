@@ -1,0 +1,190 @@
+\doxysection{neo\+::ledger\+::Blockchain\+Events Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_blockchain_events}{}\label{classneo_1_1ledger_1_1_blockchain_events}\index{neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}}
+
+
+Static event system for \doxylink{classneo_1_1ledger_1_1_blockchain}{Blockchain} events.  
+
+
+
+
+{\ttfamily \#include $<$event\+\_\+system.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a2c75f8c0eae71f22fcc2e44c62ca25cb}{Committing\+Handler}}
+\item 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a8a9edee4f1eb0241b4b5fa9233db684c}{Committed\+Handler}} = std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system}{Neo\+System}}$>$, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}}$>$)$>$
+\item 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_aeb50002bdf0ec1cbcb200289b3dcf049}{Block\+Persisted\+Handler}} = std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}}$>$)$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a769ab6bc56d65e6d5173b4292c4fe176}{Subscribe\+Committing}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a2c75f8c0eae71f22fcc2e44c62ca25cb}{Committing\+Handler}} handler)
+\begin{DoxyCompactList}\small\item\em Subscribes to the Committing event. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a7c7a471e554d28e251e26a0e15d58307}{Subscribe\+Committed}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a8a9edee4f1eb0241b4b5fa9233db684c}{Committed\+Handler}} handler)
+\begin{DoxyCompactList}\small\item\em Subscribes to the Committed event. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a07d3d45b17e38d37959aa7ca7446b108}{Subscribe\+Block\+Persisted}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_aeb50002bdf0ec1cbcb200289b3dcf049}{Block\+Persisted\+Handler}} handler)
+\begin{DoxyCompactList}\small\item\em Subscribes to the Block\+Persisted event. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a67ac7112b4a248e926a4023d780a20d2}{Fire\+Committing}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system}{Neo\+System}} $>$ system, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ block, std\+::shared\+\_\+ptr$<$ Data\+Cache $>$ cache, const std\+::vector$<$ \mbox{\hyperlink{structneo_1_1ledger_1_1_application_executed}{Application\+Executed}} $>$ \&executed)
+\begin{DoxyCompactList}\small\item\em Fires the Committing event. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_aaecbaa253f9ba6db438ce57d467b4512}{Fire\+Committed}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system}{Neo\+System}} $>$ system, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ block)
+\begin{DoxyCompactList}\small\item\em Fires the Committed event. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a1570ebfccbb44a56d346eab124e22939}{Fire\+Block\+Persisted}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ block)
+\begin{DoxyCompactList}\small\item\em Fires the Block\+Persisted event. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_ae269a3e9004e7263b6e3f8813620e188}{Clear\+All\+Subscriptions}} ()
+\begin{DoxyCompactList}\small\item\em Clears all event subscriptions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a2c75f8c0eae71f22fcc2e44c62ca25cb}{Committing\+Handler}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a7fb8dcc3bb5c99d19bc30f9911967be5}{committing\+\_\+handlers\+\_\+}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a8a9edee4f1eb0241b4b5fa9233db684c}{Committed\+Handler}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a3c021fb00465610fa50e1c56696b8122}{committed\+\_\+handlers\+\_\+}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_aeb50002bdf0ec1cbcb200289b3dcf049}{Block\+Persisted\+Handler}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_ae930eb2b8f549af27cf0f941e8444eec}{block\+\_\+persisted\+\_\+handlers\+\_\+}}
+\item 
+static std\+::mutex \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a807df16228ebae4d18b68faa431469c2}{handlers\+\_\+mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Static event system for \doxylink{classneo_1_1ledger_1_1_blockchain}{Blockchain} events. 
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_aeb50002bdf0ec1cbcb200289b3dcf049}\index{neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}!BlockPersistedHandler@{BlockPersistedHandler}}
+\index{BlockPersistedHandler@{BlockPersistedHandler}!neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}}
+\doxysubsubsection{\texorpdfstring{BlockPersistedHandler}{BlockPersistedHandler}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_events_aeb50002bdf0ec1cbcb200289b3dcf049} 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_aeb50002bdf0ec1cbcb200289b3dcf049}{neo\+::ledger\+::\+Blockchain\+Events\+::\+Block\+Persisted\+Handler}} = std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}}$>$)$>$}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_a8a9edee4f1eb0241b4b5fa9233db684c}\index{neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}!CommittedHandler@{CommittedHandler}}
+\index{CommittedHandler@{CommittedHandler}!neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}}
+\doxysubsubsection{\texorpdfstring{CommittedHandler}{CommittedHandler}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_events_a8a9edee4f1eb0241b4b5fa9233db684c} 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a8a9edee4f1eb0241b4b5fa9233db684c}{neo\+::ledger\+::\+Blockchain\+Events\+::\+Committed\+Handler}} = std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system}{Neo\+System}}$>$, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}}$>$)$>$}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_a2c75f8c0eae71f22fcc2e44c62ca25cb}\index{neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}!CommittingHandler@{CommittingHandler}}
+\index{CommittingHandler@{CommittingHandler}!neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}}
+\doxysubsubsection{\texorpdfstring{CommittingHandler}{CommittingHandler}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_events_a2c75f8c0eae71f22fcc2e44c62ca25cb} 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a2c75f8c0eae71f22fcc2e44c62ca25cb}{neo\+::ledger\+::\+Blockchain\+Events\+::\+Committing\+Handler}}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ std::function<void(std::shared\_ptr<NeoSystem>,\ std::shared\_ptr<Block>,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<DataCache>,\ \textcolor{keyword}{const}\ std::vector<ApplicationExecuted>\&)>}
+
+\end{DoxyCode}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_ae269a3e9004e7263b6e3f8813620e188}\index{neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}!ClearAllSubscriptions@{ClearAllSubscriptions}}
+\index{ClearAllSubscriptions@{ClearAllSubscriptions}!neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}}
+\doxysubsubsection{\texorpdfstring{ClearAllSubscriptions()}{ClearAllSubscriptions()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_events_ae269a3e9004e7263b6e3f8813620e188} 
+void neo\+::ledger\+::\+Blockchain\+Events\+::\+Clear\+All\+Subscriptions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Clears all event subscriptions. 
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_a1570ebfccbb44a56d346eab124e22939}\index{neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}!FireBlockPersisted@{FireBlockPersisted}}
+\index{FireBlockPersisted@{FireBlockPersisted}!neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}}
+\doxysubsubsection{\texorpdfstring{FireBlockPersisted()}{FireBlockPersisted()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_events_a1570ebfccbb44a56d346eab124e22939} 
+void neo\+::ledger\+::\+Blockchain\+Events\+::\+Fire\+Block\+Persisted (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$}]{block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Fires the Block\+Persisted event. 
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_aaecbaa253f9ba6db438ce57d467b4512}\index{neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}!FireCommitted@{FireCommitted}}
+\index{FireCommitted@{FireCommitted}!neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}}
+\doxysubsubsection{\texorpdfstring{FireCommitted()}{FireCommitted()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_events_aaecbaa253f9ba6db438ce57d467b4512} 
+void neo\+::ledger\+::\+Blockchain\+Events\+::\+Fire\+Committed (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system}{Neo\+System}} $>$}]{system}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$}]{block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Fires the Committed event. 
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_a67ac7112b4a248e926a4023d780a20d2}\index{neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}!FireCommitting@{FireCommitting}}
+\index{FireCommitting@{FireCommitting}!neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}}
+\doxysubsubsection{\texorpdfstring{FireCommitting()}{FireCommitting()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_events_a67ac7112b4a248e926a4023d780a20d2} 
+void neo\+::ledger\+::\+Blockchain\+Events\+::\+Fire\+Committing (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system}{Neo\+System}} $>$}]{system}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$}]{block}{, }\item[{std\+::shared\+\_\+ptr$<$ Data\+Cache $>$}]{cache}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{structneo_1_1ledger_1_1_application_executed}{Application\+Executed}} $>$ \&}]{executed}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Fires the Committing event. 
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_a07d3d45b17e38d37959aa7ca7446b108}\index{neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}!SubscribeBlockPersisted@{SubscribeBlockPersisted}}
+\index{SubscribeBlockPersisted@{SubscribeBlockPersisted}!neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}}
+\doxysubsubsection{\texorpdfstring{SubscribeBlockPersisted()}{SubscribeBlockPersisted()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_events_a07d3d45b17e38d37959aa7ca7446b108} 
+void neo\+::ledger\+::\+Blockchain\+Events\+::\+Subscribe\+Block\+Persisted (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_aeb50002bdf0ec1cbcb200289b3dcf049}{Block\+Persisted\+Handler}}}]{handler}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Subscribes to the Block\+Persisted event. 
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_a7c7a471e554d28e251e26a0e15d58307}\index{neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}!SubscribeCommitted@{SubscribeCommitted}}
+\index{SubscribeCommitted@{SubscribeCommitted}!neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}}
+\doxysubsubsection{\texorpdfstring{SubscribeCommitted()}{SubscribeCommitted()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_events_a7c7a471e554d28e251e26a0e15d58307} 
+void neo\+::ledger\+::\+Blockchain\+Events\+::\+Subscribe\+Committed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a8a9edee4f1eb0241b4b5fa9233db684c}{Committed\+Handler}}}]{handler}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Subscribes to the Committed event. 
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_a769ab6bc56d65e6d5173b4292c4fe176}\index{neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}!SubscribeCommitting@{SubscribeCommitting}}
+\index{SubscribeCommitting@{SubscribeCommitting}!neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}}
+\doxysubsubsection{\texorpdfstring{SubscribeCommitting()}{SubscribeCommitting()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_events_a769ab6bc56d65e6d5173b4292c4fe176} 
+void neo\+::ledger\+::\+Blockchain\+Events\+::\+Subscribe\+Committing (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a2c75f8c0eae71f22fcc2e44c62ca25cb}{Committing\+Handler}}}]{handler}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Subscribes to the Committing event. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_ae930eb2b8f549af27cf0f941e8444eec}\index{neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}!block\_persisted\_handlers\_@{block\_persisted\_handlers\_}}
+\index{block\_persisted\_handlers\_@{block\_persisted\_handlers\_}!neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}}
+\doxysubsubsection{\texorpdfstring{block\_persisted\_handlers\_}{block\_persisted\_handlers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_events_ae930eb2b8f549af27cf0f941e8444eec} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_aeb50002bdf0ec1cbcb200289b3dcf049}{Blockchain\+Events\+::\+Block\+Persisted\+Handler}} $>$ neo\+::ledger\+::\+Blockchain\+Events\+::block\+\_\+persisted\+\_\+handlers\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_a3c021fb00465610fa50e1c56696b8122}\index{neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}!committed\_handlers\_@{committed\_handlers\_}}
+\index{committed\_handlers\_@{committed\_handlers\_}!neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}}
+\doxysubsubsection{\texorpdfstring{committed\_handlers\_}{committed\_handlers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_events_a3c021fb00465610fa50e1c56696b8122} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a8a9edee4f1eb0241b4b5fa9233db684c}{Blockchain\+Events\+::\+Committed\+Handler}} $>$ neo\+::ledger\+::\+Blockchain\+Events\+::committed\+\_\+handlers\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_a7fb8dcc3bb5c99d19bc30f9911967be5}\index{neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}!committing\_handlers\_@{committing\_handlers\_}}
+\index{committing\_handlers\_@{committing\_handlers\_}!neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}}
+\doxysubsubsection{\texorpdfstring{committing\_handlers\_}{committing\_handlers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_events_a7fb8dcc3bb5c99d19bc30f9911967be5} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a2c75f8c0eae71f22fcc2e44c62ca25cb}{Blockchain\+Events\+::\+Committing\+Handler}} $>$ neo\+::ledger\+::\+Blockchain\+Events\+::committing\+\_\+handlers\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_events_a807df16228ebae4d18b68faa431469c2}\index{neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}!handlers\_mutex\_@{handlers\_mutex\_}}
+\index{handlers\_mutex\_@{handlers\_mutex\_}!neo::ledger::BlockchainEvents@{neo::ledger::BlockchainEvents}}
+\doxysubsubsection{\texorpdfstring{handlers\_mutex\_}{handlers\_mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_events_a807df16228ebae4d18b68faa431469c2} 
+std\+::mutex neo\+::ledger\+::\+Blockchain\+Events\+::handlers\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{event__system_8h}{event\+\_\+system.\+h}}\item 
+src/ledger/\mbox{\hyperlink{event__system_8cpp}{event\+\_\+system.\+cpp}}\end{DoxyCompactItemize}

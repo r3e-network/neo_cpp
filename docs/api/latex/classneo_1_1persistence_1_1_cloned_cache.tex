@@ -1,0 +1,281 @@
+\doxysection{neo\+::persistence\+::Cloned\+Cache\texorpdfstring{$<$}{<} TKey, TValue \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classneo_1_1persistence_1_1_cloned_cache}{}\label{classneo_1_1persistence_1_1_cloned_cache}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+
+
+A cache that clones data from another cache. Provides isolation for read operations while maintaining a reference to the original cache.  
+
+
+
+
+{\ttfamily \#include $<$cloned\+\_\+cache.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8ac623ed5ea45386f7838b24dcc76603}{Cloned\+Cache}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{Data\+Cache}} $>$ inner)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a52a09e61d05b51177cec3103bfa41d2c}{\texorpdfstring{$\sim$}{\string~}\+Cloned\+Cache}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_aa16c66ab93ab308c502a4ed66f2a33f7}{Add}} (const TKey \&key, const TValue \&value)
+\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a49dbfd6c1567ea05c53af18ee8c1ab6c}{Delete}} (const TKey \&key)
+\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a2e740e6317ec37037cbeda8328fffaad}{Contains}} (const TKey \&key) const
+\item 
+TValue \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_aa524e3b651afee6da3cd39abdfdd1343}{Get}} (const TKey \&key) const
+\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a1408f7d3caacd1d2b3c5dfeb03915b23}{Try\+Get}} (const TKey \&key, TValue \&value) const
+\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_ab19be8b94b6a3ae37b24c658d2f022af}{Update}} (const TKey \&key, const TValue \&value)
+\item 
+std\+::vector$<$ std\+::pair$<$ TKey, TValue $>$ $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_afd514a19936cf0982f595a90918bc0ed}{Find}} (std\+::span$<$ const uint8\+\_\+t $>$ key\+\_\+prefix=\{\}) const
+\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a04fcbf7ccfff16613085a3ebced1d453}{Commit}} ()
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a6a8f1ee80abf132b4cea47169778429a}{Count}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of items in the cache. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_afd2bf94b94f3aef2390f763a2e737d8d}{Is\+Read\+Only}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the cache is read-\/only. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{Data\+Cache}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a2d36f834755a87d29d3cc7f441c1f454}{Get\+Inner}} () const
+\begin{DoxyCompactList}\small\item\em Gets the inner cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a5ad4fe4766ae43a2b8869e990079a1a6}{Ensure\+Cloned}} () const
+\begin{DoxyCompactList}\small\item\em Ensures the cache is cloned. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a24f9c23b37d5de531c70137a6df0dd80}{Clone\+Item}} (const TKey \&key) const
+\begin{DoxyCompactList}\small\item\em Clones an item from the inner cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{Data\+Cache}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}{inner\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ TKey, TValue $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7}{cloned\+\_\+items\+\_\+}}
+\item 
+std\+::unordered\+\_\+set$<$ TKey $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}{deleted\+\_\+items\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache_a0ec517f4505672fccaae506a29d56cb8}{is\+\_\+cloned\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename TKey, typename TValue$>$\newline
+class neo\+::persistence\+::\+Cloned\+Cache$<$ TKey, TValue $>$}
+A cache that clones data from another cache. Provides isolation for read operations while maintaining a reference to the original cache. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_a8ac623ed5ea45386f7838b24dcc76603}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!ClonedCache@{ClonedCache}}
+\index{ClonedCache@{ClonedCache}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{ClonedCache()}{ClonedCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_a8ac623ed5ea45386f7838b24dcc76603} 
+template$<$typename TKey, typename TValue$>$ \\
+\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::\+Cloned\+Cache (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{Data\+Cache}} $>$}]{inner}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inner} & The inner cache to clone from. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_a52a09e61d05b51177cec3103bfa41d2c}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!````~ClonedCache@{\texorpdfstring{$\sim$}{\string~}ClonedCache}}
+\index{````~ClonedCache@{\texorpdfstring{$\sim$}{\string~}ClonedCache}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ClonedCache()}{\string~ClonedCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_a52a09e61d05b51177cec3103bfa41d2c} 
+template$<$typename TKey, typename TValue$>$ \\
+\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{Cloned\+Cache}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_aa16c66ab93ab308c502a4ed66f2a33f7}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!Add@{Add}}
+\index{Add@{Add}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_aa16c66ab93ab308c502a4ed66f2a33f7} 
+template$<$typename TKey, typename TValue$>$ \\
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::\+Add (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{, }\item[{const TValue \&}]{value}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_a24f9c23b37d5de531c70137a6df0dd80}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!CloneItem@{CloneItem}}
+\index{CloneItem@{CloneItem}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{CloneItem()}{CloneItem()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_a24f9c23b37d5de531c70137a6df0dd80} 
+template$<$typename TKey, typename TValue$>$ \\
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::\+Clone\+Item (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Clones an item from the inner cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to clone. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_a04fcbf7ccfff16613085a3ebced1d453}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!Commit@{Commit}}
+\index{Commit@{Commit}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Commit()}{Commit()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_a04fcbf7ccfff16613085a3ebced1d453} 
+template$<$typename TKey, typename TValue$>$ \\
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::\+Commit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_a2e740e6317ec37037cbeda8328fffaad}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!Contains@{Contains}}
+\index{Contains@{Contains}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_a2e740e6317ec37037cbeda8328fffaad} 
+template$<$typename TKey, typename TValue$>$ \\
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::\+Contains (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_a6a8f1ee80abf132b4cea47169778429a}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!Count@{Count}}
+\index{Count@{Count}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Count()}{Count()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_a6a8f1ee80abf132b4cea47169778429a} 
+template$<$typename TKey, typename TValue$>$ \\
+size\+\_\+t \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of items in the cache. 
+
+\begin{DoxyReturn}{Returns}
+The number of items. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_a49dbfd6c1567ea05c53af18ee8c1ab6c}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!Delete@{Delete}}
+\index{Delete@{Delete}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Delete()}{Delete()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_a49dbfd6c1567ea05c53af18ee8c1ab6c} 
+template$<$typename TKey, typename TValue$>$ \\
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::\+Delete (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_a5ad4fe4766ae43a2b8869e990079a1a6}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!EnsureCloned@{EnsureCloned}}
+\index{EnsureCloned@{EnsureCloned}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{EnsureCloned()}{EnsureCloned()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_a5ad4fe4766ae43a2b8869e990079a1a6} 
+template$<$typename TKey, typename TValue$>$ \\
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::\+Ensure\+Cloned (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Ensures the cache is cloned. 
+
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_afd514a19936cf0982f595a90918bc0ed}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!Find@{Find}}
+\index{Find@{Find}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Find()}{Find()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_afd514a19936cf0982f595a90918bc0ed} 
+template$<$typename TKey, typename TValue$>$ \\
+std\+::vector$<$ std\+::pair$<$ TKey, TValue $>$ $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::\+Find (\begin{DoxyParamCaption}\item[{std\+::span$<$ const uint8\+\_\+t $>$}]{key\+\_\+prefix}{ = {\ttfamily \{\}}}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_aa524e3b651afee6da3cd39abdfdd1343}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!Get@{Get}}
+\index{Get@{Get}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_aa524e3b651afee6da3cd39abdfdd1343} 
+template$<$typename TKey, typename TValue$>$ \\
+TValue \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::\+Get (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_a2d36f834755a87d29d3cc7f441c1f454}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!GetInner@{GetInner}}
+\index{GetInner@{GetInner}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{GetInner()}{GetInner()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_a2d36f834755a87d29d3cc7f441c1f454} 
+template$<$typename TKey, typename TValue$>$ \\
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{Data\+Cache}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::\+Get\+Inner (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the inner cache. 
+
+\begin{DoxyReturn}{Returns}
+The inner cache. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_afd2bf94b94f3aef2390f763a2e737d8d}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!IsReadOnly@{IsReadOnly}}
+\index{IsReadOnly@{IsReadOnly}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{IsReadOnly()}{IsReadOnly()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_afd2bf94b94f3aef2390f763a2e737d8d} 
+template$<$typename TKey, typename TValue$>$ \\
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::\+Is\+Read\+Only (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the cache is read-\/only. 
+
+\begin{DoxyReturn}{Returns}
+True if read-\/only, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_a1408f7d3caacd1d2b3c5dfeb03915b23}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!TryGet@{TryGet}}
+\index{TryGet@{TryGet}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{TryGet()}{TryGet()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_a1408f7d3caacd1d2b3c5dfeb03915b23} 
+template$<$typename TKey, typename TValue$>$ \\
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::\+Try\+Get (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{, }\item[{TValue \&}]{value}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_ab19be8b94b6a3ae37b24c658d2f022af}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!Update@{Update}}
+\index{Update@{Update}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_ab19be8b94b6a3ae37b24c658d2f022af} 
+template$<$typename TKey, typename TValue$>$ \\
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::\+Update (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{, }\item[{const TValue \&}]{value}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 8
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!cloned\_items\_@{cloned\_items\_}}
+\index{cloned\_items\_@{cloned\_items\_}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{cloned\_items\_}{cloned\_items\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_a4df09c647ec455d8e83c1693430c52b7} 
+template$<$typename TKey, typename TValue$>$ \\
+std\+::unordered\+\_\+map$<$TKey, TValue$>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::cloned\+\_\+items\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!deleted\_items\_@{deleted\_items\_}}
+\index{deleted\_items\_@{deleted\_items\_}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{deleted\_items\_}{deleted\_items\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_a8c44a7d90655f1dd9e7042a67cd36d9a} 
+template$<$typename TKey, typename TValue$>$ \\
+std\+::unordered\+\_\+set$<$TKey$>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::deleted\+\_\+items\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!inner\_@{inner\_}}
+\index{inner\_@{inner\_}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{inner\_}{inner\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_a7983620696b086a8447dae99baf4812b} 
+template$<$typename TKey, typename TValue$>$ \\
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{Data\+Cache}}$>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::inner\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_cloned_cache_a0ec517f4505672fccaae506a29d56cb8}\index{neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}!is\_cloned\_@{is\_cloned\_}}
+\index{is\_cloned\_@{is\_cloned\_}!neo::persistence::ClonedCache$<$ TKey, TValue $>$@{neo::persistence::ClonedCache$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{is\_cloned\_}{is\_cloned\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_cloned_cache_a0ec517f4505672fccaae506a29d56cb8} 
+template$<$typename TKey, typename TValue$>$ \\
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{neo\+::persistence\+::\+Cloned\+Cache}}$<$ TKey, TValue $>$\+::is\+\_\+cloned\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/persistence/\mbox{\hyperlink{cloned__cache_8h}{cloned\+\_\+cache.\+h}}\end{DoxyCompactItemize}

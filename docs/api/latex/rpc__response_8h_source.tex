@@ -1,0 +1,53 @@
+\doxysection{rpc\+\_\+response.\+h}
+\hypertarget{rpc__response_8h_source}{}\label{rpc__response_8h_source}\index{include/neo/rpc/rpc\_response.h@{include/neo/rpc/rpc\_response.h}}
+\mbox{\hyperlink{rpc__response_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json_8hpp}{nlohmann/json.hpp}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1rpc}{neo::rpc}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a90b6d4291742f116616fe6185b74bd16}{RpcResponse}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a90b6d4291742f116616fe6185b74bd16}{RpcResponse}}();}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a90b6d4291742f116616fe6185b74bd16}{RpcResponse}}(\textcolor{keyword}{const}\ std::string\&\ jsonrpc,\ \textcolor{keyword}{const}\ nlohmann::json\&\ result,\ \textcolor{keyword}{const}\ nlohmann::json\&\ error,}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ nlohmann::json\&\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_acdfb3664d7e9320b142ec781afa3e2a2}{GetJsonRpc}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a05517eb8dfe11a0618d342822d698a4d}{SetJsonRpc}}(\textcolor{keyword}{const}\ std::string\&\ jsonrpc);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{const}\ nlohmann::json\&\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a7f3cb149524f5b52ae0b482f462af4cb}{GetResult}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a4e90a99621fada2ed297dee7469e27a0}{SetResult}}(\textcolor{keyword}{const}\ nlohmann::json\&\ result);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{const}\ nlohmann::json\&\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_ac62c75ddb39c316247855c31fc1b5bff}{GetError}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_ace0186c29759ce119183968a1a2d1bce}{SetError}}(\textcolor{keyword}{const}\ nlohmann::json\&\ error);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{const}\ nlohmann::json\&\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_ad7b7beb4caef79ae6bd92d4c8a7cf52b}{GetId}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a521250b53045acbb157b80d7ea51e4ad}{SetId}}(\textcolor{keyword}{const}\ nlohmann::json\&\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00081\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a9cde29bab466da33a53db184dd5a12be}{ToJson}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a90b6d4291742f116616fe6185b74bd16}{RpcResponse}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_ab8c32bb97a37d9d7aa47693b2251220d}{FromJson}}(\textcolor{keyword}{const}\ nlohmann::json\&\ \mbox{\hyperlink{namespaceneo_1_1rpc_a32244ac70068079f000691d1ba129402}{json}});}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a90b6d4291742f116616fe6185b74bd16}{RpcResponse}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a56c9ece516ce862fb010ba286f037c98}{CreateSuccessResponse}}(\textcolor{keyword}{const}\ nlohmann::json\&\ \textcolor{keywordtype}{id},\ \textcolor{keyword}{const}\ nlohmann::json\&\ result);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a90b6d4291742f116616fe6185b74bd16}{RpcResponse}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a915fc50791d3d6f58b4b252153185b65}{CreateErrorResponse}}(\textcolor{keyword}{const}\ nlohmann::json\&\ \textcolor{keywordtype}{id},\ \textcolor{keywordtype}{int}\ code,\ \textcolor{keyword}{const}\ std::string\&\ message,}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ nlohmann::json\&\ data\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00110\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a32c2761c1ed9a6dcb955bde947446b10}{jsonrpc\_}};}
+\DoxyCodeLine{00111\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_aae33e880ad20bca664ef0cdc25fff817}{result\_}};}
+\DoxyCodeLine{00112\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_acfc21946b867e678c8dd1840a06dfd06}{error\_}};}
+\DoxyCodeLine{00113\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a00a2dc603c11ac86adeee5601a5b68eb}{id\_}};}
+\DoxyCodeLine{00114\ \};}
+\DoxyCodeLine{00115\ \}\ \ \textcolor{comment}{//\ namespace\ neo::rpc}}
+
+\end{DoxyCode}

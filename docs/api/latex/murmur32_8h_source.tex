@@ -1,0 +1,33 @@
+\doxysection{murmur32.\+h}
+\hypertarget{murmur32_8h_source}{}\label{murmur32_8h_source}\index{include/neo/cryptography/murmur32.h@{include/neo/cryptography/murmur32.h}}
+\mbox{\hyperlink{murmur32_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__span_8h}{neo/io/byte\_span.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cryptography}{neo::cryptography}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32}{Murmur32}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_ac440591c72d6243ee431348f4457593a}{Hash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ data,\ uint32\_t\ seed\ =\ 0);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_ac440591c72d6243ee431348f4457593a}{Hash}}(\textcolor{keyword}{const}\ uint8\_t*\ data,\ \textcolor{keywordtype}{size\_t}\ len,\ uint32\_t\ seed\ =\ 0);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_a3d849ed22775782f28f13b01816b7442}{c1}}\ =\ 0xcc9e2d51;}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_ae5ee15b26b8fa313d6395ff3d5d6681a}{c2}}\ =\ 0x1b873593;}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_ab01ec2577ad4739f5157ac885c508cd1}{r1}}\ =\ 15;}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_ada4ab562856828023a211b24f8cb6952}{r2}}\ =\ 13;}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_ab31dadb0b58d16aa0f5463b64ed86c1f}{m}}\ =\ 5;}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_a55e9c14e5ca318d09e2e0dac66613015}{n}}\ =\ 0xe6546b64;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_a5c2116e49d8f3a96968c8ebc41804432}{RotateLeft}}(uint32\_t\ value,\ \textcolor{keywordtype}{int}\ shift);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_a75df524ba96ad6ba17ee674fe18e847c}{FinalizeHash}}(uint32\_t\ hash,\ \textcolor{keywordtype}{size\_t}\ len);}
+\DoxyCodeLine{00045\ \};}
+\DoxyCodeLine{00046\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cryptography}}
+
+\end{DoxyCode}

@@ -1,0 +1,133 @@
+\doxysection{neo\+::persistence\+::IRead\+Only\+Store\texorpdfstring{$<$}{<} TKey, TValue \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classneo_1_1persistence_1_1_i_read_only_store}{}\label{classneo_1_1persistence_1_1_i_read_only_store}\index{neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$@{neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$}}
+
+
+Interface for read-\/only operations on a key-\/value store.  
+
+
+
+
+{\ttfamily \#include $<$istore.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store_a1b27c3a9d1e10a3d76a73ab26d84d9db}{\texorpdfstring{$\sim$}{\string~}\+IRead\+Only\+Store}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual std\+::optional$<$ TValue $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store_a736304330e73c7397781fbca2e645e8a}{Try\+Get}} (const TKey \&key) const =0
+\begin{DoxyCompactList}\small\item\em Tries to get a value from the store. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store_a9a1be56aad7b2a711d558a1b87c90b26}{Contains}} (const TKey \&key) const =0
+\begin{DoxyCompactList}\small\item\em Checks if the store contains a key. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::pair$<$ TKey, TValue $>$ $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store_a16cb41b5d9ff43393989524da3793f8f}{Find}} (const TKey \texorpdfstring{$\ast$}{*}prefix=nullptr, \mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575}{Seek\+Direction}} direction=\mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575a67d2f6740a8eaebf4d5c6f79be8da481}{Seek\+Direction\+::\+Forward}}) const =0
+\begin{DoxyCompactList}\small\item\em Finds all key-\/value pairs with keys that start with the specified prefix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename TKey, typename TValue$>$\newline
+class neo\+::persistence\+::\+IRead\+Only\+Store$<$ TKey, TValue $>$}
+Interface for read-\/only operations on a key-\/value store. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TKey} & The type of the keys. \\
+\hline
+{\em TValue} & The type of the values. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1persistence_1_1_i_read_only_store_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_i_read_only_store_a1b27c3a9d1e10a3d76a73ab26d84d9db}\index{neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$@{neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$}!````~IReadOnlyStore@{\texorpdfstring{$\sim$}{\string~}IReadOnlyStore}}
+\index{````~IReadOnlyStore@{\texorpdfstring{$\sim$}{\string~}IReadOnlyStore}!neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$@{neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IReadOnlyStore()}{\string~IReadOnlyStore()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_i_read_only_store_a1b27c3a9d1e10a3d76a73ab26d84d9db} 
+template$<$typename TKey, typename TValue$>$ \\
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store}{neo\+::persistence\+::\+IRead\+Only\+Store}}$<$ TKey, TValue $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store}{IRead\+Only\+Store}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1persistence_1_1_i_read_only_store_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_i_read_only_store_a9a1be56aad7b2a711d558a1b87c90b26}\index{neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$@{neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$}!Contains@{Contains}}
+\index{Contains@{Contains}!neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$@{neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_i_read_only_store_a9a1be56aad7b2a711d558a1b87c90b26} 
+template$<$typename TKey, typename TValue$>$ \\
+virtual bool \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store}{neo\+::persistence\+::\+IRead\+Only\+Store}}$<$ TKey, TValue $>$\+::\+Contains (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Checks if the store contains a key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the key exists, false otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a9040a171cc7db3fbd405e0f536d2f773}{neo\+::persistence\+::\+Level\+Db\+Store}}, \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_snapshot_abc3b167ccefbd4c60231996c8cc4d741}{neo\+::persistence\+::\+Memory\+Snapshot}}, and \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_adb88523a68e49c45a090029d04b9007e}{neo\+::persistence\+::\+Memory\+Store}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_i_read_only_store_a16cb41b5d9ff43393989524da3793f8f}\index{neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$@{neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$}!Find@{Find}}
+\index{Find@{Find}!neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$@{neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Find()}{Find()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_i_read_only_store_a16cb41b5d9ff43393989524da3793f8f} 
+template$<$typename TKey, typename TValue$>$ \\
+virtual std\+::vector$<$ std\+::pair$<$ TKey, TValue $>$ $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store}{neo\+::persistence\+::\+IRead\+Only\+Store}}$<$ TKey, TValue $>$\+::\+Find (\begin{DoxyParamCaption}\item[{const TKey \texorpdfstring{$\ast$}{*}}]{prefix}{ = {\ttfamily nullptr}, }\item[{\mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575}{Seek\+Direction}}}]{direction}{ = {\ttfamily \mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575a67d2f6740a8eaebf4d5c6f79be8da481}{Seek\+Direction\+::\+Forward}}}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Finds all key-\/value pairs with keys that start with the specified prefix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prefix} & The prefix to search for. If nullptr, all key-\/value pairs are returned. \\
+\hline
+{\em direction} & The direction to seek. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The key-\/value pairs found. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a6b5a7bd07630c22add254d59aa2e412e}{neo\+::persistence\+::\+Level\+Db\+Store}}, \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_snapshot_a504668c50cbdbb5cab464fa6d9de9c57}{neo\+::persistence\+::\+Memory\+Snapshot}}, and \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_ad24a4042aa9f31e0bbad2f901fa89156}{neo\+::persistence\+::\+Memory\+Store}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_i_read_only_store_a736304330e73c7397781fbca2e645e8a}\index{neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$@{neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$}!TryGet@{TryGet}}
+\index{TryGet@{TryGet}!neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$@{neo::persistence::IReadOnlyStore$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{TryGet()}{TryGet()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_i_read_only_store_a736304330e73c7397781fbca2e645e8a} 
+template$<$typename TKey, typename TValue$>$ \\
+virtual std\+::optional$<$ TValue $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store}{neo\+::persistence\+::\+IRead\+Only\+Store}}$<$ TKey, TValue $>$\+::\+Try\+Get (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Tries to get a value from the store. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to look up. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value if found, std\+::nullopt otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a546f60407fcd792f19d2c1a24ee4ca2a}{neo\+::persistence\+::\+Level\+Db\+Store}}, \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_snapshot_a4c28be7367e34ab15ead3a30d857e436}{neo\+::persistence\+::\+Memory\+Snapshot}}, and \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_aa2b829db6e1d17283f284e5a7e323ec5}{neo\+::persistence\+::\+Memory\+Store}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/persistence/\mbox{\hyperlink{istore_8h}{istore.\+h}}\end{DoxyCompactItemize}

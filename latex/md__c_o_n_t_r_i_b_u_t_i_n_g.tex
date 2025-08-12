@@ -1,0 +1,306 @@
+\chapter{Contributing to Neo C++ }
+\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g}{}\label{md__c_o_n_t_r_i_b_u_t_i_n_g}\index{Contributing to Neo C++@{Contributing to Neo C++}}
+\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md122}%
+\Hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md122}%
+
+
+Thank you for your interest in contributing to the Neo C++ blockchain node implementation! This document provides guidelines and information for contributors.\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md123}{}\doxysection{\texorpdfstring{🌟 How to Contribute}{🌟 How to Contribute}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md123}
+We welcome contributions of all kinds\+:
+
+
+\begin{DoxyItemize}
+\item {\bfseries{Bug Reports}}\+: Help us identify and fix issues
+\item {\bfseries{Feature Requests}}\+: Suggest new functionality
+\item {\bfseries{Code Contributions}}\+: Implement features, fix bugs, improve performance
+\item {\bfseries{Documentation}}\+: Improve guides, API docs, and examples
+\item {\bfseries{Testing}}\+: Add test cases, improve test coverage
+\item {\bfseries{Performance}}\+: Optimize existing code and algorithms
+\end{DoxyItemize}\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md124}{}\doxysection{\texorpdfstring{🚀 Getting Started}{🚀 Getting Started}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md124}
+\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md125}{}\doxysubsection{\texorpdfstring{Prerequisites}{Prerequisites}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md125}
+Before contributing, ensure you have\+:
+
+
+\begin{DoxyItemize}
+\item C++20 compatible compiler (GCC 10+, Clang 12+, MSVC 2019+)
+\item CMake 3.\+20+
+\item Git
+\item vcpkg (for dependency management)
+\item Understanding of Neo blockchain concepts
+\end{DoxyItemize}\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md126}{}\doxysubsection{\texorpdfstring{Setting Up Development Environment}{Setting Up Development Environment}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md126}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Fork the Repository}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Fork\ the\ repo\ on\ GitHub,\ then\ clone\ your\ fork}
+\DoxyCodeLine{git\ clone\ https://github.com/your-\/username/neo-\/cpp.git}
+\DoxyCodeLine{cd\ neo-\/cpp}
+
+\end{DoxyCode}
+
+\item {\bfseries{Set Up Upstream Remote}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ remote\ add\ upstream\ https://github.com/neo-\/project/neo-\/cpp.git}
+
+\end{DoxyCode}
+
+\item {\bfseries{Initialize Dependencies}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Initialize\ vcpkg}
+\DoxyCodeLine{git\ submodule\ update\ -\/-\/init\ -\/-\/recursive}
+\DoxyCodeLine{./vcpkg/bootstrap-\/vcpkg.sh\ \ \#\ or\ .bat\ on\ Windows}
+
+\end{DoxyCode}
+
+\item {\bfseries{Build the Project}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{mkdir\ build\ \&\&\ cd\ build}
+\DoxyCodeLine{cmake\ ..\ -\/DCMAKE\_TOOLCHAIN\_FILE=../vcpkg/scripts/buildsystems/vcpkg.cmake}
+\DoxyCodeLine{cmake\ -\/-\/build\ .\ -\/-\/config\ Debug}
+
+\end{DoxyCode}
+
+\item {\bfseries{Run Tests}} 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{ctest\ -\/-\/output-\/on-\/failure}
+
+\end{DoxyCode}
+
+\end{DoxyEnumerate}\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md127}{}\doxysection{\texorpdfstring{🔧 Development Workflow}{🔧 Development Workflow}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md127}
+\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md128}{}\doxysubsection{\texorpdfstring{1. Create a Feature Branch}{1. Create a Feature Branch}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md128}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Update\ your\ main\ branch}
+\DoxyCodeLine{git\ checkout\ main}
+\DoxyCodeLine{git\ pull\ upstream\ main}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Create\ a\ new\ feature\ branch}
+\DoxyCodeLine{git\ checkout\ -\/b\ feature/your-\/feature-\/name}
+
+\end{DoxyCode}
+\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md129}{}\doxysubsection{\texorpdfstring{2. Make Changes}{2. Make Changes}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md129}
+
+\begin{DoxyItemize}
+\item Write clean, well-\/documented code
+\item Follow the project\textquotesingle{}s coding standards
+\item Add tests for new functionality
+\item Update documentation as needed
+\end{DoxyItemize}\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md130}{}\doxysubsection{\texorpdfstring{3. Test Your Changes}{3. Test Your Changes}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md130}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Run\ all\ tests}
+\DoxyCodeLine{ctest}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Run\ specific\ test\ categories}
+\DoxyCodeLine{ctest\ -\/L\ unit}
+\DoxyCodeLine{ctest\ -\/L\ integration}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Check\ for\ memory\ leaks\ (Linux)}
+\DoxyCodeLine{valgrind\ -\/-\/leak-\/check=full\ ./your-\/test}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Static\ analysis}
+\DoxyCodeLine{make\ lint}
+
+\end{DoxyCode}
+\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md131}{}\doxysubsection{\texorpdfstring{4. Commit Your Changes}{4. Commit Your Changes}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md131}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Stage\ your\ changes}
+\DoxyCodeLine{git\ add\ .}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Commit\ with\ a\ descriptive\ message}
+\DoxyCodeLine{git\ commit\ -\/m\ "{}feat:\ add\ new\ consensus\ mechanism\ feature}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/\ Implement\ new\ dBFT\ optimization}
+\DoxyCodeLine{-\/\ Add\ comprehensive\ unit\ tests}
+\DoxyCodeLine{-\/\ Update\ documentation}
+\DoxyCodeLine{-\/\ Improve\ performance\ by\ 15\%"{}}
+
+\end{DoxyCode}
+\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md132}{}\doxysubsection{\texorpdfstring{5. Push and Create Pull Request}{5. Push and Create Pull Request}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md132}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\ Push\ to\ your\ fork}
+\DoxyCodeLine{git\ push\ origin\ feature/your-\/feature-\/name}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\ Create\ a\ pull\ request\ on\ GitHub}
+
+\end{DoxyCode}
+\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md133}{}\doxysection{\texorpdfstring{📝 Coding Standards}{📝 Coding Standards}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md133}
+\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md134}{}\doxysubsection{\texorpdfstring{C++ Style Guidelines}{C++ Style Guidelines}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md134}
+
+\begin{DoxyItemize}
+\item {\bfseries{Standard}}\+: Follow C++20 best practices
+\item {\bfseries{Naming Conventions}}\+:
+\begin{DoxyItemize}
+\item Classes\+: {\ttfamily Pascal\+Case} (e.\+g., {\ttfamily Block\+Chain}, {\ttfamily Transaction})
+\item Functions/\+Methods\+: {\ttfamily Pascal\+Case} (e.\+g., {\ttfamily Process\+Block()}, {\ttfamily Validate\+Transaction()})
+\item Variables\+: {\ttfamily camel\+Case} (e.\+g., {\ttfamily block\+Height}, {\ttfamily transaction\+Hash})
+\item Member variables\+: {\ttfamily camel\+Case\+\_\+} (e.\+g., {\ttfamily block\+Height\+\_\+}, {\ttfamily is\+Running\+\_\+})
+\item Constants\+: {\ttfamily UPPER\+\_\+\+SNAKE\+\_\+\+CASE} (e.\+g., {\ttfamily MAX\+\_\+\+BLOCK\+\_\+\+SIZE})
+\end{DoxyItemize}
+\item {\bfseries{Headers}}\+: Use {\ttfamily \#pragma once} instead of include guards
+\item {\bfseries{Memory Management}}\+: Use smart pointers ({\ttfamily std\+::shared\+\_\+ptr}, {\ttfamily std\+::unique\+\_\+ptr})
+\item {\bfseries{Error Handling}}\+: Use exceptions for error conditions
+\item {\bfseries{Threading}}\+: Use standard library threading primitives
+\end{DoxyItemize}\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md135}{}\doxysubsection{\texorpdfstring{Code Organization}{Code Organization}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md135}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Example\ header\ file\ structure}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{\textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{namespace\ }neo::ledger\ \{}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{keyword}{class\ }Transaction\ \{}
+\DoxyCodeLine{\textcolor{keyword}{public}:}
+\DoxyCodeLine{\ \ \ \ Transaction()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\ \ \ \ \string~Transaction()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{comment}{//\ Copy\ and\ move\ semantics}}
+\DoxyCodeLine{\ \ \ \ Transaction(\textcolor{keyword}{const}\ Transaction\&)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\ \ \ \ Transaction\&\ operator=(\textcolor{keyword}{const}\ Transaction\&)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\ \ \ \ Transaction(Transaction\&\&)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\ \ \ \ Transaction\&\ operator=(Transaction\&\&)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordtype}{bool}\ Validate()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{\ \ \ \ }
+\DoxyCodeLine{\textcolor{keyword}{private}:}
+\DoxyCodeLine{\ \ \ \ std::string\ hash\_;}
+\DoxyCodeLine{\ \ \ \ std::vector<uint8\_t>\ script\_;}
+\DoxyCodeLine{\ \ \ \ uint64\_t\ networkFee\_;}
+\DoxyCodeLine{\ \ \ \ uint64\_t\ systemFee\_;}
+\DoxyCodeLine{\};}
+\DoxyCodeLine{}
+\DoxyCodeLine{\}\ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}
+\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md136}{}\doxysubsection{\texorpdfstring{Documentation Standards}{Documentation Standards}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md136}
+
+\begin{DoxyItemize}
+\item Use Doxygen-\/style comments for all public APIs
+\item Include parameter descriptions and return value information
+\item Provide usage examples for complex functions
+\item Document thread safety guarantees
+\item Explain algorithmic complexity where relevant
+\end{DoxyItemize}\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md137}{}\doxysection{\texorpdfstring{Commit Message Convention}{Commit Message Convention}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md137}
+We follow the \href{https://www.conventionalcommits.org/}{\texttt{Conventional Commits}} specification for commit messages\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{<type>(<scope>):\ <description>}
+\DoxyCodeLine{}
+\DoxyCodeLine{[optional\ body]}
+\DoxyCodeLine{}
+\DoxyCodeLine{[optional\ footer]}
+
+\end{DoxyCode}
+
+
+Where {\ttfamily type} is one of\+:
+\begin{DoxyItemize}
+\item {\ttfamily feat}\+: A new feature
+\item {\ttfamily fix}\+: A bug fix
+\item {\ttfamily docs}\+: Documentation changes
+\item {\ttfamily style}\+: Code style changes (formatting, etc.)
+\item {\ttfamily refactor}\+: Code refactoring
+\item {\ttfamily test}\+: Adding or modifying tests
+\item {\ttfamily chore}\+: Changes to the build process or tools
+\end{DoxyItemize}\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md138}{}\doxysection{\texorpdfstring{Branch Naming Convention}{Branch Naming Convention}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md138}
+
+\begin{DoxyItemize}
+\item {\ttfamily feature/feature-\/name}\+: For new features
+\item {\ttfamily bugfix/bug-\/name}\+: For bug fixes
+\item {\ttfamily refactor/refactor-\/name}\+: For code refactoring
+\item {\ttfamily docs/docs-\/name}\+: For documentation changes
+\item {\ttfamily test/test-\/name}\+: For test changes
+\end{DoxyItemize}\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md139}{}\doxysection{\texorpdfstring{Testing}{Testing}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md139}
+We use Google Test for unit testing. All new code should have corresponding unit tests. Significant changes should also include integration tests.
+
+To run the tests\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ build}
+\DoxyCodeLine{cmake\ -\/-\/build\ .\ -\/-\/target\ test}
+
+\end{DoxyCode}
+\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md140}{}\doxysection{\texorpdfstring{Documentation}{Documentation}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md140}
+We use Doxygen for API documentation. All public APIs should be documented using Doxygen-\/style comments.
+
+To generate the documentation\+:
+
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{cd\ build}
+\DoxyCodeLine{cmake\ -\/-\/build\ .\ -\/-\/target\ docs}
+
+\end{DoxyCode}
+\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md141}{}\doxysection{\texorpdfstring{Reporting Bugs}{Reporting Bugs}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md141}
+We use Git\+Hub issues to track public bugs. Report a bug by opening a new issue; it\textquotesingle{}s that easy!\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md142}{}\doxysubsection{\texorpdfstring{Bug Report Template}{Bug Report Template}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md142}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\ Bug\ Description}
+\DoxyCodeLine{}
+\DoxyCodeLine{A\ clear\ and\ concise\ description\ of\ what\ the\ bug\ is.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Steps\ to\ Reproduce}
+\DoxyCodeLine{}
+\DoxyCodeLine{1.\ Go\ to\ '...'}
+\DoxyCodeLine{2.\ Click\ on\ '....'}
+\DoxyCodeLine{3.\ Scroll\ down\ to\ '....'}
+\DoxyCodeLine{4.\ See\ error}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Expected\ Behavior}
+\DoxyCodeLine{}
+\DoxyCodeLine{A\ clear\ and\ concise\ description\ of\ what\ you\ expected\ to\ happen.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Actual\ Behavior}
+\DoxyCodeLine{}
+\DoxyCodeLine{A\ clear\ and\ concise\ description\ of\ what\ actually\ happened.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Screenshots}
+\DoxyCodeLine{}
+\DoxyCodeLine{If\ applicable,\ add\ screenshots\ to\ help\ explain\ your\ problem.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Environment}
+\DoxyCodeLine{}
+\DoxyCodeLine{-\/\ OS:\ [e.g.\ Ubuntu\ 20.04]}
+\DoxyCodeLine{-\/\ Compiler:\ [e.g.\ GCC\ 9.3.0]}
+\DoxyCodeLine{-\/\ Version:\ [e.g.\ 0.1.0]}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Additional\ Context}
+\DoxyCodeLine{}
+\DoxyCodeLine{Add\ any\ other\ context\ about\ the\ problem\ here.}
+
+\end{DoxyCode}
+\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md143}{}\doxysection{\texorpdfstring{Feature Requests}{Feature Requests}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md143}
+We use Git\+Hub issues to track feature requests. Request a feature by opening a new issue with the "{}feature request"{} template.\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md144}{}\doxysubsection{\texorpdfstring{Feature Request Template}{Feature Request Template}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md144}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\#\#\ Feature\ Description}
+\DoxyCodeLine{}
+\DoxyCodeLine{A\ clear\ and\ concise\ description\ of\ the\ feature\ you're\ requesting.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Problem\ Statement}
+\DoxyCodeLine{}
+\DoxyCodeLine{A\ clear\ and\ concise\ description\ of\ what\ the\ problem\ is.\ Ex.\ I'm\ always\ frustrated\ when\ [...]}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Proposed\ Solution}
+\DoxyCodeLine{}
+\DoxyCodeLine{A\ clear\ and\ concise\ description\ of\ what\ you\ want\ to\ happen.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Alternative\ Solutions}
+\DoxyCodeLine{}
+\DoxyCodeLine{A\ clear\ and\ concise\ description\ of\ any\ alternative\ solutions\ or\ features\ you've\ considered.}
+\DoxyCodeLine{}
+\DoxyCodeLine{\#\#\ Additional\ Context}
+\DoxyCodeLine{}
+\DoxyCodeLine{Add\ any\ other\ context\ or\ screenshots\ about\ the\ feature\ request\ here.}
+
+\end{DoxyCode}
+\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md145}{}\doxysection{\texorpdfstring{License}{License}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md145}
+By contributing, you agree that your contributions will be licensed under the project\textquotesingle{}s MIT License.\hypertarget{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md146}{}\doxysection{\texorpdfstring{References}{References}}\label{md__c_o_n_t_r_i_b_u_t_i_n_g_autotoc_md146}
+This document was adapted from the open-\/source contribution guidelines for \href{https://github.com/facebook/draft-js/blob/master/CONTRIBUTING.md}{\texttt{Facebook\textquotesingle{}s Draft}}. 

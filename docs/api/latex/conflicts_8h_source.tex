@@ -1,0 +1,54 @@
+\doxysection{conflicts.\+h}
+\hypertarget{conflicts_8h_source}{}\label{conflicts_8h_source}\index{include/neo/network/p2p/payloads/conflicts.h@{include/neo/network/p2p/payloads/conflicts.h}}
+\mbox{\hyperlink{conflicts_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__reader_8h}{neo/io/binary\_reader.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__writer_8h}{neo/io/binary\_writer.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__reader_8h}{neo/io/json\_reader.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__writer_8h}{neo/io/json\_writer.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{transaction__attribute_8h}{neo/ledger/transaction\_attribute.h}}>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads}{neo::network::p2p::payloads}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_a43f0f76628a29d98f0e2f014166d7d91}{Conflicts}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger::TransactionAttribute}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_a5929bfa2e04f255bc64f223cceb739f1}{hash\_}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_a43f0f76628a29d98f0e2f014166d7d91}{Conflicts}}();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_a43f0f76628a29d98f0e2f014166d7d91}{Conflicts}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_a42f9d018071f74a115c0a59012e6bb7f}{GetHash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_adb3ff65c21195d97d902d9ec036fcb18}{SetHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_acdd628d12592bd21ef71b873972e7adf}{ledger::TransactionAttribute::Usage}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_a810bc45f9c538efa80b67cf081021a0c}{GetType}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_a3d5ef67d07f8df64ce56642aec095635}{AllowMultiple}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_ae1225aca167a6f576a98dc85ee3e0fe7}{GetSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_a5f33300fe79cda499670e8b73c6b1c71}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_a63353b92e2276fc44ad7044e620d7ff7}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_ad267fc7979290ca094808e23ad3a5185}{SerializeJson}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io::JsonWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_a20c3ae321b6b9b9023af19400fadad7e}{DeserializeJson}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io::JsonReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_ad051d5bfe1374460770e50641da92eaf}{Verify}}(\textcolor{comment}{/*\ DataCache\&\ snapshot,\ const\ Transaction\&\ transaction\ */})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00100\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_adeec573a593276c154fe6277f75181be}{CalculateNetworkFee}}(\textcolor{comment}{/*\ DataCache\&\ snapshot,\ const\ Transaction\&\ transaction\ */})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_a1101bd1545887c2d9f4e8cec2cb53a28}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_a43f0f76628a29d98f0e2f014166d7d91}{Conflicts}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_a510cde29c680ad6fce56b98244c6877e}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_a43f0f76628a29d98f0e2f014166d7d91}{Conflicts}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00115\ \};}
+\DoxyCodeLine{00116\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p::payloads}}
+
+\end{DoxyCode}

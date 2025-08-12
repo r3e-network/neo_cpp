@@ -1,0 +1,125 @@
+\doxysection{performance\+\_\+config.\+h}
+\hypertarget{performance__config_8h_source}{}\label{performance__config_8h_source}\index{include/neo/core/performance\_config.h@{include/neo/core/performance\_config.h}}
+\mbox{\hyperlink{performance__config_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstddef>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1core}{neo::core}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_performance_config}{PerformanceConfig}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{comment}{//\ Memory\ settings}}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_memory}{Memory}}}
+\DoxyCodeLine{00015\ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_memory_a21041415a9378587824ed23e166cb7c7}{vm\_stack\_pool\_size}}\ =\ 10240;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ stack\ items\ to\ pool}}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_memory_a1a0ef2d00ed5d4ae5babcff13a49f363}{transaction\_pool\_size}}\ =\ 1024;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ transactions\ to\ pool}}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_memory_adcbc0e09e2893245b7146142b1343c3b}{block\_cache\_size}}\ =\ 1000;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ blocks\ to\ cache}}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_memory_ad74e7a6c67fbad5c48a799a48f983815}{script\_cache\_size}}\ =\ 10000;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ compiled\ scripts\ to\ cache}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_memory_adff973f8fa625e409d9246ad3f502c3c}{use\_memory\_pools}}\ =\ \textcolor{keyword}{true};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Enable\ memory\ pooling}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_memory_a065ba991aa94d0f3135057c6a8aba8fc}{max\_memory\_pool\_waste}}\ =\ 1024\ *\ 1024;\ \ \textcolor{comment}{//\ Max\ wasted\ memory\ before\ cleanup}}
+\DoxyCodeLine{00022\ \ \ \ \ \}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_a7625abbbc4051dc8bed514bb40c51001}{memory}};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ Threading\ settings}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_threading}{Threading}}}
+\DoxyCodeLine{00026\ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_threading_a6ce36d0192134992d6fb77fbb0197de9}{worker\_thread\_count}}\ =\ 0;\ \ \ \textcolor{comment}{//\ 0\ =\ auto-\/detect\ based\ on\ CPU\ cores}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_threading_a5049390082ef6a54c9c16e39f12d824c}{io\_thread\_count}}\ =\ 2;\ \ \ \ \ \ \ \textcolor{comment}{//\ Number\ of\ I/O\ threads}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_threading_a85dd3052171a9da50438231b922e3126}{rpc\_thread\_pool\_size}}\ =\ 4;\ \ \textcolor{comment}{//\ RPC\ request\ handler\ threads}}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_threading_a36d6c64c044945322a2a9d9e237e73bc}{use\_thread\_pools}}\ =\ \textcolor{keyword}{true};\ \ \ \ \ \textcolor{comment}{//\ Enable\ thread\ pooling}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_threading_abd5343dacc94be7664ae02cbe4a256c2}{task\_queue\_size}}\ =\ 10000;\ \ \ \textcolor{comment}{//\ Max\ queued\ tasks}}
+\DoxyCodeLine{00032\ \ \ \ \ \}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_ac496ab5834ee5aa91d7c5b69e1e61883}{threading}};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ Network\ settings}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_network}{Network}}}
+\DoxyCodeLine{00036\ \ \ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_network_ac011a3e27975f50f4b72cb46c3815288}{send\_buffer\_size}}\ =\ 8192;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Socket\ send\ buffer\ size}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_network_a6e03485d1beecaf473b097e577bffdeb}{receive\_buffer\_size}}\ =\ 8192;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Socket\ receive\ buffer\ size}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_network_afa3e584e295f6bb00f308db939d3b35b}{max\_concurrent\_connections}}\ =\ 100;\ \ \textcolor{comment}{//\ Max\ simultaneous\ connections}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_network_aacdf1359c06333f1add69664bfead8b8}{connection\_pool\_size}}\ =\ 50;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pooled\ connection\ objects}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_network_a929a19e7230f49052ee7d99b023c3c2d}{tcp\_no\_delay}}\ =\ \textcolor{keyword}{true};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Disable\ Nagle's\ algorithm}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_network_ab7bf6bc973b243cd9601cf993df32e41}{tcp\_keep\_alive}}\ =\ \textcolor{keyword}{true};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Enable\ TCP\ keep-\/alive}}
+\DoxyCodeLine{00043\ \ \ \ \ \}\ \mbox{\hyperlink{namespaceneo_1_1network}{network}};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{comment}{//\ Storage\ settings}}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_storage}{Storage}}}
+\DoxyCodeLine{00047\ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_storage_a960d15f4ac860f272e7b64866a3c33ae}{write\_buffer\_size}}\ =\ 64\ *\ 1024\ *\ 1024;\ \ \textcolor{comment}{//\ DB\ write\ buffer\ size}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_storage_ae5fa9bafcdd36a21bac01af947e06018}{block\_cache\_size}}\ =\ 128\ *\ 1024\ *\ 1024;\ \ \textcolor{comment}{//\ DB\ block\ cache\ size}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_storage_a7692ebb626ebabd14947472e7f2cf0a0}{max\_open\_files}}\ =\ 1000;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Max\ open\ DB\ files}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_storage_adcc30d0aeeee29adbb4da9fe8ae96218}{use\_direct\_io}}\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Use\ O\_DIRECT\ for\ DB\ I/O}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_storage_a4ce03f7597fa1e02bf531b33184f1e14}{sync\_writes}}\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Sync\ every\ write\ (slow\ but\ safe)}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_storage_aff08eafb77db0474823b9b61d09d70f6}{compaction\_threads}}\ =\ 2;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Background\ compaction\ threads}}
+\DoxyCodeLine{00054\ \ \ \ \ \}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_a2a88a2ab7bfe94f1e5c8e5de989449e6}{storage}};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{comment}{//\ VM\ settings}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_v_m}{VM}}}
+\DoxyCodeLine{00058\ \ \ \ \ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_v_m_aa6ef40653f3cfdb5a95cf1fe0ab137b9}{execution\_stack\_size}}\ =\ 2048;\ \ \ \ \ \textcolor{comment}{//\ Max\ VM\ execution\ stack\ depth}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_v_m_a7ac08ce44bf9808e303515e4a98e9d8c}{invocation\_stack\_size}}\ =\ 1024;\ \ \ \ \textcolor{comment}{//\ Max\ VM\ invocation\ stack\ depth}}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_v_m_a7b0c375bfa7c9f33dd8ad7cdc2a4fb99}{max\_array\_size}}\ =\ 1024;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Max\ array/struct\ size}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_v_m_a46f6049dd3dba43f1ea9597b07c14018}{max\_item\_size}}\ =\ 1024\ *\ 1024;\ \ \ \ \ \textcolor{comment}{//\ Max\ stack\ item\ size}}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_v_m_af33167d4ab2ede2b7ff0373d753c4107}{enable\_jit}}\ =\ \textcolor{keyword}{false};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Enable\ JIT\ compilation\ (future)}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_v_m_a956200ab627634dbafdf2b4cfae0d946}{instruction\_cache\_size}}\ =\ 10000;\ \ \textcolor{comment}{//\ Cached\ instruction\ count}}
+\DoxyCodeLine{00065\ \ \ \ \ \}\ \mbox{\hyperlink{namespaceneo_1_1vm}{vm}};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{comment}{//\ Consensus\ settings}}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_consensus}{Consensus}}}
+\DoxyCodeLine{00069\ \ \ \ \ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_consensus_ae62ba38cd35ae1aa2b75830ee2958517}{message\_pool\_size}}\ =\ 1000;\ \ \ \ \ \ \ \textcolor{comment}{//\ Pooled\ consensus\ messages}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_consensus_aa7b2f2d420dc5c554499d16963178267}{prepare\_request\_cache}}\ =\ 100;\ \ \ \ \textcolor{comment}{//\ Cached\ prepare\ requests}}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_consensus_a3b1fc76f2450d526159a042221aaf834}{batch\_verification}}\ =\ \textcolor{keyword}{true};\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Batch\ signature\ verification}}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_consensus_a111494c6214bc49de37df6c8fee26a27}{verification\_thread\_count}}\ =\ 4;\ \ \textcolor{comment}{//\ Parallel\ verification\ threads}}
+\DoxyCodeLine{00074\ \ \ \ \ \}\ \mbox{\hyperlink{namespaceneo_1_1consensus}{consensus}};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{comment}{//\ Optimization\ flags}}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_optimizations}{Optimizations}}}
+\DoxyCodeLine{00078\ \ \ \ \ \{}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_optimizations_a5171fbe37390f98d44d59454a4801f5f}{enable\_simd}}\ =\ \textcolor{keyword}{true};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Use\ SIMD\ instructions}}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_optimizations_a6bef1273d5f712a95494bfd1a62b409b}{enable\_prefetching}}\ =\ \textcolor{keyword}{true};\ \ \ \ \ \ \ \ \textcolor{comment}{//\ CPU\ cache\ prefetching}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_optimizations_ac71f391b9fee7a57fe1aed1427660a1c}{enable\_branch\_prediction}}\ =\ \textcolor{keyword}{true};\ \ \textcolor{comment}{//\ Branch\ prediction\ hints}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_optimizations_a70e717b645588ca5c6494f54179fa2cb}{enable\_loop\_unrolling}}\ =\ \textcolor{keyword}{true};\ \ \ \ \ \textcolor{comment}{//\ Loop\ unrolling}}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_optimizations_a84555bfeafbc7d92843e891a2e81ff7f}{enable\_inlining}}\ =\ \textcolor{keyword}{true};\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Aggressive\ inlining}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_1_1_optimizations_a21bcf960c49ee13149ae806a14955fca}{enable\_lto}}\ =\ \textcolor{keyword}{true};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Link-\/time\ optimization}}
+\DoxyCodeLine{00085\ \ \ \ \ \}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_adb36f8400ed07bea1650118065e1baa7}{optimizations}};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config}{PerformanceConfig}}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_aad2db9fa6d1d37fd2982a78dbc92f869}{default\_config}}();}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config}{PerformanceConfig}}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_a82e9791832352dc79dea6bbf91a39d85}{high\_performance}}();}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config}{PerformanceConfig}}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_a17dba274dca787fbfb67cfebed8d2c46}{low\_memory}}();}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_a22efbe13a7539bf19e4eb6a5e327d59d}{validate}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config_a47f450d73f3b34ee46a172e41a4d7ec4}{auto\_tune}}();}
+\DoxyCodeLine{00111\ \};}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00116\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_ac5171dc7ec17144deee75a2e8c1f40f7}{PerformanceManager}}}
+\DoxyCodeLine{00117\ \{}
+\DoxyCodeLine{00118\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_ac5171dc7ec17144deee75a2e8c1f40f7}{PerformanceManager}}\&\ \mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_a1728dfc2e18e7d6c70b74e7cf7526cf6}{instance}}()}
+\DoxyCodeLine{00120\ \ \ \ \ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_ac5171dc7ec17144deee75a2e8c1f40f7}{PerformanceManager}}\ \mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_a1728dfc2e18e7d6c70b74e7cf7526cf6}{instance}};}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_a1728dfc2e18e7d6c70b74e7cf7526cf6}{instance}};}
+\DoxyCodeLine{00123\ \ \ \ \ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config}{PerformanceConfig}}\&\ \mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_afb20a6f79d03c38f57a92a8b85f8e98a}{config}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_a9f56b8c729e6e5fa6486894be184a49e}{config\_}};\ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_a6581713a68ac94bf8c74de556697cf40}{set\_config}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config}{PerformanceConfig}}\&\ \mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_afb20a6f79d03c38f57a92a8b85f8e98a}{config}})}
+\DoxyCodeLine{00128\ \ \ \ \ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_a9f56b8c729e6e5fa6486894be184a49e}{config\_}}\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_afb20a6f79d03c38f57a92a8b85f8e98a}{config}};}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_ac487513f1f72d60122efeac20f485846}{apply\_config}}();}
+\DoxyCodeLine{00131\ \ \ \ \ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_ac487513f1f72d60122efeac20f485846}{apply\_config}}();}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_ac5171dc7ec17144deee75a2e8c1f40f7}{PerformanceManager}}()\ :\ \mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_a9f56b8c729e6e5fa6486894be184a49e}{config\_}}(\mbox{\hyperlink{structneo_1_1core_1_1_performance_config}{PerformanceConfig}}::default\_config())\ \{\}}
+\DoxyCodeLine{00137\ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_performance_config}{PerformanceConfig}}\ \mbox{\hyperlink{classneo_1_1core_1_1_performance_manager_a9f56b8c729e6e5fa6486894be184a49e}{config\_}};}
+\DoxyCodeLine{00138\ \};}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \}\ \ \textcolor{comment}{//\ namespace\ neo::core}}
+
+\end{DoxyCode}

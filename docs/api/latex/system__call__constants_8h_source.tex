@@ -1,0 +1,107 @@
+\doxysection{system\+\_\+call\+\_\+constants.\+h}
+\hypertarget{system__call__constants_8h_source}{}\label{system__call__constants_8h_source}\index{include/neo/smartcontract/system\_call\_constants.h@{include/neo/smartcontract/system\_call\_constants.h}}
+\mbox{\hyperlink{system__call__constants_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract}{neo::smartcontract}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost}{gas\_cost}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ Base\ gas\ costs}}
+\DoxyCodeLine{00016\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a01caee77ead9de84cfdb4b84bcbc1050}{VeryLow}}\ =\ 1\ <<\ 4;\ \ \ \ \textcolor{comment}{//\ 16\ gas}}
+\DoxyCodeLine{00017\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a3bad0e2bbc0b6b1b1642344183953b23}{Low}}\ =\ 1\ <<\ 8;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ 256\ gas}}
+\DoxyCodeLine{00018\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_afbca72b2aee543a9e4892a85f804fea7}{Medium}}\ =\ 1\ <<\ 10;\ \ \ \ \textcolor{comment}{//\ 1,024\ gas}}
+\DoxyCodeLine{00019\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a0ac71cf9c87a2aef42aa5402bce610a2}{High}}\ =\ 1\ <<\ 15;\ \ \ \ \ \ \textcolor{comment}{//\ 32,768\ gas}}
+\DoxyCodeLine{00020\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a16723325de70ecf241bdaf6fe7de52fc}{VeryHigh}}\ =\ 1\ <<\ 20;\ \ \textcolor{comment}{//\ 1,048,576\ gas}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ Runtime\ gas\ costs}}
+\DoxyCodeLine{00023\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a68a6d966d8f2901cbe18ae7e7e5427df}{GetTrigger}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a01caee77ead9de84cfdb4b84bcbc1050}{VeryLow}};}
+\DoxyCodeLine{00024\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a65b5f2cf483315cfa6af1d4dd4b7013e}{CheckWitness}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_afbca72b2aee543a9e4892a85f804fea7}{Medium}};}
+\DoxyCodeLine{00025\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a98613a1e626365c88bfd5f4073044582}{Notify}}\ =\ 1\ <<\ 9;\ \ \textcolor{comment}{//\ 512\ gas}}
+\DoxyCodeLine{00026\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a3ddd72c3155e54264ded67483ca2d941}{Log}}\ =\ 1\ <<\ 9;\ \ \ \ \ \textcolor{comment}{//\ 512\ gas}}
+\DoxyCodeLine{00027\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_aedd819ce79fd22707a901175be7e380d}{GetTime}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a01caee77ead9de84cfdb4b84bcbc1050}{VeryLow}};}
+\DoxyCodeLine{00028\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a85d233351618a6f50072dee89c8e1440}{GetPlatform}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a01caee77ead9de84cfdb4b84bcbc1050}{VeryLow}};}
+\DoxyCodeLine{00029\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a9fe25474c4b5786eaf9dd1e0d0a1c38e}{GetNetwork}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a01caee77ead9de84cfdb4b84bcbc1050}{VeryLow}};}
+\DoxyCodeLine{00030\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_ae2f4e17275de71decaac724389beab2f}{GetRandom}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a01caee77ead9de84cfdb4b84bcbc1050}{VeryLow}};}
+\DoxyCodeLine{00031\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a27a0eeeb5c0173c703a96c1b15af0c1e}{GasLeft}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a01caee77ead9de84cfdb4b84bcbc1050}{VeryLow}};}
+\DoxyCodeLine{00032\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a7511bfbe838b354ed718e84311697342}{GetInvocationCounter}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a01caee77ead9de84cfdb4b84bcbc1050}{VeryLow}};}
+\DoxyCodeLine{00033\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a907a0a5627cc8c7d97c331ea81f3fa98}{GetScriptContainer}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a01caee77ead9de84cfdb4b84bcbc1050}{VeryLow}};}
+\DoxyCodeLine{00034\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a5d7cdf732c12b5617d906207ee3bfe3b}{GetExecutingScriptHash}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a01caee77ead9de84cfdb4b84bcbc1050}{VeryLow}};}
+\DoxyCodeLine{00035\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a92f310c7fcd1be9669b9f105408d56f9}{GetCallingScriptHash}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a01caee77ead9de84cfdb4b84bcbc1050}{VeryLow}};}
+\DoxyCodeLine{00036\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_ab106b2d92dc8bd44e1dd8e7d95bb4d24}{GetEntryScriptHash}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a01caee77ead9de84cfdb4b84bcbc1050}{VeryLow}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ Storage\ gas\ costs}}
+\DoxyCodeLine{00039\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a28a1d226c56ac1bf01e1bf5846727ec7}{StorageGet}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a0ac71cf9c87a2aef42aa5402bce610a2}{High}};}
+\DoxyCodeLine{00040\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_abb877970269b0951e426e01145d999ca}{StoragePut}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a0ac71cf9c87a2aef42aa5402bce610a2}{High}};}
+\DoxyCodeLine{00041\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_afcb826b7e77eb565ecd22a772ddf4251}{StorageDelete}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a0ac71cf9c87a2aef42aa5402bce610a2}{High}};}
+\DoxyCodeLine{00042\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a68f074d3e8150f1f93f2612e4b32a7db}{StorageFind}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a0ac71cf9c87a2aef42aa5402bce610a2}{High}};}
+\DoxyCodeLine{00043\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a79f8e8435cd36b290cd38e06397c97a5}{IteratorNext}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a0ac71cf9c87a2aef42aa5402bce610a2}{High}};}
+\DoxyCodeLine{00044\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_af32b6789b08896f44b9f3f822d734622}{IteratorValue}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a01caee77ead9de84cfdb4b84bcbc1050}{VeryLow}};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \textcolor{comment}{//\ Contract\ gas\ costs}}
+\DoxyCodeLine{00047\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_ae8ada3fcd9c96bd6fceb3582571b3600}{Call}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a0ac71cf9c87a2aef42aa5402bce610a2}{High}};}
+\DoxyCodeLine{00048\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a3bc9e00807a4939e9ed6e9a1f18f3283}{GetCallFlags}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a01caee77ead9de84cfdb4b84bcbc1050}{VeryLow}};}
+\DoxyCodeLine{00049\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a0a358fabed5499133adb053c14d3762e}{CallNative}}\ =\ 0;}
+\DoxyCodeLine{00050\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a739cf5d38600dc17d37ab01bf99c5fca}{CreateStandardAccount}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_afbca72b2aee543a9e4892a85f804fea7}{Medium}};}
+\DoxyCodeLine{00051\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_ac1e2fb8b204ff56d7b7784f5250b0e97}{CreateMultisigAccount}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_afbca72b2aee543a9e4892a85f804fea7}{Medium}};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ Crypto\ gas\ costs}}
+\DoxyCodeLine{00054\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_ad0beaa2d9b72027d10249f6925fa334b}{VerifySignature}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a0ac71cf9c87a2aef42aa5402bce610a2}{High}};}
+\DoxyCodeLine{00055\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_afcf223b3ce2020bf19118f0bc6245af7}{CheckSig}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a0ac71cf9c87a2aef42aa5402bce610a2}{High}};}
+\DoxyCodeLine{00056\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a9d2bc35529d384a31ce72526d9693f17}{Hash160}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a0ac71cf9c87a2aef42aa5402bce610a2}{High}};}
+\DoxyCodeLine{00057\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a0a2442855103daa692017a03bf9b56d3}{Hash256}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a0ac71cf9c87a2aef42aa5402bce610a2}{High}};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \textcolor{comment}{//\ JSON\ gas\ costs}}
+\DoxyCodeLine{00060\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_ab90d9ade340b5a255562774712d6f60b}{JsonSerialize}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a0ac71cf9c87a2aef42aa5402bce610a2}{High}};}
+\DoxyCodeLine{00061\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a33cf990323963dcc73f7d195612d280e}{JsonDeserialize}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1gas__cost_a0ac71cf9c87a2aef42aa5402bce610a2}{High}};}
+\DoxyCodeLine{00062\ \}\ \ \textcolor{comment}{//\ namespace\ gas\_cost}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00070\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call}{system\_call}}}
+\DoxyCodeLine{00071\ \{}
+\DoxyCodeLine{00072\ \textcolor{comment}{//\ Runtime\ system\ calls}}
+\DoxyCodeLine{00073\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a05ba6a8cea39a98e6e73d2883a6d2650}{GetTrigger}}\ =\ \textcolor{stringliteral}{"{}System.Runtime.GetTrigger"{}};}
+\DoxyCodeLine{00074\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a08734ed6c60191df9364e7f5b785308c}{CheckWitness}}\ =\ \textcolor{stringliteral}{"{}System.Runtime.CheckWitness"{}};}
+\DoxyCodeLine{00075\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_aa308d2b1c8dbf4ecfada0482bdc8ad8a}{Notify}}\ =\ \textcolor{stringliteral}{"{}System.Runtime.Notify"{}};}
+\DoxyCodeLine{00076\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a204b34198f9a2ce1e8470879a6fcfe2b}{Log}}\ =\ \textcolor{stringliteral}{"{}System.Runtime.Log"{}};}
+\DoxyCodeLine{00077\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a69cb632086c93e4709b0334a96a3c518}{GetTime}}\ =\ \textcolor{stringliteral}{"{}System.Runtime.GetTime"{}};}
+\DoxyCodeLine{00078\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a9b935e5ec0da42ce77dd5a91e6f90ff1}{GetPlatform}}\ =\ \textcolor{stringliteral}{"{}System.Runtime.GetPlatform"{}};}
+\DoxyCodeLine{00079\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a6bbe723474d55c78a0a0717577e082c2}{GetNetwork}}\ =\ \textcolor{stringliteral}{"{}System.Runtime.GetNetwork"{}};}
+\DoxyCodeLine{00080\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a0c42aaea8d729e40db5f57b1bee1d930}{GetRandom}}\ =\ \textcolor{stringliteral}{"{}System.Runtime.GetRandom"{}};}
+\DoxyCodeLine{00081\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_aad04718b53b50496b9bab474663d0ced}{GasLeft}}\ =\ \textcolor{stringliteral}{"{}System.Runtime.GasLeft"{}};}
+\DoxyCodeLine{00082\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_ada97a6c76f2e44a2b85d2485d5dc5a5f}{GetInvocationCounter}}\ =\ \textcolor{stringliteral}{"{}System.Runtime.GetInvocationCounter"{}};}
+\DoxyCodeLine{00083\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_aa375928267392e49375aa3decd904fc0}{GetScriptContainer}}\ =\ \textcolor{stringliteral}{"{}System.Runtime.GetScriptContainer"{}};}
+\DoxyCodeLine{00084\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a2c45690639a5768b6a00129a46903137}{GetExecutingScriptHash}}\ =\ \textcolor{stringliteral}{"{}System.Runtime.GetExecutingScriptHash"{}};}
+\DoxyCodeLine{00085\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_ac639b5366967db48e98c7872060e3bb8}{GetCallingScriptHash}}\ =\ \textcolor{stringliteral}{"{}System.Runtime.GetCallingScriptHash"{}};}
+\DoxyCodeLine{00086\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_ae12a5212f87efec721ae8723b9a7450a}{GetEntryScriptHash}}\ =\ \textcolor{stringliteral}{"{}System.Runtime.GetEntryScriptHash"{}};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \textcolor{comment}{//\ Storage\ system\ calls}}
+\DoxyCodeLine{00089\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a18c5c186469b01bfa5fd16bafa65a54a}{StorageGet}}\ =\ \textcolor{stringliteral}{"{}System.Storage.Get"{}};}
+\DoxyCodeLine{00090\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_af3c4cb6ca3d8be4716e69f027b40290e}{StoragePut}}\ =\ \textcolor{stringliteral}{"{}System.Storage.Put"{}};}
+\DoxyCodeLine{00091\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a9449a88d1ddfc0b6ecfd95e4fdbd85b7}{StorageDelete}}\ =\ \textcolor{stringliteral}{"{}System.Storage.Delete"{}};}
+\DoxyCodeLine{00092\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a4f773e8bc7402e0b6d721ba6655354db}{StorageFind}}\ =\ \textcolor{stringliteral}{"{}System.Storage.Find"{}};}
+\DoxyCodeLine{00093\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a658565167059210e452e9bac16c5dd3f}{IteratorNext}}\ =\ \textcolor{stringliteral}{"{}System.Iterator.Next"{}};}
+\DoxyCodeLine{00094\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a24970e9c533e660639803f271914b3e6}{IteratorValue}}\ =\ \textcolor{stringliteral}{"{}System.Iterator.Value"{}};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \textcolor{comment}{//\ Contract\ system\ calls}}
+\DoxyCodeLine{00097\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_adfcfbdd0d8f6f3717a94646bad33a5e4}{Call}}\ =\ \textcolor{stringliteral}{"{}System.Contract.Call"{}};}
+\DoxyCodeLine{00098\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a7c2992d374f5ff5ed8a610c5d100a732}{GetCallFlags}}\ =\ \textcolor{stringliteral}{"{}System.Contract.GetCallFlags"{}};}
+\DoxyCodeLine{00099\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a3ca2f620b9868a9eda782fb0f1a7e3b8}{CallNative}}\ =\ \textcolor{stringliteral}{"{}System.Contract.CallNative"{}};}
+\DoxyCodeLine{00100\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a1fe4abbb4cd5795f2c466e15f145ed70}{CreateStandardAccount}}\ =\ \textcolor{stringliteral}{"{}System.Contract.CreateStandardAccount"{}};}
+\DoxyCodeLine{00101\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_afc6e067d737095adabd034bfc2e4e189}{CreateMultisigAccount}}\ =\ \textcolor{stringliteral}{"{}System.Contract.CreateMultisigAccount"{}};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \textcolor{comment}{//\ Crypto\ system\ calls}}
+\DoxyCodeLine{00104\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a0fc6b89ca45e0a8e7830b3eed1e3fd96}{VerifySignature}}\ =\ \textcolor{stringliteral}{"{}System.Crypto.VerifySignature"{}};}
+\DoxyCodeLine{00105\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_ae876b4feac1a09f40d5ad3a40510d4c6}{CheckSig}}\ =\ \textcolor{stringliteral}{"{}System.Crypto.CheckSig"{}};}
+\DoxyCodeLine{00106\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_ad89ebccdd692ee78c37983890929c033}{Hash160}}\ =\ \textcolor{stringliteral}{"{}System.Crypto.Hash160"{}};}
+\DoxyCodeLine{00107\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_af6e8f676be1b3c2d009a86b6eb97a740}{Hash256}}\ =\ \textcolor{stringliteral}{"{}System.Crypto.Hash256"{}};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \textcolor{comment}{//\ JSON\ system\ calls}}
+\DoxyCodeLine{00110\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_a34d26343cb5034243a55ffa58aa058d0}{JsonSerialize}}\ =\ \textcolor{stringliteral}{"{}System.Json.Serialize"{}};}
+\DoxyCodeLine{00111\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1system__call_abaa880f564c226490d5b4da55d4ab2ad}{JsonDeserialize}}\ =\ \textcolor{stringliteral}{"{}System.Json.Deserialize"{}};}
+\DoxyCodeLine{00112\ \}\ \ \textcolor{comment}{//\ namespace\ system\_call}}
+\DoxyCodeLine{00113\ \}\ \ \textcolor{comment}{//\ namespace\ neo::smartcontract}}
+
+\end{DoxyCode}

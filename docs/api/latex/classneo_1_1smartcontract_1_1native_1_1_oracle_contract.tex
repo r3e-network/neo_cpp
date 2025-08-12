@@ -1,0 +1,966 @@
+\doxysection{neo\+::smartcontract\+::native\+::Oracle\+Contract Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract}{}\label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+
+
+Represents the oracle native contract.  
+
+
+
+
+{\ttfamily \#include $<$oracle\+\_\+contract.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::smartcontract\+::native\+::Oracle\+Contract\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::smartcontract\+::native\+::Oracle\+Contract\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ad20dae2ffdc8bc49e0a1a22177996c64}{Oracle\+Contract}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract}{Oracle\+Contract}. \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a4e2249bb1e6a5164baabe13e0ece9f5a}{Get\+Price}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot) const
+\begin{DoxyCompactList}\small\item\em Gets the price. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a59a565b3e3dd8e0dd6575640f4686691}{Set\+Price}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, int64\+\_\+t price)
+\begin{DoxyCompactList}\small\item\em Sets the price. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a7480c0d172263c0a871caf3b6139cc39}{Get\+Oracles}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot) const
+\begin{DoxyCompactList}\small\item\em Gets the oracles. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_request}{Oracle\+Request}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a53ddf70b645de98c872f1768da7a8d8b}{Get\+Request}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, uint64\+\_\+t id) const
+\begin{DoxyCompactList}\small\item\em Gets a request by ID. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_id_list}{Id\+List}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a9fa7bdff64d467fd64e2c3b8d8e6893d}{Get\+Id\+List}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&url\+Hash) const
+\begin{DoxyCompactList}\small\item\em Gets the ID list for a URL. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ab65894186b16d15cb98ffa35ce51c8b1}{Initialize\+Contract}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, uint32\+\_\+t hardfork)
+\begin{DoxyCompactList}\small\item\em Initializes the contract. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ace07248d67e2ec848742638284bf21bd}{On\+Persist}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine)
+\begin{DoxyCompactList}\small\item\em Handles the On\+Persist event. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_af25d9cf42dbaa7e59bc9463b7fa42739}{Post\+Persist}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine)
+\begin{DoxyCompactList}\small\item\em Handles the Post\+Persist event. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a630806dfc024a2b8ca13fbee4253925a}{Set\+Oracles}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \&oracles)
+\begin{DoxyCompactList}\small\item\em Sets the oracles. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ uint64\+\_\+t, \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_request}{Oracle\+Request}} $>$ $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ac3254ef1e3b287d05473b5650a101ea1}{Get\+Requests}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot) const
+\begin{DoxyCompactList}\small\item\em Gets all requests. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ uint64\+\_\+t, \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_request}{Oracle\+Request}} $>$ $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ac121bece28d947d87219e032d50986c2}{Get\+Requests\+By\+Url}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const std\+::string \&url) const
+\begin{DoxyCompactList}\small\item\em Gets requests by URL. \end{DoxyCompactList}\item 
+std\+::tuple$<$ uint8\+\_\+t, std\+::string $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a6401c4073073dd08367498e8388234d1}{Get\+Response}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, uint64\+\_\+t id) const
+\begin{DoxyCompactList}\small\item\em Gets a response. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a9951d4af945e4b91998287ccf57290f0}{Create\+Request}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const std\+::string \&url, const std\+::string \&filter, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&callback, const std\+::string \&callback\+Method, int64\+\_\+t gas\+For\+Response, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&user\+Data, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&original\+Txid)
+\begin{DoxyCompactList}\small\item\em Creates a request. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a60667ade06e1b9a3c3ef7e2c6a68a632}{Native\+Contract}} (const std\+::string \&name, uint32\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{Native\+Contract}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_ae37e44a3d146975a024466fc40a8dc53}{\texorpdfstring{$\sim$}{\string~}\+Native\+Contract}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a36ffe7bef8e2b15c1992c7fd51735e04}{Get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Gets the name. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a514770635cb55d0e5c59a8d2b5231ea3}{Get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Gets the ID. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_adee5386515d940f614d7f680b5d0edb7}{Get\+Script\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script hash. \end{DoxyCompactList}\item 
+const std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}}, std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&)$>$ $>$ $>$ \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aefb916eb8825a724a48d75e9c5c69acf}{Get\+Methods}} () const
+\begin{DoxyCompactList}\small\item\em Gets the methods. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a3ed2d00b721434cf15b180038e4fa4f2}{Invoke}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::string \&method, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags)
+\begin{DoxyCompactList}\small\item\em Invokes a method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_acbf33ca368ff4d13541b9c12e0a34cad}{Call}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::string \&method, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Calls a method on the contract (alias for Invoke). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aef8498874e1b666ab258a891c2f05a56}{Check\+Call\+Flags}} (const std\+::string \&method, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags) const
+\begin{DoxyCompactList}\small\item\em Checks if the contract has the specified call flags. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a6d9998fc6c7dbedcc447f403fddb6d08}{Get\+Storage\+Prefix}} () const
+\begin{DoxyCompactList}\small\item\em Gets the storage prefix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aaa080efcc4d7deced7aded7bb968cd9c}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a44c7d768e39be1ed6933cdcf2350a2e8}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a50c32e2fa8e736183a0135b44ac5438d}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a2a46f86ca8b2d541f8623821d389eb8b}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aa8eed221a7bf2bce103f7e1fef187e6c}{Get\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a88e6f4aa548d073c5740d1eb0f59f91e}{Put\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value) const
+\begin{DoxyCompactList}\small\item\em Puts the storage value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a041e040e9fbf45d8d8ba9c0dcf87afe4}{Delete\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Deletes the storage value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a5a9ec24cc4c1584fb00fdf32f614dbd8}{Create\+Storage\+Key}} (uint8\+\_\+t prefix) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aacd0961fef8aaa618f43294e4561a72a}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_ac60e9957320d04ffd697e023f94bf233}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a4c42d353f5328c9fbc06f5fd38e406cd}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a8221750790b1aa223a4351bb81ec8a59}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, uint32\+\_\+t key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract}{Oracle\+Contract}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_afdd6ed78b4d793067ad9b3deb1f6af2f}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets the instance. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_aa23741826ae63ddf7a7d0b373b46d668}{Get\+Url\+Hash}} (const std\+::string \&url)
+\begin{DoxyCompactList}\small\item\em Gets the URL hash. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ae889f6e4ab5e69d26abe206a5902857d}{ID}} = -\/9
+\begin{DoxyCompactList}\small\item\em The contract ID. \end{DoxyCompactList}\item 
+static constexpr const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a2e00de2e7b70928d261b4b264613d3b4}{NAME}} = "{}Oracle\+Contract"{}
+\begin{DoxyCompactList}\small\item\em The contract name. \end{DoxyCompactList}\item 
+static constexpr int \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a453042d2786a4f19ae3fead0776bfaea}{MAX\+\_\+\+URL\+\_\+\+LENGTH}} = 256
+\begin{DoxyCompactList}\small\item\em The maximum URL length. \end{DoxyCompactList}\item 
+static constexpr int \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a766b3e81df49686f69ab3e89ea901d32}{MAX\+\_\+\+FILTER\+\_\+\+LENGTH}} = 128
+\begin{DoxyCompactList}\small\item\em The maximum filter length. \end{DoxyCompactList}\item 
+static constexpr int \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a4bdd0461a4bafd95c274942f9cb798b3}{MAX\+\_\+\+CALLBACK\+\_\+\+LENGTH}} = 32
+\begin{DoxyCompactList}\small\item\em The maximum callback length. \end{DoxyCompactList}\item 
+static constexpr int \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a459dc0f3f97b7a37d6b00efb4003167e}{MAX\+\_\+\+USER\+\_\+\+DATA\+\_\+\+LENGTH}} = 512
+\begin{DoxyCompactList}\small\item\em The maximum user data length. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_abd5ffcccb68784d8dbf3cc60e941b2c5}{PREFIX\+\_\+\+REQUEST}} = 7
+\begin{DoxyCompactList}\small\item\em The storage prefix for requests. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a4ac0aa731355a3129661ef2adee909be}{PREFIX\+\_\+\+REQUEST\+\_\+\+ID}} = 9
+\begin{DoxyCompactList}\small\item\em The storage prefix for request ID. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a1c4eb08bda0f8d536cfbcd4521e2c4df}{PREFIX\+\_\+\+ID\+\_\+\+LIST}} = 6
+\begin{DoxyCompactList}\small\item\em The storage prefix for ID list. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ae56d12e26522b24e1d3c8ab18f8a620b}{PREFIX\+\_\+\+PRICE}} = 5
+\begin{DoxyCompactList}\small\item\em The storage prefix for price. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a42e47c3d6789c049a6247a93ad1025d2}{PREFIX\+\_\+\+ORACLE}} = 8
+\begin{DoxyCompactList}\small\item\em The storage prefix for oracles. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a3bc5cec202434d96bea9ba6c31ad9381}{PREFIX\+\_\+\+RESPONSE}} = 10
+\begin{DoxyCompactList}\small\item\em The storage prefix for responses. \end{DoxyCompactList}\item 
+static constexpr int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ac2e6303f5b2491b5dd7925d6f74ce792}{DEFAULT\+\_\+\+PRICE}} = 1000000
+\begin{DoxyCompactList}\small\item\em The default price. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a48d25aaed6ef2e950d27767ddbb52128}{Initialize}} () override
+\begin{DoxyCompactList}\small\item\em Initializes the contract. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a26af9bcd266b59f910293081ef334993}{Register\+Method}} (const std\+::string \&name, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags, std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&)$>$ handler)
+\begin{DoxyCompactList}\small\item\em Registers a method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a9f3f812d94651621bb8db0bc8f09be6c}{On\+Get\+Price}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the get\+Price method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a6226fdab485ebf482d72cbf273abeff4}{On\+Set\+Price}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the set\+Price method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a76f9947964b121612e84e0f684016d5c}{On\+Get\+Oracles}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the get\+Oracles method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_acb6324bd97a39910da20966b48d6a53e}{On\+Set\+Oracles}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the set\+Oracles method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a1685d444ac508012f9deaebaeab20509}{On\+Request}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the request method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_aecd6f2c7191eae1f522f05e94dca9b76}{On\+Finish}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the finish method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a627841366fbde6f1d1afb821003b8b21}{On\+Verify}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the verify method. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ab277eb46f0ba8c00ccd78e3500e1c92c}{Get\+Next\+Request\+Id}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot) const
+\begin{DoxyCompactList}\small\item\em Gets the next request ID. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_aaee28071daa8179c4a6a625bebf951d5}{Add\+Request\+To\+Id\+List}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, uint64\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Adds a request to the ID list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ab0e95daed89d7949a27b6a129157a011}{Remove\+Request\+From\+Id\+List}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, uint64\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Removes a request from the ID list. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_id_list}{Id\+List}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_acfe847fbf21eb04e2aad555a472e9547}{Get\+Id\+List}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&url\+Hash) const
+\begin{DoxyCompactList}\small\item\em Gets the ID list. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_adaf64fc2b3da735ac4be8944744b413f}{Check\+Committee}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine) const
+\begin{DoxyCompactList}\small\item\em Checks if the caller is a committee member. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a2e14582463c5d2ecc4b123b87665ea9f}{Check\+Oracle\+Node}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine) const
+\begin{DoxyCompactList}\small\item\em Checks if the caller is an oracle node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a517d2ea53e359bf601f25bcb3eef0cfa}{Get\+Original\+Txid}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine) const
+\begin{DoxyCompactList}\small\item\em Gets the original transaction ID. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the oracle native contract. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ad20dae2ffdc8bc49e0a1a22177996c64}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!OracleContract@{OracleContract}}
+\index{OracleContract@{OracleContract}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{OracleContract()}{OracleContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ad20dae2ffdc8bc49e0a1a22177996c64} 
+neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Oracle\+Contract (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an \doxylink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract}{Oracle\+Contract}. 
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_aaee28071daa8179c4a6a625bebf951d5}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!AddRequestToIdList@{AddRequestToIdList}}
+\index{AddRequestToIdList@{AddRequestToIdList}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{AddRequestToIdList()}{AddRequestToIdList()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_aaee28071daa8179c4a6a625bebf951d5} 
+void neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Add\+Request\+To\+Id\+List (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{uint64\+\_\+t}]{id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Adds a request to the ID list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em id} & The ID. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_adaf64fc2b3da735ac4be8944744b413f}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!CheckCommittee@{CheckCommittee}}
+\index{CheckCommittee@{CheckCommittee}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{CheckCommittee()}{CheckCommittee()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_adaf64fc2b3da735ac4be8944744b413f} 
+bool neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Check\+Committee (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if the caller is a committee member. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the caller is a committee member, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a2e14582463c5d2ecc4b123b87665ea9f}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!CheckOracleNode@{CheckOracleNode}}
+\index{CheckOracleNode@{CheckOracleNode}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{CheckOracleNode()}{CheckOracleNode()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a2e14582463c5d2ecc4b123b87665ea9f} 
+bool neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Check\+Oracle\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if the caller is an oracle node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the caller is an oracle node, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a9951d4af945e4b91998287ccf57290f0}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!CreateRequest@{CreateRequest}}
+\index{CreateRequest@{CreateRequest}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{CreateRequest()}{CreateRequest()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a9951d4af945e4b91998287ccf57290f0} 
+uint64\+\_\+t neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Create\+Request (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{const std\+::string \&}]{url}{, }\item[{const std\+::string \&}]{filter}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{callback}{, }\item[{const std\+::string \&}]{callback\+Method}{, }\item[{int64\+\_\+t}]{gas\+For\+Response}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{user\+Data}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{original\+Txid}{}\end{DoxyParamCaption})}
+
+
+
+Creates a request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em url} & The URL. \\
+\hline
+{\em filter} & The filter. \\
+\hline
+{\em callback} & The callback contract. \\
+\hline
+{\em callback\+Method} & The callback method. \\
+\hline
+{\em gas\+For\+Response} & The gas for response. \\
+\hline
+{\em user\+Data} & The user data. \\
+\hline
+{\em original\+Txid} & The original transaction ID. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The request ID. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a9fa7bdff64d467fd64e2c3b8d8e6893d}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!GetIdList@{GetIdList}}
+\index{GetIdList@{GetIdList}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{GetIdList()}{GetIdList()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a9fa7bdff64d467fd64e2c3b8d8e6893d} 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_id_list}{Id\+List}} neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Get\+Id\+List (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{url\+Hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the ID list for a URL. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em url\+Hash} & The URL hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The ID list. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_acfe847fbf21eb04e2aad555a472e9547}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!GetIdList@{GetIdList}}
+\index{GetIdList@{GetIdList}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{GetIdList()}{GetIdList()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_acfe847fbf21eb04e2aad555a472e9547} 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_id_list}{Id\+List}} neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Get\+Id\+List (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{url\+Hash}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the ID list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em url\+Hash} & The URL hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The ID list. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_afdd6ed78b4d793067ad9b3deb1f6af2f}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_afdd6ed78b4d793067ad9b3deb1f6af2f} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_contract}{Oracle\+Contract}} $>$ neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the instance. 
+
+\begin{DoxyReturn}{Returns}
+The instance. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ab277eb46f0ba8c00ccd78e3500e1c92c}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!GetNextRequestId@{GetNextRequestId}}
+\index{GetNextRequestId@{GetNextRequestId}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{GetNextRequestId()}{GetNextRequestId()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ab277eb46f0ba8c00ccd78e3500e1c92c} 
+uint64\+\_\+t neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Get\+Next\+Request\+Id (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the next request ID. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The next request ID. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a7480c0d172263c0a871caf3b6139cc39}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!GetOracles@{GetOracles}}
+\index{GetOracles@{GetOracles}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{GetOracles()}{GetOracles()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a7480c0d172263c0a871caf3b6139cc39} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Get\+Oracles (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the oracles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The oracles. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a517d2ea53e359bf601f25bcb3eef0cfa}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!GetOriginalTxid@{GetOriginalTxid}}
+\index{GetOriginalTxid@{GetOriginalTxid}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{GetOriginalTxid()}{GetOriginalTxid()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a517d2ea53e359bf601f25bcb3eef0cfa} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Get\+Original\+Txid (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Gets the original transaction ID. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The original transaction ID. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a4e2249bb1e6a5164baabe13e0ece9f5a}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!GetPrice@{GetPrice}}
+\index{GetPrice@{GetPrice}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{GetPrice()}{GetPrice()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a4e2249bb1e6a5164baabe13e0ece9f5a} 
+int64\+\_\+t neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Get\+Price (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the price. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The price. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a53ddf70b645de98c872f1768da7a8d8b}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!GetRequest@{GetRequest}}
+\index{GetRequest@{GetRequest}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{GetRequest()}{GetRequest()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a53ddf70b645de98c872f1768da7a8d8b} 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_request}{Oracle\+Request}} neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Get\+Request (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{uint64\+\_\+t}]{id}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a request by ID. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em id} & The request ID. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The request. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ac3254ef1e3b287d05473b5650a101ea1}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!GetRequests@{GetRequests}}
+\index{GetRequests@{GetRequests}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{GetRequests()}{GetRequests()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ac3254ef1e3b287d05473b5650a101ea1} 
+std\+::vector$<$ std\+::pair$<$ uint64\+\_\+t, \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_request}{Oracle\+Request}} $>$ $>$ neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Get\+Requests (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets all requests. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The requests. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ac121bece28d947d87219e032d50986c2}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!GetRequestsByUrl@{GetRequestsByUrl}}
+\index{GetRequestsByUrl@{GetRequestsByUrl}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{GetRequestsByUrl()}{GetRequestsByUrl()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ac121bece28d947d87219e032d50986c2} 
+std\+::vector$<$ std\+::pair$<$ uint64\+\_\+t, \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_oracle_request}{Oracle\+Request}} $>$ $>$ neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Get\+Requests\+By\+Url (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{const std\+::string \&}]{url}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets requests by URL. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em url} & The URL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The requests. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a6401c4073073dd08367498e8388234d1}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!GetResponse@{GetResponse}}
+\index{GetResponse@{GetResponse}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{GetResponse()}{GetResponse()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a6401c4073073dd08367498e8388234d1} 
+std\+::tuple$<$ uint8\+\_\+t, std\+::string $>$ neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Get\+Response (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{uint64\+\_\+t}]{id}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a response. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em id} & The ID. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The response (code, result). 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_aa23741826ae63ddf7a7d0b373b46d668}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!GetUrlHash@{GetUrlHash}}
+\index{GetUrlHash@{GetUrlHash}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{GetUrlHash()}{GetUrlHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_aa23741826ae63ddf7a7d0b373b46d668} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Get\+Url\+Hash (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{url}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the URL hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & The URL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The URL hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a48d25aaed6ef2e950d27767ddbb52128}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a48d25aaed6ef2e950d27767ddbb52128} 
+void neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Initializes the contract. 
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a427aae1fe42c2264c5f6979a84092a5d}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}.
+
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ab65894186b16d15cb98ffa35ce51c8b1}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!InitializeContract@{InitializeContract}}
+\index{InitializeContract@{InitializeContract}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{InitializeContract()}{InitializeContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ab65894186b16d15cb98ffa35ce51c8b1} 
+bool neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Initialize\+Contract (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{uint32\+\_\+t}]{hardfork}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the contract. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em hardfork} & The hardfork version. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_aecd6f2c7191eae1f522f05e94dca9b76}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!OnFinish@{OnFinish}}
+\index{OnFinish@{OnFinish}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{OnFinish()}{OnFinish()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_aecd6f2c7191eae1f522f05e94dca9b76} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+On\+Finish (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the finish method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a76f9947964b121612e84e0f684016d5c}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!OnGetOracles@{OnGetOracles}}
+\index{OnGetOracles@{OnGetOracles}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{OnGetOracles()}{OnGetOracles()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a76f9947964b121612e84e0f684016d5c} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+On\+Get\+Oracles (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the get\+Oracles method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a9f3f812d94651621bb8db0bc8f09be6c}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!OnGetPrice@{OnGetPrice}}
+\index{OnGetPrice@{OnGetPrice}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{OnGetPrice()}{OnGetPrice()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a9f3f812d94651621bb8db0bc8f09be6c} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+On\+Get\+Price (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the get\+Price method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ace07248d67e2ec848742638284bf21bd}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!OnPersist@{OnPersist}}
+\index{OnPersist@{OnPersist}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{OnPersist()}{OnPersist()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ace07248d67e2ec848742638284bf21bd} 
+bool neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+On\+Persist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})}
+
+
+
+Handles the On\+Persist event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 23
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a1685d444ac508012f9deaebaeab20509}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!OnRequest@{OnRequest}}
+\index{OnRequest@{OnRequest}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{OnRequest()}{OnRequest()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a1685d444ac508012f9deaebaeab20509} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+On\+Request (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the request method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 24
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_acb6324bd97a39910da20966b48d6a53e}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!OnSetOracles@{OnSetOracles}}
+\index{OnSetOracles@{OnSetOracles}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{OnSetOracles()}{OnSetOracles()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_acb6324bd97a39910da20966b48d6a53e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+On\+Set\+Oracles (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the set\+Oracles method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 25
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a6226fdab485ebf482d72cbf273abeff4}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!OnSetPrice@{OnSetPrice}}
+\index{OnSetPrice@{OnSetPrice}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{OnSetPrice()}{OnSetPrice()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a6226fdab485ebf482d72cbf273abeff4} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+On\+Set\+Price (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the set\+Price method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 26
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a627841366fbde6f1d1afb821003b8b21}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!OnVerify@{OnVerify}}
+\index{OnVerify@{OnVerify}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{OnVerify()}{OnVerify()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a627841366fbde6f1d1afb821003b8b21} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+On\+Verify (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the verify method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 27
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_af25d9cf42dbaa7e59bc9463b7fa42739}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!PostPersist@{PostPersist}}
+\index{PostPersist@{PostPersist}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{PostPersist()}{PostPersist()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_af25d9cf42dbaa7e59bc9463b7fa42739} 
+bool neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Post\+Persist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})}
+
+
+
+Handles the Post\+Persist event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ab0e95daed89d7949a27b6a129157a011}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!RemoveRequestFromIdList@{RemoveRequestFromIdList}}
+\index{RemoveRequestFromIdList@{RemoveRequestFromIdList}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{RemoveRequestFromIdList()}{RemoveRequestFromIdList()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ab0e95daed89d7949a27b6a129157a011} 
+void neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Remove\+Request\+From\+Id\+List (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{uint64\+\_\+t}]{id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Removes a request from the ID list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em id} & The ID. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 28
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a630806dfc024a2b8ca13fbee4253925a}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!SetOracles@{SetOracles}}
+\index{SetOracles@{SetOracles}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{SetOracles()}{SetOracles()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a630806dfc024a2b8ca13fbee4253925a} 
+void neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Set\+Oracles (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \&}]{oracles}{}\end{DoxyParamCaption})}
+
+
+
+Sets the oracles. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em oracles} & The oracles. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 29
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a59a565b3e3dd8e0dd6575640f4686691}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!SetPrice@{SetPrice}}
+\index{SetPrice@{SetPrice}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{SetPrice()}{SetPrice()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a59a565b3e3dd8e0dd6575640f4686691} 
+void neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+Set\+Price (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{int64\+\_\+t}]{price}{}\end{DoxyParamCaption})}
+
+
+
+Sets the price. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em price} & The price. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 30
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ac2e6303f5b2491b5dd7925d6f74ce792}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!DEFAULT\_PRICE@{DEFAULT\_PRICE}}
+\index{DEFAULT\_PRICE@{DEFAULT\_PRICE}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{DEFAULT\_PRICE}{DEFAULT\_PRICE}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ac2e6303f5b2491b5dd7925d6f74ce792} 
+int64\+\_\+t neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+DEFAULT\+\_\+\+PRICE = 1000000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The default price. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ae889f6e4ab5e69d26abe206a5902857d}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!ID@{ID}}
+\index{ID@{ID}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{ID}{ID}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ae889f6e4ab5e69d26abe206a5902857d} 
+int32\+\_\+t neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+ID = -\/9\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The contract ID. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a4bdd0461a4bafd95c274942f9cb798b3}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!MAX\_CALLBACK\_LENGTH@{MAX\_CALLBACK\_LENGTH}}
+\index{MAX\_CALLBACK\_LENGTH@{MAX\_CALLBACK\_LENGTH}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{MAX\_CALLBACK\_LENGTH}{MAX\_CALLBACK\_LENGTH}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a4bdd0461a4bafd95c274942f9cb798b3} 
+int neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+MAX\+\_\+\+CALLBACK\+\_\+\+LENGTH = 32\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The maximum callback length. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a766b3e81df49686f69ab3e89ea901d32}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!MAX\_FILTER\_LENGTH@{MAX\_FILTER\_LENGTH}}
+\index{MAX\_FILTER\_LENGTH@{MAX\_FILTER\_LENGTH}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{MAX\_FILTER\_LENGTH}{MAX\_FILTER\_LENGTH}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a766b3e81df49686f69ab3e89ea901d32} 
+int neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+MAX\+\_\+\+FILTER\+\_\+\+LENGTH = 128\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The maximum filter length. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a453042d2786a4f19ae3fead0776bfaea}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!MAX\_URL\_LENGTH@{MAX\_URL\_LENGTH}}
+\index{MAX\_URL\_LENGTH@{MAX\_URL\_LENGTH}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{MAX\_URL\_LENGTH}{MAX\_URL\_LENGTH}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a453042d2786a4f19ae3fead0776bfaea} 
+int neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+MAX\+\_\+\+URL\+\_\+\+LENGTH = 256\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The maximum URL length. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a459dc0f3f97b7a37d6b00efb4003167e}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!MAX\_USER\_DATA\_LENGTH@{MAX\_USER\_DATA\_LENGTH}}
+\index{MAX\_USER\_DATA\_LENGTH@{MAX\_USER\_DATA\_LENGTH}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{MAX\_USER\_DATA\_LENGTH}{MAX\_USER\_DATA\_LENGTH}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a459dc0f3f97b7a37d6b00efb4003167e} 
+int neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+MAX\+\_\+\+USER\+\_\+\+DATA\+\_\+\+LENGTH = 512\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The maximum user data length. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a2e00de2e7b70928d261b4b264613d3b4}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!NAME@{NAME}}
+\index{NAME@{NAME}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{NAME}{NAME}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a2e00de2e7b70928d261b4b264613d3b4} 
+const char\texorpdfstring{$\ast$}{*} neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+NAME = "{}Oracle\+Contract"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The contract name. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a1c4eb08bda0f8d536cfbcd4521e2c4df}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!PREFIX\_ID\_LIST@{PREFIX\_ID\_LIST}}
+\index{PREFIX\_ID\_LIST@{PREFIX\_ID\_LIST}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_ID\_LIST}{PREFIX\_ID\_LIST}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a1c4eb08bda0f8d536cfbcd4521e2c4df} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+PREFIX\+\_\+\+ID\+\_\+\+LIST = 6\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for ID list. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a42e47c3d6789c049a6247a93ad1025d2}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!PREFIX\_ORACLE@{PREFIX\_ORACLE}}
+\index{PREFIX\_ORACLE@{PREFIX\_ORACLE}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_ORACLE}{PREFIX\_ORACLE}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a42e47c3d6789c049a6247a93ad1025d2} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+PREFIX\+\_\+\+ORACLE = 8\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for oracles. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ae56d12e26522b24e1d3c8ab18f8a620b}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!PREFIX\_PRICE@{PREFIX\_PRICE}}
+\index{PREFIX\_PRICE@{PREFIX\_PRICE}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_PRICE}{PREFIX\_PRICE}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_ae56d12e26522b24e1d3c8ab18f8a620b} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+PREFIX\+\_\+\+PRICE = 5\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for price. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_abd5ffcccb68784d8dbf3cc60e941b2c5}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!PREFIX\_REQUEST@{PREFIX\_REQUEST}}
+\index{PREFIX\_REQUEST@{PREFIX\_REQUEST}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_REQUEST}{PREFIX\_REQUEST}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_abd5ffcccb68784d8dbf3cc60e941b2c5} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+PREFIX\+\_\+\+REQUEST = 7\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for requests. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a4ac0aa731355a3129661ef2adee909be}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!PREFIX\_REQUEST\_ID@{PREFIX\_REQUEST\_ID}}
+\index{PREFIX\_REQUEST\_ID@{PREFIX\_REQUEST\_ID}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_REQUEST\_ID}{PREFIX\_REQUEST\_ID}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a4ac0aa731355a3129661ef2adee909be} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+PREFIX\+\_\+\+REQUEST\+\_\+\+ID = 9\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for request ID. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a3bc5cec202434d96bea9ba6c31ad9381}\index{neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}!PREFIX\_RESPONSE@{PREFIX\_RESPONSE}}
+\index{PREFIX\_RESPONSE@{PREFIX\_RESPONSE}!neo::smartcontract::native::OracleContract@{neo::smartcontract::native::OracleContract}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_RESPONSE}{PREFIX\_RESPONSE}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_oracle_contract_a3bc5cec202434d96bea9ba6c31ad9381} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Oracle\+Contract\+::\+PREFIX\+\_\+\+RESPONSE = 10\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for responses. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/native/\mbox{\hyperlink{oracle__contract_8h}{oracle\+\_\+contract.\+h}}\item 
+src/smartcontract/native/\mbox{\hyperlink{oracle__contract_8cpp}{oracle\+\_\+contract.\+cpp}}\item 
+src/smartcontract/native/\mbox{\hyperlink{oracle__contract__handlers_8cpp}{oracle\+\_\+contract\+\_\+handlers.\+cpp}}\item 
+src/smartcontract/native/\mbox{\hyperlink{oracle__contract__persistence_8cpp}{oracle\+\_\+contract\+\_\+persistence.\+cpp}}\item 
+src/smartcontract/native/\mbox{\hyperlink{oracle__contract__requests_8cpp}{oracle\+\_\+contract\+\_\+requests.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,110 @@
+\doxysection{neo\+::core\+::Error\+Recovery\+::Bulkhead Class Reference}
+\hypertarget{classneo_1_1core_1_1_error_recovery_1_1_bulkhead}{}\label{classneo_1_1core_1_1_error_recovery_1_1_bulkhead}\index{neo::core::ErrorRecovery::Bulkhead@{neo::core::ErrorRecovery::Bulkhead}}
+
+
+\doxylink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead}{Bulkhead} pattern for resource isolation.  
+
+
+
+
+{\ttfamily \#include $<$error\+\_\+recovery.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::core\+::Error\+Recovery\+::Bulkhead\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_bulkhead_1_1_config}{Config}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_ac609b3118b2b8110afb98490f12606a9}{Bulkhead}} (const \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_bulkhead_1_1_config}{Config}} \&config)
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a49e7d12345f1ffbe90e05642f1f86d0b}{Bulkhead}} ()
+\item 
+{\footnotesize template$<$typename T$>$ }\\\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{Recovery\+Result}}$<$ T $>$ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a4b6829f018e380dd8cd4564d23651797}{Execute}} (std\+::function$<$ T()$>$ operation)
+\item 
+int \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a18363ce2892bbb05a45e91609aabb7a5}{Get\+Current\+Calls}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_bulkhead_1_1_config}{Config}} \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a06c379e6b9a1ffbd5dd44c73c3ee8487}{config\+\_\+}}
+\item 
+int \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a5daec6c5e75480c092bd9cba128bfe28}{current\+\_\+calls\+\_\+}} = 0
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_afc4c9e8258928ef281de468e05dc9830}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead}{Bulkhead} pattern for resource isolation. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_ac609b3118b2b8110afb98490f12606a9}\index{neo::core::ErrorRecovery::Bulkhead@{neo::core::ErrorRecovery::Bulkhead}!Bulkhead@{Bulkhead}}
+\index{Bulkhead@{Bulkhead}!neo::core::ErrorRecovery::Bulkhead@{neo::core::ErrorRecovery::Bulkhead}}
+\doxysubsubsection{\texorpdfstring{Bulkhead()}{Bulkhead()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_ac609b3118b2b8110afb98490f12606a9} 
+neo\+::core\+::\+Error\+Recovery\+::\+Bulkhead\+::\+Bulkhead (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_bulkhead_1_1_config}{Config}} \&}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a49e7d12345f1ffbe90e05642f1f86d0b}\index{neo::core::ErrorRecovery::Bulkhead@{neo::core::ErrorRecovery::Bulkhead}!Bulkhead@{Bulkhead}}
+\index{Bulkhead@{Bulkhead}!neo::core::ErrorRecovery::Bulkhead@{neo::core::ErrorRecovery::Bulkhead}}
+\doxysubsubsection{\texorpdfstring{Bulkhead()}{Bulkhead()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a49e7d12345f1ffbe90e05642f1f86d0b} 
+neo\+::core\+::\+Error\+Recovery\+::\+Bulkhead\+::\+Bulkhead (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a4b6829f018e380dd8cd4564d23651797}\index{neo::core::ErrorRecovery::Bulkhead@{neo::core::ErrorRecovery::Bulkhead}!Execute@{Execute}}
+\index{Execute@{Execute}!neo::core::ErrorRecovery::Bulkhead@{neo::core::ErrorRecovery::Bulkhead}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a4b6829f018e380dd8cd4564d23651797} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{Recovery\+Result}}$<$ T $>$ neo\+::core\+::\+Error\+Recovery\+::\+Bulkhead\+::\+Execute (\begin{DoxyParamCaption}\item[{std\+::function$<$ T()$>$}]{operation}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a18363ce2892bbb05a45e91609aabb7a5}\index{neo::core::ErrorRecovery::Bulkhead@{neo::core::ErrorRecovery::Bulkhead}!GetCurrentCalls@{GetCurrentCalls}}
+\index{GetCurrentCalls@{GetCurrentCalls}!neo::core::ErrorRecovery::Bulkhead@{neo::core::ErrorRecovery::Bulkhead}}
+\doxysubsubsection{\texorpdfstring{GetCurrentCalls()}{GetCurrentCalls()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a18363ce2892bbb05a45e91609aabb7a5} 
+int neo\+::core\+::\+Error\+Recovery\+::\+Bulkhead\+::\+Get\+Current\+Calls (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a06c379e6b9a1ffbd5dd44c73c3ee8487}\index{neo::core::ErrorRecovery::Bulkhead@{neo::core::ErrorRecovery::Bulkhead}!config\_@{config\_}}
+\index{config\_@{config\_}!neo::core::ErrorRecovery::Bulkhead@{neo::core::ErrorRecovery::Bulkhead}}
+\doxysubsubsection{\texorpdfstring{config\_}{config\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a06c379e6b9a1ffbd5dd44c73c3ee8487} 
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_bulkhead_1_1_config}{Config}} neo\+::core\+::\+Error\+Recovery\+::\+Bulkhead\+::config\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a5daec6c5e75480c092bd9cba128bfe28}\index{neo::core::ErrorRecovery::Bulkhead@{neo::core::ErrorRecovery::Bulkhead}!current\_calls\_@{current\_calls\_}}
+\index{current\_calls\_@{current\_calls\_}!neo::core::ErrorRecovery::Bulkhead@{neo::core::ErrorRecovery::Bulkhead}}
+\doxysubsubsection{\texorpdfstring{current\_calls\_}{current\_calls\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a5daec6c5e75480c092bd9cba128bfe28} 
+int neo\+::core\+::\+Error\+Recovery\+::\+Bulkhead\+::current\+\_\+calls\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_afc4c9e8258928ef281de468e05dc9830}\index{neo::core::ErrorRecovery::Bulkhead@{neo::core::ErrorRecovery::Bulkhead}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::core::ErrorRecovery::Bulkhead@{neo::core::ErrorRecovery::Bulkhead}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_afc4c9e8258928ef281de468e05dc9830} 
+std\+::mutex neo\+::core\+::\+Error\+Recovery\+::\+Bulkhead\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{error__recovery_8h}{error\+\_\+recovery.\+h}}\end{DoxyCompactItemize}

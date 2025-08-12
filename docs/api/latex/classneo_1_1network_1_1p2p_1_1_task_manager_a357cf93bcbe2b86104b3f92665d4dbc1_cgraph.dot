@@ -1,0 +1,18 @@
+digraph "neo::network::p2p::TaskManager::Start"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::network::p2p::\lTaskManager::Start",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Starts the task manager."];
+  Node1 -> Node2 [id="edge6_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::network::p2p::\lTaskManager::ProcessTasks",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1p2p_1_1_task_manager.html#a301c95ed541f7192a299246696cc718e",tooltip="Processes tasks."];
+  Node2 -> Node3 [id="edge7_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::network::p2p::\lTaskManager::ProcessBlockTasks",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1p2p_1_1_task_manager.html#ac2023e9a1bce5ce603df8e883b756539",tooltip="Processes block tasks."];
+  Node3 -> Node4 [id="edge8_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::network::p2p::\lTaskManager::CleanupExpired\lTasks",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1p2p_1_1_task_manager.html#aff3c0106795c57bcb1d8408ddbf2b7d0",tooltip="Cleans up expired tasks."];
+  Node2 -> Node5 [id="edge9_Node000002_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::network::p2p::\lTaskManager::ProcessTransaction\lTasks",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1p2p_1_1_task_manager.html#aa63358cb65e5ec4cccdd84bb5b6fdd39",tooltip="Processes transaction tasks."];
+  Node5 -> Node4 [id="edge10_Node000005_Node000004",color="steelblue1",style="solid",tooltip=" "];
+}

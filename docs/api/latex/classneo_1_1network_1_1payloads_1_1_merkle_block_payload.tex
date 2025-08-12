@@ -1,0 +1,376 @@
+\doxysection{neo\+::network\+::payloads\+::Merkle\+Block\+Payload Class Reference}
+\hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload}{}\label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+
+
+Represents a merkle block payload for SPV protocol.  
+
+
+
+
+{\ttfamily \#include $<$merkle\+\_\+block\+\_\+payload.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::payloads\+::Merkle\+Block\+Payload\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::payloads\+::Merkle\+Block\+Payload\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a5dd4fbefc31352f68fdd925cbf8d6887}{Merkle\+Block\+Payload}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload}{Merkle\+Block\+Payload}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a03627dfc8fd455946c9a3b90fb33aa7a}{Merkle\+Block\+Payload}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{neo\+::network\+::p2p\+::payloads\+::\+Header}} $>$ header, uint32\+\_\+t transaction\+Count, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&hashes, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&flags)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload}{Merkle\+Block\+Payload} with the specified parameters. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{neo\+::network\+::p2p\+::payloads\+::\+Header}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_aab122a57ad849cb46aee27c4135e57ae}{Get\+Header}} () const
+\begin{DoxyCompactList}\small\item\em Gets the block header. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a964dfbc04d810b49767f13f6e5816b0c}{Set\+Header}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{neo\+::network\+::p2p\+::payloads\+::\+Header}} $>$ header)
+\begin{DoxyCompactList}\small\item\em Sets the block header. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a945d88e36f31d4d2cdacc38b35cc9fa3}{Get\+Transaction\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Gets the transaction count. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_ad3c3a2f951e2933dbb0cb91fcabd698a}{Set\+Transaction\+Count}} (uint32\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Sets the transaction count. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \& \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_af75cdfb23f5d191c8edac0850ac5982b}{Get\+Hashes}} () const
+\begin{DoxyCompactList}\small\item\em Gets the transaction hashes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_aa47810ad7424a5ad7aaa614950084f69}{Set\+Hashes}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&hashes)
+\begin{DoxyCompactList}\small\item\em Sets the transaction hashes. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a5abc7e9169192e3415208858e5269c90}{Get\+Flags}} () const
+\begin{DoxyCompactList}\small\item\em Gets the flags bits. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_adac5f2f3c0758d1f06caae8941e7e8ee}{Set\+Flags}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&flags)
+\begin{DoxyCompactList}\small\item\em Sets the flags bits. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_acfa2b8d5f499ab4401fad1237b6ebcc2}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload}{Merkle\+Block\+Payload} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a09c3029f30e82b6d2471cb9832fa0e8b}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload}{Merkle\+Block\+Payload} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a811fc3f7490ff7366a0a02299d8af887}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload}{Merkle\+Block\+Payload} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a5e7fe62d2cc6ad9ac6fc43f1edca6e91}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload}{Merkle\+Block\+Payload} from a JSON reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1network_1_1_i_payload}{neo\+::network\+::\+IPayload}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1_i_payload_a682117721a2def472fd1e3cff290d721}{\texorpdfstring{$\sim$}{\string~}\+IPayload}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{neo\+::network\+::p2p\+::payloads\+::\+Header}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a6637d92289d93c210c5242b56aae180f}{header\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a6ae9133631059be306935b5797011a84}{transaction\+Count\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a31d3d50b72641f91faa73cd60340d919}{hashes\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a617d1e411c96db75f85ff9f82e3fac66}{flags\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a merkle block payload for SPV protocol. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a5dd4fbefc31352f68fdd925cbf8d6887}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!MerkleBlockPayload@{MerkleBlockPayload}}
+\index{MerkleBlockPayload@{MerkleBlockPayload}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{MerkleBlockPayload()}{MerkleBlockPayload()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a5dd4fbefc31352f68fdd925cbf8d6887} 
+neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::\+Merkle\+Block\+Payload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload}{Merkle\+Block\+Payload}. 
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a03627dfc8fd455946c9a3b90fb33aa7a}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!MerkleBlockPayload@{MerkleBlockPayload}}
+\index{MerkleBlockPayload@{MerkleBlockPayload}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{MerkleBlockPayload()}{MerkleBlockPayload()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a03627dfc8fd455946c9a3b90fb33aa7a} 
+neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::\+Merkle\+Block\+Payload (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{neo\+::network\+::p2p\+::payloads\+::\+Header}} $>$}]{header}{, }\item[{uint32\+\_\+t}]{transaction\+Count}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&}]{hashes}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{flags}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload}{Merkle\+Block\+Payload} with the specified parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em header} & The block header. \\
+\hline
+{\em transaction\+Count} & The total number of transactions in the block. \\
+\hline
+{\em hashes} & The transaction hashes that match the filter. \\
+\hline
+{\em flags} & The flags bits, which indicate matches in the merkle tree. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a09c3029f30e82b6d2471cb9832fa0e8b}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a09c3029f30e82b6d2471cb9832fa0e8b} 
+void neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload}{Merkle\+Block\+Payload} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a5e7fe62d2cc6ad9ac6fc43f1edca6e91}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a5e7fe62d2cc6ad9ac6fc43f1edca6e91} 
+void neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload}{Merkle\+Block\+Payload} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a5abc7e9169192e3415208858e5269c90}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!GetFlags@{GetFlags}}
+\index{GetFlags@{GetFlags}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{GetFlags()}{GetFlags()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a5abc7e9169192e3415208858e5269c90} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::\+Get\+Flags (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the flags bits. 
+
+\begin{DoxyReturn}{Returns}
+The flags bits. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_af75cdfb23f5d191c8edac0850ac5982b}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!GetHashes@{GetHashes}}
+\index{GetHashes@{GetHashes}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{GetHashes()}{GetHashes()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_af75cdfb23f5d191c8edac0850ac5982b} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \& neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::\+Get\+Hashes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the transaction hashes. 
+
+\begin{DoxyReturn}{Returns}
+The transaction hashes. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_aab122a57ad849cb46aee27c4135e57ae}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!GetHeader@{GetHeader}}
+\index{GetHeader@{GetHeader}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{GetHeader()}{GetHeader()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_aab122a57ad849cb46aee27c4135e57ae} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{neo\+::network\+::p2p\+::payloads\+::\+Header}} $>$ neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::\+Get\+Header (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the block header. 
+
+\begin{DoxyReturn}{Returns}
+The block header. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a945d88e36f31d4d2cdacc38b35cc9fa3}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!GetTransactionCount@{GetTransactionCount}}
+\index{GetTransactionCount@{GetTransactionCount}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{GetTransactionCount()}{GetTransactionCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a945d88e36f31d4d2cdacc38b35cc9fa3} 
+uint32\+\_\+t neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::\+Get\+Transaction\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the transaction count. 
+
+\begin{DoxyReturn}{Returns}
+The transaction count. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_acfa2b8d5f499ab4401fad1237b6ebcc2}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_acfa2b8d5f499ab4401fad1237b6ebcc2} 
+void neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload}{Merkle\+Block\+Payload} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a811fc3f7490ff7366a0a02299d8af887}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a811fc3f7490ff7366a0a02299d8af887} 
+void neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload}{Merkle\+Block\+Payload} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_adac5f2f3c0758d1f06caae8941e7e8ee}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!SetFlags@{SetFlags}}
+\index{SetFlags@{SetFlags}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{SetFlags()}{SetFlags()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_adac5f2f3c0758d1f06caae8941e7e8ee} 
+void neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::\+Set\+Flags (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{flags}{}\end{DoxyParamCaption})}
+
+
+
+Sets the flags bits. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em flags} & The flags bits. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_aa47810ad7424a5ad7aaa614950084f69}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!SetHashes@{SetHashes}}
+\index{SetHashes@{SetHashes}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{SetHashes()}{SetHashes()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_aa47810ad7424a5ad7aaa614950084f69} 
+void neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::\+Set\+Hashes (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&}]{hashes}{}\end{DoxyParamCaption})}
+
+
+
+Sets the transaction hashes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hashes} & The transaction hashes. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a964dfbc04d810b49767f13f6e5816b0c}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!SetHeader@{SetHeader}}
+\index{SetHeader@{SetHeader}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{SetHeader()}{SetHeader()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a964dfbc04d810b49767f13f6e5816b0c} 
+void neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::\+Set\+Header (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{neo\+::network\+::p2p\+::payloads\+::\+Header}} $>$}]{header}{}\end{DoxyParamCaption})}
+
+
+
+Sets the block header. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em header} & The block header. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_ad3c3a2f951e2933dbb0cb91fcabd698a}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!SetTransactionCount@{SetTransactionCount}}
+\index{SetTransactionCount@{SetTransactionCount}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{SetTransactionCount()}{SetTransactionCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_ad3c3a2f951e2933dbb0cb91fcabd698a} 
+void neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::\+Set\+Transaction\+Count (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{count}{}\end{DoxyParamCaption})}
+
+
+
+Sets the transaction count. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em count} & The transaction count. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a617d1e411c96db75f85ff9f82e3fac66}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!flags\_@{flags\_}}
+\index{flags\_@{flags\_}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{flags\_}{flags\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a617d1e411c96db75f85ff9f82e3fac66} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::flags\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a31d3d50b72641f91faa73cd60340d919}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!hashes\_@{hashes\_}}
+\index{hashes\_@{hashes\_}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{hashes\_}{hashes\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a31d3d50b72641f91faa73cd60340d919} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}$>$ neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::hashes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a6637d92289d93c210c5242b56aae180f}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!header\_@{header\_}}
+\index{header\_@{header\_}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{header\_}{header\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a6637d92289d93c210c5242b56aae180f} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{neo\+::network\+::p2p\+::payloads\+::\+Header}}$>$ neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::header\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a6ae9133631059be306935b5797011a84}\index{neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}!transactionCount\_@{transactionCount\_}}
+\index{transactionCount\_@{transactionCount\_}!neo::network::payloads::MerkleBlockPayload@{neo::network::payloads::MerkleBlockPayload}}
+\doxysubsubsection{\texorpdfstring{transactionCount\_}{transactionCount\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a6ae9133631059be306935b5797011a84} 
+uint32\+\_\+t neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload\+::transaction\+Count\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/payloads/\mbox{\hyperlink{merkle__block__payload_8h}{merkle\+\_\+block\+\_\+payload.\+h}}\item 
+src/network/p2p/payloads/\mbox{\hyperlink{merkle__block__payload_8cpp}{merkle\+\_\+block\+\_\+payload.\+cpp}}\end{DoxyCompactItemize}

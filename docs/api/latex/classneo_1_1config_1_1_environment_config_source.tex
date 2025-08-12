@@ -1,0 +1,165 @@
+\doxysection{neo\+::config\+::Environment\+Config\+Source Class Reference}
+\hypertarget{classneo_1_1config_1_1_environment_config_source}{}\label{classneo_1_1config_1_1_environment_config_source}\index{neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}}
+
+
+Environment variables configuration source.  
+
+
+
+
+{\ttfamily \#include $<$configuration\+\_\+manager.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::config\+::Environment\+Config\+Source\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::config\+::Environment\+Config\+Source\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_ab322f4a24ff91a9188a93047d57a079f}{Environment\+Config\+Source}} (const std\+::string \&prefix="{}NEO\+\_\+"{}, int priority=10)
+\item 
+bool \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_a778b3bc97e6d2ccaf0602dd1b92f4a7b}{Load}} () override
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_a6e8703317776978328a0bc35d99dc68e}{Get}} (const std\+::string \&key) const override
+\item 
+bool \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_afb0efd49b17f419d93db7067a7e9993e}{Contains}} (const std\+::string \&key) const override
+\item 
+json\+::\+JObject \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_acd8e5f0c0bd576c5d0bc6dbfc3317021}{Get\+Section}} (const std\+::string \&section) const override
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_a1f1f24e8c67ff34d81f0ec05f76e2d34}{Get\+Name}} () const override
+\item 
+int \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_a32e68b1e15c992f859effd6cfeddad7a}{Get\+Priority}} () const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source}{neo\+::config\+::\+IConfiguration\+Source}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_a83d167353ac4aedcc27eeefc024cf081}{\texorpdfstring{$\sim$}{\string~}\+IConfiguration\+Source}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_a63c3abe625da3f784593548a173e890d}{prefix\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_af51b94fe784206b1564bc1a582bee475}{cache\+\_\+}}
+\item 
+int \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_a9420f35a0dfdcd92151b2112dfa18d02}{priority\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_a2123ab679fb85f49a4d037f4fbeb066e}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Environment variables configuration source. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1config_1_1_environment_config_source_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1config_1_1_environment_config_source_ab322f4a24ff91a9188a93047d57a079f}\index{neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}!EnvironmentConfigSource@{EnvironmentConfigSource}}
+\index{EnvironmentConfigSource@{EnvironmentConfigSource}!neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}}
+\doxysubsubsection{\texorpdfstring{EnvironmentConfigSource()}{EnvironmentConfigSource()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_environment_config_source_ab322f4a24ff91a9188a93047d57a079f} 
+neo\+::config\+::\+Environment\+Config\+Source\+::\+Environment\+Config\+Source (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{prefix}{ = {\ttfamily "{}NEO\+\_\+"{}}, }\item[{int}]{priority}{ = {\ttfamily 10}}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1config_1_1_environment_config_source_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1config_1_1_environment_config_source_afb0efd49b17f419d93db7067a7e9993e}\index{neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}!Contains@{Contains}}
+\index{Contains@{Contains}!neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_environment_config_source_afb0efd49b17f419d93db7067a7e9993e} 
+bool neo\+::config\+::\+Environment\+Config\+Source\+::\+Contains (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_adf411f181e5ad17760d2d91a5c3d80f5}{neo\+::config\+::\+IConfiguration\+Source}}.
+
+\Hypertarget{classneo_1_1config_1_1_environment_config_source_a6e8703317776978328a0bc35d99dc68e}\index{neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}!Get@{Get}}
+\index{Get@{Get}!neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_environment_config_source_a6e8703317776978328a0bc35d99dc68e} 
+std\+::string neo\+::config\+::\+Environment\+Config\+Source\+::\+Get (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_adc91f20c043dff2f651f581c8c60b9d2}{neo\+::config\+::\+IConfiguration\+Source}}.
+
+\Hypertarget{classneo_1_1config_1_1_environment_config_source_a1f1f24e8c67ff34d81f0ec05f76e2d34}\index{neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}!GetName@{GetName}}
+\index{GetName@{GetName}!neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_environment_config_source_a1f1f24e8c67ff34d81f0ec05f76e2d34} 
+std\+::string neo\+::config\+::\+Environment\+Config\+Source\+::\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_a65a018b6e12e5ee334b2ad5d317a6ef8}{neo\+::config\+::\+IConfiguration\+Source}}.
+
+\Hypertarget{classneo_1_1config_1_1_environment_config_source_a32e68b1e15c992f859effd6cfeddad7a}\index{neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}!GetPriority@{GetPriority}}
+\index{GetPriority@{GetPriority}!neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}}
+\doxysubsubsection{\texorpdfstring{GetPriority()}{GetPriority()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_environment_config_source_a32e68b1e15c992f859effd6cfeddad7a} 
+int neo\+::config\+::\+Environment\+Config\+Source\+::\+Get\+Priority (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_aec866b5735ecabacc566e2d07bbbe1bf}{neo\+::config\+::\+IConfiguration\+Source}}.
+
+\Hypertarget{classneo_1_1config_1_1_environment_config_source_acd8e5f0c0bd576c5d0bc6dbfc3317021}\index{neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}!GetSection@{GetSection}}
+\index{GetSection@{GetSection}!neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}}
+\doxysubsubsection{\texorpdfstring{GetSection()}{GetSection()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_environment_config_source_acd8e5f0c0bd576c5d0bc6dbfc3317021} 
+json\+::\+JObject neo\+::config\+::\+Environment\+Config\+Source\+::\+Get\+Section (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{section}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_a8faf3e0abfa77ccbdd0aa19a6531641c}{neo\+::config\+::\+IConfiguration\+Source}}.
+
+\Hypertarget{classneo_1_1config_1_1_environment_config_source_a778b3bc97e6d2ccaf0602dd1b92f4a7b}\index{neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}!Load@{Load}}
+\index{Load@{Load}!neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}}
+\doxysubsubsection{\texorpdfstring{Load()}{Load()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_environment_config_source_a778b3bc97e6d2ccaf0602dd1b92f4a7b} 
+bool neo\+::config\+::\+Environment\+Config\+Source\+::\+Load (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_af6c30f50cc5bbbfce633ff5f07eb731e}{neo\+::config\+::\+IConfiguration\+Source}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1config_1_1_environment_config_source_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1config_1_1_environment_config_source_af51b94fe784206b1564bc1a582bee475}\index{neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}!cache\_@{cache\_}}
+\index{cache\_@{cache\_}!neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}}
+\doxysubsubsection{\texorpdfstring{cache\_}{cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_environment_config_source_af51b94fe784206b1564bc1a582bee475} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::string$>$ neo\+::config\+::\+Environment\+Config\+Source\+::cache\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_environment_config_source_a2123ab679fb85f49a4d037f4fbeb066e}\index{neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_environment_config_source_a2123ab679fb85f49a4d037f4fbeb066e} 
+std\+::mutex neo\+::config\+::\+Environment\+Config\+Source\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_environment_config_source_a63c3abe625da3f784593548a173e890d}\index{neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}!prefix\_@{prefix\_}}
+\index{prefix\_@{prefix\_}!neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}}
+\doxysubsubsection{\texorpdfstring{prefix\_}{prefix\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_environment_config_source_a63c3abe625da3f784593548a173e890d} 
+std\+::string neo\+::config\+::\+Environment\+Config\+Source\+::prefix\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_environment_config_source_a9420f35a0dfdcd92151b2112dfa18d02}\index{neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}!priority\_@{priority\_}}
+\index{priority\_@{priority\_}!neo::config::EnvironmentConfigSource@{neo::config::EnvironmentConfigSource}}
+\doxysubsubsection{\texorpdfstring{priority\_}{priority\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_environment_config_source_a9420f35a0dfdcd92151b2112dfa18d02} 
+int neo\+::config\+::\+Environment\+Config\+Source\+::priority\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/config/\mbox{\hyperlink{configuration__manager_8h}{configuration\+\_\+manager.\+h}}\end{DoxyCompactItemize}

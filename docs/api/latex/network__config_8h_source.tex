@@ -1,0 +1,118 @@
+\doxysection{network\+\_\+config.\+h}
+\hypertarget{network__config_8h_source}{}\label{network__config_8h_source}\index{include/neo/core/network\_config.h@{include/neo/core/network\_config.h}}
+\mbox{\hyperlink{network__config_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1core}{neo::core}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_network_config}{NetworkConfig}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00016\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings}{NetworkSettings}}}
+\DoxyCodeLine{00017\ \ \ \ \ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings_a2806040466387d45d073a4ed2325da05}{magic}};}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings_a180334fd46379319ad74d6547ad6377a}{default\_p2p\_port}};}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings_a02a9b064285a61e69ab96216c6050979}{default\_rpc\_port}};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings_a3748716542215fc7f85435afe9691c8d}{default\_ws\_port}};}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings_a05200208284db91c1206cdd17f6caf52}{milliseconds\_per\_block}};}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings_aa22a0960fa19f8d0b1684a1c58863882}{max\_transactions\_per\_block}};}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings_a8a58e54de64744d4ea865c08fc6fb269}{validators\_count}};}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings_a4fb4dda80bb02465af994cba7c6573c5}{committee\_members\_count}};}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings_abb07f43a9efb0e485bedceee8f1dcbb5}{address\_version}};}
+\DoxyCodeLine{00027\ \ \ \ \ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings}{NetworkSettings}}\&\ \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a5ca45bd926f8fd64e281cd719dce77c9}{GetNetworkSettings}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{namespaceneo_1_1network}{network}})}
+\DoxyCodeLine{00036\ \ \ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a8ce2b2be45144e8d9e52f75b62188217}{network\_settings\_}}.find(\mbox{\hyperlink{namespaceneo_1_1network}{network}});}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ ==\ \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a8ce2b2be45144e8d9e52f75b62188217}{network\_settings\_}}.end())}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Unknown\ network:\ "{}}\ +\ \mbox{\hyperlink{namespaceneo_1_1network}{network}});}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ it-\/>second;}
+\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a720929151e03175cde68a89e2330b382}{GetNetworkMagic}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{namespaceneo_1_1network}{network}})\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a5ca45bd926f8fd64e281cd719dce77c9}{GetNetworkSettings}}(\mbox{\hyperlink{namespaceneo_1_1network}{network}}).\mbox{\hyperlink{structneo_1_1core_1_1_network_config_1_1_network_settings_a2806040466387d45d073a4ed2325da05}{magic}};\ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{static}\ uint16\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a85a2f6e26217f944fb517e129d2a0851}{GetDefaultPort}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{namespaceneo_1_1network}{network}},\ \textcolor{keyword}{const}\ std::string\&\ service)}
+\DoxyCodeLine{00059\ \ \ \ \ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ settings\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a5ca45bd926f8fd64e281cd719dce77c9}{GetNetworkSettings}}(\mbox{\hyperlink{namespaceneo_1_1network}{network}});}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (service\ ==\ \textcolor{stringliteral}{"{}p2p"{}})}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ settings.default\_p2p\_port;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (service\ ==\ \textcolor{stringliteral}{"{}rpc"{}})}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ settings.default\_rpc\_port;}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (service\ ==\ \textcolor{stringliteral}{"{}ws"{}})}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ settings.default\_ws\_port;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Unknown\ service\ type:\ "{}}\ +\ service);}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00078\ \ \ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a3471906edaa1844190aed041e9830137}{IsValidNetwork}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{namespaceneo_1_1network}{network}})}
+\DoxyCodeLine{00086\ \ \ \ \ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a8ce2b2be45144e8d9e52f75b62188217}{network\_settings\_}}.find(\mbox{\hyperlink{namespaceneo_1_1network}{network}})\ !=\ \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a8ce2b2be45144e8d9e52f75b62188217}{network\_settings\_}}.end();}
+\DoxyCodeLine{00088\ \ \ \ \ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::string>\ \mbox{\hyperlink{classneo_1_1core_1_1_network_config_addadad2d5d06f0408009627e37322b4c}{GetAvailableNetworks}}()}
+\DoxyCodeLine{00095\ \ \ \ \ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ std::vector<std::string>\ networks;}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ pair\ :\ \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a8ce2b2be45144e8d9e52f75b62188217}{network\_settings\_}})}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ networks.push\_back(pair.first);}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ networks;}
+\DoxyCodeLine{00102\ \ \ \ \ \}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ std::unordered\_map<std::string,\ NetworkSettings>\ \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a8ce2b2be45144e8d9e52f75b62188217}{network\_settings\_}};}
+\DoxyCodeLine{00106\ \};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \textcolor{comment}{//\ Network\ configuration\ definitions}}
+\DoxyCodeLine{00109\ \textcolor{keyword}{const}\ std::unordered\_map<std::string,\ NetworkConfig::NetworkSettings>\ \mbox{\hyperlink{classneo_1_1core_1_1_network_config_a8ce2b2be45144e8d9e52f75b62188217}{NetworkConfig::network\_settings\_}}\ =\ \{}
+\DoxyCodeLine{00110\ \ \ \ \ \{\textcolor{stringliteral}{"{}mainnet"{}},}
+\DoxyCodeLine{00111\ \ \ \ \ \ \{.magic\ =\ 0x3346454E,\ \ \textcolor{comment}{//\ 860833102\ in\ decimal}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ .default\_p2p\_port\ =\ 10333,}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ .default\_rpc\_port\ =\ 10332,}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ .default\_ws\_port\ =\ 10334,}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ .milliseconds\_per\_block\ =\ 15000,}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ .max\_transactions\_per\_block\ =\ 512,}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ .validators\_count\ =\ 7,}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ .committee\_members\_count\ =\ 21,}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ .address\_version\ =\ \textcolor{stringliteral}{"{}N"{}}\}\},}
+\DoxyCodeLine{00120\ \ \ \ \ \{\textcolor{stringliteral}{"{}testnet"{}},}
+\DoxyCodeLine{00121\ \ \ \ \ \ \{.magic\ =\ 0x3554334E,\ \ \textcolor{comment}{//\ 894710606\ in\ decimal}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ .default\_p2p\_port\ =\ 20333,}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ .default\_rpc\_port\ =\ 20332,}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ .default\_ws\_port\ =\ 20334,}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ .milliseconds\_per\_block\ =\ 15000,}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ .max\_transactions\_per\_block\ =\ 512,}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ .validators\_count\ =\ 7,}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ .committee\_members\_count\ =\ 21,}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ .address\_version\ =\ \textcolor{stringliteral}{"{}N"{}}\}\},}
+\DoxyCodeLine{00130\ \ \ \ \ \{\textcolor{stringliteral}{"{}privnet"{}},}
+\DoxyCodeLine{00131\ \ \ \ \ \ \{.magic\ =\ 0x746E4152,\ \ \textcolor{comment}{//\ 1953787474\ in\ decimal}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ .default\_p2p\_port\ =\ 30333,}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ .default\_rpc\_port\ =\ 30332,}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ .default\_ws\_port\ =\ 30334,}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ .milliseconds\_per\_block\ =\ 15000,}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ .max\_transactions\_per\_block\ =\ 512,}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ .validators\_count\ =\ 4,}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ .committee\_members\_count\ =\ 4,}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ .address\_version\ =\ \textcolor{stringliteral}{"{}N"{}}\}\}\};}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \}\ \ \textcolor{comment}{//\ namespace\ neo::core}}
+
+\end{DoxyCode}

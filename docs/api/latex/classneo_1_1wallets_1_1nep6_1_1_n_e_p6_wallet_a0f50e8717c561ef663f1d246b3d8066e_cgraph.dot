@@ -1,0 +1,16 @@
+digraph "neo::wallets::nep6::NEP6Wallet::ChangePassword"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::wallets::nep6\l::NEP6Wallet::ChangePassword",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Sets the password."];
+  Node1 -> Node2 [id="edge5_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::wallets::Wallet\l::GetAccounts",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1wallets_1_1_wallet.html#ad88ab06bc6becbfa50983de2dab7a27f",tooltip="Gets the accounts."];
+  Node1 -> Node3 [id="edge6_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::cryptography::\lecc::Secp256r1::ToNEP2",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cryptography_1_1ecc_1_1_secp256r1.html#a1db8644441097aa4aaf508e9140ecc3e",tooltip="Convert private key to NEP2 format (encrypted)"];
+  Node1 -> Node4 [id="edge7_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::wallets::nep6\l::NEP6Wallet::VerifyPassword",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet.html#ac8be64e0690bec425b927203ebb31650",tooltip="Verifies the password."];
+  Node4 -> Node2 [id="edge8_Node000004_Node000002",color="steelblue1",style="solid",tooltip=" "];
+}

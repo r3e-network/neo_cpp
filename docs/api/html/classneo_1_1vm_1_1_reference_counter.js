@@ -1,0 +1,28 @@
+var classneo_1_1vm_1_1_reference_counter =
+[
+    [ "ReferenceEntry", "structneo_1_1vm_1_1_reference_counter_1_1_reference_entry.html", "structneo_1_1vm_1_1_reference_counter_1_1_reference_entry" ],
+    [ "ReferenceCounter", "classneo_1_1vm_1_1_reference_counter.html#a27231b5b5402a5458addb349d88dc474", null ],
+    [ "AddReference", "classneo_1_1vm_1_1_reference_counter.html#afd89710924fd82dd4de79fc8a0de6bb0", null ],
+    [ "AddReference", "classneo_1_1vm_1_1_reference_counter.html#ad11fdcfb3abbaea775c400315488102b", null ],
+    [ "AddStackReference", "classneo_1_1vm_1_1_reference_counter.html#a1425cb9be73694a2e0e3b42e089a4f16", null ],
+    [ "AddZeroReferred", "classneo_1_1vm_1_1_reference_counter.html#ae62a2a0aaefc48e05e227abf0d61ca68", null ],
+    [ "CheckZeroReferred", "classneo_1_1vm_1_1_reference_counter.html#a6f7b339be376c26ad8f76f6b3931b497", null ],
+    [ "Count", "classneo_1_1vm_1_1_reference_counter.html#a895696c2e3caf8272060e67ccba20f8c", null ],
+    [ "FindStronglyConnectedComponents", "classneo_1_1vm_1_1_reference_counter.html#a36bf54264e6b3a967b9fa38815f23855", null ],
+    [ "GetReferenceCount", "classneo_1_1vm_1_1_reference_counter.html#a722f1e519e3b7987c7d7d9e4d27e45c3", null ],
+    [ "GetStackReferences", "classneo_1_1vm_1_1_reference_counter.html#abd9af47acf5a0573a92eae694e42f928", null ],
+    [ "HasCircularReference", "classneo_1_1vm_1_1_reference_counter.html#a4a20412b9d9ae5cd0c19f028418d43b5", null ],
+    [ "HasCircularReference", "classneo_1_1vm_1_1_reference_counter.html#af52a2053351f7f329786f7106e6ca917", null ],
+    [ "IsReferenced", "classneo_1_1vm_1_1_reference_counter.html#a48c0492517a969ff82f29619b3564984", null ],
+    [ "NeedTrack", "classneo_1_1vm_1_1_reference_counter.html#ad756063b6db0f17910b852b001de10c5", null ],
+    [ "RemoveReference", "classneo_1_1vm_1_1_reference_counter.html#ab934ee12ea08c935454f3e2867252512", null ],
+    [ "RemoveReference", "classneo_1_1vm_1_1_reference_counter.html#abff2150cf0eadbb9eb88a9bddad461e7", null ],
+    [ "RemoveStackReference", "classneo_1_1vm_1_1_reference_counter.html#a6b1f8a1951cc4cb3e585e277f473bcb8", null ],
+    [ "StrongConnect", "classneo_1_1vm_1_1_reference_counter.html#a8ba0eeb2a1a3673f08aace6154939f3e", null ],
+    [ "cached_components_", "classneo_1_1vm_1_1_reference_counter.html#a3ec4a6bc0f00318313450414faa7629c", null ],
+    [ "references_", "classneo_1_1vm_1_1_reference_counter.html#a178770d3fdce69f294eb401d20e193b6", null ],
+    [ "references_count_", "classneo_1_1vm_1_1_reference_counter.html#a94fd9da71f1408886a6e7d8825d5c2e5", null ],
+    [ "stack_references_", "classneo_1_1vm_1_1_reference_counter.html#a890e88e442051b4bb5c247a1c6247b55", null ],
+    [ "tracked_items_", "classneo_1_1vm_1_1_reference_counter.html#a2f1a854fb921a4cf0781c9dbd24417e1", null ],
+    [ "zero_referred_", "classneo_1_1vm_1_1_reference_counter.html#ac6983e7da2bf99e4ab0dd8e2487c604e", null ]
+];

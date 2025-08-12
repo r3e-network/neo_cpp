@@ -1,0 +1,65 @@
+\doxysection{nef\+\_\+file.\+h}
+\hypertarget{nef__file_8h_source}{}\label{nef__file_8h_source}\index{include/neo/smartcontract/nef\_file.h@{include/neo/smartcontract/nef\_file.h}}
+\mbox{\hyperlink{nef__file_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ijson__serializable_8h}{neo/io/ijson\_serializable.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{iserializable_8h}{neo/io/iserializable.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{method__token_8h}{neo/smartcontract/method\_token.h}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract}{neo::smartcontract}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a2a6609c87ebd6d33d5e2c941e53cf5e4}{NefFile}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{io::ISerializable}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{io::IJsonSerializable}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a3ecc8ee6eb8705e5b525804036a906de}{Magic}}\ =\ 0x3346454E;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a2a6609c87ebd6d33d5e2c941e53cf5e4}{NefFile}}();}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a1d47bfcb77ca8a26efd8f43d36ba6d40}{GetCompiler}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a7e04b9a0adc9f9165f397aa3013a4c03}{SetCompiler}}(\textcolor{keyword}{const}\ std::string\&\ compiler);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a2ea0c881c44a60cd9cb5786346a41aa0}{GetSource}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a2114fe83f0f51c6b54003fbef983408f}{SetSource}}(\textcolor{keyword}{const}\ std::string\&\ source);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<MethodToken>\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_af7cc82f450d0783ab9165d334ee95654}{GetTokens}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a9867dae2817a43f01c7f6da690fc7eba}{SetTokens}}(\textcolor{keyword}{const}\ std::vector<MethodToken>\&\ tokens);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_ab9241ed1d62e5e9cbf76c3af32e8038f}{GetScript}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a050c630729a92f67a5eb6f7cfb80f33e}{SetScript}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ script);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00083\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a62947ff1ef84416f76fddc8d276db582}{GetCheckSum}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a6bdf0b840d94fa43604100a730f6924d}{SetCheckSum}}(uint32\_t\ checkSum);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00095\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a10520263c9bf54b9f3006e8e9d306f6f}{ComputeChecksum}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a8fdef259ca60cc0050b43701bd1c83c7}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a4c52bab5d9b0915d630dd5ca3e2fd6a7}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a759d34d9b47b19a823010c429e2c841d}{SerializeJson}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io::JsonWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a1af3bf05070b9b60540453428d46c02f}{DeserializeJson}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io::JsonReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00122\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_ae5bffc6f5f9b0366833027a156226b0b}{compiler\_}};}
+\DoxyCodeLine{00123\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a872c5725e2823bc2f096bc9f2d9d5e9b}{source\_}};}
+\DoxyCodeLine{00124\ \ \ \ \ std::vector<MethodToken>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a1a8bc0a524e75f858c80f8e2168bf4cb}{tokens\_}};}
+\DoxyCodeLine{00125\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a994d7d68c2d1b0b71dc6e6451a640a13}{script\_}};}
+\DoxyCodeLine{00126\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a7adeea57e90c4b5782c7df0c50c25c39}{checkSum\_}};}
+\DoxyCodeLine{00127\ \};}
+\DoxyCodeLine{00128\ \}\ \ \textcolor{comment}{//\ namespace\ neo::smartcontract}}
+
+\end{DoxyCode}

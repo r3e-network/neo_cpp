@@ -1,0 +1,41 @@
+\doxysection{src/plugins/plugin\+\_\+registration\+\_\+impl.cpp File Reference}
+\hypertarget{plugin__registration__impl_8cpp}{}\label{plugin__registration__impl_8cpp}\index{src/plugins/plugin\_registration\_impl.cpp@{src/plugins/plugin\_registration\_impl.cpp}}
+{\ttfamily \#include $<$neo/core/logging.\+h$>$}\newline
+{\ttfamily \#include $<$neo/plugins/application\+\_\+logs\+\_\+plugin.\+h$>$}\newline
+{\ttfamily \#include $<$neo/plugins/dbft\+\_\+plugin.\+h$>$}\newline
+{\ttfamily \#include $<$neo/plugins/plugin\+\_\+base.\+h$>$}\newline
+{\ttfamily \#include $<$neo/plugins/plugin\+\_\+manager.\+h$>$}\newline
+{\ttfamily \#include $<$neo/plugins/rpc\+\_\+server\+\_\+plugin.\+h$>$}\newline
+{\ttfamily \#include $<$neo/plugins/state\+\_\+service\+\_\+plugin.\+h$>$}\newline
+Include dependency graph for plugin\+\_\+registration\+\_\+impl.\+cpp\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_manager_impl}{neo\+::plugins\+::\+Plugin\+Manager\+Impl}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1plugins}{neo\+::plugins}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1plugins_a00f3c8d120c1a7b1c7555a139b553512}{neo\+::plugins\+::\+Plugin\+Factory}} = std\+::function$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base}{Plugin\+Base}}$>$()$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory}{Plugin\+Factory}} $>$ \& \mbox{\hyperlink{namespaceneo_1_1plugins_a7e16c606392c907254358d6251f6d572}{neo\+::plugins\+::\+Get\+Plugin\+Registry}} ()
+\item 
+void \mbox{\hyperlink{namespaceneo_1_1plugins_a153647e62b154afa8e6e450b25b17d9c}{neo\+::plugins\+::\+Register\+Plugin\+Factory}} (const std\+::string \&name, \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory}{Plugin\+Factory}} factory)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base}{Plugin\+Base}} $>$ \mbox{\hyperlink{namespaceneo_1_1plugins_af5f7880aa4964dd5c7c7fa0535c0914b}{neo\+::plugins\+::\+Create\+Plugin}} (const std\+::string \&name)
+\item 
+void \mbox{\hyperlink{namespaceneo_1_1plugins_a1f44abc05a2d316576a01ce358f11c19}{neo\+::plugins\+::\+Initialize\+Plugin\+Factories}} ()
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespaceneo_1_1plugins_a8d864b0bb69d33a1699acfc5e23ed1f9}{neo\+::plugins\+::\+Get\+Available\+Plugins}} ()
+\end{DoxyCompactItemize}

@@ -1,0 +1,472 @@
+\doxysection{neo\+::network\+::p2p\+::Connection\+Manager Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager}{}\label{classneo_1_1network_1_1p2p_1_1_connection_manager}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+
+
+\doxylink{classneo_1_1network_1_1p2p_1_1_connection}{Connection} manager for P2P networking.  
+
+
+
+
+{\ttfamily \#include $<$connection\+\_\+manager.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::Connection\+Manager\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_connection_manager_1_1_config}{Config}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a0495f7b5be87727791937b37b2c2754c}{Connection\+Manager}} (const \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_connection_manager_1_1_config}{Config}} \&config, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager}{Peer\+Manager}} $>$ peer\+\_\+manager, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_handler}{Message\+Handler}} $>$ message\+\_\+handler)
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_ad0f8b3929803b36ef8e3f6832cd8907a}{\texorpdfstring{$\sim$}{\string~}\+Connection\+Manager}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_aad0f8db446abcf32a50eac29983f2cd9}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Start the connection manager. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a5a0b46f3ba20195019a948d61e923acc}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stop the connection manager. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a2378e3cd28299988be7fc4b508138452}{Connect\+To}} (const \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} \&address)
+\begin{DoxyCompactList}\small\item\em Connect to a specific address. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a9f4b170a218d5c22ab6283e89b9daeec}{Disconnect}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&peer\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Disconnect a peer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_ad84031c05b57f2687ab8e7d881af377e}{Send\+Message}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&peer\+\_\+id, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\begin{DoxyCompactList}\small\item\em Send message to peer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_ae6043456ff1319c4d1248eea6f5184f4}{Broadcast\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&peer\+\_\+ids=\{\})
+\begin{DoxyCompactList}\small\item\em Broadcast message to multiple peers. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_connection_stats}{Connection\+Stats}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_aebc2ac86921ec9287c31b6a3828e4322}{Get\+Statistics}} () const
+\begin{DoxyCompactList}\small\item\em Get connection statistics. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a51e79feb2feb568c9ae5983acadc0f8e}{Is\+Running}} () const
+\begin{DoxyCompactList}\small\item\em Check if running. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_ab88cee17898e260b6bfc9a02aa561300}{Initialize\+SSL}} ()
+\begin{DoxyCompactList}\small\item\em Initialize SSL context. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_ae77788e9b980a61a996674e896e2a2da}{Start\+Accept}} ()
+\begin{DoxyCompactList}\small\item\em Start accepting connections. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_af70c04ef137101807e99834e3b21bd91}{Handle\+Accept}} (std\+::shared\+\_\+ptr$<$ asio\+::ip\+::tcp\+::socket $>$ socket, const asio\+::error\+\_\+code \&error)
+\begin{DoxyCompactList}\small\item\em Handle accepted connection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a5e894bacec6115cbaa3b56587e5710ed}{Start\+Connector}} ()
+\begin{DoxyCompactList}\small\item\em Start outbound connector thread. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_ab454dfe8e0933beb19fa5cd234837e3e}{Connector\+Loop}} ()
+\begin{DoxyCompactList}\small\item\em Connector thread main loop. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a7e9bfae132092b9671a3d1e388c9b406}{Create\+Outbound\+Connection}} (const \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} \&address)
+\begin{DoxyCompactList}\small\item\em Create outbound connection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a35ea96ad103a4c401a4de3bd1715ceb9}{Handle\+Connect}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$ peer, const asio\+::error\+\_\+code \&error)
+\begin{DoxyCompactList}\small\item\em Handle connection result. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_aa4bef28299925b2f565981a156b62ef1}{Start\+Timers}} ()
+\begin{DoxyCompactList}\small\item\em Start periodic timers. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_acadcc5a237da04b1676cc512f6610671}{On\+Connect\+Timer}} ()
+\begin{DoxyCompactList}\small\item\em Periodic connection check. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a6600b9c3410524d0b30c23d8fe0d1636}{On\+Cleanup\+Timer}} ()
+\begin{DoxyCompactList}\small\item\em Periodic cleanup. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_acfc28d9877de892926d68074d0d2de10}{Create\+Peer}} (std\+::shared\+\_\+ptr$<$ asio\+::ip\+::tcp\+::socket $>$ socket, bool is\+\_\+outbound)
+\begin{DoxyCompactList}\small\item\em Create and setup a new peer connection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_acaf67e74093ee0af24e18f69e66d5757}{Setup\+Peer\+Callbacks}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$ peer)
+\begin{DoxyCompactList}\small\item\em Setup peer callbacks. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a486ca33bdea23f3e6f154d5cfa3fdfe6}{On\+Peer\+Disconnected}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&peer\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Handle peer disconnection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_adf056a6eb1a27fce2e66260fc45234a1}{On\+Message\+Received}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&peer\+\_\+id, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\begin{DoxyCompactList}\small\item\em Handle received message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a591d26178f3d58a08f680e79d6f1ceaa}{Update\+Stats}} (uint64\+\_\+t bytes\+\_\+sent, uint64\+\_\+t bytes\+\_\+received, bool message\+\_\+sent)
+\begin{DoxyCompactList}\small\item\em Update connection statistics. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_connection_manager_1_1_config}{Config}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a1b837be1cb3f5951a2964718602abea5}{config\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1core_1_1_logger}{core\+::\+Logger}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a30d06e80d0e85b34303edd842490ee8f}{logger\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager}{Peer\+Manager}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a82682d7bc22230a44143447a4d07be09}{peer\+\_\+manager\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_handler}{Message\+Handler}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a33f0a235ba6526e988acddde7c37436d}{message\+\_\+handler\+\_\+}}
+\item 
+asio\+::io\+\_\+context \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_af40fb0d3717c6aab5a73e787deda3609}{io\+\_\+context\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ asio\+::ip\+::tcp\+::acceptor $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a89242d48771ab8bde484a3e7253f73d8}{acceptor\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ asio\+::ssl\+::context $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_aa6aa472b1f086fa5c915d82f5f77b361}{ssl\+\_\+context\+\_\+}}
+\item 
+std\+::vector$<$ std\+::thread $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_ae140b2a166dc8aaa479c331593cab3d8}{io\+\_\+threads\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ asio\+::steady\+\_\+timer $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_afc248e3fe28ba2a31d8ac9c7ba193af5}{connect\+\_\+timer\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ asio\+::steady\+\_\+timer $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a129fd703d8eba0c9e3b79e3fcf01a7ff}{cleanup\+\_\+timer\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a913ea6acc2ce28eb01a05edccff70212}{running\+\_\+}} \{false\}
+\item 
+\mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_connection_stats}{Connection\+Stats}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_af3590ff62a8baf6f7915a741cb0086a8}{stats\+\_\+}}
+\item 
+std\+::queue$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_ad88f155f34acc35cf6cb181cf14959e0}{connection\+\_\+queue\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a316eda3a6e6bc398541460fc2bf70470}{queue\+\_\+mutex\+\_\+}}
+\item 
+std\+::condition\+\_\+variable \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_ac3f1a863f55676c28c6ead0f699d29c8}{queue\+\_\+cv\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_manager_a25df439abca4956f91a0196a2f592417}{connector\+\_\+thread\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1network_1_1p2p_1_1_connection}{Connection} manager for P2P networking. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a0495f7b5be87727791937b37b2c2754c}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!ConnectionManager@{ConnectionManager}}
+\index{ConnectionManager@{ConnectionManager}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{ConnectionManager()}{ConnectionManager()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a0495f7b5be87727791937b37b2c2754c} 
+neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Connection\+Manager (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_connection_manager_1_1_config}{Config}} \&}]{config}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager}{Peer\+Manager}} $>$}]{peer\+\_\+manager}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_handler}{Message\+Handler}} $>$}]{message\+\_\+handler}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_ad0f8b3929803b36ef8e3f6832cd8907a}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!````~ConnectionManager@{\texorpdfstring{$\sim$}{\string~}ConnectionManager}}
+\index{````~ConnectionManager@{\texorpdfstring{$\sim$}{\string~}ConnectionManager}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ConnectionManager()}{\string~ConnectionManager()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_ad0f8b3929803b36ef8e3f6832cd8907a} 
+neo\+::network\+::p2p\+::\+Connection\+Manager\+::\texorpdfstring{$\sim$}{\string~}\+Connection\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_ae6043456ff1319c4d1248eea6f5184f4}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!BroadcastMessage@{BroadcastMessage}}
+\index{BroadcastMessage@{BroadcastMessage}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{BroadcastMessage()}{BroadcastMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_ae6043456ff1319c4d1248eea6f5184f4} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Broadcast\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&}]{peer\+\_\+ids}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+
+
+
+Broadcast message to multiple peers. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_ab454dfe8e0933beb19fa5cd234837e3e}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!ConnectorLoop@{ConnectorLoop}}
+\index{ConnectorLoop@{ConnectorLoop}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{ConnectorLoop()}{ConnectorLoop()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_ab454dfe8e0933beb19fa5cd234837e3e} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Connector\+Loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Connector thread main loop. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a2378e3cd28299988be7fc4b508138452}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!ConnectTo@{ConnectTo}}
+\index{ConnectTo@{ConnectTo}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{ConnectTo()}{ConnectTo()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a2378e3cd28299988be7fc4b508138452} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Connect\+To (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} \&}]{address}{}\end{DoxyParamCaption})}
+
+
+
+Connect to a specific address. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a7e9bfae132092b9671a3d1e388c9b406}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!CreateOutboundConnection@{CreateOutboundConnection}}
+\index{CreateOutboundConnection@{CreateOutboundConnection}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{CreateOutboundConnection()}{CreateOutboundConnection()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a7e9bfae132092b9671a3d1e388c9b406} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Create\+Outbound\+Connection (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create outbound connection. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_acfc28d9877de892926d68074d0d2de10}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!CreatePeer@{CreatePeer}}
+\index{CreatePeer@{CreatePeer}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{CreatePeer()}{CreatePeer()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_acfc28d9877de892926d68074d0d2de10} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$ neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Create\+Peer (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ asio\+::ip\+::tcp\+::socket $>$}]{socket}{, }\item[{bool}]{is\+\_\+outbound}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Create and setup a new peer connection. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a9f4b170a218d5c22ab6283e89b9daeec}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!Disconnect@{Disconnect}}
+\index{Disconnect@{Disconnect}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{Disconnect()}{Disconnect()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a9f4b170a218d5c22ab6283e89b9daeec} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Disconnect (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{peer\+\_\+id}{}\end{DoxyParamCaption})}
+
+
+
+Disconnect a peer. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_aebc2ac86921ec9287c31b6a3828e4322}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!GetStatistics@{GetStatistics}}
+\index{GetStatistics@{GetStatistics}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{GetStatistics()}{GetStatistics()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_aebc2ac86921ec9287c31b6a3828e4322} 
+\mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_connection_stats}{Connection\+Stats}} neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Get\+Statistics (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get connection statistics. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_af70c04ef137101807e99834e3b21bd91}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!HandleAccept@{HandleAccept}}
+\index{HandleAccept@{HandleAccept}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{HandleAccept()}{HandleAccept()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_af70c04ef137101807e99834e3b21bd91} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Handle\+Accept (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ asio\+::ip\+::tcp\+::socket $>$}]{socket}{, }\item[{const asio\+::error\+\_\+code \&}]{error}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handle accepted connection. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a35ea96ad103a4c401a4de3bd1715ceb9}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!HandleConnect@{HandleConnect}}
+\index{HandleConnect@{HandleConnect}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{HandleConnect()}{HandleConnect()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a35ea96ad103a4c401a4de3bd1715ceb9} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Handle\+Connect (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$}]{peer}{, }\item[{const asio\+::error\+\_\+code \&}]{error}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handle connection result. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_ab88cee17898e260b6bfc9a02aa561300}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!InitializeSSL@{InitializeSSL}}
+\index{InitializeSSL@{InitializeSSL}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{InitializeSSL()}{InitializeSSL()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_ab88cee17898e260b6bfc9a02aa561300} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Initialize\+SSL (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Initialize SSL context. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a51e79feb2feb568c9ae5983acadc0f8e}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!IsRunning@{IsRunning}}
+\index{IsRunning@{IsRunning}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{IsRunning()}{IsRunning()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a51e79feb2feb568c9ae5983acadc0f8e} 
+bool neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Is\+Running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if running. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a6600b9c3410524d0b30c23d8fe0d1636}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!OnCleanupTimer@{OnCleanupTimer}}
+\index{OnCleanupTimer@{OnCleanupTimer}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{OnCleanupTimer()}{OnCleanupTimer()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a6600b9c3410524d0b30c23d8fe0d1636} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+On\+Cleanup\+Timer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Periodic cleanup. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_acadcc5a237da04b1676cc512f6610671}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!OnConnectTimer@{OnConnectTimer}}
+\index{OnConnectTimer@{OnConnectTimer}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{OnConnectTimer()}{OnConnectTimer()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_acadcc5a237da04b1676cc512f6610671} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+On\+Connect\+Timer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Periodic connection check. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_adf056a6eb1a27fce2e66260fc45234a1}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!OnMessageReceived@{OnMessageReceived}}
+\index{OnMessageReceived@{OnMessageReceived}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{OnMessageReceived()}{OnMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_adf056a6eb1a27fce2e66260fc45234a1} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+On\+Message\+Received (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{peer\+\_\+id}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handle received message. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a486ca33bdea23f3e6f154d5cfa3fdfe6}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!OnPeerDisconnected@{OnPeerDisconnected}}
+\index{OnPeerDisconnected@{OnPeerDisconnected}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{OnPeerDisconnected()}{OnPeerDisconnected()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a486ca33bdea23f3e6f154d5cfa3fdfe6} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+On\+Peer\+Disconnected (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{peer\+\_\+id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handle peer disconnection. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_ad84031c05b57f2687ab8e7d881af377e}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!SendMessage@{SendMessage}}
+\index{SendMessage@{SendMessage}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{SendMessage()}{SendMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_ad84031c05b57f2687ab8e7d881af377e} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Send\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{peer\+\_\+id}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Send message to peer. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_acaf67e74093ee0af24e18f69e66d5757}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!SetupPeerCallbacks@{SetupPeerCallbacks}}
+\index{SetupPeerCallbacks@{SetupPeerCallbacks}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{SetupPeerCallbacks()}{SetupPeerCallbacks()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_acaf67e74093ee0af24e18f69e66d5757} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Setup\+Peer\+Callbacks (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$}]{peer}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Setup peer callbacks. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_aad0f8db446abcf32a50eac29983f2cd9}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!Start@{Start}}
+\index{Start@{Start}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_aad0f8db446abcf32a50eac29983f2cd9} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Start the connection manager. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_ae77788e9b980a61a996674e896e2a2da}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!StartAccept@{StartAccept}}
+\index{StartAccept@{StartAccept}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{StartAccept()}{StartAccept()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_ae77788e9b980a61a996674e896e2a2da} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Start\+Accept (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Start accepting connections. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a5e894bacec6115cbaa3b56587e5710ed}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!StartConnector@{StartConnector}}
+\index{StartConnector@{StartConnector}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{StartConnector()}{StartConnector()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a5e894bacec6115cbaa3b56587e5710ed} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Start\+Connector (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Start outbound connector thread. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_aa4bef28299925b2f565981a156b62ef1}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!StartTimers@{StartTimers}}
+\index{StartTimers@{StartTimers}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{StartTimers()}{StartTimers()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_aa4bef28299925b2f565981a156b62ef1} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Start\+Timers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Start periodic timers. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a5a0b46f3ba20195019a948d61e923acc}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a5a0b46f3ba20195019a948d61e923acc} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stop the connection manager. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a591d26178f3d58a08f680e79d6f1ceaa}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!UpdateStats@{UpdateStats}}
+\index{UpdateStats@{UpdateStats}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{UpdateStats()}{UpdateStats()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a591d26178f3d58a08f680e79d6f1ceaa} 
+void neo\+::network\+::p2p\+::\+Connection\+Manager\+::\+Update\+Stats (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{bytes\+\_\+sent}{, }\item[{uint64\+\_\+t}]{bytes\+\_\+received}{, }\item[{bool}]{message\+\_\+sent}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Update connection statistics. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a89242d48771ab8bde484a3e7253f73d8}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!acceptor\_@{acceptor\_}}
+\index{acceptor\_@{acceptor\_}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{acceptor\_}{acceptor\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a89242d48771ab8bde484a3e7253f73d8} 
+std\+::unique\+\_\+ptr$<$asio\+::ip\+::tcp\+::acceptor$>$ neo\+::network\+::p2p\+::\+Connection\+Manager\+::acceptor\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a129fd703d8eba0c9e3b79e3fcf01a7ff}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!cleanup\_timer\_@{cleanup\_timer\_}}
+\index{cleanup\_timer\_@{cleanup\_timer\_}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{cleanup\_timer\_}{cleanup\_timer\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a129fd703d8eba0c9e3b79e3fcf01a7ff} 
+std\+::unique\+\_\+ptr$<$asio\+::steady\+\_\+timer$>$ neo\+::network\+::p2p\+::\+Connection\+Manager\+::cleanup\+\_\+timer\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a1b837be1cb3f5951a2964718602abea5}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!config\_@{config\_}}
+\index{config\_@{config\_}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{config\_}{config\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a1b837be1cb3f5951a2964718602abea5} 
+\mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_connection_manager_1_1_config}{Config}} neo\+::network\+::p2p\+::\+Connection\+Manager\+::config\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_afc248e3fe28ba2a31d8ac9c7ba193af5}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!connect\_timer\_@{connect\_timer\_}}
+\index{connect\_timer\_@{connect\_timer\_}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{connect\_timer\_}{connect\_timer\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_afc248e3fe28ba2a31d8ac9c7ba193af5} 
+std\+::unique\+\_\+ptr$<$asio\+::steady\+\_\+timer$>$ neo\+::network\+::p2p\+::\+Connection\+Manager\+::connect\+\_\+timer\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_ad88f155f34acc35cf6cb181cf14959e0}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!connection\_queue\_@{connection\_queue\_}}
+\index{connection\_queue\_@{connection\_queue\_}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{connection\_queue\_}{connection\_queue\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_ad88f155f34acc35cf6cb181cf14959e0} 
+std\+::queue$<$\mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}}$>$ neo\+::network\+::p2p\+::\+Connection\+Manager\+::connection\+\_\+queue\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a25df439abca4956f91a0196a2f592417}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!connector\_thread\_@{connector\_thread\_}}
+\index{connector\_thread\_@{connector\_thread\_}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{connector\_thread\_}{connector\_thread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a25df439abca4956f91a0196a2f592417} 
+std\+::thread neo\+::network\+::p2p\+::\+Connection\+Manager\+::connector\+\_\+thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_af40fb0d3717c6aab5a73e787deda3609}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!io\_context\_@{io\_context\_}}
+\index{io\_context\_@{io\_context\_}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{io\_context\_}{io\_context\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_af40fb0d3717c6aab5a73e787deda3609} 
+asio\+::io\+\_\+context neo\+::network\+::p2p\+::\+Connection\+Manager\+::io\+\_\+context\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_ae140b2a166dc8aaa479c331593cab3d8}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!io\_threads\_@{io\_threads\_}}
+\index{io\_threads\_@{io\_threads\_}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{io\_threads\_}{io\_threads\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_ae140b2a166dc8aaa479c331593cab3d8} 
+std\+::vector$<$std\+::thread$>$ neo\+::network\+::p2p\+::\+Connection\+Manager\+::io\+\_\+threads\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a30d06e80d0e85b34303edd842490ee8f}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!logger\_@{logger\_}}
+\index{logger\_@{logger\_}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{logger\_}{logger\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a30d06e80d0e85b34303edd842490ee8f} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1core_1_1_logger}{core\+::\+Logger}}$>$ neo\+::network\+::p2p\+::\+Connection\+Manager\+::logger\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a33f0a235ba6526e988acddde7c37436d}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!message\_handler\_@{message\_handler\_}}
+\index{message\_handler\_@{message\_handler\_}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{message\_handler\_}{message\_handler\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a33f0a235ba6526e988acddde7c37436d} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_handler}{Message\+Handler}}$>$ neo\+::network\+::p2p\+::\+Connection\+Manager\+::message\+\_\+handler\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a82682d7bc22230a44143447a4d07be09}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!peer\_manager\_@{peer\_manager\_}}
+\index{peer\_manager\_@{peer\_manager\_}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{peer\_manager\_}{peer\_manager\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a82682d7bc22230a44143447a4d07be09} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager}{Peer\+Manager}}$>$ neo\+::network\+::p2p\+::\+Connection\+Manager\+::peer\+\_\+manager\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_ac3f1a863f55676c28c6ead0f699d29c8}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!queue\_cv\_@{queue\_cv\_}}
+\index{queue\_cv\_@{queue\_cv\_}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{queue\_cv\_}{queue\_cv\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_ac3f1a863f55676c28c6ead0f699d29c8} 
+std\+::condition\+\_\+variable neo\+::network\+::p2p\+::\+Connection\+Manager\+::queue\+\_\+cv\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a316eda3a6e6bc398541460fc2bf70470}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!queue\_mutex\_@{queue\_mutex\_}}
+\index{queue\_mutex\_@{queue\_mutex\_}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{queue\_mutex\_}{queue\_mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a316eda3a6e6bc398541460fc2bf70470} 
+std\+::mutex neo\+::network\+::p2p\+::\+Connection\+Manager\+::queue\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_a913ea6acc2ce28eb01a05edccff70212}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_a913ea6acc2ce28eb01a05edccff70212} 
+std\+::atomic$<$bool$>$ neo\+::network\+::p2p\+::\+Connection\+Manager\+::running\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_aa6aa472b1f086fa5c915d82f5f77b361}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!ssl\_context\_@{ssl\_context\_}}
+\index{ssl\_context\_@{ssl\_context\_}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{ssl\_context\_}{ssl\_context\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_aa6aa472b1f086fa5c915d82f5f77b361} 
+std\+::unique\+\_\+ptr$<$asio\+::ssl\+::context$>$ neo\+::network\+::p2p\+::\+Connection\+Manager\+::ssl\+\_\+context\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_connection_manager_af3590ff62a8baf6f7915a741cb0086a8}\index{neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}!stats\_@{stats\_}}
+\index{stats\_@{stats\_}!neo::network::p2p::ConnectionManager@{neo::network::p2p::ConnectionManager}}
+\doxysubsubsection{\texorpdfstring{stats\_}{stats\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_connection_manager_af3590ff62a8baf6f7915a741cb0086a8} 
+\mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_connection_stats}{Connection\+Stats}} neo\+::network\+::p2p\+::\+Connection\+Manager\+::stats\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/\mbox{\hyperlink{p2p_2connection__manager_8h}{connection\+\_\+manager.\+h}}\end{DoxyCompactItemize}

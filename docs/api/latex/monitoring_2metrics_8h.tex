@@ -1,0 +1,127 @@
+\doxysection{include/neo/monitoring/metrics.h File Reference}
+\hypertarget{monitoring_2metrics_8h}{}\label{monitoring_2metrics_8h}\index{include/neo/monitoring/metrics.h@{include/neo/monitoring/metrics.h}}
+{\ttfamily \#include $<$neo/core/logging.\+h$>$}\newline
+{\ttfamily \#include $<$atomic$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for metrics.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{neo\+::monitoring\+::\+Metric}}
+\begin{DoxyCompactList}\small\item\em Base class for all metrics. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter}{neo\+::monitoring\+::\+Counter}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1monitoring_1_1_counter}{Counter} metric -\/ monotonically increasing value. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge}{neo\+::monitoring\+::\+Gauge}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1monitoring_1_1_gauge}{Gauge} metric -\/ value that can go up or down. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram}{neo\+::monitoring\+::\+Histogram}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1monitoring_1_1_histogram}{Histogram} metric -\/ distribution of values. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_timer}{neo\+::monitoring\+::\+Timer}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1monitoring_1_1_timer}{Timer} for measuring durations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry}{neo\+::monitoring\+::\+Metrics\+Registry}}
+\begin{DoxyCompactList}\small\item\em Metrics registry for managing all metrics. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{neo\+::monitoring\+::\+Health\+Check\+Result}}
+\begin{DoxyCompactList}\small\item\em Health check result. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_i_health_check}{neo\+::monitoring\+::\+IHealth\+Check}}
+\begin{DoxyCompactList}\small\item\em Health check interface. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry}{neo\+::monitoring\+::\+Health\+Check\+Registry}}
+\begin{DoxyCompactList}\small\item\em Health check registry. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1monitoring}{neo\+::monitoring}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{monitoring_2metrics_8h_abf22651be7667a528cd189928817314e}{METRICS\+\_\+\+COUNTER}}(name,  description)
+\item 
+\#define \mbox{\hyperlink{monitoring_2metrics_8h_a5aa9d8277afd667404d9c79436b91d8d}{METRICS\+\_\+\+GAUGE}}(name,  description)
+\item 
+\#define \mbox{\hyperlink{monitoring_2metrics_8h_a23b21d9eaf196801e1eb3e68f2869b86}{METRICS\+\_\+\+HISTOGRAM}}(name,  description)
+\item 
+\#define \mbox{\hyperlink{monitoring_2metrics_8h_ae418775f3f958836786c1e41cdce7e14}{METRICS\+\_\+\+TIMER}}(histogram)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{neo\+::monitoring\+::\+Metric\+Type}} \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a64d129224a5377b63e9727479ec987d9}{neo\+::monitoring\+::\+Counter}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a948f0edf37b92d0717053d38e5ea12c2}{neo\+::monitoring\+::\+Gauge}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35ac00e3b8460f0592cacf813fd68988ed4}{neo\+::monitoring\+::\+Histogram}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a290612199861c31d1036b185b4e69b75}{neo\+::monitoring\+::\+Summary}}
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a125e831262b4dbbd68c6878c5d3759f6}{neo\+::monitoring\+::\+COUNTER}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a6a91e159ac40f39402ef860163318744}{neo\+::monitoring\+::\+GAUGE}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a7f33aef6b28f7abec2f5d804ab1343c8}{neo\+::monitoring\+::\+HISTOGRAM}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a36cbecb886c3fb994669cd10cdbd9f5f}{neo\+::monitoring\+::\+SUMMARY}}
+ \}
+\begin{DoxyCompactList}\small\item\em Metric types supported. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{neo\+::monitoring\+::\+Health\+Status}} \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6af068ebe4133e3e6563080836268ea979}{neo\+::monitoring\+::\+HEALTHY}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed}{neo\+::monitoring\+::\+DEGRADED}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{neo\+::monitoring\+::\+UNHEALTHY}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a396d45b57c2fbe3318e7b93272a2686b}{neo\+::monitoring\+::\+Healthy}}
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6aaa95669cd5732a57e8f6467705f06642}{neo\+::monitoring\+::\+Degraded}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a2b329fc84084b45754e42488aca3114b}{neo\+::monitoring\+::\+Unhealthy}}
+ \}
+\begin{DoxyCompactList}\small\item\em Health check status. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{monitoring_2metrics_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{monitoring_2metrics_8h_abf22651be7667a528cd189928817314e}\index{metrics.h@{metrics.h}!METRICS\_COUNTER@{METRICS\_COUNTER}}
+\index{METRICS\_COUNTER@{METRICS\_COUNTER}!metrics.h@{metrics.h}}
+\doxysubsubsection{\texorpdfstring{METRICS\_COUNTER}{METRICS\_COUNTER}}
+{\footnotesize\ttfamily \label{monitoring_2metrics_8h_abf22651be7667a528cd189928817314e} 
+\#define METRICS\+\_\+\+COUNTER(\begin{DoxyParamCaption}\item[{}]{name}{, }\item[{}]{description}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry_a0d290d51ab1a1cde3929503664011e4c}{neo::monitoring::MetricsRegistry::GetInstance}}()-\/>Register<\mbox{\hyperlink{classneo_1_1monitoring_1_1_counter}{neo::monitoring::Counter}}>(name,\ description)}
+
+\end{DoxyCode}
+\Hypertarget{monitoring_2metrics_8h_a5aa9d8277afd667404d9c79436b91d8d}\index{metrics.h@{metrics.h}!METRICS\_GAUGE@{METRICS\_GAUGE}}
+\index{METRICS\_GAUGE@{METRICS\_GAUGE}!metrics.h@{metrics.h}}
+\doxysubsubsection{\texorpdfstring{METRICS\_GAUGE}{METRICS\_GAUGE}}
+{\footnotesize\ttfamily \label{monitoring_2metrics_8h_a5aa9d8277afd667404d9c79436b91d8d} 
+\#define METRICS\+\_\+\+GAUGE(\begin{DoxyParamCaption}\item[{}]{name}{, }\item[{}]{description}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry_a0d290d51ab1a1cde3929503664011e4c}{neo::monitoring::MetricsRegistry::GetInstance}}()-\/>Register<\mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge}{neo::monitoring::Gauge}}>(name,\ description)}
+
+\end{DoxyCode}
+\Hypertarget{monitoring_2metrics_8h_a23b21d9eaf196801e1eb3e68f2869b86}\index{metrics.h@{metrics.h}!METRICS\_HISTOGRAM@{METRICS\_HISTOGRAM}}
+\index{METRICS\_HISTOGRAM@{METRICS\_HISTOGRAM}!metrics.h@{metrics.h}}
+\doxysubsubsection{\texorpdfstring{METRICS\_HISTOGRAM}{METRICS\_HISTOGRAM}}
+{\footnotesize\ttfamily \label{monitoring_2metrics_8h_a23b21d9eaf196801e1eb3e68f2869b86} 
+\#define METRICS\+\_\+\+HISTOGRAM(\begin{DoxyParamCaption}\item[{}]{name}{, }\item[{}]{description}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry_a0d290d51ab1a1cde3929503664011e4c}{neo::monitoring::MetricsRegistry::GetInstance}}()-\/>Register<\mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram}{neo::monitoring::Histogram}}>(name,\ description)}
+
+\end{DoxyCode}
+\Hypertarget{monitoring_2metrics_8h_ae418775f3f958836786c1e41cdce7e14}\index{metrics.h@{metrics.h}!METRICS\_TIMER@{METRICS\_TIMER}}
+\index{METRICS\_TIMER@{METRICS\_TIMER}!metrics.h@{metrics.h}}
+\doxysubsubsection{\texorpdfstring{METRICS\_TIMER}{METRICS\_TIMER}}
+{\footnotesize\ttfamily \label{monitoring_2metrics_8h_ae418775f3f958836786c1e41cdce7e14} 
+\#define METRICS\+\_\+\+TIMER(\begin{DoxyParamCaption}\item[{}]{histogram}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1monitoring_1_1_timer}{neo::monitoring::Timer}}\ timer(histogram)}
+
+\end{DoxyCode}

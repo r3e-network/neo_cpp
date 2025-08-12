@@ -1,0 +1,88 @@
+\doxysection{rpc\+\_\+methods.\+h}
+\hypertarget{rpc__methods_8h_source}{}\label{rpc__methods_8h_source}\index{include/neo/rpc/rpc\_methods.h@{include/neo/rpc/rpc\_methods.h}}
+\mbox{\hyperlink{rpc__methods_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2json_8h}{neo/io/json.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{node_2neo__system_8h}{neo/node/neo\_system.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1rpc}{neo::rpc}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods}{RPCMethods}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_aa61f3f833f1bc9f7af9ce8bc8f0a0595}{GetVersion}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_a9dc9dc720c7b49f4ef26b70e875b0a53}{GetBlockCount}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_afbeb890d83922c44420483d9029061fd}{GetBlock}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_a27155677352d0318b90286d6ccb313fb}{GetBlockHash}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_adef5a1197ebcb30009120b534b5855e8}{GetBlockHeader}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_a317eb20ffb0579440de2014f66f3f43c}{GetRawMemPool}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_a7f5003f34e97d3b0d35c454780be778a}{GetRawTransaction}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_aaf01145bc9007bdc79a900fe825ed70d}{GetTransactionHeight}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_a57389e2b3905909737a4105186cd19c0}{SendRawTransaction}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_abe0e5b86b585d6d1558a6511561b61b8}{InvokeFunction}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_acbff422faac6bc786e12b641292a272d}{InvokeScript}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_a2ea3952b4a58b7aeb5daebcfe9506c6e}{GetContractState}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_adf749505d3dc8094b1adac463e631d33}{GetUnclaimedGas}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_aad51825f1bb3351db96b50f7d15ba3da}{GetConnectionCount}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_a1fc24cbce9b4c958d405682d3a05cb5e}{GetPeers}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_a83afd2b54e62e71c5c4a26d8156179fe}{GetCommittee}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_aa49074e7d8d20bf35443cb596cf59810}{GetValidators}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_af40ddb636b1f5a7b65f5dcdd121494be}{GetNextBlockValidators}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_ae8d0b144c6df7a413206dcf16d0a54f3}{GetBestBlockHash}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_a0f883a51998c61439f45e2ea57e8fbe6}{GetBlockHeaderCount}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_a100befa1f04ccfe17fa7c86a3dd03bd7}{GetStorage}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_aad3e961199f57770bcd54ae04fd68651}{FindStorage}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_a859959eadf707e310210cdd280eb2736}{GetCandidates}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_a9709fe401c58c5df1b5652c315843da4}{GetNativeContracts}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_a92249a7087071fe23e9fb8f353bb0d87}{SubmitBlock}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_aa8f883826cd94e1dda41e7562128d7ad}{ValidateAddress}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_a891d07406e7e9a80f4b464b9a0e3f863}{TraverseIterator}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_addeaafc2a3580cd99a3c65669484cf85}{TerminateSession}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,\ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_a709edff4a5c3c107bbf4bcb2c818bcd3}{InvokeContractVerify}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ nlohmann::json\&\ params);}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00259\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_ad1de15165b7ea273b5b8c8c16f3ddef3}{BlockToJson}}(std::shared\_ptr<ledger::Block>\ block,\ \textcolor{keywordtype}{bool}\ verbose);}
+\DoxyCodeLine{00260\ }
+\DoxyCodeLine{00267\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_a74686388bdde3a7dc1b0ecdcf406695a}{TransactionToJson}}(std::shared\_ptr<ledger::Transaction>\ tx,\ \textcolor{keywordtype}{bool}\ verbose);}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{keyword}{static}\ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_r_p_c_methods_ac5b807c5412454e2398fb399590b3b2a}{ContractToJson}}(std::shared\_ptr<smartcontract::ContractState>\ contract);}
+\DoxyCodeLine{00275\ \};}
+\DoxyCodeLine{00276\ \}\ \ \textcolor{comment}{//\ namespace\ neo::rpc}}
+
+\end{DoxyCode}

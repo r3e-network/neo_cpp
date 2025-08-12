@@ -1,0 +1,260 @@
+\doxysection{neo\+::io\+::caching\+::Block\+Cache Class Reference}
+\hypertarget{classneo_1_1io_1_1caching_1_1_block_cache}{}\label{classneo_1_1io_1_1caching_1_1_block_cache}\index{neo::io::caching::BlockCache@{neo::io::caching::BlockCache}}
+
+
+A cache for Block objects.  
+
+
+
+
+{\ttfamily \#include $<$block\+\_\+cache.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::io\+::caching\+::Block\+Cache\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a019ca403f6485665eae331e0d316007b}{Block\+Cache}} (size\+\_\+t capacity)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1caching_1_1_block_cache}{Block\+Cache} with the specified capacity. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a4ff336ba7ac4433ba2487b7bd63087d7}{Add}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ block)
+\begin{DoxyCompactList}\small\item\em Adds a block to the cache. \end{DoxyCompactList}\item 
+std\+::optional$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ $>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a278123170e8e3d91e9c4ea3b4dcd0051}{Get\+By\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Gets a block by hash. \end{DoxyCompactList}\item 
+std\+::optional$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ $>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_aabb04d9c9d40734956add645b527b093}{Get\+By\+Index}} (uint32\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Gets a block by index. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_accb131a6eb4bbb3e5b25b81ebe9335f3}{Try\+Get\+By\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}} \&hash, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ \&block)
+\begin{DoxyCompactList}\small\item\em Tries to get a block by hash. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a845c08e29bc8dceeeff0b9bdbe18841c}{Try\+Get\+By\+Index}} (uint32\+\_\+t index, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ \&block)
+\begin{DoxyCompactList}\small\item\em Tries to get a block by index. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a2ef9c95cbd098a2d4d8b2797b9cd09d2}{Remove\+By\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Removes a block by hash. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a936f288756bcd8b8ba991ecabf66d2f5}{Remove\+By\+Index}} (uint32\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Removes a block by index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_ad739506a929bc88f2b27def14be5ed9f}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears the cache. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a9c637fc4448c2f3ef5bbc0d64f57da4d}{Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of items in the cache. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a7d0f643aa32e0f74e2a881cda18bf90b}{Capacity}} () const
+\begin{DoxyCompactList}\small\item\em Gets the capacity of the cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache}}$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ $>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_ac3bdbad9b70afe61ae8e3e331aeeb6c8}{hash\+Cache\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache}}$<$ uint32\+\_\+t, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ $>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache_a82cf7c0e892bc2607d54cf1a1a42f460}{index\+Cache\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A cache for Block objects. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_block_cache_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_block_cache_a019ca403f6485665eae331e0d316007b}\index{neo::io::caching::BlockCache@{neo::io::caching::BlockCache}!BlockCache@{BlockCache}}
+\index{BlockCache@{BlockCache}!neo::io::caching::BlockCache@{neo::io::caching::BlockCache}}
+\doxysubsubsection{\texorpdfstring{BlockCache()}{BlockCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_block_cache_a019ca403f6485665eae331e0d316007b} 
+neo\+::io\+::caching\+::\+Block\+Cache\+::\+Block\+Cache (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{capacity}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1caching_1_1_block_cache}{Block\+Cache} with the specified capacity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em capacity} & The maximum number of items the cache can hold. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_block_cache_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_block_cache_a4ff336ba7ac4433ba2487b7bd63087d7}\index{neo::io::caching::BlockCache@{neo::io::caching::BlockCache}!Add@{Add}}
+\index{Add@{Add}!neo::io::caching::BlockCache@{neo::io::caching::BlockCache}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_block_cache_a4ff336ba7ac4433ba2487b7bd63087d7} 
+void neo\+::io\+::caching\+::\+Block\+Cache\+::\+Add (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$}]{block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a block to the cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block to add. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_block_cache_a7d0f643aa32e0f74e2a881cda18bf90b}\index{neo::io::caching::BlockCache@{neo::io::caching::BlockCache}!Capacity@{Capacity}}
+\index{Capacity@{Capacity}!neo::io::caching::BlockCache@{neo::io::caching::BlockCache}}
+\doxysubsubsection{\texorpdfstring{Capacity()}{Capacity()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_block_cache_a7d0f643aa32e0f74e2a881cda18bf90b} 
+size\+\_\+t neo\+::io\+::caching\+::\+Block\+Cache\+::\+Capacity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the capacity of the cache. 
+
+\begin{DoxyReturn}{Returns}
+The capacity of the cache. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_block_cache_ad739506a929bc88f2b27def14be5ed9f}\index{neo::io::caching::BlockCache@{neo::io::caching::BlockCache}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::io::caching::BlockCache@{neo::io::caching::BlockCache}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_block_cache_ad739506a929bc88f2b27def14be5ed9f} 
+void neo\+::io\+::caching\+::\+Block\+Cache\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears the cache. 
+
+\Hypertarget{classneo_1_1io_1_1caching_1_1_block_cache_a278123170e8e3d91e9c4ea3b4dcd0051}\index{neo::io::caching::BlockCache@{neo::io::caching::BlockCache}!GetByHash@{GetByHash}}
+\index{GetByHash@{GetByHash}!neo::io::caching::BlockCache@{neo::io::caching::BlockCache}}
+\doxysubsubsection{\texorpdfstring{GetByHash()}{GetByHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_block_cache_a278123170e8e3d91e9c4ea3b4dcd0051} 
+std\+::optional$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ $>$ neo\+::io\+::caching\+::\+Block\+Cache\+::\+Get\+By\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}} \&}]{hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a block by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block if found, std\+::nullopt otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_block_cache_aabb04d9c9d40734956add645b527b093}\index{neo::io::caching::BlockCache@{neo::io::caching::BlockCache}!GetByIndex@{GetByIndex}}
+\index{GetByIndex@{GetByIndex}!neo::io::caching::BlockCache@{neo::io::caching::BlockCache}}
+\doxysubsubsection{\texorpdfstring{GetByIndex()}{GetByIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_block_cache_aabb04d9c9d40734956add645b527b093} 
+std\+::optional$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ $>$ neo\+::io\+::caching\+::\+Block\+Cache\+::\+Get\+By\+Index (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a block by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block if found, std\+::nullopt otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_block_cache_a2ef9c95cbd098a2d4d8b2797b9cd09d2}\index{neo::io::caching::BlockCache@{neo::io::caching::BlockCache}!RemoveByHash@{RemoveByHash}}
+\index{RemoveByHash@{RemoveByHash}!neo::io::caching::BlockCache@{neo::io::caching::BlockCache}}
+\doxysubsubsection{\texorpdfstring{RemoveByHash()}{RemoveByHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_block_cache_a2ef9c95cbd098a2d4d8b2797b9cd09d2} 
+bool neo\+::io\+::caching\+::\+Block\+Cache\+::\+Remove\+By\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}} \&}]{hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes a block by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the block was removed, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_block_cache_a936f288756bcd8b8ba991ecabf66d2f5}\index{neo::io::caching::BlockCache@{neo::io::caching::BlockCache}!RemoveByIndex@{RemoveByIndex}}
+\index{RemoveByIndex@{RemoveByIndex}!neo::io::caching::BlockCache@{neo::io::caching::BlockCache}}
+\doxysubsubsection{\texorpdfstring{RemoveByIndex()}{RemoveByIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_block_cache_a936f288756bcd8b8ba991ecabf66d2f5} 
+bool neo\+::io\+::caching\+::\+Block\+Cache\+::\+Remove\+By\+Index (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes a block by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the block was removed, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_block_cache_a9c637fc4448c2f3ef5bbc0d64f57da4d}\index{neo::io::caching::BlockCache@{neo::io::caching::BlockCache}!Size@{Size}}
+\index{Size@{Size}!neo::io::caching::BlockCache@{neo::io::caching::BlockCache}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_block_cache_a9c637fc4448c2f3ef5bbc0d64f57da4d} 
+size\+\_\+t neo\+::io\+::caching\+::\+Block\+Cache\+::\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the number of items in the cache. 
+
+\begin{DoxyReturn}{Returns}
+The number of items in the cache. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_block_cache_accb131a6eb4bbb3e5b25b81ebe9335f3}\index{neo::io::caching::BlockCache@{neo::io::caching::BlockCache}!TryGetByHash@{TryGetByHash}}
+\index{TryGetByHash@{TryGetByHash}!neo::io::caching::BlockCache@{neo::io::caching::BlockCache}}
+\doxysubsubsection{\texorpdfstring{TryGetByHash()}{TryGetByHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_block_cache_accb131a6eb4bbb3e5b25b81ebe9335f3} 
+bool neo\+::io\+::caching\+::\+Block\+Cache\+::\+Try\+Get\+By\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}} \&}]{hash}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ \&}]{block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to get a block by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the block. \\
+\hline
+{\em block} & The block if found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the block was found, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_block_cache_a845c08e29bc8dceeeff0b9bdbe18841c}\index{neo::io::caching::BlockCache@{neo::io::caching::BlockCache}!TryGetByIndex@{TryGetByIndex}}
+\index{TryGetByIndex@{TryGetByIndex}!neo::io::caching::BlockCache@{neo::io::caching::BlockCache}}
+\doxysubsubsection{\texorpdfstring{TryGetByIndex()}{TryGetByIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_block_cache_a845c08e29bc8dceeeff0b9bdbe18841c} 
+bool neo\+::io\+::caching\+::\+Block\+Cache\+::\+Try\+Get\+By\+Index (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ \&}]{block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to get a block by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the block. \\
+\hline
+{\em block} & The block if found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the block was found, false otherwise. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_block_cache_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_block_cache_ac3bdbad9b70afe61ae8e3e331aeeb6c8}\index{neo::io::caching::BlockCache@{neo::io::caching::BlockCache}!hashCache\_@{hashCache\_}}
+\index{hashCache\_@{hashCache\_}!neo::io::caching::BlockCache@{neo::io::caching::BlockCache}}
+\doxysubsubsection{\texorpdfstring{hashCache\_}{hashCache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_block_cache_ac3bdbad9b70afe61ae8e3e331aeeb6c8} 
+\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache}}$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}}$>$ $>$ neo\+::io\+::caching\+::\+Block\+Cache\+::hash\+Cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1io_1_1caching_1_1_block_cache_a82cf7c0e892bc2607d54cf1a1a42f460}\index{neo::io::caching::BlockCache@{neo::io::caching::BlockCache}!indexCache\_@{indexCache\_}}
+\index{indexCache\_@{indexCache\_}!neo::io::caching::BlockCache@{neo::io::caching::BlockCache}}
+\doxysubsubsection{\texorpdfstring{indexCache\_}{indexCache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_block_cache_a82cf7c0e892bc2607d54cf1a1a42f460} 
+\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache}}$<$uint32\+\_\+t, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}}$>$ $>$ neo\+::io\+::caching\+::\+Block\+Cache\+::index\+Cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/io/caching/\mbox{\hyperlink{block__cache_8h}{block\+\_\+cache.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,83 @@
+\doxysection{byte\+\_\+span.\+h}
+\hypertarget{io_2byte__span_8h_source}{}\label{io_2byte__span_8h_source}\index{include/neo/io/byte\_span.h@{include/neo/io/byte\_span.h}}
+\mbox{\hyperlink{io_2byte__span_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cstring>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1io}{neo::io}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a88c53a63bc63f79ce1a29314b17fca51}{ByteSpan}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a88c53a63bc63f79ce1a29314b17fca51}{ByteSpan}}()\ noexcept\ :\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a8ad00ca24a4b3c82432ae375845a2ee6}{data\_}}(\textcolor{keywordtype}{nullptr}),\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}}(0)\ \{\}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a86001375f735ab2a78359d7ddd9d31ec}{ByteSpan}}(\textcolor{keyword}{const}\ uint8\_t*\ data,\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a98dea1d6bbdab2a63e66b80efad928fc}{size}})\ noexcept\ :\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a8ad00ca24a4b3c82432ae375845a2ee6}{data\_}}(data),\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}}(\mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a98dea1d6bbdab2a63e66b80efad928fc}{size}})\ \{\}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Allocator>}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ad59f3fd3205b3544dd41023032ec3387}{ByteSpan}}(\textcolor{keyword}{const}\ std::vector<uint8\_t,\ Allocator>\&\ data)\ noexcept\ :\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a8ad00ca24a4b3c82432ae375845a2ee6}{data\_}}(data.data()),\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}}(data.size())}
+\DoxyCodeLine{00035\ \ \ \ \ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a4a869430800a37dcbeefac6f36468fcb}{Size}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}};\ \}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a98dea1d6bbdab2a63e66b80efad928fc}{size}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}};\ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a1a44ac09ac50847323a100002f530d5b}{IsEmpty}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}}\ ==\ 0;\ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_aab84b50728599e4c9424a7cf8f62e155}{empty}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}}\ ==\ 0;\ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a0285a19eb5cd212ecd1079e0bc5e494c}{Data}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a8ad00ca24a4b3c82432ae375845a2ee6}{data\_}};\ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00073\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a4138db37cf66218489cd8ce318922175}{operator[]}}(\textcolor{keywordtype}{size\_t}\ index)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a8ad00ca24a4b3c82432ae375845a2ee6}{data\_}}[index];\ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a2c5a23c38ba2ed3237664f856267e7d2}{begin}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a8ad00ca24a4b3c82432ae375845a2ee6}{data\_}};\ \}}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a3516b96c1701dd2139095b217b739b10}{end}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a8ad00ca24a4b3c82432ae375845a2ee6}{data\_}}\ +\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}};\ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a88c53a63bc63f79ce1a29314b17fca51}{ByteSpan}}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a46cbc4490cd6d66b1bdf0fbc0d31a937}{subspan}}(\textcolor{keywordtype}{size\_t}\ offset,\ \textcolor{keywordtype}{size\_t}\ count)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00094\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (offset\ >\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}})\ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Offset\ out\ of\ range"{}});}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (offset\ +\ count\ >\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}})\ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Count\ out\ of\ range"{}});}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a88c53a63bc63f79ce1a29314b17fca51}{ByteSpan}}(\mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a8ad00ca24a4b3c82432ae375845a2ee6}{data\_}}\ +\ offset,\ count);}
+\DoxyCodeLine{00100\ \ \ \ \ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00107\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a88c53a63bc63f79ce1a29314b17fca51}{ByteSpan}}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae1d35cb2b38ff63ae9b20aeec5070e4d}{subspan}}(\textcolor{keywordtype}{size\_t}\ offset)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00108\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (offset\ >\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}})\ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Offset\ out\ of\ range"{}});}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a88c53a63bc63f79ce1a29314b17fca51}{ByteSpan}}(\mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a8ad00ca24a4b3c82432ae375845a2ee6}{data\_}}\ +\ offset,\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}}\ -\/\ offset);}
+\DoxyCodeLine{00112\ \ \ \ \ \}}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00120\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a88c53a63bc63f79ce1a29314b17fca51}{ByteSpan}}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_acb9fdb2c2d7d0f827b06d1adcd1657f4}{Slice}}(\textcolor{keywordtype}{size\_t}\ start,\ \textcolor{keywordtype}{size\_t}\ length)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00121\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (start\ +\ length\ >\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}})\ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Slice\ out\ of\ range"{}});}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a88c53a63bc63f79ce1a29314b17fca51}{ByteSpan}}(\mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a8ad00ca24a4b3c82432ae375845a2ee6}{data\_}}\ +\ start,\ length);}
+\DoxyCodeLine{00124\ \ \ \ \ \}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00130\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a5bdc6499f1966458a9ceda1274ba0c2e}{ToHexString}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00136\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ac7685a9001e90a5c1aebc7581179007f}{ToBase64String}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_af9dfe5a4ef692ded6f23193595029662}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a88c53a63bc63f79ce1a29314b17fca51}{ByteSpan}}\&\ other)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00144\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}}\ !=\ other.\mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}})\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::memcmp(\mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a8ad00ca24a4b3c82432ae375845a2ee6}{data\_}},\ other.\mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a8ad00ca24a4b3c82432ae375845a2ee6}{data\_}},\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}})\ ==\ 0;}
+\DoxyCodeLine{00147\ \ \ \ \ \}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae110c04b4d05fcb4be8aaa2d30839173}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a88c53a63bc63f79ce1a29314b17fca51}{ByteSpan}}\&\ other)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ !(*\textcolor{keyword}{this}\ ==\ other);\ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a8ad00ca24a4b3c82432ae375845a2ee6}{data\_}};}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\_}};}
+\DoxyCodeLine{00159\ \};}
+\DoxyCodeLine{00160\ \}\ \ \textcolor{comment}{//\ namespace\ neo::io}}
+
+\end{DoxyCode}

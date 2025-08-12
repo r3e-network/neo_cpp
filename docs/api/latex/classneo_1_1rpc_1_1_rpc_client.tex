@@ -1,0 +1,608 @@
+\doxysection{neo\+::rpc\+::Rpc\+Client Class Reference}
+\hypertarget{classneo_1_1rpc_1_1_rpc_client}{}\label{classneo_1_1rpc_1_1_rpc_client}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+
+
+RPC client for making calls to Neo nodes.  
+
+
+
+
+{\ttfamily \#include $<$rpc\+\_\+client.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_ad2de209f3346a0a8abf6001843ae4520}{Rpc\+Client}} (const std\+::string \&base\+\_\+url, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client}{IHttp\+Client}} $>$ http\+\_\+client=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a57c28aa7dc6de909b74ded0f44d1fc7f}{Rpc\+Client}} (const std\+::string \&base\+\_\+url, const std\+::string \&username, const std\+::string \&password, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client}{IHttp\+Client}} $>$ http\+\_\+client=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructor with authentication. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_ad32690b425fc003191882405f1c02521}{\texorpdfstring{$\sim$}{\string~}\+Rpc\+Client}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response}} \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_ad09c177c2f41d3558543206f2e331db0}{Send}} (const \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request}{Rpc\+Request}} \&request, bool throw\+\_\+on\+\_\+error=true)
+\begin{DoxyCompactList}\small\item\em Sends an RPC request synchronously. \end{DoxyCompactList}\item 
+std\+::future$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response}} $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a07a3fd5dc730c4d73c07af78ec403b9f}{Send\+Async}} (const \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request}{Rpc\+Request}} \&request, bool throw\+\_\+on\+\_\+error=true)
+\begin{DoxyCompactList}\small\item\em Sends an RPC request asynchronously. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a39612be405e7d8da1c5a67b7a537df98}{Rpc\+Send}} (const std\+::string \&method, const std\+::vector$<$ nlohmann\+::json $>$ \&params=\{\})
+\begin{DoxyCompactList}\small\item\em Sends an RPC request with method and parameters. \end{DoxyCompactList}\item 
+std\+::future$<$ nlohmann\+::json $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a07246806da0d00ad8c9d003741ebef63}{Rpc\+Send\+Async}} (const std\+::string \&method, const std\+::vector$<$ nlohmann\+::json $>$ \&params=\{\})
+\begin{DoxyCompactList}\small\item\em Sends an RPC request with method and parameters asynchronously. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a86b99640bb96cd80e28c26fa96a091c1}{Get\+Best\+Block\+Hash}} ()
+\begin{DoxyCompactList}\small\item\em Gets the best block hash. \end{DoxyCompactList}\item 
+std\+::future$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_ac42b225c84bd389443e58e3bdbd47d3c}{Get\+Best\+Block\+Hash\+Async}} ()
+\begin{DoxyCompactList}\small\item\em Gets the best block hash asynchronously. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_aa5d908e819e6742527756bf1afd38757}{Get\+Block\+Count}} ()
+\begin{DoxyCompactList}\small\item\em Gets the block count. \end{DoxyCompactList}\item 
+std\+::future$<$ uint32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a48da467ea34361ccba9cc8ebfeb1be84}{Get\+Block\+Count\+Async}} ()
+\begin{DoxyCompactList}\small\item\em Gets the block count asynchronously. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a1de090a641c83742e3707f080998e41f}{Get\+Block}} (const std\+::string \&hash, bool verbose=true)
+\begin{DoxyCompactList}\small\item\em Gets a block by hash. \end{DoxyCompactList}\item 
+std\+::future$<$ nlohmann\+::json $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a0931dee29eb2cda442cc72098ee36b8d}{Get\+Block\+Async}} (const std\+::string \&hash, bool verbose=true)
+\begin{DoxyCompactList}\small\item\em Gets a block by hash asynchronously. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a35dfaefba83991342b10041c52a843d5}{Get\+Block}} (uint32\+\_\+t index, bool verbose=true)
+\begin{DoxyCompactList}\small\item\em Gets a block by index. \end{DoxyCompactList}\item 
+std\+::future$<$ nlohmann\+::json $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a825f01e7ba91860e2f6c04b7f70af817}{Get\+Block\+Async}} (uint32\+\_\+t index, bool verbose=true)
+\begin{DoxyCompactList}\small\item\em Gets a block by index asynchronously. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a868055442a07164c11cc76405b7a5cda}{Get\+Transaction}} (const std\+::string \&hash, bool verbose=true)
+\begin{DoxyCompactList}\small\item\em Gets a transaction by hash. \end{DoxyCompactList}\item 
+std\+::future$<$ nlohmann\+::json $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a78d0f840f7329d17eaa56f695650a957}{Get\+Transaction\+Async}} (const std\+::string \&hash, bool verbose=true)
+\begin{DoxyCompactList}\small\item\em Gets a transaction by hash asynchronously. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_acd431bcbaa24b62465fcfa085c55d0dd}{Send\+Raw\+Transaction}} (const std\+::string \&hex)
+\begin{DoxyCompactList}\small\item\em Sends a raw transaction. \end{DoxyCompactList}\item 
+std\+::future$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a62f9ea792c854e80f0f9babe34249e02}{Send\+Raw\+Transaction\+Async}} (const std\+::string \&hex)
+\begin{DoxyCompactList}\small\item\em Sends a raw transaction asynchronously. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a850b020ee54e33f844161039d05d4dde}{Invoke\+Function}} (const std\+::string \&script\+\_\+hash, const std\+::string \&operation, const std\+::vector$<$ nlohmann\+::json $>$ \&params=\{\})
+\begin{DoxyCompactList}\small\item\em Invokes a smart contract function. \end{DoxyCompactList}\item 
+std\+::future$<$ nlohmann\+::json $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a7d3ebbec52300c7e20dc205ea1cda9bf}{Invoke\+Function\+Async}} (const std\+::string \&script\+\_\+hash, const std\+::string \&operation, const std\+::vector$<$ nlohmann\+::json $>$ \&params=\{\})
+\begin{DoxyCompactList}\small\item\em Invokes a smart contract function asynchronously. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_ac638c71a2dfdcbdfd279c887ca2f60fe}{Get\+Version}} ()
+\begin{DoxyCompactList}\small\item\em Gets the version information. \end{DoxyCompactList}\item 
+std\+::future$<$ nlohmann\+::json $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a10a4260b0e8b3c83df5fd5b7ee0a0c0b}{Get\+Version\+Async}} ()
+\begin{DoxyCompactList}\small\item\em Gets the version information asynchronously. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request}{Rpc\+Request}} \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_ad1e5893f991a8a70835d1b90fdd11a6b}{Create\+Request}} (const std\+::string \&method, const std\+::vector$<$ nlohmann\+::json $>$ \&params=\{\})
+\begin{DoxyCompactList}\small\item\em Creates an RPC request. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response}} \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a2a354f4ca91fd55887055433f6d3b8a4}{Process\+Response}} (const std\+::string \&response, bool throw\+\_\+on\+\_\+error)
+\begin{DoxyCompactList}\small\item\em Processes an RPC response. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_aee14ff326821a513862420cb89609706}{base\+\_\+url\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client}{IHttp\+Client}} $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a974e59e98963ba4434d61eb3cbdad875}{http\+\_\+client\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a23a96153cc53844461803b068f4f8258}{next\+\_\+id\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+RPC client for making calls to Neo nodes. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_ad2de209f3346a0a8abf6001843ae4520}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!RpcClient@{RpcClient}}
+\index{RpcClient@{RpcClient}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{RpcClient()}{RpcClient()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_ad2de209f3346a0a8abf6001843ae4520} 
+neo\+::rpc\+::\+Rpc\+Client\+::\+Rpc\+Client (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{base\+\_\+url}{, }\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client}{IHttp\+Client}} $>$}]{http\+\_\+client}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base\+\_\+url} & The base URL of the Neo node. \\
+\hline
+{\em http\+\_\+client} & Optional HTTP client implementation. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a57c28aa7dc6de909b74ded0f44d1fc7f}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!RpcClient@{RpcClient}}
+\index{RpcClient@{RpcClient}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{RpcClient()}{RpcClient()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a57c28aa7dc6de909b74ded0f44d1fc7f} 
+neo\+::rpc\+::\+Rpc\+Client\+::\+Rpc\+Client (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{base\+\_\+url}{, }\item[{const std\+::string \&}]{username}{, }\item[{const std\+::string \&}]{password}{, }\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client}{IHttp\+Client}} $>$}]{http\+\_\+client}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})}
+
+
+
+Constructor with authentication. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base\+\_\+url} & The base URL of the Neo node. \\
+\hline
+{\em username} & The username for basic authentication. \\
+\hline
+{\em password} & The password for basic authentication. \\
+\hline
+{\em http\+\_\+client} & Optional HTTP client implementation. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_ad32690b425fc003191882405f1c02521}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!````~RpcClient@{\texorpdfstring{$\sim$}{\string~}RpcClient}}
+\index{````~RpcClient@{\texorpdfstring{$\sim$}{\string~}RpcClient}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RpcClient()}{\string~RpcClient()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_ad32690b425fc003191882405f1c02521} 
+neo\+::rpc\+::\+Rpc\+Client\+::\texorpdfstring{$\sim$}{\string~}\+Rpc\+Client (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_ad1e5893f991a8a70835d1b90fdd11a6b}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!CreateRequest@{CreateRequest}}
+\index{CreateRequest@{CreateRequest}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{CreateRequest()}{CreateRequest()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_ad1e5893f991a8a70835d1b90fdd11a6b} 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request}{Rpc\+Request}} neo\+::rpc\+::\+Rpc\+Client\+::\+Create\+Request (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{method}{, }\item[{const std\+::vector$<$ nlohmann\+::json $>$ \&}]{params}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Creates an RPC request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em method} & The method name. \\
+\hline
+{\em params} & The parameters. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The RPC request. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a86b99640bb96cd80e28c26fa96a091c1}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!GetBestBlockHash@{GetBestBlockHash}}
+\index{GetBestBlockHash@{GetBestBlockHash}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{GetBestBlockHash()}{GetBestBlockHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a86b99640bb96cd80e28c26fa96a091c1} 
+std\+::string neo\+::rpc\+::\+Rpc\+Client\+::\+Get\+Best\+Block\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the best block hash. 
+
+\begin{DoxyReturn}{Returns}
+The best block hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_ac42b225c84bd389443e58e3bdbd47d3c}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!GetBestBlockHashAsync@{GetBestBlockHashAsync}}
+\index{GetBestBlockHashAsync@{GetBestBlockHashAsync}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{GetBestBlockHashAsync()}{GetBestBlockHashAsync()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_ac42b225c84bd389443e58e3bdbd47d3c} 
+std\+::future$<$ std\+::string $>$ neo\+::rpc\+::\+Rpc\+Client\+::\+Get\+Best\+Block\+Hash\+Async (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the best block hash asynchronously. 
+
+\begin{DoxyReturn}{Returns}
+A future containing the best block hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a1de090a641c83742e3707f080998e41f}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!GetBlock@{GetBlock}}
+\index{GetBlock@{GetBlock}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{GetBlock()}{GetBlock()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a1de090a641c83742e3707f080998e41f} 
+json\+::\+JToken neo\+::rpc\+::\+Rpc\+Client\+::\+Get\+Block (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hash}{, }\item[{bool}]{verbose}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+
+
+
+Gets a block by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The block hash. \\
+\hline
+{\em verbose} & Whether to return verbose information. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block information. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a35dfaefba83991342b10041c52a843d5}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!GetBlock@{GetBlock}}
+\index{GetBlock@{GetBlock}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{GetBlock()}{GetBlock()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a35dfaefba83991342b10041c52a843d5} 
+json\+::\+JToken neo\+::rpc\+::\+Rpc\+Client\+::\+Get\+Block (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{, }\item[{bool}]{verbose}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+
+
+
+Gets a block by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The block index. \\
+\hline
+{\em verbose} & Whether to return verbose information. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block information. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a0931dee29eb2cda442cc72098ee36b8d}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!GetBlockAsync@{GetBlockAsync}}
+\index{GetBlockAsync@{GetBlockAsync}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{GetBlockAsync()}{GetBlockAsync()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a0931dee29eb2cda442cc72098ee36b8d} 
+std\+::future$<$ json\+::\+JToken $>$ neo\+::rpc\+::\+Rpc\+Client\+::\+Get\+Block\+Async (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hash}{, }\item[{bool}]{verbose}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+
+
+
+Gets a block by hash asynchronously. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The block hash. \\
+\hline
+{\em verbose} & Whether to return verbose information. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A future containing the block information. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a825f01e7ba91860e2f6c04b7f70af817}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!GetBlockAsync@{GetBlockAsync}}
+\index{GetBlockAsync@{GetBlockAsync}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{GetBlockAsync()}{GetBlockAsync()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a825f01e7ba91860e2f6c04b7f70af817} 
+std\+::future$<$ json\+::\+JToken $>$ neo\+::rpc\+::\+Rpc\+Client\+::\+Get\+Block\+Async (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{, }\item[{bool}]{verbose}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+
+
+
+Gets a block by index asynchronously. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The block index. \\
+\hline
+{\em verbose} & Whether to return verbose information. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A future containing the block information. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_aa5d908e819e6742527756bf1afd38757}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!GetBlockCount@{GetBlockCount}}
+\index{GetBlockCount@{GetBlockCount}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{GetBlockCount()}{GetBlockCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_aa5d908e819e6742527756bf1afd38757} 
+uint32\+\_\+t neo\+::rpc\+::\+Rpc\+Client\+::\+Get\+Block\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the block count. 
+
+\begin{DoxyReturn}{Returns}
+The block count. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a48da467ea34361ccba9cc8ebfeb1be84}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!GetBlockCountAsync@{GetBlockCountAsync}}
+\index{GetBlockCountAsync@{GetBlockCountAsync}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{GetBlockCountAsync()}{GetBlockCountAsync()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a48da467ea34361ccba9cc8ebfeb1be84} 
+std\+::future$<$ uint32\+\_\+t $>$ neo\+::rpc\+::\+Rpc\+Client\+::\+Get\+Block\+Count\+Async (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the block count asynchronously. 
+
+\begin{DoxyReturn}{Returns}
+A future containing the block count. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a868055442a07164c11cc76405b7a5cda}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!GetTransaction@{GetTransaction}}
+\index{GetTransaction@{GetTransaction}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{GetTransaction()}{GetTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a868055442a07164c11cc76405b7a5cda} 
+json\+::\+JToken neo\+::rpc\+::\+Rpc\+Client\+::\+Get\+Transaction (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hash}{, }\item[{bool}]{verbose}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+
+
+
+Gets a transaction by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The transaction hash. \\
+\hline
+{\em verbose} & Whether to return verbose information. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The transaction information. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a78d0f840f7329d17eaa56f695650a957}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!GetTransactionAsync@{GetTransactionAsync}}
+\index{GetTransactionAsync@{GetTransactionAsync}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{GetTransactionAsync()}{GetTransactionAsync()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a78d0f840f7329d17eaa56f695650a957} 
+std\+::future$<$ json\+::\+JToken $>$ neo\+::rpc\+::\+Rpc\+Client\+::\+Get\+Transaction\+Async (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hash}{, }\item[{bool}]{verbose}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+
+
+
+Gets a transaction by hash asynchronously. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The transaction hash. \\
+\hline
+{\em verbose} & Whether to return verbose information. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A future containing the transaction information. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_ac638c71a2dfdcbdfd279c887ca2f60fe}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!GetVersion@{GetVersion}}
+\index{GetVersion@{GetVersion}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{GetVersion()}{GetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_ac638c71a2dfdcbdfd279c887ca2f60fe} 
+json\+::\+JToken neo\+::rpc\+::\+Rpc\+Client\+::\+Get\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the version information. 
+
+\begin{DoxyReturn}{Returns}
+The version information. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a10a4260b0e8b3c83df5fd5b7ee0a0c0b}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!GetVersionAsync@{GetVersionAsync}}
+\index{GetVersionAsync@{GetVersionAsync}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{GetVersionAsync()}{GetVersionAsync()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a10a4260b0e8b3c83df5fd5b7ee0a0c0b} 
+std\+::future$<$ json\+::\+JToken $>$ neo\+::rpc\+::\+Rpc\+Client\+::\+Get\+Version\+Async (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the version information asynchronously. 
+
+\begin{DoxyReturn}{Returns}
+A future containing the version information. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a850b020ee54e33f844161039d05d4dde}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!InvokeFunction@{InvokeFunction}}
+\index{InvokeFunction@{InvokeFunction}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{InvokeFunction()}{InvokeFunction()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a850b020ee54e33f844161039d05d4dde} 
+json\+::\+JToken neo\+::rpc\+::\+Rpc\+Client\+::\+Invoke\+Function (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{script\+\_\+hash}{, }\item[{const std\+::string \&}]{operation}{, }\item[{const std\+::vector$<$ nlohmann\+::json $>$ \&}]{params}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+
+
+
+Invokes a smart contract function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+\_\+hash} & The contract script hash. \\
+\hline
+{\em operation} & The operation name. \\
+\hline
+{\em params} & The parameters. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The invocation result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a7d3ebbec52300c7e20dc205ea1cda9bf}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!InvokeFunctionAsync@{InvokeFunctionAsync}}
+\index{InvokeFunctionAsync@{InvokeFunctionAsync}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{InvokeFunctionAsync()}{InvokeFunctionAsync()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a7d3ebbec52300c7e20dc205ea1cda9bf} 
+std\+::future$<$ json\+::\+JToken $>$ neo\+::rpc\+::\+Rpc\+Client\+::\+Invoke\+Function\+Async (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{script\+\_\+hash}{, }\item[{const std\+::string \&}]{operation}{, }\item[{const std\+::vector$<$ nlohmann\+::json $>$ \&}]{params}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+
+
+
+Invokes a smart contract function asynchronously. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+\_\+hash} & The contract script hash. \\
+\hline
+{\em operation} & The operation name. \\
+\hline
+{\em params} & The parameters. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A future containing the invocation result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a2a354f4ca91fd55887055433f6d3b8a4}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!ProcessResponse@{ProcessResponse}}
+\index{ProcessResponse@{ProcessResponse}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{ProcessResponse()}{ProcessResponse()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a2a354f4ca91fd55887055433f6d3b8a4} 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response}} neo\+::rpc\+::\+Rpc\+Client\+::\+Process\+Response (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{response}{, }\item[{bool}]{throw\+\_\+on\+\_\+error}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Processes an RPC response. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em response} & The response content. \\
+\hline
+{\em throw\+\_\+on\+\_\+error} & Whether to throw an exception on error. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The RPC response. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a39612be405e7d8da1c5a67b7a537df98}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!RpcSend@{RpcSend}}
+\index{RpcSend@{RpcSend}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{RpcSend()}{RpcSend()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a39612be405e7d8da1c5a67b7a537df98} 
+json\+::\+JToken neo\+::rpc\+::\+Rpc\+Client\+::\+Rpc\+Send (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{method}{, }\item[{const std\+::vector$<$ nlohmann\+::json $>$ \&}]{params}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+
+
+
+Sends an RPC request with method and parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em method} & The RPC method name. \\
+\hline
+{\em params} & The parameters. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result JSON. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a07246806da0d00ad8c9d003741ebef63}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!RpcSendAsync@{RpcSendAsync}}
+\index{RpcSendAsync@{RpcSendAsync}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{RpcSendAsync()}{RpcSendAsync()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a07246806da0d00ad8c9d003741ebef63} 
+std\+::future$<$ json\+::\+JToken $>$ neo\+::rpc\+::\+Rpc\+Client\+::\+Rpc\+Send\+Async (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{method}{, }\item[{const std\+::vector$<$ nlohmann\+::json $>$ \&}]{params}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})}
+
+
+
+Sends an RPC request with method and parameters asynchronously. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em method} & The RPC method name. \\
+\hline
+{\em params} & The parameters. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A future containing the result JSON. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_ad09c177c2f41d3558543206f2e331db0}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!Send@{Send}}
+\index{Send@{Send}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{Send()}{Send()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_ad09c177c2f41d3558543206f2e331db0} 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response}} neo\+::rpc\+::\+Rpc\+Client\+::\+Send (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request}{Rpc\+Request}} \&}]{request}{, }\item[{bool}]{throw\+\_\+on\+\_\+error}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+
+
+
+Sends an RPC request synchronously. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request} & The RPC request. \\
+\hline
+{\em throw\+\_\+on\+\_\+error} & Whether to throw an exception on error. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The RPC response. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a07a3fd5dc730c4d73c07af78ec403b9f}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!SendAsync@{SendAsync}}
+\index{SendAsync@{SendAsync}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{SendAsync()}{SendAsync()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a07a3fd5dc730c4d73c07af78ec403b9f} 
+std\+::future$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response}} $>$ neo\+::rpc\+::\+Rpc\+Client\+::\+Send\+Async (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request}{Rpc\+Request}} \&}]{request}{, }\item[{bool}]{throw\+\_\+on\+\_\+error}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+
+
+
+Sends an RPC request asynchronously. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request} & The RPC request. \\
+\hline
+{\em throw\+\_\+on\+\_\+error} & Whether to throw an exception on error. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A future containing the RPC response. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_acd431bcbaa24b62465fcfa085c55d0dd}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!SendRawTransaction@{SendRawTransaction}}
+\index{SendRawTransaction@{SendRawTransaction}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{SendRawTransaction()}{SendRawTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_acd431bcbaa24b62465fcfa085c55d0dd} 
+std\+::string neo\+::rpc\+::\+Rpc\+Client\+::\+Send\+Raw\+Transaction (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{}\end{DoxyParamCaption})}
+
+
+
+Sends a raw transaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The transaction hex string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The transaction hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a62f9ea792c854e80f0f9babe34249e02}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!SendRawTransactionAsync@{SendRawTransactionAsync}}
+\index{SendRawTransactionAsync@{SendRawTransactionAsync}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{SendRawTransactionAsync()}{SendRawTransactionAsync()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a62f9ea792c854e80f0f9babe34249e02} 
+std\+::future$<$ std\+::string $>$ neo\+::rpc\+::\+Rpc\+Client\+::\+Send\+Raw\+Transaction\+Async (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{}\end{DoxyParamCaption})}
+
+
+
+Sends a raw transaction asynchronously. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The transaction hex string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A future containing the transaction hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 21
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_aee14ff326821a513862420cb89609706}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!base\_url\_@{base\_url\_}}
+\index{base\_url\_@{base\_url\_}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{base\_url\_}{base\_url\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_aee14ff326821a513862420cb89609706} 
+std\+::string neo\+::rpc\+::\+Rpc\+Client\+::base\+\_\+url\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a974e59e98963ba4434d61eb3cbdad875}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!http\_client\_@{http\_client\_}}
+\index{http\_client\_@{http\_client\_}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{http\_client\_}{http\_client\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a974e59e98963ba4434d61eb3cbdad875} 
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client}{IHttp\+Client}}$>$ neo\+::rpc\+::\+Rpc\+Client\+::http\+\_\+client\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_client_a23a96153cc53844461803b068f4f8258}\index{neo::rpc::RpcClient@{neo::rpc::RpcClient}!next\_id\_@{next\_id\_}}
+\index{next\_id\_@{next\_id\_}!neo::rpc::RpcClient@{neo::rpc::RpcClient}}
+\doxysubsubsection{\texorpdfstring{next\_id\_}{next\_id\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_client_a23a96153cc53844461803b068f4f8258} 
+uint64\+\_\+t neo\+::rpc\+::\+Rpc\+Client\+::next\+\_\+id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/rpc/\mbox{\hyperlink{rpc__client_8h}{rpc\+\_\+client.\+h}}\item 
+src/rpc/\mbox{\hyperlink{rpc__client_8cpp}{rpc\+\_\+client.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,22 @@
+digraph "neo::NeoSystem::GetCurrentBlockHeight"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::NeoSystem::GetCurrent\lBlockHeight",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Gets the current block height."];
+  Node1 -> Node2 [id="edge8_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::persistence::Storage\lKey::Create",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#ae7001770e96642cfdb2f878c6264bf51",tooltip="Creates a storage key with contract ID and prefix."];
+  Node2 -> Node3 [id="edge9_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::persistence::Storage\lKey::FillHeader",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#a4a6ee8a47d7cfb0b3802d3697ddf571f",tooltip="Fills the header (contract ID + prefix) into a span."];
+  Node2 -> Node4 [id="edge10_Node000002_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::persistence::Storage\lKey::StorageKey",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#a26e71bde9629f81837c84d69d83fd75a",tooltip="Constructs an empty StorageKey."];
+  Node1 -> Node5 [id="edge11_Node000001_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::NeoSystem::get\l_snapshot_cache",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1_neo_system.html#ade3b30c31edff42042eb70e7749204ef",tooltip="Gets a snapshot of the blockchain storage with an execution cache."];
+  Node1 -> Node6 [id="edge12_Node000001_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::NeoSystem::NeoSystem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1_neo_system.html#a40e93f57f21ba9c2c3f5c313527093b3",tooltip="Constructs a NeoSystem with the specified settings and storage provider."];
+  Node6 -> Node6 [id="edge13_Node000006_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 -> Node7 [id="edge14_Node000006_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::NeoSystem::settings",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1_neo_system.html#ac983ab9259b4934be92b43d7c69b92f2",tooltip="Gets the protocol settings of this Neo system."];
+}

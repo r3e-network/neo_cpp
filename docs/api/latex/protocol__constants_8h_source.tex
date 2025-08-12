@@ -1,0 +1,107 @@
+\doxysection{protocol\+\_\+constants.\+h}
+\hypertarget{protocol__constants_8h_source}{}\label{protocol__constants_8h_source}\index{include/neo/core/protocol\_constants.h@{include/neo/core/protocol\_constants.h}}
+\mbox{\hyperlink{protocol__constants_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1core}{neo::core}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a84cedfb0c285bb6af696cce33278e7ee}{ProtocolConstants}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ \textcolor{comment}{//\ Network\ and\ protocol\ limits}}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a2e95a88b913ecb06660bf45cfb026180}{MaxTransactionSize}}\ =\ 2000000;\ \ \ \ \ \ \textcolor{comment}{//\ 2MB\ max\ transaction\ size}}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ad92588e7a539547d2dcc370462ea259b}{MaxTransactionAttributes}}\ =\ 1024;\ \ \ \textcolor{comment}{//\ Max\ attributes\ per\ transaction}}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a2c92b534cfbf967a4c6700418edb5e8c}{MaxTransactionWitnesses}}\ =\ 16;\ \ \ \ \ \ \ \textcolor{comment}{//\ Max\ witnesses\ per\ transaction}}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ac28a307389c92a951953324dde38ec72}{MaxContractParametersCount}}\ =\ 255;\ \ \textcolor{comment}{//\ Max\ contract\ parameters}}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a828b77ba98535a433da10044311ba487}{MaxStackSize}}\ =\ 65536;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Max\ VM\ stack\ size}}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ad85e66bf91c776f3c5fd1ccf8c3659b0}{MaxScriptLength}}\ =\ 1024\ *\ 1024;\ \ \ \ \ \textcolor{comment}{//\ Max\ script\ length\ (1MB)}}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ac1b586fa3173c7e1818965029bb191d2}{MaxArraySize}}\ =\ 1024;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Max\ array\ size\ in\ VM}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a7351e0380efbbc21a9f12764f760d980}{MaxStringLength}}\ =\ 65536;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Max\ string\ length}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ac1c75fca4c57635c44743be49e76eac6}{MaxByteArrayLength}}\ =\ 65536;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Max\ byte\ array\ length}}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a766333dbf213125643aacd0c350b176b}{MaxKeySize}}\ =\ 64;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Max\ storage\ key\ size}}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a0275afae927c3269d5de558e3fc88c82}{MaxValueSize}}\ =\ 65536;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Max\ storage\ value\ size}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ Block\ and\ transaction\ limits}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a8c1dfe79e54329fbd5e9b19a8a9aff0d}{MaxBlockSize}}\ =\ 262144;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 256KB\ max\ block\ size}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a81c7491990caa743ede5f061fabdaf4b}{MaxTransactionsPerBlock}}\ =\ 512;\ \ \ \ \ \ \ \textcolor{comment}{//\ Max\ transactions\ per\ block}}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_aacfe6104d3af0faf22a39c33242790c3}{SecondsPerBlock}}\ =\ 15;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Target\ block\ time\ in\ seconds}}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a9023b1f217aa71434617ec39205388ca}{BlocksPerDay}}\ =\ 5760;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Blocks\ per\ day\ (24*60*60/15)}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_aff147777eb5aab2d946b19b77f36270c}{MaxValidUntilBlockIncrement}}\ =\ 5760;\ \ \textcolor{comment}{//\ Max\ valid\ until\ block\ increment}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{comment}{//\ Gas\ and\ fee\ constants}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a3cd1b07ea570c8a4740c12f51da5be15}{GasPerByte}}\ =\ 1000;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Gas\ cost\ per\ byte}}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a4d0b00cbf5d6e096cc154e51a6a107a5}{ApplicationGas}}\ =\ 10000000;\ \ \ \ \ \textcolor{comment}{//\ 10\ GAS\ in\ datoshi}}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_af596a47e4056506d20286d2b6519f659}{SystemGas}}\ =\ 10000000;\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 10\ GAS\ in\ datoshi}}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a48646790113a3c6799cc1f9d27f8a474}{NetworkFeePerByte}}\ =\ 1000;\ \ \ \ \ \ \textcolor{comment}{//\ Network\ fee\ per\ byte}}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_aad6f91f81276e1ebbd89fd9702c2cb2d}{MaxSystemFee}}\ =\ 10000000000LL;\ \ \textcolor{comment}{//\ Max\ system\ fee\ (10,000\ GAS)}}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a0e7b23fc4e7995f485c3f821d0c6ea3b}{MaxNetworkFee}}\ =\ 100000000;\ \ \ \ \ \textcolor{comment}{//\ Max\ network\ fee\ (100\ GAS)}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{comment}{//\ Cryptographic\ constants}}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a97ec810768162801b4f5cf70c1c4589a}{ECPointSize}}\ =\ 33;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Compressed\ EC\ point\ size}}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ae41618f0ddd4027d754cdf64afb2027a}{ECPointUncompressedSize}}\ =\ 65;\ \ \textcolor{comment}{//\ Uncompressed\ EC\ point\ size}}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a7174778eaf4e82e765e419810ee57bde}{UInt160Size}}\ =\ 20;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ UInt160\ size\ in\ bytes}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a58dcfbe73f911e77442f95f0d1f3dcfc}{UInt256Size}}\ =\ 32;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ UInt256\ size\ in\ bytes}}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ab2ffddd0c699fe8b80afd0fbd1508793}{ScriptHashSize}}\ =\ 20;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Script\ hash\ size}}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ade997bcd6a57309bd1104a759540f014}{SignatureSize}}\ =\ 64;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Signature\ size}}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a230d48de28793d4807b5dda6d6d1f15d}{PrivateKeySize}}\ =\ 32;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Private\ key\ size}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//\ BLS12-\/381\ constants}}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ad21907d4cde3fc7af2d54c015ae1a7d8}{BLS12\_381\_FieldElementSize}}\ =\ 48;\ \ \textcolor{comment}{//\ BLS12-\/381\ field\ element\ size}}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_aea8d421baf7da438dfc0a23819a67c6f}{BLS12\_381\_G1PointSize}}\ =\ 48;\ \ \ \ \ \ \ \textcolor{comment}{//\ BLS12-\/381\ G1\ point\ size}}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ad733139e8bfee116bef1c4cb0e099de6}{BLS12\_381\_G2PointSize}}\ =\ 96;\ \ \ \ \ \ \ \textcolor{comment}{//\ BLS12-\/381\ G2\ point\ size}}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a331d3157409480d7e44b30e01e8598ac}{BLS12\_381\_GTElementSize}}\ =\ 384;\ \ \ \ \textcolor{comment}{//\ BLS12-\/381\ GT\ element\ size}}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ab63207582521fa78c5f13bb79c10ffad}{BLS12\_381\_ScalarSize}}\ =\ 32;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ BLS12-\/381\ scalar\ size}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//\ P2P\ Network\ constants}}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint16\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ac2ada73d9fa7cce9ab0c47771e3672f7}{DefaultP2PPort}}\ =\ 10333;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Default\ P2P\ port\ (mainnet)}}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint16\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a360a3570fc2ab5cb457725bcf5e7fa0e}{DefaultTestnetP2PPort}}\ =\ 20333;\ \ \ \ \textcolor{comment}{//\ Default\ testnet\ P2P\ port}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint16\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a790eeb2bc786966b93e675c339edef0f}{DefaultRPCPort}}\ =\ 10332;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Default\ RPC\ port\ (mainnet)}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint16\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a4617bc3fe9884302fa994159fe3a21cf}{DefaultTestnetRPCPort}}\ =\ 20332;\ \ \ \ \textcolor{comment}{//\ Default\ testnet\ RPC\ port}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ad7e16bc579d0f4606613ba5bd30dc9c8}{MaxPeers}}\ =\ 100;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Maximum\ number\ of\ peers}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_aff9e8191502e2354e8500bf37b4c984e}{MaxPayloadSize}}\ =\ 0x02000000;\ \ \ \ \ \ \textcolor{comment}{//\ Max\ P2P\ payload\ size\ (32MB)}}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ada55a357c24cc387450e72237d635939}{MessageHeaderSize}}\ =\ 24;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ P2P\ message\ header\ size}}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a9c59394f9e623338630e605b0e6a2eae}{MainnetNetworkMagic}}\ =\ 860833102;\ \ \textcolor{comment}{//\ Mainnet\ network\ magic\ number}}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_abb1ad6268e1a81f6654373b0e1180f0f}{AddressVersion}}\ =\ 0x35;\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Neo\ address\ version\ byte\ (53\ decimal)}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{comment}{//\ Consensus\ constants}}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a0e7dafecc71c32a43a50087867dbbc2e}{ConsensusNodeCount}}\ =\ 7;\ \ \ \ \textcolor{comment}{//\ Default\ consensus\ node\ count}}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ab039aea7ff8a706b166a1d05dbfa1d8a}{CommitteeSize}}\ =\ 21;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Committee\ size}}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a19d4acce8a096c67efc2b434116bc902}{ConsensusTimeout}}\ =\ 15000;\ \ \textcolor{comment}{//\ Consensus\ timeout\ in\ ms}}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a3473583fd3192b9519cee23d39508e09}{ViewChangeFactor}}\ =\ 2;\ \ \ \ \ \ \textcolor{comment}{//\ View\ change\ factor}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{comment}{//\ Contract\ constants}}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a74338a70112b2516b939499889c0b979}{MaxSubitems}}\ =\ 16;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Max\ subitems\ in\ contract\ parameters}}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a50973c66be3f096f5ebb2c321fda333c}{MaxManifestSize}}\ =\ 65536;\ \ \ \textcolor{comment}{//\ Max\ contract\ manifest\ size}}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_acd881266d1fc716102a68efadaec8999}{MaxMethodNameLength}}\ =\ 32;\ \ \textcolor{comment}{//\ Max\ contract\ method\ name\ length}}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a34c54d85857d2b008536399b505837de}{MaxEventNameLength}}\ =\ 32;\ \ \ \textcolor{comment}{//\ Max\ contract\ event\ name\ length}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{comment}{//\ Storage\ constants}}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a3a58f34343cbe5b79e68b4a81e8dcbea}{StorageKeyPrefixLength}}\ =\ 1;\ \ \ \ \ \ \textcolor{comment}{//\ Storage\ key\ prefix\ length}}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_abb96a41a695c8c84f00440fd93bfeb96}{MaxStorageKeyLength}}\ =\ 64;\ \ \ \ \ \ \ \textcolor{comment}{//\ Max\ storage\ key\ length}}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_abb37b1c09ceb92499c5e6c96f132c622}{MaxStorageValueLength}}\ =\ 65535;\ \ \textcolor{comment}{//\ Max\ storage\ value\ length}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{comment}{//\ Oracle\ constants}}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a9193768bb665f6637c1151fbf561a925}{MaxOracleURLLength}}\ =\ 256;\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Max\ oracle\ URL\ length}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ad3551f2b8715f061c2d073d455fb5ade}{MaxOracleRequestGas}}\ =\ 50000000;\ \ \textcolor{comment}{//\ Max\ gas\ for\ oracle\ request}}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a3a7ea907225b5e6ebe651ff87d52f273}{OracleResponseGas}}\ =\ 10000000;\ \ \ \ \textcolor{comment}{//\ Gas\ cost\ for\ oracle\ response}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{comment}{//\ VM\ execution\ limits}}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_ad5971f3eda595248b2e2265c2c41bf08}{MaxInvocationStackSize}}\ =\ 1024;\ \ \textcolor{comment}{//\ Max\ invocation\ stack\ size}}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a2ff4a51bff2881c7e6579c0886bd1e3c}{MaxItemSize}}\ =\ 1024\ *\ 1024;\ \ \ \ \ \ \textcolor{comment}{//\ Max\ size\ of\ a\ single\ stack\ item}}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a25772b937cbec7d5dcb4c36a0d0dfa00}{MaxCloneDepth}}\ =\ 255;\ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Max\ clone\ depth\ for\ reference\ types}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{comment}{//\ Private\ constructor\ to\ prevent\ instantiation}}
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants_a84cedfb0c285bb6af696cce33278e7ee}{ProtocolConstants}}()\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00102\ \};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{comment}{//\ Convenience\ aliases\ for\ commonly\ used\ constants}}
+\DoxyCodeLine{00105\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceneo_1_1core_a070d2a93e94522c46ecdd0957e612bd6}{PC}}\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_constants}{ProtocolConstants}};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \}\ \ \textcolor{comment}{//\ namespace\ neo::core}}
+
+\end{DoxyCode}

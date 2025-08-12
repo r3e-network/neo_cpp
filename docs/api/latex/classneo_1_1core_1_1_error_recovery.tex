@@ -1,0 +1,189 @@
+\doxysection{neo\+::core\+::Error\+Recovery Class Reference}
+\hypertarget{classneo_1_1core_1_1_error_recovery}{}\label{classneo_1_1core_1_1_error_recovery}\index{neo::core::ErrorRecovery@{neo::core::ErrorRecovery}}
+
+
+Comprehensive error recovery framework for Neo C++ implementation.  
+
+
+
+
+{\ttfamily \#include $<$error\+\_\+recovery.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead}{Bulkhead}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead}{Bulkhead} pattern for resource isolation. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker}{Circuit\+Breaker}}
+\begin{DoxyCompactList}\small\item\em Circuit breaker for preventing cascade failures. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{Recovery\+Result}}
+\begin{DoxyCompactList}\small\item\em Result of an error recovery operation. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{Retry\+Config}}
+\begin{DoxyCompactList}\small\item\em Configuration for retry operations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{Recovery\+Result}}$<$ T $>$ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_adb8e0564ad08d660eb79317959591982}{Retry}} (std\+::function$<$ T()$>$ operation, const \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{Retry\+Config}} \&config=\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{Retry\+Config}}())
+\begin{DoxyCompactList}\small\item\em Execute a function with retry logic. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{Recovery\+Result}}$<$ T $>$ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_afca8330024e9fce3dcdf5c3260a63d55}{With\+Fallback}} (std\+::function$<$ T()$>$ primary\+\_\+operation, std\+::function$<$ T()$>$ fallback\+\_\+operation)
+\begin{DoxyCompactList}\small\item\em Execute a function with fallback on failure. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{Recovery\+Result}}$<$ T $>$ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_a710ce1ce383491c69bcfb6ddb8d860aa}{With\+Timeout}} (std\+::function$<$ T()$>$ operation, std\+::chrono\+::milliseconds timeout)
+\begin{DoxyCompactList}\small\item\em Timeout wrapper for operations. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{Recovery\+Result}}$<$ T $>$ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_a9f1208e3a96b69340f8aebee405d936d}{Safe\+Execute}} (std\+::function$<$ T()$>$ operation, const std\+::string \&operation\+\_\+name="{}operation"{})
+\begin{DoxyCompactList}\small\item\em Safe execution wrapper that never throws. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_a35ddee6f0275a972d2e02e4dec059653}{Is\+Retriable\+Exception}} (const std\+::exception \&e)
+\begin{DoxyCompactList}\small\item\em Exception categorization for better error handling. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_a65fe1c13294237cbcdbcdfb0f541cd92}{Is\+Transient\+Exception}} (const std\+::exception \&e)
+\item 
+static bool \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_a5967fca0a38b4ee1568868782c85ad3e}{Is\+Fatal\+Exception}} (const std\+::exception \&e)
+\item 
+static \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{Retry\+Config}} \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_adc31a75f5c860aaeeffb0f822ef8e244}{Network\+Retry\+Config}} ()
+\begin{DoxyCompactList}\small\item\em Create standard retry configurations for different scenarios. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{Retry\+Config}} \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_a6727685e1dbdd60fc3a341d3fda928dc}{Database\+Retry\+Config}} ()
+\item 
+static \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{Retry\+Config}} \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_afae6814a5934c45fe064d3a3566fe7c9}{File\+Operation\+Retry\+Config}} ()
+\item 
+static \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{Retry\+Config}} \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_aeb7a9a6cb6d5a59af67f24d86f7927d2}{Cryptography\+Retry\+Config}} ()
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Comprehensive error recovery framework for Neo C++ implementation. 
+
+Provides robust error handling strategies including retry logic, circuit breakers, fallback mechanisms, and graceful degradation to ensure production-\/ready reliability and fault tolerance. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1core_1_1_error_recovery_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1core_1_1_error_recovery_aeb7a9a6cb6d5a59af67f24d86f7927d2}\index{neo::core::ErrorRecovery@{neo::core::ErrorRecovery}!CryptographyRetryConfig@{CryptographyRetryConfig}}
+\index{CryptographyRetryConfig@{CryptographyRetryConfig}!neo::core::ErrorRecovery@{neo::core::ErrorRecovery}}
+\doxysubsubsection{\texorpdfstring{CryptographyRetryConfig()}{CryptographyRetryConfig()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_aeb7a9a6cb6d5a59af67f24d86f7927d2} 
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{Error\+Recovery\+::\+Retry\+Config}} neo\+::core\+::\+Error\+Recovery\+::\+Cryptography\+Retry\+Config (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_a6727685e1dbdd60fc3a341d3fda928dc}\index{neo::core::ErrorRecovery@{neo::core::ErrorRecovery}!DatabaseRetryConfig@{DatabaseRetryConfig}}
+\index{DatabaseRetryConfig@{DatabaseRetryConfig}!neo::core::ErrorRecovery@{neo::core::ErrorRecovery}}
+\doxysubsubsection{\texorpdfstring{DatabaseRetryConfig()}{DatabaseRetryConfig()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_a6727685e1dbdd60fc3a341d3fda928dc} 
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{Error\+Recovery\+::\+Retry\+Config}} neo\+::core\+::\+Error\+Recovery\+::\+Database\+Retry\+Config (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1core_1_1_error_recovery_afae6814a5934c45fe064d3a3566fe7c9}\index{neo::core::ErrorRecovery@{neo::core::ErrorRecovery}!FileOperationRetryConfig@{FileOperationRetryConfig}}
+\index{FileOperationRetryConfig@{FileOperationRetryConfig}!neo::core::ErrorRecovery@{neo::core::ErrorRecovery}}
+\doxysubsubsection{\texorpdfstring{FileOperationRetryConfig()}{FileOperationRetryConfig()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_afae6814a5934c45fe064d3a3566fe7c9} 
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{Error\+Recovery\+::\+Retry\+Config}} neo\+::core\+::\+Error\+Recovery\+::\+File\+Operation\+Retry\+Config (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_a5967fca0a38b4ee1568868782c85ad3e}\index{neo::core::ErrorRecovery@{neo::core::ErrorRecovery}!IsFatalException@{IsFatalException}}
+\index{IsFatalException@{IsFatalException}!neo::core::ErrorRecovery@{neo::core::ErrorRecovery}}
+\doxysubsubsection{\texorpdfstring{IsFatalException()}{IsFatalException()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_a5967fca0a38b4ee1568868782c85ad3e} 
+bool neo\+::core\+::\+Error\+Recovery\+::\+Is\+Fatal\+Exception (\begin{DoxyParamCaption}\item[{const std\+::exception \&}]{e}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_a35ddee6f0275a972d2e02e4dec059653}\index{neo::core::ErrorRecovery@{neo::core::ErrorRecovery}!IsRetriableException@{IsRetriableException}}
+\index{IsRetriableException@{IsRetriableException}!neo::core::ErrorRecovery@{neo::core::ErrorRecovery}}
+\doxysubsubsection{\texorpdfstring{IsRetriableException()}{IsRetriableException()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_a35ddee6f0275a972d2e02e4dec059653} 
+bool neo\+::core\+::\+Error\+Recovery\+::\+Is\+Retriable\+Exception (\begin{DoxyParamCaption}\item[{const std\+::exception \&}]{e}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Exception categorization for better error handling. 
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_a65fe1c13294237cbcdbcdfb0f541cd92}\index{neo::core::ErrorRecovery@{neo::core::ErrorRecovery}!IsTransientException@{IsTransientException}}
+\index{IsTransientException@{IsTransientException}!neo::core::ErrorRecovery@{neo::core::ErrorRecovery}}
+\doxysubsubsection{\texorpdfstring{IsTransientException()}{IsTransientException()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_a65fe1c13294237cbcdbcdfb0f541cd92} 
+bool neo\+::core\+::\+Error\+Recovery\+::\+Is\+Transient\+Exception (\begin{DoxyParamCaption}\item[{const std\+::exception \&}]{e}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_adc31a75f5c860aaeeffb0f822ef8e244}\index{neo::core::ErrorRecovery@{neo::core::ErrorRecovery}!NetworkRetryConfig@{NetworkRetryConfig}}
+\index{NetworkRetryConfig@{NetworkRetryConfig}!neo::core::ErrorRecovery@{neo::core::ErrorRecovery}}
+\doxysubsubsection{\texorpdfstring{NetworkRetryConfig()}{NetworkRetryConfig()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_adc31a75f5c860aaeeffb0f822ef8e244} 
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{Error\+Recovery\+::\+Retry\+Config}} neo\+::core\+::\+Error\+Recovery\+::\+Network\+Retry\+Config (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create standard retry configurations for different scenarios. 
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1core_1_1_error_recovery_adb8e0564ad08d660eb79317959591982}\index{neo::core::ErrorRecovery@{neo::core::ErrorRecovery}!Retry@{Retry}}
+\index{Retry@{Retry}!neo::core::ErrorRecovery@{neo::core::ErrorRecovery}}
+\doxysubsubsection{\texorpdfstring{Retry()}{Retry()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_adb8e0564ad08d660eb79317959591982} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{Recovery\+Result}}$<$ T $>$ neo\+::core\+::\+Error\+Recovery\+::\+Retry (\begin{DoxyParamCaption}\item[{std\+::function$<$ T()$>$}]{operation}{, }\item[{const \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{Retry\+Config}} \&}]{config}{ = {\ttfamily \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{Retry\+Config}}()}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Execute a function with retry logic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em operation} & Function to execute \\
+\hline
+{\em config} & Retry configuration \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Recovery result with success/failure information 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1core_1_1_error_recovery_a9f1208e3a96b69340f8aebee405d936d}\index{neo::core::ErrorRecovery@{neo::core::ErrorRecovery}!SafeExecute@{SafeExecute}}
+\index{SafeExecute@{SafeExecute}!neo::core::ErrorRecovery@{neo::core::ErrorRecovery}}
+\doxysubsubsection{\texorpdfstring{SafeExecute()}{SafeExecute()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_a9f1208e3a96b69340f8aebee405d936d} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{Recovery\+Result}}$<$ T $>$ neo\+::core\+::\+Error\+Recovery\+::\+Safe\+Execute (\begin{DoxyParamCaption}\item[{std\+::function$<$ T()$>$}]{operation}{, }\item[{const std\+::string \&}]{operation\+\_\+name}{ = {\ttfamily "{}operation"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Safe execution wrapper that never throws. 
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1core_1_1_error_recovery_afca8330024e9fce3dcdf5c3260a63d55}\index{neo::core::ErrorRecovery@{neo::core::ErrorRecovery}!WithFallback@{WithFallback}}
+\index{WithFallback@{WithFallback}!neo::core::ErrorRecovery@{neo::core::ErrorRecovery}}
+\doxysubsubsection{\texorpdfstring{WithFallback()}{WithFallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_afca8330024e9fce3dcdf5c3260a63d55} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{Recovery\+Result}}$<$ T $>$ neo\+::core\+::\+Error\+Recovery\+::\+With\+Fallback (\begin{DoxyParamCaption}\item[{std\+::function$<$ T()$>$}]{primary\+\_\+operation}{, }\item[{std\+::function$<$ T()$>$}]{fallback\+\_\+operation}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Execute a function with fallback on failure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em primary\+\_\+operation} & Primary function to try \\
+\hline
+{\em fallback\+\_\+operation} & Fallback function if primary fails \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Recovery result 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1core_1_1_error_recovery_a710ce1ce383491c69bcfb6ddb8d860aa}\index{neo::core::ErrorRecovery@{neo::core::ErrorRecovery}!WithTimeout@{WithTimeout}}
+\index{WithTimeout@{WithTimeout}!neo::core::ErrorRecovery@{neo::core::ErrorRecovery}}
+\doxysubsubsection{\texorpdfstring{WithTimeout()}{WithTimeout()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_a710ce1ce383491c69bcfb6ddb8d860aa} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{Recovery\+Result}}$<$ T $>$ neo\+::core\+::\+Error\+Recovery\+::\+With\+Timeout (\begin{DoxyParamCaption}\item[{std\+::function$<$ T()$>$}]{operation}{, }\item[{std\+::chrono\+::milliseconds}]{timeout}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Timeout wrapper for operations. 
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{error__recovery_8h}{error\+\_\+recovery.\+h}}\item 
+src/core/\mbox{\hyperlink{error__recovery_8cpp}{error\+\_\+recovery.\+cpp}}\end{DoxyCompactItemize}

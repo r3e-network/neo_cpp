@@ -1,0 +1,685 @@
+\doxysection{neo\+::network\+::p2p\+::payloads\+::Header Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+
+
+Represents the header of a block. This matches the C\# Neo.\+Network.\+P2\+P.\+Payloads.\+Header class exactly.  
+
+
+
+
+{\ttfamily \#include $<$header.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::p2p\+::payloads\+::Header\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::payloads\+::Header\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a9e6fe022df3e3d8c8cb3a373f015f1a6}{Header}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a64177edb8f1cf41d1e2b514243dfd330}{\texorpdfstring{$\sim$}{\string~}\+Header}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_adbbe4dac7c4b6611e6e36ad3e5af1457}{Header}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a0a265de58e5f556b441ea9256a02ea2a}{operator=}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} \&other)
+\begin{DoxyCompactList}\small\item\em Assignment operator. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a8697f198232757752d3e45c8c83bb572}{Get\+Version}} () const
+\begin{DoxyCompactList}\small\item\em Gets the version of the block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a6e94d8b30aa18ec6f007773345a5a2fd}{Set\+Version}} (uint32\+\_\+t version)
+\begin{DoxyCompactList}\small\item\em Sets the version of the block. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a3a6c2b43fd58deed9da7565672df30af}{Get\+Prev\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the hash of the previous block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_acefc8d00bb79102dac595a7fd85c4e40}{Set\+Prev\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&prev\+\_\+hash)
+\begin{DoxyCompactList}\small\item\em Sets the hash of the previous block. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a69ba21fc019918f6d567d9d3f8032892}{Get\+Merkle\+Root}} () const
+\begin{DoxyCompactList}\small\item\em Gets the merkle root of the transactions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a199c0ea09af757b5fdfe682cf100639f}{Set\+Merkle\+Root}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&merkle\+\_\+root)
+\begin{DoxyCompactList}\small\item\em Sets the merkle root of the transactions. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a432e8f47fc08ccbeae15f7f47df37588}{Get\+Timestamp}} () const
+\begin{DoxyCompactList}\small\item\em Gets the timestamp of the block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a8ec94722f303b469cb58b90a1c56b887}{Set\+Timestamp}} (uint64\+\_\+t timestamp)
+\begin{DoxyCompactList}\small\item\em Sets the timestamp of the block. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ae295d982bab91f0f7f80cfed74e55fc3}{Get\+Nonce}} () const
+\begin{DoxyCompactList}\small\item\em Gets the nonce of the block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a08b88c3cf63f7dbeac327843067a17a0}{Set\+Nonce}} (uint64\+\_\+t nonce)
+\begin{DoxyCompactList}\small\item\em Sets the nonce of the block. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a349ba042fc20c44d7becc0ecc3b46070}{Get\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Gets the index of the block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a62e2b4c9ad90bffaa73f6228d44f8d52}{Set\+Index}} (uint32\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Sets the index of the block. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_aec0e2235880789c4fc822e8e4871f1bc}{Get\+Primary\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Gets the primary index of the consensus node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a2cce2f7a23d42fcb6d10b1480af0b641}{Set\+Primary\+Index}} (uint8\+\_\+t primary\+\_\+index)
+\begin{DoxyCompactList}\small\item\em Sets the primary index of the consensus node. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a9fb0d53edb1ddfae288805e69861840b}{Get\+Next\+Consensus}} () const
+\begin{DoxyCompactList}\small\item\em Gets the next consensus address. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_afe1fe90954f2bea8b4658b6e01d06f22}{Set\+Next\+Consensus}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&next\+\_\+consensus)
+\begin{DoxyCompactList}\small\item\em Sets the next consensus address. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a4f0ff1cda1fd94fba9521a7f29d5a133}{Get\+Witness}} () const
+\begin{DoxyCompactList}\small\item\em Gets the witness of the block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a6b5277a0941db1b56f0e48cdbcaf7440}{Set\+Witness}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} \&witness)
+\begin{DoxyCompactList}\small\item\em Sets the witness of the block. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ad364da594c86854d1fdb299acdf1125d}{Get\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the hash of the header. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a2fae15643775fce44c9ff1e53de3fe88}{Try\+Get\+Hash}} (\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Tries to get the hash (with error checking). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a473e90f93f42e1cb45630dad90d8ac66}{Try\+Get\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Tries to get the hash (with error checking). \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a72a49fb5d89816e55e64be17a08bcd74}{Get\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the size of the header in bytes. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a655d1d9fae57089ae177895a8331f399}{Verify}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings}{config\+::\+Protocol\+Settings}} $>$ settings, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot) const
+\begin{DoxyCompactList}\small\item\em Verifies the header. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a339faee9458a396fbcd597da68d9a3e1}{Verify}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings}{config\+::\+Protocol\+Settings}} $>$ settings, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache}{Header\+Cache}} $>$ header\+\_\+cache) const
+\begin{DoxyCompactList}\small\item\em Verifies the header with header cache. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ab8b6ee257877377938af1052cf02d5ca}{Clone}} () const
+\begin{DoxyCompactList}\small\item\em Creates a clone of this header. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ab62166acee96936f1d19782d01ed7578}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a7bd5393d8b58dc778fee3a65c6781eaa}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a7a0ff4e1a9346da85e878bd5bfeb5272}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a5959524aeb012969b5ef7c46baf43de4}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a JSON reader. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a59fe355db1b248dec77c1e38583a120b}{operator==}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} \&other) const
+\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ad7a5d28c38db7d9d3f7b270f091ba000}{operator!=}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} \&other) const
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a46b32ad9e79410d2439db23e45cf1752}{Calculate\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Calculates and caches the hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a1b180aad3996eceb56b6daa810a3899c}{Invalidate\+Hash}} ()
+\begin{DoxyCompactList}\small\item\em Invalidates the cached hash. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a25e626421fef4d6aac31d8a9dc4601cf}{version\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_af0b409dc7800c0ff5ccf91d395a9b4a7}{prev\+\_\+hash\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ad05e3a4a82305d30fe6ee40408dca565}{merkle\+\_\+root\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_adca2dd5079adfa916a0e4c89fbcd5bfd}{timestamp\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_aa0bbfe3d26aa16587cb1827a43fdbf69}{nonce\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a9f8eddbc9efcbd21513cc00e33879732}{index\+\_\+}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a309cdaa0c7511aa976993a4889b81d0f}{primary\+\_\+index\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a310ac2b779eca32060dc8e2aac690ddd}{next\+\_\+consensus\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_aa70089633de6c9c7e193774929693446}{witness\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a032b2cfadee7fdae22719b64f7c85717}{hash\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_af30dfd33d5e25749a71fb595a88bec28}{hash\+\_\+calculated\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the header of a block. This matches the C\# Neo.\+Network.\+P2\+P.\+Payloads.\+Header class exactly. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a9e6fe022df3e3d8c8cb3a373f015f1a6}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!Header@{Header}}
+\index{Header@{Header}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{Header()}{Header()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a9e6fe022df3e3d8c8cb3a373f015f1a6} 
+neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Header (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a64177edb8f1cf41d1e2b514243dfd330}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!````~Header@{\texorpdfstring{$\sim$}{\string~}Header}}
+\index{````~Header@{\texorpdfstring{$\sim$}{\string~}Header}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Header()}{\string~Header()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a64177edb8f1cf41d1e2b514243dfd330} 
+neo\+::network\+::p2p\+::payloads\+::\+Header\+::\texorpdfstring{$\sim$}{\string~}\+Header (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Destructor. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_adbbe4dac7c4b6611e6e36ad3e5af1457}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!Header@{Header}}
+\index{Header@{Header}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{Header()}{Header()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_adbbe4dac7c4b6611e6e36ad3e5af1457} 
+neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Header (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a46b32ad9e79410d2439db23e45cf1752}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!CalculateHash@{CalculateHash}}
+\index{CalculateHash@{CalculateHash}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{CalculateHash()}{CalculateHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a46b32ad9e79410d2439db23e45cf1752} 
+void neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Calculate\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculates and caches the hash. 
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ab8b6ee257877377938af1052cf02d5ca}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!Clone@{Clone}}
+\index{Clone@{Clone}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{Clone()}{Clone()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ab8b6ee257877377938af1052cf02d5ca} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} $>$ neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Clone (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Creates a clone of this header. 
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a7bd5393d8b58dc778fee3a65c6781eaa}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a7bd5393d8b58dc778fee3a65c6781eaa} 
+void neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a5959524aeb012969b5ef7c46baf43de4}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a5959524aeb012969b5ef7c46baf43de4} 
+void neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ad364da594c86854d1fdb299acdf1125d}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!GetHash@{GetHash}}
+\index{GetHash@{GetHash}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{GetHash()}{GetHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ad364da594c86854d1fdb299acdf1125d} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Get\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the hash of the header. 
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a349ba042fc20c44d7becc0ecc3b46070}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!GetIndex@{GetIndex}}
+\index{GetIndex@{GetIndex}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{GetIndex()}{GetIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a349ba042fc20c44d7becc0ecc3b46070} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Get\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the index of the block. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a69ba21fc019918f6d567d9d3f8032892}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!GetMerkleRoot@{GetMerkleRoot}}
+\index{GetMerkleRoot@{GetMerkleRoot}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{GetMerkleRoot()}{GetMerkleRoot()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a69ba21fc019918f6d567d9d3f8032892} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Get\+Merkle\+Root (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the merkle root of the transactions. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a9fb0d53edb1ddfae288805e69861840b}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!GetNextConsensus@{GetNextConsensus}}
+\index{GetNextConsensus@{GetNextConsensus}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{GetNextConsensus()}{GetNextConsensus()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a9fb0d53edb1ddfae288805e69861840b} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Get\+Next\+Consensus (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the next consensus address. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ae295d982bab91f0f7f80cfed74e55fc3}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!GetNonce@{GetNonce}}
+\index{GetNonce@{GetNonce}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{GetNonce()}{GetNonce()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ae295d982bab91f0f7f80cfed74e55fc3} 
+uint64\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Get\+Nonce (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the nonce of the block. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a3a6c2b43fd58deed9da7565672df30af}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!GetPrevHash@{GetPrevHash}}
+\index{GetPrevHash@{GetPrevHash}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{GetPrevHash()}{GetPrevHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a3a6c2b43fd58deed9da7565672df30af} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Get\+Prev\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the hash of the previous block. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_aec0e2235880789c4fc822e8e4871f1bc}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!GetPrimaryIndex@{GetPrimaryIndex}}
+\index{GetPrimaryIndex@{GetPrimaryIndex}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{GetPrimaryIndex()}{GetPrimaryIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_aec0e2235880789c4fc822e8e4871f1bc} 
+uint8\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Get\+Primary\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the primary index of the consensus node. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a72a49fb5d89816e55e64be17a08bcd74}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a72a49fb5d89816e55e64be17a08bcd74} 
+size\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the size of the header in bytes. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a432e8f47fc08ccbeae15f7f47df37588}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!GetTimestamp@{GetTimestamp}}
+\index{GetTimestamp@{GetTimestamp}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{GetTimestamp()}{GetTimestamp()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a432e8f47fc08ccbeae15f7f47df37588} 
+uint64\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Get\+Timestamp (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the timestamp of the block. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a8697f198232757752d3e45c8c83bb572}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!GetVersion@{GetVersion}}
+\index{GetVersion@{GetVersion}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{GetVersion()}{GetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a8697f198232757752d3e45c8c83bb572} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Get\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the version of the block. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a4f0ff1cda1fd94fba9521a7f29d5a133}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!GetWitness@{GetWitness}}
+\index{GetWitness@{GetWitness}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{GetWitness()}{GetWitness()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a4f0ff1cda1fd94fba9521a7f29d5a133} 
+const \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} \& neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Get\+Witness (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the witness of the block. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a1b180aad3996eceb56b6daa810a3899c}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!InvalidateHash@{InvalidateHash}}
+\index{InvalidateHash@{InvalidateHash}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{InvalidateHash()}{InvalidateHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a1b180aad3996eceb56b6daa810a3899c} 
+void neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Invalidate\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Invalidates the cached hash. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ad7a5d28c38db7d9d3f7b270f091ba000}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ad7a5d28c38db7d9d3f7b270f091ba000} 
+bool neo\+::network\+::p2p\+::payloads\+::\+Header\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a0a265de58e5f556b441ea9256a02ea2a}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a0a265de58e5f556b441ea9256a02ea2a} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} \& neo\+::network\+::p2p\+::payloads\+::\+Header\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Assignment operator. 
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a59fe355db1b248dec77c1e38583a120b}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a59fe355db1b248dec77c1e38583a120b} 
+bool neo\+::network\+::p2p\+::payloads\+::\+Header\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header}{Header}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ab62166acee96936f1d19782d01ed7578}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ab62166acee96936f1d19782d01ed7578} 
+void neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a7a0ff4e1a9346da85e878bd5bfeb5272}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a7a0ff4e1a9346da85e878bd5bfeb5272} 
+void neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a62e2b4c9ad90bffaa73f6228d44f8d52}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!SetIndex@{SetIndex}}
+\index{SetIndex@{SetIndex}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{SetIndex()}{SetIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a62e2b4c9ad90bffaa73f6228d44f8d52} 
+void neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Set\+Index (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Sets the index of the block. 
+
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a199c0ea09af757b5fdfe682cf100639f}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!SetMerkleRoot@{SetMerkleRoot}}
+\index{SetMerkleRoot@{SetMerkleRoot}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{SetMerkleRoot()}{SetMerkleRoot()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a199c0ea09af757b5fdfe682cf100639f} 
+void neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Set\+Merkle\+Root (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{merkle\+\_\+root}{}\end{DoxyParamCaption})}
+
+
+
+Sets the merkle root of the transactions. 
+
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_afe1fe90954f2bea8b4658b6e01d06f22}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!SetNextConsensus@{SetNextConsensus}}
+\index{SetNextConsensus@{SetNextConsensus}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{SetNextConsensus()}{SetNextConsensus()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_afe1fe90954f2bea8b4658b6e01d06f22} 
+void neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Set\+Next\+Consensus (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{next\+\_\+consensus}{}\end{DoxyParamCaption})}
+
+
+
+Sets the next consensus address. 
+
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a08b88c3cf63f7dbeac327843067a17a0}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!SetNonce@{SetNonce}}
+\index{SetNonce@{SetNonce}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{SetNonce()}{SetNonce()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a08b88c3cf63f7dbeac327843067a17a0} 
+void neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Set\+Nonce (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{nonce}{}\end{DoxyParamCaption})}
+
+
+
+Sets the nonce of the block. 
+
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_acefc8d00bb79102dac595a7fd85c4e40}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!SetPrevHash@{SetPrevHash}}
+\index{SetPrevHash@{SetPrevHash}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{SetPrevHash()}{SetPrevHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_acefc8d00bb79102dac595a7fd85c4e40} 
+void neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Set\+Prev\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{prev\+\_\+hash}{}\end{DoxyParamCaption})}
+
+
+
+Sets the hash of the previous block. 
+
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a2cce2f7a23d42fcb6d10b1480af0b641}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!SetPrimaryIndex@{SetPrimaryIndex}}
+\index{SetPrimaryIndex@{SetPrimaryIndex}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{SetPrimaryIndex()}{SetPrimaryIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a2cce2f7a23d42fcb6d10b1480af0b641} 
+void neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Set\+Primary\+Index (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{primary\+\_\+index}{}\end{DoxyParamCaption})}
+
+
+
+Sets the primary index of the consensus node. 
+
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a8ec94722f303b469cb58b90a1c56b887}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!SetTimestamp@{SetTimestamp}}
+\index{SetTimestamp@{SetTimestamp}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{SetTimestamp()}{SetTimestamp()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a8ec94722f303b469cb58b90a1c56b887} 
+void neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Set\+Timestamp (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{timestamp}{}\end{DoxyParamCaption})}
+
+
+
+Sets the timestamp of the block. 
+
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a6e94d8b30aa18ec6f007773345a5a2fd}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!SetVersion@{SetVersion}}
+\index{SetVersion@{SetVersion}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{SetVersion()}{SetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a6e94d8b30aa18ec6f007773345a5a2fd} 
+void neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Set\+Version (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{version}{}\end{DoxyParamCaption})}
+
+
+
+Sets the version of the block. 
+
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a6b5277a0941db1b56f0e48cdbcaf7440}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!SetWitness@{SetWitness}}
+\index{SetWitness@{SetWitness}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{SetWitness()}{SetWitness()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a6b5277a0941db1b56f0e48cdbcaf7440} 
+void neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Set\+Witness (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} \&}]{witness}{}\end{DoxyParamCaption})}
+
+
+
+Sets the witness of the block. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a473e90f93f42e1cb45630dad90d8ac66}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!TryGetHash@{TryGetHash}}
+\index{TryGetHash@{TryGetHash}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{TryGetHash()}{TryGetHash()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a473e90f93f42e1cb45630dad90d8ac66} 
+bool neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Try\+Get\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Tries to get the hash (with error checking). 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a2fae15643775fce44c9ff1e53de3fe88}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!TryGetHash@{TryGetHash}}
+\index{TryGetHash@{TryGetHash}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{TryGetHash()}{TryGetHash()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a2fae15643775fce44c9ff1e53de3fe88} 
+bool neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Try\+Get\+Hash (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Tries to get the hash (with error checking). 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a655d1d9fae57089ae177895a8331f399}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!Verify@{Verify}}
+\index{Verify@{Verify}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a655d1d9fae57089ae177895a8331f399} 
+bool neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Verify (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings}{config\+::\+Protocol\+Settings}} $>$}]{settings}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption}) const}
+
+
+
+Verifies the header. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a339faee9458a396fbcd597da68d9a3e1}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!Verify@{Verify}}
+\index{Verify@{Verify}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a339faee9458a396fbcd597da68d9a3e1} 
+bool neo\+::network\+::p2p\+::payloads\+::\+Header\+::\+Verify (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings}{config\+::\+Protocol\+Settings}} $>$}]{settings}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache}{Header\+Cache}} $>$}]{header\+\_\+cache}{}\end{DoxyParamCaption}) const}
+
+
+
+Verifies the header with header cache. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a032b2cfadee7fdae22719b64f7c85717}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!hash\_@{hash\_}}
+\index{hash\_@{hash\_}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{hash\_}{hash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a032b2cfadee7fdae22719b64f7c85717} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::network\+::p2p\+::payloads\+::\+Header\+::hash\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_af30dfd33d5e25749a71fb595a88bec28}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!hash\_calculated\_@{hash\_calculated\_}}
+\index{hash\_calculated\_@{hash\_calculated\_}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{hash\_calculated\_}{hash\_calculated\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_af30dfd33d5e25749a71fb595a88bec28} 
+bool neo\+::network\+::p2p\+::payloads\+::\+Header\+::hash\+\_\+calculated\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a9f8eddbc9efcbd21513cc00e33879732}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!index\_@{index\_}}
+\index{index\_@{index\_}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{index\_}{index\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a9f8eddbc9efcbd21513cc00e33879732} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Header\+::index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ad05e3a4a82305d30fe6ee40408dca565}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!merkle\_root\_@{merkle\_root\_}}
+\index{merkle\_root\_@{merkle\_root\_}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{merkle\_root\_}{merkle\_root\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_ad05e3a4a82305d30fe6ee40408dca565} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::network\+::p2p\+::payloads\+::\+Header\+::merkle\+\_\+root\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a310ac2b779eca32060dc8e2aac690ddd}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!next\_consensus\_@{next\_consensus\_}}
+\index{next\_consensus\_@{next\_consensus\_}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{next\_consensus\_}{next\_consensus\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a310ac2b779eca32060dc8e2aac690ddd} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::network\+::p2p\+::payloads\+::\+Header\+::next\+\_\+consensus\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_aa0bbfe3d26aa16587cb1827a43fdbf69}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!nonce\_@{nonce\_}}
+\index{nonce\_@{nonce\_}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{nonce\_}{nonce\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_aa0bbfe3d26aa16587cb1827a43fdbf69} 
+uint64\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Header\+::nonce\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_af0b409dc7800c0ff5ccf91d395a9b4a7}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!prev\_hash\_@{prev\_hash\_}}
+\index{prev\_hash\_@{prev\_hash\_}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{prev\_hash\_}{prev\_hash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_af0b409dc7800c0ff5ccf91d395a9b4a7} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::network\+::p2p\+::payloads\+::\+Header\+::prev\+\_\+hash\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a309cdaa0c7511aa976993a4889b81d0f}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!primary\_index\_@{primary\_index\_}}
+\index{primary\_index\_@{primary\_index\_}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{primary\_index\_}{primary\_index\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a309cdaa0c7511aa976993a4889b81d0f} 
+uint8\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Header\+::primary\+\_\+index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_adca2dd5079adfa916a0e4c89fbcd5bfd}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!timestamp\_@{timestamp\_}}
+\index{timestamp\_@{timestamp\_}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{timestamp\_}{timestamp\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_adca2dd5079adfa916a0e4c89fbcd5bfd} 
+uint64\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Header\+::timestamp\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a25e626421fef4d6aac31d8a9dc4601cf}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!version\_@{version\_}}
+\index{version\_@{version\_}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{version\_}{version\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a25e626421fef4d6aac31d8a9dc4601cf} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Header\+::version\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_aa70089633de6c9c7e193774929693446}\index{neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}!witness\_@{witness\_}}
+\index{witness\_@{witness\_}!neo::network::p2p::payloads::Header@{neo::network::p2p::payloads::Header}}
+\doxysubsubsection{\texorpdfstring{witness\_}{witness\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_aa70089633de6c9c7e193774929693446} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} neo\+::network\+::p2p\+::payloads\+::\+Header\+::witness\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/payloads/\mbox{\hyperlink{network_2p2p_2payloads_2header_8h}{header.\+h}}\item 
+src/network/p2p/payloads/\mbox{\hyperlink{header_8cpp}{header.\+cpp}}\end{DoxyCompactItemize}

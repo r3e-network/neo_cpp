@@ -1,0 +1,54 @@
+\doxysection{time\+\_\+provider.\+h}
+\hypertarget{time__provider_8h_source}{}\label{time__provider_8h_source}\index{include/neo/time/time\_provider.h@{include/neo/time/time\_provider.h}}
+\mbox{\hyperlink{time__provider_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Copyright\ (C)\ 2015-\/2025\ The\ Neo\ Project.}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ time\_provider.h\ file\ belongs\ to\ the\ neo\ project\ and\ is\ free}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ software\ distributed\ under\ the\ MIT\ software\ license,\ see\ the}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ accompanying\ file\ LICENSE\ in\ the\ main\ directory\ of\ the}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ repository\ or\ http://www.opensource.org/licenses/mit-\/license.php}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ for\ more\ details.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Redistribution\ and\ use\ in\ source\ and\ binary\ forms\ with\ or\ without}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ modifications\ are\ permitted.}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ NEO\_TIME\_TIME\_PROVIDER\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ NEO\_TIME\_TIME\_PROVIDER\_H}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo}{neo}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1time}{time}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1time_1_1_time_provider}{TimeProvider}}}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1time_1_1_time_provider_a28c3b2d6389110e3f7826f3aa5d6ebbc}{GetUtcNow}}()}
+\DoxyCodeLine{00034\ \ \ \ \ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ now\ =\ std::chrono::system\_clock::now();}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ duration\ =\ now.time\_since\_epoch();}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::chrono::duration\_cast<std::chrono::milliseconds>(duration).count();}
+\DoxyCodeLine{00038\ \ \ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1time_1_1_time_provider_a083d55cb7d4e800fe6bdd9c6893005ae}{GetUtcNowSeconds}}()}
+\DoxyCodeLine{00045\ \ \ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ now\ =\ std::chrono::system\_clock::now();}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ duration\ =\ now.time\_since\_epoch();}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::chrono::duration\_cast<std::chrono::seconds>(duration).count();}
+\DoxyCodeLine{00049\ \ \ \ \ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1time_1_1_time_provider_a92933be0c192040fcd1f14abe45b04eb}{MillisecondsToSeconds}}(uint64\_t\ milliseconds)\ \{\ \textcolor{keywordflow}{return}\ milliseconds\ /\ 1000;\ \}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1time_1_1_time_provider_a25ea22e323b3e7956ef13d9001f11733}{SecondsToMilliseconds}}(uint64\_t\ seconds)\ \{\ \textcolor{keywordflow}{return}\ seconds\ *\ 1000;\ \}}
+\DoxyCodeLine{00064\ \};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \}\ \ \textcolor{comment}{//\ namespace\ time}}
+\DoxyCodeLine{00067\ \}\ \ \textcolor{comment}{//\ namespace\ neo}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ NEO\_TIME\_TIME\_PROVIDER\_H}}
+
+\end{DoxyCode}

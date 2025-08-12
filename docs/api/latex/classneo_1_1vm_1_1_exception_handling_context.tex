@@ -1,0 +1,216 @@
+\doxysection{neo\+::vm\+::Exception\+Handling\+Context Class Reference}
+\hypertarget{classneo_1_1vm_1_1_exception_handling_context}{}\label{classneo_1_1vm_1_1_exception_handling_context}\index{neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}}
+
+
+Represents a context for exception handling.  
+
+
+
+
+{\ttfamily \#include $<$exception\+\_\+handling\+\_\+context.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_ad4990d4d28190c9dddbc8750601d9973}{Exception\+Handling\+Context}} (int32\+\_\+t catch\+Pointer, int32\+\_\+t finally\+Pointer)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{classneo_1_1vm_1_1_exception_handling_context}{Exception\+Handling\+Context}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a1d5f903661eb1aa52feaed69e844db34}{Get\+Catch\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em Gets the catch pointer. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a264f2fb1dd69f7483936be005241fea8}{Get\+Finally\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em Gets the finally pointer. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a2b49bd41efdb45f0eb587bde13ac4aa2}{Get\+End\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em Gets the end pointer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_aad0395e0ca725752d4bf5f1816886d4f}{Set\+End\+Pointer}} (int32\+\_\+t end\+Pointer)
+\begin{DoxyCompactList}\small\item\em Sets the end pointer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1vm_a6075537e926e96deaea01659ca6a3270}{Exception\+Handling\+State}} \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a4aae5692f3fd501277e864157f529060}{Get\+State}} () const
+\begin{DoxyCompactList}\small\item\em Gets the state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a63985ce40a7f37de2465fa3c3e21d921}{Set\+State}} (\mbox{\hyperlink{namespaceneo_1_1vm_a6075537e926e96deaea01659ca6a3270}{Exception\+Handling\+State}} state)
+\begin{DoxyCompactList}\small\item\em Sets the state. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_ae841c6c144b54ce4231fb15294e442fc}{Has\+Catch}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the context has a catch block. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a626389bfd29e296a81bd3182ca4f9515}{Has\+Finally}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the context has a finally block. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a2a7280312586762343f6e23d7187ef7a}{catch\+Pointer\+\_\+}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a2daf036df8b85d799c38103ec31ed46e}{finally\+Pointer\+\_\+}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a9d2001cce126562abd3a765cba8a5455}{end\+Pointer\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1vm_a6075537e926e96deaea01659ca6a3270}{Exception\+Handling\+State}} \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a210c24bb7fca50c08d2869f7fc52f9db}{state\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a context for exception handling. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1vm_1_1_exception_handling_context_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1vm_1_1_exception_handling_context_ad4990d4d28190c9dddbc8750601d9973}\index{neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}!ExceptionHandlingContext@{ExceptionHandlingContext}}
+\index{ExceptionHandlingContext@{ExceptionHandlingContext}!neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}}
+\doxysubsubsection{\texorpdfstring{ExceptionHandlingContext()}{ExceptionHandlingContext()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_exception_handling_context_ad4990d4d28190c9dddbc8750601d9973} 
+neo\+::vm\+::\+Exception\+Handling\+Context\+::\+Exception\+Handling\+Context (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{catch\+Pointer}{, }\item[{int32\+\_\+t}]{finally\+Pointer}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a new \doxylink{classneo_1_1vm_1_1_exception_handling_context}{Exception\+Handling\+Context}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em catch\+Pointer} & The catch pointer. \\
+\hline
+{\em finally\+Pointer} & The finally pointer. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1vm_1_1_exception_handling_context_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1vm_1_1_exception_handling_context_a1d5f903661eb1aa52feaed69e844db34}\index{neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}!GetCatchPointer@{GetCatchPointer}}
+\index{GetCatchPointer@{GetCatchPointer}!neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}}
+\doxysubsubsection{\texorpdfstring{GetCatchPointer()}{GetCatchPointer()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_exception_handling_context_a1d5f903661eb1aa52feaed69e844db34} 
+int32\+\_\+t neo\+::vm\+::\+Exception\+Handling\+Context\+::\+Get\+Catch\+Pointer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the catch pointer. 
+
+\begin{DoxyReturn}{Returns}
+The catch pointer. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_exception_handling_context_a2b49bd41efdb45f0eb587bde13ac4aa2}\index{neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}!GetEndPointer@{GetEndPointer}}
+\index{GetEndPointer@{GetEndPointer}!neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}}
+\doxysubsubsection{\texorpdfstring{GetEndPointer()}{GetEndPointer()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_exception_handling_context_a2b49bd41efdb45f0eb587bde13ac4aa2} 
+int32\+\_\+t neo\+::vm\+::\+Exception\+Handling\+Context\+::\+Get\+End\+Pointer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the end pointer. 
+
+\begin{DoxyReturn}{Returns}
+The end pointer. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_exception_handling_context_a264f2fb1dd69f7483936be005241fea8}\index{neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}!GetFinallyPointer@{GetFinallyPointer}}
+\index{GetFinallyPointer@{GetFinallyPointer}!neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}}
+\doxysubsubsection{\texorpdfstring{GetFinallyPointer()}{GetFinallyPointer()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_exception_handling_context_a264f2fb1dd69f7483936be005241fea8} 
+int32\+\_\+t neo\+::vm\+::\+Exception\+Handling\+Context\+::\+Get\+Finally\+Pointer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the finally pointer. 
+
+\begin{DoxyReturn}{Returns}
+The finally pointer. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_exception_handling_context_a4aae5692f3fd501277e864157f529060}\index{neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}!GetState@{GetState}}
+\index{GetState@{GetState}!neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_exception_handling_context_a4aae5692f3fd501277e864157f529060} 
+\mbox{\hyperlink{namespaceneo_1_1vm_a6075537e926e96deaea01659ca6a3270}{Exception\+Handling\+State}} neo\+::vm\+::\+Exception\+Handling\+Context\+::\+Get\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the state. 
+
+\begin{DoxyReturn}{Returns}
+The state. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_exception_handling_context_ae841c6c144b54ce4231fb15294e442fc}\index{neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}!HasCatch@{HasCatch}}
+\index{HasCatch@{HasCatch}!neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}}
+\doxysubsubsection{\texorpdfstring{HasCatch()}{HasCatch()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_exception_handling_context_ae841c6c144b54ce4231fb15294e442fc} 
+bool neo\+::vm\+::\+Exception\+Handling\+Context\+::\+Has\+Catch (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the context has a catch block. 
+
+\begin{DoxyReturn}{Returns}
+True if the context has a catch block, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_exception_handling_context_a626389bfd29e296a81bd3182ca4f9515}\index{neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}!HasFinally@{HasFinally}}
+\index{HasFinally@{HasFinally}!neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}}
+\doxysubsubsection{\texorpdfstring{HasFinally()}{HasFinally()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_exception_handling_context_a626389bfd29e296a81bd3182ca4f9515} 
+bool neo\+::vm\+::\+Exception\+Handling\+Context\+::\+Has\+Finally (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the context has a finally block. 
+
+\begin{DoxyReturn}{Returns}
+True if the context has a finally block, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_exception_handling_context_aad0395e0ca725752d4bf5f1816886d4f}\index{neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}!SetEndPointer@{SetEndPointer}}
+\index{SetEndPointer@{SetEndPointer}!neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}}
+\doxysubsubsection{\texorpdfstring{SetEndPointer()}{SetEndPointer()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_exception_handling_context_aad0395e0ca725752d4bf5f1816886d4f} 
+void neo\+::vm\+::\+Exception\+Handling\+Context\+::\+Set\+End\+Pointer (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{end\+Pointer}{}\end{DoxyParamCaption})}
+
+
+
+Sets the end pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em end\+Pointer} & The end pointer. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_exception_handling_context_a63985ce40a7f37de2465fa3c3e21d921}\index{neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}!SetState@{SetState}}
+\index{SetState@{SetState}!neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}}
+\doxysubsubsection{\texorpdfstring{SetState()}{SetState()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_exception_handling_context_a63985ce40a7f37de2465fa3c3e21d921} 
+void neo\+::vm\+::\+Exception\+Handling\+Context\+::\+Set\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1vm_a6075537e926e96deaea01659ca6a3270}{Exception\+Handling\+State}}}]{state}{}\end{DoxyParamCaption})}
+
+
+
+Sets the state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & The state. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1vm_1_1_exception_handling_context_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1vm_1_1_exception_handling_context_a2a7280312586762343f6e23d7187ef7a}\index{neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}!catchPointer\_@{catchPointer\_}}
+\index{catchPointer\_@{catchPointer\_}!neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}}
+\doxysubsubsection{\texorpdfstring{catchPointer\_}{catchPointer\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_exception_handling_context_a2a7280312586762343f6e23d7187ef7a} 
+int32\+\_\+t neo\+::vm\+::\+Exception\+Handling\+Context\+::catch\+Pointer\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_exception_handling_context_a9d2001cce126562abd3a765cba8a5455}\index{neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}!endPointer\_@{endPointer\_}}
+\index{endPointer\_@{endPointer\_}!neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}}
+\doxysubsubsection{\texorpdfstring{endPointer\_}{endPointer\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_exception_handling_context_a9d2001cce126562abd3a765cba8a5455} 
+int32\+\_\+t neo\+::vm\+::\+Exception\+Handling\+Context\+::end\+Pointer\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_exception_handling_context_a2daf036df8b85d799c38103ec31ed46e}\index{neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}!finallyPointer\_@{finallyPointer\_}}
+\index{finallyPointer\_@{finallyPointer\_}!neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}}
+\doxysubsubsection{\texorpdfstring{finallyPointer\_}{finallyPointer\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_exception_handling_context_a2daf036df8b85d799c38103ec31ed46e} 
+int32\+\_\+t neo\+::vm\+::\+Exception\+Handling\+Context\+::finally\+Pointer\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_exception_handling_context_a210c24bb7fca50c08d2869f7fc52f9db}\index{neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}!state\_@{state\_}}
+\index{state\_@{state\_}!neo::vm::ExceptionHandlingContext@{neo::vm::ExceptionHandlingContext}}
+\doxysubsubsection{\texorpdfstring{state\_}{state\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_exception_handling_context_a210c24bb7fca50c08d2869f7fc52f9db} 
+\mbox{\hyperlink{namespaceneo_1_1vm_a6075537e926e96deaea01659ca6a3270}{Exception\+Handling\+State}} neo\+::vm\+::\+Exception\+Handling\+Context\+::state\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/vm/\mbox{\hyperlink{exception__handling__context_8h}{exception\+\_\+handling\+\_\+context.\+h}}\item 
+src/vm/\mbox{\hyperlink{exception__handling__context_8cpp}{exception\+\_\+handling\+\_\+context.\+cpp}}\end{DoxyCompactItemize}

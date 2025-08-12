@@ -1,0 +1,278 @@
+\doxysection{neo\+::smartcontract\+::native\+::Neo\+Token\+Committee Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee}{}\label{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee}\index{neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}}
+
+
+Committee-\/related methods for the NEO token.  
+
+
+
+
+{\ttfamily \#include $<$neo\+\_\+token\+\_\+committee.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a7f66d04633ff6d18f7f2e1dcd5fe3182}{Get\+Committee}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot)
+\begin{DoxyCompactList}\small\item\em Gets the committee members. \end{DoxyCompactList}\item 
+static std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a517e2c498c75efdc7ac61cf30881ecd8}{Get\+Validators}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot)
+\begin{DoxyCompactList}\small\item\em Gets the validators. \end{DoxyCompactList}\item 
+static std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a0b53fb06768099602932eaa98456417f}{Get\+Next\+Block\+Validators}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, int32\+\_\+t validators\+Count)
+\begin{DoxyCompactList}\small\item\em Gets the next block validators. \end{DoxyCompactList}\item 
+static std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a56f278dfee4a310d083c70d3f3b5570b}{Compute\+Committee\+Members}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, int32\+\_\+t committee\+Size)
+\begin{DoxyCompactList}\small\item\em Computes the committee members. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a686133c6593f7dfdbce6d4c02e8bb388}{Should\+Refresh\+Committee}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, uint32\+\_\+t block\+Index, int32\+\_\+t committee\+Size)
+\begin{DoxyCompactList}\small\item\em Helper method to check if the committee should be refreshed. \end{DoxyCompactList}\item 
+static std\+::vector$<$ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_committee_member}{Neo\+Token\+::\+Committee\+Member}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a17ccdb6d3ce332273edfc571a8a6e8d3}{Get\+Committee\+From\+Cache}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot)
+\begin{DoxyCompactList}\small\item\em Helper method to get the committee from cache. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a60c656cfb0f72a6590792602ef71caa3}{Get\+Committee\+Address}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot)
+\begin{DoxyCompactList}\small\item\em Gets the committee address. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_aa1a3c1ec6c97089b02e5192f3bf130c8}{On\+Get\+Validators}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, \mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the get\+Validators method. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a569108d83d1fe8f79e26fed312083a9a}{On\+Get\+Committee}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, \mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the get\+Committee method. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a4fb04cdab5b42143ca98c6d98241eb5e}{On\+Get\+Next\+Block\+Validators}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, \mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the get\+Next\+Block\+Validators method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Committee-\/related methods for the NEO token. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a56f278dfee4a310d083c70d3f3b5570b}\index{neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}!ComputeCommitteeMembers@{ComputeCommitteeMembers}}
+\index{ComputeCommitteeMembers@{ComputeCommitteeMembers}!neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}}
+\doxysubsubsection{\texorpdfstring{ComputeCommitteeMembers()}{ComputeCommitteeMembers()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a56f278dfee4a310d083c70d3f3b5570b} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Committee\+::\+Compute\+Committee\+Members (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{int32\+\_\+t}]{committee\+Size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the committee members. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+{\em committee\+Size} & The committee size. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The committee members. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a7f66d04633ff6d18f7f2e1dcd5fe3182}\index{neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}!GetCommittee@{GetCommittee}}
+\index{GetCommittee@{GetCommittee}!neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}}
+\doxysubsubsection{\texorpdfstring{GetCommittee()}{GetCommittee()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a7f66d04633ff6d18f7f2e1dcd5fe3182} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Committee\+::\+Get\+Committee (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the committee members. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The committee members. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a60c656cfb0f72a6590792602ef71caa3}\index{neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}!GetCommitteeAddress@{GetCommitteeAddress}}
+\index{GetCommitteeAddress@{GetCommitteeAddress}!neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}}
+\doxysubsubsection{\texorpdfstring{GetCommitteeAddress()}{GetCommitteeAddress()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a60c656cfb0f72a6590792602ef71caa3} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::smartcontract\+::native\+::\+Neo\+Token\+Committee\+::\+Get\+Committee\+Address (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the committee address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The committee address. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a17ccdb6d3ce332273edfc571a8a6e8d3}\index{neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}!GetCommitteeFromCache@{GetCommitteeFromCache}}
+\index{GetCommitteeFromCache@{GetCommitteeFromCache}!neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}}
+\doxysubsubsection{\texorpdfstring{GetCommitteeFromCache()}{GetCommitteeFromCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a17ccdb6d3ce332273edfc571a8a6e8d3} 
+std\+::vector$<$ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_committee_member}{Neo\+Token\+::\+Committee\+Member}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Committee\+::\+Get\+Committee\+From\+Cache (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Helper method to get the committee from cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The committee. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a0b53fb06768099602932eaa98456417f}\index{neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}!GetNextBlockValidators@{GetNextBlockValidators}}
+\index{GetNextBlockValidators@{GetNextBlockValidators}!neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}}
+\doxysubsubsection{\texorpdfstring{GetNextBlockValidators()}{GetNextBlockValidators()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a0b53fb06768099602932eaa98456417f} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Committee\+::\+Get\+Next\+Block\+Validators (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{int32\+\_\+t}]{validators\+Count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the next block validators. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+{\em validators\+Count} & The number of validators. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The validators. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a517e2c498c75efdc7ac61cf30881ecd8}\index{neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}!GetValidators@{GetValidators}}
+\index{GetValidators@{GetValidators}!neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}}
+\doxysubsubsection{\texorpdfstring{GetValidators()}{GetValidators()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a517e2c498c75efdc7ac61cf30881ecd8} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Committee\+::\+Get\+Validators (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the validators. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The validators. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a569108d83d1fe8f79e26fed312083a9a}\index{neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}!OnGetCommittee@{OnGetCommittee}}
+\index{OnGetCommittee@{OnGetCommittee}!neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}}
+\doxysubsubsection{\texorpdfstring{OnGetCommittee()}{OnGetCommittee()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a569108d83d1fe8f79e26fed312083a9a} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Committee\+::\+On\+Get\+Committee (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Handles the get\+Committee method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a4fb04cdab5b42143ca98c6d98241eb5e}\index{neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}!OnGetNextBlockValidators@{OnGetNextBlockValidators}}
+\index{OnGetNextBlockValidators@{OnGetNextBlockValidators}!neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}}
+\doxysubsubsection{\texorpdfstring{OnGetNextBlockValidators()}{OnGetNextBlockValidators()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a4fb04cdab5b42143ca98c6d98241eb5e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Committee\+::\+On\+Get\+Next\+Block\+Validators (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Handles the get\+Next\+Block\+Validators method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_aa1a3c1ec6c97089b02e5192f3bf130c8}\index{neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}!OnGetValidators@{OnGetValidators}}
+\index{OnGetValidators@{OnGetValidators}!neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}}
+\doxysubsubsection{\texorpdfstring{OnGetValidators()}{OnGetValidators()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_aa1a3c1ec6c97089b02e5192f3bf130c8} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Committee\+::\+On\+Get\+Validators (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Handles the get\+Validators method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a686133c6593f7dfdbce6d4c02e8bb388}\index{neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}!ShouldRefreshCommittee@{ShouldRefreshCommittee}}
+\index{ShouldRefreshCommittee@{ShouldRefreshCommittee}!neo::smartcontract::native::NeoTokenCommittee@{neo::smartcontract::native::NeoTokenCommittee}}
+\doxysubsubsection{\texorpdfstring{ShouldRefreshCommittee()}{ShouldRefreshCommittee()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee_a686133c6593f7dfdbce6d4c02e8bb388} 
+bool neo\+::smartcontract\+::native\+::\+Neo\+Token\+Committee\+::\+Should\+Refresh\+Committee (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{uint32\+\_\+t}]{block\+Index}{, }\item[{int32\+\_\+t}]{committee\+Size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Helper method to check if the committee should be refreshed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em block\+Index} & The block index. \\
+\hline
+{\em committee\+Size} & The committee size. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the committee should be refreshed, false otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/native/\mbox{\hyperlink{neo__token__committee_8h}{neo\+\_\+token\+\_\+committee.\+h}}\item 
+src/smartcontract/native/\mbox{\hyperlink{neo__token__committee_8cpp}{neo\+\_\+token\+\_\+committee.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,190 @@
+\doxysection{neo\+::io\+::caching\+::Transaction\+Cache Class Reference}
+\hypertarget{classneo_1_1io_1_1caching_1_1_transaction_cache}{}\label{classneo_1_1io_1_1caching_1_1_transaction_cache}\index{neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}}
+
+
+A cache for Transaction objects.  
+
+
+
+
+{\ttfamily \#include $<$transaction\+\_\+cache.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::io\+::caching\+::Transaction\+Cache\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a18f55b3e649186635113612413240139}{Transaction\+Cache}} (size\+\_\+t capacity)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1caching_1_1_transaction_cache}{Transaction\+Cache} with the specified capacity. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a107fb5f84ffeabd5fcbe464f93c61da3}{Add}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ transaction)
+\begin{DoxyCompactList}\small\item\em Adds a transaction to the cache. \end{DoxyCompactList}\item 
+std\+::optional$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ $>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a2cf54e11301009c1c446a89aa45a879b}{Get}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Gets a transaction by hash. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a5dd91188843d63f6b2beef106b607ea0}{Try\+Get}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}} \&hash, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ \&transaction)
+\begin{DoxyCompactList}\small\item\em Tries to get a transaction by hash. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_aab3b711dfbb7c1ec9f61777b1051a4f2}{Remove}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Removes a transaction by hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_af387b6591be095d45c4fce13cae925f5}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears the cache. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_ab1fc2c0ac3288efddb4185b902e16d25}{Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of items in the cache. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a12c475114484a3134684b2dafdf7b0f4}{Capacity}} () const
+\begin{DoxyCompactList}\small\item\em Gets the capacity of the cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache}}$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ $>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a8b9c666cfe449778ed93905e89541245}{cache\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A cache for Transaction objects. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_transaction_cache_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_transaction_cache_a18f55b3e649186635113612413240139}\index{neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}!TransactionCache@{TransactionCache}}
+\index{TransactionCache@{TransactionCache}!neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}}
+\doxysubsubsection{\texorpdfstring{TransactionCache()}{TransactionCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_transaction_cache_a18f55b3e649186635113612413240139} 
+neo\+::io\+::caching\+::\+Transaction\+Cache\+::\+Transaction\+Cache (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{capacity}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1caching_1_1_transaction_cache}{Transaction\+Cache} with the specified capacity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em capacity} & The maximum number of items the cache can hold. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_transaction_cache_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_transaction_cache_a107fb5f84ffeabd5fcbe464f93c61da3}\index{neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}!Add@{Add}}
+\index{Add@{Add}!neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_transaction_cache_a107fb5f84ffeabd5fcbe464f93c61da3} 
+void neo\+::io\+::caching\+::\+Transaction\+Cache\+::\+Add (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$}]{transaction}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a transaction to the cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to add. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_transaction_cache_a12c475114484a3134684b2dafdf7b0f4}\index{neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}!Capacity@{Capacity}}
+\index{Capacity@{Capacity}!neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}}
+\doxysubsubsection{\texorpdfstring{Capacity()}{Capacity()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_transaction_cache_a12c475114484a3134684b2dafdf7b0f4} 
+size\+\_\+t neo\+::io\+::caching\+::\+Transaction\+Cache\+::\+Capacity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the capacity of the cache. 
+
+\begin{DoxyReturn}{Returns}
+The capacity of the cache. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_transaction_cache_af387b6591be095d45c4fce13cae925f5}\index{neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_transaction_cache_af387b6591be095d45c4fce13cae925f5} 
+void neo\+::io\+::caching\+::\+Transaction\+Cache\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears the cache. 
+
+\Hypertarget{classneo_1_1io_1_1caching_1_1_transaction_cache_a2cf54e11301009c1c446a89aa45a879b}\index{neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}!Get@{Get}}
+\index{Get@{Get}!neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_transaction_cache_a2cf54e11301009c1c446a89aa45a879b} 
+std\+::optional$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ $>$ neo\+::io\+::caching\+::\+Transaction\+Cache\+::\+Get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}} \&}]{hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a transaction by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the transaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The transaction if found, std\+::nullopt otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_transaction_cache_aab3b711dfbb7c1ec9f61777b1051a4f2}\index{neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}!Remove@{Remove}}
+\index{Remove@{Remove}!neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}}
+\doxysubsubsection{\texorpdfstring{Remove()}{Remove()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_transaction_cache_aab3b711dfbb7c1ec9f61777b1051a4f2} 
+bool neo\+::io\+::caching\+::\+Transaction\+Cache\+::\+Remove (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}} \&}]{hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes a transaction by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the transaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the transaction was removed, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_transaction_cache_ab1fc2c0ac3288efddb4185b902e16d25}\index{neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}!Size@{Size}}
+\index{Size@{Size}!neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_transaction_cache_ab1fc2c0ac3288efddb4185b902e16d25} 
+size\+\_\+t neo\+::io\+::caching\+::\+Transaction\+Cache\+::\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the number of items in the cache. 
+
+\begin{DoxyReturn}{Returns}
+The number of items in the cache. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_transaction_cache_a5dd91188843d63f6b2beef106b607ea0}\index{neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}!TryGet@{TryGet}}
+\index{TryGet@{TryGet}!neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}}
+\doxysubsubsection{\texorpdfstring{TryGet()}{TryGet()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_transaction_cache_a5dd91188843d63f6b2beef106b607ea0} 
+bool neo\+::io\+::caching\+::\+Transaction\+Cache\+::\+Try\+Get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}} \&}]{hash}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ \&}]{transaction}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to get a transaction by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the transaction. \\
+\hline
+{\em transaction} & The transaction if found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the transaction was found, false otherwise. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_transaction_cache_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_transaction_cache_a8b9c666cfe449778ed93905e89541245}\index{neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}!cache\_@{cache\_}}
+\index{cache\_@{cache\_}!neo::io::caching::TransactionCache@{neo::io::caching::TransactionCache}}
+\doxysubsubsection{\texorpdfstring{cache\_}{cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_transaction_cache_a8b9c666cfe449778ed93905e89541245} 
+\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache}}$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}}$>$ $>$ neo\+::io\+::caching\+::\+Transaction\+Cache\+::cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/io/caching/\mbox{\hyperlink{transaction__cache_8h}{transaction\+\_\+cache.\+h}}\end{DoxyCompactItemize}

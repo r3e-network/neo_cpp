@@ -1,0 +1,234 @@
+\doxysection{neo\+::cryptography\+::mpttrie\+::Cache Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache}{}\label{classneo_1_1cryptography_1_1mpttrie_1_1_cache}\index{neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}}
+
+
+\doxylink{classneo_1_1cryptography_1_1mpttrie_1_1_cache}{Cache} for MPT nodes.  
+
+
+
+
+{\ttfamily \#include $<$cache.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1cryptography_1_1mpttrie_1_1_cache_1_1_trackable}{Trackable}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a79c8b50be5ae30f57a1ef62783d948a5}{Cache}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_snapshot}{persistence\+::\+IStore\+Snapshot}} $>$ store, uint8\+\_\+t prefix)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a9dd28e43548e4ee302d127f356f5fa21}{\texorpdfstring{$\sim$}{\string~}\+Cache}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a9be37f25ca58cfd45cc8c2212a30b428}{Resolve}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Resolves a node by hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_af02a0cf7b80a44b26dac1677bd0e48a1}{Put\+Node}} (std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ node)
+\begin{DoxyCompactList}\small\item\em Puts a node in the cache. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a752f56f2c3cddcf1ae309fbdf161d37f}{Delete\+Node}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Deletes a node from the cache. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_af9155487ff6bc12eb15f334630095b09}{Commit}} ()
+\begin{DoxyCompactList}\small\item\em Commits all changes to the store. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082}{Track\+State}} \+: uint8\+\_\+t \{ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082a6adf97f83acf6453d4a6a4b1070f3754}{None}}
+, \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082af29ddbfb905eb2593fdcdfb243f9af85}{Added}}
+, \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082a820dbd2b8f606aff866c0bbfb6b737c1}{Changed}}
+, \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082a5fe6005bf6e415c950c011fb65f12b8f}{Deleted}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_ae27d19fe685eb0486178ac97f1e08db8}{Create\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key from hash. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_snapshot}{persistence\+::\+IStore\+Snapshot}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_aaae44e9014f6cbafb9313e772e34e294}{store\+\_\+}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a9c5cc938a69391724f176ba19cf3c38c}{prefix\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1cryptography_1_1mpttrie_1_1_cache_1_1_trackable}{Trackable}} $>$ $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_adceebd928017098ff640def16a5ab844}{cache\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1cryptography_1_1mpttrie_1_1_cache}{Cache} for MPT nodes. 
+
+\label{doc-enum-members}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082}\index{neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}!TrackState@{TrackState}}
+\index{TrackState@{TrackState}!neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}}
+\doxysubsubsection{\texorpdfstring{TrackState}{TrackState}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082} 
+enum class \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082}{neo\+::cryptography\+::mpttrie\+::\+Cache\+::\+Track\+State}} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}, {\ttfamily [private]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{None@{None}!neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}}\index{neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}!None@{None}}}\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082a6adf97f83acf6453d4a6a4b1070f3754}\label{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082a6adf97f83acf6453d4a6a4b1070f3754} 
+None&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Added@{Added}!neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}}\index{neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}!Added@{Added}}}\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082af29ddbfb905eb2593fdcdfb243f9af85}\label{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082af29ddbfb905eb2593fdcdfb243f9af85} 
+Added&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Changed@{Changed}!neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}}\index{neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}!Changed@{Changed}}}\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082a820dbd2b8f606aff866c0bbfb6b737c1}\label{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082a820dbd2b8f606aff866c0bbfb6b737c1} 
+Changed&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Deleted@{Deleted}!neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}}\index{neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}!Deleted@{Deleted}}}\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082a5fe6005bf6e415c950c011fb65f12b8f}\label{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a6d712c2209eebee9a855e614e69d4082a5fe6005bf6e415c950c011fb65f12b8f} 
+Deleted&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a79c8b50be5ae30f57a1ef62783d948a5}\index{neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}!Cache@{Cache}}
+\index{Cache@{Cache}!neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}}
+\doxysubsubsection{\texorpdfstring{Cache()}{Cache()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a79c8b50be5ae30f57a1ef62783d948a5} 
+neo\+::cryptography\+::mpttrie\+::\+Cache\+::\+Cache (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_snapshot}{persistence\+::\+IStore\+Snapshot}} $>$}]{store}{, }\item[{uint8\+\_\+t}]{prefix}{}\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em store} & The store snapshot. \\
+\hline
+{\em prefix} & The storage prefix. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a9dd28e43548e4ee302d127f356f5fa21}\index{neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}!````~Cache@{\texorpdfstring{$\sim$}{\string~}Cache}}
+\index{````~Cache@{\texorpdfstring{$\sim$}{\string~}Cache}!neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Cache()}{\string~Cache()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a9dd28e43548e4ee302d127f356f5fa21} 
+neo\+::cryptography\+::mpttrie\+::\+Cache\+::\texorpdfstring{$\sim$}{\string~}\+Cache (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_af9155487ff6bc12eb15f334630095b09}\index{neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}!Commit@{Commit}}
+\index{Commit@{Commit}!neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}}
+\doxysubsubsection{\texorpdfstring{Commit()}{Commit()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_cache_af9155487ff6bc12eb15f334630095b09} 
+void neo\+::cryptography\+::mpttrie\+::\+Cache\+::\+Commit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Commits all changes to the store. 
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_ae27d19fe685eb0486178ac97f1e08db8}\index{neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}!CreateKey@{CreateKey}}
+\index{CreateKey@{CreateKey}!neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}}
+\doxysubsubsection{\texorpdfstring{CreateKey()}{CreateKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_cache_ae27d19fe685eb0486178ac97f1e08db8} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::mpttrie\+::\+Cache\+::\+Create\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Creates a storage key from hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a752f56f2c3cddcf1ae309fbdf161d37f}\index{neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}!DeleteNode@{DeleteNode}}
+\index{DeleteNode@{DeleteNode}!neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}}
+\doxysubsubsection{\texorpdfstring{DeleteNode()}{DeleteNode()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a752f56f2c3cddcf1ae309fbdf161d37f} 
+void neo\+::cryptography\+::mpttrie\+::\+Cache\+::\+Delete\+Node (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})}
+
+
+
+Deletes a node from the cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The node hash. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_af02a0cf7b80a44b26dac1677bd0e48a1}\index{neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}!PutNode@{PutNode}}
+\index{PutNode@{PutNode}!neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}}
+\doxysubsubsection{\texorpdfstring{PutNode()}{PutNode()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_cache_af02a0cf7b80a44b26dac1677bd0e48a1} 
+void neo\+::cryptography\+::mpttrie\+::\+Cache\+::\+Put\+Node (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$}]{node}{}\end{DoxyParamCaption})}
+
+
+
+Puts a node in the cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em node} & The node to put. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a9be37f25ca58cfd45cc8c2212a30b428}\index{neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}!Resolve@{Resolve}}
+\index{Resolve@{Resolve}!neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}}
+\doxysubsubsection{\texorpdfstring{Resolve()}{Resolve()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a9be37f25ca58cfd45cc8c2212a30b428} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}} $>$ neo\+::cryptography\+::mpttrie\+::\+Cache\+::\+Resolve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})}
+
+
+
+Resolves a node by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The node hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resolved node, or nullptr if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_adceebd928017098ff640def16a5ab844}\index{neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}!cache\_@{cache\_}}
+\index{cache\_@{cache\_}!neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}}
+\doxysubsubsection{\texorpdfstring{cache\_}{cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_cache_adceebd928017098ff640def16a5ab844} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{structneo_1_1cryptography_1_1mpttrie_1_1_cache_1_1_trackable}{Trackable}}$>$ $>$ neo\+::cryptography\+::mpttrie\+::\+Cache\+::cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a9c5cc938a69391724f176ba19cf3c38c}\index{neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}!prefix\_@{prefix\_}}
+\index{prefix\_@{prefix\_}!neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}}
+\doxysubsubsection{\texorpdfstring{prefix\_}{prefix\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_cache_a9c5cc938a69391724f176ba19cf3c38c} 
+uint8\+\_\+t neo\+::cryptography\+::mpttrie\+::\+Cache\+::prefix\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1mpttrie_1_1_cache_aaae44e9014f6cbafb9313e772e34e294}\index{neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}!store\_@{store\_}}
+\index{store\_@{store\_}!neo::cryptography::mpttrie::Cache@{neo::cryptography::mpttrie::Cache}}
+\doxysubsubsection{\texorpdfstring{store\_}{store\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1mpttrie_1_1_cache_aaae44e9014f6cbafb9313e772e34e294} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_snapshot}{persistence\+::\+IStore\+Snapshot}}$>$ neo\+::cryptography\+::mpttrie\+::\+Cache\+::store\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/mpttrie/\mbox{\hyperlink{cryptography_2mpttrie_2cache_8h}{cache.\+h}}\item 
+src/cryptography/mpttrie/\mbox{\hyperlink{cache_8cpp}{cache.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,167 @@
+\doxysection{memory\+\_\+pool.\+h}
+\hypertarget{core_2memory__pool_8h_source}{}\label{core_2memory__pool_8h_source}\index{include/neo/core/memory\_pool.h@{include/neo/core/memory\_pool.h}}
+\mbox{\hyperlink{core_2memory__pool_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cstddef>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1core}{neo::core}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a4cc2a2f8035f807e44fc29f96d921dc6}{MemoryPool}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a4cc2a2f8035f807e44fc29f96d921dc6}{MemoryPool}}(\textcolor{keywordtype}{size\_t}\ initial\_size\ =\ 1024,\ \textcolor{keywordtype}{size\_t}\ max\_size\ =\ 10240)}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_aea05e1ac47390d18b13408f30c491492}{max\_size\_}}(max\_size),\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a48d146e4d04a580d6fe8af9230b7371e}{allocated\_count\_}}(0),\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a3cd2360632fcf853cd8fdbc42c8e118e}{reused\_count\_}}(0)}
+\DoxyCodeLine{00026\ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a320e553cd36ba44cf89eea3c4aab5d12}{pool\_}}.reserve(initial\_size);}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ initial\_size;\ ++i)}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a320e553cd36ba44cf89eea3c4aab5d12}{pool\_}}.emplace\_back(std::make\_unique<T>());}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00032\ \ \ \ \ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{00041\ \ \ \ \ std::unique\_ptr<T>\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_afb6e41929c1d3fdc2e4744fd7710c522}{acquire}}(Args\&\&...\ args)}
+\DoxyCodeLine{00042\ \ \ \ \ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a0fbf5ef2c1f1fb1119f78394bf5a4508}{mutex\_}});}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a320e553cd36ba44cf89eea3c4aab5d12}{pool\_}}.empty())}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ obj\ =\ std::move(\mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a320e553cd36ba44cf89eea3c4aab5d12}{pool\_}}.back());}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a320e553cd36ba44cf89eea3c4aab5d12}{pool\_}}.pop\_back();}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reset\ the\ object\ with\ new\ values}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ *obj\ =\ T(std::forward<Args>(args)...);}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a3cd2360632fcf853cd8fdbc42c8e118e}{reused\_count\_}}++;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ obj;}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pool\ is\ empty,\ create\ new\ object}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a48d146e4d04a580d6fe8af9230b7371e}{allocated\_count\_}}++;}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::make\_unique<T>(std::forward<Args>(args)...);}
+\DoxyCodeLine{00059\ \ \ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_aaca6c0d4c03bf8c80c1ecba8781bb067}{release}}(std::unique\_ptr<T>\ obj)}
+\DoxyCodeLine{00066\ \ \ \ \ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!obj)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a0fbf5ef2c1f1fb1119f78394bf5a4508}{mutex\_}});}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Only\ keep\ objects\ if\ we\ haven't\ reached\ max\ size}}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a320e553cd36ba44cf89eea3c4aab5d12}{pool\_}}.size()\ <\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_aea05e1ac47390d18b13408f30c491492}{max\_size\_}})}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a320e553cd36ba44cf89eea3c4aab5d12}{pool\_}}.push\_back(std::move(obj));}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Otherwise,\ let\ the\ object\ be\ destroyed}}
+\DoxyCodeLine{00077\ \ \ \ \ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_acd1dd53e898547887cfae9769653b28a}{size}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00084\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a0fbf5ef2c1f1fb1119f78394bf5a4508}{mutex\_}});}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a320e553cd36ba44cf89eea3c4aab5d12}{pool\_}}.size();}
+\DoxyCodeLine{00087\ \ \ \ \ \}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00093\ \ \ \ \ std::tuple<size\_t,\ size\_t,\ size\_t>\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a0731636d093ec414348ee5f35066f820}{get\_stats}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00094\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a0fbf5ef2c1f1fb1119f78394bf5a4508}{mutex\_}});}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a48d146e4d04a580d6fe8af9230b7371e}{allocated\_count\_}}.load(),\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a3cd2360632fcf853cd8fdbc42c8e118e}{reused\_count\_}}.load(),\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a320e553cd36ba44cf89eea3c4aab5d12}{pool\_}}.size()\};}
+\DoxyCodeLine{00097\ \ \ \ \ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_aacc5c566a908d2e235979c21c51a87ba}{clear}}()}
+\DoxyCodeLine{00103\ \ \ \ \ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a0fbf5ef2c1f1fb1119f78394bf5a4508}{mutex\_}});}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a320e553cd36ba44cf89eea3c4aab5d12}{pool\_}}.clear();}
+\DoxyCodeLine{00106\ \ \ \ \ \}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a0fbf5ef2c1f1fb1119f78394bf5a4508}{mutex\_}};}
+\DoxyCodeLine{00110\ \ \ \ \ std::vector<std::unique\_ptr<T>>\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a320e553cd36ba44cf89eea3c4aab5d12}{pool\_}};}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_aea05e1ac47390d18b13408f30c491492}{max\_size\_}};}
+\DoxyCodeLine{00112\ \ \ \ \ std::atomic<size\_t>\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a48d146e4d04a580d6fe8af9230b7371e}{allocated\_count\_}};}
+\DoxyCodeLine{00113\ \ \ \ \ std::atomic<size\_t>\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a3cd2360632fcf853cd8fdbc42c8e118e}{reused\_count\_}};}
+\DoxyCodeLine{00114\ \};}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00119\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_a35c288463217d228bbbab950dbd78a15}{MemoryPoolManager}}}
+\DoxyCodeLine{00120\ \{}
+\DoxyCodeLine{00121\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_a35c288463217d228bbbab950dbd78a15}{MemoryPoolManager}}\&\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_ad9c92a31d2f36f3c75615e7ecc436b76}{instance}}()}
+\DoxyCodeLine{00123\ \ \ \ \ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_a35c288463217d228bbbab950dbd78a15}{MemoryPoolManager}}\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_ad9c92a31d2f36f3c75615e7ecc436b76}{instance}};}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_ad9c92a31d2f36f3c75615e7ecc436b76}{instance}};}
+\DoxyCodeLine{00126\ \ \ \ \ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{comment}{//\ Specialized\ pools\ for\ frequently\ allocated\ objects}}
+\DoxyCodeLine{00129\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{MemoryPool<std::vector<uint8\_t>}}>\&\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_aef916de746bc8a3f8fa15ab7b844e797}{byte\_vector\_pool}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_ab613fdcf7f0f9c0c230492274d8372cf}{byte\_vector\_pool\_}};\ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_ad5febed7b611302d24e5cf9bd5963c7d}{report\_statistics}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00136\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00137\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_a35c288463217d228bbbab950dbd78a15}{MemoryPoolManager}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00138\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_ad894b1be0ab9c350c6616fee5c71db7c}{\string~MemoryPoolManager}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00139\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_a5d241c1d1f19aa2dc439fed0dc728e0a}{MemoryPoolManager}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_a35c288463217d228bbbab950dbd78a15}{MemoryPoolManager}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00140\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_a35c288463217d228bbbab950dbd78a15}{MemoryPoolManager}}\&\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_a5340df602e6feefa9b5e4fe9c69f89ff}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_a35c288463217d228bbbab950dbd78a15}{MemoryPoolManager}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{comment}{//\ Pools\ for\ different\ object\ types}}
+\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{MemoryPool<std::vector<uint8\_t>}}>\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_manager_ab613fdcf7f0f9c0c230492274d8372cf}{byte\_vector\_pool\_}}\{1024,\ 10240\};}
+\DoxyCodeLine{00144\ \};}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00150\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00151\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a5f5af8d85420b44c0444b0aa72103746}{PooledObject}}}
+\DoxyCodeLine{00152\ \{}
+\DoxyCodeLine{00153\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a5f5af8d85420b44c0444b0aa72103746}{PooledObject}}(std::unique\_ptr<T>\ obj,\ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{MemoryPool<T>}}*\ pool)\ :\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69}{obj\_}}(\mbox{\hyperlink{namespacestd}{std}}::move(obj)),\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_af39ef9129034e8387f2b483893201a88}{pool\_}}(pool)\ \{\}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_ad7a70e0d9e940040063fbfdbf0e94cd9}{\string~PooledObject}}()}
+\DoxyCodeLine{00157\ \ \ \ \ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69}{obj\_}}\ \&\&\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_af39ef9129034e8387f2b483893201a88}{pool\_}})}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_af39ef9129034e8387f2b483893201a88}{pool\_}}-\/>release(std::move(\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69}{obj\_}}));}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00162\ \ \ \ \ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{comment}{//\ Move-\/only\ semantics}}
+\DoxyCodeLine{00165\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a8579cb4dcebc96241ca5d3c8b4f3f90f}{PooledObject}}(\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a5f5af8d85420b44c0444b0aa72103746}{PooledObject}}\&\&\ other)\ noexcept\ :\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69}{obj\_}}(std::move(other.obj\_)),\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_af39ef9129034e8387f2b483893201a88}{pool\_}}(other.pool\_)}
+\DoxyCodeLine{00166\ \ \ \ \ \{}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ other.pool\_\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00168\ \ \ \ \ \}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a5f5af8d85420b44c0444b0aa72103746}{PooledObject}}\&\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_aaa1e073eec7fa59974f73515fbf647e1}{operator=}}(\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a5f5af8d85420b44c0444b0aa72103746}{PooledObject}}\&\&\ other)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00171\ \ \ \ \ \{}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ !=\ \&other)}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69}{obj\_}}\ \&\&\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_af39ef9129034e8387f2b483893201a88}{pool\_}})}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_af39ef9129034e8387f2b483893201a88}{pool\_}}-\/>release(std::move(\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69}{obj\_}}));}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69}{obj\_}}\ =\ std::move(other.obj\_);}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_af39ef9129034e8387f2b483893201a88}{pool\_}}\ =\ other.pool\_;}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ other.pool\_\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00183\ \ \ \ \ \}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{comment}{//\ Deleted\ copy\ operations}}
+\DoxyCodeLine{00186\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a2a9ebb3977e1e63dcb467a5db3fcbdc3}{PooledObject}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a5f5af8d85420b44c0444b0aa72103746}{PooledObject}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00187\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a5f5af8d85420b44c0444b0aa72103746}{PooledObject}}\&\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_adecec38e6305aad83b9da501325b2655}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a5f5af8d85420b44c0444b0aa72103746}{PooledObject}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \ \ \ \ T*\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_aff15129bd8c7e4fa74fdf5c77cc21121}{operator-\/>}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69}{obj\_}}.get();\ \}}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keyword}{const}\ T*\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_adfe0729406f8d4870bc4e055d50a0601}{operator-\/>}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69}{obj\_}}.get();\ \}}
+\DoxyCodeLine{00191\ \ \ \ \ T\&\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a2525e737b4fa1d3075aadb7062f10356}{operator*}}()\ \{\ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69}{obj\_}};\ \}}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keyword}{const}\ T\&\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_abcc4c00e587af448429702d36666883d}{operator*}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69}{obj\_}};\ \}}
+\DoxyCodeLine{00193\ \ \ \ \ T*\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a52789c6eb94e2fd3161100b7e7d9432c}{get}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69}{obj\_}}.get();\ \}}
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keyword}{const}\ T*\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a2be408152937125e4dafeaeec5818503}{get}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69}{obj\_}}.get();\ \}}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00197\ \ \ \ \ std::unique\_ptr<T>\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69}{obj\_}};}
+\DoxyCodeLine{00198\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{MemoryPool<T>}}*\ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_af39ef9129034e8387f2b483893201a88}{pool\_}};}
+\DoxyCodeLine{00199\ \};}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \}\ \ \textcolor{comment}{//\ namespace\ neo::core}}
+
+\end{DoxyCode}

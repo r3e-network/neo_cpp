@@ -1,0 +1,100 @@
+\doxysection{neo\+::rpc\+::IHttp\+Client Class Reference}
+\hypertarget{classneo_1_1rpc_1_1_i_http_client}{}\label{classneo_1_1rpc_1_1_i_http_client}\index{neo::rpc::IHttpClient@{neo::rpc::IHttpClient}}
+
+
+HTTP client interface for making HTTP requests.  
+
+
+
+
+{\ttfamily \#include $<$rpc\+\_\+client.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::rpc\+::IHttp\+Client\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client_aadb034e69dc308d030b568e4483da4b4}{\texorpdfstring{$\sim$}{\string~}\+IHttp\+Client}} ()=default
+\item 
+virtual std\+::string \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client_ad91739ffca753fb0d40f9bcc34bd3b19}{Post}} (const std\+::string \&url, const std\+::string \&content, const std\+::map$<$ std\+::string, std\+::string $>$ \&headers=\{\})=0
+\begin{DoxyCompactList}\small\item\em Makes a synchronous HTTP POST request. \end{DoxyCompactList}\item 
+virtual std\+::future$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client_a98736cd1783b4435d419cf31ac11dc68}{Post\+Async}} (const std\+::string \&url, const std\+::string \&content, const std\+::map$<$ std\+::string, std\+::string $>$ \&headers=\{\})=0
+\begin{DoxyCompactList}\small\item\em Makes an asynchronous HTTP POST request. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+HTTP client interface for making HTTP requests. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1rpc_1_1_i_http_client_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_i_http_client_aadb034e69dc308d030b568e4483da4b4}\index{neo::rpc::IHttpClient@{neo::rpc::IHttpClient}!````~IHttpClient@{\texorpdfstring{$\sim$}{\string~}IHttpClient}}
+\index{````~IHttpClient@{\texorpdfstring{$\sim$}{\string~}IHttpClient}!neo::rpc::IHttpClient@{neo::rpc::IHttpClient}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IHttpClient()}{\string~IHttpClient()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_i_http_client_aadb034e69dc308d030b568e4483da4b4} 
+virtual neo\+::rpc\+::\+IHttp\+Client\+::\texorpdfstring{$\sim$}{\string~}\+IHttp\+Client (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1rpc_1_1_i_http_client_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_i_http_client_ad91739ffca753fb0d40f9bcc34bd3b19}\index{neo::rpc::IHttpClient@{neo::rpc::IHttpClient}!Post@{Post}}
+\index{Post@{Post}!neo::rpc::IHttpClient@{neo::rpc::IHttpClient}}
+\doxysubsubsection{\texorpdfstring{Post()}{Post()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_i_http_client_ad91739ffca753fb0d40f9bcc34bd3b19} 
+virtual std\+::string neo\+::rpc\+::\+IHttp\+Client\+::\+Post (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{url}{, }\item[{const std\+::string \&}]{content}{, }\item[{const std\+::map$<$ std\+::string, std\+::string $>$ \&}]{headers}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Makes a synchronous HTTP POST request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & The URL to send the request to. \\
+\hline
+{\em content} & The request content. \\
+\hline
+{\em headers} & Additional headers. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The response content. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1rpc_1_1_simple_http_client_ab1f76bd7be758adee75929d975752845}{neo\+::rpc\+::\+Simple\+Http\+Client}}.
+
+\Hypertarget{classneo_1_1rpc_1_1_i_http_client_a98736cd1783b4435d419cf31ac11dc68}\index{neo::rpc::IHttpClient@{neo::rpc::IHttpClient}!PostAsync@{PostAsync}}
+\index{PostAsync@{PostAsync}!neo::rpc::IHttpClient@{neo::rpc::IHttpClient}}
+\doxysubsubsection{\texorpdfstring{PostAsync()}{PostAsync()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_i_http_client_a98736cd1783b4435d419cf31ac11dc68} 
+virtual std\+::future$<$ std\+::string $>$ neo\+::rpc\+::\+IHttp\+Client\+::\+Post\+Async (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{url}{, }\item[{const std\+::string \&}]{content}{, }\item[{const std\+::map$<$ std\+::string, std\+::string $>$ \&}]{headers}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Makes an asynchronous HTTP POST request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & The URL to send the request to. \\
+\hline
+{\em content} & The request content. \\
+\hline
+{\em headers} & Additional headers. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A future containing the response content. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1rpc_1_1_simple_http_client_a267162a6c8aedb361b57d69430316154}{neo\+::rpc\+::\+Simple\+Http\+Client}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/rpc/\mbox{\hyperlink{rpc__client_8h}{rpc\+\_\+client.\+h}}\end{DoxyCompactItemize}

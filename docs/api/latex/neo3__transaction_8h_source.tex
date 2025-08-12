@@ -1,0 +1,201 @@
+\doxysection{neo3\+\_\+transaction.\+h}
+\hypertarget{neo3__transaction_8h_source}{}\label{neo3__transaction_8h_source}\index{include/neo/network/p2p/payloads/neo3\_transaction.h@{include/neo/network/p2p/payloads/neo3\_transaction.h}}
+\mbox{\hyperlink{neo3__transaction_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{safe__math_8h}{neo/common/safe\_math.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ijson__serializable_8h}{neo/io/ijson\_serializable.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{iserializable_8h}{neo/io/iserializable.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{signer_8h}{neo/ledger/signer.h}}>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{transaction__attribute_8h}{neo/ledger/transaction\_attribute.h}}>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{transaction__attribute__type_8h}{neo/ledger/transaction\_attribute\_type.h}}>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2witness_8h}{neo/ledger/witness.h}}>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{payloads_2iinventory_8h}{neo/network/p2p/payloads/iinventory.h}}>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{iverifiable_8h}{neo/network/p2p/payloads/iverifiable.h}}>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads}{neo::network::p2p::payloads}}}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a216b8501c33402db6165285d460a3e6f}{Neo3Transaction}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_inventory}{IInventory}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_verifiable}{IVerifiable}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{io::ISerializable}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{io::IJsonSerializable}}}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a0cf8ae2a391aaef2ec2ca64c1c6c85a1}{MaxTransactionSize}}\ =\ 102400;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_af0e44f780a4e82cfe1ff74c21e420741}{MaxTransactionAttributes}}\ =\ 16;}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ad3e6d10d1c82dbe2d4897f2451095a78}{HeaderSize}}\ =\ \textcolor{keyword}{sizeof}(uint8\_t)\ +\ \ \ \textcolor{comment}{//\ Version}}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(uint32\_t)\ +\ \ \textcolor{comment}{//\ Nonce}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(int64\_t)\ +\ \ \ \textcolor{comment}{//\ SystemFee}}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(int64\_t)\ +\ \ \ \textcolor{comment}{//\ NetworkFee}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(uint32\_t);\ \ \ \textcolor{comment}{//\ ValidUntilBlock}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00049\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae76c7099d1e82d13e40fb8f6c4c06647}{version\_}};}
+\DoxyCodeLine{00050\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2de8602e9c7db2fd047366a9cd13b3a7}{nonce\_}};}
+\DoxyCodeLine{00051\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae0fb5ca578f6f5445f7acf6285f47095}{systemFee\_}};\ \ \ \textcolor{comment}{//\ In\ the\ unit\ of\ datoshi,\ 1\ datoshi\ =\ 1e-\/8\ GAS}}
+\DoxyCodeLine{00052\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a1e9a014d2e7edaeea868831b1ee198fa}{networkFee\_}};\ \ \textcolor{comment}{//\ In\ the\ unit\ of\ datoshi,\ 1\ datoshi\ =\ 1e-\/8\ GAS}}
+\DoxyCodeLine{00053\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ac531e20c7d2c2ff99c655b1501c22267}{validUntilBlock\_}};}
+\DoxyCodeLine{00054\ \ \ \ \ std::vector<ledger::Signer>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ad2af2575bd34cbe136a0c83ee586dc61}{signers\_}};}
+\DoxyCodeLine{00055\ \ \ \ \ std::vector<std::shared\_ptr<ledger::TransactionAttribute>>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a80560d9f30a697a616ed6697a809f2fe}{attributes\_}};}
+\DoxyCodeLine{00056\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a6dc6f35a9236e6e1c7497f2c3fdeeba8}{script\_}};}
+\DoxyCodeLine{00057\ \ \ \ \ std::vector<ledger::Witness>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a12a8b1e314235a2c0e6ca55171cb85b9}{witnesses\_}};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{comment}{//\ Cached\ values}}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{mutable}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aacc5884c4eed568d73fe6523a9e18ef9}{hash\_}};}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{mutable}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a18e27da380836c2c6c315799618d7f95}{hashCalculated\_}};}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{mutable}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a3d0a69ab5d7bfc7702ec43b17e70c031}{size\_}};}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{mutable}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a4662401f5cd520e0ab1045bcd1083eb2}{sizeCalculated\_}};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a216b8501c33402db6165285d460a3e6f}{Neo3Transaction}}();}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00075\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a216b8501c33402db6165285d460a3e6f}{Neo3Transaction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a216b8501c33402db6165285d460a3e6f}{Neo3Transaction}}\&\ other);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a216b8501c33402db6165285d460a3e6f}{Neo3Transaction}}(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a216b8501c33402db6165285d460a3e6f}{Neo3Transaction}}\&\&\ other)\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a216b8501c33402db6165285d460a3e6f}{Neo3Transaction}}\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a18ff9b4d03b0fbb5bb778ce2a2be5225}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a216b8501c33402db6165285d460a3e6f}{Neo3Transaction}}\&\ other);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00095\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a216b8501c33402db6165285d460a3e6f}{Neo3Transaction}}\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a18ff9b4d03b0fbb5bb778ce2a2be5225}{operator=}}(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a216b8501c33402db6165285d460a3e6f}{Neo3Transaction}}\&\&\ other)\ \textcolor{keyword}{noexcept};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a37f213c75e3777a667983b5bbb1960c0}{\string~Neo3Transaction}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00106\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a8b6483e224f4facbaae30eea381d1073}{GetVersion}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a23347a11bafc565c98114e849a274879}{SetVersion}}(uint8\_t\ version);}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00118\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a534fb4d1c2aa2da3d5b11a54f493e05f}{GetNonce}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a9d25bf471e0d5b2f44ecc7bdaccb6de4}{SetNonce}}(uint32\_t\ nonce);}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00130\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a1a34948ad41357fa7abfc8e2f50aab92}{GetSystemFee}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ab1e87a1374adbeefc27d435d40c5f8b7}{SetSystemFee}}(int64\_t\ systemFee);}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00142\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a41a5ac4c95f373677204ab14c1f626db}{GetNetworkFee}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aa15b79bac4943ee15e61b05679ef20e7}{SetNetworkFee}}(int64\_t\ networkFee);}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00155\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a747479f17175f388f211577b6d793755}{GetTotalFee}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00161\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ab429116e563346cd081471acc9b17d51}{GetValidUntilBlock}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aaab827b13331ba828265333ca3ab93a9}{SetValidUntilBlock}}(uint32\_t\ validUntilBlock);}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<ledger::Signer>\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a6978e51b07edf11fea3672eb79ebda72}{GetSigners}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_abd0503e6d9d4b70920a2c208c99b4aa2}{SetSigners}}(\textcolor{keyword}{const}\ std::vector<ledger::Signer>\&\ signers);}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<ledger::TransactionAttribute>>\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aaf7ce5ca57b8045c1fd8435f1d478255}{GetAttributes}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aa54a801b6a59dffedc2096a7efbc39de}{SetAttributes}}(\textcolor{keyword}{const}\ std::vector<std::shared\_ptr<ledger::TransactionAttribute>>\&\ attributes);}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a0c3d4950b79a38589b8117c32ad4a378}{GetScript}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_abd51369e3c67ee7b400941d836c342a7}{SetScript}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ script);}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<ledger::Witness>\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae4d7ffd89880444dce90b08bacf3835c}{GetWitnesses}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a7dcd003068a3824b06bae0ad6e30338b}{SetWitnesses}}(\textcolor{keyword}{const}\ std::vector<ledger::Witness>\&\ witnesses)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00221\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aefc06c117f99ee43ded005ab4b5254e1}{GetSender}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00227\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae3837e8ee0318975afc0cc32a1a11a6e}{GetFeePerByte}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{comment}{//\ IInventory\ interface}}
+\DoxyCodeLine{00230\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads_ae90dbb31e5070cb5ba80bb80a10b4776}{InventoryType}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_af90ae3e90d366a7e6fdc1007b8bf8d02}{GetInventoryType}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{comment}{//\ IVerifiable\ interface}}
+\DoxyCodeLine{00233\ \ \ \ \ std::vector<io::UInt160>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aeb6b1fb5009c4d7d4ea769a2fdfd942d}{GetScriptHashesForVerifying}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{comment}{//\ ISerializable\ interface}}
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a568e5c94744eab91b496a85823678de1}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aacd388d09029febe2af086577352a30c}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{comment}{//\ Specific\ Neo3\ serialization\ methods}}
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2c5875aacd40092101cd99f7008bc970}{SerializeUnsigned}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aae9ed5fb8543bf78e478def4c6254504}{DeserializeUnsigned}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader);}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{comment}{//\ IJsonSerializable\ interface}}
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a162a772a646f6f029f83d02113374256}{SerializeJson}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io::JsonWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2203e636e28df0b8f4c00b73ba38d542}{DeserializeJson}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io::JsonReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00251\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ace06ea36a27942bcb338585d8f8db380}{GetHash}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a627ae33e46abcb6fbc829e2bb89d329f}{GetSize}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00264\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00265\ \ \ \ \ std::shared\_ptr<T>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a288a1aab58e2b803dcc9568489758d22}{GetAttribute}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00266\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ attr\ :\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a80560d9f30a697a616ed6697a809f2fe}{attributes\_}})}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ typed\_attr\ =\ std::dynamic\_pointer\_cast<T>(std::make\_shared<ledger::TransactionAttribute>(attr));}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (typed\_attr)\ \textcolor{keywordflow}{return}\ typed\_attr;}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00273\ \ \ \ \ \}}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00281\ \ \ \ \ \textcolor{comment}{//\ VerifyResult\ Verify(const\ ProtocolSettings\&\ protocolSettings,\ DataCache\&\ snapshot)\ const;}}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00288\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a66d6e2bea3a703eafd8055b3a2be4c6a}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3Transaction}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a33ef699160b887c0b5461005a4b0c23e}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3Transaction}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00297\ \ \ \ \ \textcolor{comment}{//\ Neo\ 2.x\ compatibility\ methods\ for\ tests}}
+\DoxyCodeLine{00298\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861}{Type}}\ :\ uint8\_t}
+\DoxyCodeLine{00299\ \ \ \ \ \{}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a5a85b655fe48720edd20783ac68713c6}{MinerTransaction}}\ =\ 0x00,}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a59727526e6e76c05aa32c8cfdec6a852}{IssueTransaction}}\ =\ 0x01,}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861ac5e2edc27d7c99fad103b6f9cc5833a9}{ClaimTransaction}}\ =\ 0x02,}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a1958414558284c14990b42503663306c}{EnrollmentTransaction}}\ =\ 0x20,}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a8f98962840b407e3de5f65fded5c904c}{RegisterTransaction}}\ =\ 0x40,}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a83fe9535fb82cd98c5e56c844eca9424}{ContractTransaction}}\ =\ 0x80,}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a5e58306dd09d57fad3237755c3d6d183}{StateTransaction}}\ =\ 0x90,}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861ad6b9b21275769d4c9fcdd95089e84f17}{PublishTransaction}}\ =\ 0xd0,}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a125d2015a7ff3b96761ffd010b46c5a4}{InvocationTransaction}}\ =\ 0xd1}
+\DoxyCodeLine{00309\ \ \ \ \ \};}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00315\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861}{Type}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a1890b65375b7e76ce08ed3505dcdfb55}{GetType}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a125d2015a7ff3b96761ffd010b46c5a4}{Type::InvocationTransaction}};\ \}\ \ \textcolor{comment}{//\ Neo\ 3\ transactions\ are\ all\ invocation-\/like}}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00321\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a3f994a3b3a518081aec3ea8aa6a2d1dc}{SetType}}(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861}{Type}}\ type)\ \{\ \textcolor{comment}{/*\ No-\/op\ in\ Neo\ 3\ */}\ \}}
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00323\ \ \ \ \ \textcolor{comment}{//\ Neo\ 2.x\ compatibility\ -\/\ store\ legacy\ data\ for\ tests}}
+\DoxyCodeLine{00324\ \ \ \ \ \textcolor{keyword}{mutable}\ std::vector<ledger::TransactionAttribute>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ad1c464a52116e01312e535e9a6b50837}{legacy\_attributes\_}};}
+\DoxyCodeLine{00325\ \ \ \ \ \textcolor{keyword}{mutable}\ std::vector<int>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a43fd9d3f1e3089156a61ffc012355e94}{legacy\_inputs\_}};\ \ \ \textcolor{comment}{//\ Reserved\ for\ CoinReference\ compatibility}}
+\DoxyCodeLine{00326\ \ \ \ \ \textcolor{keyword}{mutable}\ std::vector<int>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a4eeb2d8ad81902c1939309d56cbcf338}{legacy\_outputs\_}};\ \ \textcolor{comment}{//\ Reserved\ for\ TransactionOutput\ compatibility}}
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00332\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<ledger::TransactionAttribute>\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_acc213e59118f39f817a304bf70f9915e}{GetLegacyAttributes}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ad1c464a52116e01312e535e9a6b50837}{legacy\_attributes\_}};\ \}}
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00338\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aed6e40741bb7c0a6f083dd0c47310010}{SetAttributes}}(\textcolor{keyword}{const}\ std::vector<ledger::TransactionAttribute>\&\ attributes)\ \{\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ad1c464a52116e01312e535e9a6b50837}{legacy\_attributes\_}}\ =\ attributes;\ \}}
+\DoxyCodeLine{00339\ }
+\DoxyCodeLine{00344\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<int>\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a99fbc5610cc82313955b804b20ac8a09}{GetInputs}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a43fd9d3f1e3089156a61ffc012355e94}{legacy\_inputs\_}};\ \}}
+\DoxyCodeLine{00345\ }
+\DoxyCodeLine{00350\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aa303c33a591668424cc3f2336258330e}{SetInputs}}(\textcolor{keyword}{const}\ std::vector<int>\&\ inputs)\ \{\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a43fd9d3f1e3089156a61ffc012355e94}{legacy\_inputs\_}}\ =\ inputs;\ \}}
+\DoxyCodeLine{00351\ }
+\DoxyCodeLine{00356\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<int>\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a79e9f916ad5e064373e81cd7c7b37af5}{GetOutputs}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a4eeb2d8ad81902c1939309d56cbcf338}{legacy\_outputs\_}};\ \}}
+\DoxyCodeLine{00357\ }
+\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2855dbe298680edfd52acb308054345c}{SetOutputs}}(\textcolor{keyword}{const}\ std::vector<int>\&\ outputs)\ \{\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a4eeb2d8ad81902c1939309d56cbcf338}{legacy\_outputs\_}}\ =\ outputs;\ \}}
+\DoxyCodeLine{00363\ }
+\DoxyCodeLine{00364\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00365\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae7aa06aff8b057065633383dd73c1a35}{InvalidateCache}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00366\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aef9ca6f1e0409f79cd0682ab6bd2b6a6}{CalculateHash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00367\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a679da75e0f97d81337d08c58d19f6e7a}{CalculateSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00369\ \ \ \ \ \textcolor{comment}{//\ Helper\ methods\ for\ size\ calculation}}
+\DoxyCodeLine{00370\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aba241507ad6c22a870e7ea03d7a00cbf}{GetVarIntSize}}(\textcolor{keywordtype}{size\_t}\ value)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00371\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a3e07efc132ce3336e533182d85c41688}{GetSignerSize}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{ledger::Signer}}\&\ signer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00372\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a8250aa6b3edd7460791aa60defb5215c}{GetAttributeSize}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger::TransactionAttribute}}\&\ attr)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00373\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_af8903a6d0dd19fecbdef223c354f1815}{GetWitnessSize}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger::Witness}}\&\ witness)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00374\ }
+\DoxyCodeLine{00375\ \ \ \ \ \textcolor{comment}{//\ Helper\ methods\ for\ deserialization}}
+\DoxyCodeLine{00376\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<ledger::TransactionAttribute>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a509f4efcbc96ee3659da51f6a99967b1}{DeserializeAttributes}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader,\ \textcolor{keywordtype}{int}\ maxCount);}
+\DoxyCodeLine{00377\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<ledger::Signer>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a7d8804fa589c030bdfdda48feba572a4}{DeserializeSigners}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader,\ \textcolor{keywordtype}{int}\ maxCount);}
+\DoxyCodeLine{00378\ \};}
+\DoxyCodeLine{00379\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p::payloads}}
+
+\end{DoxyCode}

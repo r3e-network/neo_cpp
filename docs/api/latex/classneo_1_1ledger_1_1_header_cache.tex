@@ -1,0 +1,299 @@
+\doxysection{neo\+::ledger\+::Header\+Cache Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_header_cache}{}\label{classneo_1_1ledger_1_1_header_cache}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+
+
+\doxylink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header} cache for efficient blockchain header synchronization.  
+
+
+
+
+{\ttfamily \#include $<$header\+\_\+cache.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a4651fd11ddc81c3d8e9d5b15e029c818}{Header\+Cache}} (size\+\_\+t max\+\_\+size=10000)
+\begin{DoxyCompactList}\small\item\em Constructs a header cache. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a575ed1884475f8b33927eaac1c59d577}{\texorpdfstring{$\sim$}{\string~}\+Header\+Cache}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a5f06a93c7a37088ab5357a6f79635df5}{Add}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$ header)
+\begin{DoxyCompactList}\small\item\em Adds a header to the cache. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_aec36b4c1258a7784b1741b4eda0f32ad}{Get}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets a header by hash. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a4e8d5472ad9ce72f4b98b63ab13c3a6f}{Get}} (uint32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets a header by index. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a9cae38309b8375595c30d1f6d4f525fa}{Get\+Last}} () const
+\begin{DoxyCompactList}\small\item\em Gets the last header in the cache. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a0647c3f52e3134c9045851d5cc7c3601}{Is\+Full}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the cache is full. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a6afe25953794c21b5af6672dc958de33}{Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of headers in the cache. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_ab6550f5ec36f759ee6372ff9e57fc56b}{Max\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the maximum size of the cache. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_aa87042aed7aeede87d7d7767b4fd24dd}{Contains}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Checks if the cache contains a header with the given hash. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a3428aadd2ca13b6fb0d288c5487b1a19}{Remove}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Removes a header from the cache by hash. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_af69901df6d3db0cae038956b1cc604c2}{Try\+Remove\+First}} ()
+\begin{DoxyCompactList}\small\item\em Tries to remove the first header from the cache. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_afe32b0a1f7aa1e62a0346ec664c491dc}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears all headers from the cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+mutex \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a6a53ca15b605bae4c59bf7584bdff7fc}{mutex\+\_\+}}
+\item 
+std\+::deque$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$ $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a496d1744d1274d6719e6b1d1239db1b5}{headers\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$ $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_af4d5ef68f87c33b0098247a01c898e7f}{hash\+\_\+index\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ uint32\+\_\+t, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$ $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a8f722c3eb329b4fd4884460e54577597}{height\+\_\+index\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a73638f5824a8c0f389beb945d0e2c3e4}{max\+\_\+size\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header} cache for efficient blockchain header synchronization. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_a4651fd11ddc81c3d8e9d5b15e029c818}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!HeaderCache@{HeaderCache}}
+\index{HeaderCache@{HeaderCache}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{HeaderCache()}{HeaderCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_a4651fd11ddc81c3d8e9d5b15e029c818} 
+neo\+::ledger\+::\+Header\+Cache\+::\+Header\+Cache (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{max\+\_\+size}{ = {\ttfamily 10000}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a header cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+\_\+size} & Maximum number of headers to cache. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_a575ed1884475f8b33927eaac1c59d577}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!````~HeaderCache@{\texorpdfstring{$\sim$}{\string~}HeaderCache}}
+\index{````~HeaderCache@{\texorpdfstring{$\sim$}{\string~}HeaderCache}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}HeaderCache()}{\string~HeaderCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_a575ed1884475f8b33927eaac1c59d577} 
+neo\+::ledger\+::\+Header\+Cache\+::\texorpdfstring{$\sim$}{\string~}\+Header\+Cache (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_a5f06a93c7a37088ab5357a6f79635df5}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!Add@{Add}}
+\index{Add@{Add}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_a5f06a93c7a37088ab5357a6f79635df5} 
+bool neo\+::ledger\+::\+Header\+Cache\+::\+Add (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$}]{header}{}\end{DoxyParamCaption})}
+
+
+
+Adds a header to the cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em header} & The header to add. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if added successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_afe32b0a1f7aa1e62a0346ec664c491dc}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_afe32b0a1f7aa1e62a0346ec664c491dc} 
+void neo\+::ledger\+::\+Header\+Cache\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clears all headers from the cache. 
+
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_aa87042aed7aeede87d7d7767b4fd24dd}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!Contains@{Contains}}
+\index{Contains@{Contains}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_aa87042aed7aeede87d7d7767b4fd24dd} 
+bool neo\+::ledger\+::\+Header\+Cache\+::\+Contains (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the cache contains a header with the given hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if found, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_aec36b4c1258a7784b1741b4eda0f32ad}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!Get@{Get}}
+\index{Get@{Get}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_aec36b4c1258a7784b1741b4eda0f32ad} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$ neo\+::ledger\+::\+Header\+Cache\+::\+Get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a header by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the header. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The header, or nullptr if not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_a4e8d5472ad9ce72f4b98b63ab13c3a6f}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!Get@{Get}}
+\index{Get@{Get}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_a4e8d5472ad9ce72f4b98b63ab13c3a6f} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$ neo\+::ledger\+::\+Header\+Cache\+::\+Get (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a header by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the header. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The header, or nullptr if not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_a9cae38309b8375595c30d1f6d4f525fa}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!GetLast@{GetLast}}
+\index{GetLast@{GetLast}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{GetLast()}{GetLast()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_a9cae38309b8375595c30d1f6d4f525fa} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$ neo\+::ledger\+::\+Header\+Cache\+::\+Get\+Last (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the last header in the cache. 
+
+\begin{DoxyReturn}{Returns}
+The last header, or nullptr if cache is empty. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_a0647c3f52e3134c9045851d5cc7c3601}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!IsFull@{IsFull}}
+\index{IsFull@{IsFull}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{IsFull()}{IsFull()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_a0647c3f52e3134c9045851d5cc7c3601} 
+bool neo\+::ledger\+::\+Header\+Cache\+::\+Is\+Full (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the cache is full. 
+
+\begin{DoxyReturn}{Returns}
+True if full, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_ab6550f5ec36f759ee6372ff9e57fc56b}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!MaxSize@{MaxSize}}
+\index{MaxSize@{MaxSize}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{MaxSize()}{MaxSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_ab6550f5ec36f759ee6372ff9e57fc56b} 
+size\+\_\+t neo\+::ledger\+::\+Header\+Cache\+::\+Max\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the maximum size of the cache. 
+
+\begin{DoxyReturn}{Returns}
+The maximum size. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_a3428aadd2ca13b6fb0d288c5487b1a19}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!Remove@{Remove}}
+\index{Remove@{Remove}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{Remove()}{Remove()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_a3428aadd2ca13b6fb0d288c5487b1a19} 
+bool neo\+::ledger\+::\+Header\+Cache\+::\+Remove (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})}
+
+
+
+Removes a header from the cache by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the header to remove. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if removed, false if not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_a6afe25953794c21b5af6672dc958de33}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!Size@{Size}}
+\index{Size@{Size}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_a6afe25953794c21b5af6672dc958de33} 
+size\+\_\+t neo\+::ledger\+::\+Header\+Cache\+::\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of headers in the cache. 
+
+\begin{DoxyReturn}{Returns}
+The number of headers. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_af69901df6d3db0cae038956b1cc604c2}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!TryRemoveFirst@{TryRemoveFirst}}
+\index{TryRemoveFirst@{TryRemoveFirst}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{TryRemoveFirst()}{TryRemoveFirst()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_af69901df6d3db0cae038956b1cc604c2} 
+bool neo\+::ledger\+::\+Header\+Cache\+::\+Try\+Remove\+First (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Tries to remove the first header from the cache. 
+
+\begin{DoxyReturn}{Returns}
+True if removed, false if cache is empty. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_af4d5ef68f87c33b0098247a01c898e7f}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!hash\_index\_@{hash\_index\_}}
+\index{hash\_index\_@{hash\_index\_}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{hash\_index\_}{hash\_index\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_af4d5ef68f87c33b0098247a01c898e7f} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}}$>$ $>$ neo\+::ledger\+::\+Header\+Cache\+::hash\+\_\+index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_a496d1744d1274d6719e6b1d1239db1b5}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!headers\_@{headers\_}}
+\index{headers\_@{headers\_}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{headers\_}{headers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_a496d1744d1274d6719e6b1d1239db1b5} 
+std\+::deque$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}}$>$ $>$ neo\+::ledger\+::\+Header\+Cache\+::headers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_a8f722c3eb329b4fd4884460e54577597}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!height\_index\_@{height\_index\_}}
+\index{height\_index\_@{height\_index\_}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{height\_index\_}{height\_index\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_a8f722c3eb329b4fd4884460e54577597} 
+std\+::unordered\+\_\+map$<$uint32\+\_\+t, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}}$>$ $>$ neo\+::ledger\+::\+Header\+Cache\+::height\+\_\+index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_a73638f5824a8c0f389beb945d0e2c3e4}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!max\_size\_@{max\_size\_}}
+\index{max\_size\_@{max\_size\_}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{max\_size\_}{max\_size\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_a73638f5824a8c0f389beb945d0e2c3e4} 
+size\+\_\+t neo\+::ledger\+::\+Header\+Cache\+::max\+\_\+size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_header_cache_a6a53ca15b605bae4c59bf7584bdff7fc}\index{neo::ledger::HeaderCache@{neo::ledger::HeaderCache}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::ledger::HeaderCache@{neo::ledger::HeaderCache}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_header_cache_a6a53ca15b605bae4c59bf7584bdff7fc} 
+std\+::shared\+\_\+mutex neo\+::ledger\+::\+Header\+Cache\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{ledger_2header__cache_8h}{header\+\_\+cache.\+h}}\item 
+src/ledger/\mbox{\hyperlink{header__cache_8cpp}{header\+\_\+cache.\+cpp}}\end{DoxyCompactItemize}

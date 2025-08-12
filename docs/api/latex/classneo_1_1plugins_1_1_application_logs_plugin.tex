@@ -1,0 +1,252 @@
+\doxysection{neo\+::plugins\+::Application\+Logs\+Plugin Class Reference}
+\hypertarget{classneo_1_1plugins_1_1_application_logs_plugin}{}\label{classneo_1_1plugins_1_1_application_logs_plugin}\index{neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}}
+
+
+Represents an application logs plugin.  
+
+
+
+
+{\ttfamily \#include $<$application\+\_\+logs\+\_\+plugin.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::plugins\+::Application\+Logs\+Plugin\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::plugins\+::Application\+Logs\+Plugin\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_a21492534d7547b7ef4979c7b4f87e809}{Application\+Logs\+Plugin}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1plugins_1_1_application_logs_plugin}{Application\+Logs\+Plugin}. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1plugins_1_1_application_log}{Application\+Log}} $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_af6a69f6ebd1f6176811ceeea658ec58b}{Get\+Application\+Log}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&tx\+Hash) const
+\begin{DoxyCompactList}\small\item\em Gets the application log for a transaction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base}{neo\+::plugins\+::\+Plugin\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_ae2713af7147395e3f7230925418aa28d}{Plugin\+Base}} (const std\+::string \&name, const std\+::string \&description, const std\+::string \&version, const std\+::string \&author)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1plugins_1_1_plugin_base}{Plugin\+Base}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_ad52bbcbde275ae0dc3fde4a92f10bde6}{\texorpdfstring{$\sim$}{\string~}\+Plugin\+Base}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_add9eee171ca11e6d15bd9b024f92f7dd}{Get\+Name}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the name. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a44eff3017b07b2d8c46b21abaf1dabf4}{Get\+Description}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the description. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a1060247300f8288aded7ce8487947546}{Get\+Version}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the version. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_ae185958e6ee4d9b509aad4a04b2845be}{Get\+Author}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the author. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_aa09dbaf0a4a281ed5098cb04bee9a614}{Initialize}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ neo\+System, const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&settings) override
+\begin{DoxyCompactList}\small\item\em Initializes the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a247def5567cf352878b0d393e2fe18f8}{Start}} () override
+\begin{DoxyCompactList}\small\item\em Starts the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_abc80c400e1460dabf596acd8406c81bf}{Stop}} () override
+\begin{DoxyCompactList}\small\item\em Stops the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a37cd2ae749afcc1dafc56ba9e37d5e4d}{Is\+Running}} () const override
+\begin{DoxyCompactList}\small\item\em Checks if the plugin is running. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin}{neo\+::plugins\+::\+Plugin}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_aa3d82c04241154d0ea425b5b8cf1aa52}{\texorpdfstring{$\sim$}{\string~}\+Plugin}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_ae395273a512fc6ed9e3e223f03933a8b}{On\+Initialize}} (const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&settings) override
+\begin{DoxyCompactList}\small\item\em Initializes the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_aa1e234f6835a72baa56533a621ee677d}{On\+Start}} () override
+\begin{DoxyCompactList}\small\item\em Starts the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_affa22dbaf1335e0a573a89203f3a9126}{On\+Stop}} () override
+\begin{DoxyCompactList}\small\item\em Stops the plugin. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base}{neo\+::plugins\+::\+Plugin\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_af9916e44d745847ea6a2c847b55fffb1}{Get\+Neo\+System}} () const
+\begin{DoxyCompactList}\small\item\em Gets the Neo system. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}} $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a79fc4101cc2a9af9cd4155ac2c07802f}{Get\+RPCServer}} () const
+\begin{DoxyCompactList}\small\item\em Gets the RPC server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_a96c380661360c22ffcacc0991f518dd0}{On\+Block\+Persisted}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ block)
+\item 
+void \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_afe3e5d2c86f46f572099ad6f6b33536a}{On\+Transaction\+Executed}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ transaction)
+\item 
+void \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_aacf6509f70a76f12d9bab2c77b316520}{Save\+Logs}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_a7de0bc79164795a6b2d0eadd9db241f4}{Load\+Logs}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_a4acfaadb1f6ab4ea584c57077295879c}{log\+Path\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1plugins_1_1_application_log}{Application\+Log}} $>$ $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_a0543c6591b93180b30e8d0b45f95a09e}{logs\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_a40f50312a98d786b84d4f32fb7d52c58}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an application logs plugin. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1plugins_1_1_application_logs_plugin_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1plugins_1_1_application_logs_plugin_a21492534d7547b7ef4979c7b4f87e809}\index{neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}!ApplicationLogsPlugin@{ApplicationLogsPlugin}}
+\index{ApplicationLogsPlugin@{ApplicationLogsPlugin}!neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}}
+\doxysubsubsection{\texorpdfstring{ApplicationLogsPlugin()}{ApplicationLogsPlugin()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_application_logs_plugin_a21492534d7547b7ef4979c7b4f87e809} 
+neo\+::plugins\+::\+Application\+Logs\+Plugin\+::\+Application\+Logs\+Plugin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an \doxylink{classneo_1_1plugins_1_1_application_logs_plugin}{Application\+Logs\+Plugin}. 
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1plugins_1_1_application_logs_plugin_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1plugins_1_1_application_logs_plugin_af6a69f6ebd1f6176811ceeea658ec58b}\index{neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}!GetApplicationLog@{GetApplicationLog}}
+\index{GetApplicationLog@{GetApplicationLog}!neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}}
+\doxysubsubsection{\texorpdfstring{GetApplicationLog()}{GetApplicationLog()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_application_logs_plugin_af6a69f6ebd1f6176811ceeea658ec58b} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1plugins_1_1_application_log}{Application\+Log}} $>$ neo\+::plugins\+::\+Application\+Logs\+Plugin\+::\+Get\+Application\+Log (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{tx\+Hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the application log for a transaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tx\+Hash} & The transaction hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The application log, or nullptr if not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1plugins_1_1_application_logs_plugin_a7de0bc79164795a6b2d0eadd9db241f4}\index{neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}!LoadLogs@{LoadLogs}}
+\index{LoadLogs@{LoadLogs}!neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}}
+\doxysubsubsection{\texorpdfstring{LoadLogs()}{LoadLogs()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_application_logs_plugin_a7de0bc79164795a6b2d0eadd9db241f4} 
+void neo\+::plugins\+::\+Application\+Logs\+Plugin\+::\+Load\+Logs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1plugins_1_1_application_logs_plugin_a96c380661360c22ffcacc0991f518dd0}\index{neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}!OnBlockPersisted@{OnBlockPersisted}}
+\index{OnBlockPersisted@{OnBlockPersisted}!neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}}
+\doxysubsubsection{\texorpdfstring{OnBlockPersisted()}{OnBlockPersisted()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_application_logs_plugin_a96c380661360c22ffcacc0991f518dd0} 
+void neo\+::plugins\+::\+Application\+Logs\+Plugin\+::\+On\+Block\+Persisted (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$}]{block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1plugins_1_1_application_logs_plugin_ae395273a512fc6ed9e3e223f03933a8b}\index{neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}!OnInitialize@{OnInitialize}}
+\index{OnInitialize@{OnInitialize}!neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}}
+\doxysubsubsection{\texorpdfstring{OnInitialize()}{OnInitialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_application_logs_plugin_ae395273a512fc6ed9e3e223f03933a8b} 
+bool neo\+::plugins\+::\+Application\+Logs\+Plugin\+::\+On\+Initialize (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&}]{settings}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Initializes the plugin. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em settings} & The settings. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the plugin was initialized, false otherwise. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a73e21bf341eaf38562a3e45452013152}{neo\+::plugins\+::\+Plugin\+Base}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1plugins_1_1_application_logs_plugin_aa1e234f6835a72baa56533a621ee677d}\index{neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}!OnStart@{OnStart}}
+\index{OnStart@{OnStart}!neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}}
+\doxysubsubsection{\texorpdfstring{OnStart()}{OnStart()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_application_logs_plugin_aa1e234f6835a72baa56533a621ee677d} 
+bool neo\+::plugins\+::\+Application\+Logs\+Plugin\+::\+On\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Starts the plugin. 
+
+\begin{DoxyReturn}{Returns}
+True if the plugin was started, false otherwise. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a6792009d892718fdb3d605c8d4cb01d6}{neo\+::plugins\+::\+Plugin\+Base}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1plugins_1_1_application_logs_plugin_affa22dbaf1335e0a573a89203f3a9126}\index{neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}!OnStop@{OnStop}}
+\index{OnStop@{OnStop}!neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}}
+\doxysubsubsection{\texorpdfstring{OnStop()}{OnStop()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_application_logs_plugin_affa22dbaf1335e0a573a89203f3a9126} 
+bool neo\+::plugins\+::\+Application\+Logs\+Plugin\+::\+On\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Stops the plugin. 
+
+\begin{DoxyReturn}{Returns}
+True if the plugin was stopped, false otherwise. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_af88eee48057086589f386ff78e20d09f}{neo\+::plugins\+::\+Plugin\+Base}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1plugins_1_1_application_logs_plugin_afe3e5d2c86f46f572099ad6f6b33536a}\index{neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}!OnTransactionExecuted@{OnTransactionExecuted}}
+\index{OnTransactionExecuted@{OnTransactionExecuted}!neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}}
+\doxysubsubsection{\texorpdfstring{OnTransactionExecuted()}{OnTransactionExecuted()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_application_logs_plugin_afe3e5d2c86f46f572099ad6f6b33536a} 
+void neo\+::plugins\+::\+Application\+Logs\+Plugin\+::\+On\+Transaction\+Executed (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$}]{transaction}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1_application_logs_plugin_aacf6509f70a76f12d9bab2c77b316520}\index{neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}!SaveLogs@{SaveLogs}}
+\index{SaveLogs@{SaveLogs}!neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}}
+\doxysubsubsection{\texorpdfstring{SaveLogs()}{SaveLogs()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_application_logs_plugin_aacf6509f70a76f12d9bab2c77b316520} 
+void neo\+::plugins\+::\+Application\+Logs\+Plugin\+::\+Save\+Logs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1plugins_1_1_application_logs_plugin_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1plugins_1_1_application_logs_plugin_a4acfaadb1f6ab4ea584c57077295879c}\index{neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}!logPath\_@{logPath\_}}
+\index{logPath\_@{logPath\_}!neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}}
+\doxysubsubsection{\texorpdfstring{logPath\_}{logPath\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_application_logs_plugin_a4acfaadb1f6ab4ea584c57077295879c} 
+std\+::string neo\+::plugins\+::\+Application\+Logs\+Plugin\+::log\+Path\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1_application_logs_plugin_a0543c6591b93180b30e8d0b45f95a09e}\index{neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}!logs\_@{logs\_}}
+\index{logs\_@{logs\_}!neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}}
+\doxysubsubsection{\texorpdfstring{logs\_}{logs\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_application_logs_plugin_a0543c6591b93180b30e8d0b45f95a09e} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{structneo_1_1plugins_1_1_application_log}{Application\+Log}}$>$ $>$ neo\+::plugins\+::\+Application\+Logs\+Plugin\+::logs\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1_application_logs_plugin_a40f50312a98d786b84d4f32fb7d52c58}\index{neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::plugins::ApplicationLogsPlugin@{neo::plugins::ApplicationLogsPlugin}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_application_logs_plugin_a40f50312a98d786b84d4f32fb7d52c58} 
+std\+::mutex neo\+::plugins\+::\+Application\+Logs\+Plugin\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/plugins/\mbox{\hyperlink{application__logs__plugin_8h}{application\+\_\+logs\+\_\+plugin.\+h}}\item 
+src/plugins/\mbox{\hyperlink{application__logs__plugin_8cpp}{application\+\_\+logs\+\_\+plugin.\+cpp}}\end{DoxyCompactItemize}

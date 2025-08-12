@@ -1,0 +1,89 @@
+\doxysection{neo\+::ledger\+::IInventory Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_i_inventory}{}\label{classneo_1_1ledger_1_1_i_inventory}\index{neo::ledger::IInventory@{neo::ledger::IInventory}}
+
+
+Interface for inventory items in the P2P network.  
+
+
+
+
+{\ttfamily \#include $<$iinventory.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::ledger\+::IInventory\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1ledger_1_1_i_inventory_aa67cd4679b100da497fac649f58dba2d}{\texorpdfstring{$\sim$}{\string~}\+IInventory}} ()=default
+\item 
+virtual \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a16679b1d56245299fcef623d2997dddc}{Inventory\+Type}} \mbox{\hyperlink{classneo_1_1ledger_1_1_i_inventory_ad614ff982b9a9747df41890f7f8312b9}{Get\+Inventory\+Type}} () const=0
+\begin{DoxyCompactList}\small\item\em Gets the inventory type. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1ledger_1_1_i_inventory_a44993c2a95c3890f7578db2f93189a03}{Get\+Hash}} () const=0
+\begin{DoxyCompactList}\small\item\em Gets the hash of the inventory item. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{classneo_1_1ledger_1_1_i_inventory_a0c5151da9a0578658cab06512834305d}{Get\+Size}} () const=0
+\begin{DoxyCompactList}\small\item\em Gets the size of the inventory item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for inventory items in the P2P network. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_i_inventory_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_i_inventory_aa67cd4679b100da497fac649f58dba2d}\index{neo::ledger::IInventory@{neo::ledger::IInventory}!````~IInventory@{\texorpdfstring{$\sim$}{\string~}IInventory}}
+\index{````~IInventory@{\texorpdfstring{$\sim$}{\string~}IInventory}!neo::ledger::IInventory@{neo::ledger::IInventory}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IInventory()}{\string~IInventory()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_i_inventory_aa67cd4679b100da497fac649f58dba2d} 
+virtual neo\+::network\+::p2p\+::payloads\+::\+IInventory\+::\texorpdfstring{$\sim$}{\string~}\+IInventory (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_i_inventory_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_i_inventory_a44993c2a95c3890f7578db2f93189a03}\index{neo::ledger::IInventory@{neo::ledger::IInventory}!GetHash@{GetHash}}
+\index{GetHash@{GetHash}!neo::ledger::IInventory@{neo::ledger::IInventory}}
+\doxysubsubsection{\texorpdfstring{GetHash()}{GetHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_i_inventory_a44993c2a95c3890f7578db2f93189a03} 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::network\+::p2p\+::payloads\+::\+IInventory\+::\+Get\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the hash of the inventory item. 
+
+\begin{DoxyReturn}{Returns}
+The hash. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_i_inventory_ad614ff982b9a9747df41890f7f8312b9}\index{neo::ledger::IInventory@{neo::ledger::IInventory}!GetInventoryType@{GetInventoryType}}
+\index{GetInventoryType@{GetInventoryType}!neo::ledger::IInventory@{neo::ledger::IInventory}}
+\doxysubsubsection{\texorpdfstring{GetInventoryType()}{GetInventoryType()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_i_inventory_ad614ff982b9a9747df41890f7f8312b9} 
+virtual \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a16679b1d56245299fcef623d2997dddc}{Inventory\+Type}} neo\+::network\+::p2p\+::payloads\+::\+IInventory\+::\+Get\+Inventory\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the inventory type. 
+
+\begin{DoxyReturn}{Returns}
+The inventory type. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_i_inventory_a0c5151da9a0578658cab06512834305d}\index{neo::ledger::IInventory@{neo::ledger::IInventory}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::ledger::IInventory@{neo::ledger::IInventory}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_i_inventory_a0c5151da9a0578658cab06512834305d} 
+virtual int neo\+::network\+::p2p\+::payloads\+::\+IInventory\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the size of the inventory item. 
+
+\begin{DoxyReturn}{Returns}
+The size in bytes. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/payloads/\mbox{\hyperlink{payloads_2iinventory_8h}{iinventory.\+h}}\end{DoxyCompactItemize}

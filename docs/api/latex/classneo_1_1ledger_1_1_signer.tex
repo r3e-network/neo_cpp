@@ -1,0 +1,465 @@
+\doxysection{neo\+::ledger\+::Signer Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_signer}{}\label{classneo_1_1ledger_1_1_signer}\index{neo::ledger::Signer@{neo::ledger::Signer}}
+
+
+Represents a transaction signer.  
+
+
+
+
+{\ttfamily \#include $<$signer.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::ledger\+::Signer\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::ledger\+::Signer\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_signer_a214cdf540b906392a75ac9e1a7c7ddba}{Signer}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1ledger_1_1_signer}{Signer}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_a04716f02cefc7fd6144d1600a3f0ec63}{\texorpdfstring{$\sim$}{\string~}\+Signer}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_signer_aa0469537df6345a173bda8178855585f}{Signer}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account, \mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} scopes)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1ledger_1_1_signer}{Signer} with the specified account and scopes. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_ab6e972f93ebe85abd3488d1674cae733}{Get\+Account}} () const
+\begin{DoxyCompactList}\small\item\em Gets the account. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_a8d339d686c3e2a831012322f0fead402}{Set\+Account}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account)
+\begin{DoxyCompactList}\small\item\em Sets the account. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_aaab875fe0d77ef8aadcda8bb70ec8405}{Get\+Scopes}} () const
+\begin{DoxyCompactList}\small\item\em Gets the witness scopes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_abc12898537ce6e5593d43824dad086e4}{Set\+Scopes}} (\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} scopes)
+\begin{DoxyCompactList}\small\item\em Sets the witness scopes. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \& \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_ac6550386081f7752e99e7a6bfc94a39c}{Get\+Allowed\+Contracts}} () const
+\begin{DoxyCompactList}\small\item\em Gets the allowed contracts. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_a5af9b6385bbfd2a4fa260c92c0a921fd}{Set\+Allowed\+Contracts}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \&allowed\+Contracts)
+\begin{DoxyCompactList}\small\item\em Sets the allowed contracts. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \& \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_ac73aee5a50eadf23e16479c4cd9052fa}{Get\+Allowed\+Groups}} () const
+\begin{DoxyCompactList}\small\item\em Gets the allowed groups. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_a1b4199316b6e55f4ead87f412273951a}{Set\+Allowed\+Groups}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \&allowed\+Groups)
+\begin{DoxyCompactList}\small\item\em Sets the allowed groups. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule}{Witness\+Rule}} $>$ \& \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_a22dc4ef600e1bd23a661347f9f01c199}{Get\+Rules}} () const
+\begin{DoxyCompactList}\small\item\em Gets the witness rules. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_a2d48ae4ba76e0b1589b3cf5025a8c12c}{Set\+Rules}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule}{Witness\+Rule}} $>$ \&rules)
+\begin{DoxyCompactList}\small\item\em Sets the witness rules. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_ad5f38990bc95a4703834c50a714bef46}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1ledger_1_1_signer}{Signer} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_a0362fa29d1445b70811f2725f0e427a6}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1ledger_1_1_signer}{Signer} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_a1ace7e9e7d6d63072fbee7ae59514619}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1ledger_1_1_signer}{Signer} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_ab5fee6657c94549a4a4426948dbf0fac}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1ledger_1_1_signer}{Signer} from a JSON reader. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_a978d087be7b2fe8cfa0cabfd3b49e82c}{operator==}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{Signer}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1ledger_1_1_signer}{Signer} is equal to another \doxylink{classneo_1_1ledger_1_1_signer}{Signer}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_a9f21558a41dead62d1345634addc4101}{operator!=}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{Signer}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1ledger_1_1_signer}{Signer} is not equal to another \doxylink{classneo_1_1ledger_1_1_signer}{Signer}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_a16d726225839003773bd6be8749c596d}{account\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_afa774fab222af89635737ac9863972ef}{scopes\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_af88b775eb7d439af2c36456429fb775b}{allowed\+Contracts\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_a9bc8be18ccf9a37c7a37d75891d29cb5}{allowed\+Groups\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule}{Witness\+Rule}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_a95f31a8d19a31313e2cbb5d57ccc6f7e}{rules\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a transaction signer. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_signer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_signer_a214cdf540b906392a75ac9e1a7c7ddba}\index{neo::ledger::Signer@{neo::ledger::Signer}!Signer@{Signer}}
+\index{Signer@{Signer}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{Signer()}{Signer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_a214cdf540b906392a75ac9e1a7c7ddba} 
+neo\+::ledger\+::\+Signer\+::\+Signer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1ledger_1_1_signer}{Signer}. 
+
+\Hypertarget{classneo_1_1ledger_1_1_signer_a04716f02cefc7fd6144d1600a3f0ec63}\index{neo::ledger::Signer@{neo::ledger::Signer}!````~Signer@{\texorpdfstring{$\sim$}{\string~}Signer}}
+\index{````~Signer@{\texorpdfstring{$\sim$}{\string~}Signer}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Signer()}{\string~Signer()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_a04716f02cefc7fd6144d1600a3f0ec63} 
+virtual neo\+::ledger\+::\+Signer\+::\texorpdfstring{$\sim$}{\string~}\+Signer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1ledger_1_1_signer_aa0469537df6345a173bda8178855585f}\index{neo::ledger::Signer@{neo::ledger::Signer}!Signer@{Signer}}
+\index{Signer@{Signer}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{Signer()}{Signer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_aa0469537df6345a173bda8178855585f} 
+neo\+::ledger\+::\+Signer\+::\+Signer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}}}]{scopes}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1ledger_1_1_signer}{Signer} with the specified account and scopes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em account} & The account. \\
+\hline
+{\em scopes} & The witness scopes. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_signer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_signer_a0362fa29d1445b70811f2725f0e427a6}\index{neo::ledger::Signer@{neo::ledger::Signer}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_a0362fa29d1445b70811f2725f0e427a6} 
+void neo\+::ledger\+::\+Signer\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1ledger_1_1_signer}{Signer} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1ledger_1_1_signer_ab5fee6657c94549a4a4426948dbf0fac}\index{neo::ledger::Signer@{neo::ledger::Signer}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_ab5fee6657c94549a4a4426948dbf0fac} 
+void neo\+::ledger\+::\+Signer\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1ledger_1_1_signer}{Signer} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1ledger_1_1_signer_ab6e972f93ebe85abd3488d1674cae733}\index{neo::ledger::Signer@{neo::ledger::Signer}!GetAccount@{GetAccount}}
+\index{GetAccount@{GetAccount}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{GetAccount()}{GetAccount()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_ab6e972f93ebe85abd3488d1674cae733} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& neo\+::ledger\+::\+Signer\+::\+Get\+Account (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the account. 
+
+\begin{DoxyReturn}{Returns}
+The account. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_signer_ac6550386081f7752e99e7a6bfc94a39c}\index{neo::ledger::Signer@{neo::ledger::Signer}!GetAllowedContracts@{GetAllowedContracts}}
+\index{GetAllowedContracts@{GetAllowedContracts}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{GetAllowedContracts()}{GetAllowedContracts()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_ac6550386081f7752e99e7a6bfc94a39c} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \& neo\+::ledger\+::\+Signer\+::\+Get\+Allowed\+Contracts (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the allowed contracts. 
+
+\begin{DoxyReturn}{Returns}
+The allowed contracts. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_signer_ac73aee5a50eadf23e16479c4cd9052fa}\index{neo::ledger::Signer@{neo::ledger::Signer}!GetAllowedGroups@{GetAllowedGroups}}
+\index{GetAllowedGroups@{GetAllowedGroups}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{GetAllowedGroups()}{GetAllowedGroups()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_ac73aee5a50eadf23e16479c4cd9052fa} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \& neo\+::ledger\+::\+Signer\+::\+Get\+Allowed\+Groups (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the allowed groups. 
+
+\begin{DoxyReturn}{Returns}
+The allowed groups. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_signer_a22dc4ef600e1bd23a661347f9f01c199}\index{neo::ledger::Signer@{neo::ledger::Signer}!GetRules@{GetRules}}
+\index{GetRules@{GetRules}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{GetRules()}{GetRules()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_a22dc4ef600e1bd23a661347f9f01c199} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule}{Witness\+Rule}} $>$ \& neo\+::ledger\+::\+Signer\+::\+Get\+Rules (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the witness rules. 
+
+\begin{DoxyReturn}{Returns}
+The witness rules. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_signer_aaab875fe0d77ef8aadcda8bb70ec8405}\index{neo::ledger::Signer@{neo::ledger::Signer}!GetScopes@{GetScopes}}
+\index{GetScopes@{GetScopes}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{GetScopes()}{GetScopes()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_aaab875fe0d77ef8aadcda8bb70ec8405} 
+\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} neo\+::ledger\+::\+Signer\+::\+Get\+Scopes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the witness scopes. 
+
+\begin{DoxyReturn}{Returns}
+The witness scopes. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_signer_a9f21558a41dead62d1345634addc4101}\index{neo::ledger::Signer@{neo::ledger::Signer}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_a9f21558a41dead62d1345634addc4101} 
+bool neo\+::ledger\+::\+Signer\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{Signer}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1ledger_1_1_signer}{Signer} is not equal to another \doxylink{classneo_1_1ledger_1_1_signer}{Signer}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1ledger_1_1_signer}{Signer}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Signers are not equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1ledger_1_1_signer_a978d087be7b2fe8cfa0cabfd3b49e82c}\index{neo::ledger::Signer@{neo::ledger::Signer}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_a978d087be7b2fe8cfa0cabfd3b49e82c} 
+bool neo\+::ledger\+::\+Signer\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{Signer}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1ledger_1_1_signer}{Signer} is equal to another \doxylink{classneo_1_1ledger_1_1_signer}{Signer}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1ledger_1_1_signer}{Signer}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Signers are equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1ledger_1_1_signer_ad5f38990bc95a4703834c50a714bef46}\index{neo::ledger::Signer@{neo::ledger::Signer}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_ad5f38990bc95a4703834c50a714bef46} 
+void neo\+::ledger\+::\+Signer\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1ledger_1_1_signer}{Signer} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1ledger_1_1_signer_a1ace7e9e7d6d63072fbee7ae59514619}\index{neo::ledger::Signer@{neo::ledger::Signer}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_a1ace7e9e7d6d63072fbee7ae59514619} 
+void neo\+::ledger\+::\+Signer\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1ledger_1_1_signer}{Signer} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1ledger_1_1_signer_a8d339d686c3e2a831012322f0fead402}\index{neo::ledger::Signer@{neo::ledger::Signer}!SetAccount@{SetAccount}}
+\index{SetAccount@{SetAccount}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{SetAccount()}{SetAccount()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_a8d339d686c3e2a831012322f0fead402} 
+void neo\+::ledger\+::\+Signer\+::\+Set\+Account (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{}\end{DoxyParamCaption})}
+
+
+
+Sets the account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em account} & The account. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_signer_a5af9b6385bbfd2a4fa260c92c0a921fd}\index{neo::ledger::Signer@{neo::ledger::Signer}!SetAllowedContracts@{SetAllowedContracts}}
+\index{SetAllowedContracts@{SetAllowedContracts}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{SetAllowedContracts()}{SetAllowedContracts()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_a5af9b6385bbfd2a4fa260c92c0a921fd} 
+void neo\+::ledger\+::\+Signer\+::\+Set\+Allowed\+Contracts (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \&}]{allowed\+Contracts}{}\end{DoxyParamCaption})}
+
+
+
+Sets the allowed contracts. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em allowed\+Contracts} & The allowed contracts. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_signer_a1b4199316b6e55f4ead87f412273951a}\index{neo::ledger::Signer@{neo::ledger::Signer}!SetAllowedGroups@{SetAllowedGroups}}
+\index{SetAllowedGroups@{SetAllowedGroups}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{SetAllowedGroups()}{SetAllowedGroups()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_a1b4199316b6e55f4ead87f412273951a} 
+void neo\+::ledger\+::\+Signer\+::\+Set\+Allowed\+Groups (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \&}]{allowed\+Groups}{}\end{DoxyParamCaption})}
+
+
+
+Sets the allowed groups. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em allowed\+Groups} & The allowed groups. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_signer_a2d48ae4ba76e0b1589b3cf5025a8c12c}\index{neo::ledger::Signer@{neo::ledger::Signer}!SetRules@{SetRules}}
+\index{SetRules@{SetRules}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{SetRules()}{SetRules()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_a2d48ae4ba76e0b1589b3cf5025a8c12c} 
+void neo\+::ledger\+::\+Signer\+::\+Set\+Rules (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule}{Witness\+Rule}} $>$ \&}]{rules}{}\end{DoxyParamCaption})}
+
+
+
+Sets the witness rules. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em rules} & The witness rules. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_signer_abc12898537ce6e5593d43824dad086e4}\index{neo::ledger::Signer@{neo::ledger::Signer}!SetScopes@{SetScopes}}
+\index{SetScopes@{SetScopes}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{SetScopes()}{SetScopes()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_abc12898537ce6e5593d43824dad086e4} 
+void neo\+::ledger\+::\+Signer\+::\+Set\+Scopes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}}}]{scopes}{}\end{DoxyParamCaption})}
+
+
+
+Sets the witness scopes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scopes} & The witness scopes. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_signer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_signer_a16d726225839003773bd6be8749c596d}\index{neo::ledger::Signer@{neo::ledger::Signer}!account\_@{account\_}}
+\index{account\_@{account\_}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{account\_}{account\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_a16d726225839003773bd6be8749c596d} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::ledger\+::\+Signer\+::account\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_signer_af88b775eb7d439af2c36456429fb775b}\index{neo::ledger::Signer@{neo::ledger::Signer}!allowedContracts\_@{allowedContracts\_}}
+\index{allowedContracts\_@{allowedContracts\_}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{allowedContracts\_}{allowedContracts\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_af88b775eb7d439af2c36456429fb775b} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}}$>$ neo\+::ledger\+::\+Signer\+::allowed\+Contracts\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_signer_a9bc8be18ccf9a37c7a37d75891d29cb5}\index{neo::ledger::Signer@{neo::ledger::Signer}!allowedGroups\_@{allowedGroups\_}}
+\index{allowedGroups\_@{allowedGroups\_}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{allowedGroups\_}{allowedGroups\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_a9bc8be18ccf9a37c7a37d75891d29cb5} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}}$>$ neo\+::ledger\+::\+Signer\+::allowed\+Groups\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_signer_a95f31a8d19a31313e2cbb5d57ccc6f7e}\index{neo::ledger::Signer@{neo::ledger::Signer}!rules\_@{rules\_}}
+\index{rules\_@{rules\_}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{rules\_}{rules\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_a95f31a8d19a31313e2cbb5d57ccc6f7e} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule}{Witness\+Rule}}$>$ neo\+::ledger\+::\+Signer\+::rules\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_signer_afa774fab222af89635737ac9863972ef}\index{neo::ledger::Signer@{neo::ledger::Signer}!scopes\_@{scopes\_}}
+\index{scopes\_@{scopes\_}!neo::ledger::Signer@{neo::ledger::Signer}}
+\doxysubsubsection{\texorpdfstring{scopes\_}{scopes\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_signer_afa774fab222af89635737ac9863972ef} 
+\mbox{\hyperlink{namespaceneo_1_1ledger_af8204d03511ea7d8976f86b1db3d9adf}{Witness\+Scope}} neo\+::ledger\+::\+Signer\+::scopes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{signer_8h}{signer.\+h}}\item 
+src/ledger/\mbox{\hyperlink{signer_8cpp}{signer.\+cpp}}\end{DoxyCompactItemize}

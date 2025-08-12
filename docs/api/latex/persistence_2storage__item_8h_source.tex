@@ -1,0 +1,157 @@
+\doxysection{storage\+\_\+item.\+h}
+\hypertarget{persistence_2storage__item_8h_source}{}\label{persistence_2storage__item_8h_source}\index{include/neo/persistence/storage\_item.h@{include/neo/persistence/storage\_item.h}}
+\mbox{\hyperlink{persistence_2storage__item_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__reader_8h}{neo/io/binary\_reader.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__writer_8h}{neo/io/binary\_writer.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{iserializable_8h}{neo/io/iserializable.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stack__item_8h}{neo/vm/stack\_item.h}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1persistence}{neo::persistence}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_ae05e7778f4a20a950f4a10dc6cacd4f4}{StorageItem}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{io::ISerializable}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_ae05e7778f4a20a950f4a10dc6cacd4f4}{StorageItem}}();}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_ae05e7778f4a20a950f4a10dc6cacd4f4}{StorageItem}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ value);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a9a0a481b0533f452d8a532475e926716}{GetValue}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a38c104a58f0b2e142147f45c952291be}{SetValue}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ value);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_abfb63bca223a2a3dce386d0fe8e895b6}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_ab565aeeb1e37450801a07a676094921c}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_ae29ce8b5efbe8a6c4f699727b2b7f4c1}{ToArray}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a1a5926ee88f478760e25e2d7a22338e5}{DeserializeFromArray}}(\textcolor{keyword}{const}\ std::span<const\ uint8\_t>\&\ data);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a0f4e987e282d4485654df15df8aa0d98}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_ae05e7778f4a20a950f4a10dc6cacd4f4}{StorageItem}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_ae3dc12a0ee4e7ccc5a452a35201c8deb}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_ae05e7778f4a20a950f4a10dc6cacd4f4}{StorageItem}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00087\ \ \ \ \ std::shared\_ptr<T>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a7d51171ce8532436f2918607395d6fc5}{GetInteroperable}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00088\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a9bcacccc5d2ff383736c904deac0c16d}{interoperable\_obj\_}})}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Deserialize\ from\ value\_\ if\ no\ cached\ object}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a40d26150b70110e1b44f7b2c98ed1e67}{value\_}}.empty())\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ obj\ =\ std::make\_shared<T>();}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ a\ BinaryReader\ from\ the\ value}}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ ss.write(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const\ }\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a40d26150b70110e1b44f7b2c98ed1e67}{value\_}}.Data()),\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a40d26150b70110e1b44f7b2c98ed1e67}{value\_}}.Size());}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\ reader(ss);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Complete\ deserialization\ implementation}}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Try\ to\ deserialize\ from\ binary\ data\ using\ Deserialize\ method\ if\ available}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (\textcolor{keyword}{requires}\ \{\ obj-\/>Deserialize(reader);\ \})}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ obj-\/>Deserialize(reader);}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Try\ to\ deserialize\ using\ FromStackItem\ if\ available}}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (\textcolor{keyword}{requires}\ \{\ T::FromStackItem(\textcolor{keyword}{nullptr});\ \})}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convert\ binary\ data\ to\ StackItem\ first,\ then\ deserialize}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ a\ ByteString\ StackItem\ from\ the\ binary\ data}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ stack\_item\ =\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item_ad28e4e1c003592828468235ec9b9b7a2}{vm::StackItem::CreateByteString}}(}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<uint8\_t>(\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a40d26150b70110e1b44f7b2c98ed1e67}{value\_}}.Data(),\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a40d26150b70110e1b44f7b2c98ed1e67}{value\_}}.Data()\ +\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a40d26150b70110e1b44f7b2c98ed1e67}{value\_}}.Size()));}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (stack\_item)}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ obj\ =\ std::dynamic\_pointer\_cast<T>(T::FromStackItem(stack\_item));}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!obj)}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ obj\ =\ std::make\_shared<T>();}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&)}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ FromStackItem\ failed,\ keep\ default\ object}}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Try\ constructor\ with\ binary\ reader}}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (\textcolor{keyword}{requires}\ \{\ T(reader);\ \})}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ obj\ =\ std::make\_shared<T>(reader);}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Try\ to\ parse\ from\ binary\ data\ using\ any\ available\ parse\ method}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (\textcolor{keyword}{requires}\ \{\ obj-\/>Parse(\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a40d26150b70110e1b44f7b2c98ed1e67}{value\_}});\ \})}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ obj-\/>Parse(\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a40d26150b70110e1b44f7b2c98ed1e67}{value\_}});}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ For\ fundamental\ types,\ try\ direct\ binary\ interpretation}}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_arithmetic\_v<T>)}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a40d26150b70110e1b44f7b2c98ed1e67}{value\_}}.Size()\ >=\ \textcolor{keyword}{sizeof}(T))}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::memcpy(obj.get(),\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a40d26150b70110e1b44f7b2c98ed1e67}{value\_}}.Data(),\ \textcolor{keyword}{sizeof}(T));}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Otherwise,\ object\ remains\ default-\/initialized\ but\ we\ log\ this}}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Object\ remains\ default-\/initialized}}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ should\ be\ logged\ for\ debugging\ but\ not\ fail}}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&\ e)}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Deserialization\ failed\ -\/\ object\ remains\ default-\/initialized}}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ is\ better\ than\ crashing,\ but\ should\ be\ logged}}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const\_cast<}\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_ae05e7778f4a20a950f4a10dc6cacd4f4}{StorageItem}}*\textcolor{keyword}{>}(\textcolor{keyword}{this})-\/>\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a9bcacccc5d2ff383736c904deac0c16d}{interoperable\_obj\_}}\ =\ std::static\_pointer\_cast<void>(obj);}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ obj;}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::static\_pointer\_cast<T>(\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a9bcacccc5d2ff383736c904deac0c16d}{interoperable\_obj\_}});}
+\DoxyCodeLine{00168\ \ \ \ \ \}}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_ac3f146d07d3cd642e2dc2da239721317}{SetInteroperable}}(std::shared\_ptr<T>\ obj)}
+\DoxyCodeLine{00177\ \ \ \ \ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a9bcacccc5d2ff383736c904deac0c16d}{interoperable\_obj\_}}\ =\ std::static\_pointer\_cast<void>(obj);}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Serialize\ the\ object\ to\ value\_}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (obj)}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\ writer(ss);}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Serialize\ the\ object\ using\ its\ Serialize\ method}}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ obj-\/>Serialize(writer);}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Convert\ the\ stream\ to\ ByteVector}}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ data\ =\ ss.str();}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a40d26150b70110e1b44f7b2c98ed1e67}{value\_}}\ =\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keyword}{const\ }uint8\_t*\textcolor{keyword}{>}(data.c\_str()),\ data.size());}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a40d26150b70110e1b44f7b2c98ed1e67}{value\_}}.clear();}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00197\ \ \ \ \ \}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a8aea5a954a409e5fc1f58fb2e0a2085c}{IsConstant}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00206\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a40d26150b70110e1b44f7b2c98ed1e67}{value\_}};}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keyword}{mutable}\ std::shared\_ptr<void>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a9bcacccc5d2ff383736c904deac0c16d}{interoperable\_obj\_}};}
+\DoxyCodeLine{00208\ \};}
+\DoxyCodeLine{00209\ \}\ \ \textcolor{comment}{//\ namespace\ neo::persistence}}
+
+\end{DoxyCode}

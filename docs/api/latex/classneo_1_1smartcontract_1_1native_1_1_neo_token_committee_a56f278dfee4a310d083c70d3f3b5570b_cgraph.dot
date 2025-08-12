@@ -1,0 +1,51 @@
+digraph "neo::smartcontract::native::NeoTokenCommittee::ComputeCommitteeMembers"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::smartcontract\l::native::NeoTokenCommittee\l::ComputeCommitteeMembers",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Computes the committee members."];
+  Node1 -> Node2 [id="edge22_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::smartcontract\l::native::NeoTokenCandidate\l::GetCandidates",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_neo_token_candidate.html#aec1191c5e89fdba63f98e95f2931a440",tooltip="Gets all candidates."];
+  Node2 -> Node3 [id="edge23_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::smartcontract\l::native::NativeContract\l::CreateStorageKey",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_native_contract.html#a5a9ec24cc4c1584fb00fdf32f614dbd8",tooltip="Creates a storage key with the specified prefix."];
+  Node3 -> Node4 [id="edge24_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::persistence::Storage\lKey::Create",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#ae7001770e96642cfdb2f878c6264bf51",tooltip="Creates a storage key with contract ID and prefix."];
+  Node4 -> Node5 [id="edge25_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::persistence::Storage\lKey::FillHeader",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#a4a6ee8a47d7cfb0b3802d3697ddf571f",tooltip="Fills the header (contract ID + prefix) into a span."];
+  Node4 -> Node6 [id="edge26_Node000004_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::persistence::Storage\lKey::StorageKey",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#a26e71bde9629f81837c84d69d83fd75a",tooltip="Constructs an empty StorageKey."];
+  Node2 -> Node7 [id="edge27_Node000002_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::smartcontract\l::native::NeoToken::\lCandidateState::Deserialize",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_candidate_state.html#a4b3588cff845e246d112020fcd7b7974",tooltip=" "];
+  Node7 -> Node8 [id="edge28_Node000007_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="neo::io::BinaryReader\l::ReadBool",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_reader.html#a94aba9dfe2eb624fd626466227ccf3a8",tooltip="Reads a boolean value from the stream."];
+  Node8 -> Node9 [id="edge29_Node000008_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="neo::io::BinaryReader\l::ReadUInt8",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_reader.html#a3b93ff9ad86d70fb5091267936092a59",tooltip="Reads an 8-bit unsigned integer from the stream."];
+  Node7 -> Node10 [id="edge30_Node000007_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="neo::io::BinaryReader\l::ReadInt64",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_reader.html#aa8429b0320e5dee44f55d511457eb9bb",tooltip="Reads a 64-bit signed integer from the stream."];
+  Node10 -> Node11 [id="edge31_Node000010_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="neo::io::BinaryReader\l::ReadRawBytes",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_reader.html#a890faf334a0500b4474a6b2f91e63e51",tooltip="Helper method to read raw bytes from either stream or memory."];
+  Node11 -> Node12 [id="edge32_Node000011_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="neo::io::BinaryReader\l::EnsureAvailable",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_reader.html#a2bfd19e979fbdb9b340cc8dd78a9ca72",tooltip="Checks if enough bytes are available to read."];
+  Node2 -> Node13 [id="edge33_Node000002_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node13 [id="Node000013",label="neo::persistence::Storage\lKey::ToArray",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#a938bc0df3cfac2f91aa0c3ee7ba4088a",tooltip="Converts the storage key to a byte array."];
+  Node13 -> Node14 [id="edge34_Node000013_Node000014",color="steelblue1",style="solid",tooltip=" "];
+  Node14 [id="Node000014",label="neo::persistence::Storage\lKey::Build",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#a7d5a7dc6165cae747b3d97dbf499a048",tooltip="Builds the cached serialized form."];
+  Node14 -> Node15 [id="edge35_Node000014_Node000015",color="steelblue1",style="solid",tooltip=" "];
+  Node15 [id="Node000015",label="neo::io::ByteVector\l::Append",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#a08fe2080218bc11daedc416387e6f37e",tooltip="Appends data to the ByteVector."];
+  Node15 -> Node16 [id="edge36_Node000015_Node000016",color="steelblue1",style="solid",tooltip=" "];
+  Node16 [id="Node000016",label="neo::io::ByteSpan::Data",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_span.html#a0285a19eb5cd212ecd1079e0bc5e494c",tooltip="Gets a pointer to the data."];
+  Node15 -> Node17 [id="edge37_Node000015_Node000017",color="steelblue1",style="solid",tooltip=" "];
+  Node17 [id="Node000017",label="neo::io::ByteSpan::Size",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_span.html#a4a869430800a37dcbeefac6f36468fcb",tooltip="Gets the size of the ByteSpan."];
+  Node14 -> Node18 [id="edge38_Node000014_Node000018",color="steelblue1",style="solid",tooltip=" "];
+  Node18 [id="Node000018",label="neo::io::ByteVector\l::Push",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#a57eb840afcbc9cd7b784081f9f546dab",tooltip="Pushes a byte to the end of the ByteVector."];
+  Node14 -> Node19 [id="edge39_Node000014_Node000019",color="steelblue1",style="solid",tooltip=" "];
+  Node19 [id="Node000019",label="neo::io::ByteVector\l::Reserve",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#ad6906fc9c8a17ca926bc89ed6d3ef064",tooltip="Reserves capacity for the ByteVector."];
+  Node2 -> Node20 [id="edge40_Node000002_Node000020",color="steelblue1",style="solid",tooltip=" "];
+  Node20 [id="Node000020",label="neo::io::ByteVector\l::ToHexString",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#ad7916ee36e579228a97ff8c948e56c14",tooltip="Converts the ByteVector to a hexadecimal string."];
+  Node20 -> Node21 [id="edge41_Node000020_Node000021",color="steelblue1",style="solid",tooltip=" "];
+  Node21 [id="Node000021",label="neo::io::ByteVector\l::AsSpan",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#a95791d958ed4ec88d32e811b51d90451",tooltip="Converts the ByteVector to a ByteSpan."];
+  Node20 -> Node22 [id="edge42_Node000020_Node000022",color="steelblue1",style="solid",tooltip=" "];
+  Node22 [id="Node000022",label="neo::io::ByteSpan::\lToHexString",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_span.html#a5bdc6499f1966458a9ceda1274ba0c2e",tooltip="Converts the ByteSpan to a hexadecimal string."];
+}

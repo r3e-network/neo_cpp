@@ -1,0 +1,263 @@
+\doxysection{neo\+::network\+::p2p\+::Transaction\+Router Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router}{}\label{classneo_1_1network_1_1p2p_1_1_transaction_router}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+
+
+Routes transactions in the P2P network.  
+
+
+
+
+{\ttfamily \#include $<$transaction\+\_\+router.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_aaed5a26106ae42b8165005b4bcb7d3ca}{Transaction\+Router}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}} $>$ blockchain, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{ledger\+::\+Memory\+Pool}} $>$ mem\+Pool)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_transaction_router}{Transaction\+Router}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_a29ea0c04d5489d70ab1999d09ef442d3}{\texorpdfstring{$\sim$}{\string~}\+Transaction\+Router}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_abce8eca6407826d684f157b4806cb54b}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Starts the transaction router. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_a937da23c25fb6c3b951bee21128b6a9a}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stops the transaction router. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_af83ec18fa7e94396943b90e5ccde14c9}{Is\+Running}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the transaction router is running. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_ab3d96d6ad09431ffe7fc6182e7bb7f55}{Add\+Transaction}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_afde96583829abe492ef2a702eb352a21}{Neo3\+Transaction}} $>$ transaction)
+\begin{DoxyCompactList}\small\item\em Adds a transaction to the router. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_afde96583829abe492ef2a702eb352a21}{Neo3\+Transaction}} $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_a161ecb9a408b0b6d0b27427beaf4546d}{Get\+Transactions}} () const
+\begin{DoxyCompactList}\small\item\em Gets the transactions in the router. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_acedf6f813b80986a7ed89bd9f6d24a43}{Remove\+Transaction}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Removes a transaction from the router. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_abef07671f37c1d18a7bf03bc4fc0569f}{Process\+Transactions}} ()
+\begin{DoxyCompactList}\small\item\em Processes transactions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_ae5b698c808370d876922b7f5bb1ab09c}{Cleanup\+Expired\+Transactions}} ()
+\begin{DoxyCompactList}\small\item\em Cleans up expired transactions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_a8934618022356e0b2bed98c22961b519}{blockchain\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{ledger\+::\+Memory\+Pool}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_aa8dd143f7f886acfbd08f30e5bdd1ab1}{mem\+Pool\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_afde96583829abe492ef2a702eb352a21}{Neo3\+Transaction}} $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_ac70a139824deae0fc4d62ff4d496e1d8}{transactions\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_a3b247a66e934d5fa8398338ba6580407}{transactions\+Mutex\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_ad6b8d4df34c83b8d996c36286cbb7e94}{running\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_a2f92dff0542f396cbb53d271265f64bd}{router\+Thread\+\_\+}}
+\item 
+std\+::condition\+\_\+variable \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_a8f8edd216f8e4fb7182877ed4c3d5f16}{router\+Condition\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_transaction_router_adef2a7b7aca42fe79c8c06b8ffb3c8e5}{router\+Mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Routes transactions in the P2P network. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_aaed5a26106ae42b8165005b4bcb7d3ca}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!TransactionRouter@{TransactionRouter}}
+\index{TransactionRouter@{TransactionRouter}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{TransactionRouter()}{TransactionRouter()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_aaed5a26106ae42b8165005b4bcb7d3ca} 
+neo\+::network\+::p2p\+::\+Transaction\+Router\+::\+Transaction\+Router (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}} $>$}]{blockchain}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{ledger\+::\+Memory\+Pool}} $>$}]{mem\+Pool}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_transaction_router}{Transaction\+Router}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em blockchain} & The blockchain. \\
+\hline
+{\em mem\+Pool} & The memory pool. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_a29ea0c04d5489d70ab1999d09ef442d3}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!````~TransactionRouter@{\texorpdfstring{$\sim$}{\string~}TransactionRouter}}
+\index{````~TransactionRouter@{\texorpdfstring{$\sim$}{\string~}TransactionRouter}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TransactionRouter()}{\string~TransactionRouter()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_a29ea0c04d5489d70ab1999d09ef442d3} 
+neo\+::network\+::p2p\+::\+Transaction\+Router\+::\texorpdfstring{$\sim$}{\string~}\+Transaction\+Router (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+Here is the call graph for this function\+:
+% FIG 0
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_ab3d96d6ad09431ffe7fc6182e7bb7f55}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!AddTransaction@{AddTransaction}}
+\index{AddTransaction@{AddTransaction}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{AddTransaction()}{AddTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_ab3d96d6ad09431ffe7fc6182e7bb7f55} 
+bool neo\+::network\+::p2p\+::\+Transaction\+Router\+::\+Add\+Transaction (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_afde96583829abe492ef2a702eb352a21}{Neo3\+Transaction}} $>$}]{transaction}{}\end{DoxyParamCaption})}
+
+
+
+Adds a transaction to the router. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the transaction was added, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_ae5b698c808370d876922b7f5bb1ab09c}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!CleanupExpiredTransactions@{CleanupExpiredTransactions}}
+\index{CleanupExpiredTransactions@{CleanupExpiredTransactions}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{CleanupExpiredTransactions()}{CleanupExpiredTransactions()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_ae5b698c808370d876922b7f5bb1ab09c} 
+void neo\+::network\+::p2p\+::\+Transaction\+Router\+::\+Cleanup\+Expired\+Transactions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Cleans up expired transactions. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_a161ecb9a408b0b6d0b27427beaf4546d}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!GetTransactions@{GetTransactions}}
+\index{GetTransactions@{GetTransactions}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{GetTransactions()}{GetTransactions()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_a161ecb9a408b0b6d0b27427beaf4546d} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_afde96583829abe492ef2a702eb352a21}{Neo3\+Transaction}} $>$ $>$ neo\+::network\+::p2p\+::\+Transaction\+Router\+::\+Get\+Transactions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the transactions in the router. 
+
+\begin{DoxyReturn}{Returns}
+The transactions. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_af83ec18fa7e94396943b90e5ccde14c9}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!IsRunning@{IsRunning}}
+\index{IsRunning@{IsRunning}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{IsRunning()}{IsRunning()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_af83ec18fa7e94396943b90e5ccde14c9} 
+bool neo\+::network\+::p2p\+::\+Transaction\+Router\+::\+Is\+Running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the transaction router is running. 
+
+\begin{DoxyReturn}{Returns}
+True if the transaction router is running, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_abef07671f37c1d18a7bf03bc4fc0569f}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!ProcessTransactions@{ProcessTransactions}}
+\index{ProcessTransactions@{ProcessTransactions}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{ProcessTransactions()}{ProcessTransactions()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_abef07671f37c1d18a7bf03bc4fc0569f} 
+void neo\+::network\+::p2p\+::\+Transaction\+Router\+::\+Process\+Transactions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Processes transactions. 
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_acedf6f813b80986a7ed89bd9f6d24a43}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!RemoveTransaction@{RemoveTransaction}}
+\index{RemoveTransaction@{RemoveTransaction}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{RemoveTransaction()}{RemoveTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_acedf6f813b80986a7ed89bd9f6d24a43} 
+bool neo\+::network\+::p2p\+::\+Transaction\+Router\+::\+Remove\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})}
+
+
+
+Removes a transaction from the router. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the transaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the transaction was removed, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_abce8eca6407826d684f157b4806cb54b}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!Start@{Start}}
+\index{Start@{Start}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_abce8eca6407826d684f157b4806cb54b} 
+void neo\+::network\+::p2p\+::\+Transaction\+Router\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Starts the transaction router. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_a937da23c25fb6c3b951bee21128b6a9a}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_a937da23c25fb6c3b951bee21128b6a9a} 
+void neo\+::network\+::p2p\+::\+Transaction\+Router\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the transaction router. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_a8934618022356e0b2bed98c22961b519}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!blockchain\_@{blockchain\_}}
+\index{blockchain\_@{blockchain\_}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{blockchain\_}{blockchain\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_a8934618022356e0b2bed98c22961b519} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}}$>$ neo\+::network\+::p2p\+::\+Transaction\+Router\+::blockchain\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_aa8dd143f7f886acfbd08f30e5bdd1ab1}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!memPool\_@{memPool\_}}
+\index{memPool\_@{memPool\_}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{memPool\_}{memPool\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_aa8dd143f7f886acfbd08f30e5bdd1ab1} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{ledger\+::\+Memory\+Pool}}$>$ neo\+::network\+::p2p\+::\+Transaction\+Router\+::mem\+Pool\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_a8f8edd216f8e4fb7182877ed4c3d5f16}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!routerCondition\_@{routerCondition\_}}
+\index{routerCondition\_@{routerCondition\_}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{routerCondition\_}{routerCondition\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_a8f8edd216f8e4fb7182877ed4c3d5f16} 
+std\+::condition\+\_\+variable neo\+::network\+::p2p\+::\+Transaction\+Router\+::router\+Condition\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_adef2a7b7aca42fe79c8c06b8ffb3c8e5}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!routerMutex\_@{routerMutex\_}}
+\index{routerMutex\_@{routerMutex\_}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{routerMutex\_}{routerMutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_adef2a7b7aca42fe79c8c06b8ffb3c8e5} 
+std\+::mutex neo\+::network\+::p2p\+::\+Transaction\+Router\+::router\+Mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_a2f92dff0542f396cbb53d271265f64bd}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!routerThread\_@{routerThread\_}}
+\index{routerThread\_@{routerThread\_}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{routerThread\_}{routerThread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_a2f92dff0542f396cbb53d271265f64bd} 
+std\+::thread neo\+::network\+::p2p\+::\+Transaction\+Router\+::router\+Thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_ad6b8d4df34c83b8d996c36286cbb7e94}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_ad6b8d4df34c83b8d996c36286cbb7e94} 
+std\+::atomic$<$bool$>$ neo\+::network\+::p2p\+::\+Transaction\+Router\+::running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_ac70a139824deae0fc4d62ff4d496e1d8}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!transactions\_@{transactions\_}}
+\index{transactions\_@{transactions\_}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{transactions\_}{transactions\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_ac70a139824deae0fc4d62ff4d496e1d8} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_afde96583829abe492ef2a702eb352a21}{Neo3\+Transaction}}$>$ $>$ neo\+::network\+::p2p\+::\+Transaction\+Router\+::transactions\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_transaction_router_a3b247a66e934d5fa8398338ba6580407}\index{neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}!transactionsMutex\_@{transactionsMutex\_}}
+\index{transactionsMutex\_@{transactionsMutex\_}!neo::network::p2p::TransactionRouter@{neo::network::p2p::TransactionRouter}}
+\doxysubsubsection{\texorpdfstring{transactionsMutex\_}{transactionsMutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_transaction_router_a3b247a66e934d5fa8398338ba6580407} 
+std\+::mutex neo\+::network\+::p2p\+::\+Transaction\+Router\+::transactions\+Mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/\mbox{\hyperlink{transaction__router_8h}{transaction\+\_\+router.\+h}}\item 
+src/network/p2p/\mbox{\hyperlink{transaction__router_8cpp}{transaction\+\_\+router.\+cpp}}\end{DoxyCompactItemize}

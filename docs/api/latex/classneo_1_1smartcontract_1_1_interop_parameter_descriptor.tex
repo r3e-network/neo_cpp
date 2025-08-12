@@ -1,0 +1,138 @@
+\doxysection{neo\+::smartcontract\+::Interop\+Parameter\+Descriptor Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1_interop_parameter_descriptor}{}\label{classneo_1_1smartcontract_1_1_interop_parameter_descriptor}\index{neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}}
+
+
+Represents a descriptor for an interop parameter.  
+
+
+
+
+{\ttfamily \#include $<$interop\+\_\+parameter\+\_\+descriptor.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor}{Interop\+Parameter\+Descriptor}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a72897f979e42465af392004e09b34398}{create}} (const std\+::string \&\mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_add280786dfb2c35a8f3cd8579c2f238f}{name}}="{}"{})
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor}{Interop\+Parameter\+Descriptor} for the specified type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::type\+\_\+info \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a05d6f6fc8f3269abeda43fc69c826998}{type}}
+\begin{DoxyCompactList}\small\item\em The type information of the parameter. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_add280786dfb2c35a8f3cd8579c2f238f}{name}}
+\begin{DoxyCompactList}\small\item\em The name of the parameter. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a34ecd8524a76495051367008e90e9fa3}{is\+\_\+array}}
+\begin{DoxyCompactList}\small\item\em Indicates whether the parameter is an array. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a0be54462893caba8f5ef39e1042b20e0}{is\+\_\+interface}}
+\begin{DoxyCompactList}\small\item\em Indicates whether the parameter is an interface. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_add7795a52c345391adbb31b8f264d276}{is\+\_\+enum}}
+\begin{DoxyCompactList}\small\item\em Indicates whether the parameter is an enum. \end{DoxyCompactList}\item 
+std\+::function$<$ void \texorpdfstring{$\ast$}{*}(const \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} \&)$>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a8096857b04013a1a1bfcdcbd28ebc8ae}{converter}}
+\begin{DoxyCompactList}\small\item\em The converter function for the parameter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static std\+::function$<$ void \texorpdfstring{$\ast$}{*}(const \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} \&)$>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a5043bdd6b9b018186108bb8e157031aa}{create\+\_\+converter}} ()
+\begin{DoxyCompactList}\small\item\em Creates a converter function for the specified type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a descriptor for an interop parameter. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a72897f979e42465af392004e09b34398}\index{neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}!create@{create}}
+\index{create@{create}!neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}}
+\doxysubsubsection{\texorpdfstring{create()}{create()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a72897f979e42465af392004e09b34398} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor}{Interop\+Parameter\+Descriptor}} neo\+::smartcontract\+::\+Interop\+Parameter\+Descriptor\+::create (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Constructs an \doxylink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor}{Interop\+Parameter\+Descriptor} for the specified type. 
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a5043bdd6b9b018186108bb8e157031aa}\index{neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}!create\_converter@{create\_converter}}
+\index{create\_converter@{create\_converter}!neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}}
+\doxysubsubsection{\texorpdfstring{create\_converter()}{create\_converter()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a5043bdd6b9b018186108bb8e157031aa} 
+template$<$typename T$>$ \\
+std\+::function$<$ void \texorpdfstring{$\ast$}{*}(const \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} \&)$>$ neo\+::smartcontract\+::\+Interop\+Parameter\+Descriptor\+::create\+\_\+converter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Creates a converter function for the specified type. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a8096857b04013a1a1bfcdcbd28ebc8ae}\index{neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}!converter@{converter}}
+\index{converter@{converter}!neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}}
+\doxysubsubsection{\texorpdfstring{converter}{converter}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a8096857b04013a1a1bfcdcbd28ebc8ae} 
+std\+::function$<$void\texorpdfstring{$\ast$}{*}(const \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}}\&)$>$ neo\+::smartcontract\+::\+Interop\+Parameter\+Descriptor\+::converter}
+
+
+
+The converter function for the parameter. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a34ecd8524a76495051367008e90e9fa3}\index{neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}!is\_array@{is\_array}}
+\index{is\_array@{is\_array}!neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}}
+\doxysubsubsection{\texorpdfstring{is\_array}{is\_array}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a34ecd8524a76495051367008e90e9fa3} 
+bool neo\+::smartcontract\+::\+Interop\+Parameter\+Descriptor\+::is\+\_\+array}
+
+
+
+Indicates whether the parameter is an array. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_add7795a52c345391adbb31b8f264d276}\index{neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}!is\_enum@{is\_enum}}
+\index{is\_enum@{is\_enum}!neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}}
+\doxysubsubsection{\texorpdfstring{is\_enum}{is\_enum}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_add7795a52c345391adbb31b8f264d276} 
+bool neo\+::smartcontract\+::\+Interop\+Parameter\+Descriptor\+::is\+\_\+enum}
+
+
+
+Indicates whether the parameter is an enum. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a0be54462893caba8f5ef39e1042b20e0}\index{neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}!is\_interface@{is\_interface}}
+\index{is\_interface@{is\_interface}!neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}}
+\doxysubsubsection{\texorpdfstring{is\_interface}{is\_interface}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a0be54462893caba8f5ef39e1042b20e0} 
+bool neo\+::smartcontract\+::\+Interop\+Parameter\+Descriptor\+::is\+\_\+interface}
+
+
+
+Indicates whether the parameter is an interface. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_add280786dfb2c35a8f3cd8579c2f238f}\index{neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}!name@{name}}
+\index{name@{name}!neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}}
+\doxysubsubsection{\texorpdfstring{name}{name}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_add280786dfb2c35a8f3cd8579c2f238f} 
+std\+::string neo\+::smartcontract\+::\+Interop\+Parameter\+Descriptor\+::name}
+
+
+
+The name of the parameter. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a05d6f6fc8f3269abeda43fc69c826998}\index{neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}!type@{type}}
+\index{type@{type}!neo::smartcontract::InteropParameterDescriptor@{neo::smartcontract::InteropParameterDescriptor}}
+\doxysubsubsection{\texorpdfstring{type}{type}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a05d6f6fc8f3269abeda43fc69c826998} 
+const std\+::type\+\_\+info\texorpdfstring{$\ast$}{*} neo\+::smartcontract\+::\+Interop\+Parameter\+Descriptor\+::type}
+
+
+
+The type information of the parameter. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/\mbox{\hyperlink{interop__parameter__descriptor_8h}{interop\+\_\+parameter\+\_\+descriptor.\+h}}\end{DoxyCompactItemize}

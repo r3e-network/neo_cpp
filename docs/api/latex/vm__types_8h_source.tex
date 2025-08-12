@@ -1,0 +1,57 @@
+\doxysection{vm\+\_\+types.\+h}
+\hypertarget{vm__types_8h_source}{}\label{vm__types_8h_source}\index{include/neo/smartcontract/vm\_types.h@{include/neo/smartcontract/vm\_types.h}}
+\mbox{\hyperlink{vm__types_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{trigger__type_8h}{neo/smartcontract/trigger\_type.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{vm__state_8h}{neo/vm/vm\_state.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ Forward\ declarations}}
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{StackItem}};}
+\DoxyCodeLine{00016\ \}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract}{neo::smartcontract}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ Use\ the\ unified\ VMState\ from\ the\ vm\ namespace}}
+\DoxyCodeLine{00021\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract_a2fb6b813e28a0a1eda4d2c3be6f9de78}{VMState}}\ =\ \mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{neo::vm::VMState}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1smartcontract_1_1_log_entry_a4aaea4218d8e6086a4ff2b572ffeb71e}{LogEntry}}}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_log_entry_a851650292c2e4925166a215a27359edb}{script\_hash}};}
+\DoxyCodeLine{00029\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_log_entry_a2f382f1f807c86686e0f2143b34d809a}{message}};}
+\DoxyCodeLine{00030\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_log_entry_af7ba5fdee9feec8547769f848342fab6}{timestamp}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_log_entry_a4aaea4218d8e6086a4ff2b572ffeb71e}{LogEntry}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_log_entry_a20bc55f99795e860837b7aa094d98ef4}{LogEntry}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ hash,\ \textcolor{keyword}{const}\ std::string\&\ msg,\ uint64\_t\ \mbox{\hyperlink{namespaceneo_1_1time}{time}}\ =\ 0)}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_log_entry_a851650292c2e4925166a215a27359edb}{script\_hash}}(hash),\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_log_entry_a2f382f1f807c86686e0f2143b34d809a}{message}}(msg),\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_log_entry_af7ba5fdee9feec8547769f848342fab6}{timestamp}}(\mbox{\hyperlink{namespaceneo_1_1time}{time}})}
+\DoxyCodeLine{00035\ \ \ \ \ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \}}
+\DoxyCodeLine{00037\ \};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00042\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1smartcontract_1_1_notify_entry_a7777595e172f4d22cfceda40dd4ef017}{NotifyEntry}}}
+\DoxyCodeLine{00043\ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_notify_entry_afc217af2f5e6e6d6d328007de966d7a5}{script\_hash}};}
+\DoxyCodeLine{00045\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_notify_entry_a90125eb5c7ae1f0d318b0f2a6fbed2fa}{event\_name}};}
+\DoxyCodeLine{00046\ \ \ \ \ std::vector<std::shared\_ptr<neo::vm::StackItem>>\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_notify_entry_a4cd461ad8ab719bab8fe0b09dc52c617}{state}};}
+\DoxyCodeLine{00047\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_notify_entry_aeff0153fa4233730d699ac7de7d02b45}{timestamp}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_notify_entry_a7777595e172f4d22cfceda40dd4ef017}{NotifyEntry}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_notify_entry_aba2abe1aca59a3a8089548b24ba88f27}{NotifyEntry}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ hash,\ \textcolor{keyword}{const}\ std::string\&\ event,}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<neo::vm::StackItem>>\&\ data,\ uint64\_t\ \mbox{\hyperlink{namespaceneo_1_1time}{time}}\ =\ 0)}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_notify_entry_afc217af2f5e6e6d6d328007de966d7a5}{script\_hash}}(hash),\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_notify_entry_a90125eb5c7ae1f0d318b0f2a6fbed2fa}{event\_name}}(event),\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_notify_entry_a4cd461ad8ab719bab8fe0b09dc52c617}{state}}(data),\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_notify_entry_aeff0153fa4233730d699ac7de7d02b45}{timestamp}}(\mbox{\hyperlink{namespaceneo_1_1time}{time}})}
+\DoxyCodeLine{00053\ \ \ \ \ \{}
+\DoxyCodeLine{00054\ \ \ \ \ \}}
+\DoxyCodeLine{00055\ \};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \}\ \ \textcolor{comment}{//\ namespace\ neo::smartcontract}}
+
+\end{DoxyCode}

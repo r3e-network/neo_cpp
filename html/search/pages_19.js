@@ -1,0 +1,25 @@
+var searchData=
+[
+  ['objectives_20achieved_20✅_0',['All Test Objectives Achieved ✅',['../md__t_e_s_t_n_e_t___v_e_r_i_f_i_c_a_t_i_o_n___r_e_p_o_r_t.html#autotoc_md491',1,'']]],
+  ['official_20plugins_3a_1',['Missing Official Plugins:',['../md__m_o_d_u_l_e___r_e_v_i_e_w.html#autotoc_md311',1,'']]],
+  ['operation_2',['&lt;b&gt;4. Verify Operation&lt;/b&gt;',['../md__d_e_p_l_o_y_m_e_n_t___g_u_i_d_e.html#autotoc_md161',1,'']]],
+  ['operation_20results_3',['Simulated Operation Results',['../md__v_e_r_i_f_i_c_a_t_i_o_n___c_o_m_p_l_e_t_e.html#autotoc_md512',1,'']]],
+  ['operational_4',['&lt;b&gt;Node Functionality: ✅ 100% OPERATIONAL&lt;/b&gt;',['../md__d_e_p_l_o_y_m_e_n_t___g_u_i_d_e.html#autotoc_md154',1,'']]],
+  ['operational_20commands_5',['🔧 &lt;b&gt;Operational Commands&lt;/b&gt;',['../md__d_e_p_l_o_y_m_e_n_t___g_u_i_d_e.html#autotoc_md168',1,'']]],
+  ['operational_20status_6',['Node Operational Status',['../md__t_e_s_t_n_e_t___v_e_r_i_f_i_c_a_t_i_o_n___r_e_p_o_r_t.html#autotoc_md485',1,'']]],
+  ['operations_7',['Efficient Operations',['../md_code__analysis__report.html#autotoc_md60',1,'']]],
+  ['optimization_8',['Performance Optimization',['../md__c_o_m_p_a_t_i_b_i_l_i_t_y___f_i_x_e_s___s_u_m_m_a_r_y.html#autotoc_md117',1,'']]],
+  ['optimization_20flags_9',['Optimization Flags',['../md__b_u_i_l_d___r_e_p_o_r_t.html#autotoc_md3',1,'']]],
+  ['optimization_20results_10',['Optimization Results',['../md__b_u_i_l_d___r_e_p_o_r_t.html#autotoc_md17',1,'']]],
+  ['optimizations_11',['Optimizations',['../md__n_e_o___n3___c_o_m_p_a_t_i_b_i_l_i_t_y___r_e_p_o_r_t.html#autotoc_md363',1,'1. Performance Optimizations'],['../md__p_e_r_f_o_r_m_a_n_c_e___o_p_t_i_m_i_z_a_t_i_o_n_s.html#autotoc_md411',1,'4. Network Optimizations'],['../md__p_e_r_f_o_r_m_a_n_c_e___o_p_t_i_m_i_z_a_t_i_o_n_s.html#autotoc_md412',1,'5. Storage Optimizations'],['../md__p_e_r_f_o_r_m_a_n_c_e___o_p_t_i_m_i_z_a_t_i_o_n_s.html#autotoc_md402',1,'Completed Optimizations'],['../md__p_e_r_f_o_r_m_a_n_c_e___o_p_t_i_m_i_z_a_t_i_o_n_s.html',1,'Neo C++ Node Performance Optimizations']]],
+  ['optimizations_20applied_12',['Compiler Optimizations Applied',['../md__b_u_i_l_d___r_e_p_o_r_t.html#autotoc_md18',1,'']]],
+  ['optimizations_20for_20future_20work_13',['Remaining Optimizations for Future Work',['../md__p_e_r_f_o_r_m_a_n_c_e___o_p_t_i_m_i_z_a_t_i_o_n_s.html#autotoc_md407',1,'']]],
+  ['orchestrator_14',['NeoSystem (Main Orchestrator)',['../md__n_e_o___n3___c_o_m_p_a_t_i_b_i_l_i_t_y___r_e_p_o_r_t.html#autotoc_md337',1,'']]],
+  ['organization_15',['Organization',['../md_code__analysis__report.html#autotoc_md39',1,'1.3 Code Organization'],['../md__c_o_n_t_r_i_b_u_t_i_n_g.html#autotoc_md135',1,'Code Organization']]],
+  ['original_20request_16',['Original Request',['../md__f_i_n_a_l___d_e_l_i_v_e_r_y___s_u_m_m_a_r_y.html#autotoc_md179',1,'']]],
+  ['output_17',['Live Test Output',['../md__v_e_r_i_f_i_c_a_t_i_o_n___c_o_m_p_l_e_t_e.html#autotoc_md518',1,'']]],
+  ['output_20analysis_18',['Test Output Analysis',['../md__n_e_w___i_n_t_e_g_r_a_t_i_o_n___t_e_s_t___r_e_s_u_l_t_s.html#autotoc_md385',1,'']]],
+  ['overall_20quality_20score_3a_208_205_2010_19',['Overall Quality Score: &lt;b&gt;8.5/10&lt;/b&gt;',['../md_code__analysis__report.html#autotoc_md34',1,'']]],
+  ['overall_20score_3a_2095_20100_20',['Overall Score: 95/100',['../md__f_i_n_a_l___m_o_d_u_l_e___r_e_v_i_e_w.html#autotoc_md231',1,'']]],
+  ['overview_21',['Overview',['../md__f_i_n_a_l___d_e_l_i_v_e_r_y___s_u_m_m_a_r_y.html#autotoc_md194',1,'Architecture Overview'],['../md__c_o_m_p_a_t_i_b_i_l_i_t_y___f_i_x_e_s___s_u_m_m_a_r_y.html#autotoc_md100',1,'Overview'],['../md__i_m_p_l_e_m_e_n_t_a_t_i_o_n___s_u_m_m_a_r_y.html#autotoc_md255',1,'Overview'],['../md__m_o_d_u_l_e___r_e_v_i_e_w.html#autotoc_md272',1,'Overview'],['../md__p2_p___s_y_n_c___c_h_a_n_g_e_s.html#autotoc_md389',1,'Overview'],['../md__t_e_s_t___r_e_s_u_l_t_s.html#autotoc_md462',1,'Overview']]]
+];

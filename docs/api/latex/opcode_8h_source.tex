@@ -1,0 +1,431 @@
+\doxysection{opcode.\+h}
+\hypertarget{opcode_8h_source}{}\label{opcode_8h_source}\index{include/neo/vm/opcode.h@{include/neo/vm/opcode.h}}
+\mbox{\hyperlink{opcode_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{OpCode}}\ :\ uint8\_t}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ \textcolor{comment}{//\ Constants}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a71fd9921e04bd19603493a711ea065dd}{PUSHINT8}}\ =\ 0x00,}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ad1e73c162a188c0968b6acee9e3d2fe1}{PUSHINT16}}\ =\ 0x01,}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aa7eccce61a8f552020814b17e215bd42}{PUSHINT32}}\ =\ 0x02,}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a4295eb5f94ece06f111d6b55f42c220f}{PUSHINT64}}\ =\ 0x03,}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a6eacd300d82afe7d84bca83d9f9493eb}{PUSHINT128}}\ =\ 0x04,}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ad50252700f8842c5a998b7121a32f2fc}{PUSHINT256}}\ =\ 0x05,}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8f731427cccc6f1e216641d2263e63ad}{PUSHT}}\ =\ 0x08,}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac43ec83b8852b2069b3f3e52dc7e39ab}{PUSHF}}\ =\ 0x09,}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8adbeae77be97dda1ed3ef29308468c81f}{PUSHA}}\ =\ 0x0A,}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac359552889c0db7cae3f96bf979c9af4}{PUSHNULL}}\ =\ 0x0B,}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a49076f624ecc164b834b5a1976826c4e}{PUSHDATA1}}\ =\ 0x0C,}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00073\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a22a7f3111a5260b666bbc60b87f3f22c}{PUSHDATA2}}\ =\ 0x0D,}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a75558b9b83f11102cc87c9ad686a1584}{PUSHDATA4}}\ =\ 0x0E,}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a00bc7c2d37ee3a7bc2b5738b1e32a235}{PUSHM1}}\ =\ 0x0F,}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aaae7651a1d1d16a3db7c52198f68b8a2}{PUSH0}}\ =\ 0x10,}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aec971f2183d8033469c4341ca30f29e2}{PUSH1}}\ =\ 0x11,}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ad7c352a6662b9d5987e95ad1205bc51d}{PUSH2}}\ =\ 0x12,}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ab2d4954ae4e341d016e16cffc05f2b47}{PUSH3}}\ =\ 0x13,}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00108\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a11b91fb70bf0304f7b48870bb5eb488f}{PUSH4}}\ =\ 0x14,}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00113\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a9b0ab07d51310373143e99c445d8fba8}{PUSH5}}\ =\ 0x15,}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00118\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a9abd8eb729b0451a5397387e7c876730}{PUSH6}}\ =\ 0x16,}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00123\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8d127c0cdb10e8ebd6e7cdd8cba88dab}{PUSH7}}\ =\ 0x17,}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00128\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ae82494aa44523c4a19deabc23ffb45f0}{PUSH8}}\ =\ 0x18,}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a49d317557e0b7676b97b76cf853feeaa}{PUSH9}}\ =\ 0x19,}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00138\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a6fb9ef20adaf8b5090aa60964d7e2f20}{PUSH10}}\ =\ 0x1A,}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ad15335cc599209657eac7c187a85e163}{PUSH11}}\ =\ 0x1B,}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00148\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8be0a2efe861949ff8a7423a03c23071}{PUSH12}}\ =\ 0x1C,}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00153\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a97137d3ec20a12ef864f8f03d09eb7c3}{PUSH13}}\ =\ 0x1D,}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00158\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ab7497ad84c55481aab73ecde427d7da6}{PUSH14}}\ =\ 0x1E,}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00163\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a2f9d7042e5ad86307f1ea1c238a1319c}{PUSH15}}\ =\ 0x1F,}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00168\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8acd518e88978b44149f55cc158acac7a4}{PUSH16}}\ =\ 0x20,}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{comment}{//\ Flow\ control}}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00175\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a1a004f5abe2b334db21328be1ea6b593}{NOP}}\ =\ 0x21,}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00180\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a152b9af76a9e7dd95d9da277b69fdd95}{JMP}}\ =\ 0x22,}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00185\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a47764b71f3982cf97df0e78991b881d8}{JMP\_L}}\ =\ 0x23,}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00190\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7848821861aadfb5fb8d3f4d4f174eaa}{JMPIF}}\ =\ 0x24,}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00195\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8e0b03ba1194cbdd4cc23dce7d34a4a0}{JMPIF\_L}}\ =\ 0x25,}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00200\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a26be228bb8cffe6c0c5122977992bacf}{JMPIFNOT}}\ =\ 0x26,}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00205\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a5d176e5f9718b5d1375468e344c3a67c}{JMPIFNOT\_L}}\ =\ 0x27,}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00210\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8d2dae86c15d2bb8b4d0c88efa1551c8}{JMPEQ}}\ =\ 0x28,}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00215\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a21351b15494b55434e096f9c14d2ad05}{JMPEQ\_L}}\ =\ 0x29,}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00220\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac9cdd03c0a73421aa5f575fee74b173d}{JMPNE}}\ =\ 0x2A,}
+\DoxyCodeLine{00221\ }
+\DoxyCodeLine{00225\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8acb933e932eac09e2f56e57222c7d7f67}{JMPNE\_L}}\ =\ 0x2B,}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00230\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a025946414dbfd1748e2b988723265dad}{JMPGT}}\ =\ 0x2C,}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00235\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aa1bbc9a9313da8e28edbbd0277375f10}{JMPGT\_L}}\ =\ 0x2D,}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00240\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ab4eeeb4e3770c22c5001c7a962c4432c}{JMPGE}}\ =\ 0x2E,}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00245\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a0fa76ac32510f5509925aaa3381a3c2e}{JMPGE\_L}}\ =\ 0x2F,}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00250\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8abc40514b1979eb3d8eed2281adc36f08}{JMPLT}}\ =\ 0x30,}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00255\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a4940786bf593b06b210ce0b41b5bc6d8}{JMPLT\_L}}\ =\ 0x31,}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00260\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a93bf38d2f45e4ad49f0130d516154c27}{JMPLE}}\ =\ 0x32,}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00265\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac49537823e38ebe2cb0b254fcd4b803b}{JMPLE\_L}}\ =\ 0x33,}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00270\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aca3547acb9162b49fb4a6594ed9b3030}{CALL}}\ =\ 0x34,}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00275\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8abff95c89341ad121649508786a3fc2bc}{CALL\_L}}\ =\ 0x35,}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00280\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a40303fa38c40e5f6bfc743b0b3cb35b5}{CALLA}}\ =\ 0x36,}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00285\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8af15bb9ceafbc2a8b7a8804a66ec9d2b7}{CALLT}}\ =\ 0x37,}
+\DoxyCodeLine{00286\ }
+\DoxyCodeLine{00290\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8d12a2ca7e5a64036d7251a3eda51a38}{ABORT}}\ =\ 0x38,}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00295\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a1edce3bd99a335da00a27703a24f3dfc}{ASSERT}}\ =\ 0x39,}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00300\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a655474de4674aba7a436a73cd8d9a906}{THROW}}\ =\ 0x3A,}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00305\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a59dfb83f7cac4e3c8ee91700ef2ad90d}{TRY}}\ =\ 0x3B,}
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00310\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ae1f987976ed4442295b1b7b50d994cbc}{TRY\_L}}\ =\ 0x3C,}
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00315\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aae17e3dd93509fb03a7052c9700efab7}{ENDTRY}}\ =\ 0x3D,}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00320\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8acfd8a07e5120a5fa23e3c6ab4b4c468e}{ENDTRY\_L}}\ =\ 0x3E,}
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00325\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8afa5f5f4db9a3a5ff9761b775dd414a79}{ENDFINALLY}}\ =\ 0x3F,}
+\DoxyCodeLine{00326\ }
+\DoxyCodeLine{00330\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8afb902bc4807c307b9309f2b528b96f2b}{RET}}\ =\ 0x40,}
+\DoxyCodeLine{00331\ }
+\DoxyCodeLine{00335\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a45f1e61f22cb04eb7a6a39016b56db9b}{SYSCALL}}\ =\ 0x41,}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00337\ \ \ \ \ \textcolor{comment}{//\ Stack}}
+\DoxyCodeLine{00338\ }
+\DoxyCodeLine{00342\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aaa1780b4fcce2d5d9af13dc25386d111}{DEPTH}}\ =\ 0x43,}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00347\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8abf8f3be424eb6a72b21549fbb24ffb57}{DROP}}\ =\ 0x45,}
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00352\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a2be69d2c4f6a31bb2ae7db875035037e}{NIP}}\ =\ 0x46,}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00357\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aed6421e09b23da1f7b29267f437cf551}{XDROP}}\ =\ 0x48,}
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00362\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a813461e0c58e7ad59a2fd83ca2237fec}{CLEAR}}\ =\ 0x49,}
+\DoxyCodeLine{00363\ }
+\DoxyCodeLine{00367\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a89aa2bca1f427b3bba6335129f479f77}{DUP}}\ =\ 0x4A,}
+\DoxyCodeLine{00368\ }
+\DoxyCodeLine{00372\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a1bb417e796672d15256a5b51d9b554ae}{OVER}}\ =\ 0x4B,}
+\DoxyCodeLine{00373\ }
+\DoxyCodeLine{00377\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ad9f6d86a3c4dd82ccef63fe5b5cd2def}{PICK}}\ =\ 0x4D,}
+\DoxyCodeLine{00378\ }
+\DoxyCodeLine{00382\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a91401ca580e1fe0890cbc955c62c3f16}{TUCK}}\ =\ 0x4E,}
+\DoxyCodeLine{00383\ }
+\DoxyCodeLine{00387\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a46fc23bc4e4d57e5469a39658a6dd3e8}{SWAP}}\ =\ 0x50,}
+\DoxyCodeLine{00388\ }
+\DoxyCodeLine{00392\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ae1d91e3279dd3926fbe4b51b713bc216}{ROT}}\ =\ 0x51,}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00397\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a08cd1a31f17f0247ac89e2fbaadaa9e8}{ROLL}}\ =\ 0x52,}
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00402\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a67adac6729a392f610f94bac005c5ddd}{REVERSE3}}\ =\ 0x53,}
+\DoxyCodeLine{00403\ }
+\DoxyCodeLine{00407\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a5b0752b01f30a5b3d45cd6693e2d9ccd}{REVERSE4}}\ =\ 0x54,}
+\DoxyCodeLine{00408\ }
+\DoxyCodeLine{00412\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a98f9afb6df9a8e636ef0c06ab80d5d3c}{REVERSEN}}\ =\ 0x55,}
+\DoxyCodeLine{00413\ }
+\DoxyCodeLine{00414\ \ \ \ \ \textcolor{comment}{//\ Slot}}
+\DoxyCodeLine{00415\ }
+\DoxyCodeLine{00419\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac285f31606a058bd7c323f1b2951ed8d}{INITSSLOT}}\ =\ 0x56,}
+\DoxyCodeLine{00420\ }
+\DoxyCodeLine{00424\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8eed982f0e1bc01ce8e09d799da1cc88}{INITSLOT}}\ =\ 0x57,}
+\DoxyCodeLine{00425\ }
+\DoxyCodeLine{00429\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8abefab14308c0e3613db87d017cb93fb7}{LDSFLD0}}\ =\ 0x58,}
+\DoxyCodeLine{00430\ }
+\DoxyCodeLine{00434\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ad3c23fbea117a1218438ff141a2d9d28}{LDSFLD1}}\ =\ 0x59,}
+\DoxyCodeLine{00435\ }
+\DoxyCodeLine{00439\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7c8f0175eab654ef08c3a53656af8f3f}{LDSFLD2}}\ =\ 0x5A,}
+\DoxyCodeLine{00440\ }
+\DoxyCodeLine{00444\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a865e1242061840af67fb6ee8c8a3f43c}{LDSFLD3}}\ =\ 0x5B,}
+\DoxyCodeLine{00445\ }
+\DoxyCodeLine{00449\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a47d88f3ed787d6ffbddc323ea819e089}{LDSFLD4}}\ =\ 0x5C,}
+\DoxyCodeLine{00450\ }
+\DoxyCodeLine{00454\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8897131fd18c8414e364f598c07046dd}{LDSFLD5}}\ =\ 0x5D,}
+\DoxyCodeLine{00455\ }
+\DoxyCodeLine{00459\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8abde361b3f703001e8e39e87406270f79}{LDSFLD6}}\ =\ 0x5E,}
+\DoxyCodeLine{00460\ }
+\DoxyCodeLine{00464\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aaea5614dd8d0f5c742dc05e6beff0257}{LDSFLD}}\ =\ 0x5F,}
+\DoxyCodeLine{00465\ }
+\DoxyCodeLine{00469\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a364a9fb00e518127a70b0e1b4946e79e}{STSFLD0}}\ =\ 0x60,}
+\DoxyCodeLine{00470\ }
+\DoxyCodeLine{00474\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a32ece6d043f63ab06cd5a700d9fd5514}{STSFLD1}}\ =\ 0x61,}
+\DoxyCodeLine{00475\ }
+\DoxyCodeLine{00479\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a96d193cacbc0d9b71c0498986e048946}{STSFLD2}}\ =\ 0x62,}
+\DoxyCodeLine{00480\ }
+\DoxyCodeLine{00484\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aed6633a8b19c480c9624d8cffff21f74}{STSFLD3}}\ =\ 0x63,}
+\DoxyCodeLine{00485\ }
+\DoxyCodeLine{00489\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a52d482ef7e5f5549dd884d6f0afc6f2f}{STSFLD4}}\ =\ 0x64,}
+\DoxyCodeLine{00490\ }
+\DoxyCodeLine{00494\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8abe54c8a5579195a2ebccafdf4050cd56}{STSFLD5}}\ =\ 0x65,}
+\DoxyCodeLine{00495\ }
+\DoxyCodeLine{00499\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a812fb0b83b098ff199104e0ec8bc36c4}{STSFLD6}}\ =\ 0x66,}
+\DoxyCodeLine{00500\ }
+\DoxyCodeLine{00504\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a460bf6ff6808350749f04523703b6fab}{STSFLD}}\ =\ 0x67,}
+\DoxyCodeLine{00505\ }
+\DoxyCodeLine{00509\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a4c8b731f2cd864e0d38b4ad5504026c8}{LDLOC0}}\ =\ 0x68,}
+\DoxyCodeLine{00510\ }
+\DoxyCodeLine{00514\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ab73650d4dd77f0b523e30fdf5c5c7865}{LDLOC1}}\ =\ 0x69,}
+\DoxyCodeLine{00515\ }
+\DoxyCodeLine{00519\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a48c9331cf49fc5c10b2f732d471cbfd2}{LDLOC2}}\ =\ 0x6A,}
+\DoxyCodeLine{00520\ }
+\DoxyCodeLine{00524\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8af3b41ec41685d393ab6b6d9e96f5819f}{LDLOC3}}\ =\ 0x6B,}
+\DoxyCodeLine{00525\ }
+\DoxyCodeLine{00529\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aa4c00182149ae09859bfa5d51205d9d9}{LDLOC4}}\ =\ 0x6C,}
+\DoxyCodeLine{00530\ }
+\DoxyCodeLine{00534\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a792ab2c7813fec58eb6eecd1316bb235}{LDLOC5}}\ =\ 0x6D,}
+\DoxyCodeLine{00535\ }
+\DoxyCodeLine{00539\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8acacf503b90387d075f1099d9536f7a46}{LDLOC6}}\ =\ 0x6E,}
+\DoxyCodeLine{00540\ }
+\DoxyCodeLine{00544\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7a7f8f036bdc769c290ef4040701f8f7}{LDLOC}}\ =\ 0x6F,}
+\DoxyCodeLine{00545\ }
+\DoxyCodeLine{00549\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a41e598bfcdd249c17959f08e46683b7b}{STLOC0}}\ =\ 0x70,}
+\DoxyCodeLine{00550\ }
+\DoxyCodeLine{00554\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a312cd328c40e83b684fa738c684234df}{STLOC1}}\ =\ 0x71,}
+\DoxyCodeLine{00555\ }
+\DoxyCodeLine{00559\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a58f5db68e512b29deaeaa4bcbcfd7ef8}{STLOC2}}\ =\ 0x72,}
+\DoxyCodeLine{00560\ }
+\DoxyCodeLine{00564\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8acb279b517abd2db1a1969f85fc03f5cd}{STLOC3}}\ =\ 0x73,}
+\DoxyCodeLine{00565\ }
+\DoxyCodeLine{00569\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7d23b38073f7351cd47f9602f9d0ed26}{STLOC4}}\ =\ 0x74,}
+\DoxyCodeLine{00570\ }
+\DoxyCodeLine{00574\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ada19c3561602bc1dd17e86f5426a3439}{STLOC5}}\ =\ 0x75,}
+\DoxyCodeLine{00575\ }
+\DoxyCodeLine{00579\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7fe7b0cafde09b38c2563cb0e5102927}{STLOC6}}\ =\ 0x76,}
+\DoxyCodeLine{00580\ }
+\DoxyCodeLine{00584\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a054fdc30c8fdfc82062c6f71cc5aee8c}{STLOC}}\ =\ 0x77,}
+\DoxyCodeLine{00585\ }
+\DoxyCodeLine{00589\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a466d25b200861b2f874bc2fea4f19fe4}{LDARG0}}\ =\ 0x78,}
+\DoxyCodeLine{00590\ }
+\DoxyCodeLine{00594\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8af9e152a169ef97f975c7551693899b65}{LDARG1}}\ =\ 0x79,}
+\DoxyCodeLine{00595\ }
+\DoxyCodeLine{00599\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8af59381a4b8657e27c35c18b81feff2f8}{LDARG2}}\ =\ 0x7A,}
+\DoxyCodeLine{00600\ }
+\DoxyCodeLine{00604\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a35aa575aca33dd64e0c14f5580270f6d}{LDARG3}}\ =\ 0x7B,}
+\DoxyCodeLine{00605\ }
+\DoxyCodeLine{00609\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a64dfab32d3a15564ecf9f69a4be09d66}{LDARG4}}\ =\ 0x7C,}
+\DoxyCodeLine{00610\ }
+\DoxyCodeLine{00614\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a1c2c61b2f464b3a83006820c76510252}{LDARG5}}\ =\ 0x7D,}
+\DoxyCodeLine{00615\ }
+\DoxyCodeLine{00619\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a3267fef9cbec5db91741795c8122f27b}{LDARG6}}\ =\ 0x7E,}
+\DoxyCodeLine{00620\ }
+\DoxyCodeLine{00624\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a37d2a6f2d4a1242aa25fbabb5823031c}{LDARG}}\ =\ 0x7F,}
+\DoxyCodeLine{00625\ }
+\DoxyCodeLine{00629\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aa39742858aab567df0c9d3c9bc801b04}{STARG0}}\ =\ 0x80,}
+\DoxyCodeLine{00630\ }
+\DoxyCodeLine{00634\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a5a0302145d429888eba0e8f5aa5b5711}{STARG1}}\ =\ 0x81,}
+\DoxyCodeLine{00635\ }
+\DoxyCodeLine{00639\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ab5303baeb1cc217c992c8d01ded78673}{STARG2}}\ =\ 0x82,}
+\DoxyCodeLine{00640\ }
+\DoxyCodeLine{00644\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a4ef5c633e5661cbe43cf777a754ad948}{STARG3}}\ =\ 0x83,}
+\DoxyCodeLine{00645\ }
+\DoxyCodeLine{00649\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ad32fafa1811e896b89f893bf4b563647}{STARG4}}\ =\ 0x84,}
+\DoxyCodeLine{00650\ }
+\DoxyCodeLine{00654\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a702102dd52fe1fb29489849d653ab046}{STARG5}}\ =\ 0x85,}
+\DoxyCodeLine{00655\ }
+\DoxyCodeLine{00659\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a44b459a27d886d59da29b453814cc252}{STARG6}}\ =\ 0x86,}
+\DoxyCodeLine{00660\ }
+\DoxyCodeLine{00664\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a80d0a92f8b78d39987b3cba2373ab8e2}{STARG}}\ =\ 0x87,}
+\DoxyCodeLine{00665\ }
+\DoxyCodeLine{00666\ \ \ \ \ \textcolor{comment}{//\ Splice}}
+\DoxyCodeLine{00667\ }
+\DoxyCodeLine{00671\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8af783f116a510eb80c304b348672caa11}{NEWBUFFER}}\ =\ 0x88,}
+\DoxyCodeLine{00672\ }
+\DoxyCodeLine{00676\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac5d10cc70cce96265c445f14e7f5aba4}{MEMCPY}}\ =\ 0x89,}
+\DoxyCodeLine{00677\ }
+\DoxyCodeLine{00681\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac01ae1a5f122f25ce5675f86028b536a}{CAT}}\ =\ 0x8B,}
+\DoxyCodeLine{00682\ }
+\DoxyCodeLine{00686\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a0f85e58dd75e7025beb47ee590ff7669}{SUBSTR}}\ =\ 0x8C,}
+\DoxyCodeLine{00687\ }
+\DoxyCodeLine{00691\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a684d325a7303f52e64011467ff5c5758}{LEFT}}\ =\ 0x8D,}
+\DoxyCodeLine{00692\ }
+\DoxyCodeLine{00696\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a21507b40c80068eda19865706fdc2403}{RIGHT}}\ =\ 0x8E,}
+\DoxyCodeLine{00697\ }
+\DoxyCodeLine{00698\ \ \ \ \ \textcolor{comment}{//\ Bitwise\ logic}}
+\DoxyCodeLine{00699\ }
+\DoxyCodeLine{00703\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aa2727ae72447eea06d4cc0ef67187280}{INVERT}}\ =\ 0x90,}
+\DoxyCodeLine{00704\ }
+\DoxyCodeLine{00708\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a558ffc8f5770d8e4f95f51d822685532}{AND}}\ =\ 0x91,}
+\DoxyCodeLine{00709\ }
+\DoxyCodeLine{00713\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a1d00e7dce692e8dc3f6877f035e3a616}{OR}}\ =\ 0x92,}
+\DoxyCodeLine{00714\ }
+\DoxyCodeLine{00718\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a97675eb3f268048604dc5155511a2a4d}{XOR}}\ =\ 0x93,}
+\DoxyCodeLine{00719\ }
+\DoxyCodeLine{00723\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a969f331a87d8c958473c32b4d0e61a44}{EQUAL}}\ =\ 0x97,}
+\DoxyCodeLine{00724\ }
+\DoxyCodeLine{00728\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a94fbd04a26dff1689ee02634be6aaf1f}{NOTEQUAL}}\ =\ 0x98,}
+\DoxyCodeLine{00729\ }
+\DoxyCodeLine{00730\ \ \ \ \ \textcolor{comment}{//\ Arithmetic}}
+\DoxyCodeLine{00731\ }
+\DoxyCodeLine{00735\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a65b164db371ec78984e24bc8f858c0d1}{SIGN}}\ =\ 0x99,}
+\DoxyCodeLine{00736\ }
+\DoxyCodeLine{00740\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7d8a220d2262f9d6c658d549ee12cf2c}{ABS}}\ =\ 0x9A,}
+\DoxyCodeLine{00741\ }
+\DoxyCodeLine{00745\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ad2bfe823de977bec55fc1459621da7c6}{NEGATE}}\ =\ 0x9B,}
+\DoxyCodeLine{00746\ }
+\DoxyCodeLine{00750\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a38924f2227ebf15f4bdc6dca5c5eca91}{INC}}\ =\ 0x9C,}
+\DoxyCodeLine{00751\ }
+\DoxyCodeLine{00755\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a38344a4d87bb35ec197f26fad338b6ab}{DEC}}\ =\ 0x9D,}
+\DoxyCodeLine{00756\ }
+\DoxyCodeLine{00760\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a9eeb52badb613229884838847294b90d}{ADD}}\ =\ 0x9E,}
+\DoxyCodeLine{00761\ }
+\DoxyCodeLine{00765\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a241dd841abade20fcb27b8a9f494e1eb}{SUB}}\ =\ 0x9F,}
+\DoxyCodeLine{00766\ }
+\DoxyCodeLine{00770\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a2cdf52a55876063ec93b7d18bc741f6c}{MUL}}\ =\ 0xA0,}
+\DoxyCodeLine{00771\ }
+\DoxyCodeLine{00775\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a29bbf66f7f8529ec47e394fb5a36c646}{DIV}}\ =\ 0xA1,}
+\DoxyCodeLine{00776\ }
+\DoxyCodeLine{00780\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac5a28f4b35a2884fa3277150ac5d0967}{MOD}}\ =\ 0xA2,}
+\DoxyCodeLine{00781\ }
+\DoxyCodeLine{00785\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a17faf4e999b8cee4c36915c1f54ccffe}{POW}}\ =\ 0xA3,}
+\DoxyCodeLine{00786\ }
+\DoxyCodeLine{00790\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a36875f2500a09ee35d0bb7eb8c0b91b0}{SQRT}}\ =\ 0xA4,}
+\DoxyCodeLine{00791\ }
+\DoxyCodeLine{00795\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a621aa84d2315c13c9c5567d62f14e5fc}{MODMUL}}\ =\ 0xA5,}
+\DoxyCodeLine{00796\ }
+\DoxyCodeLine{00800\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a4d23292e3a1a162065eee1849c020f3c}{MODPOW}}\ =\ 0xA6,}
+\DoxyCodeLine{00801\ }
+\DoxyCodeLine{00805\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8abb0b9165d75b1fd27d0a869b036baa3c}{SHL}}\ =\ 0xA8,}
+\DoxyCodeLine{00806\ }
+\DoxyCodeLine{00810\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a10ab606ab9efe239a011d327d9301edd}{SHR}}\ =\ 0xA9,}
+\DoxyCodeLine{00811\ }
+\DoxyCodeLine{00815\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a10df3d67626099df882920ba6552f16d}{NOT}}\ =\ 0xAA,}
+\DoxyCodeLine{00816\ }
+\DoxyCodeLine{00820\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ae304154c6d2ef858b4861637dfa43687}{BOOLAND}}\ =\ 0xAB,}
+\DoxyCodeLine{00821\ }
+\DoxyCodeLine{00825\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aac2c11e7064a1ce1ed87e0eccbf3b384}{BOOLOR}}\ =\ 0xAC,}
+\DoxyCodeLine{00826\ }
+\DoxyCodeLine{00830\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8e3eb2c69a184ad1d448afe5985f50b3}{NZ}}\ =\ 0xB1,}
+\DoxyCodeLine{00831\ }
+\DoxyCodeLine{00835\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ab8fa14b0b0a44176bd52edf6c2a3a956}{NUMEQUAL}}\ =\ 0xB3,}
+\DoxyCodeLine{00836\ }
+\DoxyCodeLine{00840\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8af271d658e7181f0b36da3588712ce3c0}{NUMNOTEQUAL}}\ =\ 0xB4,}
+\DoxyCodeLine{00841\ }
+\DoxyCodeLine{00845\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac562607189d77eb9dfb707464c1e7b0b}{LT}}\ =\ 0xB5,}
+\DoxyCodeLine{00846\ }
+\DoxyCodeLine{00850\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8acfe6055d2e0503be378bb63449ec7ba6}{LE}}\ =\ 0xB6,}
+\DoxyCodeLine{00851\ }
+\DoxyCodeLine{00855\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8acd6a9bd2a175104eed40f0d33a8b4020}{GT}}\ =\ 0xB7,}
+\DoxyCodeLine{00856\ }
+\DoxyCodeLine{00860\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8af803729628adf4199f224c2a225038e9}{GE}}\ =\ 0xB8,}
+\DoxyCodeLine{00861\ }
+\DoxyCodeLine{00865\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ace31e2a082d17e038fcc6e3006166653}{MIN}}\ =\ 0xB9,}
+\DoxyCodeLine{00866\ }
+\DoxyCodeLine{00870\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a26a4b44a837bf97b972628509912b4a5}{MAX}}\ =\ 0xBA,}
+\DoxyCodeLine{00871\ }
+\DoxyCodeLine{00875\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a6115012b8971f5e51685a9b5d0d761b9}{WITHIN}}\ =\ 0xBB,}
+\DoxyCodeLine{00876\ }
+\DoxyCodeLine{00877\ \ \ \ \ \textcolor{comment}{//\ Compound-\/type}}
+\DoxyCodeLine{00878\ }
+\DoxyCodeLine{00883\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a9b4316b862a8ffd3fe80a289e74c4aff}{PACKMAP}}\ =\ 0xBE,}
+\DoxyCodeLine{00884\ }
+\DoxyCodeLine{00889\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7c1d20b35fbea7f0d2aa1d917f03de7a}{PACKSTRUCT}}\ =\ 0xBF,}
+\DoxyCodeLine{00890\ }
+\DoxyCodeLine{00895\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac6c95380f38d412370dcdfacceff48ff}{PACK}}\ =\ 0xC0,}
+\DoxyCodeLine{00896\ }
+\DoxyCodeLine{00901\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a26d35087b15c957db06a38ccb3391ef9}{UNPACK}}\ =\ 0xC1,}
+\DoxyCodeLine{00902\ }
+\DoxyCodeLine{00906\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a35694c82bac03299adca63f387848143}{NEWARRAY0}}\ =\ 0xC2,}
+\DoxyCodeLine{00907\ }
+\DoxyCodeLine{00911\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aadc78a5e0d1ec07a8e7eb09e464a286d}{NEWARRAY}}\ =\ 0xC3,}
+\DoxyCodeLine{00912\ }
+\DoxyCodeLine{00916\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ae73966361125436dfca7b2b651ff9d9c}{NEWARRAY\_T}}\ =\ 0xC4,}
+\DoxyCodeLine{00917\ }
+\DoxyCodeLine{00921\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a947c99cd031ed47cc19fdd562b7b6e46}{NEWSTRUCT0}}\ =\ 0xC5,}
+\DoxyCodeLine{00922\ }
+\DoxyCodeLine{00926\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ab2faabe2aaa7b7d9556b9b53b63a3840}{NEWSTRUCT}}\ =\ 0xC6,}
+\DoxyCodeLine{00927\ }
+\DoxyCodeLine{00931\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a4b2fa1b21b1b00e058d1f7579895aa1a}{NEWMAP}}\ =\ 0xC8,}
+\DoxyCodeLine{00932\ }
+\DoxyCodeLine{00936\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a62e5cef85d46f1a5a2144d9fd463b79e}{SIZE}}\ =\ 0xCA,}
+\DoxyCodeLine{00937\ }
+\DoxyCodeLine{00942\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8796a8f2f9b707554a548675894f9eec}{HASKEY}}\ =\ 0xCB,}
+\DoxyCodeLine{00943\ }
+\DoxyCodeLine{00947\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a48fb38e1f876fa3dc9c8cd6cad73c243}{KEYS}}\ =\ 0xCC,}
+\DoxyCodeLine{00948\ }
+\DoxyCodeLine{00952\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ab7db4588385c4fc7ed5211c35c711598}{VALUES}}\ =\ 0xCD,}
+\DoxyCodeLine{00953\ }
+\DoxyCodeLine{00958\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a6beceb5f76418c3423591135596cf700}{PICKITEM}}\ =\ 0xCE,}
+\DoxyCodeLine{00959\ }
+\DoxyCodeLine{00963\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a375ffb668aa90f1c7fcae55e9734a752}{APPEND}}\ =\ 0xCF,}
+\DoxyCodeLine{00964\ }
+\DoxyCodeLine{00969\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a83a991aca8973ca5f60b190f5a835513}{SETITEM}}\ =\ 0xD0,}
+\DoxyCodeLine{00970\ }
+\DoxyCodeLine{00974\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a328072b907cdbe459b0d4ed8ef22c2eb}{REVERSEITEMS}}\ =\ 0xD1,}
+\DoxyCodeLine{00975\ }
+\DoxyCodeLine{00980\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a78baf367c4626442174307cdf41c6538}{REMOVE}}\ =\ 0xD2,}
+\DoxyCodeLine{00981\ }
+\DoxyCodeLine{00985\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a95663bae6c65719df244a182c7f18e88}{CLEARITEMS}}\ =\ 0xD3,}
+\DoxyCodeLine{00986\ }
+\DoxyCodeLine{00990\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a4b15626b620d2f850d4ccd7f3b92f2e1}{POPITEM}}\ =\ 0xD4,}
+\DoxyCodeLine{00991\ }
+\DoxyCodeLine{00992\ \ \ \ \ \textcolor{comment}{//\ Types}}
+\DoxyCodeLine{00993\ }
+\DoxyCodeLine{00997\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac5dc611cb8490048db201f0710f4b379}{ISNULL}}\ =\ 0xD8,}
+\DoxyCodeLine{00998\ }
+\DoxyCodeLine{01002\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8adddd9bc4e50dde695726338954800766}{ISTYPE}}\ =\ 0xD9,}
+\DoxyCodeLine{01003\ }
+\DoxyCodeLine{01007\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a947a338c0e482e4afcffca292d5944f2}{CONVERT}}\ =\ 0xDB,}
+\DoxyCodeLine{01008\ }
+\DoxyCodeLine{01009\ \ \ \ \ \textcolor{comment}{//\ Extensions}}
+\DoxyCodeLine{01010\ }
+\DoxyCodeLine{01014\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7b50ae6b47d901e7453b1253f3a4e684}{ABORTMSG}}\ =\ 0xE0,}
+\DoxyCodeLine{01015\ }
+\DoxyCodeLine{01020\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7075d8a996849cb7afce74f79ca2f30e}{ASSERTMSG}}\ =\ 0xE1}
+\DoxyCodeLine{01021\ \};}
+\DoxyCodeLine{01022\ }
+\DoxyCodeLine{01028\ std::string\ \mbox{\hyperlink{namespaceneo_1_1vm_a3955bee09a17a8f8810875e16500e543}{GetOpCodeName}}(\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{OpCode}}\ opcode);}
+\DoxyCodeLine{01029\ }
+\DoxyCodeLine{01030\ \}\ \ \textcolor{comment}{//\ namespace\ neo::vm}}
+
+\end{DoxyCode}

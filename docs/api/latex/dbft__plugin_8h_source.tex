@@ -1,0 +1,49 @@
+\doxysection{dbft\+\_\+plugin.\+h}
+\hypertarget{dbft__plugin_8h_source}{}\label{dbft__plugin_8h_source}\index{include/neo/plugins/dbft\_plugin.h@{include/neo/plugins/dbft\_plugin.h}}
+\mbox{\hyperlink{dbft__plugin_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{consensus__service_8h}{neo/consensus/consensus\_service.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{plugin__base_8h}{neo/plugins/plugin\_base.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{wallet_8h}{neo/wallets/wallet.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1plugins}{neo::plugins}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1plugins_1_1_d_b_f_t_plugin_abd3405da64192167a50230f1b23bd9b1}{DBFTPlugin}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_ae2713af7147395e3f7230925418aa28d}{PluginBase}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classneo_1_1plugins_1_1_d_b_f_t_plugin_abd3405da64192167a50230f1b23bd9b1}{DBFTPlugin}}();}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_d_b_f_t_plugin_a95e64c9770d5b9bdd2ed8681f35506f5}{StartConsensus}}(std::shared\_ptr<wallets::Wallet>\ wallet);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_d_b_f_t_plugin_a1ba92881a3e2f0e7425363345d1be96a}{StopConsensus}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_d_b_f_t_plugin_ae79b236496ad4e20c91398f1bdefa6a5}{IsConsensusRunning}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_d_b_f_t_plugin_a4f321e2cbb376c487a3916ad94d9ba82}{OnInitialize}}(\textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::string>\&\ settings)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_d_b_f_t_plugin_aab59b22d8dda9b88eb4f0a9c7345b835}{OnStart}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_d_b_f_t_plugin_ac858c1a8b232805d09533b15dbabad1a}{OnStop}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00065\ \ \ \ \ std::shared\_ptr<consensus::ConsensusService>\ \mbox{\hyperlink{classneo_1_1plugins_1_1_d_b_f_t_plugin_a5586a56ceb936a0e6281c7180a19ff70}{consensusService\_}};}
+\DoxyCodeLine{00066\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1plugins_1_1_d_b_f_t_plugin_ac6ddaf87c3c50cc5babc6bdb82d67f7d}{walletPath\_}};}
+\DoxyCodeLine{00067\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1plugins_1_1_d_b_f_t_plugin_ab0220daca1af0b6cd5470d08d347abd5}{walletPassword\_}};}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_d_b_f_t_plugin_aafa6c803eb9b54e79b7b09972891e653}{autoStart\_}};}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1plugins_1_1_d_b_f_t_plugin_ab3c99dd8541bd6526cd4eb7bde6a82ae}{mutex\_}};}
+\DoxyCodeLine{00070\ \};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00075\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1plugins_1_1_d_b_f_t_plugin_factory}{DBFTPluginFactory}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory_base}{PluginFactoryBase}}<DBFTPlugin>}
+\DoxyCodeLine{00076\ \{}
+\DoxyCodeLine{00077\ \};}
+\DoxyCodeLine{00078\ \}\ \ \textcolor{comment}{//\ namespace\ neo::plugins}}
+
+\end{DoxyCode}

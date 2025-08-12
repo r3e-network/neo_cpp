@@ -1,0 +1,62 @@
+\doxysection{state\+\_\+root.\+h}
+\hypertarget{state__root_8h_source}{}\label{state__root_8h_source}\index{include/neo/ledger/state\_root.h@{include/neo/ledger/state\_root.h}}
+\mbox{\hyperlink{state__root_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ecpoint_8h}{neo/cryptography/ecc/ecpoint.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_aaf0e2a4033600157ddfafb59aa6388d1}{StateRoot}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00021\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a89a0c4fc0766f81a07673b5906ac5011}{version\_}};}
+\DoxyCodeLine{00022\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a56b67f90bb624dddee96f4227a908fb3}{index\_}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Block\ index/height}}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a44d06cb99a52e1eab0d8c46cb61b0fcd}{root\_hash\_}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ MPT\ root\ hash}}
+\DoxyCodeLine{00024\ \ \ \ \ std::vector<cryptography::ecc::ECPoint>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a7e79beb18384b5d6acea7cec3a05488e}{witnesses\_}};\ \ \textcolor{comment}{//\ Witness\ signatures}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_aaf0e2a4033600157ddfafb59aa6388d1}{StateRoot}}()\ :\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a89a0c4fc0766f81a07673b5906ac5011}{version\_}}(0),\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a56b67f90bb624dddee96f4227a908fb3}{index\_}}(0)\ \{\}}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a98f65e4ac3279551140ca75eecc6da94}{StateRoot}}(uint8\_t\ version,\ uint32\_t\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ root\_hash)}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a89a0c4fc0766f81a07673b5906ac5011}{version\_}}(version),\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a56b67f90bb624dddee96f4227a908fb3}{index\_}}(index),\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a44d06cb99a52e1eab0d8c46cb61b0fcd}{root\_hash\_}}(root\_hash)}
+\DoxyCodeLine{00040\ \ \ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \}}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_adc79e204d3c58c5437fccc15e20b8b67}{GetVersion}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a89a0c4fc0766f81a07673b5906ac5011}{version\_}};\ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_aca839ea5cc4f554b9c6fa1b59287d6be}{SetVersion}}(uint8\_t\ version)\ \{\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a89a0c4fc0766f81a07673b5906ac5011}{version\_}}\ =\ version;\ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00059\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a988cdc0c9b2e75cde4f146ce0f311195}{GetIndex}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a56b67f90bb624dddee96f4227a908fb3}{index\_}};\ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a4470e4114d854fb79763432dabf498f1}{SetIndex}}(uint32\_t\ index)\ \{\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a56b67f90bb624dddee96f4227a908fb3}{index\_}}\ =\ index;\ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_aebfde5af1593208c0ec51c9687661c52}{GetRoot}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a44d06cb99a52e1eab0d8c46cb61b0fcd}{root\_hash\_}};\ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_af9b305f62feede08a704170a194e5ff8}{SetRoot}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ root)\ \{\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a44d06cb99a52e1eab0d8c46cb61b0fcd}{root\_hash\_}}\ =\ root;\ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<cryptography::ecc::ECPoint>\&\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_acc6fe5e3092aca18311474fc9fab702d}{GetWitnesses}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a7e79beb18384b5d6acea7cec3a05488e}{witnesses\_}};\ \}}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_aefede514848bad1d7b74fe37b6484da4}{AddWitness}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography::ecc::ECPoint}}\&\ witness)\ \{\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a7e79beb18384b5d6acea7cec3a05488e}{witnesses\_}}.push\_back(witness);\ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_ae3dc6f6c47a2da7a2002fe7bf3910a6f}{ClearWitnesses}}()\ \{\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a7e79beb18384b5d6acea7cec3a05488e}{witnesses\_}}.clear();\ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a50b1c19da64e5dc4423a93648a4827e9}{GetHash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a4da11634118993e6b50c4e0ca46a5aa5}{Verify}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00112\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_aa29fa7bc80ab73e5813b4b26984c0fdb}{ToByteArray}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a5458d57a3bedeae8e0977b7f7f639704}{FromByteArray}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ data);}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a6ad8f0e79deb49a5542bfe6eb4c8c15d}{IsValid}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a56b67f90bb624dddee96f4227a908fb3}{index\_}}\ >\ 0\ \&\&\ !\mbox{\hyperlink{classneo_1_1ledger_1_1_state_root_a44d06cb99a52e1eab0d8c46cb61b0fcd}{root\_hash\_}}.IsZero();\ \}}
+\DoxyCodeLine{00126\ \};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}

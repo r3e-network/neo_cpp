@@ -1,0 +1,543 @@
+\doxysection{neo\+::extensions\+::Assembly\+Extensions Class Reference}
+\hypertarget{classneo_1_1extensions_1_1_assembly_extensions}{}\label{classneo_1_1extensions_1_1_assembly_extensions}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+
+
+Extensions for assembly and type reflection.  
+
+
+
+
+{\ttfamily \#include $<$assembly\+\_\+extensions.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_method_info}{Method\+Info}}
+\begin{DoxyCompactList}\small\item\em Method information structure. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info}{Type\+Info}}
+\begin{DoxyCompactList}\small\item\em Type information structure. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_afc6848a0a509cd28e12a6c633fb5937f}{Factory\+Function}} = std\+::function$<$std\+::shared\+\_\+ptr$<$void$>$()$>$
+\begin{DoxyCompactList}\small\item\em Factory function type for creating instances. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info}{Type\+Info}} \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a11c155d750b733f02bc63145ba9747d8}{Get\+Type\+Info}} ()
+\begin{DoxyCompactList}\small\item\em Get type information for a given type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_af8d620073205c622f4392a84b00f06cb}{Get\+Type\+Name}} ()
+\begin{DoxyCompactList}\small\item\em Get clean type name (without namespace prefixes) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static void \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a2aac74b2041dbefd6890f13fd4ab7bd9}{Register\+Type}} (const std\+::string \&name="{}"{}, \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_afc6848a0a509cd28e12a6c633fb5937f}{Factory\+Function}} factory=nullptr)
+\begin{DoxyCompactList}\small\item\em Register a type with factory function. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a649df12dcfb65363a8d69ffd9912158b}{Has\+Type}} (const std\+::string \&type\+Name)
+\begin{DoxyCompactList}\small\item\em Check if a type is registered. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ void $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a8a1f4c54166fdbc19d0a9871428eb7d5}{Create\+Instance}} (const std\+::string \&type\+Name)
+\begin{DoxyCompactList}\small\item\em Create instance of registered type. \end{DoxyCompactList}\item 
+static std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_aa6727334de057656fdd6dba5f29d557d}{Get\+Registered\+Types}} ()
+\begin{DoxyCompactList}\small\item\em Get list of all registered type names. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info}{Type\+Info}} \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_abd15ec5a1adac2e650f8fd79c0a2a99b}{Get\+Registered\+Type\+Info}} (const std\+::string \&type\+Name)
+\begin{DoxyCompactList}\small\item\em Get type information for registered type. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a5899cdd5ed98e5f47a0c7bfe72bbd83b}{Register\+Method}} (const std\+::string \&type\+Name, const std\+::string \&method\+Name, const std\+::string \&signature, std\+::function$<$ void \texorpdfstring{$\ast$}{*}()$>$ invoker)
+\begin{DoxyCompactList}\small\item\em Register a method for a type. \end{DoxyCompactList}\item 
+static std\+::vector$<$ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_method_info}{Method\+Info}} $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a60b099bf57a8648f8d04097502601dcb}{Get\+Methods}} (const std\+::string \&type\+Name)
+\begin{DoxyCompactList}\small\item\em Get methods for a registered type. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_afaf8abaded1ff27b964609325147aac7}{Has\+Method}} (const std\+::string \&type\+Name, const std\+::string \&method\+Name)
+\begin{DoxyCompactList}\small\item\em Check if type has a specific method. \end{DoxyCompactList}\item 
+static void \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a122b70607c0be941c28d123cc2714506}{Invoke\+Method}} (const std\+::string \&type\+Name, const std\+::string \&method\+Name, std\+::shared\+\_\+ptr$<$ void $>$ instance=nullptr)
+\begin{DoxyCompactList}\small\item\em Invoke a method by name. \end{DoxyCompactList}\item 
+static size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_aa9e5348504e56509ea1e6dc43d2cb378}{Get\+Type\+Size}} (const std\+::string \&type\+Name)
+\begin{DoxyCompactList}\small\item\em Get size of registered type. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a0a3ccd0eec0c132d75dcd473235a69fb}{Are\+Types\+Same}} (const std\+::string \&type\+Name1, const std\+::string \&type\+Name2)
+\begin{DoxyCompactList}\small\item\em Check if two types are the same. \end{DoxyCompactList}\item 
+static std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_ad954b0a08f78aa63f3232863475b35b6}{Get\+Base\+Classes}} (const std\+::string \&type\+Name)
+\begin{DoxyCompactList}\small\item\em Get base class names for a type (if available) \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_abb9dc15e54c7cb4623244849b5061545}{Is\+Type\+Derivied\+From}} (const std\+::string \&derived\+Type, const std\+::string \&base\+Type)
+\begin{DoxyCompactList}\small\item\em Check if type derives from another type. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a2917f17efd0a8602c65555f1219f16f5}{Clear\+Registry}} ()
+\begin{DoxyCompactList}\small\item\em Clear all registered types and methods. \end{DoxyCompactList}\item 
+static size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a4081087cd5c872b14ad1dc50242c9f87}{Get\+Registered\+Type\+Count}} ()
+\begin{DoxyCompactList}\small\item\em Get number of registered types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_afc6848a0a509cd28e12a6c633fb5937f}{Factory\+Function}} $>$ \& \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_ad4565c55aa756c84ef5701a00b5efbff}{Get\+Type\+Registry}} ()
+\begin{DoxyCompactList}\small\item\em Get the type registry (singleton pattern) \end{DoxyCompactList}\item 
+static std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info}{Type\+Info}} $>$ \& \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a17eb75de51ae2b509fa1b469e6a16d23}{Get\+Type\+Info\+Registry}} ()
+\begin{DoxyCompactList}\small\item\em Get the type info registry (singleton pattern) \end{DoxyCompactList}\item 
+static std\+::unordered\+\_\+map$<$ std\+::string, std\+::vector$<$ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_method_info}{Method\+Info}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_af16bebe84ddd7375dae96454b0059687}{Get\+Method\+Registry}} ()
+\begin{DoxyCompactList}\small\item\em Get the method registry (singleton pattern) \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a53b03b09511650d449f520898c2751e5}{Demangle\+Type\+Name}} (const std\+::string \&mangled\+Name)
+\begin{DoxyCompactList}\small\item\em Demangle a C++ type name to human-\/readable form. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_ab7f0c27a9aae61d7ed68ce044efbcd71}{Extract\+Class\+Name}} (const std\+::string \&full\+Name)
+\begin{DoxyCompactList}\small\item\em Extract clean class name from full qualified name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Extensions for assembly and type reflection. 
+
+\hypertarget{classneo_1_1extensions_1_1_assembly_extensions_autotoc_md6}{}\doxysubsubsection{\texorpdfstring{Overview}{Overview}}\label{classneo_1_1extensions_1_1_assembly_extensions_autotoc_md6}
+Provides utilities for type information, method discovery, and runtime reflection capabilities similar to .NET Assembly reflection but adapted for C++.\hypertarget{classneo_1_1extensions_1_1_assembly_extensions_autotoc_md7}{}\doxysubsubsection{\texorpdfstring{API Reference}{API Reference}}\label{classneo_1_1extensions_1_1_assembly_extensions_autotoc_md7}
+
+\begin{DoxyItemize}
+\item {\bfseries{Type Information}}\+: Get type names, sizes, and properties
+\item {\bfseries{Method Discovery}}\+: Find and invoke methods by name
+\item {\bfseries{Utilities}}\+: Type registration, factory patterns
+\end{DoxyItemize}\hypertarget{classneo_1_1extensions_1_1_assembly_extensions_autotoc_md8}{}\doxysubsubsection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{classneo_1_1extensions_1_1_assembly_extensions_autotoc_md8}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Get\ type\ information}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ info\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a11c155d750b733f02bc63145ba9747d8}{AssemblyExtensions::GetTypeInfo<MyClass>}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Check\ if\ type\ is\ registered}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ exists\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a649df12dcfb65363a8d69ffd9912158b}{AssemblyExtensions::HasType}}(\textcolor{stringliteral}{"{}MyClass"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Create\ instance\ by\ name}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ instance\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a8a1f4c54166fdbc19d0a9871428eb7d5}{AssemblyExtensions::CreateInstance}}(\textcolor{stringliteral}{"{}MyClass"{}});}
+
+\end{DoxyCode}
+\hypertarget{classneo_1_1extensions_1_1_assembly_extensions_autotoc_md9}{}\doxysubsubsection{\texorpdfstring{Design Notes}{Design Notes}}\label{classneo_1_1extensions_1_1_assembly_extensions_autotoc_md9}
+
+\begin{DoxyItemize}
+\item Uses RTTI where available for type information
+\item Provides factory pattern for object creation
+\item Thread-\/safe type registration system 
+\end{DoxyItemize}
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_afc6848a0a509cd28e12a6c633fb5937f}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!FactoryFunction@{FactoryFunction}}
+\index{FactoryFunction@{FactoryFunction}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{FactoryFunction}{FactoryFunction}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_afc6848a0a509cd28e12a6c633fb5937f} 
+using \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_afc6848a0a509cd28e12a6c633fb5937f}{neo\+::extensions\+::\+Assembly\+Extensions\+::\+Factory\+Function}} = std\+::function$<$std\+::shared\+\_\+ptr$<$void$>$()$>$}
+
+
+
+Factory function type for creating instances. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_a0a3ccd0eec0c132d75dcd473235a69fb}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!AreTypesSame@{AreTypesSame}}
+\index{AreTypesSame@{AreTypesSame}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{AreTypesSame()}{AreTypesSame()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_a0a3ccd0eec0c132d75dcd473235a69fb} 
+bool neo\+::extensions\+::\+Assembly\+Extensions\+::\+Are\+Types\+Same (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type\+Name1}{, }\item[{const std\+::string \&}]{type\+Name2}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if two types are the same. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Name1} & First type name \\
+\hline
+{\em type\+Name2} & Second type name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if types are the same 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_a2917f17efd0a8602c65555f1219f16f5}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!ClearRegistry@{ClearRegistry}}
+\index{ClearRegistry@{ClearRegistry}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{ClearRegistry()}{ClearRegistry()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_a2917f17efd0a8602c65555f1219f16f5} 
+void neo\+::extensions\+::\+Assembly\+Extensions\+::\+Clear\+Registry (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Clear all registered types and methods. 
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_a8a1f4c54166fdbc19d0a9871428eb7d5}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!CreateInstance@{CreateInstance}}
+\index{CreateInstance@{CreateInstance}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{CreateInstance()}{CreateInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_a8a1f4c54166fdbc19d0a9871428eb7d5} 
+std\+::shared\+\_\+ptr$<$ void $>$ neo\+::extensions\+::\+Assembly\+Extensions\+::\+Create\+Instance (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create instance of registered type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Name} & Name of the type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Shared pointer to created instance, or nullptr if not found 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_a53b03b09511650d449f520898c2751e5}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!DemangleTypeName@{DemangleTypeName}}
+\index{DemangleTypeName@{DemangleTypeName}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{DemangleTypeName()}{DemangleTypeName()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_a53b03b09511650d449f520898c2751e5} 
+std\+::string neo\+::extensions\+::\+Assembly\+Extensions\+::\+Demangle\+Type\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{mangled\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Demangle a C++ type name to human-\/readable form. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em mangled\+Name} & Mangled type name from typeid \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Demangled type name 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_ab7f0c27a9aae61d7ed68ce044efbcd71}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!ExtractClassName@{ExtractClassName}}
+\index{ExtractClassName@{ExtractClassName}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{ExtractClassName()}{ExtractClassName()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_ab7f0c27a9aae61d7ed68ce044efbcd71} 
+std\+::string neo\+::extensions\+::\+Assembly\+Extensions\+::\+Extract\+Class\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{full\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Extract clean class name from full qualified name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em full\+Name} & Full qualified name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Clean class name without namespace 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_ad954b0a08f78aa63f3232863475b35b6}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!GetBaseClasses@{GetBaseClasses}}
+\index{GetBaseClasses@{GetBaseClasses}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{GetBaseClasses()}{GetBaseClasses()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_ad954b0a08f78aa63f3232863475b35b6} 
+std\+::vector$<$ std\+::string $>$ neo\+::extensions\+::\+Assembly\+Extensions\+::\+Get\+Base\+Classes (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get base class names for a type (if available) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Name} & Type name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector of base class names 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_af16bebe84ddd7375dae96454b0059687}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!GetMethodRegistry@{GetMethodRegistry}}
+\index{GetMethodRegistry@{GetMethodRegistry}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{GetMethodRegistry()}{GetMethodRegistry()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_af16bebe84ddd7375dae96454b0059687} 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::vector$<$ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_method_info}{Assembly\+Extensions\+::\+Method\+Info}} $>$ $>$ \& neo\+::extensions\+::\+Assembly\+Extensions\+::\+Get\+Method\+Registry (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Get the method registry (singleton pattern) 
+
+\begin{DoxyReturn}{Returns}
+Reference to method registry map 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_a60b099bf57a8648f8d04097502601dcb}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!GetMethods@{GetMethods}}
+\index{GetMethods@{GetMethods}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{GetMethods()}{GetMethods()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_a60b099bf57a8648f8d04097502601dcb} 
+std\+::vector$<$ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_method_info}{Assembly\+Extensions\+::\+Method\+Info}} $>$ neo\+::extensions\+::\+Assembly\+Extensions\+::\+Get\+Methods (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get methods for a registered type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Name} & Type name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector of method information 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_a4081087cd5c872b14ad1dc50242c9f87}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!GetRegisteredTypeCount@{GetRegisteredTypeCount}}
+\index{GetRegisteredTypeCount@{GetRegisteredTypeCount}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{GetRegisteredTypeCount()}{GetRegisteredTypeCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_a4081087cd5c872b14ad1dc50242c9f87} 
+size\+\_\+t neo\+::extensions\+::\+Assembly\+Extensions\+::\+Get\+Registered\+Type\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get number of registered types. 
+
+\begin{DoxyReturn}{Returns}
+Number of registered types 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_abd15ec5a1adac2e650f8fd79c0a2a99b}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!GetRegisteredTypeInfo@{GetRegisteredTypeInfo}}
+\index{GetRegisteredTypeInfo@{GetRegisteredTypeInfo}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{GetRegisteredTypeInfo()}{GetRegisteredTypeInfo()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_abd15ec5a1adac2e650f8fd79c0a2a99b} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info}{Assembly\+Extensions\+::\+Type\+Info}} neo\+::extensions\+::\+Assembly\+Extensions\+::\+Get\+Registered\+Type\+Info (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get type information for registered type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Name} & Name of the type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info}{Type\+Info} structure, or empty structure if not found 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_aa6727334de057656fdd6dba5f29d557d}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!GetRegisteredTypes@{GetRegisteredTypes}}
+\index{GetRegisteredTypes@{GetRegisteredTypes}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{GetRegisteredTypes()}{GetRegisteredTypes()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_aa6727334de057656fdd6dba5f29d557d} 
+std\+::vector$<$ std\+::string $>$ neo\+::extensions\+::\+Assembly\+Extensions\+::\+Get\+Registered\+Types (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get list of all registered type names. 
+
+\begin{DoxyReturn}{Returns}
+Vector of registered type names 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_a11c155d750b733f02bc63145ba9747d8}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!GetTypeInfo@{GetTypeInfo}}
+\index{GetTypeInfo@{GetTypeInfo}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{GetTypeInfo()}{GetTypeInfo()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_a11c155d750b733f02bc63145ba9747d8} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info}{Type\+Info}} neo\+::extensions\+::\+Assembly\+Extensions\+::\+Get\+Type\+Info (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get type information for a given type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type to get information for \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info}{Type\+Info} structure with type details 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_a17eb75de51ae2b509fa1b469e6a16d23}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!GetTypeInfoRegistry@{GetTypeInfoRegistry}}
+\index{GetTypeInfoRegistry@{GetTypeInfoRegistry}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{GetTypeInfoRegistry()}{GetTypeInfoRegistry()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_a17eb75de51ae2b509fa1b469e6a16d23} 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info}{Assembly\+Extensions\+::\+Type\+Info}} $>$ \& neo\+::extensions\+::\+Assembly\+Extensions\+::\+Get\+Type\+Info\+Registry (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Get the type info registry (singleton pattern) 
+
+\begin{DoxyReturn}{Returns}
+Reference to type info registry map 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_af8d620073205c622f4392a84b00f06cb}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!GetTypeName@{GetTypeName}}
+\index{GetTypeName@{GetTypeName}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{GetTypeName()}{GetTypeName()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_af8d620073205c622f4392a84b00f06cb} 
+template$<$typename T$>$ \\
+std\+::string neo\+::extensions\+::\+Assembly\+Extensions\+::\+Get\+Type\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get clean type name (without namespace prefixes) 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type to get name for \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+Clean type name 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_ad4565c55aa756c84ef5701a00b5efbff}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!GetTypeRegistry@{GetTypeRegistry}}
+\index{GetTypeRegistry@{GetTypeRegistry}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{GetTypeRegistry()}{GetTypeRegistry()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_ad4565c55aa756c84ef5701a00b5efbff} 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_afc6848a0a509cd28e12a6c633fb5937f}{Assembly\+Extensions\+::\+Factory\+Function}} $>$ \& neo\+::extensions\+::\+Assembly\+Extensions\+::\+Get\+Type\+Registry (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Get the type registry (singleton pattern) 
+
+\begin{DoxyReturn}{Returns}
+Reference to type registry map 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_aa9e5348504e56509ea1e6dc43d2cb378}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!GetTypeSize@{GetTypeSize}}
+\index{GetTypeSize@{GetTypeSize}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{GetTypeSize()}{GetTypeSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_aa9e5348504e56509ea1e6dc43d2cb378} 
+size\+\_\+t neo\+::extensions\+::\+Assembly\+Extensions\+::\+Get\+Type\+Size (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get size of registered type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Name} & Type name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Size in bytes, or 0 if not found 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_afaf8abaded1ff27b964609325147aac7}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!HasMethod@{HasMethod}}
+\index{HasMethod@{HasMethod}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{HasMethod()}{HasMethod()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_afaf8abaded1ff27b964609325147aac7} 
+bool neo\+::extensions\+::\+Assembly\+Extensions\+::\+Has\+Method (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type\+Name}{, }\item[{const std\+::string \&}]{method\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if type has a specific method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Name} & Type name \\
+\hline
+{\em method\+Name} & Method name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if method exists 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_a649df12dcfb65363a8d69ffd9912158b}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!HasType@{HasType}}
+\index{HasType@{HasType}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{HasType()}{HasType()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_a649df12dcfb65363a8d69ffd9912158b} 
+bool neo\+::extensions\+::\+Assembly\+Extensions\+::\+Has\+Type (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if a type is registered. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Name} & Name of the type \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if type is registered 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_a122b70607c0be941c28d123cc2714506}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!InvokeMethod@{InvokeMethod}}
+\index{InvokeMethod@{InvokeMethod}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{InvokeMethod()}{InvokeMethod()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_a122b70607c0be941c28d123cc2714506} 
+void \texorpdfstring{$\ast$}{*} neo\+::extensions\+::\+Assembly\+Extensions\+::\+Invoke\+Method (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type\+Name}{, }\item[{const std\+::string \&}]{method\+Name}{, }\item[{std\+::shared\+\_\+ptr$<$ void $>$}]{instance}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Invoke a method by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Name} & Type name \\
+\hline
+{\em method\+Name} & Method name \\
+\hline
+{\em instance} & Instance to call method on (optional) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Method result as void pointer 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_abb9dc15e54c7cb4623244849b5061545}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!IsTypeDeriviedFrom@{IsTypeDeriviedFrom}}
+\index{IsTypeDeriviedFrom@{IsTypeDeriviedFrom}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{IsTypeDeriviedFrom()}{IsTypeDeriviedFrom()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_abb9dc15e54c7cb4623244849b5061545} 
+bool neo\+::extensions\+::\+Assembly\+Extensions\+::\+Is\+Type\+Derivied\+From (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{derived\+Type}{, }\item[{const std\+::string \&}]{base\+Type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if type derives from another type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em derived\+Type} & Derived type name \\
+\hline
+{\em base\+Type} & Base type name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if derived\+Type derives from base\+Type 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_a5899cdd5ed98e5f47a0c7bfe72bbd83b}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!RegisterMethod@{RegisterMethod}}
+\index{RegisterMethod@{RegisterMethod}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{RegisterMethod()}{RegisterMethod()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_a5899cdd5ed98e5f47a0c7bfe72bbd83b} 
+void neo\+::extensions\+::\+Assembly\+Extensions\+::\+Register\+Method (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type\+Name}{, }\item[{const std\+::string \&}]{method\+Name}{, }\item[{const std\+::string \&}]{signature}{, }\item[{std\+::function$<$ void \texorpdfstring{$\ast$}{*}()$>$}]{invoker}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Register a method for a type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Name} & Type name \\
+\hline
+{\em method\+Name} & Method name \\
+\hline
+{\em signature} & Method signature \\
+\hline
+{\em invoker} & Method invoker function \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1extensions_1_1_assembly_extensions_a2aac74b2041dbefd6890f13fd4ab7bd9}\index{neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}!RegisterType@{RegisterType}}
+\index{RegisterType@{RegisterType}!neo::extensions::AssemblyExtensions@{neo::extensions::AssemblyExtensions}}
+\doxysubsubsection{\texorpdfstring{RegisterType()}{RegisterType()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_assembly_extensions_a2aac74b2041dbefd6890f13fd4ab7bd9} 
+template$<$typename T$>$ \\
+void neo\+::extensions\+::\+Assembly\+Extensions\+::\+Register\+Type (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{ = {\ttfamily "{}"{}}, }\item[{\mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_afc6848a0a509cd28e12a6c633fb5937f}{Factory\+Function}}}]{factory}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Register a type with factory function. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Type to register \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Type name (optional, uses type name if empty) \\
+\hline
+{\em factory} & Factory function to create instances \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 14
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/extensions/\mbox{\hyperlink{assembly__extensions_8h}{assembly\+\_\+extensions.\+h}}\item 
+src/extensions/\mbox{\hyperlink{assembly__extensions_8cpp}{assembly\+\_\+extensions.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,107 @@
+\doxysection{random\+\_\+extensions.\+h}
+\hypertarget{random__extensions_8h_source}{}\label{random__extensions_8h_source}\index{include/neo/extensions/random\_extensions.h@{include/neo/extensions/random\_extensions.h}}
+\mbox{\hyperlink{random__extensions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <random>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1extensions}{neo::extensions}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00039\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions}{RandomExtensions}}}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00041\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a0c5dc27ea7212a2046c9e48b0f05c557}{GenerateRandomBytes}}(\textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a2cd5a3e6535156b2ec8621ef5901c3e4}{NextInt}}(int32\_t\ min,\ int32\_t\ max);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a70e8a5f0b942010391fdc28d43b7f28b}{NextInt}}(int32\_t\ max)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a70e8a5f0b942010391fdc28d43b7f28b}{NextInt}}(0,\ max);\ \}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a2cd5a3e6535156b2ec8621ef5901c3e4}{NextInt}}()}
+\DoxyCodeLine{00069\ \ \ \ \ \{}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a2cd5a3e6535156b2ec8621ef5901c3e4}{NextInt}}(std::numeric\_limits<int32\_t>::min(),\ std::numeric\_limits<int32\_t>::max());}
+\DoxyCodeLine{00071\ \ \ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a48ad0c45fa10b6a3a65fc0a2934f7365}{NextUInt}}(uint32\_t\ min,\ uint32\_t\ max);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a5d4b6ac4e6e96c4ffa5ca7f16f6ffab8}{NextUInt}}(uint32\_t\ max)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a5d4b6ac4e6e96c4ffa5ca7f16f6ffab8}{NextUInt}}(0,\ max);\ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a48ad0c45fa10b6a3a65fc0a2934f7365}{NextUInt}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a48ad0c45fa10b6a3a65fc0a2934f7365}{NextUInt}}(0,\ std::numeric\_limits<uint32\_t>::max());\ \}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{static}\ int64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a9f73d0f6f51a5d202db4c734b87b042c}{NextLong}}(int64\_t\ min,\ int64\_t\ max);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{static}\ int64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a9f73d0f6f51a5d202db4c734b87b042c}{NextLong}}()}
+\DoxyCodeLine{00107\ \ \ \ \ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a9f73d0f6f51a5d202db4c734b87b042c}{NextLong}}(std::numeric\_limits<int64\_t>::min(),\ std::numeric\_limits<int64\_t>::max());}
+\DoxyCodeLine{00109\ \ \ \ \ \}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_aada2b78ac4b021adeff88badeac41aa9}{NextULong}}(uint64\_t\ min,\ uint64\_t\ max);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_aada2b78ac4b021adeff88badeac41aa9}{NextULong}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_aada2b78ac4b021adeff88badeac41aa9}{NextULong}}(0,\ std::numeric\_limits<uint64\_t>::max());\ \}}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_aa89330bcb1f28e432a2ee4c685587c32}{NextFloat}}();}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_aa89330bcb1f28e432a2ee4c685587c32}{NextFloat}}(\textcolor{keywordtype}{float}\ min,\ \textcolor{keywordtype}{float}\ max);}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_aec56942cf46dc17444955cfb0f84a6bf}{NextDouble}}();}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_aec56942cf46dc17444955cfb0f84a6bf}{NextDouble}}(\textcolor{keywordtype}{double}\ min,\ \textcolor{keywordtype}{double}\ max);}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_ae1fcb60d02e714941cdd640fec3c2d93}{NextBool}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a2cd5a3e6535156b2ec8621ef5901c3e4}{NextInt}}(0,\ 1)\ ==\ 1;\ \}}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_acbcc6f8d9e703f29fd7c60fe4459d5ad}{NextBool}}(\textcolor{keywordtype}{double}\ probability)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_aec56942cf46dc17444955cfb0f84a6bf}{NextDouble}}()\ <\ probability;\ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a3fa977565e03dfad9cc60adbf3e7b0b7}{GenerateRandomUInt160}}();}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a89120cdf4ec024e260fe692e38697d24}{GenerateRandomUInt256}}();}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_abd6e4b87a62e4920c346b3af2a2af6d7}{GenerateRandomString}}(\textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a14b79417e0bce1f9633aaff663005d44}{GenerateRandomHexString}}(\textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a2b01094e551501bca59a8f767225d7a2}{Shuffle}}(std::vector<T>\&\ vec)}
+\DoxyCodeLine{00199\ \ \ \ \ \{}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\&\ rng\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a129d15d8cff5b341a3d6eb0a2956daa7}{GetSecureRNG}}();}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ std::shuffle(vec.begin(),\ vec.end(),\ rng);}
+\DoxyCodeLine{00202\ \ \ \ \ \}}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ T\&\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a2f389e2f2dc8c663eddc39e5494fa7ea}{SelectRandom}}(\textcolor{keyword}{const}\ std::vector<T>\&\ vec)}
+\DoxyCodeLine{00212\ \ \ \ \ \{}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (vec.empty())\ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ select\ from\ empty\ vector"{}});}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ index\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a48ad0c45fa10b6a3a65fc0a2934f7365}{NextUInt}}(0,\ \textcolor{keyword}{static\_cast<}uint32\_t\textcolor{keyword}{>}(vec.size()\ -\/\ 1));}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ vec[index];}
+\DoxyCodeLine{00217\ \ \ \ \ \}}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<T>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a453fedb7286a5d83be9e63ba6c0982a5}{SelectRandomMultiple}}(\textcolor{keyword}{const}\ std::vector<T>\&\ vec,\ \textcolor{keywordtype}{size\_t}\ count)}
+\DoxyCodeLine{00228\ \ \ \ \ \{}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (count\ >\ vec.size())\ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Cannot\ select\ more\ elements\ than\ available"{}});}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ std::vector<T>\ result\ =\ vec;}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a2b01094e551501bca59a8f767225d7a2}{Shuffle}}(result);}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ result.resize(count);}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00235\ \ \ \ \ \}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_ae1b34059c170ff7c9fbc3b37eb8a90e9}{GenerateNonce}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a48ad0c45fa10b6a3a65fc0a2934f7365}{NextUInt}}();\ \}}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_afe6d034cf5efaef81036c0664f6aa679}{GenerateRandomTimestamp}}(uint64\_t\ baseTime\ =\ 0,\ uint64\_t\ maxVariation\ =\ 3600);}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keyword}{static}\ std::mt19937\&\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a129d15d8cff5b341a3d6eb0a2956daa7}{GetSecureRNG}}();}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_random_extensions_a6536af86ce5b1468e0bc1d33f7f6fd6c}{SeedSecureRNG}}(std::mt19937\&\ rng);}
+\DoxyCodeLine{00262\ \};}
+\DoxyCodeLine{00263\ \}\ \ \textcolor{comment}{//\ namespace\ neo::extensions}}
+
+\end{DoxyCode}

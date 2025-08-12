@@ -1,0 +1,48 @@
+\doxysection{stack\+\_\+item\+\_\+types.\+h}
+\hypertarget{stack__item__types_8h_source}{}\label{stack__item__types_8h_source}\index{include/neo/vm/stack\_item\_types.h@{include/neo/vm/stack\_item\_types.h}}
+\mbox{\hyperlink{stack__item__types_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7}{StackItemType}}\ :\ uint8\_t}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7aed36a1ef76a59ee3f15180e0441188ad}{Any}}\ =\ 0x00,}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a61cf8510205077b6f5491d38cd44c0f7}{Pointer}}\ =\ 0x10,}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a27226c864bac7454a8504f8edb15d95b}{Boolean}}\ =\ 0x20,}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7aa0faef0851b4294c06f2b94bb1cb2044}{Integer}}\ =\ 0x21,}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a58efa9e8b8491c4a42cbf3bead1b06b6}{ByteString}}\ =\ 0x28,}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a7e62bc342f41c946868f0ea6f0b712d8}{Buffer}}\ =\ 0x30,}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a4410ec34d9e6c1a68100ca0ce033fb17}{Array}}\ =\ 0x40,}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a43faf876f054d0c6da8b213ea630d520}{Struct}}\ =\ 0x41,}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a46f3ea056caa3126b91f3f70beea068c}{Map}}\ =\ 0x48,}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a9474c5b69f6d5fd10b26a56d38e6c5c5}{InteropInterface}}\ =\ 0x60,}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7abbb93ef26e3c101ff11cdd21cab08a94}{Null}}\ =\ 0x70}
+\DoxyCodeLine{00023\ \};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1vm_aae65b5b040e46ad3033b30353902e6fe}{IsValidStackItemType}}(\mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7}{StackItemType}}\ type)}
+\DoxyCodeLine{00031\ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordflow}{switch}\ (type)}
+\DoxyCodeLine{00033\ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7aed36a1ef76a59ee3f15180e0441188ad}{StackItemType::Any}}:}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a61cf8510205077b6f5491d38cd44c0f7}{StackItemType::Pointer}}:}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a27226c864bac7454a8504f8edb15d95b}{StackItemType::Boolean}}:}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7aa0faef0851b4294c06f2b94bb1cb2044}{StackItemType::Integer}}:}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a58efa9e8b8491c4a42cbf3bead1b06b6}{StackItemType::ByteString}}:}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a7e62bc342f41c946868f0ea6f0b712d8}{StackItemType::Buffer}}:}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a4410ec34d9e6c1a68100ca0ce033fb17}{StackItemType::Array}}:}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a886ef5dbd655a6c97726d7091c6b173e}{StackItemType::Struct}}:}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a46f3ea056caa3126b91f3f70beea068c}{StackItemType::Map}}:}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7a9474c5b69f6d5fd10b26a56d38e6c5c5}{StackItemType::InteropInterface}}:}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7abbb93ef26e3c101ff11cdd21cab08a94}{StackItemType::Null}}:}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00049\ \}}
+\DoxyCodeLine{00050\ \}\ \ \textcolor{comment}{//\ namespace\ neo::vm}}
+
+\end{DoxyCode}

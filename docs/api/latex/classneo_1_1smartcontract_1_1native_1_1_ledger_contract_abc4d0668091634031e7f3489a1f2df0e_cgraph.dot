@@ -1,0 +1,47 @@
+digraph "neo::smartcontract::native::LedgerContract::OnGetBlock"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::smartcontract\l::native::LedgerContract\l::OnGetBlock",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Handles the getBlock method."];
+  Node1 -> Node2 [id="edge22_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::smartcontract\l::native::LedgerContract\l::BlockToStackItem",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_ledger_contract.html#a0ae8493abd3821e256cbd8b2d4a56b84",tooltip="Converts a block to a stack item."];
+  Node2 -> Node3 [id="edge23_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::vm::StackItem\l::Create",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_stack_item.html#a1d67a8c02d58d56410378b997c2e7855",tooltip="Creates a primitive stack item."];
+  Node3 -> Node4 [id="edge24_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::vm::StackItem\l::False",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_stack_item.html#a759c1a70f6481936eb089083a5fa2d4e",tooltip="Gets the false stack item."];
+  Node3 -> Node5 [id="edge25_Node000003_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::vm::StackItem\l::True",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_stack_item.html#ac5c88a02b66663d80e61942bb425391c",tooltip="Gets the true stack item."];
+  Node1 -> Node3 [id="edge26_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node6 [id="edge27_Node000001_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::smartcontract\l::native::LedgerContract\l::GetBlock",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_ledger_contract.html#a3194e243d9cd12784d6bda5a48caccbe",tooltip="Gets the block for the specified hash."];
+  Node6 -> Node7 [id="edge28_Node000006_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::smartcontract\l::native::NativeContract\l::CreateStorageKey",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_native_contract.html#a5a9ec24cc4c1584fb00fdf32f614dbd8",tooltip="Creates a storage key with the specified prefix."];
+  Node7 -> Node8 [id="edge29_Node000007_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="neo::persistence::Storage\lKey::Create",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#ae7001770e96642cfdb2f878c6264bf51",tooltip="Creates a storage key with contract ID and prefix."];
+  Node8 -> Node9 [id="edge30_Node000008_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="neo::persistence::Storage\lKey::FillHeader",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#a4a6ee8a47d7cfb0b3802d3697ddf571f",tooltip="Fills the header (contract ID + prefix) into a span."];
+  Node8 -> Node10 [id="edge31_Node000008_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="neo::persistence::Storage\lKey::StorageKey",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#a26e71bde9629f81837c84d69d83fd75a",tooltip="Constructs an empty StorageKey."];
+  Node1 -> Node11 [id="edge32_Node000001_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="neo::smartcontract\l::native::LedgerContract\l::GetBlockHash",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_ledger_contract.html#a0a55f0427e7584a355d72bf4b4038859",tooltip="Gets the block hash for the specified index."];
+  Node11 -> Node7 [id="edge33_Node000011_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node12 [id="edge34_Node000001_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="neo::smartcontract\l::ApplicationEngine\l::GetSnapshot",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1_application_engine.html#a4b11ba8a68aa0ac32ba0263c293ff1e4",tooltip="Gets the snapshot."];
+  Node1 -> Node13 [id="edge35_Node000001_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node13 [id="Node000013",label="neo::smartcontract\l::native::LedgerContract\l::IsTraceableBlock",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_ledger_contract.html#a50aece401effa302a644114ef226a56a",tooltip="Checks if a block is traceable."];
+  Node13 -> Node14 [id="edge36_Node000013_Node000014",color="steelblue1",style="solid",tooltip=" "];
+  Node14 [id="Node000014",label="neo::smartcontract\l::native::PolicyContract\l::GetInstance",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_policy_contract.html#ae73620726c425e67f0ccb59806a8829e",tooltip="Gets the instance."];
+  Node13 -> Node15 [id="edge37_Node000013_Node000015",color="steelblue1",style="solid",tooltip=" "];
+  Node15 [id="Node000015",label="neo::ProtocolSettings\l::GetMaxTraceableBlocks",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1_protocol_settings.html#a10eca38d6babf35c1f71f9d4e4b7e39b",tooltip="Gets the maximum number of traceable blocks."];
+  Node13 -> Node16 [id="edge38_Node000013_Node000016",color="steelblue1",style="solid",tooltip=" "];
+  Node16 [id="Node000016",label="neo::smartcontract\l::ApplicationEngine\l::GetProtocolSettings",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1_application_engine.html#af7d805438860e0b964982f0244ec21f6",tooltip="Gets the protocol settings."];
+  Node13 -> Node12 [id="edge39_Node000013_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node13 -> Node17 [id="edge40_Node000013_Node000017",color="steelblue1",style="solid",tooltip=" "];
+  Node17 [id="Node000017",label="neo::smartcontract\l::ApplicationEngine\l::IsHardforkEnabled",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1_application_engine.html#a544a3e5e53fcd849a58827b094192292",tooltip="Checks if a hardfork is enabled."];
+  Node17 -> Node18 [id="edge41_Node000017_Node000018",color="steelblue1",style="solid",tooltip=" "];
+  Node18 [id="Node000018",label="neo::smartcontract\l::ApplicationEngine\l::GetCurrentBlockHeight",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1_application_engine.html#a69998c51d4ffa36e0e1e1450dbf6a78a",tooltip="Gets the current block height."];
+  Node13 -> Node13 [id="edge42_Node000013_Node000013",color="steelblue1",style="solid",tooltip=" "];
+}

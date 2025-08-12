@@ -1,0 +1,528 @@
+\doxysection{neo\+::ledger\+::Block Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_block}{}\label{classneo_1_1ledger_1_1_block}\index{neo::ledger::Block@{neo::ledger::Block}}
+
+
+Represents a block in the Neo blockchain.  
+
+
+
+
+{\ttfamily \#include $<$block.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::ledger\+::Block\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::ledger\+::Block\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_block_a40b7c6c6bc458bd041c1ffa44b38c398}{Block}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a261a5c91c9e9838b1e7233bee68657b4}{\texorpdfstring{$\sim$}{\string~}\+Block}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{Block\+Header}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a8d155dde99d08b88856aeedc84b40976}{Get\+Header}} () const
+\begin{DoxyCompactList}\small\item\em Get the header of the block. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{Block\+Header}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a0795c4cde2f9962408f95f5b73a535cf}{Get\+Header}} ()
+\begin{DoxyCompactList}\small\item\em Get the header of the block (non-\/const) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a8eb4f9e84f744b61524b4f5406590428}{Set\+Header}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{Block\+Header}} \&header)
+\begin{DoxyCompactList}\small\item\em Set the header of the block. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_block_aaa1c3995115b4f8b251078f87dab1d73}{Get\+Version}} () const
+\begin{DoxyCompactList}\small\item\em Get block version (delegates to header) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_block_ae6c32b5d0ec3d5f1e17be8f3a18af368}{Set\+Version}} (uint32\+\_\+t version)
+\begin{DoxyCompactList}\small\item\em Set block version (delegates to header) \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a937500ddd6b7204ce845b41454285588}{Get\+Previous\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Get previous block hash (delegates to header) \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a84e10a75b0a4db1e81c503e65a133773}{Get\+Prev\+Hash}} () const
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_block_ad55b9edd425e11a8565d82319f82b1de}{Set\+Previous\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Set previous block hash (delegates to header) \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_block_ab3e14405314c493b4df2c0c2b0cb477b}{Get\+Merkle\+Root}} () const
+\begin{DoxyCompactList}\small\item\em Get merkle root (delegates to header) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a3d8d979c8c0ae3926ba1f52a6219fd30}{Set\+Merkle\+Root}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&root)
+\begin{DoxyCompactList}\small\item\em Set merkle root (delegates to header) \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a95150f51dce0191f4f3cbd1a5103ae3b}{Get\+Timestamp}} () const
+\begin{DoxyCompactList}\small\item\em Get block timestamp (delegates to header) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a2f438de3767a17290d8c710b8397a14b}{Set\+Timestamp}} (uint64\+\_\+t timestamp)
+\begin{DoxyCompactList}\small\item\em Set block timestamp (delegates to header) \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a45ca9228f70f3bdeeb87f60f9700a615}{Get\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Get block index (delegates to header) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_block_ad7bfe05008728edcccb9f2ab730b30fb}{Set\+Index}} (uint32\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Set block index (delegates to header) \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a84e2be8070e593d5f59b81a850ded9d5}{Get\+Primary\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Get primary index (delegates to header) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a92b87694b6538c4cd440e16dd79b4de2}{Set\+Primary\+Index}} (uint32\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Set primary index (delegates to header) \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_block_aebcb5b9e8d5e4b23b7483f1159ab476e}{Get\+Next\+Consensus}} () const
+\begin{DoxyCompactList}\small\item\em Get next consensus address (delegates to header) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a51a3bb0a326235f66ffa51b0524823bb}{Set\+Next\+Consensus}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&address)
+\begin{DoxyCompactList}\small\item\em Set next consensus address (delegates to header) \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ \& \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a712b487970c32528823eab8f68f841a3}{Get\+Transactions}} () const
+\begin{DoxyCompactList}\small\item\em Get transactions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a0f2bb8d000cd924fb86f08292a65fbd3}{Add\+Transaction}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&tx)
+\begin{DoxyCompactList}\small\item\em Add transaction. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a8f9b86bd4e5ebb6d982f39f94613aa84}{Get\+Nonce}} () const
+\begin{DoxyCompactList}\small\item\em Get nonce (delegates to header) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_block_aa3f57d59e023a81cbc77ed21a7db9e1c}{Set\+Nonce}} (uint64\+\_\+t nonce)
+\begin{DoxyCompactList}\small\item\em Set nonce (delegates to header) \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{Witness}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a217695292b2eaa82961825dfe21357c2}{Get\+Witness}} () const
+\begin{DoxyCompactList}\small\item\em Get witness (delegates to header) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a43d5c99f98b62babdd3d08aba9f3e522}{Set\+Witness}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{Witness}} \&witness)
+\begin{DoxyCompactList}\small\item\em Set witness (delegates to header) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1ledger_1_1_block_acbd5b1d0e381f1081099c473acb68961}{Get\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Get block hash. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1ledger_1_1_block_aa2d6700326eb40d7f3c88232cbed5ccb}{Calculate\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Calculate hash (force recalculation) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a43a7efc03d671b5ba9ae695fdb860878}{Update\+Hash}} ()
+\begin{DoxyCompactList}\small\item\em Update hash (force recalculation and cache) \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a2adfcf0b02d71436ad314a455fc4ff95}{Get\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Get block size. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a866e2b48a53d9e39ffd25a9952a63aee}{Compute\+Merkle\+Root}} () const
+\begin{DoxyCompactList}\small\item\em Compute and return the Merkle root of transactions. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a15bf579f4134b484943b8fa22964fdec}{Verify\+Witnesses}} () const
+\begin{DoxyCompactList}\small\item\em Verify witness signatures. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a61621de829426dd9533f8d1ffa087a9e}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_block_aa667ac7fefce91dcf2fd08d6bd26d06a}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a binary reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{Block\+Header}} \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a30eaec9924b141d7df2f80bec12ddda2}{header\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_ad91ca9ca6748491f6915e8969381d2de}{transactions\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a7fde4317d733a19fced1746308546c27}{hash\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_block_a7bcc29ad8307442fb46d7f3debc1484a}{hash\+\_\+calculated\+\_\+}} \{false\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a block in the Neo blockchain. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_block_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_block_a40b7c6c6bc458bd041c1ffa44b38c398}\index{neo::ledger::Block@{neo::ledger::Block}!Block@{Block}}
+\index{Block@{Block}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{Block()}{Block()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a40b7c6c6bc458bd041c1ffa44b38c398} 
+neo\+::ledger\+::\+Block\+::\+Block (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor. 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a261a5c91c9e9838b1e7233bee68657b4}\index{neo::ledger::Block@{neo::ledger::Block}!````~Block@{\texorpdfstring{$\sim$}{\string~}Block}}
+\index{````~Block@{\texorpdfstring{$\sim$}{\string~}Block}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Block()}{\string~Block()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a261a5c91c9e9838b1e7233bee68657b4} 
+virtual neo\+::ledger\+::\+Block\+::\texorpdfstring{$\sim$}{\string~}\+Block (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_block_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_block_a0f2bb8d000cd924fb86f08292a65fbd3}\index{neo::ledger::Block@{neo::ledger::Block}!AddTransaction@{AddTransaction}}
+\index{AddTransaction@{AddTransaction}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{AddTransaction()}{AddTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a0f2bb8d000cd924fb86f08292a65fbd3} 
+void neo\+::ledger\+::\+Block\+::\+Add\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&}]{tx}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Add transaction. 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_aa2d6700326eb40d7f3c88232cbed5ccb}\index{neo::ledger::Block@{neo::ledger::Block}!CalculateHash@{CalculateHash}}
+\index{CalculateHash@{CalculateHash}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{CalculateHash()}{CalculateHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_aa2d6700326eb40d7f3c88232cbed5ccb} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::ledger\+::\+Block\+::\+Calculate\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Calculate hash (force recalculation) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a866e2b48a53d9e39ffd25a9952a63aee}\index{neo::ledger::Block@{neo::ledger::Block}!ComputeMerkleRoot@{ComputeMerkleRoot}}
+\index{ComputeMerkleRoot@{ComputeMerkleRoot}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{ComputeMerkleRoot()}{ComputeMerkleRoot()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a866e2b48a53d9e39ffd25a9952a63aee} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::ledger\+::\+Block\+::\+Compute\+Merkle\+Root (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Compute and return the Merkle root of transactions. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1ledger_1_1_block_aa667ac7fefce91dcf2fd08d6bd26d06a}\index{neo::ledger::Block@{neo::ledger::Block}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_aa667ac7fefce91dcf2fd08d6bd26d06a} 
+void neo\+::ledger\+::\+Block\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1ledger_1_1_block_acbd5b1d0e381f1081099c473acb68961}\index{neo::ledger::Block@{neo::ledger::Block}!GetHash@{GetHash}}
+\index{GetHash@{GetHash}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{GetHash()}{GetHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_acbd5b1d0e381f1081099c473acb68961} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::ledger\+::\+Block\+::\+Get\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get block hash. 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a0795c4cde2f9962408f95f5b73a535cf}\index{neo::ledger::Block@{neo::ledger::Block}!GetHeader@{GetHeader}}
+\index{GetHeader@{GetHeader}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{GetHeader()}{GetHeader()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a0795c4cde2f9962408f95f5b73a535cf} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{Block\+Header}} \& neo\+::ledger\+::\+Block\+::\+Get\+Header (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the header of the block (non-\/const) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a8d155dde99d08b88856aeedc84b40976}\index{neo::ledger::Block@{neo::ledger::Block}!GetHeader@{GetHeader}}
+\index{GetHeader@{GetHeader}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{GetHeader()}{GetHeader()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a8d155dde99d08b88856aeedc84b40976} 
+const \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{Block\+Header}} \& neo\+::ledger\+::\+Block\+::\+Get\+Header (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the header of the block. 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a45ca9228f70f3bdeeb87f60f9700a615}\index{neo::ledger::Block@{neo::ledger::Block}!GetIndex@{GetIndex}}
+\index{GetIndex@{GetIndex}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{GetIndex()}{GetIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a45ca9228f70f3bdeeb87f60f9700a615} 
+uint32\+\_\+t neo\+::ledger\+::\+Block\+::\+Get\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get block index (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_ab3e14405314c493b4df2c0c2b0cb477b}\index{neo::ledger::Block@{neo::ledger::Block}!GetMerkleRoot@{GetMerkleRoot}}
+\index{GetMerkleRoot@{GetMerkleRoot}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{GetMerkleRoot()}{GetMerkleRoot()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_ab3e14405314c493b4df2c0c2b0cb477b} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& neo\+::ledger\+::\+Block\+::\+Get\+Merkle\+Root (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get merkle root (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_aebcb5b9e8d5e4b23b7483f1159ab476e}\index{neo::ledger::Block@{neo::ledger::Block}!GetNextConsensus@{GetNextConsensus}}
+\index{GetNextConsensus@{GetNextConsensus}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{GetNextConsensus()}{GetNextConsensus()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_aebcb5b9e8d5e4b23b7483f1159ab476e} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& neo\+::ledger\+::\+Block\+::\+Get\+Next\+Consensus (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get next consensus address (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a8f9b86bd4e5ebb6d982f39f94613aa84}\index{neo::ledger::Block@{neo::ledger::Block}!GetNonce@{GetNonce}}
+\index{GetNonce@{GetNonce}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{GetNonce()}{GetNonce()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a8f9b86bd4e5ebb6d982f39f94613aa84} 
+uint64\+\_\+t neo\+::ledger\+::\+Block\+::\+Get\+Nonce (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get nonce (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a84e10a75b0a4db1e81c503e65a133773}\index{neo::ledger::Block@{neo::ledger::Block}!GetPrevHash@{GetPrevHash}}
+\index{GetPrevHash@{GetPrevHash}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{GetPrevHash()}{GetPrevHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a84e10a75b0a4db1e81c503e65a133773} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& neo\+::ledger\+::\+Block\+::\+Get\+Prev\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1ledger_1_1_block_a937500ddd6b7204ce845b41454285588}\index{neo::ledger::Block@{neo::ledger::Block}!GetPreviousHash@{GetPreviousHash}}
+\index{GetPreviousHash@{GetPreviousHash}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{GetPreviousHash()}{GetPreviousHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a937500ddd6b7204ce845b41454285588} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& neo\+::ledger\+::\+Block\+::\+Get\+Previous\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get previous block hash (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a84e2be8070e593d5f59b81a850ded9d5}\index{neo::ledger::Block@{neo::ledger::Block}!GetPrimaryIndex@{GetPrimaryIndex}}
+\index{GetPrimaryIndex@{GetPrimaryIndex}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{GetPrimaryIndex()}{GetPrimaryIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a84e2be8070e593d5f59b81a850ded9d5} 
+uint32\+\_\+t neo\+::ledger\+::\+Block\+::\+Get\+Primary\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get primary index (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a2adfcf0b02d71436ad314a455fc4ff95}\index{neo::ledger::Block@{neo::ledger::Block}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a2adfcf0b02d71436ad314a455fc4ff95} 
+uint32\+\_\+t neo\+::ledger\+::\+Block\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get block size. 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a95150f51dce0191f4f3cbd1a5103ae3b}\index{neo::ledger::Block@{neo::ledger::Block}!GetTimestamp@{GetTimestamp}}
+\index{GetTimestamp@{GetTimestamp}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{GetTimestamp()}{GetTimestamp()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a95150f51dce0191f4f3cbd1a5103ae3b} 
+uint64\+\_\+t neo\+::ledger\+::\+Block\+::\+Get\+Timestamp (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get block timestamp (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a712b487970c32528823eab8f68f841a3}\index{neo::ledger::Block@{neo::ledger::Block}!GetTransactions@{GetTransactions}}
+\index{GetTransactions@{GetTransactions}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{GetTransactions()}{GetTransactions()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a712b487970c32528823eab8f68f841a3} 
+const std\+::vector$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ \& neo\+::ledger\+::\+Block\+::\+Get\+Transactions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get transactions. 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_aaa1c3995115b4f8b251078f87dab1d73}\index{neo::ledger::Block@{neo::ledger::Block}!GetVersion@{GetVersion}}
+\index{GetVersion@{GetVersion}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{GetVersion()}{GetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_aaa1c3995115b4f8b251078f87dab1d73} 
+uint32\+\_\+t neo\+::ledger\+::\+Block\+::\+Get\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get block version (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a217695292b2eaa82961825dfe21357c2}\index{neo::ledger::Block@{neo::ledger::Block}!GetWitness@{GetWitness}}
+\index{GetWitness@{GetWitness}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{GetWitness()}{GetWitness()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a217695292b2eaa82961825dfe21357c2} 
+const \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{Witness}} \& neo\+::ledger\+::\+Block\+::\+Get\+Witness (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get witness (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a61621de829426dd9533f8d1ffa087a9e}\index{neo::ledger::Block@{neo::ledger::Block}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a61621de829426dd9533f8d1ffa087a9e} 
+void neo\+::ledger\+::\+Block\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1ledger_1_1_block_a8eb4f9e84f744b61524b4f5406590428}\index{neo::ledger::Block@{neo::ledger::Block}!SetHeader@{SetHeader}}
+\index{SetHeader@{SetHeader}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{SetHeader()}{SetHeader()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a8eb4f9e84f744b61524b4f5406590428} 
+void neo\+::ledger\+::\+Block\+::\+Set\+Header (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{Block\+Header}} \&}]{header}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the header of the block. 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_ad7bfe05008728edcccb9f2ab730b30fb}\index{neo::ledger::Block@{neo::ledger::Block}!SetIndex@{SetIndex}}
+\index{SetIndex@{SetIndex}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{SetIndex()}{SetIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_ad7bfe05008728edcccb9f2ab730b30fb} 
+void neo\+::ledger\+::\+Block\+::\+Set\+Index (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set block index (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a3d8d979c8c0ae3926ba1f52a6219fd30}\index{neo::ledger::Block@{neo::ledger::Block}!SetMerkleRoot@{SetMerkleRoot}}
+\index{SetMerkleRoot@{SetMerkleRoot}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{SetMerkleRoot()}{SetMerkleRoot()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a3d8d979c8c0ae3926ba1f52a6219fd30} 
+void neo\+::ledger\+::\+Block\+::\+Set\+Merkle\+Root (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{root}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set merkle root (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a51a3bb0a326235f66ffa51b0524823bb}\index{neo::ledger::Block@{neo::ledger::Block}!SetNextConsensus@{SetNextConsensus}}
+\index{SetNextConsensus@{SetNextConsensus}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{SetNextConsensus()}{SetNextConsensus()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a51a3bb0a326235f66ffa51b0524823bb} 
+void neo\+::ledger\+::\+Block\+::\+Set\+Next\+Consensus (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set next consensus address (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_aa3f57d59e023a81cbc77ed21a7db9e1c}\index{neo::ledger::Block@{neo::ledger::Block}!SetNonce@{SetNonce}}
+\index{SetNonce@{SetNonce}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{SetNonce()}{SetNonce()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_aa3f57d59e023a81cbc77ed21a7db9e1c} 
+void neo\+::ledger\+::\+Block\+::\+Set\+Nonce (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{nonce}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set nonce (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_ad55b9edd425e11a8565d82319f82b1de}\index{neo::ledger::Block@{neo::ledger::Block}!SetPreviousHash@{SetPreviousHash}}
+\index{SetPreviousHash@{SetPreviousHash}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{SetPreviousHash()}{SetPreviousHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_ad55b9edd425e11a8565d82319f82b1de} 
+void neo\+::ledger\+::\+Block\+::\+Set\+Previous\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set previous block hash (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a92b87694b6538c4cd440e16dd79b4de2}\index{neo::ledger::Block@{neo::ledger::Block}!SetPrimaryIndex@{SetPrimaryIndex}}
+\index{SetPrimaryIndex@{SetPrimaryIndex}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{SetPrimaryIndex()}{SetPrimaryIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a92b87694b6538c4cd440e16dd79b4de2} 
+void neo\+::ledger\+::\+Block\+::\+Set\+Primary\+Index (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set primary index (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a2f438de3767a17290d8c710b8397a14b}\index{neo::ledger::Block@{neo::ledger::Block}!SetTimestamp@{SetTimestamp}}
+\index{SetTimestamp@{SetTimestamp}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{SetTimestamp()}{SetTimestamp()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a2f438de3767a17290d8c710b8397a14b} 
+void neo\+::ledger\+::\+Block\+::\+Set\+Timestamp (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{timestamp}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set block timestamp (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_ae6c32b5d0ec3d5f1e17be8f3a18af368}\index{neo::ledger::Block@{neo::ledger::Block}!SetVersion@{SetVersion}}
+\index{SetVersion@{SetVersion}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{SetVersion()}{SetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_ae6c32b5d0ec3d5f1e17be8f3a18af368} 
+void neo\+::ledger\+::\+Block\+::\+Set\+Version (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{version}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set block version (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a43d5c99f98b62babdd3d08aba9f3e522}\index{neo::ledger::Block@{neo::ledger::Block}!SetWitness@{SetWitness}}
+\index{SetWitness@{SetWitness}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{SetWitness()}{SetWitness()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a43d5c99f98b62babdd3d08aba9f3e522} 
+void neo\+::ledger\+::\+Block\+::\+Set\+Witness (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{Witness}} \&}]{witness}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set witness (delegates to header) 
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a43a7efc03d671b5ba9ae695fdb860878}\index{neo::ledger::Block@{neo::ledger::Block}!UpdateHash@{UpdateHash}}
+\index{UpdateHash@{UpdateHash}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{UpdateHash()}{UpdateHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a43a7efc03d671b5ba9ae695fdb860878} 
+void neo\+::ledger\+::\+Block\+::\+Update\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update hash (force recalculation and cache) 
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1ledger_1_1_block_a15bf579f4134b484943b8fa22964fdec}\index{neo::ledger::Block@{neo::ledger::Block}!VerifyWitnesses@{VerifyWitnesses}}
+\index{VerifyWitnesses@{VerifyWitnesses}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{VerifyWitnesses()}{VerifyWitnesses()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a15bf579f4134b484943b8fa22964fdec} 
+bool neo\+::ledger\+::\+Block\+::\+Verify\+Witnesses (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Verify witness signatures. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_block_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_block_a7fde4317d733a19fced1746308546c27}\index{neo::ledger::Block@{neo::ledger::Block}!hash\_@{hash\_}}
+\index{hash\_@{hash\_}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{hash\_}{hash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a7fde4317d733a19fced1746308546c27} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::ledger\+::\+Block\+::hash\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a7bcc29ad8307442fb46d7f3debc1484a}\index{neo::ledger::Block@{neo::ledger::Block}!hash\_calculated\_@{hash\_calculated\_}}
+\index{hash\_calculated\_@{hash\_calculated\_}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{hash\_calculated\_}{hash\_calculated\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a7bcc29ad8307442fb46d7f3debc1484a} 
+bool neo\+::ledger\+::\+Block\+::hash\+\_\+calculated\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_block_a30eaec9924b141d7df2f80bec12ddda2}\index{neo::ledger::Block@{neo::ledger::Block}!header\_@{header\_}}
+\index{header\_@{header\_}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{header\_}{header\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_a30eaec9924b141d7df2f80bec12ddda2} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{Block\+Header}} neo\+::ledger\+::\+Block\+::header\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_block_ad91ca9ca6748491f6915e8969381d2de}\index{neo::ledger::Block@{neo::ledger::Block}!transactions\_@{transactions\_}}
+\index{transactions\_@{transactions\_}!neo::ledger::Block@{neo::ledger::Block}}
+\doxysubsubsection{\texorpdfstring{transactions\_}{transactions\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_ad91ca9ca6748491f6915e8969381d2de} 
+std\+::vector$<$\mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}}$>$ neo\+::ledger\+::\+Block\+::transactions\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{ledger_2block_8h}{block.\+h}}\item 
+src/ledger/\mbox{\hyperlink{block_8cpp}{block.\+cpp}}\end{DoxyCompactItemize}

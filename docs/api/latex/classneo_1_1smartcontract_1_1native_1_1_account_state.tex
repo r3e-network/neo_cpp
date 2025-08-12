@@ -1,0 +1,214 @@
+\doxysection{neo\+::smartcontract\+::native\+::Account\+State Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1native_1_1_account_state}{}\label{classneo_1_1smartcontract_1_1native_1_1_account_state}\index{neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}}
+
+
+The base class of account state for all native tokens. This class matches the C\# \doxylink{classneo_1_1smartcontract_1_1native_1_1_account_state}{Account\+State} class.  
+
+
+
+
+{\ttfamily \#include $<$account\+\_\+state.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::smartcontract\+::native\+::Account\+State\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_account_state_af6a6d50b864626ac94b3343abeeed1e4}{Account\+State}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1smartcontract_1_1native_1_1_account_state}{Account\+State}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_account_state_a98afaa322a17c8a31c6c848f171bda9b}{Account\+State}} (int64\+\_\+t balance)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1smartcontract_1_1native_1_1_account_state}{Account\+State} with the specified balance. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_account_state_a99617a17b98349de394051f29646a9a5}{\texorpdfstring{$\sim$}{\string~}\+Account\+State}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_account_state_aaea97c778ab725b6842896c39f0575d6}{Get\+Balance}} () const
+\begin{DoxyCompactList}\small\item\em Gets the balance of the account. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_account_state_a53d23c2f60a5297bdac275a2804de6a7}{Set\+Balance}} (int64\+\_\+t balance)
+\begin{DoxyCompactList}\small\item\em Sets the balance of the account. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_account_state_a414ad88bf4bc8bc6b4d54384d736bb06}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader)
+\begin{DoxyCompactList}\small\item\em Deserializes the account state from a binary reader. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_account_state_a821cc2f930c8d26c4887345dbed6bbb1}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const
+\begin{DoxyCompactList}\small\item\em Serializes the account state to a binary writer. \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_account_state_a44b6f160ed9f8c1dd94909abb630550b}{To\+Stack\+Item}} () const
+\begin{DoxyCompactList}\small\item\em Converts the account state to a stack item. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_account_state_a0d62e5f52300f58ee4c5a4cda0e6f297}{From\+Stack\+Item}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \&item)
+\begin{DoxyCompactList}\small\item\em Converts a stack item to an account state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_account_state_af7d2bc2bdc5e35257d23c50e725f83b9}{balance\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The base class of account state for all native tokens. This class matches the C\# \doxylink{classneo_1_1smartcontract_1_1native_1_1_account_state}{Account\+State} class. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_account_state_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_account_state_af6a6d50b864626ac94b3343abeeed1e4}\index{neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}!AccountState@{AccountState}}
+\index{AccountState@{AccountState}!neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}}
+\doxysubsubsection{\texorpdfstring{AccountState()}{AccountState()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_account_state_af6a6d50b864626ac94b3343abeeed1e4} 
+neo\+::smartcontract\+::native\+::\+Account\+State\+::\+Account\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an \doxylink{classneo_1_1smartcontract_1_1native_1_1_account_state}{Account\+State}. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_account_state_a98afaa322a17c8a31c6c848f171bda9b}\index{neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}!AccountState@{AccountState}}
+\index{AccountState@{AccountState}!neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}}
+\doxysubsubsection{\texorpdfstring{AccountState()}{AccountState()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_account_state_a98afaa322a17c8a31c6c848f171bda9b} 
+neo\+::smartcontract\+::native\+::\+Account\+State\+::\+Account\+State (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{balance}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs an \doxylink{classneo_1_1smartcontract_1_1native_1_1_account_state}{Account\+State} with the specified balance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em balance} & The balance. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_account_state_a99617a17b98349de394051f29646a9a5}\index{neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}!````~AccountState@{\texorpdfstring{$\sim$}{\string~}AccountState}}
+\index{````~AccountState@{\texorpdfstring{$\sim$}{\string~}AccountState}!neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}AccountState()}{\string~AccountState()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_account_state_a99617a17b98349de394051f29646a9a5} 
+virtual neo\+::smartcontract\+::native\+::\+Account\+State\+::\texorpdfstring{$\sim$}{\string~}\+Account\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_account_state_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_account_state_a414ad88bf4bc8bc6b4d54384d736bb06}\index{neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_account_state_a414ad88bf4bc8bc6b4d54384d736bb06} 
+void neo\+::smartcontract\+::native\+::\+Account\+State\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Deserializes the account state from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_account_state_aafb716e2025af3d4e68dd7c0a9ce1bcc}{neo\+::smartcontract\+::native\+::\+Neo\+Account\+State}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_account_state_a0d62e5f52300f58ee4c5a4cda0e6f297}\index{neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}!FromStackItem@{FromStackItem}}
+\index{FromStackItem@{FromStackItem}!neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}}
+\doxysubsubsection{\texorpdfstring{FromStackItem()}{FromStackItem()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_account_state_a0d62e5f52300f58ee4c5a4cda0e6f297} 
+void neo\+::smartcontract\+::native\+::\+Account\+State\+::\+From\+Stack\+Item (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \&}]{item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Converts a stack item to an account state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The stack item. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_account_state_a2259c5a50a88da2c919391fad717276d}{neo\+::smartcontract\+::native\+::\+Neo\+Account\+State}}.
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_account_state_aaea97c778ab725b6842896c39f0575d6}\index{neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}!GetBalance@{GetBalance}}
+\index{GetBalance@{GetBalance}!neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}}
+\doxysubsubsection{\texorpdfstring{GetBalance()}{GetBalance()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_account_state_aaea97c778ab725b6842896c39f0575d6} 
+int64\+\_\+t neo\+::smartcontract\+::native\+::\+Account\+State\+::\+Get\+Balance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the balance of the account. 
+
+\begin{DoxyReturn}{Returns}
+The balance. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_account_state_a821cc2f930c8d26c4887345dbed6bbb1}\index{neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_account_state_a821cc2f930c8d26c4887345dbed6bbb1} 
+void neo\+::smartcontract\+::native\+::\+Account\+State\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Serializes the account state to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_account_state_adfbb1694f0c7441d4ef4f835ecf8cb5a}{neo\+::smartcontract\+::native\+::\+Neo\+Account\+State}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_account_state_a53d23c2f60a5297bdac275a2804de6a7}\index{neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}!SetBalance@{SetBalance}}
+\index{SetBalance@{SetBalance}!neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}}
+\doxysubsubsection{\texorpdfstring{SetBalance()}{SetBalance()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_account_state_a53d23c2f60a5297bdac275a2804de6a7} 
+void neo\+::smartcontract\+::native\+::\+Account\+State\+::\+Set\+Balance (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{balance}{}\end{DoxyParamCaption})}
+
+
+
+Sets the balance of the account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em balance} & The balance. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_account_state_a44b6f160ed9f8c1dd94909abb630550b}\index{neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}!ToStackItem@{ToStackItem}}
+\index{ToStackItem@{ToStackItem}!neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}}
+\doxysubsubsection{\texorpdfstring{ToStackItem()}{ToStackItem()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_account_state_a44b6f160ed9f8c1dd94909abb630550b} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Account\+State\+::\+To\+Stack\+Item (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Converts the account state to a stack item. 
+
+\begin{DoxyReturn}{Returns}
+The stack item. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_account_state_a547936bbfaa294b3a6f4445cd1bd267a}{neo\+::smartcontract\+::native\+::\+Neo\+Account\+State}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_account_state_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_account_state_af7d2bc2bdc5e35257d23c50e725f83b9}\index{neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}!balance\_@{balance\_}}
+\index{balance\_@{balance\_}!neo::smartcontract::native::AccountState@{neo::smartcontract::native::AccountState}}
+\doxysubsubsection{\texorpdfstring{balance\_}{balance\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_account_state_af7d2bc2bdc5e35257d23c50e725f83b9} 
+int64\+\_\+t neo\+::smartcontract\+::native\+::\+Account\+State\+::balance\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/native/\mbox{\hyperlink{account__state_8h}{account\+\_\+state.\+h}}\item 
+src/smartcontract/native/\mbox{\hyperlink{account__state_8cpp}{account\+\_\+state.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,46 @@
+\doxysection{call\+\_\+flags.\+h}
+\hypertarget{call__flags_8h_source}{}\label{call__flags_8h_source}\index{include/neo/smartcontract/call\_flags.h@{include/neo/smartcontract/call\_flags.h}}
+\mbox{\hyperlink{call__flags_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract}{neo::smartcontract}}}
+\DoxyCodeLine{00006\ \{}
+\DoxyCodeLine{00010\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\ :\ uint8\_t}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059a6adf97f83acf6453d4a6a4b1070f3754}{None}}\ =\ 0,}
+\DoxyCodeLine{00013\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059a9aceb89bf0cee5e6c5b1054b36cf2c97}{ReadStates}}\ =\ 0x01,}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059a4532acc41082186fe49ff0b5f7ee6e47}{WriteStates}}\ =\ 0x02,}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059a5468214587cf249a9ccd053b0adb1a5c}{AllowCall}}\ =\ 0x04,}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059a92d32e6849984668244de35930450b23}{AllowNotify}}\ =\ 0x08,}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059ab8464cdd84b5f068ad72bf5c4f32163d}{States}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059a9aceb89bf0cee5e6c5b1054b36cf2c97}{ReadStates}}\ |\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059a4532acc41082186fe49ff0b5f7ee6e47}{WriteStates}},}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059a131fb182a881796e7606ed6da27f1197}{ReadOnly}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059a9aceb89bf0cee5e6c5b1054b36cf2c97}{ReadStates}}\ |\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059a5468214587cf249a9ccd053b0adb1a5c}{AllowCall}},}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059ab1c94ca2fbc3e78fc30069c8d0f01680}{All}}\ =\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059ab8464cdd84b5f068ad72bf5c4f32163d}{States}}\ |\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059a5468214587cf249a9ccd053b0adb1a5c}{AllowCall}}\ |\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059a92d32e6849984668244de35930450b23}{AllowNotify}}}
+\DoxyCodeLine{00020\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a1fcf4e9d57eb4dcd559fcbc6232b5eb1}{operator|}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\ lhs,\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\ rhs)}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\textcolor{keyword}{>}(\textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(lhs)\ |\ \textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(rhs));}
+\DoxyCodeLine{00028\ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_ab38f9723f6210ccf8b2884433a20784c}{operator\&}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\ lhs,\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\ rhs)}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\textcolor{keyword}{>}(\textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(lhs)\ \&\ \textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(rhs));}
+\DoxyCodeLine{00036\ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00041\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_aef347179ab1dc5a427ed4c1d8cdc892e}{operator\string^}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\ lhs,\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\ rhs)}
+\DoxyCodeLine{00042\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\textcolor{keyword}{>}(\textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(lhs)\ \string^\ \textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(rhs));}
+\DoxyCodeLine{00044\ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00049\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a530a2a6a6f4f178595fd403e241f7967}{operator\string~}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\ flags)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\textcolor{keyword}{>}(\string~static\_cast<uint8\_t>(flags));\ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00057\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a898b61fada584cdc0942c2bbfb6c1c2e}{HasFlag}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\ flags,\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\ flag)}
+\DoxyCodeLine{00058\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordflow}{return}\ (\textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(flags)\ \&\ \textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(flag))\ !=\ 0;}
+\DoxyCodeLine{00060\ \}}
+\DoxyCodeLine{00061\ \}\ \ \textcolor{comment}{//\ namespace\ neo::smartcontract}}
+
+\end{DoxyCode}

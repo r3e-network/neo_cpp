@@ -1,0 +1,301 @@
+\doxysection{neo\+::network\+::p2p\+::payloads\+::Block\+Payload Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}\index{neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}}
+
+
+Represents a block payload.  
+
+
+
+
+{\ttfamily \#include $<$block\+\_\+payload.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::p2p\+::payloads\+::Block\+Payload\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::payloads\+::Block\+Payload\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a8c2824e4176a4c61c220273a97dd955d}{Block\+Payload}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{Block\+Payload}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a49f7b03c0162dcfa47da5baf349800fa}{\texorpdfstring{$\sim$}{\string~}\+Block\+Payload}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a18b102fac721eeea4ea94bec455c4bfc}{Block\+Payload}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ block)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{Block\+Payload} with the specified block. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_aa423e582ce5d940b1533d50c23def07e}{Get\+Block}} () const
+\begin{DoxyCompactList}\small\item\em Gets the block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a9b0564f9b11e6a465dfe799b916c37ea}{Set\+Block}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ block)
+\begin{DoxyCompactList}\small\item\em Sets the block. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a82ba5e3ec32c3134082fbb08c4d67138}{Get\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the size of the payload. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a8b34298e155bad1291ed71c52c1fd175}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{Block\+Payload} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a5f5de873ac09e5d7beefec79b7b2253b}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{Block\+Payload} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_ae428ff51f936f328f95f57743bb9b5d2}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{Block\+Payload} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a11b982bd8a2c7dd7577b4127ded82aed}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{Block\+Payload} from a JSON reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{neo\+::network\+::p2p\+::\+IPayload}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload_a1702136f068aff6bbc90418bc0259c9f}{\texorpdfstring{$\sim$}{\string~}\+IPayload}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{Block\+Payload}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a62f0811b044970b01e7a01f87d999cb3}{Create}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ block)
+\begin{DoxyCompactList}\small\item\em Creates a new \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{Block\+Payload} with the specified block. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a5137f61eff80f1d4dafec6f7c20ae1c3}{block\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a block payload. 
+
+This message is sent to respond to Get\+Blocks messages. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a8c2824e4176a4c61c220273a97dd955d}\index{neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}!BlockPayload@{BlockPayload}}
+\index{BlockPayload@{BlockPayload}!neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}}
+\doxysubsubsection{\texorpdfstring{BlockPayload()}{BlockPayload()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a8c2824e4176a4c61c220273a97dd955d} 
+neo\+::network\+::p2p\+::payloads\+::\+Block\+Payload\+::\+Block\+Payload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{Block\+Payload}. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a49f7b03c0162dcfa47da5baf349800fa}\index{neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}!````~BlockPayload@{\texorpdfstring{$\sim$}{\string~}BlockPayload}}
+\index{````~BlockPayload@{\texorpdfstring{$\sim$}{\string~}BlockPayload}!neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}BlockPayload()}{\string~BlockPayload()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a49f7b03c0162dcfa47da5baf349800fa} 
+neo\+::network\+::p2p\+::payloads\+::\+Block\+Payload\+::\texorpdfstring{$\sim$}{\string~}\+Block\+Payload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a18b102fac721eeea4ea94bec455c4bfc}\index{neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}!BlockPayload@{BlockPayload}}
+\index{BlockPayload@{BlockPayload}!neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}}
+\doxysubsubsection{\texorpdfstring{BlockPayload()}{BlockPayload()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a18b102fac721eeea4ea94bec455c4bfc} 
+neo\+::network\+::p2p\+::payloads\+::\+Block\+Payload\+::\+Block\+Payload (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$}]{block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{Block\+Payload} with the specified block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a62f0811b044970b01e7a01f87d999cb3}\index{neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}!Create@{Create}}
+\index{Create@{Create}!neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a62f0811b044970b01e7a01f87d999cb3} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{Block\+Payload}} neo\+::network\+::p2p\+::payloads\+::\+Block\+Payload\+::\+Create (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$}]{block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a new \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{Block\+Payload} with the specified block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created payload. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a5f5de873ac09e5d7beefec79b7b2253b}\index{neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a5f5de873ac09e5d7beefec79b7b2253b} 
+void neo\+::network\+::p2p\+::payloads\+::\+Block\+Payload\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{Block\+Payload} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a11b982bd8a2c7dd7577b4127ded82aed}\index{neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a11b982bd8a2c7dd7577b4127ded82aed} 
+void neo\+::network\+::p2p\+::payloads\+::\+Block\+Payload\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{Block\+Payload} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_aa423e582ce5d940b1533d50c23def07e}\index{neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}!GetBlock@{GetBlock}}
+\index{GetBlock@{GetBlock}!neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}}
+\doxysubsubsection{\texorpdfstring{GetBlock()}{GetBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_aa423e582ce5d940b1533d50c23def07e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ neo\+::network\+::p2p\+::payloads\+::\+Block\+Payload\+::\+Get\+Block (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the block. 
+
+\begin{DoxyReturn}{Returns}
+The block. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a82ba5e3ec32c3134082fbb08c4d67138}\index{neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a82ba5e3ec32c3134082fbb08c4d67138} 
+int neo\+::network\+::p2p\+::payloads\+::\+Block\+Payload\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the size of the payload. 
+
+\begin{DoxyReturn}{Returns}
+The size of the payload. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a8b34298e155bad1291ed71c52c1fd175}\index{neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a8b34298e155bad1291ed71c52c1fd175} 
+void neo\+::network\+::p2p\+::payloads\+::\+Block\+Payload\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{Block\+Payload} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_ae428ff51f936f328f95f57743bb9b5d2}\index{neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_ae428ff51f936f328f95f57743bb9b5d2} 
+void neo\+::network\+::p2p\+::payloads\+::\+Block\+Payload\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload}{Block\+Payload} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a9b0564f9b11e6a465dfe799b916c37ea}\index{neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}!SetBlock@{SetBlock}}
+\index{SetBlock@{SetBlock}!neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}}
+\doxysubsubsection{\texorpdfstring{SetBlock()}{SetBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a9b0564f9b11e6a465dfe799b916c37ea} 
+void neo\+::network\+::p2p\+::payloads\+::\+Block\+Payload\+::\+Set\+Block (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$}]{block}{}\end{DoxyParamCaption})}
+
+
+
+Sets the block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a5137f61eff80f1d4dafec6f7c20ae1c3}\index{neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}!block\_@{block\_}}
+\index{block\_@{block\_}!neo::network::p2p::payloads::BlockPayload@{neo::network::p2p::payloads::BlockPayload}}
+\doxysubsubsection{\texorpdfstring{block\_}{block\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a5137f61eff80f1d4dafec6f7c20ae1c3} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}}$>$ neo\+::network\+::p2p\+::payloads\+::\+Block\+Payload\+::block\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/payloads/\mbox{\hyperlink{block__payload_8h}{block\+\_\+payload.\+h}}\item 
+src/network/p2p/payloads/\mbox{\hyperlink{block__payload_8cpp}{block\+\_\+payload.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,48 @@
+\doxysection{transaction\+\_\+cache.\+h}
+\hypertarget{transaction__cache_8h_source}{}\label{transaction__cache_8h_source}\index{include/neo/io/caching/transaction\_cache.h@{include/neo/io/caching/transaction\_cache.h}}
+\mbox{\hyperlink{transaction__cache_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{caching_2lru__cache_8h}{neo/io/caching/lru\_cache.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2transaction_8h}{neo/ledger/transaction.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1io_1_1caching}{neo::io::caching}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a18f55b3e649186635113612413240139}{TransactionCache}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a18f55b3e649186635113612413240139}{TransactionCache}}(\textcolor{keywordtype}{size\_t}\ capacity)\ :\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a8b9c666cfe449778ed93905e89541245}{cache\_}}(capacity)\ \{\}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a107fb5f84ffeabd5fcbe464f93c61da3}{Add}}(std::shared\_ptr<ledger::Transaction>\ transaction)}
+\DoxyCodeLine{00028\ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!transaction)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ to\ cache}}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a8b9c666cfe449778ed93905e89541245}{cache\_}}.Add(transaction-\/>GetHash(),\ transaction);}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00040\ \ \ \ \ std::optional<std::shared\_ptr<ledger::Transaction>>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a2cf54e11301009c1c446a89aa45a879b}{Get}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}}\&\ hash)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a8b9c666cfe449778ed93905e89541245}{cache\_}}.Get(hash);\ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a5dd91188843d63f6b2beef106b607ea0}{TryGet}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}}\&\ hash,\ std::shared\_ptr<ledger::Transaction>\&\ transaction)}
+\DoxyCodeLine{00049\ \ \ \ \ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a8b9c666cfe449778ed93905e89541245}{cache\_}}.TryGet(hash,\ transaction);}
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_aab3b711dfbb7c1ec9f61777b1051a4f2}{Remove}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}}\&\ hash)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a8b9c666cfe449778ed93905e89541245}{cache\_}}.Remove(hash);\ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_af387b6591be095d45c4fce13cae925f5}{Clear}}()\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a8b9c666cfe449778ed93905e89541245}{cache\_}}.Clear();\ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_ab1fc2c0ac3288efddb4185b902e16d25}{Size}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a8b9c666cfe449778ed93905e89541245}{cache\_}}.Size();\ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a12c475114484a3134684b2dafdf7b0f4}{Capacity}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a8b9c666cfe449778ed93905e89541245}{cache\_}}.Capacity();\ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache<UInt256,\ std::shared\_ptr<ledger::Transaction>}}>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache_a8b9c666cfe449778ed93905e89541245}{cache\_}};}
+\DoxyCodeLine{00079\ \};}
+\DoxyCodeLine{00080\ \}\ \ \textcolor{comment}{//\ namespace\ neo::io::caching}}
+
+\end{DoxyCode}

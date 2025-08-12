@@ -1,0 +1,241 @@
+\doxysection{neo\+::cryptography\+::ecc\+::ECCurve Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve}{}\label{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve}\index{neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}}
+
+
+Elliptic curve parameters and operations.  
+
+
+
+
+{\ttfamily \#include $<$eccurve.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::cryptography\+::ecc\+::ECCurve\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1cryptography_1_1ecc_1_1_e_c_curve_1_1_curve_params}{Curve\+Params}}
+\begin{DoxyCompactList}\small\item\em Curve parameters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a47e949a368c40a15ffadcce717ad81c9}{ECCurve}} (const \mbox{\hyperlink{structneo_1_1cryptography_1_1ecc_1_1_e_c_curve_1_1_curve_params}{Curve\+Params}} \&params)
+\begin{DoxyCompactList}\small\item\em Constructor with curve parameters. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structneo_1_1cryptography_1_1ecc_1_1_e_c_curve_1_1_curve_params}{Curve\+Params}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a941f152702516ac48a68f27f15440cd4}{Get\+Params}} () const
+\begin{DoxyCompactList}\small\item\em Get curve parameters. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_ac8e6f8c3afef8adca104d4a2991ec11c}{Get\+Generator}} () const
+\begin{DoxyCompactList}\small\item\em Get generator point. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_aab8f6a38a08b4aedbe05700b8b7b876a}{Create\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&x, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&y) const
+\begin{DoxyCompactList}\small\item\em Create point from coordinates. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_aca231aa564d44ed44d3249a4711ac684}{Decode\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data) const
+\begin{DoxyCompactList}\small\item\em Decode point from bytes. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a239d4a957c5f5ec8d90472ce1e7886d7}{Is\+On\+Curve}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&point) const
+\begin{DoxyCompactList}\small\item\em Verify point is on curve. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_af7d6505ff8631ed035d7b160efd14de6}{Get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Get curve name. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a0c1775464f1873d9d165a4ec07136f64}{Get\+Field\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Get field size in bytes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve}{ECCurve}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a3f11f296cc068079c3fe7e127d83208a}{Secp256r1}} ()
+\begin{DoxyCompactList}\small\item\em Get the secp256r1 curve (NIST P-\/256) \end{DoxyCompactList}\item 
+static const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve}{ECCurve}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_af3695163f086cae14e4924b3eebc08a3}{Secp256k1}} ()
+\begin{DoxyCompactList}\small\item\em Get the secp256k1 curve. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structneo_1_1cryptography_1_1ecc_1_1_e_c_curve_1_1_curve_params}{Curve\+Params}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a5768f212af580f1daeca478234bd7c3f}{params\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a8e789e0979b6a095552cf267eb6c26ce}{generator\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Elliptic curve parameters and operations. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a47e949a368c40a15ffadcce717ad81c9}\index{neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}!ECCurve@{ECCurve}}
+\index{ECCurve@{ECCurve}!neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}}
+\doxysubsubsection{\texorpdfstring{ECCurve()}{ECCurve()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a47e949a368c40a15ffadcce717ad81c9} 
+neo\+::cryptography\+::ecc\+::\+ECCurve\+::\+ECCurve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1cryptography_1_1ecc_1_1_e_c_curve_1_1_curve_params}{Curve\+Params}} \&}]{params}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor with curve parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em params} & Curve parameters \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_aab8f6a38a08b4aedbe05700b8b7b876a}\index{neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}!CreatePoint@{CreatePoint}}
+\index{CreatePoint@{CreatePoint}!neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}}
+\doxysubsubsection{\texorpdfstring{CreatePoint()}{CreatePoint()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_aab8f6a38a08b4aedbe05700b8b7b876a} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} $>$ neo\+::cryptography\+::ecc\+::\+ECCurve\+::\+Create\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{x}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{y}{}\end{DoxyParamCaption}) const}
+
+
+
+Create point from coordinates. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & X coordinate \\
+\hline
+{\em y} & Y coordinate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+EC point 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_aca231aa564d44ed44d3249a4711ac684}\index{neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}!DecodePoint@{DecodePoint}}
+\index{DecodePoint@{DecodePoint}!neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}}
+\doxysubsubsection{\texorpdfstring{DecodePoint()}{DecodePoint()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_aca231aa564d44ed44d3249a4711ac684} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} $>$ neo\+::cryptography\+::ecc\+::\+ECCurve\+::\+Decode\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption}) const}
+
+
+
+Decode point from bytes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Encoded point data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Decoded EC point 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a0c1775464f1873d9d165a4ec07136f64}\index{neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}!GetFieldSize@{GetFieldSize}}
+\index{GetFieldSize@{GetFieldSize}!neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}}
+\doxysubsubsection{\texorpdfstring{GetFieldSize()}{GetFieldSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a0c1775464f1873d9d165a4ec07136f64} 
+size\+\_\+t neo\+::cryptography\+::ecc\+::\+ECCurve\+::\+Get\+Field\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get field size in bytes. 
+
+\begin{DoxyReturn}{Returns}
+Field size in bytes 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_ac8e6f8c3afef8adca104d4a2991ec11c}\index{neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}!GetGenerator@{GetGenerator}}
+\index{GetGenerator@{GetGenerator}!neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}}
+\doxysubsubsection{\texorpdfstring{GetGenerator()}{GetGenerator()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_ac8e6f8c3afef8adca104d4a2991ec11c} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} $>$ neo\+::cryptography\+::ecc\+::\+ECCurve\+::\+Get\+Generator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get generator point. 
+
+\begin{DoxyReturn}{Returns}
+Generator point 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_af7d6505ff8631ed035d7b160efd14de6}\index{neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}!GetName@{GetName}}
+\index{GetName@{GetName}!neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_af7d6505ff8631ed035d7b160efd14de6} 
+std\+::string neo\+::cryptography\+::ecc\+::\+ECCurve\+::\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get curve name. 
+
+\begin{DoxyReturn}{Returns}
+Curve name string 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a941f152702516ac48a68f27f15440cd4}\index{neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}!GetParams@{GetParams}}
+\index{GetParams@{GetParams}!neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}}
+\doxysubsubsection{\texorpdfstring{GetParams()}{GetParams()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a941f152702516ac48a68f27f15440cd4} 
+const \mbox{\hyperlink{structneo_1_1cryptography_1_1ecc_1_1_e_c_curve_1_1_curve_params}{Curve\+Params}} \& neo\+::cryptography\+::ecc\+::\+ECCurve\+::\+Get\+Params (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get curve parameters. 
+
+\begin{DoxyReturn}{Returns}
+Curve parameters 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a239d4a957c5f5ec8d90472ce1e7886d7}\index{neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}!IsOnCurve@{IsOnCurve}}
+\index{IsOnCurve@{IsOnCurve}!neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}}
+\doxysubsubsection{\texorpdfstring{IsOnCurve()}{IsOnCurve()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a239d4a957c5f5ec8d90472ce1e7886d7} 
+bool neo\+::cryptography\+::ecc\+::\+ECCurve\+::\+Is\+On\+Curve (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&}]{point}{}\end{DoxyParamCaption}) const}
+
+
+
+Verify point is on curve. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & Point to verify \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if point is on curve 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_af3695163f086cae14e4924b3eebc08a3}\index{neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}!Secp256k1@{Secp256k1}}
+\index{Secp256k1@{Secp256k1}!neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}}
+\doxysubsubsection{\texorpdfstring{Secp256k1()}{Secp256k1()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_af3695163f086cae14e4924b3eebc08a3} 
+const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve}{ECCurve}} \& neo\+::cryptography\+::ecc\+::\+ECCurve\+::\+Secp256k1 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the secp256k1 curve. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{classneo_1_1cryptography_1_1ecc_1_1_secp256k1}{Secp256k1} curve instance 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a3f11f296cc068079c3fe7e127d83208a}\index{neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}!Secp256r1@{Secp256r1}}
+\index{Secp256r1@{Secp256r1}!neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}}
+\doxysubsubsection{\texorpdfstring{Secp256r1()}{Secp256r1()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a3f11f296cc068079c3fe7e127d83208a} 
+const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve}{ECCurve}} \& neo\+::cryptography\+::ecc\+::\+ECCurve\+::\+Secp256r1 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the secp256r1 curve (NIST P-\/256) 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1}{Secp256r1} curve instance 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a8e789e0979b6a095552cf267eb6c26ce}\index{neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}!generator\_@{generator\_}}
+\index{generator\_@{generator\_}!neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}}
+\doxysubsubsection{\texorpdfstring{generator\_}{generator\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a8e789e0979b6a095552cf267eb6c26ce} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}}$>$ neo\+::cryptography\+::ecc\+::\+ECCurve\+::generator\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a5768f212af580f1daeca478234bd7c3f}\index{neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}!params\_@{params\_}}
+\index{params\_@{params\_}!neo::cryptography::ecc::ECCurve@{neo::cryptography::ecc::ECCurve}}
+\doxysubsubsection{\texorpdfstring{params\_}{params\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve_a5768f212af580f1daeca478234bd7c3f} 
+\mbox{\hyperlink{structneo_1_1cryptography_1_1ecc_1_1_e_c_curve_1_1_curve_params}{Curve\+Params}} neo\+::cryptography\+::ecc\+::\+ECCurve\+::params\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/ecc/\mbox{\hyperlink{eccurve_8h}{eccurve.\+h}}\end{DoxyCompactItemize}

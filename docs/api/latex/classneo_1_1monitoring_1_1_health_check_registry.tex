@@ -1,0 +1,149 @@
+\doxysection{neo\+::monitoring\+::Health\+Check\+Registry Class Reference}
+\hypertarget{classneo_1_1monitoring_1_1_health_check_registry}{}\label{classneo_1_1monitoring_1_1_health_check_registry}\index{neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}}
+
+
+Health check registry.  
+
+
+
+
+{\ttfamily \#include $<$metrics.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry_acbff3b69b2b0b81104e70e483aa71087}{Register}} (const std\+::string \&name, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_i_health_check}{IHealth\+Check}} $>$ check)
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry_a146c3adf84c0ed4ce144904d42194fc8}{Unregister}} (const std\+::string \&name)
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{Health\+Check\+Result}} $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry_ad065da9009718fad6f90840bbf25b255}{Run\+All}} () const
+\begin{DoxyCompactList}\small\item\em Run all health checks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{Health\+Status}} \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry_afbd9fd9b4136cf328cb6b7af4d5833a9}{Get\+Overall\+Status}} () const
+\begin{DoxyCompactList}\small\item\em Get overall health status. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry_ac9721ee2d8f67e89cf812f1680b2e659}{Export\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Export health status as JSON. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry}{Health\+Check\+Registry}} $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry_afb044ed7b25804c4d8a0931d2eb6b635}{Get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry_a58a24fbef9a1c5560ab95a42b5a641d4}{Health\+Check\+Registry}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry_a2722217246e0f46bd345411e64f37086}{mutex\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_i_health_check}{IHealth\+Check}} $>$ $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry_ac6cc8398b55c01468495d92305376274}{checks\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry}{Health\+Check\+Registry}} $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry_a87102df665174cc48552041b4e2f745f}{instance\+\_\+}}
+\item 
+static std\+::mutex \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry_a3c1e55cba39562b4d5651dd1254b1ff5}{instance\+\_\+mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Health check registry. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_registry_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_registry_a58a24fbef9a1c5560ab95a42b5a641d4}\index{neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}!HealthCheckRegistry@{HealthCheckRegistry}}
+\index{HealthCheckRegistry@{HealthCheckRegistry}!neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}}
+\doxysubsubsection{\texorpdfstring{HealthCheckRegistry()}{HealthCheckRegistry()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_registry_a58a24fbef9a1c5560ab95a42b5a641d4} 
+neo\+::monitoring\+::\+Health\+Check\+Registry\+::\+Health\+Check\+Registry (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_registry_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_registry_ac9721ee2d8f67e89cf812f1680b2e659}\index{neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}!ExportJson@{ExportJson}}
+\index{ExportJson@{ExportJson}!neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}}
+\doxysubsubsection{\texorpdfstring{ExportJson()}{ExportJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_registry_ac9721ee2d8f67e89cf812f1680b2e659} 
+std\+::string neo\+::monitoring\+::\+Health\+Check\+Registry\+::\+Export\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Export health status as JSON. 
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_registry_afb044ed7b25804c4d8a0931d2eb6b635}\index{neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_registry_afb044ed7b25804c4d8a0931d2eb6b635} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry}{Health\+Check\+Registry}} $>$ neo\+::monitoring\+::\+Health\+Check\+Registry\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_registry_afbd9fd9b4136cf328cb6b7af4d5833a9}\index{neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}!GetOverallStatus@{GetOverallStatus}}
+\index{GetOverallStatus@{GetOverallStatus}!neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}}
+\doxysubsubsection{\texorpdfstring{GetOverallStatus()}{GetOverallStatus()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_registry_afbd9fd9b4136cf328cb6b7af4d5833a9} 
+\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{Health\+Status}} neo\+::monitoring\+::\+Health\+Check\+Registry\+::\+Get\+Overall\+Status (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get overall health status. 
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_registry_acbff3b69b2b0b81104e70e483aa71087}\index{neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}!Register@{Register}}
+\index{Register@{Register}!neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}}
+\doxysubsubsection{\texorpdfstring{Register()}{Register()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_registry_acbff3b69b2b0b81104e70e483aa71087} 
+void neo\+::monitoring\+::\+Health\+Check\+Registry\+::\+Register (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_i_health_check}{IHealth\+Check}} $>$}]{check}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_registry_ad065da9009718fad6f90840bbf25b255}\index{neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}!RunAll@{RunAll}}
+\index{RunAll@{RunAll}!neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}}
+\doxysubsubsection{\texorpdfstring{RunAll()}{RunAll()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_registry_ad065da9009718fad6f90840bbf25b255} 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{Health\+Check\+Result}} $>$ neo\+::monitoring\+::\+Health\+Check\+Registry\+::\+Run\+All (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Run all health checks. 
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_registry_a146c3adf84c0ed4ce144904d42194fc8}\index{neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}!Unregister@{Unregister}}
+\index{Unregister@{Unregister}!neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}}
+\doxysubsubsection{\texorpdfstring{Unregister()}{Unregister()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_registry_a146c3adf84c0ed4ce144904d42194fc8} 
+void neo\+::monitoring\+::\+Health\+Check\+Registry\+::\+Unregister (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_registry_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_registry_ac6cc8398b55c01468495d92305376274}\index{neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}!checks\_@{checks\_}}
+\index{checks\_@{checks\_}!neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}}
+\doxysubsubsection{\texorpdfstring{checks\_}{checks\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_registry_ac6cc8398b55c01468495d92305376274} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1monitoring_1_1_i_health_check}{IHealth\+Check}}$>$ $>$ neo\+::monitoring\+::\+Health\+Check\+Registry\+::checks\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_registry_a87102df665174cc48552041b4e2f745f}\index{neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}!instance\_@{instance\_}}
+\index{instance\_@{instance\_}!neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}}
+\doxysubsubsection{\texorpdfstring{instance\_}{instance\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_registry_a87102df665174cc48552041b4e2f745f} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_registry}{Health\+Check\+Registry}}$>$ neo\+::monitoring\+::\+Health\+Check\+Registry\+::instance\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_registry_a3c1e55cba39562b4d5651dd1254b1ff5}\index{neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}!instance\_mutex\_@{instance\_mutex\_}}
+\index{instance\_mutex\_@{instance\_mutex\_}!neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}}
+\doxysubsubsection{\texorpdfstring{instance\_mutex\_}{instance\_mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_registry_a3c1e55cba39562b4d5651dd1254b1ff5} 
+std\+::mutex neo\+::monitoring\+::\+Health\+Check\+Registry\+::instance\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_registry_a2722217246e0f46bd345411e64f37086}\index{neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::monitoring::HealthCheckRegistry@{neo::monitoring::HealthCheckRegistry}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_registry_a2722217246e0f46bd345411e64f37086} 
+std\+::mutex neo\+::monitoring\+::\+Health\+Check\+Registry\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/monitoring/\mbox{\hyperlink{monitoring_2metrics_8h}{metrics.\+h}}\end{DoxyCompactItemize}

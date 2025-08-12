@@ -1,0 +1,149 @@
+\doxysection{neo\+::cryptography\+::Ed25519\+::Public\+Key Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_public_key}{}\label{classneo_1_1cryptography_1_1_ed25519_1_1_public_key}\index{neo::cryptography::Ed25519::PublicKey@{neo::cryptography::Ed25519::PublicKey}}
+
+
+Represents an \doxylink{classneo_1_1cryptography_1_1_ed25519}{Ed25519} public key.  
+
+
+
+
+{\ttfamily \#include $<$ed25519.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_a1e9838b4702ccb1e87e629c279370254}{Public\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&key\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Constructs a public key from raw bytes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_a7a111a7d3e2e5b608a2eadf6434774a6}{Get\+Bytes}} () const
+\begin{DoxyCompactList}\small\item\em Gets the raw public key bytes. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_ad97a5816b972ad4feb4a41fa8edca78e}{Verify}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&message, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&signature) const
+\begin{DoxyCompactList}\small\item\em Verifies a signature against a message. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_ad9fcce6c1a2da733f71aad391333de07}{To\+Hex}} () const
+\begin{DoxyCompactList}\small\item\em Converts the public key to hex string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key}{Public\+Key}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_ae98ddab07f06ba1eb15ec108641a9510}{From\+Hex}} (const std\+::string \&hex)
+\begin{DoxyCompactList}\small\item\em Creates a public key from hex string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::array$<$ uint8\+\_\+t, \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_a9882426d077281634fc66e9e733a1fab}{PUBLIC\+\_\+\+KEY\+\_\+\+SIZE}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_a3f64f28d3e940fcbc528d1615b0316c3}{key\+\_\+data\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an \doxylink{classneo_1_1cryptography_1_1_ed25519}{Ed25519} public key. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_a1e9838b4702ccb1e87e629c279370254}\index{neo::cryptography::Ed25519::PublicKey@{neo::cryptography::Ed25519::PublicKey}!PublicKey@{PublicKey}}
+\index{PublicKey@{PublicKey}!neo::cryptography::Ed25519::PublicKey@{neo::cryptography::Ed25519::PublicKey}}
+\doxysubsubsection{\texorpdfstring{PublicKey()}{PublicKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_a1e9838b4702ccb1e87e629c279370254} 
+neo\+::cryptography\+::\+Ed25519\+::\+Public\+Key\+::\+Public\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{key\+\_\+data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a public key from raw bytes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key\+\_\+data} & The 32-\/byte public key data. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 0
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_ae98ddab07f06ba1eb15ec108641a9510}\index{neo::cryptography::Ed25519::PublicKey@{neo::cryptography::Ed25519::PublicKey}!FromHex@{FromHex}}
+\index{FromHex@{FromHex}!neo::cryptography::Ed25519::PublicKey@{neo::cryptography::Ed25519::PublicKey}}
+\doxysubsubsection{\texorpdfstring{FromHex()}{FromHex()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_ae98ddab07f06ba1eb15ec108641a9510} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key}{Ed25519\+::\+Public\+Key}} neo\+::cryptography\+::\+Ed25519\+::\+Public\+Key\+::\+From\+Hex (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a public key from hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The hex string representation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The public key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_a7a111a7d3e2e5b608a2eadf6434774a6}\index{neo::cryptography::Ed25519::PublicKey@{neo::cryptography::Ed25519::PublicKey}!GetBytes@{GetBytes}}
+\index{GetBytes@{GetBytes}!neo::cryptography::Ed25519::PublicKey@{neo::cryptography::Ed25519::PublicKey}}
+\doxysubsubsection{\texorpdfstring{GetBytes()}{GetBytes()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_a7a111a7d3e2e5b608a2eadf6434774a6} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Ed25519\+::\+Public\+Key\+::\+Get\+Bytes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the raw public key bytes. 
+
+\begin{DoxyReturn}{Returns}
+The public key as a byte vector. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_ad9fcce6c1a2da733f71aad391333de07}\index{neo::cryptography::Ed25519::PublicKey@{neo::cryptography::Ed25519::PublicKey}!ToHex@{ToHex}}
+\index{ToHex@{ToHex}!neo::cryptography::Ed25519::PublicKey@{neo::cryptography::Ed25519::PublicKey}}
+\doxysubsubsection{\texorpdfstring{ToHex()}{ToHex()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_ad9fcce6c1a2da733f71aad391333de07} 
+std\+::string neo\+::cryptography\+::\+Ed25519\+::\+Public\+Key\+::\+To\+Hex (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Converts the public key to hex string. 
+
+\begin{DoxyReturn}{Returns}
+Hex representation of the public key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_ad97a5816b972ad4feb4a41fa8edca78e}\index{neo::cryptography::Ed25519::PublicKey@{neo::cryptography::Ed25519::PublicKey}!Verify@{Verify}}
+\index{Verify@{Verify}!neo::cryptography::Ed25519::PublicKey@{neo::cryptography::Ed25519::PublicKey}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_ad97a5816b972ad4feb4a41fa8edca78e} 
+bool neo\+::cryptography\+::\+Ed25519\+::\+Public\+Key\+::\+Verify (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{message}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{signature}{}\end{DoxyParamCaption}) const}
+
+
+
+Verifies a signature against a message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The original message. \\
+\hline
+{\em signature} & The signature to verify. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the signature is valid, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_a3f64f28d3e940fcbc528d1615b0316c3}\index{neo::cryptography::Ed25519::PublicKey@{neo::cryptography::Ed25519::PublicKey}!key\_data\_@{key\_data\_}}
+\index{key\_data\_@{key\_data\_}!neo::cryptography::Ed25519::PublicKey@{neo::cryptography::Ed25519::PublicKey}}
+\doxysubsubsection{\texorpdfstring{key\_data\_}{key\_data\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_1_1_public_key_a3f64f28d3e940fcbc528d1615b0316c3} 
+std\+::array$<$uint8\+\_\+t, \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_a9882426d077281634fc66e9e733a1fab}{PUBLIC\+\_\+\+KEY\+\_\+\+SIZE}}$>$ neo\+::cryptography\+::\+Ed25519\+::\+Public\+Key\+::key\+\_\+data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/\mbox{\hyperlink{ed25519_8h}{ed25519.\+h}}\item 
+src/cryptography/\mbox{\hyperlink{ed25519_8cpp}{ed25519.\+cpp}}\end{DoxyCompactItemize}

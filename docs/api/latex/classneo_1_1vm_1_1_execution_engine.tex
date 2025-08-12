@@ -1,0 +1,913 @@
+\doxysection{neo\+::vm\+::Execution\+Engine Class Reference}
+\hypertarget{classneo_1_1vm_1_1_execution_engine}{}\label{classneo_1_1vm_1_1_execution_engine}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+
+
+Represents an execution engine.  
+
+
+
+
+{\ttfamily \#include $<$execution\+\_\+engine.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::vm\+::Execution\+Engine\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::vm\+::Execution\+Engine\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a38a40d2a3f057dc24de928ac55b02610}{Execution\+Engine}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine} with default settings. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a1c92612c01a4c0bbab5d271ffa862fb1}{Execution\+Engine}} (const \mbox{\hyperlink{classneo_1_1vm_1_1_jump_table}{Jump\+Table}} \&jump\+Table)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine} with a custom jump table. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a9206c9063e5ab98815b797e68fc23f3b}{Execution\+Engine}} (const \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits}{Execution\+Engine\+Limits}} \&limits)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine} with custom limits. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a9f4ae22b1dc9a5f50f5b87f99e207bd2}{Execution\+Engine}} (const \mbox{\hyperlink{classneo_1_1vm_1_1_jump_table}{Jump\+Table}} \&jump\+Table, const \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits}{Execution\+Engine\+Limits}} \&limits)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine} with a custom jump table and limits. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a9acd3f9e5557d8f4bcbd572edeac928b}{\texorpdfstring{$\sim$}{\string~}\+Execution\+Engine}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor to properly clean up resources. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits}{Execution\+Engine\+Limits}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a060e47c3ca0c38760557eeaf809edce3}{Get\+Limits}} () const
+\begin{DoxyCompactList}\small\item\em Gets the limits of the execution engine. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a8301f5b182f15a7c9302c1b65cbf9220}{Get\+Current\+Context}} ()
+\begin{DoxyCompactList}\small\item\em Gets the current context. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_afa55adbefad42efcf9750838a848cd84}{Get\+Current\+Context}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current context. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a47c99722921aa20538c1c9fb1a95cd1e}{Get\+Entry\+Context}} () const
+\begin{DoxyCompactList}\small\item\em Gets the entry context. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a91d0c0db6d95f8ceb2969cf9a397b21c}{Get\+Invocation\+Stack}} () const
+\begin{DoxyCompactList}\small\item\em Gets the invocation stack. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}} \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ad7fc9ab3700721a410684027e7319b90}{Get\+State}} () const
+\begin{DoxyCompactList}\small\item\em Gets the state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a994592a88beaec9c69b75978b7287211}{Set\+State}} (\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}} state)
+\begin{DoxyCompactList}\small\item\em Sets the VM state. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_aabd43fe9b13eae0aa647d36162b3e1aa}{Get\+Result\+Stack}} () const
+\begin{DoxyCompactList}\small\item\em Gets the result stack. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_aacf27014a586581058c54c957aa03fe2}{Load\+Script}} (const \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}} \&script, int32\+\_\+t initial\+Position=0, std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} \&)$>$ configure\+Context=nullptr)
+\begin{DoxyCompactList}\small\item\em Loads a script. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a1921ea21d5b30b013d05de9b1d4392eb}{Load\+Context}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} $>$ context)
+\begin{DoxyCompactList}\small\item\em Loads a context. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}} \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_aef0a932b710f409f9c6845f88b2e6d87}{Execute}} (int64\+\_\+t gas\+Limit=-\/1)
+\begin{DoxyCompactList}\small\item\em Executes the script. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a87adfe2fadc6d9fd5f988c8cd96c5a42}{Execute\+Next}} ()
+\begin{DoxyCompactList}\small\item\em Executes the next instruction. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_afe200b4848d86d0267024cb7c92ece44}{Register\+System\+Call}} (const std\+::string \&name, std\+::function$<$ bool(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine}} \&)$>$ handler)
+\begin{DoxyCompactList}\small\item\em Registers a system call. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1vm_1_1_system_call}{System\+Call}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a3707d38d6cd39817cf27fe9e78c88b84}{Get\+System\+Call}} (uint32\+\_\+t hash) const
+\begin{DoxyCompactList}\small\item\em Gets the system call. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ac4c7337cbe6847beb734f3b788d8b6de}{Push}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item)
+\begin{DoxyCompactList}\small\item\em Pushes an item onto the evaluation stack. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a394ac4f0ef4a6c3e6ad98c2fc8e6ed68}{Pop}} ()
+\begin{DoxyCompactList}\small\item\em Pops an item from the evaluation stack. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\std\+::shared\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a6e1763051f2c590011a928640dc4a1f0}{Pop}} ()
+\begin{DoxyCompactList}\small\item\em Pops an item from the evaluation stack and converts it to the specified type. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ad0dd6909d826e680bc5eba06763d6863}{Peek}} (int32\+\_\+t index=0) const
+\begin{DoxyCompactList}\small\item\em Peeks at an item on the evaluation stack. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ae90860e6f9f9747ba4b863b0d364db25}{Set\+Jumping}} (bool jumping)
+\begin{DoxyCompactList}\small\item\em Sets the jumping flag. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a733ba1b420b5d5b40715a66ba10d92b2}{Is\+Jumping}} () const
+\begin{DoxyCompactList}\small\item\em Gets the jumping flag. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{Reference\+Counter}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a186db6d93382d4b0b58874cbb59f44a7}{Get\+Reference\+Counter}} ()
+\begin{DoxyCompactList}\small\item\em Gets the reference counter. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_af81689dff0a9d07a5530a50222bba191}{Has\+Uncaught\+Exception}} () const
+\begin{DoxyCompactList}\small\item\em Checks if there is an uncaught exception. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ab649c832d415ae0082440b44a0c50287}{Get\+Uncaught\+Exception}} () const
+\begin{DoxyCompactList}\small\item\em Gets the uncaught exception. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_af642629fc69c551c62d90655de46a9da}{Clear\+Uncaught\+Exception}} ()
+\begin{DoxyCompactList}\small\item\em Clears the uncaught exception. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a334349f8f8abf73db8ca86ad42704029}{Set\+Uncaught\+Exception}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ exception)
+\begin{DoxyCompactList}\small\item\em Sets the uncaught exception. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_aab3565ade0499baf294d618a726bfacd}{Execute\+Ret}} ()
+\begin{DoxyCompactList}\small\item\em Executes a return operation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ad1c076193afbdc57abacee84bf248d8e}{Execute\+Sys\+Call}} (uint32\+\_\+t hash)
+\begin{DoxyCompactList}\small\item\em Executes a system call. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a75840461e0aabbc1cec1b9bb076e502a}{Execute\+Call}} (int32\+\_\+t position)
+\begin{DoxyCompactList}\small\item\em Executes a call operation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a9c1f5ae18961a2b8d61b7f95e28ffbaa}{Execute\+Jump}} (int32\+\_\+t position)
+\begin{DoxyCompactList}\small\item\em Executes a jump operation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a67845f8e8923da7e7e9a24eb1a6a30a0}{Execute\+Throw}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ exception)
+\begin{DoxyCompactList}\small\item\em Executes a throw operation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a5cd2f17ac8d8c243afd3b6899d41aaf2}{Execute\+Try}} (int32\+\_\+t catch\+Position, int32\+\_\+t finally\+Position)
+\begin{DoxyCompactList}\small\item\em Executes a try operation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ac57b083da8a73b101651553d63a17ef6}{Execute\+End\+Try}} (int32\+\_\+t position)
+\begin{DoxyCompactList}\small\item\em Executes an end try operation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_aa8fe265c8b001d504fa6f63980cb36f5}{Unload\+Context}} (\mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} \&context)
+\begin{DoxyCompactList}\small\item\em Unloads a context from the invocation stack. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ab03d0b186aa18d278d68b170a84c8b71}{Create\+Context}} (const \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}} \&script, int32\+\_\+t rvcount, int32\+\_\+t initial\+Position)
+\begin{DoxyCompactList}\small\item\em Creates a new context with the specified script without loading. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a21463339ec67269ea8da1e3b5572a767}{Pre\+Execute\+Instruction}} (const \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}} \&instruction)
+\begin{DoxyCompactList}\small\item\em Called before an instruction is executed. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a8ea4c212771daaa6f020da2a9540bd36}{Post\+Execute\+Instruction}} (const \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}} \&instruction)
+\begin{DoxyCompactList}\small\item\em Called after an instruction is executed. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a2ce4f796aa3f74e0afd46bc30dd8b1f6}{On\+Fault}} (std\+::exception\+\_\+ptr ex)
+\begin{DoxyCompactList}\small\item\em Called when a fault occurs. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ac23a7b72be4d6502528322aa279c6d37}{On\+Fault}} ()
+\begin{DoxyCompactList}\small\item\em Called when a fault occurs with the current exception. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a5a446f549aeccf031ac65e107d71659c}{On\+State\+Changed}} ()
+\begin{DoxyCompactList}\small\item\em Called when the state changes. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ad09358b57285696e97b04adc37676a92}{invocation\+Stack\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}} \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a507c77f914b81d94fcd593d7417b86be}{state\+\_\+}}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_aa1f781371657a418ff82e4cfbecde764}{result\+Stack\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ uint32\+\_\+t, \mbox{\hyperlink{classneo_1_1vm_1_1_system_call}{System\+Call}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_adb62313442c3bff6d7d460d68dd27f27}{system\+Calls\+\_\+}}
+\item 
+const \mbox{\hyperlink{classneo_1_1vm_1_1_jump_table}{Jump\+Table}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a8a26de2f0b60265d701e2f72296ac36e}{jump\+Table\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a18b9f1f468b2aed039891627f6b97765}{jumping\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{Reference\+Counter}} \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ae7819127d898c3d7d0976cbcf5dc3d74}{reference\+Counter\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a7a8721ef69424c7469bf14c3bd2bf633}{uncaught\+Exception\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits}{Execution\+Engine\+Limits}} \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a869aa741fd826941a3b81ba6470e43fa}{limits\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a475f2081f7d851b08c34ab3329343527}{entry\+Context\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an execution engine. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a38a40d2a3f057dc24de928ac55b02610}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!ExecutionEngine@{ExecutionEngine}}
+\index{ExecutionEngine@{ExecutionEngine}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{ExecutionEngine()}{ExecutionEngine()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a38a40d2a3f057dc24de928ac55b02610} 
+neo\+::vm\+::\+Execution\+Engine\+::\+Execution\+Engine (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an \doxylink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine} with default settings. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a1c92612c01a4c0bbab5d271ffa862fb1}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!ExecutionEngine@{ExecutionEngine}}
+\index{ExecutionEngine@{ExecutionEngine}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{ExecutionEngine()}{ExecutionEngine()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a1c92612c01a4c0bbab5d271ffa862fb1} 
+neo\+::vm\+::\+Execution\+Engine\+::\+Execution\+Engine (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1_jump_table}{Jump\+Table}} \&}]{jump\+Table}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs an \doxylink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine} with a custom jump table. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em jump\+Table} & The jump table. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a9206c9063e5ab98815b797e68fc23f3b}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!ExecutionEngine@{ExecutionEngine}}
+\index{ExecutionEngine@{ExecutionEngine}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{ExecutionEngine()}{ExecutionEngine()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a9206c9063e5ab98815b797e68fc23f3b} 
+neo\+::vm\+::\+Execution\+Engine\+::\+Execution\+Engine (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits}{Execution\+Engine\+Limits}} \&}]{limits}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs an \doxylink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine} with custom limits. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em limits} & The execution engine limits. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a9f4ae22b1dc9a5f50f5b87f99e207bd2}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!ExecutionEngine@{ExecutionEngine}}
+\index{ExecutionEngine@{ExecutionEngine}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{ExecutionEngine()}{ExecutionEngine()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a9f4ae22b1dc9a5f50f5b87f99e207bd2} 
+neo\+::vm\+::\+Execution\+Engine\+::\+Execution\+Engine (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1_jump_table}{Jump\+Table}} \&}]{jump\+Table}{, }\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits}{Execution\+Engine\+Limits}} \&}]{limits}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an \doxylink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine} with a custom jump table and limits. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em jump\+Table} & The jump table. \\
+\hline
+{\em limits} & The execution engine limits. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a9acd3f9e5557d8f4bcbd572edeac928b}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!````~ExecutionEngine@{\texorpdfstring{$\sim$}{\string~}ExecutionEngine}}
+\index{````~ExecutionEngine@{\texorpdfstring{$\sim$}{\string~}ExecutionEngine}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ExecutionEngine()}{\string~ExecutionEngine()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a9acd3f9e5557d8f4bcbd572edeac928b} 
+neo\+::vm\+::\+Execution\+Engine\+::\texorpdfstring{$\sim$}{\string~}\+Execution\+Engine (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Virtual destructor to properly clean up resources. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_af642629fc69c551c62d90655de46a9da}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!ClearUncaughtException@{ClearUncaughtException}}
+\index{ClearUncaughtException@{ClearUncaughtException}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{ClearUncaughtException()}{ClearUncaughtException()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_af642629fc69c551c62d90655de46a9da} 
+void neo\+::vm\+::\+Execution\+Engine\+::\+Clear\+Uncaught\+Exception (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clears the uncaught exception. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_ab03d0b186aa18d278d68b170a84c8b71}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!CreateContext@{CreateContext}}
+\index{CreateContext@{CreateContext}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{CreateContext()}{CreateContext()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_ab03d0b186aa18d278d68b170a84c8b71} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} $>$ neo\+::vm\+::\+Execution\+Engine\+::\+Create\+Context (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}} \&}]{script}{, }\item[{int32\+\_\+t}]{rvcount}{, }\item[{int32\+\_\+t}]{initial\+Position}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Creates a new context with the specified script without loading. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & The script. \\
+\hline
+{\em rvcount} & The number of values that the context should return when it is unloaded. \\
+\hline
+{\em initial\+Position} & The initial position. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created context. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_aef0a932b710f409f9c6845f88b2e6d87}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!Execute@{Execute}}
+\index{Execute@{Execute}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_aef0a932b710f409f9c6845f88b2e6d87} 
+\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}} neo\+::vm\+::\+Execution\+Engine\+::\+Execute (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{gas\+Limit}{ = {\ttfamily -\/1}}\end{DoxyParamCaption})}
+
+
+
+Executes the script. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gas\+Limit} & The gas limit. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The state. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a75840461e0aabbc1cec1b9bb076e502a}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!ExecuteCall@{ExecuteCall}}
+\index{ExecuteCall@{ExecuteCall}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{ExecuteCall()}{ExecuteCall()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a75840461e0aabbc1cec1b9bb076e502a} 
+bool neo\+::vm\+::\+Execution\+Engine\+::\+Execute\+Call (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Executes a call operation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position to call. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_ac57b083da8a73b101651553d63a17ef6}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!ExecuteEndTry@{ExecuteEndTry}}
+\index{ExecuteEndTry@{ExecuteEndTry}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{ExecuteEndTry()}{ExecuteEndTry()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_ac57b083da8a73b101651553d63a17ef6} 
+bool neo\+::vm\+::\+Execution\+Engine\+::\+Execute\+End\+Try (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Executes an end try operation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a9c1f5ae18961a2b8d61b7f95e28ffbaa}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!ExecuteJump@{ExecuteJump}}
+\index{ExecuteJump@{ExecuteJump}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{ExecuteJump()}{ExecuteJump()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a9c1f5ae18961a2b8d61b7f95e28ffbaa} 
+bool neo\+::vm\+::\+Execution\+Engine\+::\+Execute\+Jump (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Executes a jump operation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position to jump to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a87adfe2fadc6d9fd5f988c8cd96c5a42}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!ExecuteNext@{ExecuteNext}}
+\index{ExecuteNext@{ExecuteNext}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{ExecuteNext()}{ExecuteNext()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a87adfe2fadc6d9fd5f988c8cd96c5a42} 
+void neo\+::vm\+::\+Execution\+Engine\+::\+Execute\+Next (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Executes the next instruction. 
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_aab3565ade0499baf294d618a726bfacd}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!ExecuteRet@{ExecuteRet}}
+\index{ExecuteRet@{ExecuteRet}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{ExecuteRet()}{ExecuteRet()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_aab3565ade0499baf294d618a726bfacd} 
+bool neo\+::vm\+::\+Execution\+Engine\+::\+Execute\+Ret (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Executes a return operation. 
+
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_ad1c076193afbdc57abacee84bf248d8e}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!ExecuteSysCall@{ExecuteSysCall}}
+\index{ExecuteSysCall@{ExecuteSysCall}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{ExecuteSysCall()}{ExecuteSysCall()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_ad1c076193afbdc57abacee84bf248d8e} 
+bool neo\+::vm\+::\+Execution\+Engine\+::\+Execute\+Sys\+Call (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{hash}{}\end{DoxyParamCaption})}
+
+
+
+Executes a system call. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the system call. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a67845f8e8923da7e7e9a24eb1a6a30a0}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!ExecuteThrow@{ExecuteThrow}}
+\index{ExecuteThrow@{ExecuteThrow}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{ExecuteThrow()}{ExecuteThrow()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a67845f8e8923da7e7e9a24eb1a6a30a0} 
+bool neo\+::vm\+::\+Execution\+Engine\+::\+Execute\+Throw (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{exception}{}\end{DoxyParamCaption})}
+
+
+
+Executes a throw operation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exception} & The exception to throw. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a5cd2f17ac8d8c243afd3b6899d41aaf2}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!ExecuteTry@{ExecuteTry}}
+\index{ExecuteTry@{ExecuteTry}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{ExecuteTry()}{ExecuteTry()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a5cd2f17ac8d8c243afd3b6899d41aaf2} 
+bool neo\+::vm\+::\+Execution\+Engine\+::\+Execute\+Try (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{catch\+Position}{, }\item[{int32\+\_\+t}]{finally\+Position}{}\end{DoxyParamCaption})}
+
+
+
+Executes a try operation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em catch\+Position} & The catch position. \\
+\hline
+{\em finally\+Position} & The finally position. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a8301f5b182f15a7c9302c1b65cbf9220}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!GetCurrentContext@{GetCurrentContext}}
+\index{GetCurrentContext@{GetCurrentContext}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{GetCurrentContext()}{GetCurrentContext()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a8301f5b182f15a7c9302c1b65cbf9220} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} \& neo\+::vm\+::\+Execution\+Engine\+::\+Get\+Current\+Context (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the current context. 
+
+\begin{DoxyReturn}{Returns}
+The current context. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_afa55adbefad42efcf9750838a848cd84}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!GetCurrentContext@{GetCurrentContext}}
+\index{GetCurrentContext@{GetCurrentContext}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{GetCurrentContext()}{GetCurrentContext()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_afa55adbefad42efcf9750838a848cd84} 
+const \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} \& neo\+::vm\+::\+Execution\+Engine\+::\+Get\+Current\+Context (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the current context. 
+
+\begin{DoxyReturn}{Returns}
+The current context. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a47c99722921aa20538c1c9fb1a95cd1e}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!GetEntryContext@{GetEntryContext}}
+\index{GetEntryContext@{GetEntryContext}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{GetEntryContext()}{GetEntryContext()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a47c99722921aa20538c1c9fb1a95cd1e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} $>$ neo\+::vm\+::\+Execution\+Engine\+::\+Get\+Entry\+Context (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the entry context. 
+
+\begin{DoxyReturn}{Returns}
+The entry context. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a91d0c0db6d95f8ceb2969cf9a397b21c}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!GetInvocationStack@{GetInvocationStack}}
+\index{GetInvocationStack@{GetInvocationStack}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{GetInvocationStack()}{GetInvocationStack()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a91d0c0db6d95f8ceb2969cf9a397b21c} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} $>$ $>$ \& neo\+::vm\+::\+Execution\+Engine\+::\+Get\+Invocation\+Stack (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the invocation stack. 
+
+\begin{DoxyReturn}{Returns}
+The invocation stack. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a060e47c3ca0c38760557eeaf809edce3}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!GetLimits@{GetLimits}}
+\index{GetLimits@{GetLimits}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{GetLimits()}{GetLimits()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a060e47c3ca0c38760557eeaf809edce3} 
+const \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits}{Execution\+Engine\+Limits}} \& neo\+::vm\+::\+Execution\+Engine\+::\+Get\+Limits (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the limits of the execution engine. 
+
+\begin{DoxyReturn}{Returns}
+The limits. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a186db6d93382d4b0b58874cbb59f44a7}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!GetReferenceCounter@{GetReferenceCounter}}
+\index{GetReferenceCounter@{GetReferenceCounter}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{GetReferenceCounter()}{GetReferenceCounter()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a186db6d93382d4b0b58874cbb59f44a7} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{Reference\+Counter}} \texorpdfstring{$\ast$}{*} neo\+::vm\+::\+Execution\+Engine\+::\+Get\+Reference\+Counter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the reference counter. 
+
+\begin{DoxyReturn}{Returns}
+The reference counter. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_aabd43fe9b13eae0aa647d36162b3e1aa}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!GetResultStack@{GetResultStack}}
+\index{GetResultStack@{GetResultStack}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{GetResultStack()}{GetResultStack()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_aabd43fe9b13eae0aa647d36162b3e1aa} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \& neo\+::vm\+::\+Execution\+Engine\+::\+Get\+Result\+Stack (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the result stack. 
+
+\begin{DoxyReturn}{Returns}
+The result stack. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_ad7fc9ab3700721a410684027e7319b90}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!GetState@{GetState}}
+\index{GetState@{GetState}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_ad7fc9ab3700721a410684027e7319b90} 
+\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}} neo\+::vm\+::\+Execution\+Engine\+::\+Get\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the state. 
+
+\begin{DoxyReturn}{Returns}
+The state. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a3707d38d6cd39817cf27fe9e78c88b84}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!GetSystemCall@{GetSystemCall}}
+\index{GetSystemCall@{GetSystemCall}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{GetSystemCall()}{GetSystemCall()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a3707d38d6cd39817cf27fe9e78c88b84} 
+const \mbox{\hyperlink{classneo_1_1vm_1_1_system_call}{System\+Call}} \& neo\+::vm\+::\+Execution\+Engine\+::\+Get\+System\+Call (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the system call. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The system call. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_ab649c832d415ae0082440b44a0c50287}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!GetUncaughtException@{GetUncaughtException}}
+\index{GetUncaughtException@{GetUncaughtException}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{GetUncaughtException()}{GetUncaughtException()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_ab649c832d415ae0082440b44a0c50287} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ neo\+::vm\+::\+Execution\+Engine\+::\+Get\+Uncaught\+Exception (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the uncaught exception. 
+
+\begin{DoxyReturn}{Returns}
+The uncaught exception. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_af81689dff0a9d07a5530a50222bba191}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!HasUncaughtException@{HasUncaughtException}}
+\index{HasUncaughtException@{HasUncaughtException}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{HasUncaughtException()}{HasUncaughtException()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_af81689dff0a9d07a5530a50222bba191} 
+bool neo\+::vm\+::\+Execution\+Engine\+::\+Has\+Uncaught\+Exception (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if there is an uncaught exception. 
+
+\begin{DoxyReturn}{Returns}
+True if there is an uncaught exception, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a733ba1b420b5d5b40715a66ba10d92b2}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!IsJumping@{IsJumping}}
+\index{IsJumping@{IsJumping}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{IsJumping()}{IsJumping()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a733ba1b420b5d5b40715a66ba10d92b2} 
+bool neo\+::vm\+::\+Execution\+Engine\+::\+Is\+Jumping (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the jumping flag. 
+
+\begin{DoxyReturn}{Returns}
+The jumping flag. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a1921ea21d5b30b013d05de9b1d4392eb}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!LoadContext@{LoadContext}}
+\index{LoadContext@{LoadContext}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{LoadContext()}{LoadContext()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a1921ea21d5b30b013d05de9b1d4392eb} 
+void neo\+::vm\+::\+Execution\+Engine\+::\+Load\+Context (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} $>$}]{context}{}\end{DoxyParamCaption})}
+
+
+
+Loads a context. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & The context. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_aacf27014a586581058c54c957aa03fe2}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!LoadScript@{LoadScript}}
+\index{LoadScript@{LoadScript}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{LoadScript()}{LoadScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_aacf27014a586581058c54c957aa03fe2} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} $>$ neo\+::vm\+::\+Execution\+Engine\+::\+Load\+Script (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}} \&}]{script}{, }\item[{int32\+\_\+t}]{initial\+Position}{ = {\ttfamily 0}, }\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} \&)$>$}]{configure\+Context}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})}
+
+
+
+Loads a script. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & The script. \\
+\hline
+{\em initial\+Position} & The initial position. \\
+\hline
+{\em configure\+Context} & The configure context function. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The loaded execution context. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_ac23a7b72be4d6502528322aa279c6d37}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!OnFault@{OnFault}}
+\index{OnFault@{OnFault}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{OnFault()}{OnFault()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_ac23a7b72be4d6502528322aa279c6d37} 
+void neo\+::vm\+::\+Execution\+Engine\+::\+On\+Fault (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called when a fault occurs with the current exception. 
+
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a2ce4f796aa3f74e0afd46bc30dd8b1f6}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!OnFault@{OnFault}}
+\index{OnFault@{OnFault}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{OnFault()}{OnFault()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a2ce4f796aa3f74e0afd46bc30dd8b1f6} 
+void neo\+::vm\+::\+Execution\+Engine\+::\+On\+Fault (\begin{DoxyParamCaption}\item[{std\+::exception\+\_\+ptr}]{ex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called when a fault occurs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ex} & The exception pointer. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a5a446f549aeccf031ac65e107d71659c}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!OnStateChanged@{OnStateChanged}}
+\index{OnStateChanged@{OnStateChanged}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{OnStateChanged()}{OnStateChanged()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a5a446f549aeccf031ac65e107d71659c} 
+void neo\+::vm\+::\+Execution\+Engine\+::\+On\+State\+Changed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called when the state changes. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_ad0dd6909d826e680bc5eba06763d6863}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!Peek@{Peek}}
+\index{Peek@{Peek}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{Peek()}{Peek()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_ad0dd6909d826e680bc5eba06763d6863} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ neo\+::vm\+::\+Execution\+Engine\+::\+Peek (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const}
+
+
+
+Peeks at an item on the evaluation stack. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The item. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a394ac4f0ef4a6c3e6ad98c2fc8e6ed68}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!Pop@{Pop}}
+\index{Pop@{Pop}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{Pop()}{Pop()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a394ac4f0ef4a6c3e6ad98c2fc8e6ed68} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ neo\+::vm\+::\+Execution\+Engine\+::\+Pop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Pops an item from the evaluation stack. 
+
+\begin{DoxyReturn}{Returns}
+The item. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a6e1763051f2c590011a928640dc4a1f0}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!Pop@{Pop}}
+\index{Pop@{Pop}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{Pop()}{Pop()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a6e1763051f2c590011a928640dc4a1f0} 
+template$<$typename T$>$ \\
+std\+::shared\+\_\+ptr$<$ T $>$ neo\+::vm\+::\+Execution\+Engine\+::\+Pop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pops an item from the evaluation stack and converts it to the specified type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type to convert to. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+The item as the specified type. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a8ea4c212771daaa6f020da2a9540bd36}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!PostExecuteInstruction@{PostExecuteInstruction}}
+\index{PostExecuteInstruction@{PostExecuteInstruction}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{PostExecuteInstruction()}{PostExecuteInstruction()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a8ea4c212771daaa6f020da2a9540bd36} 
+void neo\+::vm\+::\+Execution\+Engine\+::\+Post\+Execute\+Instruction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}} \&}]{instruction}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called after an instruction is executed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em instruction} & The instruction. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a21463339ec67269ea8da1e3b5572a767}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!PreExecuteInstruction@{PreExecuteInstruction}}
+\index{PreExecuteInstruction@{PreExecuteInstruction}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{PreExecuteInstruction()}{PreExecuteInstruction()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a21463339ec67269ea8da1e3b5572a767} 
+void neo\+::vm\+::\+Execution\+Engine\+::\+Pre\+Execute\+Instruction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}} \&}]{instruction}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Called before an instruction is executed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em instruction} & The instruction. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_ac4c7337cbe6847beb734f3b788d8b6de}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!Push@{Push}}
+\index{Push@{Push}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{Push()}{Push()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_ac4c7337cbe6847beb734f3b788d8b6de} 
+void neo\+::vm\+::\+Execution\+Engine\+::\+Push (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Pushes an item onto the evaluation stack. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_afe200b4848d86d0267024cb7c92ece44}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!RegisterSystemCall@{RegisterSystemCall}}
+\index{RegisterSystemCall@{RegisterSystemCall}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{RegisterSystemCall()}{RegisterSystemCall()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_afe200b4848d86d0267024cb7c92ece44} 
+void neo\+::vm\+::\+Execution\+Engine\+::\+Register\+System\+Call (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{std\+::function$<$ bool(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine}} \&)$>$}]{handler}{}\end{DoxyParamCaption})}
+
+
+
+Registers a system call. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name. \\
+\hline
+{\em handler} & The handler. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_ae90860e6f9f9747ba4b863b0d364db25}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!SetJumping@{SetJumping}}
+\index{SetJumping@{SetJumping}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{SetJumping()}{SetJumping()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_ae90860e6f9f9747ba4b863b0d364db25} 
+void neo\+::vm\+::\+Execution\+Engine\+::\+Set\+Jumping (\begin{DoxyParamCaption}\item[{bool}]{jumping}{}\end{DoxyParamCaption})}
+
+
+
+Sets the jumping flag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em jumping} & The jumping flag. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a994592a88beaec9c69b75978b7287211}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!SetState@{SetState}}
+\index{SetState@{SetState}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{SetState()}{SetState()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a994592a88beaec9c69b75978b7287211} 
+void neo\+::vm\+::\+Execution\+Engine\+::\+Set\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}}}]{state}{}\end{DoxyParamCaption})}
+
+
+
+Sets the VM state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state} & The state. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a334349f8f8abf73db8ca86ad42704029}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!SetUncaughtException@{SetUncaughtException}}
+\index{SetUncaughtException@{SetUncaughtException}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{SetUncaughtException()}{SetUncaughtException()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a334349f8f8abf73db8ca86ad42704029} 
+void neo\+::vm\+::\+Execution\+Engine\+::\+Set\+Uncaught\+Exception (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{exception}{}\end{DoxyParamCaption})}
+
+
+
+Sets the uncaught exception. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exception} & The exception. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_aa8fe265c8b001d504fa6f63980cb36f5}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!UnloadContext@{UnloadContext}}
+\index{UnloadContext@{UnloadContext}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{UnloadContext()}{UnloadContext()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_aa8fe265c8b001d504fa6f63980cb36f5} 
+void neo\+::vm\+::\+Execution\+Engine\+::\+Unload\+Context (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} \&}]{context}{}\end{DoxyParamCaption})}
+
+
+
+Unloads a context from the invocation stack. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em context} & The context to unload. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 20
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a475f2081f7d851b08c34ab3329343527}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!entryContext\_@{entryContext\_}}
+\index{entryContext\_@{entryContext\_}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{entryContext\_}{entryContext\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a475f2081f7d851b08c34ab3329343527} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}}$>$ neo\+::vm\+::\+Execution\+Engine\+::entry\+Context\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_ad09358b57285696e97b04adc37676a92}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!invocationStack\_@{invocationStack\_}}
+\index{invocationStack\_@{invocationStack\_}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{invocationStack\_}{invocationStack\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_ad09358b57285696e97b04adc37676a92} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}}$>$ $>$ neo\+::vm\+::\+Execution\+Engine\+::invocation\+Stack\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a18b9f1f468b2aed039891627f6b97765}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!jumping\_@{jumping\_}}
+\index{jumping\_@{jumping\_}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{jumping\_}{jumping\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a18b9f1f468b2aed039891627f6b97765} 
+bool neo\+::vm\+::\+Execution\+Engine\+::jumping\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a8a26de2f0b60265d701e2f72296ac36e}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!jumpTable\_@{jumpTable\_}}
+\index{jumpTable\_@{jumpTable\_}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{jumpTable\_}{jumpTable\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a8a26de2f0b60265d701e2f72296ac36e} 
+const \mbox{\hyperlink{classneo_1_1vm_1_1_jump_table}{Jump\+Table}}\& neo\+::vm\+::\+Execution\+Engine\+::jump\+Table\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a869aa741fd826941a3b81ba6470e43fa}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!limits\_@{limits\_}}
+\index{limits\_@{limits\_}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{limits\_}{limits\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a869aa741fd826941a3b81ba6470e43fa} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits}{Execution\+Engine\+Limits}} neo\+::vm\+::\+Execution\+Engine\+::limits\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_ae7819127d898c3d7d0976cbcf5dc3d74}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!referenceCounter\_@{referenceCounter\_}}
+\index{referenceCounter\_@{referenceCounter\_}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{referenceCounter\_}{referenceCounter\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_ae7819127d898c3d7d0976cbcf5dc3d74} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{Reference\+Counter}} neo\+::vm\+::\+Execution\+Engine\+::reference\+Counter\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_aa1f781371657a418ff82e4cfbecde764}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!resultStack\_@{resultStack\_}}
+\index{resultStack\_@{resultStack\_}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{resultStack\_}{resultStack\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_aa1f781371657a418ff82e4cfbecde764} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}}$>$ $>$ neo\+::vm\+::\+Execution\+Engine\+::result\+Stack\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a507c77f914b81d94fcd593d7417b86be}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!state\_@{state\_}}
+\index{state\_@{state\_}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{state\_}{state\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a507c77f914b81d94fcd593d7417b86be} 
+\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}} neo\+::vm\+::\+Execution\+Engine\+::state\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_adb62313442c3bff6d7d460d68dd27f27}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!systemCalls\_@{systemCalls\_}}
+\index{systemCalls\_@{systemCalls\_}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{systemCalls\_}{systemCalls\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_adb62313442c3bff6d7d460d68dd27f27} 
+std\+::unordered\+\_\+map$<$uint32\+\_\+t, \mbox{\hyperlink{classneo_1_1vm_1_1_system_call}{System\+Call}}$>$ neo\+::vm\+::\+Execution\+Engine\+::system\+Calls\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_a7a8721ef69424c7469bf14c3bd2bf633}\index{neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}!uncaughtException\_@{uncaughtException\_}}
+\index{uncaughtException\_@{uncaughtException\_}!neo::vm::ExecutionEngine@{neo::vm::ExecutionEngine}}
+\doxysubsubsection{\texorpdfstring{uncaughtException\_}{uncaughtException\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_a7a8721ef69424c7469bf14c3bd2bf633} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}}$>$ neo\+::vm\+::\+Execution\+Engine\+::uncaught\+Exception\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/vm/\mbox{\hyperlink{execution__engine_8h}{execution\+\_\+engine.\+h}}\item 
+src/vm/\mbox{\hyperlink{execution__engine_8cpp}{execution\+\_\+engine.\+cpp}}\end{DoxyCompactItemize}

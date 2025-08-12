@@ -1,0 +1,100 @@
+\doxysection{datetime\+\_\+extensions.\+h}
+\hypertarget{datetime__extensions_8h_source}{}\label{datetime__extensions_8h_source}\index{include/neo/extensions/datetime\_extensions.h@{include/neo/extensions/datetime\_extensions.h}}
+\mbox{\hyperlink{datetime__extensions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1extensions}{neo::extensions}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00033\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions}{DateTimeExtensions}}}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a085011f7f04eec824158d02ae18649a3}{GetUnixTimestamp}}()}
+\DoxyCodeLine{00041\ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::chrono::duration\_cast<std::chrono::seconds>(std::chrono::system\_clock::now().time\_since\_epoch())}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ .count();}
+\DoxyCodeLine{00044\ \ \ \ \ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a417b3b9a85da805e8e138aee84e2a169}{GetUnixTimestampMilliseconds}}()}
+\DoxyCodeLine{00051\ \ \ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::chrono::duration\_cast<std::chrono::milliseconds>(}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::chrono::system\_clock::now().time\_since\_epoch())}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ .count();}
+\DoxyCodeLine{00055\ \ \ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{static}\ std::chrono::system\_clock::time\_point\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_ad12e27fb1c0cb0df6d3f90b25a55bcf3}{FromUnixTimestamp}}(uint64\_t\ timestamp)}
+\DoxyCodeLine{00063\ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::chrono::system\_clock::from\_time\_t(\textcolor{keyword}{static\_cast<}time\_t\textcolor{keyword}{>}(timestamp));}
+\DoxyCodeLine{00065\ \ \ \ \ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{static}\ std::chrono::system\_clock::time\_point\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a22ce06338f988f899017ddf7add155ca}{FromUnixTimestampMilliseconds}}(uint64\_t\ timestampMs)}
+\DoxyCodeLine{00073\ \ \ \ \ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::chrono::system\_clock::time\_point(std::chrono::milliseconds(timestampMs));}
+\DoxyCodeLine{00075\ \ \ \ \ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_ac4a086a6991eda1baeba7c1a345f439c}{ToUnixTimestamp}}(\textcolor{keyword}{const}\ std::chrono::system\_clock::time\_point\&\ timePoint)}
+\DoxyCodeLine{00083\ \ \ \ \ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::chrono::duration\_cast<std::chrono::seconds>(timePoint.time\_since\_epoch()).count();}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a00500445e699e93f76d8c3ae377fd1ae}{ToUnixTimestampMilliseconds}}(\textcolor{keyword}{const}\ std::chrono::system\_clock::time\_point\&\ timePoint)}
+\DoxyCodeLine{00093\ \ \ \ \ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::chrono::duration\_cast<std::chrono::milliseconds>(timePoint.time\_since\_epoch()).count();}
+\DoxyCodeLine{00095\ \ \ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_aa3a43e24a533bcca628be30ffa613525}{ToISO8601String}}(uint64\_t\ timestamp);}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a8c9f4344c4983de084ca7717abc5188f}{ToReadableString}}(uint64\_t\ timestamp);}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a38b74edccb11059b6324302ea394a87f}{FromISO8601String}}(\textcolor{keyword}{const}\ std::string\&\ iso8601);}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a0992f3c797c24646500992ee2e730305}{IsValidBlockchainTimestamp}}(uint64\_t\ timestamp,\ uint64\_t\ tolerance\ =\ 900)}
+\DoxyCodeLine{00125\ \ \ \ \ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ currentTime\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a085011f7f04eec824158d02ae18649a3}{GetUnixTimestamp}}();}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (timestamp\ <=\ currentTime\ +\ tolerance)\ \&\&\ (timestamp\ >=\ currentTime\ -\/\ tolerance);}
+\DoxyCodeLine{00128\ \ \ \ \ \}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_aaae375a9b871d8b09735bc176039bf13}{IsValidBlockTime}}(uint64\_t\ blockTime,\ uint64\_t\ previousBlockTime,\ uint64\_t\ maxDelta\ =\ 7200)}
+\DoxyCodeLine{00138\ \ \ \ \ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Block\ time\ should\ be\ after\ previous\ block\ but\ not\ too\ far\ in\ the\ future}}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ blockTime\ >=\ previousBlockTime\ \&\&\ blockTime\ <=\ previousBlockTime\ +\ maxDelta\ \&\&}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a0992f3c797c24646500992ee2e730305}{IsValidBlockchainTimestamp}}(blockTime);}
+\DoxyCodeLine{00142\ \ \ \ \ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a30b2ba490407f7e6b876e38add7ab711}{GetTimeRemaining}}(uint64\_t\ startTime,\ uint64\_t\ timeoutSeconds)}
+\DoxyCodeLine{00151\ \ \ \ \ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ currentTime\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a085011f7f04eec824158d02ae18649a3}{GetUnixTimestamp}}();}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ endTime\ =\ startTime\ +\ timeoutSeconds;}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (currentTime\ >=\ endTime)\ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ endTime\ -\/\ currentTime;}
+\DoxyCodeLine{00158\ \ \ \ \ \}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a1a640dc472cf13067cfd912e859a307b}{HasTimedOut}}(uint64\_t\ startTime,\ uint64\_t\ timeoutSeconds)}
+\DoxyCodeLine{00167\ \ \ \ \ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a30b2ba490407f7e6b876e38add7ab711}{GetTimeRemaining}}(startTime,\ timeoutSeconds)\ ==\ 0;}
+\DoxyCodeLine{00169\ \ \ \ \ \}}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_af259ac5c87e3ee8cb3aedf8b0ccecb94}{GetStartOfDay}}(uint64\_t\ timestamp);}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a44296d41b50f846b284e898fd675aaa2}{GetEndOfDay}}(uint64\_t\ timestamp);}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_af4935e6e7c07ce21cd354ab2508e8c34}{AddSeconds}}(uint64\_t\ timestamp,\ int64\_t\ seconds)}
+\DoxyCodeLine{00192\ \ \ \ \ \{}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}uint64\_t\textcolor{keyword}{>}(\textcolor{keyword}{static\_cast<}int64\_t\textcolor{keyword}{>}(timestamp)\ +\ seconds);}
+\DoxyCodeLine{00194\ \ \ \ \ \}}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_ad74f5946fa261f605eaba0992a9c6ce0}{AddMinutes}}(uint64\_t\ timestamp,\ int64\_t\ minutes)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_af4935e6e7c07ce21cd354ab2508e8c34}{AddSeconds}}(timestamp,\ minutes\ *\ 60);\ \}}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a4620c0ad9809aa82ea8d14bc2c77b546}{AddHours}}(uint64\_t\ timestamp,\ int64\_t\ hours)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_af4935e6e7c07ce21cd354ab2508e8c34}{AddSeconds}}(timestamp,\ hours\ *\ 3600);\ \}}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_ade21786ce1b41dded6b0e1fc4c889a17}{AddDays}}(uint64\_t\ timestamp,\ int64\_t\ days)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_af4935e6e7c07ce21cd354ab2508e8c34}{AddSeconds}}(timestamp,\ days\ *\ 86400);\ \}}
+\DoxyCodeLine{00219\ \};}
+\DoxyCodeLine{00220\ \}\ \ \textcolor{comment}{//\ namespace\ neo::extensions}}
+
+\end{DoxyCode}

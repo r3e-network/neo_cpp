@@ -1,0 +1,428 @@
+\doxysection{neo\+::wallets\+::nep6\+::NEP6\+Account Class Reference}
+\hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account}{}\label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+
+
+Represents a NEP6 wallet account.  
+
+
+
+
+{\ttfamily \#include $<$nep6\+\_\+wallet.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::wallets\+::nep6\+::NEP6\+Account\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::wallets\+::nep6\+::NEP6\+Account\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a1d268c0c141a4ba14960deb5ee1bfebe}{NEP6\+Account}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account}{NEP6\+Account}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_af23a28f34f7fbd4eb88cfd859f5a39af}{NEP6\+Account}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account}{NEP6\+Account} with the specified script hash. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ad69dc23edc9f4e07a5fcfddcd51f3198}{NEP6\+Account}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{cryptography\+::ecc\+::\+Key\+Pair}} \&key\+Pair, const std\+::string \&password, const \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters}} \&scrypt)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account}{NEP6\+Account} with the specified key pair. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ac4416ef1291ce30dcfe851d5f1b9cf26}{NEP6\+Account}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash, const std\+::string \&nep2\+Key)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account}{NEP6\+Account} with the specified script hash and NEP2 key. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ae7cc2e70f33db2505345c3122bf5a373}{Get\+NEP2\+Key}} () const
+\begin{DoxyCompactList}\small\item\em Gets the NEP2 key. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ad5cc97b79bb13c7124eac91bade4a5ab}{Set\+NEP2\+Key}} (const std\+::string \&nep2\+Key)
+\begin{DoxyCompactList}\small\item\em Sets the NEP2 key. \end{DoxyCompactList}\item 
+const nlohmann\+::json \& \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a176401d48c7b1e377d8aba5696a08e52}{Get\+Extra}} () const
+\begin{DoxyCompactList}\small\item\em Gets the extra data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a77d516f45eb656eaaedcd6992d3d1a92}{Set\+Extra}} (const nlohmann\+::json \&extra)
+\begin{DoxyCompactList}\small\item\em Sets the extra data. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ad8280032afb6ea15df58d5668b22c589}{Is\+Deployed}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the account is deployed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a25a736e423facb72fe690ffb17bdb6ed}{Set\+Deployed}} (bool deployed)
+\begin{DoxyCompactList}\small\item\em Sets whether the account is deployed. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::string $>$ \& \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a2738d38fad025d6ebe7112c250e90de1}{Get\+Parameter\+Names}} () const
+\begin{DoxyCompactList}\small\item\em Gets the parameter names. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_adc53adedb24fd5ad92d943e91b4e8a28}{Set\+Parameter\+Names}} (const std\+::vector$<$ std\+::string $>$ \&parameter\+Names)
+\begin{DoxyCompactList}\small\item\em Sets the parameter names. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ab9f9d4fa81dcbbc00b13315cac9ff344}{Decrypt\+Private\+Key}} (const std\+::string \&password, const \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters}} \&scrypt)
+\begin{DoxyCompactList}\small\item\em Decrypts the private key using the specified password. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a8cecb68bc8ba4e62cd8e961985334f63}{Verify\+Password}} (const std\+::string \&password, const \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters}} \&scrypt) const
+\begin{DoxyCompactList}\small\item\em Verifies the password. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a7d2fdc1fdcddbad3c09c1dbb3b809087}{To\+Json}} () const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account}{NEP6\+Account} to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a90db21b72cfe123d3c49344c86741490}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}}) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account}{NEP6\+Account} from a JSON object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account}{neo\+::wallets\+::\+Wallet\+Account}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_a08896f7f2b719168b5e3da12b9f6fe91}{Wallet\+Account}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_a91ea92e2aac06108296ba5fa0738ea5b}{Wallet\+Account}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{cryptography\+::ecc\+::\+Key\+Pair}} \&key\+Pair)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account} with the specified key pair. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_a178c897b68c912fc373c43c38f0ea66b}{Wallet\+Account}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account} with the specified script hash. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_af4247d9437801c6facaf1191b4b67dd4}{Get\+Script\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_ab9e924ff1d45363fc03eb2057976e1e7}{Set\+Script\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash)
+\begin{DoxyCompactList}\small\item\em Sets the script hash. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \& \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_a7448df679f10d7310b752da81d63512a}{Get\+Public\+Key}} () const
+\begin{DoxyCompactList}\small\item\em Gets the public key. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_af9e9b9eee6a6af8ab1a61ec2f1880334}{Set\+Public\+Key}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Sets the public key. \end{DoxyCompactList}\item 
+const std\+::vector$<$ uint8\+\_\+t $>$ \& \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_aad980007a4a4863a3019e79bd8125ab2}{Get\+Private\+Key}} () const
+\begin{DoxyCompactList}\small\item\em Gets the private key. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_ab3cdf8436d21072a8a9fa20b07fe8be4}{Set\+Private\+Key}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Sets the private key. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{smartcontract\+::\+Contract}} \& \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_ab66f09ebe14a9befa40a9e0e92207618}{Get\+Contract}} () const
+\begin{DoxyCompactList}\small\item\em Gets the contract. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_adefa8ec73f3e33907fe09f3b3d6b8b77}{Set\+Contract}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{smartcontract\+::\+Contract}} \&contract)
+\begin{DoxyCompactList}\small\item\em Sets the contract. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_adcae686a9798b570bd1a1056652f1a37}{Get\+Label}} () const
+\begin{DoxyCompactList}\small\item\em Gets the label. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_a2e8a2fcd48f70cdb7ac2a3d1a992d1fa}{Set\+Label}} (const std\+::string \&label)
+\begin{DoxyCompactList}\small\item\em Sets the label. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_a2014f7ed9b0050e5078be74d329f5eb8}{Is\+Locked}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the account is locked. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_a649f41eab05e7665145cc71caf2d8b83}{Set\+Locked}} (bool locked)
+\begin{DoxyCompactList}\small\item\em Sets whether the account is locked. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_a9aef5dc1b582407fefadab0de3481a12}{Get\+WIF}} () const
+\begin{DoxyCompactList}\small\item\em Gets the WIF. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_a79fde7195e02fa6777b057c3da30524d}{Get\+Address}} () const
+\begin{DoxyCompactList}\small\item\em Gets the address. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_afe48a950641d5a1e87a87255665772a9}{Has\+Private\+Key}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the account has a private key. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_a7a8d069bd351b98b76dc610f6ea17a12}{To\+Json}} () const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account} to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_a05fed9367a01d241d8ab4f57eb93194d}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}}) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1wallets_1_1_wallet_account}{Wallet\+Account} from a JSON object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable}{neo\+::io\+::\+Json\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_ae7dd2d7bd2b036df8dc47c8df95b66f0}{\texorpdfstring{$\sim$}{\string~}\+Json\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_a1f7a1b4f0576d1bcf90ddf88c05d0e45}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_a4f9aff66b2ffc198345b53e597811363}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a49937408e6a6f6f5609af3ed3eb89d62}{nep2\+Key\+\_\+}}
+\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a90556a30bdab316f775df9f65a98be77}{extra\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_af7dbb9a742b7260d11fa2281632daedc}{deployed\+\_\+}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_aed08ac497c9c4fd5ec729a5a275b8b56}{parameter\+Names\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a NEP6 wallet account. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a1d268c0c141a4ba14960deb5ee1bfebe}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!NEP6Account@{NEP6Account}}
+\index{NEP6Account@{NEP6Account}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{NEP6Account()}{NEP6Account()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a1d268c0c141a4ba14960deb5ee1bfebe} 
+neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::\+NEP6\+Account (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account}{NEP6\+Account}. 
+
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_af23a28f34f7fbd4eb88cfd859f5a39af}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!NEP6Account@{NEP6Account}}
+\index{NEP6Account@{NEP6Account}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{NEP6Account()}{NEP6Account()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_af23a28f34f7fbd4eb88cfd859f5a39af} 
+neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::\+NEP6\+Account (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account}{NEP6\+Account} with the specified script hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The script hash. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ad69dc23edc9f4e07a5fcfddcd51f3198}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!NEP6Account@{NEP6Account}}
+\index{NEP6Account@{NEP6Account}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{NEP6Account()}{NEP6Account()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ad69dc23edc9f4e07a5fcfddcd51f3198} 
+neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::\+NEP6\+Account (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{cryptography\+::ecc\+::\+Key\+Pair}} \&}]{key\+Pair}{, }\item[{const std\+::string \&}]{password}{, }\item[{const \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters}} \&}]{scrypt}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account}{NEP6\+Account} with the specified key pair. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key\+Pair} & The key pair. \\
+\hline
+{\em password} & The password. \\
+\hline
+{\em scrypt} & The scrypt parameters. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ac4416ef1291ce30dcfe851d5f1b9cf26}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!NEP6Account@{NEP6Account}}
+\index{NEP6Account@{NEP6Account}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{NEP6Account()}{NEP6Account()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ac4416ef1291ce30dcfe851d5f1b9cf26} 
+neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::\+NEP6\+Account (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{, }\item[{const std\+::string \&}]{nep2\+Key}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account}{NEP6\+Account} with the specified script hash and NEP2 key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The script hash. \\
+\hline
+{\em nep2\+Key} & The NEP2 key. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ab9f9d4fa81dcbbc00b13315cac9ff344}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!DecryptPrivateKey@{DecryptPrivateKey}}
+\index{DecryptPrivateKey@{DecryptPrivateKey}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{DecryptPrivateKey()}{DecryptPrivateKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ab9f9d4fa81dcbbc00b13315cac9ff344} 
+bool neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::\+Decrypt\+Private\+Key (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{password}{, }\item[{const \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters}} \&}]{scrypt}{}\end{DoxyParamCaption})}
+
+
+
+Decrypts the private key using the specified password. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em password} & The password. \\
+\hline
+{\em scrypt} & The scrypt parameters. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the decryption was successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a90db21b72cfe123d3c49344c86741490}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!FromJson@{FromJson}}
+\index{FromJson@{FromJson}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{FromJson()}{FromJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a90db21b72cfe123d3c49344c86741490} 
+void neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::\+From\+Json (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account}{NEP6\+Account} from a JSON object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & The JSON object. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_a21a577bd492fc899597f33618a1da2eb}{neo\+::io\+::\+Json\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a176401d48c7b1e377d8aba5696a08e52}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!GetExtra@{GetExtra}}
+\index{GetExtra@{GetExtra}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{GetExtra()}{GetExtra()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a176401d48c7b1e377d8aba5696a08e52} 
+const nlohmann\+::json \& neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::\+Get\+Extra (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the extra data. 
+
+\begin{DoxyReturn}{Returns}
+The extra data. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ae7cc2e70f33db2505345c3122bf5a373}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!GetNEP2Key@{GetNEP2Key}}
+\index{GetNEP2Key@{GetNEP2Key}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{GetNEP2Key()}{GetNEP2Key()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ae7cc2e70f33db2505345c3122bf5a373} 
+const std\+::string \& neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::\+Get\+NEP2\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the NEP2 key. 
+
+\begin{DoxyReturn}{Returns}
+The NEP2 key. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a2738d38fad025d6ebe7112c250e90de1}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!GetParameterNames@{GetParameterNames}}
+\index{GetParameterNames@{GetParameterNames}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{GetParameterNames()}{GetParameterNames()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a2738d38fad025d6ebe7112c250e90de1} 
+const std\+::vector$<$ std\+::string $>$ \& neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::\+Get\+Parameter\+Names (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the parameter names. 
+
+\begin{DoxyReturn}{Returns}
+The parameter names. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ad8280032afb6ea15df58d5668b22c589}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!IsDeployed@{IsDeployed}}
+\index{IsDeployed@{IsDeployed}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{IsDeployed()}{IsDeployed()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ad8280032afb6ea15df58d5668b22c589} 
+bool neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::\+Is\+Deployed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the account is deployed. 
+
+\begin{DoxyReturn}{Returns}
+True if the account is deployed, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a25a736e423facb72fe690ffb17bdb6ed}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!SetDeployed@{SetDeployed}}
+\index{SetDeployed@{SetDeployed}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{SetDeployed()}{SetDeployed()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a25a736e423facb72fe690ffb17bdb6ed} 
+void neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::\+Set\+Deployed (\begin{DoxyParamCaption}\item[{bool}]{deployed}{}\end{DoxyParamCaption})}
+
+
+
+Sets whether the account is deployed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em deployed} & True to mark the account as deployed, false otherwise. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a77d516f45eb656eaaedcd6992d3d1a92}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!SetExtra@{SetExtra}}
+\index{SetExtra@{SetExtra}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{SetExtra()}{SetExtra()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a77d516f45eb656eaaedcd6992d3d1a92} 
+void neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::\+Set\+Extra (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{extra}{}\end{DoxyParamCaption})}
+
+
+
+Sets the extra data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em extra} & The extra data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ad5cc97b79bb13c7124eac91bade4a5ab}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!SetNEP2Key@{SetNEP2Key}}
+\index{SetNEP2Key@{SetNEP2Key}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{SetNEP2Key()}{SetNEP2Key()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_ad5cc97b79bb13c7124eac91bade4a5ab} 
+void neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::\+Set\+NEP2\+Key (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{nep2\+Key}{}\end{DoxyParamCaption})}
+
+
+
+Sets the NEP2 key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nep2\+Key} & The NEP2 key. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_adc53adedb24fd5ad92d943e91b4e8a28}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!SetParameterNames@{SetParameterNames}}
+\index{SetParameterNames@{SetParameterNames}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{SetParameterNames()}{SetParameterNames()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_adc53adedb24fd5ad92d943e91b4e8a28} 
+void neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::\+Set\+Parameter\+Names (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{parameter\+Names}{}\end{DoxyParamCaption})}
+
+
+
+Sets the parameter names. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parameter\+Names} & The parameter names. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a7d2fdc1fdcddbad3c09c1dbb3b809087}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!ToJson@{ToJson}}
+\index{ToJson@{ToJson}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{ToJson()}{ToJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a7d2fdc1fdcddbad3c09c1dbb3b809087} 
+nlohmann\+::json neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::\+To\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account}{NEP6\+Account} to a JSON object. 
+
+\begin{DoxyReturn}{Returns}
+The JSON object. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_a3fc4f510ac608ac070cb3c3f85b09113}{neo\+::io\+::\+Json\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a8cecb68bc8ba4e62cd8e961985334f63}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!VerifyPassword@{VerifyPassword}}
+\index{VerifyPassword@{VerifyPassword}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{VerifyPassword()}{VerifyPassword()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a8cecb68bc8ba4e62cd8e961985334f63} 
+bool neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::\+Verify\+Password (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{password}{, }\item[{const \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters}} \&}]{scrypt}{}\end{DoxyParamCaption}) const}
+
+
+
+Verifies the password. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em password} & The password. \\
+\hline
+{\em scrypt} & The scrypt parameters. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the password is correct, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_af7dbb9a742b7260d11fa2281632daedc}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!deployed\_@{deployed\_}}
+\index{deployed\_@{deployed\_}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{deployed\_}{deployed\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_af7dbb9a742b7260d11fa2281632daedc} 
+bool neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::deployed\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a90556a30bdab316f775df9f65a98be77}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!extra\_@{extra\_}}
+\index{extra\_@{extra\_}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{extra\_}{extra\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a90556a30bdab316f775df9f65a98be77} 
+nlohmann\+::json neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::extra\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a49937408e6a6f6f5609af3ed3eb89d62}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!nep2Key\_@{nep2Key\_}}
+\index{nep2Key\_@{nep2Key\_}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{nep2Key\_}{nep2Key\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a49937408e6a6f6f5609af3ed3eb89d62} 
+std\+::string neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::nep2\+Key\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_aed08ac497c9c4fd5ec729a5a275b8b56}\index{neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}!parameterNames\_@{parameterNames\_}}
+\index{parameterNames\_@{parameterNames\_}!neo::wallets::nep6::NEP6Account@{neo::wallets::nep6::NEP6Account}}
+\doxysubsubsection{\texorpdfstring{parameterNames\_}{parameterNames\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_aed08ac497c9c4fd5ec729a5a275b8b56} 
+std\+::vector$<$std\+::string$>$ neo\+::wallets\+::nep6\+::\+NEP6\+Account\+::parameter\+Names\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/wallets/nep6/\mbox{\hyperlink{nep6__wallet_8h}{nep6\+\_\+wallet.\+h}}\item 
+src/wallets/nep6/\mbox{\hyperlink{nep6__wallet_8cpp}{nep6\+\_\+wallet.\+cpp}}\end{DoxyCompactItemize}

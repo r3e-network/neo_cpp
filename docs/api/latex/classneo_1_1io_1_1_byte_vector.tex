@@ -1,0 +1,960 @@
+\doxysection{neo\+::io\+::Byte\+Vector Class Reference}
+\hypertarget{classneo_1_1io_1_1_byte_vector}{}\label{classneo_1_1io_1_1_byte_vector}\index{neo::io::ByteVector@{neo::io::ByteVector}}
+
+
+A mutable byte array with efficient operations.  
+
+
+
+
+{\ttfamily \#include $<$byte\+\_\+vector.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ae5364212e9a5709c15489351b59eeb93}{iterator}} = std\+::vector$<$uint8\+\_\+t$>$\+::iterator
+\item 
+using \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ac2e4f7c8e54f7bdbd37c24e51a3c5e39}{const\+\_\+iterator}} = std\+::vector$<$uint8\+\_\+t$>$\+::const\+\_\+iterator
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a8428939dbf8d0f3bf4047d1e2ee4e7a2}{Byte\+Vector}} ()=default
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a13721fa0e6c349bec89443faa0370aeb}{Byte\+Vector}} (size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_aa810a2a94af643c2ec1e2400da53d3d7}{size}})
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} with the specified size. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a0627768d65ded6eca999fd282b8707d1}{Byte\+Vector}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} from a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_af600ead44648e8e6368e180434f1039f}{Byte\+Vector}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_aa810a2a94af643c2ec1e2400da53d3d7}{size}})
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} from a pointer and size. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Allocator$>$ }\\\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a2aa3db53f3ff7f5a933075d1c47f8202}{Byte\+Vector}} (const std\+::vector$<$ uint8\+\_\+t, Allocator $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} from a vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_adafe94a751e87995eb4625bc53dd65ea}{Byte\+Vector}} (std\+::initializer\+\_\+list$<$ uint8\+\_\+t $>$ data)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} from an initializer list. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ac0d1a1751d25fde82c44ba55d9d68e24}{Size}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets the size of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_aa810a2a94af643c2ec1e2400da53d3d7}{size}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets the size of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} (STL compatibility). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ad7fd9d0c089e7f2c3c930489ebee1528}{Is\+Empty}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Checks if the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is empty. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a7bbd25b3d93534e4e04b468dc3305316}{empty}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Checks if the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is empty (STL compatibility). \end{DoxyCompactList}\item 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a971af50d2778c4435c924cf4b839e8a1}{Data}} () noexcept
+\begin{DoxyCompactList}\small\item\em Gets a pointer to the data. \end{DoxyCompactList}\item 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_aa33ff2ec44d13415af9040e0c5a3b43a}{Data}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets a const pointer to the data. \end{DoxyCompactList}\item 
+uint8\+\_\+t \& \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a06e81249c9430e918d01b143176c3235}{operator\mbox{[}$\,$\mbox{]}}} (size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Gets a reference to the byte at the specified index. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a1c9a7cc547fd6a37c7a3df31c43080c4}{operator\mbox{[}$\,$\mbox{]}}} (size\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets the byte at the specified index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ac5d394e2ac6ef922486d6b635d0a9c28}{Resize}} (size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_aa810a2a94af643c2ec1e2400da53d3d7}{size}})
+\begin{DoxyCompactList}\small\item\em Resizes the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ad6906fc9c8a17ca926bc89ed6d3ef064}{Reserve}} (size\+\_\+t capacity)
+\begin{DoxyCompactList}\small\item\em Reserves capacity for the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a08fe2080218bc11daedc416387e6f37e}{Append}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Appends data to the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a57eb840afcbc9cd7b784081f9f546dab}{Push}} (uint8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Pushes a byte to the end of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ab08731022f2b4683c3322f47b8ee9203}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a2d7a8711fbe8b4351fd18b7a45314de5}{insert}} (\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ae5364212e9a5709c15489351b59eeb93}{iterator}} pos, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_aa810a2a94af643c2ec1e2400da53d3d7}{size}})
+\begin{DoxyCompactList}\small\item\em Inserts data at the specified position. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Input\+It$>$ }\\auto \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a424a41252c3a80e7f1d6a0905f09b2b7}{insert}} (\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ae5364212e9a5709c15489351b59eeb93}{iterator}} pos, Input\+It first, Input\+It last)
+\begin{DoxyCompactList}\small\item\em Inserts data at the specified position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a2980098a694e2aed4d4fa92fd7bcb343}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} (STL compatibility). \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a66da39bab04ea07dea0388ce55b047db}{begin}} () noexcept
+\begin{DoxyCompactList}\small\item\em Gets an iterator to the beginning of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a6b53dac8823a4dd0b729471dd7855d61}{end}} () noexcept
+\begin{DoxyCompactList}\small\item\em Gets an iterator to the end of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a1f978ec20770048a374b972942be27fc}{begin}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets a const iterator to the beginning of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+auto \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a03c64c7d13950c9469de7efa975ffa7e}{end}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets a const iterator to the end of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a95791d958ed4ec88d32e811b51d90451}{As\+Span}} () const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} to a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ad7916ee36e579228a97ff8c948e56c14}{To\+Hex\+String}} () const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} to a hexadecimal string. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a31e61c531fbc5afb8aaf3f4bb8be8833}{operator==}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is equal to another \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_abd0f5f8a51b2ee980aab9f546b95e96f}{operator==}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is equal to a std\+::vector$<$uint8\+\_\+t$>$. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_afc91c54c734cdf6a92661692c07446d5}{operator!=}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is not equal to another \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a52348bc217ba2d00d59193b5dfffaab7}{operator!=}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is not equal to a std\+::vector$<$uint8\+\_\+t$>$. \end{DoxyCompactList}\item 
+const std\+::vector$<$ uint8\+\_\+t $>$ \& \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a48d6951c643dc11200c3f2e6a37eb708}{Get\+Vector}} () const
+\begin{DoxyCompactList}\small\item\em Gets the data as a const reference to std\+::vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ab8d303433e9bc511188176e6110e1929}{operator std\+::vector$<$ uint8\+\_\+t $>$}} () const
+\begin{DoxyCompactList}\small\item\em Implicit conversion to std\+::vector$<$uint8\+\_\+t$>$. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a1186ada5fb7cd4360e560d8b32be7be7}{Byte\+Vector}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&vec)
+\begin{DoxyCompactList}\small\item\em Constructor from std\+::vector$<$uint8\+\_\+t$>$. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ab8eb13f8733e25f9861e63e46ea630a4}{operator=}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&vec)
+\begin{DoxyCompactList}\small\item\em Assignment from std\+::vector$<$uint8\+\_\+t$>$. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a9dab2750cf3e110afc2def48fb3bf080}{To\+Base64\+String}} () const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} to a base64 string. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ad8115b696b879a0b8c0cbc36cf1fcd18}{operator$<$}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is less than another \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a077022f7cd3a47a0d788a7c41b16bc22}{operator$>$}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is greater than another \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_aa59405700b9059e777cbaac41d876666}{Get\+Var\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the variable-\/length size of the vector. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a242d1da5fa393beea8d3f0a8cd14497b}{Parse}} (const std\+::string \&hex)
+\begin{DoxyCompactList}\small\item\em Parses a hexadecimal string into a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a567a8816d402c0c57358491e6cadca39}{Concat}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&a, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&b)
+\begin{DoxyCompactList}\small\item\em Concatenates two Byte\+Vectors. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_aaaae0ac0bb992d6f6dc4f20dbefaf144}{From\+UInt16}} (uint16\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} from a uint16\+\_\+t value. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a093cac07dd430a64559616d586aa4e90}{From\+UInt32}} (uint32\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} from a uint32\+\_\+t value. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a1776bd7a8a7ff22884ffe7e8ad58aa55}{To\+Hex\+String}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&span)
+\begin{DoxyCompactList}\small\item\em Converts a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} to a hex string. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ae7660f8c804cb962e08a0f8cf0c71377}{From\+Hex\+String}} (const std\+::string \&hex)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} from a hex string. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ae43bc3a90c4246b1c90d580f69830d07}{Parse\+Hex}} (const std\+::string \&hex)
+\begin{DoxyCompactList}\small\item\em Parses a hex string into a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} (alias for From\+Hex\+String). \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ae1cb153c598175f93fe0b61d69198052}{From\+Base64\+String}} (const std\+::string \&base64)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} from a base64 string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ac01363a63c96fed8f7b4de4f54f79561}{data\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A mutable byte array with efficient operations. 
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_ac2e4f7c8e54f7bdbd37c24e51a3c5e39}\index{neo::io::ByteVector@{neo::io::ByteVector}!const\_iterator@{const\_iterator}}
+\index{const\_iterator@{const\_iterator}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{const\_iterator}{const\_iterator}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_ac2e4f7c8e54f7bdbd37c24e51a3c5e39} 
+using \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ac2e4f7c8e54f7bdbd37c24e51a3c5e39}{neo\+::io\+::\+Byte\+Vector\+::const\+\_\+iterator}} = std\+::vector$<$uint8\+\_\+t$>$\+::const\+\_\+iterator}
+
+\Hypertarget{classneo_1_1io_1_1_byte_vector_ae5364212e9a5709c15489351b59eeb93}\index{neo::io::ByteVector@{neo::io::ByteVector}!iterator@{iterator}}
+\index{iterator@{iterator}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{iterator}{iterator}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_ae5364212e9a5709c15489351b59eeb93} 
+using \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ae5364212e9a5709c15489351b59eeb93}{neo\+::io\+::\+Byte\+Vector\+::iterator}} = std\+::vector$<$uint8\+\_\+t$>$\+::iterator}
+
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a8428939dbf8d0f3bf4047d1e2ee4e7a2}\index{neo::io::ByteVector@{neo::io::ByteVector}!ByteVector@{ByteVector}}
+\index{ByteVector@{ByteVector}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{ByteVector()}{ByteVector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/7]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a8428939dbf8d0f3bf4047d1e2ee4e7a2} 
+neo\+::io\+::\+Byte\+Vector\+::\+Byte\+Vector (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Constructs an empty \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a13721fa0e6c349bec89443faa0370aeb}\index{neo::io::ByteVector@{neo::io::ByteVector}!ByteVector@{ByteVector}}
+\index{ByteVector@{ByteVector}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{ByteVector()}{ByteVector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/7]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a13721fa0e6c349bec89443faa0370aeb} 
+neo\+::io\+::\+Byte\+Vector\+::\+Byte\+Vector (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} with the specified size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The size of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a0627768d65ded6eca999fd282b8707d1}\index{neo::io::ByteVector@{neo::io::ByteVector}!ByteVector@{ByteVector}}
+\index{ByteVector@{ByteVector}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{ByteVector()}{ByteVector()}\hspace{0.1cm}{\footnotesize\ttfamily [3/7]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a0627768d65ded6eca999fd282b8707d1} 
+neo\+::io\+::\+Byte\+Vector\+::\+Byte\+Vector (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} from a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1io_1_1_byte_vector_af600ead44648e8e6368e180434f1039f}\index{neo::io::ByteVector@{neo::io::ByteVector}!ByteVector@{ByteVector}}
+\index{ByteVector@{ByteVector}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{ByteVector()}{ByteVector()}\hspace{0.1cm}{\footnotesize\ttfamily [4/7]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_af600ead44648e8e6368e180434f1039f} 
+neo\+::io\+::\+Byte\+Vector\+::\+Byte\+Vector (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} from a pointer and size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Pointer to the data. \\
+\hline
+{\em size} & Size of the data. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a2aa3db53f3ff7f5a933075d1c47f8202}\index{neo::io::ByteVector@{neo::io::ByteVector}!ByteVector@{ByteVector}}
+\index{ByteVector@{ByteVector}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{ByteVector()}{ByteVector()}\hspace{0.1cm}{\footnotesize\ttfamily [5/7]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a2aa3db53f3ff7f5a933075d1c47f8202} 
+template$<$typename Allocator$>$ \\
+neo\+::io\+::\+Byte\+Vector\+::\+Byte\+Vector (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t, Allocator $>$ \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} from a vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The vector. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_adafe94a751e87995eb4625bc53dd65ea}\index{neo::io::ByteVector@{neo::io::ByteVector}!ByteVector@{ByteVector}}
+\index{ByteVector@{ByteVector}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{ByteVector()}{ByteVector()}\hspace{0.1cm}{\footnotesize\ttfamily [6/7]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_adafe94a751e87995eb4625bc53dd65ea} 
+neo\+::io\+::\+Byte\+Vector\+::\+Byte\+Vector (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ uint8\+\_\+t $>$}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} from an initializer list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The initializer list. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a1186ada5fb7cd4360e560d8b32be7be7}\index{neo::io::ByteVector@{neo::io::ByteVector}!ByteVector@{ByteVector}}
+\index{ByteVector@{ByteVector}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{ByteVector()}{ByteVector()}\hspace{0.1cm}{\footnotesize\ttfamily [7/7]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a1186ada5fb7cd4360e560d8b32be7be7} 
+neo\+::io\+::\+Byte\+Vector\+::\+Byte\+Vector (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{vec}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor from std\+::vector$<$uint8\+\_\+t$>$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The vector to copy from. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a08fe2080218bc11daedc416387e6f37e}\index{neo::io::ByteVector@{neo::io::ByteVector}!Append@{Append}}
+\index{Append@{Append}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{Append()}{Append()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a08fe2080218bc11daedc416387e6f37e} 
+void neo\+::io\+::\+Byte\+Vector\+::\+Append (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Appends data to the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to append. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a95791d958ed4ec88d32e811b51d90451}\index{neo::io::ByteVector@{neo::io::ByteVector}!AsSpan@{AsSpan}}
+\index{AsSpan@{AsSpan}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{AsSpan()}{AsSpan()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a95791d958ed4ec88d32e811b51d90451} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} neo\+::io\+::\+Byte\+Vector\+::\+As\+Span (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} to a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+
+\begin{DoxyReturn}{Returns}
+A \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} view of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a1f978ec20770048a374b972942be27fc}\index{neo::io::ByteVector@{neo::io::ByteVector}!begin@{begin}}
+\index{begin@{begin}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a1f978ec20770048a374b972942be27fc} 
+auto neo\+::io\+::\+Byte\+Vector\+::begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets a const iterator to the beginning of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+\begin{DoxyReturn}{Returns}
+Const iterator to the beginning. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a66da39bab04ea07dea0388ce55b047db}\index{neo::io::ByteVector@{neo::io::ByteVector}!begin@{begin}}
+\index{begin@{begin}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a66da39bab04ea07dea0388ce55b047db} 
+auto neo\+::io\+::\+Byte\+Vector\+::begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets an iterator to the beginning of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+\begin{DoxyReturn}{Returns}
+Iterator to the beginning. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_ab08731022f2b4683c3322f47b8ee9203}\index{neo::io::ByteVector@{neo::io::ByteVector}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_ab08731022f2b4683c3322f47b8ee9203} 
+void neo\+::io\+::\+Byte\+Vector\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a2980098a694e2aed4d4fa92fd7bcb343}\index{neo::io::ByteVector@{neo::io::ByteVector}!clear@{clear}}
+\index{clear@{clear}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a2980098a694e2aed4d4fa92fd7bcb343} 
+void neo\+::io\+::\+Byte\+Vector\+::clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} (STL compatibility). 
+
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a567a8816d402c0c57358491e6cadca39}\index{neo::io::ByteVector@{neo::io::ByteVector}!Concat@{Concat}}
+\index{Concat@{Concat}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{Concat()}{Concat()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a567a8816d402c0c57358491e6cadca39} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} neo\+::io\+::\+Byte\+Vector\+::\+Concat (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&}]{a}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&}]{b}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Concatenates two Byte\+Vectors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & The first \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \\
+\hline
+{\em b} & The second \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The concatenated \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1io_1_1_byte_vector_aa33ff2ec44d13415af9040e0c5a3b43a}\index{neo::io::ByteVector@{neo::io::ByteVector}!Data@{Data}}
+\index{Data@{Data}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_aa33ff2ec44d13415af9040e0c5a3b43a} 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} neo\+::io\+::\+Byte\+Vector\+::\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets a const pointer to the data. 
+
+\begin{DoxyReturn}{Returns}
+Const pointer to the data. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a971af50d2778c4435c924cf4b839e8a1}\index{neo::io::ByteVector@{neo::io::ByteVector}!Data@{Data}}
+\index{Data@{Data}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a971af50d2778c4435c924cf4b839e8a1} 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} neo\+::io\+::\+Byte\+Vector\+::\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets a pointer to the data. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to the data. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a7bbd25b3d93534e4e04b468dc3305316}\index{neo::io::ByteVector@{neo::io::ByteVector}!empty@{empty}}
+\index{empty@{empty}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a7bbd25b3d93534e4e04b468dc3305316} 
+bool neo\+::io\+::\+Byte\+Vector\+::empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Checks if the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is empty (STL compatibility). 
+
+\begin{DoxyReturn}{Returns}
+True if the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is empty, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a03c64c7d13950c9469de7efa975ffa7e}\index{neo::io::ByteVector@{neo::io::ByteVector}!end@{end}}
+\index{end@{end}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a03c64c7d13950c9469de7efa975ffa7e} 
+auto neo\+::io\+::\+Byte\+Vector\+::end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets a const iterator to the end of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+\begin{DoxyReturn}{Returns}
+Const iterator to the end. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a6b53dac8823a4dd0b729471dd7855d61}\index{neo::io::ByteVector@{neo::io::ByteVector}!end@{end}}
+\index{end@{end}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a6b53dac8823a4dd0b729471dd7855d61} 
+auto neo\+::io\+::\+Byte\+Vector\+::end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets an iterator to the end of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+\begin{DoxyReturn}{Returns}
+Iterator to the end. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_ae1cb153c598175f93fe0b61d69198052}\index{neo::io::ByteVector@{neo::io::ByteVector}!FromBase64String@{FromBase64String}}
+\index{FromBase64String@{FromBase64String}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{FromBase64String()}{FromBase64String()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_ae1cb153c598175f93fe0b61d69198052} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} neo\+::io\+::\+Byte\+Vector\+::\+From\+Base64\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{base64}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} from a base64 string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base64} & The base64 string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1io_1_1_byte_vector_ae7660f8c804cb962e08a0f8cf0c71377}\index{neo::io::ByteVector@{neo::io::ByteVector}!FromHexString@{FromHexString}}
+\index{FromHexString@{FromHexString}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{FromHexString()}{FromHexString()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_ae7660f8c804cb962e08a0f8cf0c71377} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} neo\+::io\+::\+Byte\+Vector\+::\+From\+Hex\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} from a hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The hex string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1io_1_1_byte_vector_aaaae0ac0bb992d6f6dc4f20dbefaf144}\index{neo::io::ByteVector@{neo::io::ByteVector}!FromUInt16@{FromUInt16}}
+\index{FromUInt16@{FromUInt16}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{FromUInt16()}{FromUInt16()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_aaaae0ac0bb992d6f6dc4f20dbefaf144} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} neo\+::io\+::\+Byte\+Vector\+::\+From\+UInt16 (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} from a uint16\+\_\+t value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The uint16\+\_\+t value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a093cac07dd430a64559616d586aa4e90}\index{neo::io::ByteVector@{neo::io::ByteVector}!FromUInt32@{FromUInt32}}
+\index{FromUInt32@{FromUInt32}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{FromUInt32()}{FromUInt32()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a093cac07dd430a64559616d586aa4e90} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} neo\+::io\+::\+Byte\+Vector\+::\+From\+UInt32 (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} from a uint32\+\_\+t value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The uint32\+\_\+t value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1io_1_1_byte_vector_aa59405700b9059e777cbaac41d876666}\index{neo::io::ByteVector@{neo::io::ByteVector}!GetVarSize@{GetVarSize}}
+\index{GetVarSize@{GetVarSize}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{GetVarSize()}{GetVarSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_aa59405700b9059e777cbaac41d876666} 
+size\+\_\+t neo\+::io\+::\+Byte\+Vector\+::\+Get\+Var\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the variable-\/length size of the vector. 
+
+\begin{DoxyReturn}{Returns}
+The variable-\/length size. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a48d6951c643dc11200c3f2e6a37eb708}\index{neo::io::ByteVector@{neo::io::ByteVector}!GetVector@{GetVector}}
+\index{GetVector@{GetVector}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{GetVector()}{GetVector()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a48d6951c643dc11200c3f2e6a37eb708} 
+const std\+::vector$<$ uint8\+\_\+t $>$ \& neo\+::io\+::\+Byte\+Vector\+::\+Get\+Vector (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the data as a const reference to std\+::vector. 
+
+\begin{DoxyReturn}{Returns}
+Const reference to the underlying vector. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a2d7a8711fbe8b4351fd18b7a45314de5}\index{neo::io::ByteVector@{neo::io::ByteVector}!insert@{insert}}
+\index{insert@{insert}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a2d7a8711fbe8b4351fd18b7a45314de5} 
+auto neo\+::io\+::\+Byte\+Vector\+::insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ae5364212e9a5709c15489351b59eeb93}{iterator}}}]{pos}{, }\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Inserts data at the specified position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & Iterator to the position where to insert. \\
+\hline
+{\em data} & Pointer to the data to insert. \\
+\hline
+{\em size} & Size of the data to insert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Iterator to the first inserted element. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a424a41252c3a80e7f1d6a0905f09b2b7}\index{neo::io::ByteVector@{neo::io::ByteVector}!insert@{insert}}
+\index{insert@{insert}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{insert()}{insert()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a424a41252c3a80e7f1d6a0905f09b2b7} 
+template$<$typename Input\+It$>$ \\
+auto neo\+::io\+::\+Byte\+Vector\+::insert (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ae5364212e9a5709c15489351b59eeb93}{iterator}}}]{pos}{, }\item[{Input\+It}]{first}{, }\item[{Input\+It}]{last}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Inserts data at the specified position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pos} & Iterator to the position where to insert. \\
+\hline
+{\em first} & Iterator to the beginning of the data to insert. \\
+\hline
+{\em last} & Iterator to the end of the data to insert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Iterator to the first inserted element. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_ad7fd9d0c089e7f2c3c930489ebee1528}\index{neo::io::ByteVector@{neo::io::ByteVector}!IsEmpty@{IsEmpty}}
+\index{IsEmpty@{IsEmpty}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{IsEmpty()}{IsEmpty()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_ad7fd9d0c089e7f2c3c930489ebee1528} 
+bool neo\+::io\+::\+Byte\+Vector\+::\+Is\+Empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Checks if the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is empty. 
+
+\begin{DoxyReturn}{Returns}
+True if the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is empty, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_ab8d303433e9bc511188176e6110e1929}\index{neo::io::ByteVector@{neo::io::ByteVector}!operator std::vector$<$ uint8\_t $>$@{operator std::vector$<$ uint8\_t $>$}}
+\index{operator std::vector$<$ uint8\_t $>$@{operator std::vector$<$ uint8\_t $>$}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{operator std::vector$<$ uint8\_t $>$()}{operator std::vector< uint8\_t >()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_ab8d303433e9bc511188176e6110e1929} 
+neo\+::io\+::\+Byte\+Vector\+::operator std\+::vector$<$ uint8\+\_\+t $>$ (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Implicit conversion to std\+::vector$<$uint8\+\_\+t$>$. 
+
+\begin{DoxyReturn}{Returns}
+Copy of the underlying vector. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_afc91c54c734cdf6a92661692c07446d5}\index{neo::io::ByteVector@{neo::io::ByteVector}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_afc91c54c734cdf6a92661692c07446d5} 
+bool neo\+::io\+::\+Byte\+Vector\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is not equal to another \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Byte\+Vectors are not equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a52348bc217ba2d00d59193b5dfffaab7}\index{neo::io::ByteVector@{neo::io::ByteVector}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a52348bc217ba2d00d59193b5dfffaab7} 
+bool neo\+::io\+::\+Byte\+Vector\+::operator!= (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is not equal to a std\+::vector$<$uint8\+\_\+t$>$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the vectors are not equal, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_ad8115b696b879a0b8c0cbc36cf1fcd18}\index{neo::io::ByteVector@{neo::io::ByteVector}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_ad8115b696b879a0b8c0cbc36cf1fcd18} 
+bool neo\+::io\+::\+Byte\+Vector\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is less than another \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is less than the other \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1io_1_1_byte_vector_ab8eb13f8733e25f9861e63e46ea630a4}\index{neo::io::ByteVector@{neo::io::ByteVector}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_ab8eb13f8733e25f9861e63e46ea630a4} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \& neo\+::io\+::\+Byte\+Vector\+::operator= (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{vec}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Assignment from std\+::vector$<$uint8\+\_\+t$>$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & The vector to assign from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to this \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a31e61c531fbc5afb8aaf3f4bb8be8833}\index{neo::io::ByteVector@{neo::io::ByteVector}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a31e61c531fbc5afb8aaf3f4bb8be8833} 
+bool neo\+::io\+::\+Byte\+Vector\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is equal to another \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Byte\+Vectors are equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1io_1_1_byte_vector_abd0f5f8a51b2ee980aab9f546b95e96f}\index{neo::io::ByteVector@{neo::io::ByteVector}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_abd0f5f8a51b2ee980aab9f546b95e96f} 
+bool neo\+::io\+::\+Byte\+Vector\+::operator== (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is equal to a std\+::vector$<$uint8\+\_\+t$>$. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the vectors are equal, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a077022f7cd3a47a0d788a7c41b16bc22}\index{neo::io::ByteVector@{neo::io::ByteVector}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a077022f7cd3a47a0d788a7c41b16bc22} 
+bool neo\+::io\+::\+Byte\+Vector\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is greater than another \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} is greater than the other \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a06e81249c9430e918d01b143176c3235}\index{neo::io::ByteVector@{neo::io::ByteVector}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a06e81249c9430e918d01b143176c3235} 
+uint8\+\_\+t \& neo\+::io\+::\+Byte\+Vector\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a reference to the byte at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the byte at the specified index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a1c9a7cc547fd6a37c7a3df31c43080c4}\index{neo::io::ByteVector@{neo::io::ByteVector}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a1c9a7cc547fd6a37c7a3df31c43080c4} 
+uint8\+\_\+t neo\+::io\+::\+Byte\+Vector\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the byte at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The byte at the specified index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a242d1da5fa393beea8d3f0a8cd14497b}\index{neo::io::ByteVector@{neo::io::ByteVector}!Parse@{Parse}}
+\index{Parse@{Parse}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a242d1da5fa393beea8d3f0a8cd14497b} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} neo\+::io\+::\+Byte\+Vector\+::\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Parses a hexadecimal string into a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The hexadecimal string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The parsed \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1io_1_1_byte_vector_ae43bc3a90c4246b1c90d580f69830d07}\index{neo::io::ByteVector@{neo::io::ByteVector}!ParseHex@{ParseHex}}
+\index{ParseHex@{ParseHex}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{ParseHex()}{ParseHex()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_ae43bc3a90c4246b1c90d580f69830d07} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} neo\+::io\+::\+Byte\+Vector\+::\+Parse\+Hex (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Parses a hex string into a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} (alias for From\+Hex\+String). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The hex string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a57eb840afcbc9cd7b784081f9f546dab}\index{neo::io::ByteVector@{neo::io::ByteVector}!Push@{Push}}
+\index{Push@{Push}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{Push()}{Push()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a57eb840afcbc9cd7b784081f9f546dab} 
+void neo\+::io\+::\+Byte\+Vector\+::\+Push (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pushes a byte to the end of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The byte to push. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_ad6906fc9c8a17ca926bc89ed6d3ef064}\index{neo::io::ByteVector@{neo::io::ByteVector}!Reserve@{Reserve}}
+\index{Reserve@{Reserve}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{Reserve()}{Reserve()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_ad6906fc9c8a17ca926bc89ed6d3ef064} 
+void neo\+::io\+::\+Byte\+Vector\+::\+Reserve (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{capacity}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reserves capacity for the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em capacity} & The capacity to reserve. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_ac5d394e2ac6ef922486d6b635d0a9c28}\index{neo::io::ByteVector@{neo::io::ByteVector}!Resize@{Resize}}
+\index{Resize@{Resize}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{Resize()}{Resize()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_ac5d394e2ac6ef922486d6b635d0a9c28} 
+void neo\+::io\+::\+Byte\+Vector\+::\+Resize (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Resizes the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em size} & The new size. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1io_1_1_byte_vector_ac0d1a1751d25fde82c44ba55d9d68e24}\index{neo::io::ByteVector@{neo::io::ByteVector}!Size@{Size}}
+\index{Size@{Size}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_ac0d1a1751d25fde82c44ba55d9d68e24} 
+size\+\_\+t neo\+::io\+::\+Byte\+Vector\+::\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets the size of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+\begin{DoxyReturn}{Returns}
+The size of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_aa810a2a94af643c2ec1e2400da53d3d7}\index{neo::io::ByteVector@{neo::io::ByteVector}!size@{size}}
+\index{size@{size}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_aa810a2a94af643c2ec1e2400da53d3d7} 
+size\+\_\+t neo\+::io\+::\+Byte\+Vector\+::size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets the size of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} (STL compatibility). 
+
+\begin{DoxyReturn}{Returns}
+The size of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a9dab2750cf3e110afc2def48fb3bf080}\index{neo::io::ByteVector@{neo::io::ByteVector}!ToBase64String@{ToBase64String}}
+\index{ToBase64String@{ToBase64String}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{ToBase64String()}{ToBase64String()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a9dab2750cf3e110afc2def48fb3bf080} 
+std\+::string neo\+::io\+::\+Byte\+Vector\+::\+To\+Base64\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Converts the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} to a base64 string. 
+
+\begin{DoxyReturn}{Returns}
+The base64 string representation. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1io_1_1_byte_vector_ad7916ee36e579228a97ff8c948e56c14}\index{neo::io::ByteVector@{neo::io::ByteVector}!ToHexString@{ToHexString}}
+\index{ToHexString@{ToHexString}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{ToHexString()}{ToHexString()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_ad7916ee36e579228a97ff8c948e56c14} 
+std\+::string neo\+::io\+::\+Byte\+Vector\+::\+To\+Hex\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} to a hexadecimal string. 
+
+\begin{DoxyReturn}{Returns}
+The hexadecimal string representation of the \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1io_1_1_byte_vector_a1776bd7a8a7ff22884ffe7e8ad58aa55}\index{neo::io::ByteVector@{neo::io::ByteVector}!ToHexString@{ToHexString}}
+\index{ToHexString@{ToHexString}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{ToHexString()}{ToHexString()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_a1776bd7a8a7ff22884ffe7e8ad58aa55} 
+std\+::string neo\+::io\+::\+Byte\+Vector\+::\+To\+Hex\+String (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&}]{span}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} to a hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em span} & The \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The hex string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 21
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1io_1_1_byte_vector_ac01363a63c96fed8f7b4de4f54f79561}\index{neo::io::ByteVector@{neo::io::ByteVector}!data\_@{data\_}}
+\index{data\_@{data\_}!neo::io::ByteVector@{neo::io::ByteVector}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_vector_ac01363a63c96fed8f7b4de4f54f79561} 
+std\+::vector$<$uint8\+\_\+t$>$ neo\+::io\+::\+Byte\+Vector\+::data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/io/\mbox{\hyperlink{io_2byte__vector_8h}{byte\+\_\+vector.\+h}}\item 
+src/io/\mbox{\hyperlink{byte__vector_8cpp}{byte\+\_\+vector.\+cpp}}\end{DoxyCompactItemize}

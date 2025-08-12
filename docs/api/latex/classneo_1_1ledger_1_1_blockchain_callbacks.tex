@@ -1,0 +1,225 @@
+\doxysection{neo\+::ledger\+::Blockchain\+Callbacks Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks}{}\label{classneo_1_1ledger_1_1_blockchain_callbacks}\index{neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}}
+
+
+Manages blockchain callbacks.  
+
+
+
+
+{\ttfamily \#include $<$blockchain\+\_\+callbacks.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a01f188b765a71c560d7d79632e3bd6a3}{Block\+Persistence\+Callback}} = std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}}$>$)$>$
+\begin{DoxyCompactList}\small\item\em Callback for block persistence. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_aaca42d4869078e46b52f5df855e00bc1}{Transaction\+Execution\+Callback}} = std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}}$>$)$>$
+\begin{DoxyCompactList}\small\item\em Callback for transaction execution. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a4c1e15e721197c21492f7e87b28f03cf}{Blockchain\+Callbacks}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1ledger_1_1_blockchain_callbacks}{Blockchain\+Callbacks}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_ada454a5277e9d3d787a2aeba2d42a507}{Register\+Block\+Persistence\+Callback}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a01f188b765a71c560d7d79632e3bd6a3}{Block\+Persistence\+Callback}} callback)
+\begin{DoxyCompactList}\small\item\em Registers a callback for block persistence. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a57b1ab0c9cab45639dda8e2110e82e40}{Unregister\+Block\+Persistence\+Callback}} (int32\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Unregisters a callback for block persistence. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_aff47788267c94e26f0d61015b23353fa}{Register\+Transaction\+Execution\+Callback}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_aaca42d4869078e46b52f5df855e00bc1}{Transaction\+Execution\+Callback}} callback)
+\begin{DoxyCompactList}\small\item\em Registers a callback for transaction execution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_aa3f9f07778f20965b1d5b8e59e908ba5}{Unregister\+Transaction\+Execution\+Callback}} (int32\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Unregisters a callback for transaction execution. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a9fb4f98f76eaa580d7f4b2e260494a56}{Notify\+Block\+Persistence}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ block)
+\begin{DoxyCompactList}\small\item\em Notifies block persistence callbacks. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_ad7255556d55ac6ee37a8edc0d2d236a3}{Notify\+Transaction\+Execution}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ transaction)
+\begin{DoxyCompactList}\small\item\em Notifies transaction execution callbacks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a788081b6a9f8054bc7e71213d8f0b25d}{mutex\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ int32\+\_\+t, \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a01f188b765a71c560d7d79632e3bd6a3}{Block\+Persistence\+Callback}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a7795998686b60378aa315801a957f63e}{block\+Persistence\+Callbacks\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ int32\+\_\+t, \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_aaca42d4869078e46b52f5df855e00bc1}{Transaction\+Execution\+Callback}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a67dd9a81f56167053e72184fb064331e}{transaction\+Execution\+Callbacks\+\_\+}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a92e2786410b959f2adeb9af5c1c18603}{next\+Callback\+Id\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages blockchain callbacks. 
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_a01f188b765a71c560d7d79632e3bd6a3}\index{neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}!BlockPersistenceCallback@{BlockPersistenceCallback}}
+\index{BlockPersistenceCallback@{BlockPersistenceCallback}!neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}}
+\doxysubsubsection{\texorpdfstring{BlockPersistenceCallback}{BlockPersistenceCallback}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_callbacks_a01f188b765a71c560d7d79632e3bd6a3} 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a01f188b765a71c560d7d79632e3bd6a3}{neo\+::ledger\+::\+Blockchain\+Callbacks\+::\+Block\+Persistence\+Callback}} = std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}}$>$)$>$}
+
+
+
+Callback for block persistence. 
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_aaca42d4869078e46b52f5df855e00bc1}\index{neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}!TransactionExecutionCallback@{TransactionExecutionCallback}}
+\index{TransactionExecutionCallback@{TransactionExecutionCallback}!neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}}
+\doxysubsubsection{\texorpdfstring{TransactionExecutionCallback}{TransactionExecutionCallback}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_callbacks_aaca42d4869078e46b52f5df855e00bc1} 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_aaca42d4869078e46b52f5df855e00bc1}{neo\+::ledger\+::\+Blockchain\+Callbacks\+::\+Transaction\+Execution\+Callback}} = std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}}$>$)$>$}
+
+
+
+Callback for transaction execution. 
+
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_a4c1e15e721197c21492f7e87b28f03cf}\index{neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}!BlockchainCallbacks@{BlockchainCallbacks}}
+\index{BlockchainCallbacks@{BlockchainCallbacks}!neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}}
+\doxysubsubsection{\texorpdfstring{BlockchainCallbacks()}{BlockchainCallbacks()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_callbacks_a4c1e15e721197c21492f7e87b28f03cf} 
+neo\+::ledger\+::\+Blockchain\+Callbacks\+::\+Blockchain\+Callbacks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1ledger_1_1_blockchain_callbacks}{Blockchain\+Callbacks}. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_a9fb4f98f76eaa580d7f4b2e260494a56}\index{neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}!NotifyBlockPersistence@{NotifyBlockPersistence}}
+\index{NotifyBlockPersistence@{NotifyBlockPersistence}!neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}}
+\doxysubsubsection{\texorpdfstring{NotifyBlockPersistence()}{NotifyBlockPersistence()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_callbacks_a9fb4f98f76eaa580d7f4b2e260494a56} 
+void neo\+::ledger\+::\+Blockchain\+Callbacks\+::\+Notify\+Block\+Persistence (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$}]{block}{}\end{DoxyParamCaption})}
+
+
+
+Notifies block persistence callbacks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_ad7255556d55ac6ee37a8edc0d2d236a3}\index{neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}!NotifyTransactionExecution@{NotifyTransactionExecution}}
+\index{NotifyTransactionExecution@{NotifyTransactionExecution}!neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}}
+\doxysubsubsection{\texorpdfstring{NotifyTransactionExecution()}{NotifyTransactionExecution()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_callbacks_ad7255556d55ac6ee37a8edc0d2d236a3} 
+void neo\+::ledger\+::\+Blockchain\+Callbacks\+::\+Notify\+Transaction\+Execution (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$}]{transaction}{}\end{DoxyParamCaption})}
+
+
+
+Notifies transaction execution callbacks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_ada454a5277e9d3d787a2aeba2d42a507}\index{neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}!RegisterBlockPersistenceCallback@{RegisterBlockPersistenceCallback}}
+\index{RegisterBlockPersistenceCallback@{RegisterBlockPersistenceCallback}!neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}}
+\doxysubsubsection{\texorpdfstring{RegisterBlockPersistenceCallback()}{RegisterBlockPersistenceCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_callbacks_ada454a5277e9d3d787a2aeba2d42a507} 
+int32\+\_\+t neo\+::ledger\+::\+Blockchain\+Callbacks\+::\+Register\+Block\+Persistence\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a01f188b765a71c560d7d79632e3bd6a3}{Block\+Persistence\+Callback}}}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Registers a callback for block persistence. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The callback ID. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_aff47788267c94e26f0d61015b23353fa}\index{neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}!RegisterTransactionExecutionCallback@{RegisterTransactionExecutionCallback}}
+\index{RegisterTransactionExecutionCallback@{RegisterTransactionExecutionCallback}!neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}}
+\doxysubsubsection{\texorpdfstring{RegisterTransactionExecutionCallback()}{RegisterTransactionExecutionCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_callbacks_aff47788267c94e26f0d61015b23353fa} 
+int32\+\_\+t neo\+::ledger\+::\+Blockchain\+Callbacks\+::\+Register\+Transaction\+Execution\+Callback (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_aaca42d4869078e46b52f5df855e00bc1}{Transaction\+Execution\+Callback}}}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Registers a callback for transaction execution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The callback ID. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_a57b1ab0c9cab45639dda8e2110e82e40}\index{neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}!UnregisterBlockPersistenceCallback@{UnregisterBlockPersistenceCallback}}
+\index{UnregisterBlockPersistenceCallback@{UnregisterBlockPersistenceCallback}!neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}}
+\doxysubsubsection{\texorpdfstring{UnregisterBlockPersistenceCallback()}{UnregisterBlockPersistenceCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_callbacks_a57b1ab0c9cab45639dda8e2110e82e40} 
+void neo\+::ledger\+::\+Blockchain\+Callbacks\+::\+Unregister\+Block\+Persistence\+Callback (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Unregisters a callback for block persistence. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The callback ID. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_aa3f9f07778f20965b1d5b8e59e908ba5}\index{neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}!UnregisterTransactionExecutionCallback@{UnregisterTransactionExecutionCallback}}
+\index{UnregisterTransactionExecutionCallback@{UnregisterTransactionExecutionCallback}!neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}}
+\doxysubsubsection{\texorpdfstring{UnregisterTransactionExecutionCallback()}{UnregisterTransactionExecutionCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_callbacks_aa3f9f07778f20965b1d5b8e59e908ba5} 
+void neo\+::ledger\+::\+Blockchain\+Callbacks\+::\+Unregister\+Transaction\+Execution\+Callback (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Unregisters a callback for transaction execution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The callback ID. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_a7795998686b60378aa315801a957f63e}\index{neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}!blockPersistenceCallbacks\_@{blockPersistenceCallbacks\_}}
+\index{blockPersistenceCallbacks\_@{blockPersistenceCallbacks\_}!neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}}
+\doxysubsubsection{\texorpdfstring{blockPersistenceCallbacks\_}{blockPersistenceCallbacks\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_callbacks_a7795998686b60378aa315801a957f63e} 
+std\+::unordered\+\_\+map$<$int32\+\_\+t, \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_a01f188b765a71c560d7d79632e3bd6a3}{Block\+Persistence\+Callback}}$>$ neo\+::ledger\+::\+Blockchain\+Callbacks\+::block\+Persistence\+Callbacks\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_a788081b6a9f8054bc7e71213d8f0b25d}\index{neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_callbacks_a788081b6a9f8054bc7e71213d8f0b25d} 
+std\+::mutex neo\+::ledger\+::\+Blockchain\+Callbacks\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_a92e2786410b959f2adeb9af5c1c18603}\index{neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}!nextCallbackId\_@{nextCallbackId\_}}
+\index{nextCallbackId\_@{nextCallbackId\_}!neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}}
+\doxysubsubsection{\texorpdfstring{nextCallbackId\_}{nextCallbackId\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_callbacks_a92e2786410b959f2adeb9af5c1c18603} 
+int32\+\_\+t neo\+::ledger\+::\+Blockchain\+Callbacks\+::next\+Callback\+Id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_callbacks_a67dd9a81f56167053e72184fb064331e}\index{neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}!transactionExecutionCallbacks\_@{transactionExecutionCallbacks\_}}
+\index{transactionExecutionCallbacks\_@{transactionExecutionCallbacks\_}!neo::ledger::BlockchainCallbacks@{neo::ledger::BlockchainCallbacks}}
+\doxysubsubsection{\texorpdfstring{transactionExecutionCallbacks\_}{transactionExecutionCallbacks\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_callbacks_a67dd9a81f56167053e72184fb064331e} 
+std\+::unordered\+\_\+map$<$int32\+\_\+t, \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks_aaca42d4869078e46b52f5df855e00bc1}{Transaction\+Execution\+Callback}}$>$ neo\+::ledger\+::\+Blockchain\+Callbacks\+::transaction\+Execution\+Callbacks\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{blockchain__callbacks_8h}{blockchain\+\_\+callbacks.\+h}}\item 
+src/ledger/\mbox{\hyperlink{blockchain__callbacks_8cpp}{blockchain\+\_\+callbacks.\+cpp}}\end{DoxyCompactItemize}

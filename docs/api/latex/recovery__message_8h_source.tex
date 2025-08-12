@@ -1,0 +1,54 @@
+\doxysection{recovery\+\_\+message.\+h}
+\hypertarget{recovery__message_8h_source}{}\label{recovery__message_8h_source}\index{include/neo/consensus/recovery\_message.h@{include/neo/consensus/recovery\_message.h}}
+\mbox{\hyperlink{recovery__message_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{change__view__message_8h}{neo/consensus/change\_view\_message.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{commit__message_8h}{neo/consensus/commit\_message.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{consensus__message_8h}{neo/consensus/consensus\_message.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{prepare__request_8h}{neo/consensus/prepare\_request.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{prepare__response_8h}{neo/consensus/prepare\_response.h}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1consensus}{neo::consensus}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_ab53aa4bd0dbfaf264748a8a323e8adad}{RecoveryMessage}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message_aa1131ea96e3bd9f8a9760f6b4ccbdb99}{ConsensusMessage}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a8825e191ed248b28f1299e19923df06e}{RecoveryMessage}}(uint8\_t\ viewNumber);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<ChangeViewMessage>>\&\ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a70862072b99de60f9e5cdace004af6c4}{GetChangeViewMessages}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_ac32851732a7dc2349fbff854c958aea2}{AddChangeViewMessage}}(std::shared\_ptr<ChangeViewMessage>\ message);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \ \ \ \ std::shared\_ptr<PrepareRequest>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a7b333aaaa5b230d703aebb157fbbd3b6}{GetPrepareRequest}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a8bc6ca1767f424f3e109e707aee7aa85}{SetPrepareRequest}}(std::shared\_ptr<PrepareRequest>\ prepareRequest);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<PrepareResponse>>\&\ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a0e78c0ed7f024c0e19c9be72ff8448c7}{GetPrepareResponses}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a9e5e8e3dde83dcdf2fa417af923c868a}{AddPrepareResponse}}(std::shared\_ptr<PrepareResponse>\ message);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<CommitMessage>>\&\ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a9e395b973f58862dbe4fdbfad93ad3e7}{GetCommitMessages}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a4cc775b5ec94ef48a240491dbc93369c}{AddCommitMessage}}(std::shared\_ptr<CommitMessage>\ message);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_adb95e7908651c6a77d188bc91e78942f}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a67ed49d5b7c15f6df204f4324ef572e9}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00091\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a8a94109fe9a8ce4b51740a6fc2592c4b}{GetData}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00094\ \ \ \ \ std::vector<std::shared\_ptr<ChangeViewMessage>>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a736f9ce427500ce1570161c2630b995a}{changeViewMessages\_}};}
+\DoxyCodeLine{00095\ \ \ \ \ std::shared\_ptr<PrepareRequest>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_aa7d3a1dedc16fb717de500c3e83c6b8b}{prepareRequest\_}};}
+\DoxyCodeLine{00096\ \ \ \ \ std::vector<std::shared\_ptr<PrepareResponse>>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a2bc5ca4afb3f4b40deb9988f1fcc072c}{prepareResponses\_}};}
+\DoxyCodeLine{00097\ \ \ \ \ std::vector<std::shared\_ptr<CommitMessage>>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_aac4b1bc540184e618aa1b8443bcb7de3}{commitMessages\_}};}
+\DoxyCodeLine{00098\ \};}
+\DoxyCodeLine{00099\ \}\ \ \textcolor{comment}{//\ namespace\ neo::consensus}}
+
+\end{DoxyCode}

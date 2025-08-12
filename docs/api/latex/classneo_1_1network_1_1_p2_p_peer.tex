@@ -1,0 +1,362 @@
+\doxysection{neo\+::network\+::P2\+PPeer Class Reference}
+\hypertarget{classneo_1_1network_1_1_p2_p_peer}{}\label{classneo_1_1network_1_1_p2_p_peer}\index{neo::network::P2PPeer@{neo::network::P2PPeer}}
+
+
+Represents a P2P peer.  
+
+
+
+
+{\ttfamily \#include $<$p2p\+\_\+server.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a579a44a36aa29b8d28c4f5d43c78f601}{P2\+PPeer}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection}{Tcp\+Connection}} $>$ connection)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1_p2_p_peer}{P2\+PPeer}. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection}{Tcp\+Connection}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_ac84ce78ef0eec52e7ce6a45c9c85ebab}{Get\+Connection}} () const
+\begin{DoxyCompactList}\small\item\em Gets the connection. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a7c49e8885668402d195ec3861f9a2338}{Get\+Version}} () const
+\begin{DoxyCompactList}\small\item\em Gets the version. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a0d9ac9e8a2addb3e282571521f6b6abe}{Set\+Version}} (uint32\+\_\+t version)
+\begin{DoxyCompactList}\small\item\em Sets the version. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a7542107844ec5622b43a52635d8bbb1c}{Get\+Services}} () const
+\begin{DoxyCompactList}\small\item\em Gets the services. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_aad248c4854a97cbe59f980b7a2e785ca}{Set\+Services}} (uint64\+\_\+t services)
+\begin{DoxyCompactList}\small\item\em Sets the services. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a4906dfc88396b86d9e6adc2ca88fcf86}{Get\+User\+Agent}} () const
+\begin{DoxyCompactList}\small\item\em Gets the user agent. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_aed1f8820a61bcc9a2cc1e346aaf2e1d9}{Set\+User\+Agent}} (const std\+::string \&user\+Agent)
+\begin{DoxyCompactList}\small\item\em Sets the user agent. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a67402bcb92b99c379ed6188558f791f5}{Get\+Start\+Height}} () const
+\begin{DoxyCompactList}\small\item\em Gets the start height. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a175c63fdec4451809171179390b82b2d}{Set\+Start\+Height}} (uint32\+\_\+t start\+Height)
+\begin{DoxyCompactList}\small\item\em Sets the start height. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a470416cf054fc925fbebac1aa85ec6f1}{Get\+Relay}} () const
+\begin{DoxyCompactList}\small\item\em Gets whether to relay transactions. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a57f982529862c978f449d7034cb68699}{Set\+Relay}} (bool relay)
+\begin{DoxyCompactList}\small\item\em Sets whether to relay transactions. \end{DoxyCompactList}\item 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a32fccb17cf353105aeb5fdbcc1acef5e}{Get\+Last\+Seen}} () const
+\begin{DoxyCompactList}\small\item\em Gets the last seen time. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_ac7569bc02320fc95382617e398bb16e1}{Update\+Last\+Seen}} ()
+\begin{DoxyCompactList}\small\item\em Updates the last seen time. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a5741880e1bb05d961523e98855596a8a}{Is\+Connected}} () const
+\begin{DoxyCompactList}\small\item\em Gets whether the peer is connected. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_ae45b96bc5e1a21f429ce291165cb84ed}{Disconnect}} ()
+\begin{DoxyCompactList}\small\item\em Disconnects the peer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_af98d7c765a3775c6e6b5117683051b7a}{Send}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p\+::\+Message}} \&message)
+\begin{DoxyCompactList}\small\item\em Sends a message to the peer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection}{Tcp\+Connection}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_afbe54e9af7011684f7fc5bb10c148481}{connection\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a045e317101a4d54dc34d2c399e2bcc75}{version\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a6d9b318d00305c0e66fe0c6c86028db1}{services\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a1010bd013e323a9526c903c57355d167}{user\+Agent\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a7255338fd98715a06ce727b01dded127}{start\+Height\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_a6006b826bc23a03167195fe90264036e}{relay\+\_\+}}
+\item 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_peer_ad43c9dfeec7cb5ebc29c0d370827b75d}{last\+Seen\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a P2P peer. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_a579a44a36aa29b8d28c4f5d43c78f601}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!P2PPeer@{P2PPeer}}
+\index{P2PPeer@{P2PPeer}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{P2PPeer()}{P2PPeer()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_a579a44a36aa29b8d28c4f5d43c78f601} 
+neo\+::network\+::\+P2\+PPeer\+::\+P2\+PPeer (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection}{Tcp\+Connection}} $>$}]{connection}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1_p2_p_peer}{P2\+PPeer}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em connection} & The TCP connection. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 0
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_ae45b96bc5e1a21f429ce291165cb84ed}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!Disconnect@{Disconnect}}
+\index{Disconnect@{Disconnect}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{Disconnect()}{Disconnect()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_ae45b96bc5e1a21f429ce291165cb84ed} 
+void neo\+::network\+::\+P2\+PPeer\+::\+Disconnect (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Disconnects the peer. 
+
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_ac84ce78ef0eec52e7ce6a45c9c85ebab}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!GetConnection@{GetConnection}}
+\index{GetConnection@{GetConnection}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{GetConnection()}{GetConnection()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_ac84ce78ef0eec52e7ce6a45c9c85ebab} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection}{Tcp\+Connection}} $>$ neo\+::network\+::\+P2\+PPeer\+::\+Get\+Connection (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the connection. 
+
+\begin{DoxyReturn}{Returns}
+The connection. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_a32fccb17cf353105aeb5fdbcc1acef5e}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!GetLastSeen@{GetLastSeen}}
+\index{GetLastSeen@{GetLastSeen}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{GetLastSeen()}{GetLastSeen()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_a32fccb17cf353105aeb5fdbcc1acef5e} 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point neo\+::network\+::\+P2\+PPeer\+::\+Get\+Last\+Seen (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the last seen time. 
+
+\begin{DoxyReturn}{Returns}
+The last seen time. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_a470416cf054fc925fbebac1aa85ec6f1}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!GetRelay@{GetRelay}}
+\index{GetRelay@{GetRelay}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{GetRelay()}{GetRelay()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_a470416cf054fc925fbebac1aa85ec6f1} 
+bool neo\+::network\+::\+P2\+PPeer\+::\+Get\+Relay (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets whether to relay transactions. 
+
+\begin{DoxyReturn}{Returns}
+Whether to relay transactions. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_a7542107844ec5622b43a52635d8bbb1c}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!GetServices@{GetServices}}
+\index{GetServices@{GetServices}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{GetServices()}{GetServices()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_a7542107844ec5622b43a52635d8bbb1c} 
+uint64\+\_\+t neo\+::network\+::\+P2\+PPeer\+::\+Get\+Services (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the services. 
+
+\begin{DoxyReturn}{Returns}
+The services. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_a67402bcb92b99c379ed6188558f791f5}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!GetStartHeight@{GetStartHeight}}
+\index{GetStartHeight@{GetStartHeight}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{GetStartHeight()}{GetStartHeight()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_a67402bcb92b99c379ed6188558f791f5} 
+uint32\+\_\+t neo\+::network\+::\+P2\+PPeer\+::\+Get\+Start\+Height (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the start height. 
+
+\begin{DoxyReturn}{Returns}
+The start height. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_a4906dfc88396b86d9e6adc2ca88fcf86}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!GetUserAgent@{GetUserAgent}}
+\index{GetUserAgent@{GetUserAgent}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{GetUserAgent()}{GetUserAgent()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_a4906dfc88396b86d9e6adc2ca88fcf86} 
+const std\+::string \& neo\+::network\+::\+P2\+PPeer\+::\+Get\+User\+Agent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the user agent. 
+
+\begin{DoxyReturn}{Returns}
+The user agent. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_a7c49e8885668402d195ec3861f9a2338}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!GetVersion@{GetVersion}}
+\index{GetVersion@{GetVersion}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{GetVersion()}{GetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_a7c49e8885668402d195ec3861f9a2338} 
+uint32\+\_\+t neo\+::network\+::\+P2\+PPeer\+::\+Get\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the version. 
+
+\begin{DoxyReturn}{Returns}
+The version. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_a5741880e1bb05d961523e98855596a8a}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!IsConnected@{IsConnected}}
+\index{IsConnected@{IsConnected}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{IsConnected()}{IsConnected()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_a5741880e1bb05d961523e98855596a8a} 
+bool neo\+::network\+::\+P2\+PPeer\+::\+Is\+Connected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets whether the peer is connected. 
+
+\begin{DoxyReturn}{Returns}
+Whether the peer is connected. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_af98d7c765a3775c6e6b5117683051b7a}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!Send@{Send}}
+\index{Send@{Send}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{Send()}{Send()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_af98d7c765a3775c6e6b5117683051b7a} 
+void neo\+::network\+::\+P2\+PPeer\+::\+Send (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{p2p\+::\+Message}} \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Sends a message to the peer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_a57f982529862c978f449d7034cb68699}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!SetRelay@{SetRelay}}
+\index{SetRelay@{SetRelay}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{SetRelay()}{SetRelay()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_a57f982529862c978f449d7034cb68699} 
+void neo\+::network\+::\+P2\+PPeer\+::\+Set\+Relay (\begin{DoxyParamCaption}\item[{bool}]{relay}{}\end{DoxyParamCaption})}
+
+
+
+Sets whether to relay transactions. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em relay} & Whether to relay transactions. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_aad248c4854a97cbe59f980b7a2e785ca}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!SetServices@{SetServices}}
+\index{SetServices@{SetServices}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{SetServices()}{SetServices()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_aad248c4854a97cbe59f980b7a2e785ca} 
+void neo\+::network\+::\+P2\+PPeer\+::\+Set\+Services (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{services}{}\end{DoxyParamCaption})}
+
+
+
+Sets the services. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em services} & The services. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_a175c63fdec4451809171179390b82b2d}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!SetStartHeight@{SetStartHeight}}
+\index{SetStartHeight@{SetStartHeight}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{SetStartHeight()}{SetStartHeight()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_a175c63fdec4451809171179390b82b2d} 
+void neo\+::network\+::\+P2\+PPeer\+::\+Set\+Start\+Height (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{start\+Height}{}\end{DoxyParamCaption})}
+
+
+
+Sets the start height. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Height} & The start height. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_aed1f8820a61bcc9a2cc1e346aaf2e1d9}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!SetUserAgent@{SetUserAgent}}
+\index{SetUserAgent@{SetUserAgent}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{SetUserAgent()}{SetUserAgent()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_aed1f8820a61bcc9a2cc1e346aaf2e1d9} 
+void neo\+::network\+::\+P2\+PPeer\+::\+Set\+User\+Agent (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{user\+Agent}{}\end{DoxyParamCaption})}
+
+
+
+Sets the user agent. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em user\+Agent} & The user agent. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_a0d9ac9e8a2addb3e282571521f6b6abe}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!SetVersion@{SetVersion}}
+\index{SetVersion@{SetVersion}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{SetVersion()}{SetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_a0d9ac9e8a2addb3e282571521f6b6abe} 
+void neo\+::network\+::\+P2\+PPeer\+::\+Set\+Version (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{version}{}\end{DoxyParamCaption})}
+
+
+
+Sets the version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em version} & The version. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_ac7569bc02320fc95382617e398bb16e1}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!UpdateLastSeen@{UpdateLastSeen}}
+\index{UpdateLastSeen@{UpdateLastSeen}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{UpdateLastSeen()}{UpdateLastSeen()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_ac7569bc02320fc95382617e398bb16e1} 
+void neo\+::network\+::\+P2\+PPeer\+::\+Update\+Last\+Seen (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Updates the last seen time. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_afbe54e9af7011684f7fc5bb10c148481}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!connection\_@{connection\_}}
+\index{connection\_@{connection\_}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{connection\_}{connection\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_afbe54e9af7011684f7fc5bb10c148481} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection}{Tcp\+Connection}}$>$ neo\+::network\+::\+P2\+PPeer\+::connection\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_ad43c9dfeec7cb5ebc29c0d370827b75d}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!lastSeen\_@{lastSeen\_}}
+\index{lastSeen\_@{lastSeen\_}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{lastSeen\_}{lastSeen\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_ad43c9dfeec7cb5ebc29c0d370827b75d} 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point neo\+::network\+::\+P2\+PPeer\+::last\+Seen\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_a6006b826bc23a03167195fe90264036e}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!relay\_@{relay\_}}
+\index{relay\_@{relay\_}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{relay\_}{relay\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_a6006b826bc23a03167195fe90264036e} 
+bool neo\+::network\+::\+P2\+PPeer\+::relay\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_a6d9b318d00305c0e66fe0c6c86028db1}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!services\_@{services\_}}
+\index{services\_@{services\_}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{services\_}{services\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_a6d9b318d00305c0e66fe0c6c86028db1} 
+uint64\+\_\+t neo\+::network\+::\+P2\+PPeer\+::services\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_a7255338fd98715a06ce727b01dded127}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!startHeight\_@{startHeight\_}}
+\index{startHeight\_@{startHeight\_}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{startHeight\_}{startHeight\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_a7255338fd98715a06ce727b01dded127} 
+uint32\+\_\+t neo\+::network\+::\+P2\+PPeer\+::start\+Height\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_a1010bd013e323a9526c903c57355d167}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!userAgent\_@{userAgent\_}}
+\index{userAgent\_@{userAgent\_}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{userAgent\_}{userAgent\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_a1010bd013e323a9526c903c57355d167} 
+std\+::string neo\+::network\+::\+P2\+PPeer\+::user\+Agent\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_p2_p_peer_a045e317101a4d54dc34d2c399e2bcc75}\index{neo::network::P2PPeer@{neo::network::P2PPeer}!version\_@{version\_}}
+\index{version\_@{version\_}!neo::network::P2PPeer@{neo::network::P2PPeer}}
+\doxysubsubsection{\texorpdfstring{version\_}{version\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_p2_p_peer_a045e317101a4d54dc34d2c399e2bcc75} 
+uint32\+\_\+t neo\+::network\+::\+P2\+PPeer\+::version\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/\mbox{\hyperlink{p2p__server_8h}{p2p\+\_\+server.\+h}}\item 
+src/network/\mbox{\hyperlink{p2p__server_8cpp}{p2p\+\_\+server.\+cpp}}\end{DoxyCompactItemize}

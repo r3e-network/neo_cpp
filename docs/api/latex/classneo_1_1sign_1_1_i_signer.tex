@@ -1,0 +1,110 @@
+\doxysection{neo\+::sign\+::ISigner Class Reference}
+\hypertarget{classneo_1_1sign_1_1_i_signer}{}\label{classneo_1_1sign_1_1_i_signer}\index{neo::sign::ISigner@{neo::sign::ISigner}}
+
+
+Interface for signing operations in Neo.  
+
+
+
+
+{\ttfamily \#include $<$isigner.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1sign_1_1_i_signer_af038a58c765a78caf7066c99650b5317}{\texorpdfstring{$\sim$}{\string~}\+ISigner}} ()=default
+\item 
+virtual bool \mbox{\hyperlink{classneo_1_1sign_1_1_i_signer_a8acbf46212ed999519546e82d99e6abd}{Contains\+Signable}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&public\+Key) const =0
+\begin{DoxyCompactList}\small\item\em Checks if the signer contains a signable key for the given public key. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1sign_1_1_i_signer_a4cc785aff73c045ad9049c0e2d342393}{Sign\+Block}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ block, const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&public\+Key, uint32\+\_\+t network) const =0
+\begin{DoxyCompactList}\small\item\em Signs a block. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness}{cryptography\+::\+Witness}} \mbox{\hyperlink{classneo_1_1sign_1_1_i_signer_ad2a2a78bee4cf6bd90e4ecc18dcccc5d}{Sign\+Extensible\+Payload}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload}{network\+::p2p\+::payloads\+::\+Extensible\+Payload}} $>$ payload, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, uint32\+\_\+t network) const =0
+\begin{DoxyCompactList}\small\item\em Signs an extensible payload. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for signing operations in Neo. 
+
+This interface provides methods for signing blocks and extensible payloads, which is required for consensus operations. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1sign_1_1_i_signer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1sign_1_1_i_signer_af038a58c765a78caf7066c99650b5317}\index{neo::sign::ISigner@{neo::sign::ISigner}!````~ISigner@{\texorpdfstring{$\sim$}{\string~}ISigner}}
+\index{````~ISigner@{\texorpdfstring{$\sim$}{\string~}ISigner}!neo::sign::ISigner@{neo::sign::ISigner}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ISigner()}{\string~ISigner()}}
+{\footnotesize\ttfamily \label{classneo_1_1sign_1_1_i_signer_af038a58c765a78caf7066c99650b5317} 
+virtual neo\+::sign\+::\+ISigner\+::\texorpdfstring{$\sim$}{\string~}\+ISigner (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1sign_1_1_i_signer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1sign_1_1_i_signer_a8acbf46212ed999519546e82d99e6abd}\index{neo::sign::ISigner@{neo::sign::ISigner}!ContainsSignable@{ContainsSignable}}
+\index{ContainsSignable@{ContainsSignable}!neo::sign::ISigner@{neo::sign::ISigner}}
+\doxysubsubsection{\texorpdfstring{ContainsSignable()}{ContainsSignable()}}
+{\footnotesize\ttfamily \label{classneo_1_1sign_1_1_i_signer_a8acbf46212ed999519546e82d99e6abd} 
+virtual bool neo\+::sign\+::\+ISigner\+::\+Contains\+Signable (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{public\+Key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Checks if the signer contains a signable key for the given public key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em public\+Key} & The public key to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the signer can sign for this public key. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1sign_1_1_i_signer_a4cc785aff73c045ad9049c0e2d342393}\index{neo::sign::ISigner@{neo::sign::ISigner}!SignBlock@{SignBlock}}
+\index{SignBlock@{SignBlock}!neo::sign::ISigner@{neo::sign::ISigner}}
+\doxysubsubsection{\texorpdfstring{SignBlock()}{SignBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1sign_1_1_i_signer_a4cc785aff73c045ad9049c0e2d342393} 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::sign\+::\+ISigner\+::\+Sign\+Block (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$}]{block}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{public\+Key}{, }\item[{uint32\+\_\+t}]{network}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Signs a block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block to sign. \\
+\hline
+{\em public\+Key} & The public key to sign with. \\
+\hline
+{\em network} & The network magic. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The signature. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1sign_1_1_i_signer_ad2a2a78bee4cf6bd90e4ecc18dcccc5d}\index{neo::sign::ISigner@{neo::sign::ISigner}!SignExtensiblePayload@{SignExtensiblePayload}}
+\index{SignExtensiblePayload@{SignExtensiblePayload}!neo::sign::ISigner@{neo::sign::ISigner}}
+\doxysubsubsection{\texorpdfstring{SignExtensiblePayload()}{SignExtensiblePayload()}}
+{\footnotesize\ttfamily \label{classneo_1_1sign_1_1_i_signer_ad2a2a78bee4cf6bd90e4ecc18dcccc5d} 
+virtual \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness}{cryptography\+::\+Witness}} neo\+::sign\+::\+ISigner\+::\+Sign\+Extensible\+Payload (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload}{network\+::p2p\+::payloads\+::\+Extensible\+Payload}} $>$}]{payload}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{uint32\+\_\+t}]{network}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Signs an extensible payload. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em payload} & The payload to sign. \\
+\hline
+{\em snapshot} & The data cache snapshot. \\
+\hline
+{\em network} & The network magic. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The witness containing the signature. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/sign/\mbox{\hyperlink{isigner_8h}{isigner.\+h}}\end{DoxyCompactItemize}

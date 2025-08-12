@@ -1,0 +1,200 @@
+\doxysection{neo\+::ledger\+::Memory\+Pool\+Events Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_memory_pool_events}{}\label{classneo_1_1ledger_1_1_memory_pool_events}\index{neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}}
+
+
+Static event system that mimics C\#\textquotesingle{}s static event pattern. This provides compatibility with C\# Neo\textquotesingle{}s event handling while using C++ callbacks internally.  
+
+
+
+
+{\ttfamily \#include $<$event\+\_\+system.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_aeb647ff757d00df2096156de470e3af9}{Transaction\+Added\+Handler}} = std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}}$>$)$>$
+\item 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a99f4a0632536ff3a7adf33a04ed1396c}{Transaction\+Removed\+Handler}} = std\+::function$<$void(const \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args}{Transaction\+Removed\+Event\+Args}}\&)$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a6763186d701175cab0fc2ffef3796d10}{Subscribe\+Transaction\+Added}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_aeb647ff757d00df2096156de470e3af9}{Transaction\+Added\+Handler}} handler)
+\begin{DoxyCompactList}\small\item\em Subscribes to the Transaction\+Added event. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a12a6b88ab9f42b069f32a52ea309c665}{Unsubscribe\+Transaction\+Added}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_aeb647ff757d00df2096156de470e3af9}{Transaction\+Added\+Handler}} handler)
+\begin{DoxyCompactList}\small\item\em Unsubscribes from the Transaction\+Added event. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a3b8c4746530b24d365feb5c9bb35eacc}{Subscribe\+Transaction\+Removed}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a99f4a0632536ff3a7adf33a04ed1396c}{Transaction\+Removed\+Handler}} handler)
+\begin{DoxyCompactList}\small\item\em Subscribes to the Transaction\+Removed event. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_ad29ec85804d6ecb77fbe1e9a6baf78bf}{Unsubscribe\+Transaction\+Removed}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a99f4a0632536ff3a7adf33a04ed1396c}{Transaction\+Removed\+Handler}} handler)
+\begin{DoxyCompactList}\small\item\em Unsubscribes from the Transaction\+Removed event. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_afc55de336ca72a9ec3673e7b1080eb9f}{Fire\+Transaction\+Added}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ transaction)
+\begin{DoxyCompactList}\small\item\em Fires the Transaction\+Added event to all subscribers. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_aae0a3e485a1ce4996ff7a4d2e5424785}{Fire\+Transaction\+Removed}} (const \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args}{Transaction\+Removed\+Event\+Args}} \&args)
+\begin{DoxyCompactList}\small\item\em Fires the Transaction\+Removed event to all subscribers. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_acd0b5cd1b317663bf455640961994552}{Clear\+All\+Subscriptions}} ()
+\begin{DoxyCompactList}\small\item\em Clears all event subscriptions (useful for testing). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_aeb647ff757d00df2096156de470e3af9}{Transaction\+Added\+Handler}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a7ab818b42aa7876bec6e2fcfa5f9546a}{transaction\+\_\+added\+\_\+handlers\+\_\+}}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a99f4a0632536ff3a7adf33a04ed1396c}{Transaction\+Removed\+Handler}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_abc58754aa8bbeba31cfd2b9937f5d3a1}{transaction\+\_\+removed\+\_\+handlers\+\_\+}}
+\item 
+static std\+::mutex \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a6ea39845eccf71e4f5cd3623e0ba8b34}{handlers\+\_\+mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Static event system that mimics C\#\textquotesingle{}s static event pattern. This provides compatibility with C\# Neo\textquotesingle{}s event handling while using C++ callbacks internally. 
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1ledger_1_1_memory_pool_events_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_memory_pool_events_aeb647ff757d00df2096156de470e3af9}\index{neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}!TransactionAddedHandler@{TransactionAddedHandler}}
+\index{TransactionAddedHandler@{TransactionAddedHandler}!neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}}
+\doxysubsubsection{\texorpdfstring{TransactionAddedHandler}{TransactionAddedHandler}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_memory_pool_events_aeb647ff757d00df2096156de470e3af9} 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_aeb647ff757d00df2096156de470e3af9}{neo\+::ledger\+::\+Memory\+Pool\+Events\+::\+Transaction\+Added\+Handler}} = std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}}$>$)$>$}
+
+\Hypertarget{classneo_1_1ledger_1_1_memory_pool_events_a99f4a0632536ff3a7adf33a04ed1396c}\index{neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}!TransactionRemovedHandler@{TransactionRemovedHandler}}
+\index{TransactionRemovedHandler@{TransactionRemovedHandler}!neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}}
+\doxysubsubsection{\texorpdfstring{TransactionRemovedHandler}{TransactionRemovedHandler}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_memory_pool_events_a99f4a0632536ff3a7adf33a04ed1396c} 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a99f4a0632536ff3a7adf33a04ed1396c}{neo\+::ledger\+::\+Memory\+Pool\+Events\+::\+Transaction\+Removed\+Handler}} = std\+::function$<$void(const \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args}{Transaction\+Removed\+Event\+Args}}\&)$>$}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_memory_pool_events_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_memory_pool_events_acd0b5cd1b317663bf455640961994552}\index{neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}!ClearAllSubscriptions@{ClearAllSubscriptions}}
+\index{ClearAllSubscriptions@{ClearAllSubscriptions}!neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}}
+\doxysubsubsection{\texorpdfstring{ClearAllSubscriptions()}{ClearAllSubscriptions()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_memory_pool_events_acd0b5cd1b317663bf455640961994552} 
+void neo\+::ledger\+::\+Memory\+Pool\+Events\+::\+Clear\+All\+Subscriptions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Clears all event subscriptions (useful for testing). 
+
+\Hypertarget{classneo_1_1ledger_1_1_memory_pool_events_afc55de336ca72a9ec3673e7b1080eb9f}\index{neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}!FireTransactionAdded@{FireTransactionAdded}}
+\index{FireTransactionAdded@{FireTransactionAdded}!neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}}
+\doxysubsubsection{\texorpdfstring{FireTransactionAdded()}{FireTransactionAdded()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_memory_pool_events_afc55de336ca72a9ec3673e7b1080eb9f} 
+void neo\+::ledger\+::\+Memory\+Pool\+Events\+::\+Fire\+Transaction\+Added (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$}]{transaction}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Fires the Transaction\+Added event to all subscribers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction that was added. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1ledger_1_1_memory_pool_events_aae0a3e485a1ce4996ff7a4d2e5424785}\index{neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}!FireTransactionRemoved@{FireTransactionRemoved}}
+\index{FireTransactionRemoved@{FireTransactionRemoved}!neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}}
+\doxysubsubsection{\texorpdfstring{FireTransactionRemoved()}{FireTransactionRemoved()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_memory_pool_events_aae0a3e485a1ce4996ff7a4d2e5424785} 
+void neo\+::ledger\+::\+Memory\+Pool\+Events\+::\+Fire\+Transaction\+Removed (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args}{Transaction\+Removed\+Event\+Args}} \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Fires the Transaction\+Removed event to all subscribers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The event arguments containing the transaction and removal reason. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_memory_pool_events_a6763186d701175cab0fc2ffef3796d10}\index{neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}!SubscribeTransactionAdded@{SubscribeTransactionAdded}}
+\index{SubscribeTransactionAdded@{SubscribeTransactionAdded}!neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}}
+\doxysubsubsection{\texorpdfstring{SubscribeTransactionAdded()}{SubscribeTransactionAdded()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_memory_pool_events_a6763186d701175cab0fc2ffef3796d10} 
+void neo\+::ledger\+::\+Memory\+Pool\+Events\+::\+Subscribe\+Transaction\+Added (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_aeb647ff757d00df2096156de470e3af9}{Transaction\+Added\+Handler}}}]{handler}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Subscribes to the Transaction\+Added event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & The handler function to call when a transaction is added. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_memory_pool_events_a3b8c4746530b24d365feb5c9bb35eacc}\index{neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}!SubscribeTransactionRemoved@{SubscribeTransactionRemoved}}
+\index{SubscribeTransactionRemoved@{SubscribeTransactionRemoved}!neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}}
+\doxysubsubsection{\texorpdfstring{SubscribeTransactionRemoved()}{SubscribeTransactionRemoved()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_memory_pool_events_a3b8c4746530b24d365feb5c9bb35eacc} 
+void neo\+::ledger\+::\+Memory\+Pool\+Events\+::\+Subscribe\+Transaction\+Removed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a99f4a0632536ff3a7adf33a04ed1396c}{Transaction\+Removed\+Handler}}}]{handler}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Subscribes to the Transaction\+Removed event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & The handler function to call when a transaction is removed. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_memory_pool_events_a12a6b88ab9f42b069f32a52ea309c665}\index{neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}!UnsubscribeTransactionAdded@{UnsubscribeTransactionAdded}}
+\index{UnsubscribeTransactionAdded@{UnsubscribeTransactionAdded}!neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}}
+\doxysubsubsection{\texorpdfstring{UnsubscribeTransactionAdded()}{UnsubscribeTransactionAdded()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_memory_pool_events_a12a6b88ab9f42b069f32a52ea309c665} 
+void neo\+::ledger\+::\+Memory\+Pool\+Events\+::\+Unsubscribe\+Transaction\+Added (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_aeb647ff757d00df2096156de470e3af9}{Transaction\+Added\+Handler}}}]{handler}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Unsubscribes from the Transaction\+Added event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & The handler function to remove. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_memory_pool_events_ad29ec85804d6ecb77fbe1e9a6baf78bf}\index{neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}!UnsubscribeTransactionRemoved@{UnsubscribeTransactionRemoved}}
+\index{UnsubscribeTransactionRemoved@{UnsubscribeTransactionRemoved}!neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}}
+\doxysubsubsection{\texorpdfstring{UnsubscribeTransactionRemoved()}{UnsubscribeTransactionRemoved()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_memory_pool_events_ad29ec85804d6ecb77fbe1e9a6baf78bf} 
+void neo\+::ledger\+::\+Memory\+Pool\+Events\+::\+Unsubscribe\+Transaction\+Removed (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a99f4a0632536ff3a7adf33a04ed1396c}{Transaction\+Removed\+Handler}}}]{handler}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Unsubscribes from the Transaction\+Removed event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em handler} & The handler function to remove. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_memory_pool_events_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_memory_pool_events_a6ea39845eccf71e4f5cd3623e0ba8b34}\index{neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}!handlers\_mutex\_@{handlers\_mutex\_}}
+\index{handlers\_mutex\_@{handlers\_mutex\_}!neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}}
+\doxysubsubsection{\texorpdfstring{handlers\_mutex\_}{handlers\_mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_memory_pool_events_a6ea39845eccf71e4f5cd3623e0ba8b34} 
+std\+::mutex neo\+::ledger\+::\+Memory\+Pool\+Events\+::handlers\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_memory_pool_events_a7ab818b42aa7876bec6e2fcfa5f9546a}\index{neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}!transaction\_added\_handlers\_@{transaction\_added\_handlers\_}}
+\index{transaction\_added\_handlers\_@{transaction\_added\_handlers\_}!neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}}
+\doxysubsubsection{\texorpdfstring{transaction\_added\_handlers\_}{transaction\_added\_handlers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_memory_pool_events_a7ab818b42aa7876bec6e2fcfa5f9546a} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_aeb647ff757d00df2096156de470e3af9}{Memory\+Pool\+Events\+::\+Transaction\+Added\+Handler}} $>$ neo\+::ledger\+::\+Memory\+Pool\+Events\+::transaction\+\_\+added\+\_\+handlers\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_memory_pool_events_abc58754aa8bbeba31cfd2b9937f5d3a1}\index{neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}!transaction\_removed\_handlers\_@{transaction\_removed\_handlers\_}}
+\index{transaction\_removed\_handlers\_@{transaction\_removed\_handlers\_}!neo::ledger::MemoryPoolEvents@{neo::ledger::MemoryPoolEvents}}
+\doxysubsubsection{\texorpdfstring{transaction\_removed\_handlers\_}{transaction\_removed\_handlers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_memory_pool_events_abc58754aa8bbeba31cfd2b9937f5d3a1} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a99f4a0632536ff3a7adf33a04ed1396c}{Memory\+Pool\+Events\+::\+Transaction\+Removed\+Handler}} $>$ neo\+::ledger\+::\+Memory\+Pool\+Events\+::transaction\+\_\+removed\+\_\+handlers\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{event__system_8h}{event\+\_\+system.\+h}}\item 
+src/ledger/\mbox{\hyperlink{event__system_8cpp}{event\+\_\+system.\+cpp}}\end{DoxyCompactItemize}

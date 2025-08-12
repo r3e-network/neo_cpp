@@ -1,0 +1,324 @@
+\doxysection{neo\+::extensions\+::Secure\+String\+Extensions\+::Secure\+String Class Reference}
+\hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{}\label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+
+
+RAII class for secure string handling.  
+
+
+
+
+{\ttfamily \#include $<$secure\+\_\+string\+\_\+extensions.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a1e0006aa99b16cb0b4196536d98c5623}{Secure\+String}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Construct from regular string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a2bbeff13cdb0bfcf613aba1cf1b5b17f}{Secure\+String}} (const char \texorpdfstring{$\ast$}{*}str)
+\begin{DoxyCompactList}\small\item\em Construct from C-\/string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a95818d70bb2c399a5e9d0a2524d9b898}{Secure\+String}} (const char \texorpdfstring{$\ast$}{*}\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_aabc0dd70a28d7a6fdf92e4d1a34a5099}{data}}, size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a46898ed69b135555960f5771ca144ba8}{length}})
+\begin{DoxyCompactList}\small\item\em Construct from buffer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_aa5e96797a644d0c0603bab8c37ef5895}{Secure\+String}} (\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String}} \&\&other) noexcept
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String}} \& \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_ac98f2f72ba54f1216128d15da6550e7d}{operator=}} (\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String}} \&\&other) noexcept
+\begin{DoxyCompactList}\small\item\em Move assignment. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_ad1729d8c7c0af82538a9c034f578dbcf}{\texorpdfstring{$\sim$}{\string~}\+Secure\+String}} ()
+\begin{DoxyCompactList}\small\item\em Destructor -\/ securely clears memory. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a54378d35028b116294397d90b62ab923}{Secure\+String}} (const \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String}} \&)=delete
+\item 
+\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String}} \& \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_aacd118c82bace0aa0a8294f2aa91830d}{operator=}} (const \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String}} \&)=delete
+\item 
+const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_aabc0dd70a28d7a6fdf92e4d1a34a5099}{data}} () const
+\begin{DoxyCompactList}\small\item\em Get pointer to data (use with caution) \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a46898ed69b135555960f5771ca144ba8}{length}} () const
+\begin{DoxyCompactList}\small\item\em Get length of string. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_adc1f7241d76d1ba5f38c5fe4d7ecf114}{empty}} () const
+\begin{DoxyCompactList}\small\item\em Check if empty. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a8a0dea2bd10b0ef3159d53ca03c1568f}{to\+\_\+string}} () const
+\begin{DoxyCompactList}\small\item\em Create regular string (use with caution) \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a179547d3e3f330e43818f8cfabf48958}{secure\+\_\+equals}} (const \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String}} \&other) const
+\begin{DoxyCompactList}\small\item\em Secure comparison with another \doxylink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_aebce51330a3ddf6f86a2bb6d5bb389ce}{secure\+\_\+equals}} (const std\+::string \&other) const
+\begin{DoxyCompactList}\small\item\em Secure comparison with regular string. \end{DoxyCompactList}\item 
+char \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a698f5852aaaa7b609fad0055697fa876}{at}} (size\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Get character at position (bounds checked) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String}} \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a798c866e3d640afb9fbba59669dd9160}{substr}} (size\+\_\+t start, size\+\_\+t count=std\+::string\+::npos) const
+\begin{DoxyCompactList}\small\item\em Create substring. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ char\mbox{[}$\,$\mbox{]}$>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a8f7240b99c50c2dbbc2ba26512f50661}{data\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a99e2b7991ab8eba431b7649aa5f11c27}{length\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+RAII class for secure string handling. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a1e0006aa99b16cb0b4196536d98c5623}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!SecureString@{SecureString}}
+\index{SecureString@{SecureString}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{SecureString()}{SecureString()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a1e0006aa99b16cb0b4196536d98c5623} 
+neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::\+Secure\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct from regular string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String to secure \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a2bbeff13cdb0bfcf613aba1cf1b5b17f}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!SecureString@{SecureString}}
+\index{SecureString@{SecureString}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{SecureString()}{SecureString()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a2bbeff13cdb0bfcf613aba1cf1b5b17f} 
+neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::\+Secure\+String (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct from C-\/string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & C-\/string to secure \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a95818d70bb2c399a5e9d0a2524d9b898}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!SecureString@{SecureString}}
+\index{SecureString@{SecureString}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{SecureString()}{SecureString()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a95818d70bb2c399a5e9d0a2524d9b898} 
+neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::\+Secure\+String (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Construct from buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Buffer to copy \\
+\hline
+{\em length} & Buffer length \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_aa5e96797a644d0c0603bab8c37ef5895}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!SecureString@{SecureString}}
+\index{SecureString@{SecureString}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{SecureString()}{SecureString()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_aa5e96797a644d0c0603bab8c37ef5895} 
+neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::\+Secure\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String}} \&\&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Move constructor. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_ad1729d8c7c0af82538a9c034f578dbcf}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!````~SecureString@{\texorpdfstring{$\sim$}{\string~}SecureString}}
+\index{````~SecureString@{\texorpdfstring{$\sim$}{\string~}SecureString}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}SecureString()}{\string~SecureString()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_ad1729d8c7c0af82538a9c034f578dbcf} 
+neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::\texorpdfstring{$\sim$}{\string~}\+Secure\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor -\/ securely clears memory. 
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a54378d35028b116294397d90b62ab923}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!SecureString@{SecureString}}
+\index{SecureString@{SecureString}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{SecureString()}{SecureString()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a54378d35028b116294397d90b62ab923} 
+neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::\+Secure\+String (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a698f5852aaaa7b609fad0055697fa876}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!at@{at}}
+\index{at@{at}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a698f5852aaaa7b609fad0055697fa876} 
+char neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::at (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Get character at position (bounds checked) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Character at position 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_aabc0dd70a28d7a6fdf92e4d1a34a5099}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!data@{data}}
+\index{data@{data}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{data()}{data()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_aabc0dd70a28d7a6fdf92e4d1a34a5099} 
+const char \texorpdfstring{$\ast$}{*} neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get pointer to data (use with caution) 
+
+\begin{DoxyReturn}{Returns}
+Pointer to secure data 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_adc1f7241d76d1ba5f38c5fe4d7ecf114}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!empty@{empty}}
+\index{empty@{empty}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_adc1f7241d76d1ba5f38c5fe4d7ecf114} 
+bool neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if empty. 
+
+\begin{DoxyReturn}{Returns}
+True if empty 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a46898ed69b135555960f5771ca144ba8}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!length@{length}}
+\index{length@{length}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{length()}{length()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a46898ed69b135555960f5771ca144ba8} 
+size\+\_\+t neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::length (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get length of string. 
+
+\begin{DoxyReturn}{Returns}
+String length 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_aacd118c82bace0aa0a8294f2aa91830d}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_aacd118c82bace0aa0a8294f2aa91830d} 
+\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String}} \& neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_ac98f2f72ba54f1216128d15da6550e7d}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_ac98f2f72ba54f1216128d15da6550e7d} 
+\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String\+Extensions\+::\+Secure\+String}} \& neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String}} \&\&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Move assignment. 
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a179547d3e3f330e43818f8cfabf48958}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!secure\_equals@{secure\_equals}}
+\index{secure\_equals@{secure\_equals}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{secure\_equals()}{secure\_equals()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a179547d3e3f330e43818f8cfabf48958} 
+bool neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::secure\+\_\+equals (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Secure comparison with another \doxylink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & String to compare with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if equal (constant-\/time) 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_aebce51330a3ddf6f86a2bb6d5bb389ce}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!secure\_equals@{secure\_equals}}
+\index{secure\_equals@{secure\_equals}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{secure\_equals()}{secure\_equals()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_aebce51330a3ddf6f86a2bb6d5bb389ce} 
+bool neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::secure\+\_\+equals (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Secure comparison with regular string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & String to compare with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if equal (constant-\/time) 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a798c866e3d640afb9fbba59669dd9160}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!substr@{substr}}
+\index{substr@{substr}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{substr()}{substr()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a798c866e3d640afb9fbba59669dd9160} 
+\mbox{\hyperlink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String\+Extensions\+::\+Secure\+String}} neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::substr (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{start}{, }\item[{size\+\_\+t}]{count}{ = {\ttfamily std\+:\+:string\+:\+:npos}}\end{DoxyParamCaption}) const}
+
+
+
+Create substring. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & Start position \\
+\hline
+{\em count} & Number of characters \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New \doxylink{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string}{Secure\+String} with substring 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a8a0dea2bd10b0ef3159d53ca03c1568f}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!to\_string@{to\_string}}
+\index{to\_string@{to\_string}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{to\_string()}{to\_string()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a8a0dea2bd10b0ef3159d53ca03c1568f} 
+std\+::string neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::to\+\_\+string (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Create regular string (use with caution) 
+
+\begin{DoxyReturn}{Returns}
+Copy as std\+::string 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a8f7240b99c50c2dbbc2ba26512f50661}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!data\_@{data\_}}
+\index{data\_@{data\_}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a8f7240b99c50c2dbbc2ba26512f50661} 
+std\+::unique\+\_\+ptr$<$char\mbox{[}$\,$\mbox{]}$>$ neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a99e2b7991ab8eba431b7649aa5f11c27}\index{neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}!length\_@{length\_}}
+\index{length\_@{length\_}!neo::extensions::SecureStringExtensions::SecureString@{neo::extensions::SecureStringExtensions::SecureString}}
+\doxysubsubsection{\texorpdfstring{length\_}{length\_}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_secure_string_extensions_1_1_secure_string_a99e2b7991ab8eba431b7649aa5f11c27} 
+size\+\_\+t neo\+::extensions\+::\+Secure\+String\+Extensions\+::\+Secure\+String\+::length\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/extensions/\mbox{\hyperlink{secure__string__extensions_8h}{secure\+\_\+string\+\_\+extensions.\+h}}\item 
+src/extensions/\mbox{\hyperlink{secure__string__extensions_8cpp}{secure\+\_\+string\+\_\+extensions.\+cpp}}\end{DoxyCompactItemize}

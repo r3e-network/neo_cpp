@@ -1,0 +1,326 @@
+\doxysection{neo\+::persistence\+::Storage\+Item Class Reference}
+\hypertarget{classneo_1_1persistence_1_1_storage_item}{}\label{classneo_1_1persistence_1_1_storage_item}\index{neo::persistence::StorageItem@{neo::persistence::StorageItem}}
+
+
+Represents an item in the storage.  
+
+
+
+
+{\ttfamily \#include $<$storage\+\_\+item.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::persistence\+::Storage\+Item\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::persistence\+::Storage\+Item\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_ae05e7778f4a20a950f4a10dc6cacd4f4}{Storage\+Item}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a0a0f91b82af12d98f6d1834a71ecbe53}{Storage\+Item}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item} with the specified value. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a9a0a481b0533f452d8a532475e926716}{Get\+Value}} () const
+\begin{DoxyCompactList}\small\item\em Gets the value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a38c104a58f0b2e142147f45c952291be}{Set\+Value}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value)
+\begin{DoxyCompactList}\small\item\em Sets the value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_abfb63bca223a2a3dce386d0fe8e895b6}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_ab565aeeb1e37450801a07a676094921c}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item} from a binary reader. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_ae29ce8b5efbe8a6c4f699727b2b7f4c1}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Converts the storage item to a byte array. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a1a5926ee88f478760e25e2d7a22338e5}{Deserialize\+From\+Array}} (const std\+::span$<$ const uint8\+\_\+t $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes from a byte array. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a0f4e987e282d4485654df15df8aa0d98}{operator==}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item} is equal to another \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_ae3dc12a0ee4e7ccc5a452a35201c8deb}{operator!=}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item} is not equal to another \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\std\+::shared\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a7d51171ce8532436f2918607395d6fc5}{Get\+Interoperable}} () const
+\begin{DoxyCompactList}\small\item\em Gets an interoperable object from the storage item. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\void \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_ac3f146d07d3cd642e2dc2da239721317}{Set\+Interoperable}} (std\+::shared\+\_\+ptr$<$ T $>$ obj)
+\begin{DoxyCompactList}\small\item\em Sets an interoperable object in the storage item. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a8aea5a954a409e5fc1f58fb2e0a2085c}{Is\+Constant}} () const
+\begin{DoxyCompactList}\small\item\em Checks if this storage item is constant (C\# compatibility). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a40d26150b70110e1b44f7b2c98ed1e67}{value\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ void $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item_a9bcacccc5d2ff383736c904deac0c16d}{interoperable\+\_\+obj\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an item in the storage. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_ae05e7778f4a20a950f4a10dc6cacd4f4}\index{neo::persistence::StorageItem@{neo::persistence::StorageItem}!StorageItem@{StorageItem}}
+\index{StorageItem@{StorageItem}!neo::persistence::StorageItem@{neo::persistence::StorageItem}}
+\doxysubsubsection{\texorpdfstring{StorageItem()}{StorageItem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_item_ae05e7778f4a20a950f4a10dc6cacd4f4} 
+neo\+::persistence\+::\+Storage\+Item\+::\+Storage\+Item (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Constructs an empty \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_a0a0f91b82af12d98f6d1834a71ecbe53}\index{neo::persistence::StorageItem@{neo::persistence::StorageItem}!StorageItem@{StorageItem}}
+\index{StorageItem@{StorageItem}!neo::persistence::StorageItem@{neo::persistence::StorageItem}}
+\doxysubsubsection{\texorpdfstring{StorageItem()}{StorageItem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_item_a0a0f91b82af12d98f6d1834a71ecbe53} 
+neo\+::persistence\+::\+Storage\+Item\+::\+Storage\+Item (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item} with the specified value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_ab565aeeb1e37450801a07a676094921c}\index{neo::persistence::StorageItem@{neo::persistence::StorageItem}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::persistence::StorageItem@{neo::persistence::StorageItem}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_item_ab565aeeb1e37450801a07a676094921c} 
+void neo\+::persistence\+::\+Storage\+Item\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_a1a5926ee88f478760e25e2d7a22338e5}\index{neo::persistence::StorageItem@{neo::persistence::StorageItem}!DeserializeFromArray@{DeserializeFromArray}}
+\index{DeserializeFromArray@{DeserializeFromArray}!neo::persistence::StorageItem@{neo::persistence::StorageItem}}
+\doxysubsubsection{\texorpdfstring{DeserializeFromArray()}{DeserializeFromArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_item_a1a5926ee88f478760e25e2d7a22338e5} 
+void neo\+::persistence\+::\+Storage\+Item\+::\+Deserialize\+From\+Array (\begin{DoxyParamCaption}\item[{const std\+::span$<$ const uint8\+\_\+t $>$ \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Deserializes from a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The byte array. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_a7d51171ce8532436f2918607395d6fc5}\index{neo::persistence::StorageItem@{neo::persistence::StorageItem}!GetInteroperable@{GetInteroperable}}
+\index{GetInteroperable@{GetInteroperable}!neo::persistence::StorageItem@{neo::persistence::StorageItem}}
+\doxysubsubsection{\texorpdfstring{GetInteroperable()}{GetInteroperable()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_item_a7d51171ce8532436f2918607395d6fc5} 
+template$<$typename T$>$ \\
+std\+::shared\+\_\+ptr$<$ T $>$ neo\+::persistence\+::\+Storage\+Item\+::\+Get\+Interoperable (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets an interoperable object from the storage item. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of the interoperable object. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+The interoperable object. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_a9a0a481b0533f452d8a532475e926716}\index{neo::persistence::StorageItem@{neo::persistence::StorageItem}!GetValue@{GetValue}}
+\index{GetValue@{GetValue}!neo::persistence::StorageItem@{neo::persistence::StorageItem}}
+\doxysubsubsection{\texorpdfstring{GetValue()}{GetValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_item_a9a0a481b0533f452d8a532475e926716} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::persistence\+::\+Storage\+Item\+::\+Get\+Value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the value. 
+
+\begin{DoxyReturn}{Returns}
+The value. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_a8aea5a954a409e5fc1f58fb2e0a2085c}\index{neo::persistence::StorageItem@{neo::persistence::StorageItem}!IsConstant@{IsConstant}}
+\index{IsConstant@{IsConstant}!neo::persistence::StorageItem@{neo::persistence::StorageItem}}
+\doxysubsubsection{\texorpdfstring{IsConstant()}{IsConstant()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_item_a8aea5a954a409e5fc1f58fb2e0a2085c} 
+bool neo\+::persistence\+::\+Storage\+Item\+::\+Is\+Constant (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this storage item is constant (C\# compatibility). 
+
+\begin{DoxyReturn}{Returns}
+Always false in this implementation. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_ae3dc12a0ee4e7ccc5a452a35201c8deb}\index{neo::persistence::StorageItem@{neo::persistence::StorageItem}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::persistence::StorageItem@{neo::persistence::StorageItem}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_item_ae3dc12a0ee4e7ccc5a452a35201c8deb} 
+bool neo\+::persistence\+::\+Storage\+Item\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item} is not equal to another \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Storage\+Items are not equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_a0f4e987e282d4485654df15df8aa0d98}\index{neo::persistence::StorageItem@{neo::persistence::StorageItem}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::persistence::StorageItem@{neo::persistence::StorageItem}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_item_a0f4e987e282d4485654df15df8aa0d98} 
+bool neo\+::persistence\+::\+Storage\+Item\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item} is equal to another \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Storage\+Items are equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_abfb63bca223a2a3dce386d0fe8e895b6}\index{neo::persistence::StorageItem@{neo::persistence::StorageItem}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::persistence::StorageItem@{neo::persistence::StorageItem}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_item_abfb63bca223a2a3dce386d0fe8e895b6} 
+void neo\+::persistence\+::\+Storage\+Item\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_ac3f146d07d3cd642e2dc2da239721317}\index{neo::persistence::StorageItem@{neo::persistence::StorageItem}!SetInteroperable@{SetInteroperable}}
+\index{SetInteroperable@{SetInteroperable}!neo::persistence::StorageItem@{neo::persistence::StorageItem}}
+\doxysubsubsection{\texorpdfstring{SetInteroperable()}{SetInteroperable()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_item_ac3f146d07d3cd642e2dc2da239721317} 
+template$<$typename T$>$ \\
+void neo\+::persistence\+::\+Storage\+Item\+::\+Set\+Interoperable (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ T $>$}]{obj}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets an interoperable object in the storage item. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of the interoperable object. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & The interoperable object. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_a38c104a58f0b2e142147f45c952291be}\index{neo::persistence::StorageItem@{neo::persistence::StorageItem}!SetValue@{SetValue}}
+\index{SetValue@{SetValue}!neo::persistence::StorageItem@{neo::persistence::StorageItem}}
+\doxysubsubsection{\texorpdfstring{SetValue()}{SetValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_item_a38c104a58f0b2e142147f45c952291be} 
+void neo\+::persistence\+::\+Storage\+Item\+::\+Set\+Value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Sets the value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_ae29ce8b5efbe8a6c4f699727b2b7f4c1}\index{neo::persistence::StorageItem@{neo::persistence::StorageItem}!ToArray@{ToArray}}
+\index{ToArray@{ToArray}!neo::persistence::StorageItem@{neo::persistence::StorageItem}}
+\doxysubsubsection{\texorpdfstring{ToArray()}{ToArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_item_ae29ce8b5efbe8a6c4f699727b2b7f4c1} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::persistence\+::\+Storage\+Item\+::\+To\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Converts the storage item to a byte array. 
+
+\begin{DoxyReturn}{Returns}
+The byte array. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_a9bcacccc5d2ff383736c904deac0c16d}\index{neo::persistence::StorageItem@{neo::persistence::StorageItem}!interoperable\_obj\_@{interoperable\_obj\_}}
+\index{interoperable\_obj\_@{interoperable\_obj\_}!neo::persistence::StorageItem@{neo::persistence::StorageItem}}
+\doxysubsubsection{\texorpdfstring{interoperable\_obj\_}{interoperable\_obj\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_item_a9bcacccc5d2ff383736c904deac0c16d} 
+std\+::shared\+\_\+ptr$<$void$>$ neo\+::persistence\+::\+Storage\+Item\+::interoperable\+\_\+obj\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_storage_item_a40d26150b70110e1b44f7b2c98ed1e67}\index{neo::persistence::StorageItem@{neo::persistence::StorageItem}!value\_@{value\_}}
+\index{value\_@{value\_}!neo::persistence::StorageItem@{neo::persistence::StorageItem}}
+\doxysubsubsection{\texorpdfstring{value\_}{value\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_item_a40d26150b70110e1b44f7b2c98ed1e67} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::persistence\+::\+Storage\+Item\+::value\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/persistence/\mbox{\hyperlink{persistence_2storage__item_8h}{storage\+\_\+item.\+h}}\item 
+src/persistence/\mbox{\hyperlink{storage__item_8cpp}{storage\+\_\+item.\+cpp}}\end{DoxyCompactItemize}

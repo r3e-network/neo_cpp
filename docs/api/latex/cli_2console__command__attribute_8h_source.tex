@@ -1,0 +1,46 @@
+\doxysection{console\+\_\+command\+\_\+attribute.\+h}
+\hypertarget{cli_2console__command__attribute_8h_source}{}\label{cli_2console__command__attribute_8h_source}\index{include/neo/cli/console\_command\_attribute.h@{include/neo/cli/console\_command\_attribute.h}}
+\mbox{\hyperlink{cli_2console__command__attribute_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cli}{neo::cli}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cli_1_1_console_command_attribute_ad75c6f4983305e92af72a60ad399eb78}{ConsoleCommandAttribute}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_command_attribute_a7995700411fe6ee685a4dab4c4faafab}{Name}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00023\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_command_attribute_af6cd748b60e51722bbc5cd169fe8a35f}{Category}};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00028\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_command_attribute_af154f636541a4ffdc4d13539ae82f118}{Description}};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cli_1_1_console_command_attribute_ad75c6f4983305e92af72a60ad399eb78}{ConsoleCommandAttribute}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ std::string\&\ category\ =\ \textcolor{stringliteral}{"{}"{}},}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ description\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_command_attribute_a7995700411fe6ee685a4dab4c4faafab}{Name}}(name),\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_command_attribute_af6cd748b60e51722bbc5cd169fe8a35f}{Category}}(category),\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_command_attribute_af154f636541a4ffdc4d13539ae82f118}{Description}}(description)}
+\DoxyCodeLine{00039\ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00046\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_command_attribute_ae430ce186253f5c9ece4e98b3cb509fb}{GetVerbs}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00047\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ std::vector<std::string>\ verbs;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ std::istringstream\ iss(\mbox{\hyperlink{classneo_1_1cli_1_1_console_command_attribute_a7995700411fe6ee685a4dab4c4faafab}{Name}});}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ std::string\ verb;}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (iss\ >>\ verb)}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ verbs.push\_back(verb);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ verbs;}
+\DoxyCodeLine{00056\ \ \ \ \ \}}
+\DoxyCodeLine{00057\ \};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#define\ CONSOLE\_COMMAND(name,\ category,\ description)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\ \ \ \ static\ ConsoleCommandAttribute\ name\#\#\_command(\#name,\ category,\ description);\ \(\backslash\)}}
+\DoxyCodeLine{00064\ \textcolor{preprocessor}{\ \ \ \ void\ name}}
+\DoxyCodeLine{00065\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cli}}
+
+\end{DoxyCode}

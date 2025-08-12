@@ -1,0 +1,23 @@
+digraph "neo::consensus::DbftConsensus::ProcessViewChange"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::consensus::DbftConsensus\l::ProcessViewChange",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Process view change message."];
+  Node1 -> Node2 [id="edge8_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::consensus::ViewChange\lMessage::GetNewViewNumber",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1consensus_1_1_view_change_message.html#ad7645f80e2099922f9c3025bf1d60944",tooltip=" "];
+  Node1 -> Node3 [id="edge9_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::consensus::Consensus\lMessage::GetValidatorIndex",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1consensus_1_1_consensus_message.html#a57806653429804e7da8089cd79faf684",tooltip=" "];
+  Node1 -> Node4 [id="edge10_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::consensus::DbftConsensus\l::HasEnoughViewChanges",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1consensus_1_1_dbft_consensus.html#a7b48666e471bdfc36e13f3026c57d404",tooltip="Check if we have enough view changes."];
+  Node4 -> Node5 [id="edge11_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::consensus::DbftConsensus\l::GetF",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1consensus_1_1_dbft_consensus.html#a4f43c89d084c5527e10f0b43aa5eb9e8",tooltip="Calculate f value (maximum Byzantine nodes)"];
+  Node1 -> Node6 [id="edge12_Node000001_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::consensus::DbftConsensus\l::StartNewRound",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1consensus_1_1_dbft_consensus.html#a15e15445e0593eefe97bf54ccb38c7af",tooltip="Start a new consensus round."];
+  Node6 -> Node7 [id="edge13_Node000006_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::consensus::DbftConsensus\l::IsPrimary",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1consensus_1_1_dbft_consensus.html#a3264c44f471ed998b2488e5cf3c0f5f9",tooltip="Check if this node is the primary for current view."];
+  Node7 -> Node8 [id="edge14_Node000007_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="neo::consensus::DbftConsensus\l::GetPrimaryIndex",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1consensus_1_1_dbft_consensus.html#a4472c311ae19de5abf7996e2613e6d48",tooltip="Get the primary node index for given view."];
+}

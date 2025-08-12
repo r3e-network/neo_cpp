@@ -1,0 +1,91 @@
+\doxysection{neo\+::core\+::Error\+Recovery\+::Retry\+Config Struct Reference}
+\hypertarget{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{}\label{structneo_1_1core_1_1_error_recovery_1_1_retry_config}\index{neo::core::ErrorRecovery::RetryConfig@{neo::core::ErrorRecovery::RetryConfig}}
+
+
+Configuration for retry operations.  
+
+
+
+
+{\ttfamily \#include $<$error\+\_\+recovery.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a486630290287643ce40f16e7244833ab}{Retry\+Config}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a43f86cf13eddb080245c7660571890f4}{max\+\_\+attempts}}
+\item 
+std\+::chrono\+::milliseconds \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_afadd2eaae0d01605bde49e52105b60c5}{base\+\_\+delay}}
+\item 
+double \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a846ee34d5b7dcd0dc25534a094971971}{backoff\+\_\+multiplier}}
+\item 
+std\+::chrono\+::milliseconds \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a36bba03b3850aef300f78f3ac0121ca1}{max\+\_\+delay}}
+\item 
+bool \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_affd3ccec350c2ac6de2f4dd928b336a5}{exponential\+\_\+backoff}}
+\item 
+std\+::function$<$ bool(const std\+::exception \&)$>$ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a6e9c28156140f993db3ef9676ba56317}{should\+\_\+retry}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Configuration for retry operations. 
+
+\label{doc-constructors}
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_retry_config_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a486630290287643ce40f16e7244833ab}\index{neo::core::ErrorRecovery::RetryConfig@{neo::core::ErrorRecovery::RetryConfig}!RetryConfig@{RetryConfig}}
+\index{RetryConfig@{RetryConfig}!neo::core::ErrorRecovery::RetryConfig@{neo::core::ErrorRecovery::RetryConfig}}
+\doxysubsubsection{\texorpdfstring{RetryConfig()}{RetryConfig()}}
+{\footnotesize\ttfamily \label{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a486630290287643ce40f16e7244833ab} 
+neo\+::core\+::\+Error\+Recovery\+::\+Retry\+Config\+::\+Retry\+Config (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_retry_config_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a846ee34d5b7dcd0dc25534a094971971}\index{neo::core::ErrorRecovery::RetryConfig@{neo::core::ErrorRecovery::RetryConfig}!backoff\_multiplier@{backoff\_multiplier}}
+\index{backoff\_multiplier@{backoff\_multiplier}!neo::core::ErrorRecovery::RetryConfig@{neo::core::ErrorRecovery::RetryConfig}}
+\doxysubsubsection{\texorpdfstring{backoff\_multiplier}{backoff\_multiplier}}
+{\footnotesize\ttfamily \label{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a846ee34d5b7dcd0dc25534a094971971} 
+double neo\+::core\+::\+Error\+Recovery\+::\+Retry\+Config\+::backoff\+\_\+multiplier}
+
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_retry_config_afadd2eaae0d01605bde49e52105b60c5}\index{neo::core::ErrorRecovery::RetryConfig@{neo::core::ErrorRecovery::RetryConfig}!base\_delay@{base\_delay}}
+\index{base\_delay@{base\_delay}!neo::core::ErrorRecovery::RetryConfig@{neo::core::ErrorRecovery::RetryConfig}}
+\doxysubsubsection{\texorpdfstring{base\_delay}{base\_delay}}
+{\footnotesize\ttfamily \label{structneo_1_1core_1_1_error_recovery_1_1_retry_config_afadd2eaae0d01605bde49e52105b60c5} 
+std\+::chrono\+::milliseconds neo\+::core\+::\+Error\+Recovery\+::\+Retry\+Config\+::base\+\_\+delay}
+
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_retry_config_affd3ccec350c2ac6de2f4dd928b336a5}\index{neo::core::ErrorRecovery::RetryConfig@{neo::core::ErrorRecovery::RetryConfig}!exponential\_backoff@{exponential\_backoff}}
+\index{exponential\_backoff@{exponential\_backoff}!neo::core::ErrorRecovery::RetryConfig@{neo::core::ErrorRecovery::RetryConfig}}
+\doxysubsubsection{\texorpdfstring{exponential\_backoff}{exponential\_backoff}}
+{\footnotesize\ttfamily \label{structneo_1_1core_1_1_error_recovery_1_1_retry_config_affd3ccec350c2ac6de2f4dd928b336a5} 
+bool neo\+::core\+::\+Error\+Recovery\+::\+Retry\+Config\+::exponential\+\_\+backoff}
+
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a43f86cf13eddb080245c7660571890f4}\index{neo::core::ErrorRecovery::RetryConfig@{neo::core::ErrorRecovery::RetryConfig}!max\_attempts@{max\_attempts}}
+\index{max\_attempts@{max\_attempts}!neo::core::ErrorRecovery::RetryConfig@{neo::core::ErrorRecovery::RetryConfig}}
+\doxysubsubsection{\texorpdfstring{max\_attempts}{max\_attempts}}
+{\footnotesize\ttfamily \label{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a43f86cf13eddb080245c7660571890f4} 
+int neo\+::core\+::\+Error\+Recovery\+::\+Retry\+Config\+::max\+\_\+attempts}
+
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a36bba03b3850aef300f78f3ac0121ca1}\index{neo::core::ErrorRecovery::RetryConfig@{neo::core::ErrorRecovery::RetryConfig}!max\_delay@{max\_delay}}
+\index{max\_delay@{max\_delay}!neo::core::ErrorRecovery::RetryConfig@{neo::core::ErrorRecovery::RetryConfig}}
+\doxysubsubsection{\texorpdfstring{max\_delay}{max\_delay}}
+{\footnotesize\ttfamily \label{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a36bba03b3850aef300f78f3ac0121ca1} 
+std\+::chrono\+::milliseconds neo\+::core\+::\+Error\+Recovery\+::\+Retry\+Config\+::max\+\_\+delay}
+
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a6e9c28156140f993db3ef9676ba56317}\index{neo::core::ErrorRecovery::RetryConfig@{neo::core::ErrorRecovery::RetryConfig}!should\_retry@{should\_retry}}
+\index{should\_retry@{should\_retry}!neo::core::ErrorRecovery::RetryConfig@{neo::core::ErrorRecovery::RetryConfig}}
+\doxysubsubsection{\texorpdfstring{should\_retry}{should\_retry}}
+{\footnotesize\ttfamily \label{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a6e9c28156140f993db3ef9676ba56317} 
+std\+::function$<$bool(const std\+::exception\&)$>$ neo\+::core\+::\+Error\+Recovery\+::\+Retry\+Config\+::should\+\_\+retry}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{error__recovery_8h}{error\+\_\+recovery.\+h}}\end{DoxyCompactItemize}

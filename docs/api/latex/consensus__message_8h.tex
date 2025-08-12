@@ -1,0 +1,47 @@
+\doxysection{include/neo/consensus/consensus\+\_\+message.h File Reference}
+\hypertarget{consensus__message_8h}{}\label{consensus__message_8h}\index{include/neo/consensus/consensus\_message.h@{include/neo/consensus/consensus\_message.h}}
+{\ttfamily \#include $<$neo/io/iserializable.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/uint160.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/uint256.\+h$>$}\newline
+{\ttfamily \#include $<$neo/network/p2p/payloads/neo3\+\_\+transaction.\+h$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for consensus\+\_\+message.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message}{neo\+::consensus\+::\+Consensus\+Message}}
+\begin{DoxyCompactList}\small\item\em Base class for all consensus messages. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_view_change_message}{neo\+::consensus\+::\+View\+Change\+Message}}
+\begin{DoxyCompactList}\small\item\em View change request message. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_prepare_request_message}{neo\+::consensus\+::\+Prepare\+Request\+Message}}
+\begin{DoxyCompactList}\small\item\em Prepare request from primary node. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_prepare_response_message}{neo\+::consensus\+::\+Prepare\+Response\+Message}}
+\begin{DoxyCompactList}\small\item\em Prepare response from backup nodes. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_commit_message}{neo\+::consensus\+::\+Commit\+Message}}
+\begin{DoxyCompactList}\small\item\em Commit message with signature. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_request_message}{neo\+::consensus\+::\+Recovery\+Request\+Message}}
+\begin{DoxyCompactList}\small\item\em Recovery request message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1consensus}{neo\+::consensus}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5}{neo\+::consensus\+::\+Consensus\+Message\+Type}} \+: uint8\+\_\+t \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5adfe36a0ed1bbdd0235930d52d3cf983a}{neo\+::consensus\+::\+Change\+View}} = 0x00
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a4a2ad61cb85d4a1dfca176b76cef401e}{neo\+::consensus\+::\+Prepare\+Request}} = 0x20
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a1e98dddf1daa1f4bbf1400ed998bfe58}{neo\+::consensus\+::\+Prepare\+Response}} = 0x21
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a59d5b10c3a447f036d85cb5ce524c96c}{neo\+::consensus\+::\+Commit}} = 0x30
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a80ffa03f8219c0562b12e1f12d4fc5cf}{neo\+::consensus\+::\+Recovery\+Request}} = 0x40
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a8825e191ed248b28f1299e19923df06e}{neo\+::consensus\+::\+Recovery\+Message}} = 0x41
+ \}
+\begin{DoxyCompactList}\small\item\em Type of consensus message. \end{DoxyCompactList}\end{DoxyCompactItemize}

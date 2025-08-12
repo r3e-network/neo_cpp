@@ -1,0 +1,515 @@
+\doxysection{neo\+::persistence\+::Level\+Db\+Store Class Reference}
+\hypertarget{classneo_1_1persistence_1_1_level_db_store}{}\label{classneo_1_1persistence_1_1_level_db_store}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+
+
+Level\+DB-\/based persistent storage implementation.  
+
+
+
+
+{\ttfamily \#include $<$leveldb\+\_\+store.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::persistence\+::Level\+Db\+Store\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::persistence\+::Level\+Db\+Store\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch}{Write\+Batch}}
+\begin{DoxyCompactList}\small\item\em Batch write operations for efficiency. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_ac5da1a6824e00be9cb0e2a45d9e17e62}{Level\+Db\+Store}} (const \mbox{\hyperlink{structneo_1_1persistence_1_1_level_db_config}{Level\+Db\+Config}} \&config)
+\begin{DoxyCompactList}\small\item\em Construct a new Level\+DB store. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a79a556dc4415e53eda55e8f2afd5a28e}{\texorpdfstring{$\sim$}{\string~}\+Level\+Db\+Store}} () override
+\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_ad4644b283480dffd7c1dcfca4ee65b6a}{Open}} ()
+\begin{DoxyCompactList}\small\item\em Open the database. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_acfa4c2f775fd1b437d56e3d73dbdc550}{Close}} ()
+\begin{DoxyCompactList}\small\item\em Close the database. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a36d8cf47b36ae04844678c9a8d9ee70d}{Is\+Open}} () const
+\begin{DoxyCompactList}\small\item\em Check if database is open. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a7956360d24655f60c79fc6f16f5a5c16}{Put}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&key, const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} \&value)
+\item 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_aba53d9d4cafc66ac5cf7e1443be999f5}{Get}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&key) const
+\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_af0777eacd8d1eebd13cc8457c560031b}{Contains}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&key) const
+\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_aaa3949b95631e91a9aeceafd0e763e4a}{Delete}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&key)
+\item 
+std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}}, \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a48191068e44926fc1a5fd6b35e2c6f3f}{Find}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&key\+Prefix) const
+\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_ae6f4355cd6a64f527f8f023ed9ec30e0}{Clear}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a7709d9c42c9517ab4e39a5dd445b16a5}{Put}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value) override
+\begin{DoxyCompactList}\small\item\em Puts a value in the store. \end{DoxyCompactList}\item 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a546f60407fcd792f19d2c1a24ee4ca2a}{Try\+Get}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const override
+\begin{DoxyCompactList}\small\item\em Tries to get a value from the store. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a9040a171cc7db3fbd405e0f536d2f773}{Contains}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const override
+\begin{DoxyCompactList}\small\item\em Checks if the store contains a key. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a39975111fd6e33a84bd15a036726c072}{Delete}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) override
+\begin{DoxyCompactList}\small\item\em Deletes a value from the store. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a6b5a7bd07630c22add254d59aa2e412e}{Find}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \texorpdfstring{$\ast$}{*}prefix=nullptr, \mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575}{Seek\+Direction}} direction=\mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575a67d2f6740a8eaebf4d5c6f79be8da481}{Seek\+Direction\+::\+Forward}}) const override
+\begin{DoxyCompactList}\small\item\em Finds all key-\/value pairs with keys that start with the specified prefix. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch}{Write\+Batch}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_abd29af5bb3e6c74d2147fd8304926bfb}{Create\+Write\+Batch}} ()
+\begin{DoxyCompactList}\small\item\em Create a new write batch. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a04745dd1233d2e7cbe149005390b1306}{Get\+Statistics}} () const
+\begin{DoxyCompactList}\small\item\em Get database statistics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a329df837a412c16c46d9ac7e0eda61bc}{Compact}} ()
+\begin{DoxyCompactList}\small\item\em Compact the database. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a8693605321bbc993856b7317870c18e5}{Backup}} (const std\+::string \&backup\+\_\+path)
+\begin{DoxyCompactList}\small\item\em Backup the database. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store}{neo\+::persistence\+::\+IStore}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_a8d36de22d454c5bcf0ca208e82452422}{\texorpdfstring{$\sim$}{\string~}\+IStore}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store}{neo\+::persistence\+::\+IRead\+Only\+Store$<$ io\+::\+Byte\+Vector, io\+::\+Byte\+Vector $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store_a1b27c3a9d1e10a3d76a73ab26d84d9db}{\texorpdfstring{$\sim$}{\string~}\+IRead\+Only\+Store}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store}{neo\+::persistence\+::\+IWrite\+Store$<$ io\+::\+Byte\+Vector, io\+::\+Byte\+Vector $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store_a065391106a57c3b2c61bf98ad9711ecd}{\texorpdfstring{$\sim$}{\string~}\+IWrite\+Store}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store_a1f5b97ab542dea7844fb8f888c83bb57}{Put\+Sync}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value)
+\begin{DoxyCompactList}\small\item\em Puts a value in the store and syncs to disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_ac347f3a990a89ba3194dc0a6d24b93ac}{To\+Db\+Key}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&key) const
+\begin{DoxyCompactList}\small\item\em Convert \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key} to Level\+DB key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a04d47bfdc50e1c697e3dd275bf5d11a0}{From\+Db\+Key}} (const leveldb\+::\+Slice \&key) const
+\begin{DoxyCompactList}\small\item\em Convert Level\+DB key to \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_ab90d674801a0a9a3085aeaf9246b0204}{To\+Db\+Value}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} \&item) const
+\begin{DoxyCompactList}\small\item\em Convert \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item} to Level\+DB value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a83048f7fc645cc7530deb2ff51cd1923}{From\+Db\+Value}} (const leveldb\+::\+Slice \&value) const
+\begin{DoxyCompactList}\small\item\em Convert Level\+DB value to \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}. \end{DoxyCompactList}\item 
+leveldb\+::\+Options \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a2d3338d6992ac13fc1be1103c1c6ec85}{Get\+Options}} () const
+\begin{DoxyCompactList}\small\item\em Get Level\+DB options. \end{DoxyCompactList}\item 
+leveldb\+::\+Read\+Options \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a95a180fa1eb7f6d2b1daa0c98c73ce2c}{Get\+Read\+Options}} () const
+\begin{DoxyCompactList}\small\item\em Get read options. \end{DoxyCompactList}\item 
+leveldb\+::\+Write\+Options \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_acabc9fb390c6f5ac38d2a8ac85373aa3}{Get\+Write\+Options}} (bool sync=false) const
+\begin{DoxyCompactList}\small\item\em Get write options. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structneo_1_1persistence_1_1_level_db_config}{Level\+Db\+Config}} \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a44df457d7711edb43a52c0ead859afa3}{config\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ leveldb\+::\+DB $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_ad9c4252a58333a7632c8d5fd96df9a9b}{db\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ leveldb\+::\+Cache $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a2b36fff8ed5fe5184e18d68764b63370}{cache\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ const leveldb\+::\+Filter\+Policy $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a824f97bee8e5a078b545e64061f51929}{filter\+\_\+policy\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1core_1_1_logger}{core\+::\+Logger}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a0cfb738400bfc4f6d20498f27b76e261}{logger\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a9ab3c5dde49bf27c0c064defcebd59ac}{mutex\+\_\+}}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_ae056c207583a488fd8ecde23eb26bd03}{read\+\_\+count\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a1c50b4e1e2a427e1ef0c15df51dc888e}{write\+\_\+count\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a0f555a07bc1a969ea0158943cb9dbfbd}{delete\+\_\+count\+\_\+}} \{0\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Level\+DB-\/based persistent storage implementation. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_ac5da1a6824e00be9cb0e2a45d9e17e62}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!LevelDbStore@{LevelDbStore}}
+\index{LevelDbStore@{LevelDbStore}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{LevelDbStore()}{LevelDbStore()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_ac5da1a6824e00be9cb0e2a45d9e17e62} 
+neo\+::persistence\+::\+Level\+Db\+Store\+::\+Level\+Db\+Store (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1persistence_1_1_level_db_config}{Level\+Db\+Config}} \&}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct a new Level\+DB store. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & Configuration options \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a79a556dc4415e53eda55e8f2afd5a28e}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!````~LevelDbStore@{\texorpdfstring{$\sim$}{\string~}LevelDbStore}}
+\index{````~LevelDbStore@{\texorpdfstring{$\sim$}{\string~}LevelDbStore}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}LevelDbStore()}{\string~LevelDbStore()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a79a556dc4415e53eda55e8f2afd5a28e} 
+neo\+::persistence\+::\+Level\+Db\+Store\+::\texorpdfstring{$\sim$}{\string~}\+Level\+Db\+Store (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a8693605321bbc993856b7317870c18e5}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!Backup@{Backup}}
+\index{Backup@{Backup}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{Backup()}{Backup()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a8693605321bbc993856b7317870c18e5} 
+bool neo\+::persistence\+::\+Level\+Db\+Store\+::\+Backup (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{backup\+\_\+path}{}\end{DoxyParamCaption})}
+
+
+
+Backup the database. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em backup\+\_\+path} & Path to backup directory \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if successful 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_ae6f4355cd6a64f527f8f023ed9ec30e0}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_ae6f4355cd6a64f527f8f023ed9ec30e0} 
+void neo\+::persistence\+::\+Level\+Db\+Store\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_acfa4c2f775fd1b437d56e3d73dbdc550}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!Close@{Close}}
+\index{Close@{Close}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{Close()}{Close()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_acfa4c2f775fd1b437d56e3d73dbdc550} 
+void neo\+::persistence\+::\+Level\+Db\+Store\+::\+Close (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Close the database. 
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a329df837a412c16c46d9ac7e0eda61bc}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!Compact@{Compact}}
+\index{Compact@{Compact}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{Compact()}{Compact()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a329df837a412c16c46d9ac7e0eda61bc} 
+void neo\+::persistence\+::\+Level\+Db\+Store\+::\+Compact (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Compact the database. 
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a9040a171cc7db3fbd405e0f536d2f773}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!Contains@{Contains}}
+\index{Contains@{Contains}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a9040a171cc7db3fbd405e0f536d2f773} 
+bool neo\+::persistence\+::\+Level\+Db\+Store\+::\+Contains (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Checks if the store contains a key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the key exists, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store_a9a1be56aad7b2a711d558a1b87c90b26}{neo\+::persistence\+::\+IRead\+Only\+Store$<$ io\+::\+Byte\+Vector, io\+::\+Byte\+Vector $>$}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_af0777eacd8d1eebd13cc8457c560031b}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!Contains@{Contains}}
+\index{Contains@{Contains}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_af0777eacd8d1eebd13cc8457c560031b} 
+bool neo\+::persistence\+::\+Level\+Db\+Store\+::\+Contains (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{key}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_abd29af5bb3e6c74d2147fd8304926bfb}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!CreateWriteBatch@{CreateWriteBatch}}
+\index{CreateWriteBatch@{CreateWriteBatch}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{CreateWriteBatch()}{CreateWriteBatch()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_abd29af5bb3e6c74d2147fd8304926bfb} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch}{Write\+Batch}} $>$ neo\+::persistence\+::\+Level\+Db\+Store\+::\+Create\+Write\+Batch (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Create a new write batch. 
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a39975111fd6e33a84bd15a036726c072}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!Delete@{Delete}}
+\index{Delete@{Delete}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{Delete()}{Delete()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a39975111fd6e33a84bd15a036726c072} 
+void neo\+::persistence\+::\+Level\+Db\+Store\+::\+Delete (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deletes a value from the store. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store_a8a3c7a21edac74f32f8a982102c6ccb0}{neo\+::persistence\+::\+IWrite\+Store$<$ io\+::\+Byte\+Vector, io\+::\+Byte\+Vector $>$}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_aaa3949b95631e91a9aeceafd0e763e4a}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!Delete@{Delete}}
+\index{Delete@{Delete}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{Delete()}{Delete()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_aaa3949b95631e91a9aeceafd0e763e4a} 
+void neo\+::persistence\+::\+Level\+Db\+Store\+::\+Delete (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{key}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a48191068e44926fc1a5fd6b35e2c6f3f}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!Find@{Find}}
+\index{Find@{Find}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{Find()}{Find()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a48191068e44926fc1a5fd6b35e2c6f3f} 
+std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}}, \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} $>$ $>$ neo\+::persistence\+::\+Level\+Db\+Store\+::\+Find (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{key\+Prefix}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a6b5a7bd07630c22add254d59aa2e412e}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!Find@{Find}}
+\index{Find@{Find}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{Find()}{Find()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a6b5a7bd07630c22add254d59aa2e412e} 
+std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ $>$ neo\+::persistence\+::\+Level\+Db\+Store\+::\+Find (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \texorpdfstring{$\ast$}{*}}]{prefix}{ = {\ttfamily nullptr}, }\item[{\mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575}{Seek\+Direction}}}]{direction}{ = {\ttfamily \mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575a67d2f6740a8eaebf4d5c6f79be8da481}{Seek\+Direction\+::\+Forward}}}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Finds all key-\/value pairs with keys that start with the specified prefix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prefix} & The prefix to search for. If nullptr, all key-\/value pairs are returned. \\
+\hline
+{\em direction} & The direction to seek. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The key-\/value pairs found. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store_a16cb41b5d9ff43393989524da3793f8f}{neo\+::persistence\+::\+IRead\+Only\+Store$<$ io\+::\+Byte\+Vector, io\+::\+Byte\+Vector $>$}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a04d47bfdc50e1c697e3dd275bf5d11a0}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!FromDbKey@{FromDbKey}}
+\index{FromDbKey@{FromDbKey}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{FromDbKey()}{FromDbKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a04d47bfdc50e1c697e3dd275bf5d11a0} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} neo\+::persistence\+::\+Level\+Db\+Store\+::\+From\+Db\+Key (\begin{DoxyParamCaption}\item[{const leveldb\+::\+Slice \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Convert Level\+DB key to \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}. 
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a83048f7fc645cc7530deb2ff51cd1923}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!FromDbValue@{FromDbValue}}
+\index{FromDbValue@{FromDbValue}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{FromDbValue()}{FromDbValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a83048f7fc645cc7530deb2ff51cd1923} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} neo\+::persistence\+::\+Level\+Db\+Store\+::\+From\+Db\+Value (\begin{DoxyParamCaption}\item[{const leveldb\+::\+Slice \&}]{value}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Convert Level\+DB value to \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}. 
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_aba53d9d4cafc66ac5cf7e1443be999f5}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!Get@{Get}}
+\index{Get@{Get}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_aba53d9d4cafc66ac5cf7e1443be999f5} 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} $>$ neo\+::persistence\+::\+Level\+Db\+Store\+::\+Get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{key}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a2d3338d6992ac13fc1be1103c1c6ec85}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!GetOptions@{GetOptions}}
+\index{GetOptions@{GetOptions}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{GetOptions()}{GetOptions()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a2d3338d6992ac13fc1be1103c1c6ec85} 
+leveldb\+::\+Options neo\+::persistence\+::\+Level\+Db\+Store\+::\+Get\+Options (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Get Level\+DB options. 
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a95a180fa1eb7f6d2b1daa0c98c73ce2c}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!GetReadOptions@{GetReadOptions}}
+\index{GetReadOptions@{GetReadOptions}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{GetReadOptions()}{GetReadOptions()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a95a180fa1eb7f6d2b1daa0c98c73ce2c} 
+leveldb\+::\+Read\+Options neo\+::persistence\+::\+Level\+Db\+Store\+::\+Get\+Read\+Options (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Get read options. 
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a04745dd1233d2e7cbe149005390b1306}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!GetStatistics@{GetStatistics}}
+\index{GetStatistics@{GetStatistics}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{GetStatistics()}{GetStatistics()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a04745dd1233d2e7cbe149005390b1306} 
+std\+::string neo\+::persistence\+::\+Level\+Db\+Store\+::\+Get\+Statistics (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get database statistics. 
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_acabc9fb390c6f5ac38d2a8ac85373aa3}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!GetWriteOptions@{GetWriteOptions}}
+\index{GetWriteOptions@{GetWriteOptions}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{GetWriteOptions()}{GetWriteOptions()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_acabc9fb390c6f5ac38d2a8ac85373aa3} 
+leveldb\+::\+Write\+Options neo\+::persistence\+::\+Level\+Db\+Store\+::\+Get\+Write\+Options (\begin{DoxyParamCaption}\item[{bool}]{sync}{ = {\ttfamily false}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Get write options. 
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a36d8cf47b36ae04844678c9a8d9ee70d}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!IsOpen@{IsOpen}}
+\index{IsOpen@{IsOpen}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{IsOpen()}{IsOpen()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a36d8cf47b36ae04844678c9a8d9ee70d} 
+bool neo\+::persistence\+::\+Level\+Db\+Store\+::\+Is\+Open (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if database is open. 
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_ad4644b283480dffd7c1dcfca4ee65b6a}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!Open@{Open}}
+\index{Open@{Open}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{Open()}{Open()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_ad4644b283480dffd7c1dcfca4ee65b6a} 
+bool neo\+::persistence\+::\+Level\+Db\+Store\+::\+Open (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Open the database. 
+
+\begin{DoxyReturn}{Returns}
+true if successful 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a7709d9c42c9517ab4e39a5dd445b16a5}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!Put@{Put}}
+\index{Put@{Put}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{Put()}{Put()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a7709d9c42c9517ab4e39a5dd445b16a5} 
+void neo\+::persistence\+::\+Level\+Db\+Store\+::\+Put (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{key}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Puts a value in the store. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+{\em value} & The value. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store_ad372b058fc7a706856e68a1a43e1f0f8}{neo\+::persistence\+::\+IWrite\+Store$<$ io\+::\+Byte\+Vector, io\+::\+Byte\+Vector $>$}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a7956360d24655f60c79fc6f16f5a5c16}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!Put@{Put}}
+\index{Put@{Put}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{Put()}{Put()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a7956360d24655f60c79fc6f16f5a5c16} 
+void neo\+::persistence\+::\+Level\+Db\+Store\+::\+Put (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{key}{, }\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} \&}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_ac347f3a990a89ba3194dc0a6d24b93ac}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!ToDbKey@{ToDbKey}}
+\index{ToDbKey@{ToDbKey}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{ToDbKey()}{ToDbKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_ac347f3a990a89ba3194dc0a6d24b93ac} 
+std\+::string neo\+::persistence\+::\+Level\+Db\+Store\+::\+To\+Db\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Convert \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key} to Level\+DB key. 
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_ab90d674801a0a9a3085aeaf9246b0204}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!ToDbValue@{ToDbValue}}
+\index{ToDbValue@{ToDbValue}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{ToDbValue()}{ToDbValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_ab90d674801a0a9a3085aeaf9246b0204} 
+std\+::string neo\+::persistence\+::\+Level\+Db\+Store\+::\+To\+Db\+Value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} \&}]{item}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Convert \doxylink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item} to Level\+DB value. 
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a546f60407fcd792f19d2c1a24ee4ca2a}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!TryGet@{TryGet}}
+\index{TryGet@{TryGet}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{TryGet()}{TryGet()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a546f60407fcd792f19d2c1a24ee4ca2a} 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ neo\+::persistence\+::\+Level\+Db\+Store\+::\+Try\+Get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Tries to get a value from the store. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to look up. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value if found, std\+::nullopt otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store_a736304330e73c7397781fbca2e645e8a}{neo\+::persistence\+::\+IRead\+Only\+Store$<$ io\+::\+Byte\+Vector, io\+::\+Byte\+Vector $>$}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a2b36fff8ed5fe5184e18d68764b63370}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!cache\_@{cache\_}}
+\index{cache\_@{cache\_}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{cache\_}{cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a2b36fff8ed5fe5184e18d68764b63370} 
+std\+::unique\+\_\+ptr$<$leveldb\+::\+Cache$>$ neo\+::persistence\+::\+Level\+Db\+Store\+::cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a44df457d7711edb43a52c0ead859afa3}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!config\_@{config\_}}
+\index{config\_@{config\_}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{config\_}{config\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a44df457d7711edb43a52c0ead859afa3} 
+\mbox{\hyperlink{structneo_1_1persistence_1_1_level_db_config}{Level\+Db\+Config}} neo\+::persistence\+::\+Level\+Db\+Store\+::config\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_ad9c4252a58333a7632c8d5fd96df9a9b}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!db\_@{db\_}}
+\index{db\_@{db\_}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{db\_}{db\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_ad9c4252a58333a7632c8d5fd96df9a9b} 
+std\+::unique\+\_\+ptr$<$leveldb\+::\+DB$>$ neo\+::persistence\+::\+Level\+Db\+Store\+::db\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a0f555a07bc1a969ea0158943cb9dbfbd}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!delete\_count\_@{delete\_count\_}}
+\index{delete\_count\_@{delete\_count\_}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{delete\_count\_}{delete\_count\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a0f555a07bc1a969ea0158943cb9dbfbd} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::persistence\+::\+Level\+Db\+Store\+::delete\+\_\+count\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a824f97bee8e5a078b545e64061f51929}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!filter\_policy\_@{filter\_policy\_}}
+\index{filter\_policy\_@{filter\_policy\_}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{filter\_policy\_}{filter\_policy\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a824f97bee8e5a078b545e64061f51929} 
+std\+::unique\+\_\+ptr$<$const leveldb\+::\+Filter\+Policy$>$ neo\+::persistence\+::\+Level\+Db\+Store\+::filter\+\_\+policy\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a0cfb738400bfc4f6d20498f27b76e261}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!logger\_@{logger\_}}
+\index{logger\_@{logger\_}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{logger\_}{logger\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a0cfb738400bfc4f6d20498f27b76e261} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1core_1_1_logger}{core\+::\+Logger}}$>$ neo\+::persistence\+::\+Level\+Db\+Store\+::logger\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a9ab3c5dde49bf27c0c064defcebd59ac}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a9ab3c5dde49bf27c0c064defcebd59ac} 
+std\+::mutex neo\+::persistence\+::\+Level\+Db\+Store\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_ae056c207583a488fd8ecde23eb26bd03}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!read\_count\_@{read\_count\_}}
+\index{read\_count\_@{read\_count\_}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{read\_count\_}{read\_count\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_ae056c207583a488fd8ecde23eb26bd03} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::persistence\+::\+Level\+Db\+Store\+::read\+\_\+count\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_a1c50b4e1e2a427e1ef0c15df51dc888e}\index{neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}!write\_count\_@{write\_count\_}}
+\index{write\_count\_@{write\_count\_}!neo::persistence::LevelDbStore@{neo::persistence::LevelDbStore}}
+\doxysubsubsection{\texorpdfstring{write\_count\_}{write\_count\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_a1c50b4e1e2a427e1ef0c15df51dc888e} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::persistence\+::\+Level\+Db\+Store\+::write\+\_\+count\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/persistence/\mbox{\hyperlink{leveldb__store_8h}{leveldb\+\_\+store.\+h}}\end{DoxyCompactItemize}

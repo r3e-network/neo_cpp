@@ -1,0 +1,35 @@
+\doxysection{include/neo/cache/cache.h File Reference}
+\hypertarget{cache_2cache_8h}{}\label{cache_2cache_8h}\index{include/neo/cache/cache.h@{include/neo/cache/cache.h}}
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$list$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+Include dependency graph for cache.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{neo\+::cache\+::\+Cache$<$ Key, Value $>$}}
+\begin{DoxyCompactList}\small\item\em Generic cache interface for Neo components. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1cache_1_1_cache_1_1_cache_entry}{neo\+::cache\+::\+Cache$<$ Key, Value $>$\+::\+Cache\+Entry}}
+\item 
+class \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache}{neo\+::cache\+::\+LRUCache$<$ Key, Value $>$}}
+\begin{DoxyCompactList}\small\item\em LRU \doxylink{classneo_1_1cache_1_1_cache}{Cache} implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1cache}{neo\+::cache}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename Value$>$ }\\using \mbox{\hyperlink{namespaceneo_1_1cache_ae2429a3fad719ed1859742c7de472335}{neo\+::cache\+::\+String\+Cache}} = \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{Cache}}$<$std\+::string, Value$>$
+\begin{DoxyCompactList}\small\item\em Specialized cache for string keys. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Value$>$ }\\using \mbox{\hyperlink{namespaceneo_1_1cache_afdc2fafb57c7bc8ff92ee03e3fabc895}{neo\+::cache\+::\+Hash\+Cache}} = \mbox{\hyperlink{classneo_1_1cache_1_1_cache}{Cache}}$<$std\+::string, Value$>$
+\begin{DoxyCompactList}\small\item\em Specialized cache for hash keys (UInt256). \end{DoxyCompactList}\end{DoxyCompactItemize}

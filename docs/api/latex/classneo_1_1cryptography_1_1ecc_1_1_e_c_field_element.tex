@@ -1,0 +1,426 @@
+\doxysection{neo\+::cryptography\+::ecc\+::ECField\+Element Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{}\label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+
+
+Represents an element in an elliptic curve finite field.  
+
+
+
+
+{\ttfamily \#include $<$ecfieldelement.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::cryptography\+::ecc\+::ECField\+Element\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECField\+Element}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{extensions\+::\+Big\+Integer\+Extensions\+::\+Big\+Integer}} \&value)
+\begin{DoxyCompactList}\small\item\em Construct field element from Big\+Integer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a02fdbd939a1656708ca8593efea0b16e}{ECField\+Element}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&bytes)
+\begin{DoxyCompactList}\small\item\em Construct field element from byte array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_abb70ee7d4f847deecec0c50c42c1dcad}{Add}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \&other) const
+\begin{DoxyCompactList}\small\item\em Add two field elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a07957f900196ae3d3eadbcf3c8ac8e58}{Subtract}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \&other) const
+\begin{DoxyCompactList}\small\item\em Subtract two field elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_afdb805260f57fadb1227130a109fa20f}{Multiply}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \&other) const
+\begin{DoxyCompactList}\small\item\em Multiply two field elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_abe4581ce9e8c725d25921e2403b44eb7}{Divide}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \&other) const
+\begin{DoxyCompactList}\small\item\em Divide two field elements. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a875596581e2a8daa32900280456abb0f}{Negate}} () const
+\begin{DoxyCompactList}\small\item\em Negate the field element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a9bbe0d5cec356227041e7ef4fb4ee1b8}{Square}} () const
+\begin{DoxyCompactList}\small\item\em Square the field element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_ae5f11f28ea28816e2326787cedc45cbb}{Modular\+Inverse}} () const
+\begin{DoxyCompactList}\small\item\em Compute modular inverse of the element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_af2288336a17a2cf0eed1df44d1481847}{Sqrt}} () const
+\begin{DoxyCompactList}\small\item\em Compute square root of the element. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_aeb7e789edca5975bc1bd07310bf30684}{Is\+Zero}} () const
+\begin{DoxyCompactList}\small\item\em Check if element is zero. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a6fb17e9cd571e035d7a520591873b328}{Is\+One}} () const
+\begin{DoxyCompactList}\small\item\em Check if element is one. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a8f620f6d7edc0c740e0611db297f8556}{operator==}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \&other) const
+\begin{DoxyCompactList}\small\item\em Equality comparison. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_aca2bde71ff94b83710ee5229ce9137b4}{operator!=}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \&other) const
+\begin{DoxyCompactList}\small\item\em Inequality comparison. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{extensions\+::\+Big\+Integer\+Extensions\+::\+Big\+Integer}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a8fd7d67de2588ef5f0ee5fd8dbfaf4b7}{Get\+Value}} () const
+\begin{DoxyCompactList}\small\item\em Get the underlying value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_aa88356720254ce29b64e723a3775b72d}{To\+Byte\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Convert to byte array. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_aa2d06c2d68483dadf156ee860d8ae4a8}{To\+String}} () const
+\begin{DoxyCompactList}\small\item\em Convert to string representation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a5a97a3c8ef00b3f2358778fb9a73cc8a}{Zero}} ()
+\begin{DoxyCompactList}\small\item\em Get the zero element. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a6601f7a4e29ddb1094a1666578373b49}{One}} ()
+\begin{DoxyCompactList}\small\item\em Get the one element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{extensions\+::\+Big\+Integer\+Extensions\+::\+Big\+Integer}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a9127b72cf03d4bccf9e086aa9f405eaa}{Get\+Field\+Modulus}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{extensions\+::\+Big\+Integer\+Extensions\+::\+Big\+Integer}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a0f53c648ec2c23b2a8c08f4c151d1e5f}{value\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an element in an elliptic curve finite field. 
+
+This class implements arithmetic operations for elements in the finite field used by elliptic curve cryptography, specifically for secp256r1 curve. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!ECFieldElement@{ECFieldElement}}
+\index{ECFieldElement@{ECFieldElement}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{ECFieldElement()}{ECFieldElement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90} 
+neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+ECField\+Element (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{extensions\+::\+Big\+Integer\+Extensions\+::\+Big\+Integer}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct field element from Big\+Integer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value (will be reduced modulo field modulus) \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a02fdbd939a1656708ca8593efea0b16e}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!ECFieldElement@{ECFieldElement}}
+\index{ECFieldElement@{ECFieldElement}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{ECFieldElement()}{ECFieldElement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a02fdbd939a1656708ca8593efea0b16e} 
+neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+ECField\+Element (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{bytes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Construct field element from byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & Byte representation of the value \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_abb70ee7d4f847deecec0c50c42c1dcad}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!Add@{Add}}
+\index{Add@{Add}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_abb70ee7d4f847deecec0c50c42c1dcad} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+Add (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Add two field elements. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other element to add \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Sum of the two elements 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_abe4581ce9e8c725d25921e2403b44eb7}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!Divide@{Divide}}
+\index{Divide@{Divide}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{Divide()}{Divide()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_abe4581ce9e8c725d25921e2403b44eb7} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+Divide (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Divide two field elements. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The element to divide by \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Quotient of the two elements 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if dividing by zero \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a9127b72cf03d4bccf9e086aa9f405eaa}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!GetFieldModulus@{GetFieldModulus}}
+\index{GetFieldModulus@{GetFieldModulus}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{GetFieldModulus()}{GetFieldModulus()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a9127b72cf03d4bccf9e086aa9f405eaa} 
+const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{extensions\+::\+Big\+Integer\+Extensions\+::\+Big\+Integer}} \& neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+Get\+Field\+Modulus (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a8fd7d67de2588ef5f0ee5fd8dbfaf4b7}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!GetValue@{GetValue}}
+\index{GetValue@{GetValue}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{GetValue()}{GetValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a8fd7d67de2588ef5f0ee5fd8dbfaf4b7} 
+const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{extensions\+::\+Big\+Integer\+Extensions\+::\+Big\+Integer}} \& neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+Get\+Value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the underlying value. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the Big\+Integer value 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a6fb17e9cd571e035d7a520591873b328}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!IsOne@{IsOne}}
+\index{IsOne@{IsOne}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{IsOne()}{IsOne()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a6fb17e9cd571e035d7a520591873b328} 
+bool neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+Is\+One (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Check if element is one. 
+
+\begin{DoxyReturn}{Returns}
+true if element is one 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_aeb7e789edca5975bc1bd07310bf30684}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!IsZero@{IsZero}}
+\index{IsZero@{IsZero}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{IsZero()}{IsZero()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_aeb7e789edca5975bc1bd07310bf30684} 
+bool neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+Is\+Zero (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Check if element is zero. 
+
+\begin{DoxyReturn}{Returns}
+true if element is zero 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_ae5f11f28ea28816e2326787cedc45cbb}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!ModularInverse@{ModularInverse}}
+\index{ModularInverse@{ModularInverse}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{ModularInverse()}{ModularInverse()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_ae5f11f28ea28816e2326787cedc45cbb} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+Modular\+Inverse (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Compute modular inverse of the element. 
+
+\begin{DoxyReturn}{Returns}
+Modular inverse 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if element is zero \\
+\hline
+{\em std\+::runtime\+\_\+error} & if inverse doesn\textquotesingle{}t exist \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_afdb805260f57fadb1227130a109fa20f}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!Multiply@{Multiply}}
+\index{Multiply@{Multiply}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{Multiply()}{Multiply()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_afdb805260f57fadb1227130a109fa20f} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+Multiply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Multiply two field elements. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other element to multiply \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Product of the two elements 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a875596581e2a8daa32900280456abb0f}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!Negate@{Negate}}
+\index{Negate@{Negate}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{Negate()}{Negate()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a875596581e2a8daa32900280456abb0f} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+Negate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Negate the field element. 
+
+\begin{DoxyReturn}{Returns}
+Negated element 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a6601f7a4e29ddb1094a1666578373b49}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!One@{One}}
+\index{One@{One}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{One()}{One()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a6601f7a4e29ddb1094a1666578373b49} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+One (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the one element. 
+
+\begin{DoxyReturn}{Returns}
+One field element 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_aca2bde71ff94b83710ee5229ce9137b4}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_aca2bde71ff94b83710ee5229ce9137b4} 
+bool neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Inequality comparison. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other element to compare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if elements are not equal 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a8f620f6d7edc0c740e0611db297f8556}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a8f620f6d7edc0c740e0611db297f8556} 
+bool neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Equality comparison. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other element to compare \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if elements are equal 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_af2288336a17a2cf0eed1df44d1481847}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!Sqrt@{Sqrt}}
+\index{Sqrt@{Sqrt}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{Sqrt()}{Sqrt()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_af2288336a17a2cf0eed1df44d1481847} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+Sqrt (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Compute square root of the element. 
+
+\begin{DoxyReturn}{Returns}
+Square root in the field 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a9bbe0d5cec356227041e7ef4fb4ee1b8}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!Square@{Square}}
+\index{Square@{Square}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{Square()}{Square()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a9bbe0d5cec356227041e7ef4fb4ee1b8} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+Square (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Square the field element. 
+
+\begin{DoxyReturn}{Returns}
+Squared element 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a07957f900196ae3d3eadbcf3c8ac8e58}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!Subtract@{Subtract}}
+\index{Subtract@{Subtract}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{Subtract()}{Subtract()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a07957f900196ae3d3eadbcf3c8ac8e58} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+Subtract (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Subtract two field elements. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The element to subtract \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Difference of the two elements 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_aa88356720254ce29b64e723a3775b72d}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!ToByteArray@{ToByteArray}}
+\index{ToByteArray@{ToByteArray}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{ToByteArray()}{ToByteArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_aa88356720254ce29b64e723a3775b72d} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+To\+Byte\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Convert to byte array. 
+
+\begin{DoxyReturn}{Returns}
+Byte representation of the element 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_aa2d06c2d68483dadf156ee860d8ae4a8}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_aa2d06c2d68483dadf156ee860d8ae4a8} 
+std\+::string neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Convert to string representation. 
+
+\begin{DoxyReturn}{Returns}
+String representation of the element 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a5a97a3c8ef00b3f2358778fb9a73cc8a}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!Zero@{Zero}}
+\index{Zero@{Zero}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{Zero()}{Zero()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a5a97a3c8ef00b3f2358778fb9a73cc8a} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element}{ECField\+Element}} neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::\+Zero (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the zero element. 
+
+\begin{DoxyReturn}{Returns}
+Zero field element 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a0f53c648ec2c23b2a8c08f4c151d1e5f}\index{neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}!value\_@{value\_}}
+\index{value\_@{value\_}!neo::cryptography::ecc::ECFieldElement@{neo::cryptography::ecc::ECFieldElement}}
+\doxysubsubsection{\texorpdfstring{value\_}{value\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a0f53c648ec2c23b2a8c08f4c151d1e5f} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{extensions\+::\+Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::cryptography\+::ecc\+::\+ECField\+Element\+::value\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/ecc/\mbox{\hyperlink{ecfieldelement_8h}{ecfieldelement.\+h}}\item 
+src/cryptography/ecc/\mbox{\hyperlink{ecfieldelement_8cpp}{ecfieldelement.\+cpp}}\end{DoxyCompactItemize}

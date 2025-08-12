@@ -1,0 +1,35 @@
+\doxysection{neo\+\_\+system\+\_\+factory.\+h}
+\hypertarget{neo__system__factory_8h_source}{}\label{neo__system__factory_8h_source}\index{include/neo/core/neo\_system\_factory.h@{include/neo/core/neo\_system\_factory.h}}
+\mbox{\hyperlink{neo__system__factory_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{core_2neo__system_8h}{neo/core/neo\_system.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{istore_8h}{neo/persistence/istore.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo}{neo}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1_protocol_settings}{ProtocolSettings}};}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1_neo_system_factory_ad66e8e0f2518644f0c0df09459d7899f}{NeoSystemFactory}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<NeoSystem>\ \mbox{\hyperlink{classneo_1_1_neo_system_factory_a500791f4d862b82d70f9cf3cfec3e6e5}{Create}}(std::unique\_ptr<ProtocolSettings>\ settings,}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<persistence::IStoreProvider>\ storage\_provider,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ storage\_path\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<NeoSystem>\ \mbox{\hyperlink{classneo_1_1_neo_system_factory_a500791f4d862b82d70f9cf3cfec3e6e5}{Create}}(std::unique\_ptr<ProtocolSettings>\ settings,}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ storage\_provider\_name\ =\ \textcolor{stringliteral}{"{}memory"{}},}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ storage\_path\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{comment}{//\ Factory\ class\ should\ not\ be\ instantiated}}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{classneo_1_1_neo_system_factory_ad66e8e0f2518644f0c0df09459d7899f}{NeoSystemFactory}}()\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \}\ \ \textcolor{comment}{//\ namespace\ neo}}
+
+\end{DoxyCode}

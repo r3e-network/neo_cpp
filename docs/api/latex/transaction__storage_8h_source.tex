@@ -1,0 +1,46 @@
+\doxysection{transaction\+\_\+storage.\+h}
+\hypertarget{transaction__storage_8h_source}{}\label{transaction__storage_8h_source}\index{include/neo/ledger/transaction\_storage.h@{include/neo/ledger/transaction\_storage.h}}
+\mbox{\hyperlink{transaction__storage_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2fixed8_8h}{neo/io/fixed8.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2transaction_8h}{neo/ledger/transaction.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{data__cache_8h}{neo/persistence/data\_cache.h}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_af762547d211e87eac6a44c057abaaea8}{TransactionStorage}}}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_af762547d211e87eac6a44c057abaaea8}{TransactionStorage}}(std::shared\_ptr<persistence::DataCache>\ dataCache);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00033\ \ \ \ \ std::shared\_ptr<Transaction>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_aab94ecfa9c85ba01616d9e01a2e145e7}{GetTransaction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_af3fcd6ee4568abf5c7dff2925c29c839}{AddTransaction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}}\&\ transaction,\ std::shared\_ptr<persistence::DataCache>\ snapshot);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_a2ba22a5baf7b4144633f9a6ec0e5e6c3}{ContainsTransaction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00055\ \ \ \ \ std::vector<TransactionOutput>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_a9d9cfc69565b6b4c83e8d3a7932444ba}{GetUnspentOutputs}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00062\ \ \ \ \ std::vector<TransactionOutput>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_a9d9cfc69565b6b4c83e8d3a7932444ba}{GetUnspentOutputs}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ scriptHash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00070\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{io::Fixed8}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_aa90dac1d09e8ccc600eb1bd2eee2db1b}{GetBalance}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ scriptHash,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ assetId)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00073\ \ \ \ \ std::shared\_ptr<persistence::DataCache>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_ad241ee58724737b5e60e3109d487410f}{dataCache\_}};}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_a49cc8d29a1d9aafdf9c250f65ad177b7}{mutex\_}};}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{mutable}\ std::unordered\_map<io::UInt256,\ std::shared\_ptr<Transaction>>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_aa0df1afbe5289647a31a4f3abc8f652a}{transactions\_}};}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{mutable}\ std::unordered\_map<io::UInt256,\ std::vector<TransactionOutput>>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_a7ed08bfcf865cdae194f9409274ec6a2}{unspentOutputs\_}};}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{mutable}\ std::unordered\_map<io::UInt160,\ std::vector<TransactionOutput>>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_a60f42388c18fe7e5b71ea90eaf4c7199}{addressOutputs\_}};}
+\DoxyCodeLine{00078\ \};}
+\DoxyCodeLine{00079\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}

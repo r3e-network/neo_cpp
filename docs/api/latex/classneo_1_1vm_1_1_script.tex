@@ -1,0 +1,310 @@
+\doxysection{neo\+::vm\+::Script Class Reference}
+\hypertarget{classneo_1_1vm_1_1_script}{}\label{classneo_1_1vm_1_1_script}\index{neo::vm::Script@{neo::vm::Script}}
+
+
+Represents a script.  
+
+
+
+
+{\ttfamily \#include $<$script.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::vm\+::Script\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_a8239f409134e2b06866dfdd973d1050a}{Script}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1vm_1_1_script}{Script}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_a54bbc2023eb2984ed8a1c02a5e627ba9}{Script}} (const \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_vector}{internal\+::\+Byte\+Vector}} \&script)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1vm_1_1_script}{Script} from a byte array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_af5bc4fbccb18eb3b2eabfdd534cc6fdd}{Script}} (const \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span}{internal\+::\+Byte\+Span}} \&script)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1vm_1_1_script}{Script} from a byte span. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_vector}{internal\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_ab2940794ce4bcda2c68c3d414d5a9011}{Get\+Script}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_script_aa5a98520c6d23a6dc7fb3d5d8c99e682}{Get\+Length}} () const
+\begin{DoxyCompactList}\small\item\em Gets the length of the script. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_script_a3935360f54e5b2652b1de036f9d53f66}{Get\+Instruction}} (int32\+\_\+t position) const
+\begin{DoxyCompactList}\small\item\em Gets the instruction at the specified position. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_script_a76070cb81560532399666c93d56c1df9}{Get\+Next\+Instruction}} (int32\+\_\+t \&position) const
+\begin{DoxyCompactList}\small\item\em Gets the next instruction. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_script_a6a1ceef439be7d04d73882e3f9d1e781}{Get\+Jump\+Destination}} (int32\+\_\+t position, int32\+\_\+t offset) const
+\begin{DoxyCompactList}\small\item\em Gets the jump destination. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_script_a1dc84891bc3d70a35b0d802cb28132e8}{operator==}} (const \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1vm_1_1_script}{Script} is equal to another \doxylink{classneo_1_1vm_1_1_script}{Script}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_script_aa85fc8b8abee8b16c3b9f0e791e55d74}{operator!=}} (const \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1vm_1_1_script}{Script} is not equal to another \doxylink{classneo_1_1vm_1_1_script}{Script}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_script_adb7253d9f75055a73a4049461f5a3fa3}{Get\+Operand\+Size}} (\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code}} opcode)
+\begin{DoxyCompactList}\small\item\em Gets the operand size for the specified opcode. \end{DoxyCompactList}\item 
+static int64\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_script_a8902e19afd00f37b5f4d1c8dd178b617}{Get\+Price}} (\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code}} opcode)
+\begin{DoxyCompactList}\small\item\em Gets the price for the specified opcode. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1vm_1_1_script_a1f63750c7ebb7c026f9aa6208f10fd33}{Get\+Op\+Code\+Name}} (\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code}} opcode)
+\begin{DoxyCompactList}\small\item\em Gets the name of the specified opcode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_vector}{internal\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1vm_1_1_script_a3cf771f5f8d7a37a6386096cd45d0886}{script\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ int32\+\_\+t, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}} $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_script_afa2ce50d8fbbef9a22ec08b657500f26}{instructions\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a script. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1vm_1_1_script_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1vm_1_1_script_a8239f409134e2b06866dfdd973d1050a}\index{neo::vm::Script@{neo::vm::Script}!Script@{Script}}
+\index{Script@{Script}!neo::vm::Script@{neo::vm::Script}}
+\doxysubsubsection{\texorpdfstring{Script()}{Script()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_a8239f409134e2b06866dfdd973d1050a} 
+neo\+::vm\+::\+Script\+::\+Script (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Constructs an empty \doxylink{classneo_1_1vm_1_1_script}{Script}. 
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1vm_1_1_script_a54bbc2023eb2984ed8a1c02a5e627ba9}\index{neo::vm::Script@{neo::vm::Script}!Script@{Script}}
+\index{Script@{Script}!neo::vm::Script@{neo::vm::Script}}
+\doxysubsubsection{\texorpdfstring{Script()}{Script()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_a54bbc2023eb2984ed8a1c02a5e627ba9} 
+neo\+::vm\+::\+Script\+::\+Script (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_vector}{internal\+::\+Byte\+Vector}} \&}]{script}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1vm_1_1_script}{Script} from a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & The script. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_script_af5bc4fbccb18eb3b2eabfdd534cc6fdd}\index{neo::vm::Script@{neo::vm::Script}!Script@{Script}}
+\index{Script@{Script}!neo::vm::Script@{neo::vm::Script}}
+\doxysubsubsection{\texorpdfstring{Script()}{Script()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_af5bc4fbccb18eb3b2eabfdd534cc6fdd} 
+neo\+::vm\+::\+Script\+::\+Script (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span}{internal\+::\+Byte\+Span}} \&}]{script}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1vm_1_1_script}{Script} from a byte span. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & The script. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1vm_1_1_script_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1vm_1_1_script_a3935360f54e5b2652b1de036f9d53f66}\index{neo::vm::Script@{neo::vm::Script}!GetInstruction@{GetInstruction}}
+\index{GetInstruction@{GetInstruction}!neo::vm::Script@{neo::vm::Script}}
+\doxysubsubsection{\texorpdfstring{GetInstruction()}{GetInstruction()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_a3935360f54e5b2652b1de036f9d53f66} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}} $>$ neo\+::vm\+::\+Script\+::\+Get\+Instruction (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{position}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the instruction at the specified position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The instruction. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_script_a6a1ceef439be7d04d73882e3f9d1e781}\index{neo::vm::Script@{neo::vm::Script}!GetJumpDestination@{GetJumpDestination}}
+\index{GetJumpDestination@{GetJumpDestination}!neo::vm::Script@{neo::vm::Script}}
+\doxysubsubsection{\texorpdfstring{GetJumpDestination()}{GetJumpDestination()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_a6a1ceef439be7d04d73882e3f9d1e781} 
+int32\+\_\+t neo\+::vm\+::\+Script\+::\+Get\+Jump\+Destination (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{position}{, }\item[{int32\+\_\+t}]{offset}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the jump destination. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position. \\
+\hline
+{\em offset} & The offset. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The jump destination. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_script_aa5a98520c6d23a6dc7fb3d5d8c99e682}\index{neo::vm::Script@{neo::vm::Script}!GetLength@{GetLength}}
+\index{GetLength@{GetLength}!neo::vm::Script@{neo::vm::Script}}
+\doxysubsubsection{\texorpdfstring{GetLength()}{GetLength()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_aa5a98520c6d23a6dc7fb3d5d8c99e682} 
+size\+\_\+t neo\+::vm\+::\+Script\+::\+Get\+Length (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the length of the script. 
+
+\begin{DoxyReturn}{Returns}
+The length of the script. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_script_a76070cb81560532399666c93d56c1df9}\index{neo::vm::Script@{neo::vm::Script}!GetNextInstruction@{GetNextInstruction}}
+\index{GetNextInstruction@{GetNextInstruction}!neo::vm::Script@{neo::vm::Script}}
+\doxysubsubsection{\texorpdfstring{GetNextInstruction()}{GetNextInstruction()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_a76070cb81560532399666c93d56c1df9} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}} $>$ neo\+::vm\+::\+Script\+::\+Get\+Next\+Instruction (\begin{DoxyParamCaption}\item[{int32\+\_\+t \&}]{position}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the next instruction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The next instruction. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1vm_1_1_script_a1f63750c7ebb7c026f9aa6208f10fd33}\index{neo::vm::Script@{neo::vm::Script}!GetOpCodeName@{GetOpCodeName}}
+\index{GetOpCodeName@{GetOpCodeName}!neo::vm::Script@{neo::vm::Script}}
+\doxysubsubsection{\texorpdfstring{GetOpCodeName()}{GetOpCodeName()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_a1f63750c7ebb7c026f9aa6208f10fd33} 
+std\+::string neo\+::vm\+::\+Script\+::\+Get\+Op\+Code\+Name (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code}}}]{opcode}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the name of the specified opcode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em opcode} & The opcode. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The name. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_script_adb7253d9f75055a73a4049461f5a3fa3}\index{neo::vm::Script@{neo::vm::Script}!GetOperandSize@{GetOperandSize}}
+\index{GetOperandSize@{GetOperandSize}!neo::vm::Script@{neo::vm::Script}}
+\doxysubsubsection{\texorpdfstring{GetOperandSize()}{GetOperandSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_adb7253d9f75055a73a4049461f5a3fa3} 
+int32\+\_\+t neo\+::vm\+::\+Script\+::\+Get\+Operand\+Size (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code}}}]{opcode}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the operand size for the specified opcode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em opcode} & The opcode. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The operand size. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_script_a8902e19afd00f37b5f4d1c8dd178b617}\index{neo::vm::Script@{neo::vm::Script}!GetPrice@{GetPrice}}
+\index{GetPrice@{GetPrice}!neo::vm::Script@{neo::vm::Script}}
+\doxysubsubsection{\texorpdfstring{GetPrice()}{GetPrice()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_a8902e19afd00f37b5f4d1c8dd178b617} 
+int64\+\_\+t neo\+::vm\+::\+Script\+::\+Get\+Price (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code}}}]{opcode}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the price for the specified opcode. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em opcode} & The opcode. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The price. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_script_ab2940794ce4bcda2c68c3d414d5a9011}\index{neo::vm::Script@{neo::vm::Script}!GetScript@{GetScript}}
+\index{GetScript@{GetScript}!neo::vm::Script@{neo::vm::Script}}
+\doxysubsubsection{\texorpdfstring{GetScript()}{GetScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_ab2940794ce4bcda2c68c3d414d5a9011} 
+const \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_vector}{internal\+::\+Byte\+Vector}} \& neo\+::vm\+::\+Script\+::\+Get\+Script (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the script. 
+
+\begin{DoxyReturn}{Returns}
+The script. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_script_aa85fc8b8abee8b16c3b9f0e791e55d74}\index{neo::vm::Script@{neo::vm::Script}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::vm::Script@{neo::vm::Script}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_aa85fc8b8abee8b16c3b9f0e791e55d74} 
+bool neo\+::vm\+::\+Script\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1vm_1_1_script}{Script} is not equal to another \doxylink{classneo_1_1vm_1_1_script}{Script}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1vm_1_1_script}{Script}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Scripts are not equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1vm_1_1_script_a1dc84891bc3d70a35b0d802cb28132e8}\index{neo::vm::Script@{neo::vm::Script}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::vm::Script@{neo::vm::Script}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_a1dc84891bc3d70a35b0d802cb28132e8} 
+bool neo\+::vm\+::\+Script\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1vm_1_1_script}{Script} is equal to another \doxylink{classneo_1_1vm_1_1_script}{Script}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1vm_1_1_script}{Script}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Scripts are equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1vm_1_1_script_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1vm_1_1_script_afa2ce50d8fbbef9a22ec08b657500f26}\index{neo::vm::Script@{neo::vm::Script}!instructions\_@{instructions\_}}
+\index{instructions\_@{instructions\_}!neo::vm::Script@{neo::vm::Script}}
+\doxysubsubsection{\texorpdfstring{instructions\_}{instructions\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_afa2ce50d8fbbef9a22ec08b657500f26} 
+std\+::unordered\+\_\+map$<$int32\+\_\+t, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}}$>$ $>$ neo\+::vm\+::\+Script\+::instructions\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_script_a3cf771f5f8d7a37a6386096cd45d0886}\index{neo::vm::Script@{neo::vm::Script}!script\_@{script\_}}
+\index{script\_@{script\_}!neo::vm::Script@{neo::vm::Script}}
+\doxysubsubsection{\texorpdfstring{script\_}{script\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_a3cf771f5f8d7a37a6386096cd45d0886} 
+\mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_vector}{internal\+::\+Byte\+Vector}} neo\+::vm\+::\+Script\+::script\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/vm/\mbox{\hyperlink{script_8h}{script.\+h}}\item 
+src/vm/\mbox{\hyperlink{script_8cpp}{script.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,313 @@
+\doxysection{config\+\_\+manager.\+h}
+\hypertarget{config__manager_8h_source}{}\label{config__manager_8h_source}\index{include/neo/core/config\_manager.h@{include/neo/core/config\_manager.h}}
+\mbox{\hyperlink{config__manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdlib>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json_8hpp}{nlohmann/json.hpp}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <regex>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{safe__conversions_8h}{safe\_conversions.h}}"{}}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1core}{neo::core}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a21fc1f6f33272c586ef2d25f3b193623}{ConfigManager}}}
+\DoxyCodeLine{00028\ \{}
+\DoxyCodeLine{00029\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ad1d416eac0b0fb3a8e8520550a4ac973}{LoadFromFile}}(\textcolor{keyword}{const}\ std::string\&\ configPath)}
+\DoxyCodeLine{00036\ \ \ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ac7909f11b5742c0ebbf1456f10343dc4}{mutex\_}});}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ std::ifstream\ file(configPath);}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!file.is\_open())}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Cannot\ open\ configuration\ file:\ "{}}\ +\ configPath);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ file\ >>\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_aa93ea260d8be22cb209e9f7ebefaa6dc}{config\_}};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Process\ environment\ variable\ substitutions}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a8a86ed691eef04acac56f811fa83f3d4}{ProcessEnvironmentVariables}}(\mbox{\hyperlink{classneo_1_1core_1_1_config_manager_aa93ea260d8be22cb209e9f7ebefaa6dc}{config\_}});}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Validate\ required\ fields}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ad6a7c0964e1e6d9672be6de37c553e67}{ValidateConfiguration}}();}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{classbasic__json_a4ed57fa411e69ae5741bc2f333a967c9}{nlohmann::json::exception}}\&\ e)}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Invalid\ JSON\ in\ configuration\ file:\ "{}}\ +\ std::string(e.\mbox{\hyperlink{classdetail_1_1exception_ae75d7315f5f2d85958da6d961375caf0}{what}}()));}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00059\ \ \ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00067\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ad2db378234ee83a1ab72722344fbd6de}{GetString}}(\textcolor{keyword}{const}\ std::string\&\ path,\ \textcolor{keyword}{const}\ std::string\&\ defaultValue\ =\ \textcolor{stringliteral}{"{}"{}})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00068\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ac7909f11b5742c0ebbf1456f10343dc4}{mutex\_}});}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ environment\ variable\ first}}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ std::string\ envVar\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a838330a9508805966328d20965612c4f}{PathToEnvVar}}(path);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ envValue\ =\ std::getenv(envVar.c\_str());}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (envValue)}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::string(envValue);}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ JSON\ config}}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classbasic__json_afe66720a34c11920f359394a4430a16e}{nlohmann::json::json\_pointer}}\ ptr(\mbox{\hyperlink{classneo_1_1core_1_1_config_manager_acbb8d5d039c3738db0d6ccac7eaceb30}{PathToJsonPointer}}(path));}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_config_manager_aa93ea260d8be22cb209e9f7ebefaa6dc}{config\_}}.contains(ptr))}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_aa93ea260d8be22cb209e9f7ebefaa6dc}{config\_}}[ptr].get<std::string>();}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&)}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Path\ not\ found}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ defaultValue;}
+\DoxyCodeLine{00094\ \ \ \ \ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ae0ccb42a14d042a00b4580247de631e7}{GetInt}}(\textcolor{keyword}{const}\ std::string\&\ path,\ \textcolor{keywordtype}{int}\ defaultValue\ =\ 0)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00103\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ std::string\ strValue\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ad2db378234ee83a1ab72722344fbd6de}{GetString}}(path,\ std::to\_string(defaultValue));}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ maybeValue\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_safe_conversions_a1378932a0e76a74c6600bcc62cf3d0a4}{SafeConversions::TryToInt32}}(strValue);}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ maybeValue\ ?\ *maybeValue\ :\ defaultValue;}
+\DoxyCodeLine{00107\ \ \ \ \ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_acc54cf9e8a6f789c2330c9540bc282ba}{GetBool}}(\textcolor{keyword}{const}\ std::string\&\ path,\ \textcolor{keywordtype}{bool}\ defaultValue\ =\ \textcolor{keyword}{false})\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00116\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ std::string\ strValue\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ad2db378234ee83a1ab72722344fbd6de}{GetString}}(path,\ defaultValue\ ?\ \textcolor{stringliteral}{"{}true"{}}\ :\ \textcolor{stringliteral}{"{}false"{}});}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ std::transform(strValue.begin(),\ strValue.end(),\ strValue.begin(),\ ::tolower);}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ strValue\ ==\ \textcolor{stringliteral}{"{}true"{}}\ ||\ strValue\ ==\ \textcolor{stringliteral}{"{}1"{}}\ ||\ strValue\ ==\ \textcolor{stringliteral}{"{}yes"{}};}
+\DoxyCodeLine{00120\ \ \ \ \ \}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00128\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a99cb8d66c8796f06e6d8920921b6fa8a}{GetUInt32}}(\textcolor{keyword}{const}\ std::string\&\ path,\ uint32\_t\ defaultValue\ =\ 0)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00129\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ std::string\ strValue\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ad2db378234ee83a1ab72722344fbd6de}{GetString}}(path,\ std::to\_string(defaultValue));}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ maybeValue\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_safe_conversions_a5959a5a442dff8aea30ba58891da6c44}{SafeConversions::TryToUInt32}}(strValue);}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ maybeValue\ ?\ *maybeValue\ :\ defaultValue;}
+\DoxyCodeLine{00133\ \ \ \ \ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00141\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a817a423302beee8ad9544ecec80e37fb}{GetPort}}(\textcolor{keyword}{const}\ std::string\&\ path,\ uint16\_t\ defaultValue\ =\ 0)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00142\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ std::string\ strValue\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ad2db378234ee83a1ab72722344fbd6de}{GetString}}(path,\ std::to\_string(defaultValue));}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_safe_conversions_a8d7368b1d5a7c26e7b14679b5cc60ec0}{SafeConversions::SafeToPort}}(strValue);}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&)}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ defaultValue;}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00152\ \ \ \ \ \}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_abe2dd1f7e5078635e68ae58f81d6a16a}{Set}}(\textcolor{keyword}{const}\ std::string\&\ path,\ \textcolor{keyword}{const}\ T\&\ value)}
+\DoxyCodeLine{00161\ \ \ \ \ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ac7909f11b5742c0ebbf1456f10343dc4}{mutex\_}});}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classbasic__json_afe66720a34c11920f359394a4430a16e}{nlohmann::json::json\_pointer}}\ ptr(\mbox{\hyperlink{classneo_1_1core_1_1_config_manager_acbb8d5d039c3738db0d6ccac7eaceb30}{PathToJsonPointer}}(path));}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_aa93ea260d8be22cb209e9f7ebefaa6dc}{config\_}}[ptr]\ =\ value;}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{classbasic__json_a4ed57fa411e69ae5741bc2f333a967c9}{nlohmann::json::exception}}\&\ e)}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Failed\ to\ set\ config\ value:\ "{}}\ +\ std::string(e.\mbox{\hyperlink{classdetail_1_1exception_ae75d7315f5f2d85958da6d961375caf0}{what}}()));}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00173\ \ \ \ \ \}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00179\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a9f294c74dcc9c051e19cd3964cc103d4}{GetJson}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00180\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ac7909f11b5742c0ebbf1456f10343dc4}{mutex\_}});}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_aa93ea260d8be22cb209e9f7ebefaa6dc}{config\_}};}
+\DoxyCodeLine{00183\ \ \ \ \ \}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a21fc1f6f33272c586ef2d25f3b193623}{ConfigManager}}\&\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_afaceec2955d4dec4b8c419d305b4b7df}{GetInstance}}()}
+\DoxyCodeLine{00190\ \ \ \ \ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a21fc1f6f33272c586ef2d25f3b193623}{ConfigManager}}\ instance;}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00193\ \ \ \ \ \}}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keyword}{static}\ uint16\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_aeafca3625ef24d5c03065da5865e6fb5}{GetDefaultPort}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{namespaceneo_1_1network}{network}},\ \textcolor{keyword}{const}\ std::string\&\ service)}
+\DoxyCodeLine{00202\ \ \ \ \ \{}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceneo_1_1network}{network}}\ ==\ \textcolor{stringliteral}{"{}mainnet"{}})}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (service\ ==\ \textcolor{stringliteral}{"{}p2p"{}})\ \textcolor{keywordflow}{return}\ 10333;}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (service\ ==\ \textcolor{stringliteral}{"{}rpc"{}})\ \textcolor{keywordflow}{return}\ 10332;}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (service\ ==\ \textcolor{stringliteral}{"{}ws"{}})\ \textcolor{keywordflow}{return}\ 10334;}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceneo_1_1network}{network}}\ ==\ \textcolor{stringliteral}{"{}testnet"{}})}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (service\ ==\ \textcolor{stringliteral}{"{}p2p"{}})\ \textcolor{keywordflow}{return}\ 20333;}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (service\ ==\ \textcolor{stringliteral}{"{}rpc"{}})\ \textcolor{keywordflow}{return}\ 20332;}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (service\ ==\ \textcolor{stringliteral}{"{}ws"{}})\ \textcolor{keywordflow}{return}\ 20334;}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceneo_1_1network}{network}}\ ==\ \textcolor{stringliteral}{"{}privnet"{}})}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (service\ ==\ \textcolor{stringliteral}{"{}p2p"{}})\ \textcolor{keywordflow}{return}\ 30333;}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (service\ ==\ \textcolor{stringliteral}{"{}rpc"{}})\ \textcolor{keywordflow}{return}\ 30332;}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (service\ ==\ \textcolor{stringliteral}{"{}ws"{}})\ \textcolor{keywordflow}{return}\ 30334;}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ 0;}
+\DoxyCodeLine{00222\ \ \ \ \ \}}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00224\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00225\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a21fc1f6f33272c586ef2d25f3b193623}{ConfigManager}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a8a86ed691eef04acac56f811fa83f3d4}{ProcessEnvironmentVariables}}(nlohmann::json\&\ \mbox{\hyperlink{namespaceneo_1_1json}{json}})}
+\DoxyCodeLine{00232\ \ \ \ \ \{}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceneo_1_1json}{json}}.is\_string())}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ value\ =\ \mbox{\hyperlink{namespaceneo_1_1json}{json}}.get<std::string>();}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1json}{json}}\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ae3c2c13a6306da9f9705c5af4ecdeb12}{SubstituteEnvironmentVariables}}(value);}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceneo_1_1json}{json}}.is\_object())}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ [key,\ value]\ :\ \mbox{\hyperlink{namespaceneo_1_1json}{json}}.items())}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a8a86ed691eef04acac56f811fa83f3d4}{ProcessEnvironmentVariables}}(value);}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceneo_1_1json}{json}}.is\_array())}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ element\ :\ \mbox{\hyperlink{namespaceneo_1_1json}{json}})}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a8a86ed691eef04acac56f811fa83f3d4}{ProcessEnvironmentVariables}}(element);}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00252\ \ \ \ \ \}}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00259\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ae3c2c13a6306da9f9705c5af4ecdeb12}{SubstituteEnvironmentVariables}}(\textcolor{keyword}{const}\ std::string\&\ str)}
+\DoxyCodeLine{00260\ \ \ \ \ \{}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ std::regex\ envRegex(R\textcolor{stringliteral}{"{}(\(\backslash\)\$\(\backslash\)\{([A-\/Z\_][A-\/Z0-\/9\_]*)\(\backslash\)\})"{});}}
+\DoxyCodeLine{00262\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ std::string\ result\ =\ str;}}
+\DoxyCodeLine{00263\ \textcolor{stringliteral}{}}
+\DoxyCodeLine{00264\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ std::smatch\ match;}}
+\DoxyCodeLine{00265\ \textcolor{stringliteral}{\ \ \ \ \ \ \ \ }\textcolor{keywordflow}{while}\ (std::regex\_search(result,\ match,\ envRegex))}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ varName\ =\ match[1].str();}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ envValue\ =\ std::getenv(varName.c\_str());}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (envValue)}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.replace(match.position(),\ match.length(),\ envValue);}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Keep\ the\ variable\ reference\ if\ env\ var\ not\ found}}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00282\ \ \ \ \ \}}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00289\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a838330a9508805966328d20965612c4f}{PathToEnvVar}}(\textcolor{keyword}{const}\ std::string\&\ path)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00290\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ std::string\ envVar\ =\ \textcolor{stringliteral}{"{}NEO\_"{}};}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{char}\ c\ :\ path)}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (c\ ==\ \textcolor{charliteral}{'.'})}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ envVar\ +=\ \textcolor{charliteral}{'\_'};}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ envVar\ +=\ std::toupper(c);}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ envVar;}
+\DoxyCodeLine{00304\ \ \ \ \ \}}
+\DoxyCodeLine{00305\ }
+\DoxyCodeLine{00311\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_acbb8d5d039c3738db0d6ccac7eaceb30}{PathToJsonPointer}}(\textcolor{keyword}{const}\ std::string\&\ path)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00312\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ std::string\ pointer\ =\ \textcolor{stringliteral}{"{}/"{}};}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ path.length();\ ++i)}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (path[i]\ ==\ \textcolor{charliteral}{'.'})}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pointer\ +=\ \textcolor{charliteral}{'/'};}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ pointer\ +=\ path[i];}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ pointer;}
+\DoxyCodeLine{00326\ \ \ \ \ \}}
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00332\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ad6a7c0964e1e6d9672be6de37c553e67}{ValidateConfiguration}}()}
+\DoxyCodeLine{00333\ \ \ \ \ \{}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ required\ fields}}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ std::vector<std::string>\ requiredFields\ =\ \{\textcolor{stringliteral}{"{}ProtocolConfiguration.Magic"{}},}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}ApplicationConfiguration.Storage.Engine"{}},}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}ApplicationConfiguration.P2P.Port"{}}\};}
+\DoxyCodeLine{00338\ }
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ field\ :\ requiredFields)}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ad2db378234ee83a1ab72722344fbd6de}{GetString}}(field).empty())}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Required\ configuration\ field\ missing:\ "{}}\ +\ field);}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Validate\ port\ ranges}}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ uint16\_t\ p2pPort\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a817a423302beee8ad9544ecec80e37fb}{GetPort}}(\textcolor{stringliteral}{"{}ApplicationConfiguration.P2P.Port"{}});}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (p2pPort\ ==\ 0)}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Invalid\ P2P\ port\ configuration"{}});}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ uint16\_t\ rpcPort\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a817a423302beee8ad9544ecec80e37fb}{GetPort}}(\textcolor{stringliteral}{"{}ApplicationConfiguration.RPC.Port"{}});}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (rpcPort\ ==\ p2pPort)}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}RPC\ port\ cannot\ be\ the\ same\ as\ P2P\ port"{}});}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00359\ \ \ \ \ \}}
+\DoxyCodeLine{00360\ }
+\DoxyCodeLine{00361\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_aa93ea260d8be22cb209e9f7ebefaa6dc}{config\_}};}
+\DoxyCodeLine{00362\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ac7909f11b5742c0ebbf1456f10343dc4}{mutex\_}};}
+\DoxyCodeLine{00363\ \};}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00368\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_config}{Config}}}
+\DoxyCodeLine{00369\ \{}
+\DoxyCodeLine{00370\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00371\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1core_1_1_config_aab1e162018667b7a5a56244bbb921a6c}{GetString}}(\textcolor{keyword}{const}\ std::string\&\ path,\ \textcolor{keyword}{const}\ std::string\&\ defaultValue\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00372\ \ \ \ \ \{}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_afaceec2955d4dec4b8c419d305b4b7df}{ConfigManager::GetInstance}}().\mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ad2db378234ee83a1ab72722344fbd6de}{GetString}}(path,\ defaultValue);}
+\DoxyCodeLine{00374\ \ \ \ \ \}}
+\DoxyCodeLine{00375\ }
+\DoxyCodeLine{00376\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_a364432190b0dd22abfd0db3281052821}{GetInt}}(\textcolor{keyword}{const}\ std::string\&\ path,\ \textcolor{keywordtype}{int}\ defaultValue\ =\ 0)}
+\DoxyCodeLine{00377\ \ \ \ \ \{}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_afaceec2955d4dec4b8c419d305b4b7df}{ConfigManager::GetInstance}}().\mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ae0ccb42a14d042a00b4580247de631e7}{GetInt}}(path,\ defaultValue);}
+\DoxyCodeLine{00379\ \ \ \ \ \}}
+\DoxyCodeLine{00380\ }
+\DoxyCodeLine{00381\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_a8de09941ca1415a6eeb40d0b0bd5b804}{GetBool}}(\textcolor{keyword}{const}\ std::string\&\ path,\ \textcolor{keywordtype}{bool}\ defaultValue\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00382\ \ \ \ \ \{}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_afaceec2955d4dec4b8c419d305b4b7df}{ConfigManager::GetInstance}}().\mbox{\hyperlink{classneo_1_1core_1_1_config_manager_acc54cf9e8a6f789c2330c9540bc282ba}{GetBool}}(path,\ defaultValue);}
+\DoxyCodeLine{00384\ \ \ \ \ \}}
+\DoxyCodeLine{00385\ }
+\DoxyCodeLine{00386\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_config_a02bdebb343f4fef394ccf3ba9dbc8e88}{GetUInt32}}(\textcolor{keyword}{const}\ std::string\&\ path,\ uint32\_t\ defaultValue\ =\ 0)}
+\DoxyCodeLine{00387\ \ \ \ \ \{}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_afaceec2955d4dec4b8c419d305b4b7df}{ConfigManager::GetInstance}}().\mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a99cb8d66c8796f06e6d8920921b6fa8a}{GetUInt32}}(path,\ defaultValue);}
+\DoxyCodeLine{00389\ \ \ \ \ \}}
+\DoxyCodeLine{00390\ }
+\DoxyCodeLine{00391\ \ \ \ \ \textcolor{keyword}{static}\ uint16\_t\ \mbox{\hyperlink{classneo_1_1core_1_1_config_a1e9ba1e67a1971d6977b63adf12a96b8}{GetPort}}(\textcolor{keyword}{const}\ std::string\&\ path,\ uint16\_t\ defaultValue\ =\ 0)}
+\DoxyCodeLine{00392\ \ \ \ \ \{}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_afaceec2955d4dec4b8c419d305b4b7df}{ConfigManager::GetInstance}}().\mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a817a423302beee8ad9544ecec80e37fb}{GetPort}}(path,\ defaultValue);}
+\DoxyCodeLine{00394\ \ \ \ \ \}}
+\DoxyCodeLine{00395\ \};}
+\DoxyCodeLine{00396\ }
+\DoxyCodeLine{00397\ \}\ \ \textcolor{comment}{//\ namespace\ neo::core}}
+
+\end{DoxyCode}

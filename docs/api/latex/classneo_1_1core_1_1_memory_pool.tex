@@ -1,0 +1,204 @@
+\doxysection{neo\+::core\+::Memory\+Pool\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classneo_1_1core_1_1_memory_pool}{}\label{classneo_1_1core_1_1_memory_pool}\index{neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}}
+
+
+Thread-\/safe object pool for efficient memory allocation and reuse.  
+
+
+
+
+{\ttfamily \#include $<$memory\+\_\+pool.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a4cc2a2f8035f807e44fc29f96d921dc6}{Memory\+Pool}} (size\+\_\+t initial\+\_\+size=1024, size\+\_\+t max\+\_\+size=10240)
+\begin{DoxyCompactList}\small\item\em Constructs a memory pool with initial capacity. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Args$>$ }\\std\+::unique\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_afb6e41929c1d3fdc2e4744fd7710c522}{acquire}} (Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Acquires an object from the pool or creates a new one. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_aaca6c0d4c03bf8c80c1ecba8781bb067}{release}} (std\+::unique\+\_\+ptr$<$ T $>$ obj)
+\begin{DoxyCompactList}\small\item\em Returns an object to the pool for reuse. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_acd1dd53e898547887cfae9769653b28a}{size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current number of objects in the pool. \end{DoxyCompactList}\item 
+std\+::tuple$<$ size\+\_\+t, size\+\_\+t, size\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a0731636d093ec414348ee5f35066f820}{get\+\_\+stats}} () const
+\begin{DoxyCompactList}\small\item\em Gets performance statistics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_aacc5c566a908d2e235979c21c51a87ba}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears the pool, releasing all cached objects. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a0fbf5ef2c1f1fb1119f78394bf5a4508}{mutex\+\_\+}}
+\item 
+std\+::vector$<$ std\+::unique\+\_\+ptr$<$ T $>$ $>$ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a320e553cd36ba44cf89eea3c4aab5d12}{pool\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_aea05e1ac47390d18b13408f30c491492}{max\+\_\+size\+\_\+}}
+\item 
+std\+::atomic$<$ size\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a48d146e4d04a580d6fe8af9230b7371e}{allocated\+\_\+count\+\_\+}}
+\item 
+std\+::atomic$<$ size\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool_a3cd2360632fcf853cd8fdbc42c8e118e}{reused\+\_\+count\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class neo\+::core\+::\+Memory\+Pool$<$ T $>$}
+Thread-\/safe object pool for efficient memory allocation and reuse. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of objects to pool \\
+\hline
+\end{DoxyTemplParams}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1core_1_1_memory_pool_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1core_1_1_memory_pool_a4cc2a2f8035f807e44fc29f96d921dc6}\index{neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}!MemoryPool@{MemoryPool}}
+\index{MemoryPool@{MemoryPool}!neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{MemoryPool()}{MemoryPool()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_memory_pool_a4cc2a2f8035f807e44fc29f96d921dc6} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{neo\+::core\+::\+Memory\+Pool}}$<$ T $>$\+::\+Memory\+Pool (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{initial\+\_\+size}{ = {\ttfamily 1024}, }\item[{size\+\_\+t}]{max\+\_\+size}{ = {\ttfamily 10240}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a memory pool with initial capacity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em initial\+\_\+size} & Initial number of objects to pre-\/allocate \\
+\hline
+{\em max\+\_\+size} & Maximum number of objects to keep in pool \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1core_1_1_memory_pool_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1core_1_1_memory_pool_afb6e41929c1d3fdc2e4744fd7710c522}\index{neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}!acquire@{acquire}}
+\index{acquire@{acquire}!neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{acquire()}{acquire()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_memory_pool_afb6e41929c1d3fdc2e4744fd7710c522} 
+template$<$typename T$>$ \\
+template$<$typename... Args$>$ \\
+std\+::unique\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{neo\+::core\+::\+Memory\+Pool}}$<$ T $>$\+::acquire (\begin{DoxyParamCaption}\item[{Args \&\&...}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Acquires an object from the pool or creates a new one. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Args} & Arguments for constructing the object \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Arguments to forward to the object constructor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Unique pointer to the object 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_memory_pool_aacc5c566a908d2e235979c21c51a87ba}\index{neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}!clear@{clear}}
+\index{clear@{clear}!neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_memory_pool_aacc5c566a908d2e235979c21c51a87ba} 
+template$<$typename T$>$ \\
+void \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{neo\+::core\+::\+Memory\+Pool}}$<$ T $>$\+::clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears the pool, releasing all cached objects. 
+
+\Hypertarget{classneo_1_1core_1_1_memory_pool_a0731636d093ec414348ee5f35066f820}\index{neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}!get\_stats@{get\_stats}}
+\index{get\_stats@{get\_stats}!neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get\_stats()}{get\_stats()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_memory_pool_a0731636d093ec414348ee5f35066f820} 
+template$<$typename T$>$ \\
+std\+::tuple$<$ size\+\_\+t, size\+\_\+t, size\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{neo\+::core\+::\+Memory\+Pool}}$<$ T $>$\+::get\+\_\+stats (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets performance statistics. 
+
+\begin{DoxyReturn}{Returns}
+Tuple of (allocated\+\_\+count, reused\+\_\+count, current\+\_\+pool\+\_\+size) 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_memory_pool_aaca6c0d4c03bf8c80c1ecba8781bb067}\index{neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}!release@{release}}
+\index{release@{release}!neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{release()}{release()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_memory_pool_aaca6c0d4c03bf8c80c1ecba8781bb067} 
+template$<$typename T$>$ \\
+void \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{neo\+::core\+::\+Memory\+Pool}}$<$ T $>$\+::release (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ T $>$}]{obj}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Returns an object to the pool for reuse. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em obj} & The object to return \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1core_1_1_memory_pool_acd1dd53e898547887cfae9769653b28a}\index{neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}!size@{size}}
+\index{size@{size}!neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_memory_pool_acd1dd53e898547887cfae9769653b28a} 
+template$<$typename T$>$ \\
+size\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{neo\+::core\+::\+Memory\+Pool}}$<$ T $>$\+::size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the current number of objects in the pool. 
+
+\begin{DoxyReturn}{Returns}
+Number of pooled objects 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1core_1_1_memory_pool_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1core_1_1_memory_pool_a48d146e4d04a580d6fe8af9230b7371e}\index{neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}!allocated\_count\_@{allocated\_count\_}}
+\index{allocated\_count\_@{allocated\_count\_}!neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{allocated\_count\_}{allocated\_count\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_memory_pool_a48d146e4d04a580d6fe8af9230b7371e} 
+template$<$typename T$>$ \\
+std\+::atomic$<$size\+\_\+t$>$ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{neo\+::core\+::\+Memory\+Pool}}$<$ T $>$\+::allocated\+\_\+count\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_memory_pool_aea05e1ac47390d18b13408f30c491492}\index{neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}!max\_size\_@{max\_size\_}}
+\index{max\_size\_@{max\_size\_}!neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{max\_size\_}{max\_size\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_memory_pool_aea05e1ac47390d18b13408f30c491492} 
+template$<$typename T$>$ \\
+size\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{neo\+::core\+::\+Memory\+Pool}}$<$ T $>$\+::max\+\_\+size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_memory_pool_a0fbf5ef2c1f1fb1119f78394bf5a4508}\index{neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_memory_pool_a0fbf5ef2c1f1fb1119f78394bf5a4508} 
+template$<$typename T$>$ \\
+std\+::mutex \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{neo\+::core\+::\+Memory\+Pool}}$<$ T $>$\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_memory_pool_a320e553cd36ba44cf89eea3c4aab5d12}\index{neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}!pool\_@{pool\_}}
+\index{pool\_@{pool\_}!neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{pool\_}{pool\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_memory_pool_a320e553cd36ba44cf89eea3c4aab5d12} 
+template$<$typename T$>$ \\
+std\+::vector$<$std\+::unique\+\_\+ptr$<$T$>$ $>$ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{neo\+::core\+::\+Memory\+Pool}}$<$ T $>$\+::pool\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_memory_pool_a3cd2360632fcf853cd8fdbc42c8e118e}\index{neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}!reused\_count\_@{reused\_count\_}}
+\index{reused\_count\_@{reused\_count\_}!neo::core::MemoryPool$<$ T $>$@{neo::core::MemoryPool$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{reused\_count\_}{reused\_count\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_memory_pool_a3cd2360632fcf853cd8fdbc42c8e118e} 
+template$<$typename T$>$ \\
+std\+::atomic$<$size\+\_\+t$>$ \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{neo\+::core\+::\+Memory\+Pool}}$<$ T $>$\+::reused\+\_\+count\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{core_2memory__pool_8h}{memory\+\_\+pool.\+h}}\end{DoxyCompactItemize}

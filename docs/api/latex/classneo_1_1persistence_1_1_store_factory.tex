@@ -1,0 +1,202 @@
+\doxysection{neo\+::persistence\+::Store\+Factory Class Reference}
+\hypertarget{classneo_1_1persistence_1_1_store_factory}{}\label{classneo_1_1persistence_1_1_store_factory}\index{neo::persistence::StoreFactory@{neo::persistence::StoreFactory}}
+
+
+Factory class for creating store providers and stores.  
+
+
+
+
+{\ttfamily \#include $<$store\+\_\+factory.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider}{IStore\+Provider}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_abcc3961e9f6623199f7a15e3a2466816}{get\+\_\+store\+\_\+provider}} (const std\+::string \&provider\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Gets a store provider by name. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider}{IStore\+Provider}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_a8f2aadb98e6bbfd5f204c7dedb3903f8}{get\+\_\+store\+\_\+provider}} (const std\+::string \&provider\+\_\+name, const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&config)
+\begin{DoxyCompactList}\small\item\em Gets a store provider by name with configuration. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider}{IStore\+Provider}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_ab85d90fe8ce07608e93ddbb25bc0a59e}{get\+\_\+default\+\_\+store\+\_\+provider}} ()
+\begin{DoxyCompactList}\small\item\em Gets the default store provider. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_a0693bf11576af6482a01259334d1cf5f}{register\+\_\+store\+\_\+provider}} (const std\+::string \&name, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider}{IStore\+Provider}} $>$ provider)
+\begin{DoxyCompactList}\small\item\em Registers a custom store provider. \end{DoxyCompactList}\item 
+static std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_a252a811820b64c2ebad8112669a8a132}{get\+\_\+available\+\_\+providers}} ()
+\begin{DoxyCompactList}\small\item\em Gets a list of available store provider names. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store}{IStore}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_ac1027be13b79203aaa2c8cd0c488ee8f}{create\+\_\+store}} (const std\+::string \&provider\+\_\+name, const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Creates a store directly without going through a provider. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_a6353829ae2b0bffd848718c009cddf90}{initialize}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the factory with default providers. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_a45cb363377933cdae64819f7fae51703}{ensure\+\_\+initialized}} ()
+\begin{DoxyCompactList}\small\item\em Ensures the factory is initialized. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unordered\+\_\+map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider}{IStore\+Provider}} $>$ $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_ab538e54c2df042a97f402d4681a4d91b}{providers\+\_\+}}
+\item 
+static std\+::mutex \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_a86ab3273efab36946c086c0d20fa8b64}{providers\+\_\+mutex\+\_\+}}
+\item 
+static bool \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_a98903a33efceb189f0b6f43bf6600133}{initialized\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Factory class for creating store providers and stores. 
+
+The \doxylink{classneo_1_1persistence_1_1_store_factory}{Store\+Factory} provides a centralized way to create different types of storage providers (memory, Rocks\+DB, etc.) and manages their lifecycle. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1persistence_1_1_store_factory_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_store_factory_ac1027be13b79203aaa2c8cd0c488ee8f}\index{neo::persistence::StoreFactory@{neo::persistence::StoreFactory}!create\_store@{create\_store}}
+\index{create\_store@{create\_store}!neo::persistence::StoreFactory@{neo::persistence::StoreFactory}}
+\doxysubsubsection{\texorpdfstring{create\_store()}{create\_store()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_factory_ac1027be13b79203aaa2c8cd0c488ee8f} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store}{IStore}} $>$ neo\+::persistence\+::\+Store\+Factory\+::create\+\_\+store (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{provider\+\_\+name}{, }\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a store directly without going through a provider. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em provider\+\_\+name} & The type of store to create \\
+\hline
+{\em path} & The path for the store \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Unique pointer to the created store 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1persistence_1_1_store_factory_a45cb363377933cdae64819f7fae51703}\index{neo::persistence::StoreFactory@{neo::persistence::StoreFactory}!ensure\_initialized@{ensure\_initialized}}
+\index{ensure\_initialized@{ensure\_initialized}!neo::persistence::StoreFactory@{neo::persistence::StoreFactory}}
+\doxysubsubsection{\texorpdfstring{ensure\_initialized()}{ensure\_initialized()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_factory_a45cb363377933cdae64819f7fae51703} 
+void neo\+::persistence\+::\+Store\+Factory\+::ensure\+\_\+initialized (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Ensures the factory is initialized. 
+
+\Hypertarget{classneo_1_1persistence_1_1_store_factory_a252a811820b64c2ebad8112669a8a132}\index{neo::persistence::StoreFactory@{neo::persistence::StoreFactory}!get\_available\_providers@{get\_available\_providers}}
+\index{get\_available\_providers@{get\_available\_providers}!neo::persistence::StoreFactory@{neo::persistence::StoreFactory}}
+\doxysubsubsection{\texorpdfstring{get\_available\_providers()}{get\_available\_providers()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_factory_a252a811820b64c2ebad8112669a8a132} 
+std\+::vector$<$ std\+::string $>$ neo\+::persistence\+::\+Store\+Factory\+::get\+\_\+available\+\_\+providers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets a list of available store provider names. 
+
+\begin{DoxyReturn}{Returns}
+Vector of provider names 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1persistence_1_1_store_factory_ab85d90fe8ce07608e93ddbb25bc0a59e}\index{neo::persistence::StoreFactory@{neo::persistence::StoreFactory}!get\_default\_store\_provider@{get\_default\_store\_provider}}
+\index{get\_default\_store\_provider@{get\_default\_store\_provider}!neo::persistence::StoreFactory@{neo::persistence::StoreFactory}}
+\doxysubsubsection{\texorpdfstring{get\_default\_store\_provider()}{get\_default\_store\_provider()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_factory_ab85d90fe8ce07608e93ddbb25bc0a59e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider}{IStore\+Provider}} $>$ neo\+::persistence\+::\+Store\+Factory\+::get\+\_\+default\+\_\+store\+\_\+provider (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the default store provider. 
+
+\begin{DoxyReturn}{Returns}
+Shared pointer to the default store provider (memory) 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1persistence_1_1_store_factory_abcc3961e9f6623199f7a15e3a2466816}\index{neo::persistence::StoreFactory@{neo::persistence::StoreFactory}!get\_store\_provider@{get\_store\_provider}}
+\index{get\_store\_provider@{get\_store\_provider}!neo::persistence::StoreFactory@{neo::persistence::StoreFactory}}
+\doxysubsubsection{\texorpdfstring{get\_store\_provider()}{get\_store\_provider()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_factory_abcc3961e9f6623199f7a15e3a2466816} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider}{IStore\+Provider}} $>$ neo\+::persistence\+::\+Store\+Factory\+::get\+\_\+store\+\_\+provider (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{provider\+\_\+name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets a store provider by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em provider\+\_\+name} & The name of the provider ("{}memory"{}, "{}rocksdb"{}, etc.) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Shared pointer to the store provider, or nullptr if not found 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1persistence_1_1_store_factory_a8f2aadb98e6bbfd5f204c7dedb3903f8}\index{neo::persistence::StoreFactory@{neo::persistence::StoreFactory}!get\_store\_provider@{get\_store\_provider}}
+\index{get\_store\_provider@{get\_store\_provider}!neo::persistence::StoreFactory@{neo::persistence::StoreFactory}}
+\doxysubsubsection{\texorpdfstring{get\_store\_provider()}{get\_store\_provider()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_factory_a8f2aadb98e6bbfd5f204c7dedb3903f8} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider}{IStore\+Provider}} $>$ neo\+::persistence\+::\+Store\+Factory\+::get\+\_\+store\+\_\+provider (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{provider\+\_\+name}{, }\item[{const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets a store provider by name with configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em provider\+\_\+name} & The name of the provider ("{}memory"{}, "{}rocksdb"{}, etc.) \\
+\hline
+{\em config} & Configuration parameters for the provider \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Shared pointer to the store provider, or nullptr if not found 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1persistence_1_1_store_factory_a6353829ae2b0bffd848718c009cddf90}\index{neo::persistence::StoreFactory@{neo::persistence::StoreFactory}!initialize@{initialize}}
+\index{initialize@{initialize}!neo::persistence::StoreFactory@{neo::persistence::StoreFactory}}
+\doxysubsubsection{\texorpdfstring{initialize()}{initialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_factory_a6353829ae2b0bffd848718c009cddf90} 
+void neo\+::persistence\+::\+Store\+Factory\+::initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Initializes the factory with default providers. 
+
+\Hypertarget{classneo_1_1persistence_1_1_store_factory_a0693bf11576af6482a01259334d1cf5f}\index{neo::persistence::StoreFactory@{neo::persistence::StoreFactory}!register\_store\_provider@{register\_store\_provider}}
+\index{register\_store\_provider@{register\_store\_provider}!neo::persistence::StoreFactory@{neo::persistence::StoreFactory}}
+\doxysubsubsection{\texorpdfstring{register\_store\_provider()}{register\_store\_provider()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_factory_a0693bf11576af6482a01259334d1cf5f} 
+void neo\+::persistence\+::\+Store\+Factory\+::register\+\_\+store\+\_\+provider (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider}{IStore\+Provider}} $>$}]{provider}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Registers a custom store provider. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the provider \\
+\hline
+{\em provider} & The store provider instance \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1persistence_1_1_store_factory_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_store_factory_a98903a33efceb189f0b6f43bf6600133}\index{neo::persistence::StoreFactory@{neo::persistence::StoreFactory}!initialized\_@{initialized\_}}
+\index{initialized\_@{initialized\_}!neo::persistence::StoreFactory@{neo::persistence::StoreFactory}}
+\doxysubsubsection{\texorpdfstring{initialized\_}{initialized\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_factory_a98903a33efceb189f0b6f43bf6600133} 
+bool neo\+::persistence\+::\+Store\+Factory\+::initialized\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_store_factory_ab538e54c2df042a97f402d4681a4d91b}\index{neo::persistence::StoreFactory@{neo::persistence::StoreFactory}!providers\_@{providers\_}}
+\index{providers\_@{providers\_}!neo::persistence::StoreFactory@{neo::persistence::StoreFactory}}
+\doxysubsubsection{\texorpdfstring{providers\_}{providers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_factory_ab538e54c2df042a97f402d4681a4d91b} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider}{IStore\+Provider}}$>$ $>$ neo\+::persistence\+::\+Store\+Factory\+::providers\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_store_factory_a86ab3273efab36946c086c0d20fa8b64}\index{neo::persistence::StoreFactory@{neo::persistence::StoreFactory}!providers\_mutex\_@{providers\_mutex\_}}
+\index{providers\_mutex\_@{providers\_mutex\_}!neo::persistence::StoreFactory@{neo::persistence::StoreFactory}}
+\doxysubsubsection{\texorpdfstring{providers\_mutex\_}{providers\_mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_factory_a86ab3273efab36946c086c0d20fa8b64} 
+std\+::mutex neo\+::persistence\+::\+Store\+Factory\+::providers\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/persistence/\mbox{\hyperlink{store__factory_8h}{store\+\_\+factory.\+h}}\item 
+src/persistence/\mbox{\hyperlink{store__factory__complete_8cpp}{store\+\_\+factory\+\_\+complete.\+cpp}}\end{DoxyCompactItemize}

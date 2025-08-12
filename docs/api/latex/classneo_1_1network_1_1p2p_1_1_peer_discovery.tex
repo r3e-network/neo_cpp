@@ -1,0 +1,183 @@
+\doxysection{neo\+::network\+::p2p\+::Peer\+Discovery Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery}{}\label{classneo_1_1network_1_1p2p_1_1_peer_discovery}\index{neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}}
+
+
+\doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} discovery service.  
+
+
+
+
+{\ttfamily \#include $<$peer\+\_\+manager.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_discovery_a0fcf6c02029b6f88c78cfcfe4dd6b7b2}{Peer\+Discovery}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager}{Peer\+Manager}} $>$ peer\+\_\+manager)
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_discovery_a0ebe009d8d656a160eb3d504611734a0}{\texorpdfstring{$\sim$}{\string~}\+Peer\+Discovery}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_discovery_aff968bca505468c8d05c73de98902018}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Start peer discovery. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_discovery_aea075409a9b322142a92ec48bae2dd9b}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stop peer discovery. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_discovery_a2b5812f70547bbd3295e05ce64db7907}{Request\+Addresses}} ()
+\begin{DoxyCompactList}\small\item\em Request addresses from peers. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_discovery_a32c9204ba6fbfed01a885a503ef32052}{Process\+Received\+Addresses}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ \&addresses)
+\begin{DoxyCompactList}\small\item\em Process received addresses. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_discovery_a843433645e76e02f974076df6e9f86f8}{Discovery\+Loop}} ()
+\begin{DoxyCompactList}\small\item\em Discovery thread main loop. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_discovery_a42328912b194fac488e5a11fbb851f98}{Query\+DNSSeeds}} ()
+\begin{DoxyCompactList}\small\item\em Query DNS seeds. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_discovery_aa6ba001fdfa12122621344d6dcd1476c}{Filter\+Addresses}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ \&addresses)
+\begin{DoxyCompactList}\small\item\em Filter and validate addresses. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager}{Peer\+Manager}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_discovery_a479e51d5d124de4337cabad20d99ed02}{peer\+\_\+manager\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1core_1_1_logger}{core\+::\+Logger}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_discovery_a28defb91afaf173dc14a7caec31817ca}{logger\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_discovery_a76088618eab8dab06747deff7332daeb}{discovery\+\_\+thread\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_discovery_ae5d52c2ecefc1508ecb45e139f18ddbc}{running\+\_\+}} \{false\}
+\item 
+std\+::chrono\+::seconds \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_discovery_a9f5f48e10945ff17f773a5c9ab97e3b0}{discovery\+\_\+interval\+\_\+}} \{300\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} discovery service. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_a0fcf6c02029b6f88c78cfcfe4dd6b7b2}\index{neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}!PeerDiscovery@{PeerDiscovery}}
+\index{PeerDiscovery@{PeerDiscovery}!neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}}
+\doxysubsubsection{\texorpdfstring{PeerDiscovery()}{PeerDiscovery()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_discovery_a0fcf6c02029b6f88c78cfcfe4dd6b7b2} 
+neo\+::network\+::p2p\+::\+Peer\+Discovery\+::\+Peer\+Discovery (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager}{Peer\+Manager}} $>$}]{peer\+\_\+manager}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_a0ebe009d8d656a160eb3d504611734a0}\index{neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}!````~PeerDiscovery@{\texorpdfstring{$\sim$}{\string~}PeerDiscovery}}
+\index{````~PeerDiscovery@{\texorpdfstring{$\sim$}{\string~}PeerDiscovery}!neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}PeerDiscovery()}{\string~PeerDiscovery()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_discovery_a0ebe009d8d656a160eb3d504611734a0} 
+neo\+::network\+::p2p\+::\+Peer\+Discovery\+::\texorpdfstring{$\sim$}{\string~}\+Peer\+Discovery (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_a843433645e76e02f974076df6e9f86f8}\index{neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}!DiscoveryLoop@{DiscoveryLoop}}
+\index{DiscoveryLoop@{DiscoveryLoop}!neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}}
+\doxysubsubsection{\texorpdfstring{DiscoveryLoop()}{DiscoveryLoop()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_discovery_a843433645e76e02f974076df6e9f86f8} 
+void neo\+::network\+::p2p\+::\+Peer\+Discovery\+::\+Discovery\+Loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Discovery thread main loop. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_aa6ba001fdfa12122621344d6dcd1476c}\index{neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}!FilterAddresses@{FilterAddresses}}
+\index{FilterAddresses@{FilterAddresses}!neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}}
+\doxysubsubsection{\texorpdfstring{FilterAddresses()}{FilterAddresses()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_discovery_aa6ba001fdfa12122621344d6dcd1476c} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ neo\+::network\+::p2p\+::\+Peer\+Discovery\+::\+Filter\+Addresses (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ \&}]{addresses}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Filter and validate addresses. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_a32c9204ba6fbfed01a885a503ef32052}\index{neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}!ProcessReceivedAddresses@{ProcessReceivedAddresses}}
+\index{ProcessReceivedAddresses@{ProcessReceivedAddresses}!neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}}
+\doxysubsubsection{\texorpdfstring{ProcessReceivedAddresses()}{ProcessReceivedAddresses()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_discovery_a32c9204ba6fbfed01a885a503ef32052} 
+void neo\+::network\+::p2p\+::\+Peer\+Discovery\+::\+Process\+Received\+Addresses (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ \&}]{addresses}{}\end{DoxyParamCaption})}
+
+
+
+Process received addresses. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_a42328912b194fac488e5a11fbb851f98}\index{neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}!QueryDNSSeeds@{QueryDNSSeeds}}
+\index{QueryDNSSeeds@{QueryDNSSeeds}!neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}}
+\doxysubsubsection{\texorpdfstring{QueryDNSSeeds()}{QueryDNSSeeds()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_discovery_a42328912b194fac488e5a11fbb851f98} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ neo\+::network\+::p2p\+::\+Peer\+Discovery\+::\+Query\+DNSSeeds (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Query DNS seeds. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_a2b5812f70547bbd3295e05ce64db7907}\index{neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}!RequestAddresses@{RequestAddresses}}
+\index{RequestAddresses@{RequestAddresses}!neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}}
+\doxysubsubsection{\texorpdfstring{RequestAddresses()}{RequestAddresses()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_discovery_a2b5812f70547bbd3295e05ce64db7907} 
+void neo\+::network\+::p2p\+::\+Peer\+Discovery\+::\+Request\+Addresses (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Request addresses from peers. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_aff968bca505468c8d05c73de98902018}\index{neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}!Start@{Start}}
+\index{Start@{Start}!neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_discovery_aff968bca505468c8d05c73de98902018} 
+void neo\+::network\+::p2p\+::\+Peer\+Discovery\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Start peer discovery. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_aea075409a9b322142a92ec48bae2dd9b}\index{neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_discovery_aea075409a9b322142a92ec48bae2dd9b} 
+void neo\+::network\+::p2p\+::\+Peer\+Discovery\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stop peer discovery. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_a9f5f48e10945ff17f773a5c9ab97e3b0}\index{neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}!discovery\_interval\_@{discovery\_interval\_}}
+\index{discovery\_interval\_@{discovery\_interval\_}!neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}}
+\doxysubsubsection{\texorpdfstring{discovery\_interval\_}{discovery\_interval\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_discovery_a9f5f48e10945ff17f773a5c9ab97e3b0} 
+std\+::chrono\+::seconds neo\+::network\+::p2p\+::\+Peer\+Discovery\+::discovery\+\_\+interval\+\_\+ \{300\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_a76088618eab8dab06747deff7332daeb}\index{neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}!discovery\_thread\_@{discovery\_thread\_}}
+\index{discovery\_thread\_@{discovery\_thread\_}!neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}}
+\doxysubsubsection{\texorpdfstring{discovery\_thread\_}{discovery\_thread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_discovery_a76088618eab8dab06747deff7332daeb} 
+std\+::thread neo\+::network\+::p2p\+::\+Peer\+Discovery\+::discovery\+\_\+thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_a28defb91afaf173dc14a7caec31817ca}\index{neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}!logger\_@{logger\_}}
+\index{logger\_@{logger\_}!neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}}
+\doxysubsubsection{\texorpdfstring{logger\_}{logger\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_discovery_a28defb91afaf173dc14a7caec31817ca} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1core_1_1_logger}{core\+::\+Logger}}$>$ neo\+::network\+::p2p\+::\+Peer\+Discovery\+::logger\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_a479e51d5d124de4337cabad20d99ed02}\index{neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}!peer\_manager\_@{peer\_manager\_}}
+\index{peer\_manager\_@{peer\_manager\_}!neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}}
+\doxysubsubsection{\texorpdfstring{peer\_manager\_}{peer\_manager\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_discovery_a479e51d5d124de4337cabad20d99ed02} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager}{Peer\+Manager}}$>$ neo\+::network\+::p2p\+::\+Peer\+Discovery\+::peer\+\_\+manager\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_discovery_ae5d52c2ecefc1508ecb45e139f18ddbc}\index{neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::network::p2p::PeerDiscovery@{neo::network::p2p::PeerDiscovery}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_discovery_ae5d52c2ecefc1508ecb45e139f18ddbc} 
+std\+::atomic$<$bool$>$ neo\+::network\+::p2p\+::\+Peer\+Discovery\+::running\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/\mbox{\hyperlink{peer__manager_8h}{peer\+\_\+manager.\+h}}\end{DoxyCompactItemize}

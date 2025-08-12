@@ -1,0 +1,100 @@
+\doxysection{src/node/main.cpp File Reference}
+\hypertarget{main_8cpp}{}\label{main_8cpp}\index{src/node/main.cpp@{src/node/main.cpp}}
+
+
+Main entry point for Neo C++ Node.  
+
+
+{\ttfamily \#include $<$neo/node/neo\+\_\+node.\+h$>$}\newline
+{\ttfamily \#include $<$atomic$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$csignal$>$}\newline
+{\ttfamily \#include $<$exception$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+Include dependency graph for main.\+cpp\+:
+% FIG 0
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{main_8cpp_a372450e049ef643a503edf75c1ec29d7}{g\+\_\+shutdown\+Requested}} (false)
+\item 
+void \mbox{\hyperlink{main_8cpp_a01af5df9d4270d594f2a4391b5a775ec}{Signal\+Handler}} (int signal)
+\item 
+int \mbox{\hyperlink{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}{main}} (int argc, char \texorpdfstring{$\ast$}{*}argv\mbox{[}$\,$\mbox{]})
+\begin{DoxyCompactList}\small\item\em Main entry point for Neo C++ Node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node}{neo\+::node\+::\+Neo\+Node}} $>$ \mbox{\hyperlink{main_8cpp_aa366422cf74d66e784237078e585f903}{g\+\_\+neo\+Node}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Main entry point for Neo C++ Node. 
+
+This is the main entry point for the Neo C++ blockchain node. It provides complete functionality matching the C\# Neo node implementation.
+
+\begin{DoxyAuthor}{Author}
+Neo C++ Development Team 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+December 2024 
+\end{DoxyDate}
+
+
+\label{doc-func-members}
+\Hypertarget{main_8cpp_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{main_8cpp_a372450e049ef643a503edf75c1ec29d7}\index{main.cpp@{main.cpp}!g\_shutdownRequested@{g\_shutdownRequested}}
+\index{g\_shutdownRequested@{g\_shutdownRequested}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{g\_shutdownRequested()}{g\_shutdownRequested()}}
+{\footnotesize\ttfamily \label{main_8cpp_a372450e049ef643a503edf75c1ec29d7} 
+std\+::atomic$<$ bool $>$ g\+\_\+shutdown\+Requested (\begin{DoxyParamCaption}\item[{false}]{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97}\index{main.cpp@{main.cpp}!main@{main}}
+\index{main@{main}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily \label{main_8cpp_a0ddf1224851353fc92bfbff6f499fa97} 
+int main (\begin{DoxyParamCaption}\item[{int}]{argc}{, }\item[{char \texorpdfstring{$\ast$}{*}}]{argv}{\mbox{[}$\,$\mbox{]}}\end{DoxyParamCaption})}
+
+
+
+Main entry point for Neo C++ Node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & Argument count \\
+\hline
+{\em argv} & Argument values \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Exit code (0 for success, non-\/zero for error) 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{main_8cpp_a01af5df9d4270d594f2a4391b5a775ec}\index{main.cpp@{main.cpp}!SignalHandler@{SignalHandler}}
+\index{SignalHandler@{SignalHandler}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{SignalHandler()}{SignalHandler()}}
+{\footnotesize\ttfamily \label{main_8cpp_a01af5df9d4270d594f2a4391b5a775ec} 
+void Signal\+Handler (\begin{DoxyParamCaption}\item[{int}]{signal}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-var-members}
+\Hypertarget{main_8cpp_doc-var-members}
+\doxysubsection{Variable Documentation}
+\Hypertarget{main_8cpp_aa366422cf74d66e784237078e585f903}\index{main.cpp@{main.cpp}!g\_neoNode@{g\_neoNode}}
+\index{g\_neoNode@{g\_neoNode}!main.cpp@{main.cpp}}
+\doxysubsubsection{\texorpdfstring{g\_neoNode}{g\_neoNode}}
+{\footnotesize\ttfamily \label{main_8cpp_aa366422cf74d66e784237078e585f903} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1node_1_1_neo_node}{neo\+::node\+::\+Neo\+Node}}$>$ g\+\_\+neo\+Node}
+

@@ -1,0 +1,515 @@
+\doxysection{neo\+::extensions\+::Byte\+Extensions Class Reference}
+\hypertarget{classneo_1_1extensions_1_1_byte_extensions}{}\label{classneo_1_1extensions_1_1_byte_extensions}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+
+
+Extension methods for byte arrays and spans.  
+
+
+
+
+{\ttfamily \#include $<$byte\+\_\+extensions.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_ada81f64425e59c16ab49630bce206c58}{Xx\+Hash3\+\_\+32}} (std\+::span$<$ const uint8\+\_\+t $>$ value, int64\+\_\+t seed=\mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_a7eefa1011f453e15cbcc8a641cc6a405}{Default\+Xx\+Hash3\+Seed}})
+\begin{DoxyCompactList}\small\item\em Computes the 32-\/bit hash value for the specified byte array using the xxhash3 algorithm. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_afad5a7b5f59d0026ca84bce5690f2204}{Xx\+Hash3\+\_\+32}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&value, int64\+\_\+t seed=\mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_a7eefa1011f453e15cbcc8a641cc6a405}{Default\+Xx\+Hash3\+Seed}})
+\begin{DoxyCompactList}\small\item\em Computes the 32-\/bit hash value for the specified byte array using the xxhash3 algorithm. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_a8b04aaef6636444d3bf8653e65d68dc1}{To\+Hex\+String}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&value)
+\begin{DoxyCompactList}\small\item\em Converts a byte array to hex string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_af27ac3c404c69983e6bcffa60564dd10}{To\+Hex\+String}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&value, bool reverse)
+\begin{DoxyCompactList}\small\item\em Converts a byte array to hex string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_a26953c4326d3fa2ea8097ca32d20140b}{To\+Hex\+String}} (std\+::span$<$ const uint8\+\_\+t $>$ value)
+\begin{DoxyCompactList}\small\item\em Converts a byte span to hex string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_a5e156dcfb53f1d7f8a8701302b8ca52f}{To\+Hex\+String}} (std\+::span$<$ const uint8\+\_\+t $>$ value, bool reverse)
+\begin{DoxyCompactList}\small\item\em Converts a byte span to hex string. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_a5d7b74a02ed582f6f2f63516cea50d30}{From\+Hex\+String}} (const std\+::string \&hex)
+\begin{DoxyCompactList}\small\item\em Converts a hex string to byte array. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_a05a4ddde2937897a10723161a940dc7a}{Not\+Zero}} (std\+::span$<$ const uint8\+\_\+t $>$ value)
+\begin{DoxyCompactList}\small\item\em Checks if all bytes are zero in a byte array. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_af04b07865f61529e6a5531f62a106da1}{Not\+Zero}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&value)
+\begin{DoxyCompactList}\small\item\em Checks if all bytes are zero in a byte array. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_ac172a5a907fab75b52124322ff1a9d9e}{Is\+Zero}} (std\+::span$<$ const uint8\+\_\+t $>$ value)
+\begin{DoxyCompactList}\small\item\em Checks if all bytes are zero in a byte array. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_a0f5681685aabcf19084e5d516eff955f}{Is\+Zero}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&value)
+\begin{DoxyCompactList}\small\item\em Checks if all bytes are zero in a byte array. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_a00b8610b07dfef29f8add38d7a69f7d6}{Reverse}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&value)
+\begin{DoxyCompactList}\small\item\em Reverses the byte order of a byte array. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_ae46972b121a32fa8ce021de5308974f5}{Reverse\+In\+Place}} (std\+::vector$<$ uint8\+\_\+t $>$ \&value)
+\begin{DoxyCompactList}\small\item\em Reverses the byte order of a byte array in place. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_a5a79d386ff623c42a3aced2a3f44d713}{Concat}} (const std\+::vector$<$ std\+::vector$<$ uint8\+\_\+t $>$ $>$ \&arrays)
+\begin{DoxyCompactList}\small\item\em Concatenates multiple byte arrays. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_acaabca1f4217b27226354f59fe6d3342}{Concat}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&first, const std\+::vector$<$ uint8\+\_\+t $>$ \&second)
+\begin{DoxyCompactList}\small\item\em Concatenates two byte arrays. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_a4b83cebfa951ce7b2fa10dfa38112457}{Slice}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&value, size\+\_\+t start, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Gets a slice of a byte array. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_adb3dc048280158376e8a1cb3fe4c2b70}{Slice}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&value, size\+\_\+t start)
+\begin{DoxyCompactList}\small\item\em Gets a slice of a byte array from start to end. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_a0209701b97d5e5d9d04036bf2dbad3f3}{Sequence\+Equal}} (std\+::span$<$ const uint8\+\_\+t $>$ left, std\+::span$<$ const uint8\+\_\+t $>$ right)
+\begin{DoxyCompactList}\small\item\em Compares two byte arrays for equality. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_ac4d6622c540ecf7f2ac06264ab7a25be}{Sequence\+Equal}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&left, const std\+::vector$<$ uint8\+\_\+t $>$ \&right)
+\begin{DoxyCompactList}\small\item\em Compares two byte arrays for equality. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static uint8\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_a8065de037b9ebd92b4292c9eabf39936}{Hex\+Char\+To\+Value}} (char c)
+\begin{DoxyCompactList}\small\item\em Converts a single hex character to its numeric value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int64\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_a7eefa1011f453e15cbcc8a641cc6a405}{Default\+Xx\+Hash3\+Seed}} = 40343
+\item 
+static constexpr char \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_abde30a0f0546ef6033a7232e81c9fcc0}{Hex\+Chars}} \mbox{[}$\,$\mbox{]} = "{}0123456789abcdef"{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Extension methods for byte arrays and spans. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_a5a79d386ff623c42a3aced2a3f44d713}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!Concat@{Concat}}
+\index{Concat@{Concat}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{Concat()}{Concat()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_a5a79d386ff623c42a3aced2a3f44d713} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::extensions\+::\+Byte\+Extensions\+::\+Concat (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::vector$<$ uint8\+\_\+t $>$ $>$ \&}]{arrays}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Concatenates multiple byte arrays. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em arrays} & The byte arrays to concatenate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The concatenated byte array. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_acaabca1f4217b27226354f59fe6d3342}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!Concat@{Concat}}
+\index{Concat@{Concat}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{Concat()}{Concat()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_acaabca1f4217b27226354f59fe6d3342} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::extensions\+::\+Byte\+Extensions\+::\+Concat (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{first}{, }\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{second}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Concatenates two byte arrays. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em first} & The first byte array. \\
+\hline
+{\em second} & The second byte array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The concatenated byte array. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_a5d7b74a02ed582f6f2f63516cea50d30}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!FromHexString@{FromHexString}}
+\index{FromHexString@{FromHexString}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{FromHexString()}{FromHexString()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_a5d7b74a02ed582f6f2f63516cea50d30} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::extensions\+::\+Byte\+Extensions\+::\+From\+Hex\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a hex string to byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The hex string to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted byte array. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if hex string is invalid. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_a8065de037b9ebd92b4292c9eabf39936}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!HexCharToValue@{HexCharToValue}}
+\index{HexCharToValue@{HexCharToValue}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{HexCharToValue()}{HexCharToValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_a8065de037b9ebd92b4292c9eabf39936} 
+uint8\+\_\+t neo\+::extensions\+::\+Byte\+Extensions\+::\+Hex\+Char\+To\+Value (\begin{DoxyParamCaption}\item[{char}]{c}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Converts a single hex character to its numeric value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & The hex character. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The numeric value. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if character is not a valid hex digit. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_a0f5681685aabcf19084e5d516eff955f}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!IsZero@{IsZero}}
+\index{IsZero@{IsZero}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{IsZero()}{IsZero()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_a0f5681685aabcf19084e5d516eff955f} 
+bool neo\+::extensions\+::\+Byte\+Extensions\+::\+Is\+Zero (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Checks if all bytes are zero in a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The byte array to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if all bytes are zero, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_ac172a5a907fab75b52124322ff1a9d9e}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!IsZero@{IsZero}}
+\index{IsZero@{IsZero}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{IsZero()}{IsZero()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_ac172a5a907fab75b52124322ff1a9d9e} 
+bool neo\+::extensions\+::\+Byte\+Extensions\+::\+Is\+Zero (\begin{DoxyParamCaption}\item[{std\+::span$<$ const uint8\+\_\+t $>$}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Checks if all bytes are zero in a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The byte array to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if all bytes are zero, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_af04b07865f61529e6a5531f62a106da1}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!NotZero@{NotZero}}
+\index{NotZero@{NotZero}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{NotZero()}{NotZero()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_af04b07865f61529e6a5531f62a106da1} 
+bool neo\+::extensions\+::\+Byte\+Extensions\+::\+Not\+Zero (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Checks if all bytes are zero in a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The byte array to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false if all bytes are zero, true otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_a05a4ddde2937897a10723161a940dc7a}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!NotZero@{NotZero}}
+\index{NotZero@{NotZero}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{NotZero()}{NotZero()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_a05a4ddde2937897a10723161a940dc7a} 
+bool neo\+::extensions\+::\+Byte\+Extensions\+::\+Not\+Zero (\begin{DoxyParamCaption}\item[{std\+::span$<$ const uint8\+\_\+t $>$}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Checks if all bytes are zero in a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The byte array to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false if all bytes are zero, true otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_a00b8610b07dfef29f8add38d7a69f7d6}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!Reverse@{Reverse}}
+\index{Reverse@{Reverse}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{Reverse()}{Reverse()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_a00b8610b07dfef29f8add38d7a69f7d6} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::extensions\+::\+Byte\+Extensions\+::\+Reverse (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Reverses the byte order of a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The byte array to reverse. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The reversed byte array. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_ae46972b121a32fa8ce021de5308974f5}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!ReverseInPlace@{ReverseInPlace}}
+\index{ReverseInPlace@{ReverseInPlace}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{ReverseInPlace()}{ReverseInPlace()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_ae46972b121a32fa8ce021de5308974f5} 
+void neo\+::extensions\+::\+Byte\+Extensions\+::\+Reverse\+In\+Place (\begin{DoxyParamCaption}\item[{std\+::vector$<$ uint8\+\_\+t $>$ \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Reverses the byte order of a byte array in place. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The byte array to reverse. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_ac4d6622c540ecf7f2ac06264ab7a25be}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!SequenceEqual@{SequenceEqual}}
+\index{SequenceEqual@{SequenceEqual}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{SequenceEqual()}{SequenceEqual()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_ac4d6622c540ecf7f2ac06264ab7a25be} 
+bool neo\+::extensions\+::\+Byte\+Extensions\+::\+Sequence\+Equal (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{left}{, }\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Compares two byte arrays for equality. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & The first byte array. \\
+\hline
+{\em right} & The second byte array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if arrays are equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_a0209701b97d5e5d9d04036bf2dbad3f3}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!SequenceEqual@{SequenceEqual}}
+\index{SequenceEqual@{SequenceEqual}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{SequenceEqual()}{SequenceEqual()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_a0209701b97d5e5d9d04036bf2dbad3f3} 
+bool neo\+::extensions\+::\+Byte\+Extensions\+::\+Sequence\+Equal (\begin{DoxyParamCaption}\item[{std\+::span$<$ const uint8\+\_\+t $>$}]{left}{, }\item[{std\+::span$<$ const uint8\+\_\+t $>$}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Compares two byte arrays for equality. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & The first byte array. \\
+\hline
+{\em right} & The second byte array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if arrays are equal, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_adb3dc048280158376e8a1cb3fe4c2b70}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!Slice@{Slice}}
+\index{Slice@{Slice}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{Slice()}{Slice()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_adb3dc048280158376e8a1cb3fe4c2b70} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::extensions\+::\+Byte\+Extensions\+::\+Slice (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{value}{, }\item[{size\+\_\+t}]{start}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets a slice of a byte array from start to end. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The source byte array. \\
+\hline
+{\em start} & The start index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The sliced byte array. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & if indices are invalid. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_a4b83cebfa951ce7b2fa10dfa38112457}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!Slice@{Slice}}
+\index{Slice@{Slice}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{Slice()}{Slice()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_a4b83cebfa951ce7b2fa10dfa38112457} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::extensions\+::\+Byte\+Extensions\+::\+Slice (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{value}{, }\item[{size\+\_\+t}]{start}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets a slice of a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The source byte array. \\
+\hline
+{\em start} & The start index. \\
+\hline
+{\em length} & The length of the slice. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The sliced byte array. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & if indices are invalid. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_a8b04aaef6636444d3bf8653e65d68dc1}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!ToHexString@{ToHexString}}
+\index{ToHexString@{ToHexString}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{ToHexString()}{ToHexString()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_a8b04aaef6636444d3bf8653e65d68dc1} 
+std\+::string neo\+::extensions\+::\+Byte\+Extensions\+::\+To\+Hex\+String (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a byte array to hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The byte array to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted hex string. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if value is empty when not allowed. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_af27ac3c404c69983e6bcffa60564dd10}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!ToHexString@{ToHexString}}
+\index{ToHexString@{ToHexString}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{ToHexString()}{ToHexString()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_af27ac3c404c69983e6bcffa60564dd10} 
+std\+::string neo\+::extensions\+::\+Byte\+Extensions\+::\+To\+Hex\+String (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{value}{, }\item[{bool}]{reverse}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a byte array to hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The byte array to convert. \\
+\hline
+{\em reverse} & Indicates whether it should be converted in the reversed byte order. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted hex string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_a26953c4326d3fa2ea8097ca32d20140b}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!ToHexString@{ToHexString}}
+\index{ToHexString@{ToHexString}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{ToHexString()}{ToHexString()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_a26953c4326d3fa2ea8097ca32d20140b} 
+std\+::string neo\+::extensions\+::\+Byte\+Extensions\+::\+To\+Hex\+String (\begin{DoxyParamCaption}\item[{std\+::span$<$ const uint8\+\_\+t $>$}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a byte span to hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The byte span to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted hex string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_a5e156dcfb53f1d7f8a8701302b8ca52f}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!ToHexString@{ToHexString}}
+\index{ToHexString@{ToHexString}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{ToHexString()}{ToHexString()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_a5e156dcfb53f1d7f8a8701302b8ca52f} 
+std\+::string neo\+::extensions\+::\+Byte\+Extensions\+::\+To\+Hex\+String (\begin{DoxyParamCaption}\item[{std\+::span$<$ const uint8\+\_\+t $>$}]{value}{, }\item[{bool}]{reverse}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a byte span to hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The byte span to convert. \\
+\hline
+{\em reverse} & Indicates whether it should be converted in the reversed byte order. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted hex string. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_afad5a7b5f59d0026ca84bce5690f2204}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!XxHash3\_32@{XxHash3\_32}}
+\index{XxHash3\_32@{XxHash3\_32}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{XxHash3\_32()}{XxHash3\_32()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_afad5a7b5f59d0026ca84bce5690f2204} 
+int neo\+::extensions\+::\+Byte\+Extensions\+::\+Xx\+Hash3\+\_\+32 (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{value}{, }\item[{int64\+\_\+t}]{seed}{ = {\ttfamily \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_a7eefa1011f453e15cbcc8a641cc6a405}{Default\+Xx\+Hash3\+Seed}}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the 32-\/bit hash value for the specified byte array using the xxhash3 algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The input to compute the hash code for. \\
+\hline
+{\em seed} & The seed used by the xxhash3 algorithm. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The computed hash code. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_ada81f64425e59c16ab49630bce206c58}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!XxHash3\_32@{XxHash3\_32}}
+\index{XxHash3\_32@{XxHash3\_32}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{XxHash3\_32()}{XxHash3\_32()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_ada81f64425e59c16ab49630bce206c58} 
+int neo\+::extensions\+::\+Byte\+Extensions\+::\+Xx\+Hash3\+\_\+32 (\begin{DoxyParamCaption}\item[{std\+::span$<$ const uint8\+\_\+t $>$}]{value}{, }\item[{int64\+\_\+t}]{seed}{ = {\ttfamily \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_extensions_a7eefa1011f453e15cbcc8a641cc6a405}{Default\+Xx\+Hash3\+Seed}}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the 32-\/bit hash value for the specified byte array using the xxhash3 algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The input to compute the hash code for. \\
+\hline
+{\em seed} & The seed used by the xxhash3 algorithm. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The computed hash code. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_a7eefa1011f453e15cbcc8a641cc6a405}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!DefaultXxHash3Seed@{DefaultXxHash3Seed}}
+\index{DefaultXxHash3Seed@{DefaultXxHash3Seed}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{DefaultXxHash3Seed}{DefaultXxHash3Seed}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_a7eefa1011f453e15cbcc8a641cc6a405} 
+int64\+\_\+t neo\+::extensions\+::\+Byte\+Extensions\+::\+Default\+Xx\+Hash3\+Seed = 40343\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1extensions_1_1_byte_extensions_abde30a0f0546ef6033a7232e81c9fcc0}\index{neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}!HexChars@{HexChars}}
+\index{HexChars@{HexChars}!neo::extensions::ByteExtensions@{neo::extensions::ByteExtensions}}
+\doxysubsubsection{\texorpdfstring{HexChars}{HexChars}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_extensions_abde30a0f0546ef6033a7232e81c9fcc0} 
+char neo\+::extensions\+::\+Byte\+Extensions\+::\+Hex\+Chars = "{}0123456789abcdef"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/extensions/\mbox{\hyperlink{byte__extensions_8h}{byte\+\_\+extensions.\+h}}\item 
+src/extensions/\mbox{\hyperlink{byte__extensions_8cpp}{byte\+\_\+extensions.\+cpp}}\end{DoxyCompactItemize}

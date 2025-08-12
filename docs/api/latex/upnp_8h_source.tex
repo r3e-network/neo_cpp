@@ -1,0 +1,43 @@
+\doxysection{upnp.\+h}
+\hypertarget{upnp_8h_source}{}\label{upnp_8h_source}\index{include/neo/network/upnp.h@{include/neo/network/upnp.h}}
+\mbox{\hyperlink{upnp_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ip__address_8h}{neo/network/ip\_address.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network}{neo::network}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p}{UPnP}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{static}\ std::chrono::seconds\ \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_a941962563b7276972741cca86f1fea6b}{GetTimeOut}}();}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_ad3de6d67d9469233f9c2cb7a1b17988e}{SetTimeOut}}(std::chrono::seconds\ timeout);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_a61ee40b9064d23885100d7f8d2b4a569}{Discover}}();}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_ad96dd155500025df8f1d8cbb950730b0}{ForwardPort}}(uint16\_t\ port,\ \textcolor{keyword}{const}\ std::string\&\ protocol,\ \textcolor{keyword}{const}\ std::string\&\ description);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_a88936b9fa0fe22398d0ea914501cafaf}{DeleteForwardingRule}}(uint16\_t\ port,\ \textcolor{keyword}{const}\ std::string\&\ protocol);}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}}\ \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_a8281a6c0cad83fa91c15b70253c54fdb}{GetExternalIP}}();}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{static}\ std::chrono::seconds\ \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_ac4b554884e82a8b60ad297f1271bc62e}{timeOut\_}};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_aedc600df3007522d1dabc2c60c111b7b}{serviceUrl\_}};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_abea0913c0be377ea6f167beb86355f0e}{GetServiceUrl}}(\textcolor{keyword}{const}\ std::string\&\ resp);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_a5ea02217fae1f2192483ddf03321a4f3}{CombineUrls}}(\textcolor{keyword}{const}\ std::string\&\ baseUrl,\ \textcolor{keyword}{const}\ std::string\&\ relativeUrl);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_a53360502ce914102a8edf5a18802a0c5}{SOAPRequest}}(\textcolor{keyword}{const}\ std::string\&\ url,\ \textcolor{keyword}{const}\ std::string\&\ soap,\ \textcolor{keyword}{const}\ std::string\&\ function);}
+\DoxyCodeLine{00090\ \};}
+\DoxyCodeLine{00091\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network}}
+
+\end{DoxyCode}

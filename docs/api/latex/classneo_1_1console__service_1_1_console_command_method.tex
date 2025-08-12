@@ -1,0 +1,227 @@
+\doxysection{neo\+::console\+\_\+service\+::Console\+Command\+Method Class Reference}
+\hypertarget{classneo_1_1console__service_1_1_console_command_method}{}\label{classneo_1_1console__service_1_1_console_command_method}\index{neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}}
+
+
+Represents a console command method with execution capabilities.  
+
+
+
+
+{\ttfamily \#include $<$console\+\_\+command\+\_\+method.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a9d6cb35921acc2121d03e0126ce0def8}{Command\+Function}} = std\+::function$<$std\+::string(const std\+::vector$<$std\+::string$>$\&)$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a450a3e78a1ca9128319ab4bfcf0a0906}{Console\+Command\+Method}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a88ccfd241333c86c624d989c7b00dd2d}{Console\+Command\+Method}} (const std\+::string \&cmd\+\_\+key, const std\+::string \&category, const std\+::string \&message, \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a9d6cb35921acc2121d03e0126ce0def8}{Command\+Function}} func)
+\begin{DoxyCompactList}\small\item\em Constructor with all parameters. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a56c579654f6178f633a38772ac2ce7a1}{Execute}} (const std\+::vector$<$ std\+::string $>$ \&args) const
+\begin{DoxyCompactList}\small\item\em Execute the command with given arguments. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a1007f6c165375ce935c5a23433a6b565}{Is\+Implemented}} () const
+\begin{DoxyCompactList}\small\item\em Check if the command has an implementation. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_ad0b5d0382e6cb17eeca68b93e2d55c3e}{Get\+Help}} () const
+\begin{DoxyCompactList}\small\item\em Get formatted help string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_aa16605ec97fd20dc3eb93e7ca6c6c751}{Set\+Function}} (\mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a9d6cb35921acc2121d03e0126ce0def8}{Command\+Function}} func)
+\begin{DoxyCompactList}\small\item\em Set the command function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a406b113c52b6435cc8a6785335c0725f}{key}}
+\begin{DoxyCompactList}\small\item\em Command key/name. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a6bea442c3c97d7e3a110aaeddf89e8ac}{help\+\_\+category}}
+\begin{DoxyCompactList}\small\item\em Help category for grouping commands. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a3fa1392a148092fa1e58a11b11190571}{help\+\_\+message}}
+\begin{DoxyCompactList}\small\item\em Help message describing the command. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a9d6cb35921acc2121d03e0126ce0def8}{Command\+Function}} \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a2c5c0c4cb3b22530477a59ac98d349b0}{function\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a console command method with execution capabilities. 
+
+\hypertarget{classneo_1_1console__service_1_1_console_command_method_autotoc_md0}{}\doxysubsubsection{\texorpdfstring{Overview}{Overview}}\label{classneo_1_1console__service_1_1_console_command_method_autotoc_md0}
+The \doxylink{classneo_1_1console__service_1_1_console_command_method}{Console\+Command\+Method} class encapsulates a command that can be executed in the Neo console, including its metadata and execution function.\hypertarget{classneo_1_1console__service_1_1_console_command_method_autotoc_md1}{}\doxysubsubsection{\texorpdfstring{API Reference}{API Reference}}\label{classneo_1_1console__service_1_1_console_command_method_autotoc_md1}
+
+\begin{DoxyItemize}
+\item {\bfseries{Metadata}}\+: Command key, help category, help message
+\item {\bfseries{Execution}}\+: Function pointer for command execution
+\item {\bfseries{Validation}}\+: Parameter validation and help display
+\end{DoxyItemize}\hypertarget{classneo_1_1console__service_1_1_console_command_method_autotoc_md2}{}\doxysubsubsection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{classneo_1_1console__service_1_1_console_command_method_autotoc_md2}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Create\ a\ command\ method}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ cmd\ =\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a450a3e78a1ca9128319ab4bfcf0a0906}{ConsoleCommandMethod}}(\textcolor{stringliteral}{"{}exit"{}},\ \textcolor{stringliteral}{"{}System"{}},\ \textcolor{stringliteral}{"{}Exit\ the\ application"{}},}
+\DoxyCodeLine{\ \ \ \ [](\textcolor{keyword}{const}\ std::vector<std::string>\&\ args)\ -\/>\ std::string\ \{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Exiting..."{}};}
+\DoxyCodeLine{\ \ \ \ \});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Execute\ the\ command}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ result\ =\ cmd.Execute(\{\textcolor{stringliteral}{"{}exit"{}}\});}
+
+\end{DoxyCode}
+ 
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1console__service_1_1_console_command_method_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1console__service_1_1_console_command_method_a9d6cb35921acc2121d03e0126ce0def8}\index{neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}!CommandFunction@{CommandFunction}}
+\index{CommandFunction@{CommandFunction}!neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}}
+\doxysubsubsection{\texorpdfstring{CommandFunction}{CommandFunction}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_command_method_a9d6cb35921acc2121d03e0126ce0def8} 
+using \mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a9d6cb35921acc2121d03e0126ce0def8}{neo\+::console\+\_\+service\+::\+Console\+Command\+Method\+::\+Command\+Function}} = std\+::function$<$std\+::string(const std\+::vector$<$std\+::string$>$\&)$>$}
+
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1console__service_1_1_console_command_method_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1console__service_1_1_console_command_method_a450a3e78a1ca9128319ab4bfcf0a0906}\index{neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}!ConsoleCommandMethod@{ConsoleCommandMethod}}
+\index{ConsoleCommandMethod@{ConsoleCommandMethod}!neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}}
+\doxysubsubsection{\texorpdfstring{ConsoleCommandMethod()}{ConsoleCommandMethod()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_command_method_a450a3e78a1ca9128319ab4bfcf0a0906} 
+neo\+::console\+\_\+service\+::\+Console\+Command\+Method\+::\+Console\+Command\+Method (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor. 
+
+\Hypertarget{classneo_1_1console__service_1_1_console_command_method_a88ccfd241333c86c624d989c7b00dd2d}\index{neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}!ConsoleCommandMethod@{ConsoleCommandMethod}}
+\index{ConsoleCommandMethod@{ConsoleCommandMethod}!neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}}
+\doxysubsubsection{\texorpdfstring{ConsoleCommandMethod()}{ConsoleCommandMethod()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_command_method_a88ccfd241333c86c624d989c7b00dd2d} 
+neo\+::console\+\_\+service\+::\+Console\+Command\+Method\+::\+Console\+Command\+Method (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{cmd\+\_\+key}{, }\item[{const std\+::string \&}]{category}{, }\item[{const std\+::string \&}]{message}{, }\item[{\mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a9d6cb35921acc2121d03e0126ce0def8}{Command\+Function}}}]{func}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor with all parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em cmd\+\_\+key} & The command key \\
+\hline
+{\em category} & The help category \\
+\hline
+{\em message} & The help message \\
+\hline
+{\em func} & The command function \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1console__service_1_1_console_command_method_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1console__service_1_1_console_command_method_a56c579654f6178f633a38772ac2ce7a1}\index{neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}!Execute@{Execute}}
+\index{Execute@{Execute}!neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_command_method_a56c579654f6178f633a38772ac2ce7a1} 
+std\+::string neo\+::console\+\_\+service\+::\+Console\+Command\+Method\+::\+Execute (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Execute the command with given arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & Command arguments \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Command execution result 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1console__service_1_1_console_command_method_ad0b5d0382e6cb17eeca68b93e2d55c3e}\index{neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}!GetHelp@{GetHelp}}
+\index{GetHelp@{GetHelp}!neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}}
+\doxysubsubsection{\texorpdfstring{GetHelp()}{GetHelp()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_command_method_ad0b5d0382e6cb17eeca68b93e2d55c3e} 
+std\+::string neo\+::console\+\_\+service\+::\+Console\+Command\+Method\+::\+Get\+Help (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get formatted help string. 
+
+\begin{DoxyReturn}{Returns}
+Formatted help text 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1console__service_1_1_console_command_method_a1007f6c165375ce935c5a23433a6b565}\index{neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}!IsImplemented@{IsImplemented}}
+\index{IsImplemented@{IsImplemented}!neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}}
+\doxysubsubsection{\texorpdfstring{IsImplemented()}{IsImplemented()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_command_method_a1007f6c165375ce935c5a23433a6b565} 
+bool neo\+::console\+\_\+service\+::\+Console\+Command\+Method\+::\+Is\+Implemented (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if the command has an implementation. 
+
+\begin{DoxyReturn}{Returns}
+True if command can be executed 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1console__service_1_1_console_command_method_aa16605ec97fd20dc3eb93e7ca6c6c751}\index{neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}!SetFunction@{SetFunction}}
+\index{SetFunction@{SetFunction}!neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}}
+\doxysubsubsection{\texorpdfstring{SetFunction()}{SetFunction()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_command_method_aa16605ec97fd20dc3eb93e7ca6c6c751} 
+void neo\+::console\+\_\+service\+::\+Console\+Command\+Method\+::\+Set\+Function (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a9d6cb35921acc2121d03e0126ce0def8}{Command\+Function}}}]{func}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the command function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & The command function \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1console__service_1_1_console_command_method_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1console__service_1_1_console_command_method_a2c5c0c4cb3b22530477a59ac98d349b0}\index{neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}!function\_@{function\_}}
+\index{function\_@{function\_}!neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}}
+\doxysubsubsection{\texorpdfstring{function\_}{function\_}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_command_method_a2c5c0c4cb3b22530477a59ac98d349b0} 
+\mbox{\hyperlink{classneo_1_1console__service_1_1_console_command_method_a9d6cb35921acc2121d03e0126ce0def8}{Command\+Function}} neo\+::console\+\_\+service\+::\+Console\+Command\+Method\+::function\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1console__service_1_1_console_command_method_a6bea442c3c97d7e3a110aaeddf89e8ac}\index{neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}!help\_category@{help\_category}}
+\index{help\_category@{help\_category}!neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}}
+\doxysubsubsection{\texorpdfstring{help\_category}{help\_category}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_command_method_a6bea442c3c97d7e3a110aaeddf89e8ac} 
+std\+::string neo\+::console\+\_\+service\+::\+Console\+Command\+Method\+::help\+\_\+category}
+
+
+
+Help category for grouping commands. 
+
+\Hypertarget{classneo_1_1console__service_1_1_console_command_method_a3fa1392a148092fa1e58a11b11190571}\index{neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}!help\_message@{help\_message}}
+\index{help\_message@{help\_message}!neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}}
+\doxysubsubsection{\texorpdfstring{help\_message}{help\_message}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_command_method_a3fa1392a148092fa1e58a11b11190571} 
+std\+::string neo\+::console\+\_\+service\+::\+Console\+Command\+Method\+::help\+\_\+message}
+
+
+
+Help message describing the command. 
+
+\Hypertarget{classneo_1_1console__service_1_1_console_command_method_a406b113c52b6435cc8a6785335c0725f}\index{neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}!key@{key}}
+\index{key@{key}!neo::console\_service::ConsoleCommandMethod@{neo::console\_service::ConsoleCommandMethod}}
+\doxysubsubsection{\texorpdfstring{key}{key}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_command_method_a406b113c52b6435cc8a6785335c0725f} 
+std\+::string neo\+::console\+\_\+service\+::\+Console\+Command\+Method\+::key}
+
+
+
+Command key/name. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/console\+\_\+service/\mbox{\hyperlink{console__command__method_8h}{console\+\_\+command\+\_\+method.\+h}}\end{DoxyCompactItemize}

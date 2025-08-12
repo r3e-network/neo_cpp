@@ -1,0 +1,382 @@
+\doxysection{neo\+::ledger\+::Transaction\+Output Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_transaction_output}{}\label{classneo_1_1ledger_1_1_transaction_output}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+
+
+Represents a transaction output (Neo 2.\+x compatibility). This class is provided for test compatibility only.  
+
+
+
+
+{\ttfamily \#include $<$transaction\+\_\+output.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::ledger\+::Transaction\+Output\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::ledger\+::Transaction\+Output\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a8c10503771276bc8066e0c8766c01dec}{Transaction\+Output}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1ledger_1_1_transaction_output}{Transaction\+Output}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_ab03a735ef128f97a5f1e7eb751d216e3}{Transaction\+Output}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&asset\+Id, const \mbox{\hyperlink{classneo_1_1core_1_1_fixed8}{core\+::\+Fixed8}} \&value, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1ledger_1_1_transaction_output}{Transaction\+Output} with the specified values. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a08e37c3e856fc20f0c944f62cbbc382b}{Get\+Asset\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Gets the asset ID. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_ad2310e80ee1a01603aa8dcebb338c751}{Set\+Asset\+Id}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&asset\+Id)
+\begin{DoxyCompactList}\small\item\em Sets the asset ID. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1core_1_1_fixed8}{core\+::\+Fixed8}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_aef0816f7f2418bb75a6e1250d8268489}{Get\+Value}} () const
+\begin{DoxyCompactList}\small\item\em Gets the value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a92119c87761afd1ef82668c2b34a328f}{Set\+Value}} (const \mbox{\hyperlink{classneo_1_1core_1_1_fixed8}{core\+::\+Fixed8}} \&value)
+\begin{DoxyCompactList}\small\item\em Sets the value. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a2a16bca6b88fa4c14ab37a9e409501a4}{Get\+Script\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a0aa9a7d29a235858d71602c21159eb3a}{Set\+Script\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash)
+\begin{DoxyCompactList}\small\item\em Sets the script hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_aa88c02eca8c922cc4b5c4e560ca11e42}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_ad26cfc9288af690a2dd60e90301b24e0}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a binary reader. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_adacdb33e35ba281fb68b025709c59e68}{Get\+Size}} () const
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a97edec72a9a0135901e3b655a2354cfc}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_aa58c0344d8b6676559532cf1b4aec740}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a JSON reader. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a1da00d5fc70c01c5da3e0668651c9d7f}{operator==}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output}{Transaction\+Output}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this transaction output equals another. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_ad1b53133f77c4f8e9212cfa4f9b57e80}{operator!=}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output}{Transaction\+Output}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this transaction output does not equal another. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a348f1b7659bf44e40cb6dc82fa128c23}{asset\+Id\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_fixed8}{core\+::\+Fixed8}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a045c612a4cd9722dd61b56f06638bcdf}{value\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a4fca8ad9b0101489aeb07cb27930a4e8}{script\+Hash\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a transaction output (Neo 2.\+x compatibility). This class is provided for test compatibility only. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_a8c10503771276bc8066e0c8766c01dec}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!TransactionOutput@{TransactionOutput}}
+\index{TransactionOutput@{TransactionOutput}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{TransactionOutput()}{TransactionOutput()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_a8c10503771276bc8066e0c8766c01dec} 
+neo\+::ledger\+::\+Transaction\+Output\+::\+Transaction\+Output (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1ledger_1_1_transaction_output}{Transaction\+Output}. 
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_ab03a735ef128f97a5f1e7eb751d216e3}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!TransactionOutput@{TransactionOutput}}
+\index{TransactionOutput@{TransactionOutput}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{TransactionOutput()}{TransactionOutput()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_ab03a735ef128f97a5f1e7eb751d216e3} 
+neo\+::ledger\+::\+Transaction\+Output\+::\+Transaction\+Output (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{asset\+Id}{, }\item[{const \mbox{\hyperlink{classneo_1_1core_1_1_fixed8}{core\+::\+Fixed8}} \&}]{value}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1ledger_1_1_transaction_output}{Transaction\+Output} with the specified values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em asset\+Id} & The asset ID. \\
+\hline
+{\em value} & The value. \\
+\hline
+{\em script\+Hash} & The script hash. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_ad26cfc9288af690a2dd60e90301b24e0}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_ad26cfc9288af690a2dd60e90301b24e0} 
+void neo\+::ledger\+::\+Transaction\+Output\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_aa58c0344d8b6676559532cf1b4aec740}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_aa58c0344d8b6676559532cf1b4aec740} 
+void neo\+::ledger\+::\+Transaction\+Output\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_a08e37c3e856fc20f0c944f62cbbc382b}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!GetAssetId@{GetAssetId}}
+\index{GetAssetId@{GetAssetId}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{GetAssetId()}{GetAssetId()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_a08e37c3e856fc20f0c944f62cbbc382b} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& neo\+::ledger\+::\+Transaction\+Output\+::\+Get\+Asset\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the asset ID. 
+
+\begin{DoxyReturn}{Returns}
+The asset ID. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_a2a16bca6b88fa4c14ab37a9e409501a4}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!GetScriptHash@{GetScriptHash}}
+\index{GetScriptHash@{GetScriptHash}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{GetScriptHash()}{GetScriptHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_a2a16bca6b88fa4c14ab37a9e409501a4} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& neo\+::ledger\+::\+Transaction\+Output\+::\+Get\+Script\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the script hash. 
+
+\begin{DoxyReturn}{Returns}
+The script hash. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_adacdb33e35ba281fb68b025709c59e68}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_adacdb33e35ba281fb68b025709c59e68} 
+int neo\+::ledger\+::\+Transaction\+Output\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_aef0816f7f2418bb75a6e1250d8268489}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!GetValue@{GetValue}}
+\index{GetValue@{GetValue}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{GetValue()}{GetValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_aef0816f7f2418bb75a6e1250d8268489} 
+const \mbox{\hyperlink{classneo_1_1core_1_1_fixed8}{core\+::\+Fixed8}} \& neo\+::ledger\+::\+Transaction\+Output\+::\+Get\+Value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the value. 
+
+\begin{DoxyReturn}{Returns}
+The value. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_ad1b53133f77c4f8e9212cfa4f9b57e80}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_ad1b53133f77c4f8e9212cfa4f9b57e80} 
+bool neo\+::ledger\+::\+Transaction\+Output\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output}{Transaction\+Output}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this transaction output does not equal another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other transaction output. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if not equal. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_a1da00d5fc70c01c5da3e0668651c9d7f}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_a1da00d5fc70c01c5da3e0668651c9d7f} 
+bool neo\+::ledger\+::\+Transaction\+Output\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output}{Transaction\+Output}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this transaction output equals another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other transaction output. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if equal. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_aa88c02eca8c922cc4b5c4e560ca11e42}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_aa88c02eca8c922cc4b5c4e560ca11e42} 
+void neo\+::ledger\+::\+Transaction\+Output\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_a97edec72a9a0135901e3b655a2354cfc}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_a97edec72a9a0135901e3b655a2354cfc} 
+void neo\+::ledger\+::\+Transaction\+Output\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_ad2310e80ee1a01603aa8dcebb338c751}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!SetAssetId@{SetAssetId}}
+\index{SetAssetId@{SetAssetId}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{SetAssetId()}{SetAssetId()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_ad2310e80ee1a01603aa8dcebb338c751} 
+void neo\+::ledger\+::\+Transaction\+Output\+::\+Set\+Asset\+Id (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{asset\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Sets the asset ID. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em asset\+Id} & The asset ID. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_a0aa9a7d29a235858d71602c21159eb3a}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!SetScriptHash@{SetScriptHash}}
+\index{SetScriptHash@{SetScriptHash}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{SetScriptHash()}{SetScriptHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_a0aa9a7d29a235858d71602c21159eb3a} 
+void neo\+::ledger\+::\+Transaction\+Output\+::\+Set\+Script\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{}\end{DoxyParamCaption})}
+
+
+
+Sets the script hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The script hash. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_a92119c87761afd1ef82668c2b34a328f}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!SetValue@{SetValue}}
+\index{SetValue@{SetValue}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{SetValue()}{SetValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_a92119c87761afd1ef82668c2b34a328f} 
+void neo\+::ledger\+::\+Transaction\+Output\+::\+Set\+Value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1core_1_1_fixed8}{core\+::\+Fixed8}} \&}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Sets the value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_a348f1b7659bf44e40cb6dc82fa128c23}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!assetId\_@{assetId\_}}
+\index{assetId\_@{assetId\_}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{assetId\_}{assetId\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_a348f1b7659bf44e40cb6dc82fa128c23} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::ledger\+::\+Transaction\+Output\+::asset\+Id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_a4fca8ad9b0101489aeb07cb27930a4e8}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!scriptHash\_@{scriptHash\_}}
+\index{scriptHash\_@{scriptHash\_}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{scriptHash\_}{scriptHash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_a4fca8ad9b0101489aeb07cb27930a4e8} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::ledger\+::\+Transaction\+Output\+::script\+Hash\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_output_a045c612a4cd9722dd61b56f06638bcdf}\index{neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}!value\_@{value\_}}
+\index{value\_@{value\_}!neo::ledger::TransactionOutput@{neo::ledger::TransactionOutput}}
+\doxysubsubsection{\texorpdfstring{value\_}{value\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_output_a045c612a4cd9722dd61b56f06638bcdf} 
+\mbox{\hyperlink{classneo_1_1core_1_1_fixed8}{core\+::\+Fixed8}} neo\+::ledger\+::\+Transaction\+Output\+::value\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{transaction__output_8h}{transaction\+\_\+output.\+h}}\item 
+src/ledger/\mbox{\hyperlink{transaction__json_8cpp}{transaction\+\_\+json.\+cpp}}\item 
+src/ledger/\mbox{\hyperlink{transaction__output_8cpp}{transaction\+\_\+output.\+cpp}}\end{DoxyCompactItemize}

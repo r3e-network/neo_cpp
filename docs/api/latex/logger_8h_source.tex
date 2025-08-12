@@ -1,0 +1,92 @@
+\doxysection{logger.\+h}
+\hypertarget{logger_8h_source}{}\label{logger_8h_source}\index{include/neo/logging/logger.h@{include/neo/logging/logger.h}}
+\mbox{\hyperlink{logger_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <iosfwd>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#if\ defined(NEO\_HAS\_SPDLOG)\ \&\&\ !defined(NEO\_MINIMAL\_LOGGING)}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <spdlog/sinks/basic\_file\_sink.h>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <spdlog/sinks/stdout\_color\_sinks.h>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <spdlog/spdlog.h>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1logging}{neo::logging}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1logging_1_1_logger_a8e3e3c0db70c7a54b526744fc406eb55}{Logger}}}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2}{Level}}}
+\DoxyCodeLine{00033\ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a485ed9afbd0080210414d88d81862b70}{Trace}}\ =\ 0,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a93c1f33b6b290b2e6220e599d0afc9f1}{Debug}}\ =\ 1,}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a7b9d24c31fd3a110a8abb3d32ab9e800}{Info}}\ =\ 2,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a64fa223bffb88e3121a11c94e91674e0}{Warn}}\ =\ 3,}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ab2af17208a339e979fef8368a7ea05cc}{Error}}\ =\ 4,}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a57d61dad8a9c03cc8ce47b9c70789e1e}{Critical}}\ =\ 5,}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2ad15305d7a4e34e02489c74a5ef542f36}{Off}}\ =\ 6}
+\DoxyCodeLine{00041\ \ \ \ \ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger}{Logger}}\&\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_abff18ad1faab25601174fa98b85159b9}{GetDefault}}();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger}{Logger}}\&\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae6d1d8d54985e37831b0f0e66b61be87}{Instance}}();}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<Logger>\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a2b4b5153165e67c9814931466373ffc0}{Create}}(\textcolor{keyword}{const}\ std::string\&\ name);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a8e3e3c0db70c7a54b526744fc406eb55}{Logger}}(\textcolor{keyword}{const}\ std::string\&\ name);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a0f56d98f6a3252161a74ffec39da2b14}{SetLevel}}(\mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2}{Level}}\ level);}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2add4ec0ac4e58f7c32a01244ae91150b1}{Trace}}(\textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2aa603905470e2a5b8c13e96b579ef0dba}{Debug}}(\textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2aa603905470e2a5b8c13e96b579ef0dba}{Debug}}(\textcolor{keyword}{const}\ std::string\&\ category,\ \textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a4059b0251f66a18cb56f544728796875}{Info}}(\textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a4059b0251f66a18cb56f544728796875}{Info}}(\textcolor{keyword}{const}\ std::string\&\ category,\ \textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a56525ae64d370c0b448ac0d60710ef17}{Warn}}(\textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a56525ae64d370c0b448ac0d60710ef17}{Warn}}(\textcolor{keyword}{const}\ std::string\&\ category,\ \textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a1a2d08946a4595c714c95eeef473ca5d}{Warning}}(\textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a1a2d08946a4595c714c95eeef473ca5d}{Warning}}(\textcolor{keyword}{const}\ std::string\&\ category,\ \textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a902b0d55fddef6f8d651fe1035b7d4bd}{Error}}(\textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a902b0d55fddef6f8d651fe1035b7d4bd}{Error}}(\textcolor{keyword}{const}\ std::string\&\ category,\ \textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a278d01e5af56273bae1bb99a98b370cd}{Critical}}(\textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a56ab60d06864e5d8025c4ebbc584e682}{Log}}(\mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2}{Level}}\ level,\ \textcolor{keyword}{const}\ std::string\&\ format,\ Args\&\&...\ args);}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{comment}{//\ Helper\ method\ for\ minimal\ logging}}
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a17a308461574a9598f527fd81c035d4c}{LogMinimal}}(\mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2}{Level}}\ level,\ \textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00165\ \textcolor{preprocessor}{\#if\ defined(NEO\_MINIMAL\_LOGGING)\ ||\ !defined(NEO\_HAS\_SPDLOG)}}
+\DoxyCodeLine{00166\ \ \ \ \ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2}{Level}}\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a94b4ca72fc8e751dea1f7714c969a522}{current\_level\_}}\ =\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a4059b0251f66a18cb56f544728796875}{Level::Info}};}
+\DoxyCodeLine{00167\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a5d331f5ec46ffad0fd9862aba1099040}{name\_}};}
+\DoxyCodeLine{00168\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00169\ \ \ \ \ std::shared\_ptr<spdlog::logger>\ logger\_;}
+\DoxyCodeLine{00170\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00171\ \};}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \textcolor{comment}{//\ Convenience\ macros\ for\ logging}}
+\DoxyCodeLine{00174\ \textcolor{preprocessor}{\#define\ NEO\_LOG\_TRACE(msg)\ neo::logging::Logger::GetDefault().Trace(msg)}}
+\DoxyCodeLine{00175\ \textcolor{preprocessor}{\#define\ NEO\_LOG\_DEBUG(msg)\ neo::logging::Logger::GetDefault().Debug(msg)}}
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\#define\ NEO\_LOG\_INFO(msg)\ neo::logging::Logger::GetDefault().Info(msg)}}
+\DoxyCodeLine{00177\ \textcolor{preprocessor}{\#define\ NEO\_LOG\_WARN(msg)\ neo::logging::Logger::GetDefault().Warn(msg)}}
+\DoxyCodeLine{00178\ \textcolor{preprocessor}{\#define\ NEO\_LOG\_ERROR(msg)\ neo::logging::Logger::GetDefault().Error(msg)}}
+\DoxyCodeLine{00179\ \textcolor{preprocessor}{\#define\ NEO\_LOG\_CRITICAL(msg)\ neo::logging::Logger::GetDefault().Critical(msg)}}
+\DoxyCodeLine{00180\ \}\ \ \textcolor{comment}{//\ namespace\ neo::logging}}
+
+\end{DoxyCode}

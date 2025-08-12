@@ -1,0 +1,17 @@
+digraph "neo::ledger::TransactionValidator::ValidateScript"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::ledger::Transaction\lValidator::ValidateScript",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::ledger::Transaction\lValidator::ContainsForbidden\lOpcodes",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1ledger_1_1_transaction_validator.html#a04eb29a611e01d8269b95dec5f7aa4e4",tooltip=" "];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::network::p2p::\lpayloads::Neo3Transaction\l::GetScript",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction.html#a0c3d4950b79a38589b8117c32ad4a378",tooltip="Gets the script."];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::ledger::Transaction\lValidator::VerifyScriptLimits",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1ledger_1_1_transaction_validator.html#a243851268d5460dfb58aee470c290baf",tooltip=" "];
+  Node4 -> Node5 [id="edge4_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::vm::Script::GetLength",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_script.html#aa5a98520c6d23a6dc7fb3d5d8c99e682",tooltip="Gets the length of the script."];
+}

@@ -1,0 +1,163 @@
+\doxysection{neo\+::smartcontract\+::Storage\+Iterator Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1_storage_iterator}{}\label{classneo_1_1smartcontract_1_1_storage_iterator}\index{neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}}
+
+
+Iterator for storage items.  
+
+
+
+
+{\ttfamily \#include $<$storage\+\_\+iterator.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::smartcontract\+::Storage\+Iterator\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_iterator_a27ea0db9668b8ab9eb3e65c63795f7a2}{Storage\+Iterator}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \&prefix)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1_storage_iterator}{Storage\+Iterator}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_iterator_a8ae050d5be174b7181ef5562a23dfeef}{Has\+Next}} () const
+\begin{DoxyCompactList}\small\item\em Checks if there are more items in the iterator. \end{DoxyCompactList}\item 
+std\+::pair$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_iterator_a32fad03e172472c8f3f2a743ae04ae30}{Next}} ()
+\begin{DoxyCompactList}\small\item\em Advances the iterator to the next item. \end{DoxyCompactList}\item 
+std\+::pair$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_iterator_a771cc989bd4d35c883dd6fc270c7a07f}{Get\+Current}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current key-\/value pair. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_iterator_aaaae3453c1e8071ab05a7c8ba911cd1a}{snapshot\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_iterator_a85905824b5364afec0b6ba61fd03ac88}{prefix\+\_\+}}
+\item 
+std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}}, \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{persistence\+::\+Storage\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_iterator_a7de60e48faa9310bb4ddcfd436b708ed}{entries\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_iterator_a38e2853a52af74557a25b59a81af522d}{current\+Index\+\_\+}}
+\item 
+std\+::pair$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_iterator_a1a4a2df76218eaa4edbf30c66b881e04}{current\+Pair\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Iterator for storage items. 
+
+This class provides an iterator interface for storage items in the blockchain. It is used by the System.\+Storage.\+Find system call to iterate over storage items that match a given prefix. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_iterator_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_iterator_a27ea0db9668b8ab9eb3e65c63795f7a2}\index{neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}!StorageIterator@{StorageIterator}}
+\index{StorageIterator@{StorageIterator}!neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}}
+\doxysubsubsection{\texorpdfstring{StorageIterator()}{StorageIterator()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_iterator_a27ea0db9668b8ab9eb3e65c63795f7a2} 
+neo\+::smartcontract\+::\+Storage\+Iterator\+::\+Storage\+Iterator (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \&}]{prefix}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1smartcontract_1_1_storage_iterator}{Storage\+Iterator}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The data cache snapshot. \\
+\hline
+{\em prefix} & The storage key prefix to match. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_iterator_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_iterator_a771cc989bd4d35c883dd6fc270c7a07f}\index{neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}!GetCurrent@{GetCurrent}}
+\index{GetCurrent@{GetCurrent}!neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}}
+\doxysubsubsection{\texorpdfstring{GetCurrent()}{GetCurrent()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_iterator_a771cc989bd4d35c883dd6fc270c7a07f} 
+std\+::pair$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ neo\+::smartcontract\+::\+Storage\+Iterator\+::\+Get\+Current (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the current key-\/value pair. 
+
+\begin{DoxyReturn}{Returns}
+The current key-\/value pair. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if the iterator has not been advanced. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_iterator_a8ae050d5be174b7181ef5562a23dfeef}\index{neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}!HasNext@{HasNext}}
+\index{HasNext@{HasNext}!neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}}
+\doxysubsubsection{\texorpdfstring{HasNext()}{HasNext()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_iterator_a8ae050d5be174b7181ef5562a23dfeef} 
+bool neo\+::smartcontract\+::\+Storage\+Iterator\+::\+Has\+Next (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if there are more items in the iterator. 
+
+\begin{DoxyReturn}{Returns}
+True if there are more items, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_iterator_a32fad03e172472c8f3f2a743ae04ae30}\index{neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}!Next@{Next}}
+\index{Next@{Next}!neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}}
+\doxysubsubsection{\texorpdfstring{Next()}{Next()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_iterator_a32fad03e172472c8f3f2a743ae04ae30} 
+std\+::pair$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ neo\+::smartcontract\+::\+Storage\+Iterator\+::\+Next (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Advances the iterator to the next item. 
+
+\begin{DoxyReturn}{Returns}
+The key-\/value pair of the next item. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if there are no more items. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_iterator_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_iterator_a38e2853a52af74557a25b59a81af522d}\index{neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}!currentIndex\_@{currentIndex\_}}
+\index{currentIndex\_@{currentIndex\_}!neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}}
+\doxysubsubsection{\texorpdfstring{currentIndex\_}{currentIndex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_iterator_a38e2853a52af74557a25b59a81af522d} 
+size\+\_\+t neo\+::smartcontract\+::\+Storage\+Iterator\+::current\+Index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_iterator_a1a4a2df76218eaa4edbf30c66b881e04}\index{neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}!currentPair\_@{currentPair\_}}
+\index{currentPair\_@{currentPair\_}!neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}}
+\doxysubsubsection{\texorpdfstring{currentPair\_}{currentPair\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_iterator_a1a4a2df76218eaa4edbf30c66b881e04} 
+std\+::pair$<$\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}$>$ neo\+::smartcontract\+::\+Storage\+Iterator\+::current\+Pair\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_iterator_a7de60e48faa9310bb4ddcfd436b708ed}\index{neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}!entries\_@{entries\_}}
+\index{entries\_@{entries\_}!neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}}
+\doxysubsubsection{\texorpdfstring{entries\_}{entries\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_iterator_a7de60e48faa9310bb4ddcfd436b708ed} 
+std\+::vector$<$std\+::pair$<$\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}}, \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{persistence\+::\+Storage\+Item}}$>$ $>$ neo\+::smartcontract\+::\+Storage\+Iterator\+::entries\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_iterator_a85905824b5364afec0b6ba61fd03ac88}\index{neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}!prefix\_@{prefix\_}}
+\index{prefix\_@{prefix\_}!neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}}
+\doxysubsubsection{\texorpdfstring{prefix\_}{prefix\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_iterator_a85905824b5364afec0b6ba61fd03ac88} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} neo\+::smartcontract\+::\+Storage\+Iterator\+::prefix\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_iterator_aaaae3453c1e8071ab05a7c8ba911cd1a}\index{neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}!snapshot\_@{snapshot\_}}
+\index{snapshot\_@{snapshot\_}!neo::smartcontract::StorageIterator@{neo::smartcontract::StorageIterator}}
+\doxysubsubsection{\texorpdfstring{snapshot\_}{snapshot\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_iterator_aaaae3453c1e8071ab05a7c8ba911cd1a} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}}$>$ neo\+::smartcontract\+::\+Storage\+Iterator\+::snapshot\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/\mbox{\hyperlink{storage__iterator_8h}{storage\+\_\+iterator.\+h}}\item 
+src/smartcontract/\mbox{\hyperlink{storage__iterator_8cpp}{storage\+\_\+iterator.\+cpp}}\end{DoxyCompactItemize}

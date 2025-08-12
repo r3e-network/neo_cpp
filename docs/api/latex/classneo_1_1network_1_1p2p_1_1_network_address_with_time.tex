@@ -1,0 +1,695 @@
+\doxysection{neo\+::network\+::p2p\+::Network\+Address\+With\+Time Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{}\label{classneo_1_1network_1_1p2p_1_1_network_address_with_time}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+
+
+Represents a network address with a timestamp.  
+
+
+
+
+{\ttfamily \#include $<$network\+\_\+address.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::p2p\+::Network\+Address\+With\+Time\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::Network\+Address\+With\+Time\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ae7ca63acdc88ce34c22dff8ebd6a7eed}{Network\+Address\+With\+Time}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a2772b9319dadba32262763f6e3f6f7e5}{Network\+Address\+With\+Time}} (uint32\+\_\+t timestamp, const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \&address, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \&capabilities)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} with the specified timestamp, address, and capabilities. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a449410fdb5ed44399588733268559e85}{Get\+Timestamp}} () const
+\begin{DoxyCompactList}\small\item\em Gets the timestamp. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_adc91152b04e048e7e5b95843fc12a96c}{Set\+Timestamp}} (uint32\+\_\+t timestamp)
+\begin{DoxyCompactList}\small\item\em Sets the timestamp. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ae995062240087422b282d3d0eaf25b26}{Get\+Address}} () const
+\begin{DoxyCompactList}\small\item\em Gets the address. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a74607fce8551906a9ac176ef5c4186da}{Set\+Address}} (const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \&address)
+\begin{DoxyCompactList}\small\item\em Sets the address. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ac911a4a66789d95fd2cfd85fa2059fca}{Get\+Capabilities}} () const
+\begin{DoxyCompactList}\small\item\em Gets the capabilities. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a0df739c1d98cffc0f546e417680dc581}{Set\+Capabilities}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \&capabilities)
+\begin{DoxyCompactList}\small\item\em Sets the capabilities. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a1ee28c9c1a04fddfb68a48cd161f710a}{Get\+End\+Point}} () const
+\begin{DoxyCompactList}\small\item\em Gets the endpoint. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a7efc8f9ec13bfa8cd8c1990860747cb1}{Get\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the size of the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} in bytes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ab5fd1e028fd5af8821ba61790c7ba03e}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a2ff50a99ff5f5f217c9dfdcf77e77eb9}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aeaa31da72bbfb191d21e51716082a045}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aea2c59ba1bec0b58c861642a7cd7797f}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} from a JSON reader. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ae7ca63acdc88ce34c22dff8ebd6a7eed}{Network\+Address\+With\+Time}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ab31aa3fa2c4397080699df2d697a044a}{Network\+Address\+With\+Time}} (uint32\+\_\+t timestamp, uint64\+\_\+t services, const std\+::string \&address, uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} with the specified parameters. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a449410fdb5ed44399588733268559e85}{Get\+Timestamp}} () const
+\begin{DoxyCompactList}\small\item\em Gets the timestamp. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_adc91152b04e048e7e5b95843fc12a96c}{Set\+Timestamp}} (uint32\+\_\+t timestamp)
+\begin{DoxyCompactList}\small\item\em Sets the timestamp. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a0f04ceccea098d8d41c3da645827a157}{Get\+Services}} () const
+\begin{DoxyCompactList}\small\item\em Gets the services provided by the node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_abe627b36c3dd17043f5b0ddbde1081ca}{Set\+Services}} (uint64\+\_\+t services)
+\begin{DoxyCompactList}\small\item\em Sets the services provided by the node. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ae995062240087422b282d3d0eaf25b26}{Get\+Address}} () const
+\begin{DoxyCompactList}\small\item\em Gets the address. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ad1ba5e6c0e8b84daf7ea1f418232f8af}{Set\+Address}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Sets the address. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a7ea37a7bbda77590afcb8d9b084c7ec2}{Get\+Port}} () const
+\begin{DoxyCompactList}\small\item\em Gets the port. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a413c9a90d670b314dc630e756f13e3f1}{Set\+Port}} (uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em Sets the port. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ab5fd1e028fd5af8821ba61790c7ba03e}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a2ff50a99ff5f5f217c9dfdcf77e77eb9}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aeaa31da72bbfb191d21e51716082a045}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aea2c59ba1bec0b58c861642a7cd7797f}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} from a JSON reader. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a7efc8f9ec13bfa8cd8c1990860747cb1}{Get\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the size of the network address with time. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a86c40ed9924633e0838050823b615c83}{operator==}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} is equal to another \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aafacf19002d6d1c22e3a45c953cbb2f3}{operator!=}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} is not equal to another \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a8de8e8a933c548b2450edfdbe3aec70f}{timestamp\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a3b98d905518093733c791f79a382c1f2}{address\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a817e76bf919093f0c443958112d474c1}{capabilities\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a6285cb2772d301a6c82cd66013d37701}{services\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a29ea95da0cc16230fa88552e979afddf}{address\+\_\+}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a0707b06190f05ef0e5d8ac0c95278a05}{port\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a network address with a timestamp. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ae7ca63acdc88ce34c22dff8ebd6a7eed}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!NetworkAddressWithTime@{NetworkAddressWithTime}}
+\index{NetworkAddressWithTime@{NetworkAddressWithTime}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{NetworkAddressWithTime()}{NetworkAddressWithTime()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ae7ca63acdc88ce34c22dff8ebd6a7eed} 
+neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Network\+Address\+With\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time}. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a2772b9319dadba32262763f6e3f6f7e5}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!NetworkAddressWithTime@{NetworkAddressWithTime}}
+\index{NetworkAddressWithTime@{NetworkAddressWithTime}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{NetworkAddressWithTime()}{NetworkAddressWithTime()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a2772b9319dadba32262763f6e3f6f7e5} 
+neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Network\+Address\+With\+Time (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{timestamp}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \&}]{address}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \&}]{capabilities}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} with the specified timestamp, address, and capabilities. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & The timestamp. \\
+\hline
+{\em address} & The address. \\
+\hline
+{\em capabilities} & The capabilities. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ae7ca63acdc88ce34c22dff8ebd6a7eed}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!NetworkAddressWithTime@{NetworkAddressWithTime}}
+\index{NetworkAddressWithTime@{NetworkAddressWithTime}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{NetworkAddressWithTime()}{NetworkAddressWithTime()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ae7ca63acdc88ce34c22dff8ebd6a7eed} 
+neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Network\+Address\+With\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time}. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ab31aa3fa2c4397080699df2d697a044a}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!NetworkAddressWithTime@{NetworkAddressWithTime}}
+\index{NetworkAddressWithTime@{NetworkAddressWithTime}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{NetworkAddressWithTime()}{NetworkAddressWithTime()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ab31aa3fa2c4397080699df2d697a044a} 
+neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Network\+Address\+With\+Time (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{timestamp}{, }\item[{uint64\+\_\+t}]{services}{, }\item[{const std\+::string \&}]{address}{, }\item[{uint16\+\_\+t}]{port}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} with the specified parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & The timestamp. \\
+\hline
+{\em services} & The services provided by the node. \\
+\hline
+{\em address} & The address. \\
+\hline
+{\em port} & The port. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a2ff50a99ff5f5f217c9dfdcf77e77eb9}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a2ff50a99ff5f5f217c9dfdcf77e77eb9} 
+void neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a2ff50a99ff5f5f217c9dfdcf77e77eb9}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a2ff50a99ff5f5f217c9dfdcf77e77eb9} 
+void neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aea2c59ba1bec0b58c861642a7cd7797f}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aea2c59ba1bec0b58c861642a7cd7797f} 
+void neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aea2c59ba1bec0b58c861642a7cd7797f}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aea2c59ba1bec0b58c861642a7cd7797f} 
+void neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ae995062240087422b282d3d0eaf25b26}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!GetAddress@{GetAddress}}
+\index{GetAddress@{GetAddress}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{GetAddress()}{GetAddress()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ae995062240087422b282d3d0eaf25b26} 
+const std\+::string \& neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Get\+Address (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the address. 
+
+\begin{DoxyReturn}{Returns}
+The address. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ae995062240087422b282d3d0eaf25b26}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!GetAddress@{GetAddress}}
+\index{GetAddress@{GetAddress}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{GetAddress()}{GetAddress()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ae995062240087422b282d3d0eaf25b26} 
+const std\+::string \& neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Get\+Address (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the address. 
+
+\begin{DoxyReturn}{Returns}
+The address. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ac911a4a66789d95fd2cfd85fa2059fca}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!GetCapabilities@{GetCapabilities}}
+\index{GetCapabilities@{GetCapabilities}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{GetCapabilities()}{GetCapabilities()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ac911a4a66789d95fd2cfd85fa2059fca} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \& neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Get\+Capabilities (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the capabilities. 
+
+\begin{DoxyReturn}{Returns}
+The capabilities. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a1ee28c9c1a04fddfb68a48cd161f710a}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!GetEndPoint@{GetEndPoint}}
+\index{GetEndPoint@{GetEndPoint}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{GetEndPoint()}{GetEndPoint()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a1ee28c9c1a04fddfb68a48cd161f710a} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Get\+End\+Point (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the endpoint. 
+
+\begin{DoxyReturn}{Returns}
+The endpoint. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a7ea37a7bbda77590afcb8d9b084c7ec2}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!GetPort@{GetPort}}
+\index{GetPort@{GetPort}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{GetPort()}{GetPort()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a7ea37a7bbda77590afcb8d9b084c7ec2} 
+uint16\+\_\+t neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Get\+Port (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the port. 
+
+\begin{DoxyReturn}{Returns}
+The port. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a0f04ceccea098d8d41c3da645827a157}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!GetServices@{GetServices}}
+\index{GetServices@{GetServices}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{GetServices()}{GetServices()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a0f04ceccea098d8d41c3da645827a157} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Get\+Services (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the services provided by the node. 
+
+\begin{DoxyReturn}{Returns}
+The services provided by the node. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a7efc8f9ec13bfa8cd8c1990860747cb1}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a7efc8f9ec13bfa8cd8c1990860747cb1} 
+int neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the size of the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} in bytes. 
+
+\begin{DoxyReturn}{Returns}
+The size of the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time}. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a7efc8f9ec13bfa8cd8c1990860747cb1}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a7efc8f9ec13bfa8cd8c1990860747cb1} 
+int neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the size of the network address with time. 
+
+\begin{DoxyReturn}{Returns}
+The size of the network address with time. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a449410fdb5ed44399588733268559e85}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!GetTimestamp@{GetTimestamp}}
+\index{GetTimestamp@{GetTimestamp}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{GetTimestamp()}{GetTimestamp()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a449410fdb5ed44399588733268559e85} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Get\+Timestamp (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the timestamp. 
+
+\begin{DoxyReturn}{Returns}
+The timestamp. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a449410fdb5ed44399588733268559e85}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!GetTimestamp@{GetTimestamp}}
+\index{GetTimestamp@{GetTimestamp}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{GetTimestamp()}{GetTimestamp()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a449410fdb5ed44399588733268559e85} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Get\+Timestamp (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the timestamp. 
+
+\begin{DoxyReturn}{Returns}
+The timestamp. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aafacf19002d6d1c22e3a45c953cbb2f3}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aafacf19002d6d1c22e3a45c953cbb2f3} 
+bool neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} is not equal to another \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} objects are not equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a86c40ed9924633e0838050823b615c83}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a86c40ed9924633e0838050823b615c83} 
+bool neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} is equal to another \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} objects are equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ab5fd1e028fd5af8821ba61790c7ba03e}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ab5fd1e028fd5af8821ba61790c7ba03e} 
+void neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ab5fd1e028fd5af8821ba61790c7ba03e}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ab5fd1e028fd5af8821ba61790c7ba03e} 
+void neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aeaa31da72bbfb191d21e51716082a045}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aeaa31da72bbfb191d21e51716082a045} 
+void neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aeaa31da72bbfb191d21e51716082a045}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aeaa31da72bbfb191d21e51716082a045} 
+void neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1_network_address_with_time}{Network\+Address\+With\+Time} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a74607fce8551906a9ac176ef5c4186da}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!SetAddress@{SetAddress}}
+\index{SetAddress@{SetAddress}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{SetAddress()}{SetAddress()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a74607fce8551906a9ac176ef5c4186da} 
+void neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Set\+Address (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \&}]{address}{}\end{DoxyParamCaption})}
+
+
+
+Sets the address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The address. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ad1ba5e6c0e8b84daf7ea1f418232f8af}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!SetAddress@{SetAddress}}
+\index{SetAddress@{SetAddress}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{SetAddress()}{SetAddress()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_ad1ba5e6c0e8b84daf7ea1f418232f8af} 
+void neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Set\+Address (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})}
+
+
+
+Sets the address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The address. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a0df739c1d98cffc0f546e417680dc581}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!SetCapabilities@{SetCapabilities}}
+\index{SetCapabilities@{SetCapabilities}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{SetCapabilities()}{SetCapabilities()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a0df739c1d98cffc0f546e417680dc581} 
+void neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Set\+Capabilities (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \&}]{capabilities}{}\end{DoxyParamCaption})}
+
+
+
+Sets the capabilities. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em capabilities} & The capabilities. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a413c9a90d670b314dc630e756f13e3f1}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!SetPort@{SetPort}}
+\index{SetPort@{SetPort}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{SetPort()}{SetPort()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a413c9a90d670b314dc630e756f13e3f1} 
+void neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Set\+Port (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{port}{}\end{DoxyParamCaption})}
+
+
+
+Sets the port. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & The port. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_abe627b36c3dd17043f5b0ddbde1081ca}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!SetServices@{SetServices}}
+\index{SetServices@{SetServices}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{SetServices()}{SetServices()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_abe627b36c3dd17043f5b0ddbde1081ca} 
+void neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Set\+Services (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{services}{}\end{DoxyParamCaption})}
+
+
+
+Sets the services provided by the node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em services} & The services provided by the node. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_adc91152b04e048e7e5b95843fc12a96c}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!SetTimestamp@{SetTimestamp}}
+\index{SetTimestamp@{SetTimestamp}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{SetTimestamp()}{SetTimestamp()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_adc91152b04e048e7e5b95843fc12a96c} 
+void neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Set\+Timestamp (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{timestamp}{}\end{DoxyParamCaption})}
+
+
+
+Sets the timestamp. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & The timestamp. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_adc91152b04e048e7e5b95843fc12a96c}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!SetTimestamp@{SetTimestamp}}
+\index{SetTimestamp@{SetTimestamp}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{SetTimestamp()}{SetTimestamp()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_adc91152b04e048e7e5b95843fc12a96c} 
+void neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::\+Set\+Timestamp (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{timestamp}{}\end{DoxyParamCaption})}
+
+
+
+Sets the timestamp. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & The timestamp. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a3b98d905518093733c791f79a382c1f2}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!address\_@{address\_}}
+\index{address\_@{address\_}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{address\_}{address\_}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a3b98d905518093733c791f79a382c1f2} 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::address\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a29ea95da0cc16230fa88552e979afddf}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!address\_@{address\_}}
+\index{address\_@{address\_}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{address\_}{address\_}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a29ea95da0cc16230fa88552e979afddf} 
+std\+::string neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::address\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a817e76bf919093f0c443958112d474c1}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!capabilities\_@{capabilities\_}}
+\index{capabilities\_@{capabilities\_}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{capabilities\_}{capabilities\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a817e76bf919093f0c443958112d474c1} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}}$>$ neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::capabilities\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a0707b06190f05ef0e5d8ac0c95278a05}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!port\_@{port\_}}
+\index{port\_@{port\_}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{port\_}{port\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a0707b06190f05ef0e5d8ac0c95278a05} 
+uint16\+\_\+t neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::port\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a6285cb2772d301a6c82cd66013d37701}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!services\_@{services\_}}
+\index{services\_@{services\_}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{services\_}{services\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a6285cb2772d301a6c82cd66013d37701} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::services\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a8de8e8a933c548b2450edfdbe3aec70f}\index{neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}!timestamp\_@{timestamp\_}}
+\index{timestamp\_@{timestamp\_}!neo::network::p2p::NetworkAddressWithTime@{neo::network::p2p::NetworkAddressWithTime}}
+\doxysubsubsection{\texorpdfstring{timestamp\_}{timestamp\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_address_with_time_a8de8e8a933c548b2450edfdbe3aec70f} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time\+::timestamp\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/\mbox{\hyperlink{p2p_2network__address_8h}{network\+\_\+address.\+h}}\item 
+include/neo/network/p2p/\mbox{\hyperlink{network__address__with__time_8h}{network\+\_\+address\+\_\+with\+\_\+time.\+h}}\item 
+src/network/p2p/\mbox{\hyperlink{p2p_2network__address_8cpp}{network\+\_\+address.\+cpp}}\item 
+src/network/p2p/\mbox{\hyperlink{network__address__with__time_8cpp}{network\+\_\+address\+\_\+with\+\_\+time.\+cpp}}\end{DoxyCompactItemize}

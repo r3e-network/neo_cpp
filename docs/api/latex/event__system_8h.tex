@@ -1,0 +1,40 @@
+\doxysection{include/neo/ledger/event\+\_\+system.h File Reference}
+\hypertarget{event__system_8h}{}\label{event__system_8h}\index{include/neo/ledger/event\_system.h@{include/neo/ledger/event\_system.h}}
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+{\ttfamily \#include $<$neo/ledger/transaction.\+h$>$}\newline
+Include dependency graph for event\+\_\+system.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events}{neo\+::ledger\+::\+Memory\+Pool\+Events}}
+\begin{DoxyCompactList}\small\item\em Static event system that mimics C\#\textquotesingle{}s static event pattern. This provides compatibility with C\# Neo\textquotesingle{}s event handling while using C++ callbacks internally. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events}{neo\+::ledger\+::\+Blockchain\+Events}}
+\begin{DoxyCompactList}\small\item\em Static event system for \doxylink{classneo_1_1ledger_1_1_blockchain}{Blockchain} events. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{neo\+::ledger\+::\+Event\+Subscription$<$ Event\+Class, Handler $>$}}
+\begin{DoxyCompactList}\small\item\em RAII-\/style event subscription helper. Automatically unsubscribes when the object is destroyed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1ledger}{neo\+::ledger}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1ledger_af65b5fb5acc571f2965eda2f2eb93888}{neo\+::ledger\+::\+Memory\+Pool\+Transaction\+Added\+Subscription}}
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1ledger_a06b70f58a0d6cba4efe79bedbf59d8e7}{neo\+::ledger\+::\+Memory\+Pool\+Transaction\+Removed\+Subscription}}
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1ledger_a71e176c85266c9278d7182058bd34eeb}{neo\+::ledger\+::\+Blockchain\+Committing\+Subscription}} = \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{Event\+Subscription}}$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events}{Blockchain\+Events}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a2c75f8c0eae71f22fcc2e44c62ca25cb}{Blockchain\+Events\+::\+Committing\+Handler}}$>$
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1ledger_a8df55c847ebf526ce62a5bf60c073599}{neo\+::ledger\+::\+Blockchain\+Committed\+Subscription}} = \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{Event\+Subscription}}$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events}{Blockchain\+Events}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a8a9edee4f1eb0241b4b5fa9233db684c}{Blockchain\+Events\+::\+Committed\+Handler}}$>$
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1ledger_a8ee7fac2a4c38e594f10843ffca9ab41}{neo\+::ledger\+::\+Blockchain\+Block\+Persisted\+Subscription}}
+\end{DoxyCompactItemize}

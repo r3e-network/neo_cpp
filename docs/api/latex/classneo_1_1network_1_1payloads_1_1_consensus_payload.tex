@@ -1,0 +1,409 @@
+\doxysection{neo\+::network\+::payloads\+::Consensus\+Payload Class Reference}
+\hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload}{}\label{classneo_1_1network_1_1payloads_1_1_consensus_payload}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+
+
+Represents a consensus payload.  
+
+
+
+
+{\ttfamily \#include $<$consensus\+\_\+payload.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::payloads\+::Consensus\+Payload\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::payloads\+::Consensus\+Payload\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_aec98a1b922061658c4fefb51a5a97fd9}{Consensus\+Payload}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1network_1_1payloads_1_1_consensus_payload}{Consensus\+Payload}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_a72e815cbecf6c57ad0bff35ee7959d1f}{Consensus\+Payload}} (uint32\+\_\+t version, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&prev\+Hash, uint32\+\_\+t block\+Index, uint16\+\_\+t validator\+Index, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1payloads_1_1_consensus_payload}{Consensus\+Payload} with the specified parameters. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_ad1fa87a20bf18086996e7b5da38a6509}{Get\+Version}} () const
+\begin{DoxyCompactList}\small\item\em Gets the version. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_ac9e67e2d718b14e4ba35fc5bed8236bb}{Set\+Version}} (uint32\+\_\+t version)
+\begin{DoxyCompactList}\small\item\em Sets the version. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_ae01f820dd04e7010aab8b0441374efd7}{Get\+Prev\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the previous block hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_a907c14beceed559f1ae4eec699863a99}{Set\+Prev\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&prev\+Hash)
+\begin{DoxyCompactList}\small\item\em Sets the previous block hash. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_aa4f78a219a470172aafa67779bc33df0}{Get\+Block\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Gets the block index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_a7cface755ed454be2c6d14693ddb68b6}{Set\+Block\+Index}} (uint32\+\_\+t block\+Index)
+\begin{DoxyCompactList}\small\item\em Sets the block index. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_aedd04598c5597eac23bd89109b7886ee}{Get\+Validator\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Gets the validator index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_a482b171e10354b5230a8b0f3765ec388}{Set\+Validator\+Index}} (uint16\+\_\+t validator\+Index)
+\begin{DoxyCompactList}\small\item\em Sets the validator index. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_ae7475069ccc7142d8067cd7f6155d963}{Get\+Data}} () const
+\begin{DoxyCompactList}\small\item\em Gets the consensus data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_a84862389cf32cbb6623d93c103c53c48}{Set\+Data}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data)
+\begin{DoxyCompactList}\small\item\em Sets the consensus data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_a498dd136f02c0ff0590d6f5e30a5bfe4}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1payloads_1_1_consensus_payload}{Consensus\+Payload} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_a756668f41c3a38556d5b4f322ba0e632}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1payloads_1_1_consensus_payload}{Consensus\+Payload} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_af1264c3b741d1318abfa1b62ba2f7492}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1payloads_1_1_consensus_payload}{Consensus\+Payload} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_a39ccb0e7b1a12961c1539f14fbfcb3f6}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1payloads_1_1_consensus_payload}{Consensus\+Payload} from a JSON reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1network_1_1_i_payload}{neo\+::network\+::\+IPayload}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1_i_payload_a682117721a2def472fd1e3cff290d721}{\texorpdfstring{$\sim$}{\string~}\+IPayload}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_aac86eea91c6e240862faeac2d57ceab9}{version\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_a6641801c15cede29777b3186ccdc0f62}{prev\+Hash\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_a65a23d536e19a135ac04447c7f31f0c1}{block\+Index\+\_\+}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_a60c73a1a9752558f1fba0eb2b8b6ce09}{validator\+Index\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_af047a5b3afd033ea20c5bdfbd3496802}{data\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a consensus payload. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_aec98a1b922061658c4fefb51a5a97fd9}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!ConsensusPayload@{ConsensusPayload}}
+\index{ConsensusPayload@{ConsensusPayload}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{ConsensusPayload()}{ConsensusPayload()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_aec98a1b922061658c4fefb51a5a97fd9} 
+neo\+::network\+::payloads\+::\+Consensus\+Payload\+::\+Consensus\+Payload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1network_1_1payloads_1_1_consensus_payload}{Consensus\+Payload}. 
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_a72e815cbecf6c57ad0bff35ee7959d1f}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!ConsensusPayload@{ConsensusPayload}}
+\index{ConsensusPayload@{ConsensusPayload}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{ConsensusPayload()}{ConsensusPayload()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_a72e815cbecf6c57ad0bff35ee7959d1f} 
+neo\+::network\+::payloads\+::\+Consensus\+Payload\+::\+Consensus\+Payload (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{version}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{prev\+Hash}{, }\item[{uint32\+\_\+t}]{block\+Index}{, }\item[{uint16\+\_\+t}]{validator\+Index}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1payloads_1_1_consensus_payload}{Consensus\+Payload} with the specified parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em version} & The version of the payload. \\
+\hline
+{\em prev\+Hash} & The previous block hash. \\
+\hline
+{\em block\+Index} & The block index. \\
+\hline
+{\em validator\+Index} & The validator index. \\
+\hline
+{\em data} & The consensus data. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_a756668f41c3a38556d5b4f322ba0e632}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_a756668f41c3a38556d5b4f322ba0e632} 
+void neo\+::network\+::payloads\+::\+Consensus\+Payload\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1payloads_1_1_consensus_payload}{Consensus\+Payload} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_a39ccb0e7b1a12961c1539f14fbfcb3f6}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_a39ccb0e7b1a12961c1539f14fbfcb3f6} 
+void neo\+::network\+::payloads\+::\+Consensus\+Payload\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1payloads_1_1_consensus_payload}{Consensus\+Payload} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_aa4f78a219a470172aafa67779bc33df0}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!GetBlockIndex@{GetBlockIndex}}
+\index{GetBlockIndex@{GetBlockIndex}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{GetBlockIndex()}{GetBlockIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_aa4f78a219a470172aafa67779bc33df0} 
+uint32\+\_\+t neo\+::network\+::payloads\+::\+Consensus\+Payload\+::\+Get\+Block\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the block index. 
+
+\begin{DoxyReturn}{Returns}
+The block index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_ae7475069ccc7142d8067cd7f6155d963}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!GetData@{GetData}}
+\index{GetData@{GetData}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{GetData()}{GetData()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_ae7475069ccc7142d8067cd7f6155d963} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::network\+::payloads\+::\+Consensus\+Payload\+::\+Get\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the consensus data. 
+
+\begin{DoxyReturn}{Returns}
+The consensus data. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_ae01f820dd04e7010aab8b0441374efd7}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!GetPrevHash@{GetPrevHash}}
+\index{GetPrevHash@{GetPrevHash}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{GetPrevHash()}{GetPrevHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_ae01f820dd04e7010aab8b0441374efd7} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& neo\+::network\+::payloads\+::\+Consensus\+Payload\+::\+Get\+Prev\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the previous block hash. 
+
+\begin{DoxyReturn}{Returns}
+The previous block hash. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_aedd04598c5597eac23bd89109b7886ee}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!GetValidatorIndex@{GetValidatorIndex}}
+\index{GetValidatorIndex@{GetValidatorIndex}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{GetValidatorIndex()}{GetValidatorIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_aedd04598c5597eac23bd89109b7886ee} 
+uint16\+\_\+t neo\+::network\+::payloads\+::\+Consensus\+Payload\+::\+Get\+Validator\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the validator index. 
+
+\begin{DoxyReturn}{Returns}
+The validator index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_ad1fa87a20bf18086996e7b5da38a6509}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!GetVersion@{GetVersion}}
+\index{GetVersion@{GetVersion}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{GetVersion()}{GetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_ad1fa87a20bf18086996e7b5da38a6509} 
+uint32\+\_\+t neo\+::network\+::payloads\+::\+Consensus\+Payload\+::\+Get\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the version. 
+
+\begin{DoxyReturn}{Returns}
+The version. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_a498dd136f02c0ff0590d6f5e30a5bfe4}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_a498dd136f02c0ff0590d6f5e30a5bfe4} 
+void neo\+::network\+::payloads\+::\+Consensus\+Payload\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1payloads_1_1_consensus_payload}{Consensus\+Payload} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_af1264c3b741d1318abfa1b62ba2f7492}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_af1264c3b741d1318abfa1b62ba2f7492} 
+void neo\+::network\+::payloads\+::\+Consensus\+Payload\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1payloads_1_1_consensus_payload}{Consensus\+Payload} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_a7cface755ed454be2c6d14693ddb68b6}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!SetBlockIndex@{SetBlockIndex}}
+\index{SetBlockIndex@{SetBlockIndex}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{SetBlockIndex()}{SetBlockIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_a7cface755ed454be2c6d14693ddb68b6} 
+void neo\+::network\+::payloads\+::\+Consensus\+Payload\+::\+Set\+Block\+Index (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{block\+Index}{}\end{DoxyParamCaption})}
+
+
+
+Sets the block index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\+Index} & The block index. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_a84862389cf32cbb6623d93c103c53c48}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!SetData@{SetData}}
+\index{SetData@{SetData}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{SetData()}{SetData()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_a84862389cf32cbb6623d93c103c53c48} 
+void neo\+::network\+::payloads\+::\+Consensus\+Payload\+::\+Set\+Data (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Sets the consensus data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The consensus data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_a907c14beceed559f1ae4eec699863a99}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!SetPrevHash@{SetPrevHash}}
+\index{SetPrevHash@{SetPrevHash}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{SetPrevHash()}{SetPrevHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_a907c14beceed559f1ae4eec699863a99} 
+void neo\+::network\+::payloads\+::\+Consensus\+Payload\+::\+Set\+Prev\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{prev\+Hash}{}\end{DoxyParamCaption})}
+
+
+
+Sets the previous block hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prev\+Hash} & The previous block hash. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_a482b171e10354b5230a8b0f3765ec388}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!SetValidatorIndex@{SetValidatorIndex}}
+\index{SetValidatorIndex@{SetValidatorIndex}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{SetValidatorIndex()}{SetValidatorIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_a482b171e10354b5230a8b0f3765ec388} 
+void neo\+::network\+::payloads\+::\+Consensus\+Payload\+::\+Set\+Validator\+Index (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{validator\+Index}{}\end{DoxyParamCaption})}
+
+
+
+Sets the validator index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em validator\+Index} & The validator index. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_ac9e67e2d718b14e4ba35fc5bed8236bb}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!SetVersion@{SetVersion}}
+\index{SetVersion@{SetVersion}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{SetVersion()}{SetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_ac9e67e2d718b14e4ba35fc5bed8236bb} 
+void neo\+::network\+::payloads\+::\+Consensus\+Payload\+::\+Set\+Version (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{version}{}\end{DoxyParamCaption})}
+
+
+
+Sets the version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em version} & The version. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_a65a23d536e19a135ac04447c7f31f0c1}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!blockIndex\_@{blockIndex\_}}
+\index{blockIndex\_@{blockIndex\_}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{blockIndex\_}{blockIndex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_a65a23d536e19a135ac04447c7f31f0c1} 
+uint32\+\_\+t neo\+::network\+::payloads\+::\+Consensus\+Payload\+::block\+Index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_af047a5b3afd033ea20c5bdfbd3496802}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!data\_@{data\_}}
+\index{data\_@{data\_}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_af047a5b3afd033ea20c5bdfbd3496802} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::network\+::payloads\+::\+Consensus\+Payload\+::data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_a6641801c15cede29777b3186ccdc0f62}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!prevHash\_@{prevHash\_}}
+\index{prevHash\_@{prevHash\_}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{prevHash\_}{prevHash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_a6641801c15cede29777b3186ccdc0f62} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::network\+::payloads\+::\+Consensus\+Payload\+::prev\+Hash\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_a60c73a1a9752558f1fba0eb2b8b6ce09}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!validatorIndex\_@{validatorIndex\_}}
+\index{validatorIndex\_@{validatorIndex\_}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{validatorIndex\_}{validatorIndex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_a60c73a1a9752558f1fba0eb2b8b6ce09} 
+uint16\+\_\+t neo\+::network\+::payloads\+::\+Consensus\+Payload\+::validator\+Index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_consensus_payload_aac86eea91c6e240862faeac2d57ceab9}\index{neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}!version\_@{version\_}}
+\index{version\_@{version\_}!neo::network::payloads::ConsensusPayload@{neo::network::payloads::ConsensusPayload}}
+\doxysubsubsection{\texorpdfstring{version\_}{version\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_consensus_payload_aac86eea91c6e240862faeac2d57ceab9} 
+uint32\+\_\+t neo\+::network\+::payloads\+::\+Consensus\+Payload\+::version\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/payloads/\mbox{\hyperlink{consensus__payload_8h}{consensus\+\_\+payload.\+h}}\end{DoxyCompactItemize}

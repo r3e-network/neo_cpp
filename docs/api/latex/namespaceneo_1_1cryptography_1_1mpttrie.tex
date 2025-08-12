@@ -1,0 +1,60 @@
+\doxysection{neo\+::cryptography\+::mpttrie Namespace Reference}
+\hypertarget{namespaceneo_1_1cryptography_1_1mpttrie}{}\label{namespaceneo_1_1cryptography_1_1mpttrie}\index{neo::cryptography::mpttrie@{neo::cryptography::mpttrie}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_cache}{Cache}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1cryptography_1_1mpttrie_1_1_cache}{Cache} for MPT nodes. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node} in the Merkle Patricia \doxylink{classneo_1_1cryptography_1_1mpttrie_1_1_trie}{Trie}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1cryptography_1_1mpttrie_1_1_trie}{Trie}}
+\begin{DoxyCompactList}\small\item\em Merkle Patricia \doxylink{classneo_1_1cryptography_1_1mpttrie_1_1_trie}{Trie} implementation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406}{Node\+Type}} \+: uint8\+\_\+t \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406a4382dd6faa0a11dc0e7181408be1a3e7}{Branch\+Node}} = 0x00
+, \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406aa10d290e15ab44d7a046943dd3d62b5f}{Extension\+Node}} = 0x01
+, \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406a267b9f7cb10c41f037e84a25ef20801f}{Leaf\+Node}} = 0x02
+, \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406a9244d95a4959d4a3ac182ab25fe65cbd}{Hash\+Node}} = 0x03
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406ace2c8aed9c2fa0cfbed56cbda4d8bf07}{Empty}} = 0x04
+ \}
+\begin{DoxyCompactList}\small\item\em Node types in the Merkle Patricia Trie. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-enum-members}
+\Hypertarget{namespaceneo_1_1cryptography_1_1mpttrie_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406}\index{neo::cryptography::mpttrie@{neo::cryptography::mpttrie}!NodeType@{NodeType}}
+\index{NodeType@{NodeType}!neo::cryptography::mpttrie@{neo::cryptography::mpttrie}}
+\doxysubsubsection{\texorpdfstring{NodeType}{NodeType}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406} 
+enum class \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406}{neo\+::cryptography\+::mpttrie\+::\+Node\+Type}} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+\doxylink{classneo_1_1cryptography_1_1mpttrie_1_1_node}{Node} types in the Merkle Patricia \doxylink{classneo_1_1cryptography_1_1mpttrie_1_1_trie}{Trie}. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BranchNode@{BranchNode}!neo::cryptography::mpttrie@{neo::cryptography::mpttrie}}\index{neo::cryptography::mpttrie@{neo::cryptography::mpttrie}!BranchNode@{BranchNode}}}\Hypertarget{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406a4382dd6faa0a11dc0e7181408be1a3e7}\label{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406a4382dd6faa0a11dc0e7181408be1a3e7} 
+Branch\+Node&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ExtensionNode@{ExtensionNode}!neo::cryptography::mpttrie@{neo::cryptography::mpttrie}}\index{neo::cryptography::mpttrie@{neo::cryptography::mpttrie}!ExtensionNode@{ExtensionNode}}}\Hypertarget{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406aa10d290e15ab44d7a046943dd3d62b5f}\label{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406aa10d290e15ab44d7a046943dd3d62b5f} 
+Extension\+Node&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{LeafNode@{LeafNode}!neo::cryptography::mpttrie@{neo::cryptography::mpttrie}}\index{neo::cryptography::mpttrie@{neo::cryptography::mpttrie}!LeafNode@{LeafNode}}}\Hypertarget{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406a267b9f7cb10c41f037e84a25ef20801f}\label{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406a267b9f7cb10c41f037e84a25ef20801f} 
+Leaf\+Node&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HashNode@{HashNode}!neo::cryptography::mpttrie@{neo::cryptography::mpttrie}}\index{neo::cryptography::mpttrie@{neo::cryptography::mpttrie}!HashNode@{HashNode}}}\Hypertarget{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406a9244d95a4959d4a3ac182ab25fe65cbd}\label{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406a9244d95a4959d4a3ac182ab25fe65cbd} 
+Hash\+Node&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Empty@{Empty}!neo::cryptography::mpttrie@{neo::cryptography::mpttrie}}\index{neo::cryptography::mpttrie@{neo::cryptography::mpttrie}!Empty@{Empty}}}\Hypertarget{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406ace2c8aed9c2fa0cfbed56cbda4d8bf07}\label{namespaceneo_1_1cryptography_1_1mpttrie_afc824d43c600959d6bf825e85149d406ace2c8aed9c2fa0cfbed56cbda4d8bf07} 
+Empty&\\
+\hline
+
+\end{DoxyEnumFields}

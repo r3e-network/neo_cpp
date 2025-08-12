@@ -1,0 +1,159 @@
+\doxysection{interop\+\_\+service.\+h}
+\hypertarget{interop__service_8h_source}{}\label{interop__service_8h_source}\index{include/neo/smartcontract/interop\_service.h@{include/neo/smartcontract/interop\_service.h}}
+\mbox{\hyperlink{interop__service_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Copyright\ (C)\ 2015-\/2025\ The\ Neo\ Project.}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ interop\_service.h\ file\ belongs\ to\ the\ neo\ project\ and\ is\ free}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ software\ distributed\ under\ the\ MIT\ software\ license,\ see\ the}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ accompanying\ file\ LICENSE\ in\ the\ main\ directory\ of\ the}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ repository\ or\ http://www.opensource.org/licenses/mit-\/license.php}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ for\ more\ details.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Redistribution\ and\ use\ in\ source\ and\ binary\ forms\ with\ or\ without}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ modifications\ are\ permitted.}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ NEO\_SMARTCONTRACT\_INTEROP\_SERVICE\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ NEO\_SMARTCONTRACT\_INTEROP\_SERVICE\_H}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{interop__descriptor_8h}{neo/smartcontract/interop\_descriptor.h}}"{}}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ "{}\mbox{\hyperlink{interop__parameter__descriptor_8h}{neo/smartcontract/interop\_parameter\_descriptor.h}}"{}}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo}{neo}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract}{smartcontract}}}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a4e2744d5854d2283a6f41081acabf54a}{InteropService}}}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a4e2744d5854d2283a6f41081acabf54a}{InteropService}}\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a1babe5a613ea34fab9613e7edbd08a0c}{instance}}();}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_af32972386702bd0526ed86aee72dd7d2}{initialize}}();}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{const}\ std::unordered\_map<uint32\_t,\ InteropDescriptor>\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a51247451a7715147503a3fcc2fede584}{services}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a1d2ce18adc77f7b3528d7b05ecd4c3c6}{services\_}};\ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}*\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_aae09565dcf767d9099590b60c16aa487}{get\_descriptor}}(uint32\_t\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_ae4bd3054762f237f9623f2853232cd0d}{register\_service}}(\textcolor{keyword}{const}\ std::string\&\ name,\ std::function<\textcolor{keywordtype}{void}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&)>\ handler,}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int64\_t\ fixed\_price,\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{CallFlags}}\ required\_call\_flags);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{comment}{//\ System.Runtime\ services}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a997e4b81f39766731bd0e1deaa31f344}{runtime\_platform}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_aa4a6b74c6e31f4ad601764a8d379c670}{runtime\_get\_network}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a7f082ce5b18130a061a8cf16a6c95615}{runtime\_get\_address\_version}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a70c84890957d641d8ffe7a180350fdc5}{runtime\_get\_trigger}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a25a877d127d5d8827964f72924b6a2ec}{runtime\_get\_time}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a6d2d7c759072ca951f1aec43be7eb198}{runtime\_get\_script\_container}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a27d4e0baf2fdbfb2c68e5f69f6d26878}{runtime\_get\_executing\_script\_hash}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a399d4f4f24d5dbaa48cd7227d046c994}{runtime\_get\_calling\_script\_hash}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a4ab3287a3d57690f9ca183c0fda2f943}{runtime\_get\_entry\_script\_hash}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_afdb9700d82a580cf9405d046373dba4e}{runtime\_load\_script}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a829fc0128a0dfc1ada93980b92975a2f}{runtime\_check\_witness}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a7748ce3832dbd39a1b933ad46cdc1510}{runtime\_get\_invocation\_counter}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a1c2055ab9e6ccb00d81c9846cb095cbf}{runtime\_get\_random}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a62037bb93e331384dcfb37ea0c97a8e1}{runtime\_log}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_aa42d5a559107f296d65e8003e6c72a41}{runtime\_notify}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a6de76147ce36d9cc54a71f69a197aa43}{runtime\_get\_notifications}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a25eeb002dbac4f46a6d3e1640122ec43}{runtime\_gas\_left}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a885d617a56d43690f1fdd5a1af49114b}{runtime\_burn\_gas}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_aa3d1cf589c85731fd37d6569549b0ff3}{runtime\_current\_signers}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{comment}{//\ System.Crypto\ services}}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_ae2a6608527d200a8676b71ac91dcde36}{crypto\_check\_sig}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a909b2c288379e230a5b9c31d36983e96}{crypto\_check\_multisig}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{comment}{//\ System.Contract\ services}}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_afc549fa791e54097aef6a1dfd887dfb6}{contract\_call}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_abfdc4e06135b76f2917578a777aed25b}{contract\_call\_native}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a324ee559ff870c23f086ccc86b899d7e}{contract\_get\_call\_flags}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a53c4a2c5aa888d5f254f82cbf8351500}{contract\_create\_standard\_account}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_aae9c86625244e3d5f74a2447a6657ed1}{contract\_create\_multisig\_account}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a90547e3045072ffcf9a9ea8a8aed08ef}{contract\_native\_on\_persist}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_aa66ef7ccfd610cb0a8f9a945b796351f}{contract\_native\_post\_persist}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{comment}{//\ System.Storage\ services}}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a1f6f2572406f1a1f066b9dff3704931d}{storage\_get\_context}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_af1b0acddb364cfe7379ef2e10ea5e2db}{storage\_get\_readonly\_context}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_abd16100f01cd9dc908ec759b58692f8d}{storage\_as\_readonly}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a82b069a3a1a9d1bf30a048e8b41732be}{storage\_get}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a50d983005e16ea9752253c3b901264c7}{storage\_find}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a34fac5d6291ae605261e49272fd2c6e8}{storage\_put}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a13c5c69790d2cc15ffea87e6c3b1dc38}{storage\_delete}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{comment}{//\ System.Iterator\ services}}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a44cb1d04715a5d1a0e578284bf83f3bf}{iterator\_next}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_aadb80030b88c823c2c94a188c0abb5d3}{iterator\_value}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00111\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a4e2744d5854d2283a6f41081acabf54a}{InteropService}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ std::unordered\_map<uint32\_t,\ InteropDescriptor>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a1d2ce18adc77f7b3528d7b05ecd4c3c6}{services\_}};}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_ac68da804a6e6c08d773a67eb88686eb6}{register\_builtin\_services}}();}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_service_a0eb360f201ab4abde92ee93ff1ef411c}{register\_service\_internal}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\&\ descriptor);}
+\DoxyCodeLine{00124\ \};}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \textcolor{comment}{//\ Global\ interop\ descriptors\ (matching\ C\#\ static\ readonly\ fields)}}
+\DoxyCodeLine{00127\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors}{interop\_descriptors}}}
+\DoxyCodeLine{00128\ \{}
+\DoxyCodeLine{00129\ \textcolor{comment}{//\ System.Runtime}}
+\DoxyCodeLine{00130\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a91f829d025f68a8c02f39c29007ee93d}{system\_runtime\_platform}};}
+\DoxyCodeLine{00131\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_ac333a19c251a573d6bf34b686fa319b1}{system\_runtime\_get\_network}};}
+\DoxyCodeLine{00132\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_ab25294c5b9a16784cbc6706bc7a6e493}{system\_runtime\_get\_address\_version}};}
+\DoxyCodeLine{00133\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_acf22319cbadf192c1d73263cbd2522a5}{system\_runtime\_get\_trigger}};}
+\DoxyCodeLine{00134\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a5aea165d6426610d744a7be32917e902}{system\_runtime\_get\_time}};}
+\DoxyCodeLine{00135\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a416b9878162ccbeafaac003d1aa3bced}{system\_runtime\_get\_script\_container}};}
+\DoxyCodeLine{00136\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a6fb2b72fa291126128b8dc845fa97239}{system\_runtime\_get\_executing\_script\_hash}};}
+\DoxyCodeLine{00137\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a7980597fb329db05288286b84489f1fd}{system\_runtime\_get\_calling\_script\_hash}};}
+\DoxyCodeLine{00138\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_afef31942619424770716d6f236f5df80}{system\_runtime\_get\_entry\_script\_hash}};}
+\DoxyCodeLine{00139\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_ab05521162348d628aa0b84c223eec8d2}{system\_runtime\_load\_script}};}
+\DoxyCodeLine{00140\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a5cceb674565e83c8f3d9b5769bf5c093}{system\_runtime\_check\_witness}};}
+\DoxyCodeLine{00141\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a2f6c04ce3153ef897d62de7200566be2}{system\_runtime\_get\_invocation\_counter}};}
+\DoxyCodeLine{00142\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_ad92b87675c9ee3490aeed9a3684e0781}{system\_runtime\_get\_random}};}
+\DoxyCodeLine{00143\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a35ca6e8cc3b407f4d3f0525ed9d2d566}{system\_runtime\_log}};}
+\DoxyCodeLine{00144\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a25e5c8cc645d34ef1e68a8983a6494c2}{system\_runtime\_notify}};}
+\DoxyCodeLine{00145\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a5d4985affaa1ec621b805fdf8261220e}{system\_runtime\_get\_notifications}};}
+\DoxyCodeLine{00146\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_adc9a56f49b31e4933d7a7c153385c4f6}{system\_runtime\_gas\_left}};}
+\DoxyCodeLine{00147\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a66491cecc59e842e163c1730ab146aa5}{system\_runtime\_burn\_gas}};}
+\DoxyCodeLine{00148\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_ae4860f88f9881eca0ea9b1233d991aa4}{system\_runtime\_current\_signers}};}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \textcolor{comment}{//\ System.Crypto}}
+\DoxyCodeLine{00151\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a15ed9fb88279cf8d3e74512660db34b2}{system\_crypto\_check\_sig}};}
+\DoxyCodeLine{00152\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_aabd739e952a734b23727458f12f990b6}{system\_crypto\_check\_multisig}};}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \textcolor{comment}{//\ System.Contract}}
+\DoxyCodeLine{00155\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a892bb5ff182e1299e5bf798dd12ce7e1}{system\_contract\_call}};}
+\DoxyCodeLine{00156\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_ab21b1bd89c1b9acf8a4a50d66c79ba57}{system\_contract\_call\_native}};}
+\DoxyCodeLine{00157\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_aef090e70b7cc4d9c34c16c02d2f4d012}{system\_contract\_get\_call\_flags}};}
+\DoxyCodeLine{00158\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a793e8c3a2fe55b5f80e18dda34f18969}{system\_contract\_create\_standard\_account}};}
+\DoxyCodeLine{00159\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a519da5eca79ce0fb79bf56e0dd9782b7}{system\_contract\_create\_multisig\_account}};}
+\DoxyCodeLine{00160\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_af9812e5309fd89a62433304a2af81479}{system\_contract\_native\_on\_persist}};}
+\DoxyCodeLine{00161\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a30aab9495201cd0470167279b52c602d}{system\_contract\_native\_post\_persist}};}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00163\ \textcolor{comment}{//\ System.Storage}}
+\DoxyCodeLine{00164\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a4a597febd22788bf9adf5623576e6115}{system\_storage\_get\_context}};}
+\DoxyCodeLine{00165\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a1ab0fc919f3cf395196271b52b643d1b}{system\_storage\_get\_readonly\_context}};}
+\DoxyCodeLine{00166\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_ac8d402c4153af499aeab88e536b2a50b}{system\_storage\_as\_readonly}};}
+\DoxyCodeLine{00167\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a1c4841e47774b29f99ffcc5cdb22133d}{system\_storage\_get}};}
+\DoxyCodeLine{00168\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a805f924799399b6f64f191ab5c599543}{system\_storage\_find}};}
+\DoxyCodeLine{00169\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_ad378a075de805f8d17a12fecfe768967}{system\_storage\_put}};}
+\DoxyCodeLine{00170\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_ad8d70c11aa670f84e4496fd909047b92}{system\_storage\_delete}};}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \textcolor{comment}{//\ System.Iterator}}
+\DoxyCodeLine{00173\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_a35de747384e655e233d1db6cc9bdfd37}{system\_iterator\_next}};}
+\DoxyCodeLine{00174\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1_interop_descriptor}{InteropDescriptor}}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1interop__descriptors_aca0db7ec72a119f87f0258812376b803}{system\_iterator\_value}};}
+\DoxyCodeLine{00175\ \}\ \ \textcolor{comment}{//\ namespace\ interop\_descriptors}}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \}\ \ \textcolor{comment}{//\ namespace\ smartcontract}}
+\DoxyCodeLine{00178\ \}\ \ \textcolor{comment}{//\ namespace\ neo}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ NEO\_SMARTCONTRACT\_INTEROP\_SERVICE\_H}}
+
+\end{DoxyCode}

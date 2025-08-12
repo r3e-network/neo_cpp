@@ -1,0 +1,475 @@
+\doxysection{neo\+::network\+::p2p\+::Network\+Synchronizer Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer}{}\label{classneo_1_1network_1_1p2p_1_1_network_synchronizer}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+
+
+Handles network synchronization.  
+
+
+
+
+{\ttfamily \#include $<$network\+\_\+synchronizer.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::Network\+Synchronizer\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a082b5d3e8a1914aaa0df19ecb8e4a260}{Network\+Synchronizer}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{Local\+Node}} \&local\+Node, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}} $>$ blockchain)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_network_synchronizer}{Network\+Synchronizer}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_aa2f9ff6e23197a375ef4192b6e380e2f}{\texorpdfstring{$\sim$}{\string~}\+Network\+Synchronizer}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_aefb26e09b4964a4dad35290a9e15337d}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Starts the synchronizer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_aa0354ac105e691a31a3de5d9eb4ca4d8}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stops the synchronizer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a01f93adca275721693b79100eb5b9009}{Synchronization\+State}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af615405f884461db1679c7eb377855b1}{Get\+State}} () const
+\begin{DoxyCompactList}\small\item\em Gets the synchronization state. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a1a0c85f49377f936f155106470fc51a6}{Get\+Current\+Block\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current block index. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a5f75fc5b1b6d582387b0993da271ad21}{Get\+Target\+Block\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Gets the target block index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a344a442f9befcda39fc4d283dace5802}{Set\+Block\+Received\+Callback}} (std\+::function$<$ void(const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the block received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a057d72db711cdeaa74c80896f0f7df2e}{Set\+Transaction\+Received\+Callback}} (std\+::function$<$ void(const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the transaction received callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a3eee345521f818879471cff7e7b10abd}{Set\+State\+Changed\+Callback}} (std\+::function$<$ void(\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a01f93adca275721693b79100eb5b9009}{Synchronization\+State}})$>$ callback)
+\begin{DoxyCompactList}\small\item\em Sets the synchronization state changed callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_aee08369f6617960a560727093024d3cf}{On\+Inv\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_inv_payload}{payloads\+::\+Inv\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when an inv message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a860efb4674803fb84a175496daac7993}{On\+Block\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ \&block)
+\begin{DoxyCompactList}\small\item\em Called when a block message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_ac1797b3f64f3f1ddb078d3a982a84c2c}{On\+Transaction\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ \&transaction)
+\begin{DoxyCompactList}\small\item\em Called when a transaction message is received. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af35e78231360e85d94e415d661cb5277}{On\+Headers\+Message\+Received}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}remote\+Node, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{payloads\+::\+Headers\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Called when a headers message is received. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a97d0a116fe7db037b113885d8e1034ab}{Run\+Sync}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_acf2b0ecce74edef1e78b7af920ab58ce}{Sync\+Headers}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_ab3f967a531e019b034343c182635d08b}{Sync\+Blocks}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a05ece83b6ae0a475dc6c536034c3a770}{Process\+Pending\+Blocks}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a1b6d03766b7ee4f044fa2680cc640119}{Process\+Pending\+Transactions}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a17aa776a39d9e94bc999ca0320379266}{Request\+Headers}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_ae9434fe7c50f32977302d66f10958e4b}{Request\+Blocks}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a1305f5231dee88422aa9a8aa7876e241}{Set\+State}} (\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a01f93adca275721693b79100eb5b9009}{Synchronization\+State}} state)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{Local\+Node}} \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a784baf5a7263a234d6f8a090579edcad}{local\+Node\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_ad11345792475539c38734ba91d660001}{blockchain\+\_\+}}
+\item 
+std\+::atomic$<$ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a01f93adca275721693b79100eb5b9009}{Synchronization\+State}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_acca968ae7c7f0bfb55ce2700f040f985}{state\+\_\+}}
+\item 
+std\+::atomic$<$ uint32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af49aad73300687f68913f1f907d6a582}{current\+Block\+Index\+\_\+}}
+\item 
+std\+::atomic$<$ uint32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a4f85d5b5360c8eb0e41dc75a6f8cf955}{target\+Block\+Index\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af36d44abe79c4019de7b386b2241b652}{running\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_aec0fed13e088cef4d467f889489ffbbd}{sync\+Thread\+\_\+}}
+\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_abd1dc47e4d83a4935a4b34a109514436}{known\+Hashes\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_ab061e6ef314e453d4beebbac050d5f9a}{pending\+Blocks\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af0c941ebc41aa67422d6a462f6931995}{pending\+Transactions\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a74a10b25d3926353a1448cabd2a5b021}{mutex\+\_\+}}
+\item 
+std\+::function$<$ void(const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a466f8ffdf5518719715607fbdad5d830}{block\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ \&)$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a27c79142c70436c23af9a65a57750f07}{transaction\+Received\+Callback\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a01f93adca275721693b79100eb5b9009}{Synchronization\+State}})$>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af95102e6b48a277152323006411923f8}{state\+Changed\+Callback\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles network synchronization. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a082b5d3e8a1914aaa0df19ecb8e4a260}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!NetworkSynchronizer@{NetworkSynchronizer}}
+\index{NetworkSynchronizer@{NetworkSynchronizer}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{NetworkSynchronizer()}{NetworkSynchronizer()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a082b5d3e8a1914aaa0df19ecb8e4a260} 
+neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Network\+Synchronizer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{Local\+Node}} \&}]{local\+Node}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}} $>$}]{blockchain}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_network_synchronizer}{Network\+Synchronizer}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em local\+Node} & The local node. \\
+\hline
+{\em blockchain} & The blockchain. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_aa2f9ff6e23197a375ef4192b6e380e2f}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!````~NetworkSynchronizer@{\texorpdfstring{$\sim$}{\string~}NetworkSynchronizer}}
+\index{````~NetworkSynchronizer@{\texorpdfstring{$\sim$}{\string~}NetworkSynchronizer}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}NetworkSynchronizer()}{\string~NetworkSynchronizer()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_aa2f9ff6e23197a375ef4192b6e380e2f} 
+neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\texorpdfstring{$\sim$}{\string~}\+Network\+Synchronizer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a1a0c85f49377f936f155106470fc51a6}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!GetCurrentBlockIndex@{GetCurrentBlockIndex}}
+\index{GetCurrentBlockIndex@{GetCurrentBlockIndex}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{GetCurrentBlockIndex()}{GetCurrentBlockIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a1a0c85f49377f936f155106470fc51a6} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Get\+Current\+Block\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the current block index. 
+
+\begin{DoxyReturn}{Returns}
+The current block index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af615405f884461db1679c7eb377855b1}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!GetState@{GetState}}
+\index{GetState@{GetState}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af615405f884461db1679c7eb377855b1} 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a01f93adca275721693b79100eb5b9009}{Synchronization\+State}} neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Get\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the synchronization state. 
+
+\begin{DoxyReturn}{Returns}
+The synchronization state. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a5f75fc5b1b6d582387b0993da271ad21}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!GetTargetBlockIndex@{GetTargetBlockIndex}}
+\index{GetTargetBlockIndex@{GetTargetBlockIndex}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{GetTargetBlockIndex()}{GetTargetBlockIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a5f75fc5b1b6d582387b0993da271ad21} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Get\+Target\+Block\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the target block index. 
+
+\begin{DoxyReturn}{Returns}
+The target block index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a860efb4674803fb84a175496daac7993}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!OnBlockMessageReceived@{OnBlockMessageReceived}}
+\index{OnBlockMessageReceived@{OnBlockMessageReceived}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{OnBlockMessageReceived()}{OnBlockMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a860efb4674803fb84a175496daac7993} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+On\+Block\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ \&}]{block}{}\end{DoxyParamCaption})}
+
+
+
+Called when a block message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em block} & The block. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af35e78231360e85d94e415d661cb5277}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!OnHeadersMessageReceived@{OnHeadersMessageReceived}}
+\index{OnHeadersMessageReceived@{OnHeadersMessageReceived}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{OnHeadersMessageReceived()}{OnHeadersMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af35e78231360e85d94e415d661cb5277} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+On\+Headers\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{payloads\+::\+Headers\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when a headers message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The headers payload. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_aee08369f6617960a560727093024d3cf}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!OnInvMessageReceived@{OnInvMessageReceived}}
+\index{OnInvMessageReceived@{OnInvMessageReceived}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{OnInvMessageReceived()}{OnInvMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_aee08369f6617960a560727093024d3cf} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+On\+Inv\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_inv_payload}{payloads\+::\+Inv\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Called when an inv message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em payload} & The inv payload. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_ac1797b3f64f3f1ddb078d3a982a84c2c}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!OnTransactionMessageReceived@{OnTransactionMessageReceived}}
+\index{OnTransactionMessageReceived@{OnTransactionMessageReceived}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{OnTransactionMessageReceived()}{OnTransactionMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_ac1797b3f64f3f1ddb078d3a982a84c2c} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+On\+Transaction\+Message\+Received (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} \texorpdfstring{$\ast$}{*}}]{remote\+Node}{, }\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ \&}]{transaction}{}\end{DoxyParamCaption})}
+
+
+
+Called when a transaction message is received. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em remote\+Node} & The remote node. \\
+\hline
+{\em transaction} & The transaction. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a05ece83b6ae0a475dc6c536034c3a770}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!ProcessPendingBlocks@{ProcessPendingBlocks}}
+\index{ProcessPendingBlocks@{ProcessPendingBlocks}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{ProcessPendingBlocks()}{ProcessPendingBlocks()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a05ece83b6ae0a475dc6c536034c3a770} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Process\+Pending\+Blocks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a1b6d03766b7ee4f044fa2680cc640119}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!ProcessPendingTransactions@{ProcessPendingTransactions}}
+\index{ProcessPendingTransactions@{ProcessPendingTransactions}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{ProcessPendingTransactions()}{ProcessPendingTransactions()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a1b6d03766b7ee4f044fa2680cc640119} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Process\+Pending\+Transactions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_ae9434fe7c50f32977302d66f10958e4b}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!RequestBlocks@{RequestBlocks}}
+\index{RequestBlocks@{RequestBlocks}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{RequestBlocks()}{RequestBlocks()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_ae9434fe7c50f32977302d66f10958e4b} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Request\+Blocks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a17aa776a39d9e94bc999ca0320379266}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!RequestHeaders@{RequestHeaders}}
+\index{RequestHeaders@{RequestHeaders}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{RequestHeaders()}{RequestHeaders()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a17aa776a39d9e94bc999ca0320379266} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Request\+Headers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a97d0a116fe7db037b113885d8e1034ab}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!RunSync@{RunSync}}
+\index{RunSync@{RunSync}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{RunSync()}{RunSync()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a97d0a116fe7db037b113885d8e1034ab} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Run\+Sync (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a344a442f9befcda39fc4d283dace5802}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!SetBlockReceivedCallback@{SetBlockReceivedCallback}}
+\index{SetBlockReceivedCallback@{SetBlockReceivedCallback}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{SetBlockReceivedCallback()}{SetBlockReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a344a442f9befcda39fc4d283dace5802} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Set\+Block\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the block received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a1305f5231dee88422aa9a8aa7876e241}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!SetState@{SetState}}
+\index{SetState@{SetState}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{SetState()}{SetState()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a1305f5231dee88422aa9a8aa7876e241} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Set\+State (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a01f93adca275721693b79100eb5b9009}{Synchronization\+State}}}]{state}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a3eee345521f818879471cff7e7b10abd}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!SetStateChangedCallback@{SetStateChangedCallback}}
+\index{SetStateChangedCallback@{SetStateChangedCallback}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{SetStateChangedCallback()}{SetStateChangedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a3eee345521f818879471cff7e7b10abd} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Set\+State\+Changed\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a01f93adca275721693b79100eb5b9009}{Synchronization\+State}})$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the synchronization state changed callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a057d72db711cdeaa74c80896f0f7df2e}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!SetTransactionReceivedCallback@{SetTransactionReceivedCallback}}
+\index{SetTransactionReceivedCallback@{SetTransactionReceivedCallback}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{SetTransactionReceivedCallback()}{SetTransactionReceivedCallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a057d72db711cdeaa74c80896f0f7df2e} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Set\+Transaction\+Received\+Callback (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Sets the transaction received callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & The callback. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_aefb26e09b4964a4dad35290a9e15337d}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!Start@{Start}}
+\index{Start@{Start}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_aefb26e09b4964a4dad35290a9e15337d} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Starts the synchronizer. 
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_aa0354ac105e691a31a3de5d9eb4ca4d8}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_aa0354ac105e691a31a3de5d9eb4ca4d8} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the synchronizer. 
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_ab3f967a531e019b034343c182635d08b}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!SyncBlocks@{SyncBlocks}}
+\index{SyncBlocks@{SyncBlocks}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{SyncBlocks()}{SyncBlocks()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_ab3f967a531e019b034343c182635d08b} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Sync\+Blocks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_acf2b0ecce74edef1e78b7af920ab58ce}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!SyncHeaders@{SyncHeaders}}
+\index{SyncHeaders@{SyncHeaders}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{SyncHeaders()}{SyncHeaders()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_acf2b0ecce74edef1e78b7af920ab58ce} 
+void neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::\+Sync\+Headers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 12
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_ad11345792475539c38734ba91d660001}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!blockchain\_@{blockchain\_}}
+\index{blockchain\_@{blockchain\_}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{blockchain\_}{blockchain\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_ad11345792475539c38734ba91d660001} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}}$>$ neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::blockchain\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a466f8ffdf5518719715607fbdad5d830}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!blockReceivedCallback\_@{blockReceivedCallback\_}}
+\index{blockReceivedCallback\_@{blockReceivedCallback\_}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{blockReceivedCallback\_}{blockReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a466f8ffdf5518719715607fbdad5d830} 
+std\+::function$<$void(const std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}}$>$\&)$>$ neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::block\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af49aad73300687f68913f1f907d6a582}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!currentBlockIndex\_@{currentBlockIndex\_}}
+\index{currentBlockIndex\_@{currentBlockIndex\_}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{currentBlockIndex\_}{currentBlockIndex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af49aad73300687f68913f1f907d6a582} 
+std\+::atomic$<$uint32\+\_\+t$>$ neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::current\+Block\+Index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_abd1dc47e4d83a4935a4b34a109514436}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!knownHashes\_@{knownHashes\_}}
+\index{knownHashes\_@{knownHashes\_}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{knownHashes\_}{knownHashes\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_abd1dc47e4d83a4935a4b34a109514436} 
+std\+::unordered\+\_\+set$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}$>$ neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::known\+Hashes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a784baf5a7263a234d6f8a090579edcad}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!localNode\_@{localNode\_}}
+\index{localNode\_@{localNode\_}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{localNode\_}{localNode\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a784baf5a7263a234d6f8a090579edcad} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{Local\+Node}}\& neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::local\+Node\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a74a10b25d3926353a1448cabd2a5b021}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a74a10b25d3926353a1448cabd2a5b021} 
+std\+::mutex neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_ab061e6ef314e453d4beebbac050d5f9a}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!pendingBlocks\_@{pendingBlocks\_}}
+\index{pendingBlocks\_@{pendingBlocks\_}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{pendingBlocks\_}{pendingBlocks\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_ab061e6ef314e453d4beebbac050d5f9a} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}}$>$ $>$ neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::pending\+Blocks\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af0c941ebc41aa67422d6a462f6931995}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!pendingTransactions\_@{pendingTransactions\_}}
+\index{pendingTransactions\_@{pendingTransactions\_}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{pendingTransactions\_}{pendingTransactions\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af0c941ebc41aa67422d6a462f6931995} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}}$>$ $>$ neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::pending\+Transactions\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af36d44abe79c4019de7b386b2241b652}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af36d44abe79c4019de7b386b2241b652} 
+std\+::atomic$<$bool$>$ neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_acca968ae7c7f0bfb55ce2700f040f985}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!state\_@{state\_}}
+\index{state\_@{state\_}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{state\_}{state\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_acca968ae7c7f0bfb55ce2700f040f985} 
+std\+::atomic$<$\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a01f93adca275721693b79100eb5b9009}{Synchronization\+State}}$>$ neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::state\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af95102e6b48a277152323006411923f8}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!stateChangedCallback\_@{stateChangedCallback\_}}
+\index{stateChangedCallback\_@{stateChangedCallback\_}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{stateChangedCallback\_}{stateChangedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_af95102e6b48a277152323006411923f8} 
+std\+::function$<$void(\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a01f93adca275721693b79100eb5b9009}{Synchronization\+State}})$>$ neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::state\+Changed\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_aec0fed13e088cef4d467f889489ffbbd}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!syncThread\_@{syncThread\_}}
+\index{syncThread\_@{syncThread\_}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{syncThread\_}{syncThread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_aec0fed13e088cef4d467f889489ffbbd} 
+std\+::thread neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::sync\+Thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a4f85d5b5360c8eb0e41dc75a6f8cf955}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!targetBlockIndex\_@{targetBlockIndex\_}}
+\index{targetBlockIndex\_@{targetBlockIndex\_}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{targetBlockIndex\_}{targetBlockIndex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a4f85d5b5360c8eb0e41dc75a6f8cf955} 
+std\+::atomic$<$uint32\+\_\+t$>$ neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::target\+Block\+Index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a27c79142c70436c23af9a65a57750f07}\index{neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}!transactionReceivedCallback\_@{transactionReceivedCallback\_}}
+\index{transactionReceivedCallback\_@{transactionReceivedCallback\_}!neo::network::p2p::NetworkSynchronizer@{neo::network::p2p::NetworkSynchronizer}}
+\doxysubsubsection{\texorpdfstring{transactionReceivedCallback\_}{transactionReceivedCallback\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_network_synchronizer_a27c79142c70436c23af9a65a57750f07} 
+std\+::function$<$void(const std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}}$>$\&)$>$ neo\+::network\+::p2p\+::\+Network\+Synchronizer\+::transaction\+Received\+Callback\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/\mbox{\hyperlink{network__synchronizer_8h}{network\+\_\+synchronizer.\+h}}\item 
+src/network/p2p/\mbox{\hyperlink{network__synchronizer_8cpp}{network\+\_\+synchronizer.\+cpp}}\end{DoxyCompactItemize}

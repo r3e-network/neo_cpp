@@ -1,0 +1,1285 @@
+\doxysection{neo\+::network\+::p2p\+::payloads\+::Neo3\+Transaction Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+
+
+Represents a Neo N3 transaction.  
+
+
+
+
+{\ttfamily \#include $<$neo3\+\_\+transaction.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::p2p\+::payloads\+::Neo3\+Transaction\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::payloads\+::Neo3\+Transaction\+:
+% FIG 1
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861}{Type}} \+: uint8\+\_\+t \{ \newline
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a5a85b655fe48720edd20783ac68713c6}{Miner\+Transaction}} = 0x00
+, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a59727526e6e76c05aa32c8cfdec6a852}{Issue\+Transaction}} = 0x01
+, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861ac5e2edc27d7c99fad103b6f9cc5833a9}{Claim\+Transaction}} = 0x02
+, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a1958414558284c14990b42503663306c}{Enrollment\+Transaction}} = 0x20
+, \newline
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a8f98962840b407e3de5f65fded5c904c}{Register\+Transaction}} = 0x40
+, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a83fe9535fb82cd98c5e56c844eca9424}{Contract\+Transaction}} = 0x80
+, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a5e58306dd09d57fad3237755c3d6d183}{State\+Transaction}} = 0x90
+, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861ad6b9b21275769d4c9fcdd95089e84f17}{Publish\+Transaction}} = 0xd0
+, \newline
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a125d2015a7ff3b96761ffd010b46c5a4}{Invocation\+Transaction}} = 0xd1
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a216b8501c33402db6165285d460a3e6f}{Neo3\+Transaction}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a7fe70f6cef708ac5fa270d68e565dfc9}{Neo3\+Transaction}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a7f8451167ae7111ba3c627b68c0a3d6b}{Neo3\+Transaction}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}} \&\&other) noexcept
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}} \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a18ff9b4d03b0fbb5bb778ce2a2be5225}{operator=}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}} \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aa12c3fafb3b2a54d9750c92d79bcf802}{operator=}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}} \&\&other) noexcept
+\begin{DoxyCompactList}\small\item\em Move assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a37f213c75e3777a667983b5bbb1960c0}{\texorpdfstring{$\sim$}{\string~}\+Neo3\+Transaction}} () override
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a8b6483e224f4facbaae30eea381d1073}{Get\+Version}} () const
+\begin{DoxyCompactList}\small\item\em Gets the version. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a23347a11bafc565c98114e849a274879}{Set\+Version}} (uint8\+\_\+t version)
+\begin{DoxyCompactList}\small\item\em Sets the version. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a534fb4d1c2aa2da3d5b11a54f493e05f}{Get\+Nonce}} () const
+\begin{DoxyCompactList}\small\item\em Gets the nonce. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a9d25bf471e0d5b2f44ecc7bdaccb6de4}{Set\+Nonce}} (uint32\+\_\+t nonce)
+\begin{DoxyCompactList}\small\item\em Sets the nonce. \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a1a34948ad41357fa7abfc8e2f50aab92}{Get\+System\+Fee}} () const
+\begin{DoxyCompactList}\small\item\em Gets the system fee. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ab1e87a1374adbeefc27d435d40c5f8b7}{Set\+System\+Fee}} (int64\+\_\+t system\+Fee)
+\begin{DoxyCompactList}\small\item\em Sets the system fee. \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a41a5ac4c95f373677204ab14c1f626db}{Get\+Network\+Fee}} () const
+\begin{DoxyCompactList}\small\item\em Gets the network fee. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aa15b79bac4943ee15e61b05679ef20e7}{Set\+Network\+Fee}} (int64\+\_\+t network\+Fee)
+\begin{DoxyCompactList}\small\item\em Sets the network fee. \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a747479f17175f388f211577b6d793755}{Get\+Total\+Fee}} () const
+\begin{DoxyCompactList}\small\item\em Gets the total fee (system + network) with overflow protection. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ab429116e563346cd081471acc9b17d51}{Get\+Valid\+Until\+Block}} () const
+\begin{DoxyCompactList}\small\item\em Gets the valid until block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aaab827b13331ba828265333ca3ab93a9}{Set\+Valid\+Until\+Block}} (uint32\+\_\+t valid\+Until\+Block)
+\begin{DoxyCompactList}\small\item\em Sets the valid until block. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{ledger\+::\+Signer}} $>$ \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a6978e51b07edf11fea3672eb79ebda72}{Get\+Signers}} () const
+\begin{DoxyCompactList}\small\item\em Gets the signers. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_abd0503e6d9d4b70920a2c208c99b4aa2}{Set\+Signers}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{ledger\+::\+Signer}} $>$ \&signers)
+\begin{DoxyCompactList}\small\item\em Sets the signers. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger\+::\+Transaction\+Attribute}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aaf7ce5ca57b8045c1fd8435f1d478255}{Get\+Attributes}} () const
+\begin{DoxyCompactList}\small\item\em Gets the attributes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aa54a801b6a59dffedc2096a7efbc39de}{Set\+Attributes}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger\+::\+Transaction\+Attribute}} $>$ $>$ \&attributes)
+\begin{DoxyCompactList}\small\item\em Sets the attributes. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a0c3d4950b79a38589b8117c32ad4a378}{Get\+Script}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_abd51369e3c67ee7b400941d836c342a7}{Set\+Script}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&script)
+\begin{DoxyCompactList}\small\item\em Sets the script. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} $>$ \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae4d7ffd89880444dce90b08bacf3835c}{Get\+Witnesses}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the witnesses. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a7dcd003068a3824b06bae0ad6e30338b}{Set\+Witnesses}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} $>$ \&witnesses) override
+\begin{DoxyCompactList}\small\item\em Sets the witnesses. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aefc06c117f99ee43ded005ab4b5254e1}{Get\+Sender}} () const
+\begin{DoxyCompactList}\small\item\em Gets the sender (first signer). \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae3837e8ee0318975afc0cc32a1a11a6e}{Get\+Fee\+Per\+Byte}} () const
+\begin{DoxyCompactList}\small\item\em Gets the network fee per byte. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a16679b1d56245299fcef623d2997dddc}{Inventory\+Type}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_af90ae3e90d366a7e6fdc1007b8bf8d02}{Get\+Inventory\+Type}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the inventory type. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aeb6b1fb5009c4d7d4ea769a2fdfd942d}{Get\+Script\+Hashes\+For\+Verifying}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the script hashes that need to be verified. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a568e5c94744eab91b496a85823678de1}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aacd388d09029febe2af086577352a30c}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2c5875aacd40092101cd99f7008bc970}{Serialize\+Unsigned}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aae9ed5fb8543bf78e478def4c6254504}{Deserialize\+Unsigned}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a162a772a646f6f029f83d02113374256}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2203e636e28df0b8f4c00b73ba38d542}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a JSON reader. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ace06ea36a27942bcb338585d8f8db380}{Get\+Hash}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the hash of the transaction. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a627ae33e46abcb6fbc829e2bb89d329f}{Get\+Size}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the size of the transaction. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\std\+::shared\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a288a1aab58e2b803dcc9568489758d22}{Get\+Attribute}} () const
+\begin{DoxyCompactList}\small\item\em Gets the first attribute of the specified type. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a66d6e2bea3a703eafd8055b3a2be4c6a}{operator==}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}} \&other) const
+\begin{DoxyCompactList}\small\item\em Verifies the transaction. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a33ef699160b887c0b5461005a4b0c23e}{operator!=}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this transaction does not equal another. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861}{Type}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a1890b65375b7e76ce08ed3505dcdfb55}{Get\+Type}} () const
+\begin{DoxyCompactList}\small\item\em Gets the transaction type (Neo 2.\+x compatibility). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a3f994a3b3a518081aec3ea8aa6a2d1dc}{Set\+Type}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861}{Type}} type)
+\begin{DoxyCompactList}\small\item\em Sets the transaction type (Neo 2.\+x compatibility -\/ no-\/op in Neo 3). \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger\+::\+Transaction\+Attribute}} $>$ \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_acc213e59118f39f817a304bf70f9915e}{Get\+Legacy\+Attributes}} () const
+\begin{DoxyCompactList}\small\item\em Gets attributes (Neo 2.\+x compatibility). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aed6e40741bb7c0a6f083dd0c47310010}{Set\+Attributes}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger\+::\+Transaction\+Attribute}} $>$ \&attributes)
+\begin{DoxyCompactList}\small\item\em Sets attributes (Neo 2.\+x compatibility). \end{DoxyCompactList}\item 
+const std\+::vector$<$ int $>$ \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a99fbc5610cc82313955b804b20ac8a09}{Get\+Inputs}} () const
+\begin{DoxyCompactList}\small\item\em Gets inputs (Neo 2.\+x compatibility -\/ empty in Neo 3). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aa303c33a591668424cc3f2336258330e}{Set\+Inputs}} (const std\+::vector$<$ int $>$ \&inputs)
+\begin{DoxyCompactList}\small\item\em Sets inputs (Neo 2.\+x compatibility -\/ no-\/op in Neo 3). \end{DoxyCompactList}\item 
+const std\+::vector$<$ int $>$ \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a79e9f916ad5e064373e81cd7c7b37af5}{Get\+Outputs}} () const
+\begin{DoxyCompactList}\small\item\em Gets outputs (Neo 2.\+x compatibility -\/ empty in Neo 3). \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2855dbe298680edfd52acb308054345c}{Set\+Outputs}} (const std\+::vector$<$ int $>$ \&outputs)
+\begin{DoxyCompactList}\small\item\em Sets outputs (Neo 2.\+x compatibility -\/ no-\/op in Neo 3). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_inventory}{neo\+::network\+::p2p\+::payloads\+::\+IInventory}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_inventory_aa67cd4679b100da497fac649f58dba2d}{\texorpdfstring{$\sim$}{\string~}\+IInventory}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_verifiable}{neo\+::network\+::p2p\+::payloads\+::\+IVerifiable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_verifiable_a5f0ebb318034a9bdf931b5984bf50936}{\texorpdfstring{$\sim$}{\string~}\+IVerifiable}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger\+::\+Transaction\+Attribute}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ad1c464a52116e01312e535e9a6b50837}{legacy\+\_\+attributes\+\_\+}}
+\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a43fd9d3f1e3089156a61ffc012355e94}{legacy\+\_\+inputs\+\_\+}}
+\item 
+std\+::vector$<$ int $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a4eeb2d8ad81902c1939309d56cbcf338}{legacy\+\_\+outputs\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a0cf8ae2a391aaef2ec2ca64c1c6c85a1}{Max\+Transaction\+Size}} = 102400
+\begin{DoxyCompactList}\small\item\em The maximum size of a transaction. \end{DoxyCompactList}\item 
+static constexpr int \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_af0e44f780a4e82cfe1ff74c21e420741}{Max\+Transaction\+Attributes}} = 16
+\begin{DoxyCompactList}\small\item\em The maximum number of attributes that can be contained within a transaction. \end{DoxyCompactList}\item 
+static constexpr int \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ad3e6d10d1c82dbe2d4897f2451095a78}{Header\+Size}}
+\begin{DoxyCompactList}\small\item\em The size of a transaction header. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae7aa06aff8b057065633383dd73c1a35}{Invalidate\+Cache}} () const
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aef9ca6f1e0409f79cd0682ab6bd2b6a6}{Calculate\+Hash}} () const
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a679da75e0f97d81337d08c58d19f6e7a}{Calculate\+Size}} () const
+\item 
+int \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aba241507ad6c22a870e7ea03d7a00cbf}{Get\+Var\+Int\+Size}} (size\+\_\+t value) const
+\item 
+int \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a3e07efc132ce3336e533182d85c41688}{Get\+Signer\+Size}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{ledger\+::\+Signer}} \&signer) const
+\item 
+int \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a8250aa6b3edd7460791aa60defb5215c}{Get\+Attribute\+Size}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger\+::\+Transaction\+Attribute}} \&attr) const
+\item 
+int \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_af8903a6d0dd19fecbdef223c354f1815}{Get\+Witness\+Size}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} \&witness) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger\+::\+Transaction\+Attribute}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a509f4efcbc96ee3659da51f6a99967b1}{Deserialize\+Attributes}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader, int max\+Count)
+\item 
+static std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{ledger\+::\+Signer}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a7d8804fa589c030bdfdda48feba572a4}{Deserialize\+Signers}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader, int max\+Count)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae76c7099d1e82d13e40fb8f6c4c06647}{version\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2de8602e9c7db2fd047366a9cd13b3a7}{nonce\+\_\+}}
+\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae0fb5ca578f6f5445f7acf6285f47095}{system\+Fee\+\_\+}}
+\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a1e9a014d2e7edaeea868831b1ee198fa}{network\+Fee\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ac531e20c7d2c2ff99c655b1501c22267}{valid\+Until\+Block\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{ledger\+::\+Signer}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ad2af2575bd34cbe136a0c83ee586dc61}{signers\+\_\+}}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger\+::\+Transaction\+Attribute}} $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a80560d9f30a697a616ed6697a809f2fe}{attributes\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a6dc6f35a9236e6e1c7497f2c3fdeeba8}{script\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a12a8b1e314235a2c0e6ca55171cb85b9}{witnesses\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aacc5884c4eed568d73fe6523a9e18ef9}{hash\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a18e27da380836c2c6c315799618d7f95}{hash\+Calculated\+\_\+}}
+\item 
+int \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a3d0a69ab5d7bfc7702ec43b17e70c031}{size\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a4662401f5cd520e0ab1045bcd1083eb2}{size\+Calculated\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a Neo N3 transaction. 
+
+This is the correct Neo N3 transaction format that matches the C\# implementation exactly. 
+
+\label{doc-enum-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!Type@{Type}}
+\index{Type@{Type}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{Type}{Type}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861} 
+enum class \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861}{neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Type}} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{MinerTransaction@{MinerTransaction}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!MinerTransaction@{MinerTransaction}}}\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a5a85b655fe48720edd20783ac68713c6}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a5a85b655fe48720edd20783ac68713c6} 
+Miner\+Transaction&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{IssueTransaction@{IssueTransaction}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!IssueTransaction@{IssueTransaction}}}\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a59727526e6e76c05aa32c8cfdec6a852}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a59727526e6e76c05aa32c8cfdec6a852} 
+Issue\+Transaction&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ClaimTransaction@{ClaimTransaction}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!ClaimTransaction@{ClaimTransaction}}}\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861ac5e2edc27d7c99fad103b6f9cc5833a9}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861ac5e2edc27d7c99fad103b6f9cc5833a9} 
+Claim\+Transaction&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EnrollmentTransaction@{EnrollmentTransaction}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!EnrollmentTransaction@{EnrollmentTransaction}}}\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a1958414558284c14990b42503663306c}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a1958414558284c14990b42503663306c} 
+Enrollment\+Transaction&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RegisterTransaction@{RegisterTransaction}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!RegisterTransaction@{RegisterTransaction}}}\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a8f98962840b407e3de5f65fded5c904c}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a8f98962840b407e3de5f65fded5c904c} 
+Register\+Transaction&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ContractTransaction@{ContractTransaction}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!ContractTransaction@{ContractTransaction}}}\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a83fe9535fb82cd98c5e56c844eca9424}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a83fe9535fb82cd98c5e56c844eca9424} 
+Contract\+Transaction&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{StateTransaction@{StateTransaction}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!StateTransaction@{StateTransaction}}}\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a5e58306dd09d57fad3237755c3d6d183}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a5e58306dd09d57fad3237755c3d6d183} 
+State\+Transaction&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PublishTransaction@{PublishTransaction}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!PublishTransaction@{PublishTransaction}}}\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861ad6b9b21275769d4c9fcdd95089e84f17}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861ad6b9b21275769d4c9fcdd95089e84f17} 
+Publish\+Transaction&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{InvocationTransaction@{InvocationTransaction}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!InvocationTransaction@{InvocationTransaction}}}\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a125d2015a7ff3b96761ffd010b46c5a4}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861a125d2015a7ff3b96761ffd010b46c5a4} 
+Invocation\+Transaction&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a216b8501c33402db6165285d460a3e6f}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!Neo3Transaction@{Neo3Transaction}}
+\index{Neo3Transaction@{Neo3Transaction}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{Neo3Transaction()}{Neo3Transaction()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a216b8501c33402db6165285d460a3e6f} 
+neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Neo3\+Transaction (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a7fe70f6cef708ac5fa270d68e565dfc9}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!Neo3Transaction@{Neo3Transaction}}
+\index{Neo3Transaction@{Neo3Transaction}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{Neo3Transaction()}{Neo3Transaction()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a7fe70f6cef708ac5fa270d68e565dfc9} 
+neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Neo3\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The transaction to copy from. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a7f8451167ae7111ba3c627b68c0a3d6b}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!Neo3Transaction@{Neo3Transaction}}
+\index{Neo3Transaction@{Neo3Transaction}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{Neo3Transaction()}{Neo3Transaction()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a7f8451167ae7111ba3c627b68c0a3d6b} 
+neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Neo3\+Transaction (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}} \&\&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Move constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The transaction to move from. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a37f213c75e3777a667983b5bbb1960c0}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!````~Neo3Transaction@{\texorpdfstring{$\sim$}{\string~}Neo3Transaction}}
+\index{````~Neo3Transaction@{\texorpdfstring{$\sim$}{\string~}Neo3Transaction}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Neo3Transaction()}{\string~Neo3Transaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a37f213c75e3777a667983b5bbb1960c0} 
+neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\texorpdfstring{$\sim$}{\string~}\+Neo3\+Transaction (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+Destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aef9ca6f1e0409f79cd0682ab6bd2b6a6}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!CalculateHash@{CalculateHash}}
+\index{CalculateHash@{CalculateHash}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{CalculateHash()}{CalculateHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aef9ca6f1e0409f79cd0682ab6bd2b6a6} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Calculate\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a679da75e0f97d81337d08c58d19f6e7a}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!CalculateSize@{CalculateSize}}
+\index{CalculateSize@{CalculateSize}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{CalculateSize()}{CalculateSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a679da75e0f97d81337d08c58d19f6e7a} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Calculate\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aacd388d09029febe2af086577352a30c}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aacd388d09029febe2af086577352a30c} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a509f4efcbc96ee3659da51f6a99967b1}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!DeserializeAttributes@{DeserializeAttributes}}
+\index{DeserializeAttributes@{DeserializeAttributes}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{DeserializeAttributes()}{DeserializeAttributes()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a509f4efcbc96ee3659da51f6a99967b1} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger\+::\+Transaction\+Attribute}} $>$ neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Deserialize\+Attributes (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{, }\item[{int}]{max\+Count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2203e636e28df0b8f4c00b73ba38d542}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2203e636e28df0b8f4c00b73ba38d542} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a7d8804fa589c030bdfdda48feba572a4}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!DeserializeSigners@{DeserializeSigners}}
+\index{DeserializeSigners@{DeserializeSigners}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{DeserializeSigners()}{DeserializeSigners()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a7d8804fa589c030bdfdda48feba572a4} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{ledger\+::\+Signer}} $>$ neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Deserialize\+Signers (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{, }\item[{int}]{max\+Count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aae9ed5fb8543bf78e478def4c6254504}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!DeserializeUnsigned@{DeserializeUnsigned}}
+\index{DeserializeUnsigned@{DeserializeUnsigned}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{DeserializeUnsigned()}{DeserializeUnsigned()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aae9ed5fb8543bf78e478def4c6254504} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Deserialize\+Unsigned (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a288a1aab58e2b803dcc9568489758d22}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetAttribute@{GetAttribute}}
+\index{GetAttribute@{GetAttribute}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetAttribute()}{GetAttribute()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a288a1aab58e2b803dcc9568489758d22} 
+template$<$typename T$>$ \\
+std\+::shared\+\_\+ptr$<$ T $>$ neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Attribute (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the first attribute of the specified type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of the attribute. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+The first attribute of this type, or nullptr if not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aaf7ce5ca57b8045c1fd8435f1d478255}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetAttributes@{GetAttributes}}
+\index{GetAttributes@{GetAttributes}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetAttributes()}{GetAttributes()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aaf7ce5ca57b8045c1fd8435f1d478255} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger\+::\+Transaction\+Attribute}} $>$ $>$ \& neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Attributes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the attributes. 
+
+\begin{DoxyReturn}{Returns}
+The attributes. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a8250aa6b3edd7460791aa60defb5215c}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetAttributeSize@{GetAttributeSize}}
+\index{GetAttributeSize@{GetAttributeSize}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetAttributeSize()}{GetAttributeSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a8250aa6b3edd7460791aa60defb5215c} 
+int neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Attribute\+Size (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger\+::\+Transaction\+Attribute}} \&}]{attr}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae3837e8ee0318975afc0cc32a1a11a6e}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetFeePerByte@{GetFeePerByte}}
+\index{GetFeePerByte@{GetFeePerByte}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetFeePerByte()}{GetFeePerByte()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae3837e8ee0318975afc0cc32a1a11a6e} 
+int64\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Fee\+Per\+Byte (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the network fee per byte. 
+
+\begin{DoxyReturn}{Returns}
+The fee per byte. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ace06ea36a27942bcb338585d8f8db380}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetHash@{GetHash}}
+\index{GetHash@{GetHash}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetHash()}{GetHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ace06ea36a27942bcb338585d8f8db380} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the hash of the transaction. 
+
+\begin{DoxyReturn}{Returns}
+The hash. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_inventory_ae5f8a2225a5bad73622a73e5f677997b}{neo\+::network\+::p2p\+::payloads\+::\+IInventory}}.
+
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a99fbc5610cc82313955b804b20ac8a09}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetInputs@{GetInputs}}
+\index{GetInputs@{GetInputs}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetInputs()}{GetInputs()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a99fbc5610cc82313955b804b20ac8a09} 
+const std\+::vector$<$ Coin\+Reference $>$ \& neo\+::ledger\+::\+Transaction\+::\+Get\+Inputs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets inputs (Neo 2.\+x compatibility -\/ empty in Neo 3). 
+
+\begin{DoxyReturn}{Returns}
+Empty vector. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_af90ae3e90d366a7e6fdc1007b8bf8d02}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetInventoryType@{GetInventoryType}}
+\index{GetInventoryType@{GetInventoryType}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetInventoryType()}{GetInventoryType()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_af90ae3e90d366a7e6fdc1007b8bf8d02} 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a16679b1d56245299fcef623d2997dddc}{Inventory\+Type}} neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Inventory\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the inventory type. 
+
+\begin{DoxyReturn}{Returns}
+The inventory type. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_inventory_a7dec843f535a47ba782601bba6023a2a}{neo\+::network\+::p2p\+::payloads\+::\+IInventory}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_acc213e59118f39f817a304bf70f9915e}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetLegacyAttributes@{GetLegacyAttributes}}
+\index{GetLegacyAttributes@{GetLegacyAttributes}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetLegacyAttributes()}{GetLegacyAttributes()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_acc213e59118f39f817a304bf70f9915e} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger\+::\+Transaction\+Attribute}} $>$ \& neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Legacy\+Attributes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets attributes (Neo 2.\+x compatibility). 
+
+\begin{DoxyReturn}{Returns}
+The attributes as Transaction\+Attribute objects. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a41a5ac4c95f373677204ab14c1f626db}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetNetworkFee@{GetNetworkFee}}
+\index{GetNetworkFee@{GetNetworkFee}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetNetworkFee()}{GetNetworkFee()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a41a5ac4c95f373677204ab14c1f626db} 
+int64\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Network\+Fee (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the network fee. 
+
+\begin{DoxyReturn}{Returns}
+The network fee in datoshi. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a534fb4d1c2aa2da3d5b11a54f493e05f}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetNonce@{GetNonce}}
+\index{GetNonce@{GetNonce}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetNonce()}{GetNonce()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a534fb4d1c2aa2da3d5b11a54f493e05f} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Nonce (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the nonce. 
+
+\begin{DoxyReturn}{Returns}
+The nonce. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a79e9f916ad5e064373e81cd7c7b37af5}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetOutputs@{GetOutputs}}
+\index{GetOutputs@{GetOutputs}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetOutputs()}{GetOutputs()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a79e9f916ad5e064373e81cd7c7b37af5} 
+const std\+::vector$<$ Transaction\+Output $>$ \& neo\+::ledger\+::\+Transaction\+::\+Get\+Outputs (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets outputs (Neo 2.\+x compatibility -\/ empty in Neo 3). 
+
+\begin{DoxyReturn}{Returns}
+Empty vector. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a0c3d4950b79a38589b8117c32ad4a378}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetScript@{GetScript}}
+\index{GetScript@{GetScript}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetScript()}{GetScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a0c3d4950b79a38589b8117c32ad4a378} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Script (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the script. 
+
+\begin{DoxyReturn}{Returns}
+The script. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aeb6b1fb5009c4d7d4ea769a2fdfd942d}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetScriptHashesForVerifying@{GetScriptHashesForVerifying}}
+\index{GetScriptHashesForVerifying@{GetScriptHashesForVerifying}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetScriptHashesForVerifying()}{GetScriptHashesForVerifying()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aeb6b1fb5009c4d7d4ea769a2fdfd942d} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Script\+Hashes\+For\+Verifying (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the script hashes that need to be verified. 
+
+\begin{DoxyReturn}{Returns}
+The script hashes for verification. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_verifiable_a4b3390be4b35bd1d5e4d4b535eaf4eff}{neo\+::network\+::p2p\+::payloads\+::\+IVerifiable}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aefc06c117f99ee43ded005ab4b5254e1}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetSender@{GetSender}}
+\index{GetSender@{GetSender}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetSender()}{GetSender()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aefc06c117f99ee43ded005ab4b5254e1} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Sender (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the sender (first signer). 
+
+\begin{DoxyReturn}{Returns}
+The sender address. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a6978e51b07edf11fea3672eb79ebda72}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetSigners@{GetSigners}}
+\index{GetSigners@{GetSigners}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetSigners()}{GetSigners()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a6978e51b07edf11fea3672eb79ebda72} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{ledger\+::\+Signer}} $>$ \& neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Signers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the signers. 
+
+\begin{DoxyReturn}{Returns}
+The signers. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a3e07efc132ce3336e533182d85c41688}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetSignerSize@{GetSignerSize}}
+\index{GetSignerSize@{GetSignerSize}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetSignerSize()}{GetSignerSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a3e07efc132ce3336e533182d85c41688} 
+int neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Signer\+Size (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{ledger\+::\+Signer}} \&}]{signer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a627ae33e46abcb6fbc829e2bb89d329f}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a627ae33e46abcb6fbc829e2bb89d329f} 
+int neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the size of the transaction. 
+
+\begin{DoxyReturn}{Returns}
+The size in bytes. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_inventory_a9742a86de63451b3aef40c3f13c102f4}{neo\+::network\+::p2p\+::payloads\+::\+IInventory}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a1a34948ad41357fa7abfc8e2f50aab92}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetSystemFee@{GetSystemFee}}
+\index{GetSystemFee@{GetSystemFee}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetSystemFee()}{GetSystemFee()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a1a34948ad41357fa7abfc8e2f50aab92} 
+int64\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+System\+Fee (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the system fee. 
+
+\begin{DoxyReturn}{Returns}
+The system fee in datoshi. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a747479f17175f388f211577b6d793755}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetTotalFee@{GetTotalFee}}
+\index{GetTotalFee@{GetTotalFee}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetTotalFee()}{GetTotalFee()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a747479f17175f388f211577b6d793755} 
+int64\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Total\+Fee (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the total fee (system + network) with overflow protection. 
+
+\begin{DoxyReturn}{Returns}
+The total fee in datoshi. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::overflow\+\_\+error} & if the sum would overflow. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a1890b65375b7e76ce08ed3505dcdfb55}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetType@{GetType}}
+\index{GetType@{GetType}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a1890b65375b7e76ce08ed3505dcdfb55} 
+Transaction\+::\+Type neo\+::ledger\+::\+Transaction\+::\+Get\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the transaction type (Neo 2.\+x compatibility). 
+
+\begin{DoxyReturn}{Returns}
+The transaction type. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ab429116e563346cd081471acc9b17d51}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetValidUntilBlock@{GetValidUntilBlock}}
+\index{GetValidUntilBlock@{GetValidUntilBlock}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetValidUntilBlock()}{GetValidUntilBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ab429116e563346cd081471acc9b17d51} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Valid\+Until\+Block (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the valid until block. 
+
+\begin{DoxyReturn}{Returns}
+The valid until block height. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aba241507ad6c22a870e7ea03d7a00cbf}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetVarIntSize@{GetVarIntSize}}
+\index{GetVarIntSize@{GetVarIntSize}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetVarIntSize()}{GetVarIntSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aba241507ad6c22a870e7ea03d7a00cbf} 
+int neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Var\+Int\+Size (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{value}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a8b6483e224f4facbaae30eea381d1073}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetVersion@{GetVersion}}
+\index{GetVersion@{GetVersion}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetVersion()}{GetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a8b6483e224f4facbaae30eea381d1073} 
+uint8\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the version. 
+
+\begin{DoxyReturn}{Returns}
+The version. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae4d7ffd89880444dce90b08bacf3835c}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetWitnesses@{GetWitnesses}}
+\index{GetWitnesses@{GetWitnesses}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetWitnesses()}{GetWitnesses()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae4d7ffd89880444dce90b08bacf3835c} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} $>$ \& neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Witnesses (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the witnesses. 
+
+\begin{DoxyReturn}{Returns}
+The witnesses. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_verifiable_a0e354f1f2e71685e7f0c78dbd9404ae8}{neo\+::network\+::p2p\+::payloads\+::\+IVerifiable}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_af8903a6d0dd19fecbdef223c354f1815}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!GetWitnessSize@{GetWitnessSize}}
+\index{GetWitnessSize@{GetWitnessSize}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{GetWitnessSize()}{GetWitnessSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_af8903a6d0dd19fecbdef223c354f1815} 
+int neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Get\+Witness\+Size (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} \&}]{witness}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae7aa06aff8b057065633383dd73c1a35}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!InvalidateCache@{InvalidateCache}}
+\index{InvalidateCache@{InvalidateCache}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{InvalidateCache()}{InvalidateCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae7aa06aff8b057065633383dd73c1a35} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Invalidate\+Cache (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a33ef699160b887c0b5461005a4b0c23e}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a33ef699160b887c0b5461005a4b0c23e} 
+bool neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this transaction does not equal another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other transaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if not equal. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a18ff9b4d03b0fbb5bb778ce2a2be5225}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a18ff9b4d03b0fbb5bb778ce2a2be5225} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}} \& neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Copy assignment operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The transaction to copy from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to this transaction. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aa12c3fafb3b2a54d9750c92d79bcf802}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aa12c3fafb3b2a54d9750c92d79bcf802} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}} \& neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}} \&\&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Move assignment operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The transaction to move from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to this transaction. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a66d6e2bea3a703eafd8055b3a2be4c6a}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a66d6e2bea3a703eafd8055b3a2be4c6a} 
+bool neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{Neo3\+Transaction}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Verifies the transaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em protocol\+Settings} & The protocol settings. \\
+\hline
+{\em snapshot} & The data cache snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The verification result.
+\end{DoxyReturn}
+Checks if this transaction equals another. 
+\begin{DoxyParams}{Parameters}
+{\em other} & The other transaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if equal. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a568e5c94744eab91b496a85823678de1}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a568e5c94744eab91b496a85823678de1} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a162a772a646f6f029f83d02113374256}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a162a772a646f6f029f83d02113374256} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2c5875aacd40092101cd99f7008bc970}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!SerializeUnsigned@{SerializeUnsigned}}
+\index{SerializeUnsigned@{SerializeUnsigned}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{SerializeUnsigned()}{SerializeUnsigned()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2c5875aacd40092101cd99f7008bc970} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Serialize\+Unsigned (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aed6e40741bb7c0a6f083dd0c47310010}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!SetAttributes@{SetAttributes}}
+\index{SetAttributes@{SetAttributes}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{SetAttributes()}{SetAttributes()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aed6e40741bb7c0a6f083dd0c47310010} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Set\+Attributes (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger\+::\+Transaction\+Attribute}} $>$ \&}]{attributes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets attributes (Neo 2.\+x compatibility). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em attributes} & The attributes. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aa54a801b6a59dffedc2096a7efbc39de}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!SetAttributes@{SetAttributes}}
+\index{SetAttributes@{SetAttributes}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{SetAttributes()}{SetAttributes()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aa54a801b6a59dffedc2096a7efbc39de} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Set\+Attributes (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger\+::\+Transaction\+Attribute}} $>$ $>$ \&}]{attributes}{}\end{DoxyParamCaption})}
+
+
+
+Sets the attributes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em attributes} & The attributes. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aa303c33a591668424cc3f2336258330e}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!SetInputs@{SetInputs}}
+\index{SetInputs@{SetInputs}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{SetInputs()}{SetInputs()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aa303c33a591668424cc3f2336258330e} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Set\+Inputs (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ int $>$ \&}]{inputs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets inputs (Neo 2.\+x compatibility -\/ no-\/op in Neo 3). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inputs} & The inputs. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aa15b79bac4943ee15e61b05679ef20e7}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!SetNetworkFee@{SetNetworkFee}}
+\index{SetNetworkFee@{SetNetworkFee}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{SetNetworkFee()}{SetNetworkFee()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aa15b79bac4943ee15e61b05679ef20e7} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Set\+Network\+Fee (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{network\+Fee}{}\end{DoxyParamCaption})}
+
+
+
+Sets the network fee. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em network\+Fee} & The network fee in datoshi. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a9d25bf471e0d5b2f44ecc7bdaccb6de4}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!SetNonce@{SetNonce}}
+\index{SetNonce@{SetNonce}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{SetNonce()}{SetNonce()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a9d25bf471e0d5b2f44ecc7bdaccb6de4} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Set\+Nonce (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{nonce}{}\end{DoxyParamCaption})}
+
+
+
+Sets the nonce. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nonce} & The nonce. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2855dbe298680edfd52acb308054345c}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!SetOutputs@{SetOutputs}}
+\index{SetOutputs@{SetOutputs}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{SetOutputs()}{SetOutputs()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2855dbe298680edfd52acb308054345c} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Set\+Outputs (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ int $>$ \&}]{outputs}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets outputs (Neo 2.\+x compatibility -\/ no-\/op in Neo 3). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em outputs} & The outputs. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_abd51369e3c67ee7b400941d836c342a7}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!SetScript@{SetScript}}
+\index{SetScript@{SetScript}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{SetScript()}{SetScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_abd51369e3c67ee7b400941d836c342a7} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Set\+Script (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{script}{}\end{DoxyParamCaption})}
+
+
+
+Sets the script. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & The script. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_abd0503e6d9d4b70920a2c208c99b4aa2}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!SetSigners@{SetSigners}}
+\index{SetSigners@{SetSigners}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{SetSigners()}{SetSigners()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_abd0503e6d9d4b70920a2c208c99b4aa2} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Set\+Signers (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{ledger\+::\+Signer}} $>$ \&}]{signers}{}\end{DoxyParamCaption})}
+
+
+
+Sets the signers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em signers} & The signers. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 23
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ab1e87a1374adbeefc27d435d40c5f8b7}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!SetSystemFee@{SetSystemFee}}
+\index{SetSystemFee@{SetSystemFee}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{SetSystemFee()}{SetSystemFee()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ab1e87a1374adbeefc27d435d40c5f8b7} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Set\+System\+Fee (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{system\+Fee}{}\end{DoxyParamCaption})}
+
+
+
+Sets the system fee. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em system\+Fee} & The system fee in datoshi. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a3f994a3b3a518081aec3ea8aa6a2d1dc}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!SetType@{SetType}}
+\index{SetType@{SetType}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{SetType()}{SetType()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a3f994a3b3a518081aec3ea8aa6a2d1dc} 
+void neo\+::ledger\+::\+Transaction\+::\+Set\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aac12015b0660e61b1a0ea5b05fe91861}{Type}}}]{type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the transaction type (Neo 2.\+x compatibility -\/ no-\/op in Neo 3). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The transaction type. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aaab827b13331ba828265333ca3ab93a9}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!SetValidUntilBlock@{SetValidUntilBlock}}
+\index{SetValidUntilBlock@{SetValidUntilBlock}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{SetValidUntilBlock()}{SetValidUntilBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aaab827b13331ba828265333ca3ab93a9} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Set\+Valid\+Until\+Block (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{valid\+Until\+Block}{}\end{DoxyParamCaption})}
+
+
+
+Sets the valid until block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em valid\+Until\+Block} & The valid until block height. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a23347a11bafc565c98114e849a274879}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!SetVersion@{SetVersion}}
+\index{SetVersion@{SetVersion}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{SetVersion()}{SetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a23347a11bafc565c98114e849a274879} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Set\+Version (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{version}{}\end{DoxyParamCaption})}
+
+
+
+Sets the version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em version} & The version. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a7dcd003068a3824b06bae0ad6e30338b}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!SetWitnesses@{SetWitnesses}}
+\index{SetWitnesses@{SetWitnesses}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{SetWitnesses()}{SetWitnesses()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a7dcd003068a3824b06bae0ad6e30338b} 
+void neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Set\+Witnesses (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} $>$ \&}]{witnesses}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Sets the witnesses. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em witnesses} & The witnesses. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_verifiable_a15d95ec58a14e9849dd64e68673f30b6}{neo\+::network\+::p2p\+::payloads\+::\+IVerifiable}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a80560d9f30a697a616ed6697a809f2fe}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!attributes\_@{attributes\_}}
+\index{attributes\_@{attributes\_}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{attributes\_}{attributes\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a80560d9f30a697a616ed6697a809f2fe} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger\+::\+Transaction\+Attribute}}$>$ $>$ neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::attributes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aacc5884c4eed568d73fe6523a9e18ef9}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!hash\_@{hash\_}}
+\index{hash\_@{hash\_}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{hash\_}{hash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_aacc5884c4eed568d73fe6523a9e18ef9} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::hash\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a18e27da380836c2c6c315799618d7f95}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!hashCalculated\_@{hashCalculated\_}}
+\index{hashCalculated\_@{hashCalculated\_}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{hashCalculated\_}{hashCalculated\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a18e27da380836c2c6c315799618d7f95} 
+bool neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::hash\+Calculated\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ad3e6d10d1c82dbe2d4897f2451095a78}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!HeaderSize@{HeaderSize}}
+\index{HeaderSize@{HeaderSize}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{HeaderSize}{HeaderSize}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ad3e6d10d1c82dbe2d4897f2451095a78} 
+int neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Header\+Size\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=\ \textcolor{keyword}{sizeof}(uint8\_t)\ +\ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(uint32\_t)\ +\ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(int64\_t)\ +\ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(int64\_t)\ +\ \ \ }
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{sizeof}(uint32\_t)}
+
+\end{DoxyCode}
+
+
+The size of a transaction header. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ad1c464a52116e01312e535e9a6b50837}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!legacy\_attributes\_@{legacy\_attributes\_}}
+\index{legacy\_attributes\_@{legacy\_attributes\_}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{legacy\_attributes\_}{legacy\_attributes\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ad1c464a52116e01312e535e9a6b50837} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute}{ledger\+::\+Transaction\+Attribute}}$>$ neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::legacy\+\_\+attributes\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a43fd9d3f1e3089156a61ffc012355e94}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!legacy\_inputs\_@{legacy\_inputs\_}}
+\index{legacy\_inputs\_@{legacy\_inputs\_}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{legacy\_inputs\_}{legacy\_inputs\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a43fd9d3f1e3089156a61ffc012355e94} 
+std\+::vector$<$int$>$ neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::legacy\+\_\+inputs\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a4eeb2d8ad81902c1939309d56cbcf338}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!legacy\_outputs\_@{legacy\_outputs\_}}
+\index{legacy\_outputs\_@{legacy\_outputs\_}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{legacy\_outputs\_}{legacy\_outputs\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a4eeb2d8ad81902c1939309d56cbcf338} 
+std\+::vector$<$int$>$ neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::legacy\+\_\+outputs\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_af0e44f780a4e82cfe1ff74c21e420741}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!MaxTransactionAttributes@{MaxTransactionAttributes}}
+\index{MaxTransactionAttributes@{MaxTransactionAttributes}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{MaxTransactionAttributes}{MaxTransactionAttributes}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_af0e44f780a4e82cfe1ff74c21e420741} 
+int neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Max\+Transaction\+Attributes = 16\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The maximum number of attributes that can be contained within a transaction. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a0cf8ae2a391aaef2ec2ca64c1c6c85a1}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!MaxTransactionSize@{MaxTransactionSize}}
+\index{MaxTransactionSize@{MaxTransactionSize}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{MaxTransactionSize}{MaxTransactionSize}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a0cf8ae2a391aaef2ec2ca64c1c6c85a1} 
+int neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::\+Max\+Transaction\+Size = 102400\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The maximum size of a transaction. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a1e9a014d2e7edaeea868831b1ee198fa}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!networkFee\_@{networkFee\_}}
+\index{networkFee\_@{networkFee\_}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{networkFee\_}{networkFee\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a1e9a014d2e7edaeea868831b1ee198fa} 
+int64\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::network\+Fee\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2de8602e9c7db2fd047366a9cd13b3a7}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!nonce\_@{nonce\_}}
+\index{nonce\_@{nonce\_}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{nonce\_}{nonce\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2de8602e9c7db2fd047366a9cd13b3a7} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::nonce\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a6dc6f35a9236e6e1c7497f2c3fdeeba8}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!script\_@{script\_}}
+\index{script\_@{script\_}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{script\_}{script\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a6dc6f35a9236e6e1c7497f2c3fdeeba8} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::script\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ad2af2575bd34cbe136a0c83ee586dc61}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!signers\_@{signers\_}}
+\index{signers\_@{signers\_}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{signers\_}{signers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ad2af2575bd34cbe136a0c83ee586dc61} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_signer}{ledger\+::\+Signer}}$>$ neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::signers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a3d0a69ab5d7bfc7702ec43b17e70c031}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!size\_@{size\_}}
+\index{size\_@{size\_}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{size\_}{size\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a3d0a69ab5d7bfc7702ec43b17e70c031} 
+int neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::size\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a4662401f5cd520e0ab1045bcd1083eb2}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!sizeCalculated\_@{sizeCalculated\_}}
+\index{sizeCalculated\_@{sizeCalculated\_}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{sizeCalculated\_}{sizeCalculated\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a4662401f5cd520e0ab1045bcd1083eb2} 
+bool neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::size\+Calculated\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae0fb5ca578f6f5445f7acf6285f47095}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!systemFee\_@{systemFee\_}}
+\index{systemFee\_@{systemFee\_}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{systemFee\_}{systemFee\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae0fb5ca578f6f5445f7acf6285f47095} 
+int64\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::system\+Fee\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ac531e20c7d2c2ff99c655b1501c22267}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!validUntilBlock\_@{validUntilBlock\_}}
+\index{validUntilBlock\_@{validUntilBlock\_}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{validUntilBlock\_}{validUntilBlock\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ac531e20c7d2c2ff99c655b1501c22267} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::valid\+Until\+Block\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae76c7099d1e82d13e40fb8f6c4c06647}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!version\_@{version\_}}
+\index{version\_@{version\_}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{version\_}{version\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_ae76c7099d1e82d13e40fb8f6c4c06647} 
+uint8\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::version\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a12a8b1e314235a2c0e6ca55171cb85b9}\index{neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}!witnesses\_@{witnesses\_}}
+\index{witnesses\_@{witnesses\_}!neo::network::p2p::payloads::Neo3Transaction@{neo::network::p2p::payloads::Neo3Transaction}}
+\doxysubsubsection{\texorpdfstring{witnesses\_}{witnesses\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a12a8b1e314235a2c0e6ca55171cb85b9} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}}$>$ neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction\+::witnesses\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/payloads/\mbox{\hyperlink{neo3__transaction_8h}{neo3\+\_\+transaction.\+h}}\item 
+src/ledger/\mbox{\hyperlink{transaction__basic_8cpp}{transaction\+\_\+basic.\+cpp}}\item 
+src/ledger/\mbox{\hyperlink{transaction__json_8cpp}{transaction\+\_\+json.\+cpp}}\item 
+src/ledger/\mbox{\hyperlink{transaction__serialization_8cpp}{transaction\+\_\+serialization.\+cpp}}\item 
+src/network/p2p/payloads/\mbox{\hyperlink{neo3__transaction_8cpp}{neo3\+\_\+transaction.\+cpp}}\end{DoxyCompactItemize}

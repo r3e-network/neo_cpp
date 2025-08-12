@@ -1,0 +1,207 @@
+\doxysection{neo\+::network\+::Connection\+Limits Class Reference}
+\hypertarget{classneo_1_1network_1_1_connection_limits}{}\label{classneo_1_1network_1_1_connection_limits}\index{neo::network::ConnectionLimits@{neo::network::ConnectionLimits}}
+
+
+Connection limits manager.  
+
+
+
+
+{\ttfamily \#include $<$connection\+\_\+manager.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::network\+::Connection\+Limits\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1network_1_1_connection_limits_1_1_config}{Config}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_aa498c32080a69864e49e626a5cdcf790}{Connection\+Limits}} (const \mbox{\hyperlink{structneo_1_1network_1_1_connection_limits_1_1_config}{Config}} \&config)
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a499f4aa9dd0d37378ebc0bc7f8a5890c}{Connection\+Limits}} ()
+\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a2f6817c79f66573ad6347e60de298fb0}{Is\+Connection\+Allowed}} (const std\+::string \&client\+IP)
+\begin{DoxyCompactList}\small\item\em Check if a new connection is allowed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_af4128c8a088a103e0f50e06bdeca5c37}{Register\+Connection}} (const std\+::string \&client\+IP)
+\begin{DoxyCompactList}\small\item\em Register a new connection. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ae5a371a060b1755fe2081d9aa32ba5ab}{Unregister\+Connection}} (const std\+::string \&client\+IP)
+\begin{DoxyCompactList}\small\item\em Unregister a connection. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a4c3807f186974d908e6219c99d2e20f1}{Get\+Connection\+Count}} (const std\+::string \&client\+IP) const
+\begin{DoxyCompactList}\small\item\em Get current connection count for an IP. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_adc81976e923ee0943fd4061819595cad}{Get\+Total\+Connections}} () const
+\begin{DoxyCompactList}\small\item\em Get total connection count. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_afc0cd1a0079a924717808659b0664da4}{Clean\+Old\+Records}} (const std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \&now)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structneo_1_1network_1_1_connection_limits_1_1_config}{Config}} \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a084c421f2cbc399d47abc4db3438d493}{config\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, size\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ab68975ad5ecc758b1291aed2ba42eb7b}{ip\+Connections\+\_\+}}
+\item 
+std\+::vector$<$ std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point $>$ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ac50a50878deaba5b4a1d9db800320ce9}{connection\+Times\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a90b1d1b77e949454fec7b93efa4e23d3}{total\+Connections\+\_\+}} = 0
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a6c3cedfa3c186e7ca36715d2ee0f6fac}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Connection limits manager. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1_connection_limits_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1_connection_limits_aa498c32080a69864e49e626a5cdcf790}\index{neo::network::ConnectionLimits@{neo::network::ConnectionLimits}!ConnectionLimits@{ConnectionLimits}}
+\index{ConnectionLimits@{ConnectionLimits}!neo::network::ConnectionLimits@{neo::network::ConnectionLimits}}
+\doxysubsubsection{\texorpdfstring{ConnectionLimits()}{ConnectionLimits()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_limits_aa498c32080a69864e49e626a5cdcf790} 
+neo\+::network\+::\+Connection\+Limits\+::\+Connection\+Limits (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1network_1_1_connection_limits_1_1_config}{Config}} \&}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_limits_a499f4aa9dd0d37378ebc0bc7f8a5890c}\index{neo::network::ConnectionLimits@{neo::network::ConnectionLimits}!ConnectionLimits@{ConnectionLimits}}
+\index{ConnectionLimits@{ConnectionLimits}!neo::network::ConnectionLimits@{neo::network::ConnectionLimits}}
+\doxysubsubsection{\texorpdfstring{ConnectionLimits()}{ConnectionLimits()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_limits_a499f4aa9dd0d37378ebc0bc7f8a5890c} 
+neo\+::network\+::\+Connection\+Limits\+::\+Connection\+Limits (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1_connection_limits_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1_connection_limits_afc0cd1a0079a924717808659b0664da4}\index{neo::network::ConnectionLimits@{neo::network::ConnectionLimits}!CleanOldRecords@{CleanOldRecords}}
+\index{CleanOldRecords@{CleanOldRecords}!neo::network::ConnectionLimits@{neo::network::ConnectionLimits}}
+\doxysubsubsection{\texorpdfstring{CleanOldRecords()}{CleanOldRecords()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_limits_afc0cd1a0079a924717808659b0664da4} 
+void neo\+::network\+::\+Connection\+Limits\+::\+Clean\+Old\+Records (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \&}]{now}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_limits_a4c3807f186974d908e6219c99d2e20f1}\index{neo::network::ConnectionLimits@{neo::network::ConnectionLimits}!GetConnectionCount@{GetConnectionCount}}
+\index{GetConnectionCount@{GetConnectionCount}!neo::network::ConnectionLimits@{neo::network::ConnectionLimits}}
+\doxysubsubsection{\texorpdfstring{GetConnectionCount()}{GetConnectionCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_limits_a4c3807f186974d908e6219c99d2e20f1} 
+size\+\_\+t neo\+::network\+::\+Connection\+Limits\+::\+Get\+Connection\+Count (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{client\+IP}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get current connection count for an IP. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+IP} & Client IP address \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Connection count 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_connection_limits_adc81976e923ee0943fd4061819595cad}\index{neo::network::ConnectionLimits@{neo::network::ConnectionLimits}!GetTotalConnections@{GetTotalConnections}}
+\index{GetTotalConnections@{GetTotalConnections}!neo::network::ConnectionLimits@{neo::network::ConnectionLimits}}
+\doxysubsubsection{\texorpdfstring{GetTotalConnections()}{GetTotalConnections()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_limits_adc81976e923ee0943fd4061819595cad} 
+size\+\_\+t neo\+::network\+::\+Connection\+Limits\+::\+Get\+Total\+Connections (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get total connection count. 
+
+\begin{DoxyReturn}{Returns}
+Total connections 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_connection_limits_a2f6817c79f66573ad6347e60de298fb0}\index{neo::network::ConnectionLimits@{neo::network::ConnectionLimits}!IsConnectionAllowed@{IsConnectionAllowed}}
+\index{IsConnectionAllowed@{IsConnectionAllowed}!neo::network::ConnectionLimits@{neo::network::ConnectionLimits}}
+\doxysubsubsection{\texorpdfstring{IsConnectionAllowed()}{IsConnectionAllowed()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_limits_a2f6817c79f66573ad6347e60de298fb0} 
+bool neo\+::network\+::\+Connection\+Limits\+::\+Is\+Connection\+Allowed (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{client\+IP}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if a new connection is allowed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+IP} & Client IP address \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if allowed 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1network_1_1_connection_limits_af4128c8a088a103e0f50e06bdeca5c37}\index{neo::network::ConnectionLimits@{neo::network::ConnectionLimits}!RegisterConnection@{RegisterConnection}}
+\index{RegisterConnection@{RegisterConnection}!neo::network::ConnectionLimits@{neo::network::ConnectionLimits}}
+\doxysubsubsection{\texorpdfstring{RegisterConnection()}{RegisterConnection()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_limits_af4128c8a088a103e0f50e06bdeca5c37} 
+void neo\+::network\+::\+Connection\+Limits\+::\+Register\+Connection (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{client\+IP}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Register a new connection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+IP} & Client IP address \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_connection_limits_ae5a371a060b1755fe2081d9aa32ba5ab}\index{neo::network::ConnectionLimits@{neo::network::ConnectionLimits}!UnregisterConnection@{UnregisterConnection}}
+\index{UnregisterConnection@{UnregisterConnection}!neo::network::ConnectionLimits@{neo::network::ConnectionLimits}}
+\doxysubsubsection{\texorpdfstring{UnregisterConnection()}{UnregisterConnection()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_limits_ae5a371a060b1755fe2081d9aa32ba5ab} 
+void neo\+::network\+::\+Connection\+Limits\+::\+Unregister\+Connection (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{client\+IP}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Unregister a connection. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+IP} & Client IP address \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1_connection_limits_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1_connection_limits_a084c421f2cbc399d47abc4db3438d493}\index{neo::network::ConnectionLimits@{neo::network::ConnectionLimits}!config\_@{config\_}}
+\index{config\_@{config\_}!neo::network::ConnectionLimits@{neo::network::ConnectionLimits}}
+\doxysubsubsection{\texorpdfstring{config\_}{config\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_limits_a084c421f2cbc399d47abc4db3438d493} 
+\mbox{\hyperlink{structneo_1_1network_1_1_connection_limits_1_1_config}{Config}} neo\+::network\+::\+Connection\+Limits\+::config\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_limits_ac50a50878deaba5b4a1d9db800320ce9}\index{neo::network::ConnectionLimits@{neo::network::ConnectionLimits}!connectionTimes\_@{connectionTimes\_}}
+\index{connectionTimes\_@{connectionTimes\_}!neo::network::ConnectionLimits@{neo::network::ConnectionLimits}}
+\doxysubsubsection{\texorpdfstring{connectionTimes\_}{connectionTimes\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_limits_ac50a50878deaba5b4a1d9db800320ce9} 
+std\+::vector$<$std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point$>$ neo\+::network\+::\+Connection\+Limits\+::connection\+Times\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_limits_ab68975ad5ecc758b1291aed2ba42eb7b}\index{neo::network::ConnectionLimits@{neo::network::ConnectionLimits}!ipConnections\_@{ipConnections\_}}
+\index{ipConnections\_@{ipConnections\_}!neo::network::ConnectionLimits@{neo::network::ConnectionLimits}}
+\doxysubsubsection{\texorpdfstring{ipConnections\_}{ipConnections\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_limits_ab68975ad5ecc758b1291aed2ba42eb7b} 
+std\+::unordered\+\_\+map$<$std\+::string, size\+\_\+t$>$ neo\+::network\+::\+Connection\+Limits\+::ip\+Connections\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_limits_a6c3cedfa3c186e7ca36715d2ee0f6fac}\index{neo::network::ConnectionLimits@{neo::network::ConnectionLimits}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::network::ConnectionLimits@{neo::network::ConnectionLimits}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_limits_a6c3cedfa3c186e7ca36715d2ee0f6fac} 
+std\+::mutex neo\+::network\+::\+Connection\+Limits\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_limits_a90b1d1b77e949454fec7b93efa4e23d3}\index{neo::network::ConnectionLimits@{neo::network::ConnectionLimits}!totalConnections\_@{totalConnections\_}}
+\index{totalConnections\_@{totalConnections\_}!neo::network::ConnectionLimits@{neo::network::ConnectionLimits}}
+\doxysubsubsection{\texorpdfstring{totalConnections\_}{totalConnections\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_limits_a90b1d1b77e949454fec7b93efa4e23d3} 
+size\+\_\+t neo\+::network\+::\+Connection\+Limits\+::total\+Connections\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/\mbox{\hyperlink{connection__manager_8h}{connection\+\_\+manager.\+h}}\end{DoxyCompactItemize}

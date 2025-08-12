@@ -1,0 +1,420 @@
+\doxysection{neo\+::smartcontract\+::Nef\+File Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1_nef_file}{}\label{classneo_1_1smartcontract_1_1_nef_file}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+
+
+Represents the structure of NEO Executable Format.  
+
+
+
+
+{\ttfamily \#include $<$nef\+\_\+file.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::smartcontract\+::Nef\+File\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::smartcontract\+::Nef\+File\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a2a6609c87ebd6d33d5e2c941e53cf5e4}{Nef\+File}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1smartcontract_1_1_nef_file}{Nef\+File}. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a1d47bfcb77ca8a26efd8f43d36ba6d40}{Get\+Compiler}} () const
+\begin{DoxyCompactList}\small\item\em Gets the compiler name and version. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a7e04b9a0adc9f9165f397aa3013a4c03}{Set\+Compiler}} (const std\+::string \&compiler)
+\begin{DoxyCompactList}\small\item\em Sets the compiler name and version. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a2ea0c881c44a60cd9cb5786346a41aa0}{Get\+Source}} () const
+\begin{DoxyCompactList}\small\item\em Gets the source URL. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a2114fe83f0f51c6b54003fbef983408f}{Set\+Source}} (const std\+::string \&source)
+\begin{DoxyCompactList}\small\item\em Sets the source URL. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token}{Method\+Token}} $>$ \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_af7cc82f450d0783ab9165d334ee95654}{Get\+Tokens}} () const
+\begin{DoxyCompactList}\small\item\em Gets the method tokens. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a9867dae2817a43f01c7f6da690fc7eba}{Set\+Tokens}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token}{Method\+Token}} $>$ \&tokens)
+\begin{DoxyCompactList}\small\item\em Sets the method tokens. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_ab9241ed1d62e5e9cbf76c3af32e8038f}{Get\+Script}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a050c630729a92f67a5eb6f7cfb80f33e}{Set\+Script}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&script)
+\begin{DoxyCompactList}\small\item\em Sets the script. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a62947ff1ef84416f76fddc8d276db582}{Get\+Check\+Sum}} () const
+\begin{DoxyCompactList}\small\item\em Gets the checksum. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a6bdf0b840d94fa43604100a730f6924d}{Set\+Check\+Sum}} (uint32\+\_\+t check\+Sum)
+\begin{DoxyCompactList}\small\item\em Sets the checksum. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a10520263c9bf54b9f3006e8e9d306f6f}{Compute\+Checksum}} () const
+\begin{DoxyCompactList}\small\item\em Computes the checksum for this \doxylink{classneo_1_1smartcontract_1_1_nef_file}{Nef\+File}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a8fdef259ca60cc0050b43701bd1c83c7}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1smartcontract_1_1_nef_file}{Nef\+File} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a4c52bab5d9b0915d630dd5ca3e2fd6a7}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1smartcontract_1_1_nef_file}{Nef\+File} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a759d34d9b47b19a823010c429e2c841d}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1smartcontract_1_1_nef_file}{Nef\+File} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a1af3bf05070b9b60540453428d46c02f}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1smartcontract_1_1_nef_file}{Nef\+File} from a JSON reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a3ecc8ee6eb8705e5b525804036a906de}{Magic}} = 0x3346454E
+\begin{DoxyCompactList}\small\item\em NEO Executable Format 3 (NEF3) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_ae5bffc6f5f9b0366833027a156226b0b}{compiler\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a872c5725e2823bc2f096bc9f2d9d5e9b}{source\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token}{Method\+Token}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a1a8bc0a524e75f858c80f8e2168bf4cb}{tokens\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a994d7d68c2d1b0b71dc6e6451a640a13}{script\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a7adeea57e90c4b5782c7df0c50c25c39}{check\+Sum\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the structure of NEO Executable Format. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a2a6609c87ebd6d33d5e2c941e53cf5e4}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!NefFile@{NefFile}}
+\index{NefFile@{NefFile}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{NefFile()}{NefFile()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a2a6609c87ebd6d33d5e2c941e53cf5e4} 
+neo\+::smartcontract\+::\+Nef\+File\+::\+Nef\+File (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1smartcontract_1_1_nef_file}{Nef\+File}. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a10520263c9bf54b9f3006e8e9d306f6f}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!ComputeChecksum@{ComputeChecksum}}
+\index{ComputeChecksum@{ComputeChecksum}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{ComputeChecksum()}{ComputeChecksum()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a10520263c9bf54b9f3006e8e9d306f6f} 
+uint32\+\_\+t neo\+::smartcontract\+::\+Nef\+File\+::\+Compute\+Checksum (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Computes the checksum for this \doxylink{classneo_1_1smartcontract_1_1_nef_file}{Nef\+File}. 
+
+\begin{DoxyReturn}{Returns}
+The computed checksum. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a4c52bab5d9b0915d630dd5ca3e2fd6a7}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a4c52bab5d9b0915d630dd5ca3e2fd6a7} 
+void neo\+::smartcontract\+::\+Nef\+File\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1smartcontract_1_1_nef_file}{Nef\+File} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a1af3bf05070b9b60540453428d46c02f}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a1af3bf05070b9b60540453428d46c02f} 
+void neo\+::smartcontract\+::\+Nef\+File\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1smartcontract_1_1_nef_file}{Nef\+File} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a62947ff1ef84416f76fddc8d276db582}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!GetCheckSum@{GetCheckSum}}
+\index{GetCheckSum@{GetCheckSum}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{GetCheckSum()}{GetCheckSum()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a62947ff1ef84416f76fddc8d276db582} 
+uint32\+\_\+t neo\+::smartcontract\+::\+Nef\+File\+::\+Get\+Check\+Sum (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the checksum. 
+
+\begin{DoxyReturn}{Returns}
+The checksum. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a1d47bfcb77ca8a26efd8f43d36ba6d40}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!GetCompiler@{GetCompiler}}
+\index{GetCompiler@{GetCompiler}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{GetCompiler()}{GetCompiler()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a1d47bfcb77ca8a26efd8f43d36ba6d40} 
+const std\+::string \& neo\+::smartcontract\+::\+Nef\+File\+::\+Get\+Compiler (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the compiler name and version. 
+
+\begin{DoxyReturn}{Returns}
+The compiler name and version. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_ab9241ed1d62e5e9cbf76c3af32e8038f}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!GetScript@{GetScript}}
+\index{GetScript@{GetScript}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{GetScript()}{GetScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_ab9241ed1d62e5e9cbf76c3af32e8038f} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::smartcontract\+::\+Nef\+File\+::\+Get\+Script (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the script. 
+
+\begin{DoxyReturn}{Returns}
+The script. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a2ea0c881c44a60cd9cb5786346a41aa0}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!GetSource@{GetSource}}
+\index{GetSource@{GetSource}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{GetSource()}{GetSource()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a2ea0c881c44a60cd9cb5786346a41aa0} 
+const std\+::string \& neo\+::smartcontract\+::\+Nef\+File\+::\+Get\+Source (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the source URL. 
+
+\begin{DoxyReturn}{Returns}
+The source URL. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_af7cc82f450d0783ab9165d334ee95654}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!GetTokens@{GetTokens}}
+\index{GetTokens@{GetTokens}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{GetTokens()}{GetTokens()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_af7cc82f450d0783ab9165d334ee95654} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token}{Method\+Token}} $>$ \& neo\+::smartcontract\+::\+Nef\+File\+::\+Get\+Tokens (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the method tokens. 
+
+\begin{DoxyReturn}{Returns}
+The method tokens. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a8fdef259ca60cc0050b43701bd1c83c7}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a8fdef259ca60cc0050b43701bd1c83c7} 
+void neo\+::smartcontract\+::\+Nef\+File\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1smartcontract_1_1_nef_file}{Nef\+File} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a759d34d9b47b19a823010c429e2c841d}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a759d34d9b47b19a823010c429e2c841d} 
+void neo\+::smartcontract\+::\+Nef\+File\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1smartcontract_1_1_nef_file}{Nef\+File} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a6bdf0b840d94fa43604100a730f6924d}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!SetCheckSum@{SetCheckSum}}
+\index{SetCheckSum@{SetCheckSum}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{SetCheckSum()}{SetCheckSum()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a6bdf0b840d94fa43604100a730f6924d} 
+void neo\+::smartcontract\+::\+Nef\+File\+::\+Set\+Check\+Sum (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{check\+Sum}{}\end{DoxyParamCaption})}
+
+
+
+Sets the checksum. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em check\+Sum} & The checksum. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a7e04b9a0adc9f9165f397aa3013a4c03}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!SetCompiler@{SetCompiler}}
+\index{SetCompiler@{SetCompiler}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{SetCompiler()}{SetCompiler()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a7e04b9a0adc9f9165f397aa3013a4c03} 
+void neo\+::smartcontract\+::\+Nef\+File\+::\+Set\+Compiler (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{compiler}{}\end{DoxyParamCaption})}
+
+
+
+Sets the compiler name and version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em compiler} & The compiler name and version. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a050c630729a92f67a5eb6f7cfb80f33e}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!SetScript@{SetScript}}
+\index{SetScript@{SetScript}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{SetScript()}{SetScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a050c630729a92f67a5eb6f7cfb80f33e} 
+void neo\+::smartcontract\+::\+Nef\+File\+::\+Set\+Script (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{script}{}\end{DoxyParamCaption})}
+
+
+
+Sets the script. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & The script. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a2114fe83f0f51c6b54003fbef983408f}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!SetSource@{SetSource}}
+\index{SetSource@{SetSource}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{SetSource()}{SetSource()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a2114fe83f0f51c6b54003fbef983408f} 
+void neo\+::smartcontract\+::\+Nef\+File\+::\+Set\+Source (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{source}{}\end{DoxyParamCaption})}
+
+
+
+Sets the source URL. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em source} & The source URL. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a9867dae2817a43f01c7f6da690fc7eba}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!SetTokens@{SetTokens}}
+\index{SetTokens@{SetTokens}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{SetTokens()}{SetTokens()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a9867dae2817a43f01c7f6da690fc7eba} 
+void neo\+::smartcontract\+::\+Nef\+File\+::\+Set\+Tokens (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token}{Method\+Token}} $>$ \&}]{tokens}{}\end{DoxyParamCaption})}
+
+
+
+Sets the method tokens. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tokens} & The method tokens. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a7adeea57e90c4b5782c7df0c50c25c39}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!checkSum\_@{checkSum\_}}
+\index{checkSum\_@{checkSum\_}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{checkSum\_}{checkSum\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a7adeea57e90c4b5782c7df0c50c25c39} 
+uint32\+\_\+t neo\+::smartcontract\+::\+Nef\+File\+::check\+Sum\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_ae5bffc6f5f9b0366833027a156226b0b}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!compiler\_@{compiler\_}}
+\index{compiler\_@{compiler\_}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{compiler\_}{compiler\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_ae5bffc6f5f9b0366833027a156226b0b} 
+std\+::string neo\+::smartcontract\+::\+Nef\+File\+::compiler\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a3ecc8ee6eb8705e5b525804036a906de}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!Magic@{Magic}}
+\index{Magic@{Magic}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{Magic}{Magic}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a3ecc8ee6eb8705e5b525804036a906de} 
+uint32\+\_\+t neo\+::smartcontract\+::\+Nef\+File\+::\+Magic = 0x3346454E\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+NEO Executable Format 3 (NEF3) 
+
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a994d7d68c2d1b0b71dc6e6451a640a13}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!script\_@{script\_}}
+\index{script\_@{script\_}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{script\_}{script\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a994d7d68c2d1b0b71dc6e6451a640a13} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::smartcontract\+::\+Nef\+File\+::script\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a872c5725e2823bc2f096bc9f2d9d5e9b}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!source\_@{source\_}}
+\index{source\_@{source\_}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{source\_}{source\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a872c5725e2823bc2f096bc9f2d9d5e9b} 
+std\+::string neo\+::smartcontract\+::\+Nef\+File\+::source\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_nef_file_a1a8bc0a524e75f858c80f8e2168bf4cb}\index{neo::smartcontract::NefFile@{neo::smartcontract::NefFile}!tokens\_@{tokens\_}}
+\index{tokens\_@{tokens\_}!neo::smartcontract::NefFile@{neo::smartcontract::NefFile}}
+\doxysubsubsection{\texorpdfstring{tokens\_}{tokens\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_nef_file_a1a8bc0a524e75f858c80f8e2168bf4cb} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token}{Method\+Token}}$>$ neo\+::smartcontract\+::\+Nef\+File\+::tokens\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/\mbox{\hyperlink{nef__file_8h}{nef\+\_\+file.\+h}}\item 
+src/smartcontract/\mbox{\hyperlink{nef__file_8cpp}{nef\+\_\+file.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,21 @@
+digraph "neo::cryptography::base58::decode_check"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::cryptography::\lbase58::decode_check",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge7_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::cryptography::\lBase58::DecodeCheck",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cryptography_1_1_base58.html#a513281f3ec39ac6d265a272f23f52bf1",tooltip="Decode Base58Check string to bytes (verifies checksum)."];
+  Node2 -> Node3 [id="edge8_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::cryptography::\lBase58::CalculateChecksum",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cryptography_1_1_base58.html#ad90529cf8e6bc33c8273b9df02155c95",tooltip="Calculate SHA256 double hash for checksum."];
+  Node3 -> Node4 [id="edge9_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::cryptography::\lHash::Sha256",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cryptography_1_1_hash.html#a45b12e21ad2391d1919f3eb7b61f683a",tooltip="Computes SHA256 hash."];
+  Node4 -> Node5 [id="edge10_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::io::ByteSpan::Data",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_span.html#a0285a19eb5cd212ecd1079e0bc5e494c",tooltip="Gets a pointer to the data."];
+  Node4 -> Node6 [id="edge11_Node000004_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::io::ByteSpan::Size",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_span.html#a4a869430800a37dcbeefac6f36468fcb",tooltip="Gets the size of the ByteSpan."];
+  Node2 -> Node7 [id="edge12_Node000002_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::cryptography::\lBase58::Decode",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cryptography_1_1_base58.html#a063133b21ab7c5bf5f7ed7fc153015b0",tooltip="Decode Base58 string to bytes."];
+}

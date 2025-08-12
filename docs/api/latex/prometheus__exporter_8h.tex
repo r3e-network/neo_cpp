@@ -1,0 +1,142 @@
+\doxysection{include/neo/monitoring/prometheus\+\_\+exporter.h File Reference}
+\hypertarget{prometheus__exporter_8h}{}\label{prometheus__exporter_8h}\index{include/neo/monitoring/prometheus\_exporter.h@{include/neo/monitoring/prometheus\_exporter.h}}
+{\ttfamily \#include $<$httplib.\+h$>$}\newline
+{\ttfamily \#include $<$atomic$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for prometheus\+\_\+exporter.\+h\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{neo\+::monitoring\+::\+Metric}}
+\begin{DoxyCompactList}\small\item\em Base class for all metrics. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter}{neo\+::monitoring\+::\+Counter}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1monitoring_1_1_counter}{Counter} metric -\/ monotonically increasing value. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge}{neo\+::monitoring\+::\+Gauge}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1monitoring_1_1_gauge}{Gauge} metric -\/ value that can go up or down. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram}{neo\+::monitoring\+::\+Histogram}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1monitoring_1_1_histogram}{Histogram} metric -\/ distribution of values. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric}{neo\+::monitoring\+::\+Labeled\+Metric$<$ Metric\+T $>$}}
+\begin{DoxyCompactList}\small\item\em Labeled metric wrapper. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1monitoring_1_1_labeled_metric_1_1_metric_entry}{neo\+::monitoring\+::\+Labeled\+Metric$<$ Metric\+T $>$\+::\+Metric\+Entry}}
+\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter}{neo\+::monitoring\+::\+Prometheus\+Exporter}}
+\begin{DoxyCompactList}\small\item\em Prometheus metrics exporter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1monitoring}{neo\+::monitoring}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{prometheus__exporter_8h_ad7f84458eb921060120e73ab271d9373}{PROMETHEUS\+\_\+\+COUNTER}}(name,  help)
+\begin{DoxyCompactList}\small\item\em Convenience macros for metric creation. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{prometheus__exporter_8h_a032cbfc5787ac6f8f66e2f811f877fc9}{PROMETHEUS\+\_\+\+GAUGE}}(name,  help)
+\item 
+\#define \mbox{\hyperlink{prometheus__exporter_8h_a33139d281285a7f1ba5bbcb119ed3bfc}{PROMETHEUS\+\_\+\+HISTOGRAM}}(name,  help, ...)
+\item 
+\#define \mbox{\hyperlink{prometheus__exporter_8h_ad2172fc0ccff8005cff5fec87acc2d31}{PROMETHEUS\+\_\+\+LABELED\+\_\+\+COUNTER}}(name,  help,  labels)
+\item 
+\#define \mbox{\hyperlink{prometheus__exporter_8h_a8417a1f892c3427d7f4b452342ef97a4}{PROMETHEUS\+\_\+\+LABELED\+\_\+\+GAUGE}}(name,  help,  labels)
+\item 
+\#define \mbox{\hyperlink{prometheus__exporter_8h_ae16b3f56186a5111513a2dd792747ae2}{PROMETHEUS\+\_\+\+LABELED\+\_\+\+HISTOGRAM}}(name,  help,  labels, ...)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{neo\+::monitoring\+::\+Metric\+Type}} \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a64d129224a5377b63e9727479ec987d9}{neo\+::monitoring\+::\+Counter}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a948f0edf37b92d0717053d38e5ea12c2}{neo\+::monitoring\+::\+Gauge}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35ac00e3b8460f0592cacf813fd68988ed4}{neo\+::monitoring\+::\+Histogram}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a290612199861c31d1036b185b4e69b75}{neo\+::monitoring\+::\+Summary}}
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a125e831262b4dbbd68c6878c5d3759f6}{neo\+::monitoring\+::\+COUNTER}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a6a91e159ac40f39402ef860163318744}{neo\+::monitoring\+::\+GAUGE}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a7f33aef6b28f7abec2f5d804ab1343c8}{neo\+::monitoring\+::\+HISTOGRAM}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a36cbecb886c3fb994669cd10cdbd9f5f}{neo\+::monitoring\+::\+SUMMARY}}
+ \}
+\begin{DoxyCompactList}\small\item\em Prometheus metric types. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{prometheus__exporter_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{prometheus__exporter_8h_ad7f84458eb921060120e73ab271d9373}\index{prometheus\_exporter.h@{prometheus\_exporter.h}!PROMETHEUS\_COUNTER@{PROMETHEUS\_COUNTER}}
+\index{PROMETHEUS\_COUNTER@{PROMETHEUS\_COUNTER}!prometheus\_exporter.h@{prometheus\_exporter.h}}
+\doxysubsubsection{\texorpdfstring{PROMETHEUS\_COUNTER}{PROMETHEUS\_COUNTER}}
+{\footnotesize\ttfamily \label{prometheus__exporter_8h_ad7f84458eb921060120e73ab271d9373} 
+\#define PROMETHEUS\+\_\+\+COUNTER(\begin{DoxyParamCaption}\item[{}]{name}{, }\item[{}]{help}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::make\_shared<neo::monitoring::Counter>(name,\ help)}
+
+\end{DoxyCode}
+
+
+Convenience macros for metric creation. 
+
+\Hypertarget{prometheus__exporter_8h_a032cbfc5787ac6f8f66e2f811f877fc9}\index{prometheus\_exporter.h@{prometheus\_exporter.h}!PROMETHEUS\_GAUGE@{PROMETHEUS\_GAUGE}}
+\index{PROMETHEUS\_GAUGE@{PROMETHEUS\_GAUGE}!prometheus\_exporter.h@{prometheus\_exporter.h}}
+\doxysubsubsection{\texorpdfstring{PROMETHEUS\_GAUGE}{PROMETHEUS\_GAUGE}}
+{\footnotesize\ttfamily \label{prometheus__exporter_8h_a032cbfc5787ac6f8f66e2f811f877fc9} 
+\#define PROMETHEUS\+\_\+\+GAUGE(\begin{DoxyParamCaption}\item[{}]{name}{, }\item[{}]{help}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::make\_shared<neo::monitoring::Gauge>(name,\ help)}
+
+\end{DoxyCode}
+\Hypertarget{prometheus__exporter_8h_a33139d281285a7f1ba5bbcb119ed3bfc}\index{prometheus\_exporter.h@{prometheus\_exporter.h}!PROMETHEUS\_HISTOGRAM@{PROMETHEUS\_HISTOGRAM}}
+\index{PROMETHEUS\_HISTOGRAM@{PROMETHEUS\_HISTOGRAM}!prometheus\_exporter.h@{prometheus\_exporter.h}}
+\doxysubsubsection{\texorpdfstring{PROMETHEUS\_HISTOGRAM}{PROMETHEUS\_HISTOGRAM}}
+{\footnotesize\ttfamily \label{prometheus__exporter_8h_a33139d281285a7f1ba5bbcb119ed3bfc} 
+\#define PROMETHEUS\+\_\+\+HISTOGRAM(\begin{DoxyParamCaption}\item[{}]{name}{, }\item[{}]{help}{, }\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{std::make\_shared<neo::monitoring::Histogram>(name,\ help,\ \#\#\_\_VA\_ARGS\_\_)}
+
+\end{DoxyCode}
+\Hypertarget{prometheus__exporter_8h_ad2172fc0ccff8005cff5fec87acc2d31}\index{prometheus\_exporter.h@{prometheus\_exporter.h}!PROMETHEUS\_LABELED\_COUNTER@{PROMETHEUS\_LABELED\_COUNTER}}
+\index{PROMETHEUS\_LABELED\_COUNTER@{PROMETHEUS\_LABELED\_COUNTER}!prometheus\_exporter.h@{prometheus\_exporter.h}}
+\doxysubsubsection{\texorpdfstring{PROMETHEUS\_LABELED\_COUNTER}{PROMETHEUS\_LABELED\_COUNTER}}
+{\footnotesize\ttfamily \label{prometheus__exporter_8h_ad2172fc0ccff8005cff5fec87acc2d31} 
+\#define PROMETHEUS\+\_\+\+LABELED\+\_\+\+COUNTER(\begin{DoxyParamCaption}\item[{}]{name}{, }\item[{}]{help}{, }\item[{}]{labels}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ std::make\_shared<neo::monitoring::LabeledMetric<neo::monitoring::Counter>>(name,\ help,\ labels)}
+
+\end{DoxyCode}
+\Hypertarget{prometheus__exporter_8h_a8417a1f892c3427d7f4b452342ef97a4}\index{prometheus\_exporter.h@{prometheus\_exporter.h}!PROMETHEUS\_LABELED\_GAUGE@{PROMETHEUS\_LABELED\_GAUGE}}
+\index{PROMETHEUS\_LABELED\_GAUGE@{PROMETHEUS\_LABELED\_GAUGE}!prometheus\_exporter.h@{prometheus\_exporter.h}}
+\doxysubsubsection{\texorpdfstring{PROMETHEUS\_LABELED\_GAUGE}{PROMETHEUS\_LABELED\_GAUGE}}
+{\footnotesize\ttfamily \label{prometheus__exporter_8h_a8417a1f892c3427d7f4b452342ef97a4} 
+\#define PROMETHEUS\+\_\+\+LABELED\+\_\+\+GAUGE(\begin{DoxyParamCaption}\item[{}]{name}{, }\item[{}]{help}{, }\item[{}]{labels}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ std::make\_shared<neo::monitoring::LabeledMetric<neo::monitoring::Gauge>>(name,\ help,\ labels)}
+
+\end{DoxyCode}
+\Hypertarget{prometheus__exporter_8h_ae16b3f56186a5111513a2dd792747ae2}\index{prometheus\_exporter.h@{prometheus\_exporter.h}!PROMETHEUS\_LABELED\_HISTOGRAM@{PROMETHEUS\_LABELED\_HISTOGRAM}}
+\index{PROMETHEUS\_LABELED\_HISTOGRAM@{PROMETHEUS\_LABELED\_HISTOGRAM}!prometheus\_exporter.h@{prometheus\_exporter.h}}
+\doxysubsubsection{\texorpdfstring{PROMETHEUS\_LABELED\_HISTOGRAM}{PROMETHEUS\_LABELED\_HISTOGRAM}}
+{\footnotesize\ttfamily \label{prometheus__exporter_8h_ae16b3f56186a5111513a2dd792747ae2} 
+\#define PROMETHEUS\+\_\+\+LABELED\+\_\+\+HISTOGRAM(\begin{DoxyParamCaption}\item[{}]{name}{, }\item[{}]{help}{, }\item[{}]{labels}{, }\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ std::make\_shared<neo::monitoring::LabeledMetric<neo::monitoring::Histogram>>(name,\ help,\ labels,\ \#\#\_\_VA\_ARGS\_\_)}
+
+\end{DoxyCode}

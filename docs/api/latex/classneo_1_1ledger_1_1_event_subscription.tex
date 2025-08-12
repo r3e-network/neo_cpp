@@ -1,0 +1,141 @@
+\doxysection{neo\+::ledger\+::Event\+Subscription\texorpdfstring{$<$}{<} Event\+Class, Handler \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classneo_1_1ledger_1_1_event_subscription}{}\label{classneo_1_1ledger_1_1_event_subscription}\index{neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}}
+
+
+RAII-\/style event subscription helper. Automatically unsubscribes when the object is destroyed.  
+
+
+
+
+{\ttfamily \#include $<$event\+\_\+system.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a16310a58f3f9fc83c6cf843928b7abaa}{Event\+Subscription}} (Handler handler)
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_adee806fd8a74abc232443c539db5aa60}{\texorpdfstring{$\sim$}{\string~}\+Event\+Subscription}} ()
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a4bec316fcb97598a3fbdf5d7bf69d956}{Event\+Subscription}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{Event\+Subscription}} \&)=delete
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{Event\+Subscription}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_ad542dd51f7291d9f754fa0f5ef34cb00}{operator=}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{Event\+Subscription}} \&)=delete
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_ab3395811267a2829d2abf2f9cf265e11}{Event\+Subscription}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{Event\+Subscription}} \&\&)=delete
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{Event\+Subscription}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_ac488d3e910cab410833e361003dcdcc7}{operator=}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{Event\+Subscription}} \&\&)=delete
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a60c08308ed89c31becd4e6b0eaefd16a}{Subscribe}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a16799c01f30e5cc8d0533cfb60a1cc12}{Unsubscribe}} ()
+\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a93721e94b6d617a2f1eb37e05c7bd518}{Is\+Subscribed}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+Handler \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_aa7d14f8a9ff7e4cdf1b08967be8a1be6}{handler\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_acb4866e1a8d69bcca67bf3ca69c2898f}{subscribed\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Event\+Class, typename Handler$>$\newline
+class neo\+::ledger\+::\+Event\+Subscription$<$ Event\+Class, Handler $>$}
+RAII-\/style event subscription helper. Automatically unsubscribes when the object is destroyed. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_event_subscription_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_event_subscription_a16310a58f3f9fc83c6cf843928b7abaa}\index{neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}!EventSubscription@{EventSubscription}}
+\index{EventSubscription@{EventSubscription}!neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}}
+\doxysubsubsection{\texorpdfstring{EventSubscription()}{EventSubscription()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_event_subscription_a16310a58f3f9fc83c6cf843928b7abaa} 
+template$<$typename Event\+Class, typename Handler$>$ \\
+\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{neo\+::ledger\+::\+Event\+Subscription}}$<$ Event\+Class, Handler $>$\+::\+Event\+Subscription (\begin{DoxyParamCaption}\item[{Handler}]{handler}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_event_subscription_adee806fd8a74abc232443c539db5aa60}\index{neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}!````~EventSubscription@{\texorpdfstring{$\sim$}{\string~}EventSubscription}}
+\index{````~EventSubscription@{\texorpdfstring{$\sim$}{\string~}EventSubscription}!neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}EventSubscription()}{\string~EventSubscription()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_event_subscription_adee806fd8a74abc232443c539db5aa60} 
+template$<$typename Event\+Class, typename Handler$>$ \\
+\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{neo\+::ledger\+::\+Event\+Subscription}}$<$ Event\+Class, Handler $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{Event\+Subscription}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_event_subscription_a4bec316fcb97598a3fbdf5d7bf69d956}\index{neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}!EventSubscription@{EventSubscription}}
+\index{EventSubscription@{EventSubscription}!neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}}
+\doxysubsubsection{\texorpdfstring{EventSubscription()}{EventSubscription()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_event_subscription_a4bec316fcb97598a3fbdf5d7bf69d956} 
+template$<$typename Event\+Class, typename Handler$>$ \\
+\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{neo\+::ledger\+::\+Event\+Subscription}}$<$ Event\+Class, Handler $>$\+::\+Event\+Subscription (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{Event\+Subscription}}$<$ Event\+Class, Handler $>$ \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_event_subscription_ab3395811267a2829d2abf2f9cf265e11}\index{neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}!EventSubscription@{EventSubscription}}
+\index{EventSubscription@{EventSubscription}!neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}}
+\doxysubsubsection{\texorpdfstring{EventSubscription()}{EventSubscription()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_event_subscription_ab3395811267a2829d2abf2f9cf265e11} 
+template$<$typename Event\+Class, typename Handler$>$ \\
+\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{neo\+::ledger\+::\+Event\+Subscription}}$<$ Event\+Class, Handler $>$\+::\+Event\+Subscription (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{Event\+Subscription}}$<$ Event\+Class, Handler $>$ \&\&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_event_subscription_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_event_subscription_a93721e94b6d617a2f1eb37e05c7bd518}\index{neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}!IsSubscribed@{IsSubscribed}}
+\index{IsSubscribed@{IsSubscribed}!neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}}
+\doxysubsubsection{\texorpdfstring{IsSubscribed()}{IsSubscribed()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_event_subscription_a93721e94b6d617a2f1eb37e05c7bd518} 
+template$<$typename Event\+Class, typename Handler$>$ \\
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{neo\+::ledger\+::\+Event\+Subscription}}$<$ Event\+Class, Handler $>$\+::\+Is\+Subscribed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_event_subscription_ad542dd51f7291d9f754fa0f5ef34cb00}\index{neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_event_subscription_ad542dd51f7291d9f754fa0f5ef34cb00} 
+template$<$typename Event\+Class, typename Handler$>$ \\
+\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{Event\+Subscription}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{neo\+::ledger\+::\+Event\+Subscription}}$<$ Event\+Class, Handler $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{Event\+Subscription}}$<$ Event\+Class, Handler $>$ \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_event_subscription_ac488d3e910cab410833e361003dcdcc7}\index{neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_event_subscription_ac488d3e910cab410833e361003dcdcc7} 
+template$<$typename Event\+Class, typename Handler$>$ \\
+\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{Event\+Subscription}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{neo\+::ledger\+::\+Event\+Subscription}}$<$ Event\+Class, Handler $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{Event\+Subscription}}$<$ Event\+Class, Handler $>$ \&\&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_event_subscription_a60c08308ed89c31becd4e6b0eaefd16a}\index{neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}!Subscribe@{Subscribe}}
+\index{Subscribe@{Subscribe}!neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}}
+\doxysubsubsection{\texorpdfstring{Subscribe()}{Subscribe()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_event_subscription_a60c08308ed89c31becd4e6b0eaefd16a} 
+template$<$typename Event\+Class, typename Handler$>$ \\
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{neo\+::ledger\+::\+Event\+Subscription}}$<$ Event\+Class, Handler $>$\+::\+Subscribe (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classneo_1_1ledger_1_1_event_subscription_a16799c01f30e5cc8d0533cfb60a1cc12}\index{neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}!Unsubscribe@{Unsubscribe}}
+\index{Unsubscribe@{Unsubscribe}!neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}}
+\doxysubsubsection{\texorpdfstring{Unsubscribe()}{Unsubscribe()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_event_subscription_a16799c01f30e5cc8d0533cfb60a1cc12} 
+template$<$typename Event\+Class, typename Handler$>$ \\
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{neo\+::ledger\+::\+Event\+Subscription}}$<$ Event\+Class, Handler $>$\+::\+Unsubscribe (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_event_subscription_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_event_subscription_aa7d14f8a9ff7e4cdf1b08967be8a1be6}\index{neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}!handler\_@{handler\_}}
+\index{handler\_@{handler\_}!neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}}
+\doxysubsubsection{\texorpdfstring{handler\_}{handler\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_event_subscription_aa7d14f8a9ff7e4cdf1b08967be8a1be6} 
+template$<$typename Event\+Class, typename Handler$>$ \\
+Handler \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{neo\+::ledger\+::\+Event\+Subscription}}$<$ Event\+Class, Handler $>$\+::handler\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_event_subscription_acb4866e1a8d69bcca67bf3ca69c2898f}\index{neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}!subscribed\_@{subscribed\_}}
+\index{subscribed\_@{subscribed\_}!neo::ledger::EventSubscription$<$ EventClass, Handler $>$@{neo::ledger::EventSubscription$<$ EventClass, Handler $>$}}
+\doxysubsubsection{\texorpdfstring{subscribed\_}{subscribed\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_event_subscription_acb4866e1a8d69bcca67bf3ca69c2898f} 
+template$<$typename Event\+Class, typename Handler$>$ \\
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{neo\+::ledger\+::\+Event\+Subscription}}$<$ Event\+Class, Handler $>$\+::subscribed\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{event__system_8h}{event\+\_\+system.\+h}}\end{DoxyCompactItemize}

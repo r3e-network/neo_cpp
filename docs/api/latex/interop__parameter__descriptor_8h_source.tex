@@ -1,0 +1,73 @@
+\doxysection{interop\+\_\+parameter\+\_\+descriptor.\+h}
+\hypertarget{interop__parameter__descriptor_8h_source}{}\label{interop__parameter__descriptor_8h_source}\index{include/neo/smartcontract/interop\_parameter\_descriptor.h@{include/neo/smartcontract/interop\_parameter\_descriptor.h}}
+\mbox{\hyperlink{interop__parameter__descriptor_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Copyright\ (C)\ 2015-\/2025\ The\ Neo\ Project.}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ interop\_parameter\_descriptor.h\ file\ belongs\ to\ the\ neo\ project\ and\ is\ free}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ software\ distributed\ under\ the\ MIT\ software\ license,\ see\ the}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ accompanying\ file\ LICENSE\ in\ the\ main\ directory\ of\ the}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ repository\ or\ http://www.opensource.org/licenses/mit-\/license.php}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ for\ more\ details.}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ Redistribution\ and\ use\ in\ source\ and\ binary\ forms\ with\ or\ without}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ modifications\ are\ permitted.}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#ifndef\ NEO\_SMARTCONTRACT\_INTEROP\_PARAMETER\_DESCRIPTOR\_H}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#define\ NEO\_SMARTCONTRACT\_INTEROP\_PARAMETER\_DESCRIPTOR\_H}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <typeinfo>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo}{neo}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{vm}}}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{StackItem}};}
+\DoxyCodeLine{00025\ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract}{smartcontract}}}
+\DoxyCodeLine{00028\ \{}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor}{InteropParameterDescriptor}}}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{const}\ std::type\_info*\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a05d6f6fc8f3269abeda43fc69c826998}{type}};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00044\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_add280786dfb2c35a8f3cd8579c2f238f}{name}};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a34ecd8524a76495051367008e90e9fa3}{is\_array}};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a0be54462893caba8f5ef39e1042b20e0}{is\_interface}};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_add7795a52c345391adbb31b8f264d276}{is\_enum}};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00064\ \ \ \ \ std::function<\textcolor{keywordtype}{void}*(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm::StackItem}}\&)>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a8096857b04013a1a1bfcdcbd28ebc8ae}{converter}};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor}{InteropParameterDescriptor}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a72897f979e42465af392004e09b34398}{create}}(\textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_add280786dfb2c35a8f3cd8579c2f238f}{name}}\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00071\ \ \ \ \ \{}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor}{InteropParameterDescriptor}}\ descriptor;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ descriptor.\mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a05d6f6fc8f3269abeda43fc69c826998}{type}}\ =\ \&\textcolor{keyword}{typeid}(T);}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ descriptor.\mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_add280786dfb2c35a8f3cd8579c2f238f}{name}}\ =\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_add280786dfb2c35a8f3cd8579c2f238f}{name}};}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ descriptor.\mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a34ecd8524a76495051367008e90e9fa3}{is\_array}}\ =\ std::is\_array\_v<T>;}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ descriptor.\mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a0be54462893caba8f5ef39e1042b20e0}{is\_interface}}\ =}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ std::is\_abstract\_v<T>;\ \ \textcolor{comment}{//\ Complete\ interface\ detection\ -\/\ checks\ for\ abstract\ classes\ (interfaces)}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ descriptor.\mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_add7795a52c345391adbb31b8f264d276}{is\_enum}}\ =\ std::is\_enum\_v<T>;}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ descriptor.\mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a8096857b04013a1a1bfcdcbd28ebc8ae}{converter}}\ =\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a5043bdd6b9b018186108bb8e157031aa}{create\_converter<T>}}();}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ descriptor;}
+\DoxyCodeLine{00081\ \ \ \ \ \}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{static}\ std::function<\textcolor{keywordtype}{void}*(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm::StackItem}}\&)>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_interop_parameter_descriptor_a5043bdd6b9b018186108bb8e157031aa}{create\_converter}}();}
+\DoxyCodeLine{00089\ \};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \}\ \ \textcolor{comment}{//\ namespace\ smartcontract}}
+\DoxyCodeLine{00092\ \}\ \ \textcolor{comment}{//\ namespace\ neo}}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#endif\ \ }\textcolor{comment}{//\ NEO\_SMARTCONTRACT\_INTEROP\_PARAMETER\_DESCRIPTOR\_H}}
+
+\end{DoxyCode}

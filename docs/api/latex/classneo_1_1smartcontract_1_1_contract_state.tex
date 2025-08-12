@@ -1,0 +1,322 @@
+\doxysection{neo\+::smartcontract\+::Contract\+State Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1_contract_state}{}\label{classneo_1_1smartcontract_1_1_contract_state}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+
+
+Represents a contract state.  
+
+
+
+
+{\ttfamily \#include $<$contract.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::smartcontract\+::Contract\+State\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::smartcontract\+::Contract\+State\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_ae42e10d4c4731ede6bcf70bdfbe7f544}{Contract\+State}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1smartcontract_1_1_contract_state}{Contract\+State}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_a7e379e3d09680d46212551e21217ba60}{Get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Gets the id. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_a139287aa577b58524ae0fb7d71cc2462}{Set\+Id}} (int32\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Sets the id. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_a5b5d0db6c4cdc03269fdcb20dc03b5ca}{Get\+Script\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_a4cd3d79a59c097c3a8e9f6a97aed81e6}{Set\+Script\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash)
+\begin{DoxyCompactList}\small\item\em Sets the script hash. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_a14566a751ad315a009bc8909fc0dfd6b}{Get\+Script}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_ad63b79dcdc648c4d74e6f182c64fb505}{Set\+Script}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&script)
+\begin{DoxyCompactList}\small\item\em Sets the script. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_acf4bc96bafd3834a799c8580c9ac5763}{Get\+Manifest}} () const
+\begin{DoxyCompactList}\small\item\em Gets the manifest. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_ad496c950d7af0c330c73c2dd3a950006}{Set\+Manifest}} (const std\+::string \&manifest)
+\begin{DoxyCompactList}\small\item\em Sets the manifest. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_a9865cfdc0bdd313b1c553ce410d43459}{Get\+Update\+Counter}} () const
+\begin{DoxyCompactList}\small\item\em Gets the update counter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_a794ac984c4cc8ba9f810c4c59ed2e7c6}{Set\+Update\+Counter}} (uint16\+\_\+t update\+Counter)
+\begin{DoxyCompactList}\small\item\em Sets the update counter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_ac0d7a7b363b131fe1a196c8a7b9673fb}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1smartcontract_1_1_contract_state}{Contract\+State} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_a8c381bf79560ea48705ff117dd685308}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1smartcontract_1_1_contract_state}{Contract\+State} from a binary reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_ae73b52100792b70fedeef42d245a047a}{id\+\_\+}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_aca5f8e5137290d6fa142c269ab72f4ee}{update\+Counter\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_a86d4d75036ff88b54f6401fd18a7cd29}{script\+Hash\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_abf74364aa335c8c6c601f3e12e3bfb11}{script\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state_ad2c9dff60a847c28a0b393d3bdb3c40d}{manifest\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a contract state. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_ae42e10d4c4731ede6bcf70bdfbe7f544}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!ContractState@{ContractState}}
+\index{ContractState@{ContractState}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{ContractState()}{ContractState()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_ae42e10d4c4731ede6bcf70bdfbe7f544} 
+neo\+::smartcontract\+::\+Contract\+State\+::\+Contract\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1smartcontract_1_1_contract_state}{Contract\+State}. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_a8c381bf79560ea48705ff117dd685308}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_a8c381bf79560ea48705ff117dd685308} 
+void neo\+::smartcontract\+::\+Contract\+State\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1smartcontract_1_1_contract_state}{Contract\+State} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_a7e379e3d09680d46212551e21217ba60}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!GetId@{GetId}}
+\index{GetId@{GetId}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{GetId()}{GetId()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_a7e379e3d09680d46212551e21217ba60} 
+int32\+\_\+t neo\+::smartcontract\+::\+Contract\+State\+::\+Get\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the id. 
+
+\begin{DoxyReturn}{Returns}
+The id. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_acf4bc96bafd3834a799c8580c9ac5763}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!GetManifest@{GetManifest}}
+\index{GetManifest@{GetManifest}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{GetManifest()}{GetManifest()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_acf4bc96bafd3834a799c8580c9ac5763} 
+const std\+::string \& neo\+::smartcontract\+::\+Contract\+State\+::\+Get\+Manifest (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the manifest. 
+
+\begin{DoxyReturn}{Returns}
+The manifest. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_a14566a751ad315a009bc8909fc0dfd6b}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!GetScript@{GetScript}}
+\index{GetScript@{GetScript}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{GetScript()}{GetScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_a14566a751ad315a009bc8909fc0dfd6b} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::smartcontract\+::\+Contract\+State\+::\+Get\+Script (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the script. 
+
+\begin{DoxyReturn}{Returns}
+The script. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_a5b5d0db6c4cdc03269fdcb20dc03b5ca}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!GetScriptHash@{GetScriptHash}}
+\index{GetScriptHash@{GetScriptHash}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{GetScriptHash()}{GetScriptHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_a5b5d0db6c4cdc03269fdcb20dc03b5ca} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& neo\+::smartcontract\+::\+Contract\+State\+::\+Get\+Script\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the script hash. 
+
+\begin{DoxyReturn}{Returns}
+The script hash. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_a9865cfdc0bdd313b1c553ce410d43459}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!GetUpdateCounter@{GetUpdateCounter}}
+\index{GetUpdateCounter@{GetUpdateCounter}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{GetUpdateCounter()}{GetUpdateCounter()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_a9865cfdc0bdd313b1c553ce410d43459} 
+uint16\+\_\+t neo\+::smartcontract\+::\+Contract\+State\+::\+Get\+Update\+Counter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the update counter. 
+
+\begin{DoxyReturn}{Returns}
+The update counter. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_ac0d7a7b363b131fe1a196c8a7b9673fb}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_ac0d7a7b363b131fe1a196c8a7b9673fb} 
+void neo\+::smartcontract\+::\+Contract\+State\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1smartcontract_1_1_contract_state}{Contract\+State} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_a139287aa577b58524ae0fb7d71cc2462}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!SetId@{SetId}}
+\index{SetId@{SetId}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{SetId()}{SetId()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_a139287aa577b58524ae0fb7d71cc2462} 
+void neo\+::smartcontract\+::\+Contract\+State\+::\+Set\+Id (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Sets the id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The id. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_ad496c950d7af0c330c73c2dd3a950006}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!SetManifest@{SetManifest}}
+\index{SetManifest@{SetManifest}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{SetManifest()}{SetManifest()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_ad496c950d7af0c330c73c2dd3a950006} 
+void neo\+::smartcontract\+::\+Contract\+State\+::\+Set\+Manifest (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{manifest}{}\end{DoxyParamCaption})}
+
+
+
+Sets the manifest. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em manifest} & The manifest. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_ad63b79dcdc648c4d74e6f182c64fb505}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!SetScript@{SetScript}}
+\index{SetScript@{SetScript}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{SetScript()}{SetScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_ad63b79dcdc648c4d74e6f182c64fb505} 
+void neo\+::smartcontract\+::\+Contract\+State\+::\+Set\+Script (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{script}{}\end{DoxyParamCaption})}
+
+
+
+Sets the script. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & The script. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_a4cd3d79a59c097c3a8e9f6a97aed81e6}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!SetScriptHash@{SetScriptHash}}
+\index{SetScriptHash@{SetScriptHash}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{SetScriptHash()}{SetScriptHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_a4cd3d79a59c097c3a8e9f6a97aed81e6} 
+void neo\+::smartcontract\+::\+Contract\+State\+::\+Set\+Script\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{}\end{DoxyParamCaption})}
+
+
+
+Sets the script hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The script hash. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_a794ac984c4cc8ba9f810c4c59ed2e7c6}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!SetUpdateCounter@{SetUpdateCounter}}
+\index{SetUpdateCounter@{SetUpdateCounter}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{SetUpdateCounter()}{SetUpdateCounter()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_a794ac984c4cc8ba9f810c4c59ed2e7c6} 
+void neo\+::smartcontract\+::\+Contract\+State\+::\+Set\+Update\+Counter (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{update\+Counter}{}\end{DoxyParamCaption})}
+
+
+
+Sets the update counter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em update\+Counter} & The update counter. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_ae73b52100792b70fedeef42d245a047a}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!id\_@{id\_}}
+\index{id\_@{id\_}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{id\_}{id\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_ae73b52100792b70fedeef42d245a047a} 
+int32\+\_\+t neo\+::smartcontract\+::\+Contract\+State\+::id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_ad2c9dff60a847c28a0b393d3bdb3c40d}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!manifest\_@{manifest\_}}
+\index{manifest\_@{manifest\_}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{manifest\_}{manifest\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_ad2c9dff60a847c28a0b393d3bdb3c40d} 
+std\+::string neo\+::smartcontract\+::\+Contract\+State\+::manifest\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_abf74364aa335c8c6c601f3e12e3bfb11}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!script\_@{script\_}}
+\index{script\_@{script\_}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{script\_}{script\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_abf74364aa335c8c6c601f3e12e3bfb11} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::smartcontract\+::\+Contract\+State\+::script\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_a86d4d75036ff88b54f6401fd18a7cd29}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!scriptHash\_@{scriptHash\_}}
+\index{scriptHash\_@{scriptHash\_}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{scriptHash\_}{scriptHash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_a86d4d75036ff88b54f6401fd18a7cd29} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::smartcontract\+::\+Contract\+State\+::script\+Hash\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_state_aca5f8e5137290d6fa142c269ab72f4ee}\index{neo::smartcontract::ContractState@{neo::smartcontract::ContractState}!updateCounter\_@{updateCounter\_}}
+\index{updateCounter\_@{updateCounter\_}!neo::smartcontract::ContractState@{neo::smartcontract::ContractState}}
+\doxysubsubsection{\texorpdfstring{updateCounter\_}{updateCounter\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_state_aca5f8e5137290d6fa142c269ab72f4ee} 
+uint16\+\_\+t neo\+::smartcontract\+::\+Contract\+State\+::update\+Counter\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/\mbox{\hyperlink{contract_8h}{contract.\+h}}\item 
+src/smartcontract/\mbox{\hyperlink{contract__state_8cpp}{contract\+\_\+state.\+cpp}}\end{DoxyCompactItemize}

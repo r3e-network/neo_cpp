@@ -1,0 +1,548 @@
+\doxysection{neo\+::cryptography\+::bls12\+\_\+381 Namespace Reference}
+\hypertarget{namespaceneo_1_1cryptography_1_1bls12__381}{}\label{namespaceneo_1_1cryptography_1_1bls12__381}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_1_1detail}{detail}}
+\begin{DoxyCompactList}\small\item\em Simple BLS12-\/381 implementation for Neo C++ node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_field_ops}{Field\+Ops}}
+\item 
+class \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}}
+\begin{DoxyCompactList}\small\item\em Represents a point on the G1 curve of BLS12-\/381. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}}
+\begin{DoxyCompactList}\small\item\em Represents a point on the G2 curve of BLS12-\/381. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}}
+\begin{DoxyCompactList}\small\item\em Represents a point in the target group GT of BLS12-\/381. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_aedc5a5435eedc791382a89ccf4750a38}{Pairing}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&p, const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&q)
+\begin{DoxyCompactList}\small\item\em Computes the pairing of a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point} and a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a95196382dbfa42bdf7e388501f89a63e}{Multi\+Pairing}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} $>$ \&ps, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} $>$ \&qs)
+\begin{DoxyCompactList}\small\item\em Computes the multi-\/pairing of G1\+Points and G2\+Points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a024d21676620b4597e74e6e1e4830044}{Miller\+Loop}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&p, const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&q)
+\begin{DoxyCompactList}\small\item\em Computes the Miller loop for a pair of points. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a9a6d3ed7c51198a295181e19f4fe169e}{Gt}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \&f)
+\begin{DoxyCompactList}\small\item\em Performs the final exponentiation step of GT. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a80406277b1586adaf98f67297a4b26f6}{Verify\+Signature}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&public\+Key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&message, const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&signature)
+\begin{DoxyCompactList}\small\item\em Verifies a BLS signature. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_abd861f68efc84380af2413cca4ae7cc5}{Sign}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&private\+Key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&message)
+\begin{DoxyCompactList}\small\item\em Signs a message using BLS. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_aa28c5788f90b0d7cc9f4a155cb078603}{Generate\+Public\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Generates a public key from a private key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a78471b992c70946d177ab00f163badae}{Aggregate\+Signatures}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} $>$ \&signatures)
+\begin{DoxyCompactList}\small\item\em Aggregates multiple signatures into a single signature. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a02160903d084c76363825867d52ed54c}{Verify\+Aggregate\+Signature}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} $>$ \&public\+Keys, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} $>$ \&messages, const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&signature)
+\begin{DoxyCompactList}\small\item\em Verifies an aggregated signature. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_aadf995d05dc641a38f159306fa6f2e6c}{Deserialize\+G1\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data, \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&out)
+\begin{DoxyCompactList}\small\item\em Deserializes a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point} from bytes. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a08fba5b446175286e49a1450b5ed0b6f}{Deserialize\+G2\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data, \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&out)
+\begin{DoxyCompactList}\small\item\em Deserializes a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} from bytes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a1548872821a7a5396e045f191d2f70a3}{Get\+G2\+Generator}} ()
+\begin{DoxyCompactList}\small\item\em Gets the G2 generator point. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_acf88aa73b86497934d607e968df3b083}{Negate\+G2}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&point)
+\begin{DoxyCompactList}\small\item\em Negates a G2 point. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a291d49d0f0d09b508e41027091f71d63}{Multiply\+GT}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \&a, const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \&b)
+\begin{DoxyCompactList}\small\item\em Multiplies two GT points. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a1e6be6cd890cd2824d0f2c28c364a7cf}{Is\+Identity\+GT}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \&point)
+\begin{DoxyCompactList}\small\item\em Checks if a GT point is the identity element. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_af0a1a9ac13370eabf491b108c00d5a6d}{Hash\+To\+G1}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&message)
+\begin{DoxyCompactList}\small\item\em Hashes a message to a G1 point. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a57cb208405fc91b3fdf3f1cae2c96ae2}{G1\+Point\+Double}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&point)
+\begin{DoxyCompactList}\small\item\em Doubles a G1 point. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a53ccc2bcc3d8cd6b967fa817032488e3}{G1\+Point\+Negate}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&point)
+\begin{DoxyCompactList}\small\item\em Negates a G1 point. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a28c5238d29c03fb198a09d807877fa81}{GTPoint\+Identity}} ()
+\begin{DoxyCompactList}\small\item\em Gets the identity element for GT. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_aaf953d0373456420c73a3470f3248b8e}{Compute\+Tangent\+Line}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&point, const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&twist\+\_\+point)
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_aeda939fe6c23bcf7fe392e88f5cde24e}{Compute\+Secant\+Line}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&p1, const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&p2, const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&twist\+\_\+point)
+\item 
+void \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a7971557e9d52b1d7dc45e356c4a44c17}{Subtract\+Fp}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}a, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}b, uint8\+\_\+t \texorpdfstring{$\ast$}{*}result)
+\item 
+bool \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_afbbfe9df225266365743aed118a9d78b}{Invert\+Fp}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}a, uint8\+\_\+t \texorpdfstring{$\ast$}{*}result)
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a4e0993661b519573e070623d4cb6ced4}{Compute\+Line\+Function}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&P, const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&Q, const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&T)
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_afdadba06e8d69bb8fd61ad8fe406905d}{Frobenius\+GT}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \&f, int power)
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a7dfe5214ef0bdc104202587e6ad752d7}{Invert\+GT}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \&f)
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a35925a1d94738c83a6f3d2da6c76293b}{Hard\+Part\+Exponentiation}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \&f)
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_aa6c130cfc95a76c6d9e674c65dc16b09}{Power\+GT}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \&base, uint64\+\_\+t exponent)
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a78471b992c70946d177ab00f163badae}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!AggregateSignatures@{AggregateSignatures}}
+\index{AggregateSignatures@{AggregateSignatures}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{AggregateSignatures()}{AggregateSignatures()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a78471b992c70946d177ab00f163badae} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Aggregate\+Signatures (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} $>$ \&}]{signatures}{}\end{DoxyParamCaption})}
+
+
+
+Aggregates multiple signatures into a single signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em signatures} & The signatures. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The aggregated signature. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a4e0993661b519573e070623d4cb6ced4}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!ComputeLineFunction@{ComputeLineFunction}}
+\index{ComputeLineFunction@{ComputeLineFunction}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{ComputeLineFunction()}{ComputeLineFunction()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a4e0993661b519573e070623d4cb6ced4} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Compute\+Line\+Function (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&}]{P}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&}]{Q}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&}]{T}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_aeda939fe6c23bcf7fe392e88f5cde24e}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!ComputeSecantLine@{ComputeSecantLine}}
+\index{ComputeSecantLine@{ComputeSecantLine}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{ComputeSecantLine()}{ComputeSecantLine()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_aeda939fe6c23bcf7fe392e88f5cde24e} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Compute\+Secant\+Line (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&}]{p1}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&}]{p2}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&}]{twist\+\_\+point}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_aaf953d0373456420c73a3470f3248b8e}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!ComputeTangentLine@{ComputeTangentLine}}
+\index{ComputeTangentLine@{ComputeTangentLine}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{ComputeTangentLine()}{ComputeTangentLine()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_aaf953d0373456420c73a3470f3248b8e} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Compute\+Tangent\+Line (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&}]{point}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&}]{twist\+\_\+point}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_aadf995d05dc641a38f159306fa6f2e6c}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!DeserializeG1Point@{DeserializeG1Point}}
+\index{DeserializeG1Point@{DeserializeG1Point}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{DeserializeG1Point()}{DeserializeG1Point()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_aadf995d05dc641a38f159306fa6f2e6c} 
+bool neo\+::cryptography\+::bls12\+\_\+381\+::\+Deserialize\+G1\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{, }\item[{\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&}]{out}{}\end{DoxyParamCaption})}
+
+
+
+Deserializes a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point} from bytes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The byte data. \\
+\hline
+{\em out} & The output \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if deserialization was successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a08fba5b446175286e49a1450b5ed0b6f}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!DeserializeG2Point@{DeserializeG2Point}}
+\index{DeserializeG2Point@{DeserializeG2Point}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{DeserializeG2Point()}{DeserializeG2Point()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a08fba5b446175286e49a1450b5ed0b6f} 
+bool neo\+::cryptography\+::bls12\+\_\+381\+::\+Deserialize\+G2\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{, }\item[{\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&}]{out}{}\end{DoxyParamCaption})}
+
+
+
+Deserializes a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point} from bytes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The byte data. \\
+\hline
+{\em out} & The output \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if deserialization was successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_afdadba06e8d69bb8fd61ad8fe406905d}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!FrobeniusGT@{FrobeniusGT}}
+\index{FrobeniusGT@{FrobeniusGT}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{FrobeniusGT()}{FrobeniusGT()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_afdadba06e8d69bb8fd61ad8fe406905d} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Frobenius\+GT (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \&}]{f}{, }\item[{int}]{power}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a57cb208405fc91b3fdf3f1cae2c96ae2}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!G1PointDouble@{G1PointDouble}}
+\index{G1PointDouble@{G1PointDouble}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{G1PointDouble()}{G1PointDouble()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a57cb208405fc91b3fdf3f1cae2c96ae2} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} neo\+::cryptography\+::bls12\+\_\+381\+::\+G1\+Point\+Double (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&}]{point}{}\end{DoxyParamCaption})}
+
+
+
+Doubles a G1 point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The G1 point to double. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The doubled G1 point. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a53ccc2bcc3d8cd6b967fa817032488e3}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!G1PointNegate@{G1PointNegate}}
+\index{G1PointNegate@{G1PointNegate}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{G1PointNegate()}{G1PointNegate()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a53ccc2bcc3d8cd6b967fa817032488e3} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} neo\+::cryptography\+::bls12\+\_\+381\+::\+G1\+Point\+Negate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&}]{point}{}\end{DoxyParamCaption})}
+
+
+
+Negates a G1 point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The G1 point to negate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The negated G1 point. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_aa28c5788f90b0d7cc9f4a155cb078603}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!GeneratePublicKey@{GeneratePublicKey}}
+\index{GeneratePublicKey@{GeneratePublicKey}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{GeneratePublicKey()}{GeneratePublicKey()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_aa28c5788f90b0d7cc9f4a155cb078603} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Generate\+Public\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{private\+Key}{}\end{DoxyParamCaption})}
+
+
+
+Generates a public key from a private key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em private\+Key} & The private key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The public key (\doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}). 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a1548872821a7a5396e045f191d2f70a3}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!GetG2Generator@{GetG2Generator}}
+\index{GetG2Generator@{GetG2Generator}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{GetG2Generator()}{GetG2Generator()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a1548872821a7a5396e045f191d2f70a3} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Get\+G2\+Generator (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the G2 generator point. 
+
+\begin{DoxyReturn}{Returns}
+The G2 generator point. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a9a6d3ed7c51198a295181e19f4fe169e}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!Gt@{Gt}}
+\index{Gt@{Gt}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{Gt()}{Gt()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a9a6d3ed7c51198a295181e19f4fe169e} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Gt (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \&}]{f}{}\end{DoxyParamCaption})}
+
+
+
+Performs the final exponentiation step of GT. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em f} & The result from Miller loop. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The final GT result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a28c5238d29c03fb198a09d807877fa81}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!GTPointIdentity@{GTPointIdentity}}
+\index{GTPointIdentity@{GTPointIdentity}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{GTPointIdentity()}{GTPointIdentity()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a28c5238d29c03fb198a09d807877fa81} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} neo\+::cryptography\+::bls12\+\_\+381\+::\+GTPoint\+Identity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the identity element for GT. 
+
+\begin{DoxyReturn}{Returns}
+The GT identity element. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a35925a1d94738c83a6f3d2da6c76293b}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!HardPartExponentiation@{HardPartExponentiation}}
+\index{HardPartExponentiation@{HardPartExponentiation}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{HardPartExponentiation()}{HardPartExponentiation()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a35925a1d94738c83a6f3d2da6c76293b} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Hard\+Part\+Exponentiation (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \&}]{f}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_af0a1a9ac13370eabf491b108c00d5a6d}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!HashToG1@{HashToG1}}
+\index{HashToG1@{HashToG1}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{HashToG1()}{HashToG1()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_af0a1a9ac13370eabf491b108c00d5a6d} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Hash\+To\+G1 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Hashes a message to a G1 point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resulting G1 point. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_afbbfe9df225266365743aed118a9d78b}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!InvertFp@{InvertFp}}
+\index{InvertFp@{InvertFp}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{InvertFp()}{InvertFp()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_afbbfe9df225266365743aed118a9d78b} 
+bool neo\+::cryptography\+::bls12\+\_\+381\+::\+Invert\+Fp (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{result}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a7dfe5214ef0bdc104202587e6ad752d7}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!InvertGT@{InvertGT}}
+\index{InvertGT@{InvertGT}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{InvertGT()}{InvertGT()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a7dfe5214ef0bdc104202587e6ad752d7} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Invert\+GT (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \&}]{f}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a1e6be6cd890cd2824d0f2c28c364a7cf}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!IsIdentityGT@{IsIdentityGT}}
+\index{IsIdentityGT@{IsIdentityGT}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{IsIdentityGT()}{IsIdentityGT()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a1e6be6cd890cd2824d0f2c28c364a7cf} 
+bool neo\+::cryptography\+::bls12\+\_\+381\+::\+Is\+Identity\+GT (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \&}]{point}{}\end{DoxyParamCaption})}
+
+
+
+Checks if a GT point is the identity element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The GT point to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the point is identity, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a024d21676620b4597e74e6e1e4830044}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!MillerLoop@{MillerLoop}}
+\index{MillerLoop@{MillerLoop}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{MillerLoop()}{MillerLoop()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a024d21676620b4597e74e6e1e4830044} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Miller\+Loop (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&}]{p}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&}]{q}{}\end{DoxyParamCaption})}
+
+
+
+Computes the Miller loop for a pair of points. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & The \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}. \\
+\hline
+{\em q} & The \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of the Miller loop computation. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a95196382dbfa42bdf7e388501f89a63e}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!MultiPairing@{MultiPairing}}
+\index{MultiPairing@{MultiPairing}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{MultiPairing()}{MultiPairing()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a95196382dbfa42bdf7e388501f89a63e} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Multi\+Pairing (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} $>$ \&}]{ps}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} $>$ \&}]{qs}{}\end{DoxyParamCaption})}
+
+
+
+Computes the multi-\/pairing of G1\+Points and G2\+Points. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ps} & The G1\+Points. \\
+\hline
+{\em qs} & The G2\+Points. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of the multi-\/pairing. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the number of G1\+Points and G2\+Points is not equal. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a291d49d0f0d09b508e41027091f71d63}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!MultiplyGT@{MultiplyGT}}
+\index{MultiplyGT@{MultiplyGT}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{MultiplyGT()}{MultiplyGT()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a291d49d0f0d09b508e41027091f71d63} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Multiply\+GT (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \&}]{a}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \&}]{b}{}\end{DoxyParamCaption})}
+
+
+
+Multiplies two GT points. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em a} & The first GT point. \\
+\hline
+{\em b} & The second GT point. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of the multiplication. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_acf88aa73b86497934d607e968df3b083}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!NegateG2@{NegateG2}}
+\index{NegateG2@{NegateG2}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{NegateG2()}{NegateG2()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_acf88aa73b86497934d607e968df3b083} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Negate\+G2 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&}]{point}{}\end{DoxyParamCaption})}
+
+
+
+Negates a G2 point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em point} & The G2 point to negate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The negated G2 point. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_aedc5a5435eedc791382a89ccf4750a38}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!Pairing@{Pairing}}
+\index{Pairing@{Pairing}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{Pairing()}{Pairing()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_aedc5a5435eedc791382a89ccf4750a38} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Pairing (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&}]{p}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&}]{q}{}\end{DoxyParamCaption})}
+
+
+
+Computes the pairing of a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point} and a \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & The \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}. \\
+\hline
+{\em q} & The \doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of the pairing. 
+\end{DoxyReturn}
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_aa6c130cfc95a76c6d9e674c65dc16b09}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!PowerGT@{PowerGT}}
+\index{PowerGT@{PowerGT}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{PowerGT()}{PowerGT()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_aa6c130cfc95a76c6d9e674c65dc16b09} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Power\+GT (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}} \&}]{base}{, }\item[{uint64\+\_\+t}]{exponent}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_abd861f68efc84380af2413cca4ae7cc5}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!Sign@{Sign}}
+\index{Sign@{Sign}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{Sign()}{Sign()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_abd861f68efc84380af2413cca4ae7cc5} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} neo\+::cryptography\+::bls12\+\_\+381\+::\+Sign (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{private\+Key}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Signs a message using BLS. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em private\+Key} & The private key. \\
+\hline
+{\em message} & The message. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The signature (\doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}). 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a7971557e9d52b1d7dc45e356c4a44c17}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!SubtractFp@{SubtractFp}}
+\index{SubtractFp@{SubtractFp}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{SubtractFp()}{SubtractFp()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a7971557e9d52b1d7dc45e356c4a44c17} 
+void neo\+::cryptography\+::bls12\+\_\+381\+::\+Subtract\+Fp (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{a}{, }\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{b}{, }\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{result}{}\end{DoxyParamCaption})}
+
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a02160903d084c76363825867d52ed54c}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!VerifyAggregateSignature@{VerifyAggregateSignature}}
+\index{VerifyAggregateSignature@{VerifyAggregateSignature}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{VerifyAggregateSignature()}{VerifyAggregateSignature()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a02160903d084c76363825867d52ed54c} 
+bool neo\+::cryptography\+::bls12\+\_\+381\+::\+Verify\+Aggregate\+Signature (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} $>$ \&}]{public\+Keys}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} $>$ \&}]{messages}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&}]{signature}{}\end{DoxyParamCaption})}
+
+
+
+Verifies an aggregated signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em public\+Keys} & The public keys. \\
+\hline
+{\em messages} & The messages. \\
+\hline
+{\em signature} & The aggregated signature. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the signature is valid, false otherwise. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the number of public keys and messages is not equal. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{namespaceneo_1_1cryptography_1_1bls12__381_a80406277b1586adaf98f67297a4b26f6}\index{neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}!VerifySignature@{VerifySignature}}
+\index{VerifySignature@{VerifySignature}!neo::cryptography::bls12\_381@{neo::cryptography::bls12\_381}}
+\doxysubsubsection{\texorpdfstring{VerifySignature()}{VerifySignature()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cryptography_1_1bls12__381_a80406277b1586adaf98f67297a4b26f6} 
+bool neo\+::cryptography\+::bls12\+\_\+381\+::\+Verify\+Signature (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}} \&}]{public\+Key}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{message}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}} \&}]{signature}{}\end{DoxyParamCaption})}
+
+
+
+Verifies a BLS signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em public\+Key} & The public key (\doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2\+Point}). \\
+\hline
+{\em message} & The message. \\
+\hline
+{\em signature} & The signature (\doxylink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1\+Point}). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the signature is valid, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 23

@@ -1,0 +1,317 @@
+\doxysection{neo\+::persistence\+::Memory\+Store Class Reference}
+\hypertarget{classneo_1_1persistence_1_1_memory_store}{}\label{classneo_1_1persistence_1_1_memory_store}\index{neo::persistence::MemoryStore@{neo::persistence::MemoryStore}}
+
+
+A memory-\/based implementation of \doxylink{classneo_1_1persistence_1_1_i_store}{IStore}.  
+
+
+
+
+{\ttfamily \#include $<$memory\+\_\+store.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::persistence\+::Memory\+Store\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::persistence\+::Memory\+Store\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_ad0fa2affd9533564ff5e0edf7ee1b494}{Memory\+Store}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1persistence_1_1_memory_store}{Memory\+Store}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_ab55e687b8c5a13a035d670ffa95d25a0}{Memory\+Store}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store}{Memory\+Store}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_aa2b829db6e1d17283f284e5a7e323ec5}{Try\+Get}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const override
+\begin{DoxyCompactList}\small\item\em Tries to get a value from the store. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_ae90497ccbbc9afc8e932740a4b27a6ca}{Get}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets a value from the store. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_adb88523a68e49c45a090029d04b9007e}{Contains}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const override
+\begin{DoxyCompactList}\small\item\em Checks if the store contains a key. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_ad24a4042aa9f31e0bbad2f901fa89156}{Find}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \texorpdfstring{$\ast$}{*}prefix=nullptr, \mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575}{Seek\+Direction}} direction=\mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575a67d2f6740a8eaebf4d5c6f79be8da481}{Seek\+Direction\+::\+Forward}}) const override
+\begin{DoxyCompactList}\small\item\em Finds all key-\/value pairs with keys that start with the specified prefix. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_a6b2f1228260b21f4ff679b0753ce74f1}{Put}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value) override
+\begin{DoxyCompactList}\small\item\em Puts a value in the store. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_a04e0063a0fb78537b88289a82dd62aa6}{Delete}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) override
+\begin{DoxyCompactList}\small\item\em Deletes a value from the store. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_snapshot}{IStore\+Snapshot}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_a309dbfa67b5fd06c76eef5c523a608b1}{Get\+Snapshot}} ()
+\begin{DoxyCompactList}\small\item\em Gets a snapshot of the store. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_a1109521ea4d998a1b24239a680ac5d94}{Seek}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&prefix, \mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575}{Seek\+Direction}} direction=\mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575a67d2f6740a8eaebf4d5c6f79be8da481}{Seek\+Direction\+::\+Forward}}) const
+\begin{DoxyCompactList}\small\item\em Seeks all key-\/value pairs with keys that start with the specified prefix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store}{neo\+::persistence\+::\+IStore}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_a8d36de22d454c5bcf0ca208e82452422}{\texorpdfstring{$\sim$}{\string~}\+IStore}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store}{neo\+::persistence\+::\+IRead\+Only\+Store$<$ io\+::\+Byte\+Vector, io\+::\+Byte\+Vector $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store_a1b27c3a9d1e10a3d76a73ab26d84d9db}{\texorpdfstring{$\sim$}{\string~}\+IRead\+Only\+Store}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store}{neo\+::persistence\+::\+IWrite\+Store$<$ io\+::\+Byte\+Vector, io\+::\+Byte\+Vector $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store_a065391106a57c3b2c61bf98ad9711ecd}{\texorpdfstring{$\sim$}{\string~}\+IWrite\+Store}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store_a1f5b97ab542dea7844fb8f888c83bb57}{Put\+Sync}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value)
+\begin{DoxyCompactList}\small\item\em Puts a value in the store and syncs to disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_a0aed9222d732a606ddb29fb09fc672b7}{store\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_a647756c0690100d31d98370d26c4e3ec}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_a18f9e261fa9cb4237b4b35ecdb515e5c}{Memory\+Snapshot}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A memory-\/based implementation of \doxylink{classneo_1_1persistence_1_1_i_store}{IStore}. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_ad0fa2affd9533564ff5e0edf7ee1b494}\index{neo::persistence::MemoryStore@{neo::persistence::MemoryStore}!MemoryStore@{MemoryStore}}
+\index{MemoryStore@{MemoryStore}!neo::persistence::MemoryStore@{neo::persistence::MemoryStore}}
+\doxysubsubsection{\texorpdfstring{MemoryStore()}{MemoryStore()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_ad0fa2affd9533564ff5e0edf7ee1b494} 
+neo\+::persistence\+::\+Memory\+Store\+::\+Memory\+Store (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Constructs a \doxylink{classneo_1_1persistence_1_1_memory_store}{Memory\+Store}. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_ab55e687b8c5a13a035d670ffa95d25a0}\index{neo::persistence::MemoryStore@{neo::persistence::MemoryStore}!MemoryStore@{MemoryStore}}
+\index{MemoryStore@{MemoryStore}!neo::persistence::MemoryStore@{neo::persistence::MemoryStore}}
+\doxysubsubsection{\texorpdfstring{MemoryStore()}{MemoryStore()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_ab55e687b8c5a13a035d670ffa95d25a0} 
+neo\+::persistence\+::\+Memory\+Store\+::\+Memory\+Store (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store}{Memory\+Store}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The \doxylink{classneo_1_1persistence_1_1_memory_store}{Memory\+Store} to copy from. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_adb88523a68e49c45a090029d04b9007e}\index{neo::persistence::MemoryStore@{neo::persistence::MemoryStore}!Contains@{Contains}}
+\index{Contains@{Contains}!neo::persistence::MemoryStore@{neo::persistence::MemoryStore}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_adb88523a68e49c45a090029d04b9007e} 
+bool neo\+::persistence\+::\+Memory\+Store\+::\+Contains (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Checks if the store contains a key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the key exists, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store_a9a1be56aad7b2a711d558a1b87c90b26}{neo\+::persistence\+::\+IRead\+Only\+Store$<$ io\+::\+Byte\+Vector, io\+::\+Byte\+Vector $>$}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_a04e0063a0fb78537b88289a82dd62aa6}\index{neo::persistence::MemoryStore@{neo::persistence::MemoryStore}!Delete@{Delete}}
+\index{Delete@{Delete}!neo::persistence::MemoryStore@{neo::persistence::MemoryStore}}
+\doxysubsubsection{\texorpdfstring{Delete()}{Delete()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_a04e0063a0fb78537b88289a82dd62aa6} 
+void neo\+::persistence\+::\+Memory\+Store\+::\+Delete (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deletes a value from the store. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store_a8a3c7a21edac74f32f8a982102c6ccb0}{neo\+::persistence\+::\+IWrite\+Store$<$ io\+::\+Byte\+Vector, io\+::\+Byte\+Vector $>$}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_ad24a4042aa9f31e0bbad2f901fa89156}\index{neo::persistence::MemoryStore@{neo::persistence::MemoryStore}!Find@{Find}}
+\index{Find@{Find}!neo::persistence::MemoryStore@{neo::persistence::MemoryStore}}
+\doxysubsubsection{\texorpdfstring{Find()}{Find()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_ad24a4042aa9f31e0bbad2f901fa89156} 
+std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ $>$ neo\+::persistence\+::\+Memory\+Store\+::\+Find (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \texorpdfstring{$\ast$}{*}}]{prefix}{ = {\ttfamily nullptr}, }\item[{\mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575}{Seek\+Direction}}}]{direction}{ = {\ttfamily \mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575a67d2f6740a8eaebf4d5c6f79be8da481}{Seek\+Direction\+::\+Forward}}}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Finds all key-\/value pairs with keys that start with the specified prefix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prefix} & The prefix to search for. If nullptr, all key-\/value pairs are returned. \\
+\hline
+{\em direction} & The direction to seek. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The key-\/value pairs found. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store_a16cb41b5d9ff43393989524da3793f8f}{neo\+::persistence\+::\+IRead\+Only\+Store$<$ io\+::\+Byte\+Vector, io\+::\+Byte\+Vector $>$}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_ae90497ccbbc9afc8e932740a4b27a6ca}\index{neo::persistence::MemoryStore@{neo::persistence::MemoryStore}!Get@{Get}}
+\index{Get@{Get}!neo::persistence::MemoryStore@{neo::persistence::MemoryStore}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_ae90497ccbbc9afc8e932740a4b27a6ca} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::persistence\+::\+Memory\+Store\+::\+Get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{key}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a value from the store. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to look up. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if the key is not found. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_a309dbfa67b5fd06c76eef5c523a608b1}\index{neo::persistence::MemoryStore@{neo::persistence::MemoryStore}!GetSnapshot@{GetSnapshot}}
+\index{GetSnapshot@{GetSnapshot}!neo::persistence::MemoryStore@{neo::persistence::MemoryStore}}
+\doxysubsubsection{\texorpdfstring{GetSnapshot()}{GetSnapshot()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_a309dbfa67b5fd06c76eef5c523a608b1} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_snapshot}{IStore\+Snapshot}} $>$ neo\+::persistence\+::\+Memory\+Store\+::\+Get\+Snapshot (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets a snapshot of the store. 
+
+\begin{DoxyReturn}{Returns}
+The snapshot. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_a6b2f1228260b21f4ff679b0753ce74f1}\index{neo::persistence::MemoryStore@{neo::persistence::MemoryStore}!Put@{Put}}
+\index{Put@{Put}!neo::persistence::MemoryStore@{neo::persistence::MemoryStore}}
+\doxysubsubsection{\texorpdfstring{Put()}{Put()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_a6b2f1228260b21f4ff679b0753ce74f1} 
+void neo\+::persistence\+::\+Memory\+Store\+::\+Put (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{key}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Puts a value in the store. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+{\em value} & The value. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store_ad372b058fc7a706856e68a1a43e1f0f8}{neo\+::persistence\+::\+IWrite\+Store$<$ io\+::\+Byte\+Vector, io\+::\+Byte\+Vector $>$}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_a1109521ea4d998a1b24239a680ac5d94}\index{neo::persistence::MemoryStore@{neo::persistence::MemoryStore}!Seek@{Seek}}
+\index{Seek@{Seek}!neo::persistence::MemoryStore@{neo::persistence::MemoryStore}}
+\doxysubsubsection{\texorpdfstring{Seek()}{Seek()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_a1109521ea4d998a1b24239a680ac5d94} 
+std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ $>$ neo\+::persistence\+::\+Memory\+Store\+::\+Seek (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{prefix}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575}{Seek\+Direction}}}]{direction}{ = {\ttfamily \mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575a67d2f6740a8eaebf4d5c6f79be8da481}{Seek\+Direction\+::\+Forward}}}}\end{DoxyParamCaption}) const}
+
+
+
+Seeks all key-\/value pairs with keys that start with the specified prefix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prefix} & The prefix to search for. \\
+\hline
+{\em direction} & The direction to seek. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The key-\/value pairs found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_aa2b829db6e1d17283f284e5a7e323ec5}\index{neo::persistence::MemoryStore@{neo::persistence::MemoryStore}!TryGet@{TryGet}}
+\index{TryGet@{TryGet}!neo::persistence::MemoryStore@{neo::persistence::MemoryStore}}
+\doxysubsubsection{\texorpdfstring{TryGet()}{TryGet()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_aa2b829db6e1d17283f284e5a7e323ec5} 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ neo\+::persistence\+::\+Memory\+Store\+::\+Try\+Get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Tries to get a value from the store. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to look up. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value if found, std\+::nullopt otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store_a736304330e73c7397781fbca2e645e8a}{neo\+::persistence\+::\+IRead\+Only\+Store$<$ io\+::\+Byte\+Vector, io\+::\+Byte\+Vector $>$}}.
+
+
+
+\label{doc-related-members}
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_doc-related-members}
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_a18f9e261fa9cb4237b4b35ecdb515e5c}\index{neo::persistence::MemoryStore@{neo::persistence::MemoryStore}!MemorySnapshot@{MemorySnapshot}}
+\index{MemorySnapshot@{MemorySnapshot}!neo::persistence::MemoryStore@{neo::persistence::MemoryStore}}
+\doxysubsubsection{\texorpdfstring{MemorySnapshot}{MemorySnapshot}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_a18f9e261fa9cb4237b4b35ecdb515e5c} 
+friend class \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_snapshot}{Memory\+Snapshot}}\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_a647756c0690100d31d98370d26c4e3ec}\index{neo::persistence::MemoryStore@{neo::persistence::MemoryStore}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::persistence::MemoryStore@{neo::persistence::MemoryStore}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_a647756c0690100d31d98370d26c4e3ec} 
+std\+::mutex neo\+::persistence\+::\+Memory\+Store\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_a0aed9222d732a606ddb29fb09fc672b7}\index{neo::persistence::MemoryStore@{neo::persistence::MemoryStore}!store\_@{store\_}}
+\index{store\_@{store\_}!neo::persistence::MemoryStore@{neo::persistence::MemoryStore}}
+\doxysubsubsection{\texorpdfstring{store\_}{store\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_a0aed9222d732a606ddb29fb09fc672b7} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}$>$ neo\+::persistence\+::\+Memory\+Store\+::store\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/persistence/\mbox{\hyperlink{memory__store_8h}{memory\+\_\+store.\+h}}\item 
+src/persistence/\mbox{\hyperlink{memory__store_8cpp}{memory\+\_\+store.\+cpp}}\end{DoxyCompactItemize}

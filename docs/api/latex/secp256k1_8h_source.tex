@@ -1,0 +1,49 @@
+\doxysection{secp256k1.\+h}
+\hypertarget{secp256k1_8h_source}{}\label{secp256k1_8h_source}\index{include/neo/cryptography/ecc/secp256k1.h@{include/neo/cryptography/ecc/secp256k1.h}}
+\mbox{\hyperlink{secp256k1_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ Forward\ declarations}}
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cryptography_1_1ecc}{neo::cryptography::ecc}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{KeyPair}};}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}};}
+\DoxyCodeLine{00013\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cryptography::ecc}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cryptography_1_1ecc}{neo::cryptography::ecc}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256k1}{Secp256k1}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256k1_add6adfa916bdbb23c2382ee381a5897c}{PRIVATE\_KEY\_SIZE}}\ =\ 32;}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256k1_aa7ff6ab12fdaf8f42564677f3538725d}{PUBLIC\_KEY\_SIZE}}\ =\ 33;\ \ \textcolor{comment}{//\ Compressed}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256k1_af420c94e0d2d82eb0356fed6f370be20}{SIGNATURE\_SIZE}}\ =\ 64;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256k1_a1dd631d639bf120cbe6f6485b61ad3d0}{GeneratePrivateKey}}();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256k1_a5f5b2bb884f874079f4b855c6972765d}{ComputePublicKey}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ privateKey);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256k1_a309fc87fee20e39fb57f168dfab67189}{Sign}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ data,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ privateKey);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256k1_a5e9c5af18c545f9f5e90c7fcef294e3c}{Verify}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ data,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ signature,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ publicKey);}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256k1_ab20cea7ae111e589bcc515b67e0f7a33}{IsValidPrivateKey}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ privateKey);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256k1_a031b5513c9527f6d8d29a2079fac9eea}{IsValidPublicKey}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ publicKey);}
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00061\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve}{ECCurve}}}
+\DoxyCodeLine{00062\ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256r1}{Secp256r1}},}
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_secp256k1}{Secp256k1}}}
+\DoxyCodeLine{00065\ \};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cryptography::ecc}}
+
+\end{DoxyCode}

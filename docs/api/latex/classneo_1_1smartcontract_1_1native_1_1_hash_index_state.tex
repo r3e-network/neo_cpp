@@ -1,0 +1,228 @@
+\doxysection{neo\+::smartcontract\+::native\+::Hash\+Index\+State Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1native_1_1_hash_index_state}{}\label{classneo_1_1smartcontract_1_1native_1_1_hash_index_state}\index{neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}}
+
+
+Represents a hash and index state.  
+
+
+
+
+{\ttfamily \#include $<$hash\+\_\+index\+\_\+state.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::smartcontract\+::native\+::Hash\+Index\+State\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a4ae6739ba9217a44b6ae47d70d8cc0ad}{Hash\+Index\+State}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state}{Hash\+Index\+State}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a78b92cba866c9db2d4001b1d4ca0d406}{Hash\+Index\+State}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash, uint32\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state}{Hash\+Index\+State} with the specified hash and index. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a361a5d6f154bc468fee0f0b5280144af}{Get\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_ac8509f0e41a92d22391f224d03be8e38}{Set\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Sets the hash. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a6e2642b809efca743b1048765464dda3}{Get\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Gets the index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a12c1f9423ae0fcc0d125ccba5225a04e}{Set\+Index}} (uint32\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Sets the index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a0a27f939b81e515e98cb8a604f4ca4f6}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader)
+\begin{DoxyCompactList}\small\item\em Deserializes the hash index state from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a74fc51e4c97ee5d2479d6c26ed3f9cfb}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const
+\begin{DoxyCompactList}\small\item\em Serializes the hash index state to a binary writer. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a7c2be04300903670f7d87634f7eb3aac}{To\+Stack\+Item}} () const
+\begin{DoxyCompactList}\small\item\em Converts the hash index state to a stack item. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_aed981b5ea0f2581b8494ee8a62777328}{From\+Stack\+Item}} (const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \&item)
+\begin{DoxyCompactList}\small\item\em Converts a stack item to a hash index state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_ab7828b02da5c93cd460427b5619c47b8}{hash\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_ab8a00ffec024d38aa7e7478300846987}{index\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a hash and index state. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a4ae6739ba9217a44b6ae47d70d8cc0ad}\index{neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}!HashIndexState@{HashIndexState}}
+\index{HashIndexState@{HashIndexState}!neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}}
+\doxysubsubsection{\texorpdfstring{HashIndexState()}{HashIndexState()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a4ae6739ba9217a44b6ae47d70d8cc0ad} 
+neo\+::smartcontract\+::native\+::\+Hash\+Index\+State\+::\+Hash\+Index\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state}{Hash\+Index\+State}. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a78b92cba866c9db2d4001b1d4ca0d406}\index{neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}!HashIndexState@{HashIndexState}}
+\index{HashIndexState@{HashIndexState}!neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}}
+\doxysubsubsection{\texorpdfstring{HashIndexState()}{HashIndexState()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a78b92cba866c9db2d4001b1d4ca0d406} 
+neo\+::smartcontract\+::native\+::\+Hash\+Index\+State\+::\+Hash\+Index\+State (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{, }\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_hash_index_state}{Hash\+Index\+State} with the specified hash and index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash. \\
+\hline
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a0a27f939b81e515e98cb8a604f4ca4f6}\index{neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a0a27f939b81e515e98cb8a604f4ca4f6} 
+void neo\+::smartcontract\+::native\+::\+Hash\+Index\+State\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})}
+
+
+
+Deserializes the hash index state from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_aed981b5ea0f2581b8494ee8a62777328}\index{neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}!FromStackItem@{FromStackItem}}
+\index{FromStackItem@{FromStackItem}!neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}}
+\doxysubsubsection{\texorpdfstring{FromStackItem()}{FromStackItem()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_aed981b5ea0f2581b8494ee8a62777328} 
+void neo\+::smartcontract\+::native\+::\+Hash\+Index\+State\+::\+From\+Stack\+Item (\begin{DoxyParamCaption}\item[{const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \&}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Converts a stack item to a hash index state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The stack item. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a361a5d6f154bc468fee0f0b5280144af}\index{neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}!GetHash@{GetHash}}
+\index{GetHash@{GetHash}!neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}}
+\doxysubsubsection{\texorpdfstring{GetHash()}{GetHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a361a5d6f154bc468fee0f0b5280144af} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& neo\+::smartcontract\+::native\+::\+Hash\+Index\+State\+::\+Get\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the hash. 
+
+\begin{DoxyReturn}{Returns}
+The hash. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a6e2642b809efca743b1048765464dda3}\index{neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}!GetIndex@{GetIndex}}
+\index{GetIndex@{GetIndex}!neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}}
+\doxysubsubsection{\texorpdfstring{GetIndex()}{GetIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a6e2642b809efca743b1048765464dda3} 
+uint32\+\_\+t neo\+::smartcontract\+::native\+::\+Hash\+Index\+State\+::\+Get\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the index. 
+
+\begin{DoxyReturn}{Returns}
+The index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a74fc51e4c97ee5d2479d6c26ed3f9cfb}\index{neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a74fc51e4c97ee5d2479d6c26ed3f9cfb} 
+void neo\+::smartcontract\+::native\+::\+Hash\+Index\+State\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const}
+
+
+
+Serializes the hash index state to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_ac8509f0e41a92d22391f224d03be8e38}\index{neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}!SetHash@{SetHash}}
+\index{SetHash@{SetHash}!neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}}
+\doxysubsubsection{\texorpdfstring{SetHash()}{SetHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_ac8509f0e41a92d22391f224d03be8e38} 
+void neo\+::smartcontract\+::native\+::\+Hash\+Index\+State\+::\+Set\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})}
+
+
+
+Sets the hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a12c1f9423ae0fcc0d125ccba5225a04e}\index{neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}!SetIndex@{SetIndex}}
+\index{SetIndex@{SetIndex}!neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}}
+\doxysubsubsection{\texorpdfstring{SetIndex()}{SetIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a12c1f9423ae0fcc0d125ccba5225a04e} 
+void neo\+::smartcontract\+::native\+::\+Hash\+Index\+State\+::\+Set\+Index (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Sets the index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a7c2be04300903670f7d87634f7eb3aac}\index{neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}!ToStackItem@{ToStackItem}}
+\index{ToStackItem@{ToStackItem}!neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}}
+\doxysubsubsection{\texorpdfstring{ToStackItem()}{ToStackItem()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_a7c2be04300903670f7d87634f7eb3aac} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Hash\+Index\+State\+::\+To\+Stack\+Item (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Converts the hash index state to a stack item. 
+
+\begin{DoxyReturn}{Returns}
+The stack item. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_ab7828b02da5c93cd460427b5619c47b8}\index{neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}!hash\_@{hash\_}}
+\index{hash\_@{hash\_}!neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}}
+\doxysubsubsection{\texorpdfstring{hash\_}{hash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_ab7828b02da5c93cd460427b5619c47b8} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::smartcontract\+::native\+::\+Hash\+Index\+State\+::hash\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_ab8a00ffec024d38aa7e7478300846987}\index{neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}!index\_@{index\_}}
+\index{index\_@{index\_}!neo::smartcontract::native::HashIndexState@{neo::smartcontract::native::HashIndexState}}
+\doxysubsubsection{\texorpdfstring{index\_}{index\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_hash_index_state_ab8a00ffec024d38aa7e7478300846987} 
+uint32\+\_\+t neo\+::smartcontract\+::native\+::\+Hash\+Index\+State\+::index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/native/\mbox{\hyperlink{hash__index__state_8h}{hash\+\_\+index\+\_\+state.\+h}}\item 
+src/smartcontract/native/\mbox{\hyperlink{hash__index__state_8cpp}{hash\+\_\+index\+\_\+state.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,28 @@
+var classneo_1_1network_1_1p2p_1_1_channels_config =
+[
+    [ "ChannelsConfig", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a3b4bd0ee4546991bf3ca80b1bb5af1a2", null ],
+    [ "GetMaxConnections", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a680bde098ec55e7ead939abca8fd525e", null ],
+    [ "GetMaxConnectionsPerAddress", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a9432af1644aee797506940dcf14bbf66", null ],
+    [ "GetMaxKnownAddresses", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a37e588441d4de87204d195ae7042ce6f", null ],
+    [ "GetMaxKnownHashes", "classneo_1_1network_1_1p2p_1_1_channels_config.html#afe45e2d101d31839bc9bd940bdafd933", null ],
+    [ "GetMinDesiredConnections", "classneo_1_1network_1_1p2p_1_1_channels_config.html#ac066b9f014a011cd73ff0415f9d3f0b5", null ],
+    [ "GetSeedList", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a75391c4b4d65f18a0bd15368039ffe0e", null ],
+    [ "GetTcp", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a5376fe284dc9f0d5ce5a87e9e79f9d58", null ],
+    [ "GetWebSocket", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a4fb3ea3ab90595b9904ab6704571c497", null ],
+    [ "SetMaxConnections", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a37d65c3418eea9160c4b8af8b7f691dd", null ],
+    [ "SetMaxConnectionsPerAddress", "classneo_1_1network_1_1p2p_1_1_channels_config.html#ae1bf7d52b4edabe1dc53b05fd0fb827b", null ],
+    [ "SetMaxKnownAddresses", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a9112ed26ee514a73a940d0148c7b219d", null ],
+    [ "SetMaxKnownHashes", "classneo_1_1network_1_1p2p_1_1_channels_config.html#af1f7216861c7f535b1f6023de38e3968", null ],
+    [ "SetMinDesiredConnections", "classneo_1_1network_1_1p2p_1_1_channels_config.html#acaa984f506333d5b52697b9d1587fc90", null ],
+    [ "SetSeedList", "classneo_1_1network_1_1p2p_1_1_channels_config.html#ae9bddf0e17879aa5e7a573069d602ba7", null ],
+    [ "SetTcp", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a29d23a983f5da2bbfe60084d3f05da71", null ],
+    [ "SetWebSocket", "classneo_1_1network_1_1p2p_1_1_channels_config.html#ac2a7eafe95aa118cc9094771c05532d7", null ],
+    [ "maxConnections_", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a2db081dcd6c560946bc744808925338a", null ],
+    [ "maxConnectionsPerAddress_", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a612a792dbbbb886edc38e756ea867aef", null ],
+    [ "maxKnownAddresses_", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a533845515b85d2c4e0198f1aa0411af4", null ],
+    [ "maxKnownHashes_", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a31f296bc2aeb4e7f40ad4221e8ae13f7", null ],
+    [ "minDesiredConnections_", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a7fc92f2c10837f8fa3e4c60e0538263f", null ],
+    [ "seedList_", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a73f1c81f8d34c955d91ff1cb8fd89d3b", null ],
+    [ "tcp_", "classneo_1_1network_1_1p2p_1_1_channels_config.html#a4605ef5d0c81880d77792f0df14ceda7", null ],
+    [ "webSocket_", "classneo_1_1network_1_1p2p_1_1_channels_config.html#ad3c8e7eaf9947b810a672a767e345fc2", null ]
+];

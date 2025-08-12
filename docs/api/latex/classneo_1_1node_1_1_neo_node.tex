@@ -1,0 +1,463 @@
+\doxysection{neo\+::node\+::Neo\+Node Class Reference}
+\hypertarget{classneo_1_1node_1_1_neo_node}{}\label{classneo_1_1node_1_1_neo_node}\index{neo::node::NeoNode@{neo::node::NeoNode}}
+
+
+Production-\/ready Neo Node Implementation.  
+
+
+
+
+{\ttfamily \#include $<$neo\+\_\+node.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a7a71ae9f90b1c4049e27a6174e4cd82e}{Neo\+Node}} (const std\+::string \&config\+Path="{}config.\+json"{}, const std\+::string \&data\+Path="{}./data"{})
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a4a6d1464461fb7da78c31116123a8e1a}{\texorpdfstring{$\sim$}{\string~}\+Neo\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Destructor -\/ ensures clean shutdown. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_ada2db264ad69a12be30d0ce60506242e}{Initialize}} ()
+\begin{DoxyCompactList}\small\item\em Initialize the Neo node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a686508e49f9f14595e6a4a6cd941455b}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Start the Neo node. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a5c1d9821607e40a00bcec5afd658309f}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stop the Neo node gracefully. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_abfd412d36409fe4ab4c07c94ebfb7a40}{Is\+Running}} () const
+\begin{DoxyCompactList}\small\item\em Check if the node is running. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a29eafd45b6d0908a7449bd7f72d880b2}{Get\+Block\+Height}} () const
+\begin{DoxyCompactList}\small\item\em Get the current blockchain height. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a934c761a0567eb097ef40f22e322f03e}{Get\+Connected\+Peers\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Get the number of connected peers. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a921dcff6357f4bfbb82023ef102c7d9e}{Get\+Memory\+Pool\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Get memory pool transaction count. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a0cd6a113a49af8fa58f8b82b52823639}{Initialize\+Logging}} ()
+\item 
+bool \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a7d520d1217f14fda80dd7a6a82aabdc9}{Load\+Protocol\+Settings}} ()
+\item 
+bool \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a9d155d87a7711d49e8e9834a586162ac}{Initialize\+Storage}} ()
+\item 
+bool \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_ad5b866d97b6b8335afdc9a3fa0ea0a89}{Initialize\+Blockchain}} ()
+\item 
+bool \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a7e80ad63902f083de8651e0169dbf9c9}{Initialize\+Smart\+Contracts}} ()
+\item 
+bool \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a5be1217ffb5e8558f315baddc73e2984}{Initialize\+Network}} ()
+\item 
+bool \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a684e3ba11206cc611d077450ccac4076}{Initialize\+RPC}} ()
+\item 
+bool \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_ad7a32d630554c49b79e8027edc62ed7d}{Initialize\+Consensus}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a80dfc8ed5a925900b10144a6b67725e9}{Main\+Loop}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a744c23be13a9a502d62200ef3d4cca54}{Process\+Blockchain}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a35f4c823fb871738f9b156775e4f102f}{Process\+Memory\+Pool}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a412d4529d0f9abe5a058a35cc71154d0}{Process\+Network}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a29ff20be8d50492649e85502d8be6bef}{Report\+Status}} ()
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a39b0c343110897add1ca8b3a9f23fd97}{Get\+Memory\+Usage}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} $>$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a348ff6c7583ee830377044b38023807b}{protocol\+Settings\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a5267287a1895e0ce23653c40f98fd7c3}{config\+Path\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_aba0255559373bc21d77954c6f7468459}{data\+Path\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ persistence\+::\+Level\+DBStore $>$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a84b8f96f8ef6fa9f4ca586c3c0bdd97b}{store\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}} $>$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_ac5701dcbb4a6f728adcd9d15ed3aa381}{blockchain\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{ledger\+::\+Memory\+Pool}} $>$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_ad25eb4bb099836d6ed232b7c3bd97742}{memory\+Pool\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server}{network\+::\+P2\+PServer}} $>$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_aa2b492b0b5173b4d4789d35f3aee8380}{p2p\+Server\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service}{network\+::\+Peer\+Discovery\+Service}} $>$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a463a92a47b8b5bb999b6b48f74b97fb5}{peer\+Discovery\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{smartcontract\+::\+Application\+Engine}} $>$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_ad16cc8374ea9b41058de4e42e5e80b93}{application\+Engine\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token}{smartcontract\+::native\+::\+Gas\+Token}} $>$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_ac4b0a09e5a702a2162f4c171ec4bbca8}{gas\+Token\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{smartcontract\+::native\+::\+Neo\+Token}} $>$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_ab61c785d1b340cf009434efe6afeca60}{neo\+Token\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_policy_contract}{smartcontract\+::native\+::\+Policy\+Contract}} $>$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a35eb3c8140858fd8aa823956193c6a0f}{policy\+Contract\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management}{smartcontract\+::native\+::\+Role\+Management}} $>$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_ac26ff0be7ddceabf70a24c3d8a658f76}{role\+Management\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}} $>$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a458f6a52622373a7afcbc5889d60444d}{rpc\+Server\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service}{consensus\+::\+Consensus\+Service}} $>$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a12fb42488e2919e3a12651318087ef98}{consensus\+Service\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a31857308ea4ae20f063fb91e22352d3b}{running\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_a2bf38d6c71c75b74d71d25e28e516ec9}{shutdown\+Requested\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_abcefded571ea5188d9a530423e14997e}{main\+Thread\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1logging_1_1_logger}{logging\+::\+Logger}} $>$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_node_ae868be20c14ce0eb1ab20624c3691f3d}{logger\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Production-\/ready Neo Node Implementation. 
+
+This class encapsulates the complete Neo blockchain node functionality, providing identical behavior to the C\# Neo node implementation. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1node_1_1_neo_node_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1node_1_1_neo_node_a7a71ae9f90b1c4049e27a6174e4cd82e}\index{neo::node::NeoNode@{neo::node::NeoNode}!NeoNode@{NeoNode}}
+\index{NeoNode@{NeoNode}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{NeoNode()}{NeoNode()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a7a71ae9f90b1c4049e27a6174e4cd82e} 
+neo\+::node\+::\+Neo\+Node\+::\+Neo\+Node (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{config\+Path}{ = {\ttfamily "{}config.json"{}}, }\item[{const std\+::string \&}]{data\+Path}{ = {\ttfamily "{}./data"{}}}\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config\+Path} & Path to configuration file \\
+\hline
+{\em data\+Path} & Path to blockchain data directory \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1node_1_1_neo_node_a4a6d1464461fb7da78c31116123a8e1a}\index{neo::node::NeoNode@{neo::node::NeoNode}!````~NeoNode@{\texorpdfstring{$\sim$}{\string~}NeoNode}}
+\index{````~NeoNode@{\texorpdfstring{$\sim$}{\string~}NeoNode}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}NeoNode()}{\string~NeoNode()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a4a6d1464461fb7da78c31116123a8e1a} 
+neo\+::node\+::\+Neo\+Node\+::\texorpdfstring{$\sim$}{\string~}\+Neo\+Node (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor -\/ ensures clean shutdown. 
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1node_1_1_neo_node_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1node_1_1_neo_node_a29eafd45b6d0908a7449bd7f72d880b2}\index{neo::node::NeoNode@{neo::node::NeoNode}!GetBlockHeight@{GetBlockHeight}}
+\index{GetBlockHeight@{GetBlockHeight}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{GetBlockHeight()}{GetBlockHeight()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a29eafd45b6d0908a7449bd7f72d880b2} 
+uint32\+\_\+t neo\+::node\+::\+Neo\+Node\+::\+Get\+Block\+Height (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the current blockchain height. 
+
+\begin{DoxyReturn}{Returns}
+Current block height 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1node_1_1_neo_node_a934c761a0567eb097ef40f22e322f03e}\index{neo::node::NeoNode@{neo::node::NeoNode}!GetConnectedPeersCount@{GetConnectedPeersCount}}
+\index{GetConnectedPeersCount@{GetConnectedPeersCount}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{GetConnectedPeersCount()}{GetConnectedPeersCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a934c761a0567eb097ef40f22e322f03e} 
+size\+\_\+t neo\+::node\+::\+Neo\+Node\+::\+Get\+Connected\+Peers\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the number of connected peers. 
+
+\begin{DoxyReturn}{Returns}
+Number of connected peers 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1node_1_1_neo_node_a921dcff6357f4bfbb82023ef102c7d9e}\index{neo::node::NeoNode@{neo::node::NeoNode}!GetMemoryPoolCount@{GetMemoryPoolCount}}
+\index{GetMemoryPoolCount@{GetMemoryPoolCount}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{GetMemoryPoolCount()}{GetMemoryPoolCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a921dcff6357f4bfbb82023ef102c7d9e} 
+size\+\_\+t neo\+::node\+::\+Neo\+Node\+::\+Get\+Memory\+Pool\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get memory pool transaction count. 
+
+\begin{DoxyReturn}{Returns}
+Number of transactions in memory pool 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1node_1_1_neo_node_a39b0c343110897add1ca8b3a9f23fd97}\index{neo::node::NeoNode@{neo::node::NeoNode}!GetMemoryUsage@{GetMemoryUsage}}
+\index{GetMemoryUsage@{GetMemoryUsage}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{GetMemoryUsage()}{GetMemoryUsage()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a39b0c343110897add1ca8b3a9f23fd97} 
+size\+\_\+t neo\+::node\+::\+Neo\+Node\+::\+Get\+Memory\+Usage (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_ada2db264ad69a12be30d0ce60506242e}\index{neo::node::NeoNode@{neo::node::NeoNode}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_ada2db264ad69a12be30d0ce60506242e} 
+bool neo\+::node\+::\+Neo\+Node\+::\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Initialize the Neo node. 
+
+\begin{DoxyReturn}{Returns}
+true if initialization successful, false otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1node_1_1_neo_node_ad5b866d97b6b8335afdc9a3fa0ea0a89}\index{neo::node::NeoNode@{neo::node::NeoNode}!InitializeBlockchain@{InitializeBlockchain}}
+\index{InitializeBlockchain@{InitializeBlockchain}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{InitializeBlockchain()}{InitializeBlockchain()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_ad5b866d97b6b8335afdc9a3fa0ea0a89} 
+bool neo\+::node\+::\+Neo\+Node\+::\+Initialize\+Blockchain (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_ad7a32d630554c49b79e8027edc62ed7d}\index{neo::node::NeoNode@{neo::node::NeoNode}!InitializeConsensus@{InitializeConsensus}}
+\index{InitializeConsensus@{InitializeConsensus}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{InitializeConsensus()}{InitializeConsensus()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_ad7a32d630554c49b79e8027edc62ed7d} 
+bool neo\+::node\+::\+Neo\+Node\+::\+Initialize\+Consensus (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_a0cd6a113a49af8fa58f8b82b52823639}\index{neo::node::NeoNode@{neo::node::NeoNode}!InitializeLogging@{InitializeLogging}}
+\index{InitializeLogging@{InitializeLogging}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{InitializeLogging()}{InitializeLogging()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a0cd6a113a49af8fa58f8b82b52823639} 
+void neo\+::node\+::\+Neo\+Node\+::\+Initialize\+Logging (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_a5be1217ffb5e8558f315baddc73e2984}\index{neo::node::NeoNode@{neo::node::NeoNode}!InitializeNetwork@{InitializeNetwork}}
+\index{InitializeNetwork@{InitializeNetwork}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{InitializeNetwork()}{InitializeNetwork()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a5be1217ffb5e8558f315baddc73e2984} 
+bool neo\+::node\+::\+Neo\+Node\+::\+Initialize\+Network (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1node_1_1_neo_node_a684e3ba11206cc611d077450ccac4076}\index{neo::node::NeoNode@{neo::node::NeoNode}!InitializeRPC@{InitializeRPC}}
+\index{InitializeRPC@{InitializeRPC}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{InitializeRPC()}{InitializeRPC()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a684e3ba11206cc611d077450ccac4076} 
+bool neo\+::node\+::\+Neo\+Node\+::\+Initialize\+RPC (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_a7e80ad63902f083de8651e0169dbf9c9}\index{neo::node::NeoNode@{neo::node::NeoNode}!InitializeSmartContracts@{InitializeSmartContracts}}
+\index{InitializeSmartContracts@{InitializeSmartContracts}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{InitializeSmartContracts()}{InitializeSmartContracts()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a7e80ad63902f083de8651e0169dbf9c9} 
+bool neo\+::node\+::\+Neo\+Node\+::\+Initialize\+Smart\+Contracts (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1node_1_1_neo_node_a9d155d87a7711d49e8e9834a586162ac}\index{neo::node::NeoNode@{neo::node::NeoNode}!InitializeStorage@{InitializeStorage}}
+\index{InitializeStorage@{InitializeStorage}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{InitializeStorage()}{InitializeStorage()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a9d155d87a7711d49e8e9834a586162ac} 
+bool neo\+::node\+::\+Neo\+Node\+::\+Initialize\+Storage (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_abfd412d36409fe4ab4c07c94ebfb7a40}\index{neo::node::NeoNode@{neo::node::NeoNode}!IsRunning@{IsRunning}}
+\index{IsRunning@{IsRunning}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{IsRunning()}{IsRunning()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_abfd412d36409fe4ab4c07c94ebfb7a40} 
+bool neo\+::node\+::\+Neo\+Node\+::\+Is\+Running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Check if the node is running. 
+
+\begin{DoxyReturn}{Returns}
+true if running, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1node_1_1_neo_node_a7d520d1217f14fda80dd7a6a82aabdc9}\index{neo::node::NeoNode@{neo::node::NeoNode}!LoadProtocolSettings@{LoadProtocolSettings}}
+\index{LoadProtocolSettings@{LoadProtocolSettings}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{LoadProtocolSettings()}{LoadProtocolSettings()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a7d520d1217f14fda80dd7a6a82aabdc9} 
+bool neo\+::node\+::\+Neo\+Node\+::\+Load\+Protocol\+Settings (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1node_1_1_neo_node_a80dfc8ed5a925900b10144a6b67725e9}\index{neo::node::NeoNode@{neo::node::NeoNode}!MainLoop@{MainLoop}}
+\index{MainLoop@{MainLoop}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{MainLoop()}{MainLoop()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a80dfc8ed5a925900b10144a6b67725e9} 
+void neo\+::node\+::\+Neo\+Node\+::\+Main\+Loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1node_1_1_neo_node_a744c23be13a9a502d62200ef3d4cca54}\index{neo::node::NeoNode@{neo::node::NeoNode}!ProcessBlockchain@{ProcessBlockchain}}
+\index{ProcessBlockchain@{ProcessBlockchain}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{ProcessBlockchain()}{ProcessBlockchain()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a744c23be13a9a502d62200ef3d4cca54} 
+void neo\+::node\+::\+Neo\+Node\+::\+Process\+Blockchain (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_a35f4c823fb871738f9b156775e4f102f}\index{neo::node::NeoNode@{neo::node::NeoNode}!ProcessMemoryPool@{ProcessMemoryPool}}
+\index{ProcessMemoryPool@{ProcessMemoryPool}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{ProcessMemoryPool()}{ProcessMemoryPool()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a35f4c823fb871738f9b156775e4f102f} 
+void neo\+::node\+::\+Neo\+Node\+::\+Process\+Memory\+Pool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_a412d4529d0f9abe5a058a35cc71154d0}\index{neo::node::NeoNode@{neo::node::NeoNode}!ProcessNetwork@{ProcessNetwork}}
+\index{ProcessNetwork@{ProcessNetwork}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{ProcessNetwork()}{ProcessNetwork()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a412d4529d0f9abe5a058a35cc71154d0} 
+void neo\+::node\+::\+Neo\+Node\+::\+Process\+Network (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_a29ff20be8d50492649e85502d8be6bef}\index{neo::node::NeoNode@{neo::node::NeoNode}!ReportStatus@{ReportStatus}}
+\index{ReportStatus@{ReportStatus}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{ReportStatus()}{ReportStatus()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a29ff20be8d50492649e85502d8be6bef} 
+void neo\+::node\+::\+Neo\+Node\+::\+Report\+Status (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1node_1_1_neo_node_a686508e49f9f14595e6a4a6cd941455b}\index{neo::node::NeoNode@{neo::node::NeoNode}!Start@{Start}}
+\index{Start@{Start}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a686508e49f9f14595e6a4a6cd941455b} 
+bool neo\+::node\+::\+Neo\+Node\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Start the Neo node. 
+
+\begin{DoxyReturn}{Returns}
+true if started successfully, false otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1node_1_1_neo_node_a5c1d9821607e40a00bcec5afd658309f}\index{neo::node::NeoNode@{neo::node::NeoNode}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a5c1d9821607e40a00bcec5afd658309f} 
+void neo\+::node\+::\+Neo\+Node\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stop the Neo node gracefully. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1node_1_1_neo_node_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1node_1_1_neo_node_ad16cc8374ea9b41058de4e42e5e80b93}\index{neo::node::NeoNode@{neo::node::NeoNode}!applicationEngine\_@{applicationEngine\_}}
+\index{applicationEngine\_@{applicationEngine\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{applicationEngine\_}{applicationEngine\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_ad16cc8374ea9b41058de4e42e5e80b93} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{smartcontract\+::\+Application\+Engine}}$>$ neo\+::node\+::\+Neo\+Node\+::application\+Engine\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_ac5701dcbb4a6f728adcd9d15ed3aa381}\index{neo::node::NeoNode@{neo::node::NeoNode}!blockchain\_@{blockchain\_}}
+\index{blockchain\_@{blockchain\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{blockchain\_}{blockchain\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_ac5701dcbb4a6f728adcd9d15ed3aa381} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}}$>$ neo\+::node\+::\+Neo\+Node\+::blockchain\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_a5267287a1895e0ce23653c40f98fd7c3}\index{neo::node::NeoNode@{neo::node::NeoNode}!configPath\_@{configPath\_}}
+\index{configPath\_@{configPath\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{configPath\_}{configPath\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a5267287a1895e0ce23653c40f98fd7c3} 
+std\+::string neo\+::node\+::\+Neo\+Node\+::config\+Path\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_a12fb42488e2919e3a12651318087ef98}\index{neo::node::NeoNode@{neo::node::NeoNode}!consensusService\_@{consensusService\_}}
+\index{consensusService\_@{consensusService\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{consensusService\_}{consensusService\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a12fb42488e2919e3a12651318087ef98} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service}{consensus\+::\+Consensus\+Service}}$>$ neo\+::node\+::\+Neo\+Node\+::consensus\+Service\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_aba0255559373bc21d77954c6f7468459}\index{neo::node::NeoNode@{neo::node::NeoNode}!dataPath\_@{dataPath\_}}
+\index{dataPath\_@{dataPath\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{dataPath\_}{dataPath\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_aba0255559373bc21d77954c6f7468459} 
+std\+::string neo\+::node\+::\+Neo\+Node\+::data\+Path\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_ac4b0a09e5a702a2162f4c171ec4bbca8}\index{neo::node::NeoNode@{neo::node::NeoNode}!gasToken\_@{gasToken\_}}
+\index{gasToken\_@{gasToken\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{gasToken\_}{gasToken\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_ac4b0a09e5a702a2162f4c171ec4bbca8} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token}{smartcontract\+::native\+::\+Gas\+Token}}$>$ neo\+::node\+::\+Neo\+Node\+::gas\+Token\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_ae868be20c14ce0eb1ab20624c3691f3d}\index{neo::node::NeoNode@{neo::node::NeoNode}!logger\_@{logger\_}}
+\index{logger\_@{logger\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{logger\_}{logger\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_ae868be20c14ce0eb1ab20624c3691f3d} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1logging_1_1_logger}{logging\+::\+Logger}}$>$ neo\+::node\+::\+Neo\+Node\+::logger\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_abcefded571ea5188d9a530423e14997e}\index{neo::node::NeoNode@{neo::node::NeoNode}!mainThread\_@{mainThread\_}}
+\index{mainThread\_@{mainThread\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{mainThread\_}{mainThread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_abcefded571ea5188d9a530423e14997e} 
+std\+::thread neo\+::node\+::\+Neo\+Node\+::main\+Thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_ad25eb4bb099836d6ed232b7c3bd97742}\index{neo::node::NeoNode@{neo::node::NeoNode}!memoryPool\_@{memoryPool\_}}
+\index{memoryPool\_@{memoryPool\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{memoryPool\_}{memoryPool\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_ad25eb4bb099836d6ed232b7c3bd97742} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{ledger\+::\+Memory\+Pool}}$>$ neo\+::node\+::\+Neo\+Node\+::memory\+Pool\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_ab61c785d1b340cf009434efe6afeca60}\index{neo::node::NeoNode@{neo::node::NeoNode}!neoToken\_@{neoToken\_}}
+\index{neoToken\_@{neoToken\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{neoToken\_}{neoToken\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_ab61c785d1b340cf009434efe6afeca60} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{smartcontract\+::native\+::\+Neo\+Token}}$>$ neo\+::node\+::\+Neo\+Node\+::neo\+Token\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_aa2b492b0b5173b4d4789d35f3aee8380}\index{neo::node::NeoNode@{neo::node::NeoNode}!p2pServer\_@{p2pServer\_}}
+\index{p2pServer\_@{p2pServer\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{p2pServer\_}{p2pServer\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_aa2b492b0b5173b4d4789d35f3aee8380} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server}{network\+::\+P2\+PServer}}$>$ neo\+::node\+::\+Neo\+Node\+::p2p\+Server\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_a463a92a47b8b5bb999b6b48f74b97fb5}\index{neo::node::NeoNode@{neo::node::NeoNode}!peerDiscovery\_@{peerDiscovery\_}}
+\index{peerDiscovery\_@{peerDiscovery\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{peerDiscovery\_}{peerDiscovery\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a463a92a47b8b5bb999b6b48f74b97fb5} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service}{network\+::\+Peer\+Discovery\+Service}}$>$ neo\+::node\+::\+Neo\+Node\+::peer\+Discovery\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_a35eb3c8140858fd8aa823956193c6a0f}\index{neo::node::NeoNode@{neo::node::NeoNode}!policyContract\_@{policyContract\_}}
+\index{policyContract\_@{policyContract\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{policyContract\_}{policyContract\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a35eb3c8140858fd8aa823956193c6a0f} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_policy_contract}{smartcontract\+::native\+::\+Policy\+Contract}}$>$ neo\+::node\+::\+Neo\+Node\+::policy\+Contract\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_a348ff6c7583ee830377044b38023807b}\index{neo::node::NeoNode@{neo::node::NeoNode}!protocolSettings\_@{protocolSettings\_}}
+\index{protocolSettings\_@{protocolSettings\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{protocolSettings\_}{protocolSettings\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a348ff6c7583ee830377044b38023807b} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}}$>$ neo\+::node\+::\+Neo\+Node\+::protocol\+Settings\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_ac26ff0be7ddceabf70a24c3d8a658f76}\index{neo::node::NeoNode@{neo::node::NeoNode}!roleManagement\_@{roleManagement\_}}
+\index{roleManagement\_@{roleManagement\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{roleManagement\_}{roleManagement\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_ac26ff0be7ddceabf70a24c3d8a658f76} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_role_management}{smartcontract\+::native\+::\+Role\+Management}}$>$ neo\+::node\+::\+Neo\+Node\+::role\+Management\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_a458f6a52622373a7afcbc5889d60444d}\index{neo::node::NeoNode@{neo::node::NeoNode}!rpcServer\_@{rpcServer\_}}
+\index{rpcServer\_@{rpcServer\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{rpcServer\_}{rpcServer\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a458f6a52622373a7afcbc5889d60444d} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}}$>$ neo\+::node\+::\+Neo\+Node\+::rpc\+Server\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_a31857308ea4ae20f063fb91e22352d3b}\index{neo::node::NeoNode@{neo::node::NeoNode}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a31857308ea4ae20f063fb91e22352d3b} 
+std\+::atomic$<$bool$>$ neo\+::node\+::\+Neo\+Node\+::running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_a2bf38d6c71c75b74d71d25e28e516ec9}\index{neo::node::NeoNode@{neo::node::NeoNode}!shutdownRequested\_@{shutdownRequested\_}}
+\index{shutdownRequested\_@{shutdownRequested\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{shutdownRequested\_}{shutdownRequested\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a2bf38d6c71c75b74d71d25e28e516ec9} 
+std\+::atomic$<$bool$>$ neo\+::node\+::\+Neo\+Node\+::shutdown\+Requested\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1node_1_1_neo_node_a84b8f96f8ef6fa9f4ca586c3c0bdd97b}\index{neo::node::NeoNode@{neo::node::NeoNode}!store\_@{store\_}}
+\index{store\_@{store\_}!neo::node::NeoNode@{neo::node::NeoNode}}
+\doxysubsubsection{\texorpdfstring{store\_}{store\_}}
+{\footnotesize\ttfamily \label{classneo_1_1node_1_1_neo_node_a84b8f96f8ef6fa9f4ca586c3c0bdd97b} 
+std\+::shared\+\_\+ptr$<$persistence\+::\+Level\+DBStore$>$ neo\+::node\+::\+Neo\+Node\+::store\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/node/\mbox{\hyperlink{neo__node_8h}{neo\+\_\+node.\+h}}\item 
+src/node/\mbox{\hyperlink{neo__node_8cpp}{neo\+\_\+node.\+cpp}}\item 
+src/node/\mbox{\hyperlink{neo__node__initialization_8cpp}{neo\+\_\+node\+\_\+initialization.\+cpp}}\item 
+src/node/\mbox{\hyperlink{neo__node__processing_8cpp}{neo\+\_\+node\+\_\+processing.\+cpp}}\end{DoxyCompactItemize}

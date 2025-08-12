@@ -1,0 +1,193 @@
+\doxysection{neo\+::extensions\+::Byte\+Array\+Equality\+Comparer Class Reference}
+\hypertarget{classneo_1_1extensions_1_1_byte_array_equality_comparer}{}\label{classneo_1_1extensions_1_1_byte_array_equality_comparer}\index{neo::extensions::ByteArrayEqualityComparer@{neo::extensions::ByteArrayEqualityComparer}}
+
+
+Equality comparer for byte arrays.  
+
+
+
+
+{\ttfamily \#include $<$byte\+\_\+array\+\_\+equality\+\_\+comparer.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_equal}{Equal}}
+\begin{DoxyCompactList}\small\item\em Equality functor for use with standard containers. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_hash}{Hash}}
+\begin{DoxyCompactList}\small\item\em \doxylink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_hash}{Hash} functor for use with standard containers. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_hash_equal}{Hash\+Equal}}
+\begin{DoxyCompactList}\small\item\em Combined hash and equality for unordered containers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_ae4560c4ea0bd31eb05a156933615c41b}{Equals}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&left, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&right)
+\begin{DoxyCompactList}\small\item\em Check if two byte spans are equal. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_a98f02a8c683c38d5b60380c548641a71}{Equals}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&left, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&right)
+\begin{DoxyCompactList}\small\item\em Check if two byte vectors are equal. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_ab84d9837cc84d98dbb32560a89b293da}{Equals}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&left, const std\+::vector$<$ uint8\+\_\+t $>$ \&right)
+\begin{DoxyCompactList}\small\item\em Check if two std\+::vector$<$uint8\+\_\+t$>$ are equal. \end{DoxyCompactList}\item 
+static size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_aff9b2dc8d8b23ef0f5b413d5adc8314b}{Get\+Hash\+Code}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Generate hash code for byte span. \end{DoxyCompactList}\item 
+static size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_abf79f91e2e32aa9f6645267d836dce17}{Get\+Hash\+Code}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data)
+\begin{DoxyCompactList}\small\item\em Generate hash code for byte vector. \end{DoxyCompactList}\item 
+static size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_a5fe64079f8fa8937e5a4e5466faf5c66}{Get\+Hash\+Code}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Generate hash code for std\+::vector$<$uint8\+\_\+t$>$ \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Equality comparer for byte arrays. 
+
+\hypertarget{classneo_1_1extensions_1_1_byte_array_equality_comparer_autotoc_md17}{}\doxysubsubsection{\texorpdfstring{Overview}{Overview}}\label{classneo_1_1extensions_1_1_byte_array_equality_comparer_autotoc_md17}
+Provides equality comparison and hash generation for byte arrays. Optimized for use in hash tables and equality-\/based operations.\hypertarget{classneo_1_1extensions_1_1_byte_array_equality_comparer_autotoc_md18}{}\doxysubsubsection{\texorpdfstring{API Reference}{API Reference}}\label{classneo_1_1extensions_1_1_byte_array_equality_comparer_autotoc_md18}
+
+\begin{DoxyItemize}
+\item {\bfseries{Equality}}\+: Fast byte-\/by-\/byte equality checking
+\item {\bfseries{Hashing}}\+: Consistent hash generation for containers
+\item {\bfseries{Utilities}}\+: Comparison operators and functors
+\end{DoxyItemize}\hypertarget{classneo_1_1extensions_1_1_byte_array_equality_comparer_autotoc_md19}{}\doxysubsubsection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{classneo_1_1extensions_1_1_byte_array_equality_comparer_autotoc_md19}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Check\ equality}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ equal\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_ae4560c4ea0bd31eb05a156933615c41b}{ByteArrayEqualityComparer::Equals}}(vec1,\ vec2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Generate\ hash}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ \mbox{\hyperlink{namespacedetail_a9dd43d16a6a490b032ceaca358755a29}{hash}}\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_byte_array_equality_comparer_aff9b2dc8d8b23ef0f5b413d5adc8314b}{ByteArrayEqualityComparer::GetHashCode}}(data);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Use\ as\ unordered\_map\ comparator}}
+\DoxyCodeLine{std::unordered\_map<ByteVector,\ Value,\ ByteArrayEqualityComparer::Hash,\ ByteArrayEqualityComparer::Equal>\ map;}
+
+\end{DoxyCode}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_equality_comparer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_equality_comparer_ae4560c4ea0bd31eb05a156933615c41b}\index{neo::extensions::ByteArrayEqualityComparer@{neo::extensions::ByteArrayEqualityComparer}!Equals@{Equals}}
+\index{Equals@{Equals}!neo::extensions::ByteArrayEqualityComparer@{neo::extensions::ByteArrayEqualityComparer}}
+\doxysubsubsection{\texorpdfstring{Equals()}{Equals()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_equality_comparer_ae4560c4ea0bd31eb05a156933615c41b} 
+bool neo\+::extensions\+::\+Byte\+Array\+Equality\+Comparer\+::\+Equals (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{left}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if two byte spans are equal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First byte span \\
+\hline
+{\em right} & Second byte span \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if equal, false otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_equality_comparer_a98f02a8c683c38d5b60380c548641a71}\index{neo::extensions::ByteArrayEqualityComparer@{neo::extensions::ByteArrayEqualityComparer}!Equals@{Equals}}
+\index{Equals@{Equals}!neo::extensions::ByteArrayEqualityComparer@{neo::extensions::ByteArrayEqualityComparer}}
+\doxysubsubsection{\texorpdfstring{Equals()}{Equals()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_equality_comparer_a98f02a8c683c38d5b60380c548641a71} 
+bool neo\+::extensions\+::\+Byte\+Array\+Equality\+Comparer\+::\+Equals (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{left}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if two byte vectors are equal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First byte vector \\
+\hline
+{\em right} & Second byte vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if equal, false otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_equality_comparer_ab84d9837cc84d98dbb32560a89b293da}\index{neo::extensions::ByteArrayEqualityComparer@{neo::extensions::ByteArrayEqualityComparer}!Equals@{Equals}}
+\index{Equals@{Equals}!neo::extensions::ByteArrayEqualityComparer@{neo::extensions::ByteArrayEqualityComparer}}
+\doxysubsubsection{\texorpdfstring{Equals()}{Equals()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_equality_comparer_ab84d9837cc84d98dbb32560a89b293da} 
+bool neo\+::extensions\+::\+Byte\+Array\+Equality\+Comparer\+::\+Equals (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{left}{, }\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if two std\+::vector$<$uint8\+\_\+t$>$ are equal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First vector \\
+\hline
+{\em right} & Second vector \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if equal, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_equality_comparer_aff9b2dc8d8b23ef0f5b413d5adc8314b}\index{neo::extensions::ByteArrayEqualityComparer@{neo::extensions::ByteArrayEqualityComparer}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!neo::extensions::ByteArrayEqualityComparer@{neo::extensions::ByteArrayEqualityComparer}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_equality_comparer_aff9b2dc8d8b23ef0f5b413d5adc8314b} 
+size\+\_\+t neo\+::extensions\+::\+Byte\+Array\+Equality\+Comparer\+::\+Get\+Hash\+Code (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generate hash code for byte span. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Byte span to hash \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_hash}{Hash} code 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_equality_comparer_abf79f91e2e32aa9f6645267d836dce17}\index{neo::extensions::ByteArrayEqualityComparer@{neo::extensions::ByteArrayEqualityComparer}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!neo::extensions::ByteArrayEqualityComparer@{neo::extensions::ByteArrayEqualityComparer}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_equality_comparer_abf79f91e2e32aa9f6645267d836dce17} 
+size\+\_\+t neo\+::extensions\+::\+Byte\+Array\+Equality\+Comparer\+::\+Get\+Hash\+Code (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generate hash code for byte vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Byte vector to hash \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_hash}{Hash} code 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1extensions_1_1_byte_array_equality_comparer_a5fe64079f8fa8937e5a4e5466faf5c66}\index{neo::extensions::ByteArrayEqualityComparer@{neo::extensions::ByteArrayEqualityComparer}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!neo::extensions::ByteArrayEqualityComparer@{neo::extensions::ByteArrayEqualityComparer}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_byte_array_equality_comparer_a5fe64079f8fa8937e5a4e5466faf5c66} 
+size\+\_\+t neo\+::extensions\+::\+Byte\+Array\+Equality\+Comparer\+::\+Get\+Hash\+Code (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generate hash code for std\+::vector$<$uint8\+\_\+t$>$ 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Vector to hash \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structneo_1_1extensions_1_1_byte_array_equality_comparer_1_1_hash}{Hash} code 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/extensions/\mbox{\hyperlink{byte__array__equality__comparer_8h}{byte\+\_\+array\+\_\+equality\+\_\+comparer.\+h}}\item 
+src/extensions/\mbox{\hyperlink{byte__array__equality__comparer_8cpp}{byte\+\_\+array\+\_\+equality\+\_\+comparer.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,156 @@
+\doxysection{execution\+\_\+context.\+h}
+\hypertarget{execution__context_8h_source}{}\label{execution__context_8h_source}\index{include/neo/vm/execution\_context.h@{include/neo/vm/execution\_context.h}}
+\mbox{\hyperlink{execution__context_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{exception__handling__context_8h}{neo/vm/exception\_handling\_context.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{script_8h}{neo/vm/script.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stack__item_8h}{neo/vm/stack\_item.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <any>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <tuple>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <typeindex>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_aba08d68bca5d4c4282a3eca460df0c6f}{ExecutionContext}}}
+\DoxyCodeLine{00024\ \{}
+\DoxyCodeLine{00025\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_aba08d68bca5d4c4282a3eca460df0c6f}{ExecutionContext}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}}\&\ script,\ int32\_t\ rvcount\ =\ -\/1);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a0a4d4c73dcf26ba10246427fc564f309}{GetScript}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_aa549d6eff2b85a9e6c66a442037b3144}{GetInstructionPointer}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_aa92a6eb56527a3cbf911c408037f1ea1}{SetInstructionPointer}}(int32\_t\ instructionPointer);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ad46483c8a94013c51f1b5cad3e7c812b}{GetCurrentPosition}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{OpCode}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a306b1dcd015b3617bee518c27a25c3a1}{GetNextInstructionOpCode}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ std::shared\_ptr<Instruction>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a61e441785dee502d46e3f615b9332c76}{GetNextInstructionObject}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a83515d6064b5e2bdee76502d7ce20c1e}{MoveNext}}();}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00078\ \ \ \ \ std::shared\_ptr<Instruction>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a449a6bda6f6c3126f9eb7dd8782e9f45}{GetCurrentInstruction}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00084\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a627f20e646c1c252c4dcb29ba48660d8}{GetRVCount}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<StackItem>>\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a54018cb5bf0d14352f5cdef23e1e6f3a}{GetStaticFields}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<StackItem>>\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ac91c9a2c635b0195d4b59306ebe7e580}{GetLocalVariables}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<StackItem>>\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a6102aa974dc646a1dfc55617c24624b3}{GetArguments}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<StackItem>>\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_aa3f0b42abf68ab879f659a7df75df4ea}{GetEvaluationStack}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00114\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_aa6a38303f7f1ed244c409fe8d2596b1c}{GetTryCount}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00123\ \ \ \ \ std::shared\_ptr<T>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ab638c497af5af1a22cb5e387312171cf}{GetState}}(std::function<std::shared\_ptr<T>()>\ factory)}
+\DoxyCodeLine{00124\ \ \ \ \ \{}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ std::type\_index\ type\ =\ std::type\_index(\textcolor{keyword}{typeid}(T));}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ state\ exists\ for\ this\ type}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a04cdf63c59804953340d3dc3a8656dc3}{states\_}}.find(type);}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a04cdf63c59804953340d3dc3a8656dc3}{states\_}}.end())}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Return\ existing\ state}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::any\_cast<std::shared\_ptr<T>>(it-\/>second);}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ new\ state}}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ state\ =\ factory();}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a04cdf63c59804953340d3dc3a8656dc3}{states\_}}[type]\ =\ state;}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ state;}
+\DoxyCodeLine{00139\ \ \ \ \ \}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00147\ \ \ \ \ std::shared\_ptr<T>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ad11cd70d576e0482e6eb5f3bc676f618}{GetState}}()}
+\DoxyCodeLine{00148\ \ \ \ \ \{}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ad11cd70d576e0482e6eb5f3bc676f618}{GetState<T>}}([]()\ \{\ \textcolor{keywordflow}{return}\ std::make\_shared<T>();\ \});}
+\DoxyCodeLine{00150\ \ \ \ \ \}}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a26a5d4ce5732eec67c6b23d35f9e09b0}{InitializeStaticFields}}(int32\_t\ count);}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00163\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a223e30367293d9938e6dbd4e24c77069}{GetStaticField}}(int32\_t\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a832c2f5535d8b7c019e3b4d692d78000}{SetStaticField}}(int32\_t\ index,\ std::shared\_ptr<StackItem>\ item);}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a219d110ea2913de64df702414bc42774}{InitializeLocalVariables}}(int32\_t\ count);}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a6bd7763e948ab3052f6affc82c323b0b}{SetLocalVariables}}(\textcolor{keyword}{const}\ std::vector<std::shared\_ptr<StackItem>>\&\ variables);}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a095ed2c2be085d256a8c63c456697479}{SetArguments}}(\textcolor{keyword}{const}\ std::vector<std::shared\_ptr<StackItem>>\&\ arguments);}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a219d110ea2913de64df702414bc42774}{InitializeLocalVariables}}(int32\_t\ localCount,\ int32\_t\ argumentCount);}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a74f35f3488e24ef34f272c302bafb6f6}{InitializeArguments}}(int32\_t\ count);}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00208\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a43686f03e22a16ca74e5f9fc4bc98bc3}{LoadLocalVariable}}(int32\_t\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a9a687c1313839ab255421c7e5cfdacbc}{StoreLocalVariable}}(int32\_t\ index,\ std::shared\_ptr<StackItem>\ item);}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00222\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ad27bcc06590e0f413083d9a0be6409c9}{LoadArgument}}(int32\_t\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a08f93b562ddfc1ee1082af2f201b913b}{StoreArgument}}(int32\_t\ index,\ std::shared\_ptr<StackItem>\ item);}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00236\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a830b9ce8f059b83200f099f58aa89936}{LoadStaticField}}(int32\_t\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a5212e7a1c896fcf310d743de6ca5c991}{StoreStaticField}}(int32\_t\ index,\ std::shared\_ptr<StackItem>\ item);}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ad1554da2b9a026e84808153d8d4c821d}{Push}}(std::shared\_ptr<StackItem>\ item);}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00255\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a70bded0f390d335569c242c8d0adc97a}{Pop}}();}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00262\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a23e3cd191337e28e4fd7bc01484d115b}{Peek}}(int32\_t\ index\ =\ 0)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00267\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_aa36f616837e5765bef1933c4851ff2bc}{ClearStack}}();}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00273\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a66f775f55ad049e1d3363a6a0bf8b511}{GetStackSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00281\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ac77dc27e31e1ae14079e678c2c14a76a}{EnterTry}}(int32\_t\ catchOffset,\ int32\_t\ finallyOffset,\ int32\_t\ endOffset);}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00286\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_acea366a518c54b310d63c235f3bd0d3b}{ExitTry}}();}
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00292\ \ \ \ \ std::optional<int32\_t>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a6006ad2bbf4a58dbc8586d4a36e8d392}{GetCatchOffset}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00293\ }
+\DoxyCodeLine{00298\ \ \ \ \ std::optional<int32\_t>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a4bad517f5be0b5dc11855e091326b573}{GetFinallyOffset}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00304\ \ \ \ \ std::optional<int32\_t>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a380d0f66ceec91f2fdb60477ded76416}{GetEndOffset}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00305\ }
+\DoxyCodeLine{00310\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context}{ExceptionHandlingContext}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a85f288e7495784b6f4601fea4e81402c}{GetCurrentTry}}();}
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00316\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context}{ExceptionHandlingContext}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a85f288e7495784b6f4601fea4e81402c}{GetCurrentTry}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00317\ }
+\DoxyCodeLine{00323\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a70d021df421652a4414c20ac85cbca59}{SetTryState}}(int32\_t\ catchPosition,\ int32\_t\ finallyPosition);}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00328\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a8bdf0d533ec82945eb171c07ddbdedd3}{ClearTryState}}();}
+\DoxyCodeLine{00329\ }
+\DoxyCodeLine{00335\ \ \ \ \ std::shared\_ptr<ExecutionContext>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ac5d0fce38731fe74f73b6c2bbb8c9804}{Clone}}(int32\_t\ initialPosition\ =\ -\/1)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00336\ }
+\DoxyCodeLine{00341\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<int32\_t>\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a857e29498595467ea0d57e35b73ea32d}{GetCallTable}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00343\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00344\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_aed5781915c45456f8b9517286aff827e}{script\_}};}
+\DoxyCodeLine{00345\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a71553d333528202372ce310c3dc9824a}{instructionPointer\_}};}
+\DoxyCodeLine{00346\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a75e060ca9e31730dc849b96e4ad2126f}{rvcount\_}};}
+\DoxyCodeLine{00347\ \ \ \ \ std::vector<std::shared\_ptr<StackItem>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_adf5629b9a338f0d52c63e25d60f8da1a}{staticFields\_}};}
+\DoxyCodeLine{00348\ \ \ \ \ std::vector<std::shared\_ptr<StackItem>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a4a98c70eb76498c3ae07769e19a194d7}{localVariables\_}};}
+\DoxyCodeLine{00349\ \ \ \ \ std::vector<std::shared\_ptr<StackItem>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a5d2fc87474562891e096cd77b6bd92ac}{arguments\_}};}
+\DoxyCodeLine{00350\ \ \ \ \ std::vector<std::shared\_ptr<StackItem>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a430917719fc777eb34a018f7c50818ac}{evaluationStack\_}};}
+\DoxyCodeLine{00351\ \ \ \ \ std::vector<ExceptionHandlingContext>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a7264888c99aa65f74a54f48db3cbd0ed}{tryStack\_}};}
+\DoxyCodeLine{00352\ \ \ \ \ std::vector<int32\_t>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a6b6460a5a627ce9245704afac9783dbe}{callTable\_}};}
+\DoxyCodeLine{00353\ \ \ \ \ std::unordered\_map<std::type\_index,\ std::any>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a04cdf63c59804953340d3dc3a8656dc3}{states\_}};}
+\DoxyCodeLine{00354\ \};}
+\DoxyCodeLine{00355\ \}\ \ \textcolor{comment}{//\ namespace\ neo::vm}}
+
+\end{DoxyCode}

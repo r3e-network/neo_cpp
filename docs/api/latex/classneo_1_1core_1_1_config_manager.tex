@@ -1,0 +1,397 @@
+\doxysection{neo\+::core\+::Config\+Manager Class Reference}
+\hypertarget{classneo_1_1core_1_1_config_manager}{}\label{classneo_1_1core_1_1_config_manager}\index{neo::core::ConfigManager@{neo::core::ConfigManager}}
+
+
+Configuration management with environment variable support.  
+
+
+
+
+{\ttfamily \#include $<$config\+\_\+manager.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ad1d416eac0b0fb3a8e8520550a4ac973}{Load\+From\+File}} (const std\+::string \&config\+Path)
+\begin{DoxyCompactList}\small\item\em Load configuration from file with environment variable substitution. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ad2db378234ee83a1ab72722344fbd6de}{Get\+String}} (const std\+::string \&path, const std\+::string \&default\+Value="{}"{}) const
+\begin{DoxyCompactList}\small\item\em Get string configuration value. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ae0ccb42a14d042a00b4580247de631e7}{Get\+Int}} (const std\+::string \&path, int default\+Value=0) const
+\begin{DoxyCompactList}\small\item\em Get integer configuration value. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_acc54cf9e8a6f789c2330c9540bc282ba}{Get\+Bool}} (const std\+::string \&path, bool default\+Value=false) const
+\begin{DoxyCompactList}\small\item\em Get boolean configuration value. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a99cb8d66c8796f06e6d8920921b6fa8a}{Get\+UInt32}} (const std\+::string \&path, uint32\+\_\+t default\+Value=0) const
+\begin{DoxyCompactList}\small\item\em Get uint32\+\_\+t configuration value. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a817a423302beee8ad9544ecec80e37fb}{Get\+Port}} (const std\+::string \&path, uint16\+\_\+t default\+Value=0) const
+\begin{DoxyCompactList}\small\item\em Get uint16\+\_\+t configuration value (for ports) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\void \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_abe2dd1f7e5078635e68ae58f81d6a16a}{Set}} (const std\+::string \&path, const T \&value)
+\begin{DoxyCompactList}\small\item\em Set configuration value (runtime override) \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a9f294c74dcc9c051e19cd3964cc103d4}{Get\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Get the entire configuration as JSON. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1core_1_1_config_manager}{Config\+Manager}} \& \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_afaceec2955d4dec4b8c419d305b4b7df}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Get singleton instance. \end{DoxyCompactList}\item 
+static uint16\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_aeafca3625ef24d5c03065da5865e6fb5}{Get\+Default\+Port}} (const std\+::string \&network, const std\+::string \&service)
+\begin{DoxyCompactList}\small\item\em Get default port for network. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a21fc1f6f33272c586ef2d25f3b193623}{Config\+Manager}} ()=default
+\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a8a86ed691eef04acac56f811fa83f3d4}{Process\+Environment\+Variables}} (nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Process environment variable substitutions in JSON. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ae3c2c13a6306da9f9705c5af4ecdeb12}{Substitute\+Environment\+Variables}} (const std\+::string \&str)
+\begin{DoxyCompactList}\small\item\em Substitute environment variables in string. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_a838330a9508805966328d20965612c4f}{Path\+To\+Env\+Var}} (const std\+::string \&path) const
+\begin{DoxyCompactList}\small\item\em Convert JSON path to environment variable name. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_acbb8d5d039c3738db0d6ccac7eaceb30}{Path\+To\+Json\+Pointer}} (const std\+::string \&path) const
+\begin{DoxyCompactList}\small\item\em Convert dot-\/separated path to JSON pointer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ad6a7c0964e1e6d9672be6de37c553e67}{Validate\+Configuration}} ()
+\begin{DoxyCompactList}\small\item\em Validate required configuration fields. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_aa93ea260d8be22cb209e9f7ebefaa6dc}{config\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1core_1_1_config_manager_ac7909f11b5742c0ebbf1456f10343dc4}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Configuration management with environment variable support. 
+
+Supports configuration hierarchy\+:
+\begin{DoxyEnumerate}
+\item Environment variables (highest priority)
+\item Configuration file
+\item Default values (lowest priority)
+\end{DoxyEnumerate}
+
+Environment variables can be referenced in config as \$\{VAR\+\_\+\+NAME\} 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1core_1_1_config_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1core_1_1_config_manager_a21fc1f6f33272c586ef2d25f3b193623}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!ConfigManager@{ConfigManager}}
+\index{ConfigManager@{ConfigManager}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{ConfigManager()}{ConfigManager()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_a21fc1f6f33272c586ef2d25f3b193623} 
+neo\+::core\+::\+Config\+Manager\+::\+Config\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1core_1_1_config_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1core_1_1_config_manager_acc54cf9e8a6f789c2330c9540bc282ba}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!GetBool@{GetBool}}
+\index{GetBool@{GetBool}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{GetBool()}{GetBool()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_acc54cf9e8a6f789c2330c9540bc282ba} 
+bool neo\+::core\+::\+Config\+Manager\+::\+Get\+Bool (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{, }\item[{bool}]{default\+Value}{ = {\ttfamily false}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get boolean configuration value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & JSON path \\
+\hline
+{\em default\+Value} & Default value if not found \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Configuration value 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1core_1_1_config_manager_aeafca3625ef24d5c03065da5865e6fb5}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!GetDefaultPort@{GetDefaultPort}}
+\index{GetDefaultPort@{GetDefaultPort}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{GetDefaultPort()}{GetDefaultPort()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_aeafca3625ef24d5c03065da5865e6fb5} 
+uint16\+\_\+t neo\+::core\+::\+Config\+Manager\+::\+Get\+Default\+Port (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{network}{, }\item[{const std\+::string \&}]{service}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get default port for network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em network} & Network name (mainnet, testnet, privnet) \\
+\hline
+{\em service} & Service type (p2p, rpc, ws) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Default port number 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_config_manager_afaceec2955d4dec4b8c419d305b4b7df}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_afaceec2955d4dec4b8c419d305b4b7df} 
+\mbox{\hyperlink{classneo_1_1core_1_1_config_manager}{Config\+Manager}} \& neo\+::core\+::\+Config\+Manager\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get singleton instance. 
+
+\begin{DoxyReturn}{Returns}
+\doxylink{classneo_1_1core_1_1_config_manager}{Config\+Manager} instance 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1core_1_1_config_manager_ae0ccb42a14d042a00b4580247de631e7}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!GetInt@{GetInt}}
+\index{GetInt@{GetInt}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{GetInt()}{GetInt()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_ae0ccb42a14d042a00b4580247de631e7} 
+int neo\+::core\+::\+Config\+Manager\+::\+Get\+Int (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{, }\item[{int}]{default\+Value}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get integer configuration value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & JSON path \\
+\hline
+{\em default\+Value} & Default value if not found \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Configuration value 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1core_1_1_config_manager_a9f294c74dcc9c051e19cd3964cc103d4}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!GetJson@{GetJson}}
+\index{GetJson@{GetJson}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{GetJson()}{GetJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_a9f294c74dcc9c051e19cd3964cc103d4} 
+nlohmann\+::json neo\+::core\+::\+Config\+Manager\+::\+Get\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the entire configuration as JSON. 
+
+\begin{DoxyReturn}{Returns}
+Configuration JSON 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_config_manager_a817a423302beee8ad9544ecec80e37fb}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!GetPort@{GetPort}}
+\index{GetPort@{GetPort}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{GetPort()}{GetPort()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_a817a423302beee8ad9544ecec80e37fb} 
+uint16\+\_\+t neo\+::core\+::\+Config\+Manager\+::\+Get\+Port (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{, }\item[{uint16\+\_\+t}]{default\+Value}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get uint16\+\_\+t configuration value (for ports) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & JSON path \\
+\hline
+{\em default\+Value} & Default value if not found \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Configuration value 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1core_1_1_config_manager_ad2db378234ee83a1ab72722344fbd6de}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!GetString@{GetString}}
+\index{GetString@{GetString}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{GetString()}{GetString()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_ad2db378234ee83a1ab72722344fbd6de} 
+std\+::string neo\+::core\+::\+Config\+Manager\+::\+Get\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{, }\item[{const std\+::string \&}]{default\+Value}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get string configuration value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & JSON path (e.\+g., "{}\+Application\+Configuration.\+RPC.\+Bind\+Address"{}) \\
+\hline
+{\em default\+Value} & Default value if not found \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Configuration value 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1core_1_1_config_manager_a99cb8d66c8796f06e6d8920921b6fa8a}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!GetUInt32@{GetUInt32}}
+\index{GetUInt32@{GetUInt32}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{GetUInt32()}{GetUInt32()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_a99cb8d66c8796f06e6d8920921b6fa8a} 
+uint32\+\_\+t neo\+::core\+::\+Config\+Manager\+::\+Get\+UInt32 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{, }\item[{uint32\+\_\+t}]{default\+Value}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get uint32\+\_\+t configuration value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & JSON path \\
+\hline
+{\em default\+Value} & Default value if not found \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Configuration value 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1core_1_1_config_manager_ad1d416eac0b0fb3a8e8520550a4ac973}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!LoadFromFile@{LoadFromFile}}
+\index{LoadFromFile@{LoadFromFile}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{LoadFromFile()}{LoadFromFile()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_ad1d416eac0b0fb3a8e8520550a4ac973} 
+void neo\+::core\+::\+Config\+Manager\+::\+Load\+From\+File (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{config\+Path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Load configuration from file with environment variable substitution. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config\+Path} & Path to configuration file \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & on parse error \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1core_1_1_config_manager_a838330a9508805966328d20965612c4f}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!PathToEnvVar@{PathToEnvVar}}
+\index{PathToEnvVar@{PathToEnvVar}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{PathToEnvVar()}{PathToEnvVar()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_a838330a9508805966328d20965612c4f} 
+std\+::string neo\+::core\+::\+Config\+Manager\+::\+Path\+To\+Env\+Var (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Convert JSON path to environment variable name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Dot-\/separated path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Environment variable name 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_config_manager_acbb8d5d039c3738db0d6ccac7eaceb30}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!PathToJsonPointer@{PathToJsonPointer}}
+\index{PathToJsonPointer@{PathToJsonPointer}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{PathToJsonPointer()}{PathToJsonPointer()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_acbb8d5d039c3738db0d6ccac7eaceb30} 
+std\+::string neo\+::core\+::\+Config\+Manager\+::\+Path\+To\+Json\+Pointer (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Convert dot-\/separated path to JSON pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Dot-\/separated path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+JSON pointer path 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_config_manager_a8a86ed691eef04acac56f811fa83f3d4}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!ProcessEnvironmentVariables@{ProcessEnvironmentVariables}}
+\index{ProcessEnvironmentVariables@{ProcessEnvironmentVariables}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{ProcessEnvironmentVariables()}{ProcessEnvironmentVariables()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_a8a86ed691eef04acac56f811fa83f3d4} 
+void neo\+::core\+::\+Config\+Manager\+::\+Process\+Environment\+Variables (\begin{DoxyParamCaption}\item[{nlohmann\+::json \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Process environment variable substitutions in JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & JSON object to process \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1core_1_1_config_manager_abe2dd1f7e5078635e68ae58f81d6a16a}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!Set@{Set}}
+\index{Set@{Set}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_abe2dd1f7e5078635e68ae58f81d6a16a} 
+template$<$typename T$>$ \\
+void neo\+::core\+::\+Config\+Manager\+::\+Set (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{, }\item[{const T \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set configuration value (runtime override) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & JSON path \\
+\hline
+{\em value} & Value to set \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1core_1_1_config_manager_ae3c2c13a6306da9f9705c5af4ecdeb12}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!SubstituteEnvironmentVariables@{SubstituteEnvironmentVariables}}
+\index{SubstituteEnvironmentVariables@{SubstituteEnvironmentVariables}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{SubstituteEnvironmentVariables()}{SubstituteEnvironmentVariables()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_ae3c2c13a6306da9f9705c5af4ecdeb12} 
+std\+::string neo\+::core\+::\+Config\+Manager\+::\+Substitute\+Environment\+Variables (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Substitute environment variables in string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & String containing \$\{VAR\+\_\+\+NAME\} environment variable references \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String with substitutions 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_config_manager_ad6a7c0964e1e6d9672be6de37c553e67}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!ValidateConfiguration@{ValidateConfiguration}}
+\index{ValidateConfiguration@{ValidateConfiguration}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{ValidateConfiguration()}{ValidateConfiguration()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_ad6a7c0964e1e6d9672be6de37c553e67} 
+void neo\+::core\+::\+Config\+Manager\+::\+Validate\+Configuration (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+Validate required configuration fields. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if validation fails \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 9
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1core_1_1_config_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1core_1_1_config_manager_aa93ea260d8be22cb209e9f7ebefaa6dc}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!config\_@{config\_}}
+\index{config\_@{config\_}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{config\_}{config\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_aa93ea260d8be22cb209e9f7ebefaa6dc} 
+nlohmann\+::json neo\+::core\+::\+Config\+Manager\+::config\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_config_manager_ac7909f11b5742c0ebbf1456f10343dc4}\index{neo::core::ConfigManager@{neo::core::ConfigManager}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::core::ConfigManager@{neo::core::ConfigManager}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_config_manager_ac7909f11b5742c0ebbf1456f10343dc4} 
+std\+::mutex neo\+::core\+::\+Config\+Manager\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{config__manager_8h}{config\+\_\+manager.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,423 @@
+\doxysection{neo\+::config\+::Configuration Class Reference}
+\hypertarget{classneo_1_1config_1_1_configuration}{}\label{classneo_1_1config_1_1_configuration}\index{neo::config::Configuration@{neo::config::Configuration}}
+
+
+Complete Neo node configuration.  
+
+
+
+
+{\ttfamily \#include $<$configuration.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::config\+::Configuration\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a226656beeb7868d0faee62a087da7208}{Save}} (const std\+::string \&path) const
+\begin{DoxyCompactList}\small\item\em Save configuration to file. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ab975de27875206be79b3202c4e82a1cf}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Convert configuration to JSON. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structneo_1_1config_1_1_network_config}{Network\+Config}} \& \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a9fcb36e8a73dfcc0af864a749f1e6730}{Get\+Network}} () const
+\begin{DoxyCompactList}\small\item\em Get network configuration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1config_1_1_network_config}{Network\+Config}} \& \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ae2dcad5d84eb23ba28fb1725983d5d61}{Get\+Network}} ()
+\item 
+const \mbox{\hyperlink{structneo_1_1config_1_1_rpc_config}{Rpc\+Config}} \& \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a38e51ee9ab0e0de2a6c0f5d68741e916}{Get\+Rpc}} () const
+\begin{DoxyCompactList}\small\item\em Get RPC configuration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1config_1_1_rpc_config}{Rpc\+Config}} \& \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a96ee55ccfb19671f7b55f3fb19f2d8a2}{Get\+Rpc}} ()
+\item 
+const \mbox{\hyperlink{structneo_1_1config_1_1_storage_config}{Storage\+Config}} \& \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a19bd40879efc699cd250602f0f49f7ac}{Get\+Storage}} () const
+\begin{DoxyCompactList}\small\item\em Get storage configuration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1config_1_1_storage_config}{Storage\+Config}} \& \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a40a457d54d3588472d9db005151df3e2}{Get\+Storage}} ()
+\item 
+const \mbox{\hyperlink{structneo_1_1config_1_1_logging_config}{Logging\+Config}} \& \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a7a423c66a3be9fe2c69fac3560bf0196}{Get\+Logging}} () const
+\begin{DoxyCompactList}\small\item\em Get logging configuration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1config_1_1_logging_config}{Logging\+Config}} \& \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ada702758e26fbf960f9c72ad18ac3184}{Get\+Logging}} ()
+\item 
+const \mbox{\hyperlink{structneo_1_1config_1_1_wallet_config}{Wallet\+Config}} \& \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a64bbef6de79e1bf579368c9606645ca9}{Get\+Wallet}} () const
+\begin{DoxyCompactList}\small\item\em Get wallet configuration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1config_1_1_wallet_config}{Wallet\+Config}} \& \mbox{\hyperlink{classneo_1_1config_1_1_configuration_afcd43763da6930c2dfad5b5197b98d6d}{Get\+Wallet}} ()
+\item 
+const \mbox{\hyperlink{structneo_1_1config_1_1_protocol_config}{Protocol\+Config}} \& \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a13045d60aff3ce28e30f61e166e96dc7}{Get\+Protocol}} () const
+\begin{DoxyCompactList}\small\item\em Get protocol configuration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1config_1_1_protocol_config}{Protocol\+Config}} \& \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a2032adf75061088ae40d17e0e3d5d3ee}{Get\+Protocol}} ()
+\item 
+const std\+::vector$<$ \mbox{\hyperlink{structneo_1_1config_1_1_plugin_config}{Plugin\+Config}} $>$ \& \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a8b2701017aff0623e3cd205dbf3fbfc2}{Get\+Plugins}} () const
+\begin{DoxyCompactList}\small\item\em Get plugin configurations. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{structneo_1_1config_1_1_plugin_config}{Plugin\+Config}} $>$ \& \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a429761e1072cd6814f71030d0269f701}{Get\+Plugins}} ()
+\item 
+bool \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a03e98f3a19a73899ffda17fd19d5e218}{Validate}} () const
+\begin{DoxyCompactList}\small\item\em Validate configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}} $>$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ac0ac22ce9bb04a3bbac0a04f4cc25f77}{Load}} (const std\+::string \&path)
+\begin{DoxyCompactList}\small\item\em Load configuration from file. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}} $>$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a950849b6e195a5ee67ca9748ed2a9200}{Load\+From\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Load configuration from JSON. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}} $>$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a436e6bad49f45024815ec1cffe4a0862}{Get\+Mainnet\+Config}} ()
+\begin{DoxyCompactList}\small\item\em Get default configuration for mainnet. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}} $>$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a5f0ebfc4a06644a69971221af65f3e4d}{Get\+Testnet\+Config}} ()
+\begin{DoxyCompactList}\small\item\em Get default configuration for testnet. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}} $>$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a6a8e679eefe08386dd4f0924b2e9318e}{Get\+Private\+Net\+Config}} ()
+\begin{DoxyCompactList}\small\item\em Get default configuration for private net. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a47a1410686a1b9001ccc84b0f50ec47c}{Parse\+Network\+Config}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\item 
+void \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a1f2fd160856e3a882f5084f8a7f02545}{Parse\+Rpc\+Config}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\item 
+void \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a358b0fa2605469ac5d443ac6dd79793e}{Parse\+Storage\+Config}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\item 
+void \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a07ca987665c854324a577942e66c5070}{Parse\+Logging\+Config}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\item 
+void \mbox{\hyperlink{classneo_1_1config_1_1_configuration_aae9f783046acfc0c7bf302e2f6b41670}{Parse\+Wallet\+Config}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\item 
+void \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a160b910d6f0e4c0d58cb3c6fbc4d09a7}{Parse\+Protocol\+Config}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\item 
+void \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a9a31f2593c4d67cb061ad18b33857f2e}{Parse\+Plugin\+Configs}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structneo_1_1config_1_1_network_config}{Network\+Config}} \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a65830206063a157da93638f76c1e2d53}{network\+\_\+}}
+\item 
+\mbox{\hyperlink{structneo_1_1config_1_1_rpc_config}{Rpc\+Config}} \mbox{\hyperlink{classneo_1_1config_1_1_configuration_af54b369ad03276cbe34a23b1e1b0937b}{rpc\+\_\+}}
+\item 
+\mbox{\hyperlink{structneo_1_1config_1_1_storage_config}{Storage\+Config}} \mbox{\hyperlink{classneo_1_1config_1_1_configuration_aa282472fa19a1096a1cbdef0f514f228}{storage\+\_\+}}
+\item 
+\mbox{\hyperlink{structneo_1_1config_1_1_logging_config}{Logging\+Config}} \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ad14ee30521b3316dff463aaabf5a8bcf}{logging\+\_\+}}
+\item 
+\mbox{\hyperlink{structneo_1_1config_1_1_wallet_config}{Wallet\+Config}} \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ad32c178a198ce0a9002f157d121ecb02}{wallet\+\_\+}}
+\item 
+\mbox{\hyperlink{structneo_1_1config_1_1_protocol_config}{Protocol\+Config}} \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a5edd74e2757d6ce490c24d84faba4bd1}{protocol\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structneo_1_1config_1_1_plugin_config}{Plugin\+Config}} $>$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ae6baafa318f20a21ff67f716a494a198}{plugins\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Complete Neo node configuration. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1config_1_1_configuration_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1config_1_1_configuration_ada702758e26fbf960f9c72ad18ac3184}\index{neo::config::Configuration@{neo::config::Configuration}!GetLogging@{GetLogging}}
+\index{GetLogging@{GetLogging}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetLogging()}{GetLogging()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_ada702758e26fbf960f9c72ad18ac3184} 
+\mbox{\hyperlink{structneo_1_1config_1_1_logging_config}{Logging\+Config}} \& neo\+::config\+::\+Configuration\+::\+Get\+Logging (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a7a423c66a3be9fe2c69fac3560bf0196}\index{neo::config::Configuration@{neo::config::Configuration}!GetLogging@{GetLogging}}
+\index{GetLogging@{GetLogging}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetLogging()}{GetLogging()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a7a423c66a3be9fe2c69fac3560bf0196} 
+const \mbox{\hyperlink{structneo_1_1config_1_1_logging_config}{Logging\+Config}} \& neo\+::config\+::\+Configuration\+::\+Get\+Logging (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get logging configuration. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a436e6bad49f45024815ec1cffe4a0862}\index{neo::config::Configuration@{neo::config::Configuration}!GetMainnetConfig@{GetMainnetConfig}}
+\index{GetMainnetConfig@{GetMainnetConfig}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetMainnetConfig()}{GetMainnetConfig()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a436e6bad49f45024815ec1cffe4a0862} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}} $>$ neo\+::config\+::\+Configuration\+::\+Get\+Mainnet\+Config (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get default configuration for mainnet. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_ae2dcad5d84eb23ba28fb1725983d5d61}\index{neo::config::Configuration@{neo::config::Configuration}!GetNetwork@{GetNetwork}}
+\index{GetNetwork@{GetNetwork}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetNetwork()}{GetNetwork()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_ae2dcad5d84eb23ba28fb1725983d5d61} 
+\mbox{\hyperlink{structneo_1_1config_1_1_network_config}{Network\+Config}} \& neo\+::config\+::\+Configuration\+::\+Get\+Network (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a9fcb36e8a73dfcc0af864a749f1e6730}\index{neo::config::Configuration@{neo::config::Configuration}!GetNetwork@{GetNetwork}}
+\index{GetNetwork@{GetNetwork}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetNetwork()}{GetNetwork()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a9fcb36e8a73dfcc0af864a749f1e6730} 
+const \mbox{\hyperlink{structneo_1_1config_1_1_network_config}{Network\+Config}} \& neo\+::config\+::\+Configuration\+::\+Get\+Network (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get network configuration. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a429761e1072cd6814f71030d0269f701}\index{neo::config::Configuration@{neo::config::Configuration}!GetPlugins@{GetPlugins}}
+\index{GetPlugins@{GetPlugins}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetPlugins()}{GetPlugins()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a429761e1072cd6814f71030d0269f701} 
+std\+::vector$<$ \mbox{\hyperlink{structneo_1_1config_1_1_plugin_config}{Plugin\+Config}} $>$ \& neo\+::config\+::\+Configuration\+::\+Get\+Plugins (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a8b2701017aff0623e3cd205dbf3fbfc2}\index{neo::config::Configuration@{neo::config::Configuration}!GetPlugins@{GetPlugins}}
+\index{GetPlugins@{GetPlugins}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetPlugins()}{GetPlugins()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a8b2701017aff0623e3cd205dbf3fbfc2} 
+const std\+::vector$<$ \mbox{\hyperlink{structneo_1_1config_1_1_plugin_config}{Plugin\+Config}} $>$ \& neo\+::config\+::\+Configuration\+::\+Get\+Plugins (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get plugin configurations. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a6a8e679eefe08386dd4f0924b2e9318e}\index{neo::config::Configuration@{neo::config::Configuration}!GetPrivateNetConfig@{GetPrivateNetConfig}}
+\index{GetPrivateNetConfig@{GetPrivateNetConfig}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetPrivateNetConfig()}{GetPrivateNetConfig()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a6a8e679eefe08386dd4f0924b2e9318e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}} $>$ neo\+::config\+::\+Configuration\+::\+Get\+Private\+Net\+Config (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get default configuration for private net. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a2032adf75061088ae40d17e0e3d5d3ee}\index{neo::config::Configuration@{neo::config::Configuration}!GetProtocol@{GetProtocol}}
+\index{GetProtocol@{GetProtocol}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetProtocol()}{GetProtocol()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a2032adf75061088ae40d17e0e3d5d3ee} 
+\mbox{\hyperlink{structneo_1_1config_1_1_protocol_config}{Protocol\+Config}} \& neo\+::config\+::\+Configuration\+::\+Get\+Protocol (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a13045d60aff3ce28e30f61e166e96dc7}\index{neo::config::Configuration@{neo::config::Configuration}!GetProtocol@{GetProtocol}}
+\index{GetProtocol@{GetProtocol}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetProtocol()}{GetProtocol()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a13045d60aff3ce28e30f61e166e96dc7} 
+const \mbox{\hyperlink{structneo_1_1config_1_1_protocol_config}{Protocol\+Config}} \& neo\+::config\+::\+Configuration\+::\+Get\+Protocol (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get protocol configuration. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a96ee55ccfb19671f7b55f3fb19f2d8a2}\index{neo::config::Configuration@{neo::config::Configuration}!GetRpc@{GetRpc}}
+\index{GetRpc@{GetRpc}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetRpc()}{GetRpc()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a96ee55ccfb19671f7b55f3fb19f2d8a2} 
+\mbox{\hyperlink{structneo_1_1config_1_1_rpc_config}{Rpc\+Config}} \& neo\+::config\+::\+Configuration\+::\+Get\+Rpc (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a38e51ee9ab0e0de2a6c0f5d68741e916}\index{neo::config::Configuration@{neo::config::Configuration}!GetRpc@{GetRpc}}
+\index{GetRpc@{GetRpc}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetRpc()}{GetRpc()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a38e51ee9ab0e0de2a6c0f5d68741e916} 
+const \mbox{\hyperlink{structneo_1_1config_1_1_rpc_config}{Rpc\+Config}} \& neo\+::config\+::\+Configuration\+::\+Get\+Rpc (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get RPC configuration. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a40a457d54d3588472d9db005151df3e2}\index{neo::config::Configuration@{neo::config::Configuration}!GetStorage@{GetStorage}}
+\index{GetStorage@{GetStorage}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetStorage()}{GetStorage()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a40a457d54d3588472d9db005151df3e2} 
+\mbox{\hyperlink{structneo_1_1config_1_1_storage_config}{Storage\+Config}} \& neo\+::config\+::\+Configuration\+::\+Get\+Storage (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a19bd40879efc699cd250602f0f49f7ac}\index{neo::config::Configuration@{neo::config::Configuration}!GetStorage@{GetStorage}}
+\index{GetStorage@{GetStorage}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetStorage()}{GetStorage()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a19bd40879efc699cd250602f0f49f7ac} 
+const \mbox{\hyperlink{structneo_1_1config_1_1_storage_config}{Storage\+Config}} \& neo\+::config\+::\+Configuration\+::\+Get\+Storage (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get storage configuration. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a5f0ebfc4a06644a69971221af65f3e4d}\index{neo::config::Configuration@{neo::config::Configuration}!GetTestnetConfig@{GetTestnetConfig}}
+\index{GetTestnetConfig@{GetTestnetConfig}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetTestnetConfig()}{GetTestnetConfig()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a5f0ebfc4a06644a69971221af65f3e4d} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}} $>$ neo\+::config\+::\+Configuration\+::\+Get\+Testnet\+Config (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get default configuration for testnet. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_afcd43763da6930c2dfad5b5197b98d6d}\index{neo::config::Configuration@{neo::config::Configuration}!GetWallet@{GetWallet}}
+\index{GetWallet@{GetWallet}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetWallet()}{GetWallet()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_afcd43763da6930c2dfad5b5197b98d6d} 
+\mbox{\hyperlink{structneo_1_1config_1_1_wallet_config}{Wallet\+Config}} \& neo\+::config\+::\+Configuration\+::\+Get\+Wallet (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a64bbef6de79e1bf579368c9606645ca9}\index{neo::config::Configuration@{neo::config::Configuration}!GetWallet@{GetWallet}}
+\index{GetWallet@{GetWallet}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{GetWallet()}{GetWallet()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a64bbef6de79e1bf579368c9606645ca9} 
+const \mbox{\hyperlink{structneo_1_1config_1_1_wallet_config}{Wallet\+Config}} \& neo\+::config\+::\+Configuration\+::\+Get\+Wallet (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get wallet configuration. 
+
+\Hypertarget{classneo_1_1config_1_1_configuration_ac0ac22ce9bb04a3bbac0a04f4cc25f77}\index{neo::config::Configuration@{neo::config::Configuration}!Load@{Load}}
+\index{Load@{Load}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{Load()}{Load()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_ac0ac22ce9bb04a3bbac0a04f4cc25f77} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}} $>$ neo\+::config\+::\+Configuration\+::\+Load (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Load configuration from file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to configuration file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{classneo_1_1config_1_1_configuration}{Configuration} instance 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1config_1_1_configuration_a950849b6e195a5ee67ca9748ed2a9200}\index{neo::config::Configuration@{neo::config::Configuration}!LoadFromJson@{LoadFromJson}}
+\index{LoadFromJson@{LoadFromJson}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{LoadFromJson()}{LoadFromJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a950849b6e195a5ee67ca9748ed2a9200} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}} $>$ neo\+::config\+::\+Configuration\+::\+Load\+From\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Load configuration from JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & JSON configuration object \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{classneo_1_1config_1_1_configuration}{Configuration} instance 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1config_1_1_configuration_a07ca987665c854324a577942e66c5070}\index{neo::config::Configuration@{neo::config::Configuration}!ParseLoggingConfig@{ParseLoggingConfig}}
+\index{ParseLoggingConfig@{ParseLoggingConfig}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{ParseLoggingConfig()}{ParseLoggingConfig()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a07ca987665c854324a577942e66c5070} 
+void neo\+::config\+::\+Configuration\+::\+Parse\+Logging\+Config (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a47a1410686a1b9001ccc84b0f50ec47c}\index{neo::config::Configuration@{neo::config::Configuration}!ParseNetworkConfig@{ParseNetworkConfig}}
+\index{ParseNetworkConfig@{ParseNetworkConfig}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{ParseNetworkConfig()}{ParseNetworkConfig()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a47a1410686a1b9001ccc84b0f50ec47c} 
+void neo\+::config\+::\+Configuration\+::\+Parse\+Network\+Config (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a9a31f2593c4d67cb061ad18b33857f2e}\index{neo::config::Configuration@{neo::config::Configuration}!ParsePluginConfigs@{ParsePluginConfigs}}
+\index{ParsePluginConfigs@{ParsePluginConfigs}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{ParsePluginConfigs()}{ParsePluginConfigs()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a9a31f2593c4d67cb061ad18b33857f2e} 
+void neo\+::config\+::\+Configuration\+::\+Parse\+Plugin\+Configs (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a160b910d6f0e4c0d58cb3c6fbc4d09a7}\index{neo::config::Configuration@{neo::config::Configuration}!ParseProtocolConfig@{ParseProtocolConfig}}
+\index{ParseProtocolConfig@{ParseProtocolConfig}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{ParseProtocolConfig()}{ParseProtocolConfig()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a160b910d6f0e4c0d58cb3c6fbc4d09a7} 
+void neo\+::config\+::\+Configuration\+::\+Parse\+Protocol\+Config (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a1f2fd160856e3a882f5084f8a7f02545}\index{neo::config::Configuration@{neo::config::Configuration}!ParseRpcConfig@{ParseRpcConfig}}
+\index{ParseRpcConfig@{ParseRpcConfig}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{ParseRpcConfig()}{ParseRpcConfig()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a1f2fd160856e3a882f5084f8a7f02545} 
+void neo\+::config\+::\+Configuration\+::\+Parse\+Rpc\+Config (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a358b0fa2605469ac5d443ac6dd79793e}\index{neo::config::Configuration@{neo::config::Configuration}!ParseStorageConfig@{ParseStorageConfig}}
+\index{ParseStorageConfig@{ParseStorageConfig}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{ParseStorageConfig()}{ParseStorageConfig()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a358b0fa2605469ac5d443ac6dd79793e} 
+void neo\+::config\+::\+Configuration\+::\+Parse\+Storage\+Config (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_aae9f783046acfc0c7bf302e2f6b41670}\index{neo::config::Configuration@{neo::config::Configuration}!ParseWalletConfig@{ParseWalletConfig}}
+\index{ParseWalletConfig@{ParseWalletConfig}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{ParseWalletConfig()}{ParseWalletConfig()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_aae9f783046acfc0c7bf302e2f6b41670} 
+void neo\+::config\+::\+Configuration\+::\+Parse\+Wallet\+Config (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a226656beeb7868d0faee62a087da7208}\index{neo::config::Configuration@{neo::config::Configuration}!Save@{Save}}
+\index{Save@{Save}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{Save()}{Save()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a226656beeb7868d0faee62a087da7208} 
+bool neo\+::config\+::\+Configuration\+::\+Save (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption}) const}
+
+
+
+Save configuration to file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & Path to save configuration \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successful 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1config_1_1_configuration_ab975de27875206be79b3202c4e82a1cf}\index{neo::config::Configuration@{neo::config::Configuration}!ToJson@{ToJson}}
+\index{ToJson@{ToJson}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{ToJson()}{ToJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_ab975de27875206be79b3202c4e82a1cf} 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}} neo\+::config\+::\+Configuration\+::\+To\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Convert configuration to JSON. 
+
+\begin{DoxyReturn}{Returns}
+JSON representation 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1config_1_1_configuration_a03e98f3a19a73899ffda17fd19d5e218}\index{neo::config::Configuration@{neo::config::Configuration}!Validate@{Validate}}
+\index{Validate@{Validate}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{Validate()}{Validate()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a03e98f3a19a73899ffda17fd19d5e218} 
+bool neo\+::config\+::\+Configuration\+::\+Validate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Validate configuration. 
+
+\begin{DoxyReturn}{Returns}
+True if configuration is valid 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1config_1_1_configuration_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1config_1_1_configuration_ad14ee30521b3316dff463aaabf5a8bcf}\index{neo::config::Configuration@{neo::config::Configuration}!logging\_@{logging\_}}
+\index{logging\_@{logging\_}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{logging\_}{logging\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_ad14ee30521b3316dff463aaabf5a8bcf} 
+\mbox{\hyperlink{structneo_1_1config_1_1_logging_config}{Logging\+Config}} neo\+::config\+::\+Configuration\+::logging\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a65830206063a157da93638f76c1e2d53}\index{neo::config::Configuration@{neo::config::Configuration}!network\_@{network\_}}
+\index{network\_@{network\_}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{network\_}{network\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a65830206063a157da93638f76c1e2d53} 
+\mbox{\hyperlink{structneo_1_1config_1_1_network_config}{Network\+Config}} neo\+::config\+::\+Configuration\+::network\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_ae6baafa318f20a21ff67f716a494a198}\index{neo::config::Configuration@{neo::config::Configuration}!plugins\_@{plugins\_}}
+\index{plugins\_@{plugins\_}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{plugins\_}{plugins\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_ae6baafa318f20a21ff67f716a494a198} 
+std\+::vector$<$\mbox{\hyperlink{structneo_1_1config_1_1_plugin_config}{Plugin\+Config}}$>$ neo\+::config\+::\+Configuration\+::plugins\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_a5edd74e2757d6ce490c24d84faba4bd1}\index{neo::config::Configuration@{neo::config::Configuration}!protocol\_@{protocol\_}}
+\index{protocol\_@{protocol\_}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{protocol\_}{protocol\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_a5edd74e2757d6ce490c24d84faba4bd1} 
+\mbox{\hyperlink{structneo_1_1config_1_1_protocol_config}{Protocol\+Config}} neo\+::config\+::\+Configuration\+::protocol\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_af54b369ad03276cbe34a23b1e1b0937b}\index{neo::config::Configuration@{neo::config::Configuration}!rpc\_@{rpc\_}}
+\index{rpc\_@{rpc\_}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{rpc\_}{rpc\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_af54b369ad03276cbe34a23b1e1b0937b} 
+\mbox{\hyperlink{structneo_1_1config_1_1_rpc_config}{Rpc\+Config}} neo\+::config\+::\+Configuration\+::rpc\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_aa282472fa19a1096a1cbdef0f514f228}\index{neo::config::Configuration@{neo::config::Configuration}!storage\_@{storage\_}}
+\index{storage\_@{storage\_}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{storage\_}{storage\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_aa282472fa19a1096a1cbdef0f514f228} 
+\mbox{\hyperlink{structneo_1_1config_1_1_storage_config}{Storage\+Config}} neo\+::config\+::\+Configuration\+::storage\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_configuration_ad32c178a198ce0a9002f157d121ecb02}\index{neo::config::Configuration@{neo::config::Configuration}!wallet\_@{wallet\_}}
+\index{wallet\_@{wallet\_}!neo::config::Configuration@{neo::config::Configuration}}
+\doxysubsubsection{\texorpdfstring{wallet\_}{wallet\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_configuration_ad32c178a198ce0a9002f157d121ecb02} 
+\mbox{\hyperlink{structneo_1_1config_1_1_wallet_config}{Wallet\+Config}} neo\+::config\+::\+Configuration\+::wallet\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/config/\mbox{\hyperlink{configuration_8h}{configuration.\+h}}\end{DoxyCompactItemize}

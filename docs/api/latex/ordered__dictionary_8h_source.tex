@@ -1,0 +1,184 @@
+\doxysection{ordered\+\_\+dictionary.\+h}
+\hypertarget{ordered__dictionary_8h_source}{}\label{ordered__dictionary_8h_source}\index{include/neo/json/ordered\_dictionary.h@{include/neo/json/ordered\_dictionary.h}}
+\mbox{\hyperlink{ordered__dictionary_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1json}{neo::json}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue>}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ac3af84333bb5e6c86207361ca54c31e8}{OrderedDictionary}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1json_1_1_ordered_dictionary_1_1_item_a8f443e9be5e7c6ccf293a7d34622222c}{Item}}}
+\DoxyCodeLine{00019\ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ TKey\ \mbox{\hyperlink{structneo_1_1json_1_1_ordered_dictionary_1_1_item_abbc8c0554aaf2d89cacfe6bcfde3cb4f}{key}};}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ TValue\ \mbox{\hyperlink{structneo_1_1json_1_1_ordered_dictionary_1_1_item_a90ae2aef3b0be452d10a068e5d37c4f6}{value}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1json_1_1_ordered_dictionary_1_1_item_a8f443e9be5e7c6ccf293a7d34622222c}{Item}}(\textcolor{keyword}{const}\ TKey\&\ k,\ \textcolor{keyword}{const}\ TValue\&\ v)\ :\ \mbox{\hyperlink{structneo_1_1json_1_1_ordered_dictionary_1_1_item_abbc8c0554aaf2d89cacfe6bcfde3cb4f}{key}}(k),\ \mbox{\hyperlink{structneo_1_1json_1_1_ordered_dictionary_1_1_item_a90ae2aef3b0be452d10a068e5d37c4f6}{value}}(v)\ \{\}}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1json_1_1_ordered_dictionary_1_1_item_aa547726a3158f529a9ad2ae1cda4fb99}{Item}}(TKey\&\&\ k,\ TValue\&\&\ v)\ :\ \mbox{\hyperlink{structneo_1_1json_1_1_ordered_dictionary_1_1_item_abbc8c0554aaf2d89cacfe6bcfde3cb4f}{key}}(\mbox{\hyperlink{namespacestd}{std}}::move(k)),\ \mbox{\hyperlink{structneo_1_1json_1_1_ordered_dictionary_1_1_item_a90ae2aef3b0be452d10a068e5d37c4f6}{value}}(\mbox{\hyperlink{namespacestd}{std}}::move(v))\ \{\}}
+\DoxyCodeLine{00025\ \ \ \ \ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ std::vector<Item>\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}};}
+\DoxyCodeLine{00028\ \ \ \ \ std::unordered\_map<TKey,\ size\_t>\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ae30775608548da293a78547cc6dc5e3d}{iterator}}\ =\ \textcolor{keyword}{typename}\ std::vector<Item>::iterator;}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a14fa3c223c045f735e5ac5295f16cea1}{const\_iterator}}\ =\ \textcolor{keyword}{typename}\ std::vector<Item>::const\_iterator;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ac3af84333bb5e6c86207361ca54c31e8}{OrderedDictionary}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a04469533952b0094a1fdd289a7477744}{OrderedDictionary}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ac3af84333bb5e6c86207361ca54c31e8}{OrderedDictionary}}\&\ other)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_af0a7bf3b839b9a94f8b0bc6b1028ab3b}{OrderedDictionary}}(\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ac3af84333bb5e6c86207361ca54c31e8}{OrderedDictionary}}\&\&\ other)\ \textcolor{keyword}{noexcept}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ac3af84333bb5e6c86207361ca54c31e8}{OrderedDictionary}}\&\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a9b9a1503e73f89f2fcd43504299a3e00}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ac3af84333bb5e6c86207361ca54c31e8}{OrderedDictionary}}\&\ other)\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00057\ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ac3af84333bb5e6c86207361ca54c31e8}{OrderedDictionary}}\&\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a713f11a2935a64bffe2ccf3f80927016}{operator=}}(\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ac3af84333bb5e6c86207361ca54c31e8}{OrderedDictionary}}\&\&\ other)\ \textcolor{keyword}{noexcept}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a581a6a729ec7f7f78899291b58cc07c1}{size}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.size();\ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a1e04db4425e45fab5af870490136cbb0}{empty}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.empty();\ \}}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a87346cdb70844938cc5453651491988e}{clear}}()}
+\DoxyCodeLine{00075\ \ \ \ \ \{}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.clear();}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}.clear();}
+\DoxyCodeLine{00078\ \ \ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a401d252f604259b4da24b3cf4f749e59}{insert\_or\_assign}}(\textcolor{keyword}{const}\ TKey\&\ key,\ \textcolor{keyword}{const}\ TValue\&\ value)}
+\DoxyCodeLine{00086\ \ \ \ \ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}.find(key);}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}.end())}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ existing}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}[it-\/>second].value\ =\ value;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ new}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ index\ =\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.size();}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.emplace\_back(key,\ value);}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}[key]\ =\ index;}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00100\ \ \ \ \ \}}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_af1ae8253e75d17a59dbc57543a0f98ba}{insert\_or\_assign}}(TKey\&\&\ key,\ TValue\&\&\ value)}
+\DoxyCodeLine{00108\ \ \ \ \ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}.find(key);}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}.end())}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ existing}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}[it-\/>second].value\ =\ std::move(value);}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ new}}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ index\ =\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.size();}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}[key]\ =\ index;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.emplace\_back(std::move(key),\ std::move(value));}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00122\ \ \ \ \ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a288c3ce8de9a6c31ddde6acfc109d24f}{contains}}(\textcolor{keyword}{const}\ TKey\&\ key)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}.find(key)\ !=\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}.end();\ \}}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00137\ \ \ \ \ TValue\&\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ad1cefe85bcaffed0460e9c07f7f04005}{at}}(\textcolor{keyword}{const}\ TKey\&\ key)}
+\DoxyCodeLine{00138\ \ \ \ \ \{}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}.find(key);}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ ==\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}.end())\ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Key\ not\ found"{}});}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}[it-\/>second].value;}
+\DoxyCodeLine{00142\ \ \ \ \ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keyword}{const}\ TValue\&\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ab839d986d3c07aefab8180df5d17ad5d}{at}}(\textcolor{keyword}{const}\ TKey\&\ key)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00151\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}.find(key);}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ ==\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}.end())\ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Key\ not\ found"{}});}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}[it-\/>second].value;}
+\DoxyCodeLine{00155\ \ \ \ \ \}}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00163\ \ \ \ \ TValue\&\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a3fa97ab1e8015247520fc5025ae4b195}{at}}(\textcolor{keywordtype}{size\_t}\ index)}
+\DoxyCodeLine{00164\ \ \ \ \ \{}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (index\ >=\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.size())\ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Index\ out\ of\ range"{}});}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}[index].value;}
+\DoxyCodeLine{00167\ \ \ \ \ \}}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keyword}{const}\ TValue\&\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ae397a4f382c580d0f66c489ad6a414fe}{at}}(\textcolor{keywordtype}{size\_t}\ index)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00176\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (index\ >=\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.size())\ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Index\ out\ of\ range"{}});}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}[index].value;}
+\DoxyCodeLine{00179\ \ \ \ \ \}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00186\ \ \ \ \ TValue\&\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_abb8fbf9fa57e421db30474bd106b57ae}{operator[]}}(\textcolor{keyword}{const}\ TKey\&\ key)}
+\DoxyCodeLine{00187\ \ \ \ \ \{}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}.find(key);}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}.end())}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}[it-\/>second].value;}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Insert\ default\ value}}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ index\ =\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.size();}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.emplace\_back(key,\ TValue\{\});}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}[key]\ =\ index;}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}[index].value;}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00201\ \ \ \ \ \}}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00208\ \ \ \ \ TValue\&\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a356489acf6176463a8e5189d17d5d2d9}{operator[]}}(\textcolor{keywordtype}{size\_t}\ index)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}[index].value;\ \}}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keyword}{const}\ TValue\&\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a4107420a8bc1b179361dee65af77d700}{operator[]}}(\textcolor{keywordtype}{size\_t}\ index)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}[index].value;\ \}}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a33bfbd00b2fc86f0b71074b2544c9428}{erase}}(\textcolor{keyword}{const}\ TKey\&\ key)}
+\DoxyCodeLine{00223\ \ \ \ \ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}.find(key);}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ ==\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}.end())\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ index\ =\ it-\/>second;}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Remove\ from\ items}}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.erase(\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.begin()\ +\ index);}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Remove\ from\ key\ map}}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}}.erase(it);}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ indices\ in\ key\ map}}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ pair\ :\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\_to\_index\_}})}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (pair.second\ >\ index)\ pair.second-\/-\/;}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00242\ \ \ \ \ \}}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00248\ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ae30775608548da293a78547cc6dc5e3d}{iterator}}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a66dc9cd43be61b8c398767f77ef18fdd}{begin}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.begin();\ \}}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00254\ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ae30775608548da293a78547cc6dc5e3d}{iterator}}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a08211312752f47c6e269aa7e7389cf07}{end}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.end();\ \}}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00260\ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a14fa3c223c045f735e5ac5295f16cea1}{const\_iterator}}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a11282d697c22a0ee0c0787ddd9f44ab2}{begin}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.begin();\ \}}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00266\ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a14fa3c223c045f735e5ac5295f16cea1}{const\_iterator}}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ab27a5b4f029c4f1ac515d01d627e00d5}{end}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.end();\ \}}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00272\ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a14fa3c223c045f735e5ac5295f16cea1}{const\_iterator}}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ac28ffaa5c7a7868866ced607466ad950}{cbegin}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.cbegin();\ \}}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00278\ \ \ \ \ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a14fa3c223c045f735e5ac5295f16cea1}{const\_iterator}}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a46d16e3b67d7e8c22fbca112d7a6ccf6}{cend}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.cend();\ \}}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00285\ \ \ \ \ \textcolor{keyword}{const}\ TKey\&\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_aa934de1d33d2f82cbfeb5a36d304a9a3}{key\_at}}(\textcolor{keywordtype}{size\_t}\ index)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00286\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (index\ >=\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.size())\ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Index\ out\ of\ range"{}});}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}[index].key;}
+\DoxyCodeLine{00289\ \ \ \ \ \}}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00296\ \ \ \ \ \textcolor{keyword}{const}\ TValue\&\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a78211e752daaf2472619e0351bd01a3e}{value\_at}}(\textcolor{keywordtype}{size\_t}\ index)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00297\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (index\ >=\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}.size())\ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Index\ out\ of\ range"{}});}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\_}}[index].value;}
+\DoxyCodeLine{00300\ \ \ \ \ \}}
+\DoxyCodeLine{00301\ \};}
+\DoxyCodeLine{00302\ \}\ \ \textcolor{comment}{//\ namespace\ neo::json}}
+
+\end{DoxyCode}

@@ -1,0 +1,40 @@
+\doxysection{include/neo/consensus/consensus\+\_\+state.h File Reference}
+\hypertarget{consensus__state_8h}{}\label{consensus__state_8h}\index{include/neo/consensus/consensus\_state.h@{include/neo/consensus/consensus\_state.h}}
+{\ttfamily \#include $<$neo/io/uint256.\+h$>$}\newline
+{\ttfamily \#include $<$neo/network/p2p/payloads/neo3\+\_\+transaction.\+h$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+set$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for consensus\+\_\+state.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state}{neo\+::consensus\+::\+Consensus\+State}}
+\begin{DoxyCompactList}\small\item\em State tracking for d\+BFT consensus. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1consensus}{neo\+::consensus}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805}{neo\+::consensus\+::\+Consensus\+Phase}} \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a4f2a91e15af2631ff9424564b8a45fb2}{neo\+::consensus\+::\+Initial}}
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a074de7e7c226d5c60f8af14c20725352}{neo\+::consensus\+::\+Primary}}
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a3500ba09d0538297440ca620c9dd46bf}{neo\+::consensus\+::\+Backup}}
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805abd6598ad25882fac85535d16e7e2f305}{neo\+::consensus\+::\+Request\+Sent}}
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805ac0061f0229809369b6525fea6a9c5dea}{neo\+::consensus\+::\+Request\+Received}}
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a51a5293d3af2049e564db11edd4efdaf}{neo\+::consensus\+::\+Signature\+Sent}}
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a1694bbbd8c3e377a63b2020183699911}{neo\+::consensus\+::\+Block\+Sent}}
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805aec27f40ee956b0fc3b2b35c9e5e7ac85}{neo\+::consensus\+::\+View\+Changing}}
+ \}
+\begin{DoxyCompactList}\small\item\em Current phase of consensus. \end{DoxyCompactList}\end{DoxyCompactItemize}

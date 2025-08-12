@@ -1,0 +1,264 @@
+\doxysection{neo\+::network\+::Inventory\+Vector Class Reference}
+\hypertarget{classneo_1_1network_1_1_inventory_vector}{}\label{classneo_1_1network_1_1_inventory_vector}\index{neo::network::InventoryVector@{neo::network::InventoryVector}}
+
+
+Represents an inventory vector used in network messages.  
+
+
+
+
+{\ttfamily \#include $<$inventory\+\_\+vector.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::Inventory\+Vector\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::Inventory\+Vector\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_ae797efa812e404e4b548e1448d215d5d}{Inventory\+Vector}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_adc08e966823821d45838a59db5c24e73}{Inventory\+Vector}} (\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{Inventory\+Type}} type, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Constructs an inventory vector with specified type and hash. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{Inventory\+Type}} \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a50535171f66f06822edd960b68981458}{Get\+Type}} () const
+\begin{DoxyCompactList}\small\item\em Gets the inventory type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_afdd933d9336a3277dcf29fe550d8cf74}{Set\+Type}} (\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{Inventory\+Type}} type)
+\begin{DoxyCompactList}\small\item\em Sets the inventory type. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_ae1138a4d7973196d8174973787bf8f5b}{Get\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the inventory hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a4b465c78a15be13331b186c40160e3b2}{Set\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Sets the inventory hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a533a74ef1151bdc0706f0169f02e0e50}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the inventory vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a5e2620ac1bbe1e9ff9e856f852a6f722}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the inventory vector. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a562392c376ede9c0bb1b6f4488d84256}{operator==}} (const \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector}{Inventory\+Vector}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks equality. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_aee2c8f66e3105cb393e86f9c8cef4fe4}{operator!=}} (const \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector}{Inventory\+Vector}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks inequality. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{Inventory\+Type}} \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_a87cbdb5ea7020e5b6b357157fde38b5e}{type\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector_aa71cdeb0ce915298bbda0ae6ef67c4c3}{hash\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an inventory vector used in network messages. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1_inventory_vector_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1_inventory_vector_ae797efa812e404e4b548e1448d215d5d}\index{neo::network::InventoryVector@{neo::network::InventoryVector}!InventoryVector@{InventoryVector}}
+\index{InventoryVector@{InventoryVector}!neo::network::InventoryVector@{neo::network::InventoryVector}}
+\doxysubsubsection{\texorpdfstring{InventoryVector()}{InventoryVector()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_inventory_vector_ae797efa812e404e4b548e1448d215d5d} 
+neo\+::network\+::\+Inventory\+Vector\+::\+Inventory\+Vector (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor. 
+
+\Hypertarget{classneo_1_1network_1_1_inventory_vector_adc08e966823821d45838a59db5c24e73}\index{neo::network::InventoryVector@{neo::network::InventoryVector}!InventoryVector@{InventoryVector}}
+\index{InventoryVector@{InventoryVector}!neo::network::InventoryVector@{neo::network::InventoryVector}}
+\doxysubsubsection{\texorpdfstring{InventoryVector()}{InventoryVector()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_inventory_vector_adc08e966823821d45838a59db5c24e73} 
+neo\+::network\+::\+Inventory\+Vector\+::\+Inventory\+Vector (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{Inventory\+Type}}}]{type}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an inventory vector with specified type and hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The inventory type. \\
+\hline
+{\em hash} & The inventory hash. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1_inventory_vector_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1_inventory_vector_a5e2620ac1bbe1e9ff9e856f852a6f722}\index{neo::network::InventoryVector@{neo::network::InventoryVector}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::InventoryVector@{neo::network::InventoryVector}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_inventory_vector_a5e2620ac1bbe1e9ff9e856f852a6f722} 
+void neo\+::network\+::\+Inventory\+Vector\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the inventory vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1_inventory_vector_ae1138a4d7973196d8174973787bf8f5b}\index{neo::network::InventoryVector@{neo::network::InventoryVector}!GetHash@{GetHash}}
+\index{GetHash@{GetHash}!neo::network::InventoryVector@{neo::network::InventoryVector}}
+\doxysubsubsection{\texorpdfstring{GetHash()}{GetHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_inventory_vector_ae1138a4d7973196d8174973787bf8f5b} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& neo\+::network\+::\+Inventory\+Vector\+::\+Get\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the inventory hash. 
+
+\begin{DoxyReturn}{Returns}
+The inventory hash. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_inventory_vector_a50535171f66f06822edd960b68981458}\index{neo::network::InventoryVector@{neo::network::InventoryVector}!GetType@{GetType}}
+\index{GetType@{GetType}!neo::network::InventoryVector@{neo::network::InventoryVector}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_inventory_vector_a50535171f66f06822edd960b68981458} 
+\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{Inventory\+Type}} neo\+::network\+::\+Inventory\+Vector\+::\+Get\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the inventory type. 
+
+\begin{DoxyReturn}{Returns}
+The inventory type. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_inventory_vector_aee2c8f66e3105cb393e86f9c8cef4fe4}\index{neo::network::InventoryVector@{neo::network::InventoryVector}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::network::InventoryVector@{neo::network::InventoryVector}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_inventory_vector_aee2c8f66e3105cb393e86f9c8cef4fe4} 
+bool neo\+::network\+::\+Inventory\+Vector\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector}{Inventory\+Vector}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks inequality. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other inventory vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if not equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1_inventory_vector_a562392c376ede9c0bb1b6f4488d84256}\index{neo::network::InventoryVector@{neo::network::InventoryVector}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::network::InventoryVector@{neo::network::InventoryVector}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_inventory_vector_a562392c376ede9c0bb1b6f4488d84256} 
+bool neo\+::network\+::\+Inventory\+Vector\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1_inventory_vector}{Inventory\+Vector}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks equality. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other inventory vector. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1_inventory_vector_a533a74ef1151bdc0706f0169f02e0e50}\index{neo::network::InventoryVector@{neo::network::InventoryVector}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::InventoryVector@{neo::network::InventoryVector}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_inventory_vector_a533a74ef1151bdc0706f0169f02e0e50} 
+void neo\+::network\+::\+Inventory\+Vector\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the inventory vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1_inventory_vector_a4b465c78a15be13331b186c40160e3b2}\index{neo::network::InventoryVector@{neo::network::InventoryVector}!SetHash@{SetHash}}
+\index{SetHash@{SetHash}!neo::network::InventoryVector@{neo::network::InventoryVector}}
+\doxysubsubsection{\texorpdfstring{SetHash()}{SetHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_inventory_vector_a4b465c78a15be13331b186c40160e3b2} 
+void neo\+::network\+::\+Inventory\+Vector\+::\+Set\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the inventory hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The inventory hash. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_inventory_vector_afdd933d9336a3277dcf29fe550d8cf74}\index{neo::network::InventoryVector@{neo::network::InventoryVector}!SetType@{SetType}}
+\index{SetType@{SetType}!neo::network::InventoryVector@{neo::network::InventoryVector}}
+\doxysubsubsection{\texorpdfstring{SetType()}{SetType()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_inventory_vector_afdd933d9336a3277dcf29fe550d8cf74} 
+void neo\+::network\+::\+Inventory\+Vector\+::\+Set\+Type (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{Inventory\+Type}}}]{type}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the inventory type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The inventory type. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1_inventory_vector_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1_inventory_vector_aa71cdeb0ce915298bbda0ae6ef67c4c3}\index{neo::network::InventoryVector@{neo::network::InventoryVector}!hash\_@{hash\_}}
+\index{hash\_@{hash\_}!neo::network::InventoryVector@{neo::network::InventoryVector}}
+\doxysubsubsection{\texorpdfstring{hash\_}{hash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_inventory_vector_aa71cdeb0ce915298bbda0ae6ef67c4c3} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::network\+::\+Inventory\+Vector\+::hash\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_inventory_vector_a87cbdb5ea7020e5b6b357157fde38b5e}\index{neo::network::InventoryVector@{neo::network::InventoryVector}!type\_@{type\_}}
+\index{type\_@{type\_}!neo::network::InventoryVector@{neo::network::InventoryVector}}
+\doxysubsubsection{\texorpdfstring{type\_}{type\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_inventory_vector_a87cbdb5ea7020e5b6b357157fde38b5e} 
+\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{Inventory\+Type}} neo\+::network\+::\+Inventory\+Vector\+::type\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/\mbox{\hyperlink{inventory__vector_8h}{inventory\+\_\+vector.\+h}}\end{DoxyCompactItemize}

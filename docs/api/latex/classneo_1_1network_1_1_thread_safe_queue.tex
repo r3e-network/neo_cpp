@@ -1,0 +1,153 @@
+\doxysection{neo\+::network\+::Thread\+Safe\+Queue\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classneo_1_1network_1_1_thread_safe_queue}{}\label{classneo_1_1network_1_1_thread_safe_queue}\index{neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}}
+
+
+Thread-\/safe queue for messages.  
+
+
+
+
+{\ttfamily \#include $<$thread\+\_\+safe\+\_\+queue.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_ae258fcc38e6f727cf94e5b0dc190737d}{Push}} (T item)
+\begin{DoxyCompactList}\small\item\em Pushes an item to the queue. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_ae3504a296c76dbac76322bda65ae6a30}{Try\+Pop}} (T \&item)
+\begin{DoxyCompactList}\small\item\em Pops an item from the queue. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a81a26784bb6cd22962ec55fef0790aa7}{Wait\+And\+Pop}} (T \&item)
+\begin{DoxyCompactList}\small\item\em Pops an item from the queue, waiting if necessary. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a0659bd58de68ea46e385df2f8cff9621}{Empty}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the queue is empty. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a2ee565c3477c92abe817d0bd4fb8cef2}{Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the size of the queue. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a907347c78466c4dc05745eda240deb4d}{mutex\+\_\+}}
+\item 
+std\+::queue$<$ T $>$ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_adbfa75a7d45513eb44bf460471f16236}{queue\+\_\+}}
+\item 
+std\+::condition\+\_\+variable \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a470c21d29fdff1bb41946692b31d2020}{condition\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class neo\+::network\+::\+Thread\+Safe\+Queue$<$ T $>$}
+Thread-\/safe queue for messages. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1_thread_safe_queue_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1_thread_safe_queue_a0659bd58de68ea46e385df2f8cff9621}\index{neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}!Empty@{Empty}}
+\index{Empty@{Empty}!neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Empty()}{Empty()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_thread_safe_queue_a0659bd58de68ea46e385df2f8cff9621} 
+template$<$typename T$>$ \\
+bool \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue}{neo\+::network\+::\+Thread\+Safe\+Queue}}$<$ T $>$\+::\+Empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if the queue is empty. 
+
+\begin{DoxyReturn}{Returns}
+True if the queue is empty, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_thread_safe_queue_ae258fcc38e6f727cf94e5b0dc190737d}\index{neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}!Push@{Push}}
+\index{Push@{Push}!neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Push()}{Push()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_thread_safe_queue_ae258fcc38e6f727cf94e5b0dc190737d} 
+template$<$typename T$>$ \\
+void \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue}{neo\+::network\+::\+Thread\+Safe\+Queue}}$<$ T $>$\+::\+Push (\begin{DoxyParamCaption}\item[{T}]{item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pushes an item to the queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item to push. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_thread_safe_queue_a2ee565c3477c92abe817d0bd4fb8cef2}\index{neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}!Size@{Size}}
+\index{Size@{Size}!neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_thread_safe_queue_a2ee565c3477c92abe817d0bd4fb8cef2} 
+template$<$typename T$>$ \\
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue}{neo\+::network\+::\+Thread\+Safe\+Queue}}$<$ T $>$\+::\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the size of the queue. 
+
+\begin{DoxyReturn}{Returns}
+The size of the queue. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_thread_safe_queue_ae3504a296c76dbac76322bda65ae6a30}\index{neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}!TryPop@{TryPop}}
+\index{TryPop@{TryPop}!neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{TryPop()}{TryPop()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_thread_safe_queue_ae3504a296c76dbac76322bda65ae6a30} 
+template$<$typename T$>$ \\
+bool \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue}{neo\+::network\+::\+Thread\+Safe\+Queue}}$<$ T $>$\+::\+Try\+Pop (\begin{DoxyParamCaption}\item[{T \&}]{item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pops an item from the queue. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item that was popped. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if an item was popped, false if the queue was empty. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_thread_safe_queue_a81a26784bb6cd22962ec55fef0790aa7}\index{neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}!WaitAndPop@{WaitAndPop}}
+\index{WaitAndPop@{WaitAndPop}!neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{WaitAndPop()}{WaitAndPop()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_thread_safe_queue_a81a26784bb6cd22962ec55fef0790aa7} 
+template$<$typename T$>$ \\
+void \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue}{neo\+::network\+::\+Thread\+Safe\+Queue}}$<$ T $>$\+::\+Wait\+And\+Pop (\begin{DoxyParamCaption}\item[{T \&}]{item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Pops an item from the queue, waiting if necessary. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item that was popped. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1_thread_safe_queue_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1_thread_safe_queue_a470c21d29fdff1bb41946692b31d2020}\index{neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}!condition\_@{condition\_}}
+\index{condition\_@{condition\_}!neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{condition\_}{condition\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_thread_safe_queue_a470c21d29fdff1bb41946692b31d2020} 
+template$<$typename T$>$ \\
+std\+::condition\+\_\+variable \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue}{neo\+::network\+::\+Thread\+Safe\+Queue}}$<$ T $>$\+::condition\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_thread_safe_queue_a907347c78466c4dc05745eda240deb4d}\index{neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_thread_safe_queue_a907347c78466c4dc05745eda240deb4d} 
+template$<$typename T$>$ \\
+std\+::mutex \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue}{neo\+::network\+::\+Thread\+Safe\+Queue}}$<$ T $>$\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_thread_safe_queue_adbfa75a7d45513eb44bf460471f16236}\index{neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}!queue\_@{queue\_}}
+\index{queue\_@{queue\_}!neo::network::ThreadSafeQueue$<$ T $>$@{neo::network::ThreadSafeQueue$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{queue\_}{queue\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_thread_safe_queue_adbfa75a7d45513eb44bf460471f16236} 
+template$<$typename T$>$ \\
+std\+::queue$<$T$>$ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue}{neo\+::network\+::\+Thread\+Safe\+Queue}}$<$ T $>$\+::queue\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/\mbox{\hyperlink{thread__safe__queue_8h}{thread\+\_\+safe\+\_\+queue.\+h}}\end{DoxyCompactItemize}

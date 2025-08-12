@@ -1,0 +1,328 @@
+\doxysection{neo\+::rpc\+::Rpc\+Response Class Reference}
+\hypertarget{classneo_1_1rpc_1_1_rpc_response}{}\label{classneo_1_1rpc_1_1_rpc_response}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+
+
+Represents an RPC response.  
+
+
+
+
+{\ttfamily \#include $<$rpc\+\_\+response.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a90b6d4291742f116616fe6185b74bd16}{Rpc\+Response}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a5f10be2ea667a931015c94fa8c7079f4}{Rpc\+Response}} (const std\+::string \&jsonrpc, const nlohmann\+::json \&result, const nlohmann\+::json \&error, const nlohmann\+::json \&id)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response} with the specified values. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_acdfb3664d7e9320b142ec781afa3e2a2}{Get\+Json\+Rpc}} () const
+\begin{DoxyCompactList}\small\item\em Gets the JSON-\/\+RPC version. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a05517eb8dfe11a0618d342822d698a4d}{Set\+Json\+Rpc}} (const std\+::string \&jsonrpc)
+\begin{DoxyCompactList}\small\item\em Sets the JSON-\/\+RPC version. \end{DoxyCompactList}\item 
+const nlohmann\+::json \& \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a7f3cb149524f5b52ae0b482f462af4cb}{Get\+Result}} () const
+\begin{DoxyCompactList}\small\item\em Gets the result. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a4e90a99621fada2ed297dee7469e27a0}{Set\+Result}} (const nlohmann\+::json \&result)
+\begin{DoxyCompactList}\small\item\em Sets the result. \end{DoxyCompactList}\item 
+const nlohmann\+::json \& \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_ac62c75ddb39c316247855c31fc1b5bff}{Get\+Error}} () const
+\begin{DoxyCompactList}\small\item\em Gets the error. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_ace0186c29759ce119183968a1a2d1bce}{Set\+Error}} (const nlohmann\+::json \&error)
+\begin{DoxyCompactList}\small\item\em Sets the error. \end{DoxyCompactList}\item 
+const nlohmann\+::json \& \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_ad7b7beb4caef79ae6bd92d4c8a7cf52b}{Get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Gets the request ID. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a521250b53045acbb157b80d7ea51e4ad}{Set\+Id}} (const nlohmann\+::json \&id)
+\begin{DoxyCompactList}\small\item\em Sets the request ID. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a9cde29bab466da33a53db184dd5a12be}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Converts the response to JSON. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response}} \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_ab8c32bb97a37d9d7aa47693b2251220d}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{namespaceneo_1_1rpc_a32244ac70068079f000691d1ba129402}{json}})
+\begin{DoxyCompactList}\small\item\em Parses a response from JSON. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response}} \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a56c9ece516ce862fb010ba286f037c98}{Create\+Success\+Response}} (const nlohmann\+::json \&id, const nlohmann\+::json \&result)
+\begin{DoxyCompactList}\small\item\em Creates a success response. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response}} \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a915fc50791d3d6f58b4b252153185b65}{Create\+Error\+Response}} (const nlohmann\+::json \&id, int code, const std\+::string \&message, const nlohmann\+::json \&data=nullptr)
+\begin{DoxyCompactList}\small\item\em Creates an error response. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a32c2761c1ed9a6dcb955bde947446b10}{jsonrpc\+\_\+}}
+\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_aae33e880ad20bca664ef0cdc25fff817}{result\+\_\+}}
+\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_acfc21946b867e678c8dd1840a06dfd06}{error\+\_\+}}
+\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response_a00a2dc603c11ac86adeee5601a5b68eb}{id\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an RPC response. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_a90b6d4291742f116616fe6185b74bd16}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!RpcResponse@{RpcResponse}}
+\index{RpcResponse@{RpcResponse}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{RpcResponse()}{RpcResponse()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_a90b6d4291742f116616fe6185b74bd16} 
+neo\+::rpc\+::\+Rpc\+Response\+::\+Rpc\+Response (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an \doxylink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response}. 
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_a5f10be2ea667a931015c94fa8c7079f4}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!RpcResponse@{RpcResponse}}
+\index{RpcResponse@{RpcResponse}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{RpcResponse()}{RpcResponse()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_a5f10be2ea667a931015c94fa8c7079f4} 
+neo\+::rpc\+::\+Rpc\+Response\+::\+Rpc\+Response (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{jsonrpc}{, }\item[{const nlohmann\+::json \&}]{result}{, }\item[{const nlohmann\+::json \&}]{error}{, }\item[{const nlohmann\+::json \&}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an \doxylink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response} with the specified values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em jsonrpc} & The JSON-\/\+RPC version. \\
+\hline
+{\em result} & The result. \\
+\hline
+{\em error} & The error. \\
+\hline
+{\em id} & The request ID. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_a915fc50791d3d6f58b4b252153185b65}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!CreateErrorResponse@{CreateErrorResponse}}
+\index{CreateErrorResponse@{CreateErrorResponse}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{CreateErrorResponse()}{CreateErrorResponse()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_a915fc50791d3d6f58b4b252153185b65} 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response}} neo\+::rpc\+::\+Rpc\+Response\+::\+Create\+Error\+Response (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{id}{, }\item[{int}]{code}{, }\item[{const std\+::string \&}]{message}{, }\item[{const nlohmann\+::json \&}]{data}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates an error response. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The request ID. \\
+\hline
+{\em code} & The error code. \\
+\hline
+{\em message} & The error message. \\
+\hline
+{\em data} & The error data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The error response. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_a56c9ece516ce862fb010ba286f037c98}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!CreateSuccessResponse@{CreateSuccessResponse}}
+\index{CreateSuccessResponse@{CreateSuccessResponse}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{CreateSuccessResponse()}{CreateSuccessResponse()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_a56c9ece516ce862fb010ba286f037c98} 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response}} neo\+::rpc\+::\+Rpc\+Response\+::\+Create\+Success\+Response (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{id}{, }\item[{const nlohmann\+::json \&}]{result}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a success response. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The request ID. \\
+\hline
+{\em result} & The result. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The success response. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_ab8c32bb97a37d9d7aa47693b2251220d}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!FromJson@{FromJson}}
+\index{FromJson@{FromJson}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{FromJson()}{FromJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_ab8c32bb97a37d9d7aa47693b2251220d} 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response}{Rpc\+Response}} neo\+::rpc\+::\+Rpc\+Response\+::\+From\+Json (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Parses a response from JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & The JSON to parse. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The parsed response. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_ac62c75ddb39c316247855c31fc1b5bff}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!GetError@{GetError}}
+\index{GetError@{GetError}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{GetError()}{GetError()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_ac62c75ddb39c316247855c31fc1b5bff} 
+const nlohmann\+::json \& neo\+::rpc\+::\+Rpc\+Response\+::\+Get\+Error (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the error. 
+
+\begin{DoxyReturn}{Returns}
+The error. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_ad7b7beb4caef79ae6bd92d4c8a7cf52b}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!GetId@{GetId}}
+\index{GetId@{GetId}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{GetId()}{GetId()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_ad7b7beb4caef79ae6bd92d4c8a7cf52b} 
+const nlohmann\+::json \& neo\+::rpc\+::\+Rpc\+Response\+::\+Get\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the request ID. 
+
+\begin{DoxyReturn}{Returns}
+The request ID. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_acdfb3664d7e9320b142ec781afa3e2a2}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!GetJsonRpc@{GetJsonRpc}}
+\index{GetJsonRpc@{GetJsonRpc}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{GetJsonRpc()}{GetJsonRpc()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_acdfb3664d7e9320b142ec781afa3e2a2} 
+const std\+::string \& neo\+::rpc\+::\+Rpc\+Response\+::\+Get\+Json\+Rpc (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the JSON-\/\+RPC version. 
+
+\begin{DoxyReturn}{Returns}
+The JSON-\/\+RPC version. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_a7f3cb149524f5b52ae0b482f462af4cb}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!GetResult@{GetResult}}
+\index{GetResult@{GetResult}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{GetResult()}{GetResult()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_a7f3cb149524f5b52ae0b482f462af4cb} 
+const nlohmann\+::json \& neo\+::rpc\+::\+Rpc\+Response\+::\+Get\+Result (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the result. 
+
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_ace0186c29759ce119183968a1a2d1bce}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!SetError@{SetError}}
+\index{SetError@{SetError}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{SetError()}{SetError()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_ace0186c29759ce119183968a1a2d1bce} 
+void neo\+::rpc\+::\+Rpc\+Response\+::\+Set\+Error (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{error}{}\end{DoxyParamCaption})}
+
+
+
+Sets the error. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em error} & The error. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_a521250b53045acbb157b80d7ea51e4ad}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!SetId@{SetId}}
+\index{SetId@{SetId}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{SetId()}{SetId()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_a521250b53045acbb157b80d7ea51e4ad} 
+void neo\+::rpc\+::\+Rpc\+Response\+::\+Set\+Id (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Sets the request ID. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The request ID. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_a05517eb8dfe11a0618d342822d698a4d}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!SetJsonRpc@{SetJsonRpc}}
+\index{SetJsonRpc@{SetJsonRpc}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{SetJsonRpc()}{SetJsonRpc()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_a05517eb8dfe11a0618d342822d698a4d} 
+void neo\+::rpc\+::\+Rpc\+Response\+::\+Set\+Json\+Rpc (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{jsonrpc}{}\end{DoxyParamCaption})}
+
+
+
+Sets the JSON-\/\+RPC version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em jsonrpc} & The JSON-\/\+RPC version. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_a4e90a99621fada2ed297dee7469e27a0}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!SetResult@{SetResult}}
+\index{SetResult@{SetResult}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{SetResult()}{SetResult()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_a4e90a99621fada2ed297dee7469e27a0} 
+void neo\+::rpc\+::\+Rpc\+Response\+::\+Set\+Result (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{result}{}\end{DoxyParamCaption})}
+
+
+
+Sets the result. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & The result. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_a9cde29bab466da33a53db184dd5a12be}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!ToJson@{ToJson}}
+\index{ToJson@{ToJson}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{ToJson()}{ToJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_a9cde29bab466da33a53db184dd5a12be} 
+nlohmann\+::json neo\+::rpc\+::\+Rpc\+Response\+::\+To\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Converts the response to JSON. 
+
+\begin{DoxyReturn}{Returns}
+The JSON representation of the response. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_acfc21946b867e678c8dd1840a06dfd06}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!error\_@{error\_}}
+\index{error\_@{error\_}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{error\_}{error\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_acfc21946b867e678c8dd1840a06dfd06} 
+nlohmann\+::json neo\+::rpc\+::\+Rpc\+Response\+::error\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_a00a2dc603c11ac86adeee5601a5b68eb}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!id\_@{id\_}}
+\index{id\_@{id\_}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{id\_}{id\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_a00a2dc603c11ac86adeee5601a5b68eb} 
+nlohmann\+::json neo\+::rpc\+::\+Rpc\+Response\+::id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_a32c2761c1ed9a6dcb955bde947446b10}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!jsonrpc\_@{jsonrpc\_}}
+\index{jsonrpc\_@{jsonrpc\_}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{jsonrpc\_}{jsonrpc\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_a32c2761c1ed9a6dcb955bde947446b10} 
+std\+::string neo\+::rpc\+::\+Rpc\+Response\+::jsonrpc\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rpc_response_aae33e880ad20bca664ef0cdc25fff817}\index{neo::rpc::RpcResponse@{neo::rpc::RpcResponse}!result\_@{result\_}}
+\index{result\_@{result\_}!neo::rpc::RpcResponse@{neo::rpc::RpcResponse}}
+\doxysubsubsection{\texorpdfstring{result\_}{result\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rpc_response_aae33e880ad20bca664ef0cdc25fff817} 
+nlohmann\+::json neo\+::rpc\+::\+Rpc\+Response\+::result\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/rpc/\mbox{\hyperlink{rpc__response_8h}{rpc\+\_\+response.\+h}}\item 
+src/rpc/\mbox{\hyperlink{rpc__response_8cpp}{rpc\+\_\+response.\+cpp}}\end{DoxyCompactItemize}

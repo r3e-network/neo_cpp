@@ -1,0 +1,220 @@
+\doxysection{neo\+::ledger\+::Transaction\+Verification\+Context Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_transaction_verification_context}{}\label{classneo_1_1ledger_1_1_transaction_verification_context}\index{neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}}
+
+
+Context for transaction verification to track conflicts and state.  
+
+
+
+
+{\ttfamily \#include $<$transaction\+\_\+verification\+\_\+context.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a0f82ab73a4989a972d0c0d1d1113ba0e}{Transaction\+Verification\+Context}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a828f745dc93cffec0c1dd1116117f62a}{\texorpdfstring{$\sim$}{\string~}\+Transaction\+Verification\+Context}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a36a5322a3bea4c92c686982ffa6a6a55}{Check\+Transaction}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ transaction)
+\begin{DoxyCompactList}\small\item\em Checks if a transaction can be added without conflicts. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a99478e00e32a74e21f90a37d9549b23a}{Add\+Transaction}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ transaction)
+\begin{DoxyCompactList}\small\item\em Adds a transaction to the verification context. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a406352044b656351e1a6ff44ad4d8b43}{Is\+Conflicted}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ transaction) const
+\begin{DoxyCompactList}\small\item\em Checks if there are any conflicts for the given transaction. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a7efda288aae3b7658b30fc78e65968f6}{Reset}} ()
+\begin{DoxyCompactList}\small\item\em Resets the verification context. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_aa3828e2a37265a7224b7d8856fb64eae}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears all tracked state. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_aa971518b515484911f7be21f21d58336}{Get\+Transaction\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of transactions in the context. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a2d651dda99651b26dff6eec4b28954a4}{Has\+Output\+Conflict}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ transaction) const
+\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a778531bd55d2b891bbe02d5156651f0f}{Has\+Account\+Conflict}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ transaction) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}}, \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_aa78fc9654efa35773de37a69f9606d77}{account\+\_\+conflicts\+\_\+}}
+\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_ae3342a3aff1070faa6f4482b6d7e892c}{transaction\+\_\+hashes\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Context for transaction verification to track conflicts and state. 
+
+\hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_autotoc_md45}{}\doxysubsubsection{\texorpdfstring{Overview}{Overview}}\label{classneo_1_1ledger_1_1_transaction_verification_context_autotoc_md45}
+The \doxylink{classneo_1_1ledger_1_1_transaction_verification_context}{Transaction\+Verification\+Context} tracks transaction verification state to detect conflicts and ensure proper validation during block processing and mempool operations.\hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_autotoc_md46}{}\doxysubsubsection{\texorpdfstring{API Reference}{API Reference}}\label{classneo_1_1ledger_1_1_transaction_verification_context_autotoc_md46}
+
+\begin{DoxyItemize}
+\item {\bfseries{Conflict Detection}}\+: \doxylink{classneo_1_1ledger_1_1_transaction_verification_context_a36a5322a3bea4c92c686982ffa6a6a55}{Check\+Transaction()}, \doxylink{classneo_1_1ledger_1_1_transaction_verification_context_a99478e00e32a74e21f90a37d9549b23a}{Add\+Transaction()}
+\item {\bfseries{State Management}}\+: \doxylink{classneo_1_1ledger_1_1_transaction_verification_context_a7efda288aae3b7658b30fc78e65968f6}{Reset()}, \doxylink{classneo_1_1ledger_1_1_transaction_verification_context_aa3828e2a37265a7224b7d8856fb64eae}{Clear()}
+\item {\bfseries{Validation}}\+: \doxylink{classneo_1_1ledger_1_1_transaction_verification_context_a406352044b656351e1a6ff44ad4d8b43}{Is\+Conflicted()}
+\end{DoxyItemize}\hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_autotoc_md47}{}\doxysubsubsection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{classneo_1_1ledger_1_1_transaction_verification_context_autotoc_md47}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context_a0f82ab73a4989a972d0c0d1d1113ba0e}{TransactionVerificationContext}}\ context;}
+\DoxyCodeLine{\textcolor{keywordflow}{if}\ (context.CheckTransaction(tx))\ \{}
+\DoxyCodeLine{\ \ \ \ context.AddTransaction(tx);}
+\DoxyCodeLine{\}}
+
+\end{DoxyCode}
+ 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_a0f82ab73a4989a972d0c0d1d1113ba0e}\index{neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}!TransactionVerificationContext@{TransactionVerificationContext}}
+\index{TransactionVerificationContext@{TransactionVerificationContext}!neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}}
+\doxysubsubsection{\texorpdfstring{TransactionVerificationContext()}{TransactionVerificationContext()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_verification_context_a0f82ab73a4989a972d0c0d1d1113ba0e} 
+neo\+::ledger\+::\+Transaction\+Verification\+Context\+::\+Transaction\+Verification\+Context (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor. 
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_a828f745dc93cffec0c1dd1116117f62a}\index{neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}!````~TransactionVerificationContext@{\texorpdfstring{$\sim$}{\string~}TransactionVerificationContext}}
+\index{````~TransactionVerificationContext@{\texorpdfstring{$\sim$}{\string~}TransactionVerificationContext}!neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TransactionVerificationContext()}{\string~TransactionVerificationContext()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_verification_context_a828f745dc93cffec0c1dd1116117f62a} 
+neo\+::ledger\+::\+Transaction\+Verification\+Context\+::\texorpdfstring{$\sim$}{\string~}\+Transaction\+Verification\+Context (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_a99478e00e32a74e21f90a37d9549b23a}\index{neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}!AddTransaction@{AddTransaction}}
+\index{AddTransaction@{AddTransaction}!neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}}
+\doxysubsubsection{\texorpdfstring{AddTransaction()}{AddTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_verification_context_a99478e00e32a74e21f90a37d9549b23a} 
+void neo\+::ledger\+::\+Transaction\+Verification\+Context\+::\+Add\+Transaction (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$}]{transaction}{}\end{DoxyParamCaption})}
+
+
+
+Adds a transaction to the verification context. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to add \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_a36a5322a3bea4c92c686982ffa6a6a55}\index{neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}!CheckTransaction@{CheckTransaction}}
+\index{CheckTransaction@{CheckTransaction}!neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}}
+\doxysubsubsection{\texorpdfstring{CheckTransaction()}{CheckTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_verification_context_a36a5322a3bea4c92c686982ffa6a6a55} 
+bool neo\+::ledger\+::\+Transaction\+Verification\+Context\+::\+Check\+Transaction (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$}]{transaction}{}\end{DoxyParamCaption})}
+
+
+
+Checks if a transaction can be added without conflicts. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the transaction can be added, false if there are conflicts 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_aa3828e2a37265a7224b7d8856fb64eae}\index{neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_verification_context_aa3828e2a37265a7224b7d8856fb64eae} 
+void neo\+::ledger\+::\+Transaction\+Verification\+Context\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clears all tracked state. 
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_aa971518b515484911f7be21f21d58336}\index{neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}!GetTransactionCount@{GetTransactionCount}}
+\index{GetTransactionCount@{GetTransactionCount}!neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}}
+\doxysubsubsection{\texorpdfstring{GetTransactionCount()}{GetTransactionCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_verification_context_aa971518b515484911f7be21f21d58336} 
+size\+\_\+t neo\+::ledger\+::\+Transaction\+Verification\+Context\+::\+Get\+Transaction\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of transactions in the context. 
+
+\begin{DoxyReturn}{Returns}
+Number of transactions 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_a778531bd55d2b891bbe02d5156651f0f}\index{neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}!HasAccountConflict@{HasAccountConflict}}
+\index{HasAccountConflict@{HasAccountConflict}!neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}}
+\doxysubsubsection{\texorpdfstring{HasAccountConflict()}{HasAccountConflict()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_verification_context_a778531bd55d2b891bbe02d5156651f0f} 
+bool neo\+::ledger\+::\+Transaction\+Verification\+Context\+::\+Has\+Account\+Conflict (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$}]{transaction}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_a2d651dda99651b26dff6eec4b28954a4}\index{neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}!HasOutputConflict@{HasOutputConflict}}
+\index{HasOutputConflict@{HasOutputConflict}!neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}}
+\doxysubsubsection{\texorpdfstring{HasOutputConflict()}{HasOutputConflict()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_verification_context_a2d651dda99651b26dff6eec4b28954a4} 
+bool neo\+::ledger\+::\+Transaction\+Verification\+Context\+::\+Has\+Output\+Conflict (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$}]{transaction}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_a406352044b656351e1a6ff44ad4d8b43}\index{neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}!IsConflicted@{IsConflicted}}
+\index{IsConflicted@{IsConflicted}!neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}}
+\doxysubsubsection{\texorpdfstring{IsConflicted()}{IsConflicted()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_verification_context_a406352044b656351e1a6ff44ad4d8b43} 
+bool neo\+::ledger\+::\+Transaction\+Verification\+Context\+::\+Is\+Conflicted (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$}]{transaction}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if there are any conflicts for the given transaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if there are conflicts, false otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_a7efda288aae3b7658b30fc78e65968f6}\index{neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}!Reset@{Reset}}
+\index{Reset@{Reset}!neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}}
+\doxysubsubsection{\texorpdfstring{Reset()}{Reset()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_verification_context_a7efda288aae3b7658b30fc78e65968f6} 
+void neo\+::ledger\+::\+Transaction\+Verification\+Context\+::\+Reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Resets the verification context. 
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_aa78fc9654efa35773de37a69f9606d77}\index{neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}!account\_conflicts\_@{account\_conflicts\_}}
+\index{account\_conflicts\_@{account\_conflicts\_}!neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}}
+\doxysubsubsection{\texorpdfstring{account\_conflicts\_}{account\_conflicts\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_verification_context_aa78fc9654efa35773de37a69f9606d77} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}}, \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}$>$ neo\+::ledger\+::\+Transaction\+Verification\+Context\+::account\+\_\+conflicts\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_verification_context_ae3342a3aff1070faa6f4482b6d7e892c}\index{neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}!transaction\_hashes\_@{transaction\_hashes\_}}
+\index{transaction\_hashes\_@{transaction\_hashes\_}!neo::ledger::TransactionVerificationContext@{neo::ledger::TransactionVerificationContext}}
+\doxysubsubsection{\texorpdfstring{transaction\_hashes\_}{transaction\_hashes\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_verification_context_ae3342a3aff1070faa6f4482b6d7e892c} 
+std\+::unordered\+\_\+set$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}$>$ neo\+::ledger\+::\+Transaction\+Verification\+Context\+::transaction\+\_\+hashes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{transaction__verification__context_8h}{transaction\+\_\+verification\+\_\+context.\+h}}\item 
+src/ledger/\mbox{\hyperlink{transaction__verification__context_8cpp}{transaction\+\_\+verification\+\_\+context.\+cpp}}\end{DoxyCompactItemize}

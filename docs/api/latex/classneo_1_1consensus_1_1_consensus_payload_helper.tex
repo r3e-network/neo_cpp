@@ -1,0 +1,141 @@
+\doxysection{neo\+::consensus\+::Consensus\+Payload\+Helper Class Reference}
+\hypertarget{classneo_1_1consensus_1_1_consensus_payload_helper}{}\label{classneo_1_1consensus_1_1_consensus_payload_helper}\index{neo::consensus::ConsensusPayloadHelper@{neo::consensus::ConsensusPayloadHelper}}
+
+
+Helper class for working with consensus messages in Extensible\+Payload.  
+
+
+
+
+{\ttfamily \#include $<$consensus\+\_\+payload\+\_\+helper.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload}{network\+::p2p\+::payloads\+::\+Extensible\+Payload}} $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_payload_helper_a35a74e896ce8907b1a988a43a1ab1e23}{Create\+Payload}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message}{Consensus\+Message}} $>$ message, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&sender, uint32\+\_\+t valid\+Block\+Start, uint32\+\_\+t valid\+Block\+End)
+\begin{DoxyCompactList}\small\item\em Creates an Extensible\+Payload containing a consensus message. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message}{Consensus\+Message}} $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_payload_helper_ac81c3629af8cc928742d1e0b3ca011e0}{Get\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload}{network\+::p2p\+::payloads\+::\+Extensible\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Extracts a consensus message from an Extensible\+Payload. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_payload_helper_a071eff99aa005b7c951250e357c2d534}{Is\+Consensus\+Payload}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload}{network\+::p2p\+::payloads\+::\+Extensible\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Checks if an Extensible\+Payload contains a consensus message. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_payload_helper_a41c6f0955f21daa80ad5abae730f5532}{Sign\+Payload}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload}{network\+::p2p\+::payloads\+::\+Extensible\+Payload}} \&payload, const \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness}{cryptography\+::\+Witness}} \&witness)
+\begin{DoxyCompactList}\small\item\em Signs an Extensible\+Payload containing a consensus message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_payload_helper_a450696d4c5f03855f0f16551bf227575}{CONSENSUS\+\_\+\+CATEGORY}} = "{}d\+BFT"{}
+\begin{DoxyCompactList}\small\item\em The category name for consensus messages. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Helper class for working with consensus messages in Extensible\+Payload. 
+
+In Neo N3, consensus messages are wrapped in Extensible\+Payload with category "{}d\+BFT"{} for transmission over the network. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_payload_helper_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_payload_helper_a35a74e896ce8907b1a988a43a1ab1e23}\index{neo::consensus::ConsensusPayloadHelper@{neo::consensus::ConsensusPayloadHelper}!CreatePayload@{CreatePayload}}
+\index{CreatePayload@{CreatePayload}!neo::consensus::ConsensusPayloadHelper@{neo::consensus::ConsensusPayloadHelper}}
+\doxysubsubsection{\texorpdfstring{CreatePayload()}{CreatePayload()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_payload_helper_a35a74e896ce8907b1a988a43a1ab1e23} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload}{network\+::p2p\+::payloads\+::\+Extensible\+Payload}} $>$ neo\+::consensus\+::\+Consensus\+Payload\+Helper\+::\+Create\+Payload (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message}{Consensus\+Message}} $>$}]{message}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{sender}{, }\item[{uint32\+\_\+t}]{valid\+Block\+Start}{, }\item[{uint32\+\_\+t}]{valid\+Block\+End}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates an Extensible\+Payload containing a consensus message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The consensus message to wrap. \\
+\hline
+{\em sender} & The sender\textquotesingle{}s script hash. \\
+\hline
+{\em valid\+Block\+Start} & The starting block for validity. \\
+\hline
+{\em valid\+Block\+End} & The ending block for validity. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created Extensible\+Payload. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_payload_helper_ac81c3629af8cc928742d1e0b3ca011e0}\index{neo::consensus::ConsensusPayloadHelper@{neo::consensus::ConsensusPayloadHelper}!GetMessage@{GetMessage}}
+\index{GetMessage@{GetMessage}!neo::consensus::ConsensusPayloadHelper@{neo::consensus::ConsensusPayloadHelper}}
+\doxysubsubsection{\texorpdfstring{GetMessage()}{GetMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_payload_helper_ac81c3629af8cc928742d1e0b3ca011e0} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message}{Consensus\+Message}} $>$ neo\+::consensus\+::\+Consensus\+Payload\+Helper\+::\+Get\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload}{network\+::p2p\+::payloads\+::\+Extensible\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Extracts a consensus message from an Extensible\+Payload. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em payload} & The Extensible\+Payload to extract from. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The extracted consensus message, or nullptr if not a consensus payload. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1consensus_1_1_consensus_payload_helper_a071eff99aa005b7c951250e357c2d534}\index{neo::consensus::ConsensusPayloadHelper@{neo::consensus::ConsensusPayloadHelper}!IsConsensusPayload@{IsConsensusPayload}}
+\index{IsConsensusPayload@{IsConsensusPayload}!neo::consensus::ConsensusPayloadHelper@{neo::consensus::ConsensusPayloadHelper}}
+\doxysubsubsection{\texorpdfstring{IsConsensusPayload()}{IsConsensusPayload()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_payload_helper_a071eff99aa005b7c951250e357c2d534} 
+bool neo\+::consensus\+::\+Consensus\+Payload\+Helper\+::\+Is\+Consensus\+Payload (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload}{network\+::p2p\+::payloads\+::\+Extensible\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Checks if an Extensible\+Payload contains a consensus message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em payload} & The Extensible\+Payload to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if it contains a consensus message, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1consensus_1_1_consensus_payload_helper_a41c6f0955f21daa80ad5abae730f5532}\index{neo::consensus::ConsensusPayloadHelper@{neo::consensus::ConsensusPayloadHelper}!SignPayload@{SignPayload}}
+\index{SignPayload@{SignPayload}!neo::consensus::ConsensusPayloadHelper@{neo::consensus::ConsensusPayloadHelper}}
+\doxysubsubsection{\texorpdfstring{SignPayload()}{SignPayload()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_payload_helper_a41c6f0955f21daa80ad5abae730f5532} 
+void neo\+::consensus\+::\+Consensus\+Payload\+Helper\+::\+Sign\+Payload (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload}{network\+::p2p\+::payloads\+::\+Extensible\+Payload}} \&}]{payload}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness}{cryptography\+::\+Witness}} \&}]{witness}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Signs an Extensible\+Payload containing a consensus message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em payload} & The payload to sign. \\
+\hline
+{\em witness} & The witness containing the signature. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_payload_helper_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_payload_helper_a450696d4c5f03855f0f16551bf227575}\index{neo::consensus::ConsensusPayloadHelper@{neo::consensus::ConsensusPayloadHelper}!CONSENSUS\_CATEGORY@{CONSENSUS\_CATEGORY}}
+\index{CONSENSUS\_CATEGORY@{CONSENSUS\_CATEGORY}!neo::consensus::ConsensusPayloadHelper@{neo::consensus::ConsensusPayloadHelper}}
+\doxysubsubsection{\texorpdfstring{CONSENSUS\_CATEGORY}{CONSENSUS\_CATEGORY}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_payload_helper_a450696d4c5f03855f0f16551bf227575} 
+const char\texorpdfstring{$\ast$}{*} neo\+::consensus\+::\+Consensus\+Payload\+Helper\+::\+CONSENSUS\+\_\+\+CATEGORY = "{}d\+BFT"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The category name for consensus messages. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/consensus/\mbox{\hyperlink{consensus__payload__helper_8h}{consensus\+\_\+payload\+\_\+helper.\+h}}\item 
+src/consensus/\mbox{\hyperlink{consensus__payload__helper_8cpp}{consensus\+\_\+payload\+\_\+helper.\+cpp}}\end{DoxyCompactItemize}

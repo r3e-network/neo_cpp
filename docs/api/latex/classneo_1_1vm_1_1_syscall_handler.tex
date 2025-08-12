@@ -1,0 +1,85 @@
+\doxysection{neo\+::vm\+::Syscall\+Handler Class Reference}
+\hypertarget{classneo_1_1vm_1_1_syscall_handler}{}\label{classneo_1_1vm_1_1_syscall_handler}\index{neo::vm::SyscallHandler@{neo::vm::SyscallHandler}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_syscall_handler_ac0e0664a86db66cafb3a3d2ec2355c84}{Syscall\+Handler}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_syscall_handler_a0928ca5c93f2cd44bde16500ab4a0e51}{Register\+Syscall}} (uint32\+\_\+t id, std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine}} \&)$>$ handler)
+\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_syscall_handler_a9ce48cc68af8ac0cf61e739916545f69}{Handle\+Syscall}} (\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine}} \&engine, uint32\+\_\+t id)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_syscall_handler_a34e88506a556c70f848ed734605c660d}{Register\+Builtin\+Syscalls}} ()
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_syscall_handler_aa79e46c0a9455bafe6d469bca04c258f}{Calculate\+Hash}} (const std\+::string \&name)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ uint32\+\_\+t, std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine}} \&)$>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_syscall_handler_a0b95c01f0de08156c3bbd7b8d1f2c7cf}{handlers\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1vm_1_1_syscall_handler_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1vm_1_1_syscall_handler_ac0e0664a86db66cafb3a3d2ec2355c84}\index{neo::vm::SyscallHandler@{neo::vm::SyscallHandler}!SyscallHandler@{SyscallHandler}}
+\index{SyscallHandler@{SyscallHandler}!neo::vm::SyscallHandler@{neo::vm::SyscallHandler}}
+\doxysubsubsection{\texorpdfstring{SyscallHandler()}{SyscallHandler()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_syscall_handler_ac0e0664a86db66cafb3a3d2ec2355c84} 
+neo\+::vm\+::\+Syscall\+Handler\+::\+Syscall\+Handler (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1vm_1_1_syscall_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1vm_1_1_syscall_handler_aa79e46c0a9455bafe6d469bca04c258f}\index{neo::vm::SyscallHandler@{neo::vm::SyscallHandler}!CalculateHash@{CalculateHash}}
+\index{CalculateHash@{CalculateHash}!neo::vm::SyscallHandler@{neo::vm::SyscallHandler}}
+\doxysubsubsection{\texorpdfstring{CalculateHash()}{CalculateHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_syscall_handler_aa79e46c0a9455bafe6d469bca04c258f} 
+uint32\+\_\+t neo\+::vm\+::\+Syscall\+Handler\+::\+Calculate\+Hash (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1vm_1_1_syscall_handler_a9ce48cc68af8ac0cf61e739916545f69}\index{neo::vm::SyscallHandler@{neo::vm::SyscallHandler}!HandleSyscall@{HandleSyscall}}
+\index{HandleSyscall@{HandleSyscall}!neo::vm::SyscallHandler@{neo::vm::SyscallHandler}}
+\doxysubsubsection{\texorpdfstring{HandleSyscall()}{HandleSyscall()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_syscall_handler_a9ce48cc68af8ac0cf61e739916545f69} 
+bool neo\+::vm\+::\+Syscall\+Handler\+::\+Handle\+Syscall (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine}} \&}]{engine}{, }\item[{uint32\+\_\+t}]{id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1vm_1_1_syscall_handler_a34e88506a556c70f848ed734605c660d}\index{neo::vm::SyscallHandler@{neo::vm::SyscallHandler}!RegisterBuiltinSyscalls@{RegisterBuiltinSyscalls}}
+\index{RegisterBuiltinSyscalls@{RegisterBuiltinSyscalls}!neo::vm::SyscallHandler@{neo::vm::SyscallHandler}}
+\doxysubsubsection{\texorpdfstring{RegisterBuiltinSyscalls()}{RegisterBuiltinSyscalls()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_syscall_handler_a34e88506a556c70f848ed734605c660d} 
+void neo\+::vm\+::\+Syscall\+Handler\+::\+Register\+Builtin\+Syscalls (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1vm_1_1_syscall_handler_a0928ca5c93f2cd44bde16500ab4a0e51}\index{neo::vm::SyscallHandler@{neo::vm::SyscallHandler}!RegisterSyscall@{RegisterSyscall}}
+\index{RegisterSyscall@{RegisterSyscall}!neo::vm::SyscallHandler@{neo::vm::SyscallHandler}}
+\doxysubsubsection{\texorpdfstring{RegisterSyscall()}{RegisterSyscall()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_syscall_handler_a0928ca5c93f2cd44bde16500ab4a0e51} 
+void neo\+::vm\+::\+Syscall\+Handler\+::\+Register\+Syscall (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{id}{, }\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine}} \&)$>$}]{handler}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1vm_1_1_syscall_handler_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1vm_1_1_syscall_handler_a0b95c01f0de08156c3bbd7b8d1f2c7cf}\index{neo::vm::SyscallHandler@{neo::vm::SyscallHandler}!handlers\_@{handlers\_}}
+\index{handlers\_@{handlers\_}!neo::vm::SyscallHandler@{neo::vm::SyscallHandler}}
+\doxysubsubsection{\texorpdfstring{handlers\_}{handlers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_syscall_handler_a0b95c01f0de08156c3bbd7b8d1f2c7cf} 
+std\+::unordered\+\_\+map$<$uint32\+\_\+t, std\+::function$<$void(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine}}\&)$>$ $>$ neo\+::vm\+::\+Syscall\+Handler\+::handlers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/vm/\mbox{\hyperlink{syscalls_8cpp}{syscalls.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,207 @@
+\doxysection{neo\+::plugins\+::Plugin\+Manager Class Reference}
+\hypertarget{classneo_1_1plugins_1_1_plugin_manager}{}\label{classneo_1_1plugins_1_1_plugin_manager}\index{neo::plugins::PluginManager@{neo::plugins::PluginManager}}
+
+
+Represents a plugin manager.  
+
+
+
+
+{\ttfamily \#include $<$plugin\+\_\+manager.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_manager_a0fe07454ab67af5b0074a60d69091bfe}{Register\+Plugin\+Factory}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory}{Plugin\+Factory}} $>$ factory)
+\begin{DoxyCompactList}\small\item\em Registers a plugin factory. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory}{Plugin\+Factory}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_manager_ab480d9384d27d46726b048a7db0304d5}{Get\+Plugin\+Factories}} () const
+\begin{DoxyCompactList}\small\item\em Gets the plugin factories. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin}{Plugin}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_manager_adb1c90fb128d437c0cbc7482b999d5da}{Get\+Plugins}} () const
+\begin{DoxyCompactList}\small\item\em Gets the plugins. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin}{Plugin}} $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_manager_af20e31ce973537918123ff4b40402c4e}{Get\+Plugin}} (const std\+::string \&name) const
+\begin{DoxyCompactList}\small\item\em Gets a plugin by name. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_manager_a96ee72febd837005894b752af5ffca81}{Load\+Plugins}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ neo\+System, const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&settings)
+\begin{DoxyCompactList}\small\item\em Loads plugins. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_manager_ad33072678e701e85edccbc3a4df2a48e}{Start\+Plugins}} ()
+\begin{DoxyCompactList}\small\item\em Starts plugins. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_manager_a8581d3a560b54c892fbc304db93e6d1c}{Stop\+Plugins}} ()
+\begin{DoxyCompactList}\small\item\em Stops plugins. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_manager}{Plugin\+Manager}} \& \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_manager_a9468130ac6764b7fc0704396af8d769c}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets the instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_manager_a8d57686b00f21378ede05578d83cf69f}{Plugin\+Manager}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory}{Plugin\+Factory}} $>$ $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_manager_a0db5340dd5984d2d1567549e6beb8462}{factories\+\_\+}}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin}{Plugin}} $>$ $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_manager_aa8563dd3279345278887ec986220c2b3}{plugins\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a plugin manager. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1plugins_1_1_plugin_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1plugins_1_1_plugin_manager_a8d57686b00f21378ede05578d83cf69f}\index{neo::plugins::PluginManager@{neo::plugins::PluginManager}!PluginManager@{PluginManager}}
+\index{PluginManager@{PluginManager}!neo::plugins::PluginManager@{neo::plugins::PluginManager}}
+\doxysubsubsection{\texorpdfstring{PluginManager()}{PluginManager()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_plugin_manager_a8d57686b00f21378ede05578d83cf69f} 
+neo\+::plugins\+::\+Plugin\+Manager\+::\+Plugin\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1plugins_1_1_plugin_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1plugins_1_1_plugin_manager_a9468130ac6764b7fc0704396af8d769c}\index{neo::plugins::PluginManager@{neo::plugins::PluginManager}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::plugins::PluginManager@{neo::plugins::PluginManager}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_plugin_manager_a9468130ac6764b7fc0704396af8d769c} 
+\mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_manager}{Plugin\+Manager}} \& neo\+::plugins\+::\+Plugin\+Manager\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the instance. 
+
+\begin{DoxyReturn}{Returns}
+The instance. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1plugins_1_1_plugin_manager_af20e31ce973537918123ff4b40402c4e}\index{neo::plugins::PluginManager@{neo::plugins::PluginManager}!GetPlugin@{GetPlugin}}
+\index{GetPlugin@{GetPlugin}!neo::plugins::PluginManager@{neo::plugins::PluginManager}}
+\doxysubsubsection{\texorpdfstring{GetPlugin()}{GetPlugin()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_plugin_manager_af20e31ce973537918123ff4b40402c4e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin}{Plugin}} $>$ neo\+::plugins\+::\+Plugin\+Manager\+::\+Get\+Plugin (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a plugin by name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The plugin, or nullptr if not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1plugins_1_1_plugin_manager_ab480d9384d27d46726b048a7db0304d5}\index{neo::plugins::PluginManager@{neo::plugins::PluginManager}!GetPluginFactories@{GetPluginFactories}}
+\index{GetPluginFactories@{GetPluginFactories}!neo::plugins::PluginManager@{neo::plugins::PluginManager}}
+\doxysubsubsection{\texorpdfstring{GetPluginFactories()}{GetPluginFactories()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_plugin_manager_ab480d9384d27d46726b048a7db0304d5} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory}{Plugin\+Factory}} $>$ $>$ \& neo\+::plugins\+::\+Plugin\+Manager\+::\+Get\+Plugin\+Factories (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the plugin factories. 
+
+\begin{DoxyReturn}{Returns}
+The plugin factories. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1plugins_1_1_plugin_manager_adb1c90fb128d437c0cbc7482b999d5da}\index{neo::plugins::PluginManager@{neo::plugins::PluginManager}!GetPlugins@{GetPlugins}}
+\index{GetPlugins@{GetPlugins}!neo::plugins::PluginManager@{neo::plugins::PluginManager}}
+\doxysubsubsection{\texorpdfstring{GetPlugins()}{GetPlugins()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_plugin_manager_adb1c90fb128d437c0cbc7482b999d5da} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin}{Plugin}} $>$ $>$ \& neo\+::plugins\+::\+Plugin\+Manager\+::\+Get\+Plugins (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the plugins. 
+
+\begin{DoxyReturn}{Returns}
+The plugins. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1plugins_1_1_plugin_manager_a96ee72febd837005894b752af5ffca81}\index{neo::plugins::PluginManager@{neo::plugins::PluginManager}!LoadPlugins@{LoadPlugins}}
+\index{LoadPlugins@{LoadPlugins}!neo::plugins::PluginManager@{neo::plugins::PluginManager}}
+\doxysubsubsection{\texorpdfstring{LoadPlugins()}{LoadPlugins()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_plugin_manager_a96ee72febd837005894b752af5ffca81} 
+bool neo\+::plugins\+::\+Plugin\+Manager\+::\+Load\+Plugins (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$}]{neo\+System}{, }\item[{const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&}]{settings}{}\end{DoxyParamCaption})}
+
+
+
+Loads plugins. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neo\+System} & The Neo system. \\
+\hline
+{\em settings} & The settings. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the plugins were loaded, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1plugins_1_1_plugin_manager_a0fe07454ab67af5b0074a60d69091bfe}\index{neo::plugins::PluginManager@{neo::plugins::PluginManager}!RegisterPluginFactory@{RegisterPluginFactory}}
+\index{RegisterPluginFactory@{RegisterPluginFactory}!neo::plugins::PluginManager@{neo::plugins::PluginManager}}
+\doxysubsubsection{\texorpdfstring{RegisterPluginFactory()}{RegisterPluginFactory()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_plugin_manager_a0fe07454ab67af5b0074a60d69091bfe} 
+void neo\+::plugins\+::\+Plugin\+Manager\+::\+Register\+Plugin\+Factory (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory}{Plugin\+Factory}} $>$}]{factory}{}\end{DoxyParamCaption})}
+
+
+
+Registers a plugin factory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em factory} & The factory. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1plugins_1_1_plugin_manager_ad33072678e701e85edccbc3a4df2a48e}\index{neo::plugins::PluginManager@{neo::plugins::PluginManager}!StartPlugins@{StartPlugins}}
+\index{StartPlugins@{StartPlugins}!neo::plugins::PluginManager@{neo::plugins::PluginManager}}
+\doxysubsubsection{\texorpdfstring{StartPlugins()}{StartPlugins()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_plugin_manager_ad33072678e701e85edccbc3a4df2a48e} 
+bool neo\+::plugins\+::\+Plugin\+Manager\+::\+Start\+Plugins (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Starts plugins. 
+
+\begin{DoxyReturn}{Returns}
+True if the plugins were started, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1plugins_1_1_plugin_manager_a8581d3a560b54c892fbc304db93e6d1c}\index{neo::plugins::PluginManager@{neo::plugins::PluginManager}!StopPlugins@{StopPlugins}}
+\index{StopPlugins@{StopPlugins}!neo::plugins::PluginManager@{neo::plugins::PluginManager}}
+\doxysubsubsection{\texorpdfstring{StopPlugins()}{StopPlugins()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_plugin_manager_a8581d3a560b54c892fbc304db93e6d1c} 
+bool neo\+::plugins\+::\+Plugin\+Manager\+::\+Stop\+Plugins (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops plugins. 
+
+\begin{DoxyReturn}{Returns}
+True if the plugins were stopped, false otherwise. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1plugins_1_1_plugin_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1plugins_1_1_plugin_manager_a0db5340dd5984d2d1567549e6beb8462}\index{neo::plugins::PluginManager@{neo::plugins::PluginManager}!factories\_@{factories\_}}
+\index{factories\_@{factories\_}!neo::plugins::PluginManager@{neo::plugins::PluginManager}}
+\doxysubsubsection{\texorpdfstring{factories\_}{factories\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_plugin_manager_a0db5340dd5984d2d1567549e6beb8462} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory}{Plugin\+Factory}}$>$ $>$ neo\+::plugins\+::\+Plugin\+Manager\+::factories\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1_plugin_manager_aa8563dd3279345278887ec986220c2b3}\index{neo::plugins::PluginManager@{neo::plugins::PluginManager}!plugins\_@{plugins\_}}
+\index{plugins\_@{plugins\_}!neo::plugins::PluginManager@{neo::plugins::PluginManager}}
+\doxysubsubsection{\texorpdfstring{plugins\_}{plugins\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_plugin_manager_aa8563dd3279345278887ec986220c2b3} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1plugins_1_1_plugin}{Plugin}}$>$ $>$ neo\+::plugins\+::\+Plugin\+Manager\+::plugins\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/plugins/\mbox{\hyperlink{plugin__manager_8h}{plugin\+\_\+manager.\+h}}\item 
+src/plugins/\mbox{\hyperlink{plugin__manager_8cpp}{plugin\+\_\+manager.\+cpp}}\end{DoxyCompactItemize}

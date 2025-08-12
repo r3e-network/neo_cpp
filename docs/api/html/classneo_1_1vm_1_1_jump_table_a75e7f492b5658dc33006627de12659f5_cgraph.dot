@@ -1,0 +1,44 @@
+digraph "neo::vm::JumpTable::LEAVE"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::vm::JumpTable\l::LEAVE",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip=" "];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::vm::JumpTableControl\lException::LEAVE",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_jump_table_control_exception.html#a6be0f3a733d990f51f06203260f7b57d",tooltip=" "];
+  Node2 -> Node3 [id="edge2_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::vm::ExecutionEngine\l::ExecuteNext",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_execution_engine.html#a87adfe2fadc6d9fd5f988c8cd96c5a42",tooltip="Executes the next instruction."];
+  Node3 -> Node4 [id="edge3_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::vm::JumpTable\l::ExecuteThrow",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_jump_table.html#a4688aefb81d2a7f658ea6e9a1a3ea808",tooltip="Executes a throw operation."];
+  Node4 -> Node5 [id="edge4_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::vm::JumpTableException\l::ExecuteThrow",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_jump_table_exception.html#a023a45ba639a8707a5add0e0dfb5a8a8",tooltip="Executes a throw operation."];
+  Node5 -> Node6 [id="edge5_Node000005_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::vm::StackItem\l::Create",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_stack_item.html#a1d67a8c02d58d56410378b997c2e7855",tooltip="Creates a primitive stack item."];
+  Node6 -> Node7 [id="edge6_Node000006_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::vm::StackItem\l::False",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_stack_item.html#a759c1a70f6481936eb089083a5fa2d4e",tooltip="Gets the false stack item."];
+  Node6 -> Node8 [id="edge7_Node000006_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="neo::vm::StackItem\l::True",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_stack_item.html#ac5c88a02b66663d80e61942bb425391c",tooltip="Gets the true stack item."];
+  Node5 -> Node5 [id="edge8_Node000005_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 -> Node9 [id="edge9_Node000005_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="neo::vm::ExecutionEngine\l::GetCurrentContext",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_execution_engine.html#a8301f5b182f15a7c9302c1b65cbf9220",tooltip="Gets the current context."];
+  Node3 -> Node10 [id="edge10_Node000003_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="neo::vm::ExecutionEngine\l::OnFault",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_execution_engine.html#ac23a7b72be4d6502528322aa279c6d37",tooltip="Called when a fault occurs with the current exception."];
+  Node10 -> Node10 [id="edge11_Node000010_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node3 -> Node11 [id="edge12_Node000003_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="neo::vm::ExecutionEngine\l::PostExecuteInstruction",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_execution_engine.html#a8ea4c212771daaa6f020da2a9540bd36",tooltip="Called after an instruction is executed."];
+  Node3 -> Node12 [id="edge13_Node000003_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="neo::vm::ExecutionEngine\l::PreExecuteInstruction",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_execution_engine.html#a21463339ec67269ea8da1e3b5572a767",tooltip="Called before an instruction is executed."];
+  Node3 -> Node13 [id="edge14_Node000003_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node13 [id="Node000013",label="neo::vm::ExecutionEngine\l::SetState",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_execution_engine.html#a994592a88beaec9c69b75978b7287211",tooltip="Sets the VM state."];
+  Node13 -> Node14 [id="edge15_Node000013_Node000014",color="steelblue1",style="solid",tooltip=" "];
+  Node14 [id="Node000014",label="neo::vm::ExecutionEngine\l::OnStateChanged",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_execution_engine.html#a5a446f549aeccf031ac65e107d71659c",tooltip="Called when the state changes."];
+  Node2 -> Node9 [id="edge16_Node000002_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node2 -> Node15 [id="edge17_Node000002_Node000015",color="steelblue1",style="solid",tooltip=" "];
+  Node15 [id="Node000015",label="neo::vm::ExecutionEngine\l::GetState",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_execution_engine.html#ad7fc9ab3700721a410684027e7319b90",tooltip="Gets the state."];
+  Node2 -> Node16 [id="edge18_Node000002_Node000016",color="steelblue1",style="solid",tooltip=" "];
+  Node16 [id="Node000016",label="neo::vm::ExecutionEngine\l::SetJumping",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_execution_engine.html#ae90860e6f9f9747ba4b863b0d364db25",tooltip="Sets the jumping flag."];
+  Node2 -> Node17 [id="edge19_Node000002_Node000017",color="steelblue1",style="solid",tooltip=" "];
+  Node17 [id="Node000017",label="neo::vm::Instruction\l::TokenI8",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1vm_1_1_instruction.html#ae24c253c025b65e62f49e892056fc7fb",tooltip="Gets the first operand as int8_t."];
+}

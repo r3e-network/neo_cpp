@@ -1,0 +1,234 @@
+\doxysection{neo\+::ledger\+::Transaction\+Storage Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_transaction_storage}{}\label{classneo_1_1ledger_1_1_transaction_storage}\index{neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}}
+
+
+Handles transaction storage and retrieval.  
+
+
+
+
+{\ttfamily \#include $<$transaction\+\_\+storage.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_af762547d211e87eac6a44c057abaaea8}{Transaction\+Storage}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ data\+Cache)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1ledger_1_1_transaction_storage}{Transaction\+Storage}. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_aab94ecfa9c85ba01616d9e01a2e145e7}{Get\+Transaction}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets a transaction by hash. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_af3fcd6ee4568abf5c7dff2925c29c839}{Add\+Transaction}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&transaction, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot)
+\begin{DoxyCompactList}\small\item\em Adds a transaction to storage. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_a2ba22a5baf7b4144633f9a6ec0e5e6c3}{Contains\+Transaction}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Checks if a transaction exists. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output}{Transaction\+Output}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_a9d9cfc69565b6b4c83e8d3a7932444ba}{Get\+Unspent\+Outputs}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets the unspent transaction outputs for a transaction. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output}{Transaction\+Output}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_a5defb62518e4f98f370ab4900939227c}{Get\+Unspent\+Outputs}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash) const
+\begin{DoxyCompactList}\small\item\em Gets the unspent transaction outputs for an address. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{io\+::\+Fixed8}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_aa90dac1d09e8ccc600eb1bd2eee2db1b}{Get\+Balance}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&asset\+Id) const
+\begin{DoxyCompactList}\small\item\em Gets the balance of an address. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_ad241ee58724737b5e60e3109d487410f}{data\+Cache\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_a49cc8d29a1d9aafdf9c250f65ad177b7}{mutex\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_aa0df1afbe5289647a31a4f3abc8f652a}{transactions\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output}{Transaction\+Output}} $>$ $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_a7ed08bfcf865cdae194f9409274ec6a2}{unspent\+Outputs\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}}, std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output}{Transaction\+Output}} $>$ $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_storage_a60f42388c18fe7e5b71ea90eaf4c7199}{address\+Outputs\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles transaction storage and retrieval. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_storage_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_storage_af762547d211e87eac6a44c057abaaea8}\index{neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}!TransactionStorage@{TransactionStorage}}
+\index{TransactionStorage@{TransactionStorage}!neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}}
+\doxysubsubsection{\texorpdfstring{TransactionStorage()}{TransactionStorage()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_storage_af762547d211e87eac6a44c057abaaea8} 
+neo\+::ledger\+::\+Transaction\+Storage\+::\+Transaction\+Storage (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{data\+Cache}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1ledger_1_1_transaction_storage}{Transaction\+Storage}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+Cache} & The data cache. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_storage_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_storage_af3fcd6ee4568abf5c7dff2925c29c839}\index{neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}!AddTransaction@{AddTransaction}}
+\index{AddTransaction@{AddTransaction}!neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}}
+\doxysubsubsection{\texorpdfstring{AddTransaction()}{AddTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_storage_af3fcd6ee4568abf5c7dff2925c29c839} 
+bool neo\+::ledger\+::\+Transaction\+Storage\+::\+Add\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} \&}]{transaction}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption})}
+
+
+
+Adds a transaction to storage. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to add. \\
+\hline
+{\em snapshot} & The snapshot to use. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the transaction was added, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1ledger_1_1_transaction_storage_a2ba22a5baf7b4144633f9a6ec0e5e6c3}\index{neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}!ContainsTransaction@{ContainsTransaction}}
+\index{ContainsTransaction@{ContainsTransaction}!neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}}
+\doxysubsubsection{\texorpdfstring{ContainsTransaction()}{ContainsTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_storage_a2ba22a5baf7b4144633f9a6ec0e5e6c3} 
+bool neo\+::ledger\+::\+Transaction\+Storage\+::\+Contains\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if a transaction exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the transaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the transaction exists, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1ledger_1_1_transaction_storage_aa90dac1d09e8ccc600eb1bd2eee2db1b}\index{neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}!GetBalance@{GetBalance}}
+\index{GetBalance@{GetBalance}!neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}}
+\doxysubsubsection{\texorpdfstring{GetBalance()}{GetBalance()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_storage_aa90dac1d09e8ccc600eb1bd2eee2db1b} 
+\mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{io\+::\+Fixed8}} neo\+::ledger\+::\+Transaction\+Storage\+::\+Get\+Balance (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{asset\+Id}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the balance of an address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The script hash of the address. \\
+\hline
+{\em asset\+Id} & The asset ID. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The balance. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1ledger_1_1_transaction_storage_aab94ecfa9c85ba01616d9e01a2e145e7}\index{neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}!GetTransaction@{GetTransaction}}
+\index{GetTransaction@{GetTransaction}!neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}}
+\doxysubsubsection{\texorpdfstring{GetTransaction()}{GetTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_storage_aab94ecfa9c85ba01616d9e01a2e145e7} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ neo\+::ledger\+::\+Transaction\+Storage\+::\+Get\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a transaction by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the transaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The transaction, or nullptr if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1ledger_1_1_transaction_storage_a5defb62518e4f98f370ab4900939227c}\index{neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}!GetUnspentOutputs@{GetUnspentOutputs}}
+\index{GetUnspentOutputs@{GetUnspentOutputs}!neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}}
+\doxysubsubsection{\texorpdfstring{GetUnspentOutputs()}{GetUnspentOutputs()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_storage_a5defb62518e4f98f370ab4900939227c} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output}{Transaction\+Output}} $>$ neo\+::ledger\+::\+Transaction\+Storage\+::\+Get\+Unspent\+Outputs (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the unspent transaction outputs for an address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The script hash of the address. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The unspent transaction outputs. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1ledger_1_1_transaction_storage_a9d9cfc69565b6b4c83e8d3a7932444ba}\index{neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}!GetUnspentOutputs@{GetUnspentOutputs}}
+\index{GetUnspentOutputs@{GetUnspentOutputs}!neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}}
+\doxysubsubsection{\texorpdfstring{GetUnspentOutputs()}{GetUnspentOutputs()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_storage_a9d9cfc69565b6b4c83e8d3a7932444ba} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output}{Transaction\+Output}} $>$ neo\+::ledger\+::\+Transaction\+Storage\+::\+Get\+Unspent\+Outputs (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the unspent transaction outputs for a transaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the transaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The unspent transaction outputs. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_storage_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_storage_a60f42388c18fe7e5b71ea90eaf4c7199}\index{neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}!addressOutputs\_@{addressOutputs\_}}
+\index{addressOutputs\_@{addressOutputs\_}!neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}}
+\doxysubsubsection{\texorpdfstring{addressOutputs\_}{addressOutputs\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_storage_a60f42388c18fe7e5b71ea90eaf4c7199} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}}, std\+::vector$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output}{Transaction\+Output}}$>$ $>$ neo\+::ledger\+::\+Transaction\+Storage\+::address\+Outputs\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_storage_ad241ee58724737b5e60e3109d487410f}\index{neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}!dataCache\_@{dataCache\_}}
+\index{dataCache\_@{dataCache\_}!neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}}
+\doxysubsubsection{\texorpdfstring{dataCache\_}{dataCache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_storage_ad241ee58724737b5e60e3109d487410f} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}}$>$ neo\+::ledger\+::\+Transaction\+Storage\+::data\+Cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_storage_a49cc8d29a1d9aafdf9c250f65ad177b7}\index{neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_storage_a49cc8d29a1d9aafdf9c250f65ad177b7} 
+std\+::mutex neo\+::ledger\+::\+Transaction\+Storage\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_storage_aa0df1afbe5289647a31a4f3abc8f652a}\index{neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}!transactions\_@{transactions\_}}
+\index{transactions\_@{transactions\_}!neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}}
+\doxysubsubsection{\texorpdfstring{transactions\_}{transactions\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_storage_aa0df1afbe5289647a31a4f3abc8f652a} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}}$>$ $>$ neo\+::ledger\+::\+Transaction\+Storage\+::transactions\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_storage_a7ed08bfcf865cdae194f9409274ec6a2}\index{neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}!unspentOutputs\_@{unspentOutputs\_}}
+\index{unspentOutputs\_@{unspentOutputs\_}!neo::ledger::TransactionStorage@{neo::ledger::TransactionStorage}}
+\doxysubsubsection{\texorpdfstring{unspentOutputs\_}{unspentOutputs\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_storage_a7ed08bfcf865cdae194f9409274ec6a2} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::vector$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output}{Transaction\+Output}}$>$ $>$ neo\+::ledger\+::\+Transaction\+Storage\+::unspent\+Outputs\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{transaction__storage_8h}{transaction\+\_\+storage.\+h}}\item 
+src/ledger/\mbox{\hyperlink{transaction__storage_8cpp}{transaction\+\_\+storage.\+cpp}}\end{DoxyCompactItemize}

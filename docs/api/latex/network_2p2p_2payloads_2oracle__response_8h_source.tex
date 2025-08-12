@@ -1,0 +1,51 @@
+\doxysection{oracle\+\_\+response.\+h}
+\hypertarget{network_2p2p_2payloads_2oracle__response_8h_source}{}\label{network_2p2p_2payloads_2oracle__response_8h_source}\index{include/neo/network/p2p/payloads/oracle\_response.h@{include/neo/network/p2p/payloads/oracle\_response.h}}
+\mbox{\hyperlink{network_2p2p_2payloads_2oracle__response_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{p2p_2ipayload_8h}{neo/network/p2p/ipayload.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{oracle__response__code_8h}{neo/network/p2p/payloads/oracle\_response\_code.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads}{neo::network::p2p::payloads}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_aabb00dbbb45f047ebf233ca9b8da4935}{OracleResponse}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{IPayload}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_ac6d17e3d114762fdae33224cb7cb4576}{MaxResultSize}}\ =\ UINT16\_MAX;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_aabb00dbbb45f047ebf233ca9b8da4935}{OracleResponse}}();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_aabb00dbbb45f047ebf233ca9b8da4935}{OracleResponse}}(uint64\_t\ \textcolor{keywordtype}{id},\ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads_ab2a97039c921f49aa4b13150b39b087a}{OracleResponseCode}}\ code,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ result);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00039\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_afbab72a4db0a0341b3af0ae4669ac0a3}{GetId}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_adfdd11dfdfa735ffada04da4a21d60e3}{SetId}}(uint64\_t\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads_ab2a97039c921f49aa4b13150b39b087a}{OracleResponseCode}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_ad90fe1155bd8333c8097d4e8453ef122}{GetCode}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_afac3eb28087930c41c79c3e9338b5b23}{SetCode}}(\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads_ab2a97039c921f49aa4b13150b39b087a}{OracleResponseCode}}\ code);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a971e118d758661eebb3519508271ecdf}{GetResult}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_ad4b9c3850af8bd5930b933a3fc4045e8}{SetResult}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ result);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a7a9b05722eb30e8212fa5d006500d2fe}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a73f9b58c1c2457e8d1574a47b187c5f5}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a1ad42ce4ef872de64a821235226f0b14}{SerializeJson}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io::JsonWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a194d0ed72aff612e7ea044b79aed7a11}{DeserializeJson}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io::JsonReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00096\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a65868c1f5a00b8fc1d8b6c81bb6b9d55}{id\_}};}
+\DoxyCodeLine{00097\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads_ab2a97039c921f49aa4b13150b39b087a}{OracleResponseCode}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_aa10dbe283973dc09498c75c19f83eb01}{code\_}};}
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a6621bb92e65f7a064b01e44dc96c3b33}{result\_}};}
+\DoxyCodeLine{00099\ \};}
+\DoxyCodeLine{00100\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p::payloads}}
+
+\end{DoxyCode}

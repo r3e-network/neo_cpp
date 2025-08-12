@@ -1,0 +1,45 @@
+\doxysection{src/cryptography/ecrecover.cpp File Reference}
+\hypertarget{ecrecover_8cpp}{}\label{ecrecover_8cpp}\index{src/cryptography/ecrecover.cpp@{src/cryptography/ecrecover.cpp}}
+{\ttfamily \#include $<$neo/core/logging.\+h$>$}\newline
+{\ttfamily \#include $<$neo/cryptography/ecc/ecpoint.\+h$>$}\newline
+{\ttfamily \#include $<$neo/cryptography/ecrecover.\+h$>$}\newline
+{\ttfamily \#include $<$neo/cryptography/hash.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/bn.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/ec.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/ecdsa.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/evp.\+h$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for ecrecover.\+cpp\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1cryptography_1_1_b_n_deleter}{neo\+::cryptography\+::\+BNDeleter}}
+\item 
+struct \mbox{\hyperlink{structneo_1_1cryptography_1_1_e_c_point_deleter}{neo\+::cryptography\+::\+ECPoint\+Deleter}}
+\item 
+struct \mbox{\hyperlink{structneo_1_1cryptography_1_1_e_c_key_deleter}{neo\+::cryptography\+::\+ECKey\+Deleter}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1cryptography}{neo\+::cryptography}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1cryptography_a3cb2eaf5a4d678e1ef197fe883dbb518}{neo\+::cryptography\+::\+BNPtr}} = std\+::unique\+\_\+ptr$<$BIGNUM, \mbox{\hyperlink{structneo_1_1cryptography_1_1_b_n_deleter}{BNDeleter}}$>$
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1cryptography_a38e9e9fcd30601ffcbcc428f9d9a82b5}{neo\+::cryptography\+::\+ECPoint\+Ptr}} = std\+::unique\+\_\+ptr$<$EC\+\_\+\+POINT, \mbox{\hyperlink{structneo_1_1cryptography_1_1_e_c_point_deleter}{ECPoint\+Deleter}}$>$
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1cryptography_a0a621aaffb8f8ea14c9a54d493710c3a}{neo\+::cryptography\+::\+ECKey\+Ptr}} = std\+::unique\+\_\+ptr$<$EC\+\_\+\+KEY, \mbox{\hyperlink{structneo_1_1cryptography_1_1_e_c_key_deleter}{ECKey\+Deleter}}$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ecc\+::\+ECPoint}} $>$ \mbox{\hyperlink{namespaceneo_1_1cryptography_a15cf5435169bd83ff4ba2c689944a4a1}{neo\+::cryptography\+::\+ECRecover}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&hash, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&signature, uint8\+\_\+t recovery\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Recovers public key from signature (Ethereum-\/style ECRecover) \end{DoxyCompactList}\end{DoxyCompactItemize}

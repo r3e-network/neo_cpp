@@ -1,0 +1,52 @@
+\doxysection{plugin.\+h}
+\hypertarget{plugins_2plugin_8h_source}{}\label{plugins_2plugin_8h_source}\index{include/neo/plugins/plugin.h@{include/neo/plugins/plugin.h}}
+\mbox{\hyperlink{plugins_2plugin_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{node_2neo__system_8h}{neo/node/neo\_system.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{rpc__server_8h}{neo/rpc/rpc\_server.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1plugins}{neo::plugins}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1plugins_1_1_plugin}{Plugin}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_aa3d82c04241154d0ea425b5b8cf1aa52}{\string~Plugin}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_a4a9054a846e3e9cf1037a57996b19227}{GetName}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_aa8ba3ede35b7c31e9f6a33f0e4922c07}{GetDescription}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_aa156efd03ff026aef403cfab7d4318a5}{GetVersion}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_a1fac78cd5f885092da9e4af9e4059a2f}{GetAuthor}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_ab9b7974038149e0bbb14553e639309b9}{Initialize}}(std::shared\_ptr<node::NeoSystem>\ neoSystem,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::string>\&\ settings)\ =\ 0;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_ac2013eb05fc07ef33196571eb636d079}{Start}}()\ =\ 0;}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_a7d198d0b1c29e4997e4e051d2580534e}{Stop}}()\ =\ 0;}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_a4ace6f4b27780ea0e380be997debca58}{IsRunning}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00075\ \};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00080\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory}{PluginFactory}}}
+\DoxyCodeLine{00081\ \{}
+\DoxyCodeLine{00082\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory_adbc887c73eb323dcf80a1f5f27e62cfd}{\string~PluginFactory}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{virtual}\ std::shared\_ptr<Plugin>\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory_a8fa2b3dca894af0f0c20398ee438c0b9}{CreatePlugin}}()\ =\ 0;}
+\DoxyCodeLine{00093\ \};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{comment}{//\ PluginManager\ is\ defined\ in\ plugin\_manager.h\ to\ avoid\ duplication}}
+\DoxyCodeLine{00096\ \}\ \ \textcolor{comment}{//\ namespace\ neo::plugins}}
+
+\end{DoxyCode}

@@ -1,0 +1,179 @@
+\doxysection{neo\+::monitoring\+::Prometheus\+Exporter Class Reference}
+\hypertarget{classneo_1_1monitoring_1_1_prometheus_exporter}{}\label{classneo_1_1monitoring_1_1_prometheus_exporter}\index{neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}}
+
+
+Prometheus metrics exporter.  
+
+
+
+
+{\ttfamily \#include $<$prometheus\+\_\+exporter.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a46cc1d72e95b804275f501486fbe56e2}{Register\+Metric}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{Metric}} $>$ metric)
+\begin{DoxyCompactList}\small\item\em Register a metric. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_ab6c45efdc7d705d5616e7b2826a5875c}{Start\+Server}} (uint16\+\_\+t port=9090)
+\begin{DoxyCompactList}\small\item\em Start HTTP server for metrics export. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_af4aec4210f484995e10ccd21caf0bb06}{Stop\+Server}} ()
+\begin{DoxyCompactList}\small\item\em Stop HTTP server. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_af69aedae2820fc6578cb6d883e17a56f}{Collect\+Metrics}} () const
+\begin{DoxyCompactList}\small\item\em Collect all metrics in Prometheus format. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_ac066a214f94e2d2431a8727f82ec016d}{\texorpdfstring{$\sim$}{\string~}\+Prometheus\+Exporter}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter}{Prometheus\+Exporter}} \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a547fb2ae88a3382ffca4b1df025565ba}{Get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_aa0a257a394cdab4162b7e4c916ae91a0}{Prometheus\+Exporter}} ()=default
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a2ea4880f91c743c9b1323484e34f85c5}{Add\+Process\+Metrics}} (std\+::stringstream \&ss) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{Metric}} $>$ $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a81c7c1fc66a537ab9c043b229d4266ea}{metrics\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a874ac92e015cd1fc0603eed04df2b6e8}{mutex\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ httplib\+::\+Server $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a2e9818426ec018e54b44f3c0f24a2c2e}{server\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_ab515253d29445d1415f926f4c4feb6e7}{server\+Thread\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Prometheus metrics exporter. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1monitoring_1_1_prometheus_exporter_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_prometheus_exporter_ac066a214f94e2d2431a8727f82ec016d}\index{neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}!````~PrometheusExporter@{\texorpdfstring{$\sim$}{\string~}PrometheusExporter}}
+\index{````~PrometheusExporter@{\texorpdfstring{$\sim$}{\string~}PrometheusExporter}!neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}PrometheusExporter()}{\string~PrometheusExporter()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_prometheus_exporter_ac066a214f94e2d2431a8727f82ec016d} 
+neo\+::monitoring\+::\+Prometheus\+Exporter\+::\texorpdfstring{$\sim$}{\string~}\+Prometheus\+Exporter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1monitoring_1_1_prometheus_exporter_aa0a257a394cdab4162b7e4c916ae91a0}\index{neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}!PrometheusExporter@{PrometheusExporter}}
+\index{PrometheusExporter@{PrometheusExporter}!neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}}
+\doxysubsubsection{\texorpdfstring{PrometheusExporter()}{PrometheusExporter()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_prometheus_exporter_aa0a257a394cdab4162b7e4c916ae91a0} 
+neo\+::monitoring\+::\+Prometheus\+Exporter\+::\+Prometheus\+Exporter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1monitoring_1_1_prometheus_exporter_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_prometheus_exporter_a2ea4880f91c743c9b1323484e34f85c5}\index{neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}!AddProcessMetrics@{AddProcessMetrics}}
+\index{AddProcessMetrics@{AddProcessMetrics}!neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}}
+\doxysubsubsection{\texorpdfstring{AddProcessMetrics()}{AddProcessMetrics()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_prometheus_exporter_a2ea4880f91c743c9b1323484e34f85c5} 
+void neo\+::monitoring\+::\+Prometheus\+Exporter\+::\+Add\+Process\+Metrics (\begin{DoxyParamCaption}\item[{std\+::stringstream \&}]{ss}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_prometheus_exporter_af69aedae2820fc6578cb6d883e17a56f}\index{neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}!CollectMetrics@{CollectMetrics}}
+\index{CollectMetrics@{CollectMetrics}!neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}}
+\doxysubsubsection{\texorpdfstring{CollectMetrics()}{CollectMetrics()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_prometheus_exporter_af69aedae2820fc6578cb6d883e17a56f} 
+std\+::string neo\+::monitoring\+::\+Prometheus\+Exporter\+::\+Collect\+Metrics (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Collect all metrics in Prometheus format. 
+
+\begin{DoxyReturn}{Returns}
+Prometheus formatted metrics 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1monitoring_1_1_prometheus_exporter_a547fb2ae88a3382ffca4b1df025565ba}\index{neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_prometheus_exporter_a547fb2ae88a3382ffca4b1df025565ba} 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter}{Prometheus\+Exporter}} \& neo\+::monitoring\+::\+Prometheus\+Exporter\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1monitoring_1_1_prometheus_exporter_a46cc1d72e95b804275f501486fbe56e2}\index{neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}!RegisterMetric@{RegisterMetric}}
+\index{RegisterMetric@{RegisterMetric}!neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}}
+\doxysubsubsection{\texorpdfstring{RegisterMetric()}{RegisterMetric()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_prometheus_exporter_a46cc1d72e95b804275f501486fbe56e2} 
+void neo\+::monitoring\+::\+Prometheus\+Exporter\+::\+Register\+Metric (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{Metric}} $>$}]{metric}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Register a metric. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em metric} & \doxylink{classneo_1_1monitoring_1_1_metric}{Metric} to register \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1monitoring_1_1_prometheus_exporter_ab6c45efdc7d705d5616e7b2826a5875c}\index{neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}!StartServer@{StartServer}}
+\index{StartServer@{StartServer}!neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}}
+\doxysubsubsection{\texorpdfstring{StartServer()}{StartServer()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_prometheus_exporter_ab6c45efdc7d705d5616e7b2826a5875c} 
+void neo\+::monitoring\+::\+Prometheus\+Exporter\+::\+Start\+Server (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{port}{ = {\ttfamily 9090}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Start HTTP server for metrics export. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & Port to listen on \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1monitoring_1_1_prometheus_exporter_af4aec4210f484995e10ccd21caf0bb06}\index{neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}!StopServer@{StopServer}}
+\index{StopServer@{StopServer}!neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}}
+\doxysubsubsection{\texorpdfstring{StopServer()}{StopServer()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_prometheus_exporter_af4aec4210f484995e10ccd21caf0bb06} 
+void neo\+::monitoring\+::\+Prometheus\+Exporter\+::\+Stop\+Server (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Stop HTTP server. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1monitoring_1_1_prometheus_exporter_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_prometheus_exporter_a81c7c1fc66a537ab9c043b229d4266ea}\index{neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}!metrics\_@{metrics\_}}
+\index{metrics\_@{metrics\_}!neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}}
+\doxysubsubsection{\texorpdfstring{metrics\_}{metrics\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_prometheus_exporter_a81c7c1fc66a537ab9c043b229d4266ea} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{Metric}}$>$ $>$ neo\+::monitoring\+::\+Prometheus\+Exporter\+::metrics\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_prometheus_exporter_a874ac92e015cd1fc0603eed04df2b6e8}\index{neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_prometheus_exporter_a874ac92e015cd1fc0603eed04df2b6e8} 
+std\+::mutex neo\+::monitoring\+::\+Prometheus\+Exporter\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_prometheus_exporter_a2e9818426ec018e54b44f3c0f24a2c2e}\index{neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}!server\_@{server\_}}
+\index{server\_@{server\_}!neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}}
+\doxysubsubsection{\texorpdfstring{server\_}{server\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_prometheus_exporter_a2e9818426ec018e54b44f3c0f24a2c2e} 
+std\+::unique\+\_\+ptr$<$httplib\+::\+Server$>$ neo\+::monitoring\+::\+Prometheus\+Exporter\+::server\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_prometheus_exporter_ab515253d29445d1415f926f4c4feb6e7}\index{neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}!serverThread\_@{serverThread\_}}
+\index{serverThread\_@{serverThread\_}!neo::monitoring::PrometheusExporter@{neo::monitoring::PrometheusExporter}}
+\doxysubsubsection{\texorpdfstring{serverThread\_}{serverThread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_prometheus_exporter_ab515253d29445d1415f926f4c4feb6e7} 
+std\+::thread neo\+::monitoring\+::\+Prometheus\+Exporter\+::server\+Thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/monitoring/\mbox{\hyperlink{prometheus__exporter_8h}{prometheus\+\_\+exporter.\+h}}\end{DoxyCompactItemize}

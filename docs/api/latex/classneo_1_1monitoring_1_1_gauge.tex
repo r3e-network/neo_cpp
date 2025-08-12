@@ -1,0 +1,222 @@
+\doxysection{neo\+::monitoring\+::Gauge Class Reference}
+\hypertarget{classneo_1_1monitoring_1_1_gauge}{}\label{classneo_1_1monitoring_1_1_gauge}\index{neo::monitoring::Gauge@{neo::monitoring::Gauge}}
+
+
+\doxylink{classneo_1_1monitoring_1_1_gauge}{Gauge} metric -\/ value that can go up or down.  
+
+
+
+
+{\ttfamily \#include $<$metrics.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::monitoring\+::Gauge\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::monitoring\+::Gauge\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a1689bb1f7d20b6bf0646c9a133f043ba}{Gauge}} (const std\+::string \&name, const std\+::string \&description)
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a45593d9f9deda699517e4b5a22708be3}{Set}} (double value)
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a2068f01bf911a22f395a6c6d5d5a8e1c}{Increment}} (double delta=1.\+0)
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_aacb2fd88474e7c6261b82771af1924ca}{Decrement}} (double delta=1.\+0)
+\item 
+double \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_aeae46e6e0d5a0e59e3428c29b6fd5740}{Get}} () const
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_adc4231a3cdd4354cde17a714c6df7df7}{To\+Prometheus}} () const override
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a91f24a025acc462a860f54a817f355be}{Gauge}} (const std\+::string \&name, const std\+::string \&help)
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a45593d9f9deda699517e4b5a22708be3}{Set}} (double value)
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a645e8bbe513554e559a8f3e6597bc024}{Increment}} (double value=1.\+0)
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_ab07257fa712a71b90707cc9b88442fa0}{Decrement}} (double value=1.\+0)
+\item 
+double \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_aeae46e6e0d5a0e59e3428c29b6fd5740}{Get}} () const
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a9941bcc05e7ee63274c87438b498224d}{Serialize}} () const override
+\begin{DoxyCompactList}\small\item\em Serialize metric to Prometheus format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{neo\+::monitoring\+::\+Metric}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a2fabc388c640698b8ea800e0cc8b5d5f}{Metric}} (const std\+::string \&name, const std\+::string \&description, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} type)
+\item 
+virtual \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_ad3f062c16fa8a54f2babb1fa1f247c29}{\texorpdfstring{$\sim$}{\string~}\+Metric}} ()=default
+\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a514f8ad2bb1ee128016785a4705b5084}{Get\+Name}} () const
+\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_af756fcfeb3ffd38d255411a1fe363e72}{Get\+Description}} () const
+\item 
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a194d6b9b3862300250c9f91129f8d486}{Get\+Type}} () const
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a787fd65928f94768a49fb42f538d91b6}{Set\+Label}} (const std\+::string \&key, const std\+::string \&value)
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_af5a69c403e3784d99aa03c6f534ea602}{Metric}} (const std\+::string \&name, const std\+::string \&help, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} type)
+\item 
+virtual \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_ad3f062c16fa8a54f2babb1fa1f247c29}{\texorpdfstring{$\sim$}{\string~}\+Metric}} ()=default
+\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a514f8ad2bb1ee128016785a4705b5084}{Get\+Name}} () const
+\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a02fc58e08ab7760cffd98d1c5166d3a3}{Get\+Help}} () const
+\item 
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a194d6b9b3862300250c9f91129f8d486}{Get\+Type}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::atomic$<$ double $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a3e7328fc8c616b3f9ed9f95a3771d686}{value\+\_\+}} \{0.\+0\}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{neo\+::monitoring\+::\+Metric}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_ac02de7bc213735d2d47ab1dd388937fd}{Type\+String}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{neo\+::monitoring\+::\+Metric}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a08cd309a2371946ba5df2fd96e1f4e04}{description\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_aeeef931c32528d9756ac041df70cdec8}{labels\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_aaa32b50e25a5eb197834638167fc871d}{type\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a7d477b0164ecefab56c843ab76998b7b}{help\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1monitoring_1_1_gauge}{Gauge} metric -\/ value that can go up or down. 
+
+\doxylink{classneo_1_1monitoring_1_1_gauge}{Gauge} metric (can go up and down) 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1monitoring_1_1_gauge_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_gauge_a1689bb1f7d20b6bf0646c9a133f043ba}\index{neo::monitoring::Gauge@{neo::monitoring::Gauge}!Gauge@{Gauge}}
+\index{Gauge@{Gauge}!neo::monitoring::Gauge@{neo::monitoring::Gauge}}
+\doxysubsubsection{\texorpdfstring{Gauge()}{Gauge()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_gauge_a1689bb1f7d20b6bf0646c9a133f043ba} 
+neo\+::monitoring\+::\+Gauge\+::\+Gauge (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{const std\+::string \&}]{description}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1monitoring_1_1_gauge_a91f24a025acc462a860f54a817f355be}\index{neo::monitoring::Gauge@{neo::monitoring::Gauge}!Gauge@{Gauge}}
+\index{Gauge@{Gauge}!neo::monitoring::Gauge@{neo::monitoring::Gauge}}
+\doxysubsubsection{\texorpdfstring{Gauge()}{Gauge()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_gauge_a91f24a025acc462a860f54a817f355be} 
+neo\+::monitoring\+::\+Gauge\+::\+Gauge (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{const std\+::string \&}]{help}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1monitoring_1_1_gauge_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_gauge_aacb2fd88474e7c6261b82771af1924ca}\index{neo::monitoring::Gauge@{neo::monitoring::Gauge}!Decrement@{Decrement}}
+\index{Decrement@{Decrement}!neo::monitoring::Gauge@{neo::monitoring::Gauge}}
+\doxysubsubsection{\texorpdfstring{Decrement()}{Decrement()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_gauge_aacb2fd88474e7c6261b82771af1924ca} 
+void neo\+::monitoring\+::\+Gauge\+::\+Decrement (\begin{DoxyParamCaption}\item[{double}]{delta}{ = {\ttfamily 1.0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1monitoring_1_1_gauge_ab07257fa712a71b90707cc9b88442fa0}\index{neo::monitoring::Gauge@{neo::monitoring::Gauge}!Decrement@{Decrement}}
+\index{Decrement@{Decrement}!neo::monitoring::Gauge@{neo::monitoring::Gauge}}
+\doxysubsubsection{\texorpdfstring{Decrement()}{Decrement()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_gauge_ab07257fa712a71b90707cc9b88442fa0} 
+void neo\+::monitoring\+::\+Gauge\+::\+Decrement (\begin{DoxyParamCaption}\item[{double}]{value}{ = {\ttfamily 1.0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_gauge_aeae46e6e0d5a0e59e3428c29b6fd5740}\index{neo::monitoring::Gauge@{neo::monitoring::Gauge}!Get@{Get}}
+\index{Get@{Get}!neo::monitoring::Gauge@{neo::monitoring::Gauge}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_gauge_aeae46e6e0d5a0e59e3428c29b6fd5740} 
+double neo\+::monitoring\+::\+Gauge\+::\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_gauge_aeae46e6e0d5a0e59e3428c29b6fd5740}\index{neo::monitoring::Gauge@{neo::monitoring::Gauge}!Get@{Get}}
+\index{Get@{Get}!neo::monitoring::Gauge@{neo::monitoring::Gauge}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_gauge_aeae46e6e0d5a0e59e3428c29b6fd5740} 
+double neo\+::monitoring\+::\+Gauge\+::\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_gauge_a2068f01bf911a22f395a6c6d5d5a8e1c}\index{neo::monitoring::Gauge@{neo::monitoring::Gauge}!Increment@{Increment}}
+\index{Increment@{Increment}!neo::monitoring::Gauge@{neo::monitoring::Gauge}}
+\doxysubsubsection{\texorpdfstring{Increment()}{Increment()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_gauge_a2068f01bf911a22f395a6c6d5d5a8e1c} 
+void neo\+::monitoring\+::\+Gauge\+::\+Increment (\begin{DoxyParamCaption}\item[{double}]{delta}{ = {\ttfamily 1.0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_gauge_a645e8bbe513554e559a8f3e6597bc024}\index{neo::monitoring::Gauge@{neo::monitoring::Gauge}!Increment@{Increment}}
+\index{Increment@{Increment}!neo::monitoring::Gauge@{neo::monitoring::Gauge}}
+\doxysubsubsection{\texorpdfstring{Increment()}{Increment()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_gauge_a645e8bbe513554e559a8f3e6597bc024} 
+void neo\+::monitoring\+::\+Gauge\+::\+Increment (\begin{DoxyParamCaption}\item[{double}]{value}{ = {\ttfamily 1.0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_gauge_a9941bcc05e7ee63274c87438b498224d}\index{neo::monitoring::Gauge@{neo::monitoring::Gauge}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::monitoring::Gauge@{neo::monitoring::Gauge}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_gauge_a9941bcc05e7ee63274c87438b498224d} 
+std\+::string neo\+::monitoring\+::\+Gauge\+::\+Serialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize metric to Prometheus format. 
+
+\begin{DoxyReturn}{Returns}
+Prometheus formatted string 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a814cbfc8ab1f5c2df22440a5a507a461}{neo\+::monitoring\+::\+Metric}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1monitoring_1_1_gauge_a45593d9f9deda699517e4b5a22708be3}\index{neo::monitoring::Gauge@{neo::monitoring::Gauge}!Set@{Set}}
+\index{Set@{Set}!neo::monitoring::Gauge@{neo::monitoring::Gauge}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_gauge_a45593d9f9deda699517e4b5a22708be3} 
+void neo\+::monitoring\+::\+Gauge\+::\+Set (\begin{DoxyParamCaption}\item[{double}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_gauge_a45593d9f9deda699517e4b5a22708be3}\index{neo::monitoring::Gauge@{neo::monitoring::Gauge}!Set@{Set}}
+\index{Set@{Set}!neo::monitoring::Gauge@{neo::monitoring::Gauge}}
+\doxysubsubsection{\texorpdfstring{Set()}{Set()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_gauge_a45593d9f9deda699517e4b5a22708be3} 
+void neo\+::monitoring\+::\+Gauge\+::\+Set (\begin{DoxyParamCaption}\item[{double}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_gauge_adc4231a3cdd4354cde17a714c6df7df7}\index{neo::monitoring::Gauge@{neo::monitoring::Gauge}!ToPrometheus@{ToPrometheus}}
+\index{ToPrometheus@{ToPrometheus}!neo::monitoring::Gauge@{neo::monitoring::Gauge}}
+\doxysubsubsection{\texorpdfstring{ToPrometheus()}{ToPrometheus()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_gauge_adc4231a3cdd4354cde17a714c6df7df7} 
+std\+::string neo\+::monitoring\+::\+Gauge\+::\+To\+Prometheus (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a62a05fbe49c84ce9e8ce44cb2224c883}{neo\+::monitoring\+::\+Metric}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1monitoring_1_1_gauge_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_gauge_a3e7328fc8c616b3f9ed9f95a3771d686}\index{neo::monitoring::Gauge@{neo::monitoring::Gauge}!value\_@{value\_}}
+\index{value\_@{value\_}!neo::monitoring::Gauge@{neo::monitoring::Gauge}}
+\doxysubsubsection{\texorpdfstring{value\_}{value\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_gauge_a3e7328fc8c616b3f9ed9f95a3771d686} 
+std\+::atomic$<$ double $>$ neo\+::monitoring\+::\+Gauge\+::value\+\_\+ \{0.\+0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/monitoring/\mbox{\hyperlink{monitoring_2metrics_8h}{metrics.\+h}}\item 
+include/neo/monitoring/\mbox{\hyperlink{prometheus__exporter_8h}{prometheus\+\_\+exporter.\+h}}\end{DoxyCompactItemize}

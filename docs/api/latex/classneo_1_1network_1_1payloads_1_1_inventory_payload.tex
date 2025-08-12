@@ -1,0 +1,249 @@
+\doxysection{neo\+::network\+::payloads\+::Inventory\+Payload Class Reference}
+\hypertarget{classneo_1_1network_1_1payloads_1_1_inventory_payload}{}\label{classneo_1_1network_1_1payloads_1_1_inventory_payload}\index{neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}}
+
+
+Represents an inventory payload.  
+
+
+
+
+{\ttfamily \#include $<$inventory\+\_\+payload.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::payloads\+::Inventory\+Payload\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::payloads\+::Inventory\+Payload\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_inventory_payload_ab058d9ada81246ea3e34852a969309a4}{Inventory\+Payload}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1network_1_1payloads_1_1_inventory_payload}{Inventory\+Payload}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_inventory_payload_a4624e5f0f513bf80b63b1a3b5bccf863}{Inventory\+Payload}} (\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{Inventory\+Type}} type, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&hashes)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1network_1_1payloads_1_1_inventory_payload}{Inventory\+Payload} with the specified parameters. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{Inventory\+Type}} \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_inventory_payload_ae7b825e7635bf492273bc5d62151a883}{Get\+Type}} () const
+\begin{DoxyCompactList}\small\item\em Gets the inventory type. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \& \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_inventory_payload_a3219eb8adc21bc9de2488f42c9e414e4}{Get\+Hashes}} () const
+\begin{DoxyCompactList}\small\item\em Gets the hashes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_inventory_payload_ad95e1e2cf0c1d6cecae3d4e5499c68e7}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1payloads_1_1_inventory_payload}{Inventory\+Payload} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_inventory_payload_a0571dff12f90fd9c6308eed6f8e0e9c4}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1payloads_1_1_inventory_payload}{Inventory\+Payload} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_inventory_payload_a6a657155d9ea9f3bf81e9d7fa3eb21ec}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1payloads_1_1_inventory_payload}{Inventory\+Payload} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_inventory_payload_a7763ea077333edc4db1f4f5b5d29f05c}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1payloads_1_1_inventory_payload}{Inventory\+Payload} from a JSON reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1network_1_1_i_payload}{neo\+::network\+::\+IPayload}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1_i_payload_a682117721a2def472fd1e3cff290d721}{\texorpdfstring{$\sim$}{\string~}\+IPayload}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{Inventory\+Type}} \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_inventory_payload_ab4b4235214764c725947501741c959da}{type\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_inventory_payload_a6e9b2aa39a8ad584168f531eb98039df}{hashes\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an inventory payload. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_inventory_payload_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_inventory_payload_ab058d9ada81246ea3e34852a969309a4}\index{neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}!InventoryPayload@{InventoryPayload}}
+\index{InventoryPayload@{InventoryPayload}!neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}}
+\doxysubsubsection{\texorpdfstring{InventoryPayload()}{InventoryPayload()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_inventory_payload_ab058d9ada81246ea3e34852a969309a4} 
+neo\+::network\+::payloads\+::\+Inventory\+Payload\+::\+Inventory\+Payload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1network_1_1payloads_1_1_inventory_payload}{Inventory\+Payload}. 
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_inventory_payload_a4624e5f0f513bf80b63b1a3b5bccf863}\index{neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}!InventoryPayload@{InventoryPayload}}
+\index{InventoryPayload@{InventoryPayload}!neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}}
+\doxysubsubsection{\texorpdfstring{InventoryPayload()}{InventoryPayload()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_inventory_payload_a4624e5f0f513bf80b63b1a3b5bccf863} 
+neo\+::network\+::payloads\+::\+Inventory\+Payload\+::\+Inventory\+Payload (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{Inventory\+Type}}}]{type}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&}]{hashes}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an \doxylink{classneo_1_1network_1_1payloads_1_1_inventory_payload}{Inventory\+Payload} with the specified parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The inventory type. \\
+\hline
+{\em hashes} & The hashes. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_inventory_payload_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_inventory_payload_a0571dff12f90fd9c6308eed6f8e0e9c4}\index{neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_inventory_payload_a0571dff12f90fd9c6308eed6f8e0e9c4} 
+void neo\+::network\+::payloads\+::\+Inventory\+Payload\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1payloads_1_1_inventory_payload}{Inventory\+Payload} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_inventory_payload_a7763ea077333edc4db1f4f5b5d29f05c}\index{neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_inventory_payload_a7763ea077333edc4db1f4f5b5d29f05c} 
+void neo\+::network\+::payloads\+::\+Inventory\+Payload\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1payloads_1_1_inventory_payload}{Inventory\+Payload} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_inventory_payload_a3219eb8adc21bc9de2488f42c9e414e4}\index{neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}!GetHashes@{GetHashes}}
+\index{GetHashes@{GetHashes}!neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}}
+\doxysubsubsection{\texorpdfstring{GetHashes()}{GetHashes()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_inventory_payload_a3219eb8adc21bc9de2488f42c9e414e4} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \& neo\+::network\+::payloads\+::\+Inventory\+Payload\+::\+Get\+Hashes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the hashes. 
+
+\begin{DoxyReturn}{Returns}
+The hashes. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_inventory_payload_ae7b825e7635bf492273bc5d62151a883}\index{neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}!GetType@{GetType}}
+\index{GetType@{GetType}!neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_inventory_payload_ae7b825e7635bf492273bc5d62151a883} 
+\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{Inventory\+Type}} neo\+::network\+::payloads\+::\+Inventory\+Payload\+::\+Get\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the inventory type. 
+
+\begin{DoxyReturn}{Returns}
+The inventory type. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_inventory_payload_ad95e1e2cf0c1d6cecae3d4e5499c68e7}\index{neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_inventory_payload_ad95e1e2cf0c1d6cecae3d4e5499c68e7} 
+void neo\+::network\+::payloads\+::\+Inventory\+Payload\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1payloads_1_1_inventory_payload}{Inventory\+Payload} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_inventory_payload_a6a657155d9ea9f3bf81e9d7fa3eb21ec}\index{neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_inventory_payload_a6a657155d9ea9f3bf81e9d7fa3eb21ec} 
+void neo\+::network\+::payloads\+::\+Inventory\+Payload\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1payloads_1_1_inventory_payload}{Inventory\+Payload} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_inventory_payload_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_inventory_payload_a6e9b2aa39a8ad584168f531eb98039df}\index{neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}!hashes\_@{hashes\_}}
+\index{hashes\_@{hashes\_}!neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}}
+\doxysubsubsection{\texorpdfstring{hashes\_}{hashes\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_inventory_payload_a6e9b2aa39a8ad584168f531eb98039df} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}$>$ neo\+::network\+::payloads\+::\+Inventory\+Payload\+::hashes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1payloads_1_1_inventory_payload_ab4b4235214764c725947501741c959da}\index{neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}!type\_@{type\_}}
+\index{type\_@{type\_}!neo::network::payloads::InventoryPayload@{neo::network::payloads::InventoryPayload}}
+\doxysubsubsection{\texorpdfstring{type\_}{type\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1payloads_1_1_inventory_payload_ab4b4235214764c725947501741c959da} 
+\mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3d}{Inventory\+Type}} neo\+::network\+::payloads\+::\+Inventory\+Payload\+::type\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/payloads/\mbox{\hyperlink{inventory__payload_8h}{inventory\+\_\+payload.\+h}}\end{DoxyCompactItemize}

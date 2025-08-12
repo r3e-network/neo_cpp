@@ -1,0 +1,260 @@
+\doxysection{neo\+::io\+::Byte\+String Class Reference}
+\hypertarget{classneo_1_1io_1_1_byte_string}{}\label{classneo_1_1io_1_1_byte_string}\index{neo::io::ByteString@{neo::io::ByteString}}
+
+
+An immutable byte array with efficient operations.  
+
+
+
+
+{\ttfamily \#include $<$byte\+\_\+string.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a51bbfd3b506a03808dc7813e0f826ec5}{Byte\+String}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a4eaf333d4782c7c5df1d82dec1dca279}{Byte\+String}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String} from a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_string_add70d7ab8f6be4f5ff795bde5a380fe3}{Byte\+String}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&data)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String} from a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a94bed0c6268981516c002b95e9930ffd}{Byte\+String}} (std\+::initializer\+\_\+list$<$ uint8\+\_\+t $>$ data)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String} from an initializer list. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_aa2d3173e6b5219cf9da020d34f58cdbe}{Size}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets the size of the \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String}. \end{DoxyCompactList}\item 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a1c77d8ecd183cab47a2a40f8ffbe2a70}{Data}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets a const pointer to the data. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_afd3d0b5617a5b1f83eb9a5cdeb8dad17}{operator\mbox{[}$\,$\mbox{]}}} (size\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets the byte at the specified index. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_ad689bfb6589b43a271c2fd7240ab6bfb}{As\+Span}} () const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String} to a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a653e544b5499a1c100a97d9e7f6e7d19}{To\+Hex\+String}} () const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String} to a hexadecimal string. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_abef4eb3a3badbe1417fac059635ced12}{operator==}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_string}{Byte\+String}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String} is equal to another \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a8dbd86f59732452880e46d69cffba477}{operator!=}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_string}{Byte\+String}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String} is not equal to another \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_string}{Byte\+String}} \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a01fabb2faeba5282d87c731676f72454}{Parse}} (const std\+::string \&hex)
+\begin{DoxyCompactList}\small\item\em Parses a hexadecimal string into a \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} $>$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc}{data\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+An immutable byte array with efficient operations. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1io_1_1_byte_string_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1io_1_1_byte_string_a51bbfd3b506a03808dc7813e0f826ec5}\index{neo::io::ByteString@{neo::io::ByteString}!ByteString@{ByteString}}
+\index{ByteString@{ByteString}!neo::io::ByteString@{neo::io::ByteString}}
+\doxysubsubsection{\texorpdfstring{ByteString()}{ByteString()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_string_a51bbfd3b506a03808dc7813e0f826ec5} 
+neo\+::io\+::\+Byte\+String\+::\+Byte\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an empty \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String}. 
+
+\Hypertarget{classneo_1_1io_1_1_byte_string_a4eaf333d4782c7c5df1d82dec1dca279}\index{neo::io::ByteString@{neo::io::ByteString}!ByteString@{ByteString}}
+\index{ByteString@{ByteString}!neo::io::ByteString@{neo::io::ByteString}}
+\doxysubsubsection{\texorpdfstring{ByteString()}{ByteString()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_string_a4eaf333d4782c7c5df1d82dec1dca279} 
+neo\+::io\+::\+Byte\+String\+::\+Byte\+String (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String} from a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_byte_string_add70d7ab8f6be4f5ff795bde5a380fe3}\index{neo::io::ByteString@{neo::io::ByteString}!ByteString@{ByteString}}
+\index{ByteString@{ByteString}!neo::io::ByteString@{neo::io::ByteString}}
+\doxysubsubsection{\texorpdfstring{ByteString()}{ByteString()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_string_add70d7ab8f6be4f5ff795bde5a380fe3} 
+neo\+::io\+::\+Byte\+String\+::\+Byte\+String (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String} from a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_byte_string_a94bed0c6268981516c002b95e9930ffd}\index{neo::io::ByteString@{neo::io::ByteString}!ByteString@{ByteString}}
+\index{ByteString@{ByteString}!neo::io::ByteString@{neo::io::ByteString}}
+\doxysubsubsection{\texorpdfstring{ByteString()}{ByteString()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_string_a94bed0c6268981516c002b95e9930ffd} 
+neo\+::io\+::\+Byte\+String\+::\+Byte\+String (\begin{DoxyParamCaption}\item[{std\+::initializer\+\_\+list$<$ uint8\+\_\+t $>$}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String} from an initializer list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The initializer list. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1io_1_1_byte_string_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1io_1_1_byte_string_ad689bfb6589b43a271c2fd7240ab6bfb}\index{neo::io::ByteString@{neo::io::ByteString}!AsSpan@{AsSpan}}
+\index{AsSpan@{AsSpan}!neo::io::ByteString@{neo::io::ByteString}}
+\doxysubsubsection{\texorpdfstring{AsSpan()}{AsSpan()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_string_ad689bfb6589b43a271c2fd7240ab6bfb} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} neo\+::io\+::\+Byte\+String\+::\+As\+Span (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts the \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String} to a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+
+\begin{DoxyReturn}{Returns}
+A \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} view of the \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String}. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_string_a1c77d8ecd183cab47a2a40f8ffbe2a70}\index{neo::io::ByteString@{neo::io::ByteString}!Data@{Data}}
+\index{Data@{Data}!neo::io::ByteString@{neo::io::ByteString}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_string_a1c77d8ecd183cab47a2a40f8ffbe2a70} 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} neo\+::io\+::\+Byte\+String\+::\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets a const pointer to the data. 
+
+\begin{DoxyReturn}{Returns}
+Const pointer to the data. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_string_a8dbd86f59732452880e46d69cffba477}\index{neo::io::ByteString@{neo::io::ByteString}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::io::ByteString@{neo::io::ByteString}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_string_a8dbd86f59732452880e46d69cffba477} 
+bool neo\+::io\+::\+Byte\+String\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_string}{Byte\+String}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String} is not equal to another \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Byte\+Strings are not equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1io_1_1_byte_string_abef4eb3a3badbe1417fac059635ced12}\index{neo::io::ByteString@{neo::io::ByteString}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::io::ByteString@{neo::io::ByteString}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_string_abef4eb3a3badbe1417fac059635ced12} 
+bool neo\+::io\+::\+Byte\+String\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_string}{Byte\+String}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String} is equal to another \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Byte\+Strings are equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1io_1_1_byte_string_afd3d0b5617a5b1f83eb9a5cdeb8dad17}\index{neo::io::ByteString@{neo::io::ByteString}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::io::ByteString@{neo::io::ByteString}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_string_afd3d0b5617a5b1f83eb9a5cdeb8dad17} 
+uint8\+\_\+t neo\+::io\+::\+Byte\+String\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the byte at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The byte at the specified index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_string_a01fabb2faeba5282d87c731676f72454}\index{neo::io::ByteString@{neo::io::ByteString}!Parse@{Parse}}
+\index{Parse@{Parse}!neo::io::ByteString@{neo::io::ByteString}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_string_a01fabb2faeba5282d87c731676f72454} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_string}{Byte\+String}} neo\+::io\+::\+Byte\+String\+::\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Parses a hexadecimal string into a \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The hexadecimal string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The parsed \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1io_1_1_byte_string_aa2d3173e6b5219cf9da020d34f58cdbe}\index{neo::io::ByteString@{neo::io::ByteString}!Size@{Size}}
+\index{Size@{Size}!neo::io::ByteString@{neo::io::ByteString}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_string_aa2d3173e6b5219cf9da020d34f58cdbe} 
+size\+\_\+t neo\+::io\+::\+Byte\+String\+::\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets the size of the \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String}. 
+
+\begin{DoxyReturn}{Returns}
+The size of the \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String}. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_string_a653e544b5499a1c100a97d9e7f6e7d19}\index{neo::io::ByteString@{neo::io::ByteString}!ToHexString@{ToHexString}}
+\index{ToHexString@{ToHexString}!neo::io::ByteString@{neo::io::ByteString}}
+\doxysubsubsection{\texorpdfstring{ToHexString()}{ToHexString()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_string_a653e544b5499a1c100a97d9e7f6e7d19} 
+std\+::string neo\+::io\+::\+Byte\+String\+::\+To\+Hex\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts the \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String} to a hexadecimal string. 
+
+\begin{DoxyReturn}{Returns}
+The hexadecimal string representation of the \doxylink{classneo_1_1io_1_1_byte_string}{Byte\+String}. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1io_1_1_byte_string_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc}\index{neo::io::ByteString@{neo::io::ByteString}!data\_@{data\_}}
+\index{data\_@{data\_}!neo::io::ByteString@{neo::io::ByteString}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_string_a9861c461c59b0526bf9db85d6b9ecddc} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}}$>$ neo\+::io\+::\+Byte\+String\+::data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/io/\mbox{\hyperlink{byte__string_8h}{byte\+\_\+string.\+h}}\end{DoxyCompactItemize}

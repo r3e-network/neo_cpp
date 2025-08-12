@@ -1,0 +1,171 @@
+\doxysection{neo\+::cryptography\+::Merkle\+Tree Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1_merkle_tree}{}\label{classneo_1_1cryptography_1_1_merkle_tree}\index{neo::cryptography::MerkleTree@{neo::cryptography::MerkleTree}}
+
+
+Represents a Merkle tree.  
+
+
+
+
+{\ttfamily \#include $<$merkletree.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_merkle_tree_a3492b2be41a5d8355d18094b0b05df89}{Compute\+Root\+Optional}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&hashes)
+\begin{DoxyCompactList}\small\item\em Computes the Merkle root of the specified hashes. \end{DoxyCompactList}\item 
+static std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_merkle_tree_adfd125fede5eb5a5791bdbd453b93824}{Compute\+Path}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&hashes, size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Computes the Merkle path of the specified leaf hash. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1cryptography_1_1_merkle_tree_a5f309d4f5f950337235c61e830f23ed0}{Verify\+Path}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&leaf, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&path, size\+\_\+t index, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&root)
+\begin{DoxyCompactList}\small\item\em Verifies the Merkle path of the specified leaf hash. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_merkle_tree_a7ff59d2461b31524567790673ba5e7cc}{Compute\+Root}} (std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ hashes)
+\begin{DoxyCompactList}\small\item\em Computes the Merkle root of the specified hashes. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_merkle_tree_a3c921ec593629214541ff6d5a6654f44}{Compute\+Parent}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&left, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&right)
+\begin{DoxyCompactList}\small\item\em Computes the parent hash of the specified left and right hashes. \end{DoxyCompactList}\item 
+static std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_merkle_tree_a2ace479e156ff9d991ced12579c4bf14}{Get\+Proof}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&hashes, size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Gets the Merkle proof for a specific element. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a Merkle tree. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1_merkle_tree_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_merkle_tree_a3c921ec593629214541ff6d5a6654f44}\index{neo::cryptography::MerkleTree@{neo::cryptography::MerkleTree}!ComputeParent@{ComputeParent}}
+\index{ComputeParent@{ComputeParent}!neo::cryptography::MerkleTree@{neo::cryptography::MerkleTree}}
+\doxysubsubsection{\texorpdfstring{ComputeParent()}{ComputeParent()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_merkle_tree_a3c921ec593629214541ff6d5a6654f44} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::cryptography\+::\+Merkle\+Tree\+::\+Compute\+Parent (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{left}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the parent hash of the specified left and right hashes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & The left hash. \\
+\hline
+{\em right} & The right hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The parent hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1cryptography_1_1_merkle_tree_adfd125fede5eb5a5791bdbd453b93824}\index{neo::cryptography::MerkleTree@{neo::cryptography::MerkleTree}!ComputePath@{ComputePath}}
+\index{ComputePath@{ComputePath}!neo::cryptography::MerkleTree@{neo::cryptography::MerkleTree}}
+\doxysubsubsection{\texorpdfstring{ComputePath()}{ComputePath()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_merkle_tree_adfd125fede5eb5a5791bdbd453b93824} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ neo\+::cryptography\+::\+Merkle\+Tree\+::\+Compute\+Path (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&}]{hashes}{, }\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the Merkle path of the specified leaf hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hashes} & The hashes. \\
+\hline
+{\em index} & The index of the leaf hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Merkle path. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & if the index is out of range. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1cryptography_1_1_merkle_tree_a7ff59d2461b31524567790673ba5e7cc}\index{neo::cryptography::MerkleTree@{neo::cryptography::MerkleTree}!ComputeRoot@{ComputeRoot}}
+\index{ComputeRoot@{ComputeRoot}!neo::cryptography::MerkleTree@{neo::cryptography::MerkleTree}}
+\doxysubsubsection{\texorpdfstring{ComputeRoot()}{ComputeRoot()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_merkle_tree_a7ff59d2461b31524567790673ba5e7cc} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::cryptography\+::\+Merkle\+Tree\+::\+Compute\+Root (\begin{DoxyParamCaption}\item[{std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$}]{hashes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the Merkle root of the specified hashes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hashes} & The hashes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Merkle root. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cryptography_1_1_merkle_tree_a3492b2be41a5d8355d18094b0b05df89}\index{neo::cryptography::MerkleTree@{neo::cryptography::MerkleTree}!ComputeRootOptional@{ComputeRootOptional}}
+\index{ComputeRootOptional@{ComputeRootOptional}!neo::cryptography::MerkleTree@{neo::cryptography::MerkleTree}}
+\doxysubsubsection{\texorpdfstring{ComputeRootOptional()}{ComputeRootOptional()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_merkle_tree_a3492b2be41a5d8355d18094b0b05df89} 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ neo\+::cryptography\+::\+Merkle\+Tree\+::\+Compute\+Root\+Optional (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&}]{hashes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the Merkle root of the specified hashes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hashes} & The hashes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Merkle root, or std\+::nullopt if the hashes vector is empty. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1_merkle_tree_a2ace479e156ff9d991ced12579c4bf14}\index{neo::cryptography::MerkleTree@{neo::cryptography::MerkleTree}!GetProof@{GetProof}}
+\index{GetProof@{GetProof}!neo::cryptography::MerkleTree@{neo::cryptography::MerkleTree}}
+\doxysubsubsection{\texorpdfstring{GetProof()}{GetProof()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_merkle_tree_a2ace479e156ff9d991ced12579c4bf14} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ neo\+::cryptography\+::\+Merkle\+Tree\+::\+Get\+Proof (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&}]{hashes}{, }\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the Merkle proof for a specific element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hashes} & The hashes. \\
+\hline
+{\em index} & The index of the element to get proof for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Merkle proof path. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cryptography_1_1_merkle_tree_a5f309d4f5f950337235c61e830f23ed0}\index{neo::cryptography::MerkleTree@{neo::cryptography::MerkleTree}!VerifyPath@{VerifyPath}}
+\index{VerifyPath@{VerifyPath}!neo::cryptography::MerkleTree@{neo::cryptography::MerkleTree}}
+\doxysubsubsection{\texorpdfstring{VerifyPath()}{VerifyPath()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_merkle_tree_a5f309d4f5f950337235c61e830f23ed0} 
+bool neo\+::cryptography\+::\+Merkle\+Tree\+::\+Verify\+Path (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{leaf}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&}]{path}{, }\item[{size\+\_\+t}]{index}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{root}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Verifies the Merkle path of the specified leaf hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em leaf} & The leaf hash. \\
+\hline
+{\em path} & The Merkle path. \\
+\hline
+{\em index} & The index of the leaf hash. \\
+\hline
+{\em root} & The Merkle root. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Merkle path is valid, false otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/\mbox{\hyperlink{merkletree_8h}{merkletree.\+h}}\item 
+src/cryptography/\mbox{\hyperlink{merkletree_8cpp}{merkletree.\+cpp}}\end{DoxyCompactItemize}

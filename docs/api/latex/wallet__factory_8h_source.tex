@@ -1,0 +1,48 @@
+\doxysection{wallet\+\_\+factory.\+h}
+\hypertarget{wallet__factory_8h_source}{}\label{wallet__factory_8h_source}\index{include/neo/wallets/wallet\_factory.h@{include/neo/wallets/wallet\_factory.h}}
+\mbox{\hyperlink{wallet__factory_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{wallet_8h}{neo/wallets/wallet.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1wallets}{neo::wallets}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory}{WalletFactory}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_a4b00e8fc1a9ea91658fca34ef5f79347}{\string~WalletFactory}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_abac6194b1ae4fbff09e236bb6ab38179}{CanHandle}}(\textcolor{keyword}{const}\ std::string\&\ path)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{virtual}\ std::shared\_ptr<Wallet>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_a4cd447c2b24414ca8a1712dd0ddae48b}{CreateWallet}}(\textcolor{keyword}{const}\ std::string\&\ path,\ \textcolor{keyword}{const}\ std::string\&\ password,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ name)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{virtual}\ std::shared\_ptr<Wallet>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_a0877e12449ee4965a9631db760f4d95e}{OpenWallet}}(\textcolor{keyword}{const}\ std::string\&\ path,\ \textcolor{keyword}{const}\ std::string\&\ password)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00046\ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00051\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager_a5b530023d39f7431e98f5d0d840b8c6a}{WalletFactoryManager}}}
+\DoxyCodeLine{00052\ \{}
+\DoxyCodeLine{00053\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager_a5b530023d39f7431e98f5d0d840b8c6a}{WalletFactoryManager}}\&\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager_af9da082261ad4bab022fee39ac271e22}{GetInstance}}();}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager_ad9de26823a776647f0f21eddd9041c39}{RegisterFactory}}(std::shared\_ptr<WalletFactory>\ factory);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00071\ \ \ \ \ std::shared\_ptr<WalletFactory>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager_ae4a44ad01f9602c7b71a8c07722b2c68}{GetFactory}}(\textcolor{keyword}{const}\ std::string\&\ path)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00080\ \ \ \ \ std::shared\_ptr<Wallet>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager_aec124b5677f532f21552e87b9576174f}{CreateWallet}}(\textcolor{keyword}{const}\ std::string\&\ path,\ \textcolor{keyword}{const}\ std::string\&\ password,}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ name)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00089\ \ \ \ \ std::shared\_ptr<Wallet>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager_a6fa573598a220e3ed9414fd2d3173583}{OpenWallet}}(\textcolor{keyword}{const}\ std::string\&\ path,\ \textcolor{keyword}{const}\ std::string\&\ password)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager_a5b530023d39f7431e98f5d0d840b8c6a}{WalletFactoryManager}}();}
+\DoxyCodeLine{00093\ \ \ \ \ std::vector<std::shared\_ptr<WalletFactory>>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager_adaacb6db5eb3cdd2bf2d4a415954ff27}{factories\_}};}
+\DoxyCodeLine{00094\ \};}
+\DoxyCodeLine{00095\ \}\ \ \textcolor{comment}{//\ namespace\ neo::wallets}}
+
+\end{DoxyCode}

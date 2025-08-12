@@ -1,0 +1,308 @@
+\doxysection{neo\+::ledger\+::Block\+Storage Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_block_storage}{}\label{classneo_1_1ledger_1_1_block_storage}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+
+
+Handles block storage and retrieval.  
+
+
+
+
+{\ttfamily \#include $<$block\+\_\+storage.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a078467efe93263e5cbca3023d385536b}{Block\+Storage}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ data\+Cache)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1ledger_1_1_block_storage}{Block\+Storage}. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a044f560af514e64eb29965e3078fc3f7}{Get\+Block}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets a block by hash. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a759c3cf5e0dd6a6be62241d2c1518b2d}{Get\+Block}} (uint32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets a block by index. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{Block\+Header}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a5d8aa35025d8ec77697ea76a51792e5e}{Get\+Block\+Header}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets a block header by hash. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{Block\+Header}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a038d2ae098c762fc4ac70c6a6c1a141e}{Get\+Block\+Header}} (uint32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets a block header by index. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a7b821e58c4dcd2f946c8b14f2d7de7d2}{Add\+Block}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} \&block, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot)
+\begin{DoxyCompactList}\small\item\em Adds a block to storage. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a1da3501b29dffb634e9379c163595528}{Add\+Block\+Header}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{Block\+Header}} \&header, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot)
+\begin{DoxyCompactList}\small\item\em Adds a block header to storage. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_af6a6c5aa77fc99eceef132974d133910}{Contains\+Block}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Checks if a block exists. \end{DoxyCompactList}\item 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a0f208cfc6a059e04271156b15c064d50}{Get\+Block\+Hash}} (uint32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets the hash of a block by index. \end{DoxyCompactList}\item 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a0863d93f810b8e4541769555b0c01a2d}{Get\+Next\+Block\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets the next block hash. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a3cbdd138499c9b08f75f5e8181401099}{data\+Cache\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a30d73d9f4932af97a6ddf1662256b66d}{mutex\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a56e088cbdfd3eb7d2e0e60a192fd207d}{blocks\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{Block\+Header}} $>$ $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_ada301870ab80548d8cd89eb5bdd8f8b4}{headers\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ uint32\+\_\+t, \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a0638d5d3fde2ba890a8ce3e25427188b}{block\+Hashes\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a0556bf8c2674a58eaff05108ee125053}{next\+Block\+Hashes\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles block storage and retrieval. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_a078467efe93263e5cbca3023d385536b}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}!BlockStorage@{BlockStorage}}
+\index{BlockStorage@{BlockStorage}!neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+\doxysubsubsection{\texorpdfstring{BlockStorage()}{BlockStorage()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_storage_a078467efe93263e5cbca3023d385536b} 
+neo\+::ledger\+::\+Block\+Storage\+::\+Block\+Storage (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{data\+Cache}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1ledger_1_1_block_storage}{Block\+Storage}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+Cache} & The data cache. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_a7b821e58c4dcd2f946c8b14f2d7de7d2}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}!AddBlock@{AddBlock}}
+\index{AddBlock@{AddBlock}!neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+\doxysubsubsection{\texorpdfstring{AddBlock()}{AddBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_storage_a7b821e58c4dcd2f946c8b14f2d7de7d2} 
+bool neo\+::ledger\+::\+Block\+Storage\+::\+Add\+Block (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} \&}]{block}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption})}
+
+
+
+Adds a block to storage. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block to add. \\
+\hline
+{\em snapshot} & The snapshot to use. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the block was added, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_a1da3501b29dffb634e9379c163595528}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}!AddBlockHeader@{AddBlockHeader}}
+\index{AddBlockHeader@{AddBlockHeader}!neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+\doxysubsubsection{\texorpdfstring{AddBlockHeader()}{AddBlockHeader()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_storage_a1da3501b29dffb634e9379c163595528} 
+bool neo\+::ledger\+::\+Block\+Storage\+::\+Add\+Block\+Header (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{Block\+Header}} \&}]{header}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption})}
+
+
+
+Adds a block header to storage. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em header} & The block header to add. \\
+\hline
+{\em snapshot} & The snapshot to use. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the block header was added, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_af6a6c5aa77fc99eceef132974d133910}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}!ContainsBlock@{ContainsBlock}}
+\index{ContainsBlock@{ContainsBlock}!neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+\doxysubsubsection{\texorpdfstring{ContainsBlock()}{ContainsBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_storage_af6a6c5aa77fc99eceef132974d133910} 
+bool neo\+::ledger\+::\+Block\+Storage\+::\+Contains\+Block (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if a block exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the block exists, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_a044f560af514e64eb29965e3078fc3f7}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}!GetBlock@{GetBlock}}
+\index{GetBlock@{GetBlock}!neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+\doxysubsubsection{\texorpdfstring{GetBlock()}{GetBlock()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_storage_a044f560af514e64eb29965e3078fc3f7} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ neo\+::ledger\+::\+Block\+Storage\+::\+Get\+Block (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a block by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block, or nullptr if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_a759c3cf5e0dd6a6be62241d2c1518b2d}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}!GetBlock@{GetBlock}}
+\index{GetBlock@{GetBlock}!neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+\doxysubsubsection{\texorpdfstring{GetBlock()}{GetBlock()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_storage_a759c3cf5e0dd6a6be62241d2c1518b2d} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ neo\+::ledger\+::\+Block\+Storage\+::\+Get\+Block (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a block by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block, or nullptr if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_a0f208cfc6a059e04271156b15c064d50}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}!GetBlockHash@{GetBlockHash}}
+\index{GetBlockHash@{GetBlockHash}!neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+\doxysubsubsection{\texorpdfstring{GetBlockHash()}{GetBlockHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_storage_a0f208cfc6a059e04271156b15c064d50} 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ neo\+::ledger\+::\+Block\+Storage\+::\+Get\+Block\+Hash (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the hash of a block by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The hash of the block, or std\+::nullopt if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_a5d8aa35025d8ec77697ea76a51792e5e}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}!GetBlockHeader@{GetBlockHeader}}
+\index{GetBlockHeader@{GetBlockHeader}!neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+\doxysubsubsection{\texorpdfstring{GetBlockHeader()}{GetBlockHeader()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_storage_a5d8aa35025d8ec77697ea76a51792e5e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{Block\+Header}} $>$ neo\+::ledger\+::\+Block\+Storage\+::\+Get\+Block\+Header (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a block header by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block header, or nullptr if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_a038d2ae098c762fc4ac70c6a6c1a141e}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}!GetBlockHeader@{GetBlockHeader}}
+\index{GetBlockHeader@{GetBlockHeader}!neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+\doxysubsubsection{\texorpdfstring{GetBlockHeader()}{GetBlockHeader()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_storage_a038d2ae098c762fc4ac70c6a6c1a141e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{Block\+Header}} $>$ neo\+::ledger\+::\+Block\+Storage\+::\+Get\+Block\+Header (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a block header by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block header, or nullptr if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_a0863d93f810b8e4541769555b0c01a2d}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}!GetNextBlockHash@{GetNextBlockHash}}
+\index{GetNextBlockHash@{GetNextBlockHash}!neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+\doxysubsubsection{\texorpdfstring{GetNextBlockHash()}{GetNextBlockHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_storage_a0863d93f810b8e4541769555b0c01a2d} 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ neo\+::ledger\+::\+Block\+Storage\+::\+Get\+Next\+Block\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the next block hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the current block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The hash of the next block, or std\+::nullopt if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_a0638d5d3fde2ba890a8ce3e25427188b}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}!blockHashes\_@{blockHashes\_}}
+\index{blockHashes\_@{blockHashes\_}!neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+\doxysubsubsection{\texorpdfstring{blockHashes\_}{blockHashes\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_storage_a0638d5d3fde2ba890a8ce3e25427188b} 
+std\+::unordered\+\_\+map$<$uint32\+\_\+t, \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}$>$ neo\+::ledger\+::\+Block\+Storage\+::block\+Hashes\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_a56e088cbdfd3eb7d2e0e60a192fd207d}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}!blocks\_@{blocks\_}}
+\index{blocks\_@{blocks\_}!neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+\doxysubsubsection{\texorpdfstring{blocks\_}{blocks\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_storage_a56e088cbdfd3eb7d2e0e60a192fd207d} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}}$>$ $>$ neo\+::ledger\+::\+Block\+Storage\+::blocks\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_a3cbdd138499c9b08f75f5e8181401099}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}!dataCache\_@{dataCache\_}}
+\index{dataCache\_@{dataCache\_}!neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+\doxysubsubsection{\texorpdfstring{dataCache\_}{dataCache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_storage_a3cbdd138499c9b08f75f5e8181401099} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}}$>$ neo\+::ledger\+::\+Block\+Storage\+::data\+Cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_ada301870ab80548d8cd89eb5bdd8f8b4}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}!headers\_@{headers\_}}
+\index{headers\_@{headers\_}!neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+\doxysubsubsection{\texorpdfstring{headers\_}{headers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_storage_ada301870ab80548d8cd89eb5bdd8f8b4} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{Block\+Header}}$>$ $>$ neo\+::ledger\+::\+Block\+Storage\+::headers\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_a30d73d9f4932af97a6ddf1662256b66d}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_storage_a30d73d9f4932af97a6ddf1662256b66d} 
+std\+::mutex neo\+::ledger\+::\+Block\+Storage\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_block_storage_a0556bf8c2674a58eaff05108ee125053}\index{neo::ledger::BlockStorage@{neo::ledger::BlockStorage}!nextBlockHashes\_@{nextBlockHashes\_}}
+\index{nextBlockHashes\_@{nextBlockHashes\_}!neo::ledger::BlockStorage@{neo::ledger::BlockStorage}}
+\doxysubsubsection{\texorpdfstring{nextBlockHashes\_}{nextBlockHashes\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_block_storage_a0556bf8c2674a58eaff05108ee125053} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}$>$ neo\+::ledger\+::\+Block\+Storage\+::next\+Block\+Hashes\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{block__storage_8h}{block\+\_\+storage.\+h}}\item 
+src/ledger/\mbox{\hyperlink{block__storage_8cpp}{block\+\_\+storage.\+cpp}}\end{DoxyCompactItemize}

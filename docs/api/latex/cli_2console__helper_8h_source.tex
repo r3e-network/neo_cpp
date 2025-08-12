@@ -1,0 +1,46 @@
+\doxysection{console\+\_\+helper.\+h}
+\hypertarget{cli_2console__helper_8h_source}{}\label{cli_2console__helper_8h_source}\index{include/neo/cli/console\_helper.h@{include/neo/cli/console\_helper.h}}
+\mbox{\hyperlink{cli_2console__helper_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cli}{neo::cli}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cli_1_1_console_helper}{ConsoleHelper}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_a6d48e1c45f338bd842bf7fa6bf00b0d9}{Info}}(\textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_ac3ec7b1362555499592739354105f6f1}{Error}}(\textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_a21ffadc58d20bda16ebf347a0b3efa50}{Warning}}(\textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_a69d524c18d678bdba7478cae3a16d9d9}{Success}}(\textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_a2a27c6da155111aeb2c81520654b5e4c}{ReadLine}}(\textcolor{keyword}{const}\ std::string\&\ prompt\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_a9ae9feae6c7d9484b9e06e5c5947357f}{ReadPassword}}(\textcolor{keyword}{const}\ std::string\&\ prompt\ =\ \textcolor{stringliteral}{"{}Password:\ "{}});}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_a8c77cdac34d556a2a11447e319bb8680}{Clear}}();}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_ad263bec77ecce8013dddb817efef151f}{SetColor}}(\textcolor{keywordtype}{int}\ color);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_aa19a32aa086b8165b918589106658595}{ResetColor}}();}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{comment}{//\ Console\ color\ codes}}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_acbb63a9027f5fc51de0de85a5900ec8b}{COLOR\_DEFAULT}}\ =\ 0;}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_a59b5f3abc3671fbb1dc6c7c8a0e42f9e}{COLOR\_RED}}\ =\ 1;}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_a7955bca79de4c15f06068be7b28aadd8}{COLOR\_GREEN}}\ =\ 2;}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_ad8ae1b405310940bcb9070607ac2ae50}{COLOR\_YELLOW}}\ =\ 3;}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_aea75ac11b0697cf9f7b34f2300f372e5}{COLOR\_BLUE}}\ =\ 4;}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_a387a25f889e65b0c03ecb70a05cf1c1d}{COLOR\_MAGENTA}}\ =\ 5;}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_a3f645141333332dfec8fc77690ea86b6}{COLOR\_CYAN}}\ =\ 6;}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper_aede0bc7d2c6419e63413d18ff26f2952}{COLOR\_WHITE}}\ =\ 7;}
+\DoxyCodeLine{00078\ \};}
+\DoxyCodeLine{00079\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cli}}
+
+\end{DoxyCode}

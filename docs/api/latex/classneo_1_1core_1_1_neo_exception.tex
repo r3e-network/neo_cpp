@@ -1,0 +1,449 @@
+\doxysection{neo\+::core\+::Neo\+Exception Class Reference}
+\hypertarget{classneo_1_1core_1_1_neo_exception}{}\label{classneo_1_1core_1_1_neo_exception}\index{neo::core::NeoException@{neo::core::NeoException}}
+
+
+Base exception class for all Neo-\/specific exceptions.  
+
+
+
+
+{\ttfamily \#include $<$exceptions.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::core\+::Neo\+Exception\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::core\+::Neo\+Exception\+:
+% FIG 1
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}} \+: uint32\+\_\+t \{ \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9a10f345b0f755d461a8673a5e9ef6b4}{UNKNOWN\+\_\+\+ERROR}} = 1000
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af295a0c3e37c94f078e1c5476479132d}{INVALID\+\_\+\+ARGUMENT}} = 1001
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a5e6a8de74c8f7d4b04d91a3dc3bf7659}{INVALID\+\_\+\+STATE}} = 1002
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad07995fa8f4a3a019d134fcbfca4669a}{NOT\+\_\+\+AVAILABLE}} = 1003
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6feaf66704b269610cff9431d5519cad}{OUT\+\_\+\+OF\+\_\+\+RANGE}} = 1004
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a070a0fb40f6c308ab544b227660aadff}{TIMEOUT}} = 1005
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6b03470e24be0d9a73494f9491575db3}{SERIALIZATION\+\_\+\+ERROR}} = 2000
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aaf7685d125c5b33467c4f7783cb22e29}{DESERIALIZATION\+\_\+\+ERROR}} = 2001
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a252d8e34178da47f2208605a66051241}{INVALID\+\_\+\+FORMAT}} = 2002
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad53c9f7d5b985bba6cb80cdf8ae665e4}{BUFFER\+\_\+\+OVERFLOW}} = 2003
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af83ed13db581f1569713429e43a96bb2}{BUFFER\+\_\+\+UNDERFLOW}} = 2004
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad8e13f08667a0b31e93bd54a7302e91d}{CRYPTO\+\_\+\+ERROR}} = 3000
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a14eddb1ed548833eb26b0325f17b967e}{INVALID\+\_\+\+KEY}} = 3001
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad0eb6b378baae0b4b64c2933674e61fc}{INVALID\+\_\+\+SIGNATURE}} = 3002
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a3328769dfe2ed33f689689663ff18877}{HASH\+\_\+\+CALCULATION\+\_\+\+FAILED}} = 3003
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6dccefab5234f98839821f3106e8e3e3}{ENCRYPTION\+\_\+\+FAILED}} = 3004
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ac32948a3a3b3b746526320f675f6c583}{DECRYPTION\+\_\+\+FAILED}} = 3005
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a547ba52b62f9302ee1b6950111c36f9f}{NETWORK\+\_\+\+ERROR}} = 4000
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a042ec2cfe6c78a6a49b3a6555302947c}{CONNECTION\+\_\+\+FAILED}} = 4001
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a4ca5a319d1b3065c5f8fc8b20e69f0ce}{INVALID\+\_\+\+MESSAGE}} = 4002
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aa224afc9af395429edad294f94a9ae14}{PROTOCOL\+\_\+\+VIOLATION}} = 4003
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a002982bd4378347e2a41ce37bb95f17d}{PEER\+\_\+\+DISCONNECTED}} = 4004
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1caaf6711640dcf25bee1a8a8dc9236d}{BLOCKCHAIN\+\_\+\+ERROR}} = 5000
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a2ec46db67908a0fa69ee0c7558c4bc8f}{INVALID\+\_\+\+BLOCK}} = 5001
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1dd057fa369b981429d016ad2fb12de7}{INVALID\+\_\+\+TRANSACTION}} = 5002
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aaac4d4690679f0c9c4c65d6bcf36214f}{CONSENSUS\+\_\+\+FAILURE}} = 5003
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a4eed0177f2593a164543593202187281}{VERIFICATION\+\_\+\+FAILED}} = 5004
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad93c4d456f42793a014f8d32aa437962}{INVALID\+\_\+\+CONTRACT}} = 5005
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a7ae7f2a13f0d5a18b0db91af9c5aef34}{STORAGE\+\_\+\+ERROR}} = 6000
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1f14ca382a4431d278aba810e59070c1}{KEY\+\_\+\+NOT\+\_\+\+FOUND}} = 6001
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9424c68422cd1dc9bbd817cea013bb1d}{STORAGE\+\_\+\+CORRUPTION}} = 6002
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af50f3ad3a92a014d1f69bcaa20e67b32}{INSUFFICIENT\+\_\+\+SPACE}} = 6003
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a2eaec33b2d6224f90e7222e4b7a49183}{ACCESS\+\_\+\+DENIED}} = 6004
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a15af281710fb0b50726a2b6f560db9c6}{VM\+\_\+\+ERROR}} = 7000
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aaf5dcc114f4d3618802f0cd7bad2ccd8}{STACK\+\_\+\+OVERFLOW}} = 7001
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a4a0a7f755cbb064fb44e2201ab5c57c4}{STACK\+\_\+\+UNDERFLOW}} = 7002
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a78e364cbd50bcd6e731cc156bded135e}{INVALID\+\_\+\+OPCODE}} = 7003
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab23f1844d7ffdcacd50686f46c0345dc}{EXECUTION\+\_\+\+TIMEOUT}} = 7004
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a917fc6224ece5d998c2602aaa7ea3d8b}{OUT\+\_\+\+OF\+\_\+\+GAS}} = 7005
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9edfc5e4293ea1de2e980b0200a48db4}{CONTRACT\+\_\+\+ERROR}} = 8000
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1a9326f1eb071f13673054b74eb95feb}{CONTRACT\+\_\+\+NOT\+\_\+\+FOUND}} = 8001
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab0bf8bc74a483faf7290985969175419}{CONTRACT\+\_\+\+EXECUTION\+\_\+\+FAILED}} = 8002
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab478fed760f994b2ecf33a6e23402ed5}{INVALID\+\_\+\+CONTRACT\+\_\+\+STATE}} = 8003
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a08882b2afdb1b387f4af528ee0005ab3}{WALLET\+\_\+\+ERROR}} = 9000
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab11372f0cbdfce0208b24001349a60b8}{WALLET\+\_\+\+NOT\+\_\+\+FOUND}} = 9001
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af3291c3248dc6fad08d3c6eaa7c87332}{WALLET\+\_\+\+LOCKED}} = 9002
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a15f5afe7f7c311db6b8a5e549081d671}{INVALID\+\_\+\+PASSWORD}} = 9003
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aed37ceb30665ea11467e944311ffe598}{INSUFFICIENT\+\_\+\+FUNDS}} = 9004
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{Neo\+Exception}} (\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}} code, const std\+::string \&message, const std\+::string \&context="{}"{})
+\begin{DoxyCompactList}\small\item\em Construct a new Neo Exception. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}} \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_af071bd842839f2d8192e6999f23fb08e}{Get\+Error\+Code}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Get the error code. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a46f921257b699d6301a426b242973375}{Get\+Original\+Message}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Get the original message without formatting. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a3c956a25c4699bde2067bda176dcec0e}{Get\+Context}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Get the context information. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_ad58f1d173cfb1122460d3f92486f0ed9}{Error\+Code\+To\+String}} (\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}} code)
+\begin{DoxyCompactList}\small\item\em Convert error code to string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_aefbf7a0000f4d6e61b05bc27ec3c961f}{Format\+Message}} (\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}} code, const std\+::string \&message, const std\+::string \&context)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}} \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a60a71444b6c6d5e8938a1a00e1a9c8d5}{error\+\_\+code\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_aff706d3df4d7c39531931069f0ac319a}{original\+\_\+message\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a1486aa7564bd5e7519c267fa22895b3c}{context\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base exception class for all Neo-\/specific exceptions. 
+
+Provides a consistent error handling framework with error codes, detailed messages, and context information for debugging and logging. 
+
+\label{doc-enum-members}
+\Hypertarget{classneo_1_1core_1_1_neo_exception_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}\index{neo::core::NeoException@{neo::core::NeoException}!ErrorCode@{ErrorCode}}
+\index{ErrorCode@{ErrorCode}!neo::core::NeoException@{neo::core::NeoException}}
+\doxysubsubsection{\texorpdfstring{ErrorCode}{ErrorCode}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8} 
+enum class \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{neo\+::core\+::\+Neo\+Exception\+::\+Error\+Code}} \+: uint32\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{UNKNOWN\_ERROR@{UNKNOWN\_ERROR}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!UNKNOWN\_ERROR@{UNKNOWN\_ERROR}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9a10f345b0f755d461a8673a5e9ef6b4}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9a10f345b0f755d461a8673a5e9ef6b4} 
+UNKNOWN\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_ARGUMENT@{INVALID\_ARGUMENT}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!INVALID\_ARGUMENT@{INVALID\_ARGUMENT}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af295a0c3e37c94f078e1c5476479132d}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af295a0c3e37c94f078e1c5476479132d} 
+INVALID\+\_\+\+ARGUMENT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_STATE@{INVALID\_STATE}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!INVALID\_STATE@{INVALID\_STATE}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a5e6a8de74c8f7d4b04d91a3dc3bf7659}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a5e6a8de74c8f7d4b04d91a3dc3bf7659} 
+INVALID\+\_\+\+STATE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NOT\_AVAILABLE@{NOT\_AVAILABLE}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!NOT\_AVAILABLE@{NOT\_AVAILABLE}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad07995fa8f4a3a019d134fcbfca4669a}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad07995fa8f4a3a019d134fcbfca4669a} 
+NOT\+\_\+\+AVAILABLE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OUT\_OF\_RANGE@{OUT\_OF\_RANGE}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!OUT\_OF\_RANGE@{OUT\_OF\_RANGE}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6feaf66704b269610cff9431d5519cad}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6feaf66704b269610cff9431d5519cad} 
+OUT\+\_\+\+OF\+\_\+\+RANGE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{TIMEOUT@{TIMEOUT}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!TIMEOUT@{TIMEOUT}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a070a0fb40f6c308ab544b227660aadff}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a070a0fb40f6c308ab544b227660aadff} 
+TIMEOUT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SERIALIZATION\_ERROR@{SERIALIZATION\_ERROR}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!SERIALIZATION\_ERROR@{SERIALIZATION\_ERROR}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6b03470e24be0d9a73494f9491575db3}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6b03470e24be0d9a73494f9491575db3} 
+SERIALIZATION\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DESERIALIZATION\_ERROR@{DESERIALIZATION\_ERROR}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!DESERIALIZATION\_ERROR@{DESERIALIZATION\_ERROR}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aaf7685d125c5b33467c4f7783cb22e29}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aaf7685d125c5b33467c4f7783cb22e29} 
+DESERIALIZATION\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_FORMAT@{INVALID\_FORMAT}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!INVALID\_FORMAT@{INVALID\_FORMAT}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a252d8e34178da47f2208605a66051241}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a252d8e34178da47f2208605a66051241} 
+INVALID\+\_\+\+FORMAT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BUFFER\_OVERFLOW@{BUFFER\_OVERFLOW}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!BUFFER\_OVERFLOW@{BUFFER\_OVERFLOW}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad53c9f7d5b985bba6cb80cdf8ae665e4}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad53c9f7d5b985bba6cb80cdf8ae665e4} 
+BUFFER\+\_\+\+OVERFLOW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BUFFER\_UNDERFLOW@{BUFFER\_UNDERFLOW}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!BUFFER\_UNDERFLOW@{BUFFER\_UNDERFLOW}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af83ed13db581f1569713429e43a96bb2}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af83ed13db581f1569713429e43a96bb2} 
+BUFFER\+\_\+\+UNDERFLOW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CRYPTO\_ERROR@{CRYPTO\_ERROR}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!CRYPTO\_ERROR@{CRYPTO\_ERROR}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad8e13f08667a0b31e93bd54a7302e91d}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad8e13f08667a0b31e93bd54a7302e91d} 
+CRYPTO\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_KEY@{INVALID\_KEY}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!INVALID\_KEY@{INVALID\_KEY}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a14eddb1ed548833eb26b0325f17b967e}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a14eddb1ed548833eb26b0325f17b967e} 
+INVALID\+\_\+\+KEY&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_SIGNATURE@{INVALID\_SIGNATURE}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!INVALID\_SIGNATURE@{INVALID\_SIGNATURE}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad0eb6b378baae0b4b64c2933674e61fc}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad0eb6b378baae0b4b64c2933674e61fc} 
+INVALID\+\_\+\+SIGNATURE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HASH\_CALCULATION\_FAILED@{HASH\_CALCULATION\_FAILED}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!HASH\_CALCULATION\_FAILED@{HASH\_CALCULATION\_FAILED}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a3328769dfe2ed33f689689663ff18877}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a3328769dfe2ed33f689689663ff18877} 
+HASH\+\_\+\+CALCULATION\+\_\+\+FAILED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ENCRYPTION\_FAILED@{ENCRYPTION\_FAILED}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!ENCRYPTION\_FAILED@{ENCRYPTION\_FAILED}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6dccefab5234f98839821f3106e8e3e3}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6dccefab5234f98839821f3106e8e3e3} 
+ENCRYPTION\+\_\+\+FAILED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{DECRYPTION\_FAILED@{DECRYPTION\_FAILED}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!DECRYPTION\_FAILED@{DECRYPTION\_FAILED}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ac32948a3a3b3b746526320f675f6c583}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ac32948a3a3b3b746526320f675f6c583} 
+DECRYPTION\+\_\+\+FAILED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{NETWORK\_ERROR@{NETWORK\_ERROR}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!NETWORK\_ERROR@{NETWORK\_ERROR}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a547ba52b62f9302ee1b6950111c36f9f}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a547ba52b62f9302ee1b6950111c36f9f} 
+NETWORK\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CONNECTION\_FAILED@{CONNECTION\_FAILED}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!CONNECTION\_FAILED@{CONNECTION\_FAILED}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a042ec2cfe6c78a6a49b3a6555302947c}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a042ec2cfe6c78a6a49b3a6555302947c} 
+CONNECTION\+\_\+\+FAILED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_MESSAGE@{INVALID\_MESSAGE}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!INVALID\_MESSAGE@{INVALID\_MESSAGE}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a4ca5a319d1b3065c5f8fc8b20e69f0ce}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a4ca5a319d1b3065c5f8fc8b20e69f0ce} 
+INVALID\+\_\+\+MESSAGE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PROTOCOL\_VIOLATION@{PROTOCOL\_VIOLATION}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!PROTOCOL\_VIOLATION@{PROTOCOL\_VIOLATION}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aa224afc9af395429edad294f94a9ae14}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aa224afc9af395429edad294f94a9ae14} 
+PROTOCOL\+\_\+\+VIOLATION&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PEER\_DISCONNECTED@{PEER\_DISCONNECTED}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!PEER\_DISCONNECTED@{PEER\_DISCONNECTED}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a002982bd4378347e2a41ce37bb95f17d}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a002982bd4378347e2a41ce37bb95f17d} 
+PEER\+\_\+\+DISCONNECTED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BLOCKCHAIN\_ERROR@{BLOCKCHAIN\_ERROR}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!BLOCKCHAIN\_ERROR@{BLOCKCHAIN\_ERROR}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1caaf6711640dcf25bee1a8a8dc9236d}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1caaf6711640dcf25bee1a8a8dc9236d} 
+BLOCKCHAIN\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_BLOCK@{INVALID\_BLOCK}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!INVALID\_BLOCK@{INVALID\_BLOCK}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a2ec46db67908a0fa69ee0c7558c4bc8f}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a2ec46db67908a0fa69ee0c7558c4bc8f} 
+INVALID\+\_\+\+BLOCK&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_TRANSACTION@{INVALID\_TRANSACTION}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!INVALID\_TRANSACTION@{INVALID\_TRANSACTION}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1dd057fa369b981429d016ad2fb12de7}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1dd057fa369b981429d016ad2fb12de7} 
+INVALID\+\_\+\+TRANSACTION&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CONSENSUS\_FAILURE@{CONSENSUS\_FAILURE}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!CONSENSUS\_FAILURE@{CONSENSUS\_FAILURE}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aaac4d4690679f0c9c4c65d6bcf36214f}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aaac4d4690679f0c9c4c65d6bcf36214f} 
+CONSENSUS\+\_\+\+FAILURE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{VERIFICATION\_FAILED@{VERIFICATION\_FAILED}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!VERIFICATION\_FAILED@{VERIFICATION\_FAILED}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a4eed0177f2593a164543593202187281}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a4eed0177f2593a164543593202187281} 
+VERIFICATION\+\_\+\+FAILED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_CONTRACT@{INVALID\_CONTRACT}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!INVALID\_CONTRACT@{INVALID\_CONTRACT}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad93c4d456f42793a014f8d32aa437962}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad93c4d456f42793a014f8d32aa437962} 
+INVALID\+\_\+\+CONTRACT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STORAGE\_ERROR@{STORAGE\_ERROR}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!STORAGE\_ERROR@{STORAGE\_ERROR}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a7ae7f2a13f0d5a18b0db91af9c5aef34}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a7ae7f2a13f0d5a18b0db91af9c5aef34} 
+STORAGE\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{KEY\_NOT\_FOUND@{KEY\_NOT\_FOUND}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!KEY\_NOT\_FOUND@{KEY\_NOT\_FOUND}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1f14ca382a4431d278aba810e59070c1}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1f14ca382a4431d278aba810e59070c1} 
+KEY\+\_\+\+NOT\+\_\+\+FOUND&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STORAGE\_CORRUPTION@{STORAGE\_CORRUPTION}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!STORAGE\_CORRUPTION@{STORAGE\_CORRUPTION}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9424c68422cd1dc9bbd817cea013bb1d}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9424c68422cd1dc9bbd817cea013bb1d} 
+STORAGE\+\_\+\+CORRUPTION&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INSUFFICIENT\_SPACE@{INSUFFICIENT\_SPACE}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!INSUFFICIENT\_SPACE@{INSUFFICIENT\_SPACE}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af50f3ad3a92a014d1f69bcaa20e67b32}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af50f3ad3a92a014d1f69bcaa20e67b32} 
+INSUFFICIENT\+\_\+\+SPACE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ACCESS\_DENIED@{ACCESS\_DENIED}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!ACCESS\_DENIED@{ACCESS\_DENIED}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a2eaec33b2d6224f90e7222e4b7a49183}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a2eaec33b2d6224f90e7222e4b7a49183} 
+ACCESS\+\_\+\+DENIED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{VM\_ERROR@{VM\_ERROR}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!VM\_ERROR@{VM\_ERROR}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a15af281710fb0b50726a2b6f560db9c6}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a15af281710fb0b50726a2b6f560db9c6} 
+VM\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STACK\_OVERFLOW@{STACK\_OVERFLOW}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!STACK\_OVERFLOW@{STACK\_OVERFLOW}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aaf5dcc114f4d3618802f0cd7bad2ccd8}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aaf5dcc114f4d3618802f0cd7bad2ccd8} 
+STACK\+\_\+\+OVERFLOW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{STACK\_UNDERFLOW@{STACK\_UNDERFLOW}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!STACK\_UNDERFLOW@{STACK\_UNDERFLOW}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a4a0a7f755cbb064fb44e2201ab5c57c4}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a4a0a7f755cbb064fb44e2201ab5c57c4} 
+STACK\+\_\+\+UNDERFLOW&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_OPCODE@{INVALID\_OPCODE}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!INVALID\_OPCODE@{INVALID\_OPCODE}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a78e364cbd50bcd6e731cc156bded135e}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a78e364cbd50bcd6e731cc156bded135e} 
+INVALID\+\_\+\+OPCODE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{EXECUTION\_TIMEOUT@{EXECUTION\_TIMEOUT}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!EXECUTION\_TIMEOUT@{EXECUTION\_TIMEOUT}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab23f1844d7ffdcacd50686f46c0345dc}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab23f1844d7ffdcacd50686f46c0345dc} 
+EXECUTION\+\_\+\+TIMEOUT&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OUT\_OF\_GAS@{OUT\_OF\_GAS}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!OUT\_OF\_GAS@{OUT\_OF\_GAS}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a917fc6224ece5d998c2602aaa7ea3d8b}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a917fc6224ece5d998c2602aaa7ea3d8b} 
+OUT\+\_\+\+OF\+\_\+\+GAS&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CONTRACT\_ERROR@{CONTRACT\_ERROR}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!CONTRACT\_ERROR@{CONTRACT\_ERROR}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9edfc5e4293ea1de2e980b0200a48db4}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9edfc5e4293ea1de2e980b0200a48db4} 
+CONTRACT\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CONTRACT\_NOT\_FOUND@{CONTRACT\_NOT\_FOUND}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!CONTRACT\_NOT\_FOUND@{CONTRACT\_NOT\_FOUND}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1a9326f1eb071f13673054b74eb95feb}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1a9326f1eb071f13673054b74eb95feb} 
+CONTRACT\+\_\+\+NOT\+\_\+\+FOUND&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CONTRACT\_EXECUTION\_FAILED@{CONTRACT\_EXECUTION\_FAILED}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!CONTRACT\_EXECUTION\_FAILED@{CONTRACT\_EXECUTION\_FAILED}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab0bf8bc74a483faf7290985969175419}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab0bf8bc74a483faf7290985969175419} 
+CONTRACT\+\_\+\+EXECUTION\+\_\+\+FAILED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_CONTRACT\_STATE@{INVALID\_CONTRACT\_STATE}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!INVALID\_CONTRACT\_STATE@{INVALID\_CONTRACT\_STATE}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab478fed760f994b2ecf33a6e23402ed5}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab478fed760f994b2ecf33a6e23402ed5} 
+INVALID\+\_\+\+CONTRACT\+\_\+\+STATE&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WALLET\_ERROR@{WALLET\_ERROR}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!WALLET\_ERROR@{WALLET\_ERROR}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a08882b2afdb1b387f4af528ee0005ab3}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a08882b2afdb1b387f4af528ee0005ab3} 
+WALLET\+\_\+\+ERROR&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WALLET\_NOT\_FOUND@{WALLET\_NOT\_FOUND}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!WALLET\_NOT\_FOUND@{WALLET\_NOT\_FOUND}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab11372f0cbdfce0208b24001349a60b8}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab11372f0cbdfce0208b24001349a60b8} 
+WALLET\+\_\+\+NOT\+\_\+\+FOUND&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{WALLET\_LOCKED@{WALLET\_LOCKED}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!WALLET\_LOCKED@{WALLET\_LOCKED}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af3291c3248dc6fad08d3c6eaa7c87332}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af3291c3248dc6fad08d3c6eaa7c87332} 
+WALLET\+\_\+\+LOCKED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INVALID\_PASSWORD@{INVALID\_PASSWORD}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!INVALID\_PASSWORD@{INVALID\_PASSWORD}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a15f5afe7f7c311db6b8a5e549081d671}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a15f5afe7f7c311db6b8a5e549081d671} 
+INVALID\+\_\+\+PASSWORD&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{INSUFFICIENT\_FUNDS@{INSUFFICIENT\_FUNDS}!neo::core::NeoException@{neo::core::NeoException}}\index{neo::core::NeoException@{neo::core::NeoException}!INSUFFICIENT\_FUNDS@{INSUFFICIENT\_FUNDS}}}\Hypertarget{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aed37ceb30665ea11467e944311ffe598}\label{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aed37ceb30665ea11467e944311ffe598} 
+INSUFFICIENT\+\_\+\+FUNDS&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1core_1_1_neo_exception_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}\index{neo::core::NeoException@{neo::core::NeoException}!NeoException@{NeoException}}
+\index{NeoException@{NeoException}!neo::core::NeoException@{neo::core::NeoException}}
+\doxysubsubsection{\texorpdfstring{NeoException()}{NeoException()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562} 
+neo\+::core\+::\+Neo\+Exception\+::\+Neo\+Exception (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}}}]{code}{, }\item[{const std\+::string \&}]{message}{, }\item[{const std\+::string \&}]{context}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Construct a new Neo Exception. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & Error code \\
+\hline
+{\em message} & Descriptive error message \\
+\hline
+{\em context} & Additional context information \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1core_1_1_neo_exception_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1core_1_1_neo_exception_ad58f1d173cfb1122460d3f92486f0ed9}\index{neo::core::NeoException@{neo::core::NeoException}!ErrorCodeToString@{ErrorCodeToString}}
+\index{ErrorCodeToString@{ErrorCodeToString}!neo::core::NeoException@{neo::core::NeoException}}
+\doxysubsubsection{\texorpdfstring{ErrorCodeToString()}{ErrorCodeToString()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_neo_exception_ad58f1d173cfb1122460d3f92486f0ed9} 
+std\+::string neo\+::core\+::\+Neo\+Exception\+::\+Error\+Code\+To\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}}}]{code}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert error code to string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & Error code to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+String representation of error code 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_neo_exception_aefbf7a0000f4d6e61b05bc27ec3c961f}\index{neo::core::NeoException@{neo::core::NeoException}!FormatMessage@{FormatMessage}}
+\index{FormatMessage@{FormatMessage}!neo::core::NeoException@{neo::core::NeoException}}
+\doxysubsubsection{\texorpdfstring{FormatMessage()}{FormatMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_neo_exception_aefbf7a0000f4d6e61b05bc27ec3c961f} 
+std\+::string neo\+::core\+::\+Neo\+Exception\+::\+Format\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}}}]{code}{, }\item[{const std\+::string \&}]{message}{, }\item[{const std\+::string \&}]{context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1core_1_1_neo_exception_a3c956a25c4699bde2067bda176dcec0e}\index{neo::core::NeoException@{neo::core::NeoException}!GetContext@{GetContext}}
+\index{GetContext@{GetContext}!neo::core::NeoException@{neo::core::NeoException}}
+\doxysubsubsection{\texorpdfstring{GetContext()}{GetContext()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_neo_exception_a3c956a25c4699bde2067bda176dcec0e} 
+const std\+::string \& neo\+::core\+::\+Neo\+Exception\+::\+Get\+Context (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Get the context information. 
+
+\begin{DoxyReturn}{Returns}
+Context string 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_neo_exception_af071bd842839f2d8192e6999f23fb08e}\index{neo::core::NeoException@{neo::core::NeoException}!GetErrorCode@{GetErrorCode}}
+\index{GetErrorCode@{GetErrorCode}!neo::core::NeoException@{neo::core::NeoException}}
+\doxysubsubsection{\texorpdfstring{GetErrorCode()}{GetErrorCode()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_neo_exception_af071bd842839f2d8192e6999f23fb08e} 
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}} neo\+::core\+::\+Neo\+Exception\+::\+Get\+Error\+Code (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Get the error code. 
+
+\begin{DoxyReturn}{Returns}
+Error code enum value 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_neo_exception_a46f921257b699d6301a426b242973375}\index{neo::core::NeoException@{neo::core::NeoException}!GetOriginalMessage@{GetOriginalMessage}}
+\index{GetOriginalMessage@{GetOriginalMessage}!neo::core::NeoException@{neo::core::NeoException}}
+\doxysubsubsection{\texorpdfstring{GetOriginalMessage()}{GetOriginalMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_neo_exception_a46f921257b699d6301a426b242973375} 
+const std\+::string \& neo\+::core\+::\+Neo\+Exception\+::\+Get\+Original\+Message (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Get the original message without formatting. 
+
+\begin{DoxyReturn}{Returns}
+Original error message 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1core_1_1_neo_exception_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1core_1_1_neo_exception_a1486aa7564bd5e7519c267fa22895b3c}\index{neo::core::NeoException@{neo::core::NeoException}!context\_@{context\_}}
+\index{context\_@{context\_}!neo::core::NeoException@{neo::core::NeoException}}
+\doxysubsubsection{\texorpdfstring{context\_}{context\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_neo_exception_a1486aa7564bd5e7519c267fa22895b3c} 
+std\+::string neo\+::core\+::\+Neo\+Exception\+::context\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_neo_exception_a60a71444b6c6d5e8938a1a00e1a9c8d5}\index{neo::core::NeoException@{neo::core::NeoException}!error\_code\_@{error\_code\_}}
+\index{error\_code\_@{error\_code\_}!neo::core::NeoException@{neo::core::NeoException}}
+\doxysubsubsection{\texorpdfstring{error\_code\_}{error\_code\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_neo_exception_a60a71444b6c6d5e8938a1a00e1a9c8d5} 
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}} neo\+::core\+::\+Neo\+Exception\+::error\+\_\+code\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_neo_exception_aff706d3df4d7c39531931069f0ac319a}\index{neo::core::NeoException@{neo::core::NeoException}!original\_message\_@{original\_message\_}}
+\index{original\_message\_@{original\_message\_}!neo::core::NeoException@{neo::core::NeoException}}
+\doxysubsubsection{\texorpdfstring{original\_message\_}{original\_message\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_neo_exception_aff706d3df4d7c39531931069f0ac319a} 
+std\+::string neo\+::core\+::\+Neo\+Exception\+::original\+\_\+message\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{core_2exceptions_8h}{exceptions.\+h}}\item 
+src/core/\mbox{\hyperlink{exceptions_8cpp}{exceptions.\+cpp}}\end{DoxyCompactItemize}

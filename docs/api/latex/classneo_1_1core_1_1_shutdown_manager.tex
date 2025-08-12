@@ -1,0 +1,269 @@
+\doxysection{neo\+::core\+::Shutdown\+Manager Class Reference}
+\hypertarget{classneo_1_1core_1_1_shutdown_manager}{}\label{classneo_1_1core_1_1_shutdown_manager}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+
+
+Manages graceful shutdown of the application.  
+
+
+
+
+{\ttfamily \#include $<$shutdown\+\_\+manager.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_shutdown_manager_1_1_handler_info}{Handler\+Info}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a5978e483f53f9420eec79deadc7cc9e5}{Shutdown\+Handler}} = std\+::function$<$void()$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a396923cf60d7b88f76d30fdb7ba91e85}{Register\+Handler}} (const std\+::string \&name, \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a5978e483f53f9420eec79deadc7cc9e5}{Shutdown\+Handler}} handler, int priority=100, std\+::chrono\+::milliseconds timeout=std\+::chrono\+::milliseconds(30000))
+\begin{DoxyCompactList}\small\item\em Register a shutdown handler. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a5aad44215373687241a5b7f9579df359}{Request\+Shutdown}} (const std\+::string \&reason="{}User requested"{})
+\begin{DoxyCompactList}\small\item\em Request shutdown. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a53c55247167c253b3a3dd14356cbb540}{Is\+Shutdown\+Requested}} () const
+\begin{DoxyCompactList}\small\item\em Check if shutdown has been requested. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a279ec20572d09415b5aab0e3bcd8f019}{Wait\+For\+Shutdown}} (std\+::chrono\+::milliseconds timeout=std\+::chrono\+::milliseconds\+::max())
+\begin{DoxyCompactList}\small\item\em Wait for shutdown request. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a4b6b0cac9e08978ce0a738c5a585020d}{Install\+Signal\+Handlers}} ()
+\begin{DoxyCompactList}\small\item\em Install signal handlers for graceful shutdown. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a8a76baa6498623fb7b1155899e926806}{Wait\+For\+Shutdown\+Complete}} ()
+\begin{DoxyCompactList}\small\item\em Wait for shutdown to complete. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a65a0bdf2cc260a74aea45241258aa714}{Set\+Max\+Shutdown\+Time}} (std\+::chrono\+::milliseconds timeout)
+\begin{DoxyCompactList}\small\item\em Set maximum shutdown time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager}{Shutdown\+Manager}} \& \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a7a2411a4c51d9bb5cc42f4035d894869}{Get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_acd68db08f480ae1ae482cee0a546c98b}{Shutdown\+Manager}} ()=default
+\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a8758b5b611ab70c83f8903923f4155a8}{Execute\+Shutdown}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structneo_1_1core_1_1_shutdown_manager_1_1_handler_info}{Handler\+Info}} $>$ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_afbad07afc4498690eebf4b932ed7deaf}{handlers\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_aec0031d7b1d8fa391ae0455e59cd0bfa}{shutdown\+Requested\+\_\+}} \{false\}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_aaba99d4002f144fd560e3033bd12993a}{shutdown\+Complete\+\_\+}} \{false\}
+\item 
+std\+::chrono\+::milliseconds \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a06943021014b14b974bee8ae0514b4b8}{max\+Shutdown\+Time\+\_\+}} \{std\+::chrono\+::minutes(5)\}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a3478fa0b4a94984e8051e6a521e2b4b2}{mutex\+\_\+}}
+\item 
+std\+::condition\+\_\+variable \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a297be314c12d429c53c6368d716d3e0d}{cv\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a7b748fcc29a3340532da504e43f67f8a}{shutdown\+Thread\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages graceful shutdown of the application. 
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_a5978e483f53f9420eec79deadc7cc9e5}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!ShutdownHandler@{ShutdownHandler}}
+\index{ShutdownHandler@{ShutdownHandler}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{ShutdownHandler}{ShutdownHandler}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_a5978e483f53f9420eec79deadc7cc9e5} 
+using \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a5978e483f53f9420eec79deadc7cc9e5}{neo\+::core\+::\+Shutdown\+Manager\+::\+Shutdown\+Handler}} = std\+::function$<$void()$>$}
+
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_acd68db08f480ae1ae482cee0a546c98b}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!ShutdownManager@{ShutdownManager}}
+\index{ShutdownManager@{ShutdownManager}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{ShutdownManager()}{ShutdownManager()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_acd68db08f480ae1ae482cee0a546c98b} 
+neo\+::core\+::\+Shutdown\+Manager\+::\+Shutdown\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_a8758b5b611ab70c83f8903923f4155a8}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!ExecuteShutdown@{ExecuteShutdown}}
+\index{ExecuteShutdown@{ExecuteShutdown}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{ExecuteShutdown()}{ExecuteShutdown()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_a8758b5b611ab70c83f8903923f4155a8} 
+void neo\+::core\+::\+Shutdown\+Manager\+::\+Execute\+Shutdown (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_a7a2411a4c51d9bb5cc42f4035d894869}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_a7a2411a4c51d9bb5cc42f4035d894869} 
+\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager}{Shutdown\+Manager}} \& neo\+::core\+::\+Shutdown\+Manager\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_a4b6b0cac9e08978ce0a738c5a585020d}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!InstallSignalHandlers@{InstallSignalHandlers}}
+\index{InstallSignalHandlers@{InstallSignalHandlers}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{InstallSignalHandlers()}{InstallSignalHandlers()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_a4b6b0cac9e08978ce0a738c5a585020d} 
+void neo\+::core\+::\+Shutdown\+Manager\+::\+Install\+Signal\+Handlers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Install signal handlers for graceful shutdown. 
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_a53c55247167c253b3a3dd14356cbb540}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!IsShutdownRequested@{IsShutdownRequested}}
+\index{IsShutdownRequested@{IsShutdownRequested}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{IsShutdownRequested()}{IsShutdownRequested()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_a53c55247167c253b3a3dd14356cbb540} 
+bool neo\+::core\+::\+Shutdown\+Manager\+::\+Is\+Shutdown\+Requested (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if shutdown has been requested. 
+
+\begin{DoxyReturn}{Returns}
+true if shutdown requested 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_a396923cf60d7b88f76d30fdb7ba91e85}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!RegisterHandler@{RegisterHandler}}
+\index{RegisterHandler@{RegisterHandler}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{RegisterHandler()}{RegisterHandler()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_a396923cf60d7b88f76d30fdb7ba91e85} 
+void neo\+::core\+::\+Shutdown\+Manager\+::\+Register\+Handler (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a5978e483f53f9420eec79deadc7cc9e5}{Shutdown\+Handler}}}]{handler}{, }\item[{int}]{priority}{ = {\ttfamily 100}, }\item[{std\+::chrono\+::milliseconds}]{timeout}{ = {\ttfamily std\+:\+:chrono\+:\+:milliseconds(30000)}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Register a shutdown handler. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Handler name for logging \\
+\hline
+{\em handler} & Function to call during shutdown \\
+\hline
+{\em priority} & Execution priority (lower = earlier) \\
+\hline
+{\em timeout} & Maximum time for handler execution \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_a5aad44215373687241a5b7f9579df359}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!RequestShutdown@{RequestShutdown}}
+\index{RequestShutdown@{RequestShutdown}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{RequestShutdown()}{RequestShutdown()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_a5aad44215373687241a5b7f9579df359} 
+void neo\+::core\+::\+Shutdown\+Manager\+::\+Request\+Shutdown (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{reason}{ = {\ttfamily "{}User~requested"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Request shutdown. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reason} & Shutdown reason for logging \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_a65a0bdf2cc260a74aea45241258aa714}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!SetMaxShutdownTime@{SetMaxShutdownTime}}
+\index{SetMaxShutdownTime@{SetMaxShutdownTime}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{SetMaxShutdownTime()}{SetMaxShutdownTime()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_a65a0bdf2cc260a74aea45241258aa714} 
+void neo\+::core\+::\+Shutdown\+Manager\+::\+Set\+Max\+Shutdown\+Time (\begin{DoxyParamCaption}\item[{std\+::chrono\+::milliseconds}]{timeout}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set maximum shutdown time. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout} & Maximum time for shutdown \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_a279ec20572d09415b5aab0e3bcd8f019}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!WaitForShutdown@{WaitForShutdown}}
+\index{WaitForShutdown@{WaitForShutdown}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{WaitForShutdown()}{WaitForShutdown()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_a279ec20572d09415b5aab0e3bcd8f019} 
+bool neo\+::core\+::\+Shutdown\+Manager\+::\+Wait\+For\+Shutdown (\begin{DoxyParamCaption}\item[{std\+::chrono\+::milliseconds}]{timeout}{ = {\ttfamily std\+:\+:chrono\+:\+:milliseconds\+:\+:max()}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Wait for shutdown request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout} & Maximum time to wait \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if shutdown requested, false if timeout 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_a8a76baa6498623fb7b1155899e926806}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!WaitForShutdownComplete@{WaitForShutdownComplete}}
+\index{WaitForShutdownComplete@{WaitForShutdownComplete}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{WaitForShutdownComplete()}{WaitForShutdownComplete()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_a8a76baa6498623fb7b1155899e926806} 
+void neo\+::core\+::\+Shutdown\+Manager\+::\+Wait\+For\+Shutdown\+Complete (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Wait for shutdown to complete. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_a297be314c12d429c53c6368d716d3e0d}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!cv\_@{cv\_}}
+\index{cv\_@{cv\_}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{cv\_}{cv\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_a297be314c12d429c53c6368d716d3e0d} 
+std\+::condition\+\_\+variable neo\+::core\+::\+Shutdown\+Manager\+::cv\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_afbad07afc4498690eebf4b932ed7deaf}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!handlers\_@{handlers\_}}
+\index{handlers\_@{handlers\_}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{handlers\_}{handlers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_afbad07afc4498690eebf4b932ed7deaf} 
+std\+::vector$<$\mbox{\hyperlink{structneo_1_1core_1_1_shutdown_manager_1_1_handler_info}{Handler\+Info}}$>$ neo\+::core\+::\+Shutdown\+Manager\+::handlers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_a06943021014b14b974bee8ae0514b4b8}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!maxShutdownTime\_@{maxShutdownTime\_}}
+\index{maxShutdownTime\_@{maxShutdownTime\_}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{maxShutdownTime\_}{maxShutdownTime\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_a06943021014b14b974bee8ae0514b4b8} 
+std\+::chrono\+::milliseconds neo\+::core\+::\+Shutdown\+Manager\+::max\+Shutdown\+Time\+\_\+ \{std\+::chrono\+::minutes(5)\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_a3478fa0b4a94984e8051e6a521e2b4b2}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_a3478fa0b4a94984e8051e6a521e2b4b2} 
+std\+::mutex neo\+::core\+::\+Shutdown\+Manager\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_aaba99d4002f144fd560e3033bd12993a}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!shutdownComplete\_@{shutdownComplete\_}}
+\index{shutdownComplete\_@{shutdownComplete\_}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{shutdownComplete\_}{shutdownComplete\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_aaba99d4002f144fd560e3033bd12993a} 
+std\+::atomic$<$bool$>$ neo\+::core\+::\+Shutdown\+Manager\+::shutdown\+Complete\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_aec0031d7b1d8fa391ae0455e59cd0bfa}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!shutdownRequested\_@{shutdownRequested\_}}
+\index{shutdownRequested\_@{shutdownRequested\_}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{shutdownRequested\_}{shutdownRequested\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_aec0031d7b1d8fa391ae0455e59cd0bfa} 
+std\+::atomic$<$bool$>$ neo\+::core\+::\+Shutdown\+Manager\+::shutdown\+Requested\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_shutdown_manager_a7b748fcc29a3340532da504e43f67f8a}\index{neo::core::ShutdownManager@{neo::core::ShutdownManager}!shutdownThread\_@{shutdownThread\_}}
+\index{shutdownThread\_@{shutdownThread\_}!neo::core::ShutdownManager@{neo::core::ShutdownManager}}
+\doxysubsubsection{\texorpdfstring{shutdownThread\_}{shutdownThread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_shutdown_manager_a7b748fcc29a3340532da504e43f67f8a} 
+std\+::thread neo\+::core\+::\+Shutdown\+Manager\+::shutdown\+Thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{shutdown__manager_8h}{shutdown\+\_\+manager.\+h}}\end{DoxyCompactItemize}

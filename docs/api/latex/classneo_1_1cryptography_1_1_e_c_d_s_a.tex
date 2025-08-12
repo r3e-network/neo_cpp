@@ -1,0 +1,138 @@
+\doxysection{neo\+::cryptography\+::ECDSA Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1_e_c_d_s_a}{}\label{classneo_1_1cryptography_1_1_e_c_d_s_a}\index{neo::cryptography::ECDSA@{neo::cryptography::ECDSA}}
+
+
+\doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} cryptographic operations for Neo.  
+
+
+
+
+{\ttfamily \#include $<$ecdsa.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classneo_1_1cryptography_1_1_e_c_d_s_a_a018890b496521838f23fe408d261394e}{Verify}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&message, const std\+::vector$<$ uint8\+\_\+t $>$ \&signature, const std\+::vector$<$ uint8\+\_\+t $>$ \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Verifies an \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} signature. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1cryptography_1_1_e_c_d_s_a_ad0d866a11cc0f9380c084d83c2b33c61}{Verify\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash, const std\+::vector$<$ uint8\+\_\+t $>$ \&signature, const std\+::vector$<$ uint8\+\_\+t $>$ \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Verifies an \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} signature with a hash. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_e_c_d_s_a_a842a23318fbb522b3c61e62c9790d763}{Sign}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&message, const std\+::vector$<$ uint8\+\_\+t $>$ \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Creates an \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} signature. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_e_c_d_s_a_a30effad5579d7298df856b342e2974b8}{Sign\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash, const std\+::vector$<$ uint8\+\_\+t $>$ \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Creates an \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} signature for a hash. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1cryptography_1_1_e_c_d_s_a_aa235ab39fc248709a0aaa39ca4eb28c8}{Generate\+Key\+Pair}} (std\+::vector$<$ uint8\+\_\+t $>$ \&private\+Key, std\+::vector$<$ uint8\+\_\+t $>$ \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Generates a new \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} key pair. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} cryptographic operations for Neo. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1_e_c_d_s_a_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_e_c_d_s_a_aa235ab39fc248709a0aaa39ca4eb28c8}\index{neo::cryptography::ECDSA@{neo::cryptography::ECDSA}!GenerateKeyPair@{GenerateKeyPair}}
+\index{GenerateKeyPair@{GenerateKeyPair}!neo::cryptography::ECDSA@{neo::cryptography::ECDSA}}
+\doxysubsubsection{\texorpdfstring{GenerateKeyPair()}{GenerateKeyPair()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_e_c_d_s_a_aa235ab39fc248709a0aaa39ca4eb28c8} 
+void neo\+::cryptography\+::\+ECDSA\+::\+Generate\+Key\+Pair (\begin{DoxyParamCaption}\item[{std\+::vector$<$ uint8\+\_\+t $>$ \&}]{private\+Key}{, }\item[{std\+::vector$<$ uint8\+\_\+t $>$ \&}]{public\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generates a new \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} key pair. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em private\+Key} & Output parameter for the private key. \\
+\hline
+{\em public\+Key} & Output parameter for the public key. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1cryptography_1_1_e_c_d_s_a_a842a23318fbb522b3c61e62c9790d763}\index{neo::cryptography::ECDSA@{neo::cryptography::ECDSA}!Sign@{Sign}}
+\index{Sign@{Sign}!neo::cryptography::ECDSA@{neo::cryptography::ECDSA}}
+\doxysubsubsection{\texorpdfstring{Sign()}{Sign()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_e_c_d_s_a_a842a23318fbb522b3c61e62c9790d763} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::cryptography\+::\+ECDSA\+::\+Sign (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{message}{, }\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{private\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates an \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to sign. \\
+\hline
+{\em private\+Key} & The private key to sign with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The signature. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1_e_c_d_s_a_a30effad5579d7298df856b342e2974b8}\index{neo::cryptography::ECDSA@{neo::cryptography::ECDSA}!SignHash@{SignHash}}
+\index{SignHash@{SignHash}!neo::cryptography::ECDSA@{neo::cryptography::ECDSA}}
+\doxysubsubsection{\texorpdfstring{SignHash()}{SignHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_e_c_d_s_a_a30effad5579d7298df856b342e2974b8} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::cryptography\+::\+ECDSA\+::\+Sign\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{, }\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{private\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates an \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} signature for a hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash to sign. \\
+\hline
+{\em private\+Key} & The private key to sign with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The signature. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1_e_c_d_s_a_a018890b496521838f23fe408d261394e}\index{neo::cryptography::ECDSA@{neo::cryptography::ECDSA}!Verify@{Verify}}
+\index{Verify@{Verify}!neo::cryptography::ECDSA@{neo::cryptography::ECDSA}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_e_c_d_s_a_a018890b496521838f23fe408d261394e} 
+bool neo\+::cryptography\+::\+ECDSA\+::\+Verify (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{message}{, }\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{signature}{, }\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{public\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Verifies an \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message that was signed. \\
+\hline
+{\em signature} & The signature to verify. \\
+\hline
+{\em public\+Key} & The public key to verify against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the signature is valid, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1_e_c_d_s_a_ad0d866a11cc0f9380c084d83c2b33c61}\index{neo::cryptography::ECDSA@{neo::cryptography::ECDSA}!VerifyHash@{VerifyHash}}
+\index{VerifyHash@{VerifyHash}!neo::cryptography::ECDSA@{neo::cryptography::ECDSA}}
+\doxysubsubsection{\texorpdfstring{VerifyHash()}{VerifyHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_e_c_d_s_a_ad0d866a11cc0f9380c084d83c2b33c61} 
+bool neo\+::cryptography\+::\+ECDSA\+::\+Verify\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{, }\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{signature}{, }\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{public\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Verifies an \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} signature with a hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash that was signed. \\
+\hline
+{\em signature} & The signature to verify. \\
+\hline
+{\em public\+Key} & The public key to verify against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the signature is valid, false otherwise. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/\mbox{\hyperlink{ecdsa_8h}{ecdsa.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,88 @@
+\doxysection{wallet.\+h}
+\hypertarget{wallet_8h_source}{}\label{wallet_8h_source}\index{include/neo/wallets/wallet.h@{include/neo/wallets/wallet.h}}
+\mbox{\hyperlink{wallet_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{keypair_8h}{neo/cryptography/ecc/keypair.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__serializable_8h}{neo/io/json\_serializable.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{wallet__account_8h}{neo/wallets/wallet\_account.h}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1wallets}{neo::wallets}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a2c62cab46ad536921093a5b4916c2adf}{Wallet}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable}{io::JsonSerializable}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a2c62cab46ad536921093a5b4916c2adf}{Wallet}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a2c62cab46ad536921093a5b4916c2adf}{Wallet}}(\textcolor{keyword}{const}\ std::string\&\ path);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a7692c3be1d49fd4f2c04d0507792b9fa}{GetPath}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a20ee7e7cd030d675cdd4f83e8997af5a}{SetPath}}(\textcolor{keyword}{const}\ std::string\&\ path);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_aca8466405a8044e17fb58538fcb22185}{GetName}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a35d9284fb0865a2a0e7c382fbb140b75}{SetName}}(\textcolor{keyword}{const}\ std::string\&\ name);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00062\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ae51dfa12a9c5f9aa5a8c068faf92da82}{GetVersion}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ab2a1bb7419e8c7441ffc6092a30d8706}{SetVersion}}(int32\_t\ version);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<WalletAccount>>\&\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ad88ab06bc6becbfa50983de2dab7a27f}{GetAccounts}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00080\ \ \ \ \ std::shared\_ptr<WalletAccount>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ab90bef4c617ba60e29cd477c7430e9c2}{GetDefaultAccount}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ac6ea75a20339a5dcd35b2a445c587fcb}{SetDefaultAccount}}(std::shared\_ptr<WalletAccount>\ account);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00093\ \ \ \ \ std::shared\_ptr<WalletAccount>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a8b9ed149b5034d115deda80ae65e281b}{GetAccount}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ scriptHash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00100\ \ \ \ \ std::shared\_ptr<WalletAccount>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a8b9ed149b5034d115deda80ae65e281b}{GetAccount}}(\textcolor{keyword}{const}\ std::string\&\ address)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00106\ \ \ \ \ std::shared\_ptr<WalletAccount>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ab892fe4e34d0ac997678188c97f1bf3b}{CreateAccount}}();}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00113\ \ \ \ \ std::shared\_ptr<WalletAccount>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ab892fe4e34d0ac997678188c97f1bf3b}{CreateAccount}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ privateKey);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00120\ \ \ \ \ std::shared\_ptr<WalletAccount>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ab892fe4e34d0ac997678188c97f1bf3b}{CreateAccount}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_key_pair}{cryptography::ecc::KeyPair}}\&\ keyPair);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00127\ \ \ \ \ std::shared\_ptr<WalletAccount>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a7d3ae688828c1cae1c14b80aac105069}{CreateAccountFromWIF}}(\textcolor{keyword}{const}\ std::string\&\ wif);}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00134\ \ \ \ \ std::shared\_ptr<WalletAccount>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ab892fe4e34d0ac997678188c97f1bf3b}{CreateAccount}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ scriptHash);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ae556a83f47da99d20e810980225a2e33}{AddAccount}}(std::shared\_ptr<WalletAccount>\ account);}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a1693239f6425007a3200b0b7dd03ed5d}{RemoveAccount}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ scriptHash);}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a1693239f6425007a3200b0b7dd03ed5d}{RemoveAccount}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a6c39b18c049b41fb2e64649e69308da6}{Save}}();}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_afccda849c652bc50cfe772601d0bdaf8}{SaveAs}}(\textcolor{keyword}{const}\ std::string\&\ path);}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_aa4c6ad71e7dbb7e7102e33a0d79db128}{Load}}();}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00180\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_aaf4db51574aaea5793a132b369225445}{LoadFrom}}(\textcolor{keyword}{const}\ std::string\&\ path);}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00186\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ad22dfd462e56e65ed760028721c02118}{ToJson}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a81ff3b7aac263cc40b115f0dc8cb89fc}{FromJson}}(\textcolor{keyword}{const}\ nlohmann::json\&\ \mbox{\hyperlink{namespaceneo_1_1json}{json}})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00195\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a4048de04bf8443bc5b80d0b438780a96}{path\_}};}
+\DoxyCodeLine{00196\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a37f7ec25d3cfc36d6c48c53de1473a31}{name\_}};}
+\DoxyCodeLine{00197\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a722e17422f8ad09208f8dbb6a1db5b93}{version\_}};}
+\DoxyCodeLine{00198\ \ \ \ \ std::vector<std::shared\_ptr<WalletAccount>>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a9060daedb09197c7040e4deb7baf0a34}{accounts\_}};}
+\DoxyCodeLine{00199\ \ \ \ \ std::shared\_ptr<WalletAccount>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a5bbeffa9c55cb83baead85c0d0fb1155}{defaultAccount\_}};}
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a18133f92f40d1b9cfb741935665628e5}{mutex\_}};}
+\DoxyCodeLine{00201\ \};}
+\DoxyCodeLine{00202\ \}\ \ \textcolor{comment}{//\ namespace\ neo::wallets}}
+
+\end{DoxyCode}

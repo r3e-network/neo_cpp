@@ -1,0 +1,91 @@
+\doxysection{system\+\_\+call\+\_\+exception.\+h}
+\hypertarget{system__call__exception_8h_source}{}\label{system__call__exception_8h_source}\index{include/neo/smartcontract/system\_call\_exception.h@{include/neo/smartcontract/system\_call\_exception.h}}
+\mbox{\hyperlink{system__call__exception_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract}{neo::smartcontract}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a3adcf2f219125e117e99bab987198bdc}{SystemCallException}}\ :\ \textcolor{keyword}{public}\ std::runtime\_error}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a3adcf2f219125e117e99bab987198bdc}{SystemCallException}}(\textcolor{keyword}{const}\ std::string\&\ systemCall,\ \textcolor{keyword}{const}\ std::string\&\ message)}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{namespacestd}{std}}::runtime\_error(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_aa64b51e1cfc0eedafe7f38751377b3fb}{FormatMessage}}(systemCall,\ message)),\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a1e08607700ad450c50a09174df4c44ca}{systemCall\_}}(systemCall),\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a5c5af104e4ec2087573f792e25048175}{message\_}}(message)}
+\DoxyCodeLine{00024\ \ \ \ \ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_af8dd60d5540d2e82fda920efddef6418}{GetSystemCall}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a1e08607700ad450c50a09174df4c44ca}{systemCall\_}};\ \}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a13fc8bfdcdd47b98c6ebe2ff63eae275}{GetMessage}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a5c5af104e4ec2087573f792e25048175}{message\_}};\ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00040\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a1e08607700ad450c50a09174df4c44ca}{systemCall\_}};}
+\DoxyCodeLine{00041\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a5c5af104e4ec2087573f792e25048175}{message\_}};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_aa64b51e1cfc0eedafe7f38751377b3fb}{FormatMessage}}(\textcolor{keyword}{const}\ std::string\&\ systemCall,\ \textcolor{keyword}{const}\ std::string\&\ message)}
+\DoxyCodeLine{00050\ \ \ \ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}System\ call\ '"{}}\ +\ systemCall\ +\ \textcolor{stringliteral}{"{}'\ failed:\ "{}}\ +\ message;}
+\DoxyCodeLine{00052\ \ \ \ \ \}}
+\DoxyCodeLine{00053\ \};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00058\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1_invalid_argument_exception_a3d6aef00b73002f02bda218a904d9fcd}{InvalidArgumentException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a3adcf2f219125e117e99bab987198bdc}{SystemCallException}}}
+\DoxyCodeLine{00059\ \{}
+\DoxyCodeLine{00060\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00066\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_invalid_argument_exception_a3d6aef00b73002f02bda218a904d9fcd}{InvalidArgumentException}}(\textcolor{keyword}{const}\ std::string\&\ systemCall,\ \textcolor{keyword}{const}\ std::string\&\ message)}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a3adcf2f219125e117e99bab987198bdc}{SystemCallException}}(systemCall,\ message)}
+\DoxyCodeLine{00068\ \ \ \ \ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00075\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1_missing_flags_exception_a761f7f83069a5e3308d1a0dd6e174fa2}{MissingFlagsException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a3adcf2f219125e117e99bab987198bdc}{SystemCallException}}}
+\DoxyCodeLine{00076\ \{}
+\DoxyCodeLine{00077\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_missing_flags_exception_a761f7f83069a5e3308d1a0dd6e174fa2}{MissingFlagsException}}(\textcolor{keyword}{const}\ std::string\&\ systemCall,\ \textcolor{keyword}{const}\ std::string\&\ requiredFlags)}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a3adcf2f219125e117e99bab987198bdc}{SystemCallException}}(systemCall,\ \textcolor{stringliteral}{"{}Missing\ required\ flags:\ "{}}\ +\ requiredFlags)}
+\DoxyCodeLine{00085\ \ \ \ \ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \}}
+\DoxyCodeLine{00087\ \};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00092\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1_insufficient_gas_exception_a70d5bb2540f5b5452d4eb8a14f595b64}{InsufficientGasException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a3adcf2f219125e117e99bab987198bdc}{SystemCallException}}}
+\DoxyCodeLine{00093\ \{}
+\DoxyCodeLine{00094\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_insufficient_gas_exception_a70d5bb2540f5b5452d4eb8a14f595b64}{InsufficientGasException}}(\textcolor{keyword}{const}\ std::string\&\ systemCall,\ int64\_t\ requiredGas,\ int64\_t\ availableGas)}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a3adcf2f219125e117e99bab987198bdc}{SystemCallException}}(systemCall,\ \textcolor{stringliteral}{"{}Insufficient\ gas:\ required\ "{}}\ +\ \mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{json_8hpp_a5b9ca6dc52cf4226c68d67f895b2a1d4}{to\_string}}(requiredGas)\ +\ \textcolor{stringliteral}{"{},\ available\ "{}}\ +}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacestd}{std}}::\mbox{\hyperlink{json_8hpp_a5b9ca6dc52cf4226c68d67f895b2a1d4}{to\_string}}(availableGas)),}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_insufficient_gas_exception_a24b914f9bc526cab63d4eb20548e983c}{requiredGas\_}}(requiredGas),}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_insufficient_gas_exception_ad17b847463496cc869136c7692de519a}{availableGas\_}}(availableGas)}
+\DoxyCodeLine{00106\ \ \ \ \ \{}
+\DoxyCodeLine{00107\ \ \ \ \ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00113\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_insufficient_gas_exception_a2f48516267dc27c92fd6a1b01d047006}{GetRequiredGas}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_insufficient_gas_exception_a24b914f9bc526cab63d4eb20548e983c}{requiredGas\_}};\ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00119\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_insufficient_gas_exception_a5e83f55eaa85865cc83e0a685f397c38}{GetAvailableGas}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_insufficient_gas_exception_ad17b847463496cc869136c7692de519a}{availableGas\_}};\ \}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00122\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_insufficient_gas_exception_a24b914f9bc526cab63d4eb20548e983c}{requiredGas\_}};}
+\DoxyCodeLine{00123\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_insufficient_gas_exception_ad17b847463496cc869136c7692de519a}{availableGas\_}};}
+\DoxyCodeLine{00124\ \};}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00129\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_not_found_exception_a522e66199bf65345a6411540da6efd06}{ContractNotFoundException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a3adcf2f219125e117e99bab987198bdc}{SystemCallException}}}
+\DoxyCodeLine{00130\ \{}
+\DoxyCodeLine{00131\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00137\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_not_found_exception_a522e66199bf65345a6411540da6efd06}{ContractNotFoundException}}(\textcolor{keyword}{const}\ std::string\&\ systemCall,\ \textcolor{keyword}{const}\ std::string\&\ contractHash)}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a3adcf2f219125e117e99bab987198bdc}{SystemCallException}}(systemCall,\ \textcolor{stringliteral}{"{}Contract\ not\ found:\ "{}}\ +\ contractHash)}
+\DoxyCodeLine{00139\ \ \ \ \ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \}}
+\DoxyCodeLine{00141\ \};}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00146\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_not_found_exception_a19263b7f5ab3da990468fd58dba9680a}{MethodNotFoundException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a3adcf2f219125e117e99bab987198bdc}{SystemCallException}}}
+\DoxyCodeLine{00147\ \{}
+\DoxyCodeLine{00148\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00155\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_not_found_exception_a19263b7f5ab3da990468fd58dba9680a}{MethodNotFoundException}}(\textcolor{keyword}{const}\ std::string\&\ systemCall,\ \textcolor{keyword}{const}\ std::string\&\ contractHash,\ \textcolor{keyword}{const}\ std::string\&\ method)}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_system_call_exception_a3adcf2f219125e117e99bab987198bdc}{SystemCallException}}(systemCall,\ \textcolor{stringliteral}{"{}Method\ '"{}}\ +\ method\ +\ \textcolor{stringliteral}{"{}'\ not\ found\ in\ contract\ "{}}\ +\ contractHash)}
+\DoxyCodeLine{00157\ \ \ \ \ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \}}
+\DoxyCodeLine{00159\ \};}
+\DoxyCodeLine{00160\ \}\ \ \textcolor{comment}{//\ namespace\ neo::smartcontract}}
+
+\end{DoxyCode}

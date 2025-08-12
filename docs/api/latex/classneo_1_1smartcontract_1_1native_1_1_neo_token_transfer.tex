@@ -1,0 +1,136 @@
+\doxysection{neo\+::smartcontract\+::native\+::Neo\+Token\+Transfer Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_transfer}{}\label{classneo_1_1smartcontract_1_1native_1_1_neo_token_transfer}\index{neo::smartcontract::native::NeoTokenTransfer@{neo::smartcontract::native::NeoTokenTransfer}}
+
+
+Transfer-\/related methods for the NEO token.  
+
+
+
+
+{\ttfamily \#include $<$neo\+\_\+token\+\_\+transfer.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{io\+::\+Fixed8}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_transfer_ac7b643aa19d0ac546016ae6a8b4ac928}{Get\+Total\+Supply}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot)
+\begin{DoxyCompactList}\small\item\em Gets the total supply. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_transfer_af1c4f801e12e231e76ae392615714cf9}{Transfer}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, \mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&engine, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&from, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&to, const \mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{io\+::\+Fixed8}} \&amount)
+\begin{DoxyCompactList}\small\item\em Transfers NEO from one account to another. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_transfer_a88dbf6ccfa56d7166ce2e9bd97e79cc8}{On\+Total\+Supply}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, \mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the total\+Supply method. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_transfer_a3d2a234b5345de5ed35d148d02160a8d}{On\+Transfer}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, \mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the transfer method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Transfer-\/related methods for the NEO token. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_transfer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_transfer_ac7b643aa19d0ac546016ae6a8b4ac928}\index{neo::smartcontract::native::NeoTokenTransfer@{neo::smartcontract::native::NeoTokenTransfer}!GetTotalSupply@{GetTotalSupply}}
+\index{GetTotalSupply@{GetTotalSupply}!neo::smartcontract::native::NeoTokenTransfer@{neo::smartcontract::native::NeoTokenTransfer}}
+\doxysubsubsection{\texorpdfstring{GetTotalSupply()}{GetTotalSupply()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_transfer_ac7b643aa19d0ac546016ae6a8b4ac928} 
+\mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{io\+::\+Fixed8}} neo\+::smartcontract\+::native\+::\+Neo\+Token\+Transfer\+::\+Get\+Total\+Supply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the total supply. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The total supply. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_transfer_a88dbf6ccfa56d7166ce2e9bd97e79cc8}\index{neo::smartcontract::native::NeoTokenTransfer@{neo::smartcontract::native::NeoTokenTransfer}!OnTotalSupply@{OnTotalSupply}}
+\index{OnTotalSupply@{OnTotalSupply}!neo::smartcontract::native::NeoTokenTransfer@{neo::smartcontract::native::NeoTokenTransfer}}
+\doxysubsubsection{\texorpdfstring{OnTotalSupply()}{OnTotalSupply()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_transfer_a88dbf6ccfa56d7166ce2e9bd97e79cc8} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Transfer\+::\+On\+Total\+Supply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Handles the total\+Supply method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_transfer_a3d2a234b5345de5ed35d148d02160a8d}\index{neo::smartcontract::native::NeoTokenTransfer@{neo::smartcontract::native::NeoTokenTransfer}!OnTransfer@{OnTransfer}}
+\index{OnTransfer@{OnTransfer}!neo::smartcontract::native::NeoTokenTransfer@{neo::smartcontract::native::NeoTokenTransfer}}
+\doxysubsubsection{\texorpdfstring{OnTransfer()}{OnTransfer()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_transfer_a3d2a234b5345de5ed35d148d02160a8d} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Transfer\+::\+On\+Transfer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Handles the transfer method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_transfer_af1c4f801e12e231e76ae392615714cf9}\index{neo::smartcontract::native::NeoTokenTransfer@{neo::smartcontract::native::NeoTokenTransfer}!Transfer@{Transfer}}
+\index{Transfer@{Transfer}!neo::smartcontract::native::NeoTokenTransfer@{neo::smartcontract::native::NeoTokenTransfer}}
+\doxysubsubsection{\texorpdfstring{Transfer()}{Transfer()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_transfer_af1c4f801e12e231e76ae392615714cf9} 
+bool neo\+::smartcontract\+::native\+::\+Neo\+Token\+Transfer\+::\+Transfer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&}]{engine}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{from}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{to}{, }\item[{const \mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{io\+::\+Fixed8}} \&}]{amount}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Transfers NEO from one account to another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em engine} & The engine. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+{\em from} & The from account. \\
+\hline
+{\em to} & The to account. \\
+\hline
+{\em amount} & The amount. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the transfer was successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/native/\mbox{\hyperlink{neo__token__transfer_8h}{neo\+\_\+token\+\_\+transfer.\+h}}\item 
+src/smartcontract/native/\mbox{\hyperlink{neo__token__transfer_8cpp}{neo\+\_\+token\+\_\+transfer.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,160 @@
+\doxysection{neo\+::rpc\+::Method\+Rate\+Limiter Class Reference}
+\hypertarget{classneo_1_1rpc_1_1_method_rate_limiter}{}\label{classneo_1_1rpc_1_1_method_rate_limiter}\index{neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}}
+
+
+Method-\/specific rate limiter with different limits per method.  
+
+
+
+
+{\ttfamily \#include $<$rate\+\_\+limiter.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1rpc_1_1_method_rate_limiter_1_1_method_config}{Method\+Config}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_method_rate_limiter_a7e24954b0dea2bf1e403f49e24fccb14}{Method\+Rate\+Limiter}} ()
+\item 
+bool \mbox{\hyperlink{classneo_1_1rpc_1_1_method_rate_limiter_a9336c2e98d0ee96673de5661b52690a4}{Is\+Allowed}} (const std\+::string \&client\+Id, const std\+::string \&method)
+\begin{DoxyCompactList}\small\item\em Check if a request is allowed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1rpc_1_1_method_rate_limiter_abee35575c3c3770b19ca8be668d3c96e}{Set\+Method\+Limit}} (const std\+::string \&method, const \mbox{\hyperlink{structneo_1_1rpc_1_1_method_rate_limiter_1_1_method_config}{Method\+Config}} \&config)
+\begin{DoxyCompactList}\small\item\em Set rate limit for a specific method. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1rpc_1_1_method_rate_limiter_aa6090e22060ba9c742f83fcce9cceb84}{Set\+Default\+Limit}} (const \mbox{\hyperlink{structneo_1_1rpc_1_1_method_rate_limiter_1_1_method_config}{Method\+Config}} \&config)
+\begin{DoxyCompactList}\small\item\em Set default rate limit for methods without specific limits. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1rpc_1_1_method_rate_limiter_a9fcb62c6aae677f9df0ecb6e1282790d}{Reset\+Client}} (const std\+::string \&client\+Id)
+\begin{DoxyCompactList}\small\item\em Reset rate limits for a specific client. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter}{Rate\+Limiter}} $>$ $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_method_rate_limiter_a3398c5bbe43fd4f16ffa629260acf4fd}{method\+Limiters\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter}{Rate\+Limiter}} $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_method_rate_limiter_a60beecde059566af65b6de06fc62fa91}{default\+Limiter\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1rpc_1_1_method_rate_limiter_af348b3ec3bb2d74a97dc18fe6069f518}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Method-\/specific rate limiter with different limits per method. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1rpc_1_1_method_rate_limiter_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_method_rate_limiter_a7e24954b0dea2bf1e403f49e24fccb14}\index{neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}!MethodRateLimiter@{MethodRateLimiter}}
+\index{MethodRateLimiter@{MethodRateLimiter}!neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}}
+\doxysubsubsection{\texorpdfstring{MethodRateLimiter()}{MethodRateLimiter()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_method_rate_limiter_a7e24954b0dea2bf1e403f49e24fccb14} 
+neo\+::rpc\+::\+Method\+Rate\+Limiter\+::\+Method\+Rate\+Limiter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1rpc_1_1_method_rate_limiter_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_method_rate_limiter_a9336c2e98d0ee96673de5661b52690a4}\index{neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}!IsAllowed@{IsAllowed}}
+\index{IsAllowed@{IsAllowed}!neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}}
+\doxysubsubsection{\texorpdfstring{IsAllowed()}{IsAllowed()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_method_rate_limiter_a9336c2e98d0ee96673de5661b52690a4} 
+bool neo\+::rpc\+::\+Method\+Rate\+Limiter\+::\+Is\+Allowed (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{client\+Id}{, }\item[{const std\+::string \&}]{method}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if a request is allowed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+Id} & Client identifier \\
+\hline
+{\em method} & RPC method name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if allowed, false if rate limited 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1rpc_1_1_method_rate_limiter_a9fcb62c6aae677f9df0ecb6e1282790d}\index{neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}!ResetClient@{ResetClient}}
+\index{ResetClient@{ResetClient}!neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}}
+\doxysubsubsection{\texorpdfstring{ResetClient()}{ResetClient()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_method_rate_limiter_a9fcb62c6aae677f9df0ecb6e1282790d} 
+void neo\+::rpc\+::\+Method\+Rate\+Limiter\+::\+Reset\+Client (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{client\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reset rate limits for a specific client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+Id} & Client identifier \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1rpc_1_1_method_rate_limiter_aa6090e22060ba9c742f83fcce9cceb84}\index{neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}!SetDefaultLimit@{SetDefaultLimit}}
+\index{SetDefaultLimit@{SetDefaultLimit}!neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}}
+\doxysubsubsection{\texorpdfstring{SetDefaultLimit()}{SetDefaultLimit()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_method_rate_limiter_aa6090e22060ba9c742f83fcce9cceb84} 
+void neo\+::rpc\+::\+Method\+Rate\+Limiter\+::\+Set\+Default\+Limit (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1rpc_1_1_method_rate_limiter_1_1_method_config}{Method\+Config}} \&}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set default rate limit for methods without specific limits. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & Rate limit configuration \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1rpc_1_1_method_rate_limiter_abee35575c3c3770b19ca8be668d3c96e}\index{neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}!SetMethodLimit@{SetMethodLimit}}
+\index{SetMethodLimit@{SetMethodLimit}!neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}}
+\doxysubsubsection{\texorpdfstring{SetMethodLimit()}{SetMethodLimit()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_method_rate_limiter_abee35575c3c3770b19ca8be668d3c96e} 
+void neo\+::rpc\+::\+Method\+Rate\+Limiter\+::\+Set\+Method\+Limit (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{method}{, }\item[{const \mbox{\hyperlink{structneo_1_1rpc_1_1_method_rate_limiter_1_1_method_config}{Method\+Config}} \&}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set rate limit for a specific method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em method} & Method name \\
+\hline
+{\em config} & Rate limit configuration \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1rpc_1_1_method_rate_limiter_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_method_rate_limiter_a60beecde059566af65b6de06fc62fa91}\index{neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}!defaultLimiter\_@{defaultLimiter\_}}
+\index{defaultLimiter\_@{defaultLimiter\_}!neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}}
+\doxysubsubsection{\texorpdfstring{defaultLimiter\_}{defaultLimiter\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_method_rate_limiter_a60beecde059566af65b6de06fc62fa91} 
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter}{Rate\+Limiter}}$>$ neo\+::rpc\+::\+Method\+Rate\+Limiter\+::default\+Limiter\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::make\_unique<RateLimiter>(\mbox{\hyperlink{structneo_1_1rpc_1_1_rate_limiter_1_1_config}{RateLimiter::Config}}\{10,\ 300,\ 20,\ \textcolor{keyword}{true}\})}
+
+\end{DoxyCode}
+\Hypertarget{classneo_1_1rpc_1_1_method_rate_limiter_a3398c5bbe43fd4f16ffa629260acf4fd}\index{neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}!methodLimiters\_@{methodLimiters\_}}
+\index{methodLimiters\_@{methodLimiters\_}!neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}}
+\doxysubsubsection{\texorpdfstring{methodLimiters\_}{methodLimiters\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_method_rate_limiter_a3398c5bbe43fd4f16ffa629260acf4fd} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter}{Rate\+Limiter}}$>$ $>$ neo\+::rpc\+::\+Method\+Rate\+Limiter\+::method\+Limiters\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_method_rate_limiter_af348b3ec3bb2d74a97dc18fe6069f518}\index{neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::rpc::MethodRateLimiter@{neo::rpc::MethodRateLimiter}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_method_rate_limiter_af348b3ec3bb2d74a97dc18fe6069f518} 
+std\+::mutex neo\+::rpc\+::\+Method\+Rate\+Limiter\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/rpc/\mbox{\hyperlink{rate__limiter_8h}{rate\+\_\+limiter.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,54 @@
+\doxysection{tcp\+\_\+connection.\+h}
+\hypertarget{p2p_2tcp__connection_8h_source}{}\label{p2p_2tcp__connection_8h_source}\index{include/neo/network/p2p/tcp\_connection.h@{include/neo/network/p2p/tcp\_connection.h}}
+\mbox{\hyperlink{p2p_2tcp__connection_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ip__endpoint_8h}{neo/network/ip\_endpoint.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{connection_8h}{neo/network/p2p/connection.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <boost/asio.hpp>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p}{neo::network::p2p}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ Forward\ declaration}}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_a6075bb5fcbcce398d6c6eba1a732eb1a}{TcpConnection}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection_abbaa3d1a3313f798fbf91c2193f3d8cb}{Connection}},\ \textcolor{keyword}{public}\ std::enable\_shared\_from\_this<TcpConnection>}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<TcpConnection>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_a98cf485c9bfd6b6242e16a95705d8fcb}{Create}}(boost::asio::ip::tcp::socket\ socket);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_a6075bb5fcbcce398d6c6eba1a732eb1a}{TcpConnection}}(boost::asio::ip::tcp::socket\ socket);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_a8db97661c4467e9f035ea303b8f019c6}{\string~TcpConnection}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEndPoint}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_af645d6d03afb82ac5a6b5721cae67d61}{GetRemoteEndPoint}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEndPoint}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_aeb62645eb30af244225a8661129a3783}{GetLocalEndPoint}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_a067d31a1fbf1db4fb44192bbb371b25a}{Send}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message,\ \textcolor{keywordtype}{bool}\ enableCompression\ =\ \textcolor{keyword}{true})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_acb68bd163d9e0a4df4f66866f8bdd465}{Disconnect}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_a22385ab33e29d3286c491c57e2ea8d53}{StartReceiving}}();}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00074\ \ \ \ \ boost::asio::ip::tcp::socket\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_a9629f25b319bf2df087ac3b0303316f7}{socket\_}};}
+\DoxyCodeLine{00075\ \ \ \ \ std::atomic<bool>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_a3b47c7c1c4c8c427eada3f8a8f8116aa}{connected\_}};}
+\DoxyCodeLine{00076\ \ \ \ \ std::mutex\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_a5c7492fbeaf70cc1bb6dc127914a660f}{sendMutex\_}};}
+\DoxyCodeLine{00077\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_a1ce4edf91b0cb45a6d0d330377ddf119}{receiveBuffer\_}};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_a01e4145bf03a05372559f309630072d7}{DoReceive}}();}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_ae93cb2c6443cb2629ba82f3a967d8af4}{HandleReceive}}(\textcolor{keyword}{const}\ std::error\_code\&\ error,\ std::size\_t\ bytesTransferred);}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_tcp_connection_a2a06f9680229b1c83b34f04565dbbb1e}{HandleSend}}(\textcolor{keyword}{const}\ std::error\_code\&\ error,\ std::size\_t\ bytesTransferred);}
+\DoxyCodeLine{00082\ \};}
+\DoxyCodeLine{00083\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p}}
+
+\end{DoxyCode}

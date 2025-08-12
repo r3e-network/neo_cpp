@@ -1,0 +1,48 @@
+\doxysection{include/neo/monitoring/health\+\_\+check.h File Reference}
+\hypertarget{health__check_8h}{}\label{health__check_8h}\index{include/neo/monitoring/health\_check.h@{include/neo/monitoring/health\_check.h}}
+{\ttfamily \#include $<$atomic$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$nlohmann/json.\+hpp$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for health\+\_\+check.\+h\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{neo\+::monitoring\+::\+Health\+Check\+Result}}
+\begin{DoxyCompactList}\small\item\em Health check result. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check}{neo\+::monitoring\+::\+Health\+Check}}
+\begin{DoxyCompactList}\small\item\em Base class for health checks. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_blockchain_health_check}{neo\+::monitoring\+::\+Blockchain\+Health\+Check}}
+\begin{DoxyCompactList}\small\item\em Health check that verifies blockchain sync status. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_p2_p_health_check}{neo\+::monitoring\+::\+P2\+PHealth\+Check}}
+\begin{DoxyCompactList}\small\item\em Health check for P2P connectivity. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_memory_health_check}{neo\+::monitoring\+::\+Memory\+Health\+Check}}
+\begin{DoxyCompactList}\small\item\em Health check for memory usage. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager}{neo\+::monitoring\+::\+Health\+Check\+Manager}}
+\begin{DoxyCompactList}\small\item\em Health check manager. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1monitoring}{neo\+::monitoring}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{neo\+::monitoring\+::\+Health\+Status}} \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6af068ebe4133e3e6563080836268ea979}{neo\+::monitoring\+::\+HEALTHY}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed}{neo\+::monitoring\+::\+DEGRADED}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{neo\+::monitoring\+::\+UNHEALTHY}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a396d45b57c2fbe3318e7b93272a2686b}{neo\+::monitoring\+::\+Healthy}}
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6aaa95669cd5732a57e8f6467705f06642}{neo\+::monitoring\+::\+Degraded}}
+, \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a2b329fc84084b45754e42488aca3114b}{neo\+::monitoring\+::\+Unhealthy}}
+ \}
+\begin{DoxyCompactList}\small\item\em Health check status. \end{DoxyCompactList}\end{DoxyCompactItemize}

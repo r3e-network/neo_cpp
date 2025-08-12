@@ -1,0 +1,130 @@
+\doxysection{event\+\_\+system.\+h}
+\hypertarget{event__system_8h_source}{}\label{event__system_8h_source}\index{include/neo/ledger/event\_system.h@{include/neo/ledger/event\_system.h}}
+\mbox{\hyperlink{event__system_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ Include\ transaction\ type}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2transaction_8h}{neo/ledger/transaction.h}}>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ Forward\ declarations}}
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo}{neo}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1_neo_system}{NeoSystem}};}
+\DoxyCodeLine{00015\ \}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ Forward\ declarations}}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}};}
+\DoxyCodeLine{00021\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args}{TransactionRemovedEventArgs}};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00027\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events}{MemoryPoolEvents}}}
+\DoxyCodeLine{00028\ \{}
+\DoxyCodeLine{00029\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ Event\ handler\ types}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_aeb647ff757d00df2096156de470e3af9}{TransactionAddedHandler}}\ =\ std::function<void(std::shared\_ptr<Transaction>)>;}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a99f4a0632536ff3a7adf33a04ed1396c}{TransactionRemovedHandler}}\ =\ std::function<void(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args}{TransactionRemovedEventArgs}}\&)>;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a6763186d701175cab0fc2ffef3796d10}{SubscribeTransactionAdded}}(\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_aeb647ff757d00df2096156de470e3af9}{TransactionAddedHandler}}\ handler);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a12a6b88ab9f42b069f32a52ea309c665}{UnsubscribeTransactionAdded}}(\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_aeb647ff757d00df2096156de470e3af9}{TransactionAddedHandler}}\ handler);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a3b8c4746530b24d365feb5c9bb35eacc}{SubscribeTransactionRemoved}}(\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a99f4a0632536ff3a7adf33a04ed1396c}{TransactionRemovedHandler}}\ handler);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_ad29ec85804d6ecb77fbe1e9a6baf78bf}{UnsubscribeTransactionRemoved}}(\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a99f4a0632536ff3a7adf33a04ed1396c}{TransactionRemovedHandler}}\ handler);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_afc55de336ca72a9ec3673e7b1080eb9f}{FireTransactionAdded}}(std::shared\_ptr<Transaction>\ transaction);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_aae0a3e485a1ce4996ff7a4d2e5424785}{FireTransactionRemoved}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_removed_event_args}{TransactionRemovedEventArgs}}\&\ args);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_acd0b5cd1b317663bf455640961994552}{ClearAllSubscriptions}}();}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<TransactionAddedHandler>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a7ab818b42aa7876bec6e2fcfa5f9546a}{transaction\_added\_handlers\_}};}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<TransactionRemovedHandler>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_abc58754aa8bbeba31cfd2b9937f5d3a1}{transaction\_removed\_handlers\_}};}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{static}\ std::mutex\ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool_events_a6ea39845eccf71e4f5cd3623e0ba8b34}{handlers\_mutex\_}};}
+\DoxyCodeLine{00079\ \};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00084\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events}{BlockchainEvents}}}
+\DoxyCodeLine{00085\ \{}
+\DoxyCodeLine{00086\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{comment}{//\ Forward\ declarations}}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{structneo_1_1ledger_1_1_application_executed}{ApplicationExecuted}};}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{class\ }DataCache;}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{comment}{//\ Event\ handler\ types}}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a2c75f8c0eae71f22fcc2e44c62ca25cb}{CommittingHandler}}\ =\ std::function<void(std::shared\_ptr<NeoSystem>,\ std::shared\_ptr<Block>,}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<DataCache>,\ \textcolor{keyword}{const}\ std::vector<ApplicationExecuted>\&)>;}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a8a9edee4f1eb0241b4b5fa9233db684c}{CommittedHandler}}\ =\ std::function<void(std::shared\_ptr<NeoSystem>,\ std::shared\_ptr<Block>)>;}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_aeb50002bdf0ec1cbcb200289b3dcf049}{BlockPersistedHandler}}\ =\ std::function<void(std::shared\_ptr<Block>)>;}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a769ab6bc56d65e6d5173b4292c4fe176}{SubscribeCommitting}}(\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a2c75f8c0eae71f22fcc2e44c62ca25cb}{CommittingHandler}}\ handler);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a7c7a471e554d28e251e26a0e15d58307}{SubscribeCommitted}}(\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a8a9edee4f1eb0241b4b5fa9233db684c}{CommittedHandler}}\ handler);}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a07d3d45b17e38d37959aa7ca7446b108}{SubscribeBlockPersisted}}(\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_aeb50002bdf0ec1cbcb200289b3dcf049}{BlockPersistedHandler}}\ handler);}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a67ac7112b4a248e926a4023d780a20d2}{FireCommitting}}(std::shared\_ptr<NeoSystem>\ system,\ std::shared\_ptr<Block>\ block,}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<DataCache>\ \mbox{\hyperlink{namespaceneo_1_1cache}{cache}},\ \textcolor{keyword}{const}\ std::vector<ApplicationExecuted>\&\ executed);}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_aaecbaa253f9ba6db438ce57d467b4512}{FireCommitted}}(std::shared\_ptr<NeoSystem>\ system,\ std::shared\_ptr<Block>\ block);}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a1570ebfccbb44a56d346eab124e22939}{FireBlockPersisted}}(std::shared\_ptr<Block>\ block);}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_ae269a3e9004e7263b6e3f8813620e188}{ClearAllSubscriptions}}();}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<CommittingHandler>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a7fb8dcc3bb5c99d19bc30f9911967be5}{committing\_handlers\_}};}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<CommittedHandler>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a3c021fb00465610fa50e1c56696b8122}{committed\_handlers\_}};}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<BlockPersistedHandler>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_ae930eb2b8f549af27cf0f941e8444eec}{block\_persisted\_handlers\_}};}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keyword}{static}\ std::mutex\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_events_a807df16228ebae4d18b68faa431469c2}{handlers\_mutex\_}};}
+\DoxyCodeLine{00138\ \};}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00144\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ EventClass,\ \textcolor{keyword}{typename}\ Handler>}
+\DoxyCodeLine{00145\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a16310a58f3f9fc83c6cf843928b7abaa}{EventSubscription}}}
+\DoxyCodeLine{00146\ \{}
+\DoxyCodeLine{00147\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00148\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a16310a58f3f9fc83c6cf843928b7abaa}{EventSubscription}}(Handler\ handler)\ :\ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_aa7d14f8a9ff7e4cdf1b08967be8a1be6}{handler\_}}(handler),\ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_acb4866e1a8d69bcca67bf3ca69c2898f}{subscribed\_}}(false)\ \{\}}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_adee806fd8a74abc232443c539db5aa60}{\string~EventSubscription}}()}
+\DoxyCodeLine{00151\ \ \ \ \ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_acb4866e1a8d69bcca67bf3ca69c2898f}{subscribed\_}})}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a16799c01f30e5cc8d0533cfb60a1cc12}{Unsubscribe}}();}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00156\ \ \ \ \ \}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{comment}{//\ Disable\ copy\ and\ move\ to\ prevent\ double\ unsubscription}}
+\DoxyCodeLine{00159\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a4bec316fcb97598a3fbdf5d7bf69d956}{EventSubscription}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a16310a58f3f9fc83c6cf843928b7abaa}{EventSubscription}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00160\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a16310a58f3f9fc83c6cf843928b7abaa}{EventSubscription}}\&\ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_ad542dd51f7291d9f754fa0f5ef34cb00}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a16310a58f3f9fc83c6cf843928b7abaa}{EventSubscription}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00161\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_ab3395811267a2829d2abf2f9cf265e11}{EventSubscription}}(\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a16310a58f3f9fc83c6cf843928b7abaa}{EventSubscription}}\&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00162\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a16310a58f3f9fc83c6cf843928b7abaa}{EventSubscription}}\&\ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_ac488d3e910cab410833e361003dcdcc7}{operator=}}(\mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a16310a58f3f9fc83c6cf843928b7abaa}{EventSubscription}}\&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a60c08308ed89c31becd4e6b0eaefd16a}{Subscribe}}();}
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a16799c01f30e5cc8d0533cfb60a1cc12}{Unsubscribe}}();}
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_a93721e94b6d617a2f1eb37e05c7bd518}{IsSubscribed}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_acb4866e1a8d69bcca67bf3ca69c2898f}{subscribed\_}};\ \}}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00168\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00169\ \ \ \ \ Handler\ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_aa7d14f8a9ff7e4cdf1b08967be8a1be6}{handler\_}};}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription_acb4866e1a8d69bcca67bf3ca69c2898f}{subscribed\_}};}
+\DoxyCodeLine{00171\ \};}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \textcolor{comment}{//\ Convenience\ type\ aliases\ for\ RAII\ subscriptions}}
+\DoxyCodeLine{00174\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceneo_1_1ledger_af65b5fb5acc571f2965eda2f2eb93888}{MemoryPoolTransactionAddedSubscription}}\ =}
+\DoxyCodeLine{00175\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{EventSubscription<MemoryPoolEvents,\ MemoryPoolEvents::TransactionAddedHandler>}};}
+\DoxyCodeLine{00176\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceneo_1_1ledger_a06b70f58a0d6cba4efe79bedbf59d8e7}{MemoryPoolTransactionRemovedSubscription}}\ =}
+\DoxyCodeLine{00177\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{EventSubscription<MemoryPoolEvents,\ MemoryPoolEvents::TransactionRemovedHandler>}};}
+\DoxyCodeLine{00178\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceneo_1_1ledger_a71e176c85266c9278d7182058bd34eeb}{BlockchainCommittingSubscription}}\ =\ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{EventSubscription<BlockchainEvents,\ BlockchainEvents::CommittingHandler>}};}
+\DoxyCodeLine{00179\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceneo_1_1ledger_a8df55c847ebf526ce62a5bf60c073599}{BlockchainCommittedSubscription}}\ =\ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{EventSubscription<BlockchainEvents,\ BlockchainEvents::CommittedHandler>}};}
+\DoxyCodeLine{00180\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceneo_1_1ledger_a8ee7fac2a4c38e594f10843ffca9ab41}{BlockchainBlockPersistedSubscription}}\ =}
+\DoxyCodeLine{00181\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_event_subscription}{EventSubscription<BlockchainEvents,\ BlockchainEvents::BlockPersistedHandler>}};}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00183\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}

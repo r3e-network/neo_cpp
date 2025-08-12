@@ -1,0 +1,183 @@
+\doxysection{transaction\+\_\+pool\+\_\+manager.\+h}
+\hypertarget{transaction__pool__manager_8h_source}{}\label{transaction__pool__manager_8h_source}\index{include/neo/ledger/transaction\_pool\_manager.h@{include/neo/ledger/transaction\_pool\_manager.h}}
+\mbox{\hyperlink{transaction__pool__manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2memory__pool_8h}{neo/ledger/memory\_pool.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{pool__item_8h}{neo/ledger/pool\_item.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{neo3__transaction_8h}{neo/network/p2p/payloads/neo3\_transaction.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00032\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a5c012846a1b7ae74a983e58b42a974cc}{TransactionPoolManager}}}
+\DoxyCodeLine{00033\ \{}
+\DoxyCodeLine{00034\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5b}{Priority}}}
+\DoxyCodeLine{00039\ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba28d0edd045e05cf5af64e35ae0c4c6ef}{Low}}\ =\ 0,}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba960b44c579bc2f6818d2daaf9e4c16f0}{Normal}}\ =\ 1,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba655d20c1ca69519ca647684edbb2db35}{High}}\ =\ 2,}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba278d01e5af56273bae1bb99a98b370cd}{Critical}}\ =\ 3}
+\DoxyCodeLine{00044\ \ \ \ \ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats}{PoolStats}}}
+\DoxyCodeLine{00050\ \ \ \ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats_a267506408eb87f15f8437fd76ea47fdd}{total\_transactions}};}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats_a98d9964231982a2d54f5dc0692d4fc87}{verified\_count}};}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats_ae02bb69cc10047305bc08695bed43a61}{unverified\_count}};}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats_a3435fcedfc6e725e42bf20b1b69a9506}{pending\_count}};}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats_a1c59badc6016b855e5d075cc4483f5b2}{rejected\_count}};}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ uint64\_t\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats_a0ac5792600d820c3fc3fae3893549af7}{total\_fees}};}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats_a279853bf29dfa2dd5a8e8a4616033271}{average\_fee}};}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats_a1bd917435341ed169f855fae3a09e56b}{average\_validation\_time}};}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats_a15a87ff740ac47542c29daa104361d0d}{memory\_usage\_bytes}};}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats_a027b37c637d5e49b83b7f490cffb7869}{throughput\_tps}};\ \ \textcolor{comment}{//\ Transactions\ per\ second}}
+\DoxyCodeLine{00061\ \ \ \ \ \};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata}{TransactionMetadata}}}
+\DoxyCodeLine{00067\ \ \ \ \ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata_a8aa79044ce58bd3535760729bfbc6ad5}{hash}};}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5b}{Priority}}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata_a3b178ddb680fc88073d29ffb8c1e3590}{priority}};}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ uint64\_t\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata_a5509ff4d23c7e0af92db2f9d0cf510f4}{fee}};}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata_abd63e3cecb6f1028367956a6ff32f4b0}{received\_time}};}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata_ab7e4d1ba364fd1fb7c0ae69d1894301a}{validated\_time}};}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ std::vector<io::UInt256>\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata_a8fa678de4e6a73c5b01f86965c1b978f}{dependencies}};\ \ \textcolor{comment}{//\ Other\ transactions\ this\ depends\ on}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata_aa34666b4d20395bcdc1451913e0adfdc}{is\_verified}};}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata_a5f7ce1376767badf7edf4c4fed39420e}{retry\_count}};}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata_a4e40eeba026c7fa9243149f12690bfcf}{source\_peer}};\ \ \textcolor{comment}{//\ Network\ peer\ that\ sent\ this\ transaction}}
+\DoxyCodeLine{00077\ \ \ \ \ \};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration}{Configuration}}}
+\DoxyCodeLine{00083\ \ \ \ \ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration_aff2a359e2b07e034014ed0652a16da2c}{max\_pool\_size}}\ =\ 100000;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration_a8d863eb8f1299530cb3d94e9981b4675}{max\_unverified\_size}}\ =\ 10000;}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration_a9fe63e15630b59ee6e4afb0bc2fa5dcb}{max\_transaction\_size}}\ =\ 102400;\ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 100KB}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ std::chrono::seconds\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration_a558fab259d428d7ae07d425f90cfda35}{transaction\_timeout}}\{300\};\ \ \textcolor{comment}{//\ 5\ minutes}}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ std::chrono::seconds\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration_a3f92a971f20a3087e0eedc878353accb}{cleanup\_interval}}\{60\};\ \ \ \ \ \ \textcolor{comment}{//\ 1\ minute}}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ uint64\_t\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration_aa3329fd3d846650353896f16b46f3032}{min\_fee\_threshold}}\ =\ 0;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration_af54464334814778b577d0329c5a35a49}{enable\_priority\_queue}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration_afd731bbc18e0085471b364ce9c524207}{enable\_conflict\_detection}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration_aa86daaeb1311296e5041db1eaf3bcf1a}{enable\_metrics}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration_adbdeacdb71eb9ce37160ab2561486393}{max\_retry\_attempts}}\ =\ 3;}
+\DoxyCodeLine{00094\ \ \ \ \ \};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{comment}{//\ Core\ memory\ pool}}
+\DoxyCodeLine{00098\ \ \ \ \ std::unique\_ptr<MemoryPool>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ae6019d6a76634c8bc6d5808de103d4ce}{memory\_pool\_}};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{comment}{//\ Configuration}}
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration}{Configuration}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_af29069915cfb1cd287aafa22efe0bc62}{config\_}};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{comment}{//\ Transaction\ metadata\ tracking}}
+\DoxyCodeLine{00104\ \ \ \ \ std::unordered\_map<io::UInt256,\ TransactionMetadata>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a58e5dd475532593a2368fb3f1a44af27}{metadata\_}};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{comment}{//\ Priority\ queue\ for\ transaction\ ordering}}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_comparator}{TransactionComparator}}}
+\DoxyCodeLine{00108\ \ \ \ \ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_comparator_ab03ba8e2d89c2d6ce29084aba7e8ea77}{operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata}{TransactionMetadata}}\&\ a,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata}{TransactionMetadata}}\&\ b)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00110\ \textcolor{keyword}{\ \ \ \ \ \ \ \ }\{}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Higher\ priority\ first,\ then\ higher\ fee}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (a.\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata_a3b178ddb680fc88073d29ffb8c1e3590}{priority}}\ !=\ b.\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata_a3b178ddb680fc88073d29ffb8c1e3590}{priority}})\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(a.\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata_a3b178ddb680fc88073d29ffb8c1e3590}{priority}})\ <\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{int}\textcolor{keyword}{>}(b.\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata_a3b178ddb680fc88073d29ffb8c1e3590}{priority}});}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ a.\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata_a5509ff4d23c7e0af92db2f9d0cf510f4}{fee}}\ <\ b.\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata_a5509ff4d23c7e0af92db2f9d0cf510f4}{fee}};}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00115\ \ \ \ \ \};}
+\DoxyCodeLine{00116\ \ \ \ \ std::priority\_queue<TransactionMetadata,\ std::vector<TransactionMetadata>,\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_comparator}{TransactionComparator}}>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a4083771d1243048d6c49b6af83f592a2}{priority\_queue\_}};}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{comment}{//\ Conflict\ detection}}
+\DoxyCodeLine{00119\ \ \ \ \ std::unordered\_map<std::string,\ std::vector<io::UInt256>>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ac32e2ff8e2dc1e2e01bc56e30c6a1aa0}{conflict\_groups\_}};\ \ \textcolor{comment}{//\ Track\ conflicting\ transactions}}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{comment}{//\ Metrics\ and\ monitoring}}
+\DoxyCodeLine{00122\ \ \ \ \ std::atomic<size\_t>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ad3ff04a4918496babe3f6d7a563c289a}{total\_received\_}}\{0\};}
+\DoxyCodeLine{00123\ \ \ \ \ std::atomic<size\_t>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ae88efee3bd553ec247fdba2374b49863}{total\_validated\_}}\{0\};}
+\DoxyCodeLine{00124\ \ \ \ \ std::atomic<size\_t>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a52b5a8cb5a37cc15cadf295010802b64}{total\_rejected\_}}\{0\};}
+\DoxyCodeLine{00125\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_aaeb93caf4c9972d786fce8cada02f763}{total\_fees\_}}\{0\};}
+\DoxyCodeLine{00126\ \ \ \ \ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a1a1bb7a86e8575067b2cb443cbb528e1}{start\_time\_}};}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{comment}{//\ Thread\ management}}
+\DoxyCodeLine{00129\ \ \ \ \ std::thread\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a997be4fa8ceb6ef073cfb04e79d38e51}{cleanup\_thread\_}};}
+\DoxyCodeLine{00130\ \ \ \ \ std::atomic<bool>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a1df6cf365b7155885d75cc7df03732d2}{running\_}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keyword}{mutable}\ std::shared\_mutex\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a00754c016d97b09eaec5ad0cac74945c}{mutex\_}};}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{comment}{//\ Callbacks}}
+\DoxyCodeLine{00134\ \ \ \ \ std::function<bool(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network::p2p::payloads::Neo3Transaction}}\&)>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a5e248639b7275c3f15278d9f6e4c89d5}{validator\_}};}
+\DoxyCodeLine{00135\ \ \ \ \ std::function<void(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&,\ \textcolor{keyword}{const}\ std::string\&)>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a4ac58f65b98e0a3c717dbbcafc8f714f}{on\_transaction\_added\_}};}
+\DoxyCodeLine{00136\ \ \ \ \ std::function<void(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&,\ \textcolor{keyword}{const}\ std::string\&)>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a8e5e52ebce0e7fe73d954d2a0e8037a9}{on\_transaction\_removed\_}};}
+\DoxyCodeLine{00137\ \ \ \ \ std::function<void(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats}{PoolStats}}\&)>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a0c74a418b3728b3fae2aa619a8c31db7}{on\_stats\_updated\_}};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab6bb6b085f25900863a9babca293f45a}{TransactionPoolManager}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration}{Configuration}}\&\ \mbox{\hyperlink{namespaceneo_1_1config}{config}});}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00149\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab6bb6b085f25900863a9babca293f45a}{TransactionPoolManager}}();}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00154\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ae23fc5f5c8a33f9921ecb1ad7a95449d}{\string~TransactionPoolManager}}();}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a53806a64ddcb80f95113ffa104cff0bb}{Start}}();}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a842c5438f4c45cd23e82c590d87e0a2e}{Stop}}();}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_afcc2f12e635bb4f743f60c9f00ba24d4}{AddTransaction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network::p2p::payloads::Neo3Transaction}}\&\ transaction,}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5b}{Priority}}\ priority\ =\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba960b44c579bc2f6818d2daaf9e4c16f0}{Priority::Normal}},\ \textcolor{keyword}{const}\ std::string\&\ source\_peer\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a12f0d27d2c5db2c26815c5bc14ee2d07}{RemoveTransaction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash,\ \textcolor{keyword}{const}\ std::string\&\ reason\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00189\ \ \ \ \ std::optional<network::p2p::payloads::Neo3Transaction>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a5e8beafad18b22335c1b537cfa00687a}{GetTransaction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00197\ \ \ \ \ std::vector<network::p2p::payloads::Neo3Transaction>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a2bb4a4f81717457f213ff40d1ea9070d}{GetTransactionsForBlock}}(\textcolor{keywordtype}{size\_t}\ max\_count\ =\ 1000,}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ max\_size\ =\ 1024\ *\ 1024)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_aa0ae12cfcc2253bd9709cd77acc933ea}{ContainsTransaction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00211\ \ \ \ \ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats}{PoolStats}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_af8f7f4a93ff65debcc8848e96bbc7d30}{GetStatistics}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_aab479b4f8fea7c48996831fe3631fd4c}{Clear}}(\textcolor{keyword}{const}\ std::string\&\ reason\ =\ \textcolor{stringliteral}{"{}Manual\ clear"{}});}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a0d863d2957b2a813c251f52f45e1b6f8}{ValidateUnverifiedTransactions}}();}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_abc89127d0ffecae93bd7ea382e361fe9}{RemoveExpiredTransactions}}();}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a047e86afdad3c52e6fbb1b17f0a68fb8}{DetectAndResolveConflicts}}();}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00242\ \ \ \ \ std::optional<TransactionMetadata>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a440d3b07d15e59144781890d9a9c13b8}{GetTransactionMetadata}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00248\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ad67d3cf8c419872566e54980adf474d3}{SetValidator}}(std::function<\textcolor{keywordtype}{bool}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network::p2p::payloads::Neo3Transaction}}\&)>\ validator);}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00254\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a63bdcaa4769d9ac73a683b5b0f5c9674}{SetOnTransactionAdded}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&,\ \textcolor{keyword}{const}\ std::string\&)>\ callback);}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00260\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_aedeaf41f01f94125fdfe3c63a25652cf}{SetOnTransactionRemoved}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&,\ \textcolor{keyword}{const}\ std::string\&)>\ callback);}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00266\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a4937c7281295e6d87d35301a2e8375cc}{SetOnStatsUpdated}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats}{PoolStats}}\&)>\ callback);}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00272\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration}{Configuration}}\&\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a73d35e45aefe8b69a4d3d4a2383c39b2}{GetConfiguration}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_af29069915cfb1cd287aafa22efe0bc62}{config\_}};\ \}}
+\DoxyCodeLine{00273\ }
+\DoxyCodeLine{00278\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_adefbe1aebf1bb4bfa7809f89c4906fc7}{UpdateConfiguration}}(\textcolor{keyword}{const}\ Configuration\&\ \mbox{\hyperlink{namespaceneo_1_1config}{config}});}
+\DoxyCodeLine{00279\ }
+\DoxyCodeLine{00280\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a64991c7f3b6e17a034113ca89f4f4a7e}{CleanupThread}}();}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00291\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5b}{Priority}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a7212983394abca6fdeb15e05139e2ba4}{CalculatePriority}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network::p2p::payloads::Neo3Transaction}}\&\ transaction)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00292\ }
+\DoxyCodeLine{00298\ \ \ \ \ std::vector<io::UInt256>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_aabab2f11044d1f622d6b512ae7229e1a}{CheckConflicts}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network::p2p::payloads::Neo3Transaction}}\&\ transaction)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00303\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a99b1cd8310ec8550af3a7fa269fa0c23}{UpdateMetrics}}();}
+\DoxyCodeLine{00304\ }
+\DoxyCodeLine{00309\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_aadfd162ad78caf4990bcb1eb333438bc}{CalculateMemoryUsage}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00316\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a57e543568e9f838e02dfc89529cc7013}{IsInUnverifiedPool}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00317\ \};}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00319\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}

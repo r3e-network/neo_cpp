@@ -1,0 +1,217 @@
+\doxysection{neo\+::common\+::Safe\+Math Class Reference}
+\hypertarget{classneo_1_1common_1_1_safe_math}{}\label{classneo_1_1common_1_1_safe_math}\index{neo::common::SafeMath@{neo::common::SafeMath}}
+
+
+Safe arithmetic operations that check for overflow.  
+
+
+
+
+{\ttfamily \#include $<$safe\+\_\+math.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1common_1_1_safe_math_a487b7027679b6d02e1b60492af06024d}{Add}} (T a, T b)
+\begin{DoxyCompactList}\small\item\em Safe addition with overflow check. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1common_1_1_safe_math_aa6303aaf75bb345739eac5b9c586a8d4}{Subtract}} (T a, T b)
+\begin{DoxyCompactList}\small\item\em Safe subtraction with overflow check. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1common_1_1_safe_math_af77f82ccbbae239d8a8f5d12a6a42607}{Multiply}} (T a, T b)
+\begin{DoxyCompactList}\small\item\em Safe multiplication with overflow check. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1common_1_1_safe_math_af80c5913ab614bebee055f4c62cc25ad}{Divide}} (T a, T b)
+\begin{DoxyCompactList}\small\item\em Safe division with divide-\/by-\/zero check. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static bool \mbox{\hyperlink{classneo_1_1common_1_1_safe_math_aa1e103e0f5543f211d09f647fee374c2}{Would\+Add\+Overflow}} (T a, T b) noexcept
+\begin{DoxyCompactList}\small\item\em Check if adding two values would overflow. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static bool \mbox{\hyperlink{classneo_1_1common_1_1_safe_math_a78e6736401fc878777ee618d35efaf16}{Would\+Multiply\+Overflow}} (T a, T b) noexcept
+\begin{DoxyCompactList}\small\item\em Check if multiplying two values would overflow. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Safe arithmetic operations that check for overflow. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1common_1_1_safe_math_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1common_1_1_safe_math_a487b7027679b6d02e1b60492af06024d}\index{neo::common::SafeMath@{neo::common::SafeMath}!Add@{Add}}
+\index{Add@{Add}!neo::common::SafeMath@{neo::common::SafeMath}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{classneo_1_1common_1_1_safe_math_a487b7027679b6d02e1b60492af06024d} 
+template$<$typename T$>$ \\
+T neo\+::common\+::\+Safe\+Math\+::\+Add (\begin{DoxyParamCaption}\item[{T}]{a}{, }\item[{T}]{b}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Safe addition with overflow check. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First operand \\
+\hline
+{\em b} & Second operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Result of a + b 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::overflow\+\_\+error} & if operation would overflow \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1common_1_1_safe_math_af80c5913ab614bebee055f4c62cc25ad}\index{neo::common::SafeMath@{neo::common::SafeMath}!Divide@{Divide}}
+\index{Divide@{Divide}!neo::common::SafeMath@{neo::common::SafeMath}}
+\doxysubsubsection{\texorpdfstring{Divide()}{Divide()}}
+{\footnotesize\ttfamily \label{classneo_1_1common_1_1_safe_math_af80c5913ab614bebee055f4c62cc25ad} 
+template$<$typename T$>$ \\
+T neo\+::common\+::\+Safe\+Math\+::\+Divide (\begin{DoxyParamCaption}\item[{T}]{a}{, }\item[{T}]{b}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Safe division with divide-\/by-\/zero check. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & Dividend \\
+\hline
+{\em b} & Divisor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Result of a / b 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::domain\+\_\+error} & if b is zero \\
+\hline
+{\em std\+::overflow\+\_\+error} & if operation would overflow (for signed min / -\/1) \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1common_1_1_safe_math_af77f82ccbbae239d8a8f5d12a6a42607}\index{neo::common::SafeMath@{neo::common::SafeMath}!Multiply@{Multiply}}
+\index{Multiply@{Multiply}!neo::common::SafeMath@{neo::common::SafeMath}}
+\doxysubsubsection{\texorpdfstring{Multiply()}{Multiply()}}
+{\footnotesize\ttfamily \label{classneo_1_1common_1_1_safe_math_af77f82ccbbae239d8a8f5d12a6a42607} 
+template$<$typename T$>$ \\
+T neo\+::common\+::\+Safe\+Math\+::\+Multiply (\begin{DoxyParamCaption}\item[{T}]{a}{, }\item[{T}]{b}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Safe multiplication with overflow check. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First operand \\
+\hline
+{\em b} & Second operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Result of a \texorpdfstring{$\ast$}{*} b 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::overflow\+\_\+error} & if operation would overflow \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1common_1_1_safe_math_aa6303aaf75bb345739eac5b9c586a8d4}\index{neo::common::SafeMath@{neo::common::SafeMath}!Subtract@{Subtract}}
+\index{Subtract@{Subtract}!neo::common::SafeMath@{neo::common::SafeMath}}
+\doxysubsubsection{\texorpdfstring{Subtract()}{Subtract()}}
+{\footnotesize\ttfamily \label{classneo_1_1common_1_1_safe_math_aa6303aaf75bb345739eac5b9c586a8d4} 
+template$<$typename T$>$ \\
+T neo\+::common\+::\+Safe\+Math\+::\+Subtract (\begin{DoxyParamCaption}\item[{T}]{a}{, }\item[{T}]{b}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Safe subtraction with overflow check. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First operand \\
+\hline
+{\em b} & Second operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Result of a -\/ b 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::overflow\+\_\+error} & if operation would overflow \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1common_1_1_safe_math_aa1e103e0f5543f211d09f647fee374c2}\index{neo::common::SafeMath@{neo::common::SafeMath}!WouldAddOverflow@{WouldAddOverflow}}
+\index{WouldAddOverflow@{WouldAddOverflow}!neo::common::SafeMath@{neo::common::SafeMath}}
+\doxysubsubsection{\texorpdfstring{WouldAddOverflow()}{WouldAddOverflow()}}
+{\footnotesize\ttfamily \label{classneo_1_1common_1_1_safe_math_aa1e103e0f5543f211d09f647fee374c2} 
+template$<$typename T$>$ \\
+bool neo\+::common\+::\+Safe\+Math\+::\+Would\+Add\+Overflow (\begin{DoxyParamCaption}\item[{T}]{a}{, }\item[{T}]{b}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+
+
+Check if adding two values would overflow. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First operand \\
+\hline
+{\em b} & Second operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if operation would overflow, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1common_1_1_safe_math_a78e6736401fc878777ee618d35efaf16}\index{neo::common::SafeMath@{neo::common::SafeMath}!WouldMultiplyOverflow@{WouldMultiplyOverflow}}
+\index{WouldMultiplyOverflow@{WouldMultiplyOverflow}!neo::common::SafeMath@{neo::common::SafeMath}}
+\doxysubsubsection{\texorpdfstring{WouldMultiplyOverflow()}{WouldMultiplyOverflow()}}
+{\footnotesize\ttfamily \label{classneo_1_1common_1_1_safe_math_a78e6736401fc878777ee618d35efaf16} 
+template$<$typename T$>$ \\
+bool neo\+::common\+::\+Safe\+Math\+::\+Would\+Multiply\+Overflow (\begin{DoxyParamCaption}\item[{T}]{a}{, }\item[{T}]{b}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [noexcept]}}
+
+
+
+Check if multiplying two values would overflow. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Numeric type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em a} & First operand \\
+\hline
+{\em b} & Second operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if operation would overflow, false otherwise 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/common/\mbox{\hyperlink{safe__math_8h}{safe\+\_\+math.\+h}}\end{DoxyCompactItemize}

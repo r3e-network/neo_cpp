@@ -1,0 +1,30 @@
+\doxysection{blockchain\+\_\+execution.\+h}
+\hypertarget{blockchain__execution_8h_source}{}\label{blockchain__execution_8h_source}\index{include/neo/ledger/blockchain\_execution.h@{include/neo/ledger/blockchain\_execution.h}}
+\mbox{\hyperlink{blockchain__execution_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2block_8h}{neo/ledger/block.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{blockchain__callbacks_8h}{neo/ledger/blockchain\_callbacks.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2transaction_8h}{neo/ledger/transaction.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{data__cache_8h}{neo/persistence/data\_cache.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_execution_a92f04ffa6c2f887462fdb28dbffb5855}{BlockchainExecution}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_execution_a92f04ffa6c2f887462fdb28dbffb5855}{BlockchainExecution}}(std::shared\_ptr<BlockchainCallbacks>\ callbacks);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_execution_aabebb8aa48dd70ba1ab9f9d777c8c1a3}{ExecuteBlock}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}}\&\ block,\ std::shared\_ptr<persistence::DataCache>\ snapshot);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_execution_a5fd037261d4aa15404191cd5d87e6d08}{Initialize}}(std::shared\_ptr<persistence::DataCache>\ snapshot);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00039\ \ \ \ \ std::shared\_ptr<BlockchainCallbacks>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_execution_aa16fa99f7582bce782f8af670936b722}{callbacks\_}};}
+\DoxyCodeLine{00040\ \};}
+\DoxyCodeLine{00041\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}

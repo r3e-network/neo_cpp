@@ -1,0 +1,122 @@
+\doxysection{neo\+::plugins Namespace Reference}
+\hypertarget{namespaceneo_1_1plugins}{}\label{namespaceneo_1_1plugins}\index{neo::plugins@{neo::plugins}}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1plugins_1_1statistics}{statistics}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1plugins_1_1_application_log}{Application\+Log}}
+\begin{DoxyCompactList}\small\item\em Represents an application log. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin}{Application\+Logs\+Plugin}}
+\begin{DoxyCompactList}\small\item\em Represents an application logs plugin. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_d_b_f_t_plugin}{DBFTPlugin}}
+\begin{DoxyCompactList}\small\item\em Represents a DBFT plugin. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_d_b_f_t_plugin_factory}{DBFTPlugin\+Factory}}
+\begin{DoxyCompactList}\small\item\em Represents a DBFT plugin factory. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin}{Plugin}}
+\begin{DoxyCompactList}\small\item\em Represents a plugin. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base}{Plugin\+Base}}
+\begin{DoxyCompactList}\small\item\em Represents a base plugin. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory}{Plugin\+Factory}}
+\begin{DoxyCompactList}\small\item\em Represents a plugin factory. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory_base}{Plugin\+Factory\+Base}}
+\begin{DoxyCompactList}\small\item\em Represents a base plugin factory. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_manager}{Plugin\+Manager}}
+\begin{DoxyCompactList}\small\item\em Represents a plugin manager. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_manager_impl}{Plugin\+Manager\+Impl}}
+\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_r_p_c_plugin}{RPCPlugin}}
+\begin{DoxyCompactList}\small\item\em Represents an RPC plugin. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_r_p_c_plugin_factory}{RPCPlugin\+Factory}}
+\begin{DoxyCompactList}\small\item\em Represents an RPC plugin factory. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_rpc_server_plugin}{Rpc\+Server\+Plugin}}
+\begin{DoxyCompactList}\small\item\em Represents an RPC server plugin. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_rpc_server_plugin_factory}{Rpc\+Server\+Plugin\+Factory}}
+\begin{DoxyCompactList}\small\item\em Represents an RPC server plugin factory. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1plugins_1_1_state_root}{State\+Root}}
+\begin{DoxyCompactList}\small\item\em Represents a state root. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin}{State\+Service\+Plugin}}
+\begin{DoxyCompactList}\small\item\em Represents a state service plugin. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_factory}{State\+Service\+Plugin\+Factory}}
+\begin{DoxyCompactList}\small\item\em Represents a state service plugin factory. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin}{Statistics\+Plugin}}
+\begin{DoxyCompactList}\small\item\em Represents a statistics plugin. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_test_plugin}{Test\+Plugin}}
+\begin{DoxyCompactList}\small\item\em Represents a test plugin. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1plugins_1_1_test_plugin_factory}{Test\+Plugin\+Factory}}
+\begin{DoxyCompactList}\small\item\em Represents a test plugin factory. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1plugins_a00f3c8d120c1a7b1c7555a139b553512}{Plugin\+Factory}} = std\+::function$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base}{Plugin\+Base}}$>$()$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory}{Plugin\+Factory}} $>$ \& \mbox{\hyperlink{namespaceneo_1_1plugins_a7e16c606392c907254358d6251f6d572}{Get\+Plugin\+Registry}} ()
+\item 
+void \mbox{\hyperlink{namespaceneo_1_1plugins_a153647e62b154afa8e6e450b25b17d9c}{Register\+Plugin\+Factory}} (const std\+::string \&name, \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory}{Plugin\+Factory}} factory)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base}{Plugin\+Base}} $>$ \mbox{\hyperlink{namespaceneo_1_1plugins_af5f7880aa4964dd5c7c7fa0535c0914b}{Create\+Plugin}} (const std\+::string \&name)
+\item 
+void \mbox{\hyperlink{namespaceneo_1_1plugins_a1f44abc05a2d316576a01ce358f11c19}{Initialize\+Plugin\+Factories}} ()
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{namespaceneo_1_1plugins_a8d864b0bb69d33a1699acfc5e23ed1f9}{Get\+Available\+Plugins}} ()
+\end{DoxyCompactItemize}
+
+
+\label{doc-typedef-members}
+\Hypertarget{namespaceneo_1_1plugins_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{namespaceneo_1_1plugins_a00f3c8d120c1a7b1c7555a139b553512}\index{neo::plugins@{neo::plugins}!PluginFactory@{PluginFactory}}
+\index{PluginFactory@{PluginFactory}!neo::plugins@{neo::plugins}}
+\doxysubsubsection{\texorpdfstring{PluginFactory}{PluginFactory}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1plugins_a00f3c8d120c1a7b1c7555a139b553512} 
+using neo\+::plugins\+::\+Plugin\+Factory = std\+::function$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base}{Plugin\+Base}}$>$()$>$}
+
+
+
+\label{doc-func-members}
+\Hypertarget{namespaceneo_1_1plugins_doc-func-members}
+\doxysubsection{Function Documentation}
+\Hypertarget{namespaceneo_1_1plugins_af5f7880aa4964dd5c7c7fa0535c0914b}\index{neo::plugins@{neo::plugins}!CreatePlugin@{CreatePlugin}}
+\index{CreatePlugin@{CreatePlugin}!neo::plugins@{neo::plugins}}
+\doxysubsubsection{\texorpdfstring{CreatePlugin()}{CreatePlugin()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1plugins_af5f7880aa4964dd5c7c7fa0535c0914b} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base}{Plugin\+Base}} $>$ neo\+::plugins\+::\+Create\+Plugin (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{namespaceneo_1_1plugins_a8d864b0bb69d33a1699acfc5e23ed1f9}\index{neo::plugins@{neo::plugins}!GetAvailablePlugins@{GetAvailablePlugins}}
+\index{GetAvailablePlugins@{GetAvailablePlugins}!neo::plugins@{neo::plugins}}
+\doxysubsubsection{\texorpdfstring{GetAvailablePlugins()}{GetAvailablePlugins()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1plugins_a8d864b0bb69d33a1699acfc5e23ed1f9} 
+std\+::vector$<$ std\+::string $>$ neo\+::plugins\+::\+Plugin\+Manager\+::\+Get\+Available\+Plugins (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{namespaceneo_1_1plugins_a7e16c606392c907254358d6251f6d572}\index{neo::plugins@{neo::plugins}!GetPluginRegistry@{GetPluginRegistry}}
+\index{GetPluginRegistry@{GetPluginRegistry}!neo::plugins@{neo::plugins}}
+\doxysubsubsection{\texorpdfstring{GetPluginRegistry()}{GetPluginRegistry()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1plugins_a7e16c606392c907254358d6251f6d572} 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory}{Plugin\+Factory}} $>$ \& neo\+::plugins\+::\+Get\+Plugin\+Registry (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{namespaceneo_1_1plugins_a1f44abc05a2d316576a01ce358f11c19}\index{neo::plugins@{neo::plugins}!InitializePluginFactories@{InitializePluginFactories}}
+\index{InitializePluginFactories@{InitializePluginFactories}!neo::plugins@{neo::plugins}}
+\doxysubsubsection{\texorpdfstring{InitializePluginFactories()}{InitializePluginFactories()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1plugins_a1f44abc05a2d316576a01ce358f11c19} 
+void neo\+::plugins\+::\+Initialize\+Plugin\+Factories (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{namespaceneo_1_1plugins_a153647e62b154afa8e6e450b25b17d9c}\index{neo::plugins@{neo::plugins}!RegisterPluginFactory@{RegisterPluginFactory}}
+\index{RegisterPluginFactory@{RegisterPluginFactory}!neo::plugins@{neo::plugins}}
+\doxysubsubsection{\texorpdfstring{RegisterPluginFactory()}{RegisterPluginFactory()}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1plugins_a153647e62b154afa8e6e450b25b17d9c} 
+void neo\+::plugins\+::\+Register\+Plugin\+Factory (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{\mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory}{Plugin\+Factory}}}]{factory}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 3

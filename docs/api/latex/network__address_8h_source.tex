@@ -1,0 +1,46 @@
+\doxysection{network\+\_\+address.\+h}
+\hypertarget{network__address_8h_source}{}\label{network__address_8h_source}\index{include/neo/network/network\_address.h@{include/neo/network/network\_address.h}}
+\mbox{\hyperlink{network__address_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ijson__serializable_8h}{neo/io/ijson\_serializable.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{iserializable_8h}{neo/io/iserializable.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network}{neo::network}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1_network_address_a6f1bf796f41cda5495c44f9ddb70ed09}{NetworkAddress}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{io::ISerializable}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{io::IJsonSerializable}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a6f1bf796f41cda5495c44f9ddb70ed09}{NetworkAddress}}();}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a6f1bf796f41cda5495c44f9ddb70ed09}{NetworkAddress}}(uint32\_t\ timestamp,\ uint64\_t\ services,\ \textcolor{keyword}{const}\ std::string\&\ address,\ uint16\_t\ port);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00035\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a1953ded2c2f4d2fdfc912e2edf2e2971}{GetTimestamp}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a838cde1886730a25ecd1d77bb8b834fb}{GetServices}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1network_1_1_network_address_ac28886d3efa9142f9b3d4dfbe73563b5}{GetAddress}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a544731572043cfea98cbf14a9554cb3c}{GetPort}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a7e71f63c834f816a9ff39a191e8f4533}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a9082b26aeb2918e369e4acb5d894b2fc}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a5c1bf5a20f8fa5ef97a8cfb69da5e35e}{SerializeJson}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io::JsonWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a8ee800f3166273e4cfa862c9ac79a14e}{DeserializeJson}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io::JsonReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00080\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_network_address_aee7d81b292fc5f3ee627c8b60122cd9a}{timestamp\_}};}
+\DoxyCodeLine{00081\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_network_address_abd190a8bda0556484b24943ccdf7f607}{services\_}};}
+\DoxyCodeLine{00082\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1network_1_1_network_address_aad4b5f1a0a4d888c17ca881bd0a7be00}{address\_}};}
+\DoxyCodeLine{00083\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a205d5b55229f0c4a546d6c4198156327}{port\_}};}
+\DoxyCodeLine{00084\ \};}
+\DoxyCodeLine{00085\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network}}
+
+\end{DoxyCode}

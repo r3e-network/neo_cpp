@@ -1,0 +1,89 @@
+\doxysection{neo\+::vm\+::IInteroperable Class Reference}
+\hypertarget{classneo_1_1vm_1_1_i_interoperable}{}\label{classneo_1_1vm_1_1_i_interoperable}\index{neo::vm::IInteroperable@{neo::vm::IInteroperable}}
+
+
+Interface for objects that can be converted to/from VM stack items.  
+
+
+
+
+{\ttfamily \#include $<$iinteroperable.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::vm\+::IInteroperable\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1vm_1_1_i_interoperable_a311df6665fbba201898b8ef32e1782e8}{\texorpdfstring{$\sim$}{\string~}\+IInteroperable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_i_interoperable_acf9cc44a430d44a5777cdc0dd9966de6}{To\+Stack\+Item}} (\mbox{\hyperlink{classneo_1_1vm_1_1_i_reference_counter}{IReference\+Counter}} \texorpdfstring{$\ast$}{*}reference\+Counter)=0
+\begin{DoxyCompactList}\small\item\em Creates a stack item from this object. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1vm_1_1_i_interoperable_ad96624e3ce8e86e6fa61b290e47574e3}{From\+Stack\+Item}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ stack\+Item)=0
+\begin{DoxyCompactList}\small\item\em Initializes this object from a stack item. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for objects that can be converted to/from VM stack items. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1vm_1_1_i_interoperable_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1vm_1_1_i_interoperable_a311df6665fbba201898b8ef32e1782e8}\index{neo::vm::IInteroperable@{neo::vm::IInteroperable}!````~IInteroperable@{\texorpdfstring{$\sim$}{\string~}IInteroperable}}
+\index{````~IInteroperable@{\texorpdfstring{$\sim$}{\string~}IInteroperable}!neo::vm::IInteroperable@{neo::vm::IInteroperable}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IInteroperable()}{\string~IInteroperable()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_i_interoperable_a311df6665fbba201898b8ef32e1782e8} 
+virtual neo\+::vm\+::\+IInteroperable\+::\texorpdfstring{$\sim$}{\string~}\+IInteroperable (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1vm_1_1_i_interoperable_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1vm_1_1_i_interoperable_ad96624e3ce8e86e6fa61b290e47574e3}\index{neo::vm::IInteroperable@{neo::vm::IInteroperable}!FromStackItem@{FromStackItem}}
+\index{FromStackItem@{FromStackItem}!neo::vm::IInteroperable@{neo::vm::IInteroperable}}
+\doxysubsubsection{\texorpdfstring{FromStackItem()}{FromStackItem()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_i_interoperable_ad96624e3ce8e86e6fa61b290e47574e3} 
+virtual void neo\+::vm\+::\+IInteroperable\+::\+From\+Stack\+Item (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{stack\+Item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Initializes this object from a stack item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em stack\+Item} & The stack item to convert from. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_i_interoperable_acf9cc44a430d44a5777cdc0dd9966de6}\index{neo::vm::IInteroperable@{neo::vm::IInteroperable}!ToStackItem@{ToStackItem}}
+\index{ToStackItem@{ToStackItem}!neo::vm::IInteroperable@{neo::vm::IInteroperable}}
+\doxysubsubsection{\texorpdfstring{ToStackItem()}{ToStackItem()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_i_interoperable_acf9cc44a430d44a5777cdc0dd9966de6} 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ neo\+::vm\+::\+IInteroperable\+::\+To\+Stack\+Item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1vm_1_1_i_reference_counter}{IReference\+Counter}} \texorpdfstring{$\ast$}{*}}]{reference\+Counter}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Creates a stack item from this object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reference\+Counter} & The reference counter for managing object references. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The stack item representation. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_notary_1_1_deposit_a7d85fb4dfb3f71c6d0f7c2a6f5ea0066}{neo\+::smartcontract\+::native\+::\+Notary\+::\+Deposit}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/vm/\mbox{\hyperlink{iinteroperable_8h}{iinteroperable.\+h}}\end{DoxyCompactItemize}

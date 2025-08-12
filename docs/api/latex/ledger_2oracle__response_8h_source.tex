@@ -1,0 +1,64 @@
+\doxysection{oracle\+\_\+response.\+h}
+\hypertarget{ledger_2oracle__response_8h_source}{}\label{ledger_2oracle__response_8h_source}\index{include/neo/ledger/oracle\_response.h@{include/neo/ledger/oracle\_response.h}}
+\mbox{\hyperlink{ledger_2oracle__response_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{transaction__attribute_8h}{neo/ledger/transaction\_attribute.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespaceneo_1_1ledger_adc71ae8272d2c1a04a0dba53d20ac6e9}{OracleResponseCode}}\ :\ uint8\_t}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1ledger_adc71ae8272d2c1a04a0dba53d20ac6e9a505a83f220c02df2f85c3810cd9ceb38}{Success}}\ =\ 0x00,}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1ledger_adc71ae8272d2c1a04a0dba53d20ac6e9a92fc625d90a9f5955275e8fc2e0f6572}{ProtocolNotSupported}}\ =\ 0x10,}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1ledger_adc71ae8272d2c1a04a0dba53d20ac6e9a2317a9d0187db86f264ae0a44413fa02}{ConsensusUnreachable}}\ =\ 0x12,}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1ledger_adc71ae8272d2c1a04a0dba53d20ac6e9a38c300f4fc9ce8a77aad4a30de05cad8}{NotFound}}\ =\ 0x14,}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1ledger_adc71ae8272d2c1a04a0dba53d20ac6e9ac85a251cc457840f1e032f1b733e9398}{Timeout}}\ =\ 0x16,}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1ledger_adc71ae8272d2c1a04a0dba53d20ac6e9a722969577a96ca3953e84e3d949dee81}{Forbidden}}\ =\ 0x18,}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1ledger_adc71ae8272d2c1a04a0dba53d20ac6e9aea049755df7d3ac3339ed1be31f670ee}{ResponseTooLarge}}\ =\ 0x1a,}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1ledger_adc71ae8272d2c1a04a0dba53d20ac6e9a09d9ff5c9cf461998dc29f4c90f2c60c}{InsufficientFunds}}\ =\ 0x1c,}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1ledger_adc71ae8272d2c1a04a0dba53d20ac6e9a9c96bafebf4a701dcdc0897f2247a480}{ContentTypeNotSupported}}\ =\ 0x1f,}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1ledger_adc71ae8272d2c1a04a0dba53d20ac6e9a902b0d55fddef6f8d651fe1035b7d4bd}{Error}}\ =\ 0xff}
+\DoxyCodeLine{00025\ \};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_a77fef896470698d08e733a2ebd2c0417}{OracleResponse}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_af93e5abcd8e3d4bf4bffc2d66c26b0eb}{TransactionAttribute}}}
+\DoxyCodeLine{00031\ \{}
+\DoxyCodeLine{00032\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_a77fef896470698d08e733a2ebd2c0417}{OracleResponse}}();}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_a77fef896470698d08e733a2ebd2c0417}{OracleResponse}}(uint64\_t\ \textcolor{keywordtype}{id},\ \mbox{\hyperlink{namespaceneo_1_1ledger_adc71ae8272d2c1a04a0dba53d20ac6e9}{OracleResponseCode}}\ code,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ result);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_a06bc6adb5be05a7ae41aec837e584a0b}{GetId}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_aadb6b586028c2671af59abfbcc39153f}{SetId}}(uint64\_t\ \textcolor{keywordtype}{id});}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1ledger_adc71ae8272d2c1a04a0dba53d20ac6e9}{OracleResponseCode}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_aa9f75fa6ab07097b5d2a956e7dbc0d67}{GetCode}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_a48eba8b93dd19c5419eb94c92cfbf124}{SetCode}}(\mbox{\hyperlink{namespaceneo_1_1ledger_adc71ae8272d2c1a04a0dba53d20ac6e9}{OracleResponseCode}}\ code);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_a063fdc2e1937a2626c28e1f281f1a6a0}{GetResult}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_a65bf63080f4d250fad1363a55d801ed2}{SetResult}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ result);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_a9f8221b6dae6fbf05aa3fae8ff3fc1f4}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_ae363b4f724b0a333bfe6819a9bd08b81}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_a5d6e78176a1d3dfe22c3ebf928ccbf95}{GetSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_a4fa7189d03e4dd8676e9d88fe8a7a357}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_a77fef896470698d08e733a2ebd2c0417}{OracleResponse}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_a88ee330b806b9c95fcd12a4351664fdf}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_a77fef896470698d08e733a2ebd2c0417}{OracleResponse}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00115\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_aaadf3d2622fbe2250332adf648b9fed8}{id\_}};}
+\DoxyCodeLine{00116\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1ledger_adc71ae8272d2c1a04a0dba53d20ac6e9}{OracleResponseCode}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_a5939c7f1f91d0d28e568efd06004b99f}{code\_}};}
+\DoxyCodeLine{00117\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_oracle_response_ad8cc75d36f26ae6c92665c2dd73caec3}{result\_}};}
+\DoxyCodeLine{00118\ \};}
+\DoxyCodeLine{00119\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}

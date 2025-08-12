@@ -1,0 +1,91 @@
+\doxysection{neo\+::ledger\+::IVerifiable Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_i_verifiable}{}\label{classneo_1_1ledger_1_1_i_verifiable}\index{neo::ledger::IVerifiable@{neo::ledger::IVerifiable}}
+
+
+Interface for verifiable items in the Neo network.  
+
+
+
+
+{\ttfamily \#include $<$iverifiable.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::ledger\+::IVerifiable\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1ledger_1_1_i_verifiable_a5f0ebb318034a9bdf931b5984bf50936}{\texorpdfstring{$\sim$}{\string~}\+IVerifiable}} ()=default
+\item 
+virtual std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_i_verifiable_a9ef18c76e9483916486bff9c28e22432}{Get\+Script\+Hashes\+For\+Verifying}} () const=0
+\begin{DoxyCompactList}\small\item\em Gets the script hashes that need to be verified. \end{DoxyCompactList}\item 
+virtual const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} $>$ \& \mbox{\hyperlink{classneo_1_1ledger_1_1_i_verifiable_ab2575387684121dbf314e11422622000}{Get\+Witnesses}} () const=0
+\begin{DoxyCompactList}\small\item\em Gets the witnesses for verification. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1ledger_1_1_i_verifiable_a15d95ec58a14e9849dd64e68673f30b6}{Set\+Witnesses}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} $>$ \&witnesses)=0
+\begin{DoxyCompactList}\small\item\em Sets the witnesses. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for verifiable items in the Neo network. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_i_verifiable_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_i_verifiable_a5f0ebb318034a9bdf931b5984bf50936}\index{neo::ledger::IVerifiable@{neo::ledger::IVerifiable}!````~IVerifiable@{\texorpdfstring{$\sim$}{\string~}IVerifiable}}
+\index{````~IVerifiable@{\texorpdfstring{$\sim$}{\string~}IVerifiable}!neo::ledger::IVerifiable@{neo::ledger::IVerifiable}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IVerifiable()}{\string~IVerifiable()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_i_verifiable_a5f0ebb318034a9bdf931b5984bf50936} 
+virtual neo\+::network\+::p2p\+::payloads\+::\+IVerifiable\+::\texorpdfstring{$\sim$}{\string~}\+IVerifiable (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_i_verifiable_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_i_verifiable_a9ef18c76e9483916486bff9c28e22432}\index{neo::ledger::IVerifiable@{neo::ledger::IVerifiable}!GetScriptHashesForVerifying@{GetScriptHashesForVerifying}}
+\index{GetScriptHashesForVerifying@{GetScriptHashesForVerifying}!neo::ledger::IVerifiable@{neo::ledger::IVerifiable}}
+\doxysubsubsection{\texorpdfstring{GetScriptHashesForVerifying()}{GetScriptHashesForVerifying()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_i_verifiable_a9ef18c76e9483916486bff9c28e22432} 
+virtual std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ neo\+::network\+::p2p\+::payloads\+::\+IVerifiable\+::\+Get\+Script\+Hashes\+For\+Verifying (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the script hashes that need to be verified. 
+
+\begin{DoxyReturn}{Returns}
+The script hashes for verification. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_i_verifiable_ab2575387684121dbf314e11422622000}\index{neo::ledger::IVerifiable@{neo::ledger::IVerifiable}!GetWitnesses@{GetWitnesses}}
+\index{GetWitnesses@{GetWitnesses}!neo::ledger::IVerifiable@{neo::ledger::IVerifiable}}
+\doxysubsubsection{\texorpdfstring{GetWitnesses()}{GetWitnesses()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_i_verifiable_ab2575387684121dbf314e11422622000} 
+virtual const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} $>$ \& neo\+::network\+::p2p\+::payloads\+::\+IVerifiable\+::\+Get\+Witnesses (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the witnesses for verification. 
+
+\begin{DoxyReturn}{Returns}
+The witnesses. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_i_verifiable_a15d95ec58a14e9849dd64e68673f30b6}\index{neo::ledger::IVerifiable@{neo::ledger::IVerifiable}!SetWitnesses@{SetWitnesses}}
+\index{SetWitnesses@{SetWitnesses}!neo::ledger::IVerifiable@{neo::ledger::IVerifiable}}
+\doxysubsubsection{\texorpdfstring{SetWitnesses()}{SetWitnesses()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_i_verifiable_a15d95ec58a14e9849dd64e68673f30b6} 
+virtual void neo\+::network\+::p2p\+::payloads\+::\+IVerifiable\+::\+Set\+Witnesses (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} $>$ \&}]{witnesses}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Sets the witnesses. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em witnesses} & The witnesses. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/payloads/\mbox{\hyperlink{iverifiable_8h}{iverifiable.\+h}}\end{DoxyCompactItemize}

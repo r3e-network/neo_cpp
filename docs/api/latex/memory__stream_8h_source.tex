@@ -1,0 +1,107 @@
+\doxysection{memory\+\_\+stream.\+h}
+\hypertarget{memory__stream_8h_source}{}\label{memory__stream_8h_source}\index{include/neo/io/memory\_stream.h@{include/neo/io/memory\_stream.h}}
+\mbox{\hyperlink{memory__stream_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <streambuf>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1io}{neo::io}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_acdb257d78d2528f3ec3e94629a9b9160}{MemoryStreamBuf}}\ :\ \textcolor{keyword}{public}\ std::streambuf}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_acdb257d78d2528f3ec3e94629a9b9160}{MemoryStreamBuf}}(std::vector<uint8\_t>\&\ buffer)\ :\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a5179781dba9d827e2d05180df3eaf431}{buffer\_}}(buffer)}
+\DoxyCodeLine{00020\ \ \ \ \ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ up\ the\ buffer\ for\ both\ reading\ and\ writing}}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a7c43920feef4a72a1a0902f5ac7ffe2b}{Reset}}();}
+\DoxyCodeLine{00023\ \ \ \ \ \}}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a7c43920feef4a72a1a0902f5ac7ffe2b}{Reset}}()}
+\DoxyCodeLine{00026\ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ up\ for\ writing}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}*\ begin\ =\ \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a5179781dba9d827e2d05180df3eaf431}{buffer\_}}.data());}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}*\ end\ =\ begin\ +\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a5179781dba9d827e2d05180df3eaf431}{buffer\_}}.size();}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ setp(begin,\ end);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Set\ up\ for\ reading}}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ setg(begin,\ begin,\ end);}
+\DoxyCodeLine{00034\ \ \ \ \ \}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00037\ \ \ \ \ int\_type\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a16bca9183ed942a75e10ad5ab998c875}{overflow}}(int\_type\ ch)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00038\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ch\ !=\ EOF)}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a5179781dba9d827e2d05180df3eaf431}{buffer\_}}.push\_back(\textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(ch));}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a7c43920feef4a72a1a0902f5ac7ffe2b}{Reset}}();}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Move\ to\ the\ end\ for\ writing}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ setp(\textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a5179781dba9d827e2d05180df3eaf431}{buffer\_}}.data())\ +\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a5179781dba9d827e2d05180df3eaf431}{buffer\_}}.size()\ -\/\ 1,}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{char}*\textcolor{keyword}{>}(\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a5179781dba9d827e2d05180df3eaf431}{buffer\_}}.data())\ +\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a5179781dba9d827e2d05180df3eaf431}{buffer\_}}.size());}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ch;}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ std::streamsize\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_aa358f6a984ffbddd6ad9bc3f26ae4684}{xsputn}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ s,\ std::streamsize\ n)\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00051\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ old\_size\ =\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a5179781dba9d827e2d05180df3eaf431}{buffer\_}}.size();}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a5179781dba9d827e2d05180df3eaf431}{buffer\_}}.resize(old\_size\ +\ n);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ std::memcpy(\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a5179781dba9d827e2d05180df3eaf431}{buffer\_}}.data()\ +\ old\_size,\ s,\ n);}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a7c43920feef4a72a1a0902f5ac7ffe2b}{Reset}}();}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ n;}
+\DoxyCodeLine{00057\ \ \ \ \ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00060\ \ \ \ \ std::vector<uint8\_t>\&\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf_a5179781dba9d827e2d05180df3eaf431}{buffer\_}};}
+\DoxyCodeLine{00061\ \};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00066\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_aefcc30ac5b0a3872da40a6d886f5c030}{MemoryStream}}\ :\ \textcolor{keyword}{public}\ std::iostream}
+\DoxyCodeLine{00067\ \{}
+\DoxyCodeLine{00068\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_aefcc30ac5b0a3872da40a6d886f5c030}{MemoryStream}}()\ :\ \mbox{\hyperlink{namespacestd}{std}}::iostream(\&\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a91ffa94d02fd6867c56039f76e415f39}{streamBuf\_}}),\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a91ffa94d02fd6867c56039f76e415f39}{streamBuf\_}}(\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a00e599d18c970692bfee4e964f2ca729}{data\_}}),\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_aabdfb1f87f009023e827f79c01d24c7f}{position\_}}(0)\ \{\}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a2d9886491e2fad072c3c941d8a37781c}{MemoryStream}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\&\ data)\ :\ \mbox{\hyperlink{namespacestd}{std}}::iostream(\&\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a91ffa94d02fd6867c56039f76e415f39}{streamBuf\_}}),\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a91ffa94d02fd6867c56039f76e415f39}{streamBuf\_}}(\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a00e599d18c970692bfee4e964f2ca729}{data\_}}),\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_aabdfb1f87f009023e827f79c01d24c7f}{position\_}}(0)}
+\DoxyCodeLine{00079\ \ \ \ \ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a00e599d18c970692bfee4e964f2ca729}{data\_}}.assign(data.\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a971af50d2778c4435c924cf4b839e8a1}{Data}}(),\ data.\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a971af50d2778c4435c924cf4b839e8a1}{Data}}()\ +\ data.\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ac0d1a1751d25fde82c44ba55d9d68e24}{Size}}());}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a91ffa94d02fd6867c56039f76e415f39}{streamBuf\_}}.Reset();}
+\DoxyCodeLine{00082\ \ \ \ \ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a6797e504cbe388e3fd720ceacb51ada3}{MemoryStream}}(\textcolor{keyword}{const}\ uint8\_t*\ data,\ \textcolor{keywordtype}{size\_t}\ size)\ :\ \mbox{\hyperlink{namespacestd}{std}}::iostream(\&\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a91ffa94d02fd6867c56039f76e415f39}{streamBuf\_}}),\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a91ffa94d02fd6867c56039f76e415f39}{streamBuf\_}}(\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a00e599d18c970692bfee4e964f2ca729}{data\_}}),\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_aabdfb1f87f009023e827f79c01d24c7f}{position\_}}(0)}
+\DoxyCodeLine{00090\ \ \ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a00e599d18c970692bfee4e964f2ca729}{data\_}}.assign(data,\ data\ +\ size);}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a91ffa94d02fd6867c56039f76e415f39}{streamBuf\_}}.Reset();}
+\DoxyCodeLine{00093\ \ \ \ \ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a0ca07e2cf5c3f7343a628f7068e5e340}{\string~MemoryStream}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_ae0a4bbc5eb3341fd5e90e129d94d6d13}{GetPosition}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_aabdfb1f87f009023e827f79c01d24c7f}{position\_}};\ \}}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a7df49bad0278721a649e8c7a6d4061d5}{SetPosition}}(\textcolor{keywordtype}{size\_t}\ position);}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a2d0b296cf4d7d9cd528c940aefa61760}{Seek}}(\textcolor{keywordtype}{size\_t}\ position)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a7df49bad0278721a649e8c7a6d4061d5}{SetPosition}}(position);\ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_ae140b09a408ec473dad07e372badbec3}{GetLength}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a00e599d18c970692bfee4e964f2ca729}{data\_}}.size();\ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a195b5cf6e862636aac5017563315f7a6}{Read}}(uint8\_t*\ buffer,\ \textcolor{keywordtype}{size\_t}\ count);}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_ab75dfbb6d4ca3002d859f436fc4d535a}{Write}}(\textcolor{keyword}{const}\ uint8\_t*\ buffer,\ \textcolor{keywordtype}{size\_t}\ count);}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a79a8d430014150d5278a8ca20821b40a}{GetData}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a00e599d18c970692bfee4e964f2ca729}{data\_}};\ \}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00149\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_aae3f75c9f1f1733c05ca7beddac81a83}{ToByteVector}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00152\ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a00e599d18c970692bfee4e964f2ca729}{data\_}};}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_aabdfb1f87f009023e827f79c01d24c7f}{position\_}};}
+\DoxyCodeLine{00154\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf}{MemoryStreamBuf}}\ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a91ffa94d02fd6867c56039f76e415f39}{streamBuf\_}};}
+\DoxyCodeLine{00155\ \};}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00157\ \}\ \ \textcolor{comment}{//\ namespace\ neo::io}}
+
+\end{DoxyCode}

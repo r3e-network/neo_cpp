@@ -1,0 +1,991 @@
+\doxysection{neo\+::ledger\+::Blockchain Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_blockchain}{}\label{classneo_1_1ledger_1_1_blockchain}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+
+
+Enhanced \doxylink{classneo_1_1ledger_1_1_blockchain}{Blockchain} processing engine -\/ core of the Neo node. This implementation matches the C\# Blockchain.\+cs functionality with sophisticated block processing, transaction verification, and event handling.  
+
+
+
+
+{\ttfamily \#include $<$blockchain.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a3d03c3f023a869539a6b9fc6d1bf3847}{Committing\+Handler}}
+\item 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_aa5e55775cd047ce7b7f1f74dcb1017a4}{Committed\+Handler}} = std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system}{Neo\+System}}$>$, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}}$>$)$>$
+\item 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a11323e54e678b35f78cfc9aa7d912649}{Block\+Persistence\+Handler}} = std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}}$>$)$>$
+\item 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a09f762bfdb777a6a716e3dc19c5e9535}{Transaction\+Handler}} = std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}}$>$, \mbox{\hyperlink{namespaceneo_1_1ledger_a51e5d8e2e5bfe607699feb8cdd392e5e}{Verify\+Result}})$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a4cf93d0fa4837dad6ba397ae270490ce}{Blockchain}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1_neo_system}{neo\+::\+Neo\+System}} $>$ system)
+\begin{DoxyCompactList}\small\item\em Constructs the \doxylink{classneo_1_1ledger_1_1_blockchain}{Blockchain} processing engine. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a1bec75f4b63ca2cb5a05b2b62f2f1148}{\texorpdfstring{$\sim$}{\string~}\+Blockchain}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_aa8a764597d5154afb8e16dc1d494ef66}{Blockchain}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} \&)=delete
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a0d56affff307043a275e020230048cc7}{operator=}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} \&)=delete
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a3f8efe015b80ea339b6b55da200b3a3b}{Blockchain}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} \&\&)=delete
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a0fcf91f7e6e01e8f6c8410060d4ec554}{operator=}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} \&\&)=delete
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_af12f5610b81acf8dc9d510e95892e8b1}{Initialize}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the blockchain with genesis block if needed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_af793f1c8b262e2645dec9856c001f48a}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Starts the blockchain processing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a4491100200dfffb56b890814a17249b7}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stops the blockchain processing. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a7a9cd9b58a2641bb7c0e2c9b18f888de}{Get\+Height}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current block height. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a03e15130a09c4144fc6bd1f7a3030175}{Get\+Current\+Block\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current block index (alias for Get\+Height). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_ad4ce4638a6cfb541f769f29a07b75535}{Get\+Current\+Block\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current block hash. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a7ec02c8be6b9b049fea7c71de61744c8}{Get\+Current\+Block}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current block. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a9af172a7a4817451e1ed996d8b358c26}{Get\+Block}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets a block by hash. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a8a67f69cd5610e7c0d88d23b617faa40}{Get\+Block}} (uint32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets a block by index. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a6eff54b59385e2d409c6715dde981df9}{Get\+Block\+Hash}} (uint32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets a block hash by index. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a769007c606e84663bbd939e7b712fe60}{Get\+Block\+Header}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets a block header by hash. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a7727469adc61985fee477d190cdd0497}{Get\+Block\+Header}} (uint32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets a block header by index. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a0e5da217f156b0dd145183d60cc39bb4}{Get\+Transaction}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets a transaction by hash. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_ae2502069a71d77451fea2e45f014e53d}{Get\+Transaction\+Height}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets the height/index of the block containing the specified transaction. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{smartcontract\+::\+Contract\+State}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a8f226df925cbf45dba9bfbe11bdb8fc4}{Get\+Contract}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets a contract state by script hash. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a6edfe603c5cebe61f4d752e98f1a1367}{Contains\+Block}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Checks if a block exists in the blockchain. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_abf29213a805224d38ecb125a10214faa}{Contains\+Transaction}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Checks if a transaction exists in the blockchain. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1ledger_a51e5d8e2e5bfe607699feb8cdd392e5e}{Verify\+Result}} \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_aa00611ec69f6e37faab6a9afe76b8132}{On\+New\+Block}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ block)
+\begin{DoxyCompactList}\small\item\em Processes a new block received from the network. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_ae57489cb32022967ffeced8ac660b112}{On\+New\+Headers}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$ $>$ \&headers)
+\begin{DoxyCompactList}\small\item\em Processes new headers received from the network. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1ledger_a51e5d8e2e5bfe607699feb8cdd392e5e}{Verify\+Result}} \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_afd8b85b47e18f63ed412a2be8f969322}{On\+New\+Transaction}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ transaction)
+\begin{DoxyCompactList}\small\item\em Processes a new transaction received from the network. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a4be78372c38bebd60bf827ad4bff09b8}{Import\+Blocks}} (const \mbox{\hyperlink{structneo_1_1ledger_1_1_import_data}{Import\+Data}} \&import\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Imports blocks into the blockchain. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a634c9b7ede16820c116118a956e754d5}{Fill\+Memory\+Pool}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ $>$ \&transactions)
+\begin{DoxyCompactList}\small\item\em Fills the memory pool with transactions for consensus. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a513f9ebd6d41b85dd049dcc8e929385f}{Register\+Committing\+Handler}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a3d03c3f023a869539a6b9fc6d1bf3847}{Committing\+Handler}} handler)
+\begin{DoxyCompactList}\small\item\em Re-\/verifies inventories that may have become valid. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_aa3e55f794f691ca3d09013bb6636c2c9}{Register\+Committed\+Handler}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_aa5e55775cd047ce7b7f1f74dcb1017a4}{Committed\+Handler}} handler)
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a26a6b28b8879c0b6d85f43801ff30804}{Register\+Block\+Persistence\+Handler}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a11323e54e678b35f78cfc9aa7d912649}{Block\+Persistence\+Handler}} handler)
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a04c92cdbaa13b7da24205a03e7586494}{Register\+Transaction\+Handler}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a09f762bfdb777a6a716e3dc19c5e9535}{Transaction\+Handler}} handler)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache}{network\+::p2p\+::payloads\+::\+Header\+Cache}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a9e587a5932b26dee7322b73add0a3684}{Get\+Header\+Cache}} () const
+\begin{DoxyCompactList}\small\item\em Gets the header cache. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system}{Neo\+System}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a7ea0a88fa9acce205847d48c774e2692}{Get\+System}} () const
+\begin{DoxyCompactList}\small\item\em Gets the Neo system. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a14e3360a5e2c7b56e766ba30d46ff48b}{Process\+Block}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ block)
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a714e9067cf4c5ae32a58e8fbfc9b6a08}{Persist\+Block}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ block)
+\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_ace7f36daacdd5f9599fe1d92b6aedc14}{Verify\+Block}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ block, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot)
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a116ec33bff36054b2d2069cba561a276}{Add\+Unverified\+Block\+To\+Cache}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ block, const std\+::string \&node\+\_\+id)
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a2800d4e24b1e609d0e4b3633fb375d0d}{Process\+Unverified\+Blocks}} (uint32\+\_\+t height)
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structneo_1_1ledger_1_1_application_executed}{Application\+Executed}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_accba4845fee547347e7eb5ed3afc677e}{Execute\+Block\+Scripts}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ block, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot)
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_ac72fdd46b290e52f2d2bde2faddf6c73}{Fire\+Committing\+Event}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ block, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, const std\+::vector$<$ \mbox{\hyperlink{structneo_1_1ledger_1_1_application_executed}{Application\+Executed}} $>$ \&app\+\_\+executed)
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_af0b1c9f2cfaa223d7c1540f6c325d2f6}{Fire\+Committed\+Event}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ block)
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_aa97a8d5970825a1f938147bad49e25c2}{Fire\+Block\+Persisted\+Event}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ block)
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_ad4895b63bda2449bc2880bc4019b347e}{Fire\+Transaction\+Event}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ transaction, \mbox{\hyperlink{namespaceneo_1_1ledger_a51e5d8e2e5bfe607699feb8cdd392e5e}{Verify\+Result}} result)
+\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_ae46f539f04521a25cd2b64bbf50abcde}{Update\+Extensible\+Witness\+White\+List}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot)
+\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_ae0663cc117da99fc894a8c01f1fe36df}{Is\+Genesis\+Block\+Initialized}} () const
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_ac8518de022062ba014a18b2d8b54f2d9}{Initialize\+Genesis\+Block}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_ab8fae4e8a0316609831738f888fea4e5}{Processing\+Thread\+Function}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_ac746b797793164562e322a6e6b2e40ea}{Idle\+Processing\+Function}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system}{Neo\+System}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a79f51bb02b19339bd8f2b3180d274f3b}{system\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache}{network\+::p2p\+::payloads\+::\+Header\+Cache}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_aa7c13a26619e4ed21181a9965e7093cf}{header\+\_\+cache\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a77dd2ccc6606e46cc6bf3615a2f823f9}{data\+\_\+cache\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_ab7b7bc2446fdaa611ed45717a1db7b8b}{block\+\_\+cache\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ uint32\+\_\+t, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1ledger_1_1_unverified_blocks_list}{Unverified\+Blocks\+List}} $>$ $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a114d8eeb6442b3382e03ed4eff343c2f}{block\+\_\+cache\+\_\+unverified\+\_\+}}
+\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_aa156c601d2c97ef99d8b975914cb52d2}{extensible\+\_\+witness\+\_\+whitelist\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_ab865974457d5dc525c296db23e82b172}{extensible\+\_\+whitelist\+\_\+cached\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a3d03c3f023a869539a6b9fc6d1bf3847}{Committing\+Handler}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a518179a1a1e7e70e27141fb09ee52e01}{committing\+\_\+handlers\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_aa5e55775cd047ce7b7f1f74dcb1017a4}{Committed\+Handler}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_aaefa0bd06534efa208211395feacc419}{committed\+\_\+handlers\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a11323e54e678b35f78cfc9aa7d912649}{Block\+Persistence\+Handler}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a70a099128513fe2ee735d1fd6c367f76}{block\+\_\+persistence\+\_\+handlers\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a09f762bfdb777a6a716e3dc19c5e9535}{Transaction\+Handler}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a1d795f483a17d9d4261777bece0df296}{transaction\+\_\+handlers\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_aaa034e4f5ef3521e4673148facf65e72}{running\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a406e6bb24f2f6aa5c684a93667f92fa7}{processing\+\_\+thread\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_af9304475bbb15a39ecf8324798d952db}{processing\+\_\+mutex\+\_\+}}
+\item 
+std\+::condition\+\_\+variable \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a6c648c8fcd3c8f364506636285c8da5d}{processing\+\_\+cv\+\_\+}}
+\item 
+std\+::queue$<$ std\+::function$<$ void()$>$ $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_ad6608e043eff8bceea69a2b822851d18}{processing\+\_\+queue\+\_\+}}
+\item 
+std\+::shared\+\_\+mutex \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a80035a737c9726801e1603082338df6e}{blockchain\+\_\+mutex\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a06a8e55ee447e8c79b359d16d02e91cd}{event\+\_\+mutex\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a1b1184d6b447a4ebc5a36e44e906c74a}{Max\+Tx\+To\+Reverify\+Per\+Idle}} = 10
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a37a3ea3cab681f76da14f1ff95cac783}{Max\+Unverified\+Blocks}} = 10000
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Enhanced \doxylink{classneo_1_1ledger_1_1_blockchain}{Blockchain} processing engine -\/ core of the Neo node. This implementation matches the C\# Blockchain.\+cs functionality with sophisticated block processing, transaction verification, and event handling. 
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a11323e54e678b35f78cfc9aa7d912649}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!BlockPersistenceHandler@{BlockPersistenceHandler}}
+\index{BlockPersistenceHandler@{BlockPersistenceHandler}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{BlockPersistenceHandler}{BlockPersistenceHandler}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a11323e54e678b35f78cfc9aa7d912649} 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a11323e54e678b35f78cfc9aa7d912649}{neo\+::ledger\+::\+Blockchain\+::\+Block\+Persistence\+Handler}} = std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}}$>$)$>$}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_aa5e55775cd047ce7b7f1f74dcb1017a4}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!CommittedHandler@{CommittedHandler}}
+\index{CommittedHandler@{CommittedHandler}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{CommittedHandler}{CommittedHandler}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_aa5e55775cd047ce7b7f1f74dcb1017a4} 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_aa5e55775cd047ce7b7f1f74dcb1017a4}{neo\+::ledger\+::\+Blockchain\+::\+Committed\+Handler}} = std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system}{Neo\+System}}$>$, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}}$>$)$>$}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a3d03c3f023a869539a6b9fc6d1bf3847}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!CommittingHandler@{CommittingHandler}}
+\index{CommittingHandler@{CommittingHandler}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{CommittingHandler}{CommittingHandler}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a3d03c3f023a869539a6b9fc6d1bf3847} 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a3d03c3f023a869539a6b9fc6d1bf3847}{neo\+::ledger\+::\+Blockchain\+::\+Committing\+Handler}}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::function<void(std::shared\_ptr<NeoSystem>,\ std::shared\_ptr<Block>,\ std::shared\_ptr<persistence::DataCache>,}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<ApplicationExecuted>\&)>}
+
+\end{DoxyCode}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a09f762bfdb777a6a716e3dc19c5e9535}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!TransactionHandler@{TransactionHandler}}
+\index{TransactionHandler@{TransactionHandler}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{TransactionHandler}{TransactionHandler}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a09f762bfdb777a6a716e3dc19c5e9535} 
+using \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a09f762bfdb777a6a716e3dc19c5e9535}{neo\+::ledger\+::\+Blockchain\+::\+Transaction\+Handler}} = std\+::function$<$void(std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}}$>$, \mbox{\hyperlink{namespaceneo_1_1ledger_a51e5d8e2e5bfe607699feb8cdd392e5e}{Verify\+Result}})$>$}
+
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a4cf93d0fa4837dad6ba397ae270490ce}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!Blockchain@{Blockchain}}
+\index{Blockchain@{Blockchain}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{Blockchain()}{Blockchain()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a4cf93d0fa4837dad6ba397ae270490ce} 
+neo\+::ledger\+::\+Blockchain\+::\+Blockchain (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1_neo_system}{neo\+::\+Neo\+System}} $>$}]{system}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs the \doxylink{classneo_1_1ledger_1_1_blockchain}{Blockchain} processing engine. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em system} & The \doxylink{classneo_1_1ledger_1_1_neo_system}{Neo\+System} that contains this blockchain. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a1bec75f4b63ca2cb5a05b2b62f2f1148}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!````~Blockchain@{\texorpdfstring{$\sim$}{\string~}Blockchain}}
+\index{````~Blockchain@{\texorpdfstring{$\sim$}{\string~}Blockchain}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}Blockchain()}{\string~Blockchain()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a1bec75f4b63ca2cb5a05b2b62f2f1148} 
+neo\+::ledger\+::\+Blockchain\+::\texorpdfstring{$\sim$}{\string~}\+Blockchain (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_aa8a764597d5154afb8e16dc1d494ef66}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!Blockchain@{Blockchain}}
+\index{Blockchain@{Blockchain}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{Blockchain()}{Blockchain()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_aa8a764597d5154afb8e16dc1d494ef66} 
+neo\+::ledger\+::\+Blockchain\+::\+Blockchain (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a3f8efe015b80ea339b6b55da200b3a3b}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!Blockchain@{Blockchain}}
+\index{Blockchain@{Blockchain}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{Blockchain()}{Blockchain()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a3f8efe015b80ea339b6b55da200b3a3b} 
+neo\+::ledger\+::\+Blockchain\+::\+Blockchain (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} \&\&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a116ec33bff36054b2d2069cba561a276}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!AddUnverifiedBlockToCache@{AddUnverifiedBlockToCache}}
+\index{AddUnverifiedBlockToCache@{AddUnverifiedBlockToCache}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{AddUnverifiedBlockToCache()}{AddUnverifiedBlockToCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a116ec33bff36054b2d2069cba561a276} 
+void neo\+::ledger\+::\+Blockchain\+::\+Add\+Unverified\+Block\+To\+Cache (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$}]{block}{, }\item[{const std\+::string \&}]{node\+\_\+id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a6edfe603c5cebe61f4d752e98f1a1367}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!ContainsBlock@{ContainsBlock}}
+\index{ContainsBlock@{ContainsBlock}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{ContainsBlock()}{ContainsBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a6edfe603c5cebe61f4d752e98f1a1367} 
+bool neo\+::ledger\+::\+Blockchain\+::\+Contains\+Block (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if a block exists in the blockchain. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the block exists, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_abf29213a805224d38ecb125a10214faa}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!ContainsTransaction@{ContainsTransaction}}
+\index{ContainsTransaction@{ContainsTransaction}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{ContainsTransaction()}{ContainsTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_abf29213a805224d38ecb125a10214faa} 
+bool neo\+::ledger\+::\+Blockchain\+::\+Contains\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if a transaction exists in the blockchain. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the transaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the transaction exists, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_accba4845fee547347e7eb5ed3afc677e}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!ExecuteBlockScripts@{ExecuteBlockScripts}}
+\index{ExecuteBlockScripts@{ExecuteBlockScripts}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{ExecuteBlockScripts()}{ExecuteBlockScripts()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_accba4845fee547347e7eb5ed3afc677e} 
+std\+::vector$<$ \mbox{\hyperlink{structneo_1_1ledger_1_1_application_executed}{Application\+Executed}} $>$ neo\+::ledger\+::\+Blockchain\+::\+Execute\+Block\+Scripts (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$}]{block}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a634c9b7ede16820c116118a956e754d5}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!FillMemoryPool@{FillMemoryPool}}
+\index{FillMemoryPool@{FillMemoryPool}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{FillMemoryPool()}{FillMemoryPool()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a634c9b7ede16820c116118a956e754d5} 
+void neo\+::ledger\+::\+Blockchain\+::\+Fill\+Memory\+Pool (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ $>$ \&}]{transactions}{}\end{DoxyParamCaption})}
+
+
+
+Fills the memory pool with transactions for consensus. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transactions} & The transactions to add to the memory pool. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_aa97a8d5970825a1f938147bad49e25c2}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!FireBlockPersistedEvent@{FireBlockPersistedEvent}}
+\index{FireBlockPersistedEvent@{FireBlockPersistedEvent}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{FireBlockPersistedEvent()}{FireBlockPersistedEvent()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_aa97a8d5970825a1f938147bad49e25c2} 
+void neo\+::ledger\+::\+Blockchain\+::\+Fire\+Block\+Persisted\+Event (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$}]{block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_af0b1c9f2cfaa223d7c1540f6c325d2f6}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!FireCommittedEvent@{FireCommittedEvent}}
+\index{FireCommittedEvent@{FireCommittedEvent}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{FireCommittedEvent()}{FireCommittedEvent()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_af0b1c9f2cfaa223d7c1540f6c325d2f6} 
+void neo\+::ledger\+::\+Blockchain\+::\+Fire\+Committed\+Event (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$}]{block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_ac72fdd46b290e52f2d2bde2faddf6c73}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!FireCommittingEvent@{FireCommittingEvent}}
+\index{FireCommittingEvent@{FireCommittingEvent}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{FireCommittingEvent()}{FireCommittingEvent()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_ac72fdd46b290e52f2d2bde2faddf6c73} 
+void neo\+::ledger\+::\+Blockchain\+::\+Fire\+Committing\+Event (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$}]{block}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{structneo_1_1ledger_1_1_application_executed}{Application\+Executed}} $>$ \&}]{app\+\_\+executed}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_ad4895b63bda2449bc2880bc4019b347e}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!FireTransactionEvent@{FireTransactionEvent}}
+\index{FireTransactionEvent@{FireTransactionEvent}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{FireTransactionEvent()}{FireTransactionEvent()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_ad4895b63bda2449bc2880bc4019b347e} 
+void neo\+::ledger\+::\+Blockchain\+::\+Fire\+Transaction\+Event (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$}]{transaction}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1ledger_a51e5d8e2e5bfe607699feb8cdd392e5e}{Verify\+Result}}}]{result}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a9af172a7a4817451e1ed996d8b358c26}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!GetBlock@{GetBlock}}
+\index{GetBlock@{GetBlock}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{GetBlock()}{GetBlock()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a9af172a7a4817451e1ed996d8b358c26} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ neo\+::ledger\+::\+Blockchain\+::\+Get\+Block (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a block by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block, or nullptr if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a8a67f69cd5610e7c0d88d23b617faa40}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!GetBlock@{GetBlock}}
+\index{GetBlock@{GetBlock}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{GetBlock()}{GetBlock()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a8a67f69cd5610e7c0d88d23b617faa40} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ neo\+::ledger\+::\+Blockchain\+::\+Get\+Block (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a block by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block, or nullptr if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a6eff54b59385e2d409c6715dde981df9}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!GetBlockHash@{GetBlockHash}}
+\index{GetBlockHash@{GetBlockHash}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{GetBlockHash()}{GetBlockHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a6eff54b59385e2d409c6715dde981df9} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::ledger\+::\+Blockchain\+::\+Get\+Block\+Hash (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a block hash by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block hash, or UInt256\+::\+Zero() if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a769007c606e84663bbd939e7b712fe60}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!GetBlockHeader@{GetBlockHeader}}
+\index{GetBlockHeader@{GetBlockHeader}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{GetBlockHeader()}{GetBlockHeader()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a769007c606e84663bbd939e7b712fe60} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$ neo\+::ledger\+::\+Blockchain\+::\+Get\+Block\+Header (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a block header by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block header, or nullptr if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a7727469adc61985fee477d190cdd0497}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!GetBlockHeader@{GetBlockHeader}}
+\index{GetBlockHeader@{GetBlockHeader}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{GetBlockHeader()}{GetBlockHeader()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a7727469adc61985fee477d190cdd0497} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$ neo\+::ledger\+::\+Blockchain\+::\+Get\+Block\+Header (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a block header by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block header, or nullptr if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a8f226df925cbf45dba9bfbe11bdb8fc4}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!GetContract@{GetContract}}
+\index{GetContract@{GetContract}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{GetContract()}{GetContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a8f226df925cbf45dba9bfbe11bdb8fc4} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{smartcontract\+::\+Contract\+State}} $>$ neo\+::ledger\+::\+Blockchain\+::\+Get\+Contract (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a contract state by script hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The script hash of the contract. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The contract state, or nullptr if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a7ec02c8be6b9b049fea7c71de61744c8}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!GetCurrentBlock@{GetCurrentBlock}}
+\index{GetCurrentBlock@{GetCurrentBlock}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{GetCurrentBlock()}{GetCurrentBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a7ec02c8be6b9b049fea7c71de61744c8} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$ neo\+::ledger\+::\+Blockchain\+::\+Get\+Current\+Block (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the current block. 
+
+\begin{DoxyReturn}{Returns}
+The current block. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_ad4ce4638a6cfb541f769f29a07b75535}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!GetCurrentBlockHash@{GetCurrentBlockHash}}
+\index{GetCurrentBlockHash@{GetCurrentBlockHash}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{GetCurrentBlockHash()}{GetCurrentBlockHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_ad4ce4638a6cfb541f769f29a07b75535} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::ledger\+::\+Blockchain\+::\+Get\+Current\+Block\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the current block hash. 
+
+\begin{DoxyReturn}{Returns}
+The current block hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a03e15130a09c4144fc6bd1f7a3030175}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!GetCurrentBlockIndex@{GetCurrentBlockIndex}}
+\index{GetCurrentBlockIndex@{GetCurrentBlockIndex}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{GetCurrentBlockIndex()}{GetCurrentBlockIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a03e15130a09c4144fc6bd1f7a3030175} 
+uint32\+\_\+t neo\+::ledger\+::\+Blockchain\+::\+Get\+Current\+Block\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the current block index (alias for Get\+Height). 
+
+\begin{DoxyReturn}{Returns}
+The current block index. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a9e587a5932b26dee7322b73add0a3684}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!GetHeaderCache@{GetHeaderCache}}
+\index{GetHeaderCache@{GetHeaderCache}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{GetHeaderCache()}{GetHeaderCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a9e587a5932b26dee7322b73add0a3684} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache}{network\+::p2p\+::payloads\+::\+Header\+Cache}} $>$ neo\+::ledger\+::\+Blockchain\+::\+Get\+Header\+Cache (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the header cache. 
+
+\begin{DoxyReturn}{Returns}
+The header cache. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a7a9cd9b58a2641bb7c0e2c9b18f888de}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!GetHeight@{GetHeight}}
+\index{GetHeight@{GetHeight}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{GetHeight()}{GetHeight()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a7a9cd9b58a2641bb7c0e2c9b18f888de} 
+uint32\+\_\+t neo\+::ledger\+::\+Blockchain\+::\+Get\+Height (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the current block height. 
+
+\begin{DoxyReturn}{Returns}
+The current block height. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a7ea0a88fa9acce205847d48c774e2692}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!GetSystem@{GetSystem}}
+\index{GetSystem@{GetSystem}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{GetSystem()}{GetSystem()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a7ea0a88fa9acce205847d48c774e2692} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system}{Neo\+System}} $>$ neo\+::ledger\+::\+Blockchain\+::\+Get\+System (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the Neo system. 
+
+\begin{DoxyReturn}{Returns}
+The Neo system. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a0e5da217f156b0dd145183d60cc39bb4}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!GetTransaction@{GetTransaction}}
+\index{GetTransaction@{GetTransaction}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{GetTransaction()}{GetTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a0e5da217f156b0dd145183d60cc39bb4} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ neo\+::ledger\+::\+Blockchain\+::\+Get\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a transaction by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the transaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The transaction, or nullptr if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_ae2502069a71d77451fea2e45f014e53d}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!GetTransactionHeight@{GetTransactionHeight}}
+\index{GetTransactionHeight@{GetTransactionHeight}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{GetTransactionHeight()}{GetTransactionHeight()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_ae2502069a71d77451fea2e45f014e53d} 
+int32\+\_\+t neo\+::ledger\+::\+Blockchain\+::\+Get\+Transaction\+Height (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the height/index of the block containing the specified transaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the transaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The block height, or -\/1 if not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_ac746b797793164562e322a6e6b2e40ea}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!IdleProcessingFunction@{IdleProcessingFunction}}
+\index{IdleProcessingFunction@{IdleProcessingFunction}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{IdleProcessingFunction()}{IdleProcessingFunction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_ac746b797793164562e322a6e6b2e40ea} 
+void neo\+::ledger\+::\+Blockchain\+::\+Idle\+Processing\+Function (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 23
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a4be78372c38bebd60bf827ad4bff09b8}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!ImportBlocks@{ImportBlocks}}
+\index{ImportBlocks@{ImportBlocks}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{ImportBlocks()}{ImportBlocks()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a4be78372c38bebd60bf827ad4bff09b8} 
+bool neo\+::ledger\+::\+Blockchain\+::\+Import\+Blocks (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1ledger_1_1_import_data}{Import\+Data}} \&}]{import\+\_\+data}{}\end{DoxyParamCaption})}
+
+
+
+Imports blocks into the blockchain. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em import\+\_\+data} & The import data containing blocks and verification flag. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if import succeeded, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 24
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_af12f5610b81acf8dc9d510e95892e8b1}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_af12f5610b81acf8dc9d510e95892e8b1} 
+void neo\+::ledger\+::\+Blockchain\+::\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the blockchain with genesis block if needed. 
+
+Here is the call graph for this function\+:
+% FIG 25
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_ac8518de022062ba014a18b2d8b54f2d9}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!InitializeGenesisBlock@{InitializeGenesisBlock}}
+\index{InitializeGenesisBlock@{InitializeGenesisBlock}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{InitializeGenesisBlock()}{InitializeGenesisBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_ac8518de022062ba014a18b2d8b54f2d9} 
+void neo\+::ledger\+::\+Blockchain\+::\+Initialize\+Genesis\+Block (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 26
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_ae0663cc117da99fc894a8c01f1fe36df}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!IsGenesisBlockInitialized@{IsGenesisBlockInitialized}}
+\index{IsGenesisBlockInitialized@{IsGenesisBlockInitialized}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{IsGenesisBlockInitialized()}{IsGenesisBlockInitialized()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_ae0663cc117da99fc894a8c01f1fe36df} 
+bool neo\+::ledger\+::\+Blockchain\+::\+Is\+Genesis\+Block\+Initialized (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 27
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_aa00611ec69f6e37faab6a9afe76b8132}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!OnNewBlock@{OnNewBlock}}
+\index{OnNewBlock@{OnNewBlock}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{OnNewBlock()}{OnNewBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_aa00611ec69f6e37faab6a9afe76b8132} 
+\mbox{\hyperlink{namespaceneo_1_1ledger_a51e5d8e2e5bfe607699feb8cdd392e5e}{Verify\+Result}} neo\+::ledger\+::\+Blockchain\+::\+On\+New\+Block (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$}]{block}{}\end{DoxyParamCaption})}
+
+
+
+Processes a new block received from the network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block to process. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The verification result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 28
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_ae57489cb32022967ffeced8ac660b112}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!OnNewHeaders@{OnNewHeaders}}
+\index{OnNewHeaders@{OnNewHeaders}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{OnNewHeaders()}{OnNewHeaders()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_ae57489cb32022967ffeced8ac660b112} 
+void neo\+::ledger\+::\+Blockchain\+::\+On\+New\+Headers (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_ae74a274f7eba15679df5a236d5f36048}{Header}} $>$ $>$ \&}]{headers}{}\end{DoxyParamCaption})}
+
+
+
+Processes new headers received from the network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em headers} & The headers to process. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 29
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_afd8b85b47e18f63ed412a2be8f969322}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!OnNewTransaction@{OnNewTransaction}}
+\index{OnNewTransaction@{OnNewTransaction}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{OnNewTransaction()}{OnNewTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_afd8b85b47e18f63ed412a2be8f969322} 
+\mbox{\hyperlink{namespaceneo_1_1ledger_a51e5d8e2e5bfe607699feb8cdd392e5e}{Verify\+Result}} neo\+::ledger\+::\+Blockchain\+::\+On\+New\+Transaction (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$}]{transaction}{}\end{DoxyParamCaption})}
+
+
+
+Processes a new transaction received from the network. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to process. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The verification result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 30
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a0fcf91f7e6e01e8f6c8410060d4ec554}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a0fcf91f7e6e01e8f6c8410060d4ec554} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} \& neo\+::ledger\+::\+Blockchain\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} \&\&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+Here is the call graph for this function\+:
+% FIG 31
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a0d56affff307043a275e020230048cc7}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a0d56affff307043a275e020230048cc7} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} \& neo\+::ledger\+::\+Blockchain\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{Blockchain}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+Here is the call graph for this function\+:
+% FIG 32
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a714e9067cf4c5ae32a58e8fbfc9b6a08}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!PersistBlock@{PersistBlock}}
+\index{PersistBlock@{PersistBlock}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{PersistBlock()}{PersistBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a714e9067cf4c5ae32a58e8fbfc9b6a08} 
+void neo\+::ledger\+::\+Blockchain\+::\+Persist\+Block (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$}]{block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 33
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a14e3360a5e2c7b56e766ba30d46ff48b}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!ProcessBlock@{ProcessBlock}}
+\index{ProcessBlock@{ProcessBlock}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{ProcessBlock()}{ProcessBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a14e3360a5e2c7b56e766ba30d46ff48b} 
+void neo\+::ledger\+::\+Blockchain\+::\+Process\+Block (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$}]{block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 34
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_ab8fae4e8a0316609831738f888fea4e5}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!ProcessingThreadFunction@{ProcessingThreadFunction}}
+\index{ProcessingThreadFunction@{ProcessingThreadFunction}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{ProcessingThreadFunction()}{ProcessingThreadFunction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_ab8fae4e8a0316609831738f888fea4e5} 
+void neo\+::ledger\+::\+Blockchain\+::\+Processing\+Thread\+Function (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 35
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a2800d4e24b1e609d0e4b3633fb375d0d}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!ProcessUnverifiedBlocks@{ProcessUnverifiedBlocks}}
+\index{ProcessUnverifiedBlocks@{ProcessUnverifiedBlocks}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{ProcessUnverifiedBlocks()}{ProcessUnverifiedBlocks()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a2800d4e24b1e609d0e4b3633fb375d0d} 
+void neo\+::ledger\+::\+Blockchain\+::\+Process\+Unverified\+Blocks (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{height}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 36
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a26a6b28b8879c0b6d85f43801ff30804}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!RegisterBlockPersistenceHandler@{RegisterBlockPersistenceHandler}}
+\index{RegisterBlockPersistenceHandler@{RegisterBlockPersistenceHandler}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{RegisterBlockPersistenceHandler()}{RegisterBlockPersistenceHandler()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a26a6b28b8879c0b6d85f43801ff30804} 
+void neo\+::ledger\+::\+Blockchain\+::\+Register\+Block\+Persistence\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a11323e54e678b35f78cfc9aa7d912649}{Block\+Persistence\+Handler}}}]{handler}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 37
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_aa3e55f794f691ca3d09013bb6636c2c9}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!RegisterCommittedHandler@{RegisterCommittedHandler}}
+\index{RegisterCommittedHandler@{RegisterCommittedHandler}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{RegisterCommittedHandler()}{RegisterCommittedHandler()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_aa3e55f794f691ca3d09013bb6636c2c9} 
+void neo\+::ledger\+::\+Blockchain\+::\+Register\+Committed\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_aa5e55775cd047ce7b7f1f74dcb1017a4}{Committed\+Handler}}}]{handler}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 38
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a513f9ebd6d41b85dd049dcc8e929385f}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!RegisterCommittingHandler@{RegisterCommittingHandler}}
+\index{RegisterCommittingHandler@{RegisterCommittingHandler}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{RegisterCommittingHandler()}{RegisterCommittingHandler()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a513f9ebd6d41b85dd049dcc8e929385f} 
+void neo\+::ledger\+::\+Blockchain\+::\+Register\+Committing\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a3d03c3f023a869539a6b9fc6d1bf3847}{Committing\+Handler}}}]{handler}{}\end{DoxyParamCaption})}
+
+
+
+Re-\/verifies inventories that may have become valid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em inventories} & The inventories to re-\/verify. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 39
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a04c92cdbaa13b7da24205a03e7586494}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!RegisterTransactionHandler@{RegisterTransactionHandler}}
+\index{RegisterTransactionHandler@{RegisterTransactionHandler}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{RegisterTransactionHandler()}{RegisterTransactionHandler()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a04c92cdbaa13b7da24205a03e7586494} 
+void neo\+::ledger\+::\+Blockchain\+::\+Register\+Transaction\+Handler (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a09f762bfdb777a6a716e3dc19c5e9535}{Transaction\+Handler}}}]{handler}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 40
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_af793f1c8b262e2645dec9856c001f48a}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!Start@{Start}}
+\index{Start@{Start}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_af793f1c8b262e2645dec9856c001f48a} 
+void neo\+::ledger\+::\+Blockchain\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Starts the blockchain processing. 
+
+Here is the call graph for this function\+:
+% FIG 41
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a4491100200dfffb56b890814a17249b7}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a4491100200dfffb56b890814a17249b7} 
+void neo\+::ledger\+::\+Blockchain\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the blockchain processing. 
+
+Here is the call graph for this function\+:
+% FIG 42
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_ae46f539f04521a25cd2b64bbf50abcde}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!UpdateExtensibleWitnessWhiteList@{UpdateExtensibleWitnessWhiteList}}
+\index{UpdateExtensibleWitnessWhiteList@{UpdateExtensibleWitnessWhiteList}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{UpdateExtensibleWitnessWhiteList()}{UpdateExtensibleWitnessWhiteList()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_ae46f539f04521a25cd2b64bbf50abcde} 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ neo\+::ledger\+::\+Blockchain\+::\+Update\+Extensible\+Witness\+White\+List (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 43
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_ace7f36daacdd5f9599fe1d92b6aedc14}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!VerifyBlock@{VerifyBlock}}
+\index{VerifyBlock@{VerifyBlock}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{VerifyBlock()}{VerifyBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_ace7f36daacdd5f9599fe1d92b6aedc14} 
+bool neo\+::ledger\+::\+Blockchain\+::\+Verify\+Block (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} $>$}]{block}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 44
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_ab7b7bc2446fdaa611ed45717a1db7b8b}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!block\_cache\_@{block\_cache\_}}
+\index{block\_cache\_@{block\_cache\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{block\_cache\_}{block\_cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_ab7b7bc2446fdaa611ed45717a1db7b8b} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}}$>$ $>$ neo\+::ledger\+::\+Blockchain\+::block\+\_\+cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a114d8eeb6442b3382e03ed4eff343c2f}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!block\_cache\_unverified\_@{block\_cache\_unverified\_}}
+\index{block\_cache\_unverified\_@{block\_cache\_unverified\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{block\_cache\_unverified\_}{block\_cache\_unverified\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a114d8eeb6442b3382e03ed4eff343c2f} 
+std\+::unordered\+\_\+map$<$uint32\+\_\+t, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{structneo_1_1ledger_1_1_unverified_blocks_list}{Unverified\+Blocks\+List}}$>$ $>$ neo\+::ledger\+::\+Blockchain\+::block\+\_\+cache\+\_\+unverified\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a70a099128513fe2ee735d1fd6c367f76}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!block\_persistence\_handlers\_@{block\_persistence\_handlers\_}}
+\index{block\_persistence\_handlers\_@{block\_persistence\_handlers\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{block\_persistence\_handlers\_}{block\_persistence\_handlers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a70a099128513fe2ee735d1fd6c367f76} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a11323e54e678b35f78cfc9aa7d912649}{Block\+Persistence\+Handler}}$>$ neo\+::ledger\+::\+Blockchain\+::block\+\_\+persistence\+\_\+handlers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a80035a737c9726801e1603082338df6e}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!blockchain\_mutex\_@{blockchain\_mutex\_}}
+\index{blockchain\_mutex\_@{blockchain\_mutex\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{blockchain\_mutex\_}{blockchain\_mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a80035a737c9726801e1603082338df6e} 
+std\+::shared\+\_\+mutex neo\+::ledger\+::\+Blockchain\+::blockchain\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_aaefa0bd06534efa208211395feacc419}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!committed\_handlers\_@{committed\_handlers\_}}
+\index{committed\_handlers\_@{committed\_handlers\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{committed\_handlers\_}{committed\_handlers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_aaefa0bd06534efa208211395feacc419} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_aa5e55775cd047ce7b7f1f74dcb1017a4}{Committed\+Handler}}$>$ neo\+::ledger\+::\+Blockchain\+::committed\+\_\+handlers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a518179a1a1e7e70e27141fb09ee52e01}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!committing\_handlers\_@{committing\_handlers\_}}
+\index{committing\_handlers\_@{committing\_handlers\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{committing\_handlers\_}{committing\_handlers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a518179a1a1e7e70e27141fb09ee52e01} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a3d03c3f023a869539a6b9fc6d1bf3847}{Committing\+Handler}}$>$ neo\+::ledger\+::\+Blockchain\+::committing\+\_\+handlers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a77dd2ccc6606e46cc6bf3615a2f823f9}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!data\_cache\_@{data\_cache\_}}
+\index{data\_cache\_@{data\_cache\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{data\_cache\_}{data\_cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a77dd2ccc6606e46cc6bf3615a2f823f9} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}}$>$ neo\+::ledger\+::\+Blockchain\+::data\+\_\+cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a06a8e55ee447e8c79b359d16d02e91cd}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!event\_mutex\_@{event\_mutex\_}}
+\index{event\_mutex\_@{event\_mutex\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{event\_mutex\_}{event\_mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a06a8e55ee447e8c79b359d16d02e91cd} 
+std\+::mutex neo\+::ledger\+::\+Blockchain\+::event\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_ab865974457d5dc525c296db23e82b172}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!extensible\_whitelist\_cached\_@{extensible\_whitelist\_cached\_}}
+\index{extensible\_whitelist\_cached\_@{extensible\_whitelist\_cached\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{extensible\_whitelist\_cached\_}{extensible\_whitelist\_cached\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_ab865974457d5dc525c296db23e82b172} 
+bool neo\+::ledger\+::\+Blockchain\+::extensible\+\_\+whitelist\+\_\+cached\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_aa156c601d2c97ef99d8b975914cb52d2}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!extensible\_witness\_whitelist\_@{extensible\_witness\_whitelist\_}}
+\index{extensible\_witness\_whitelist\_@{extensible\_witness\_whitelist\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{extensible\_witness\_whitelist\_}{extensible\_witness\_whitelist\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_aa156c601d2c97ef99d8b975914cb52d2} 
+std\+::unordered\+\_\+set$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}}$>$ neo\+::ledger\+::\+Blockchain\+::extensible\+\_\+witness\+\_\+whitelist\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_aa7c13a26619e4ed21181a9965e7093cf}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!header\_cache\_@{header\_cache\_}}
+\index{header\_cache\_@{header\_cache\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{header\_cache\_}{header\_cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_aa7c13a26619e4ed21181a9965e7093cf} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_cache}{network\+::p2p\+::payloads\+::\+Header\+Cache}}$>$ neo\+::ledger\+::\+Blockchain\+::header\+\_\+cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a1b1184d6b447a4ebc5a36e44e906c74a}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!MaxTxToReverifyPerIdle@{MaxTxToReverifyPerIdle}}
+\index{MaxTxToReverifyPerIdle@{MaxTxToReverifyPerIdle}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{MaxTxToReverifyPerIdle}{MaxTxToReverifyPerIdle}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a1b1184d6b447a4ebc5a36e44e906c74a} 
+int neo\+::ledger\+::\+Blockchain\+::\+Max\+Tx\+To\+Reverify\+Per\+Idle = 10\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a37a3ea3cab681f76da14f1ff95cac783}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!MaxUnverifiedBlocks@{MaxUnverifiedBlocks}}
+\index{MaxUnverifiedBlocks@{MaxUnverifiedBlocks}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{MaxUnverifiedBlocks}{MaxUnverifiedBlocks}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a37a3ea3cab681f76da14f1ff95cac783} 
+uint32\+\_\+t neo\+::ledger\+::\+Blockchain\+::\+Max\+Unverified\+Blocks = 10000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a6c648c8fcd3c8f364506636285c8da5d}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!processing\_cv\_@{processing\_cv\_}}
+\index{processing\_cv\_@{processing\_cv\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{processing\_cv\_}{processing\_cv\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a6c648c8fcd3c8f364506636285c8da5d} 
+std\+::condition\+\_\+variable neo\+::ledger\+::\+Blockchain\+::processing\+\_\+cv\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_af9304475bbb15a39ecf8324798d952db}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!processing\_mutex\_@{processing\_mutex\_}}
+\index{processing\_mutex\_@{processing\_mutex\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{processing\_mutex\_}{processing\_mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_af9304475bbb15a39ecf8324798d952db} 
+std\+::mutex neo\+::ledger\+::\+Blockchain\+::processing\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_ad6608e043eff8bceea69a2b822851d18}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!processing\_queue\_@{processing\_queue\_}}
+\index{processing\_queue\_@{processing\_queue\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{processing\_queue\_}{processing\_queue\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_ad6608e043eff8bceea69a2b822851d18} 
+std\+::queue$<$std\+::function$<$void()$>$ $>$ neo\+::ledger\+::\+Blockchain\+::processing\+\_\+queue\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a406e6bb24f2f6aa5c684a93667f92fa7}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!processing\_thread\_@{processing\_thread\_}}
+\index{processing\_thread\_@{processing\_thread\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{processing\_thread\_}{processing\_thread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a406e6bb24f2f6aa5c684a93667f92fa7} 
+std\+::thread neo\+::ledger\+::\+Blockchain\+::processing\+\_\+thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_aaa034e4f5ef3521e4673148facf65e72}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_aaa034e4f5ef3521e4673148facf65e72} 
+std\+::atomic$<$bool$>$ neo\+::ledger\+::\+Blockchain\+::running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a79f51bb02b19339bd8f2b3180d274f3b}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!system\_@{system\_}}
+\index{system\_@{system\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{system\_}{system\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a79f51bb02b19339bd8f2b3180d274f3b} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_neo_system}{Neo\+System}}$>$ neo\+::ledger\+::\+Blockchain\+::system\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_a1d795f483a17d9d4261777bece0df296}\index{neo::ledger::Blockchain@{neo::ledger::Blockchain}!transaction\_handlers\_@{transaction\_handlers\_}}
+\index{transaction\_handlers\_@{transaction\_handlers\_}!neo::ledger::Blockchain@{neo::ledger::Blockchain}}
+\doxysubsubsection{\texorpdfstring{transaction\_handlers\_}{transaction\_handlers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_a1d795f483a17d9d4261777bece0df296} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_a09f762bfdb777a6a716e3dc19c5e9535}{Transaction\+Handler}}$>$ neo\+::ledger\+::\+Blockchain\+::transaction\+\_\+handlers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{blockchain_8h}{blockchain.\+h}}\item 
+src/ledger/\mbox{\hyperlink{blockchain_8cpp}{blockchain.\+cpp}}\item 
+src/ledger/\mbox{\hyperlink{blockchain__complete_8cpp}{blockchain\+\_\+complete.\+cpp}}\item 
+src/ledger/\mbox{\hyperlink{blockchain__fallback_8cpp}{blockchain\+\_\+fallback.\+cpp}}\item 
+src/ledger/\mbox{\hyperlink{blockchain__persistence_8cpp}{blockchain\+\_\+persistence.\+cpp}}\item 
+src/ledger/\mbox{\hyperlink{blockchain__utilities_8cpp}{blockchain\+\_\+utilities.\+cpp}}\item 
+src/ledger/\mbox{\hyperlink{blockchain__utils_8cpp}{blockchain\+\_\+utils.\+cpp}}\end{DoxyCompactItemize}

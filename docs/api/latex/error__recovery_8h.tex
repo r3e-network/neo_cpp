@@ -1,0 +1,86 @@
+\doxysection{include/neo/core/error\+\_\+recovery.h File Reference}
+\hypertarget{error__recovery_8h}{}\label{error__recovery_8h}\index{include/neo/core/error\_recovery.h@{include/neo/core/error\_recovery.h}}
+{\ttfamily \#include $<$neo/core/exceptions.\+h$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$future$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$optional$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for error\+\_\+recovery.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery}{neo\+::core\+::\+Error\+Recovery}}
+\begin{DoxyCompactList}\small\item\em Comprehensive error recovery framework for Neo C++ implementation. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{neo\+::core\+::\+Error\+Recovery\+::\+Recovery\+Result$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Result of an error recovery operation. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{neo\+::core\+::\+Error\+Recovery\+::\+Retry\+Config}}
+\begin{DoxyCompactList}\small\item\em Configuration for retry operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker}{neo\+::core\+::\+Error\+Recovery\+::\+Circuit\+Breaker}}
+\begin{DoxyCompactList}\small\item\em Circuit breaker for preventing cascade failures. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_1_1_config}{neo\+::core\+::\+Error\+Recovery\+::\+Circuit\+Breaker\+::\+Config}}
+\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead}{neo\+::core\+::\+Error\+Recovery\+::\+Bulkhead}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead}{Bulkhead} pattern for resource isolation. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_bulkhead_1_1_config}{neo\+::core\+::\+Error\+Recovery\+::\+Bulkhead\+::\+Config}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1core}{neo\+::core}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{error__recovery_8h_adaa47cb4e59f4f6c63b54b89d30348ad}{SAFE\+\_\+\+EXECUTE}}(operation)
+\item 
+\#define \mbox{\hyperlink{error__recovery_8h_a366eca47f6e417dbe2541466b67a9d02}{RETRY\+\_\+\+OPERATION}}(operation,  config)
+\item 
+\#define \mbox{\hyperlink{error__recovery_8h_a2af759c676b1ec617a3fd5f75eb5d206}{WITH\+\_\+\+FALLBACK}}(primary,  fallback)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{error__recovery_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{error__recovery_8h_a366eca47f6e417dbe2541466b67a9d02}\index{error\_recovery.h@{error\_recovery.h}!RETRY\_OPERATION@{RETRY\_OPERATION}}
+\index{RETRY\_OPERATION@{RETRY\_OPERATION}!error\_recovery.h@{error\_recovery.h}}
+\doxysubsubsection{\texorpdfstring{RETRY\_OPERATION}{RETRY\_OPERATION}}
+{\footnotesize\ttfamily \label{error__recovery_8h_a366eca47f6e417dbe2541466b67a9d02} 
+\#define RETRY\+\_\+\+OPERATION(\begin{DoxyParamCaption}\item[{}]{operation}{, }\item[{}]{config}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_adb8e0564ad08d660eb79317959591982}{neo::core::ErrorRecovery::Retry<decltype(operation())>}}([\&]()\ \{\ \textcolor{keywordflow}{return}\ operation();\ \},\ config)}
+
+\end{DoxyCode}
+\Hypertarget{error__recovery_8h_adaa47cb4e59f4f6c63b54b89d30348ad}\index{error\_recovery.h@{error\_recovery.h}!SAFE\_EXECUTE@{SAFE\_EXECUTE}}
+\index{SAFE\_EXECUTE@{SAFE\_EXECUTE}!error\_recovery.h@{error\_recovery.h}}
+\doxysubsubsection{\texorpdfstring{SAFE\_EXECUTE}{SAFE\_EXECUTE}}
+{\footnotesize\ttfamily \label{error__recovery_8h_adaa47cb4e59f4f6c63b54b89d30348ad} 
+\#define SAFE\+\_\+\+EXECUTE(\begin{DoxyParamCaption}\item[{}]{operation}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_a9f1208e3a96b69340f8aebee405d936d}{neo::core::ErrorRecovery::SafeExecute<decltype(operation())>}}([\&]()\ \{\ \textcolor{keywordflow}{return}\ operation();\ \},\ \#operation)}
+
+\end{DoxyCode}
+\Hypertarget{error__recovery_8h_a2af759c676b1ec617a3fd5f75eb5d206}\index{error\_recovery.h@{error\_recovery.h}!WITH\_FALLBACK@{WITH\_FALLBACK}}
+\index{WITH\_FALLBACK@{WITH\_FALLBACK}!error\_recovery.h@{error\_recovery.h}}
+\doxysubsubsection{\texorpdfstring{WITH\_FALLBACK}{WITH\_FALLBACK}}
+{\footnotesize\ttfamily \label{error__recovery_8h_a2af759c676b1ec617a3fd5f75eb5d206} 
+\#define WITH\+\_\+\+FALLBACK(\begin{DoxyParamCaption}\item[{}]{primary}{, }\item[{}]{fallback}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_afca8330024e9fce3dcdf5c3260a63d55}{neo::core::ErrorRecovery::WithFallback<decltype(primary())>}}([\&]()\ \{\ \textcolor{keywordflow}{return}\ primary();\ \},\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\&]()\ \{\ \textcolor{keywordflow}{return}\ fallback();\ \})}
+
+\end{DoxyCode}

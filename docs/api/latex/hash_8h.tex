@@ -1,0 +1,30 @@
+\doxysection{include/neo/cryptography/hash.h File Reference}
+\hypertarget{hash_8h}{}\label{hash_8h}\index{include/neo/cryptography/hash.h@{include/neo/cryptography/hash.h}}
+{\ttfamily \#include $<$neo/io/byte\+\_\+span.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/uint160.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/uint256.\+h$>$}\newline
+{\ttfamily \#include $<$optional$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for hash.\+h\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1cryptography_1_1_hash}{neo\+::cryptography\+::\+Hash}}
+\begin{DoxyCompactList}\small\item\em Provides cryptographic hash functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1cryptography}{neo\+::cryptography}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1ecc}{neo\+::cryptography\+::ecc}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ecc\+::\+ECPoint}} $>$ \mbox{\hyperlink{namespaceneo_1_1cryptography_a15cf5435169bd83ff4ba2c689944a4a1}{neo\+::cryptography\+::\+ECRecover}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&hash, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&signature, uint8\+\_\+t recovery\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Recovers public key from signature (Ethereum-\/style ECRecover) \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ecc\+::\+ECPoint}} $>$ \mbox{\hyperlink{namespaceneo_1_1cryptography_a8be23c6dd27ec6c61a1e0b458be82817}{neo\+::cryptography\+::\+ECRecover\+All}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&hash, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&signature)
+\begin{DoxyCompactList}\small\item\em ECRecover that automatically tries all recovery IDs. \end{DoxyCompactList}\end{DoxyCompactItemize}

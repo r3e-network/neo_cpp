@@ -1,0 +1,907 @@
+\doxysection{neo\+::persistence\+::Storage\+Key Class Reference}
+\hypertarget{classneo_1_1persistence_1_1_storage_key}{}\label{classneo_1_1persistence_1_1_storage_key}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+
+
+Represents a key in the storage for Neo N3.  
+
+
+
+
+{\ttfamily \#include $<$storage\+\_\+key.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::persistence\+::Storage\+Key\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::persistence\+::Storage\+Key\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a26e71bde9629f81837c84d69d83fd75a}{Storage\+Key}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a7dc7d5fc605765122ba8c04704efd018}{Storage\+Key}} (int32\+\_\+t contract\+Id)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key} with the specified contract ID. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a93e7fef2dbf119646971dda8c39dae50}{Storage\+Key}} (int32\+\_\+t contract\+Id, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key} with the specified contract ID and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a6b9dbdbfb6401adb8394411d3f77cd2c}{Storage\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key} from a Byte\+Vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_abb05532b0c7cb081f22cfca4a741490d}{Storage\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key} from a UInt160 script hash (Neo 2.\+x compatibility). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a9b0f66c1f0733c510f82b66b2a93d362}{Storage\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key} from a UInt160 script hash and key (Neo 2.\+x compatibility). \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_af64e0f93624647829ab295f6853bdbe2}{Get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Gets the contract ID. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_ad3349ce2d82f28982cb4a595085dbe83}{Get\+Key}} () const
+\begin{DoxyCompactList}\small\item\em Gets the key. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_ad41cdd9a12f20684bd17bd92240441e3}{Get\+Length}} () const
+\begin{DoxyCompactList}\small\item\em Gets the total length of the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a938bc0df3cfac2f91aa0c3ee7ba4088a}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Converts the storage key to a byte array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a93f9c957bfd46197c092a357df59a046}{Get\+Script\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script hash for the contract ID. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a559e0bec010bdd473e0d32643d280acc}{Resolve\+Contract\+Id}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{Data\+Cache}} \&data\+Cache) const
+\begin{DoxyCompactList}\small\item\em Resolves the contract ID from script hash using \doxylink{classneo_1_1persistence_1_1_data_cache}{Data\+Cache}. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a4e70afade752d59f4bd858366d02b6fe}{Get\+Contract\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Gets the contract ID. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_ad6b67a36b4b9d9492aae63bff81aee59}{Deserialize\+From\+Array}} (const std\+::span$<$ const uint8\+\_\+t $>$ \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes from a byte array. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_ac85b0c62828c502518b88b617120a401}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the storage key to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a4bf49289e728f2dd16b001f3cfc1f7b8}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the storage key from a binary reader. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a2cb502f061775304a68c7a7676c2f689}{operator==}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&other) const
+\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a092cd6f43b23db0e80da8c48170361bb}{operator!=}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&other) const
+\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_ae3e2cef84b4fce38a3a743c6dae67c1c}{operator$<$}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&other) const
+\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_afead25800c924d1cf830c22ebd2e82fc}{Equals}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this storage key equals another (C\# compatibility). \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_ad16b5fd0a5be3be21da8a9c45e87c168}{Compare\+To}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&other) const
+\begin{DoxyCompactList}\small\item\em Compares this storage key with another (C\# compatibility). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_ae7001770e96642cfdb2f878c6264bf51}{Create}} (int32\+\_\+t id, uint8\+\_\+t prefix)
+\begin{DoxyCompactList}\small\item\em Creates a storage key with contract ID and prefix. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a8919e7b24a1e34d1deb53894de955cf8}{Create}} (int32\+\_\+t id, uint8\+\_\+t prefix, uint8\+\_\+t content)
+\begin{DoxyCompactList}\small\item\em Creates a storage key with contract ID, prefix, and byte content. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_ace143d58cd5e2c51d82b03cfdb214ab7}{Create}} (int32\+\_\+t id, uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&hash)
+\begin{DoxyCompactList}\small\item\em Creates a storage key with contract ID, prefix, and UInt160. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_aacd84aeba34e331b7c035adc884f1f70}{Create}} (int32\+\_\+t id, uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Creates a storage key with contract ID, prefix, and UInt256. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_ade3d7559ef106bc2cc10bfc271d89afb}{Create}} (int32\+\_\+t id, uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Creates a storage key with contract ID, prefix, and ECPoint. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a9fdec1cd412e42437a0bfb90f05b6700}{Create}} (int32\+\_\+t id, uint8\+\_\+t prefix, int32\+\_\+t big\+Endian)
+\begin{DoxyCompactList}\small\item\em Creates a storage key with contract ID, prefix, and int32 (big-\/endian). \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a66254e1e5b0a5050caa22a51ee8e4bba}{Create}} (int32\+\_\+t id, uint8\+\_\+t prefix, uint32\+\_\+t big\+Endian)
+\begin{DoxyCompactList}\small\item\em Creates a storage key with contract ID, prefix, and uint32 (big-\/endian). \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a547c73141fe3196165bb37512415f379}{Create}} (int32\+\_\+t id, uint8\+\_\+t prefix, int64\+\_\+t big\+Endian)
+\begin{DoxyCompactList}\small\item\em Creates a storage key with contract ID, prefix, and int64 (big-\/endian). \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a214066c92ff5f5ea85ffc8d1a54a9484}{Create}} (int32\+\_\+t id, uint8\+\_\+t prefix, uint64\+\_\+t big\+Endian)
+\begin{DoxyCompactList}\small\item\em Creates a storage key with contract ID, prefix, and uint64 (big-\/endian). \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a1ed649ec3d275abd59bfba280565b5ca}{Create}} (int32\+\_\+t id, uint8\+\_\+t prefix, const std\+::span$<$ const uint8\+\_\+t $>$ \&content)
+\begin{DoxyCompactList}\small\item\em Creates a storage key with contract ID, prefix, and byte span. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a5a2c9fb7b1801fe324867298bd44bbb8}{Create}} (int32\+\_\+t id, uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&signer)
+\begin{DoxyCompactList}\small\item\em Creates a storage key with contract ID, prefix, UInt256, and UInt160. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a4bfff0b237f4ed46728c3f6065dc9dd4}{Create\+Search\+Prefix}} (int32\+\_\+t id, const std\+::span$<$ const uint8\+\_\+t $>$ \&prefix)
+\begin{DoxyCompactList}\small\item\em Creates a search prefix for finding storage keys. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_aa4d6099dea90de8f08645465f5bd4dbf}{Create}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash, uint8\+\_\+t prefix)
+\begin{DoxyCompactList}\small\item\em Creates a storage key with script hash and prefix. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a77f42b80a535a1bfdf696db6c1fa2f49}{Create\+With\+Contract}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{Data\+Cache}} \&data\+Cache, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash, uint8\+\_\+t prefix)
+\begin{DoxyCompactList}\small\item\em Creates a storage key with contract lookup via \doxylink{classneo_1_1persistence_1_1_data_cache}{Data\+Cache}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_ae187e4a92c6239d8106902cbf4913ec0}{PREFIX\+\_\+\+LENGTH}} = sizeof(int32\+\_\+t) + sizeof(uint8\+\_\+t)
+\begin{DoxyCompactList}\small\item\em The length of the prefix (contract ID + prefix byte). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a7d5a7dc6165cae747b3d97dbf499a048}{Build}} () const
+\begin{DoxyCompactList}\small\item\em Builds the cached serialized form. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a4a6ee8a47d7cfb0b3802d3697ddf571f}{Fill\+Header}} (std\+::span$<$ uint8\+\_\+t $>$ data, int32\+\_\+t id, uint8\+\_\+t prefix)
+\begin{DoxyCompactList}\small\item\em Fills the header (contract ID + prefix) into a span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_aa0b63b5d66a7c1446c42ee4a5cb4dc50}{id\+\_\+}} = 0
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a08ddb6ab87083d88b685e59e1155c486}{key\+\_\+}}
+\item 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a4a4d5a45e6c2ecd8b9f3def5cb337667}{script\+Hash\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a981bc9518afa2e8157d838b2f8dac6d3}{cache\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_ad424b8911f6baea134ed436e1dcccd79}{cache\+Valid\+\_\+}} = false
+\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key_a504cdc185692c170265d053c801ae79f}{requires\+Lookup\+\_\+}} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a key in the storage for Neo N3. 
+
+In Neo N3, storage keys consist of\+:
+\begin{DoxyItemize}
+\item Contract ID (4 bytes, little-\/endian)
+\item Key data (variable length)
+\end{DoxyItemize}
+
+This replaces the old script hash + key format from Neo 2.\+x. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a26e71bde9629f81837c84d69d83fd75a}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!StorageKey@{StorageKey}}
+\index{StorageKey@{StorageKey}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{StorageKey()}{StorageKey()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a26e71bde9629f81837c84d69d83fd75a} 
+neo\+::persistence\+::\+Storage\+Key\+::\+Storage\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Constructs an empty \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}. 
+
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a7dc7d5fc605765122ba8c04704efd018}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!StorageKey@{StorageKey}}
+\index{StorageKey@{StorageKey}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{StorageKey()}{StorageKey()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a7dc7d5fc605765122ba8c04704efd018} 
+neo\+::persistence\+::\+Storage\+Key\+::\+Storage\+Key (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{contract\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key} with the specified contract ID. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em contract\+Id} & The contract ID. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a93e7fef2dbf119646971dda8c39dae50}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!StorageKey@{StorageKey}}
+\index{StorageKey@{StorageKey}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{StorageKey()}{StorageKey()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a93e7fef2dbf119646971dda8c39dae50} 
+neo\+::persistence\+::\+Storage\+Key\+::\+Storage\+Key (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{contract\+Id}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{key}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key} with the specified contract ID and key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em contract\+Id} & The contract ID. \\
+\hline
+{\em key} & The key. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a6b9dbdbfb6401adb8394411d3f77cd2c}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!StorageKey@{StorageKey}}
+\index{StorageKey@{StorageKey}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{StorageKey()}{StorageKey()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a6b9dbdbfb6401adb8394411d3f77cd2c} 
+neo\+::persistence\+::\+Storage\+Key\+::\+Storage\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key} from a Byte\+Vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The serialized \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key} data. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_abb05532b0c7cb081f22cfca4a741490d}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!StorageKey@{StorageKey}}
+\index{StorageKey@{StorageKey}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{StorageKey()}{StorageKey()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_abb05532b0c7cb081f22cfca4a741490d} 
+neo\+::persistence\+::\+Storage\+Key\+::\+Storage\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key} from a UInt160 script hash (Neo 2.\+x compatibility). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The script hash. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a9b0f66c1f0733c510f82b66b2a93d362}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!StorageKey@{StorageKey}}
+\index{StorageKey@{StorageKey}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{StorageKey()}{StorageKey()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a9b0f66c1f0733c510f82b66b2a93d362} 
+neo\+::persistence\+::\+Storage\+Key\+::\+Storage\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{key}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key} from a UInt160 script hash and key (Neo 2.\+x compatibility). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The script hash. \\
+\hline
+{\em key} & The key. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a7d5a7dc6165cae747b3d97dbf499a048}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!Build@{Build}}
+\index{Build@{Build}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Build()}{Build()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a7d5a7dc6165cae747b3d97dbf499a048} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::persistence\+::\+Storage\+Key\+::\+Build (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Builds the cached serialized form. 
+
+\begin{DoxyReturn}{Returns}
+The serialized data. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_ad16b5fd0a5be3be21da8a9c45e87c168}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!CompareTo@{CompareTo}}
+\index{CompareTo@{CompareTo}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{CompareTo()}{CompareTo()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_ad16b5fd0a5be3be21da8a9c45e87c168} 
+int neo\+::persistence\+::\+Storage\+Key\+::\+Compare\+To (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Compares this storage key with another (C\# compatibility). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other storage key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if less, 0 if equal, 1 if greater. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_aa4d6099dea90de8f08645465f5bd4dbf}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!Create@{Create}}
+\index{Create@{Create}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [1/12]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_aa4d6099dea90de8f08645465f5bd4dbf} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} neo\+::persistence\+::\+Storage\+Key\+::\+Create (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{, }\item[{uint8\+\_\+t}]{prefix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a storage key with script hash and prefix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The script hash. \\
+\hline
+{\em prefix} & The prefix byte. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_ae7001770e96642cfdb2f878c6264bf51}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!Create@{Create}}
+\index{Create@{Create}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [2/12]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_ae7001770e96642cfdb2f878c6264bf51} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} neo\+::persistence\+::\+Storage\+Key\+::\+Create (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{id}{, }\item[{uint8\+\_\+t}]{prefix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a storage key with contract ID and prefix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The contract ID. \\
+\hline
+{\em prefix} & The prefix byte. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_ade3d7559ef106bc2cc10bfc271d89afb}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!Create@{Create}}
+\index{Create@{Create}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [3/12]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_ade3d7559ef106bc2cc10bfc271d89afb} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} neo\+::persistence\+::\+Storage\+Key\+::\+Create (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{id}{, }\item[{uint8\+\_\+t}]{prefix}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{public\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a storage key with contract ID, prefix, and ECPoint. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The contract ID. \\
+\hline
+{\em prefix} & The prefix byte. \\
+\hline
+{\em public\+Key} & The public key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_ace143d58cd5e2c51d82b03cfdb214ab7}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!Create@{Create}}
+\index{Create@{Create}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [4/12]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_ace143d58cd5e2c51d82b03cfdb214ab7} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} neo\+::persistence\+::\+Storage\+Key\+::\+Create (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{id}{, }\item[{uint8\+\_\+t}]{prefix}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a storage key with contract ID, prefix, and UInt160. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The contract ID. \\
+\hline
+{\em prefix} & The prefix byte. \\
+\hline
+{\em hash} & The UInt160 hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_aacd84aeba34e331b7c035adc884f1f70}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!Create@{Create}}
+\index{Create@{Create}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [5/12]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_aacd84aeba34e331b7c035adc884f1f70} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} neo\+::persistence\+::\+Storage\+Key\+::\+Create (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{id}{, }\item[{uint8\+\_\+t}]{prefix}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a storage key with contract ID, prefix, and UInt256. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The contract ID. \\
+\hline
+{\em prefix} & The prefix byte. \\
+\hline
+{\em hash} & The UInt256 hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a5a2c9fb7b1801fe324867298bd44bbb8}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!Create@{Create}}
+\index{Create@{Create}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [6/12]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a5a2c9fb7b1801fe324867298bd44bbb8} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} neo\+::persistence\+::\+Storage\+Key\+::\+Create (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{id}{, }\item[{uint8\+\_\+t}]{prefix}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{signer}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a storage key with contract ID, prefix, UInt256, and UInt160. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The contract ID. \\
+\hline
+{\em prefix} & The prefix byte. \\
+\hline
+{\em hash} & The UInt256 hash. \\
+\hline
+{\em signer} & The UInt160 signer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a1ed649ec3d275abd59bfba280565b5ca}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!Create@{Create}}
+\index{Create@{Create}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [7/12]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a1ed649ec3d275abd59bfba280565b5ca} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} neo\+::persistence\+::\+Storage\+Key\+::\+Create (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{id}{, }\item[{uint8\+\_\+t}]{prefix}{, }\item[{const std\+::span$<$ const uint8\+\_\+t $>$ \&}]{content}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a storage key with contract ID, prefix, and byte span. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The contract ID. \\
+\hline
+{\em prefix} & The prefix byte. \\
+\hline
+{\em content} & The content bytes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a9fdec1cd412e42437a0bfb90f05b6700}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!Create@{Create}}
+\index{Create@{Create}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [8/12]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a9fdec1cd412e42437a0bfb90f05b6700} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} neo\+::persistence\+::\+Storage\+Key\+::\+Create (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{id}{, }\item[{uint8\+\_\+t}]{prefix}{, }\item[{int32\+\_\+t}]{big\+Endian}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a storage key with contract ID, prefix, and int32 (big-\/endian). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The contract ID. \\
+\hline
+{\em prefix} & The prefix byte. \\
+\hline
+{\em big\+Endian} & The big-\/endian integer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a547c73141fe3196165bb37512415f379}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!Create@{Create}}
+\index{Create@{Create}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [9/12]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a547c73141fe3196165bb37512415f379} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} neo\+::persistence\+::\+Storage\+Key\+::\+Create (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{id}{, }\item[{uint8\+\_\+t}]{prefix}{, }\item[{int64\+\_\+t}]{big\+Endian}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a storage key with contract ID, prefix, and int64 (big-\/endian). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The contract ID. \\
+\hline
+{\em prefix} & The prefix byte. \\
+\hline
+{\em big\+Endian} & The big-\/endian long integer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a66254e1e5b0a5050caa22a51ee8e4bba}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!Create@{Create}}
+\index{Create@{Create}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [10/12]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a66254e1e5b0a5050caa22a51ee8e4bba} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} neo\+::persistence\+::\+Storage\+Key\+::\+Create (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{id}{, }\item[{uint8\+\_\+t}]{prefix}{, }\item[{uint32\+\_\+t}]{big\+Endian}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a storage key with contract ID, prefix, and uint32 (big-\/endian). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The contract ID. \\
+\hline
+{\em prefix} & The prefix byte. \\
+\hline
+{\em big\+Endian} & The big-\/endian unsigned integer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a214066c92ff5f5ea85ffc8d1a54a9484}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!Create@{Create}}
+\index{Create@{Create}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [11/12]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a214066c92ff5f5ea85ffc8d1a54a9484} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} neo\+::persistence\+::\+Storage\+Key\+::\+Create (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{id}{, }\item[{uint8\+\_\+t}]{prefix}{, }\item[{uint64\+\_\+t}]{big\+Endian}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a storage key with contract ID, prefix, and uint64 (big-\/endian). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The contract ID. \\
+\hline
+{\em prefix} & The prefix byte. \\
+\hline
+{\em big\+Endian} & The big-\/endian unsigned long integer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a8919e7b24a1e34d1deb53894de955cf8}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!Create@{Create}}
+\index{Create@{Create}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [12/12]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a8919e7b24a1e34d1deb53894de955cf8} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} neo\+::persistence\+::\+Storage\+Key\+::\+Create (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{id}{, }\item[{uint8\+\_\+t}]{prefix}{, }\item[{uint8\+\_\+t}]{content}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a storage key with contract ID, prefix, and byte content. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The contract ID. \\
+\hline
+{\em prefix} & The prefix byte. \\
+\hline
+{\em content} & The content byte. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a4bfff0b237f4ed46728c3f6065dc9dd4}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!CreateSearchPrefix@{CreateSearchPrefix}}
+\index{CreateSearchPrefix@{CreateSearchPrefix}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{CreateSearchPrefix()}{CreateSearchPrefix()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a4bfff0b237f4ed46728c3f6065dc9dd4} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::persistence\+::\+Storage\+Key\+::\+Create\+Search\+Prefix (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{id}{, }\item[{const std\+::span$<$ const uint8\+\_\+t $>$ \&}]{prefix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a search prefix for finding storage keys. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The contract ID. \\
+\hline
+{\em prefix} & The prefix bytes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The search prefix. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a77f42b80a535a1bfdf696db6c1fa2f49}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!CreateWithContract@{CreateWithContract}}
+\index{CreateWithContract@{CreateWithContract}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{CreateWithContract()}{CreateWithContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a77f42b80a535a1bfdf696db6c1fa2f49} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} neo\+::persistence\+::\+Storage\+Key\+::\+Create\+With\+Contract (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{Data\+Cache}} \&}]{data\+Cache}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{, }\item[{uint8\+\_\+t}]{prefix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a storage key with contract lookup via \doxylink{classneo_1_1persistence_1_1_data_cache}{Data\+Cache}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+Cache} & The data cache for contract lookup. \\
+\hline
+{\em script\+Hash} & The script hash. \\
+\hline
+{\em prefix} & The prefix byte. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a4bf49289e728f2dd16b001f3cfc1f7b8}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a4bf49289e728f2dd16b001f3cfc1f7b8} 
+void neo\+::persistence\+::\+Storage\+Key\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the storage key from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_ad6b67a36b4b9d9492aae63bff81aee59}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!DeserializeFromArray@{DeserializeFromArray}}
+\index{DeserializeFromArray@{DeserializeFromArray}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{DeserializeFromArray()}{DeserializeFromArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_ad6b67a36b4b9d9492aae63bff81aee59} 
+void neo\+::persistence\+::\+Storage\+Key\+::\+Deserialize\+From\+Array (\begin{DoxyParamCaption}\item[{const std\+::span$<$ const uint8\+\_\+t $>$ \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Deserializes from a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The byte array. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_afead25800c924d1cf830c22ebd2e82fc}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!Equals@{Equals}}
+\index{Equals@{Equals}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Equals()}{Equals()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_afead25800c924d1cf830c22ebd2e82fc} 
+bool neo\+::persistence\+::\+Storage\+Key\+::\+Equals (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this storage key equals another (C\# compatibility). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other storage key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a4a6ee8a47d7cfb0b3802d3697ddf571f}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!FillHeader@{FillHeader}}
+\index{FillHeader@{FillHeader}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{FillHeader()}{FillHeader()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a4a6ee8a47d7cfb0b3802d3697ddf571f} 
+void neo\+::persistence\+::\+Storage\+Key\+::\+Fill\+Header (\begin{DoxyParamCaption}\item[{std\+::span$<$ uint8\+\_\+t $>$}]{data}{, }\item[{int32\+\_\+t}]{id}{, }\item[{uint8\+\_\+t}]{prefix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Fills the header (contract ID + prefix) into a span. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The span to fill. \\
+\hline
+{\em id} & The contract ID. \\
+\hline
+{\em prefix} & The prefix byte. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a4e70afade752d59f4bd858366d02b6fe}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!GetContractId@{GetContractId}}
+\index{GetContractId@{GetContractId}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{GetContractId()}{GetContractId()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a4e70afade752d59f4bd858366d02b6fe} 
+int32\+\_\+t neo\+::persistence\+::\+Storage\+Key\+::\+Get\+Contract\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the contract ID. 
+
+\begin{DoxyReturn}{Returns}
+The contract ID. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if contract ID requires resolution. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_af64e0f93624647829ab295f6853bdbe2}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!GetId@{GetId}}
+\index{GetId@{GetId}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{GetId()}{GetId()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_af64e0f93624647829ab295f6853bdbe2} 
+int32\+\_\+t neo\+::persistence\+::\+Storage\+Key\+::\+Get\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the contract ID. 
+
+\begin{DoxyReturn}{Returns}
+The contract ID. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_ad3349ce2d82f28982cb4a595085dbe83}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!GetKey@{GetKey}}
+\index{GetKey@{GetKey}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{GetKey()}{GetKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_ad3349ce2d82f28982cb4a595085dbe83} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::persistence\+::\+Storage\+Key\+::\+Get\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the key. 
+
+\begin{DoxyReturn}{Returns}
+The key. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_ad41cdd9a12f20684bd17bd92240441e3}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!GetLength@{GetLength}}
+\index{GetLength@{GetLength}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{GetLength()}{GetLength()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_ad41cdd9a12f20684bd17bd92240441e3} 
+size\+\_\+t neo\+::persistence\+::\+Storage\+Key\+::\+Get\+Length (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the total length of the storage key. 
+
+\begin{DoxyReturn}{Returns}
+The length. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a93f9c957bfd46197c092a357df59a046}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!GetScriptHash@{GetScriptHash}}
+\index{GetScriptHash@{GetScriptHash}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{GetScriptHash()}{GetScriptHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a93f9c957bfd46197c092a357df59a046} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} neo\+::persistence\+::\+Storage\+Key\+::\+Get\+Script\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the script hash for the contract ID. 
+
+\begin{DoxyReturn}{Returns}
+The script hash (UInt160). 
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+This implementation requires blockchain state access for full functionality. 
+\end{DoxyNote}
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a092cd6f43b23db0e80da8c48170361bb}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a092cd6f43b23db0e80da8c48170361bb} 
+bool neo\+::persistence\+::\+Storage\+Key\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 23
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_ae3e2cef84b4fce38a3a743c6dae67c1c}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_ae3e2cef84b4fce38a3a743c6dae67c1c} 
+bool neo\+::persistence\+::\+Storage\+Key\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 24
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a2cb502f061775304a68c7a7676c2f689}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a2cb502f061775304a68c7a7676c2f689} 
+bool neo\+::persistence\+::\+Storage\+Key\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 25
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a559e0bec010bdd473e0d32643d280acc}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!ResolveContractId@{ResolveContractId}}
+\index{ResolveContractId@{ResolveContractId}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{ResolveContractId()}{ResolveContractId()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a559e0bec010bdd473e0d32643d280acc} 
+int32\+\_\+t neo\+::persistence\+::\+Storage\+Key\+::\+Resolve\+Contract\+Id (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{Data\+Cache}} \&}]{data\+Cache}{}\end{DoxyParamCaption}) const}
+
+
+
+Resolves the contract ID from script hash using \doxylink{classneo_1_1persistence_1_1_data_cache}{Data\+Cache}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data\+Cache} & The data cache for contract lookup. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The resolved contract ID. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 26
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_ac85b0c62828c502518b88b617120a401}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_ac85b0c62828c502518b88b617120a401} 
+void neo\+::persistence\+::\+Storage\+Key\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the storage key to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 27
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a938bc0df3cfac2f91aa0c3ee7ba4088a}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!ToArray@{ToArray}}
+\index{ToArray@{ToArray}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{ToArray()}{ToArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a938bc0df3cfac2f91aa0c3ee7ba4088a} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::persistence\+::\+Storage\+Key\+::\+To\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Converts the storage key to a byte array. 
+
+\begin{DoxyReturn}{Returns}
+The byte array. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 28
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a981bc9518afa2e8157d838b2f8dac6d3}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!cache\_@{cache\_}}
+\index{cache\_@{cache\_}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{cache\_}{cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a981bc9518afa2e8157d838b2f8dac6d3} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::persistence\+::\+Storage\+Key\+::cache\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_ad424b8911f6baea134ed436e1dcccd79}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!cacheValid\_@{cacheValid\_}}
+\index{cacheValid\_@{cacheValid\_}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{cacheValid\_}{cacheValid\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_ad424b8911f6baea134ed436e1dcccd79} 
+bool neo\+::persistence\+::\+Storage\+Key\+::cache\+Valid\+\_\+ = false\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_aa0b63b5d66a7c1446c42ee4a5cb4dc50}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!id\_@{id\_}}
+\index{id\_@{id\_}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{id\_}{id\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_aa0b63b5d66a7c1446c42ee4a5cb4dc50} 
+int32\+\_\+t neo\+::persistence\+::\+Storage\+Key\+::id\+\_\+ = 0\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a08ddb6ab87083d88b685e59e1155c486}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!key\_@{key\_}}
+\index{key\_@{key\_}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{key\_}{key\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a08ddb6ab87083d88b685e59e1155c486} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::persistence\+::\+Storage\+Key\+::key\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_ae187e4a92c6239d8106902cbf4913ec0}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!PREFIX\_LENGTH@{PREFIX\_LENGTH}}
+\index{PREFIX\_LENGTH@{PREFIX\_LENGTH}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_LENGTH}{PREFIX\_LENGTH}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_ae187e4a92c6239d8106902cbf4913ec0} 
+size\+\_\+t neo\+::persistence\+::\+Storage\+Key\+::\+PREFIX\+\_\+\+LENGTH = sizeof(int32\+\_\+t) + sizeof(uint8\+\_\+t)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The length of the prefix (contract ID + prefix byte). 
+
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a504cdc185692c170265d053c801ae79f}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!requiresLookup\_@{requiresLookup\_}}
+\index{requiresLookup\_@{requiresLookup\_}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{requiresLookup\_}{requiresLookup\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a504cdc185692c170265d053c801ae79f} 
+bool neo\+::persistence\+::\+Storage\+Key\+::requires\+Lookup\+\_\+ = false\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_storage_key_a4a4d5a45e6c2ecd8b9f3def5cb337667}\index{neo::persistence::StorageKey@{neo::persistence::StorageKey}!scriptHash\_@{scriptHash\_}}
+\index{scriptHash\_@{scriptHash\_}!neo::persistence::StorageKey@{neo::persistence::StorageKey}}
+\doxysubsubsection{\texorpdfstring{scriptHash\_}{scriptHash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_storage_key_a4a4d5a45e6c2ecd8b9f3def5cb337667} 
+std\+::optional$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}}$>$ neo\+::persistence\+::\+Storage\+Key\+::script\+Hash\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/persistence/\mbox{\hyperlink{persistence_2storage__key_8h}{storage\+\_\+key.\+h}}\item 
+src/persistence/\mbox{\hyperlink{storage__key_8cpp}{storage\+\_\+key.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,385 @@
+{
+  "dashboard": {
+    "id": null,
+    "uid": "neo-cpp-enhanced",
+    "title": "Neo C++ Node - Enhanced Monitoring",
+    "tags": ["blockchain", "neo", "monitoring"],
+    "timezone": "browser",
+    "schemaVersion": 30,
+    "version": 1,
+    "refresh": "5s",
+    "time": {
+      "from": "now-1h",
+      "to": "now"
+    },
+    "panels": [
+      {
+        "id": 1,
+        "gridPos": {"h": 4, "w": 6, "x": 0, "y": 0},
+        "type": "stat",
+        "title": "Block Height",
+        "targets": [
+          {
+            "expr": "neo_block_height",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"color": "green", "value": null}
+              ]
+            },
+            "unit": "none"
+          }
+        }
+      },
+      {
+        "id": 2,
+        "gridPos": {"h": 4, "w": 6, "x": 6, "y": 0},
+        "type": "stat",
+        "title": "Connected Peers",
+        "targets": [
+          {
+            "expr": "neo_peers_current",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"color": "red", "value": 0},
+                {"color": "yellow", "value": 3},
+                {"color": "green", "value": 5}
+              ]
+            },
+            "unit": "none",
+            "max": "neo_peers_max"
+          }
+        }
+      },
+      {
+        "id": 3,
+        "gridPos": {"h": 4, "w": 6, "x": 12, "y": 0},
+        "type": "stat",
+        "title": "Mempool Size",
+        "targets": [
+          {
+            "expr": "neo_mempool_size",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "thresholds"},
+            "thresholds": {
+              "mode": "absolute",
+              "steps": [
+                {"color": "green", "value": null},
+                {"color": "yellow", "value": 1000},
+                {"color": "red", "value": 5000}
+              ]
+            },
+            "unit": "none"
+          }
+        }
+      },
+      {
+        "id": 4,
+        "gridPos": {"h": 4, "w": 6, "x": 18, "y": 0},
+        "type": "stat",
+        "title": "Active Validators",
+        "targets": [
+          {
+            "expr": "neo_validators_total",
+            "refId": "A"
+          }
+        ],
+        "fieldConfig": {
+          "defaults": {
+            "color": {"mode": "fixed", "fixedColor": "blue"},
+            "unit": "none"
+          }
+        }
+      },
+      {
+        "id": 5,
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 4},
+        "type": "graph",
+        "title": "Block Processing Time",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.5, rate(neo_block_processing_duration_seconds_bucket[5m]))",
+            "legendFormat": "p50",
+            "refId": "A"
+          },
+          {
+            "expr": "histogram_quantile(0.95, rate(neo_block_processing_duration_seconds_bucket[5m]))",
+            "legendFormat": "p95",
+            "refId": "B"
+          },
+          {
+            "expr": "histogram_quantile(0.99, rate(neo_block_processing_duration_seconds_bucket[5m]))",
+            "legendFormat": "p99",
+            "refId": "C"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "s",
+            "label": "Processing Time"
+          },
+          {
+            "format": "short"
+          }
+        ]
+      },
+      {
+        "id": 6,
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 4},
+        "type": "graph",
+        "title": "Transaction Rate",
+        "targets": [
+          {
+            "expr": "rate(neo_transactions_processed_total[1m])",
+            "legendFormat": "Processed",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(neo_transactions_received_total[1m])",
+            "legendFormat": "Received",
+            "refId": "B"
+          },
+          {
+            "expr": "rate(neo_transactions_invalid_total[1m])",
+            "legendFormat": "Invalid",
+            "refId": "C"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "ops",
+            "label": "Transactions/sec"
+          },
+          {
+            "format": "short"
+          }
+        ]
+      },
+      {
+        "id": 7,
+        "gridPos": {"h": 8, "w": 12, "x": 0, "y": 12},
+        "type": "graph",
+        "title": "Network Bandwidth",
+        "targets": [
+          {
+            "expr": "neo_bandwidth_in_bytes_per_second",
+            "legendFormat": "Incoming",
+            "refId": "A"
+          },
+          {
+            "expr": "neo_bandwidth_out_bytes_per_second",
+            "legendFormat": "Outgoing",
+            "refId": "B"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "Bps",
+            "label": "Bandwidth"
+          },
+          {
+            "format": "short"
+          }
+        ]
+      },
+      {
+        "id": 8,
+        "gridPos": {"h": 8, "w": 12, "x": 12, "y": 12},
+        "type": "graph",
+        "title": "RPC Performance",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.5, rate(neo_rpc_duration_seconds_bucket[5m]))",
+            "legendFormat": "p50",
+            "refId": "A"
+          },
+          {
+            "expr": "histogram_quantile(0.95, rate(neo_rpc_duration_seconds_bucket[5m]))",
+            "legendFormat": "p95",
+            "refId": "B"
+          },
+          {
+            "expr": "histogram_quantile(0.99, rate(neo_rpc_duration_seconds_bucket[5m]))",
+            "legendFormat": "p99",
+            "refId": "C"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "s",
+            "label": "Response Time"
+          },
+          {
+            "format": "short"
+          }
+        ]
+      },
+      {
+        "id": 9,
+        "gridPos": {"h": 8, "w": 8, "x": 0, "y": 20},
+        "type": "graph",
+        "title": "VM Execution Time",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.5, rate(neo_vm_execution_duration_seconds_bucket[5m]))",
+            "legendFormat": "p50",
+            "refId": "A"
+          },
+          {
+            "expr": "histogram_quantile(0.95, rate(neo_vm_execution_duration_seconds_bucket[5m]))",
+            "legendFormat": "p95",
+            "refId": "B"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "s",
+            "label": "Execution Time"
+          },
+          {
+            "format": "short"
+          }
+        ]
+      },
+      {
+        "id": 10,
+        "gridPos": {"h": 8, "w": 8, "x": 8, "y": 20},
+        "type": "graph",
+        "title": "Database Operations",
+        "targets": [
+          {
+            "expr": "histogram_quantile(0.5, rate(neo_database_read_duration_seconds_bucket[5m]))",
+            "legendFormat": "Read p50",
+            "refId": "A"
+          },
+          {
+            "expr": "histogram_quantile(0.5, rate(neo_database_write_duration_seconds_bucket[5m]))",
+            "legendFormat": "Write p50",
+            "refId": "B"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "s",
+            "label": "Operation Time"
+          },
+          {
+            "format": "short"
+          }
+        ]
+      },
+      {
+        "id": 11,
+        "gridPos": {"h": 8, "w": 8, "x": 16, "y": 20},
+        "type": "graph",
+        "title": "Consensus Metrics",
+        "targets": [
+          {
+            "expr": "rate(neo_consensus_rounds_total[5m])",
+            "legendFormat": "Rounds/min",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(neo_consensus_view_changes_total[5m])",
+            "legendFormat": "View Changes/min",
+            "refId": "B"
+          }
+        ],
+        "yaxes": [
+          {
+            "format": "ops",
+            "label": "Rate"
+          },
+          {
+            "format": "short"
+          }
+        ]
+      },
+      {
+        "id": 12,
+        "gridPos": {"h": 6, "w": 12, "x": 0, "y": 28},
+        "type": "table",
+        "title": "Top RPC Methods",
+        "targets": [
+          {
+            "expr": "topk(10, rate(neo_rpc_requests_total[5m])) by (method)",
+            "format": "table",
+            "instant": true,
+            "refId": "A"
+          }
+        ]
+      },
+      {
+        "id": 13,
+        "gridPos": {"h": 6, "w": 12, "x": 12, "y": 28},
+        "type": "table",
+        "title": "Error Rates",
+        "targets": [
+          {
+            "expr": "rate(neo_connection_errors_total[5m])",
+            "legendFormat": "Connection Errors",
+            "refId": "A"
+          },
+          {
+            "expr": "rate(neo_message_errors_total[5m])",
+            "legendFormat": "Message Errors",
+            "refId": "B"
+          },
+          {
+            "expr": "rate(neo_protocol_violations_total[5m])",
+            "legendFormat": "Protocol Violations",
+            "refId": "C"
+          }
+        ]
+      },
+      {
+        "id": 14,
+        "gridPos": {"h": 4, "w": 24, "x": 0, "y": 34},
+        "type": "row",
+        "title": "System Metrics",
+        "collapsed": true,
+        "panels": [
+          {
+            "gridPos": {"h": 8, "w": 12, "x": 0, "y": 35},
+            "type": "graph",
+            "title": "CPU Usage",
+            "targets": [
+              {
+                "expr": "rate(process_cpu_seconds_total[1m])",
+                "refId": "A"
+              }
+            ]
+          },
+          {
+            "gridPos": {"h": 8, "w": 12, "x": 12, "y": 35},
+            "type": "graph",
+            "title": "Memory Usage",
+            "targets": [
+              {
+                "expr": "process_resident_memory_bytes",
+                "refId": "A"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

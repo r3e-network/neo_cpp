@@ -1,0 +1,18 @@
+digraph "neo::ledger::TransactionAttribute::Serialize"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::ledger::Transaction\lAttribute::Serialize",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Serializes the TransactionAttribute to a binary writer."];
+  Node1 -> Node2 [id="edge7_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::io::BinaryWriter\l::Write",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_writer.html#ac50767ade20a9099ba7e6b6ed684ef45",tooltip="Writes a boolean value to the stream."];
+  Node2 -> Node2 [id="edge8_Node000002_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node3 [id="edge9_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::io::BinaryWriter\l::WriteVarBytes",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_writer.html#ace5e14a07bea5e53bc025433e531853d",tooltip="Writes a variable-length byte array to the stream."];
+  Node3 -> Node2 [id="edge10_Node000003_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node3 -> Node4 [id="edge11_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::io::BinaryWriter\l::WriteVarInt",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_writer.html#a39fc5781e0d7a018ac8a1d86fea0cd4e",tooltip="Writes a variable-length integer to the stream."];
+  Node4 -> Node2 [id="edge12_Node000004_Node000002",color="steelblue1",style="solid",tooltip=" "];
+}

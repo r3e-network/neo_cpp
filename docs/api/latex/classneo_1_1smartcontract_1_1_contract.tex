@@ -1,0 +1,288 @@
+\doxysection{neo\+::smartcontract\+::Contract Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1_contract}{}\label{classneo_1_1smartcontract_1_1_contract}\index{neo::smartcontract::Contract@{neo::smartcontract::Contract}}
+
+
+Represents a contract.  
+
+
+
+
+{\ttfamily \#include $<$contract.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::smartcontract\+::Contract\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::smartcontract\+::Contract\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_af679d851a99668f6be59bb27a34498c3}{Contract}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1smartcontract_1_1_contract}{Contract}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_ab4f032dc55993020ee0eebbca708e385}{Contract}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&script, const std\+::vector$<$ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a9feda1fb2349688c11a654555c1a32fb}{Contract\+Parameter\+Type}} $>$ \&parameter\+List)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1_contract}{Contract} with the specified script and parameter list. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_a467bdc8d1ac6c6eeaacef513506e7c4c}{Get\+Script}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_ac2712adc0cbe41dc30012ad77dc4cbcc}{Set\+Script}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&script)
+\begin{DoxyCompactList}\small\item\em Sets the script. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a9feda1fb2349688c11a654555c1a32fb}{Contract\+Parameter\+Type}} $>$ \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_a16af4595c87a246e94e9ac5789b73081}{Get\+Parameter\+List}} () const
+\begin{DoxyCompactList}\small\item\em Gets the parameter list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_a2398f11ad81fffffe8a8cf5ab9bdbb22}{Set\+Parameter\+List}} (const std\+::vector$<$ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a9feda1fb2349688c11a654555c1a32fb}{Contract\+Parameter\+Type}} $>$ \&parameter\+List)
+\begin{DoxyCompactList}\small\item\em Sets the parameter list. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_a440e6c0ecc575d55dd6f72a9bdd5789f}{Get\+Script\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_a35310534256e98ad5d0f73f95bfe770a}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1smartcontract_1_1_contract}{Contract} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_a443c4a29dbf69dca3287f738af91bf46}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1smartcontract_1_1_contract}{Contract} from a binary reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_aefcd47bce6e6dc289ce3d544c0b7449e}{Create\+Signature\+Contract}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&pub\+Key)
+\begin{DoxyCompactList}\small\item\em Creates a contract from a public key. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_ae57642e3756ea205f4d2197e2d269c70}{Create\+Multi\+Sig\+Contract}} (int m, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \&pub\+Keys)
+\begin{DoxyCompactList}\small\item\em Creates a multi-\/signature contract. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_acc7069ec0a891a3b3e604bc3e7703ce5}{script\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a9feda1fb2349688c11a654555c1a32fb}{Contract\+Parameter\+Type}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_ab99bea8b29702ecebfeb45750fd2e933}{parameter\+List\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a contract. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_af679d851a99668f6be59bb27a34498c3}\index{neo::smartcontract::Contract@{neo::smartcontract::Contract}!Contract@{Contract}}
+\index{Contract@{Contract}!neo::smartcontract::Contract@{neo::smartcontract::Contract}}
+\doxysubsubsection{\texorpdfstring{Contract()}{Contract()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_af679d851a99668f6be59bb27a34498c3} 
+neo\+::smartcontract\+::\+Contract\+::\+Contract (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Constructs an empty \doxylink{classneo_1_1smartcontract_1_1_contract}{Contract}. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_ab4f032dc55993020ee0eebbca708e385}\index{neo::smartcontract::Contract@{neo::smartcontract::Contract}!Contract@{Contract}}
+\index{Contract@{Contract}!neo::smartcontract::Contract@{neo::smartcontract::Contract}}
+\doxysubsubsection{\texorpdfstring{Contract()}{Contract()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_ab4f032dc55993020ee0eebbca708e385} 
+neo\+::smartcontract\+::\+Contract\+::\+Contract (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{script}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a9feda1fb2349688c11a654555c1a32fb}{Contract\+Parameter\+Type}} $>$ \&}]{parameter\+List}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1smartcontract_1_1_contract}{Contract} with the specified script and parameter list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & The script. \\
+\hline
+{\em parameter\+List} & The parameter list. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_ae57642e3756ea205f4d2197e2d269c70}\index{neo::smartcontract::Contract@{neo::smartcontract::Contract}!CreateMultiSigContract@{CreateMultiSigContract}}
+\index{CreateMultiSigContract@{CreateMultiSigContract}!neo::smartcontract::Contract@{neo::smartcontract::Contract}}
+\doxysubsubsection{\texorpdfstring{CreateMultiSigContract()}{CreateMultiSigContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_ae57642e3756ea205f4d2197e2d269c70} 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}} neo\+::smartcontract\+::\+Contract\+::\+Create\+Multi\+Sig\+Contract (\begin{DoxyParamCaption}\item[{int}]{m}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \&}]{pub\+Keys}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a multi-\/signature contract. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & The minimum number of signatures required. \\
+\hline
+{\em pub\+Keys} & The public keys. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The contract. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_aefcd47bce6e6dc289ce3d544c0b7449e}\index{neo::smartcontract::Contract@{neo::smartcontract::Contract}!CreateSignatureContract@{CreateSignatureContract}}
+\index{CreateSignatureContract@{CreateSignatureContract}!neo::smartcontract::Contract@{neo::smartcontract::Contract}}
+\doxysubsubsection{\texorpdfstring{CreateSignatureContract()}{CreateSignatureContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_aefcd47bce6e6dc289ce3d544c0b7449e} 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}} neo\+::smartcontract\+::\+Contract\+::\+Create\+Signature\+Contract (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{pub\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a contract from a public key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pub\+Key} & The public key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The contract. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_a443c4a29dbf69dca3287f738af91bf46}\index{neo::smartcontract::Contract@{neo::smartcontract::Contract}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::smartcontract::Contract@{neo::smartcontract::Contract}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_a443c4a29dbf69dca3287f738af91bf46} 
+void neo\+::smartcontract\+::\+Contract\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1smartcontract_1_1_contract}{Contract} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_a16af4595c87a246e94e9ac5789b73081}\index{neo::smartcontract::Contract@{neo::smartcontract::Contract}!GetParameterList@{GetParameterList}}
+\index{GetParameterList@{GetParameterList}!neo::smartcontract::Contract@{neo::smartcontract::Contract}}
+\doxysubsubsection{\texorpdfstring{GetParameterList()}{GetParameterList()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_a16af4595c87a246e94e9ac5789b73081} 
+const std\+::vector$<$ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a9feda1fb2349688c11a654555c1a32fb}{Contract\+Parameter\+Type}} $>$ \& neo\+::smartcontract\+::\+Contract\+::\+Get\+Parameter\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the parameter list. 
+
+\begin{DoxyReturn}{Returns}
+The parameter list. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_a467bdc8d1ac6c6eeaacef513506e7c4c}\index{neo::smartcontract::Contract@{neo::smartcontract::Contract}!GetScript@{GetScript}}
+\index{GetScript@{GetScript}!neo::smartcontract::Contract@{neo::smartcontract::Contract}}
+\doxysubsubsection{\texorpdfstring{GetScript()}{GetScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_a467bdc8d1ac6c6eeaacef513506e7c4c} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::smartcontract\+::\+Contract\+::\+Get\+Script (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the script. 
+
+\begin{DoxyReturn}{Returns}
+The script. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_a440e6c0ecc575d55dd6f72a9bdd5789f}\index{neo::smartcontract::Contract@{neo::smartcontract::Contract}!GetScriptHash@{GetScriptHash}}
+\index{GetScriptHash@{GetScriptHash}!neo::smartcontract::Contract@{neo::smartcontract::Contract}}
+\doxysubsubsection{\texorpdfstring{GetScriptHash()}{GetScriptHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_a440e6c0ecc575d55dd6f72a9bdd5789f} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::smartcontract\+::\+Contract\+::\+Get\+Script\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the script hash. 
+
+\begin{DoxyReturn}{Returns}
+The script hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_a35310534256e98ad5d0f73f95bfe770a}\index{neo::smartcontract::Contract@{neo::smartcontract::Contract}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::smartcontract::Contract@{neo::smartcontract::Contract}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_a35310534256e98ad5d0f73f95bfe770a} 
+void neo\+::smartcontract\+::\+Contract\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1smartcontract_1_1_contract}{Contract} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_a2398f11ad81fffffe8a8cf5ab9bdbb22}\index{neo::smartcontract::Contract@{neo::smartcontract::Contract}!SetParameterList@{SetParameterList}}
+\index{SetParameterList@{SetParameterList}!neo::smartcontract::Contract@{neo::smartcontract::Contract}}
+\doxysubsubsection{\texorpdfstring{SetParameterList()}{SetParameterList()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_a2398f11ad81fffffe8a8cf5ab9bdbb22} 
+void neo\+::smartcontract\+::\+Contract\+::\+Set\+Parameter\+List (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a9feda1fb2349688c11a654555c1a32fb}{Contract\+Parameter\+Type}} $>$ \&}]{parameter\+List}{}\end{DoxyParamCaption})}
+
+
+
+Sets the parameter list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parameter\+List} & The parameter list. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_ac2712adc0cbe41dc30012ad77dc4cbcc}\index{neo::smartcontract::Contract@{neo::smartcontract::Contract}!SetScript@{SetScript}}
+\index{SetScript@{SetScript}!neo::smartcontract::Contract@{neo::smartcontract::Contract}}
+\doxysubsubsection{\texorpdfstring{SetScript()}{SetScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_ac2712adc0cbe41dc30012ad77dc4cbcc} 
+void neo\+::smartcontract\+::\+Contract\+::\+Set\+Script (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{script}{}\end{DoxyParamCaption})}
+
+
+
+Sets the script. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & The script. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_ab99bea8b29702ecebfeb45750fd2e933}\index{neo::smartcontract::Contract@{neo::smartcontract::Contract}!parameterList\_@{parameterList\_}}
+\index{parameterList\_@{parameterList\_}!neo::smartcontract::Contract@{neo::smartcontract::Contract}}
+\doxysubsubsection{\texorpdfstring{parameterList\_}{parameterList\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_ab99bea8b29702ecebfeb45750fd2e933} 
+std\+::vector$<$\mbox{\hyperlink{namespaceneo_1_1smartcontract_a9feda1fb2349688c11a654555c1a32fb}{Contract\+Parameter\+Type}}$>$ neo\+::smartcontract\+::\+Contract\+::parameter\+List\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_acc7069ec0a891a3b3e604bc3e7703ce5}\index{neo::smartcontract::Contract@{neo::smartcontract::Contract}!script\_@{script\_}}
+\index{script\_@{script\_}!neo::smartcontract::Contract@{neo::smartcontract::Contract}}
+\doxysubsubsection{\texorpdfstring{script\_}{script\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_acc7069ec0a891a3b3e604bc3e7703ce5} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::smartcontract\+::\+Contract\+::script\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/\mbox{\hyperlink{contract_8h}{contract.\+h}}\item 
+src/smartcontract/\mbox{\hyperlink{contract_8cpp}{contract.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,190 @@
+\doxysection{compiler\+\_\+config.\+h}
+\hypertarget{compiler__config_8h_source}{}\label{compiler__config_8h_source}\index{include/neo/common/compiler\_config.h@{include/neo/common/compiler\_config.h}}
+\mbox{\hyperlink{compiler__config_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ Check\ C++20\ support}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#if\ \_\_cplusplus\ <\ 202002L}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#error\ "{}Neo\ N3\ C++\ Node\ requires\ C++20\ support"{}}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ Compiler\ identification}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#if\ defined(\_MSC\_VER)}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#define\ NEO\_COMPILER\_MSVC\ 1}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#define\ NEO\_COMPILER\_VERSION\ \_MSC\_VER}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ MSVC-\/specific\ configurations}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#pragma\ warning(push)}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#pragma\ warning(disable\ :\ 4996)\ \ }\textcolor{comment}{//\ Disable\ deprecated\ function\ warnings}}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ Enable\ C++20\ features}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#if\ \_MSVC\_LANG\ <\ 202002L}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#error\ "{}MSVC\ C++20\ mode\ not\ enabled.\ Use\ /std:c++20\ or\ /std:c++latest"{}}}
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\#elif\ defined(\_\_GNUC\_\_)}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\#define\ NEO\_COMPILER\_GCC\ 1}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ NEO\_COMPILER\_VERSION\ (\_\_GNUC\_\_\ *\ 10000\ +\ \_\_GNUC\_MINOR\_\_\ *\ 100\ +\ \_\_GNUC\_PATCHLEVEL\_\_)}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{comment}{//\ GCC-\/specific\ configurations}}
+\DoxyCodeLine{00032\ \textcolor{preprocessor}{\#if\ \_\_GNUC\_\_\ <\ 10}}
+\DoxyCodeLine{00033\ \textcolor{preprocessor}{\#error\ "{}Neo\ N3\ C++\ Node\ requires\ GCC\ 10\ or\ later\ for\ C++20\ support"{}}}
+\DoxyCodeLine{00034\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \textcolor{preprocessor}{\#elif\ defined(\_\_clang\_\_)}}
+\DoxyCodeLine{00037\ \textcolor{preprocessor}{\#define\ NEO\_COMPILER\_CLANG\ 1}}
+\DoxyCodeLine{00038\ \textcolor{preprocessor}{\#define\ NEO\_COMPILER\_VERSION\ (\_\_clang\_major\_\_\ *\ 10000\ +\ \_\_clang\_minor\_\_\ *\ 100\ +\ \_\_clang\_patchlevel\_\_)}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \textcolor{comment}{//\ Clang-\/specific\ configurations}}
+\DoxyCodeLine{00041\ \textcolor{preprocessor}{\#if\ \_\_clang\_major\_\_\ <\ 12}}
+\DoxyCodeLine{00042\ \textcolor{preprocessor}{\#error\ "{}Neo\ N3\ C++\ Node\ requires\ Clang\ 12\ or\ later\ for\ C++20\ support"{}}}
+\DoxyCodeLine{00043\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00046\ \textcolor{preprocessor}{\#warning\ "{}Unknown\ compiler\ -\/\ Neo\ N3\ C++\ Node\ may\ not\ compile\ correctly"{}}}
+\DoxyCodeLine{00047\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \textcolor{comment}{//\ Platform\ identification}}
+\DoxyCodeLine{00050\ \textcolor{preprocessor}{\#if\ defined(\_WIN32)\ ||\ defined(\_WIN64)}}
+\DoxyCodeLine{00051\ \textcolor{preprocessor}{\#define\ NEO\_PLATFORM\_WINDOWS\ 1}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \textcolor{comment}{//\ Windows-\/specific\ includes\ and\ definitions}}
+\DoxyCodeLine{00054\ \textcolor{preprocessor}{\#ifndef\ WIN32\_LEAN\_AND\_MEAN}}
+\DoxyCodeLine{00055\ \textcolor{preprocessor}{\#define\ WIN32\_LEAN\_AND\_MEAN}}
+\DoxyCodeLine{00056\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \textcolor{preprocessor}{\#ifndef\ NOMINMAX}}
+\DoxyCodeLine{00059\ \textcolor{preprocessor}{\#define\ NOMINMAX}}
+\DoxyCodeLine{00060\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \textcolor{preprocessor}{\#elif\ defined(\_\_linux\_\_)}}
+\DoxyCodeLine{00063\ \textcolor{preprocessor}{\#define\ NEO\_PLATFORM\_LINUX\ 1}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \textcolor{preprocessor}{\#elif\ defined(\_\_APPLE\_\_)}}
+\DoxyCodeLine{00066\ \textcolor{preprocessor}{\#define\ NEO\_PLATFORM\_MACOS\ 1}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00069\ \textcolor{preprocessor}{\#warning\ "{}Unknown\ platform\ -\/\ Neo\ N3\ C++\ Node\ may\ not\ work\ correctly"{}}}
+\DoxyCodeLine{00070\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \textcolor{comment}{//\ C++20\ feature\ testing}}
+\DoxyCodeLine{00073\ \textcolor{preprocessor}{\#include\ <version>}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \textcolor{comment}{//\ Concepts\ support}}
+\DoxyCodeLine{00076\ \textcolor{preprocessor}{\#ifdef\ \_\_cpp\_concepts}}
+\DoxyCodeLine{00077\ \textcolor{preprocessor}{\#define\ NEO\_HAS\_CONCEPTS\ 1}}
+\DoxyCodeLine{00078\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00079\ \textcolor{preprocessor}{\#define\ NEO\_HAS\_CONCEPTS\ 0}}
+\DoxyCodeLine{00080\ \textcolor{preprocessor}{\#warning\ "{}C++20\ concepts\ not\ available"{}}}
+\DoxyCodeLine{00081\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \textcolor{comment}{//\ Modules\ support}}
+\DoxyCodeLine{00084\ \textcolor{preprocessor}{\#ifdef\ \_\_cpp\_modules}}
+\DoxyCodeLine{00085\ \textcolor{preprocessor}{\#define\ NEO\_HAS\_MODULES\ 1}}
+\DoxyCodeLine{00086\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00087\ \textcolor{preprocessor}{\#define\ NEO\_HAS\_MODULES\ 0}}
+\DoxyCodeLine{00088\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{comment}{//\ Coroutines\ support}}
+\DoxyCodeLine{00091\ \textcolor{preprocessor}{\#ifdef\ \_\_cpp\_impl\_coroutine}}
+\DoxyCodeLine{00092\ \textcolor{preprocessor}{\#define\ NEO\_HAS\_COROUTINES\ 1}}
+\DoxyCodeLine{00093\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00094\ \textcolor{preprocessor}{\#define\ NEO\_HAS\_COROUTINES\ 0}}
+\DoxyCodeLine{00095\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{comment}{//\ Ranges\ support}}
+\DoxyCodeLine{00098\ \textcolor{preprocessor}{\#ifdef\ \_\_cpp\_lib\_ranges}}
+\DoxyCodeLine{00099\ \textcolor{preprocessor}{\#define\ NEO\_HAS\_RANGES\ 1}}
+\DoxyCodeLine{00100\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00101\ \textcolor{preprocessor}{\#define\ NEO\_HAS\_RANGES\ 0}}
+\DoxyCodeLine{00102\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00104\ \textcolor{comment}{//\ Format\ library\ support}}
+\DoxyCodeLine{00105\ \textcolor{preprocessor}{\#ifdef\ \_\_cpp\_lib\_format}}
+\DoxyCodeLine{00106\ \textcolor{preprocessor}{\#define\ NEO\_HAS\_FORMAT\ 1}}
+\DoxyCodeLine{00107\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00108\ \textcolor{preprocessor}{\#define\ NEO\_HAS\_FORMAT\ 0}}
+\DoxyCodeLine{00109\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \textcolor{comment}{//\ Debugging\ macros}}
+\DoxyCodeLine{00112\ \textcolor{preprocessor}{\#ifdef\ DEBUG}}
+\DoxyCodeLine{00113\ \textcolor{preprocessor}{\#define\ NEO\_DEBUG\ 1}}
+\DoxyCodeLine{00114\ \textcolor{preprocessor}{\#define\ NEO\_ASSERT(condition,\ message)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00115\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00116\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00117\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (!(condition))\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00118\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00119\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ "{}Assertion\ failed:\ "{}\ <<\ \#condition\ <<\ "{}\ -\/\ "{}\ <<\ message\ <<\ "{}\ at\ "{}\ <<\ \_\_FILE\_\_\ <<\ "{}:"{}\ \(\backslash\)}}
+\DoxyCodeLine{00120\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ \_\_LINE\_\_\ <<\ std::endl;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ std::abort();\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00122\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00123\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (0)}}
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00125\ \textcolor{preprocessor}{\#define\ NEO\_DEBUG\ 0}}
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#define\ NEO\_ASSERT(condition,\ message)\ ((void)0)}}
+\DoxyCodeLine{00127\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \textcolor{comment}{//\ Likely/unlikely\ hints\ for\ better\ optimization}}
+\DoxyCodeLine{00130\ \textcolor{preprocessor}{\#if\ defined(\_\_has\_cpp\_attribute)}}
+\DoxyCodeLine{00131\ \textcolor{preprocessor}{\#if\ \_\_has\_cpp\_attribute(likely)}}
+\DoxyCodeLine{00132\ \textcolor{preprocessor}{\#define\ NEO\_LIKELY\ [[likely]]}}
+\DoxyCodeLine{00133\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00134\ \textcolor{preprocessor}{\#define\ NEO\_LIKELY}}
+\DoxyCodeLine{00135\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \textcolor{preprocessor}{\#if\ \_\_has\_cpp\_attribute(unlikely)}}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#define\ NEO\_UNLIKELY\ [[unlikely]]}}
+\DoxyCodeLine{00139\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00140\ \textcolor{preprocessor}{\#define\ NEO\_UNLIKELY}}
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00142\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00143\ \textcolor{preprocessor}{\#define\ NEO\_LIKELY}}
+\DoxyCodeLine{00144\ \textcolor{preprocessor}{\#define\ NEO\_UNLIKELY}}
+\DoxyCodeLine{00145\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \textcolor{comment}{//\ Force\ inline}}
+\DoxyCodeLine{00148\ \textcolor{preprocessor}{\#if\ defined(NEO\_COMPILER\_MSVC)}}
+\DoxyCodeLine{00149\ \textcolor{preprocessor}{\#define\ NEO\_FORCE\_INLINE\ \_\_forceinline}}
+\DoxyCodeLine{00150\ \textcolor{preprocessor}{\#elif\ defined(NEO\_COMPILER\_GCC)\ ||\ defined(NEO\_COMPILER\_CLANG)}}
+\DoxyCodeLine{00151\ \textcolor{preprocessor}{\#define\ NEO\_FORCE\_INLINE\ \_\_attribute\_\_((always\_inline))\ inline}}
+\DoxyCodeLine{00152\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00153\ \textcolor{preprocessor}{\#define\ NEO\_FORCE\_INLINE\ inline}}
+\DoxyCodeLine{00154\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \textcolor{comment}{//\ No\ inline}}
+\DoxyCodeLine{00157\ \textcolor{preprocessor}{\#if\ defined(NEO\_COMPILER\_MSVC)}}
+\DoxyCodeLine{00158\ \textcolor{preprocessor}{\#define\ NEO\_NO\_INLINE\ \_\_declspec(noinline)}}
+\DoxyCodeLine{00159\ \textcolor{preprocessor}{\#elif\ defined(NEO\_COMPILER\_GCC)\ ||\ defined(NEO\_COMPILER\_CLANG)}}
+\DoxyCodeLine{00160\ \textcolor{preprocessor}{\#define\ NEO\_NO\_INLINE\ \_\_attribute\_\_((noinline))}}
+\DoxyCodeLine{00161\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00162\ \textcolor{preprocessor}{\#define\ NEO\_NO\_INLINE}}
+\DoxyCodeLine{00163\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \textcolor{comment}{//\ Thread\ local\ storage}}
+\DoxyCodeLine{00166\ \textcolor{preprocessor}{\#if\ defined(NEO\_COMPILER\_MSVC)}}
+\DoxyCodeLine{00167\ \textcolor{preprocessor}{\#define\ NEO\_THREAD\_LOCAL\ \_\_declspec(thread)}}
+\DoxyCodeLine{00168\ \textcolor{preprocessor}{\#elif\ defined(NEO\_COMPILER\_GCC)\ ||\ defined(NEO\_COMPILER\_CLANG)}}
+\DoxyCodeLine{00169\ \textcolor{preprocessor}{\#define\ NEO\_THREAD\_LOCAL\ \_\_thread}}
+\DoxyCodeLine{00170\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00171\ \textcolor{preprocessor}{\#define\ NEO\_THREAD\_LOCAL\ thread\_local}}
+\DoxyCodeLine{00172\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \textcolor{comment}{//\ Export/import\ for\ shared\ libraries}}
+\DoxyCodeLine{00175\ \textcolor{preprocessor}{\#if\ defined(NEO\_PLATFORM\_WINDOWS)}}
+\DoxyCodeLine{00176\ \textcolor{preprocessor}{\#ifdef\ NEO\_EXPORTS}}
+\DoxyCodeLine{00177\ \textcolor{preprocessor}{\#define\ NEO\_API\ \_\_declspec(dllexport)}}
+\DoxyCodeLine{00178\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00179\ \textcolor{preprocessor}{\#define\ NEO\_API\ \_\_declspec(dllimport)}}
+\DoxyCodeLine{00180\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00181\ \textcolor{preprocessor}{\#else}}
+\DoxyCodeLine{00182\ \textcolor{preprocessor}{\#define\ NEO\_API\ \_\_attribute\_\_((visibility("{}default"{})))}}
+\DoxyCodeLine{00183\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \textcolor{comment}{//\ Cleanup\ MSVC\ warnings}}
+\DoxyCodeLine{00186\ \textcolor{preprocessor}{\#if\ defined(NEO\_COMPILER\_MSVC)}}
+\DoxyCodeLine{00187\ \textcolor{preprocessor}{\#pragma\ warning(pop)}}
+\DoxyCodeLine{00188\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

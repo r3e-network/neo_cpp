@@ -1,0 +1,389 @@
+\doxysection{error\+\_\+recovery.\+h}
+\hypertarget{error__recovery_8h_source}{}\label{error__recovery_8h_source}\index{include/neo/core/error\_recovery.h@{include/neo/core/error\_recovery.h}}
+\mbox{\hyperlink{error__recovery_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{core_2exceptions_8h}{neo/core/exceptions.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <future>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1core}{neo::core}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery}{ErrorRecovery}}}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a34e26375f6fa6275a4c132a80f692fe6}{RecoveryResult}}}
+\DoxyCodeLine{00030\ \ \ \ \ \{}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a4a5355d4f5a4ee26da5446b5743c7558}{success}};}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ std::optional<T>\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a4c291e43144b1b776a1dbde370d356b9}{value}};}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a2a449334993964a70b29c3b851f2568c}{error\_message}};}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{NeoException::ErrorCode}}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_ad92dea2a54c44e28e59a25453d9c4f70}{error\_code}};}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a6fbe47bb87936c5da2c74de64587d16e}{attempts\_made}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a34e26375f6fa6275a4c132a80f692fe6}{RecoveryResult}}(\textcolor{keywordtype}{bool}\ succeeded\ =\ \textcolor{keyword}{false})}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a4a5355d4f5a4ee26da5446b5743c7558}{success}}(succeeded),\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_ad92dea2a54c44e28e59a25453d9c4f70}{error\_code}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{NeoException}}::ErrorCode::UNKNOWN\_ERROR),\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a6fbe47bb87936c5da2c74de64587d16e}{attempts\_made}}(0)}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a374413985d64a930b88fd4f714533365}{RecoveryResult}}(\textcolor{keyword}{const}\ T\&\ val,\ \textcolor{keywordtype}{int}\ attempts\ =\ 1)\ :\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a4a5355d4f5a4ee26da5446b5743c7558}{success}}(true),\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a4c291e43144b1b776a1dbde370d356b9}{value}}(val),\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a6fbe47bb87936c5da2c74de64587d16e}{attempts\_made}}(attempts)\ \{\}}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_ad39d9893e2b56a1f697c4f1bdd1fcee5}{RecoveryResult}}(\textcolor{keyword}{const}\ std::string\&\ error,\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{NeoException::ErrorCode}}\ code,\ \textcolor{keywordtype}{int}\ attempts)}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a4a5355d4f5a4ee26da5446b5743c7558}{success}}(false),\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a2a449334993964a70b29c3b851f2568c}{error\_message}}(error),\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_ad92dea2a54c44e28e59a25453d9c4f70}{error\_code}}(code),\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a6fbe47bb87936c5da2c74de64587d16e}{attempts\_made}}(attempts)}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \textcolor{keyword}{operator}\ bool()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a4a5355d4f5a4ee26da5446b5743c7558}{success}};\ \}}
+\DoxyCodeLine{00050\ \ \ \ \ \};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a486630290287643ce40f16e7244833ab}{RetryConfig}}}
+\DoxyCodeLine{00056\ \ \ \ \ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a43f86cf13eddb080245c7660571890f4}{max\_attempts}};}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_afadd2eaae0d01605bde49e52105b60c5}{base\_delay}};}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a846ee34d5b7dcd0dc25534a094971971}{backoff\_multiplier}};}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a36bba03b3850aef300f78f3ac0121ca1}{max\_delay}};}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_affd3ccec350c2ac6de2f4dd928b336a5}{exponential\_backoff}};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Function\ to\ determine\ if\ an\ exception\ should\ trigger\ a\ retry}}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ std::function<bool(\textcolor{keyword}{const}\ std::exception\&)>\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a6e9c28156140f993db3ef9676ba56317}{should\_retry}};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a486630290287643ce40f16e7244833ab}{RetryConfig}}()}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a43f86cf13eddb080245c7660571890f4}{max\_attempts}}(3),}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_afadd2eaae0d01605bde49e52105b60c5}{base\_delay}}(100),}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a846ee34d5b7dcd0dc25534a094971971}{backoff\_multiplier}}(2.0),}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a36bba03b3850aef300f78f3ac0121ca1}{max\_delay}}(5000),}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_affd3ccec350c2ac6de2f4dd928b336a5}{exponential\_backoff}}(true),}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config_a6e9c28156140f993db3ef9676ba56317}{should\_retry}}([](const\ \mbox{\hyperlink{namespacestd}{std}}::exception\&)\ \{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \})}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00075\ \ \ \ \ \};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_adb8e0564ad08d660eb79317959591982}{Retry}}(std::function<T()>\ operation,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{RetryConfig}}\&\ \mbox{\hyperlink{namespaceneo_1_1config}{config}}\ =\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_retry_config}{RetryConfig}}())}
+\DoxyCodeLine{00085\ \ \ \ \ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ std::string\ last\_error;}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{NeoException::ErrorCode}}\ last\_error\_code\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9a10f345b0f755d461a8673a5e9ef6b4}{NeoException::ErrorCode::UNKNOWN\_ERROR}};}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ attempt\ =\ 1;\ attempt\ <=\ \mbox{\hyperlink{namespaceneo_1_1config}{config}}.max\_attempts;\ ++attempt)}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ T\ result\ =\ operation();}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(result,\ attempt);}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{NeoException}}\&\ e)}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\_error\ =\ e.what();}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\_error\_code\ =\ e.\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_af071bd842839f2d8192e6999f23fb08e}{GetErrorCode}}();}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespaceneo_1_1config}{config}}.should\_retry(e)\ ||\ attempt\ ==\ \mbox{\hyperlink{namespaceneo_1_1config}{config}}.max\_attempts)}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&\ e)}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ last\_error\ =\ e.what();}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{namespaceneo_1_1config}{config}}.should\_retry(e)\ ||\ attempt\ ==\ \mbox{\hyperlink{namespaceneo_1_1config}{config}}.max\_attempts)}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Calculate\ delay\ for\ next\ attempt}}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (attempt\ <\ \mbox{\hyperlink{namespaceneo_1_1config}{config}}.max\_attempts)}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ delay\ =\ \mbox{\hyperlink{namespaceneo_1_1config}{config}}.base\_delay;}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{namespaceneo_1_1config}{config}}.exponential\_backoff)}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{int}\ i\ =\ 1;\ i\ <\ attempt;\ ++i)}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ delay\ =\ std::chrono::milliseconds(}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{long}\ \textcolor{keywordtype}{long}\textcolor{keyword}{>}(delay.count()\ *\ \mbox{\hyperlink{namespaceneo_1_1config}{config}}.backoff\_multiplier));}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ delay\ =\ std::min(delay,\ \mbox{\hyperlink{namespaceneo_1_1config}{config}}.max\_delay);}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::this\_thread::sleep\_for(delay);}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(last\_error,\ last\_error\_code,\ \mbox{\hyperlink{namespaceneo_1_1config}{config}}.max\_attempts);}
+\DoxyCodeLine{00134\ \ \ \ \ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_afca8330024e9fce3dcdf5c3260a63d55}{WithFallback}}(std::function<T()>\ primary\_operation,\ std::function<T()>\ fallback\_operation)}
+\DoxyCodeLine{00144\ \ \ \ \ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \ \ \ \ T\ result\ =\ primary\_operation();}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(result);}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{NeoException}}\&\ e)}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ T\ fallback\_result\ =\ fallback\_operation();}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(fallback\_result);}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&\ fallback\_error)}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Primary\ failed:\ "{}}\ +\ std::string(e.what())\ +\ \textcolor{stringliteral}{"{},\ Fallback\ failed:\ "{}}\ +\ fallback\_error.what(),}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ e.\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_af071bd842839f2d8192e6999f23fb08e}{GetErrorCode}}(),\ 2);}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&\ e)}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ T\ fallback\_result\ =\ fallback\_operation();}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(fallback\_result);}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&\ fallback\_error)}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}Primary\ failed:\ "{}}\ +\ std::string(e.what())\ +\ \textcolor{stringliteral}{"{},\ Fallback\ failed:\ "{}}\ +\ fallback\_error.what(),}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9a10f345b0f755d461a8673a5e9ef6b4}{NeoException::ErrorCode::UNKNOWN\_ERROR}},\ 2);}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00178\ \ \ \ \ \}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ae0c71388fe220cfcf58a128247ef6f1f}{CircuitBreaker}}}
+\DoxyCodeLine{00184\ \ \ \ \ \{}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914da}{State}}}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daa110ccf2f5d2ff4eda1fd1a494293467d}{CLOSED}},\ \ \ \ \textcolor{comment}{//\ Normal\ operation}}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daaa38bd5138bf35514df41a1795ebbf5c3}{OPEN}},\ \ \ \ \ \ \textcolor{comment}{//\ Circuit\ is\ open,\ calls\ are\ failing\ fast}}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daa5c1c0fca237f238d3c656d55a4db3ca4}{HALF\_OPEN}}\ \ \textcolor{comment}{//\ Testing\ if\ service\ has\ recovered}}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_1_1_config}{Config}}}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_1_1_config_ac444532001dbd1c3db1494700a5b1e1d}{failure\_threshold}}\ =\ 5;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Failures\ before\ opening\ circuit}}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ std::chrono::seconds\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_1_1_config_a1240481c01da2eee837526aefab9137b}{timeout}}\{30\};\ \ \textcolor{comment}{//\ Time\ before\ trying\ half-\/open}}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_1_1_config_af4bc97c91abc37500d63f679c7420bb4}{success\_threshold}}\ =\ 2;\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Successes\ needed\ to\ close\ circuit}}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ae0c71388fe220cfcf58a128247ef6f1f}{CircuitBreaker}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_1_1_config}{Config}}\&\ \mbox{\hyperlink{namespaceneo_1_1config}{config}})\ :\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a5d6a01859ec3b182450823069dd28012}{config\_}}(\mbox{\hyperlink{namespaceneo_1_1config}{config}})\ \{\}}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a12d44269280e2ee9381c930bc6df5962}{CircuitBreaker}}()\ :\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ae0c71388fe220cfcf58a128247ef6f1f}{CircuitBreaker}}(\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_1_1_config}{Config}}\{\})\ \{\}}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a2b6eb05430cb275097579a9d5f55daaa}{Execute}}(std::function<T()>\ operation)}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a30393b10e975ec7e5bc773056fb3a513}{mutex\_}});}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a21c4bfc31db1e50380a5e405694a6fc1}{state\_}}\ ==\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daaa38bd5138bf35514df41a1795ebbf5c3}{State::OPEN}})}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::chrono::steady\_clock::now()\ -\/\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a899f0930e619770aaf59e59b7c4717d0}{last\_failure\_time\_}}\ >\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a5d6a01859ec3b182450823069dd28012}{config\_}}.timeout)}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a21c4bfc31db1e50380a5e405694a6fc1}{state\_}}\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daa5c1c0fca237f238d3c656d55a4db3ca4}{State::HALF\_OPEN}};}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ac4d65d56ff7abdc8cbb91845d4e010b1}{consecutive\_successes\_}}\ =\ 0;}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(\textcolor{stringliteral}{"{}Circuit\ breaker\ is\ OPEN"{}},\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a070a0fb40f6c308ab544b227660aadff}{NeoException::ErrorCode::TIMEOUT}},\ 0);}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ T\ result\ =\ operation();}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ad032bf19b70777a1e1a8df1e54b8374b}{OnSuccess}}();}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(result);}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{NeoException}}\&\ e)}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a19da94a7032997dd6eaf722f71721e2b}{OnFailure}}();}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(e.what(),\ e.\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_af071bd842839f2d8192e6999f23fb08e}{GetErrorCode}}(),\ 1);}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&\ e)}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a19da94a7032997dd6eaf722f71721e2b}{OnFailure}}();}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(e.what(),\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9a10f345b0f755d461a8673a5e9ef6b4}{NeoException::ErrorCode::UNKNOWN\_ERROR}},\ 1);}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914da}{State}}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a2ad84e3cd624dc2c76da4119abbee7c9}{GetState}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a21c4bfc31db1e50380a5e405694a6fc1}{state\_}};\ \}}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_aaefbbbbccc1412e7c5fa9f383e4e5ab9}{GetFailureCount}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ac8d06be24c5a87b5a913f64b90491385}{failure\_count\_}};\ \}}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_1_1_config}{Config}}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a5d6a01859ec3b182450823069dd28012}{config\_}};}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914da}{State}}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a21c4bfc31db1e50380a5e405694a6fc1}{state\_}}\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daa110ccf2f5d2ff4eda1fd1a494293467d}{State::CLOSED}};}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ac8d06be24c5a87b5a913f64b90491385}{failure\_count\_}}\ =\ 0;}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ac4d65d56ff7abdc8cbb91845d4e010b1}{consecutive\_successes\_}}\ =\ 0;}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a899f0930e619770aaf59e59b7c4717d0}{last\_failure\_time\_}};}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a30393b10e975ec7e5bc773056fb3a513}{mutex\_}};}
+\DoxyCodeLine{00249\ }
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ad032bf19b70777a1e1a8df1e54b8374b}{OnSuccess}}()}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ac8d06be24c5a87b5a913f64b90491385}{failure\_count\_}}\ =\ 0;}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a21c4bfc31db1e50380a5e405694a6fc1}{state\_}}\ ==\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daa5c1c0fca237f238d3c656d55a4db3ca4}{State::HALF\_OPEN}})}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ac4d65d56ff7abdc8cbb91845d4e010b1}{consecutive\_successes\_}}++;}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ac4d65d56ff7abdc8cbb91845d4e010b1}{consecutive\_successes\_}}\ >=\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a5d6a01859ec3b182450823069dd28012}{config\_}}.success\_threshold)}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a21c4bfc31db1e50380a5e405694a6fc1}{state\_}}\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daa110ccf2f5d2ff4eda1fd1a494293467d}{State::CLOSED}};}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a19da94a7032997dd6eaf722f71721e2b}{OnFailure}}()}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ac8d06be24c5a87b5a913f64b90491385}{failure\_count\_}}++;}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a899f0930e619770aaf59e59b7c4717d0}{last\_failure\_time\_}}\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ac4d65d56ff7abdc8cbb91845d4e010b1}{consecutive\_successes\_}}\ =\ 0;}
+\DoxyCodeLine{00268\ }
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ac8d06be24c5a87b5a913f64b90491385}{failure\_count\_}}\ >=\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a5d6a01859ec3b182450823069dd28012}{config\_}}.failure\_threshold)}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a21c4bfc31db1e50380a5e405694a6fc1}{state\_}}\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daaa38bd5138bf35514df41a1795ebbf5c3}{State::OPEN}};}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00274\ \ \ \ \ \};}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00279\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_ac609b3118b2b8110afb98490f12606a9}{Bulkhead}}}
+\DoxyCodeLine{00280\ \ \ \ \ \{}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_bulkhead_1_1_config}{Config}}}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_bulkhead_1_1_config_a7a2d0b33a4f6e8e22c4d8e0a6037cebe}{max\_concurrent\_calls}}\ =\ 10;}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_bulkhead_1_1_config_a7e8cc71b2f8bd7c044ccda5f64047fa7}{timeout}}\{5000\};}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_ac609b3118b2b8110afb98490f12606a9}{Bulkhead}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_bulkhead_1_1_config}{Config}}\&\ \mbox{\hyperlink{namespaceneo_1_1config}{config}})\ :\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a06c379e6b9a1ffbd5dd44c73c3ee8487}{config\_}}(\mbox{\hyperlink{namespaceneo_1_1config}{config}})\ \{\}}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a49e7d12345f1ffbe90e05642f1f86d0b}{Bulkhead}}()\ :\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_ac609b3118b2b8110afb98490f12606a9}{Bulkhead}}(\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_bulkhead_1_1_config}{Config}}\{\})\ \{\}}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a4b6829f018e380dd8cd4564d23651797}{Execute}}(std::function<T()>\ operation)}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_lock<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_afc4c9e8258928ef281de468e05dc9830}{mutex\_}});}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a5daec6c5e75480c092bd9cba128bfe28}{current\_calls\_}}\ >=\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a06c379e6b9a1ffbd5dd44c73c3ee8487}{config\_}}.max\_concurrent\_calls)}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(\textcolor{stringliteral}{"{}Bulkhead\ capacity\ exceeded"{}},\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a070a0fb40f6c308ab544b227660aadff}{NeoException::ErrorCode::TIMEOUT}},\ 0);}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a5daec6c5e75480c092bd9cba128bfe28}{current\_calls\_}}++;}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \ \ \ \ lock.unlock();}
+\DoxyCodeLine{00303\ }
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ T\ result\ =\ operation();}
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lock.lock();}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a5daec6c5e75480c092bd9cba128bfe28}{current\_calls\_}}-\/-\/;}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(result);}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{NeoException}}\&\ e)}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lock.lock();}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a5daec6c5e75480c092bd9cba128bfe28}{current\_calls\_}}-\/-\/;}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(e.what(),\ e.\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_af071bd842839f2d8192e6999f23fb08e}{GetErrorCode}}(),\ 1);}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&\ e)}
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lock.lock();}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a5daec6c5e75480c092bd9cba128bfe28}{current\_calls\_}}-\/-\/;}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(e.what(),\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9a10f345b0f755d461a8673a5e9ef6b4}{NeoException::ErrorCode::UNKNOWN\_ERROR}},\ 1);}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00325\ }
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a18363ce2892bbb05a45e91609aabb7a5}{GetCurrentCalls}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a5daec6c5e75480c092bd9cba128bfe28}{current\_calls\_}};\ \}}
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_bulkhead_1_1_config}{Config}}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a06c379e6b9a1ffbd5dd44c73c3ee8487}{config\_}};}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_a5daec6c5e75480c092bd9cba128bfe28}{current\_calls\_}}\ =\ 0;}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_bulkhead_afc4c9e8258928ef281de468e05dc9830}{mutex\_}};}
+\DoxyCodeLine{00332\ \ \ \ \ \};}
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00337\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00338\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_a710ce1ce383491c69bcfb6ddb8d860aa}{WithTimeout}}(std::function<T()>\ operation,\ std::chrono::milliseconds\ timeout)}
+\DoxyCodeLine{00339\ \ \ \ \ \{}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ std::promise<RecoveryResult<T>>\ promise;}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ future\ =\ promise.get\_future();}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ std::thread\ worker(}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ [\&promise,\ operation]()}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ T\ result\ =\ operation();}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ promise.set\_value(\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(result));}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{NeoException}}\&\ e)}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ promise.set\_value(\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(e.what(),\ e.\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_af071bd842839f2d8192e6999f23fb08e}{GetErrorCode}}(),\ 1));}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&\ e)}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ promise.set\_value(\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(e.what(),\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9a10f345b0f755d461a8673a5e9ef6b4}{NeoException::ErrorCode::UNKNOWN\_ERROR}},\ 1));}
+\DoxyCodeLine{00358\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00360\ }
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (future.wait\_for(timeout)\ ==\ std::future\_status::timeout)}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Worker\ thread\ is\ detached\ on\ timeout\ to\ prevent\ blocking}}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \ \ \ \ worker.detach();}
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(\textcolor{stringliteral}{"{}Operation\ timed\ out"{}},\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a070a0fb40f6c308ab544b227660aadff}{NeoException::ErrorCode::TIMEOUT}},\ 1);}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00367\ }
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ worker.join();}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ future.get();}
+\DoxyCodeLine{00370\ \ \ \ \ \}}
+\DoxyCodeLine{00371\ }
+\DoxyCodeLine{00375\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00376\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_a9f1208e3a96b69340f8aebee405d936d}{SafeExecute}}(std::function<T()>\ operation,\ \textcolor{keyword}{const}\ std::string\&\ operation\_name\ =\ \textcolor{stringliteral}{"{}operation"{}})}
+\DoxyCodeLine{00377\ \ \ \ \ \{}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \ \ \ \ T\ result\ =\ operation();}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(result);}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{NeoException}}\&\ e)}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(operation\_name\ +\ \textcolor{stringliteral}{"{}\ failed:\ "{}}\ +\ e.what(),\ e.\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_af071bd842839f2d8192e6999f23fb08e}{GetErrorCode}}(),\ 1);}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00387\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&\ e)}
+\DoxyCodeLine{00388\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(operation\_name\ +\ \textcolor{stringliteral}{"{}\ failed:\ "{}}\ +\ e.what(),\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9a10f345b0f755d461a8673a5e9ef6b4}{NeoException::ErrorCode::UNKNOWN\_ERROR}},}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ 1);}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (...)}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{RecoveryResult<T>}}(operation\_name\ +\ \textcolor{stringliteral}{"{}\ failed\ with\ unknown\ exception"{}},}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9a10f345b0f755d461a8673a5e9ef6b4}{NeoException::ErrorCode::UNKNOWN\_ERROR}},\ 1);}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00397\ \ \ \ \ \}}
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00402\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_a35ddee6f0275a972d2e02e4dec059653}{IsRetriableException}}(\textcolor{keyword}{const}\ std::exception\&\ e);}
+\DoxyCodeLine{00403\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_a65fe1c13294237cbcdbcdfb0f541cd92}{IsTransientException}}(\textcolor{keyword}{const}\ std::exception\&\ e);}
+\DoxyCodeLine{00404\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_a5967fca0a38b4ee1568868782c85ad3e}{IsFatalException}}(\textcolor{keyword}{const}\ std::exception\&\ e);}
+\DoxyCodeLine{00405\ }
+\DoxyCodeLine{00409\ \ \ \ \ \textcolor{keyword}{static}\ RetryConfig\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_adc31a75f5c860aaeeffb0f822ef8e244}{NetworkRetryConfig}}();}
+\DoxyCodeLine{00410\ \ \ \ \ \textcolor{keyword}{static}\ RetryConfig\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_a6727685e1dbdd60fc3a341d3fda928dc}{DatabaseRetryConfig}}();}
+\DoxyCodeLine{00411\ \ \ \ \ \textcolor{keyword}{static}\ RetryConfig\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_afae6814a5934c45fe064d3a3566fe7c9}{FileOperationRetryConfig}}();}
+\DoxyCodeLine{00412\ \ \ \ \ \textcolor{keyword}{static}\ RetryConfig\ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_aeb7a9a6cb6d5a59af67f24d86f7927d2}{CryptographyRetryConfig}}();}
+\DoxyCodeLine{00413\ \};}
+\DoxyCodeLine{00414\ }
+\DoxyCodeLine{00415\ \textcolor{comment}{//\ Utility\ macros\ for\ error\ recovery}}
+\DoxyCodeLine{00416\ \textcolor{preprocessor}{\#define\ SAFE\_EXECUTE(operation)\ \(\backslash\)}}
+\DoxyCodeLine{00417\ \textcolor{preprocessor}{\ \ \ \ neo::core::ErrorRecovery::SafeExecute<decltype(operation())>([\&]()\ \{\ return\ operation();\ \},\ \#operation)}}
+\DoxyCodeLine{00418\ }
+\DoxyCodeLine{00419\ \textcolor{preprocessor}{\#define\ RETRY\_OPERATION(operation,\ config)\ \(\backslash\)}}
+\DoxyCodeLine{00420\ \textcolor{preprocessor}{\ \ \ \ neo::core::ErrorRecovery::Retry<decltype(operation())>([\&]()\ \{\ return\ operation();\ \},\ config)}}
+\DoxyCodeLine{00421\ }
+\DoxyCodeLine{00422\ \textcolor{preprocessor}{\#define\ WITH\_FALLBACK(primary,\ fallback)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00423\ \textcolor{preprocessor}{\ \ \ \ neo::core::ErrorRecovery::WithFallback<decltype(primary())>([\&]()\ \{\ return\ primary();\ \},\ \(\backslash\)}}
+\DoxyCodeLine{00424\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\&]()\ \{\ return\ fallback();\ \})}}
+\DoxyCodeLine{00425\ }
+\DoxyCodeLine{00426\ \}\ \ \textcolor{comment}{//\ namespace\ neo::core}}
+
+\end{DoxyCode}

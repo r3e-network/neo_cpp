@@ -1,0 +1,243 @@
+\doxysection{neo\+::network\+::UPnP Class Reference}
+\hypertarget{classneo_1_1network_1_1_u_pn_p}{}\label{classneo_1_1network_1_1_u_pn_p}\index{neo::network::UPnP@{neo::network::UPnP}}
+
+
+Provides methods for interacting with \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} devices.  
+
+
+
+
+{\ttfamily \#include $<$upnp.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::chrono\+::seconds \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_a941962563b7276972741cca86f1fea6b}{Get\+Time\+Out}} ()
+\begin{DoxyCompactList}\small\item\em Gets or sets the timeout for discovering the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_ad3de6d67d9469233f9c2cb7a1b17988e}{Set\+Time\+Out}} (std\+::chrono\+::seconds timeout)
+\begin{DoxyCompactList}\small\item\em Sets the timeout for discovering the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_a61ee40b9064d23885100d7f8d2b4a569}{Discover}} ()
+\begin{DoxyCompactList}\small\item\em Sends an Udp broadcast message to discover the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_ad96dd155500025df8f1d8cbb950730b0}{Forward\+Port}} (uint16\+\_\+t port, const std\+::string \&protocol, const std\+::string \&description)
+\begin{DoxyCompactList}\small\item\em Attempt to create a port forwarding. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_a88936b9fa0fe22398d0ea914501cafaf}{Delete\+Forwarding\+Rule}} (uint16\+\_\+t port, const std\+::string \&protocol)
+\begin{DoxyCompactList}\small\item\em Attempt to delete a port forwarding. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_a8281a6c0cad83fa91c15b70253c54fdb}{Get\+External\+IP}} ()
+\begin{DoxyCompactList}\small\item\em Attempt to get the external IP address of the local host. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_abea0913c0be377ea6f167beb86355f0e}{Get\+Service\+Url}} (const std\+::string \&resp)
+\begin{DoxyCompactList}\small\item\em Gets the service URL from the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device description. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_a5ea02217fae1f2192483ddf03321a4f3}{Combine\+Urls}} (const std\+::string \&base\+Url, const std\+::string \&relative\+Url)
+\begin{DoxyCompactList}\small\item\em Combines two URLs. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_a53360502ce914102a8edf5a18802a0c5}{SOAPRequest}} (const std\+::string \&url, const std\+::string \&soap, const std\+::string \&function)
+\begin{DoxyCompactList}\small\item\em Sends a SOAP request to the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::chrono\+::seconds \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_ac4b554884e82a8b60ad297f1271bc62e}{time\+Out\+\_\+}} = std\+::chrono\+::seconds(3)
+\begin{DoxyCompactList}\small\item\em The timeout for discovering the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1network_1_1_u_pn_p_aedc600df3007522d1dabc2c60c111b7b}{service\+Url\+\_\+}}
+\begin{DoxyCompactList}\small\item\em The service URL of the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides methods for interacting with \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} devices. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1_u_pn_p_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1_u_pn_p_a5ea02217fae1f2192483ddf03321a4f3}\index{neo::network::UPnP@{neo::network::UPnP}!CombineUrls@{CombineUrls}}
+\index{CombineUrls@{CombineUrls}!neo::network::UPnP@{neo::network::UPnP}}
+\doxysubsubsection{\texorpdfstring{CombineUrls()}{CombineUrls()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_u_pn_p_a5ea02217fae1f2192483ddf03321a4f3} 
+std\+::string neo\+::network\+::\+UPn\+P\+::\+Combine\+Urls (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{base\+Url}{, }\item[{const std\+::string \&}]{relative\+Url}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Combines two URLs. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base\+Url} & The base URL. \\
+\hline
+{\em relative\+Url} & The relative URL. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The combined URL. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_u_pn_p_a88936b9fa0fe22398d0ea914501cafaf}\index{neo::network::UPnP@{neo::network::UPnP}!DeleteForwardingRule@{DeleteForwardingRule}}
+\index{DeleteForwardingRule@{DeleteForwardingRule}!neo::network::UPnP@{neo::network::UPnP}}
+\doxysubsubsection{\texorpdfstring{DeleteForwardingRule()}{DeleteForwardingRule()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_u_pn_p_a88936b9fa0fe22398d0ea914501cafaf} 
+void neo\+::network\+::\+UPn\+P\+::\+Delete\+Forwarding\+Rule (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{port}{, }\item[{const std\+::string \&}]{protocol}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Attempt to delete a port forwarding. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & The port to forward. \\
+\hline
+{\em protocol} & The protocol of the port (TCP or UDP). \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1network_1_1_u_pn_p_a61ee40b9064d23885100d7f8d2b4a569}\index{neo::network::UPnP@{neo::network::UPnP}!Discover@{Discover}}
+\index{Discover@{Discover}!neo::network::UPnP@{neo::network::UPnP}}
+\doxysubsubsection{\texorpdfstring{Discover()}{Discover()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_u_pn_p_a61ee40b9064d23885100d7f8d2b4a569} 
+bool neo\+::network\+::\+UPn\+P\+::\+Discover (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Sends an Udp broadcast message to discover the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. 
+
+\begin{DoxyReturn}{Returns}
+true if the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device is successfully discovered; otherwise, false. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1network_1_1_u_pn_p_ad96dd155500025df8f1d8cbb950730b0}\index{neo::network::UPnP@{neo::network::UPnP}!ForwardPort@{ForwardPort}}
+\index{ForwardPort@{ForwardPort}!neo::network::UPnP@{neo::network::UPnP}}
+\doxysubsubsection{\texorpdfstring{ForwardPort()}{ForwardPort()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_u_pn_p_ad96dd155500025df8f1d8cbb950730b0} 
+void neo\+::network\+::\+UPn\+P\+::\+Forward\+Port (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{port}{, }\item[{const std\+::string \&}]{protocol}{, }\item[{const std\+::string \&}]{description}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Attempt to create a port forwarding. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & The port to forward. \\
+\hline
+{\em protocol} & The protocol of the port (TCP or UDP). \\
+\hline
+{\em description} & The description of the forward. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1_u_pn_p_a8281a6c0cad83fa91c15b70253c54fdb}\index{neo::network::UPnP@{neo::network::UPnP}!GetExternalIP@{GetExternalIP}}
+\index{GetExternalIP@{GetExternalIP}!neo::network::UPnP@{neo::network::UPnP}}
+\doxysubsubsection{\texorpdfstring{GetExternalIP()}{GetExternalIP()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_u_pn_p_a8281a6c0cad83fa91c15b70253c54fdb} 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} neo\+::network\+::\+UPn\+P\+::\+Get\+External\+IP (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Attempt to get the external IP address of the local host. 
+
+\begin{DoxyReturn}{Returns}
+The external IP address of the local host. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1_u_pn_p_abea0913c0be377ea6f167beb86355f0e}\index{neo::network::UPnP@{neo::network::UPnP}!GetServiceUrl@{GetServiceUrl}}
+\index{GetServiceUrl@{GetServiceUrl}!neo::network::UPnP@{neo::network::UPnP}}
+\doxysubsubsection{\texorpdfstring{GetServiceUrl()}{GetServiceUrl()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_u_pn_p_abea0913c0be377ea6f167beb86355f0e} 
+std\+::string neo\+::network\+::\+UPn\+P\+::\+Get\+Service\+Url (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{resp}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Gets the service URL from the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device description. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em resp} & The URL of the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device description. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The service URL of the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1_u_pn_p_a941962563b7276972741cca86f1fea6b}\index{neo::network::UPnP@{neo::network::UPnP}!GetTimeOut@{GetTimeOut}}
+\index{GetTimeOut@{GetTimeOut}!neo::network::UPnP@{neo::network::UPnP}}
+\doxysubsubsection{\texorpdfstring{GetTimeOut()}{GetTimeOut()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_u_pn_p_a941962563b7276972741cca86f1fea6b} 
+std\+::chrono\+::seconds neo\+::network\+::\+UPn\+P\+::\+Get\+Time\+Out (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets or sets the timeout for discovering the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. 
+
+\begin{DoxyReturn}{Returns}
+The timeout for discovering the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_u_pn_p_ad3de6d67d9469233f9c2cb7a1b17988e}\index{neo::network::UPnP@{neo::network::UPnP}!SetTimeOut@{SetTimeOut}}
+\index{SetTimeOut@{SetTimeOut}!neo::network::UPnP@{neo::network::UPnP}}
+\doxysubsubsection{\texorpdfstring{SetTimeOut()}{SetTimeOut()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_u_pn_p_ad3de6d67d9469233f9c2cb7a1b17988e} 
+void neo\+::network\+::\+UPn\+P\+::\+Set\+Time\+Out (\begin{DoxyParamCaption}\item[{std\+::chrono\+::seconds}]{timeout}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Sets the timeout for discovering the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timeout} & The timeout for discovering the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_u_pn_p_a53360502ce914102a8edf5a18802a0c5}\index{neo::network::UPnP@{neo::network::UPnP}!SOAPRequest@{SOAPRequest}}
+\index{SOAPRequest@{SOAPRequest}!neo::network::UPnP@{neo::network::UPnP}}
+\doxysubsubsection{\texorpdfstring{SOAPRequest()}{SOAPRequest()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_u_pn_p_a53360502ce914102a8edf5a18802a0c5} 
+std\+::string neo\+::network\+::\+UPn\+P\+::\+SOAPRequest (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{url}{, }\item[{const std\+::string \&}]{soap}{, }\item[{const std\+::string \&}]{function}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Sends a SOAP request to the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & The URL of the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. \\
+\hline
+{\em soap} & The SOAP request. \\
+\hline
+{\em function} & The function name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The XML response from the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1_u_pn_p_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1_u_pn_p_aedc600df3007522d1dabc2c60c111b7b}\index{neo::network::UPnP@{neo::network::UPnP}!serviceUrl\_@{serviceUrl\_}}
+\index{serviceUrl\_@{serviceUrl\_}!neo::network::UPnP@{neo::network::UPnP}}
+\doxysubsubsection{\texorpdfstring{serviceUrl\_}{serviceUrl\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_u_pn_p_aedc600df3007522d1dabc2c60c111b7b} 
+std\+::string neo\+::network\+::\+UPn\+P\+::service\+Url\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The service URL of the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. 
+
+\Hypertarget{classneo_1_1network_1_1_u_pn_p_ac4b554884e82a8b60ad297f1271bc62e}\index{neo::network::UPnP@{neo::network::UPnP}!timeOut\_@{timeOut\_}}
+\index{timeOut\_@{timeOut\_}!neo::network::UPnP@{neo::network::UPnP}}
+\doxysubsubsection{\texorpdfstring{timeOut\_}{timeOut\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_u_pn_p_ac4b554884e82a8b60ad297f1271bc62e} 
+std\+::chrono\+::seconds neo\+::network\+::\+UPn\+P\+::time\+Out\+\_\+ = std\+::chrono\+::seconds(3)\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The timeout for discovering the \doxylink{classneo_1_1network_1_1_u_pn_p}{UPnP} device. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/\mbox{\hyperlink{upnp_8h}{upnp.\+h}}\item 
+src/network/\mbox{\hyperlink{upnp_8cpp}{upnp.\+cpp}}\end{DoxyCompactItemize}

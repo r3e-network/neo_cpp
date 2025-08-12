@@ -1,0 +1,56 @@
+\doxysection{include/neo/core/shutdown\+\_\+manager.h File Reference}
+\hypertarget{shutdown__manager_8h}{}\label{shutdown__manager_8h}\index{include/neo/core/shutdown\_manager.h@{include/neo/core/shutdown\_manager.h}}
+{\ttfamily \#include $<$signal.\+h$>$}\newline
+{\ttfamily \#include $<$atomic$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$condition\+\_\+variable$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for shutdown\+\_\+manager.\+h\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager}{neo\+::core\+::\+Shutdown\+Manager}}
+\begin{DoxyCompactList}\small\item\em Manages graceful shutdown of the application. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_shutdown_manager_1_1_handler_info}{neo\+::core\+::\+Shutdown\+Manager\+::\+Handler\+Info}}
+\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_handler_guard}{neo\+::core\+::\+Shutdown\+Handler\+Guard}}
+\begin{DoxyCompactList}\small\item\em RAII helper for automatic shutdown handler registration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1core}{neo\+::core}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{shutdown__manager_8h_a952d6a8c53d217e6fd0cc4836bf297c3}{REGISTER\+\_\+\+SHUTDOWN\+\_\+\+HANDLER}}(name,  priority,  timeout,  code)
+\begin{DoxyCompactList}\small\item\em Macro for easy shutdown handler registration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{shutdown__manager_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{shutdown__manager_8h_a952d6a8c53d217e6fd0cc4836bf297c3}\index{shutdown\_manager.h@{shutdown\_manager.h}!REGISTER\_SHUTDOWN\_HANDLER@{REGISTER\_SHUTDOWN\_HANDLER}}
+\index{REGISTER\_SHUTDOWN\_HANDLER@{REGISTER\_SHUTDOWN\_HANDLER}!shutdown\_manager.h@{shutdown\_manager.h}}
+\doxysubsubsection{\texorpdfstring{REGISTER\_SHUTDOWN\_HANDLER}{REGISTER\_SHUTDOWN\_HANDLER}}
+{\footnotesize\ttfamily \label{shutdown__manager_8h_a952d6a8c53d217e6fd0cc4836bf297c3} 
+\#define REGISTER\+\_\+\+SHUTDOWN\+\_\+\+HANDLER(\begin{DoxyParamCaption}\item[{}]{name}{, }\item[{}]{priority}{, }\item[{}]{timeout}{, }\item[{}]{code}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_handler_guard}{neo::core::ShutdownHandlerGuard}}\ \_shutdown\_\#\#name(\ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \#name,\ []()\ \{\ code\ \},\ priority,\ std::chrono::milliseconds(timeout))}
+
+\end{DoxyCode}
+
+
+Macro for easy shutdown handler registration. 
+

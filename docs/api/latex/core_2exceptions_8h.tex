@@ -1,0 +1,162 @@
+\doxysection{include/neo/core/exceptions.h File Reference}
+\hypertarget{core_2exceptions_8h}{}\label{core_2exceptions_8h}\index{include/neo/core/exceptions.h@{include/neo/core/exceptions.h}}
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+Include dependency graph for exceptions.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{neo\+::core\+::\+Neo\+Exception}}
+\begin{DoxyCompactList}\small\item\em Base exception class for all Neo-\/specific exceptions. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_serialization_exception}{neo\+::core\+::\+Serialization\+Exception}}
+\begin{DoxyCompactList}\small\item\em Exception for serialization/deserialization errors. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_cryptography_exception}{neo\+::core\+::\+Cryptography\+Exception}}
+\begin{DoxyCompactList}\small\item\em Exception for cryptographic operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_network_exception}{neo\+::core\+::\+Network\+Exception}}
+\begin{DoxyCompactList}\small\item\em Exception for network operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_blockchain_exception}{neo\+::core\+::\+Blockchain\+Exception}}
+\begin{DoxyCompactList}\small\item\em Exception for blockchain operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_storage_exception}{neo\+::core\+::\+Storage\+Exception}}
+\begin{DoxyCompactList}\small\item\em Exception for storage operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_v_m_exception}{neo\+::core\+::\+VMException}}
+\begin{DoxyCompactList}\small\item\em Exception for VM operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_contract_exception}{neo\+::core\+::\+Contract\+Exception}}
+\begin{DoxyCompactList}\small\item\em Exception for smart contract operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_wallet_exception}{neo\+::core\+::\+Wallet\+Exception}}
+\begin{DoxyCompactList}\small\item\em Exception for wallet operations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1core}{neo\+::core}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{core_2exceptions_8h_adb8dedcf2d6a753bb73ac9f37cb7022d}{THROW\+\_\+\+NEO\+\_\+\+EXCEPTION}}(code,  message)
+\item 
+\#define \mbox{\hyperlink{core_2exceptions_8h_aff99cad9fe7dfa53b1013f5e80249a8e}{THROW\+\_\+\+SERIALIZATION\+\_\+\+EXCEPTION}}(message)
+\item 
+\#define \mbox{\hyperlink{core_2exceptions_8h_a5ea80a07f2a194a34529946326d98533}{THROW\+\_\+\+CRYPTO\+\_\+\+EXCEPTION}}(message)
+\item 
+\#define \mbox{\hyperlink{core_2exceptions_8h_a453f7ae820977e7530a6490dbf476c99}{THROW\+\_\+\+NETWORK\+\_\+\+EXCEPTION}}(message)
+\item 
+\#define \mbox{\hyperlink{core_2exceptions_8h_a0ab56ca7e519afe9c958010b9b943840}{THROW\+\_\+\+BLOCKCHAIN\+\_\+\+EXCEPTION}}(message)
+\item 
+\#define \mbox{\hyperlink{core_2exceptions_8h_a7adcc24c5636c4c9f4c9823f354dc988}{THROW\+\_\+\+STORAGE\+\_\+\+EXCEPTION}}(message)
+\item 
+\#define \mbox{\hyperlink{core_2exceptions_8h_ac680e3493256d556aeef14c18ee9f3c9}{THROW\+\_\+\+VM\+\_\+\+EXCEPTION}}(message)
+\item 
+\#define \mbox{\hyperlink{core_2exceptions_8h_af1b0329107bce2bb5d6fc004540bb05b}{THROW\+\_\+\+CONTRACT\+\_\+\+EXCEPTION}}(message)
+\item 
+\#define \mbox{\hyperlink{core_2exceptions_8h_a42bc66844d865a2daf986b04fdf0585e}{THROW\+\_\+\+WALLET\+\_\+\+EXCEPTION}}(message)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{core_2exceptions_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{core_2exceptions_8h_a0ab56ca7e519afe9c958010b9b943840}\index{exceptions.h@{exceptions.h}!THROW\_BLOCKCHAIN\_EXCEPTION@{THROW\_BLOCKCHAIN\_EXCEPTION}}
+\index{THROW\_BLOCKCHAIN\_EXCEPTION@{THROW\_BLOCKCHAIN\_EXCEPTION}!exceptions.h@{exceptions.h}}
+\doxysubsubsection{\texorpdfstring{THROW\_BLOCKCHAIN\_EXCEPTION}{THROW\_BLOCKCHAIN\_EXCEPTION}}
+{\footnotesize\ttfamily \label{core_2exceptions_8h_a0ab56ca7e519afe9c958010b9b943840} 
+\#define THROW\+\_\+\+BLOCKCHAIN\+\_\+\+EXCEPTION(\begin{DoxyParamCaption}\item[{}]{message}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_blockchain_exception}{neo::core::BlockchainException}}(message,\ \_\_FILE\_\_\ \textcolor{stringliteral}{"{}:"{}}\ +\ std::to\_string(\_\_LINE\_\_))}
+
+\end{DoxyCode}
+\Hypertarget{core_2exceptions_8h_af1b0329107bce2bb5d6fc004540bb05b}\index{exceptions.h@{exceptions.h}!THROW\_CONTRACT\_EXCEPTION@{THROW\_CONTRACT\_EXCEPTION}}
+\index{THROW\_CONTRACT\_EXCEPTION@{THROW\_CONTRACT\_EXCEPTION}!exceptions.h@{exceptions.h}}
+\doxysubsubsection{\texorpdfstring{THROW\_CONTRACT\_EXCEPTION}{THROW\_CONTRACT\_EXCEPTION}}
+{\footnotesize\ttfamily \label{core_2exceptions_8h_af1b0329107bce2bb5d6fc004540bb05b} 
+\#define THROW\+\_\+\+CONTRACT\+\_\+\+EXCEPTION(\begin{DoxyParamCaption}\item[{}]{message}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_contract_exception}{neo::core::ContractException}}(message,\ \_\_FILE\_\_\ \textcolor{stringliteral}{"{}:"{}}\ +\ std::to\_string(\_\_LINE\_\_))}
+
+\end{DoxyCode}
+\Hypertarget{core_2exceptions_8h_a5ea80a07f2a194a34529946326d98533}\index{exceptions.h@{exceptions.h}!THROW\_CRYPTO\_EXCEPTION@{THROW\_CRYPTO\_EXCEPTION}}
+\index{THROW\_CRYPTO\_EXCEPTION@{THROW\_CRYPTO\_EXCEPTION}!exceptions.h@{exceptions.h}}
+\doxysubsubsection{\texorpdfstring{THROW\_CRYPTO\_EXCEPTION}{THROW\_CRYPTO\_EXCEPTION}}
+{\footnotesize\ttfamily \label{core_2exceptions_8h_a5ea80a07f2a194a34529946326d98533} 
+\#define THROW\+\_\+\+CRYPTO\+\_\+\+EXCEPTION(\begin{DoxyParamCaption}\item[{}]{message}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_cryptography_exception}{neo::core::CryptographyException}}(message,\ \_\_FILE\_\_\ \textcolor{stringliteral}{"{}:"{}}\ +\ std::to\_string(\_\_LINE\_\_))}
+
+\end{DoxyCode}
+\Hypertarget{core_2exceptions_8h_adb8dedcf2d6a753bb73ac9f37cb7022d}\index{exceptions.h@{exceptions.h}!THROW\_NEO\_EXCEPTION@{THROW\_NEO\_EXCEPTION}}
+\index{THROW\_NEO\_EXCEPTION@{THROW\_NEO\_EXCEPTION}!exceptions.h@{exceptions.h}}
+\doxysubsubsection{\texorpdfstring{THROW\_NEO\_EXCEPTION}{THROW\_NEO\_EXCEPTION}}
+{\footnotesize\ttfamily \label{core_2exceptions_8h_adb8dedcf2d6a753bb73ac9f37cb7022d} 
+\#define THROW\+\_\+\+NEO\+\_\+\+EXCEPTION(\begin{DoxyParamCaption}\item[{}]{code}{, }\item[{}]{message}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{neo::core::NeoException}}(code,\ message,\ \_\_FILE\_\_\ \textcolor{stringliteral}{"{}:"{}}\ +\ std::to\_string(\_\_LINE\_\_))}
+
+\end{DoxyCode}
+\Hypertarget{core_2exceptions_8h_a453f7ae820977e7530a6490dbf476c99}\index{exceptions.h@{exceptions.h}!THROW\_NETWORK\_EXCEPTION@{THROW\_NETWORK\_EXCEPTION}}
+\index{THROW\_NETWORK\_EXCEPTION@{THROW\_NETWORK\_EXCEPTION}!exceptions.h@{exceptions.h}}
+\doxysubsubsection{\texorpdfstring{THROW\_NETWORK\_EXCEPTION}{THROW\_NETWORK\_EXCEPTION}}
+{\footnotesize\ttfamily \label{core_2exceptions_8h_a453f7ae820977e7530a6490dbf476c99} 
+\#define THROW\+\_\+\+NETWORK\+\_\+\+EXCEPTION(\begin{DoxyParamCaption}\item[{}]{message}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_network_exception}{neo::core::NetworkException}}(message,\ \_\_FILE\_\_\ \textcolor{stringliteral}{"{}:"{}}\ +\ std::to\_string(\_\_LINE\_\_))}
+
+\end{DoxyCode}
+\Hypertarget{core_2exceptions_8h_aff99cad9fe7dfa53b1013f5e80249a8e}\index{exceptions.h@{exceptions.h}!THROW\_SERIALIZATION\_EXCEPTION@{THROW\_SERIALIZATION\_EXCEPTION}}
+\index{THROW\_SERIALIZATION\_EXCEPTION@{THROW\_SERIALIZATION\_EXCEPTION}!exceptions.h@{exceptions.h}}
+\doxysubsubsection{\texorpdfstring{THROW\_SERIALIZATION\_EXCEPTION}{THROW\_SERIALIZATION\_EXCEPTION}}
+{\footnotesize\ttfamily \label{core_2exceptions_8h_aff99cad9fe7dfa53b1013f5e80249a8e} 
+\#define THROW\+\_\+\+SERIALIZATION\+\_\+\+EXCEPTION(\begin{DoxyParamCaption}\item[{}]{message}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_serialization_exception}{neo::core::SerializationException}}(message,\ \_\_FILE\_\_\ \textcolor{stringliteral}{"{}:"{}}\ +\ std::to\_string(\_\_LINE\_\_))}
+
+\end{DoxyCode}
+\Hypertarget{core_2exceptions_8h_a7adcc24c5636c4c9f4c9823f354dc988}\index{exceptions.h@{exceptions.h}!THROW\_STORAGE\_EXCEPTION@{THROW\_STORAGE\_EXCEPTION}}
+\index{THROW\_STORAGE\_EXCEPTION@{THROW\_STORAGE\_EXCEPTION}!exceptions.h@{exceptions.h}}
+\doxysubsubsection{\texorpdfstring{THROW\_STORAGE\_EXCEPTION}{THROW\_STORAGE\_EXCEPTION}}
+{\footnotesize\ttfamily \label{core_2exceptions_8h_a7adcc24c5636c4c9f4c9823f354dc988} 
+\#define THROW\+\_\+\+STORAGE\+\_\+\+EXCEPTION(\begin{DoxyParamCaption}\item[{}]{message}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_storage_exception}{neo::core::StorageException}}(message,\ \_\_FILE\_\_\ \textcolor{stringliteral}{"{}:"{}}\ +\ std::to\_string(\_\_LINE\_\_))}
+
+\end{DoxyCode}
+\Hypertarget{core_2exceptions_8h_ac680e3493256d556aeef14c18ee9f3c9}\index{exceptions.h@{exceptions.h}!THROW\_VM\_EXCEPTION@{THROW\_VM\_EXCEPTION}}
+\index{THROW\_VM\_EXCEPTION@{THROW\_VM\_EXCEPTION}!exceptions.h@{exceptions.h}}
+\doxysubsubsection{\texorpdfstring{THROW\_VM\_EXCEPTION}{THROW\_VM\_EXCEPTION}}
+{\footnotesize\ttfamily \label{core_2exceptions_8h_ac680e3493256d556aeef14c18ee9f3c9} 
+\#define THROW\+\_\+\+VM\+\_\+\+EXCEPTION(\begin{DoxyParamCaption}\item[{}]{message}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_v_m_exception}{neo::core::VMException}}(message,\ \_\_FILE\_\_\ \textcolor{stringliteral}{"{}:"{}}\ +\ std::to\_string(\_\_LINE\_\_))}
+
+\end{DoxyCode}
+\Hypertarget{core_2exceptions_8h_a42bc66844d865a2daf986b04fdf0585e}\index{exceptions.h@{exceptions.h}!THROW\_WALLET\_EXCEPTION@{THROW\_WALLET\_EXCEPTION}}
+\index{THROW\_WALLET\_EXCEPTION@{THROW\_WALLET\_EXCEPTION}!exceptions.h@{exceptions.h}}
+\doxysubsubsection{\texorpdfstring{THROW\_WALLET\_EXCEPTION}{THROW\_WALLET\_EXCEPTION}}
+{\footnotesize\ttfamily \label{core_2exceptions_8h_a42bc66844d865a2daf986b04fdf0585e} 
+\#define THROW\+\_\+\+WALLET\+\_\+\+EXCEPTION(\begin{DoxyParamCaption}\item[{}]{message}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_wallet_exception}{neo::core::WalletException}}(message,\ \_\_FILE\_\_\ \textcolor{stringliteral}{"{}:"{}}\ +\ std::to\_string(\_\_LINE\_\_))}
+
+\end{DoxyCode}

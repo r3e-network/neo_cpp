@@ -1,0 +1,166 @@
+\doxysection{hashset\+\_\+extensions.\+h}
+\hypertarget{hashset__extensions_8h_source}{}\label{hashset__extensions_8h_source}\index{include/neo/extensions/hashset\_extensions.h@{include/neo/extensions/hashset\_extensions.h}}
+\mbox{\hyperlink{hashset__extensions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <set>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1extensions}{neo::extensions}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00035\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions}{HashSetExtensions}}}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00037\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{static}\ std::unordered\_set<T>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a3d935a5414de0ff17696ffadfefbcc5f}{Union}}(\textcolor{keyword}{const}\ std::unordered\_set<T>\&\ left,\ \textcolor{keyword}{const}\ std::unordered\_set<T>\&\ right)}
+\DoxyCodeLine{00047\ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ std::unordered\_set<T>\ result\ =\ left;}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ result.insert(right.begin(),\ right.end());}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{static}\ std::unordered\_set<T>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_abbc0746bba5e04fa132499a0094e5cc7}{Intersection}}(\textcolor{keyword}{const}\ std::unordered\_set<T>\&\ left,\ \textcolor{keyword}{const}\ std::unordered\_set<T>\&\ right)}
+\DoxyCodeLine{00062\ \ \ \ \ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ std::unordered\_set<T>\ result;}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ item\ :\ left)}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (right.find(item)\ !=\ right.end())}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.insert(item);}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00072\ \ \ \ \ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{static}\ std::unordered\_set<T>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a897b9b72861d5d756366c0ef45ac7428}{Difference}}(\textcolor{keyword}{const}\ std::unordered\_set<T>\&\ left,\ \textcolor{keyword}{const}\ std::unordered\_set<T>\&\ right)}
+\DoxyCodeLine{00083\ \ \ \ \ \{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ std::unordered\_set<T>\ result;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ item\ :\ left)}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (right.find(item)\ ==\ right.end())}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.insert(item);}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00093\ \ \ \ \ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keyword}{static}\ std::unordered\_set<T>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a7ad9450b4192cdfaa29cd9f23fc21c97}{SymmetricDifference}}(\textcolor{keyword}{const}\ std::unordered\_set<T>\&\ left,}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::unordered\_set<T>\&\ right)}
+\DoxyCodeLine{00105\ \ \ \ \ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ leftDiff\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a897b9b72861d5d756366c0ef45ac7428}{Difference}}(left,\ right);}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ rightDiff\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a897b9b72861d5d756366c0ef45ac7428}{Difference}}(right,\ left);}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a3d935a5414de0ff17696ffadfefbcc5f}{Union}}(leftDiff,\ rightDiff);}
+\DoxyCodeLine{00109\ \ \ \ \ \}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_aec5d2ba120f66579495c895f1aa87bc3}{IsSubsetOf}}(\textcolor{keyword}{const}\ std::unordered\_set<T>\&\ left,\ \textcolor{keyword}{const}\ std::unordered\_set<T>\&\ right)}
+\DoxyCodeLine{00120\ \ \ \ \ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (left.size()\ >\ right.size())\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ item\ :\ left)}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (right.find(item)\ ==\ right.end())\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00128\ \ \ \ \ \}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a4c3a60fd2469b9eff87bc39f38e2a6bb}{IsSupersetOf}}(\textcolor{keyword}{const}\ std::unordered\_set<T>\&\ left,\ \textcolor{keyword}{const}\ std::unordered\_set<T>\&\ right)}
+\DoxyCodeLine{00139\ \ \ \ \ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_aec5d2ba120f66579495c895f1aa87bc3}{IsSubsetOf}}(right,\ left);}
+\DoxyCodeLine{00141\ \ \ \ \ \}}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_aa05830ff389aeec36854387e1330df9e}{AreDisjoint}}(\textcolor{keyword}{const}\ std::unordered\_set<T>\&\ left,\ \textcolor{keyword}{const}\ std::unordered\_set<T>\&\ right)}
+\DoxyCodeLine{00152\ \ \ \ \ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ smaller\ =\ (left.size()\ <=\ right.size())\ ?\ left\ :\ right;}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ larger\ =\ (left.size()\ <=\ right.size())\ ?\ right\ :\ left;}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ item\ :\ smaller)}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (larger.find(item)\ !=\ larger.end())\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00161\ \ \ \ \ \}}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<T>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_afa7144501e5ce9e4c08b9b3ae28d3cb0}{ToVector}}(\textcolor{keyword}{const}\ std::unordered\_set<T>\&\ hashSet)}
+\DoxyCodeLine{00171\ \ \ \ \ \{}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::vector<T>(hashSet.begin(),\ hashSet.end());}
+\DoxyCodeLine{00173\ \ \ \ \ \}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keyword}{static}\ std::unordered\_set<T>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a187dac229adef9263baf59effa47c80c}{FromVector}}(\textcolor{keyword}{const}\ std::vector<T>\&\ vec)}
+\DoxyCodeLine{00183\ \ \ \ \ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::unordered\_set<T>(vec.begin(),\ vec.end());}
+\DoxyCodeLine{00185\ \ \ \ \ \}}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ Predicate>}
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keyword}{static}\ std::unordered\_set<T>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a0ed3c718abafbf596a20be7be6570b5c}{Where}}(\textcolor{keyword}{const}\ std::unordered\_set<T>\&\ hashSet,\ Predicate\ predicate)}
+\DoxyCodeLine{00197\ \ \ \ \ \{}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ std::unordered\_set<T>\ result;}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ item\ :\ hashSet)}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (predicate(item))}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.insert(item);}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00207\ \ \ \ \ \}}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ Predicate>}
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a6eaa3db7562770009e2975ccb5b793a5}{Any}}(\textcolor{keyword}{const}\ std::unordered\_set<T>\&\ hashSet,\ Predicate\ predicate)}
+\DoxyCodeLine{00219\ \ \ \ \ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::any\_of(hashSet.begin(),\ hashSet.end(),\ predicate);}
+\DoxyCodeLine{00221\ \ \ \ \ \}}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ Predicate>}
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_ab959fe1ecef46a8284426cb3c2ef3617}{All}}(\textcolor{keyword}{const}\ std::unordered\_set<T>\&\ hashSet,\ Predicate\ predicate)}
+\DoxyCodeLine{00233\ \ \ \ \ \{}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::all\_of(hashSet.begin(),\ hashSet.end(),\ predicate);}
+\DoxyCodeLine{00235\ \ \ \ \ \}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T,\ \textcolor{keyword}{typename}\ Predicate>}
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a8ebc3dcdb99a7820d68215d52efaff67}{RemoveWhere}}(std::unordered\_set<T>\&\ hashSet,\ Predicate\ predicate)}
+\DoxyCodeLine{00247\ \ \ \ \ \{}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ removed\ =\ 0;}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ hashSet.begin();}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (it\ !=\ hashSet.end())}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (predicate(*it))}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ it\ =\ hashSet.erase(it);}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++removed;}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ++it;}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ removed;}
+\DoxyCodeLine{00263\ \ \ \ \ \}}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00271\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00272\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a02c7e3583117ebd694bb9f511ef24b03}{AddRange}}(std::unordered\_set<T>\&\ hashSet,\ \textcolor{keyword}{const}\ std::vector<T>\&\ elements)}
+\DoxyCodeLine{00273\ \ \ \ \ \{}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ hashSet.insert(elements.begin(),\ elements.end());}
+\DoxyCodeLine{00275\ \ \ \ \ \}}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00283\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_af0af4e75f5a8488dca36968fba0eb5f9}{AddRange}}(std::unordered\_set<T>\&\ hashSet,\ \textcolor{keyword}{const}\ std::unordered\_set<T>\&\ other)}
+\DoxyCodeLine{00285\ \ \ \ \ \{}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ hashSet.insert(other.begin(),\ other.end());}
+\DoxyCodeLine{00287\ \ \ \ \ \}}
+\DoxyCodeLine{00288\ \};}
+\DoxyCodeLine{00289\ \}\ \ \textcolor{comment}{//\ namespace\ neo::extensions}}
+
+\end{DoxyCode}

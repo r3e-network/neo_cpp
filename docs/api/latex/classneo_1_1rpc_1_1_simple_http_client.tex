@@ -1,0 +1,167 @@
+\doxysection{neo\+::rpc\+::Simple\+Http\+Client Class Reference}
+\hypertarget{classneo_1_1rpc_1_1_simple_http_client}{}\label{classneo_1_1rpc_1_1_simple_http_client}\index{neo::rpc::SimpleHttpClient@{neo::rpc::SimpleHttpClient}}
+
+
+Simple HTTP client implementation.  
+
+
+
+
+{\ttfamily \#include $<$rpc\+\_\+client.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::rpc\+::Simple\+Http\+Client\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::rpc\+::Simple\+Http\+Client\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_simple_http_client_ab9eb173017c2ba068079b172e45d7623}{Simple\+Http\+Client}} ()
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_simple_http_client_ae8c5044a46b03fbe864c014517bf07de}{\texorpdfstring{$\sim$}{\string~}\+Simple\+Http\+Client}} () override=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1rpc_1_1_simple_http_client_aa6f82b14fac517a2ef6f6c347539e66d}{Set\+Basic\+Auth}} (const std\+::string \&username, const std\+::string \&password)
+\begin{DoxyCompactList}\small\item\em Sets basic authentication credentials. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1rpc_1_1_simple_http_client_ab1f76bd7be758adee75929d975752845}{Post}} (const std\+::string \&url, const std\+::string \&content, const std\+::map$<$ std\+::string, std\+::string $>$ \&headers=\{\}) override
+\begin{DoxyCompactList}\small\item\em Makes a synchronous HTTP POST request. \end{DoxyCompactList}\item 
+std\+::future$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_simple_http_client_a267162a6c8aedb361b57d69430316154}{Post\+Async}} (const std\+::string \&url, const std\+::string \&content, const std\+::map$<$ std\+::string, std\+::string $>$ \&headers=\{\}) override
+\begin{DoxyCompactList}\small\item\em Makes an asynchronous HTTP POST request. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client}{neo\+::rpc\+::\+IHttp\+Client}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client_aadb034e69dc308d030b568e4483da4b4}{\texorpdfstring{$\sim$}{\string~}\+IHttp\+Client}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1rpc_1_1_simple_http_client_a43c27b4c21936adb0c85155d92679f3d}{auth\+\_\+header\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Simple HTTP client implementation. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1rpc_1_1_simple_http_client_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_simple_http_client_ab9eb173017c2ba068079b172e45d7623}\index{neo::rpc::SimpleHttpClient@{neo::rpc::SimpleHttpClient}!SimpleHttpClient@{SimpleHttpClient}}
+\index{SimpleHttpClient@{SimpleHttpClient}!neo::rpc::SimpleHttpClient@{neo::rpc::SimpleHttpClient}}
+\doxysubsubsection{\texorpdfstring{SimpleHttpClient()}{SimpleHttpClient()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_simple_http_client_ab9eb173017c2ba068079b172e45d7623} 
+neo\+::rpc\+::\+Simple\+Http\+Client\+::\+Simple\+Http\+Client (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructor. 
+
+\Hypertarget{classneo_1_1rpc_1_1_simple_http_client_ae8c5044a46b03fbe864c014517bf07de}\index{neo::rpc::SimpleHttpClient@{neo::rpc::SimpleHttpClient}!````~SimpleHttpClient@{\texorpdfstring{$\sim$}{\string~}SimpleHttpClient}}
+\index{````~SimpleHttpClient@{\texorpdfstring{$\sim$}{\string~}SimpleHttpClient}!neo::rpc::SimpleHttpClient@{neo::rpc::SimpleHttpClient}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}SimpleHttpClient()}{\string~SimpleHttpClient()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_simple_http_client_ae8c5044a46b03fbe864c014517bf07de} 
+neo\+::rpc\+::\+Simple\+Http\+Client\+::\texorpdfstring{$\sim$}{\string~}\+Simple\+Http\+Client (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [default]}}
+
+
+
+Destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1rpc_1_1_simple_http_client_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_simple_http_client_ab1f76bd7be758adee75929d975752845}\index{neo::rpc::SimpleHttpClient@{neo::rpc::SimpleHttpClient}!Post@{Post}}
+\index{Post@{Post}!neo::rpc::SimpleHttpClient@{neo::rpc::SimpleHttpClient}}
+\doxysubsubsection{\texorpdfstring{Post()}{Post()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_simple_http_client_ab1f76bd7be758adee75929d975752845} 
+std\+::string neo\+::rpc\+::\+Simple\+Http\+Client\+::\+Post (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{url}{, }\item[{const std\+::string \&}]{content}{, }\item[{const std\+::map$<$ std\+::string, std\+::string $>$ \&}]{headers}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Makes a synchronous HTTP POST request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & The URL to send the request to. \\
+\hline
+{\em content} & The request content. \\
+\hline
+{\em headers} & Additional headers. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The response content. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client_ad91739ffca753fb0d40f9bcc34bd3b19}{neo\+::rpc\+::\+IHttp\+Client}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1rpc_1_1_simple_http_client_a267162a6c8aedb361b57d69430316154}\index{neo::rpc::SimpleHttpClient@{neo::rpc::SimpleHttpClient}!PostAsync@{PostAsync}}
+\index{PostAsync@{PostAsync}!neo::rpc::SimpleHttpClient@{neo::rpc::SimpleHttpClient}}
+\doxysubsubsection{\texorpdfstring{PostAsync()}{PostAsync()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_simple_http_client_a267162a6c8aedb361b57d69430316154} 
+std\+::future$<$ std\+::string $>$ neo\+::rpc\+::\+Simple\+Http\+Client\+::\+Post\+Async (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{url}{, }\item[{const std\+::string \&}]{content}{, }\item[{const std\+::map$<$ std\+::string, std\+::string $>$ \&}]{headers}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Makes an asynchronous HTTP POST request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em url} & The URL to send the request to. \\
+\hline
+{\em content} & The request content. \\
+\hline
+{\em headers} & Additional headers. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A future containing the response content. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client_a98736cd1783b4435d419cf31ac11dc68}{neo\+::rpc\+::\+IHttp\+Client}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1rpc_1_1_simple_http_client_aa6f82b14fac517a2ef6f6c347539e66d}\index{neo::rpc::SimpleHttpClient@{neo::rpc::SimpleHttpClient}!SetBasicAuth@{SetBasicAuth}}
+\index{SetBasicAuth@{SetBasicAuth}!neo::rpc::SimpleHttpClient@{neo::rpc::SimpleHttpClient}}
+\doxysubsubsection{\texorpdfstring{SetBasicAuth()}{SetBasicAuth()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_simple_http_client_aa6f82b14fac517a2ef6f6c347539e66d} 
+void neo\+::rpc\+::\+Simple\+Http\+Client\+::\+Set\+Basic\+Auth (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{username}{, }\item[{const std\+::string \&}]{password}{}\end{DoxyParamCaption})}
+
+
+
+Sets basic authentication credentials. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em username} & The username. \\
+\hline
+{\em password} & The password. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1rpc_1_1_simple_http_client_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_simple_http_client_a43c27b4c21936adb0c85155d92679f3d}\index{neo::rpc::SimpleHttpClient@{neo::rpc::SimpleHttpClient}!auth\_header\_@{auth\_header\_}}
+\index{auth\_header\_@{auth\_header\_}!neo::rpc::SimpleHttpClient@{neo::rpc::SimpleHttpClient}}
+\doxysubsubsection{\texorpdfstring{auth\_header\_}{auth\_header\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_simple_http_client_a43c27b4c21936adb0c85155d92679f3d} 
+std\+::string neo\+::rpc\+::\+Simple\+Http\+Client\+::auth\+\_\+header\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/rpc/\mbox{\hyperlink{rpc__client_8h}{rpc\+\_\+client.\+h}}\item 
+src/rpc/\mbox{\hyperlink{rpc__client_8cpp}{rpc\+\_\+client.\+cpp}}\end{DoxyCompactItemize}

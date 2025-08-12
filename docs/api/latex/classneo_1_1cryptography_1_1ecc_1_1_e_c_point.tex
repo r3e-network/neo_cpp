@@ -1,0 +1,805 @@
+\doxysection{neo\+::cryptography\+::ecc\+::ECPoint Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{}\label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+
+
+Represents a point on an elliptic curve.  
+
+
+
+
+{\ttfamily \#include $<$ecpoint.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::cryptography\+::ecc\+::ECPoint\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::cryptography\+::ecc\+::ECPoint\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae4a83f7a5dcc95b65abd3e694adff846}{ECPoint}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a46871ed885a17ef15e7d25afe4bfbe78}{\texorpdfstring{$\sim$}{\string~}\+ECPoint}} ()
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a0637f076fa3d776dfb9f17282ffd07a5}{ECPoint}} (const std\+::string \&curve\+Name)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} with the specified curve name. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af32099891207ca77a1a621585cac577c}{Get\+Curve\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Gets the curve name. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a564016425b75bba617ecd82eefcfc2d1}{Set\+Curve\+Name}} (const std\+::string \&curve\+Name)
+\begin{DoxyCompactList}\small\item\em Sets the curve name. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a635b1f023273b7557e605b238d9fecea}{Is\+Infinity}} () const
+\begin{DoxyCompactList}\small\item\em Checks if this point is at infinity. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a1dd6d4a8073b2c4effa350fd1eaecb73}{Set\+Infinity}} (bool is\+Infinity)
+\begin{DoxyCompactList}\small\item\em Sets whether this point is at infinity. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ad064eba9012e9f80d896401bccf09bf5}{GetX}} () const
+\begin{DoxyCompactList}\small\item\em Gets the X coordinate. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_abea50aec908986d1271d824ae00400b7}{SetX}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&x)
+\begin{DoxyCompactList}\small\item\em Sets the X coordinate. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a991a79b4400146aed93f34d58d5cfba3}{GetY}} () const
+\begin{DoxyCompactList}\small\item\em Gets the Y coordinate. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a052a97ced0b56150a48256bbece321c5}{SetY}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&y)
+\begin{DoxyCompactList}\small\item\em Sets the Y coordinate. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_acaf3aa20394e9261354877c0e64c8f37}{To\+Bytes}} (bool compressed=true) const
+\begin{DoxyCompactList}\small\item\em Converts this point to a byte array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ac78e405cf844e51af4f0830b2b392368}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Converts this point to a byte array (compressed format). This method matches the C\# \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ac78e405cf844e51af4f0830b2b392368}{ECPoint.\+To\+Array()} method. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af8f851ebb5374591aeccf5baa946bba7}{To\+Hex}} (bool compressed=true) const
+\begin{DoxyCompactList}\small\item\em Converts this point to a hex string. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a293a06f69967165553f5b7bdd2266a38}{To\+String}} (bool compressed=true) const
+\begin{DoxyCompactList}\small\item\em Converts this point to a string (hex representation). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_afa55bd274c1bddbb2dbb1f7a8ce3051f}{operator==}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} is equal to another \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae766c7fde0b49693382eb5aa146037db}{operator!=}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} is not equal to another \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ac048320971409d232afc836a1e784e3a}{operator$<$}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} is less than another \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a0d0c7778812f160fad68e569538232db}{operator$>$}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} is greater than another \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ad785370bd6cf1a6d64d373d3bdaef758}{operator$<$=}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} is less than or equal to another \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af7280ce6f25e80a96f5807b3ac6038e7}{operator$>$=}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} is greater than or equal to another \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_aba5c22b4cccded869d51a3bad2f29b65}{Add}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&other) const
+\begin{DoxyCompactList}\small\item\em Adds another \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} to this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a10005ae5e3ab366170479b4d54673cc0}{Multiply}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&scalar) const
+\begin{DoxyCompactList}\small\item\em Multiplies this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} by a scalar. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a8fa9b2f6798db92a2304b2d153740880}{Negate}} () const
+\begin{DoxyCompactList}\small\item\em Negates this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_afe3ee7ec2c222368b7a82fea71d97983}{operator+}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&other) const
+\begin{DoxyCompactList}\small\item\em Operator overload for \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} addition. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a8165957be104292ff5b5e6e9e7ef9765}{operator\texorpdfstring{$\ast$}{*}}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&scalar) const
+\begin{DoxyCompactList}\small\item\em Operator overload for \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} scalar multiplication. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a4d2fa743f0dc0166e794aacdf60409a9}{operator-\/}} () const
+\begin{DoxyCompactList}\small\item\em Operator overload for \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} negation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a124e7eea95413fabb39bc28d08b931ad}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a0b36bcdae2c3be68011386f14baec8bf}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} from a binary reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a76149bc8215c7297d3bd54d273bdaaca}{From\+Bytes}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data, const std\+::string \&curve\+Name)
+\begin{DoxyCompactList}\small\item\em Creates an \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} from a byte array. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a21d43136701acbe053589c058f667e3d}{From\+Bytes}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Creates an \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} from a byte array (with default curve). \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_aee2f331e27180796eeaea7f7a195c7e4}{From\+Hex}} (const std\+::string \&hex, const std\+::string \&curve\+Name)
+\begin{DoxyCompactList}\small\item\em Creates an \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} from a hex string. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ab290ff411acaebdc51054a183f9469eb}{From\+Hex}} (const std\+::string \&hex)
+\begin{DoxyCompactList}\small\item\em Creates an \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} from a hex string (with default curve). \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a1c75d3fc7ae853e91db5d592b39a2ebb}{Parse}} (const std\+::string \&hex, const std\+::string \&curve\+Name="{}secp256r1"{})
+\begin{DoxyCompactList}\small\item\em Parses an \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} from a hex string. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a1d1785d3555fb8028d2e74b0e8799179}{Infinity}} (const std\+::string \&curve\+Name="{}secp256r1"{})
+\begin{DoxyCompactList}\small\item\em Gets the infinity point. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a978656bba5a36f67594d2230a2ac0884}{Max\+Size}} = 33
+\begin{DoxyCompactList}\small\item\em The maximum size of an \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} in bytes (compressed format). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a392b066d6acce0fcc98a0c8eb5dd75b6}{curve\+Name\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af7295168e07146ace69717464d810dc7}{is\+Infinity\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a16de53fb50283597cf9295b087597c5d}{x\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ac240a1989366c5bf13bfd23297a43906}{y\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a point on an elliptic curve. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae4a83f7a5dcc95b65abd3e694adff846}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!ECPoint@{ECPoint}}
+\index{ECPoint@{ECPoint}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{ECPoint()}{ECPoint()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae4a83f7a5dcc95b65abd3e694adff846} 
+neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+ECPoint (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. 
+
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a46871ed885a17ef15e7d25afe4bfbe78}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!````~ECPoint@{\texorpdfstring{$\sim$}{\string~}ECPoint}}
+\index{````~ECPoint@{\texorpdfstring{$\sim$}{\string~}ECPoint}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ECPoint()}{\string~ECPoint()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a46871ed885a17ef15e7d25afe4bfbe78} 
+neo\+::cryptography\+::ecc\+::\+ECPoint\+::\texorpdfstring{$\sim$}{\string~}\+ECPoint (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a0637f076fa3d776dfb9f17282ffd07a5}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!ECPoint@{ECPoint}}
+\index{ECPoint@{ECPoint}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{ECPoint()}{ECPoint()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a0637f076fa3d776dfb9f17282ffd07a5} 
+neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+ECPoint (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{curve\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs an \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} with the specified curve name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em curve\+Name} & The curve name. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_aba5c22b4cccded869d51a3bad2f29b65}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!Add@{Add}}
+\index{Add@{Add}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_aba5c22b4cccded869d51a3bad2f29b65} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+Add (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Adds another \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} to this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of the addition. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a0b36bcdae2c3be68011386f14baec8bf}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a0b36bcdae2c3be68011386f14baec8bf} 
+void neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a21d43136701acbe053589c058f667e3d}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!FromBytes@{FromBytes}}
+\index{FromBytes@{FromBytes}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{FromBytes()}{FromBytes()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a21d43136701acbe053589c058f667e3d} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+From\+Bytes (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates an \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} from a byte array (with default curve). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The byte array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a76149bc8215c7297d3bd54d273bdaaca}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!FromBytes@{FromBytes}}
+\index{FromBytes@{FromBytes}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{FromBytes()}{FromBytes()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a76149bc8215c7297d3bd54d273bdaaca} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+From\+Bytes (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{, }\item[{const std\+::string \&}]{curve\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates an \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} from a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The byte array. \\
+\hline
+{\em curve\+Name} & The curve name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ab290ff411acaebdc51054a183f9469eb}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!FromHex@{FromHex}}
+\index{FromHex@{FromHex}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{FromHex()}{FromHex()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ab290ff411acaebdc51054a183f9469eb} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+From\+Hex (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates an \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} from a hex string (with default curve). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The hex string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_aee2f331e27180796eeaea7f7a195c7e4}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!FromHex@{FromHex}}
+\index{FromHex@{FromHex}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{FromHex()}{FromHex()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_aee2f331e27180796eeaea7f7a195c7e4} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+From\+Hex (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{, }\item[{const std\+::string \&}]{curve\+Name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates an \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} from a hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The hex string. \\
+\hline
+{\em curve\+Name} & The curve name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af32099891207ca77a1a621585cac577c}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!GetCurveName@{GetCurveName}}
+\index{GetCurveName@{GetCurveName}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{GetCurveName()}{GetCurveName()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af32099891207ca77a1a621585cac577c} 
+const std\+::string \& neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+Get\+Curve\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the curve name. 
+
+\begin{DoxyReturn}{Returns}
+The curve name. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ad064eba9012e9f80d896401bccf09bf5}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!GetX@{GetX}}
+\index{GetX@{GetX}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{GetX()}{GetX()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ad064eba9012e9f80d896401bccf09bf5} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+GetX (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the X coordinate. 
+
+\begin{DoxyReturn}{Returns}
+The X coordinate. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a991a79b4400146aed93f34d58d5cfba3}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!GetY@{GetY}}
+\index{GetY@{GetY}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{GetY()}{GetY()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a991a79b4400146aed93f34d58d5cfba3} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+GetY (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the Y coordinate. 
+
+\begin{DoxyReturn}{Returns}
+The Y coordinate. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a1d1785d3555fb8028d2e74b0e8799179}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!Infinity@{Infinity}}
+\index{Infinity@{Infinity}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{Infinity()}{Infinity()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a1d1785d3555fb8028d2e74b0e8799179} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+Infinity (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{curve\+Name}{ = {\ttfamily "{}secp256r1"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the infinity point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em curve\+Name} & The curve name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The infinity point. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a635b1f023273b7557e605b238d9fecea}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!IsInfinity@{IsInfinity}}
+\index{IsInfinity@{IsInfinity}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{IsInfinity()}{IsInfinity()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a635b1f023273b7557e605b238d9fecea} 
+bool neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+Is\+Infinity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this point is at infinity. 
+
+\begin{DoxyReturn}{Returns}
+True if this point is at infinity, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a10005ae5e3ab366170479b4d54673cc0}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!Multiply@{Multiply}}
+\index{Multiply@{Multiply}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{Multiply()}{Multiply()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a10005ae5e3ab366170479b4d54673cc0} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+Multiply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{scalar}{}\end{DoxyParamCaption}) const}
+
+
+
+Multiplies this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} by a scalar. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scalar} & The scalar value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of the multiplication. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a8fa9b2f6798db92a2304b2d153740880}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!Negate@{Negate}}
+\index{Negate@{Negate}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{Negate()}{Negate()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a8fa9b2f6798db92a2304b2d153740880} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+Negate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Negates this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. 
+
+\begin{DoxyReturn}{Returns}
+The negated \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae766c7fde0b49693382eb5aa146037db}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae766c7fde0b49693382eb5aa146037db} 
+bool neo\+::cryptography\+::ecc\+::\+ECPoint\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} is not equal to another \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the ECPoints are not equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a8165957be104292ff5b5e6e9e7ef9765}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a8165957be104292ff5b5e6e9e7ef9765} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} neo\+::cryptography\+::ecc\+::\+ECPoint\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{scalar}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Operator overload for \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} scalar multiplication. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em scalar} & The scalar value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of the multiplication. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_afe3ee7ec2c222368b7a82fea71d97983}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!operator+@{operator+}}
+\index{operator+@{operator+}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_afe3ee7ec2c222368b7a82fea71d97983} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} neo\+::cryptography\+::ecc\+::\+ECPoint\+::operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Operator overload for \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} addition. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result of the addition. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a4d2fa743f0dc0166e794aacdf60409a9}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a4d2fa743f0dc0166e794aacdf60409a9} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} neo\+::cryptography\+::ecc\+::\+ECPoint\+::operator-\/ (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Operator overload for \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} negation. 
+
+\begin{DoxyReturn}{Returns}
+The negated \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ac048320971409d232afc836a1e784e3a}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ac048320971409d232afc836a1e784e3a} 
+bool neo\+::cryptography\+::ecc\+::\+ECPoint\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} is less than another \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} is less than the other \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ad785370bd6cf1a6d64d373d3bdaef758}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{operator$<$=()}{operator<=()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ad785370bd6cf1a6d64d373d3bdaef758} 
+bool neo\+::cryptography\+::ecc\+::\+ECPoint\+::operator$<$= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} is less than or equal to another \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} is less than or equal to the other \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_afa55bd274c1bddbb2dbb1f7a8ce3051f}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_afa55bd274c1bddbb2dbb1f7a8ce3051f} 
+bool neo\+::cryptography\+::ecc\+::\+ECPoint\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} is equal to another \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the ECPoints are equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a0d0c7778812f160fad68e569538232db}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a0d0c7778812f160fad68e569538232db} 
+bool neo\+::cryptography\+::ecc\+::\+ECPoint\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} is greater than another \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} is greater than the other \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af7280ce6f25e80a96f5807b3ac6038e7}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!operator$>$=@{operator$>$=}}
+\index{operator$>$=@{operator$>$=}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{operator$>$=()}{operator>=()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af7280ce6f25e80a96f5807b3ac6038e7} 
+bool neo\+::cryptography\+::ecc\+::\+ECPoint\+::operator$>$= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} is greater than or equal to another \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} is greater than or equal to the other \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a1c75d3fc7ae853e91db5d592b39a2ebb}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!Parse@{Parse}}
+\index{Parse@{Parse}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a1c75d3fc7ae853e91db5d592b39a2ebb} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}} neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{, }\item[{const std\+::string \&}]{curve\+Name}{ = {\ttfamily "{}secp256r1"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Parses an \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} from a hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The hex string. \\
+\hline
+{\em curve\+Name} & The curve name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a124e7eea95413fabb39bc28d08b931ad}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a124e7eea95413fabb39bc28d08b931ad} 
+void neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a564016425b75bba617ecd82eefcfc2d1}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!SetCurveName@{SetCurveName}}
+\index{SetCurveName@{SetCurveName}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{SetCurveName()}{SetCurveName()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a564016425b75bba617ecd82eefcfc2d1} 
+void neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+Set\+Curve\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{curve\+Name}{}\end{DoxyParamCaption})}
+
+
+
+Sets the curve name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em curve\+Name} & The curve name. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a1dd6d4a8073b2c4effa350fd1eaecb73}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!SetInfinity@{SetInfinity}}
+\index{SetInfinity@{SetInfinity}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{SetInfinity()}{SetInfinity()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a1dd6d4a8073b2c4effa350fd1eaecb73} 
+void neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+Set\+Infinity (\begin{DoxyParamCaption}\item[{bool}]{is\+Infinity}{}\end{DoxyParamCaption})}
+
+
+
+Sets whether this point is at infinity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\+Infinity} & True if this point is at infinity, false otherwise. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_abea50aec908986d1271d824ae00400b7}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!SetX@{SetX}}
+\index{SetX@{SetX}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{SetX()}{SetX()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_abea50aec908986d1271d824ae00400b7} 
+void neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+SetX (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{x}{}\end{DoxyParamCaption})}
+
+
+
+Sets the X coordinate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & The X coordinate. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a052a97ced0b56150a48256bbece321c5}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!SetY@{SetY}}
+\index{SetY@{SetY}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{SetY()}{SetY()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a052a97ced0b56150a48256bbece321c5} 
+void neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+SetY (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{y}{}\end{DoxyParamCaption})}
+
+
+
+Sets the Y coordinate. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em y} & The Y coordinate. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ac78e405cf844e51af4f0830b2b392368}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!ToArray@{ToArray}}
+\index{ToArray@{ToArray}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{ToArray()}{ToArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ac78e405cf844e51af4f0830b2b392368} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+To\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Converts this point to a byte array (compressed format). This method matches the C\# \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ac78e405cf844e51af4f0830b2b392368}{ECPoint.\+To\+Array()} method. 
+
+\begin{DoxyReturn}{Returns}
+The byte array in compressed format. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 23
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_acaf3aa20394e9261354877c0e64c8f37}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!ToBytes@{ToBytes}}
+\index{ToBytes@{ToBytes}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{ToBytes()}{ToBytes()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_acaf3aa20394e9261354877c0e64c8f37} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+To\+Bytes (\begin{DoxyParamCaption}\item[{bool}]{compressed}{ = {\ttfamily true}}\end{DoxyParamCaption}) const}
+
+
+
+Converts this point to a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em compressed} & True to use compressed format, false otherwise. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The byte array. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 24
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af8f851ebb5374591aeccf5baa946bba7}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!ToHex@{ToHex}}
+\index{ToHex@{ToHex}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{ToHex()}{ToHex()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af8f851ebb5374591aeccf5baa946bba7} 
+std\+::string neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+To\+Hex (\begin{DoxyParamCaption}\item[{bool}]{compressed}{ = {\ttfamily true}}\end{DoxyParamCaption}) const}
+
+
+
+Converts this point to a hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em compressed} & True to use compressed format, false otherwise. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The hex string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 25
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a293a06f69967165553f5b7bdd2266a38}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a293a06f69967165553f5b7bdd2266a38} 
+std\+::string neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+To\+String (\begin{DoxyParamCaption}\item[{bool}]{compressed}{ = {\ttfamily true}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts this point to a string (hex representation). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em compressed} & True to use compressed format, false otherwise. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The hex string representation. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 26
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a392b066d6acce0fcc98a0c8eb5dd75b6}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!curveName\_@{curveName\_}}
+\index{curveName\_@{curveName\_}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{curveName\_}{curveName\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a392b066d6acce0fcc98a0c8eb5dd75b6} 
+std\+::string neo\+::cryptography\+::ecc\+::\+ECPoint\+::curve\+Name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af7295168e07146ace69717464d810dc7}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!isInfinity\_@{isInfinity\_}}
+\index{isInfinity\_@{isInfinity\_}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{isInfinity\_}{isInfinity\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af7295168e07146ace69717464d810dc7} 
+bool neo\+::cryptography\+::ecc\+::\+ECPoint\+::is\+Infinity\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a978656bba5a36f67594d2230a2ac0884}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!MaxSize@{MaxSize}}
+\index{MaxSize@{MaxSize}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{MaxSize}{MaxSize}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a978656bba5a36f67594d2230a2ac0884} 
+size\+\_\+t neo\+::cryptography\+::ecc\+::\+ECPoint\+::\+Max\+Size = 33\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The maximum size of an \doxylink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint} in bytes (compressed format). 
+
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a16de53fb50283597cf9295b087597c5d}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!x\_@{x\_}}
+\index{x\_@{x\_}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{x\_}{x\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a16de53fb50283597cf9295b087597c5d} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::cryptography\+::ecc\+::\+ECPoint\+::x\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ac240a1989366c5bf13bfd23297a43906}\index{neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}!y\_@{y\_}}
+\index{y\_@{y\_}!neo::cryptography::ecc::ECPoint@{neo::cryptography::ecc::ECPoint}}
+\doxysubsubsection{\texorpdfstring{y\_}{y\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ac240a1989366c5bf13bfd23297a43906} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::cryptography\+::ecc\+::\+ECPoint\+::y\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/ecc/\mbox{\hyperlink{ecpoint_8h}{ecpoint.\+h}}\item 
+src/cryptography/ecc/\mbox{\hyperlink{ecpoint_8cpp}{ecpoint.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,172 @@
+\doxysection{configuration.\+h}
+\hypertarget{configuration_8h_source}{}\label{configuration_8h_source}\index{include/neo/config/configuration.h@{include/neo/config/configuration.h}}
+\mbox{\hyperlink{configuration_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <neo/cryptography/ecc\_point.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2json_8h}{neo/io/json.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1config}{neo::config}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1config_1_1_network_config}{NetworkConfig}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1config_1_1_network_config_a8abdd1544c2f975a6cb5964346a6285d}{network}}\ =\ \textcolor{stringliteral}{"{}mainnet"{}};}
+\DoxyCodeLine{00020\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_network_config_a1f9def3761480ca1b814554d64555053}{magic}}\ =\ 860833102;\ \ \textcolor{comment}{//\ MainNet\ magic\ number}}
+\DoxyCodeLine{00021\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_network_config_a80b7e50383837d5a4a8d1262512ee9b1}{addressVersion}}\ =\ 53;}
+\DoxyCodeLine{00022\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{structneo_1_1config_1_1_network_config_af34bafd340ac1c4c79f056b18cf9a5e1}{seedList}};}
+\DoxyCodeLine{00023\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_network_config_a65d4d1702faeb57c0a99d86364056e3f}{port}}\ =\ 10333;}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1config_1_1_network_config_a67fca13a9d484ae0e7a59bf967dea168}{maxConnections}}\ =\ 100;}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1config_1_1_network_config_a90546e79e09dd7de4b0b0523fc85657d}{minDesiredConnections}}\ =\ 10;}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1config_1_1_network_config_a2d0ed312378b8588f8bc4b6904ffc547}{maxConnectionsPerAddress}}\ =\ 3;}
+\DoxyCodeLine{00027\ \};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1config_1_1_rpc_config}{RpcConfig}}}
+\DoxyCodeLine{00033\ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1config_1_1_rpc_config_aa67e32832abb4aeff49c14d14351b233}{enabled}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00035\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_rpc_config_a0bc35ede22f7359b30bf766814fc2987}{port}}\ =\ 10332;}
+\DoxyCodeLine{00036\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1config_1_1_rpc_config_a49c98eed9e49ae69bd2b66fe6883c2c9}{sslCertificate}};}
+\DoxyCodeLine{00037\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1config_1_1_rpc_config_afbf4bd699d4db9d27b35907a40a57d99}{sslCertificatePassword}};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1config_1_1_rpc_config_a2ed341882a39ee6063b946d7bb0960a4}{maxConcurrentConnections}}\ =\ 40;}
+\DoxyCodeLine{00039\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_rpc_config_a680ba1dbca1b91f88f7052ef2710ec27}{maxGasInvoke}}\ =\ 50000000;}
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1config_1_1_rpc_config_a76ffe4585e8d01129e254decfb33b9ae}{maxIteratorResultItems}}\ =\ 100;}
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1config_1_1_rpc_config_ae74555698b90313db60ee726074f12ff}{maxStackSize}}\ =\ 2048;}
+\DoxyCodeLine{00042\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{structneo_1_1config_1_1_rpc_config_a6ec95af35f9f7e6e0e2b5e3657ec5f3b}{disabledMethods}};}
+\DoxyCodeLine{00043\ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1config_1_1_storage_config}{StorageConfig}}}
+\DoxyCodeLine{00049\ \{}
+\DoxyCodeLine{00050\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1config_1_1_storage_config_a92ae5595fb12c7df6b5eabf9a66506d0}{engine}}\ =\ \textcolor{stringliteral}{"{}LevelDB"{}};}
+\DoxyCodeLine{00051\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1config_1_1_storage_config_a82aa50f99870bb5a751cf3bb7a1dbb51}{path}}\ =\ \textcolor{stringliteral}{"{}./data"{}};}
+\DoxyCodeLine{00052\ \};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00057\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1config_1_1_logging_config}{LoggingConfig}}}
+\DoxyCodeLine{00058\ \{}
+\DoxyCodeLine{00059\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1config_1_1_logging_config_aa1badc2ab5e6d057c5f96f3c9d688af4}{path}}\ =\ \textcolor{stringliteral}{"{}./logs"{}};}
+\DoxyCodeLine{00060\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1config_1_1_logging_config_ad8f0e1a12bee10c105e9361bf70abca4}{level}}\ =\ \textcolor{stringliteral}{"{}INFO"{}};}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1config_1_1_logging_config_a75c93496da07bad1b15196231f325a68}{console}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1config_1_1_logging_config_a32523fae2d6376e9487a97278b058b64}{file}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1config_1_1_logging_config_a62d3f3d42be9bd4429ce91c10031efd9}{maxFileSize}}\ =\ 10485760;\ \ \textcolor{comment}{//\ 10MB}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1config_1_1_logging_config_af7387f3a0f5261968408d693f9eb0cc5}{maxBackupFiles}}\ =\ 10;}
+\DoxyCodeLine{00065\ \};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00070\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1config_1_1_wallet_config}{WalletConfig}}}
+\DoxyCodeLine{00071\ \{}
+\DoxyCodeLine{00072\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1config_1_1_wallet_config_adc1d514e2f8008a00ce844a988657145}{path}};}
+\DoxyCodeLine{00073\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1config_1_1_wallet_config_a20da866422cba6c23e00da72f96452bc}{password}};}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1config_1_1_wallet_config_a224b2e6aae7dcd4834a9ee25b6c7c278}{isActive}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00075\ \};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00080\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1config_1_1_protocol_config}{ProtocolConfig}}}
+\DoxyCodeLine{00081\ \{}
+\DoxyCodeLine{00082\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_config_a1b0da841425401010df3b4d303a768c6}{network}}\ =\ 860833102;}
+\DoxyCodeLine{00083\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_config_a42a58ffafa5f2d132bcfb1276790bd8c}{addressVersion}}\ =\ 53;}
+\DoxyCodeLine{00084\ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_config_a436177311b2659cc6420652d473be53e}{millisecondsPerBlock}}\{15000\};}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_config_a7f8179396916800028ac09155b12ee3b}{maxTransactionsPerBlock}}\ =\ 512;}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_config_a3d116a59fe27ee45fc952b5e849664fd}{memoryPoolMaxTransactions}}\ =\ 50000;}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_config_a4feb6754eeffe6f80eefb01642dc957b}{maxTraceableBlocks}}\ =\ 2102400;}
+\DoxyCodeLine{00088\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_config_a2f25f0c8b2e68dd0f947727c3b5dfc15}{initialGasDistribution}}\ =\ 5200000000000000;}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_config_a65bc43e390e09b6265de792c3494f58b}{validatorsCount}}\ =\ 7;}
+\DoxyCodeLine{00090\ \ \ \ \ std::vector<cryptography::ECPoint>\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_config_a7f3852f7ee2af56b3bfea1b7676a320f}{standbyCommittee}};}
+\DoxyCodeLine{00091\ \};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00096\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1config_1_1_plugin_config}{PluginConfig}}}
+\DoxyCodeLine{00097\ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1config_1_1_plugin_config_a2a4b194e01f8c1479dfa75a41e8b84dc}{enabled}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00099\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1config_1_1_plugin_config_a6bf84c67e50d4d96b7edd012a2ea6bac}{name}};}
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{structneo_1_1config_1_1_plugin_config_a8346dc10b6eaf2e9ab3d649c8230e74b}{settings}};}
+\DoxyCodeLine{00101\ \};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00106\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1config_1_1_configuration}{Configuration}}}
+\DoxyCodeLine{00107\ \{}
+\DoxyCodeLine{00108\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<Configuration>\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ac0ac22ce9bb04a3bbac0a04f4cc25f77}{Load}}(\textcolor{keyword}{const}\ std::string\&\ path);}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<Configuration>\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a950849b6e195a5ee67ca9748ed2a9200}{LoadFromJson}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ \mbox{\hyperlink{namespaceneo_1_1json}{json}});}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a226656beeb7868d0faee62a087da7208}{Save}}(\textcolor{keyword}{const}\ std::string\&\ path)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00134\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ab975de27875206be79b3202c4e82a1cf}{ToJson}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1config_1_1_network_config}{NetworkConfig}}\&\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a9fcb36e8a73dfcc0af864a749f1e6730}{GetNetwork}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a65830206063a157da93638f76c1e2d53}{network\_}};\ \}}
+\DoxyCodeLine{00140\ \ \ \ \ \mbox{\hyperlink{structneo_1_1config_1_1_network_config}{NetworkConfig}}\&\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ae2dcad5d84eb23ba28fb1725983d5d61}{GetNetwork}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a65830206063a157da93638f76c1e2d53}{network\_}};\ \}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1config_1_1_rpc_config}{RpcConfig}}\&\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a38e51ee9ab0e0de2a6c0f5d68741e916}{GetRpc}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_af54b369ad03276cbe34a23b1e1b0937b}{rpc\_}};\ \}}
+\DoxyCodeLine{00146\ \ \ \ \ \mbox{\hyperlink{structneo_1_1config_1_1_rpc_config}{RpcConfig}}\&\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a96ee55ccfb19671f7b55f3fb19f2d8a2}{GetRpc}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_af54b369ad03276cbe34a23b1e1b0937b}{rpc\_}};\ \}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1config_1_1_storage_config}{StorageConfig}}\&\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a19bd40879efc699cd250602f0f49f7ac}{GetStorage}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_aa282472fa19a1096a1cbdef0f514f228}{storage\_}};\ \}}
+\DoxyCodeLine{00152\ \ \ \ \ \mbox{\hyperlink{structneo_1_1config_1_1_storage_config}{StorageConfig}}\&\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a40a457d54d3588472d9db005151df3e2}{GetStorage}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_aa282472fa19a1096a1cbdef0f514f228}{storage\_}};\ \}}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1config_1_1_logging_config}{LoggingConfig}}\&\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a7a423c66a3be9fe2c69fac3560bf0196}{GetLogging}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ad14ee30521b3316dff463aaabf5a8bcf}{logging\_}};\ \}}
+\DoxyCodeLine{00158\ \ \ \ \ \mbox{\hyperlink{structneo_1_1config_1_1_logging_config}{LoggingConfig}}\&\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ada702758e26fbf960f9c72ad18ac3184}{GetLogging}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ad14ee30521b3316dff463aaabf5a8bcf}{logging\_}};\ \}}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1config_1_1_wallet_config}{WalletConfig}}\&\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a64bbef6de79e1bf579368c9606645ca9}{GetWallet}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ad32c178a198ce0a9002f157d121ecb02}{wallet\_}};\ \}}
+\DoxyCodeLine{00164\ \ \ \ \ \mbox{\hyperlink{structneo_1_1config_1_1_wallet_config}{WalletConfig}}\&\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_afcd43763da6930c2dfad5b5197b98d6d}{GetWallet}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ad32c178a198ce0a9002f157d121ecb02}{wallet\_}};\ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_config}{ProtocolConfig}}\&\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a13045d60aff3ce28e30f61e166e96dc7}{GetProtocol}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a5edd74e2757d6ce490c24d84faba4bd1}{protocol\_}};\ \}}
+\DoxyCodeLine{00170\ \ \ \ \ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_config}{ProtocolConfig}}\&\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a2032adf75061088ae40d17e0e3d5d3ee}{GetProtocol}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a5edd74e2757d6ce490c24d84faba4bd1}{protocol\_}};\ \}}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<PluginConfig>\&\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a8b2701017aff0623e3cd205dbf3fbfc2}{GetPlugins}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ae6baafa318f20a21ff67f716a494a198}{plugins\_}};\ \}}
+\DoxyCodeLine{00176\ \ \ \ \ std::vector<PluginConfig>\&\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a429761e1072cd6814f71030d0269f701}{GetPlugins}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ae6baafa318f20a21ff67f716a494a198}{plugins\_}};\ \}}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<Configuration>\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a436e6bad49f45024815ec1cffe4a0862}{GetMainnetConfig}}();}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<Configuration>\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a5f0ebfc4a06644a69971221af65f3e4d}{GetTestnetConfig}}();}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<Configuration>\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a6a8e679eefe08386dd4f0924b2e9318e}{GetPrivateNetConfig}}();}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a03e98f3a19a73899ffda17fd19d5e218}{Validate}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00200\ \ \ \ \ \mbox{\hyperlink{structneo_1_1config_1_1_network_config}{NetworkConfig}}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a65830206063a157da93638f76c1e2d53}{network\_}};}
+\DoxyCodeLine{00201\ \ \ \ \ \mbox{\hyperlink{structneo_1_1config_1_1_rpc_config}{RpcConfig}}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_af54b369ad03276cbe34a23b1e1b0937b}{rpc\_}};}
+\DoxyCodeLine{00202\ \ \ \ \ \mbox{\hyperlink{structneo_1_1config_1_1_storage_config}{StorageConfig}}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_aa282472fa19a1096a1cbdef0f514f228}{storage\_}};}
+\DoxyCodeLine{00203\ \ \ \ \ \mbox{\hyperlink{structneo_1_1config_1_1_logging_config}{LoggingConfig}}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ad14ee30521b3316dff463aaabf5a8bcf}{logging\_}};}
+\DoxyCodeLine{00204\ \ \ \ \ \mbox{\hyperlink{structneo_1_1config_1_1_wallet_config}{WalletConfig}}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ad32c178a198ce0a9002f157d121ecb02}{wallet\_}};}
+\DoxyCodeLine{00205\ \ \ \ \ \mbox{\hyperlink{structneo_1_1config_1_1_protocol_config}{ProtocolConfig}}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a5edd74e2757d6ce490c24d84faba4bd1}{protocol\_}};}
+\DoxyCodeLine{00206\ \ \ \ \ std::vector<PluginConfig>\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_ae6baafa318f20a21ff67f716a494a198}{plugins\_}};}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a47a1410686a1b9001ccc84b0f50ec47c}{ParseNetworkConfig}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ \mbox{\hyperlink{namespaceneo_1_1json}{json}});}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a1f2fd160856e3a882f5084f8a7f02545}{ParseRpcConfig}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ \mbox{\hyperlink{namespaceneo_1_1json}{json}});}
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a358b0fa2605469ac5d443ac6dd79793e}{ParseStorageConfig}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ \mbox{\hyperlink{namespaceneo_1_1json}{json}});}
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a07ca987665c854324a577942e66c5070}{ParseLoggingConfig}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ \mbox{\hyperlink{namespaceneo_1_1json}{json}});}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_aae9f783046acfc0c7bf302e2f6b41670}{ParseWalletConfig}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ \mbox{\hyperlink{namespaceneo_1_1json}{json}});}
+\DoxyCodeLine{00213\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a160b910d6f0e4c0d58cb3c6fbc4d09a7}{ParseProtocolConfig}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ \mbox{\hyperlink{namespaceneo_1_1json}{json}});}
+\DoxyCodeLine{00214\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_a9a31f2593c4d67cb061ad18b33857f2e}{ParsePluginConfigs}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io::JsonValue}}\&\ \mbox{\hyperlink{namespaceneo_1_1json}{json}});}
+\DoxyCodeLine{00215\ \};}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00220\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a78add4feb633a0543f538f2cb2a79c66}{ConfigurationManager}}}
+\DoxyCodeLine{00221\ \{}
+\DoxyCodeLine{00222\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a78add4feb633a0543f538f2cb2a79c66}{ConfigurationManager}}\&\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a71a4e4feea25de4b617d186d13cdc09e}{GetInstance}}();}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a4e7cc4ad9b4a46dd1448cf5a6291217c}{Initialize}}(\textcolor{keyword}{const}\ std::string\&\ configPath);}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a3373b9c28d248aa5a0d2d36a6b637ef1}{Initialize}}(std::shared\_ptr<Configuration>\ \mbox{\hyperlink{namespaceneo_1_1config}{config}});}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00246\ \ \ \ \ std::shared\_ptr<Configuration>\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a0336362502f6b39b07e6c169a864b128}{GetConfiguration}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00252\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_abe74a5eccfc486af5740d78aeb86d585}{IsInitialized}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a2f951aecaa113a6aa6e3c0ecdbf64c19}{Reload}}();}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00260\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00261\ \ \ \ \ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a78add4feb633a0543f538f2cb2a79c66}{ConfigurationManager}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00262\ \ \ \ \ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a30db1284f9da6c696d76d0bb12197e55}{\string~ConfigurationManager}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00263\ \ \ \ \ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a09f3cb9a2ecdde81a056a976ce28135c}{ConfigurationManager}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a78add4feb633a0543f538f2cb2a79c66}{ConfigurationManager}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00264\ \ \ \ \ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a78add4feb633a0543f538f2cb2a79c66}{ConfigurationManager}}\&\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a377cf8f0479dda40a3072609b4d56234}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a78add4feb633a0543f538f2cb2a79c66}{ConfigurationManager}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \ \ \ \ std::shared\_ptr<Configuration>\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a686e3f89eefb69478614b85ef823471d}{config\_}};}
+\DoxyCodeLine{00267\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a12bf299c9bdbeab9eb57ca98b9180c2d}{configPath\_}};}
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a4127308810a8e47db04a138eaa635ce0}{mutex\_}};}
+\DoxyCodeLine{00269\ \};}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00271\ \}\ \ \textcolor{comment}{//\ namespace\ neo::config}}
+
+\end{DoxyCode}

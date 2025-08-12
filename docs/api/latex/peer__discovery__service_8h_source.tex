@@ -1,0 +1,91 @@
+\doxysection{peer\+\_\+discovery\+\_\+service.\+h}
+\hypertarget{peer__discovery__service_8h_source}{}\label{peer__discovery__service_8h_source}\index{include/neo/network/peer\_discovery\_service.h@{include/neo/network/peer\_discovery\_service.h}}
+\mbox{\hyperlink{peer__discovery__service_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ijson__serializable_8h}{neo/io/ijson\_serializable.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{iserializable_8h}{neo/io/iserializable.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{logger_8h}{neo/logging/logger.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{network__address_8h}{neo/network/network\_address.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <boost/asio/io\_context.hpp>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <boost/asio/ip/tcp.hpp>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <boost/asio/steady\_timer.hpp>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <random>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network}{neo::network}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1_p2_p_server}{P2PServer}};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_a6547e4fb1828f85d3734c19c970e6d6c}{PeerDiscoveryService}}\ :\ \textcolor{keyword}{public}\ std::enable\_shared\_from\_this<PeerDiscoveryService>}
+\DoxyCodeLine{00029\ \{}
+\DoxyCodeLine{00030\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00037\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_a6547e4fb1828f85d3734c19c970e6d6c}{PeerDiscoveryService}}(boost::asio::io\_context\&\ ioContext,\ std::shared\_ptr<P2PServer>\ p2pServer,\ \textcolor{keywordtype}{size\_t}\ maxPeers\ =\ 8);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_a89637a40f27d4df4eb50568276a2523e}{Start}}();}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_a51b0e47e150d291082ed0e58ce29fdfb}{Stop}}();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_a1c730229aeab8fdc43ab0fe35be1ac87}{AddSeedNodes}}(\textcolor{keyword}{const}\ std::vector<NetworkAddress>\&\ seedNodes);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_a6b6c96ed462cf0c872b4e7ce1038ee8f}{AddKnownPeer}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{NetworkAddress}}\&\ address);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_ae2218aa2218da28213988d6d75788013}{AddKnownPeers}}(\textcolor{keyword}{const}\ std::vector<NetworkAddress>\&\ addresses);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00075\ \ \ \ \ std::vector<NetworkAddress>\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_ab7de66622eb1d9b20ea2cbe13ea7cdd8}{GetKnownPeers}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00081\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_a21e86418c7578db81c7e602a19460092}{GetConnectedPeers}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_a2fcfb452042a219c2ddfc9e45d29f2da}{OnPeerConnected}}(\textcolor{keyword}{const}\ std::string\&\ endpoint);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_ac9d47c898253dbcbce06f5bfc02698f4}{OnPeerDisconnected}}(\textcolor{keyword}{const}\ std::string\&\ endpoint);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_a8e6c6730f4b8cffedd0fa8ab8a19ca6f}{HandleGetAddrMessage}}(\textcolor{keyword}{const}\ std::shared\_ptr<class\ P2PPeer>\&\ peer,}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::shared\_ptr<class\ GetAddrPayload>\&\ payload);}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_a6796e5e1a5271a180fc8e2c5b49e92b1}{HandleAddrMessage}}(\textcolor{keyword}{const}\ std::shared\_ptr<class\ P2PPeer>\&\ peer,}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::shared\_ptr<class\ AddrPayload>\&\ payload);}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1network_1_1_peer_discovery_service_1_1_peer_info}{PeerInfo}}}
+\DoxyCodeLine{00113\ \ \ \ \ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{NetworkAddress}}\ \mbox{\hyperlink{structneo_1_1network_1_1_peer_discovery_service_1_1_peer_info_a62669a96964b8468cf5981b03fd51eea}{address}};}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ std::chrono::system\_clock::time\_point\ \mbox{\hyperlink{structneo_1_1network_1_1_peer_discovery_service_1_1_peer_info_a47d94fe3caa940ea5c1b042946e60bf5}{lastSeen}};}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ std::chrono::system\_clock::time\_point\ \mbox{\hyperlink{structneo_1_1network_1_1_peer_discovery_service_1_1_peer_info_adbd198112517246219181225f97506f8}{lastAttempt}};}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1network_1_1_peer_discovery_service_1_1_peer_info_ab5b7a3a0d797c76abc97dfbb915b89dd}{failedAttempts}}\{0\};}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1network_1_1_peer_discovery_service_1_1_peer_info_aedecd901e6a76b38c1a47964c98db528}{connected}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00119\ \ \ \ \ \};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_a0677e2001be99fc89a2326606351a84c}{DiscoverPeers}}();}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_aa32229a3e87c5b01935a536f5fbb0d48}{AttemptConnections}}();}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_a1247affcd0b4682d319c421805ce0e0f}{CleanupOldPeers}}();}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_aaf423a3860403ed26de9ffcd5b7ebd4f}{ScheduleNextDiscovery}}();}
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_af237511cad28bf87dc92a0b2d6ca06e2}{SaveKnownPeers}}();}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_ae7a0dcc7d1ccf9a0e4e0eca7a62a69c9}{LoadKnownPeers}}();}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00133\ \ \ \ \ boost::asio::io\_context\&\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_ae142581e99d5d26d952d7b1a7c2c5691}{ioContext\_}};}
+\DoxyCodeLine{00134\ \ \ \ \ std::shared\_ptr<P2PServer>\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_a04b482707bbd8563152fd395569d7207}{p2pServer\_}};}
+\DoxyCodeLine{00135\ \ \ \ \ boost::asio::steady\_timer\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_abae21cd17df5d00fc6d05dfc52cc3152}{discoveryTimer\_}};}
+\DoxyCodeLine{00136\ \ \ \ \ std::vector<NetworkAddress>\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_a4b703b0e3974fb8114ab864530e9d85a}{seedNodes\_}};}
+\DoxyCodeLine{00137\ \ \ \ \ std::unordered\_map<std::string,\ PeerInfo>\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_ad5827c8ca5482dbaaf9c563691a6f1ba}{knownPeers\_}};}
+\DoxyCodeLine{00138\ \ \ \ \ std::unordered\_set<std::string>\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_aab2ca1eb22ad90e434b17a5e048d9e2e}{connectedPeers\_}};}
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_af60261cb5eb0d347e879e1ad885a0a53}{mutex\_}};}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_af31286c5580c4e8103cd7d03ea79e418}{maxPeers\_}};}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_abecfe451e1d08adff2a94013074349f1}{running\_}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00142\ \ \ \ \ std::mt19937\ \mbox{\hyperlink{classneo_1_1network_1_1_peer_discovery_service_acccbbd537831c3009f86248acfdde5b5}{rng\_}}\{std::random\_device\{\}()\};}
+\DoxyCodeLine{00143\ \};}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network}}
+
+\end{DoxyCode}

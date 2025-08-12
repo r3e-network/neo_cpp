@@ -1,0 +1,499 @@
+\doxysection{neo\+::network\+::p2p\+::Message Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1_message}{}\label{classneo_1_1network_1_1p2p_1_1_message}\index{neo::network::p2p::Message@{neo::network::p2p::Message}}
+
+
+Represents a message on the NEO network.  
+
+
+
+
+{\ttfamily \#include $<$message.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::p2p\+::Message\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::Message\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_ad500547950c4cfac21e99587e0f8f05a}{Message}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1_message}{Message}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_aaacb7de23d9a537d929d969f94b39275}{Message}} (\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{Message\+Command}} command, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{IPayload}} $>$ payload)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_message}{Message} with the specified command and payload. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a806f27dd59399fa07bb0e0d17c3b172e}{Message\+Flags}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_acf88f8d648a3ba1c9dc534094930ba3a}{Get\+Flags}} () const
+\begin{DoxyCompactList}\small\item\em Gets the flags of the message. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{Message\+Command}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_af505a0952e235388e42f926f2314e882}{Get\+Command}} () const
+\begin{DoxyCompactList}\small\item\em Gets the command of the message. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{IPayload}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_aa4078d4b6627d7b12d39bfe1cfebfe25}{Get\+Payload}} () const
+\begin{DoxyCompactList}\small\item\em Gets the payload of the message. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a6602eb67d8f257249302d6d7f2b64cfb}{Get\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the size of the message. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a715ccb28cf3623b4c2bd48df0015fcdd}{Is\+Compressed}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the message is compressed. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a3c33905384283f8a5190a369295f8b6c}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the message to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_ae1bf057d746f676cd2ecea8f2bd16ed6}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the message from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a4bb4e5bda2aef4a75407206c24e96e10}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the message to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a3eb99bb76a199d3d64a7b261cf3bc139}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the message from a JSON reader. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_afbc860dc068254c6e66c693eeb0c59b9}{To\+Array}} (bool enable\+Compression=true) const
+\begin{DoxyCompactList}\small\item\em Converts the message to a byte array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_ae3142f00d9d6d585d97648bdf6d62759}{Create}} (\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{Message\+Command}} command, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{IPayload}} $>$ payload=nullptr)
+\begin{DoxyCompactList}\small\item\em Creates a new \doxylink{classneo_1_1network_1_1p2p_1_1_message}{Message}. \end{DoxyCompactList}\item 
+static uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_af51deec699dc8d8828e45d245870f1e9}{Try\+Deserialize}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\begin{DoxyCompactList}\small\item\em Tries to deserialize a message from a byte array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a07ed6a1e4897d9d4a79cdf33495117a7}{Payload\+Max\+Size}} = 0x02000000
+\begin{DoxyCompactList}\small\item\em Indicates the maximum size of the payload. \end{DoxyCompactList}\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a54dd9e017858d053b01580a83b01b36b}{Compression\+Min\+Size}} = 128
+\begin{DoxyCompactList}\small\item\em The minimum size for compression. \end{DoxyCompactList}\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a548e30290b737bf89ae90063f88e2312}{Compression\+Threshold}} = 64
+\begin{DoxyCompactList}\small\item\em The compression threshold. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a3cc4c8b3d929218f6ad9afb64f747e52}{Compress\+Payload}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a5c8df365c957520d0e6a90ddecc02f98}{Decompress\+Payload}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_adba30a6ec5e49d8a847b6c760e8f390f}{Should\+Compress}} (\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{Message\+Command}} command)
+\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a0e5f858aee7d563a0d5b40b073fafbe4}{Get\+Command\+String}} (\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{Message\+Command}} command)
+\item 
+static \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{Message\+Command}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a4348deb8baa21f15ff24f28ac5c5612e}{Get\+Command\+From\+String}} (const std\+::string \&command\+Str)
+\item 
+static uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a654aaf898e51e3b91c7a60dcdeaf763f}{Calculate\+Payload\+Checksum}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&payload)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a806f27dd59399fa07bb0e0d17c3b172e}{Message\+Flags}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_ae2ad74237e7bda871c3f3d29bf51cb63}{flags\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{Message\+Command}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_abea701466c756265673c5333c1446459}{command\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{IPayload}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a746de130e6b19db67564a54fb95c8ca7}{payload\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a786d342eb41755d5fd39fccd35a9da5c}{payload\+Raw\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_aef963c23b7d50b899ec6aefc3c34dcb6}{payload\+Compressed\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a message on the NEO network. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_ad500547950c4cfac21e99587e0f8f05a}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!Message@{Message}}
+\index{Message@{Message}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{Message()}{Message()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_ad500547950c4cfac21e99587e0f8f05a} 
+neo\+::network\+::p2p\+::\+Message\+::\+Message (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1_message}{Message}. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_aaacb7de23d9a537d929d969f94b39275}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!Message@{Message}}
+\index{Message@{Message}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{Message()}{Message()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_aaacb7de23d9a537d929d969f94b39275} 
+neo\+::network\+::p2p\+::\+Message\+::\+Message (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{Message\+Command}}}]{command}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{IPayload}} $>$}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_message}{Message} with the specified command and payload. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The command. \\
+\hline
+{\em payload} & The payload. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_a654aaf898e51e3b91c7a60dcdeaf763f}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!CalculatePayloadChecksum@{CalculatePayloadChecksum}}
+\index{CalculatePayloadChecksum@{CalculatePayloadChecksum}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{CalculatePayloadChecksum()}{CalculatePayloadChecksum()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_a654aaf898e51e3b91c7a60dcdeaf763f} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Message\+::\+Calculate\+Payload\+Checksum (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{payload}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_a3cc4c8b3d929218f6ad9afb64f747e52}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!CompressPayload@{CompressPayload}}
+\index{CompressPayload@{CompressPayload}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{CompressPayload()}{CompressPayload()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_a3cc4c8b3d929218f6ad9afb64f747e52} 
+void neo\+::network\+::p2p\+::\+Message\+::\+Compress\+Payload (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_ae3142f00d9d6d585d97648bdf6d62759}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!Create@{Create}}
+\index{Create@{Create}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_ae3142f00d9d6d585d97648bdf6d62759} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} neo\+::network\+::p2p\+::\+Message\+::\+Create (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{Message\+Command}}}]{command}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{IPayload}} $>$}]{payload}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a new \doxylink{classneo_1_1network_1_1p2p_1_1_message}{Message}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em command} & The command. \\
+\hline
+{\em payload} & The payload. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The message. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_a5c8df365c957520d0e6a90ddecc02f98}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!DecompressPayload@{DecompressPayload}}
+\index{DecompressPayload@{DecompressPayload}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{DecompressPayload()}{DecompressPayload()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_a5c8df365c957520d0e6a90ddecc02f98} 
+void neo\+::network\+::p2p\+::\+Message\+::\+Decompress\+Payload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_ae1bf057d746f676cd2ecea8f2bd16ed6}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_ae1bf057d746f676cd2ecea8f2bd16ed6} 
+void neo\+::network\+::p2p\+::\+Message\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the message from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_a3eb99bb76a199d3d64a7b261cf3bc139}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_a3eb99bb76a199d3d64a7b261cf3bc139} 
+void neo\+::network\+::p2p\+::\+Message\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the message from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_af505a0952e235388e42f926f2314e882}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!GetCommand@{GetCommand}}
+\index{GetCommand@{GetCommand}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{GetCommand()}{GetCommand()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_af505a0952e235388e42f926f2314e882} 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{Message\+Command}} neo\+::network\+::p2p\+::\+Message\+::\+Get\+Command (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the command of the message. 
+
+\begin{DoxyReturn}{Returns}
+The command. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_a4348deb8baa21f15ff24f28ac5c5612e}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!GetCommandFromString@{GetCommandFromString}}
+\index{GetCommandFromString@{GetCommandFromString}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{GetCommandFromString()}{GetCommandFromString()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_a4348deb8baa21f15ff24f28ac5c5612e} 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{Message\+Command}} neo\+::network\+::p2p\+::\+Message\+::\+Get\+Command\+From\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{command\+Str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_a0e5f858aee7d563a0d5b40b073fafbe4}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!GetCommandString@{GetCommandString}}
+\index{GetCommandString@{GetCommandString}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{GetCommandString()}{GetCommandString()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_a0e5f858aee7d563a0d5b40b073fafbe4} 
+std\+::string neo\+::network\+::p2p\+::\+Message\+::\+Get\+Command\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{Message\+Command}}}]{command}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_acf88f8d648a3ba1c9dc534094930ba3a}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!GetFlags@{GetFlags}}
+\index{GetFlags@{GetFlags}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{GetFlags()}{GetFlags()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_acf88f8d648a3ba1c9dc534094930ba3a} 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a806f27dd59399fa07bb0e0d17c3b172e}{Message\+Flags}} neo\+::network\+::p2p\+::\+Message\+::\+Get\+Flags (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the flags of the message. 
+
+\begin{DoxyReturn}{Returns}
+The flags. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_aa4078d4b6627d7b12d39bfe1cfebfe25}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!GetPayload@{GetPayload}}
+\index{GetPayload@{GetPayload}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{GetPayload()}{GetPayload()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_aa4078d4b6627d7b12d39bfe1cfebfe25} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{IPayload}} $>$ neo\+::network\+::p2p\+::\+Message\+::\+Get\+Payload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the payload of the message. 
+
+\begin{DoxyReturn}{Returns}
+The payload. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_a6602eb67d8f257249302d6d7f2b64cfb}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_a6602eb67d8f257249302d6d7f2b64cfb} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Message\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the size of the message. 
+
+\begin{DoxyReturn}{Returns}
+The size. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_a715ccb28cf3623b4c2bd48df0015fcdd}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!IsCompressed@{IsCompressed}}
+\index{IsCompressed@{IsCompressed}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{IsCompressed()}{IsCompressed()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_a715ccb28cf3623b4c2bd48df0015fcdd} 
+bool neo\+::network\+::p2p\+::\+Message\+::\+Is\+Compressed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the message is compressed. 
+
+\begin{DoxyReturn}{Returns}
+True if the message is compressed, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_a3c33905384283f8a5190a369295f8b6c}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_a3c33905384283f8a5190a369295f8b6c} 
+void neo\+::network\+::p2p\+::\+Message\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the message to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_a4bb4e5bda2aef4a75407206c24e96e10}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_a4bb4e5bda2aef4a75407206c24e96e10} 
+void neo\+::network\+::p2p\+::\+Message\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the message to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_adba30a6ec5e49d8a847b6c760e8f390f}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!ShouldCompress@{ShouldCompress}}
+\index{ShouldCompress@{ShouldCompress}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{ShouldCompress()}{ShouldCompress()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_adba30a6ec5e49d8a847b6c760e8f390f} 
+bool neo\+::network\+::p2p\+::\+Message\+::\+Should\+Compress (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{Message\+Command}}}]{command}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_afbc860dc068254c6e66c693eeb0c59b9}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!ToArray@{ToArray}}
+\index{ToArray@{ToArray}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{ToArray()}{ToArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_afbc860dc068254c6e66c693eeb0c59b9} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::network\+::p2p\+::\+Message\+::\+To\+Array (\begin{DoxyParamCaption}\item[{bool}]{enable\+Compression}{ = {\ttfamily true}}\end{DoxyParamCaption}) const}
+
+
+
+Converts the message to a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em enable\+Compression} & Whether to enable compression. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The byte array. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_af51deec699dc8d8828e45d245870f1e9}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!TryDeserialize@{TryDeserialize}}
+\index{TryDeserialize@{TryDeserialize}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{TryDeserialize()}{TryDeserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_af51deec699dc8d8828e45d245870f1e9} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Message\+::\+Try\+Deserialize (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{, }\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Tries to deserialize a message from a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The byte array. \\
+\hline
+{\em message} & The message to deserialize into. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of bytes read, or 0 if deserialization failed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_abea701466c756265673c5333c1446459}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!command\_@{command\_}}
+\index{command\_@{command\_}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{command\_}{command\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_abea701466c756265673c5333c1446459} 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{Message\+Command}} neo\+::network\+::p2p\+::\+Message\+::command\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_a54dd9e017858d053b01580a83b01b36b}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!CompressionMinSize@{CompressionMinSize}}
+\index{CompressionMinSize@{CompressionMinSize}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{CompressionMinSize}{CompressionMinSize}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_a54dd9e017858d053b01580a83b01b36b} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Message\+::\+Compression\+Min\+Size = 128\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The minimum size for compression. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_a548e30290b737bf89ae90063f88e2312}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!CompressionThreshold@{CompressionThreshold}}
+\index{CompressionThreshold@{CompressionThreshold}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{CompressionThreshold}{CompressionThreshold}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_a548e30290b737bf89ae90063f88e2312} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Message\+::\+Compression\+Threshold = 64\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The compression threshold. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_ae2ad74237e7bda871c3f3d29bf51cb63}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!flags\_@{flags\_}}
+\index{flags\_@{flags\_}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{flags\_}{flags\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_ae2ad74237e7bda871c3f3d29bf51cb63} 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a806f27dd59399fa07bb0e0d17c3b172e}{Message\+Flags}} neo\+::network\+::p2p\+::\+Message\+::flags\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_a746de130e6b19db67564a54fb95c8ca7}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!payload\_@{payload\_}}
+\index{payload\_@{payload\_}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{payload\_}{payload\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_a746de130e6b19db67564a54fb95c8ca7} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{IPayload}}$>$ neo\+::network\+::p2p\+::\+Message\+::payload\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_aef963c23b7d50b899ec6aefc3c34dcb6}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!payloadCompressed\_@{payloadCompressed\_}}
+\index{payloadCompressed\_@{payloadCompressed\_}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{payloadCompressed\_}{payloadCompressed\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_aef963c23b7d50b899ec6aefc3c34dcb6} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::network\+::p2p\+::\+Message\+::payload\+Compressed\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_a07ed6a1e4897d9d4a79cdf33495117a7}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!PayloadMaxSize@{PayloadMaxSize}}
+\index{PayloadMaxSize@{PayloadMaxSize}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{PayloadMaxSize}{PayloadMaxSize}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_a07ed6a1e4897d9d4a79cdf33495117a7} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Message\+::\+Payload\+Max\+Size = 0x02000000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Indicates the maximum size of the payload. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_message_a786d342eb41755d5fd39fccd35a9da5c}\index{neo::network::p2p::Message@{neo::network::p2p::Message}!payloadRaw\_@{payloadRaw\_}}
+\index{payloadRaw\_@{payloadRaw\_}!neo::network::p2p::Message@{neo::network::p2p::Message}}
+\doxysubsubsection{\texorpdfstring{payloadRaw\_}{payloadRaw\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_message_a786d342eb41755d5fd39fccd35a9da5c} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::network\+::p2p\+::\+Message\+::payload\+Raw\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/\mbox{\hyperlink{message_8h}{message.\+h}}\item 
+src/network/p2p/\mbox{\hyperlink{message__complete_8cpp}{message\+\_\+complete.\+cpp}}\item 
+src/network/p2p/\mbox{\hyperlink{message__impl_8cpp}{message\+\_\+impl.\+cpp}}\item 
+src/network/p2p/\mbox{\hyperlink{message__simple_8cpp}{message\+\_\+simple.\+cpp}}\end{DoxyCompactItemize}

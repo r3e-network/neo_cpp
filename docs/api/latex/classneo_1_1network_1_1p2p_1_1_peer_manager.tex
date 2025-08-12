@@ -1,0 +1,500 @@
+\doxysection{neo\+::network\+::p2p\+::Peer\+Manager Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager}{}\label{classneo_1_1network_1_1p2p_1_1_peer_manager}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+
+
+Production-\/ready peer manager for P2P networking.  
+
+
+
+
+{\ttfamily \#include $<$peer\+\_\+manager.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::Peer\+Manager\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_peer_manager_1_1_config}{Config}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_ac8f22f95b1f10140bf3f3bd5538c0673}{Peer\+Manager}} (const \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_peer_manager_1_1_config}{Config}} \&config)
+\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a61ee22a6ce20ebca10db5db14ab1d910}{Add\+Peer}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$ peer)
+\begin{DoxyCompactList}\small\item\em Add a new peer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a2bd87b4850fea5f003023a63487d311d}{Remove\+Peer}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&peer\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Remove a peer. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a9f502a6d31b6e7f24ff33129c7bfb1ee}{Get\+Peer}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&peer\+\_\+id) const
+\begin{DoxyCompactList}\small\item\em Get peer by ID. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a4f1ab43bff3db4106b9f0942a49401cc}{Get\+Connected\+Peers}} () const
+\begin{DoxyCompactList}\small\item\em Get all connected peers. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a02c003462368e11a6e556a919203432e}{Get\+Broadcast\+Peers}} (size\+\_\+t count) const
+\begin{DoxyCompactList}\small\item\em Get peers for broadcasting. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_ac94027c8d199001d54d060d550494a44}{Get\+Peer\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Get peer count. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_aa8934274e4cf8abf904f2543b59abc07}{Get\+Outbound\+Peer\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Get outbound peer count. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_ac94b3fd82a036b2d2abb1452e7ed1550}{Need\+More\+Peers}} () const
+\begin{DoxyCompactList}\small\item\em Check if we need more peers. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a9ef03503c9491cf06067c5e9c6fb968c}{Get\+Addresses\+To\+Connect}} (size\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Get addresses for new connections. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_af22b13767552b22da6f2a5ae6d243048}{Add\+Known\+Addresses}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ \&addresses)
+\begin{DoxyCompactList}\small\item\em Add known addresses from peer discovery. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a433e7e9a7bdcba5d6a751dcf37d06678}{Mark\+Address\+Tried}} (const \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} \&address)
+\begin{DoxyCompactList}\small\item\em Mark address as tried. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a08a4472bb18a33ff32232f54c3a268b5}{Update\+Peer\+Stats}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&peer\+\_\+id, uint64\+\_\+t bytes\+\_\+sent, uint64\+\_\+t bytes\+\_\+received, double latency\+\_\+ms)
+\begin{DoxyCompactList}\small\item\em Update peer statistics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a12eef0a0b08bf5fd725bad65f49a200b}{Report\+Misbehavior}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&peer\+\_\+id, uint32\+\_\+t score, const std\+::string \&reason)
+\begin{DoxyCompactList}\small\item\em Report peer misbehavior. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a8a6d3cdbddd1dac48613d9ee0e253ee9}{Ban\+IP}} (const std\+::string \&ip\+\_\+address, std\+::chrono\+::seconds duration=std\+::chrono\+::seconds(0))
+\begin{DoxyCompactList}\small\item\em Ban an IP address. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_ae94f5b20a68293b416e76edb76749a82}{Is\+IPBanned}} (const std\+::string \&ip\+\_\+address) const
+\begin{DoxyCompactList}\small\item\em Check if IP is banned. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a5ae93fe3afcd3716c7b370ef3e2808c5}{Unban\+IP}} (const std\+::string \&ip\+\_\+address)
+\begin{DoxyCompactList}\small\item\em Unban an IP address. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a521a20b07a3e3a113d07411a6b2b6ac9}{Cleanup}} ()
+\begin{DoxyCompactList}\small\item\em Clean up disconnected peers and expired bans. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a370745ef01deddcd32dd507973d406d6}{Peer\+Quality}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a15582931cef07af7d2799046b42fec20}{Get\+Peer\+Quality}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&peer\+\_\+id) const
+\begin{DoxyCompactList}\small\item\em Get peer quality score. \end{DoxyCompactList}\item 
+json\+::\+JObject \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a2fde1c3bd9721043d5de813cd91fbbb2}{Export\+Statistics}} () const
+\begin{DoxyCompactList}\small\item\em Export peer statistics. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a022509557b8c895e0bca2f1073cd4234}{Save\+Peer\+Addresses}} (const std\+::string \&filepath) const
+\begin{DoxyCompactList}\small\item\em Save peer addresses to file. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a8d597c936567be586354b2ef223a1717}{Load\+Peer\+Addresses}} (const std\+::string \&filepath)
+\begin{DoxyCompactList}\small\item\em Load peer addresses from file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a751239dd73852d6ebe692884be8ce5ff}{Can\+Accept\+From\+IP}} (const std\+::string \&ip\+\_\+address) const
+\begin{DoxyCompactList}\small\item\em Check if we can accept more peers from this IP. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_ad815c60be85ec6477c8395c02112690b}{Select\+Random\+Addresses}} (size\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Select random addresses from known pool. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a5011b2191dbee4835814c1b37a6bc27c}{Score\+Address}} (const \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} \&address) const
+\begin{DoxyCompactList}\small\item\em Score an address for connection priority. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a02c4f1a13ffa97bccb59bea74d83ce43}{Update\+Last\+Seen}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&peer\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Update last seen time for peer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_abe40eb3205aa007d267d263384f1a094}{Enforce\+Peer\+Limits}} ()
+\begin{DoxyCompactList}\small\item\em Check and enforce peer limits. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_ac33753a61362c9945b0247b8c7762f0c}{Calculate\+Peer\+Score}} (const \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_peer_stats}{Peer\+Stats}} \&stats) const
+\begin{DoxyCompactList}\small\item\em Calculate peer score based on statistics. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_peer_manager_1_1_config}{Config}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a9b6e8351015a88a3f006b99292512571}{config\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1core_1_1_logger}{core\+::\+Logger}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_ad47ec6d217b6ae149ca69d1d785183d1}{logger\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a006f7793012fc54571ef35d6fab51e2c}{mutex\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a05ca6b7d5d00d22d57706a9ed62e50f2}{peers\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a8f25e7818ae8ed3ae04fc5cd0d057327}{peers\+\_\+by\+\_\+ip\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_peer_stats}{Peer\+Stats}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a0c0d111aa7075f4d48d490f3a45e4a7c}{peer\+\_\+stats\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a5d35c6dfe3c6b14b18905c786de1a24e}{known\+\_\+addresses\+\_\+}}
+\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a342a6d9ec58edeb3c8ae749b34f5d079}{tried\+\_\+addresses\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a64dbd590c3135cc7a70dd51f9cb9bf8e}{banned\+\_\+ips\+\_\+}}
+\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a023fdaf3af754974085feef140c3b0cf}{banned\+\_\+peers\+\_\+}}
+\item 
+std\+::mt19937 \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_manager_a9698b0721fe300520fb4f5823f0f3b12}{rng\+\_\+}} \{std\+::random\+\_\+device\{\}()\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Production-\/ready peer manager for P2P networking. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_ac8f22f95b1f10140bf3f3bd5538c0673}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!PeerManager@{PeerManager}}
+\index{PeerManager@{PeerManager}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{PeerManager()}{PeerManager()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_ac8f22f95b1f10140bf3f3bd5538c0673} 
+neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Peer\+Manager (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_peer_manager_1_1_config}{Config}} \&}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_af22b13767552b22da6f2a5ae6d243048}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!AddKnownAddresses@{AddKnownAddresses}}
+\index{AddKnownAddresses@{AddKnownAddresses}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{AddKnownAddresses()}{AddKnownAddresses()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_af22b13767552b22da6f2a5ae6d243048} 
+void neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Add\+Known\+Addresses (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ \&}]{addresses}{}\end{DoxyParamCaption})}
+
+
+
+Add known addresses from peer discovery. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a61ee22a6ce20ebca10db5db14ab1d910}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!AddPeer@{AddPeer}}
+\index{AddPeer@{AddPeer}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{AddPeer()}{AddPeer()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a61ee22a6ce20ebca10db5db14ab1d910} 
+bool neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Add\+Peer (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$}]{peer}{}\end{DoxyParamCaption})}
+
+
+
+Add a new peer. 
+
+\begin{DoxyReturn}{Returns}
+true if peer was added successfully 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a8a6d3cdbddd1dac48613d9ee0e253ee9}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!BanIP@{BanIP}}
+\index{BanIP@{BanIP}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{BanIP()}{BanIP()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a8a6d3cdbddd1dac48613d9ee0e253ee9} 
+void neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Ban\+IP (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{ip\+\_\+address}{, }\item[{std\+::chrono\+::seconds}]{duration}{ = {\ttfamily std\+:\+:chrono\+:\+:seconds(0)}}\end{DoxyParamCaption})}
+
+
+
+Ban an IP address. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_ac33753a61362c9945b0247b8c7762f0c}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!CalculatePeerScore@{CalculatePeerScore}}
+\index{CalculatePeerScore@{CalculatePeerScore}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{CalculatePeerScore()}{CalculatePeerScore()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_ac33753a61362c9945b0247b8c7762f0c} 
+double neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Calculate\+Peer\+Score (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_peer_stats}{Peer\+Stats}} \&}]{stats}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculate peer score based on statistics. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a751239dd73852d6ebe692884be8ce5ff}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!CanAcceptFromIP@{CanAcceptFromIP}}
+\index{CanAcceptFromIP@{CanAcceptFromIP}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{CanAcceptFromIP()}{CanAcceptFromIP()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a751239dd73852d6ebe692884be8ce5ff} 
+bool neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Can\+Accept\+From\+IP (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{ip\+\_\+address}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Check if we can accept more peers from this IP. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a521a20b07a3e3a113d07411a6b2b6ac9}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!Cleanup@{Cleanup}}
+\index{Cleanup@{Cleanup}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{Cleanup()}{Cleanup()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a521a20b07a3e3a113d07411a6b2b6ac9} 
+void neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Cleanup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clean up disconnected peers and expired bans. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_abe40eb3205aa007d267d263384f1a094}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!EnforcePeerLimits@{EnforcePeerLimits}}
+\index{EnforcePeerLimits@{EnforcePeerLimits}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{EnforcePeerLimits()}{EnforcePeerLimits()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_abe40eb3205aa007d267d263384f1a094} 
+void neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Enforce\+Peer\+Limits (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Check and enforce peer limits. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a2fde1c3bd9721043d5de813cd91fbbb2}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!ExportStatistics@{ExportStatistics}}
+\index{ExportStatistics@{ExportStatistics}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{ExportStatistics()}{ExportStatistics()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a2fde1c3bd9721043d5de813cd91fbbb2} 
+json\+::\+JObject neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Export\+Statistics (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Export peer statistics. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a9ef03503c9491cf06067c5e9c6fb968c}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!GetAddressesToConnect@{GetAddressesToConnect}}
+\index{GetAddressesToConnect@{GetAddressesToConnect}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{GetAddressesToConnect()}{GetAddressesToConnect()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a9ef03503c9491cf06067c5e9c6fb968c} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Get\+Addresses\+To\+Connect (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{count}{}\end{DoxyParamCaption})}
+
+
+
+Get addresses for new connections. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em count} & Number of addresses to get \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Addresses to try connecting to 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a02c003462368e11a6e556a919203432e}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!GetBroadcastPeers@{GetBroadcastPeers}}
+\index{GetBroadcastPeers@{GetBroadcastPeers}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{GetBroadcastPeers()}{GetBroadcastPeers()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a02c003462368e11a6e556a919203432e} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$ $>$ neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Get\+Broadcast\+Peers (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{count}{}\end{DoxyParamCaption}) const}
+
+
+
+Get peers for broadcasting. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em count} & Maximum number of peers \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Selected peers for broadcast 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a4f1ab43bff3db4106b9f0942a49401cc}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!GetConnectedPeers@{GetConnectedPeers}}
+\index{GetConnectedPeers@{GetConnectedPeers}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{GetConnectedPeers()}{GetConnectedPeers()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a4f1ab43bff3db4106b9f0942a49401cc} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$ $>$ neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Get\+Connected\+Peers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get all connected peers. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_aa8934274e4cf8abf904f2543b59abc07}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!GetOutboundPeerCount@{GetOutboundPeerCount}}
+\index{GetOutboundPeerCount@{GetOutboundPeerCount}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{GetOutboundPeerCount()}{GetOutboundPeerCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_aa8934274e4cf8abf904f2543b59abc07} 
+size\+\_\+t neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Get\+Outbound\+Peer\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get outbound peer count. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a9f502a6d31b6e7f24ff33129c7bfb1ee}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!GetPeer@{GetPeer}}
+\index{GetPeer@{GetPeer}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{GetPeer()}{GetPeer()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a9f502a6d31b6e7f24ff33129c7bfb1ee} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}} $>$ neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Get\+Peer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{peer\+\_\+id}{}\end{DoxyParamCaption}) const}
+
+
+
+Get peer by ID. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_ac94027c8d199001d54d060d550494a44}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!GetPeerCount@{GetPeerCount}}
+\index{GetPeerCount@{GetPeerCount}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{GetPeerCount()}{GetPeerCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_ac94027c8d199001d54d060d550494a44} 
+size\+\_\+t neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Get\+Peer\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get peer count. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a15582931cef07af7d2799046b42fec20}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!GetPeerQuality@{GetPeerQuality}}
+\index{GetPeerQuality@{GetPeerQuality}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{GetPeerQuality()}{GetPeerQuality()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a15582931cef07af7d2799046b42fec20} 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a370745ef01deddcd32dd507973d406d6}{Peer\+Quality}} neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Get\+Peer\+Quality (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{peer\+\_\+id}{}\end{DoxyParamCaption}) const}
+
+
+
+Get peer quality score. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_ae94f5b20a68293b416e76edb76749a82}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!IsIPBanned@{IsIPBanned}}
+\index{IsIPBanned@{IsIPBanned}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{IsIPBanned()}{IsIPBanned()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_ae94f5b20a68293b416e76edb76749a82} 
+bool neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Is\+IPBanned (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{ip\+\_\+address}{}\end{DoxyParamCaption}) const}
+
+
+
+Check if IP is banned. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a8d597c936567be586354b2ef223a1717}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!LoadPeerAddresses@{LoadPeerAddresses}}
+\index{LoadPeerAddresses@{LoadPeerAddresses}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{LoadPeerAddresses()}{LoadPeerAddresses()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a8d597c936567be586354b2ef223a1717} 
+bool neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Load\+Peer\+Addresses (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filepath}{}\end{DoxyParamCaption})}
+
+
+
+Load peer addresses from file. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a433e7e9a7bdcba5d6a751dcf37d06678}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!MarkAddressTried@{MarkAddressTried}}
+\index{MarkAddressTried@{MarkAddressTried}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{MarkAddressTried()}{MarkAddressTried()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a433e7e9a7bdcba5d6a751dcf37d06678} 
+void neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Mark\+Address\+Tried (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} \&}]{address}{}\end{DoxyParamCaption})}
+
+
+
+Mark address as tried. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_ac94b3fd82a036b2d2abb1452e7ed1550}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!NeedMorePeers@{NeedMorePeers}}
+\index{NeedMorePeers@{NeedMorePeers}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{NeedMorePeers()}{NeedMorePeers()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_ac94b3fd82a036b2d2abb1452e7ed1550} 
+bool neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Need\+More\+Peers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Check if we need more peers. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a2bd87b4850fea5f003023a63487d311d}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!RemovePeer@{RemovePeer}}
+\index{RemovePeer@{RemovePeer}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{RemovePeer()}{RemovePeer()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a2bd87b4850fea5f003023a63487d311d} 
+void neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Remove\+Peer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{peer\+\_\+id}{}\end{DoxyParamCaption})}
+
+
+
+Remove a peer. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a12eef0a0b08bf5fd725bad65f49a200b}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!ReportMisbehavior@{ReportMisbehavior}}
+\index{ReportMisbehavior@{ReportMisbehavior}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{ReportMisbehavior()}{ReportMisbehavior()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a12eef0a0b08bf5fd725bad65f49a200b} 
+void neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Report\+Misbehavior (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{peer\+\_\+id}{, }\item[{uint32\+\_\+t}]{score}{, }\item[{const std\+::string \&}]{reason}{}\end{DoxyParamCaption})}
+
+
+
+Report peer misbehavior. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em peer\+\_\+id} & \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} ID \\
+\hline
+{\em score} & Misbehavior score to add \\
+\hline
+{\em reason} & Reason for misbehavior \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a022509557b8c895e0bca2f1073cd4234}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!SavePeerAddresses@{SavePeerAddresses}}
+\index{SavePeerAddresses@{SavePeerAddresses}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{SavePeerAddresses()}{SavePeerAddresses()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a022509557b8c895e0bca2f1073cd4234} 
+bool neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Save\+Peer\+Addresses (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filepath}{}\end{DoxyParamCaption}) const}
+
+
+
+Save peer addresses to file. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a5011b2191dbee4835814c1b37a6bc27c}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!ScoreAddress@{ScoreAddress}}
+\index{ScoreAddress@{ScoreAddress}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{ScoreAddress()}{ScoreAddress()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a5011b2191dbee4835814c1b37a6bc27c} 
+double neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Score\+Address (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} \&}]{address}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Score an address for connection priority. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_ad815c60be85ec6477c8395c02112690b}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!SelectRandomAddresses@{SelectRandomAddresses}}
+\index{SelectRandomAddresses@{SelectRandomAddresses}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{SelectRandomAddresses()}{SelectRandomAddresses()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_ad815c60be85ec6477c8395c02112690b} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}} $>$ neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Select\+Random\+Addresses (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Select random addresses from known pool. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a5ae93fe3afcd3716c7b370ef3e2808c5}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!UnbanIP@{UnbanIP}}
+\index{UnbanIP@{UnbanIP}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{UnbanIP()}{UnbanIP()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a5ae93fe3afcd3716c7b370ef3e2808c5} 
+void neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Unban\+IP (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{ip\+\_\+address}{}\end{DoxyParamCaption})}
+
+
+
+Unban an IP address. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a02c4f1a13ffa97bccb59bea74d83ce43}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!UpdateLastSeen@{UpdateLastSeen}}
+\index{UpdateLastSeen@{UpdateLastSeen}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{UpdateLastSeen()}{UpdateLastSeen()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a02c4f1a13ffa97bccb59bea74d83ce43} 
+void neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Update\+Last\+Seen (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{peer\+\_\+id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Update last seen time for peer. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a08a4472bb18a33ff32232f54c3a268b5}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!UpdatePeerStats@{UpdatePeerStats}}
+\index{UpdatePeerStats@{UpdatePeerStats}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{UpdatePeerStats()}{UpdatePeerStats()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a08a4472bb18a33ff32232f54c3a268b5} 
+void neo\+::network\+::p2p\+::\+Peer\+Manager\+::\+Update\+Peer\+Stats (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{peer\+\_\+id}{, }\item[{uint64\+\_\+t}]{bytes\+\_\+sent}{, }\item[{uint64\+\_\+t}]{bytes\+\_\+received}{, }\item[{double}]{latency\+\_\+ms}{}\end{DoxyParamCaption})}
+
+
+
+Update peer statistics. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a64dbd590c3135cc7a70dd51f9cb9bf8e}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!banned\_ips\_@{banned\_ips\_}}
+\index{banned\_ips\_@{banned\_ips\_}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{banned\_ips\_}{banned\_ips\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a64dbd590c3135cc7a70dd51f9cb9bf8e} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point$>$ neo\+::network\+::p2p\+::\+Peer\+Manager\+::banned\+\_\+ips\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a023fdaf3af754974085feef140c3b0cf}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!banned\_peers\_@{banned\_peers\_}}
+\index{banned\_peers\_@{banned\_peers\_}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{banned\_peers\_}{banned\_peers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a023fdaf3af754974085feef140c3b0cf} 
+std\+::unordered\+\_\+set$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}$>$ neo\+::network\+::p2p\+::\+Peer\+Manager\+::banned\+\_\+peers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a9b6e8351015a88a3f006b99292512571}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!config\_@{config\_}}
+\index{config\_@{config\_}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{config\_}{config\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a9b6e8351015a88a3f006b99292512571} 
+\mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_peer_manager_1_1_config}{Config}} neo\+::network\+::p2p\+::\+Peer\+Manager\+::config\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a5d35c6dfe3c6b14b18905c786de1a24e}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!known\_addresses\_@{known\_addresses\_}}
+\index{known\_addresses\_@{known\_addresses\_}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{known\_addresses\_}{known\_addresses\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a5d35c6dfe3c6b14b18905c786de1a24e} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}}$>$ neo\+::network\+::p2p\+::\+Peer\+Manager\+::known\+\_\+addresses\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_ad47ec6d217b6ae149ca69d1d785183d1}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!logger\_@{logger\_}}
+\index{logger\_@{logger\_}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{logger\_}{logger\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_ad47ec6d217b6ae149ca69d1d785183d1} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1core_1_1_logger}{core\+::\+Logger}}$>$ neo\+::network\+::p2p\+::\+Peer\+Manager\+::logger\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a006f7793012fc54571ef35d6fab51e2c}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a006f7793012fc54571ef35d6fab51e2c} 
+std\+::mutex neo\+::network\+::p2p\+::\+Peer\+Manager\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a0c0d111aa7075f4d48d490f3a45e4a7c}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!peer\_stats\_@{peer\_stats\_}}
+\index{peer\_stats\_@{peer\_stats\_}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{peer\_stats\_}{peer\_stats\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a0c0d111aa7075f4d48d490f3a45e4a7c} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_peer_stats}{Peer\+Stats}}$>$ neo\+::network\+::p2p\+::\+Peer\+Manager\+::peer\+\_\+stats\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a05ca6b7d5d00d22d57706a9ed62e50f2}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!peers\_@{peers\_}}
+\index{peers\_@{peers\_}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{peers\_}{peers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a05ca6b7d5d00d22d57706a9ed62e50f2} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}}$>$ $>$ neo\+::network\+::p2p\+::\+Peer\+Manager\+::peers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a8f25e7818ae8ed3ae04fc5cd0d057327}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!peers\_by\_ip\_@{peers\_by\_ip\_}}
+\index{peers\_by\_ip\_@{peers\_by\_ip\_}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{peers\_by\_ip\_}{peers\_by\_ip\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a8f25e7818ae8ed3ae04fc5cd0d057327} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::vector$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}$>$ $>$ neo\+::network\+::p2p\+::\+Peer\+Manager\+::peers\+\_\+by\+\_\+ip\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a9698b0721fe300520fb4f5823f0f3b12}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!rng\_@{rng\_}}
+\index{rng\_@{rng\_}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{rng\_}{rng\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a9698b0721fe300520fb4f5823f0f3b12} 
+std\+::mt19937 neo\+::network\+::p2p\+::\+Peer\+Manager\+::rng\+\_\+ \{std\+::random\+\_\+device\{\}()\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_manager_a342a6d9ec58edeb3c8ae749b34f5d079}\index{neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}!tried\_addresses\_@{tried\_addresses\_}}
+\index{tried\_addresses\_@{tried\_addresses\_}!neo::network::p2p::PeerManager@{neo::network::p2p::PeerManager}}
+\doxysubsubsection{\texorpdfstring{tried\_addresses\_}{tried\_addresses\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_manager_a342a6d9ec58edeb3c8ae749b34f5d079} 
+std\+::unordered\+\_\+set$<$\mbox{\hyperlink{classneo_1_1network_1_1_network_address}{Network\+Address}}$>$ neo\+::network\+::p2p\+::\+Peer\+Manager\+::tried\+\_\+addresses\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/\mbox{\hyperlink{peer__manager_8h}{peer\+\_\+manager.\+h}}\end{DoxyCompactItemize}

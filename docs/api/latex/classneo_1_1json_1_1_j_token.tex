@@ -1,0 +1,595 @@
+\doxysection{neo\+::json\+::JToken Class Reference}
+\hypertarget{classneo_1_1json_1_1_j_token}{}\label{classneo_1_1json_1_1_j_token}\index{neo::json::JToken@{neo::json::JToken}}
+
+
+Base class for all JSON tokens.  
+
+
+
+
+{\ttfamily \#include $<$jtoken.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::json\+::JToken\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a5d9f6c0845587eaff048a37312cdbbbf}{\texorpdfstring{$\sim$}{\string~}\+JToken}} ()=default
+\item 
+virtual \mbox{\hyperlink{namespaceneo_1_1json_afc636cefa75119dde9ec4c7058ab605c}{JToken\+Type}} \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a7ddf451a867dd8855212eb5a6d4667ef}{Get\+Type}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the type of this token. \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a0a9ed56f1f28c0720e11820915170e1b}{operator\mbox{[}$\,$\mbox{]}}} (int index) const
+\begin{DoxyCompactList}\small\item\em Gets or sets the child token at the specified index. \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a09467c3b4853cd918c45a8030c237553}{operator\mbox{[}$\,$\mbox{]}}} (const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Gets or sets the properties of the JSON object. \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a85568ef627871ffc66c30a41179c32e1}{operator\mbox{[}$\,$\mbox{]}}} (const char \texorpdfstring{$\ast$}{*}key) const
+\begin{DoxyCompactList}\small\item\em Gets or sets the properties of the JSON object. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1json_1_1_j_token_aefe75d06c0767387b11b76b244ba3126}{As\+Boolean}} () const
+\begin{DoxyCompactList}\small\item\em Converts the current JSON token to a boolean value. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classneo_1_1json_1_1_j_token_ad4a6eb6f88363bd5b24300f0f7826dd9}{As\+Number}} () const
+\begin{DoxyCompactList}\small\item\em Converts the current JSON token to a floating point number. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classneo_1_1json_1_1_j_token_af71c278113c54dd73bb000c693931e97}{As\+String}} () const
+\begin{DoxyCompactList}\small\item\em Converts the current JSON token to a string. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a65f32bfdc482e4f8b7e6c10691ed0e3f}{Get\+Boolean}} () const
+\begin{DoxyCompactList}\small\item\em Converts the current JSON token to a boolean value. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a5b033737332d8f3d847192a1832d43f9}{Get\+Int32}} () const
+\begin{DoxyCompactList}\small\item\em Converts the current JSON token to a 32-\/bit signed integer. \end{DoxyCompactList}\item 
+virtual double \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a57552d677e367b04dfc54125fc469070}{Get\+Number}} () const
+\begin{DoxyCompactList}\small\item\em Converts the current JSON token to a floating point number. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classneo_1_1json_1_1_j_token_adcd32e1127833068175eab6cfd2e2e26}{Get\+String}} () const
+\begin{DoxyCompactList}\small\item\em Converts the current JSON token to a string. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a42d1e592f73864c798a0e37b04ae1de7}{To\+String}} () const =0
+\begin{DoxyCompactList}\small\item\em Converts this token to a string representation. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a47644200ec64d269a31396deafa8c3f2}{To\+String}} (bool indented) const
+\begin{DoxyCompactList}\small\item\em Converts this token to a string representation. \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_acf002ab2913b85ace931c514d69c439d}{Clone}} () const =0
+\begin{DoxyCompactList}\small\item\em Clones this token. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1json_1_1_j_token_aee9c9291f435ac35aceec3a91e5362cc}{Equals}} (const \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} \&other) const =0
+\begin{DoxyCompactList}\small\item\em Checks if this token equals another token. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a11424901e92e2c5a78cd115403cbc729}{operator bool}} () const
+\begin{DoxyCompactList}\small\item\em Implicit conversion to bool. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a9f5e1e2bf3cf23085844ce7e572bda83}{operator std\+::string}} () const
+\begin{DoxyCompactList}\small\item\em Implicit conversion to string. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a495d3df1ba8f0da57df06873b4b32f5c}{operator int}} () const
+\begin{DoxyCompactList}\small\item\em Implicit conversion to int. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1json_1_1_j_token_aeb835c697ffe9ee39e6a412cb8ce445a}{operator double}} () const
+\begin{DoxyCompactList}\small\item\em Implicit conversion to double. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a0b2728b236992fa90ba16d5888129a7f}{Write\+Json}} (std\+::string \&output, bool indented=false, int indent\+\_\+level=0) const =0
+\begin{DoxyCompactList}\small\item\em Writes this token to a JSON writer. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a2274871f837dca04468b48209fa05993}{Parse}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}}, int max\+\_\+nest=64)
+\begin{DoxyCompactList}\small\item\em Parses a JSON string into a \doxylink{classneo_1_1json_1_1_j_token}{JToken}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a30a35aa6ba3f794842e08ccfa98b8863}{Null}} = nullptr
+\begin{DoxyCompactList}\small\item\em Represents a null token. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classneo_1_1json_1_1_j_token_a1a8e9b1d2fe1b4e1aab211373ad5e42a}{Add\+Indentation}} (std\+::string \&output, int indent\+\_\+level)
+\begin{DoxyCompactList}\small\item\em Helper function to add indentation. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token_aef360cbc3d276b780f0e5009df1ccd73}{Parse\+Json\+Value}} (const nlohmann\+::json \&j)
+\begin{DoxyCompactList}\small\item\em Parses a nlohmann\+::json value into a \doxylink{classneo_1_1json_1_1_j_token}{JToken}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for all JSON tokens. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1json_1_1_j_token_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1json_1_1_j_token_a5d9f6c0845587eaff048a37312cdbbbf}\index{neo::json::JToken@{neo::json::JToken}!````~JToken@{\texorpdfstring{$\sim$}{\string~}JToken}}
+\index{````~JToken@{\texorpdfstring{$\sim$}{\string~}JToken}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}JToken()}{\string~JToken()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a5d9f6c0845587eaff048a37312cdbbbf} 
+virtual neo\+::json\+::\+JToken\+::\texorpdfstring{$\sim$}{\string~}\+JToken (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1json_1_1_j_token_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1json_1_1_j_token_a1a8e9b1d2fe1b4e1aab211373ad5e42a}\index{neo::json::JToken@{neo::json::JToken}!AddIndentation@{AddIndentation}}
+\index{AddIndentation@{AddIndentation}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{AddIndentation()}{AddIndentation()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a1a8e9b1d2fe1b4e1aab211373ad5e42a} 
+void neo\+::json\+::\+JToken\+::\+Add\+Indentation (\begin{DoxyParamCaption}\item[{std\+::string \&}]{output}{, }\item[{int}]{indent\+\_\+level}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [protected]}}
+
+
+
+Helper function to add indentation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output} & The output string. \\
+\hline
+{\em indent\+\_\+level} & The indentation level. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1json_1_1_j_token_aefe75d06c0767387b11b76b244ba3126}\index{neo::json::JToken@{neo::json::JToken}!AsBoolean@{AsBoolean}}
+\index{AsBoolean@{AsBoolean}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{AsBoolean()}{AsBoolean()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_aefe75d06c0767387b11b76b244ba3126} 
+virtual bool neo\+::json\+::\+JToken\+::\+As\+Boolean (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Converts the current JSON token to a boolean value. 
+
+\begin{DoxyReturn}{Returns}
+The converted value. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_boolean_ab525af1d978416d4a71004f32776971d}{neo\+::json\+::\+JBoolean}}.
+
+\Hypertarget{classneo_1_1json_1_1_j_token_ad4a6eb6f88363bd5b24300f0f7826dd9}\index{neo::json::JToken@{neo::json::JToken}!AsNumber@{AsNumber}}
+\index{AsNumber@{AsNumber}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{AsNumber()}{AsNumber()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_ad4a6eb6f88363bd5b24300f0f7826dd9} 
+virtual double neo\+::json\+::\+JToken\+::\+As\+Number (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Converts the current JSON token to a floating point number. 
+
+\begin{DoxyReturn}{Returns}
+The converted value. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_number_a78590c409304f510082d2c79adaed641}{neo\+::json\+::\+JNumber}}.
+
+\Hypertarget{classneo_1_1json_1_1_j_token_af71c278113c54dd73bb000c693931e97}\index{neo::json::JToken@{neo::json::JToken}!AsString@{AsString}}
+\index{AsString@{AsString}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{AsString()}{AsString()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_af71c278113c54dd73bb000c693931e97} 
+virtual std\+::string neo\+::json\+::\+JToken\+::\+As\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Converts the current JSON token to a string. 
+
+\begin{DoxyReturn}{Returns}
+The converted value. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_string_a518d9e40020af611019a802e14336a82}{neo\+::json\+::\+JString}}.
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1json_1_1_j_token_acf002ab2913b85ace931c514d69c439d}\index{neo::json::JToken@{neo::json::JToken}!Clone@{Clone}}
+\index{Clone@{Clone}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{Clone()}{Clone()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_acf002ab2913b85ace931c514d69c439d} 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ neo\+::json\+::\+JToken\+::\+Clone (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Clones this token. 
+
+\begin{DoxyReturn}{Returns}
+A clone of this token. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_array_acf10023c81ff19c5131ec868eaa52579}{neo\+::json\+::\+JArray}}, \mbox{\hyperlink{classneo_1_1json_1_1_j_boolean_a64cfdebac90fa9b960a1300ab033be40}{neo\+::json\+::\+JBoolean}}, \mbox{\hyperlink{classneo_1_1json_1_1_j_number_ad933d04632fc8875118d5f4246abe020}{neo\+::json\+::\+JNumber}}, \mbox{\hyperlink{classneo_1_1json_1_1_j_object_afdd20ca7c88da505f636437b132efa47}{neo\+::json\+::\+JObject}}, and \mbox{\hyperlink{classneo_1_1json_1_1_j_string_a62b1c58dae6c5350c3c36de6b3ef7411}{neo\+::json\+::\+JString}}.
+
+\Hypertarget{classneo_1_1json_1_1_j_token_aee9c9291f435ac35aceec3a91e5362cc}\index{neo::json::JToken@{neo::json::JToken}!Equals@{Equals}}
+\index{Equals@{Equals}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{Equals()}{Equals()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_aee9c9291f435ac35aceec3a91e5362cc} 
+virtual bool neo\+::json\+::\+JToken\+::\+Equals (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Checks if this token equals another token. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other token. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if equal, false otherwise. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_array_a5eec695361176640941d9a48321b5e09}{neo\+::json\+::\+JArray}}, \mbox{\hyperlink{classneo_1_1json_1_1_j_boolean_a8464cfad0409d976c6353224e648b6d3}{neo\+::json\+::\+JBoolean}}, \mbox{\hyperlink{classneo_1_1json_1_1_j_number_a782a497c285eb630a7b217973540e4b9}{neo\+::json\+::\+JNumber}}, \mbox{\hyperlink{classneo_1_1json_1_1_j_object_aa11bbd2c64577ddaa4c046021f5b08fc}{neo\+::json\+::\+JObject}}, and \mbox{\hyperlink{classneo_1_1json_1_1_j_string_aa9bbcbfcd210db4345cdb4a8979587e2}{neo\+::json\+::\+JString}}.
+
+\Hypertarget{classneo_1_1json_1_1_j_token_a65f32bfdc482e4f8b7e6c10691ed0e3f}\index{neo::json::JToken@{neo::json::JToken}!GetBoolean@{GetBoolean}}
+\index{GetBoolean@{GetBoolean}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{GetBoolean()}{GetBoolean()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a65f32bfdc482e4f8b7e6c10691ed0e3f} 
+virtual bool neo\+::json\+::\+JToken\+::\+Get\+Boolean (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Converts the current JSON token to a boolean value. 
+
+\begin{DoxyReturn}{Returns}
+The converted value. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the JSON token is not a boolean. \\
+\hline
+\end{DoxyExceptions}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_boolean_a4c8ee626f0d39ae70a88adcfa673e61c}{neo\+::json\+::\+JBoolean}}.
+
+\Hypertarget{classneo_1_1json_1_1_j_token_a5b033737332d8f3d847192a1832d43f9}\index{neo::json::JToken@{neo::json::JToken}!GetInt32@{GetInt32}}
+\index{GetInt32@{GetInt32}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{GetInt32()}{GetInt32()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a5b033737332d8f3d847192a1832d43f9} 
+int neo\+::json\+::\+JToken\+::\+Get\+Int32 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts the current JSON token to a 32-\/bit signed integer. 
+
+\begin{DoxyReturn}{Returns}
+The converted value. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the JSON token is not a number. \\
+\hline
+{\em std\+::overflow\+\_\+error} & if the JSON token cannot be converted to a 32-\/bit signed integer. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1json_1_1_j_token_a57552d677e367b04dfc54125fc469070}\index{neo::json::JToken@{neo::json::JToken}!GetNumber@{GetNumber}}
+\index{GetNumber@{GetNumber}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{GetNumber()}{GetNumber()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a57552d677e367b04dfc54125fc469070} 
+virtual double neo\+::json\+::\+JToken\+::\+Get\+Number (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Converts the current JSON token to a floating point number. 
+
+\begin{DoxyReturn}{Returns}
+The converted value. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the JSON token is not a number. \\
+\hline
+\end{DoxyExceptions}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_number_ae3d1adc988709c1b28d54433416e2b35}{neo\+::json\+::\+JNumber}}.
+
+\Hypertarget{classneo_1_1json_1_1_j_token_adcd32e1127833068175eab6cfd2e2e26}\index{neo::json::JToken@{neo::json::JToken}!GetString@{GetString}}
+\index{GetString@{GetString}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{GetString()}{GetString()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_adcd32e1127833068175eab6cfd2e2e26} 
+virtual std\+::string neo\+::json\+::\+JToken\+::\+Get\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Converts the current JSON token to a string. 
+
+\begin{DoxyReturn}{Returns}
+The converted value. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the JSON token is not a string. \\
+\hline
+\end{DoxyExceptions}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_string_a311178050a075fca8bc3aef1e08d4d0a}{neo\+::json\+::\+JString}}.
+
+\Hypertarget{classneo_1_1json_1_1_j_token_a7ddf451a867dd8855212eb5a6d4667ef}\index{neo::json::JToken@{neo::json::JToken}!GetType@{GetType}}
+\index{GetType@{GetType}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a7ddf451a867dd8855212eb5a6d4667ef} 
+virtual \mbox{\hyperlink{namespaceneo_1_1json_afc636cefa75119dde9ec4c7058ab605c}{JToken\+Type}} neo\+::json\+::\+JToken\+::\+Get\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the type of this token. 
+
+\begin{DoxyReturn}{Returns}
+The token type. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_array_ac6e0dd5d9c4a8a5e554c935fcebb8619}{neo\+::json\+::\+JArray}}, \mbox{\hyperlink{classneo_1_1json_1_1_j_boolean_a8cca1e291f6c3d707e32d09484966853}{neo\+::json\+::\+JBoolean}}, \mbox{\hyperlink{classneo_1_1json_1_1_j_number_ab4fd2e631294f7c54d2fe96a313d85f7}{neo\+::json\+::\+JNumber}}, \mbox{\hyperlink{classneo_1_1json_1_1_j_object_ab71f4eaf49b85e92658612f4af73572a}{neo\+::json\+::\+JObject}}, and \mbox{\hyperlink{classneo_1_1json_1_1_j_string_ac04587387143f82934778bdd52ed9011}{neo\+::json\+::\+JString}}.
+
+\Hypertarget{classneo_1_1json_1_1_j_token_a11424901e92e2c5a78cd115403cbc729}\index{neo::json::JToken@{neo::json::JToken}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a11424901e92e2c5a78cd115403cbc729} 
+neo\+::json\+::\+JToken\+::operator bool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implicit conversion to bool. 
+
+\begin{DoxyReturn}{Returns}
+True if the token represents a truthy value. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_boolean_ae9ebad59cf53588ecc70cc687f1eded6}{neo\+::json\+::\+JBoolean}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1json_1_1_j_token_aeb835c697ffe9ee39e6a412cb8ce445a}\index{neo::json::JToken@{neo::json::JToken}!operator double@{operator double}}
+\index{operator double@{operator double}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{operator double()}{operator double()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_aeb835c697ffe9ee39e6a412cb8ce445a} 
+neo\+::json\+::\+JToken\+::operator double (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implicit conversion to double. 
+
+\begin{DoxyReturn}{Returns}
+The double representation of the token. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_number_a5c1347f7ebfa4b05b2cab11b55fba0bf}{neo\+::json\+::\+JNumber}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1json_1_1_j_token_a495d3df1ba8f0da57df06873b4b32f5c}\index{neo::json::JToken@{neo::json::JToken}!operator int@{operator int}}
+\index{operator int@{operator int}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{operator int()}{operator int()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a495d3df1ba8f0da57df06873b4b32f5c} 
+neo\+::json\+::\+JToken\+::operator int (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implicit conversion to int. 
+
+\begin{DoxyReturn}{Returns}
+The integer representation of the token. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_number_a0ab0e82122ca6f39803177c3c590dd08}{neo\+::json\+::\+JNumber}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1json_1_1_j_token_a9f5e1e2bf3cf23085844ce7e572bda83}\index{neo::json::JToken@{neo::json::JToken}!operator std::string@{operator std::string}}
+\index{operator std::string@{operator std::string}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{operator std::string()}{operator std::string()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a9f5e1e2bf3cf23085844ce7e572bda83} 
+neo\+::json\+::\+JToken\+::operator std\+::string (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Implicit conversion to string. 
+
+\begin{DoxyReturn}{Returns}
+The string representation of the token. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_string_a9d69ab4eee6a2e18389db43eeba30172}{neo\+::json\+::\+JString}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1json_1_1_j_token_a85568ef627871ffc66c30a41179c32e1}\index{neo::json::JToken@{neo::json::JToken}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a85568ef627871ffc66c30a41179c32e1} 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ neo\+::json\+::\+JToken\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Gets or sets the properties of the JSON object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the property to get or set. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The property with the specified name. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if not supported. \\
+\hline
+\end{DoxyExceptions}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_object_a78053bd1845cc0d60a77deb83049a2ef}{neo\+::json\+::\+JObject}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1json_1_1_j_token_a09467c3b4853cd918c45a8030c237553}\index{neo::json::JToken@{neo::json::JToken}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a09467c3b4853cd918c45a8030c237553} 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ neo\+::json\+::\+JToken\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Gets or sets the properties of the JSON object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the property to get or set. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The property with the specified name. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if not supported. \\
+\hline
+\end{DoxyExceptions}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_object_a0452352410ae49c16c73318af309f5a4}{neo\+::json\+::\+JObject}}.
+
+\Hypertarget{classneo_1_1json_1_1_j_token_a0a9ed56f1f28c0720e11820915170e1b}\index{neo::json::JToken@{neo::json::JToken}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a0a9ed56f1f28c0720e11820915170e1b} 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ neo\+::json\+::\+JToken\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{int}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Gets or sets the child token at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The zero-\/based index of the child token to get or set. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The child token at the specified index. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if not supported. \\
+\hline
+\end{DoxyExceptions}
+
+
+Reimplemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_array_a8c65f5aed009852f6aecef3df606902a}{neo\+::json\+::\+JArray}}.
+
+\Hypertarget{classneo_1_1json_1_1_j_token_a2274871f837dca04468b48209fa05993}\index{neo::json::JToken@{neo::json::JToken}!Parse@{Parse}}
+\index{Parse@{Parse}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a2274871f837dca04468b48209fa05993} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ neo\+::json\+::\+JToken\+::\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{json}{, }\item[{int}]{max\+\_\+nest}{ = {\ttfamily 64}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Parses a JSON string into a \doxylink{classneo_1_1json_1_1_j_token}{JToken}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & The JSON string to parse. \\
+\hline
+{\em max\+\_\+nest} & The maximum nesting depth when parsing the JSON token. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The parsed \doxylink{classneo_1_1json_1_1_j_token}{JToken}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1json_1_1_j_token_aef360cbc3d276b780f0e5009df1ccd73}\index{neo::json::JToken@{neo::json::JToken}!ParseJsonValue@{ParseJsonValue}}
+\index{ParseJsonValue@{ParseJsonValue}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{ParseJsonValue()}{ParseJsonValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_aef360cbc3d276b780f0e5009df1ccd73} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ neo\+::json\+::\+JToken\+::\+Parse\+Json\+Value (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{j}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Parses a nlohmann\+::json value into a \doxylink{classneo_1_1json_1_1_j_token}{JToken}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em j} & The nlohmann\+::json value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The parsed \doxylink{classneo_1_1json_1_1_j_token}{JToken}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1json_1_1_j_token_a42d1e592f73864c798a0e37b04ae1de7}\index{neo::json::JToken@{neo::json::JToken}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a42d1e592f73864c798a0e37b04ae1de7} 
+virtual std\+::string neo\+::json\+::\+JToken\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Converts this token to a string representation. 
+
+\begin{DoxyReturn}{Returns}
+The string representation. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_array_af8f316c90e01d2221f54139ed5e46c1b}{neo\+::json\+::\+JArray}}, \mbox{\hyperlink{classneo_1_1json_1_1_j_boolean_acc855a9d1e15fbb0325939d802d6636c}{neo\+::json\+::\+JBoolean}}, \mbox{\hyperlink{classneo_1_1json_1_1_j_number_a0b9b117f5bf98ccb31cd4096a5011d50}{neo\+::json\+::\+JNumber}}, \mbox{\hyperlink{classneo_1_1json_1_1_j_object_a9ed072e33948a62235d0093ad66d838c}{neo\+::json\+::\+JObject}}, and \mbox{\hyperlink{classneo_1_1json_1_1_j_string_a3b2a5e0619c571876a12e7a293871b72}{neo\+::json\+::\+JString}}.
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1json_1_1_j_token_a47644200ec64d269a31396deafa8c3f2}\index{neo::json::JToken@{neo::json::JToken}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a47644200ec64d269a31396deafa8c3f2} 
+std\+::string neo\+::json\+::\+JToken\+::\+To\+String (\begin{DoxyParamCaption}\item[{bool}]{indented}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Converts this token to a string representation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em indented} & Whether to use indented formatting. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The string representation. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1json_1_1_j_token_a0b2728b236992fa90ba16d5888129a7f}\index{neo::json::JToken@{neo::json::JToken}!WriteJson@{WriteJson}}
+\index{WriteJson@{WriteJson}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{WriteJson()}{WriteJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a0b2728b236992fa90ba16d5888129a7f} 
+virtual void neo\+::json\+::\+JToken\+::\+Write\+Json (\begin{DoxyParamCaption}\item[{std\+::string \&}]{output}{, }\item[{bool}]{indented}{ = {\ttfamily false}, }\item[{int}]{indent\+\_\+level}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Writes this token to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1json_1_1_j_array_abe6d4896d45ed810ca0b441ed9b9fdea}{neo\+::json\+::\+JArray}}, \mbox{\hyperlink{classneo_1_1json_1_1_j_boolean_a317c63b1e8ac00f6a7fb2ce9e954409f}{neo\+::json\+::\+JBoolean}}, \mbox{\hyperlink{classneo_1_1json_1_1_j_number_a1ceacec4a78e2f75efe83757b81a026b}{neo\+::json\+::\+JNumber}}, \mbox{\hyperlink{classneo_1_1json_1_1_j_object_a68bbf6dddb64b03ea5f65db018b014e3}{neo\+::json\+::\+JObject}}, and \mbox{\hyperlink{classneo_1_1json_1_1_j_string_ab66743b9601a81de891b034ff4b07aca}{neo\+::json\+::\+JString}}.
+
+Here is the call graph for this function\+:
+% FIG 12
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1json_1_1_j_token_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1json_1_1_j_token_a30a35aa6ba3f794842e08ccfa98b8863}\index{neo::json::JToken@{neo::json::JToken}!Null@{Null}}
+\index{Null@{Null}!neo::json::JToken@{neo::json::JToken}}
+\doxysubsubsection{\texorpdfstring{Null}{Null}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_j_token_a30a35aa6ba3f794842e08ccfa98b8863} 
+const std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1json_1_1_j_token}{JToken}} $>$ neo\+::json\+::\+JToken\+::\+Null = nullptr\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Represents a null token. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/json/\mbox{\hyperlink{jtoken_8h}{jtoken.\+h}}\item 
+src/json/\mbox{\hyperlink{jtoken_8cpp}{jtoken.\+cpp}}\end{DoxyCompactItemize}

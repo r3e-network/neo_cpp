@@ -1,0 +1,171 @@
+\doxysection{utility.\+h}
+\hypertarget{utility_8h_source}{}\label{utility_8h_source}\index{include/neo/extensions/utility.h@{include/neo/extensions/utility.h}}
+\mbox{\hyperlink{utility_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__span_8h}{neo/io/byte\_span.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <cstddef>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <type\_traits>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1extensions}{neo::extensions}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Func>}
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_aea9bbd32e74ab39480fa611f07cdaebb}{ScopeGuard}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_aea9bbd32e74ab39480fa611f07cdaebb}{ScopeGuard}}(Func\&\&\ func)\ :\ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_ab3bc95127203858b5763c2da68df7a29}{func\_}}(\mbox{\hyperlink{namespacestd}{std}}::forward<Func>(func)),\ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_a0b06a24c40edc00ab080b789ffb777e5}{active\_}}(true)\ \{\}}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_aa81bc1381a1f3103bf6583ad9dc7a9ce}{\string~ScopeGuard}}()}
+\DoxyCodeLine{00026\ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_a0b06a24c40edc00ab080b789ffb777e5}{active\_}})\ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_ab3bc95127203858b5763c2da68df7a29}{func\_}}();}
+\DoxyCodeLine{00028\ \ \ \ \ \}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_aa0cd83a9d90ae8f67ee89f6a88f4845e}{ScopeGuard}}(\mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_aea9bbd32e74ab39480fa611f07cdaebb}{ScopeGuard}}\&\&\ other)\ noexcept\ :\ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_ab3bc95127203858b5763c2da68df7a29}{func\_}}(std::move(other.func\_)),\ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_a0b06a24c40edc00ab080b789ffb777e5}{active\_}}(other.active\_)}
+\DoxyCodeLine{00031\ \ \ \ \ \{}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ other.active\_\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_a3b7cb2dde7b0aa1c127ab9163b921dd3}{Release}}()\ \{\ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_a0b06a24c40edc00ab080b789ffb777e5}{active\_}}\ =\ \textcolor{keyword}{false};\ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00038\ \ \ \ \ Func\ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_ab3bc95127203858b5763c2da68df7a29}{func\_}};}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_a0b06a24c40edc00ab080b789ffb777e5}{active\_}};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_a6c6042dc8e91fc61281b8bd8daebb820}{ScopeGuard}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_aea9bbd32e74ab39480fa611f07cdaebb}{ScopeGuard}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_aea9bbd32e74ab39480fa611f07cdaebb}{ScopeGuard}}\&\ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_a65f64885d8fd79ac657e422bb5ddec79}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_aea9bbd32e74ab39480fa611f07cdaebb}{ScopeGuard}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_aea9bbd32e74ab39480fa611f07cdaebb}{ScopeGuard}}\&\ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_a5691c4dc960717ce0ad9f479fe8668dd}{operator=}}(\mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard_aea9bbd32e74ab39480fa611f07cdaebb}{ScopeGuard}}\&\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00044\ \};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00072\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1extensions_1_1_utility}{Utility}}}
+\DoxyCodeLine{00073\ \{}
+\DoxyCodeLine{00074\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::string>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a22771dd0f87fa4258a346fdceaf1aa03}{Split}}(\textcolor{keyword}{const}\ std::string\&\ str,\ \textcolor{keyword}{const}\ std::string\&\ delimiter,}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ removeEmpty\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_ad6cd1f83310481691b5d42dd90ead44e}{Join}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ parts,\ \textcolor{keyword}{const}\ std::string\&\ delimiter);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a32991a0c7431d1561e5255b01cfb9dc3}{Trim}}(\textcolor{keyword}{const}\ std::string\&\ str);}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a51f8ddf57191bf24cebaef38d5772967}{TrimLeft}}(\textcolor{keyword}{const}\ std::string\&\ str);}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a857c033786cee08f1effb8fd011ce3a8}{TrimRight}}(\textcolor{keyword}{const}\ std::string\&\ str);}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a9f3bb81949486ff05c58daba0393e2d6}{ToLower}}(\textcolor{keyword}{const}\ std::string\&\ str);}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a0ce813752ca6f57ce72d4b9c4566e39b}{ToUpper}}(\textcolor{keyword}{const}\ std::string\&\ str);}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a4763227514c8fdd27b48e3d391d76ca7}{StartsWith}}(\textcolor{keyword}{const}\ std::string\&\ str,\ \textcolor{keyword}{const}\ std::string\&\ prefix,\ \textcolor{keywordtype}{bool}\ ignoreCase\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a84070a3aab0ae4e5fd3065be16aaff4e}{EndsWith}}(\textcolor{keyword}{const}\ std::string\&\ str,\ \textcolor{keyword}{const}\ std::string\&\ suffix,\ \textcolor{keywordtype}{bool}\ ignoreCase\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a704d70ccdbba1a9411c1d56caa761454}{Contains}}(\textcolor{keyword}{const}\ std::string\&\ str,\ \textcolor{keyword}{const}\ std::string\&\ substring,\ \textcolor{keywordtype}{bool}\ ignoreCase\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a7f6baed99b3806d7486e60f19ddfc0d5}{Replace}}(\textcolor{keyword}{const}\ std::string\&\ str,\ \textcolor{keyword}{const}\ std::string\&\ from,\ \textcolor{keyword}{const}\ std::string\&\ to);}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a3f232542c7959c0651ef8694c69090ed}{SecureZeroMemory}}(\textcolor{keywordtype}{void}*\ ptr,\ \textcolor{keywordtype}{size\_t}\ size);}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a10567c23ace5906efab097fbca9979cc}{SecureCompareMemory}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ a,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ b,\ \textcolor{keywordtype}{size\_t}\ size);}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Container>}
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a5a382ad7e0c066a4e57e2667513a60b4}{GetSize}}(\textcolor{keyword}{const}\ Container\&\ container)}
+\DoxyCodeLine{00188\ \ \ \ \ \{}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ container.size();}
+\DoxyCodeLine{00190\ \ \ \ \ \}}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Container>}
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a2b9eec6d7ad292c75a9f035bc7243cfe}{IsEmpty}}(\textcolor{keyword}{const}\ Container\&\ container)}
+\DoxyCodeLine{00200\ \ \ \ \ \{}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ container.empty();}
+\DoxyCodeLine{00202\ \ \ \ \ \}}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00212\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_ab8a26240dec9a3965645ae0c53280070}{TryParse}}(\textcolor{keyword}{const}\ std::string\&\ str,\ T\&\ result);}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keyword}{static}\ T\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_aaf20c25fc219a814f63adabe4cf50599}{Parse}}(\textcolor{keyword}{const}\ std::string\&\ str);}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a0f1dc6ffe66b686b75920bd18638e724}{ToString}}(\textcolor{keyword}{const}\ T\&\ value);}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keyword}{static}\ T\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a00bdd18ded64e74ffb873420fb391e71}{Clamp}}(\textcolor{keyword}{const}\ T\&\ value,\ \textcolor{keyword}{const}\ T\&\ min,\ \textcolor{keyword}{const}\ T\&\ max)}
+\DoxyCodeLine{00242\ \ \ \ \ \{}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::max(min,\ std::min(value,\ max));}
+\DoxyCodeLine{00244\ \ \ \ \ \}}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00254\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00255\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a048f48b90adf8fc5de3f5881cbe91a34}{IsInRange}}(\textcolor{keyword}{const}\ T\&\ value,\ \textcolor{keyword}{const}\ T\&\ min,\ \textcolor{keyword}{const}\ T\&\ max)}
+\DoxyCodeLine{00256\ \ \ \ \ \{}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ value\ >=\ min\ \&\&\ value\ <=\ max;}
+\DoxyCodeLine{00258\ \ \ \ \ \}}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00267\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ To,\ \textcolor{keyword}{typename}\ From>}
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{keyword}{static}\ To\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_aff0400ab8bd4a0086234b686294f5da5}{SafeCast}}(\textcolor{keyword}{const}\ From\&\ value);}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00278\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ T\&\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a2a5f84b210e1114d04f0234ff2d6a687}{Min}}(\textcolor{keyword}{const}\ T\&\ a,\ \textcolor{keyword}{const}\ T\&\ b)}
+\DoxyCodeLine{00279\ \ \ \ \ \{}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::min(a,\ b);}
+\DoxyCodeLine{00281\ \ \ \ \ \}}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00290\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00291\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ T\&\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a60747c57a13d4f40d2abf355608de73e}{Max}}(\textcolor{keyword}{const}\ T\&\ a,\ \textcolor{keyword}{const}\ T\&\ b)}
+\DoxyCodeLine{00292\ \ \ \ \ \{}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::max(a,\ b);}
+\DoxyCodeLine{00294\ \ \ \ \ \}}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00302\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00303\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a0eeeb454828ea5811b1e406ffccd0f61}{Swap}}(T\&\ a,\ T\&\ b)}
+\DoxyCodeLine{00304\ \ \ \ \ \{}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespacestd_a4874fd00297ff5aef2872379cb521783}{std::swap}}(a,\ b);}
+\DoxyCodeLine{00306\ \ \ \ \ \}}
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00314\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}...\ Args>}
+\DoxyCodeLine{00315\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_ad03ec9529077284482d2e807e2768b8b}{Format}}(\textcolor{keyword}{const}\ std::string\&\ format,\ Args\&\&...\ args);}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00323\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00324\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_aec7eb6da9f1fb8386e41b170a7da2712}{IsValidPtr}}(\textcolor{keyword}{const}\ T*\ ptr)}
+\DoxyCodeLine{00325\ \ \ \ \ \{}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ptr\ !=\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00327\ \ \ \ \ \}}
+\DoxyCodeLine{00328\ }
+\DoxyCodeLine{00335\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00336\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_abe6b42900991b3683352c7b4f584aecf}{IsValidPtr}}(\textcolor{keyword}{const}\ std::shared\_ptr<T>\&\ ptr)}
+\DoxyCodeLine{00337\ \ \ \ \ \{}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ptr\ !=\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00339\ \ \ \ \ \}}
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00347\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Func>}
+\DoxyCodeLine{00348\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a793fe76f9e5c32cac379677ab3de0d68}{MakeGuard}}(Func\&\&\ func)\ -\/>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard}{ScopeGuard<Func>}}}
+\DoxyCodeLine{00349\ \ \ \ \ \{}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_scope_guard}{ScopeGuard<Func>}}(std::forward<Func>(func));}
+\DoxyCodeLine{00351\ \ \ \ \ \}}
+\DoxyCodeLine{00352\ }
+\DoxyCodeLine{00359\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00360\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_ad5edd46cef0ee9f205306e9c9d25dc51}{HashCombine}}(\textcolor{keywordtype}{size\_t}\&\ seed,\ \textcolor{keyword}{const}\ T\&\ value)}
+\DoxyCodeLine{00361\ \ \ \ \ \{}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ std::hash<T>\ hasher;}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ seed\ \string^=\ hasher(value)\ +\ 0x9e3779b9\ +\ (seed\ <<\ 6)\ +\ (seed\ >>\ 2);}
+\DoxyCodeLine{00364\ \ \ \ \ \}}
+\DoxyCodeLine{00365\ }
+\DoxyCodeLine{00371\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_ac7ca2d5292e5674e148c981630c7315a}{NextPowerOf2}}(uint32\_t\ value);}
+\DoxyCodeLine{00372\ }
+\DoxyCodeLine{00378\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a2eaad7e483b48a98d945d0e2c4517e2b}{IsPowerOf2}}(uint32\_t\ value);}
+\DoxyCodeLine{00379\ }
+\DoxyCodeLine{00385\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a21fedb11c044fc1339fc3fc201ce5f43}{ReverseBytes}}(uint8\_t*\ data,\ \textcolor{keywordtype}{size\_t}\ size);}
+\DoxyCodeLine{00386\ }
+\DoxyCodeLine{00393\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a5bd7425ed5679adcf644432f08aa15c0}{BytesToHex}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ data,\ \textcolor{keywordtype}{bool}\ uppercase\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00394\ }
+\DoxyCodeLine{00400\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_utility_a07b9809f419d127f3dd08266df655105}{HexToBytes}}(\textcolor{keyword}{const}\ std::string\&\ hex);}
+\DoxyCodeLine{00401\ \};}
+\DoxyCodeLine{00402\ \}\ \ \textcolor{comment}{//\ namespace\ neo::extensions}}
+
+\end{DoxyCode}

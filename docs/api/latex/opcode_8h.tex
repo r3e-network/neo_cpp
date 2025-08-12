@@ -1,0 +1,270 @@
+\doxysection{include/neo/vm/opcode.h File Reference}
+\hypertarget{opcode_8h}{}\label{opcode_8h}\index{include/neo/vm/opcode.h@{include/neo/vm/opcode.h}}
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+Include dependency graph for opcode.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1vm}{neo\+::vm}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{neo\+::vm\+::\+Op\+Code}} \+: uint8\+\_\+t \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a71fd9921e04bd19603493a711ea065dd}{neo\+::vm\+::\+PUSHINT8}} = 0x00
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ad1e73c162a188c0968b6acee9e3d2fe1}{neo\+::vm\+::\+PUSHINT16}} = 0x01
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aa7eccce61a8f552020814b17e215bd42}{neo\+::vm\+::\+PUSHINT32}} = 0x02
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a4295eb5f94ece06f111d6b55f42c220f}{neo\+::vm\+::\+PUSHINT64}} = 0x03
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a6eacd300d82afe7d84bca83d9f9493eb}{neo\+::vm\+::\+PUSHINT128}} = 0x04
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ad50252700f8842c5a998b7121a32f2fc}{neo\+::vm\+::\+PUSHINT256}} = 0x05
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8f731427cccc6f1e216641d2263e63ad}{neo\+::vm\+::\+PUSHT}} = 0x08
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac43ec83b8852b2069b3f3e52dc7e39ab}{neo\+::vm\+::\+PUSHF}} = 0x09
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8adbeae77be97dda1ed3ef29308468c81f}{neo\+::vm\+::\+PUSHA}} = 0x0A
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac359552889c0db7cae3f96bf979c9af4}{neo\+::vm\+::\+PUSHNULL}} = 0x0B
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a49076f624ecc164b834b5a1976826c4e}{neo\+::vm\+::\+PUSHDATA1}} = 0x0C
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a22a7f3111a5260b666bbc60b87f3f22c}{neo\+::vm\+::\+PUSHDATA2}} = 0x0D
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a75558b9b83f11102cc87c9ad686a1584}{neo\+::vm\+::\+PUSHDATA4}} = 0x0E
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a00bc7c2d37ee3a7bc2b5738b1e32a235}{neo\+::vm\+::\+PUSHM1}} = 0x0F
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aaae7651a1d1d16a3db7c52198f68b8a2}{neo\+::vm\+::\+PUSH0}} = 0x10
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aec971f2183d8033469c4341ca30f29e2}{neo\+::vm\+::\+PUSH1}} = 0x11
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ad7c352a6662b9d5987e95ad1205bc51d}{neo\+::vm\+::\+PUSH2}} = 0x12
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ab2d4954ae4e341d016e16cffc05f2b47}{neo\+::vm\+::\+PUSH3}} = 0x13
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a11b91fb70bf0304f7b48870bb5eb488f}{neo\+::vm\+::\+PUSH4}} = 0x14
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a9b0ab07d51310373143e99c445d8fba8}{neo\+::vm\+::\+PUSH5}} = 0x15
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a9abd8eb729b0451a5397387e7c876730}{neo\+::vm\+::\+PUSH6}} = 0x16
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8d127c0cdb10e8ebd6e7cdd8cba88dab}{neo\+::vm\+::\+PUSH7}} = 0x17
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ae82494aa44523c4a19deabc23ffb45f0}{neo\+::vm\+::\+PUSH8}} = 0x18
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a49d317557e0b7676b97b76cf853feeaa}{neo\+::vm\+::\+PUSH9}} = 0x19
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a6fb9ef20adaf8b5090aa60964d7e2f20}{neo\+::vm\+::\+PUSH10}} = 0x1A
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ad15335cc599209657eac7c187a85e163}{neo\+::vm\+::\+PUSH11}} = 0x1B
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8be0a2efe861949ff8a7423a03c23071}{neo\+::vm\+::\+PUSH12}} = 0x1C
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a97137d3ec20a12ef864f8f03d09eb7c3}{neo\+::vm\+::\+PUSH13}} = 0x1D
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ab7497ad84c55481aab73ecde427d7da6}{neo\+::vm\+::\+PUSH14}} = 0x1E
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a2f9d7042e5ad86307f1ea1c238a1319c}{neo\+::vm\+::\+PUSH15}} = 0x1F
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8acd518e88978b44149f55cc158acac7a4}{neo\+::vm\+::\+PUSH16}} = 0x20
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a1a004f5abe2b334db21328be1ea6b593}{neo\+::vm\+::\+NOP}} = 0x21
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a152b9af76a9e7dd95d9da277b69fdd95}{neo\+::vm\+::\+JMP}} = 0x22
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a47764b71f3982cf97df0e78991b881d8}{neo\+::vm\+::\+JMP\+\_\+L}} = 0x23
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7848821861aadfb5fb8d3f4d4f174eaa}{neo\+::vm\+::\+JMPIF}} = 0x24
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8e0b03ba1194cbdd4cc23dce7d34a4a0}{neo\+::vm\+::\+JMPIF\+\_\+L}} = 0x25
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a26be228bb8cffe6c0c5122977992bacf}{neo\+::vm\+::\+JMPIFNOT}} = 0x26
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a5d176e5f9718b5d1375468e344c3a67c}{neo\+::vm\+::\+JMPIFNOT\+\_\+L}} = 0x27
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8d2dae86c15d2bb8b4d0c88efa1551c8}{neo\+::vm\+::\+JMPEQ}} = 0x28
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a21351b15494b55434e096f9c14d2ad05}{neo\+::vm\+::\+JMPEQ\+\_\+L}} = 0x29
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac9cdd03c0a73421aa5f575fee74b173d}{neo\+::vm\+::\+JMPNE}} = 0x2A
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8acb933e932eac09e2f56e57222c7d7f67}{neo\+::vm\+::\+JMPNE\+\_\+L}} = 0x2B
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a025946414dbfd1748e2b988723265dad}{neo\+::vm\+::\+JMPGT}} = 0x2C
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aa1bbc9a9313da8e28edbbd0277375f10}{neo\+::vm\+::\+JMPGT\+\_\+L}} = 0x2D
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ab4eeeb4e3770c22c5001c7a962c4432c}{neo\+::vm\+::\+JMPGE}} = 0x2E
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a0fa76ac32510f5509925aaa3381a3c2e}{neo\+::vm\+::\+JMPGE\+\_\+L}} = 0x2F
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8abc40514b1979eb3d8eed2281adc36f08}{neo\+::vm\+::\+JMPLT}} = 0x30
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a4940786bf593b06b210ce0b41b5bc6d8}{neo\+::vm\+::\+JMPLT\+\_\+L}} = 0x31
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a93bf38d2f45e4ad49f0130d516154c27}{neo\+::vm\+::\+JMPLE}} = 0x32
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac49537823e38ebe2cb0b254fcd4b803b}{neo\+::vm\+::\+JMPLE\+\_\+L}} = 0x33
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aca3547acb9162b49fb4a6594ed9b3030}{neo\+::vm\+::\+CALL}} = 0x34
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8abff95c89341ad121649508786a3fc2bc}{neo\+::vm\+::\+CALL\+\_\+L}} = 0x35
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a40303fa38c40e5f6bfc743b0b3cb35b5}{neo\+::vm\+::\+CALLA}} = 0x36
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8af15bb9ceafbc2a8b7a8804a66ec9d2b7}{neo\+::vm\+::\+CALLT}} = 0x37
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8d12a2ca7e5a64036d7251a3eda51a38}{neo\+::vm\+::\+ABORT}} = 0x38
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a1edce3bd99a335da00a27703a24f3dfc}{neo\+::vm\+::\+ASSERT}} = 0x39
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a655474de4674aba7a436a73cd8d9a906}{neo\+::vm\+::\+THROW}} = 0x3A
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a59dfb83f7cac4e3c8ee91700ef2ad90d}{neo\+::vm\+::\+TRY}} = 0x3B
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ae1f987976ed4442295b1b7b50d994cbc}{neo\+::vm\+::\+TRY\+\_\+L}} = 0x3C
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aae17e3dd93509fb03a7052c9700efab7}{neo\+::vm\+::\+ENDTRY}} = 0x3D
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8acfd8a07e5120a5fa23e3c6ab4b4c468e}{neo\+::vm\+::\+ENDTRY\+\_\+L}} = 0x3E
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8afa5f5f4db9a3a5ff9761b775dd414a79}{neo\+::vm\+::\+ENDFINALLY}} = 0x3F
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8afb902bc4807c307b9309f2b528b96f2b}{neo\+::vm\+::\+RET}} = 0x40
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a45f1e61f22cb04eb7a6a39016b56db9b}{neo\+::vm\+::\+SYSCALL}} = 0x41
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aaa1780b4fcce2d5d9af13dc25386d111}{neo\+::vm\+::\+DEPTH}} = 0x43
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8abf8f3be424eb6a72b21549fbb24ffb57}{neo\+::vm\+::\+DROP}} = 0x45
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a2be69d2c4f6a31bb2ae7db875035037e}{neo\+::vm\+::\+NIP}} = 0x46
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aed6421e09b23da1f7b29267f437cf551}{neo\+::vm\+::\+XDROP}} = 0x48
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a813461e0c58e7ad59a2fd83ca2237fec}{neo\+::vm\+::\+CLEAR}} = 0x49
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a89aa2bca1f427b3bba6335129f479f77}{neo\+::vm\+::\+DUP}} = 0x4A
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a1bb417e796672d15256a5b51d9b554ae}{neo\+::vm\+::\+OVER}} = 0x4B
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ad9f6d86a3c4dd82ccef63fe5b5cd2def}{neo\+::vm\+::\+PICK}} = 0x4D
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a91401ca580e1fe0890cbc955c62c3f16}{neo\+::vm\+::\+TUCK}} = 0x4E
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a46fc23bc4e4d57e5469a39658a6dd3e8}{neo\+::vm\+::\+SWAP}} = 0x50
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ae1d91e3279dd3926fbe4b51b713bc216}{neo\+::vm\+::\+ROT}} = 0x51
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a08cd1a31f17f0247ac89e2fbaadaa9e8}{neo\+::vm\+::\+ROLL}} = 0x52
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a67adac6729a392f610f94bac005c5ddd}{neo\+::vm\+::\+REVERSE3}} = 0x53
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a5b0752b01f30a5b3d45cd6693e2d9ccd}{neo\+::vm\+::\+REVERSE4}} = 0x54
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a98f9afb6df9a8e636ef0c06ab80d5d3c}{neo\+::vm\+::\+REVERSEN}} = 0x55
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac285f31606a058bd7c323f1b2951ed8d}{neo\+::vm\+::\+INITSSLOT}} = 0x56
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8eed982f0e1bc01ce8e09d799da1cc88}{neo\+::vm\+::\+INITSLOT}} = 0x57
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8abefab14308c0e3613db87d017cb93fb7}{neo\+::vm\+::\+LDSFLD0}} = 0x58
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ad3c23fbea117a1218438ff141a2d9d28}{neo\+::vm\+::\+LDSFLD1}} = 0x59
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7c8f0175eab654ef08c3a53656af8f3f}{neo\+::vm\+::\+LDSFLD2}} = 0x5A
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a865e1242061840af67fb6ee8c8a3f43c}{neo\+::vm\+::\+LDSFLD3}} = 0x5B
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a47d88f3ed787d6ffbddc323ea819e089}{neo\+::vm\+::\+LDSFLD4}} = 0x5C
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8897131fd18c8414e364f598c07046dd}{neo\+::vm\+::\+LDSFLD5}} = 0x5D
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8abde361b3f703001e8e39e87406270f79}{neo\+::vm\+::\+LDSFLD6}} = 0x5E
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aaea5614dd8d0f5c742dc05e6beff0257}{neo\+::vm\+::\+LDSFLD}} = 0x5F
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a364a9fb00e518127a70b0e1b4946e79e}{neo\+::vm\+::\+STSFLD0}} = 0x60
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a32ece6d043f63ab06cd5a700d9fd5514}{neo\+::vm\+::\+STSFLD1}} = 0x61
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a96d193cacbc0d9b71c0498986e048946}{neo\+::vm\+::\+STSFLD2}} = 0x62
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aed6633a8b19c480c9624d8cffff21f74}{neo\+::vm\+::\+STSFLD3}} = 0x63
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a52d482ef7e5f5549dd884d6f0afc6f2f}{neo\+::vm\+::\+STSFLD4}} = 0x64
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8abe54c8a5579195a2ebccafdf4050cd56}{neo\+::vm\+::\+STSFLD5}} = 0x65
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a812fb0b83b098ff199104e0ec8bc36c4}{neo\+::vm\+::\+STSFLD6}} = 0x66
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a460bf6ff6808350749f04523703b6fab}{neo\+::vm\+::\+STSFLD}} = 0x67
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a4c8b731f2cd864e0d38b4ad5504026c8}{neo\+::vm\+::\+LDLOC0}} = 0x68
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ab73650d4dd77f0b523e30fdf5c5c7865}{neo\+::vm\+::\+LDLOC1}} = 0x69
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a48c9331cf49fc5c10b2f732d471cbfd2}{neo\+::vm\+::\+LDLOC2}} = 0x6A
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8af3b41ec41685d393ab6b6d9e96f5819f}{neo\+::vm\+::\+LDLOC3}} = 0x6B
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aa4c00182149ae09859bfa5d51205d9d9}{neo\+::vm\+::\+LDLOC4}} = 0x6C
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a792ab2c7813fec58eb6eecd1316bb235}{neo\+::vm\+::\+LDLOC5}} = 0x6D
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8acacf503b90387d075f1099d9536f7a46}{neo\+::vm\+::\+LDLOC6}} = 0x6E
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7a7f8f036bdc769c290ef4040701f8f7}{neo\+::vm\+::\+LDLOC}} = 0x6F
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a41e598bfcdd249c17959f08e46683b7b}{neo\+::vm\+::\+STLOC0}} = 0x70
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a312cd328c40e83b684fa738c684234df}{neo\+::vm\+::\+STLOC1}} = 0x71
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a58f5db68e512b29deaeaa4bcbcfd7ef8}{neo\+::vm\+::\+STLOC2}} = 0x72
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8acb279b517abd2db1a1969f85fc03f5cd}{neo\+::vm\+::\+STLOC3}} = 0x73
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7d23b38073f7351cd47f9602f9d0ed26}{neo\+::vm\+::\+STLOC4}} = 0x74
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ada19c3561602bc1dd17e86f5426a3439}{neo\+::vm\+::\+STLOC5}} = 0x75
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7fe7b0cafde09b38c2563cb0e5102927}{neo\+::vm\+::\+STLOC6}} = 0x76
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a054fdc30c8fdfc82062c6f71cc5aee8c}{neo\+::vm\+::\+STLOC}} = 0x77
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a466d25b200861b2f874bc2fea4f19fe4}{neo\+::vm\+::\+LDARG0}} = 0x78
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8af9e152a169ef97f975c7551693899b65}{neo\+::vm\+::\+LDARG1}} = 0x79
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8af59381a4b8657e27c35c18b81feff2f8}{neo\+::vm\+::\+LDARG2}} = 0x7A
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a35aa575aca33dd64e0c14f5580270f6d}{neo\+::vm\+::\+LDARG3}} = 0x7B
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a64dfab32d3a15564ecf9f69a4be09d66}{neo\+::vm\+::\+LDARG4}} = 0x7C
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a1c2c61b2f464b3a83006820c76510252}{neo\+::vm\+::\+LDARG5}} = 0x7D
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a3267fef9cbec5db91741795c8122f27b}{neo\+::vm\+::\+LDARG6}} = 0x7E
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a37d2a6f2d4a1242aa25fbabb5823031c}{neo\+::vm\+::\+LDARG}} = 0x7F
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aa39742858aab567df0c9d3c9bc801b04}{neo\+::vm\+::\+STARG0}} = 0x80
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a5a0302145d429888eba0e8f5aa5b5711}{neo\+::vm\+::\+STARG1}} = 0x81
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ab5303baeb1cc217c992c8d01ded78673}{neo\+::vm\+::\+STARG2}} = 0x82
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a4ef5c633e5661cbe43cf777a754ad948}{neo\+::vm\+::\+STARG3}} = 0x83
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ad32fafa1811e896b89f893bf4b563647}{neo\+::vm\+::\+STARG4}} = 0x84
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a702102dd52fe1fb29489849d653ab046}{neo\+::vm\+::\+STARG5}} = 0x85
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a44b459a27d886d59da29b453814cc252}{neo\+::vm\+::\+STARG6}} = 0x86
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a80d0a92f8b78d39987b3cba2373ab8e2}{neo\+::vm\+::\+STARG}} = 0x87
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8af783f116a510eb80c304b348672caa11}{neo\+::vm\+::\+NEWBUFFER}} = 0x88
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac5d10cc70cce96265c445f14e7f5aba4}{neo\+::vm\+::\+MEMCPY}} = 0x89
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac01ae1a5f122f25ce5675f86028b536a}{neo\+::vm\+::\+CAT}} = 0x8B
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a0f85e58dd75e7025beb47ee590ff7669}{neo\+::vm\+::\+SUBSTR}} = 0x8C
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a684d325a7303f52e64011467ff5c5758}{neo\+::vm\+::\+LEFT}} = 0x8D
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a21507b40c80068eda19865706fdc2403}{neo\+::vm\+::\+RIGHT}} = 0x8E
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aa2727ae72447eea06d4cc0ef67187280}{neo\+::vm\+::\+INVERT}} = 0x90
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a558ffc8f5770d8e4f95f51d822685532}{neo\+::vm\+::\+AND}} = 0x91
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a1d00e7dce692e8dc3f6877f035e3a616}{neo\+::vm\+::\+OR}} = 0x92
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a97675eb3f268048604dc5155511a2a4d}{neo\+::vm\+::\+XOR}} = 0x93
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a969f331a87d8c958473c32b4d0e61a44}{neo\+::vm\+::\+EQUAL}} = 0x97
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a94fbd04a26dff1689ee02634be6aaf1f}{neo\+::vm\+::\+NOTEQUAL}} = 0x98
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a65b164db371ec78984e24bc8f858c0d1}{neo\+::vm\+::\+SIGN}} = 0x99
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7d8a220d2262f9d6c658d549ee12cf2c}{neo\+::vm\+::\+ABS}} = 0x9A
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ad2bfe823de977bec55fc1459621da7c6}{neo\+::vm\+::\+NEGATE}} = 0x9B
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a38924f2227ebf15f4bdc6dca5c5eca91}{neo\+::vm\+::\+INC}} = 0x9C
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a38344a4d87bb35ec197f26fad338b6ab}{neo\+::vm\+::\+DEC}} = 0x9D
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a9eeb52badb613229884838847294b90d}{neo\+::vm\+::\+ADD}} = 0x9E
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a241dd841abade20fcb27b8a9f494e1eb}{neo\+::vm\+::\+SUB}} = 0x9F
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a2cdf52a55876063ec93b7d18bc741f6c}{neo\+::vm\+::\+MUL}} = 0x\+A0
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a29bbf66f7f8529ec47e394fb5a36c646}{neo\+::vm\+::\+DIV}} = 0x\+A1
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac5a28f4b35a2884fa3277150ac5d0967}{neo\+::vm\+::\+MOD}} = 0x\+A2
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a17faf4e999b8cee4c36915c1f54ccffe}{neo\+::vm\+::\+POW}} = 0x\+A3
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a36875f2500a09ee35d0bb7eb8c0b91b0}{neo\+::vm\+::\+SQRT}} = 0x\+A4
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a621aa84d2315c13c9c5567d62f14e5fc}{neo\+::vm\+::\+MODMUL}} = 0x\+A5
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a4d23292e3a1a162065eee1849c020f3c}{neo\+::vm\+::\+MODPOW}} = 0x\+A6
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8abb0b9165d75b1fd27d0a869b036baa3c}{neo\+::vm\+::\+SHL}} = 0x\+A8
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a10ab606ab9efe239a011d327d9301edd}{neo\+::vm\+::\+SHR}} = 0x\+A9
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a10df3d67626099df882920ba6552f16d}{neo\+::vm\+::\+NOT}} = 0x\+AA
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ae304154c6d2ef858b4861637dfa43687}{neo\+::vm\+::\+BOOLAND}} = 0x\+AB
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aac2c11e7064a1ce1ed87e0eccbf3b384}{neo\+::vm\+::\+BOOLOR}} = 0x\+AC
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8e3eb2c69a184ad1d448afe5985f50b3}{neo\+::vm\+::\+NZ}} = 0x\+B1
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ab8fa14b0b0a44176bd52edf6c2a3a956}{neo\+::vm\+::\+NUMEQUAL}} = 0x\+B3
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8af271d658e7181f0b36da3588712ce3c0}{neo\+::vm\+::\+NUMNOTEQUAL}} = 0x\+B4
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac562607189d77eb9dfb707464c1e7b0b}{neo\+::vm\+::\+LT}} = 0x\+B5
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8acfe6055d2e0503be378bb63449ec7ba6}{neo\+::vm\+::\+LE}} = 0x\+B6
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8acd6a9bd2a175104eed40f0d33a8b4020}{neo\+::vm\+::\+GT}} = 0x\+B7
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8af803729628adf4199f224c2a225038e9}{neo\+::vm\+::\+GE}} = 0x\+B8
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ace31e2a082d17e038fcc6e3006166653}{neo\+::vm\+::\+MIN}} = 0x\+B9
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a26a4b44a837bf97b972628509912b4a5}{neo\+::vm\+::\+MAX}} = 0x\+BA
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a6115012b8971f5e51685a9b5d0d761b9}{neo\+::vm\+::\+WITHIN}} = 0x\+BB
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a9b4316b862a8ffd3fe80a289e74c4aff}{neo\+::vm\+::\+PACKMAP}} = 0x\+BE
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7c1d20b35fbea7f0d2aa1d917f03de7a}{neo\+::vm\+::\+PACKSTRUCT}} = 0x\+BF
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac6c95380f38d412370dcdfacceff48ff}{neo\+::vm\+::\+PACK}} = 0x\+C0
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a26d35087b15c957db06a38ccb3391ef9}{neo\+::vm\+::\+UNPACK}} = 0x\+C1
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a35694c82bac03299adca63f387848143}{neo\+::vm\+::\+NEWARRAY0}} = 0x\+C2
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8aadc78a5e0d1ec07a8e7eb09e464a286d}{neo\+::vm\+::\+NEWARRAY}} = 0x\+C3
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ae73966361125436dfca7b2b651ff9d9c}{neo\+::vm\+::\+NEWARRAY\+\_\+T}} = 0x\+C4
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a947c99cd031ed47cc19fdd562b7b6e46}{neo\+::vm\+::\+NEWSTRUCT0}} = 0x\+C5
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ab2faabe2aaa7b7d9556b9b53b63a3840}{neo\+::vm\+::\+NEWSTRUCT}} = 0x\+C6
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a4b2fa1b21b1b00e058d1f7579895aa1a}{neo\+::vm\+::\+NEWMAP}} = 0x\+C8
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a62e5cef85d46f1a5a2144d9fd463b79e}{neo\+::vm\+::\+SIZE}} = 0x\+CA
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a8796a8f2f9b707554a548675894f9eec}{neo\+::vm\+::\+HASKEY}} = 0x\+CB
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a48fb38e1f876fa3dc9c8cd6cad73c243}{neo\+::vm\+::\+KEYS}} = 0x\+CC
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ab7db4588385c4fc7ed5211c35c711598}{neo\+::vm\+::\+VALUES}} = 0x\+CD
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a6beceb5f76418c3423591135596cf700}{neo\+::vm\+::\+PICKITEM}} = 0x\+CE
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a375ffb668aa90f1c7fcae55e9734a752}{neo\+::vm\+::\+APPEND}} = 0x\+CF
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a83a991aca8973ca5f60b190f5a835513}{neo\+::vm\+::\+SETITEM}} = 0x\+D0
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a328072b907cdbe459b0d4ed8ef22c2eb}{neo\+::vm\+::\+REVERSEITEMS}} = 0x\+D1
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a78baf367c4626442174307cdf41c6538}{neo\+::vm\+::\+REMOVE}} = 0x\+D2
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a95663bae6c65719df244a182c7f18e88}{neo\+::vm\+::\+CLEARITEMS}} = 0x\+D3
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a4b15626b620d2f850d4ccd7f3b92f2e1}{neo\+::vm\+::\+POPITEM}} = 0x\+D4
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8ac5dc611cb8490048db201f0710f4b379}{neo\+::vm\+::\+ISNULL}} = 0x\+D8
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8adddd9bc4e50dde695726338954800766}{neo\+::vm\+::\+ISTYPE}} = 0x\+D9
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a947a338c0e482e4afcffca292d5944f2}{neo\+::vm\+::\+CONVERT}} = 0x\+DB
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7b50ae6b47d901e7453b1253f3a4e684}{neo\+::vm\+::\+ABORTMSG}} = 0x\+E0
+, \mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a7075d8a996849cb7afce74f79ca2f30e}{neo\+::vm\+::\+ASSERTMSG}} = 0x\+E1
+ \}
+\begin{DoxyCompactList}\small\item\em Neo VM operation codes -\/ exact match with Neo C\# Op\+Code.\+cs. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{namespaceneo_1_1vm_a3955bee09a17a8f8810875e16500e543}{neo\+::vm\+::\+Get\+Op\+Code\+Name}} (\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code}} opcode)
+\begin{DoxyCompactList}\small\item\em Gets the string name of an \doxylink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code}. \end{DoxyCompactList}\end{DoxyCompactItemize}

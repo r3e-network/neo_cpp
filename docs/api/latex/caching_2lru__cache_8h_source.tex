@@ -1,0 +1,114 @@
+\doxysection{lru\+\_\+cache.\+h}
+\hypertarget{caching_2lru__cache_8h_source}{}\label{caching_2lru__cache_8h_source}\index{include/neo/io/caching/lru\_cache.h@{include/neo/io/caching/lru\_cache.h}}
+\mbox{\hyperlink{caching_2lru__cache_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <list>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1io_1_1caching}{neo::io::caching}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ TKey,\ \textcolor{keyword}{typename}\ TValue,\ \textcolor{keyword}{typename}\ THash\ =\ std::hash<TKey>>}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_aa20bb15750dff29cca487d18975bf3d3}{LRUCache}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_aa20bb15750dff29cca487d18975bf3d3}{LRUCache}}(\textcolor{keywordtype}{size\_t}\ capacity)\ :\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_ac8474ea35c09c014f90a6764c5cbb8c0}{capacity\_}}(capacity)\ \{\}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a689eaa08b668eaeae86ed3fcf87b9efe}{Add}}(\textcolor{keyword}{const}\ TKey\&\ key,\ \textcolor{keyword}{const}\ TValue\&\ value)}
+\DoxyCodeLine{00033\ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a62b59fd64ce88df76e62abaf699ed655}{mutex\_}});}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ key\ already\ exists}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_af55abed4924d9c5d9ccb8923a343e298}{cache\_}}.find(key);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_af55abed4924d9c5d9ccb8923a343e298}{cache\_}}.end())}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Move\ the\ item\ to\ the\ front\ of\ the\ list}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}{items\_}}.erase(it-\/>second.first);}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}{items\_}}.push\_front(std::make\_pair(key,\ value));}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ it-\/>second.first\ =\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}{items\_}}.begin();}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ it-\/>second.second\ =\ value;}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ cache\ is\ full}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}{items\_}}.size()\ >=\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_ac8474ea35c09c014f90a6764c5cbb8c0}{capacity\_}})}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Remove\ the\ least\ recently\ used\ item}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ last\ =\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}{items\_}}.back();}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_af55abed4924d9c5d9ccb8923a343e298}{cache\_}}.erase(last.first);}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}{items\_}}.pop\_back();}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ the\ new\ item}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}{items\_}}.push\_front(std::make\_pair(key,\ value));}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_af55abed4924d9c5d9ccb8923a343e298}{cache\_}}[key]\ =\ std::make\_pair(\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}{items\_}}.begin(),\ value);}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_ab3798b8c699b31628e7d1aec991148a3}{TryGet}}(\textcolor{keyword}{const}\ TKey\&\ key,\ TValue\&\ value)}
+\DoxyCodeLine{00070\ \ \ \ \ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a62b59fd64ce88df76e62abaf699ed655}{mutex\_}});}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ key\ exists}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_af55abed4924d9c5d9ccb8923a343e298}{cache\_}}.find(key);}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ ==\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_af55abed4924d9c5d9ccb8923a343e298}{cache\_}}.end())\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Move\ the\ item\ to\ the\ front\ of\ the\ list}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}{items\_}}.erase(it-\/>second.first);}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}{items\_}}.push\_front(std::make\_pair(key,\ it-\/>second.second));}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ it-\/>second.first\ =\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}{items\_}}.begin();}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Return\ the\ value}}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ value\ =\ it-\/>second.second;}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00085\ \ \ \ \ \}}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00092\ \ \ \ \ std::optional<TValue>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_aaa05d3465548c5709379a9efd12e5f50}{Get}}(\textcolor{keyword}{const}\ TKey\&\ key)}
+\DoxyCodeLine{00093\ \ \ \ \ \{}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ TValue\ value;}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_ab3798b8c699b31628e7d1aec991148a3}{TryGet}}(key,\ value))\ \textcolor{keywordflow}{return}\ value;}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::nullopt;}
+\DoxyCodeLine{00097\ \ \ \ \ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_ad388347115b1df8ba345a9b3cb090ecc}{Remove}}(\textcolor{keyword}{const}\ TKey\&\ key)}
+\DoxyCodeLine{00105\ \ \ \ \ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a62b59fd64ce88df76e62abaf699ed655}{mutex\_}});}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ the\ key\ exists}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_af55abed4924d9c5d9ccb8923a343e298}{cache\_}}.find(key);}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ ==\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_af55abed4924d9c5d9ccb8923a343e298}{cache\_}}.end())\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Remove\ the\ item}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}{items\_}}.erase(it-\/>second.first);}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_af55abed4924d9c5d9ccb8923a343e298}{cache\_}}.erase(it);}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00116\ \ \ \ \ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a8902b11705702e6949731ae9c0601be8}{Clear}}()}
+\DoxyCodeLine{00122\ \ \ \ \ \{}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a62b59fd64ce88df76e62abaf699ed655}{mutex\_}});}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}{items\_}}.clear();}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_af55abed4924d9c5d9ccb8923a343e298}{cache\_}}.clear();}
+\DoxyCodeLine{00126\ \ \ \ \ \}}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_aa010152b956bc44350da8af07053fc3d}{Size}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00133\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a62b59fd64ce88df76e62abaf699ed655}{mutex\_}});}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}{items\_}}.size();}
+\DoxyCodeLine{00136\ \ \ \ \ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_afd6e0d50f9facb58b21df75d09af2f34}{Capacity}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_ac8474ea35c09c014f90a6764c5cbb8c0}{capacity\_}};\ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_ac8474ea35c09c014f90a6764c5cbb8c0}{capacity\_}};}
+\DoxyCodeLine{00146\ \ \ \ \ std::list<std::pair<TKey,\ TValue>>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}{items\_}};}
+\DoxyCodeLine{00147\ \ \ \ \ std::unordered\_map<TKey,\ std::pair<typename\ std::list<std::pair<TKey,\ TValue>>::iterator,\ TValue>,\ THash>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_af55abed4924d9c5d9ccb8923a343e298}{cache\_}};}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a62b59fd64ce88df76e62abaf699ed655}{mutex\_}};}
+\DoxyCodeLine{00149\ \};}
+\DoxyCodeLine{00150\ \}\ \ \textcolor{comment}{//\ namespace\ neo::io::caching}}
+
+\end{DoxyCode}

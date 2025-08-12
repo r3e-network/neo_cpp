@@ -1,0 +1,41 @@
+\doxysection{src/smartcontract/system\+\_\+calls\+\_\+crypto.cpp File Reference}
+\hypertarget{system__calls__crypto_8cpp}{}\label{system__calls__crypto_8cpp}\index{src/smartcontract/system\_calls\_crypto.cpp@{src/smartcontract/system\_calls\_crypto.cpp}}
+{\ttfamily \#include $<$neo/core/protocol\+\_\+constants.\+h$>$}\newline
+{\ttfamily \#include $<$neo/cryptography/bls12\+\_\+381.\+h$>$}\newline
+{\ttfamily \#include $<$neo/cryptography/crypto.\+h$>$}\newline
+{\ttfamily \#include $<$neo/cryptography/ecc/ec\+\_\+point.\+h$>$}\newline
+{\ttfamily \#include $<$neo/cryptography/hash.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/binary\+\_\+writer.\+h$>$}\newline
+{\ttfamily \#include $<$neo/ledger/block.\+h$>$}\newline
+{\ttfamily \#include $<$neo/ledger/signer.\+h$>$}\newline
+{\ttfamily \#include $<$neo/ledger/transaction.\+h$>$}\newline
+{\ttfamily \#include $<$neo/network/p2p/payloads/neo3\+\_\+transaction.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/application\+\_\+engine.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/system\+\_\+calls.\+h$>$}\newline
+{\ttfamily \#include $<$neo/vm/stack\+\_\+item.\+h$>$}\newline
+{\ttfamily \#include $<$neo/vm/vm\+\_\+constants.\+h$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+Include dependency graph for system\+\_\+calls\+\_\+crypto.\+cpp\+:
+% FIG 0
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1smartcontract}{neo\+::smartcontract}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{namespaceneo_1_1smartcontract_a8d6c1f6070ef73a79242300a41bb9236}{neo\+::smartcontract\+::\+Validate\+BLS12381\+G1\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&point\+\_\+bytes)
+\item 
+bool \mbox{\hyperlink{namespaceneo_1_1smartcontract_a576aacfe547a64658371079f15572b91}{neo\+::smartcontract\+::\+Validate\+BLS12381\+G2\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&point\+\_\+bytes)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{namespaceneo_1_1smartcontract_a239065a95a8ca92e078a92af14d14cd8}{neo\+::smartcontract\+::\+Map\+To\+G1\+SSWU}} (const std\+::array$<$ uint8\+\_\+t, 48 $>$ \&u0, const std\+::array$<$ uint8\+\_\+t, 48 $>$ \&u1)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{namespaceneo_1_1smartcontract_a8f13854d23b5b1efdf1636d302d4229d}{neo\+::smartcontract\+::\+Hash\+To\+G1\+BLS12381}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&message)
+\item 
+bool \mbox{\hyperlink{namespaceneo_1_1smartcontract_a97642ce2855ed5de126c9c78a438b19b}{neo\+::smartcontract\+::\+Verify\+BLS12381\+Pairing}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&signature, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&pubkey, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&message\+\_\+point)
+\item 
+void \mbox{\hyperlink{namespaceneo_1_1smartcontract_a37bcefa603258d3cea9078ade4bea501}{neo\+::smartcontract\+::\+Register\+Crypto\+System\+Calls}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine)
+\begin{DoxyCompactList}\small\item\em Registers all crypto-\/related system calls. \end{DoxyCompactList}\end{DoxyCompactItemize}

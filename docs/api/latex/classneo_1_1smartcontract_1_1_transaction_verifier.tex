@@ -1,0 +1,488 @@
+\doxysection{neo\+::smartcontract\+::Transaction\+Verifier Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier}{}\label{classneo_1_1smartcontract_1_1_transaction_verifier}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+
+
+Transaction verifier.  
+
+
+
+
+{\ttfamily \#include $<$transaction\+\_\+verifier.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::smartcontract\+::Transaction\+Verifier\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_cache_entry}{Verification\+Cache\+Entry}}
+\item 
+struct \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_metrics}{Verification\+Metrics}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output}{Verification\+Output}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_ad4b27ed92d969401df44993193dcf643}{Verify\+Transaction}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&transaction, const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&context)
+\begin{DoxyCompactList}\small\item\em Verifies a transaction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output}{Verification\+Output}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_ae8269311a9ff8ae5c10bc9cfbe0553b8}{Verify\+Signature}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&transaction, const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&context)
+\begin{DoxyCompactList}\small\item\em Verifies a transaction\textquotesingle{}s signature. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output}{Verification\+Output}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a1bb67f3b54426afded100f9e50a10997}{Verify\+Witness}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&transaction, const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&context)
+\begin{DoxyCompactList}\small\item\em Verifies a transaction\textquotesingle{}s witness. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output}{Verification\+Output}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_aa985c42b2dc0bc674617fc9deb077d97}{Verify\+Network\+Fee}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&transaction, const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&context)
+\begin{DoxyCompactList}\small\item\em Verifies a transaction\textquotesingle{}s network fee. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output}{Verification\+Output}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_ab306f84db2b27bc59d8eb6caa5c1be53}{Verify\+System\+Fee}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&transaction, const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&context)
+\begin{DoxyCompactList}\small\item\em Verifies a transaction\textquotesingle{}s system fee. \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_af16e4df1b38cdfa53560451e842a7fa7}{Calculate\+Network\+Fee}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&transaction, const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&context)
+\begin{DoxyCompactList}\small\item\em Calculates the network fee for a transaction. \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a58a5010132cde192f9d1eaebf2891591}{Calculate\+System\+Fee}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&transaction, const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&context)
+\begin{DoxyCompactList}\small\item\em Calculates the system fee for a transaction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier}{Transaction\+Verifier}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a94d0ee7bc5a799f524bf2515d0f60ef9}{Instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets the singleton instance of the transaction verifier. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_abf659be16cf0982c8ac41ccbf43ae74a}{Transaction\+Verifier}} ()
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a10baf9bfff275d0339987452995f3bd4}{\texorpdfstring{$\sim$}{\string~}\+Transaction\+Verifier}} ()=default
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_ab20b5548f1b1f91e87c5f7d0babcd1d5}{Transaction\+Verifier}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier}{Transaction\+Verifier}} \&)=delete
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier}{Transaction\+Verifier}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a65d0e9af295308d5c485d99425b70e35}{operator=}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier}{Transaction\+Verifier}} \&)=delete
+\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a7d716712c7bc4ef3a82ed733a259d49a}{Calculate\+Witness\+Verification\+Fee}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&transaction, const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&context)
+\begin{DoxyCompactList}\small\item\em Calculates the witness verification fee for a transaction. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a6f2df29150fa7987d0b5ca50edf23723}{Is\+Signature\+Contract}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&script)
+\begin{DoxyCompactList}\small\item\em Checks if a script is a signature contract. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a9b95dcb53073998190daddff99daf233}{Is\+Multi\+Signature\+Contract}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&script)
+\begin{DoxyCompactList}\small\item\em Checks if a script is a multi-\/signature contract. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{Verification\+Result}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a76711adfd0aefc699feef80717f8312e}{Verify\+Transaction\+Signature}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&transaction, const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&context)
+\begin{DoxyCompactList}\small\item\em Verifies a transaction\textquotesingle{}s signature (internal helper). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{Verification\+Result}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_ae07163846b0e4ff89f17a6cd9409d77b}{Verify\+Transaction\+Witness}} (const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&transaction, const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&context)
+\begin{DoxyCompactList}\small\item\em Verifies a transaction\textquotesingle{}s witness (internal helper). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a5b0fe0d467cc6c8606648883a2872d0d}{Is\+Cache\+Entry\+Valid}} (const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_cache_entry}{Verification\+Cache\+Entry}} \&entry, size\+\_\+t current\+\_\+block\+\_\+height) const
+\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a3f9431fd808461fdd2af60951d82fa0d}{Add\+To\+Cache}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash, \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{Verification\+Result}} result, size\+\_\+t block\+\_\+height) const
+\item 
+std\+::optional$<$ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{Verification\+Result}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_ad661f8af03f398aaa2191909dc49aab5}{Get\+From\+Cache}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash, size\+\_\+t current\+\_\+block\+\_\+height) const
+\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_ac886cc97ff7936f35e18700c7667ab63}{Evict\+Old\+Cache\+Entries}} () const
+\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a6fd3f64f5acd079445419544e1da3913}{Record\+Verification\+Time}} (const std\+::chrono\+::microseconds \&duration) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_cache_entry}{Verification\+Cache\+Entry}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a78df6cb01c262bf371009d53fb3d4fe6}{verification\+Cache\+\_\+}}
+\item 
+std\+::list$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_a3e835a72d630f44dabbfd02707b7c700}{cache\+Order\+\_\+}}
+\item 
+\mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_metrics}{Verification\+Metrics}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_ac2f152cc52cf0c1d1fc445531a2e9c82}{metrics\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ void $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_aaba17186a05b64a1a7d50728461d7eeb}{verification\+Gas\+Histogram\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_adc4da6d6ae2c1a242cb7a1051066892f}{MAX\+\_\+\+CACHE\+\_\+\+SIZE}} = 10000
+\item 
+static constexpr std\+::chrono\+::minutes \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier_afe63287db77ef5766f8d9a9561337c17}{CACHE\+\_\+\+TTL}} \{30\}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Transaction verifier. 
+
+The transaction verifier is responsible for verifying transactions. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_abf659be16cf0982c8ac41ccbf43ae74a}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!TransactionVerifier@{TransactionVerifier}}
+\index{TransactionVerifier@{TransactionVerifier}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{TransactionVerifier()}{TransactionVerifier()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_abf659be16cf0982c8ac41ccbf43ae74a} 
+neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Transaction\+Verifier (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_a10baf9bfff275d0339987452995f3bd4}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!````~TransactionVerifier@{\texorpdfstring{$\sim$}{\string~}TransactionVerifier}}
+\index{````~TransactionVerifier@{\texorpdfstring{$\sim$}{\string~}TransactionVerifier}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TransactionVerifier()}{\string~TransactionVerifier()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_a10baf9bfff275d0339987452995f3bd4} 
+neo\+::smartcontract\+::\+Transaction\+Verifier\+::\texorpdfstring{$\sim$}{\string~}\+Transaction\+Verifier (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_ab20b5548f1b1f91e87c5f7d0babcd1d5}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!TransactionVerifier@{TransactionVerifier}}
+\index{TransactionVerifier@{TransactionVerifier}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{TransactionVerifier()}{TransactionVerifier()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_ab20b5548f1b1f91e87c5f7d0babcd1d5} 
+neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Transaction\+Verifier (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier}{Transaction\+Verifier}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_a3f9431fd808461fdd2af60951d82fa0d}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!AddToCache@{AddToCache}}
+\index{AddToCache@{AddToCache}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{AddToCache()}{AddToCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_a3f9431fd808461fdd2af60951d82fa0d} 
+void neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Add\+To\+Cache (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{Verification\+Result}}}]{result}{, }\item[{size\+\_\+t}]{block\+\_\+height}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_af16e4df1b38cdfa53560451e842a7fa7}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!CalculateNetworkFee@{CalculateNetworkFee}}
+\index{CalculateNetworkFee@{CalculateNetworkFee}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{CalculateNetworkFee()}{CalculateNetworkFee()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_af16e4df1b38cdfa53560451e842a7fa7} 
+int64\+\_\+t neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Calculate\+Network\+Fee (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&}]{transaction}{, }\item[{const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&}]{context}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the network fee for a transaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction. \\
+\hline
+{\em context} & The verification context. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The network fee. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_a58a5010132cde192f9d1eaebf2891591}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!CalculateSystemFee@{CalculateSystemFee}}
+\index{CalculateSystemFee@{CalculateSystemFee}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{CalculateSystemFee()}{CalculateSystemFee()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_a58a5010132cde192f9d1eaebf2891591} 
+int64\+\_\+t neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Calculate\+System\+Fee (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&}]{transaction}{, }\item[{const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&}]{context}{}\end{DoxyParamCaption})}
+
+
+
+Calculates the system fee for a transaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction. \\
+\hline
+{\em context} & The verification context. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The system fee. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_a7d716712c7bc4ef3a82ed733a259d49a}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!CalculateWitnessVerificationFee@{CalculateWitnessVerificationFee}}
+\index{CalculateWitnessVerificationFee@{CalculateWitnessVerificationFee}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{CalculateWitnessVerificationFee()}{CalculateWitnessVerificationFee()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_a7d716712c7bc4ef3a82ed733a259d49a} 
+int64\+\_\+t neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Calculate\+Witness\+Verification\+Fee (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&}]{transaction}{, }\item[{const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&}]{context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculates the witness verification fee for a transaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction. \\
+\hline
+{\em context} & The verification context. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The witness verification fee. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_ac886cc97ff7936f35e18700c7667ab63}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!EvictOldCacheEntries@{EvictOldCacheEntries}}
+\index{EvictOldCacheEntries@{EvictOldCacheEntries}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{EvictOldCacheEntries()}{EvictOldCacheEntries()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_ac886cc97ff7936f35e18700c7667ab63} 
+void neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Evict\+Old\+Cache\+Entries (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_ad661f8af03f398aaa2191909dc49aab5}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!GetFromCache@{GetFromCache}}
+\index{GetFromCache@{GetFromCache}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{GetFromCache()}{GetFromCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_ad661f8af03f398aaa2191909dc49aab5} 
+std\+::optional$<$ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{Verification\+Result}} $>$ neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Get\+From\+Cache (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{, }\item[{size\+\_\+t}]{current\+\_\+block\+\_\+height}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_a94d0ee7bc5a799f524bf2515d0f60ef9}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!Instance@{Instance}}
+\index{Instance@{Instance}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{Instance()}{Instance()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_a94d0ee7bc5a799f524bf2515d0f60ef9} 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier}{Transaction\+Verifier}} \& neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the singleton instance of the transaction verifier. 
+
+\begin{DoxyReturn}{Returns}
+The singleton instance of the transaction verifier. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_a5b0fe0d467cc6c8606648883a2872d0d}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!IsCacheEntryValid@{IsCacheEntryValid}}
+\index{IsCacheEntryValid@{IsCacheEntryValid}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{IsCacheEntryValid()}{IsCacheEntryValid()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_a5b0fe0d467cc6c8606648883a2872d0d} 
+bool neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Is\+Cache\+Entry\+Valid (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_cache_entry}{Verification\+Cache\+Entry}} \&}]{entry}{, }\item[{size\+\_\+t}]{current\+\_\+block\+\_\+height}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_a9b95dcb53073998190daddff99daf233}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!IsMultiSignatureContract@{IsMultiSignatureContract}}
+\index{IsMultiSignatureContract@{IsMultiSignatureContract}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{IsMultiSignatureContract()}{IsMultiSignatureContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_a9b95dcb53073998190daddff99daf233} 
+bool neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Is\+Multi\+Signature\+Contract (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{script}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if a script is a multi-\/signature contract. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & The script to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the script is a multi-\/signature contract, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_a6f2df29150fa7987d0b5ca50edf23723}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!IsSignatureContract@{IsSignatureContract}}
+\index{IsSignatureContract@{IsSignatureContract}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{IsSignatureContract()}{IsSignatureContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_a6f2df29150fa7987d0b5ca50edf23723} 
+bool neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Is\+Signature\+Contract (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{script}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if a script is a signature contract. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & The script to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the script is a signature contract, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_a65d0e9af295308d5c485d99425b70e35}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_a65d0e9af295308d5c485d99425b70e35} 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier}{Transaction\+Verifier}} \& neo\+::smartcontract\+::\+Transaction\+Verifier\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier}{Transaction\+Verifier}} \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [delete]}}
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_a6fd3f64f5acd079445419544e1da3913}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!RecordVerificationTime@{RecordVerificationTime}}
+\index{RecordVerificationTime@{RecordVerificationTime}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{RecordVerificationTime()}{RecordVerificationTime()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_a6fd3f64f5acd079445419544e1da3913} 
+void neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Record\+Verification\+Time (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::microseconds \&}]{duration}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_aa985c42b2dc0bc674617fc9deb077d97}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!VerifyNetworkFee@{VerifyNetworkFee}}
+\index{VerifyNetworkFee@{VerifyNetworkFee}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{VerifyNetworkFee()}{VerifyNetworkFee()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_aa985c42b2dc0bc674617fc9deb077d97} 
+\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output}{Verification\+Output}} neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Verify\+Network\+Fee (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&}]{transaction}{, }\item[{const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&}]{context}{}\end{DoxyParamCaption})}
+
+
+
+Verifies a transaction\textquotesingle{}s network fee. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to verify. \\
+\hline
+{\em context} & The verification context. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The verification output. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_ae8269311a9ff8ae5c10bc9cfbe0553b8}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!VerifySignature@{VerifySignature}}
+\index{VerifySignature@{VerifySignature}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{VerifySignature()}{VerifySignature()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_ae8269311a9ff8ae5c10bc9cfbe0553b8} 
+\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output}{Verification\+Output}} neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Verify\+Signature (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&}]{transaction}{, }\item[{const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&}]{context}{}\end{DoxyParamCaption})}
+
+
+
+Verifies a transaction\textquotesingle{}s signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to verify. \\
+\hline
+{\em context} & The verification context. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The verification output. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_ab306f84db2b27bc59d8eb6caa5c1be53}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!VerifySystemFee@{VerifySystemFee}}
+\index{VerifySystemFee@{VerifySystemFee}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{VerifySystemFee()}{VerifySystemFee()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_ab306f84db2b27bc59d8eb6caa5c1be53} 
+\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output}{Verification\+Output}} neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Verify\+System\+Fee (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&}]{transaction}{, }\item[{const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&}]{context}{}\end{DoxyParamCaption})}
+
+
+
+Verifies a transaction\textquotesingle{}s system fee. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to verify. \\
+\hline
+{\em context} & The verification context. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The verification output. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_ad4b27ed92d969401df44993193dcf643}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!VerifyTransaction@{VerifyTransaction}}
+\index{VerifyTransaction@{VerifyTransaction}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{VerifyTransaction()}{VerifyTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_ad4b27ed92d969401df44993193dcf643} 
+\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output}{Verification\+Output}} neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Verify\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&}]{transaction}{, }\item[{const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&}]{context}{}\end{DoxyParamCaption})}
+
+
+
+Verifies a transaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to verify. \\
+\hline
+{\em context} & The verification context. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The verification output. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_a76711adfd0aefc699feef80717f8312e}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!VerifyTransactionSignature@{VerifyTransactionSignature}}
+\index{VerifyTransactionSignature@{VerifyTransactionSignature}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{VerifyTransactionSignature()}{VerifyTransactionSignature()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_a76711adfd0aefc699feef80717f8312e} 
+\mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{Verification\+Result}} neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Verify\+Transaction\+Signature (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&}]{transaction}{, }\item[{const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&}]{context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Verifies a transaction\textquotesingle{}s signature (internal helper). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to verify. \\
+\hline
+{\em context} & The verification context. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The verification result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_ae07163846b0e4ff89f17a6cd9409d77b}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!VerifyTransactionWitness@{VerifyTransactionWitness}}
+\index{VerifyTransactionWitness@{VerifyTransactionWitness}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{VerifyTransactionWitness()}{VerifyTransactionWitness()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_ae07163846b0e4ff89f17a6cd9409d77b} 
+\mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{Verification\+Result}} neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Verify\+Transaction\+Witness (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&}]{transaction}{, }\item[{const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&}]{context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Verifies a transaction\textquotesingle{}s witness (internal helper). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to verify. \\
+\hline
+{\em context} & The verification context. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The verification result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_a1bb67f3b54426afded100f9e50a10997}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!VerifyWitness@{VerifyWitness}}
+\index{VerifyWitness@{VerifyWitness}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{VerifyWitness()}{VerifyWitness()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_a1bb67f3b54426afded100f9e50a10997} 
+\mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output}{Verification\+Output}} neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Verify\+Witness (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} \&}]{transaction}{, }\item[{const \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{Verification\+Context}} \&}]{context}{}\end{DoxyParamCaption})}
+
+
+
+Verifies a transaction\textquotesingle{}s witness. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to verify. \\
+\hline
+{\em context} & The verification context. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The verification output. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_afe63287db77ef5766f8d9a9561337c17}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!CACHE\_TTL@{CACHE\_TTL}}
+\index{CACHE\_TTL@{CACHE\_TTL}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{CACHE\_TTL}{CACHE\_TTL}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_afe63287db77ef5766f8d9a9561337c17} 
+std\+::chrono\+::minutes neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+CACHE\+\_\+\+TTL \{30\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_a3e835a72d630f44dabbfd02707b7c700}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!cacheOrder\_@{cacheOrder\_}}
+\index{cacheOrder\_@{cacheOrder\_}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{cacheOrder\_}{cacheOrder\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_a3e835a72d630f44dabbfd02707b7c700} 
+std\+::list$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}$>$ neo\+::smartcontract\+::\+Transaction\+Verifier\+::cache\+Order\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_adc4da6d6ae2c1a242cb7a1051066892f}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!MAX\_CACHE\_SIZE@{MAX\_CACHE\_SIZE}}
+\index{MAX\_CACHE\_SIZE@{MAX\_CACHE\_SIZE}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{MAX\_CACHE\_SIZE}{MAX\_CACHE\_SIZE}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_adc4da6d6ae2c1a242cb7a1051066892f} 
+size\+\_\+t neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+MAX\+\_\+\+CACHE\+\_\+\+SIZE = 10000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_ac2f152cc52cf0c1d1fc445531a2e9c82}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!metrics\_@{metrics\_}}
+\index{metrics\_@{metrics\_}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{metrics\_}{metrics\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_ac2f152cc52cf0c1d1fc445531a2e9c82} 
+\mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_metrics}{Verification\+Metrics}} neo\+::smartcontract\+::\+Transaction\+Verifier\+::metrics\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_a78df6cb01c262bf371009d53fb3d4fe6}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!verificationCache\_@{verificationCache\_}}
+\index{verificationCache\_@{verificationCache\_}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{verificationCache\_}{verificationCache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_a78df6cb01c262bf371009d53fb3d4fe6} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_cache_entry}{Verification\+Cache\+Entry}}$>$ neo\+::smartcontract\+::\+Transaction\+Verifier\+::verification\+Cache\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_transaction_verifier_aaba17186a05b64a1a7d50728461d7eeb}\index{neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}!verificationGasHistogram\_@{verificationGasHistogram\_}}
+\index{verificationGasHistogram\_@{verificationGasHistogram\_}!neo::smartcontract::TransactionVerifier@{neo::smartcontract::TransactionVerifier}}
+\doxysubsubsection{\texorpdfstring{verificationGasHistogram\_}{verificationGasHistogram\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_transaction_verifier_aaba17186a05b64a1a7d50728461d7eeb} 
+std\+::shared\+\_\+ptr$<$void$>$ neo\+::smartcontract\+::\+Transaction\+Verifier\+::verification\+Gas\+Histogram\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/\mbox{\hyperlink{transaction__verifier_8h}{transaction\+\_\+verifier.\+h}}\item 
+src/smartcontract/\mbox{\hyperlink{transaction__verifier_8cpp}{transaction\+\_\+verifier.\+cpp}}\end{DoxyCompactItemize}

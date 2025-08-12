@@ -1,0 +1,57 @@
+\doxysection{tcp\+\_\+server.\+h}
+\hypertarget{tcp__server_8h_source}{}\label{tcp__server_8h_source}\index{include/neo/network/tcp\_server.h@{include/neo/network/tcp\_server.h}}
+\mbox{\hyperlink{tcp__server_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ip__endpoint_8h}{neo/network/ip\_endpoint.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{tcp__connection_8h}{neo/network/tcp\_connection.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <boost/asio.hpp>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network}{neo::network}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_aec243adad224dbf18a3fcde89aa8a1c9}{TcpServer}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_aec243adad224dbf18a3fcde89aa8a1c9}{TcpServer}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEndPoint}}\&\ endpoint,\ uint32\_t\ maxConnections\ =\ 1000);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_aca9f592f5119b0df4c07bb76edc5e294}{\string~TcpServer}}();}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_a08b7f9ec0a61e3afe60d7dc220f4264d}{Start}}();}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_abfe3f434fb3f624da3f0ecfc5d05abf0}{Stop}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEndPoint}}\&\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_aff8d2a256dbc1285ffe8c7bfe202d2f1}{GetEndpoint}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_a8e5dcff6fbeb0e3b62c8b29cce9b7603}{GetConnectionCount}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_a311cf9fce0c5c162c6bdab4357d523ab}{SetConnectionAcceptedCallback}}(std::function<\textcolor{keywordtype}{void}(std::shared\_ptr<TcpConnection>)>\ callback);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00065\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEndPoint}}\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_ac80490da02f0e87c9597de6b2efcd594}{endpoint\_}};}
+\DoxyCodeLine{00066\ \ \ \ \ std::unique\_ptr<boost::asio::io\_context>\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_a0d0aec4f20c435a34e5b971d43d5335f}{ioContext\_}};}
+\DoxyCodeLine{00067\ \ \ \ \ std::unique\_ptr<boost::asio::basic\_socket\_acceptor<boost::asio::ip::tcp>>\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_a896f2221a29cb164e37d9e587669f188}{acceptor\_}};}
+\DoxyCodeLine{00068\ \ \ \ \ std::vector<std::thread>\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_a1dd3ef886f89dadff2131434861e3f42}{ioThreads\_}};}
+\DoxyCodeLine{00069\ \ \ \ \ std::unique\_ptr<boost::asio::executor\_work\_guard<boost::asio::io\_context::executor\_type>>\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_a2377946ac7e6c595e7a71e1436fecb60}{workGuard\_}};}
+\DoxyCodeLine{00070\ \ \ \ \ std::atomic<bool>\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_abb2fba75a1af91cb6b44ea68674d8f31}{running\_}};}
+\DoxyCodeLine{00071\ \ \ \ \ std::function<void(std::shared\_ptr<TcpConnection>)>\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_a173e6f1240f406f3d7f6cfb6eea975c0}{connectionAcceptedCallback\_}};}
+\DoxyCodeLine{00072\ \ \ \ \ std::unordered\_map<std::string,\ std::shared\_ptr<TcpConnection>>\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_ac115494eabce643a7fd791b2178433fb}{connections\_}};}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_a55e8db8407d874d31caa03a91f2027d2}{connectionsMutex\_}};}
+\DoxyCodeLine{00074\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_ad3092d744ab8c75532c5b4a3611cfaff}{maxConnections\_}};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_ac7ccbfd4abd3b3864db3358dc7ad0d15}{AcceptConnection}}();}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_a3f1d5c21c4ac4a3c03be7115c26a9a24}{HandleAccept}}(std::shared\_ptr<TcpConnection>\ connection,\ \textcolor{keyword}{const}\ std::error\_code\&\ error);}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_server_a8fd85211d0bb71d902b05c1a1a432bbf}{RemoveConnection}}(\textcolor{keyword}{const}\ std::string\&\ endpoint);}
+\DoxyCodeLine{00079\ \};}
+\DoxyCodeLine{00080\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network}}
+
+\end{DoxyCode}

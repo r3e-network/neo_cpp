@@ -1,0 +1,76 @@
+\doxysection{neo\+::smartcontract\+::Verification\+Cache Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1_verification_cache}{}\label{classneo_1_1smartcontract_1_1_verification_cache}\index{neo::smartcontract::VerificationCache@{neo::smartcontract::VerificationCache}}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_verification_cache_afa03d604747f0bf13c1b75293c1313bc}{Get}} (const std\+::string \&key)
+\item 
+{\footnotesize template$<$typename T$>$ }\\void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_verification_cache_a05734147e133d5841982d8746975d289}{Put}} (const std\+::string \&key, const T \&value)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+mutex \mbox{\hyperlink{classneo_1_1smartcontract_1_1_verification_cache_a6db08bb1b419ccea77e180cf514c0668}{cache\+\_\+mutex\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ bool, std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point $>$ $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_verification_cache_a11cce0b50c095a40e55cceb127fd683c}{cache\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_verification_cache_a109ea3f91f4e61a85cddf77829f4d0d4}{MAX\+\_\+\+CACHE\+\_\+\+SIZE}} = 10000
+\item 
+static constexpr std\+::chrono\+::minutes \mbox{\hyperlink{classneo_1_1smartcontract_1_1_verification_cache_aa3e7d7d00715fc5b39b64c233bdc93e0}{CACHE\+\_\+\+TTL}} \{30\}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_verification_cache_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_verification_cache_afa03d604747f0bf13c1b75293c1313bc}\index{neo::smartcontract::VerificationCache@{neo::smartcontract::VerificationCache}!Get@{Get}}
+\index{Get@{Get}!neo::smartcontract::VerificationCache@{neo::smartcontract::VerificationCache}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_verification_cache_afa03d604747f0bf13c1b75293c1313bc} 
+template$<$typename T$>$ \\
+T \texorpdfstring{$\ast$}{*} neo\+::smartcontract\+::\+Verification\+Cache\+::\+Get (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_verification_cache_a05734147e133d5841982d8746975d289}\index{neo::smartcontract::VerificationCache@{neo::smartcontract::VerificationCache}!Put@{Put}}
+\index{Put@{Put}!neo::smartcontract::VerificationCache@{neo::smartcontract::VerificationCache}}
+\doxysubsubsection{\texorpdfstring{Put()}{Put()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_verification_cache_a05734147e133d5841982d8746975d289} 
+template$<$typename T$>$ \\
+void neo\+::smartcontract\+::\+Verification\+Cache\+::\+Put (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const T \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_verification_cache_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_verification_cache_a11cce0b50c095a40e55cceb127fd683c}\index{neo::smartcontract::VerificationCache@{neo::smartcontract::VerificationCache}!cache\_@{cache\_}}
+\index{cache\_@{cache\_}!neo::smartcontract::VerificationCache@{neo::smartcontract::VerificationCache}}
+\doxysubsubsection{\texorpdfstring{cache\_}{cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_verification_cache_a11cce0b50c095a40e55cceb127fd683c} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::pair$<$bool, std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point$>$ $>$ neo\+::smartcontract\+::\+Verification\+Cache\+::cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_verification_cache_a6db08bb1b419ccea77e180cf514c0668}\index{neo::smartcontract::VerificationCache@{neo::smartcontract::VerificationCache}!cache\_mutex\_@{cache\_mutex\_}}
+\index{cache\_mutex\_@{cache\_mutex\_}!neo::smartcontract::VerificationCache@{neo::smartcontract::VerificationCache}}
+\doxysubsubsection{\texorpdfstring{cache\_mutex\_}{cache\_mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_verification_cache_a6db08bb1b419ccea77e180cf514c0668} 
+std\+::shared\+\_\+mutex neo\+::smartcontract\+::\+Verification\+Cache\+::cache\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_verification_cache_aa3e7d7d00715fc5b39b64c233bdc93e0}\index{neo::smartcontract::VerificationCache@{neo::smartcontract::VerificationCache}!CACHE\_TTL@{CACHE\_TTL}}
+\index{CACHE\_TTL@{CACHE\_TTL}!neo::smartcontract::VerificationCache@{neo::smartcontract::VerificationCache}}
+\doxysubsubsection{\texorpdfstring{CACHE\_TTL}{CACHE\_TTL}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_verification_cache_aa3e7d7d00715fc5b39b64c233bdc93e0} 
+std\+::chrono\+::minutes neo\+::smartcontract\+::\+Verification\+Cache\+::\+CACHE\+\_\+\+TTL \{30\}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_verification_cache_a109ea3f91f4e61a85cddf77829f4d0d4}\index{neo::smartcontract::VerificationCache@{neo::smartcontract::VerificationCache}!MAX\_CACHE\_SIZE@{MAX\_CACHE\_SIZE}}
+\index{MAX\_CACHE\_SIZE@{MAX\_CACHE\_SIZE}!neo::smartcontract::VerificationCache@{neo::smartcontract::VerificationCache}}
+\doxysubsubsection{\texorpdfstring{MAX\_CACHE\_SIZE}{MAX\_CACHE\_SIZE}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_verification_cache_a109ea3f91f4e61a85cddf77829f4d0d4} 
+size\+\_\+t neo\+::smartcontract\+::\+Verification\+Cache\+::\+MAX\+\_\+\+CACHE\+\_\+\+SIZE = 10000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/smartcontract/\mbox{\hyperlink{transaction__verifier_8cpp}{transaction\+\_\+verifier.\+cpp}}\end{DoxyCompactItemize}

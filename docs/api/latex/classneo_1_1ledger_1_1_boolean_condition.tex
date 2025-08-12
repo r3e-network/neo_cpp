@@ -1,0 +1,225 @@
+\doxysection{neo\+::ledger\+::Boolean\+Condition Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_boolean_condition}{}\label{classneo_1_1ledger_1_1_boolean_condition}\index{neo::ledger::BooleanCondition@{neo::ledger::BooleanCondition}}
+
+
+Inheritance diagram for neo\+::ledger\+::Boolean\+Condition\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::ledger\+::Boolean\+Condition\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_boolean_condition_ab262b6083996676103cfd47f8bf28e11}{Boolean\+Condition}} (bool value)
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46}{Type}} \mbox{\hyperlink{classneo_1_1ledger_1_1_boolean_condition_a197552ae05ec765d6c1cf288e10f0efc}{Get\+Type}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the condition type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_boolean_condition_adfca0cdaf6b495456b38ef8b435aa306}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_boolean_condition_aef9ad208f65b82f4e56d5760b7df97ee}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_boolean_condition_aa063c27c43db1d133dd423b88f6055b9}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_boolean_condition_a9eb87d9da15d81d675c8ecec671a0b24}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a JSON reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition}{neo\+::ledger\+::\+Witness\+Condition}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_a4f0d48631c66fcab03e30a413858ec06}{\texorpdfstring{$\sim$}{\string~}\+Witness\+Condition}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_boolean_condition_aaace6ecb924207ce2b41e565d8a7dc9c}{value\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition}{neo\+::ledger\+::\+Witness\+Condition}}}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46}{Type}} \+: uint8\+\_\+t \{ \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46a27226c864bac7454a8504f8edb15d95b}{Boolean}} = 0x00
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46aa74c05d080620f087c4e523977230666}{Not}} = 0x01
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46ac33315685a0cba3ce53be378b3c7874b}{And}} = 0x02
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46a3a2d5fe857d8f9541136a124c2edec6c}{Or}} = 0x03
+, \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46a142a90538a1f96e3fadbda11e30feeb1}{Script\+Hash}} = 0x18
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46a03937134cedab9078be39a77ee3a48a0}{Group}} = 0x19
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46a32eb81c8766434800c20866b73452d5d}{Called\+By\+Entry}} = 0x20
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46aff21988db8b36aa5ffcd1c1d872a325f}{Called\+By\+Contract}} = 0x28
+, \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46a8616f1884f81b23aafc088bc0910778c}{Called\+By\+Group}} = 0x29
+ \}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1ledger_1_1_witness}{Witness} condition type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition}{neo\+::ledger\+::\+Witness\+Condition}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition}{Witness\+Condition}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_afc52151489baf7e9440383b1810173f9}{Deserialize\+From}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader, uint8\+\_\+t max\+Depth)
+\begin{DoxyCompactList}\small\item\em Creates a condition from binary reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition}{neo\+::ledger\+::\+Witness\+Condition}}}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_a37054dff6ce6a421d591cd6ec2e6f82d}{Max\+Nesting\+Depth}} = 2
+\begin{DoxyCompactList}\small\item\em Maximum nesting depth for conditions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_boolean_condition_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_boolean_condition_ab262b6083996676103cfd47f8bf28e11}\index{neo::ledger::BooleanCondition@{neo::ledger::BooleanCondition}!BooleanCondition@{BooleanCondition}}
+\index{BooleanCondition@{BooleanCondition}!neo::ledger::BooleanCondition@{neo::ledger::BooleanCondition}}
+\doxysubsubsection{\texorpdfstring{BooleanCondition()}{BooleanCondition()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_boolean_condition_ab262b6083996676103cfd47f8bf28e11} 
+neo\+::ledger\+::\+Boolean\+Condition\+::\+Boolean\+Condition (\begin{DoxyParamCaption}\item[{bool}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_boolean_condition_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_boolean_condition_aef9ad208f65b82f4e56d5760b7df97ee}\index{neo::ledger::BooleanCondition@{neo::ledger::BooleanCondition}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::ledger::BooleanCondition@{neo::ledger::BooleanCondition}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_boolean_condition_aef9ad208f65b82f4e56d5760b7df97ee} 
+void neo\+::ledger\+::\+Boolean\+Condition\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1ledger_1_1_boolean_condition_a9eb87d9da15d81d675c8ecec671a0b24}\index{neo::ledger::BooleanCondition@{neo::ledger::BooleanCondition}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::ledger::BooleanCondition@{neo::ledger::BooleanCondition}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_boolean_condition_a9eb87d9da15d81d675c8ecec671a0b24} 
+void neo\+::ledger\+::\+Boolean\+Condition\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+\Hypertarget{classneo_1_1ledger_1_1_boolean_condition_a197552ae05ec765d6c1cf288e10f0efc}\index{neo::ledger::BooleanCondition@{neo::ledger::BooleanCondition}!GetType@{GetType}}
+\index{GetType@{GetType}!neo::ledger::BooleanCondition@{neo::ledger::BooleanCondition}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_boolean_condition_a197552ae05ec765d6c1cf288e10f0efc} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46}{Type}} neo\+::ledger\+::\+Boolean\+Condition\+::\+Get\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the condition type. 
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_af64bdf66401cad61e07c6ff46bc34e5b}{neo\+::ledger\+::\+Witness\+Condition}}.
+
+\Hypertarget{classneo_1_1ledger_1_1_boolean_condition_adfca0cdaf6b495456b38ef8b435aa306}\index{neo::ledger::BooleanCondition@{neo::ledger::BooleanCondition}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::ledger::BooleanCondition@{neo::ledger::BooleanCondition}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_boolean_condition_adfca0cdaf6b495456b38ef8b435aa306} 
+void neo\+::ledger\+::\+Boolean\+Condition\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1ledger_1_1_boolean_condition_aa063c27c43db1d133dd423b88f6055b9}\index{neo::ledger::BooleanCondition@{neo::ledger::BooleanCondition}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::ledger::BooleanCondition@{neo::ledger::BooleanCondition}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_boolean_condition_aa063c27c43db1d133dd423b88f6055b9} 
+void neo\+::ledger\+::\+Boolean\+Condition\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_boolean_condition_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_boolean_condition_aaace6ecb924207ce2b41e565d8a7dc9c}\index{neo::ledger::BooleanCondition@{neo::ledger::BooleanCondition}!value\_@{value\_}}
+\index{value\_@{value\_}!neo::ledger::BooleanCondition@{neo::ledger::BooleanCondition}}
+\doxysubsubsection{\texorpdfstring{value\_}{value\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_boolean_condition_aaace6ecb924207ce2b41e565d8a7dc9c} 
+bool neo\+::ledger\+::\+Boolean\+Condition\+::value\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+src/ledger/\mbox{\hyperlink{witness__rule_8cpp}{witness\+\_\+rule.\+cpp}}\end{DoxyCompactItemize}

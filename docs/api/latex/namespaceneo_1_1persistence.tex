@@ -1,0 +1,115 @@
+\doxysection{neo\+::persistence Namespace Reference}
+\hypertarget{namespaceneo_1_1persistence}{}\label{namespaceneo_1_1persistence}\index{neo::persistence@{neo::persistence}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_cloned_cache}{Cloned\+Cache}}
+\begin{DoxyCompactList}\small\item\em A cache that clones data from another cache. Provides isolation for read operations while maintaining a reference to the original cache. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{Data\+Cache}}
+\begin{DoxyCompactList}\small\item\em Base class for data caches. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache_adapter}{Data\+Cache\+Adapter}}
+\begin{DoxyCompactList}\small\item\em Adapter class to provide convenient Put/\+Add methods for \doxylink{classneo_1_1persistence_1_1_data_cache}{Data\+Cache}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store}{IRead\+Only\+Store}}
+\begin{DoxyCompactList}\small\item\em Interface for read-\/only operations on a key-\/value store. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store}{IStore}}
+\begin{DoxyCompactList}\small\item\em Interface for a key-\/value store. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider}{IStore\+Provider}}
+\begin{DoxyCompactList}\small\item\em Interface for a store provider. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_snapshot}{IStore\+Snapshot}}
+\begin{DoxyCompactList}\small\item\em Interface for a snapshot of a key-\/value store. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_view}{IStore\+View}}
+\begin{DoxyCompactList}\small\item\em Interface for storage view operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store}{IWrite\+Store}}
+\begin{DoxyCompactList}\small\item\em Interface for write operations on a key-\/value store. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1persistence_1_1_level_db_config}{Level\+Db\+Config}}
+\begin{DoxyCompactList}\small\item\em Level\+DB configuration options. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store}{Level\+Db\+Store}}
+\begin{DoxyCompactList}\small\item\em Level\+DB-\/based persistent storage implementation. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_snapshot}{Memory\+Snapshot}}
+\begin{DoxyCompactList}\small\item\em A snapshot of a \doxylink{classneo_1_1persistence_1_1_memory_store}{Memory\+Store}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store}{Memory\+Store}}
+\begin{DoxyCompactList}\small\item\em A memory-\/based implementation of \doxylink{classneo_1_1persistence_1_1_i_store}{IStore}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_provider}{Memory\+Store\+Provider}}
+\begin{DoxyCompactList}\small\item\em A memory-\/based implementation of \doxylink{classneo_1_1persistence_1_1_i_store_provider}{IStore\+Provider}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_view}{Memory\+Store\+View}}
+\begin{DoxyCompactList}\small\item\em In-\/memory implementation of store view for high-\/performance storage operations. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1persistence_1_1_rocks_db_config}{Rocks\+Db\+Config}}
+\begin{DoxyCompactList}\small\item\em Rocks\+DB configuration options. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}}
+\begin{DoxyCompactList}\small\item\em Represents an item in the storage. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_iterator}{Storage\+Iterator}}
+\begin{DoxyCompactList}\small\item\em Iterator for storage items. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}}
+\begin{DoxyCompactList}\small\item\em Represents a key in the storage for Neo N3. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_store_cache}{Store\+Cache}}
+\begin{DoxyCompactList}\small\item\em A cache for a store. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory}{Store\+Factory}}
+\begin{DoxyCompactList}\small\item\em Factory class for creating store providers and stores. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{Store\+View}}
+\begin{DoxyCompactList}\small\item\em Represents a view of a storage. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1persistence_a058803320915798e8dd9013f2528a490}{Track\+State}} \{ \mbox{\hyperlink{namespaceneo_1_1persistence_a058803320915798e8dd9013f2528a490a6adf97f83acf6453d4a6a4b1070f3754}{None}}
+, \mbox{\hyperlink{namespaceneo_1_1persistence_a058803320915798e8dd9013f2528a490af29ddbfb905eb2593fdcdfb243f9af85}{Added}}
+, \mbox{\hyperlink{namespaceneo_1_1persistence_a058803320915798e8dd9013f2528a490a820dbd2b8f606aff866c0bbfb6b737c1}{Changed}}
+, \mbox{\hyperlink{namespaceneo_1_1persistence_a058803320915798e8dd9013f2528a490a5fe6005bf6e415c950c011fb65f12b8f}{Deleted}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum for tracking the state of an item in the cache. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575}{Seek\+Direction}} \{ \mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575a67d2f6740a8eaebf4d5c6f79be8da481}{Forward}}
+, \mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575ab3263eb38f8903efc271cc7a760da510}{Backward}}
+ \}
+\begin{DoxyCompactList}\small\item\em Enum for seek direction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-enum-members}
+\Hypertarget{namespaceneo_1_1persistence_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575}\index{neo::persistence@{neo::persistence}!SeekDirection@{SeekDirection}}
+\index{SeekDirection@{SeekDirection}!neo::persistence@{neo::persistence}}
+\doxysubsubsection{\texorpdfstring{SeekDirection}{SeekDirection}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575} 
+enum class \mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575}{neo\+::persistence\+::\+Seek\+Direction}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Enum for seek direction. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Forward@{Forward}!neo::persistence@{neo::persistence}}\index{neo::persistence@{neo::persistence}!Forward@{Forward}}}\Hypertarget{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575a67d2f6740a8eaebf4d5c6f79be8da481}\label{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575a67d2f6740a8eaebf4d5c6f79be8da481} 
+Forward&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Backward@{Backward}!neo::persistence@{neo::persistence}}\index{neo::persistence@{neo::persistence}!Backward@{Backward}}}\Hypertarget{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575ab3263eb38f8903efc271cc7a760da510}\label{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575ab3263eb38f8903efc271cc7a760da510} 
+Backward&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespaceneo_1_1persistence_a058803320915798e8dd9013f2528a490}\index{neo::persistence@{neo::persistence}!TrackState@{TrackState}}
+\index{TrackState@{TrackState}!neo::persistence@{neo::persistence}}
+\doxysubsubsection{\texorpdfstring{TrackState}{TrackState}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1persistence_a058803320915798e8dd9013f2528a490} 
+enum class \mbox{\hyperlink{namespaceneo_1_1persistence_a058803320915798e8dd9013f2528a490}{neo\+::persistence\+::\+Track\+State}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Enum for tracking the state of an item in the cache. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{None@{None}!neo::persistence@{neo::persistence}}\index{neo::persistence@{neo::persistence}!None@{None}}}\Hypertarget{namespaceneo_1_1persistence_a058803320915798e8dd9013f2528a490a6adf97f83acf6453d4a6a4b1070f3754}\label{namespaceneo_1_1persistence_a058803320915798e8dd9013f2528a490a6adf97f83acf6453d4a6a4b1070f3754} 
+None&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Added@{Added}!neo::persistence@{neo::persistence}}\index{neo::persistence@{neo::persistence}!Added@{Added}}}\Hypertarget{namespaceneo_1_1persistence_a058803320915798e8dd9013f2528a490af29ddbfb905eb2593fdcdfb243f9af85}\label{namespaceneo_1_1persistence_a058803320915798e8dd9013f2528a490af29ddbfb905eb2593fdcdfb243f9af85} 
+Added&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Changed@{Changed}!neo::persistence@{neo::persistence}}\index{neo::persistence@{neo::persistence}!Changed@{Changed}}}\Hypertarget{namespaceneo_1_1persistence_a058803320915798e8dd9013f2528a490a820dbd2b8f606aff866c0bbfb6b737c1}\label{namespaceneo_1_1persistence_a058803320915798e8dd9013f2528a490a820dbd2b8f606aff866c0bbfb6b737c1} 
+Changed&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Deleted@{Deleted}!neo::persistence@{neo::persistence}}\index{neo::persistence@{neo::persistence}!Deleted@{Deleted}}}\Hypertarget{namespaceneo_1_1persistence_a058803320915798e8dd9013f2528a490a5fe6005bf6e415c950c011fb65f12b8f}\label{namespaceneo_1_1persistence_a058803320915798e8dd9013f2528a490a5fe6005bf6e415c950c011fb65f12b8f} 
+Deleted&\\
+\hline
+
+\end{DoxyEnumFields}

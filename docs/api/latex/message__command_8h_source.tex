@@ -1,0 +1,73 @@
+\doxysection{message\+\_\+command.\+h}
+\hypertarget{message__command_8h_source}{}\label{message__command_8h_source}\index{include/neo/network/message\_command.h@{include/neo/network/message\_command.h}}
+\mbox{\hyperlink{message__command_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network}{neo::network}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{MessageCommand}}\ :\ uint8\_t}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{comment}{//\ Handshaking}}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a34b6cd75171affba6957e308dcbd92be}{Version}}\ =\ 0x00,}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a3bda726d477920f8a3d52d09c5c588a1}{Verack}}\ =\ 0x01,}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//\ Connectivity}}
+\DoxyCodeLine{00033\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a88588f7d078d9191f52db8b88f917a22}{GetAddr}}\ =\ 0x10,}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a3649a5e29ad648f3cfe3eea1a93d2f78}{Addr}}\ =\ 0x11,}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ab85815d04cec053ce6deb8021f2df1b8}{Ping}}\ =\ 0x18,}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00048\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a4d94412495a32342e1b8c78f7960f2bc}{Pong}}\ =\ 0x19,}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{comment}{//\ Synchronization}}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602abbba311057055f8d35d240e4d8d603df}{GetHeaders}}\ =\ 0x20,}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a883d7615c4d2de3fa1218f1298c46d0e}{Headers}}\ =\ 0x21,}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ac88aa5b0f384e6cc590ff0b587fb0358}{GetBlocks}}\ =\ 0x24,}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a2046ead0bf60e2131e75f7f911503d62}{Mempool}}\ =\ 0x25,}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00074\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602aa7e871520a392b978d3c9e6344c4407f}{Inv}}\ =\ 0x27,}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a52600e5be768512cc215866649a5eee8}{GetData}}\ =\ 0x28,}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a6fe46cee0f158e1aefc8eb0ffd4fce46}{GetBlockByIndex}}\ =\ 0x29,}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a38c300f4fc9ce8a77aad4a30de05cad8}{NotFound}}\ =\ 0x2a,}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00094\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3da1b0ffaae3973401f71cd000ab9f7856e}{Transaction}}\ =\ 0x2b,}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00099\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3dae1e4c8c9ccd9fc39c391da4bcd093fb2}{Block}}\ =\ 0x2c,}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00104\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_ae86a2ded1a5667f22d0280f26e87bc3dacb9e3624404af6e2ec52e3a39d5358a7}{Extensible}}\ =\ 0x2e,}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ad98ac12774fca5c3cbaffe276840c55f}{Reject}}\ =\ 0x2f,}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{comment}{//\ SPV\ Protocol}}
+\DoxyCodeLine{00115\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a9952d795cc94fece435e61bf2fd3efc1}{FilterLoad}}\ =\ 0x30,}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00120\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ac10019fc11a0669023b2aaa0ceceaca1}{FilterAdd}}\ =\ 0x31,}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00125\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602a9710a80c646e2276cd3965b95b369623}{FilterClear}}\ =\ 0x32,}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00130\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602abc8f486cdfb0c498d4d4c4fa5ce4b692}{MerkleBlock}}\ =\ 0x38,}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{comment}{//\ Others}}
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602ab92071d61c88498171928745ca53078b}{Alert}}\ =\ 0x40}
+\DoxyCodeLine{00137\ \};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00144\ std::string\ \mbox{\hyperlink{namespaceneo_1_1network_ae677732a7587ff182fd6c3610a9af7ed}{MessageCommandToString}}(\mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{MessageCommand}}\ command);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00152\ \mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{MessageCommand}}\ \mbox{\hyperlink{namespaceneo_1_1network_a1df4d2e3ed454d26ac81a22d6d219a4c}{StringToMessageCommand}}(\textcolor{keyword}{const}\ std::string\&\ str);}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00159\ std::string\ \mbox{\hyperlink{namespaceneo_1_1network_a55db484499db1c03b214a1b0fc3577bf}{GetCommandName}}(\mbox{\hyperlink{namespaceneo_1_1network_a3051fb086c550655f18090a1d5043602}{MessageCommand}}\ command);}
+\DoxyCodeLine{00160\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network}}
+
+\end{DoxyCode}

@@ -1,0 +1,460 @@
+\doxysection{neo\+::extensions\+::Date\+Time\+Extensions Class Reference}
+\hypertarget{classneo_1_1extensions_1_1_date_time_extensions}{}\label{classneo_1_1extensions_1_1_date_time_extensions}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+
+
+Extensions for date and time operations.  
+
+
+
+
+{\ttfamily \#include $<$datetime\+\_\+extensions.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static uint64\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a085011f7f04eec824158d02ae18649a3}{Get\+Unix\+Timestamp}} ()
+\begin{DoxyCompactList}\small\item\em Get current Unix timestamp in seconds. \end{DoxyCompactList}\item 
+static uint64\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a417b3b9a85da805e8e138aee84e2a169}{Get\+Unix\+Timestamp\+Milliseconds}} ()
+\begin{DoxyCompactList}\small\item\em Get current Unix timestamp in milliseconds. \end{DoxyCompactList}\item 
+static std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_ad12e27fb1c0cb0df6d3f90b25a55bcf3}{From\+Unix\+Timestamp}} (uint64\+\_\+t timestamp)
+\begin{DoxyCompactList}\small\item\em Convert Unix timestamp to system time point. \end{DoxyCompactList}\item 
+static std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a22ce06338f988f899017ddf7add155ca}{From\+Unix\+Timestamp\+Milliseconds}} (uint64\+\_\+t timestamp\+Ms)
+\begin{DoxyCompactList}\small\item\em Convert Unix timestamp in milliseconds to system time point. \end{DoxyCompactList}\item 
+static uint64\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_ac4a086a6991eda1baeba7c1a345f439c}{To\+Unix\+Timestamp}} (const std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \&time\+Point)
+\begin{DoxyCompactList}\small\item\em Convert system time point to Unix timestamp. \end{DoxyCompactList}\item 
+static uint64\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a00500445e699e93f76d8c3ae377fd1ae}{To\+Unix\+Timestamp\+Milliseconds}} (const std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \&time\+Point)
+\begin{DoxyCompactList}\small\item\em Convert system time point to Unix timestamp in milliseconds. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_aa3a43e24a533bcca628be30ffa613525}{To\+ISO8601\+String}} (uint64\+\_\+t timestamp)
+\begin{DoxyCompactList}\small\item\em Convert timestamp to ISO 8601 string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a8c9f4344c4983de084ca7717abc5188f}{To\+Readable\+String}} (uint64\+\_\+t timestamp)
+\begin{DoxyCompactList}\small\item\em Convert timestamp to readable string. \end{DoxyCompactList}\item 
+static uint64\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a38b74edccb11059b6324302ea394a87f}{From\+ISO8601\+String}} (const std\+::string \&iso8601)
+\begin{DoxyCompactList}\small\item\em Parse ISO 8601 string to Unix timestamp. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a0992f3c797c24646500992ee2e730305}{Is\+Valid\+Blockchain\+Timestamp}} (uint64\+\_\+t timestamp, uint64\+\_\+t tolerance=900)
+\begin{DoxyCompactList}\small\item\em Check if a timestamp is valid for blockchain operations. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_aaae375a9b871d8b09735bc176039bf13}{Is\+Valid\+Block\+Time}} (uint64\+\_\+t block\+Time, uint64\+\_\+t previous\+Block\+Time, uint64\+\_\+t max\+Delta=7200)
+\begin{DoxyCompactList}\small\item\em Check if block time is valid relative to previous block. \end{DoxyCompactList}\item 
+static uint64\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a30b2ba490407f7e6b876e38add7ab711}{Get\+Time\+Remaining}} (uint64\+\_\+t start\+Time, uint64\+\_\+t timeout\+Seconds)
+\begin{DoxyCompactList}\small\item\em Calculate time remaining until timeout. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a1a640dc472cf13067cfd912e859a307b}{Has\+Timed\+Out}} (uint64\+\_\+t start\+Time, uint64\+\_\+t timeout\+Seconds)
+\begin{DoxyCompactList}\small\item\em Check if a timeout has occurred. \end{DoxyCompactList}\item 
+static uint64\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_af259ac5c87e3ee8cb3aedf8b0ccecb94}{Get\+Start\+Of\+Day}} (uint64\+\_\+t timestamp)
+\begin{DoxyCompactList}\small\item\em Get timestamp for beginning of day (UTC) \end{DoxyCompactList}\item 
+static uint64\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a44296d41b50f846b284e898fd675aaa2}{Get\+End\+Of\+Day}} (uint64\+\_\+t timestamp)
+\begin{DoxyCompactList}\small\item\em Get timestamp for end of day (UTC) \end{DoxyCompactList}\item 
+static uint64\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_af4935e6e7c07ce21cd354ab2508e8c34}{Add\+Seconds}} (uint64\+\_\+t timestamp, int64\+\_\+t seconds)
+\begin{DoxyCompactList}\small\item\em Add seconds to timestamp. \end{DoxyCompactList}\item 
+static uint64\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_ad74f5946fa261f605eaba0992a9c6ce0}{Add\+Minutes}} (uint64\+\_\+t timestamp, int64\+\_\+t minutes)
+\begin{DoxyCompactList}\small\item\em Add minutes to timestamp. \end{DoxyCompactList}\item 
+static uint64\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a4620c0ad9809aa82ea8d14bc2c77b546}{Add\+Hours}} (uint64\+\_\+t timestamp, int64\+\_\+t hours)
+\begin{DoxyCompactList}\small\item\em Add hours to timestamp. \end{DoxyCompactList}\item 
+static uint64\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_ade21786ce1b41dded6b0e1fc4c889a17}{Add\+Days}} (uint64\+\_\+t timestamp, int64\+\_\+t days)
+\begin{DoxyCompactList}\small\item\em Add days to timestamp. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Extensions for date and time operations. 
+
+\hypertarget{classneo_1_1extensions_1_1_date_time_extensions_autotoc_md23}{}\doxysubsubsection{\texorpdfstring{Overview}{Overview}}\label{classneo_1_1extensions_1_1_date_time_extensions_autotoc_md23}
+Provides utility methods for timestamp conversions, blockchain time operations, and date/time formatting commonly used in Neo blockchain operations.\hypertarget{classneo_1_1extensions_1_1_date_time_extensions_autotoc_md24}{}\doxysubsubsection{\texorpdfstring{API Reference}{API Reference}}\label{classneo_1_1extensions_1_1_date_time_extensions_autotoc_md24}
+
+\begin{DoxyItemize}
+\item {\bfseries{Conversion}}\+: Unix timestamp conversions, millisecond operations
+\item {\bfseries{Blockchain}}\+: Block time validation, timeout calculations
+\item {\bfseries{Formatting}}\+: ISO string conversion, readable time formats
+\end{DoxyItemize}\hypertarget{classneo_1_1extensions_1_1_date_time_extensions_autotoc_md25}{}\doxysubsubsection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{classneo_1_1extensions_1_1_date_time_extensions_autotoc_md25}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Get\ current\ Unix\ timestamp}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ timestamp\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a085011f7f04eec824158d02ae18649a3}{DateTimeExtensions::GetUnixTimestamp}}();}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Convert\ to\ readable\ format}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ readable\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_a8c9f4344c4983de084ca7717abc5188f}{DateTimeExtensions::ToReadableString}}(timestamp);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Validate\ block\ time}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ valid\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_date_time_extensions_aaae375a9b871d8b09735bc176039bf13}{DateTimeExtensions::IsValidBlockTime}}(blockTime,\ previousTime);}
+
+\end{DoxyCode}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_ade21786ce1b41dded6b0e1fc4c889a17}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!AddDays@{AddDays}}
+\index{AddDays@{AddDays}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{AddDays()}{AddDays()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_ade21786ce1b41dded6b0e1fc4c889a17} 
+uint64\+\_\+t neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+Add\+Days (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{timestamp}{, }\item[{int64\+\_\+t}]{days}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Add days to timestamp. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & Base timestamp \\
+\hline
+{\em days} & Days to add \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New timestamp 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_a4620c0ad9809aa82ea8d14bc2c77b546}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!AddHours@{AddHours}}
+\index{AddHours@{AddHours}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{AddHours()}{AddHours()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_a4620c0ad9809aa82ea8d14bc2c77b546} 
+uint64\+\_\+t neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+Add\+Hours (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{timestamp}{, }\item[{int64\+\_\+t}]{hours}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Add hours to timestamp. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & Base timestamp \\
+\hline
+{\em hours} & Hours to add \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New timestamp 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_ad74f5946fa261f605eaba0992a9c6ce0}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!AddMinutes@{AddMinutes}}
+\index{AddMinutes@{AddMinutes}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{AddMinutes()}{AddMinutes()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_ad74f5946fa261f605eaba0992a9c6ce0} 
+uint64\+\_\+t neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+Add\+Minutes (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{timestamp}{, }\item[{int64\+\_\+t}]{minutes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Add minutes to timestamp. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & Base timestamp \\
+\hline
+{\em minutes} & Minutes to add \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New timestamp 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_af4935e6e7c07ce21cd354ab2508e8c34}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!AddSeconds@{AddSeconds}}
+\index{AddSeconds@{AddSeconds}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{AddSeconds()}{AddSeconds()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_af4935e6e7c07ce21cd354ab2508e8c34} 
+uint64\+\_\+t neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+Add\+Seconds (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{timestamp}{, }\item[{int64\+\_\+t}]{seconds}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Add seconds to timestamp. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & Base timestamp \\
+\hline
+{\em seconds} & Seconds to add \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New timestamp 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_a38b74edccb11059b6324302ea394a87f}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!FromISO8601String@{FromISO8601String}}
+\index{FromISO8601String@{FromISO8601String}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{FromISO8601String()}{FromISO8601String()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_a38b74edccb11059b6324302ea394a87f} 
+uint64\+\_\+t neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+From\+ISO8601\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{iso8601}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Parse ISO 8601 string to Unix timestamp. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em iso8601} & ISO 8601 formatted string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Unix timestamp in seconds 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_ad12e27fb1c0cb0df6d3f90b25a55bcf3}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!FromUnixTimestamp@{FromUnixTimestamp}}
+\index{FromUnixTimestamp@{FromUnixTimestamp}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{FromUnixTimestamp()}{FromUnixTimestamp()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_ad12e27fb1c0cb0df6d3f90b25a55bcf3} 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+From\+Unix\+Timestamp (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{timestamp}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Convert Unix timestamp to system time point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & Unix timestamp in seconds \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+System time point 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_a22ce06338f988f899017ddf7add155ca}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!FromUnixTimestampMilliseconds@{FromUnixTimestampMilliseconds}}
+\index{FromUnixTimestampMilliseconds@{FromUnixTimestampMilliseconds}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{FromUnixTimestampMilliseconds()}{FromUnixTimestampMilliseconds()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_a22ce06338f988f899017ddf7add155ca} 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+From\+Unix\+Timestamp\+Milliseconds (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{timestamp\+Ms}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Convert Unix timestamp in milliseconds to system time point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp\+Ms} & Unix timestamp in milliseconds \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+System time point 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_a44296d41b50f846b284e898fd675aaa2}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!GetEndOfDay@{GetEndOfDay}}
+\index{GetEndOfDay@{GetEndOfDay}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{GetEndOfDay()}{GetEndOfDay()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_a44296d41b50f846b284e898fd675aaa2} 
+uint64\+\_\+t neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+Get\+End\+Of\+Day (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{timestamp}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get timestamp for end of day (UTC) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & Input timestamp \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Timestamp for end of day 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_af259ac5c87e3ee8cb3aedf8b0ccecb94}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!GetStartOfDay@{GetStartOfDay}}
+\index{GetStartOfDay@{GetStartOfDay}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{GetStartOfDay()}{GetStartOfDay()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_af259ac5c87e3ee8cb3aedf8b0ccecb94} 
+uint64\+\_\+t neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+Get\+Start\+Of\+Day (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{timestamp}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get timestamp for beginning of day (UTC) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & Input timestamp \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Timestamp for start of day 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_a30b2ba490407f7e6b876e38add7ab711}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!GetTimeRemaining@{GetTimeRemaining}}
+\index{GetTimeRemaining@{GetTimeRemaining}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{GetTimeRemaining()}{GetTimeRemaining()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_a30b2ba490407f7e6b876e38add7ab711} 
+uint64\+\_\+t neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+Get\+Time\+Remaining (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{start\+Time}{, }\item[{uint64\+\_\+t}]{timeout\+Seconds}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Calculate time remaining until timeout. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Time} & Start timestamp \\
+\hline
+{\em timeout\+Seconds} & Timeout duration in seconds \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Seconds remaining (0 if timed out) 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_a085011f7f04eec824158d02ae18649a3}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!GetUnixTimestamp@{GetUnixTimestamp}}
+\index{GetUnixTimestamp@{GetUnixTimestamp}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{GetUnixTimestamp()}{GetUnixTimestamp()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_a085011f7f04eec824158d02ae18649a3} 
+uint64\+\_\+t neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+Get\+Unix\+Timestamp (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get current Unix timestamp in seconds. 
+
+\begin{DoxyReturn}{Returns}
+Current Unix timestamp 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_a417b3b9a85da805e8e138aee84e2a169}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!GetUnixTimestampMilliseconds@{GetUnixTimestampMilliseconds}}
+\index{GetUnixTimestampMilliseconds@{GetUnixTimestampMilliseconds}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{GetUnixTimestampMilliseconds()}{GetUnixTimestampMilliseconds()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_a417b3b9a85da805e8e138aee84e2a169} 
+uint64\+\_\+t neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+Get\+Unix\+Timestamp\+Milliseconds (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Get current Unix timestamp in milliseconds. 
+
+\begin{DoxyReturn}{Returns}
+Current Unix timestamp in milliseconds 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_a1a640dc472cf13067cfd912e859a307b}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!HasTimedOut@{HasTimedOut}}
+\index{HasTimedOut@{HasTimedOut}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{HasTimedOut()}{HasTimedOut()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_a1a640dc472cf13067cfd912e859a307b} 
+bool neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+Has\+Timed\+Out (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{start\+Time}{, }\item[{uint64\+\_\+t}]{timeout\+Seconds}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if a timeout has occurred. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+Time} & Start timestamp \\
+\hline
+{\em timeout\+Seconds} & Timeout duration in seconds \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if timed out 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_a0992f3c797c24646500992ee2e730305}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!IsValidBlockchainTimestamp@{IsValidBlockchainTimestamp}}
+\index{IsValidBlockchainTimestamp@{IsValidBlockchainTimestamp}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{IsValidBlockchainTimestamp()}{IsValidBlockchainTimestamp()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_a0992f3c797c24646500992ee2e730305} 
+bool neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+Is\+Valid\+Blockchain\+Timestamp (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{timestamp}{, }\item[{uint64\+\_\+t}]{tolerance}{ = {\ttfamily 900}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if a timestamp is valid for blockchain operations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & Timestamp to validate \\
+\hline
+{\em tolerance} & Tolerance in seconds (default\+: 900 = 15 minutes) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if timestamp is within acceptable range 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_aaae375a9b871d8b09735bc176039bf13}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!IsValidBlockTime@{IsValidBlockTime}}
+\index{IsValidBlockTime@{IsValidBlockTime}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{IsValidBlockTime()}{IsValidBlockTime()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_aaae375a9b871d8b09735bc176039bf13} 
+bool neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+Is\+Valid\+Block\+Time (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{block\+Time}{, }\item[{uint64\+\_\+t}]{previous\+Block\+Time}{, }\item[{uint64\+\_\+t}]{max\+Delta}{ = {\ttfamily 7200}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if block time is valid relative to previous block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block\+Time} & Current block timestamp \\
+\hline
+{\em previous\+Block\+Time} & Previous block timestamp \\
+\hline
+{\em max\+Delta} & Maximum allowed time difference (default\+: 7200 = 2 hours) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if block time is valid 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_aa3a43e24a533bcca628be30ffa613525}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!ToISO8601String@{ToISO8601String}}
+\index{ToISO8601String@{ToISO8601String}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{ToISO8601String()}{ToISO8601String()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_aa3a43e24a533bcca628be30ffa613525} 
+std\+::string neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+To\+ISO8601\+String (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{timestamp}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert timestamp to ISO 8601 string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & Unix timestamp in seconds \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+ISO 8601 formatted string 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_a8c9f4344c4983de084ca7717abc5188f}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!ToReadableString@{ToReadableString}}
+\index{ToReadableString@{ToReadableString}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{ToReadableString()}{ToReadableString()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_a8c9f4344c4983de084ca7717abc5188f} 
+std\+::string neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+To\+Readable\+String (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{timestamp}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert timestamp to readable string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & Unix timestamp in seconds \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Human-\/readable time string 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_ac4a086a6991eda1baeba7c1a345f439c}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!ToUnixTimestamp@{ToUnixTimestamp}}
+\index{ToUnixTimestamp@{ToUnixTimestamp}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{ToUnixTimestamp()}{ToUnixTimestamp()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_ac4a086a6991eda1baeba7c1a345f439c} 
+uint64\+\_\+t neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+To\+Unix\+Timestamp (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \&}]{time\+Point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Convert system time point to Unix timestamp. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+Point} & System time point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Unix timestamp in seconds 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_date_time_extensions_a00500445e699e93f76d8c3ae377fd1ae}\index{neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}!ToUnixTimestampMilliseconds@{ToUnixTimestampMilliseconds}}
+\index{ToUnixTimestampMilliseconds@{ToUnixTimestampMilliseconds}!neo::extensions::DateTimeExtensions@{neo::extensions::DateTimeExtensions}}
+\doxysubsubsection{\texorpdfstring{ToUnixTimestampMilliseconds()}{ToUnixTimestampMilliseconds()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_date_time_extensions_a00500445e699e93f76d8c3ae377fd1ae} 
+uint64\+\_\+t neo\+::extensions\+::\+Date\+Time\+Extensions\+::\+To\+Unix\+Timestamp\+Milliseconds (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \&}]{time\+Point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Convert system time point to Unix timestamp in milliseconds. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em time\+Point} & System time point \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Unix timestamp in milliseconds 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/extensions/\mbox{\hyperlink{datetime__extensions_8h}{datetime\+\_\+extensions.\+h}}\item 
+src/extensions/\mbox{\hyperlink{datetime__extensions_8cpp}{datetime\+\_\+extensions.\+cpp}}\end{DoxyCompactItemize}

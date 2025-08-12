@@ -1,0 +1,183 @@
+\doxysection{neo\+::core\+::Pooled\+Object\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classneo_1_1core_1_1_pooled_object}{}\label{classneo_1_1core_1_1_pooled_object}\index{neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}}
+
+
+RAII wrapper for pooled objects.  
+
+
+
+
+{\ttfamily \#include $<$memory\+\_\+pool.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a5f5af8d85420b44c0444b0aa72103746}{Pooled\+Object}} (std\+::unique\+\_\+ptr$<$ T $>$ obj, \mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{Memory\+Pool}}$<$ T $>$ \texorpdfstring{$\ast$}{*}pool)
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_ad7a70e0d9e940040063fbfdbf0e94cd9}{\texorpdfstring{$\sim$}{\string~}\+Pooled\+Object}} ()
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a8579cb4dcebc96241ca5d3c8b4f3f90f}{Pooled\+Object}} (\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{Pooled\+Object}} \&\&other) noexcept
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{Pooled\+Object}} \& \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_aaa1e073eec7fa59974f73515fbf647e1}{operator=}} (\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{Pooled\+Object}} \&\&other) noexcept
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a2a9ebb3977e1e63dcb467a5db3fcbdc3}{Pooled\+Object}} (const \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{Pooled\+Object}} \&)=delete
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{Pooled\+Object}} \& \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_adecec38e6305aad83b9da501325b2655}{operator=}} (const \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{Pooled\+Object}} \&)=delete
+\item 
+T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_aff15129bd8c7e4fa74fdf5c77cc21121}{operator-\/$>$}} ()
+\item 
+const T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_adfe0729406f8d4870bc4e055d50a0601}{operator-\/$>$}} () const
+\item 
+T \& \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a2525e737b4fa1d3075aadb7062f10356}{operator\texorpdfstring{$\ast$}{*}}} ()
+\item 
+const T \& \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_abcc4c00e587af448429702d36666883d}{operator\texorpdfstring{$\ast$}{*}}} () const
+\item 
+T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a52789c6eb94e2fd3161100b7e7d9432c}{get}} ()
+\item 
+const T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a2be408152937125e4dafeaeec5818503}{get}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69}{obj\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{Memory\+Pool}}$<$ T $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object_af39ef9129034e8387f2b483893201a88}{pool\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+class neo\+::core\+::\+Pooled\+Object$<$ T $>$}
+RAII wrapper for pooled objects. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of pooled object \\
+\hline
+\end{DoxyTemplParams}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1core_1_1_pooled_object_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1core_1_1_pooled_object_a5f5af8d85420b44c0444b0aa72103746}\index{neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}!PooledObject@{PooledObject}}
+\index{PooledObject@{PooledObject}!neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{PooledObject()}{PooledObject()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_pooled_object_a5f5af8d85420b44c0444b0aa72103746} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{neo\+::core\+::\+Pooled\+Object}}$<$ T $>$\+::\+Pooled\+Object (\begin{DoxyParamCaption}\item[{std\+::unique\+\_\+ptr$<$ T $>$}]{obj}{, }\item[{\mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{Memory\+Pool}}$<$ T $>$ \texorpdfstring{$\ast$}{*}}]{pool}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classneo_1_1core_1_1_pooled_object_ad7a70e0d9e940040063fbfdbf0e94cd9}\index{neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}!````~PooledObject@{\texorpdfstring{$\sim$}{\string~}PooledObject}}
+\index{````~PooledObject@{\texorpdfstring{$\sim$}{\string~}PooledObject}!neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}PooledObject()}{\string~PooledObject()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_pooled_object_ad7a70e0d9e940040063fbfdbf0e94cd9} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{neo\+::core\+::\+Pooled\+Object}}$<$ T $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{Pooled\+Object}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1core_1_1_pooled_object_a8579cb4dcebc96241ca5d3c8b4f3f90f}\index{neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}!PooledObject@{PooledObject}}
+\index{PooledObject@{PooledObject}!neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{PooledObject()}{PooledObject()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_pooled_object_a8579cb4dcebc96241ca5d3c8b4f3f90f} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{neo\+::core\+::\+Pooled\+Object}}$<$ T $>$\+::\+Pooled\+Object (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{Pooled\+Object}}$<$ T $>$ \&\&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1core_1_1_pooled_object_a2a9ebb3977e1e63dcb467a5db3fcbdc3}\index{neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}!PooledObject@{PooledObject}}
+\index{PooledObject@{PooledObject}!neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{PooledObject()}{PooledObject()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_pooled_object_a2a9ebb3977e1e63dcb467a5db3fcbdc3} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{neo\+::core\+::\+Pooled\+Object}}$<$ T $>$\+::\+Pooled\+Object (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{Pooled\+Object}}$<$ T $>$ \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1core_1_1_pooled_object_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1core_1_1_pooled_object_a52789c6eb94e2fd3161100b7e7d9432c}\index{neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}!get@{get}}
+\index{get@{get}!neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_pooled_object_a52789c6eb94e2fd3161100b7e7d9432c} 
+template$<$typename T$>$ \\
+T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{neo\+::core\+::\+Pooled\+Object}}$<$ T $>$\+::get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1core_1_1_pooled_object_a2be408152937125e4dafeaeec5818503}\index{neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}!get@{get}}
+\index{get@{get}!neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{get()}{get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_pooled_object_a2be408152937125e4dafeaeec5818503} 
+template$<$typename T$>$ \\
+const T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{neo\+::core\+::\+Pooled\+Object}}$<$ T $>$\+::get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1core_1_1_pooled_object_a2525e737b4fa1d3075aadb7062f10356}\index{neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_pooled_object_a2525e737b4fa1d3075aadb7062f10356} 
+template$<$typename T$>$ \\
+T \& \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{neo\+::core\+::\+Pooled\+Object}}$<$ T $>$\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1core_1_1_pooled_object_abcc4c00e587af448429702d36666883d}\index{neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_pooled_object_abcc4c00e587af448429702d36666883d} 
+template$<$typename T$>$ \\
+const T \& \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{neo\+::core\+::\+Pooled\+Object}}$<$ T $>$\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1core_1_1_pooled_object_aff15129bd8c7e4fa74fdf5c77cc21121}\index{neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_pooled_object_aff15129bd8c7e4fa74fdf5c77cc21121} 
+template$<$typename T$>$ \\
+T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{neo\+::core\+::\+Pooled\+Object}}$<$ T $>$\+::operator-\/$>$ (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1core_1_1_pooled_object_adfe0729406f8d4870bc4e055d50a0601}\index{neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}!operator-\/$>$@{operator-\/$>$}}
+\index{operator-\/$>$@{operator-\/$>$}!neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator-\/$>$()}{operator->()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_pooled_object_adfe0729406f8d4870bc4e055d50a0601} 
+template$<$typename T$>$ \\
+const T \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{neo\+::core\+::\+Pooled\+Object}}$<$ T $>$\+::operator-\/$>$ (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1core_1_1_pooled_object_adecec38e6305aad83b9da501325b2655}\index{neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_pooled_object_adecec38e6305aad83b9da501325b2655} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{Pooled\+Object}} \& \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{neo\+::core\+::\+Pooled\+Object}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{Pooled\+Object}}$<$ T $>$ \&}]{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [delete]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1core_1_1_pooled_object_aaa1e073eec7fa59974f73515fbf647e1}\index{neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_pooled_object_aaa1e073eec7fa59974f73515fbf647e1} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{Pooled\+Object}} \& \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{neo\+::core\+::\+Pooled\+Object}}$<$ T $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{Pooled\+Object}}$<$ T $>$ \&\&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1core_1_1_pooled_object_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69}\index{neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}!obj\_@{obj\_}}
+\index{obj\_@{obj\_}!neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{obj\_}{obj\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_pooled_object_a6fa559edafc40be3bf48f3792c1eea69} 
+template$<$typename T$>$ \\
+std\+::unique\+\_\+ptr$<$T$>$ \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{neo\+::core\+::\+Pooled\+Object}}$<$ T $>$\+::obj\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_pooled_object_af39ef9129034e8387f2b483893201a88}\index{neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}!pool\_@{pool\_}}
+\index{pool\_@{pool\_}!neo::core::PooledObject$<$ T $>$@{neo::core::PooledObject$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{pool\_}{pool\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_pooled_object_af39ef9129034e8387f2b483893201a88} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{classneo_1_1core_1_1_memory_pool}{Memory\+Pool}}$<$T$>$\texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1core_1_1_pooled_object}{neo\+::core\+::\+Pooled\+Object}}$<$ T $>$\+::pool\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{core_2memory__pool_8h}{memory\+\_\+pool.\+h}}\end{DoxyCompactItemize}

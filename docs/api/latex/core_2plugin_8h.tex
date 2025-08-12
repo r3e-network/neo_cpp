@@ -1,0 +1,54 @@
+\doxysection{include/neo/core/plugin.h File Reference}
+\hypertarget{core_2plugin_8h}{}\label{core_2plugin_8h}\index{include/neo/core/plugin.h@{include/neo/core/plugin.h}}
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for plugin.\+h\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_plugin}{neo\+::core\+::\+Plugin}}
+\begin{DoxyCompactList}\small\item\em Base class for Neo plugins. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config}{neo\+::core\+::\+Plugin\+::\+Config}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1core_1_1_plugin}{Plugin} configuration. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager}{neo\+::core\+::\+Plugin\+Manager}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1core_1_1_plugin}{Plugin} manager handles loading and lifecycle of plugins. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1core}{neo\+::core}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{core_2plugin_8h_a070472f576fd6d215020717fa22c9760}{NEO\+\_\+\+EXPORT\+\_\+\+PLUGIN}}(Plugin\+Class)
+\begin{DoxyCompactList}\small\item\em Macro to export plugin factory function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{core_2plugin_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{core_2plugin_8h_a070472f576fd6d215020717fa22c9760}\index{plugin.h@{plugin.h}!NEO\_EXPORT\_PLUGIN@{NEO\_EXPORT\_PLUGIN}}
+\index{NEO\_EXPORT\_PLUGIN@{NEO\_EXPORT\_PLUGIN}!plugin.h@{plugin.h}}
+\doxysubsubsection{\texorpdfstring{NEO\_EXPORT\_PLUGIN}{NEO\_EXPORT\_PLUGIN}}
+{\footnotesize\ttfamily \label{core_2plugin_8h_a070472f576fd6d215020717fa22c9760} 
+\#define NEO\+\_\+\+EXPORT\+\_\+\+PLUGIN(\begin{DoxyParamCaption}\item[{}]{Plugin\+Class}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keyword}{extern}\ \textcolor{stringliteral}{"{}C"{}}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::shared\_ptr<neo::core::Plugin>\ CreatePlugin()\ \{\ \textcolor{keywordflow}{return}\ std::make\_shared<PluginClass>();\ \}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}}
+
+\end{DoxyCode}
+
+
+Macro to export plugin factory function. 
+
+Each plugin shared library should use this macro to export a factory function that creates the plugin instance. 

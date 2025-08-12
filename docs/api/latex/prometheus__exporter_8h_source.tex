@@ -1,0 +1,394 @@
+\doxysection{prometheus\+\_\+exporter.\+h}
+\hypertarget{prometheus__exporter_8h_source}{}\label{prometheus__exporter_8h_source}\index{include/neo/monitoring/prometheus\_exporter.h@{include/neo/monitoring/prometheus\_exporter.h}}
+\mbox{\hyperlink{prometheus__exporter_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <httplib.h>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1monitoring}{neo::monitoring}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{MetricType}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a125e831262b4dbbd68c6878c5d3759f6}{COUNTER}},}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a6a91e159ac40f39402ef860163318744}{GAUGE}},}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a7f33aef6b28f7abec2f5d804ab1343c8}{HISTOGRAM}},}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a36cbecb886c3fb994669cd10cdbd9f5f}{SUMMARY}}}
+\DoxyCodeLine{00026\ \};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{class\ }Metric}
+\DoxyCodeLine{00032\ \{}
+\DoxyCodeLine{00033\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_af5a69c403e3784d99aa03c6f534ea602}{Metric}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ std::string\&\ help,\ \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{MetricType}}\ type)\ :\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\_}}(name),\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a7d477b0164ecefab56c843ab76998b7b}{help\_}}(help),\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_aaa32b50e25a5eb197834638167fc871d}{type\_}}(type)\ \{\}}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_ad3f062c16fa8a54f2babb1fa1f247c29}{\string~Metric}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a814cbfc8ab1f5c2df22440a5a507a461}{Serialize}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a514f8ad2bb1ee128016785a4705b5084}{GetName}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\_}};\ \}}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a02fc58e08ab7760cffd98d1c5166d3a3}{GetHelp}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a7d477b0164ecefab56c843ab76998b7b}{help\_}};\ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{MetricType}}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a194d6b9b3862300250c9f91129f8d486}{GetType}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_aaa32b50e25a5eb197834638167fc871d}{type\_}};\ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00049\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_ac02de7bc213735d2d47ab1dd388937fd}{TypeString}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00050\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_aaa32b50e25a5eb197834638167fc871d}{type\_}})}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a125e831262b4dbbd68c6878c5d3759f6}{MetricType::COUNTER}}:}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}counter"{}};}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a6a91e159ac40f39402ef860163318744}{MetricType::GAUGE}}:}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}gauge"{}};}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a7f33aef6b28f7abec2f5d804ab1343c8}{MetricType::HISTOGRAM}}:}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}histogram"{}};}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a36cbecb886c3fb994669cd10cdbd9f5f}{MetricType::SUMMARY}}:}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}summary"{}};}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}untyped"{}};}
+\DoxyCodeLine{00063\ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\_}};}
+\DoxyCodeLine{00066\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a7d477b0164ecefab56c843ab76998b7b}{help\_}};}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{MetricType}}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_aaa32b50e25a5eb197834638167fc871d}{type\_}};}
+\DoxyCodeLine{00068\ \};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00073\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1monitoring_1_1_counter}{Counter}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{Metric}}}
+\DoxyCodeLine{00074\ \{}
+\DoxyCodeLine{00075\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_a84d6cc3c879796a033c0dd94db3796c9}{Counter}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ std::string\&\ help)\ :\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a2fabc388c640698b8ea800e0cc8b5d5f}{Metric}}(name,\ help,\ \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{MetricType}}::\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a125e831262b4dbbd68c6878c5d3759f6}{COUNTER}}),\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_abf59aeac7ea460eed964a73b476cca59}{value\_}}(0)\ \{\}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_af298de9931db453de379f3575929559f}{Increment}}(\textcolor{keywordtype}{double}\ value\ =\ 1.0)\ \{\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_abf59aeac7ea460eed964a73b476cca59}{value\_}}\ +=\ value;\ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_a85908663fb4dc59e2f3b050eb109b221}{Get}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_abf59aeac7ea460eed964a73b476cca59}{value\_}}.load();\ \}}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_a50c00789bd59a9a6b15df7fcc919c44c}{Serialize}}()\textcolor{keyword}{\ const\ override}}
+\DoxyCodeLine{00083\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ ss\ <<\ \textcolor{stringliteral}{"{}\#\ HELP\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\_}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a7d477b0164ecefab56c843ab76998b7b}{help\_}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ ss\ <<\ \textcolor{stringliteral}{"{}\#\ TYPE\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\_}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_ac02de7bc213735d2d47ab1dd388937fd}{TypeString}}()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ ss\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\_}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_abf59aeac7ea460eed964a73b476cca59}{value\_}}.load()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ss.str();}
+\DoxyCodeLine{00089\ \ \ \ \ \}}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00092\ \ \ \ \ std::atomic<double>\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_abf59aeac7ea460eed964a73b476cca59}{value\_}};}
+\DoxyCodeLine{00093\ \};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00098\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge}{Gauge}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{Metric}}}
+\DoxyCodeLine{00099\ \{}
+\DoxyCodeLine{00100\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a91f24a025acc462a860f54a817f355be}{Gauge}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ std::string\&\ help)\ :\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a2fabc388c640698b8ea800e0cc8b5d5f}{Metric}}(name,\ help,\ \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{MetricType}}::\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a6a91e159ac40f39402ef860163318744}{GAUGE}}),\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a3e7328fc8c616b3f9ed9f95a3771d686}{value\_}}(0)\ \{\}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a45593d9f9deda699517e4b5a22708be3}{Set}}(\textcolor{keywordtype}{double}\ value)\ \{\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a3e7328fc8c616b3f9ed9f95a3771d686}{value\_}}\ =\ value;\ \}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a645e8bbe513554e559a8f3e6597bc024}{Increment}}(\textcolor{keywordtype}{double}\ value\ =\ 1.0)\ \{\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a3e7328fc8c616b3f9ed9f95a3771d686}{value\_}}\ +=\ value;\ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_ab07257fa712a71b90707cc9b88442fa0}{Decrement}}(\textcolor{keywordtype}{double}\ value\ =\ 1.0)\ \{\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a3e7328fc8c616b3f9ed9f95a3771d686}{value\_}}\ -\/=\ value;\ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_aeae46e6e0d5a0e59e3428c29b6fd5740}{Get}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a3e7328fc8c616b3f9ed9f95a3771d686}{value\_}}.load();\ \}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a9941bcc05e7ee63274c87438b498224d}{Serialize}}()\textcolor{keyword}{\ const\ override}}
+\DoxyCodeLine{00112\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ ss\ <<\ \textcolor{stringliteral}{"{}\#\ HELP\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\_}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a7d477b0164ecefab56c843ab76998b7b}{help\_}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ ss\ <<\ \textcolor{stringliteral}{"{}\#\ TYPE\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\_}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_ac02de7bc213735d2d47ab1dd388937fd}{TypeString}}()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ ss\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\_}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a3e7328fc8c616b3f9ed9f95a3771d686}{value\_}}.load()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ss.str();}
+\DoxyCodeLine{00118\ \ \ \ \ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00120\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00121\ \ \ \ \ std::atomic<double>\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_gauge_a3e7328fc8c616b3f9ed9f95a3771d686}{value\_}};}
+\DoxyCodeLine{00122\ \};}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00127\ \textcolor{keyword}{class\ }\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35ac00e3b8460f0592cacf813fd68988ed4}{Histogram}}\ :\ \textcolor{keyword}{public}\ Metric}
+\DoxyCodeLine{00128\ \{}
+\DoxyCodeLine{00129\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00130\ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a96e7d1287b789898c9ba264e8ebb0eaf}{Histogram}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ std::string\&\ help,}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<double>\&\ buckets\ =\ \{0.005,\ 0.01,\ 0.025,\ 0.05,\ 0.1,\ 0.25,\ 0.5,\ 1,\ 2.5,\ 5,\ 10\})}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{Metric}}(name,\ help,\ \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{MetricType}}::\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35a7f33aef6b28f7abec2f5d804ab1343c8}{HISTOGRAM}}),\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a20f0f185f6066a51c8ecbbcdde422739}{buckets\_}}(buckets)}
+\DoxyCodeLine{00133\ \ \ \ \ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Initialize\ bucket\ counters}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <=\ buckets.size();\ ++i)}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a143331292503c562acce3bba4f05eed2}{bucketCounts\_}}.push\_back(0);}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00139\ \ \ \ \ \}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_abee1f58bf335d4f9df797881cd09fb71}{Observe}}(\textcolor{keywordtype}{double}\ value)}
+\DoxyCodeLine{00142\ \ \ \ \ \{}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_ae0bbee5f33d8d010e92ca17e855b5ba4}{mutex\_}});}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a8f0f7aee8e787cab47e04b1842a0ecb7}{sum\_}}\ +=\ value;}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a03555558e7867ea9368e6f28a01710a5}{count\_}}++;}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ bucket}}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ i\ =\ 0;}
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (;\ i\ <\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a20f0f185f6066a51c8ecbbcdde422739}{buckets\_}}.size();\ ++i)}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ <=\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a20f0f185f6066a51c8ecbbcdde422739}{buckets\_}}[i])}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Increment\ all\ buckets\ >=\ value}}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ j\ =\ i;\ j\ <=\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a20f0f185f6066a51c8ecbbcdde422739}{buckets\_}}.size();\ ++j)}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a143331292503c562acce3bba4f05eed2}{bucketCounts\_}}[j]++;}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00163\ \ \ \ \ \}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_aa2b2495ee83e350287c63aa7125be11e}{Serialize}}()\textcolor{keyword}{\ const\ override}}
+\DoxyCodeLine{00166\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_ae0bbee5f33d8d010e92ca17e855b5ba4}{mutex\_}});}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ ss\ <<\ \textcolor{stringliteral}{"{}\#\ HELP\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\_}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a7d477b0164ecefab56c843ab76998b7b}{help\_}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ ss\ <<\ \textcolor{stringliteral}{"{}\#\ TYPE\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\_}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_ac02de7bc213735d2d47ab1dd388937fd}{TypeString}}()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Buckets}}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a20f0f185f6066a51c8ecbbcdde422739}{buckets\_}}.size();\ ++i)}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ ss\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\_}}\ <<\ \textcolor{stringliteral}{"{}\_bucket\{le=\(\backslash\)"{}"{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a20f0f185f6066a51c8ecbbcdde422739}{buckets\_}}[i]\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)"{}\}\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a143331292503c562acce3bba4f05eed2}{bucketCounts\_}}[i]\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ ss\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\_}}\ <<\ \textcolor{stringliteral}{"{}\_bucket\{le=\(\backslash\)"{}+Inf\(\backslash\)"{}\}\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a143331292503c562acce3bba4f05eed2}{bucketCounts\_}}[\mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a20f0f185f6066a51c8ecbbcdde422739}{buckets\_}}.size()]\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Sum\ and\ count}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ ss\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\_}}\ <<\ \textcolor{stringliteral}{"{}\_sum\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a8f0f7aee8e787cab47e04b1842a0ecb7}{sum\_}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ ss\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\_}}\ <<\ \textcolor{stringliteral}{"{}\_count\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a03555558e7867ea9368e6f28a01710a5}{count\_}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ss.str();}
+\DoxyCodeLine{00185\ \ \ \ \ \}}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00188\ \ \ \ \ std::vector<double>\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a20f0f185f6066a51c8ecbbcdde422739}{buckets\_}};}
+\DoxyCodeLine{00189\ \ \ \ \ std::vector<uint64\_t>\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a143331292503c562acce3bba4f05eed2}{bucketCounts\_}};}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a8f0f7aee8e787cab47e04b1842a0ecb7}{sum\_}}\ =\ 0;}
+\DoxyCodeLine{00191\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a03555558e7867ea9368e6f28a01710a5}{count\_}}\ =\ 0;}
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_ae0bbee5f33d8d010e92ca17e855b5ba4}{mutex\_}};}
+\DoxyCodeLine{00193\ \};}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00198\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ MetricT>}
+\DoxyCodeLine{00199\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a0c1496fe5820b5485e38155028459600}{LabeledMetric}}}
+\DoxyCodeLine{00200\ \{}
+\DoxyCodeLine{00201\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00202\ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a0c1496fe5820b5485e38155028459600}{LabeledMetric}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ std::string\&\ help,\ \textcolor{keyword}{const}\ std::vector<std::string>\&\ labelNames)}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a9d87b60491574a63ec32681493b23a59}{name\_}}(name),\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_ade7e4adf03c6919efe0272a8c448c902}{help\_}}(help),\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a3a9a921162f6098d64d6aa1636fc3221}{labelNames\_}}(labelNames)}
+\DoxyCodeLine{00204\ \ \ \ \ \{}
+\DoxyCodeLine{00205\ \ \ \ \ \}}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \ \ \ \ MetricT\&\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a37044cffb4c5104b7a82111181299f0e}{WithLabels}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ labelValues)}
+\DoxyCodeLine{00208\ \ \ \ \ \{}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (labelValues.size()\ !=\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a3a9a921162f6098d64d6aa1636fc3221}{labelNames\_}}.size())}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::invalid\_argument(\textcolor{stringliteral}{"{}Label\ count\ mismatch"{}});}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ std::string\ key\ =\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_af86b238651a1bed4ff53f79d357c5f6a}{CreateKey}}(labelValues);}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a60aafff9fd4ae7c4e692904238a885de}{mutex\_}});}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a10a2df18c82b100d9c91891c6de5f9aa}{metrics\_}}.find(key);}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ ==\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a10a2df18c82b100d9c91891c6de5f9aa}{metrics\_}}.end())}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ metric\ =\ std::make\_unique<MetricT>(\mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a9d87b60491574a63ec32681493b23a59}{name\_}},\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_ade7e4adf03c6919efe0272a8c448c902}{help\_}});}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ ptr\ =\ metric.get();}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a10a2df18c82b100d9c91891c6de5f9aa}{metrics\_}}[key]\ =\ \{std::move(metric),\ labelValues\};}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *ptr;}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *it-\/>second.metric;}
+\DoxyCodeLine{00227\ \ \ \ \ \}}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00229\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_ab2c96622bbc111530afc2f9ee7e8ab8b}{Serialize}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00230\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a60aafff9fd4ae7c4e692904238a885de}{mutex\_}});}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a10a2df18c82b100d9c91891c6de5f9aa}{metrics\_}}.empty())\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}"{}};}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Write\ help\ and\ type\ once}}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ first\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [key,\ entry]\ :\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a10a2df18c82b100d9c91891c6de5f9aa}{metrics\_}})}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (first)}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ss\ <<\ \textcolor{stringliteral}{"{}\#\ HELP\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a9d87b60491574a63ec32681493b23a59}{name\_}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_ade7e4adf03c6919efe0272a8c448c902}{help\_}}\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ss\ <<\ \textcolor{stringliteral}{"{}\#\ TYPE\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a9d87b60491574a63ec32681493b23a59}{name\_}}\ <<\ \textcolor{stringliteral}{"{}\ "{}}\ <<\ entry.metric-\/>TypeString()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ first\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Serialize\ with\ labels}}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ labels\ =\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a295b997bf31ebf6351bdc5071c40b401}{CreateLabelString}}(entry.labelValues);}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ serialized\ =\ entry.metric-\/>Serialize();}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Extract\ value\ from\ serialized\ string}}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ lastNewline\ =\ serialized.find\_last\_of(\textcolor{charliteral}{'\(\backslash\)n'},\ serialized.length()\ -\/\ 2);}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ valueLine\ =\ serialized.substr(lastNewline\ +\ 1);}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ spacePos\ =\ valueLine.find(\textcolor{charliteral}{'\ '});}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (spacePos\ !=\ std::string::npos)}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ value\ =\ valueLine.substr(spacePos\ +\ 1);}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ss\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a9d87b60491574a63ec32681493b23a59}{name\_}}\ <<\ \textcolor{stringliteral}{"{}\{"{}}\ <<\ labels\ <<\ \textcolor{stringliteral}{"{}\}\ "{}}\ <<\ value;}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ss.str();}
+\DoxyCodeLine{00265\ \ \ \ \ \}}
+\DoxyCodeLine{00266\ }
+\DoxyCodeLine{00267\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00268\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_af86b238651a1bed4ff53f79d357c5f6a}{CreateKey}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ labelValues)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00269\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ labelValues.size();\ ++i)}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ >\ 0)\ ss\ <<\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ ss\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a3a9a921162f6098d64d6aa1636fc3221}{labelNames\_}}[i]\ <<\ \textcolor{stringliteral}{"{}="{}}\ <<\ labelValues[i];}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ss.str();}
+\DoxyCodeLine{00277\ \ \ \ \ \}}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00279\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a295b997bf31ebf6351bdc5071c40b401}{CreateLabelString}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ labelValues)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00280\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a3a9a921162f6098d64d6aa1636fc3221}{labelNames\_}}.size();\ ++i)}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (i\ >\ 0)\ ss\ <<\ \textcolor{stringliteral}{"{},"{}};}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ ss\ <<\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a3a9a921162f6098d64d6aa1636fc3221}{labelNames\_}}[i]\ <<\ \textcolor{stringliteral}{"{}=\(\backslash\)"{}"{}}\ <<\ labelValues[i]\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)"{}"{}};}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ss.str();}
+\DoxyCodeLine{00288\ \ \ \ \ \}}
+\DoxyCodeLine{00289\ }
+\DoxyCodeLine{00290\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1monitoring_1_1_labeled_metric_1_1_metric_entry}{MetricEntry}}}
+\DoxyCodeLine{00291\ \ \ \ \ \{}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ std::unique\_ptr<MetricT>\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_labeled_metric_1_1_metric_entry_a1798d4718ec6e2b5784c3c0e16756885}{metric}};}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_labeled_metric_1_1_metric_entry_a5c82288e8cbc6e3123da8618772ff9be}{labelValues}};}
+\DoxyCodeLine{00294\ \ \ \ \ \};}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a9d87b60491574a63ec32681493b23a59}{name\_}};}
+\DoxyCodeLine{00297\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_ade7e4adf03c6919efe0272a8c448c902}{help\_}};}
+\DoxyCodeLine{00298\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a3a9a921162f6098d64d6aa1636fc3221}{labelNames\_}};}
+\DoxyCodeLine{00299\ \ \ \ \ std::unordered\_map<std::string,\ MetricEntry>\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a10a2df18c82b100d9c91891c6de5f9aa}{metrics\_}};}
+\DoxyCodeLine{00300\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a60aafff9fd4ae7c4e692904238a885de}{mutex\_}};}
+\DoxyCodeLine{00301\ \};}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00306\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_aa0a257a394cdab4162b7e4c916ae91a0}{PrometheusExporter}}}
+\DoxyCodeLine{00307\ \{}
+\DoxyCodeLine{00308\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00309\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_aa0a257a394cdab4162b7e4c916ae91a0}{PrometheusExporter}}\&\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a547fb2ae88a3382ffca4b1df025565ba}{GetInstance}}()}
+\DoxyCodeLine{00310\ \ \ \ \ \{}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_aa0a257a394cdab4162b7e4c916ae91a0}{PrometheusExporter}}\ instance;}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00313\ \ \ \ \ \}}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00319\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a46cc1d72e95b804275f501486fbe56e2}{RegisterMetric}}(std::shared\_ptr<Metric>\ metric)}
+\DoxyCodeLine{00320\ \ \ \ \ \{}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a874ac92e015cd1fc0603eed04df2b6e8}{mutex\_}});}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a81c7c1fc66a537ab9c043b229d4266ea}{metrics\_}}[metric-\/>GetName()]\ =\ metric;}
+\DoxyCodeLine{00323\ \ \ \ \ \}}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00329\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_ab6c45efdc7d705d5616e7b2826a5875c}{StartServer}}(uint16\_t\ port\ =\ 9090)}
+\DoxyCodeLine{00330\ \ \ \ \ \{}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a2e9818426ec018e54b44f3c0f24a2c2e}{server\_}})\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00332\ }
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a2e9818426ec018e54b44f3c0f24a2c2e}{server\_}}\ =\ std::make\_unique<httplib::Server>();}
+\DoxyCodeLine{00334\ }
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a2e9818426ec018e54b44f3c0f24a2c2e}{server\_}}-\/>Get(\textcolor{stringliteral}{"{}/metrics"{}},\ [\textcolor{keyword}{this}](\textcolor{keyword}{const}\ httplib::Request\&,\ httplib::Response\&\ res)}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{\ res.set\_content(\mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_af69aedae2820fc6578cb6d883e17a56f}{CollectMetrics}}(),\ \textcolor{stringliteral}{"{}text/plain;\ version=0.0.4"{}});\ \});}
+\DoxyCodeLine{00337\ }
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a2e9818426ec018e54b44f3c0f24a2c2e}{server\_}}-\/>Get(\textcolor{stringliteral}{"{}/health"{}},}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [](\textcolor{keyword}{const}\ httplib::Request\&,\ httplib::Response\&\ res)\ \{\ res.set\_content(\textcolor{stringliteral}{"{}OK"{}},\ \textcolor{stringliteral}{"{}text/plain"{}});\ \});}
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_ab515253d29445d1415f926f4c4feb6e7}{serverThread\_}}\ =\ std::thread([\textcolor{keyword}{this},\ port]()\ \{\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a2e9818426ec018e54b44f3c0f24a2c2e}{server\_}}-\/>listen(\textcolor{stringliteral}{"{}0.0.0.0"{}},\ port);\ \});}
+\DoxyCodeLine{00342\ \ \ \ \ \}}
+\DoxyCodeLine{00343\ }
+\DoxyCodeLine{00347\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_af4aec4210f484995e10ccd21caf0bb06}{StopServer}}()}
+\DoxyCodeLine{00348\ \ \ \ \ \{}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a2e9818426ec018e54b44f3c0f24a2c2e}{server\_}})}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a2e9818426ec018e54b44f3c0f24a2c2e}{server\_}}-\/>stop();}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_ab515253d29445d1415f926f4c4feb6e7}{serverThread\_}}.joinable())}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_ab515253d29445d1415f926f4c4feb6e7}{serverThread\_}}.join();}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a2e9818426ec018e54b44f3c0f24a2c2e}{server\_}}.reset();}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00358\ \ \ \ \ \}}
+\DoxyCodeLine{00359\ }
+\DoxyCodeLine{00364\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_af69aedae2820fc6578cb6d883e17a56f}{CollectMetrics}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00365\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a874ac92e015cd1fc0603eed04df2b6e8}{mutex\_}});}
+\DoxyCodeLine{00367\ }
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ std::stringstream\ ss;}
+\DoxyCodeLine{00369\ }
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ standard\ process\ metrics}}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a2ea4880f91c743c9b1323484e34f85c5}{AddProcessMetrics}}(ss);}
+\DoxyCodeLine{00372\ }
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ registered\ metrics}}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [name,\ metric]\ :\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a81c7c1fc66a537ab9c043b229d4266ea}{metrics\_}})}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \ \ \ \ ss\ <<\ metric-\/>Serialize()\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n"{}};}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00378\ }
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ss.str();}
+\DoxyCodeLine{00380\ \ \ \ \ \}}
+\DoxyCodeLine{00381\ }
+\DoxyCodeLine{00382\ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_ac066a214f94e2d2431a8727f82ec016d}{\string~PrometheusExporter}}()\ \{\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_af4aec4210f484995e10ccd21caf0bb06}{StopServer}}();\ \}}
+\DoxyCodeLine{00383\ }
+\DoxyCodeLine{00384\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00385\ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_aa0a257a394cdab4162b7e4c916ae91a0}{PrometheusExporter}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00386\ }
+\DoxyCodeLine{00387\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a2ea4880f91c743c9b1323484e34f85c5}{AddProcessMetrics}}(std::stringstream\&\ ss)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00388\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00389\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Process\ start\ time}}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{auto}\ startTime\ =\ std::chrono::system\_clock::now();}
+\DoxyCodeLine{00391\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ now\ =\ std::chrono::system\_clock::now();}
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ uptime\ =\ std::chrono::duration\_cast<std::chrono::seconds>(now\ -\/\ startTime).count();}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ ss\ <<\ \textcolor{stringliteral}{"{}\#\ HELP\ process\_uptime\_seconds\ Time\ since\ process\ start\(\backslash\)n"{}};}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ ss\ <<\ \textcolor{stringliteral}{"{}\#\ TYPE\ process\_uptime\_seconds\ gauge\(\backslash\)n"{}};}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ ss\ <<\ \textcolor{stringliteral}{"{}process\_uptime\_seconds\ "{}}\ <<\ uptime\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{00397\ }
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Current\ time}}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ timestamp\ =\ std::chrono::duration\_cast<std::chrono::milliseconds>(now.time\_since\_epoch()).count();}
+\DoxyCodeLine{00400\ }
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ ss\ <<\ \textcolor{stringliteral}{"{}\#\ HELP\ process\_start\_time\_seconds\ Unix\ timestamp\ of\ process\ start\(\backslash\)n"{}};}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ ss\ <<\ \textcolor{stringliteral}{"{}\#\ TYPE\ process\_start\_time\_seconds\ gauge\(\backslash\)n"{}};}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ ss\ <<\ \textcolor{stringliteral}{"{}process\_start\_time\_seconds\ "{}}\ <<\ (timestamp\ /\ 1000.0\ -\/\ uptime)\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\(\backslash\)n"{}};}
+\DoxyCodeLine{00404\ \ \ \ \ \}}
+\DoxyCodeLine{00405\ }
+\DoxyCodeLine{00406\ \ \ \ \ std::unordered\_map<std::string,\ std::shared\_ptr<Metric>>\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a81c7c1fc66a537ab9c043b229d4266ea}{metrics\_}};}
+\DoxyCodeLine{00407\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a874ac92e015cd1fc0603eed04df2b6e8}{mutex\_}};}
+\DoxyCodeLine{00408\ }
+\DoxyCodeLine{00409\ \ \ \ \ std::unique\_ptr<httplib::Server>\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_a2e9818426ec018e54b44f3c0f24a2c2e}{server\_}};}
+\DoxyCodeLine{00410\ \ \ \ \ std::thread\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_prometheus_exporter_ab515253d29445d1415f926f4c4feb6e7}{serverThread\_}};}
+\DoxyCodeLine{00411\ \};}
+\DoxyCodeLine{00412\ }
+\DoxyCodeLine{00416\ \textcolor{preprocessor}{\#define\ PROMETHEUS\_COUNTER(name,\ help)\ std::make\_shared<neo::monitoring::Counter>(name,\ help)}}
+\DoxyCodeLine{00417\ }
+\DoxyCodeLine{00418\ \textcolor{preprocessor}{\#define\ PROMETHEUS\_GAUGE(name,\ help)\ std::make\_shared<neo::monitoring::Gauge>(name,\ help)}}
+\DoxyCodeLine{00419\ }
+\DoxyCodeLine{00420\ \textcolor{preprocessor}{\#define\ PROMETHEUS\_HISTOGRAM(name,\ help,\ ...)\ std::make\_shared<neo::monitoring::Histogram>(name,\ help,\ \#\#\_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00421\ }
+\DoxyCodeLine{00422\ \textcolor{preprocessor}{\#define\ PROMETHEUS\_LABELED\_COUNTER(name,\ help,\ labels)\ \(\backslash\)}}
+\DoxyCodeLine{00423\ \textcolor{preprocessor}{\ \ \ \ std::make\_shared<neo::monitoring::LabeledMetric<neo::monitoring::Counter>>(name,\ help,\ labels)}}
+\DoxyCodeLine{00424\ }
+\DoxyCodeLine{00425\ \textcolor{preprocessor}{\#define\ PROMETHEUS\_LABELED\_GAUGE(name,\ help,\ labels)\ \(\backslash\)}}
+\DoxyCodeLine{00426\ \textcolor{preprocessor}{\ \ \ \ std::make\_shared<neo::monitoring::LabeledMetric<neo::monitoring::Gauge>>(name,\ help,\ labels)}}
+\DoxyCodeLine{00427\ }
+\DoxyCodeLine{00428\ \textcolor{preprocessor}{\#define\ PROMETHEUS\_LABELED\_HISTOGRAM(name,\ help,\ labels,\ ...)\ \(\backslash\)}}
+\DoxyCodeLine{00429\ \textcolor{preprocessor}{\ \ \ \ std::make\_shared<neo::monitoring::LabeledMetric<neo::monitoring::Histogram>>(name,\ help,\ labels,\ \#\#\_\_VA\_ARGS\_\_)}}
+\DoxyCodeLine{00430\ }
+\DoxyCodeLine{00431\ \}\ \ \textcolor{comment}{//\ namespace\ neo::monitoring}}
+
+\end{DoxyCode}

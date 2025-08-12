@@ -1,0 +1,461 @@
+\doxysection{connection\+\_\+manager.\+h}
+\hypertarget{connection__manager_8h_source}{}\label{connection__manager_8h_source}\index{include/neo/network/connection\_manager.h@{include/neo/network/connection\_manager.h}}
+\mbox{\hyperlink{connection__manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <condition\_variable>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network}{neo::network}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Connection>}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ab3bd08a69045d71e543ec9f0edf20595}{ConnectionPool}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_config}{Config}}}
+\DoxyCodeLine{00024\ \ \ \ \ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_config_ad8227d95682658492078fbd94113ac05}{minConnections}}\ =\ 5;}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_config_a63f6037e4e9005e7a350d38f49a5ade1}{maxConnections}}\ =\ 50;}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_config_a39b317db4e172059d32403fb52cfa92d}{connectionTimeout}}\ =\ std::chrono::milliseconds(30000);}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_config_a23f1702d5ffb614c10ae7b99fae02404}{idleTimeout}}\ =\ std::chrono::milliseconds(300000);}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_config_a65bdf93f8fa2c6f755ae86e69025de22}{validationInterval}}\ =\ std::chrono::milliseconds(60000);}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_config_aca9f7b8c84bb374ff9d12481d74ecec8}{maxRetries}}\ =\ 3;}
+\DoxyCodeLine{00031\ \ \ \ \ \};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_aa6bac1eb2293aa8d2088a46602b1eb68}{ConnectionFactory}}\ =\ std::function<std::shared\_ptr<Connection>()>;}
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_abd4b6b1d326cccdb47be3f2246a215dc}{ConnectionValidator}}\ =\ std::function<bool(\textcolor{keyword}{const}\ std::shared\_ptr<Connection>\&)>;}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ab3bd08a69045d71e543ec9f0edf20595}{ConnectionPool}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_config}{Config}}\&\ \mbox{\hyperlink{namespaceneo_1_1config}{config}},\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_aa6bac1eb2293aa8d2088a46602b1eb68}{ConnectionFactory}}\ factory,\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_abd4b6b1d326cccdb47be3f2246a215dc}{ConnectionValidator}}\ validator)}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a84c844c38cb277db48d3e8d67cd6ff16}{config\_}}(\mbox{\hyperlink{namespaceneo_1_1config}{config}}),\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a51610020aa8e37d333feed981ecb4413}{factory\_}}(factory),\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a4028c08c3db10f3eee4b9596bb96b72b}{validator\_}}(validator),\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_adca9f8d1a25f6a766450caaca8c7d09a}{running\_}}(true)}
+\DoxyCodeLine{00038\ \ \ \ \ \{}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Pre-\/create\ minimum\ connections}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a84c844c38cb277db48d3e8d67cd6ff16}{config\_}}.minConnections;\ ++i)}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ conn\ =\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a51610020aa8e37d333feed981ecb4413}{factory\_}}();}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (conn\ \&\&\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a4028c08c3db10f3eee4b9596bb96b72b}{validator\_}}(conn))}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}}.push(conn);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&)}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Log\ but\ continue}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Start\ maintenance\ thread}}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ae332f7b0112f11d1fb339abbcccfc72a}{maintenanceThread\_}}\ =\ std::thread(\&\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a6b2bf2b1feedd7871760ab88adb06a81}{ConnectionPool::MaintenanceLoop}},\ \textcolor{keyword}{this});}
+\DoxyCodeLine{00058\ \ \ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ad269c15dffd7599aa375be638caec7fe}{\string~ConnectionPool}}()\ \{\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a39f2300e9ca99de5d6fe7a4b4c55c02a}{Shutdown}}();\ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00066\ \ \ \ \ std::shared\_ptr<Connection>\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a3dd8c1e204e06429610a722ca079af58}{Acquire}}()}
+\DoxyCodeLine{00067\ \ \ \ \ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ std::unique\_lock<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ad9704ffb6dbf59fa7bee4fc8c0998912}{mutex\_}});}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ deadline\ =\ std::chrono::steady\_clock::now()\ +\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a84c844c38cb277db48d3e8d67cd6ff16}{config\_}}.connectionTimeout;}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_adca9f8d1a25f6a766450caaca8c7d09a}{running\_}})}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Try\ to\ get\ an\ available\ connection}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}}.empty())}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ conn\ =\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}}.front();}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}}.pop();}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Validate\ connection\ before\ returning}}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a4028c08c3db10f3eee4b9596bb96b72b}{validator\_}}(conn))}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a3b3e13707fd6d0a5cf1d0fafa601aa50}{active\_}}[conn.get()]\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ conn;}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Invalid\ connection,\ continue\ to\ create\ new\ one}}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ we\ can\ create\ a\ new\ connection}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}}.size()\ +\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a3b3e13707fd6d0a5cf1d0fafa601aa50}{active\_}}.size()\ <\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a84c844c38cb277db48d3e8d67cd6ff16}{config\_}}.maxConnections)}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lock.unlock();}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ conn\ =\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a51610020aa8e37d333feed981ecb4413}{factory\_}}();}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (conn\ \&\&\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a4028c08c3db10f3eee4b9596bb96b72b}{validator\_}}(conn))}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lock.lock();}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a3b3e13707fd6d0a5cf1d0fafa601aa50}{active\_}}[conn.get()]\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ conn;}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&)}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Failed\ to\ create\ connection}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lock.lock();}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Wait\ for\ a\ connection\ to\ become\ available}}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a51437412836b08e39e54f404018402db}{cv\_}}.wait\_until(lock,\ deadline)\ ==\ std::cv\_status::timeout)}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};\ \ \textcolor{comment}{//\ Timeout}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00120\ \ \ \ \ \}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ab643ec86f4b63ffca1553f1c2454e0b4}{Release}}(std::shared\_ptr<Connection>\ conn)}
+\DoxyCodeLine{00127\ \ \ \ \ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!conn)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ad9704ffb6dbf59fa7bee4fc8c0998912}{mutex\_}});}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a3b3e13707fd6d0a5cf1d0fafa601aa50}{active\_}}.find(conn.get());}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a3b3e13707fd6d0a5cf1d0fafa601aa50}{active\_}}.end())}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a3b3e13707fd6d0a5cf1d0fafa601aa50}{active\_}}.erase(it);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ connection\ is\ still\ valid}}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a4028c08c3db10f3eee4b9596bb96b72b}{validator\_}}(conn))}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}}.push(conn);}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a51437412836b08e39e54f404018402db}{cv\_}}.notify\_one();}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Otherwise\ let\ it\ be\ destroyed}}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00145\ \ \ \ \ \}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_stats}{Stats}}}
+\DoxyCodeLine{00151\ \ \ \ \ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_stats_a9ddc0a3676cd213189ccfb1ebc93586d}{totalConnections}};}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_stats_a32c306224d683131590ad71c4693820b}{activeConnections}};}
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_stats_abca7195d42b1fea45e5eb0c39b364246}{availableConnections}};}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_stats_a39ae201c9c59740b09d1ee8dad0b2d90}{failedConnections}};}
+\DoxyCodeLine{00156\ \ \ \ \ \};}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00158\ \ \ \ \ \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_stats}{Stats}}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ae3f9da4d80c67ebdf025c9954fef9870}{GetStats}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00159\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ad9704ffb6dbf59fa7bee4fc8c0998912}{mutex\_}});}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}}.size()\ +\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a3b3e13707fd6d0a5cf1d0fafa601aa50}{active\_}}.size(),\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a3b3e13707fd6d0a5cf1d0fafa601aa50}{active\_}}.size(),\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}}.size(),\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_afb6ba12dd9f42c5247d8b92059bf9e26}{failedConnections\_}}\};}
+\DoxyCodeLine{00162\ \ \ \ \ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a39f2300e9ca99de5d6fe7a4b4c55c02a}{Shutdown}}()}
+\DoxyCodeLine{00168\ \ \ \ \ \{}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ad9704ffb6dbf59fa7bee4fc8c0998912}{mutex\_}});}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_adca9f8d1a25f6a766450caaca8c7d09a}{running\_}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a51437412836b08e39e54f404018402db}{cv\_}}.notify\_all();}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ae332f7b0112f11d1fb339abbcccfc72a}{maintenanceThread\_}}.joinable())}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ae332f7b0112f11d1fb339abbcccfc72a}{maintenanceThread\_}}.join();}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clear\ all\ connections}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ad9704ffb6dbf59fa7bee4fc8c0998912}{mutex\_}});}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}}.empty())}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}}.pop();}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a3b3e13707fd6d0a5cf1d0fafa601aa50}{active\_}}.clear();}
+\DoxyCodeLine{00187\ \ \ \ \ \}}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00189\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a6b2bf2b1feedd7871760ab88adb06a81}{MaintenanceLoop}}()}
+\DoxyCodeLine{00191\ \ \ \ \ \{}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_adca9f8d1a25f6a766450caaca8c7d09a}{running\_}})}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ std::this\_thread::sleep\_for(\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a84c844c38cb277db48d3e8d67cd6ff16}{config\_}}.validationInterval);}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ad9704ffb6dbf59fa7bee4fc8c0998912}{mutex\_}});}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Remove\ idle\ connections}}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ now\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ removed\ =\ 0;}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ std::queue<std::shared\_ptr<Connection>>\ validated;}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (!\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}}.empty())}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ conn\ =\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}}.front();}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}}.pop();}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a4028c08c3db10f3eee4b9596bb96b72b}{validator\_}}(conn))}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ validated.push(conn);}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ removed++;}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}}\ =\ std::move(validated);}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Ensure\ minimum\ connections}}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ currentSize\ =\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}}.size()\ +\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a3b3e13707fd6d0a5cf1d0fafa601aa50}{active\_}}.size();}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (currentSize\ <\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a84c844c38cb277db48d3e8d67cd6ff16}{config\_}}.minConnections\ \&\&\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_adca9f8d1a25f6a766450caaca8c7d09a}{running\_}})}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ conn\ =\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a51610020aa8e37d333feed981ecb4413}{factory\_}}();}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (conn\ \&\&\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a4028c08c3db10f3eee4b9596bb96b72b}{validator\_}}(conn))}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}}.push(conn);}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ currentSize++;}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&)}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00239\ \ \ \ \ \}}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_config}{Config}}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a84c844c38cb277db48d3e8d67cd6ff16}{config\_}};}
+\DoxyCodeLine{00242\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_aa6bac1eb2293aa8d2088a46602b1eb68}{ConnectionFactory}}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a51610020aa8e37d333feed981ecb4413}{factory\_}};}
+\DoxyCodeLine{00243\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_abd4b6b1d326cccdb47be3f2246a215dc}{ConnectionValidator}}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a4028c08c3db10f3eee4b9596bb96b72b}{validator\_}};}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \ \ \ \ std::queue<std::shared\_ptr<Connection>>\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\_}};}
+\DoxyCodeLine{00246\ \ \ \ \ std::unordered\_map<Connection*,\ std::chrono::steady\_clock::time\_point>\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a3b3e13707fd6d0a5cf1d0fafa601aa50}{active\_}};}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ad9704ffb6dbf59fa7bee4fc8c0998912}{mutex\_}};}
+\DoxyCodeLine{00249\ \ \ \ \ std::condition\_variable\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a51437412836b08e39e54f404018402db}{cv\_}};}
+\DoxyCodeLine{00250\ \ \ \ \ std::atomic<bool>\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_adca9f8d1a25f6a766450caaca8c7d09a}{running\_}};}
+\DoxyCodeLine{00251\ \ \ \ \ std::atomic<size\_t>\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_afb6ba12dd9f42c5247d8b92059bf9e26}{failedConnections\_}}\{0\};}
+\DoxyCodeLine{00252\ \ \ \ \ std::thread\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ae332f7b0112f11d1fb339abbcccfc72a}{maintenanceThread\_}};}
+\DoxyCodeLine{00253\ \};}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00258\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager}{TimeoutManager}}}
+\DoxyCodeLine{00259\ \{}
+\DoxyCodeLine{00260\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a0f524a1cc08a6eaafc73bdae403c0a70}{TimeoutCallback}}\ =\ std::function<void()>;}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00269\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a896912285348c027ef10359635204373}{Schedule}}(std::chrono::milliseconds\ duration,\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a0f524a1cc08a6eaafc73bdae403c0a70}{TimeoutCallback}}\ callback)}
+\DoxyCodeLine{00270\ \ \ \ \ \{}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ deadline\ =\ std::chrono::steady\_clock::now()\ +\ duration;}
+\DoxyCodeLine{00272\ }
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a24199399f7944d90685335b9796ef2bb}{mutex\_}});}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ uint64\_t\ \textcolor{keywordtype}{id}\ =\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_ac966023b1f2912d0c372cee674d8f620}{nextId\_}}++;}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aeb59f185c99ac69ceeae590befa2821b}{timeouts\_}}.emplace(\textcolor{keywordtype}{id},\ \mbox{\hyperlink{structneo_1_1network_1_1_timeout_manager_1_1_timeout_entry}{TimeoutEntry}}\{deadline,\ callback\});}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aadeda4960a5dab0154d5fcd9ea62f313}{cv\_}}.notify\_one();}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ id;}
+\DoxyCodeLine{00280\ \ \ \ \ \}}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00286\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a57eb787b06862193b451ffc25be9d5ed}{Cancel}}(uint64\_t\ \textcolor{keywordtype}{id})}
+\DoxyCodeLine{00287\ \ \ \ \ \{}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a24199399f7944d90685335b9796ef2bb}{mutex\_}});}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aeb59f185c99ac69ceeae590befa2821b}{timeouts\_}}.erase(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{00290\ \ \ \ \ \}}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a046525bf7c2baf7780831e784a19970b}{Start}}()}
+\DoxyCodeLine{00296\ \ \ \ \ \{}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a253676be33dca732d25a090ab94d39c1}{running\_}}.exchange(\textcolor{keyword}{true}))\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a5978afdc128493a5de7fa0144a3ce046}{workerThread\_}}\ =\ std::thread(\&\mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a417a6b2327a7be166627ee2d7d76ae2a}{TimeoutManager::WorkerLoop}},\ \textcolor{keyword}{this});}
+\DoxyCodeLine{00300\ \ \ \ \ \}}
+\DoxyCodeLine{00301\ }
+\DoxyCodeLine{00305\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aec6221fc1967ec3a00b0a903513501af}{Stop}}()}
+\DoxyCodeLine{00306\ \ \ \ \ \{}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a253676be33dca732d25a090ab94d39c1}{running\_}}.exchange(\textcolor{keyword}{false}))\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00308\ }
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aadeda4960a5dab0154d5fcd9ea62f313}{cv\_}}.notify\_all();}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a5978afdc128493a5de7fa0144a3ce046}{workerThread\_}}.joinable())}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a5978afdc128493a5de7fa0144a3ce046}{workerThread\_}}.join();}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00315\ \ \ \ \ \}}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00317\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a8554c339e9a6afaff9e8b6cb439bc4bf}{\string~TimeoutManager}}()\ \{\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aec6221fc1967ec3a00b0a903513501af}{Stop}}();\ \}}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00319\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00320\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1network_1_1_timeout_manager_1_1_timeout_entry}{TimeoutEntry}}}
+\DoxyCodeLine{00321\ \ \ \ \ \{}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{structneo_1_1network_1_1_timeout_manager_1_1_timeout_entry_a20bd83a08d6d2846ed38a5acea71762f}{deadline}};}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a0f524a1cc08a6eaafc73bdae403c0a70}{TimeoutCallback}}\ \mbox{\hyperlink{structneo_1_1network_1_1_timeout_manager_1_1_timeout_entry_aff55a1c087d4132b07dbd806cdc6e5d4}{callback}};}
+\DoxyCodeLine{00324\ \ \ \ \ \};}
+\DoxyCodeLine{00325\ }
+\DoxyCodeLine{00326\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a417a6b2327a7be166627ee2d7d76ae2a}{WorkerLoop}}()}
+\DoxyCodeLine{00327\ \ \ \ \ \{}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ std::unique\_lock<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a24199399f7944d90685335b9796ef2bb}{mutex\_}});}
+\DoxyCodeLine{00329\ }
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a253676be33dca732d25a090ab94d39c1}{running\_}})}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00332\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aeb59f185c99ac69ceeae590befa2821b}{timeouts\_}}.empty())}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aadeda4960a5dab0154d5fcd9ea62f313}{cv\_}}.wait(lock);}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{continue};}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00337\ }
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Find\ next\ timeout}}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ now\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<uint64\_t>\ expired;}
+\DoxyCodeLine{00341\ }
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [\textcolor{keywordtype}{id},\ entry]\ :\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aeb59f185c99ac69ceeae590befa2821b}{timeouts\_}})}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (entry.deadline\ <=\ now)}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00346\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ expired.push\_back(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00349\ }
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Execute\ expired\ timeouts}}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint64\_t\ \textcolor{keywordtype}{id}\ :\ expired)}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aeb59f185c99ac69ceeae590befa2821b}{timeouts\_}}.find(\textcolor{keywordtype}{id});}
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aeb59f185c99ac69ceeae590befa2821b}{timeouts\_}}.end())}
+\DoxyCodeLine{00355\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00356\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ callback\ =\ it-\/>second.callback;}
+\DoxyCodeLine{00357\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aeb59f185c99ac69ceeae590befa2821b}{timeouts\_}}.erase(it);}
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00359\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Execute\ callback\ without\ holding\ lock}}
+\DoxyCodeLine{00360\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lock.unlock();}
+\DoxyCodeLine{00361\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ callback();}
+\DoxyCodeLine{00362\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ lock.lock();}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00364\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00365\ }
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Wait\ until\ next\ timeout\ or\ notification}}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aeb59f185c99ac69ceeae590befa2821b}{timeouts\_}}.empty())}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ nextDeadline\ =}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::min\_element(\mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aeb59f185c99ac69ceeae590befa2821b}{timeouts\_}}.begin(),\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aeb59f185c99ac69ceeae590befa2821b}{timeouts\_}}.end(),}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [](\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ a,\ \textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ b)\ \{\ return\ a.second.deadline\ <\ b.second.deadline;\ \})}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ -\/>second.deadline;}
+\DoxyCodeLine{00373\ }
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aadeda4960a5dab0154d5fcd9ea62f313}{cv\_}}.wait\_until(lock,\ nextDeadline);}
+\DoxyCodeLine{00375\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00376\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00377\ \ \ \ \ \}}
+\DoxyCodeLine{00378\ }
+\DoxyCodeLine{00379\ \ \ \ \ std::unordered\_map<uint64\_t,\ TimeoutEntry>\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aeb59f185c99ac69ceeae590befa2821b}{timeouts\_}};}
+\DoxyCodeLine{00380\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_ac966023b1f2912d0c372cee674d8f620}{nextId\_}}\ =\ 1;}
+\DoxyCodeLine{00381\ }
+\DoxyCodeLine{00382\ \ \ \ \ std::mutex\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a24199399f7944d90685335b9796ef2bb}{mutex\_}};}
+\DoxyCodeLine{00383\ \ \ \ \ std::condition\_variable\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_aadeda4960a5dab0154d5fcd9ea62f313}{cv\_}};}
+\DoxyCodeLine{00384\ \ \ \ \ std::atomic<bool>\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a253676be33dca732d25a090ab94d39c1}{running\_}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00385\ \ \ \ \ std::thread\ \mbox{\hyperlink{classneo_1_1network_1_1_timeout_manager_a5978afdc128493a5de7fa0144a3ce046}{workerThread\_}};}
+\DoxyCodeLine{00386\ \};}
+\DoxyCodeLine{00387\ }
+\DoxyCodeLine{00391\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_aa498c32080a69864e49e626a5cdcf790}{ConnectionLimits}}}
+\DoxyCodeLine{00392\ \{}
+\DoxyCodeLine{00393\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00394\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1network_1_1_connection_limits_1_1_config}{Config}}}
+\DoxyCodeLine{00395\ \ \ \ \ \{}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1network_1_1_connection_limits_1_1_config_a7be5c7829932f7378d9fd383f61a1e4f}{maxConnectionsPerIP}}\ =\ 5;}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1network_1_1_connection_limits_1_1_config_aa7b0e9a50fd62f0c757e6f01958b47fc}{maxTotalConnections}}\ =\ 1000;}
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{structneo_1_1network_1_1_connection_limits_1_1_config_ac56fa589c77f70dd84820c00b62ba8ef}{connectionRateWindow}}\ =\ std::chrono::milliseconds(60000);}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1network_1_1_connection_limits_1_1_config_a299976dbcd3902600e29e8f64f8d4d0b}{maxConnectionsPerWindow}}\ =\ 100;}
+\DoxyCodeLine{00400\ \ \ \ \ \};}
+\DoxyCodeLine{00401\ }
+\DoxyCodeLine{00402\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_aa498c32080a69864e49e626a5cdcf790}{ConnectionLimits}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1network_1_1_connection_limits_1_1_config}{Config}}\&\ \mbox{\hyperlink{namespaceneo_1_1config}{config}})\ :\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a084c421f2cbc399d47abc4db3438d493}{config\_}}(\mbox{\hyperlink{namespaceneo_1_1config}{config}})\ \{\}}
+\DoxyCodeLine{00403\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a499f4aa9dd0d37378ebc0bc7f8a5890c}{ConnectionLimits}}()\ :\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a084c421f2cbc399d47abc4db3438d493}{config\_}}(\mbox{\hyperlink{structneo_1_1network_1_1_connection_limits_1_1_config}{Config}}\{\})\ \{\}}
+\DoxyCodeLine{00404\ }
+\DoxyCodeLine{00410\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a2f6817c79f66573ad6347e60de298fb0}{IsConnectionAllowed}}(\textcolor{keyword}{const}\ std::string\&\ clientIP)}
+\DoxyCodeLine{00411\ \ \ \ \ \{}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a6c3cedfa3c186e7ca36715d2ee0f6fac}{mutex\_}});}
+\DoxyCodeLine{00413\ }
+\DoxyCodeLine{00414\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ now\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{00415\ }
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clean\ old\ connection\ records}}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_afc0cd1a0079a924717808659b0664da4}{CleanOldRecords}}(now);}
+\DoxyCodeLine{00418\ }
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ total\ connections}}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_adc81976e923ee0943fd4061819595cad}{GetTotalConnections}}()\ >=\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a084c421f2cbc399d47abc4db3438d493}{config\_}}.maxTotalConnections)}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00424\ }
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ per-\/IP\ limit}}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ab68975ad5ecc758b1291aed2ba42eb7b}{ipConnections\_}}[clientIP]\ >=\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a084c421f2cbc399d47abc4db3438d493}{config\_}}.maxConnectionsPerIP)}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00430\ }
+\DoxyCodeLine{00431\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ connection\ rate}}
+\DoxyCodeLine{00432\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ac50a50878deaba5b4a1d9db800320ce9}{connectionTimes\_}}.push\_back(now);}
+\DoxyCodeLine{00433\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ac50a50878deaba5b4a1d9db800320ce9}{connectionTimes\_}}.size()\ >\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a084c421f2cbc399d47abc4db3438d493}{config\_}}.maxConnectionsPerWindow)}
+\DoxyCodeLine{00434\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00435\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00436\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00437\ }
+\DoxyCodeLine{00438\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00439\ \ \ \ \ \}}
+\DoxyCodeLine{00440\ }
+\DoxyCodeLine{00445\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_af4128c8a088a103e0f50e06bdeca5c37}{RegisterConnection}}(\textcolor{keyword}{const}\ std::string\&\ clientIP)}
+\DoxyCodeLine{00446\ \ \ \ \ \{}
+\DoxyCodeLine{00447\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a6c3cedfa3c186e7ca36715d2ee0f6fac}{mutex\_}});}
+\DoxyCodeLine{00448\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ab68975ad5ecc758b1291aed2ba42eb7b}{ipConnections\_}}[clientIP]++;}
+\DoxyCodeLine{00449\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a90b1d1b77e949454fec7b93efa4e23d3}{totalConnections\_}}++;}
+\DoxyCodeLine{00450\ \ \ \ \ \}}
+\DoxyCodeLine{00451\ }
+\DoxyCodeLine{00456\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ae5a371a060b1755fe2081d9aa32ba5ab}{UnregisterConnection}}(\textcolor{keyword}{const}\ std::string\&\ clientIP)}
+\DoxyCodeLine{00457\ \ \ \ \ \{}
+\DoxyCodeLine{00458\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a6c3cedfa3c186e7ca36715d2ee0f6fac}{mutex\_}});}
+\DoxyCodeLine{00459\ }
+\DoxyCodeLine{00460\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ab68975ad5ecc758b1291aed2ba42eb7b}{ipConnections\_}}.find(clientIP);}
+\DoxyCodeLine{00461\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ !=\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ab68975ad5ecc758b1291aed2ba42eb7b}{ipConnections\_}}.end())}
+\DoxyCodeLine{00462\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00463\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (-\/-\/it-\/>second\ ==\ 0)}
+\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00465\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ab68975ad5ecc758b1291aed2ba42eb7b}{ipConnections\_}}.erase(it);}
+\DoxyCodeLine{00466\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00467\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00468\ }
+\DoxyCodeLine{00469\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a90b1d1b77e949454fec7b93efa4e23d3}{totalConnections\_}}\ >\ 0)}
+\DoxyCodeLine{00470\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00471\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a90b1d1b77e949454fec7b93efa4e23d3}{totalConnections\_}}-\/-\/;}
+\DoxyCodeLine{00472\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00473\ \ \ \ \ \}}
+\DoxyCodeLine{00474\ }
+\DoxyCodeLine{00480\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a4c3807f186974d908e6219c99d2e20f1}{GetConnectionCount}}(\textcolor{keyword}{const}\ std::string\&\ clientIP)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00481\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a6c3cedfa3c186e7ca36715d2ee0f6fac}{mutex\_}});}
+\DoxyCodeLine{00483\ }
+\DoxyCodeLine{00484\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ab68975ad5ecc758b1291aed2ba42eb7b}{ipConnections\_}}.find(clientIP);}
+\DoxyCodeLine{00485\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ it\ !=\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ab68975ad5ecc758b1291aed2ba42eb7b}{ipConnections\_}}.end()\ ?\ it-\/>second\ :\ 0;}
+\DoxyCodeLine{00486\ \ \ \ \ \}}
+\DoxyCodeLine{00487\ }
+\DoxyCodeLine{00492\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_adc81976e923ee0943fd4061819595cad}{GetTotalConnections}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00493\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00494\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a6c3cedfa3c186e7ca36715d2ee0f6fac}{mutex\_}});}
+\DoxyCodeLine{00495\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a90b1d1b77e949454fec7b93efa4e23d3}{totalConnections\_}};}
+\DoxyCodeLine{00496\ \ \ \ \ \}}
+\DoxyCodeLine{00497\ }
+\DoxyCodeLine{00498\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00499\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_afc0cd1a0079a924717808659b0664da4}{CleanOldRecords}}(\textcolor{keyword}{const}\ std::chrono::steady\_clock::time\_point\&\ now)}
+\DoxyCodeLine{00500\ \ \ \ \ \{}
+\DoxyCodeLine{00501\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ cutoff\ =\ now\ -\/\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a084c421f2cbc399d47abc4db3438d493}{config\_}}.connectionRateWindow;}
+\DoxyCodeLine{00502\ }
+\DoxyCodeLine{00503\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ac50a50878deaba5b4a1d9db800320ce9}{connectionTimes\_}}.erase(std::remove\_if(\mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ac50a50878deaba5b4a1d9db800320ce9}{connectionTimes\_}}.begin(),\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ac50a50878deaba5b4a1d9db800320ce9}{connectionTimes\_}}.end(),}
+\DoxyCodeLine{00504\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [cutoff](\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ \mbox{\hyperlink{namespaceneo_1_1time}{time}})\ \{\ return\ time\ <\ cutoff;\ \}),}
+\DoxyCodeLine{00505\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ac50a50878deaba5b4a1d9db800320ce9}{connectionTimes\_}}.end());}
+\DoxyCodeLine{00506\ \ \ \ \ \}}
+\DoxyCodeLine{00507\ }
+\DoxyCodeLine{00508\ \ \ \ \ \mbox{\hyperlink{structneo_1_1network_1_1_connection_limits_1_1_config}{Config}}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a084c421f2cbc399d47abc4db3438d493}{config\_}};}
+\DoxyCodeLine{00509\ \ \ \ \ std::unordered\_map<std::string,\ size\_t>\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ab68975ad5ecc758b1291aed2ba42eb7b}{ipConnections\_}};}
+\DoxyCodeLine{00510\ \ \ \ \ std::vector<std::chrono::steady\_clock::time\_point>\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_ac50a50878deaba5b4a1d9db800320ce9}{connectionTimes\_}};}
+\DoxyCodeLine{00511\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a90b1d1b77e949454fec7b93efa4e23d3}{totalConnections\_}}\ =\ 0;}
+\DoxyCodeLine{00512\ }
+\DoxyCodeLine{00513\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1network_1_1_connection_limits_a6c3cedfa3c186e7ca36715d2ee0f6fac}{mutex\_}};}
+\DoxyCodeLine{00514\ \};}
+\DoxyCodeLine{00515\ }
+\DoxyCodeLine{00516\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network}}
+
+\end{DoxyCode}

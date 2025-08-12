@@ -1,0 +1,36 @@
+digraph "neo::ledger::MemoryPool::TryAdd"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::ledger::MemoryPool\l::TryAdd",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Try to add transaction to pool."];
+  Node1 -> Node2 [id="edge17_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::ledger::MemoryPool\l::CalculatePriority",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1ledger_1_1_memory_pool.html#ac9ec58c6dc2d6d4b60f4e34c50a06504",tooltip="Calculate transaction priority (fee per byte)"];
+  Node2 -> Node2 [id="edge18_Node000002_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 -> Node3 [id="edge19_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::network::p2p::\lpayloads::Neo3Transaction\l::GetNetworkFee",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction.html#a41a5ac4c95f373677204ab14c1f626db",tooltip="Gets the network fee."];
+  Node2 -> Node4 [id="edge20_Node000002_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::network::p2p::\lpayloads::Neo3Transaction\l::GetSize",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction.html#a627ae33e46abcb6fbc829e2bb89d329f",tooltip="Gets the size of the transaction."];
+  Node2 -> Node5 [id="edge21_Node000002_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::network::p2p::\lpayloads::Neo3Transaction\l::GetSystemFee",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction.html#a1a34948ad41357fa7abfc8e2f50aab92",tooltip="Gets the system fee."];
+  Node1 -> Node6 [id="edge22_Node000001_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::ledger::MemoryPool\l::EvictLowestPriority",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1ledger_1_1_memory_pool.html#a5b87c94d331bfbc4b9639c8e984e7b48",tooltip="Remove lowest priority transaction if pool is full."];
+  Node6 -> Node6 [id="edge23_Node000006_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node7 [id="edge24_Node000001_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::network::p2p::\lpayloads::Neo3Transaction\l::GetHash",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction.html#ace06ea36a27942bcb338585d8f8db380",tooltip="Gets the hash of the transaction."];
+  Node7 -> Node8 [id="edge25_Node000007_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="neo::cryptography::\lHash::Sha256",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cryptography_1_1_hash.html#a45b12e21ad2391d1919f3eb7b61f683a",tooltip="Computes SHA256 hash."];
+  Node8 -> Node9 [id="edge26_Node000008_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="neo::io::ByteSpan::Data",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_span.html#a0285a19eb5cd212ecd1079e0bc5e494c",tooltip="Gets a pointer to the data."];
+  Node8 -> Node10 [id="edge27_Node000008_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="neo::io::ByteSpan::Size",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_span.html#a4a869430800a37dcbeefac6f36468fcb",tooltip="Gets the size of the ByteSpan."];
+  Node7 -> Node11 [id="edge28_Node000007_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="neo::io::BinaryWriter\l::Write",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_writer.html#ac50767ade20a9099ba7e6b6ed684ef45",tooltip="Writes a boolean value to the stream."];
+  Node11 -> Node11 [id="edge29_Node000011_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node7 -> Node12 [id="edge30_Node000007_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="neo::io::BinaryWriter\l::WriteVarInt",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_writer.html#a39fc5781e0d7a018ac8a1d86fea0cd4e",tooltip="Writes a variable-length integer to the stream."];
+  Node12 -> Node11 [id="edge31_Node000012_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node1 [id="edge32_Node000001_Node000001",color="steelblue1",style="solid",tooltip=" "];
+}

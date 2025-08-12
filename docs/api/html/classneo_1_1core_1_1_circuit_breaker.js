@@ -1,0 +1,38 @@
+var classneo_1_1core_1_1_circuit_breaker =
+[
+    [ "Config", "structneo_1_1core_1_1_circuit_breaker_1_1_config.html", "structneo_1_1core_1_1_circuit_breaker_1_1_config" ],
+    [ "Metrics", "structneo_1_1core_1_1_circuit_breaker_1_1_metrics.html", "structneo_1_1core_1_1_circuit_breaker_1_1_metrics" ],
+    [ "Stats", "structneo_1_1core_1_1_circuit_breaker_1_1_stats.html", "structneo_1_1core_1_1_circuit_breaker_1_1_stats" ],
+    [ "OnStateChangeCallback", "classneo_1_1core_1_1_circuit_breaker.html#a9e10d44ba56757a75ba1794f75eb963b", null ],
+    [ "State", "classneo_1_1core_1_1_circuit_breaker.html#ab9d7aef5f3a7dfe26d1ea778326d5837", [
+      [ "CLOSED", "classneo_1_1core_1_1_circuit_breaker.html#ab9d7aef5f3a7dfe26d1ea778326d5837a110ccf2f5d2ff4eda1fd1a494293467d", null ],
+      [ "OPEN", "classneo_1_1core_1_1_circuit_breaker.html#ab9d7aef5f3a7dfe26d1ea778326d5837aa38bd5138bf35514df41a1795ebbf5c3", null ],
+      [ "HALF_OPEN", "classneo_1_1core_1_1_circuit_breaker.html#ab9d7aef5f3a7dfe26d1ea778326d5837a5c1c0fca237f238d3c656d55a4db3ca4", null ]
+    ] ],
+    [ "CircuitBreaker", "classneo_1_1core_1_1_circuit_breaker.html#ab2a1924e0840bce5736faf5d219288fb", null ],
+    [ "CircuitBreaker", "classneo_1_1core_1_1_circuit_breaker.html#ae826bf019679edcb3bf35cfefc1fe1b9", null ],
+    [ "AllowRequest", "classneo_1_1core_1_1_circuit_breaker.html#a4d27a4aa30297d396155edf69ce48279", null ],
+    [ "CleanOldMetrics", "classneo_1_1core_1_1_circuit_breaker.html#a6799dfc5afb45efeac1ad47eee26deb8", null ],
+    [ "Execute", "classneo_1_1core_1_1_circuit_breaker.html#a66cc71530c245c3c79d7e98c7bd54da6", null ],
+    [ "ExecuteWithFallback", "classneo_1_1core_1_1_circuit_breaker.html#a5c600725471df817523f0406926dac29", null ],
+    [ "GetState", "classneo_1_1core_1_1_circuit_breaker.html#a7390eec73885b5907b4ca092e5261576", null ],
+    [ "GetStats", "classneo_1_1core_1_1_circuit_breaker.html#aceaf77f50e7a0ccd4cbb48e378882d6a", null ],
+    [ "RecordFailure", "classneo_1_1core_1_1_circuit_breaker.html#aa2cb389e122224ed86d8a6304869cd08", null ],
+    [ "RecordSuccess", "classneo_1_1core_1_1_circuit_breaker.html#acee7e88c13d432eacb63091de7badda4", null ],
+    [ "Reset", "classneo_1_1core_1_1_circuit_breaker.html#ac0f069da1deab642db1875b57568a508", null ],
+    [ "SetOnStateChange", "classneo_1_1core_1_1_circuit_breaker.html#aaab4ea2eaf59f50ca69980c6d782ac35", null ],
+    [ "ShouldTrip", "classneo_1_1core_1_1_circuit_breaker.html#aed8caf2cb36af81eb6d51e817bb10025", null ],
+    [ "TransitionTo", "classneo_1_1core_1_1_circuit_breaker.html#a8de617feb98b2947db68da679bc745ef", null ],
+    [ "Trip", "classneo_1_1core_1_1_circuit_breaker.html#a2d6e57638126ee7fd72dc31e76c76c93", null ],
+    [ "UpdateResponseTime", "classneo_1_1core_1_1_circuit_breaker.html#a8b4f99b4a38b4abecd9a8639e1893da8", null ],
+    [ "config_", "classneo_1_1core_1_1_circuit_breaker.html#acbb1a8688cdfc873723648676e4f3a25", null ],
+    [ "consecutiveSuccesses_", "classneo_1_1core_1_1_circuit_breaker.html#ab5d47057a7ff113b9fa5a9eab6d26d34", null ],
+    [ "lastFailureTime_", "classneo_1_1core_1_1_circuit_breaker.html#afe808eb19f3f48d27e378fa714c089b0", null ],
+    [ "lastMetricsReset_", "classneo_1_1core_1_1_circuit_breaker.html#a299baf0767b4848f3fee13a9a1797f7d", null ],
+    [ "lastStateChange_", "classneo_1_1core_1_1_circuit_breaker.html#ac5c74323fd187e438a682cd87613fe0e", null ],
+    [ "metrics_", "classneo_1_1core_1_1_circuit_breaker.html#a4d37cc968d382c255e9b207862549a21", null ],
+    [ "mutex_", "classneo_1_1core_1_1_circuit_breaker.html#a07a04dcf5c1826b65f2afa9fd5c8f791", null ],
+    [ "name_", "classneo_1_1core_1_1_circuit_breaker.html#aeec4fa08c435019c53800efdd0d2f213", null ],
+    [ "onStateChange_", "classneo_1_1core_1_1_circuit_breaker.html#a0e899ef665543d9aaf0411bf135a3904", null ],
+    [ "state_", "classneo_1_1core_1_1_circuit_breaker.html#a419c397f1b737e1dc0014d0075241739", null ]
+];

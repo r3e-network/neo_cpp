@@ -1,0 +1,236 @@
+\doxysection{neo\+::monitoring\+::Health\+Check\+Manager Class Reference}
+\hypertarget{classneo_1_1monitoring_1_1_health_check_manager}{}\label{classneo_1_1monitoring_1_1_health_check_manager}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+
+
+Health check manager.  
+
+
+
+
+{\ttfamily \#include $<$health\+\_\+check.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a14417bb7c286d4c09681096f64409593}{Register\+Health\+Check}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check}{Health\+Check}} $>$ check)
+\begin{DoxyCompactList}\small\item\em Register a health check. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{Health\+Status}} \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a3d125cb4c74084bc2a35c801a41748f9}{Run\+Checks}} ()
+\begin{DoxyCompactList}\small\item\em Run all health checks. \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{Health\+Check\+Result}} $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a12a2d894750b517e51ec64556bbcf5f6}{Get\+Last\+Results}} () const
+\begin{DoxyCompactList}\small\item\em Get last health check results. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_adfa138fe6a2f56d0d39205790921d231}{Get\+Health\+Json}} ()
+\begin{DoxyCompactList}\small\item\em Get health status as JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a549d8037f290f7a400593b76f833338c}{Start\+Periodic\+Checks}} (std\+::chrono\+::seconds interval=std\+::chrono\+::seconds(30))
+\begin{DoxyCompactList}\small\item\em Start periodic health checks. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a476148f8aac7e979cddb7e3d81cbde3a}{Stop\+Periodic\+Checks}} ()
+\begin{DoxyCompactList}\small\item\em Stop periodic health checks. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a54f1dfd4eaa7d6b7aa41ad168992cfa1}{\texorpdfstring{$\sim$}{\string~}\+Health\+Check\+Manager}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager}{Health\+Check\+Manager}} \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a45451b46e9f157c1aac566ed47ea6dbe}{Get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_aec039dcac386996229b097a498e4443a}{Health\+Check\+Manager}} ()=default
+\item 
+\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{Health\+Status}} \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_abcb5eff45855095d49b5787701daeb37}{Get\+Overall\+Status}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a5a85c9067a7f615391fee60ea0abbe34}{Status\+To\+String}} (\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{Health\+Status}} status)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check}{Health\+Check}} $>$ $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a94e16fdf33779d40389c50c83919e75f}{checks\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{Health\+Check\+Result}} $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a10d636a6d01000b36b5f8a37df9f048b}{last\+Results\+\_\+}}
+\item 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a9c0ab383c0527cf9aa43e9d8d7332253}{last\+Check\+Time\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_ae83ad8a08ee275eeda09d519c4082898}{running\+\_\+}} \{false\}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a7019f65649b4eec700239abc1c7e1c1a}{check\+Thread\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_aa048b07dd0408119a1d6a0afdbd38e76}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Health check manager. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_a54f1dfd4eaa7d6b7aa41ad168992cfa1}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!````~HealthCheckManager@{\texorpdfstring{$\sim$}{\string~}HealthCheckManager}}
+\index{````~HealthCheckManager@{\texorpdfstring{$\sim$}{\string~}HealthCheckManager}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}HealthCheckManager()}{\string~HealthCheckManager()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_a54f1dfd4eaa7d6b7aa41ad168992cfa1} 
+neo\+::monitoring\+::\+Health\+Check\+Manager\+::\texorpdfstring{$\sim$}{\string~}\+Health\+Check\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_aec039dcac386996229b097a498e4443a}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!HealthCheckManager@{HealthCheckManager}}
+\index{HealthCheckManager@{HealthCheckManager}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{HealthCheckManager()}{HealthCheckManager()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_aec039dcac386996229b097a498e4443a} 
+neo\+::monitoring\+::\+Health\+Check\+Manager\+::\+Health\+Check\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_adfa138fe6a2f56d0d39205790921d231}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!GetHealthJson@{GetHealthJson}}
+\index{GetHealthJson@{GetHealthJson}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{GetHealthJson()}{GetHealthJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_adfa138fe6a2f56d0d39205790921d231} 
+nlohmann\+::json neo\+::monitoring\+::\+Health\+Check\+Manager\+::\+Get\+Health\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get health status as JSON. 
+
+\begin{DoxyReturn}{Returns}
+JSON representation 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_a45451b46e9f157c1aac566ed47ea6dbe}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_a45451b46e9f157c1aac566ed47ea6dbe} 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager}{Health\+Check\+Manager}} \& neo\+::monitoring\+::\+Health\+Check\+Manager\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_a12a2d894750b517e51ec64556bbcf5f6}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!GetLastResults@{GetLastResults}}
+\index{GetLastResults@{GetLastResults}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{GetLastResults()}{GetLastResults()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_a12a2d894750b517e51ec64556bbcf5f6} 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{Health\+Check\+Result}} $>$ neo\+::monitoring\+::\+Health\+Check\+Manager\+::\+Get\+Last\+Results (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get last health check results. 
+
+\begin{DoxyReturn}{Returns}
+Map of results by check name 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_abcb5eff45855095d49b5787701daeb37}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!GetOverallStatus@{GetOverallStatus}}
+\index{GetOverallStatus@{GetOverallStatus}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{GetOverallStatus()}{GetOverallStatus()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_abcb5eff45855095d49b5787701daeb37} 
+\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{Health\+Status}} neo\+::monitoring\+::\+Health\+Check\+Manager\+::\+Get\+Overall\+Status (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_a14417bb7c286d4c09681096f64409593}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!RegisterHealthCheck@{RegisterHealthCheck}}
+\index{RegisterHealthCheck@{RegisterHealthCheck}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{RegisterHealthCheck()}{RegisterHealthCheck()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_a14417bb7c286d4c09681096f64409593} 
+void neo\+::monitoring\+::\+Health\+Check\+Manager\+::\+Register\+Health\+Check (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check}{Health\+Check}} $>$}]{check}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Register a health check. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em check} & Health check to register \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_a3d125cb4c74084bc2a35c801a41748f9}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!RunChecks@{RunChecks}}
+\index{RunChecks@{RunChecks}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{RunChecks()}{RunChecks()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_a3d125cb4c74084bc2a35c801a41748f9} 
+\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{Health\+Status}} neo\+::monitoring\+::\+Health\+Check\+Manager\+::\+Run\+Checks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Run all health checks. 
+
+\begin{DoxyReturn}{Returns}
+Overall health status 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_a549d8037f290f7a400593b76f833338c}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!StartPeriodicChecks@{StartPeriodicChecks}}
+\index{StartPeriodicChecks@{StartPeriodicChecks}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{StartPeriodicChecks()}{StartPeriodicChecks()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_a549d8037f290f7a400593b76f833338c} 
+void neo\+::monitoring\+::\+Health\+Check\+Manager\+::\+Start\+Periodic\+Checks (\begin{DoxyParamCaption}\item[{std\+::chrono\+::seconds}]{interval}{ = {\ttfamily std\+:\+:chrono\+:\+:seconds(30)}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Start periodic health checks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em interval} & Check interval \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_a5a85c9067a7f615391fee60ea0abbe34}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!StatusToString@{StatusToString}}
+\index{StatusToString@{StatusToString}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{StatusToString()}{StatusToString()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_a5a85c9067a7f615391fee60ea0abbe34} 
+std\+::string neo\+::monitoring\+::\+Health\+Check\+Manager\+::\+Status\+To\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{Health\+Status}}}]{status}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_a476148f8aac7e979cddb7e3d81cbde3a}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!StopPeriodicChecks@{StopPeriodicChecks}}
+\index{StopPeriodicChecks@{StopPeriodicChecks}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{StopPeriodicChecks()}{StopPeriodicChecks()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_a476148f8aac7e979cddb7e3d81cbde3a} 
+void neo\+::monitoring\+::\+Health\+Check\+Manager\+::\+Stop\+Periodic\+Checks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Stop periodic health checks. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_a94e16fdf33779d40389c50c83919e75f}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!checks\_@{checks\_}}
+\index{checks\_@{checks\_}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{checks\_}{checks\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_a94e16fdf33779d40389c50c83919e75f} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check}{Health\+Check}}$>$ $>$ neo\+::monitoring\+::\+Health\+Check\+Manager\+::checks\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_a7019f65649b4eec700239abc1c7e1c1a}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!checkThread\_@{checkThread\_}}
+\index{checkThread\_@{checkThread\_}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{checkThread\_}{checkThread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_a7019f65649b4eec700239abc1c7e1c1a} 
+std\+::thread neo\+::monitoring\+::\+Health\+Check\+Manager\+::check\+Thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_a9c0ab383c0527cf9aa43e9d8d7332253}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!lastCheckTime\_@{lastCheckTime\_}}
+\index{lastCheckTime\_@{lastCheckTime\_}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{lastCheckTime\_}{lastCheckTime\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_a9c0ab383c0527cf9aa43e9d8d7332253} 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point neo\+::monitoring\+::\+Health\+Check\+Manager\+::last\+Check\+Time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_a10d636a6d01000b36b5f8a37df9f048b}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!lastResults\_@{lastResults\_}}
+\index{lastResults\_@{lastResults\_}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{lastResults\_}{lastResults\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_a10d636a6d01000b36b5f8a37df9f048b} 
+std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{Health\+Check\+Result}}$>$ neo\+::monitoring\+::\+Health\+Check\+Manager\+::last\+Results\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_aa048b07dd0408119a1d6a0afdbd38e76}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_aa048b07dd0408119a1d6a0afdbd38e76} 
+std\+::mutex neo\+::monitoring\+::\+Health\+Check\+Manager\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_manager_ae83ad8a08ee275eeda09d519c4082898}\index{neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::monitoring::HealthCheckManager@{neo::monitoring::HealthCheckManager}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_manager_ae83ad8a08ee275eeda09d519c4082898} 
+std\+::atomic$<$bool$>$ neo\+::monitoring\+::\+Health\+Check\+Manager\+::running\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/monitoring/\mbox{\hyperlink{health__check_8h}{health\+\_\+check.\+h}}\end{DoxyCompactItemize}

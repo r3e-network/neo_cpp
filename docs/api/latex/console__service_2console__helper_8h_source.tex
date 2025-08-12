@@ -1,0 +1,88 @@
+\doxysection{console\+\_\+helper.\+h}
+\hypertarget{console__service_2console__helper_8h_source}{}\label{console__service_2console__helper_8h_source}\index{include/neo/console\_service/console\_helper.h@{include/neo/console\_service/console\_helper.h}}
+\mbox{\hyperlink{console__service_2console__helper_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1console__service}{neo::console\_service}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{ConsoleColor}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466ae90dfb84e30edf611e326eeb04d680de}{Black}}\ =\ 0,}
+\DoxyCodeLine{00015\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466a877716336e4eb22ac67faaa9c2b86635}{DarkBlue}}\ =\ 1,}
+\DoxyCodeLine{00016\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466af780aab6295a2f368ac69a514f8b4605}{DarkGreen}}\ =\ 2,}
+\DoxyCodeLine{00017\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466a85b1ae66e65b490f35c5e8b725e7049f}{DarkCyan}}\ =\ 3,}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466a8746d21f8164452063398744f06307dd}{DarkRed}}\ =\ 4,}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466adf1b1322cf6703efd9885b0651ddb57a}{DarkMagenta}}\ =\ 5,}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466a42d873bb34e1055e40aad0ec45039e8b}{DarkYellow}}\ =\ 6,}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466a994ae1d9731cebe455aff211bcb25b93}{Gray}}\ =\ 7,}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466a91e93fc984985226ad4d319a4e4134ab}{DarkGray}}\ =\ 8,}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466a9594eec95be70e7b1710f730fdda33d9}{Blue}}\ =\ 9,}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466ad382816a3cbeed082c9e216e7392eed1}{Green}}\ =\ 10,}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466a023c239d2f2538f140a20e72c7b73f20}{Cyan}}\ =\ 11,}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466aee38e4d5dd68c4e440825018d549cb47}{Red}}\ =\ 12,}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466ab91cc2c1416fcca942b61c7ac5b1a9ac}{Magenta}}\ =\ 13,}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466a51e6cd92b6c45f9affdc158ecca2b8b8}{Yellow}}\ =\ 14,}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466a25a81701fbfa4a1efdf660a950c1d006}{White}}\ =\ 15}
+\DoxyCodeLine{00030\ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set_a4feb57a52edfbbf0f82769a516964fab}{ConsoleColorSet}}}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00037\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set_a4feb57a52edfbbf0f82769a516964fab}{ConsoleColorSet}}();}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set_a4feb57a52edfbbf0f82769a516964fab}{ConsoleColorSet}}(\mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{ConsoleColor}}\ foreground);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set_a4feb57a52edfbbf0f82769a516964fab}{ConsoleColorSet}}(\mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{ConsoleColor}}\ foreground,\ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{ConsoleColor}}\ background);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set_af72d42e10420d84a3d07ed55b828c855}{Apply}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{ConsoleColor}}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set_aa0bade05cb1f72e57975f9a9638de0a7}{foreground\_}};}
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{ConsoleColor}}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set_ae8e8764ad896bd8d1804c6881ebca570}{background\_}};}
+\DoxyCodeLine{00064\ \};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00069\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper}{ConsoleHelper}}}
+\DoxyCodeLine{00070\ \{}
+\DoxyCodeLine{00071\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_ae71bc4a82651125970caee6f29ef0bb8}{IsReadingPassword}}();}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_ab642e394e5888564d72aeae8b67906f1}{Info}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ values);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_ab642e394e5888564d72aeae8b67906f1}{Info}}(\textcolor{keyword}{const}\ std::string\&\ tag,\ \textcolor{keyword}{const}\ std::string\&\ message);}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a938a7621f9da2b69d3fdba371894fc47}{Warning}}(\textcolor{keyword}{const}\ std::string\&\ msg);}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_af878d40f46f977b2ace0905bac5bd277}{Error}}(\textcolor{keyword}{const}\ std::string\&\ msg);}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a67dae3781fc80b59e4dd58939467fa0b}{ReadUserInput}}(\textcolor{keyword}{const}\ std::string\&\ prompt\ =\ \textcolor{stringliteral}{"{}"{}},\ \textcolor{keywordtype}{bool}\ password\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a6eef8f5a19d7b720447c12bd20ac5256}{ReadSecureString}}(\textcolor{keyword}{const}\ std::string\&\ prompt\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00126\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_acfe57c1d11c7eda1259b9c2f3bfe6dcc}{SetForegroundColor}}(\mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{ConsoleColor}}\ color);}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_aa37ebc95f4755c553a0a9cf60b4c8b36}{SetBackgroundColor}}(\mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{ConsoleColor}}\ color);}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_ab3a75d702b8810e1367ae28b10f64aa5}{ResetColor}}();}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a59c6522877e5ae438acaf8ab65f9f89b}{Clear}}();}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{ConsoleColor}}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_aaecf3ad8fbc2adc400366a3c57a342aa}{GetCurrentForegroundColor}}();}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{ConsoleColor}}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_ae44359a859525528eb81b913e1c7bafb}{GetCurrentBackgroundColor}}();}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_ad725c42b976d962309bcfa88941ee077}{reading\_password\_}};}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set}{ConsoleColorSet}}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a525450b51c5c99bf255b93004fdb414a}{info\_color\_}};}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set}{ConsoleColorSet}}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a0e5d75f73668d5de490b68b999b9d926}{warning\_color\_}};}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set}{ConsoleColorSet}}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a58ac67c0b84868afa3ca36b50e2b1640}{error\_color\_}};}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a579394432774591530787e9da2b2f540}{Log}}(\textcolor{keyword}{const}\ std::string\&\ tag,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set}{ConsoleColorSet}}\&\ color\_set,\ \textcolor{keyword}{const}\ std::string\&\ msg);}
+\DoxyCodeLine{00169\ \};}
+\DoxyCodeLine{00170\ \}\ \ \textcolor{comment}{//\ namespace\ neo::console\_service}}
+
+\end{DoxyCode}

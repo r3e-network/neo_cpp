@@ -1,0 +1,458 @@
+\doxysection{neo\+::logging\+::Logger Class Reference}
+\hypertarget{classneo_1_1logging_1_1_logger}{}\label{classneo_1_1logging_1_1_logger}\index{neo::logging::Logger@{neo::logging::Logger}}
+
+
+\doxylink{classneo_1_1logging_1_1_logger}{Logger} class providing structured logging functionality.  
+
+
+
+
+{\ttfamily \#include $<$logger.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2}{Level}} \{ \newline
+\mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2add4ec0ac4e58f7c32a01244ae91150b1}{Trace}} = 0
+, \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2aa603905470e2a5b8c13e96b579ef0dba}{Debug}} = 1
+, \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a4059b0251f66a18cb56f544728796875}{Info}} = 2
+, \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a56525ae64d370c0b448ac0d60710ef17}{Warn}} = 3
+, \newline
+\mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a902b0d55fddef6f8d651fe1035b7d4bd}{Error}} = 4
+, \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a278d01e5af56273bae1bb99a98b370cd}{Critical}} = 5
+, \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2ad15305d7a4e34e02489c74a5ef542f36}{Off}} = 6
+ \}
+\begin{DoxyCompactList}\small\item\em Log levels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1logging_1_1_logger_a8e3e3c0db70c7a54b526744fc406eb55}{Logger}} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a0f56d98f6a3252161a74ffec39da2b14}{Set\+Level}} (\mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2}{Level}} level)
+\begin{DoxyCompactList}\small\item\em Set the log level. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a485ed9afbd0080210414d88d81862b70}{Trace}} (const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Log a trace message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a93c1f33b6b290b2e6220e599d0afc9f1}{Debug}} (const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Log a debug message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a198bd22d413dcf076de8cde43bbd91d1}{Debug}} (const std\+::string \&category, const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Log a debug message with category. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a7b9d24c31fd3a110a8abb3d32ab9e800}{Info}} (const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Log an info message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ad8ddf71cf6dbf57ea7dbf069b5f4f3ef}{Info}} (const std\+::string \&category, const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Log an info message with category. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a64fa223bffb88e3121a11c94e91674e0}{Warn}} (const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Log a warning message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a8bd65dc1df05e9b2a1dafceead4d239d}{Warn}} (const std\+::string \&category, const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Log a warning message with category. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a1a2d08946a4595c714c95eeef473ca5d}{Warning}} (const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Log a warning message (alias for Warn) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a4cec232aaf66bf805d486d5c861520f9}{Warning}} (const std\+::string \&category, const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Log a warning message with category (alias for Warn) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ab2af17208a339e979fef8368a7ea05cc}{Error}} (const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Log an error message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a0cf97e1ea3b1fa4d1de3a92b25921751}{Error}} (const std\+::string \&category, const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Log an error message with category. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a57d61dad8a9c03cc8ce47b9c70789e1e}{Critical}} (const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Log a critical message. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename... Args$>$ }\\void \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a56ab60d06864e5d8025c4ebbc584e682}{Log}} (\mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2}{Level}} level, const std\+::string \&format, Args \&\&... args)
+\begin{DoxyCompactList}\small\item\em Template method for formatted logging. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a17a308461574a9598f527fd81c035d4c}{Log\+Minimal}} (\mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2}{Level}} level, const std\+::string \&message)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1logging_1_1_logger}{Logger}} \& \mbox{\hyperlink{classneo_1_1logging_1_1_logger_abff18ad1faab25601174fa98b85159b9}{Get\+Default}} ()
+\begin{DoxyCompactList}\small\item\em Get the default logger instance. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1logging_1_1_logger}{Logger}} \& \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae6d1d8d54985e37831b0f0e66b61be87}{Instance}} ()
+\begin{DoxyCompactList}\small\item\em Get the singleton logger instance (alias for Get\+Default) \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1logging_1_1_logger}{Logger}} $>$ \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a2b4b5153165e67c9814931466373ffc0}{Create}} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Create a named logger. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2}{Level}} \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a94b4ca72fc8e751dea1f7714c969a522}{current\+\_\+level\+\_\+}} = \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a4059b0251f66a18cb56f544728796875}{Level\+::\+Info}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1logging_1_1_logger_a5d331f5ec46ffad0fd9862aba1099040}{name\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1logging_1_1_logger}{Logger} class providing structured logging functionality. 
+
+\label{doc-enum-members}
+\Hypertarget{classneo_1_1logging_1_1_logger_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2}\index{neo::logging::Logger@{neo::logging::Logger}!Level@{Level}}
+\index{Level@{Level}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Level}{Level}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2} 
+enum class \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2}{neo\+::logging\+::\+Logger\+::\+Level}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Log levels. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Trace@{Trace}!neo::logging::Logger@{neo::logging::Logger}}\index{neo::logging::Logger@{neo::logging::Logger}!Trace@{Trace}}}\Hypertarget{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2add4ec0ac4e58f7c32a01244ae91150b1}\label{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2add4ec0ac4e58f7c32a01244ae91150b1} 
+Trace&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Debug@{Debug}!neo::logging::Logger@{neo::logging::Logger}}\index{neo::logging::Logger@{neo::logging::Logger}!Debug@{Debug}}}\Hypertarget{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2aa603905470e2a5b8c13e96b579ef0dba}\label{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2aa603905470e2a5b8c13e96b579ef0dba} 
+Debug&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Info@{Info}!neo::logging::Logger@{neo::logging::Logger}}\index{neo::logging::Logger@{neo::logging::Logger}!Info@{Info}}}\Hypertarget{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a4059b0251f66a18cb56f544728796875}\label{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a4059b0251f66a18cb56f544728796875} 
+Info&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Warn@{Warn}!neo::logging::Logger@{neo::logging::Logger}}\index{neo::logging::Logger@{neo::logging::Logger}!Warn@{Warn}}}\Hypertarget{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a56525ae64d370c0b448ac0d60710ef17}\label{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a56525ae64d370c0b448ac0d60710ef17} 
+Warn&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Error@{Error}!neo::logging::Logger@{neo::logging::Logger}}\index{neo::logging::Logger@{neo::logging::Logger}!Error@{Error}}}\Hypertarget{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a902b0d55fddef6f8d651fe1035b7d4bd}\label{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a902b0d55fddef6f8d651fe1035b7d4bd} 
+Error&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Critical@{Critical}!neo::logging::Logger@{neo::logging::Logger}}\index{neo::logging::Logger@{neo::logging::Logger}!Critical@{Critical}}}\Hypertarget{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a278d01e5af56273bae1bb99a98b370cd}\label{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a278d01e5af56273bae1bb99a98b370cd} 
+Critical&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Off@{Off}!neo::logging::Logger@{neo::logging::Logger}}\index{neo::logging::Logger@{neo::logging::Logger}!Off@{Off}}}\Hypertarget{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2ad15305d7a4e34e02489c74a5ef542f36}\label{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2ad15305d7a4e34e02489c74a5ef542f36} 
+Off&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1logging_1_1_logger_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1logging_1_1_logger_a8e3e3c0db70c7a54b526744fc406eb55}\index{neo::logging::Logger@{neo::logging::Logger}!Logger@{Logger}}
+\index{Logger@{Logger}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Logger()}{Logger()}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a8e3e3c0db70c7a54b526744fc406eb55} 
+neo\+::logging\+::\+Logger\+::\+Logger (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & \doxylink{classneo_1_1logging_1_1_logger}{Logger} name \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1logging_1_1_logger_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1logging_1_1_logger_a2b4b5153165e67c9814931466373ffc0}\index{neo::logging::Logger@{neo::logging::Logger}!Create@{Create}}
+\index{Create@{Create}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a2b4b5153165e67c9814931466373ffc0} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1logging_1_1_logger}{Logger}} $>$ neo\+::logging\+::\+Logger\+::\+Create (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create a named logger. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & \doxylink{classneo_1_1logging_1_1_logger}{Logger} name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Shared pointer to the logger 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1logging_1_1_logger_a57d61dad8a9c03cc8ce47b9c70789e1e}\index{neo::logging::Logger@{neo::logging::Logger}!Critical@{Critical}}
+\index{Critical@{Critical}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Critical()}{Critical()}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a57d61dad8a9c03cc8ce47b9c70789e1e} 
+void neo\+::logging\+::\+Logger\+::\+Critical (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Log a critical message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Message to log \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1logging_1_1_logger_a198bd22d413dcf076de8cde43bbd91d1}\index{neo::logging::Logger@{neo::logging::Logger}!Debug@{Debug}}
+\index{Debug@{Debug}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Debug()}{Debug()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a198bd22d413dcf076de8cde43bbd91d1} 
+void neo\+::logging\+::\+Logger\+::\+Debug (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{category}{, }\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Log a debug message with category. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em category} & Message category \\
+\hline
+{\em message} & Message to log \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1logging_1_1_logger_a93c1f33b6b290b2e6220e599d0afc9f1}\index{neo::logging::Logger@{neo::logging::Logger}!Debug@{Debug}}
+\index{Debug@{Debug}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Debug()}{Debug()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a93c1f33b6b290b2e6220e599d0afc9f1} 
+void neo\+::logging\+::\+Logger\+::\+Debug (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Log a debug message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Message to log \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1logging_1_1_logger_a0cf97e1ea3b1fa4d1de3a92b25921751}\index{neo::logging::Logger@{neo::logging::Logger}!Error@{Error}}
+\index{Error@{Error}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Error()}{Error()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a0cf97e1ea3b1fa4d1de3a92b25921751} 
+void neo\+::logging\+::\+Logger\+::\+Error (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{category}{, }\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Log an error message with category. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em category} & Message category \\
+\hline
+{\em message} & Message to log \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1logging_1_1_logger_ab2af17208a339e979fef8368a7ea05cc}\index{neo::logging::Logger@{neo::logging::Logger}!Error@{Error}}
+\index{Error@{Error}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Error()}{Error()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_ab2af17208a339e979fef8368a7ea05cc} 
+void neo\+::logging\+::\+Logger\+::\+Error (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Log an error message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Message to log \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1logging_1_1_logger_abff18ad1faab25601174fa98b85159b9}\index{neo::logging::Logger@{neo::logging::Logger}!GetDefault@{GetDefault}}
+\index{GetDefault@{GetDefault}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{GetDefault()}{GetDefault()}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_abff18ad1faab25601174fa98b85159b9} 
+\mbox{\hyperlink{classneo_1_1logging_1_1_logger}{Logger}} \& neo\+::logging\+::\+Logger\+::\+Get\+Default (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the default logger instance. 
+
+\begin{DoxyReturn}{Returns}
+Reference to the default logger 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1logging_1_1_logger_ad8ddf71cf6dbf57ea7dbf069b5f4f3ef}\index{neo::logging::Logger@{neo::logging::Logger}!Info@{Info}}
+\index{Info@{Info}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Info()}{Info()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_ad8ddf71cf6dbf57ea7dbf069b5f4f3ef} 
+void neo\+::logging\+::\+Logger\+::\+Info (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{category}{, }\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Log an info message with category. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em category} & Message category \\
+\hline
+{\em message} & Message to log \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1logging_1_1_logger_a7b9d24c31fd3a110a8abb3d32ab9e800}\index{neo::logging::Logger@{neo::logging::Logger}!Info@{Info}}
+\index{Info@{Info}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Info()}{Info()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a7b9d24c31fd3a110a8abb3d32ab9e800} 
+void neo\+::logging\+::\+Logger\+::\+Info (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Log an info message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Message to log \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1logging_1_1_logger_ae6d1d8d54985e37831b0f0e66b61be87}\index{neo::logging::Logger@{neo::logging::Logger}!Instance@{Instance}}
+\index{Instance@{Instance}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Instance()}{Instance()}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_ae6d1d8d54985e37831b0f0e66b61be87} 
+\mbox{\hyperlink{classneo_1_1logging_1_1_logger}{Logger}} \& neo\+::logging\+::\+Logger\+::\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get the singleton logger instance (alias for Get\+Default) 
+
+\begin{DoxyReturn}{Returns}
+Reference to the singleton logger 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1logging_1_1_logger_a56ab60d06864e5d8025c4ebbc584e682}\index{neo::logging::Logger@{neo::logging::Logger}!Log@{Log}}
+\index{Log@{Log}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Log()}{Log()}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a56ab60d06864e5d8025c4ebbc584e682} 
+template$<$typename... Args$>$ \\
+void neo\+::logging\+::\+Logger\+::\+Log (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2}{Level}}}]{level}{, }\item[{const std\+::string \&}]{format}{, }\item[{Args \&\&...}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Template method for formatted logging. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em Args} & Argument types \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em level} & Log level \\
+\hline
+{\em format} & Format string \\
+\hline
+{\em args} & Arguments \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1logging_1_1_logger_a17a308461574a9598f527fd81c035d4c}\index{neo::logging::Logger@{neo::logging::Logger}!LogMinimal@{LogMinimal}}
+\index{LogMinimal@{LogMinimal}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{LogMinimal()}{LogMinimal()}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a17a308461574a9598f527fd81c035d4c} 
+void neo\+::logging\+::\+Logger\+::\+Log\+Minimal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2}{Level}}}]{level}{, }\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classneo_1_1logging_1_1_logger_a0f56d98f6a3252161a74ffec39da2b14}\index{neo::logging::Logger@{neo::logging::Logger}!SetLevel@{SetLevel}}
+\index{SetLevel@{SetLevel}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{SetLevel()}{SetLevel()}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a0f56d98f6a3252161a74ffec39da2b14} 
+void neo\+::logging\+::\+Logger\+::\+Set\+Level (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2}{Level}}}]{level}{}\end{DoxyParamCaption})}
+
+
+
+Set the log level. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em level} & Log level \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1logging_1_1_logger_a485ed9afbd0080210414d88d81862b70}\index{neo::logging::Logger@{neo::logging::Logger}!Trace@{Trace}}
+\index{Trace@{Trace}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Trace()}{Trace()}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a485ed9afbd0080210414d88d81862b70} 
+void neo\+::logging\+::\+Logger\+::\+Trace (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Log a trace message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Message to log \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1logging_1_1_logger_a8bd65dc1df05e9b2a1dafceead4d239d}\index{neo::logging::Logger@{neo::logging::Logger}!Warn@{Warn}}
+\index{Warn@{Warn}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Warn()}{Warn()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a8bd65dc1df05e9b2a1dafceead4d239d} 
+void neo\+::logging\+::\+Logger\+::\+Warn (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{category}{, }\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Log a warning message with category. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em category} & Message category \\
+\hline
+{\em message} & Message to log \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1logging_1_1_logger_a64fa223bffb88e3121a11c94e91674e0}\index{neo::logging::Logger@{neo::logging::Logger}!Warn@{Warn}}
+\index{Warn@{Warn}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Warn()}{Warn()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a64fa223bffb88e3121a11c94e91674e0} 
+void neo\+::logging\+::\+Logger\+::\+Warn (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Log a warning message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Message to log \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1logging_1_1_logger_a4cec232aaf66bf805d486d5c861520f9}\index{neo::logging::Logger@{neo::logging::Logger}!Warning@{Warning}}
+\index{Warning@{Warning}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Warning()}{Warning()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a4cec232aaf66bf805d486d5c861520f9} 
+void neo\+::logging\+::\+Logger\+::\+Warning (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{category}{, }\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Log a warning message with category (alias for Warn) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em category} & Message category \\
+\hline
+{\em message} & Message to log \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1logging_1_1_logger_a1a2d08946a4595c714c95eeef473ca5d}\index{neo::logging::Logger@{neo::logging::Logger}!Warning@{Warning}}
+\index{Warning@{Warning}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{Warning()}{Warning()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a1a2d08946a4595c714c95eeef473ca5d} 
+void neo\+::logging\+::\+Logger\+::\+Warning (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Log a warning message (alias for Warn) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & Message to log \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1logging_1_1_logger_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1logging_1_1_logger_a94b4ca72fc8e751dea1f7714c969a522}\index{neo::logging::Logger@{neo::logging::Logger}!current\_level\_@{current\_level\_}}
+\index{current\_level\_@{current\_level\_}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{current\_level\_}{current\_level\_}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a94b4ca72fc8e751dea1f7714c969a522} 
+\mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2}{Level}} neo\+::logging\+::\+Logger\+::current\+\_\+level\+\_\+ = \mbox{\hyperlink{classneo_1_1logging_1_1_logger_ae72e8e1ffa40a279a607c7d7710e9ab2a4059b0251f66a18cb56f544728796875}{Level\+::\+Info}}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1logging_1_1_logger_a5d331f5ec46ffad0fd9862aba1099040}\index{neo::logging::Logger@{neo::logging::Logger}!name\_@{name\_}}
+\index{name\_@{name\_}!neo::logging::Logger@{neo::logging::Logger}}
+\doxysubsubsection{\texorpdfstring{name\_}{name\_}}
+{\footnotesize\ttfamily \label{classneo_1_1logging_1_1_logger_a5d331f5ec46ffad0fd9862aba1099040} 
+std\+::string neo\+::logging\+::\+Logger\+::name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/logging/\mbox{\hyperlink{logger_8h}{logger.\+h}}\item 
+src/logging/\mbox{\hyperlink{logger_8cpp}{logger.\+cpp}}\end{DoxyCompactItemize}

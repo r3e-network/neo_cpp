@@ -1,0 +1,51 @@
+digraph "neo::smartcontract::native::OracleContract::RemoveRequestFromIdList"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::smartcontract\l::native::OracleContract\l::RemoveRequestFromIdList",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Removes a request from the ID list."];
+  Node1 -> Node2 [id="edge25_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::smartcontract\l::native::OracleContract\l::GetIdList",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_oracle_contract.html#a9fa7bdff64d467fd64e2c3b8d8e6893d",tooltip="Gets the ID list for a URL."];
+  Node2 -> Node3 [id="edge26_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::smartcontract\l::native::NativeContract\l::GetStorageKey",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_native_contract.html#aaa080efcc4d7deced7aded7bb968cd9c",tooltip="Gets the storage key."];
+  Node3 -> Node4 [id="edge27_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::io::ByteVector\l::Append",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#a08fe2080218bc11daedc416387e6f37e",tooltip="Appends data to the ByteVector."];
+  Node4 -> Node5 [id="edge28_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::io::ByteSpan::Data",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_span.html#a0285a19eb5cd212ecd1079e0bc5e494c",tooltip="Gets a pointer to the data."];
+  Node4 -> Node6 [id="edge29_Node000004_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::io::ByteSpan::Size",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_span.html#a4a869430800a37dcbeefac6f36468fcb",tooltip="Gets the size of the ByteSpan."];
+  Node3 -> Node7 [id="edge30_Node000003_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::smartcontract\l::native::NativeContract\l::GetStoragePrefix",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_native_contract.html#a6d9998fc6c7dbedcc447f403fddb6d08",tooltip="Gets the storage prefix."];
+  Node3 -> Node8 [id="edge31_Node000003_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="neo::io::ByteVector\l::Push",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#a57eb840afcbc9cd7b784081f9f546dab",tooltip="Pushes a byte to the end of the ByteVector."];
+  Node2 -> Node9 [id="edge32_Node000002_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="neo::smartcontract\l::native::NativeContract\l::GetStorageValue",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_native_contract.html#aa8eed221a7bf2bce103f7e1fef187e6c",tooltip="Gets the storage value."];
+  Node9 -> Node10 [id="edge33_Node000009_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="neo::smartcontract\l::native::NativeContract\l::CreateStorageKey",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_native_contract.html#a5a9ec24cc4c1584fb00fdf32f614dbd8",tooltip="Creates a storage key with the specified prefix."];
+  Node10 -> Node11 [id="edge34_Node000010_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="neo::persistence::Storage\lKey::Create",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#ae7001770e96642cfdb2f878c6264bf51",tooltip="Creates a storage key with contract ID and prefix."];
+  Node11 -> Node12 [id="edge35_Node000011_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="neo::persistence::Storage\lKey::FillHeader",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#a4a6ee8a47d7cfb0b3802d3697ddf571f",tooltip="Fills the header (contract ID + prefix) into a span."];
+  Node11 -> Node13 [id="edge36_Node000011_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node13 [id="Node000013",label="neo::persistence::Storage\lKey::StorageKey",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1persistence_1_1_storage_key.html#a26e71bde9629f81837c84d69d83fd75a",tooltip="Constructs an empty StorageKey."];
+  Node1 -> Node14 [id="edge37_Node000001_Node000014",color="steelblue1",style="solid",tooltip=" "];
+  Node14 [id="Node000014",label="neo::smartcontract\l::native::OracleContract\l::GetRequest",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_oracle_contract.html#a53ddf70b645de98c872f1768da7a8d8b",tooltip="Gets a request by ID."];
+  Node14 -> Node3 [id="edge38_Node000014_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node14 -> Node9 [id="edge39_Node000014_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node3 [id="edge40_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node15 [id="edge41_Node000001_Node000015",color="steelblue1",style="solid",tooltip=" "];
+  Node15 [id="Node000015",label="neo::smartcontract\l::native::OracleContract\l::GetUrlHash",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_oracle_contract.html#aa23741826ae63ddf7a7d0b373b46d668",tooltip="Gets the URL hash."];
+  Node15 -> Node16 [id="edge42_Node000015_Node000016",color="steelblue1",style="solid",tooltip=" "];
+  Node16 [id="Node000016",label="neo::cryptography::\lCrypto::Hash256",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cryptography_1_1_crypto.html#a8dc659be79d79438521da1ad195cf607",tooltip="Computes the SHA256 hash of the input data."];
+  Node1 -> Node17 [id="edge43_Node000001_Node000017",color="steelblue1",style="solid",tooltip=" "];
+  Node17 [id="Node000017",label="neo::smartcontract\l::native::NativeContract\l::PutStorageValue",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1smartcontract_1_1native_1_1_native_contract.html#a88e6f4aa548d073c5740d1eb0f59f91e",tooltip="Puts the storage value."];
+  Node17 -> Node10 [id="edge44_Node000017_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node18 [id="edge45_Node000001_Node000018",color="steelblue1",style="solid",tooltip=" "];
+  Node18 [id="Node000018",label="neo::io::BinaryWriter\l::Write",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_writer.html#ac50767ade20a9099ba7e6b6ed684ef45",tooltip="Writes a boolean value to the stream."];
+  Node18 -> Node18 [id="edge46_Node000018_Node000018",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node19 [id="edge47_Node000001_Node000019",color="steelblue1",style="solid",tooltip=" "];
+  Node19 [id="Node000019",label="neo::io::BinaryWriter\l::WriteVarInt",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_writer.html#a39fc5781e0d7a018ac8a1d86fea0cd4e",tooltip="Writes a variable-length integer to the stream."];
+  Node19 -> Node18 [id="edge48_Node000019_Node000018",color="steelblue1",style="solid",tooltip=" "];
+}

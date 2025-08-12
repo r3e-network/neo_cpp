@@ -1,0 +1,43 @@
+digraph "neo::ledger::BlockStorage::AddBlockHeader"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::ledger::BlockStorage\l::AddBlockHeader",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Adds a block header to storage."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::io::ByteVector\l::AsSpan",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#a95791d958ed4ec88d32e811b51d90451",tooltip="Converts the ByteVector to a ByteSpan."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::io::UInt256::AsSpan",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_u_int256.html#ae5761853e28717345771c7c97b104994",tooltip="Converts the UInt256 to a ByteSpan."];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::io::ByteVector\l::Concat",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#a567a8816d402c0c57358491e6cadca39",tooltip="Concatenates two ByteVectors."];
+  Node4 -> Node5 [id="edge4_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::io::ByteVector\l::ByteVector",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#a8428939dbf8d0f3bf4047d1e2ee4e7a2",tooltip="Constructs an empty ByteVector."];
+  Node4 -> Node6 [id="edge5_Node000004_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::io::ByteSpan::Data",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_span.html#a0285a19eb5cd212ecd1079e0bc5e494c",tooltip="Gets a pointer to the data."];
+  Node4 -> Node7 [id="edge6_Node000004_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::io::ByteVector\l::Data",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#a971af50d2778c4435c924cf4b839e8a1",tooltip="Gets a pointer to the data."];
+  Node4 -> Node8 [id="edge7_Node000004_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="neo::io::ByteSpan::Size",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_span.html#a4a869430800a37dcbeefac6f36468fcb",tooltip="Gets the size of the ByteSpan."];
+  Node1 -> Node9 [id="edge8_Node000001_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="neo::io::ByteVector\l::FromUInt32",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#a093cac07dd430a64559616d586aa4e90",tooltip="Creates a ByteVector from a uint32_t value."];
+  Node9 -> Node5 [id="edge9_Node000009_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node10 [id="edge10_Node000001_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="neo::ledger::BlockHeader\l::GetHash",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1ledger_1_1_block_header.html#adc4d2971e7b9bddfab4640aa58f28e91",tooltip="Gets the hash of the block header."];
+  Node10 -> Node11 [id="edge11_Node000010_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="neo::cryptography::\lHash::Hash256",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cryptography_1_1_hash.html#a1f27587bba8d21efdec839f2679e1a90",tooltip="Computes Hash256 (double SHA256)."];
+  Node11 -> Node6 [id="edge12_Node000011_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node11 -> Node8 [id="edge13_Node000011_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node10 -> Node12 [id="edge14_Node000010_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="neo::io::BinaryWriter\l::Write",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_writer.html#ac50767ade20a9099ba7e6b6ed684ef45",tooltip="Writes a boolean value to the stream."];
+  Node12 -> Node12 [id="edge15_Node000012_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node13 [id="edge16_Node000001_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node13 [id="Node000013",label="neo::ledger::BlockHeader\l::GetIndex",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1ledger_1_1_block_header.html#adcacb78fda17baa0e2fabbac4182957b",tooltip="Gets the index of the block header."];
+  Node1 -> Node14 [id="edge17_Node000001_Node000014",color="steelblue1",style="solid",tooltip=" "];
+  Node14 [id="Node000014",label="neo::ledger::BlockHeader\l::GetPrevHash",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1ledger_1_1_block_header.html#a847b1ef298d9c583d8f3009444e4ba6b",tooltip="Gets the hash of the previous block."];
+  Node1 -> Node15 [id="edge18_Node000001_Node000015",color="steelblue1",style="solid",tooltip=" "];
+  Node15 [id="Node000015",label="neo::ledger::BlockHeader\l::Serialize",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1ledger_1_1_block_header.html#a96ceab4223eaa21b231a587310fd6bac",tooltip="Serializes the block header to a binary writer."];
+  Node15 -> Node12 [id="edge19_Node000015_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node12 [id="edge20_Node000001_Node000012",color="steelblue1",style="solid",tooltip=" "];
+}

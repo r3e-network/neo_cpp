@@ -1,0 +1,63 @@
+\doxysection{src/cryptography/mpttrie/trie.cpp File Reference}
+\hypertarget{trie_8cpp}{}\label{trie_8cpp}\index{src/cryptography/mpttrie/trie.cpp@{src/cryptography/mpttrie/trie.cpp}}
+{\ttfamily \#include $<$neo/cryptography/hash.\+h$>$}\newline
+{\ttfamily \#include $<$neo/cryptography/mpttrie/trie.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/byte\+\_\+span.\+h$>$}\newline
+{\ttfamily \#include $<$algorithm$>$}\newline
+{\ttfamily \#include $<$cstddef$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$span$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for trie.\+cpp\+:
+% FIG 0
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1cryptography}{neo\+::cryptography}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1mpttrie}{neo\+::cryptography\+::mpttrie}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{trie_8cpp_ad9c73bc78b8b2564e47a037b5a6ca226}{LOG\+\_\+\+ERROR}}(msg, ...)
+\item 
+\#define \mbox{\hyperlink{trie_8cpp_a5c01521cd0033d3db4fb914d19865125}{LOG\+\_\+\+DEBUG}}(msg, ...)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{trie_8cpp_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{trie_8cpp_a5c01521cd0033d3db4fb914d19865125}\index{trie.cpp@{trie.cpp}!LOG\_DEBUG@{LOG\_DEBUG}}
+\index{LOG\_DEBUG@{LOG\_DEBUG}!trie.cpp@{trie.cpp}}
+\doxysubsubsection{\texorpdfstring{LOG\_DEBUG}{LOG\_DEBUG}}
+{\footnotesize\ttfamily \label{trie_8cpp_a5c01521cd0033d3db4fb914d19865125} 
+\#define LOG\+\_\+\+DEBUG(\begin{DoxyParamCaption}\item[{}]{msg}{, }\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{do}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \textcolor{comment}{/*\ Debug\ logging\ disabled\ */}\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{while}\ (0)}
+
+\end{DoxyCode}
+\Hypertarget{trie_8cpp_ad9c73bc78b8b2564e47a037b5a6ca226}\index{trie.cpp@{trie.cpp}!LOG\_ERROR@{LOG\_ERROR}}
+\index{LOG\_ERROR@{LOG\_ERROR}!trie.cpp@{trie.cpp}}
+\doxysubsubsection{\texorpdfstring{LOG\_ERROR}{LOG\_ERROR}}
+{\footnotesize\ttfamily \label{trie_8cpp_ad9c73bc78b8b2564e47a037b5a6ca226} 
+\#define LOG\+\_\+\+ERROR(\begin{DoxyParamCaption}\item[{}]{msg}{, }\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{do}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}ERROR:\ "{}}\ <<\ msg\ <<\ std::endl;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{while}\ (0)}
+
+\end{DoxyCode}

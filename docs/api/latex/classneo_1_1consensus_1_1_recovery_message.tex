@@ -1,0 +1,342 @@
+\doxysection{neo\+::consensus\+::Recovery\+Message Class Reference}
+\hypertarget{classneo_1_1consensus_1_1_recovery_message}{}\label{classneo_1_1consensus_1_1_recovery_message}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+
+
+Represents a recovery message.  
+
+
+
+
+{\ttfamily \#include $<$recovery\+\_\+message.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::consensus\+::Recovery\+Message\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::consensus\+::Recovery\+Message\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_ab53aa4bd0dbfaf264748a8a323e8adad}{Recovery\+Message}} (uint8\+\_\+t view\+Number)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1consensus_1_1_recovery_message}{Recovery\+Message}. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_ac98cd7545831399ea9075416af6efc16}{Change\+View\+Message}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a70862072b99de60f9e5cdace004af6c4}{Get\+Change\+View\+Messages}} () const
+\begin{DoxyCompactList}\small\item\em Gets the change view messages. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_ac32851732a7dc2349fbff854c958aea2}{Add\+Change\+View\+Message}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_ac98cd7545831399ea9075416af6efc16}{Change\+View\+Message}} $>$ message)
+\begin{DoxyCompactList}\small\item\em Adds a change view message. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_aed5c6243594d76ea9fe4ad10bc57dea6}{Prepare\+Request}} $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a7b333aaaa5b230d703aebb157fbbd3b6}{Get\+Prepare\+Request}} () const
+\begin{DoxyCompactList}\small\item\em Gets the prepare request. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a8bc6ca1767f424f3e109e707aee7aa85}{Set\+Prepare\+Request}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_aed5c6243594d76ea9fe4ad10bc57dea6}{Prepare\+Request}} $>$ prepare\+Request)
+\begin{DoxyCompactList}\small\item\em Sets the prepare request. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_aa91ad7e4dd3969cbc2685eb001bc8baa}{Prepare\+Response}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a0e78c0ed7f024c0e19c9be72ff8448c7}{Get\+Prepare\+Responses}} () const
+\begin{DoxyCompactList}\small\item\em Gets the prepare responses. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a9e5e8e3dde83dcdf2fa417af923c868a}{Add\+Prepare\+Response}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_aa91ad7e4dd3969cbc2685eb001bc8baa}{Prepare\+Response}} $>$ message)
+\begin{DoxyCompactList}\small\item\em Adds a prepare response. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_commit_message}{Commit\+Message}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a9e395b973f58862dbe4fdbfad93ad3e7}{Get\+Commit\+Messages}} () const
+\begin{DoxyCompactList}\small\item\em Gets the commit messages. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a4cc775b5ec94ef48a240491dbc93369c}{Add\+Commit\+Message}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_commit_message}{Commit\+Message}} $>$ message)
+\begin{DoxyCompactList}\small\item\em Adds a commit message. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_adb95e7908651c6a77d188bc91e78942f}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a67ed49d5b7c15f6df204f4324ef572e9}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a8a94109fe9a8ce4b51740a6fc2592c4b}{Get\+Data}} () const
+\begin{DoxyCompactList}\small\item\em Gets the message data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message}{neo\+::consensus\+::\+Consensus\+Message}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message_aa1131ea96e3bd9f8a9760f6b4ccbdb99}{Consensus\+Message}} (\mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5}{Consensus\+Message\+Type}} type)
+\item 
+\mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5}{Consensus\+Message\+Type}} \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message_acb152593a586346f343727a783565362}{Get\+Type}} () const
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message_ad9cc1973374a9f78fbf358a8723171fa}{Get\+View\+Number}} () const
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message_a57806653429804e7da8089cd79faf684}{Get\+Validator\+Index}} () const
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message_a798bf0a72d8d23b95f7489201fa126a4}{Get\+Block\+Index}} () const
+\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message_a4aa33abf6a8fa33175869ed086fe5599}{Set\+View\+Number}} (uint32\+\_\+t view)
+\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message_af1d8e045de2172ed99cc916b2a11b154}{Set\+Validator\+Index}} (uint32\+\_\+t index)
+\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message_a3b2640deb3b8724f8ae5b665cc051522}{Set\+Block\+Index}} (uint32\+\_\+t index)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_ac98cd7545831399ea9075416af6efc16}{Change\+View\+Message}} $>$ $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a736f9ce427500ce1570161c2630b995a}{change\+View\+Messages\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_aed5c6243594d76ea9fe4ad10bc57dea6}{Prepare\+Request}} $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_aa7d3a1dedc16fb717de500c3e83c6b8b}{prepare\+Request\+\_\+}}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_aa91ad7e4dd3969cbc2685eb001bc8baa}{Prepare\+Response}} $>$ $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_a2bc5ca4afb3f4b40deb9988f1fcc072c}{prepare\+Responses\+\_\+}}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_commit_message}{Commit\+Message}} $>$ $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message_aac4b1bc540184e618aa1b8443bcb7de3}{commit\+Messages\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message}{neo\+::consensus\+::\+Consensus\+Message}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message}{Consensus\+Message}} $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message_a7983ba8d1133c25965defe7e3db2dced}{Create\+From\+Type}} (\mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5}{Consensus\+Message\+Type}} type)
+\begin{DoxyCompactList}\small\item\em Create message from type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message}{neo\+::consensus\+::\+Consensus\+Message}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5}{Consensus\+Message\+Type}} \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message_af7328fd6b03aa3958d514bc81a2780bf}{type\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message_a643d3f49bfc686ee87a289cf07bb0882}{view\+\_\+number\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message_acabe506d9bf608ae960a475f6568bbd3}{validator\+\_\+index\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message_a053e6f418461cfdd50c0afbdfa492a91}{block\+\_\+index\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a recovery message. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_ab53aa4bd0dbfaf264748a8a323e8adad}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}!RecoveryMessage@{RecoveryMessage}}
+\index{RecoveryMessage@{RecoveryMessage}!neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+\doxysubsubsection{\texorpdfstring{RecoveryMessage()}{RecoveryMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_recovery_message_ab53aa4bd0dbfaf264748a8a323e8adad} 
+neo\+::consensus\+::\+Recovery\+Message\+::\+Recovery\+Message (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{view\+Number}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1consensus_1_1_recovery_message}{Recovery\+Message}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em view\+Number} & The view number. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_ac32851732a7dc2349fbff854c958aea2}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}!AddChangeViewMessage@{AddChangeViewMessage}}
+\index{AddChangeViewMessage@{AddChangeViewMessage}!neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+\doxysubsubsection{\texorpdfstring{AddChangeViewMessage()}{AddChangeViewMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_recovery_message_ac32851732a7dc2349fbff854c958aea2} 
+void neo\+::consensus\+::\+Recovery\+Message\+::\+Add\+Change\+View\+Message (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_ac98cd7545831399ea9075416af6efc16}{Change\+View\+Message}} $>$}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Adds a change view message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The change view message. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_a4cc775b5ec94ef48a240491dbc93369c}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}!AddCommitMessage@{AddCommitMessage}}
+\index{AddCommitMessage@{AddCommitMessage}!neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+\doxysubsubsection{\texorpdfstring{AddCommitMessage()}{AddCommitMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_recovery_message_a4cc775b5ec94ef48a240491dbc93369c} 
+void neo\+::consensus\+::\+Recovery\+Message\+::\+Add\+Commit\+Message (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_commit_message}{Commit\+Message}} $>$}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Adds a commit message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The commit message. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_a9e5e8e3dde83dcdf2fa417af923c868a}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}!AddPrepareResponse@{AddPrepareResponse}}
+\index{AddPrepareResponse@{AddPrepareResponse}!neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+\doxysubsubsection{\texorpdfstring{AddPrepareResponse()}{AddPrepareResponse()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_recovery_message_a9e5e8e3dde83dcdf2fa417af923c868a} 
+void neo\+::consensus\+::\+Recovery\+Message\+::\+Add\+Prepare\+Response (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_aa91ad7e4dd3969cbc2685eb001bc8baa}{Prepare\+Response}} $>$}]{message}{}\end{DoxyParamCaption})}
+
+
+
+Adds a prepare response. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The prepare response. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_a67ed49d5b7c15f6df204f4324ef572e9}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_recovery_message_a67ed49d5b7c15f6df204f4324ef572e9} 
+void neo\+::consensus\+::\+Recovery\+Message\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The reader. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message_a83783ec8217ede32002e3eba6ca69086}{neo\+::consensus\+::\+Consensus\+Message}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_a70862072b99de60f9e5cdace004af6c4}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}!GetChangeViewMessages@{GetChangeViewMessages}}
+\index{GetChangeViewMessages@{GetChangeViewMessages}!neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+\doxysubsubsection{\texorpdfstring{GetChangeViewMessages()}{GetChangeViewMessages()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_recovery_message_a70862072b99de60f9e5cdace004af6c4} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_ac98cd7545831399ea9075416af6efc16}{Change\+View\+Message}} $>$ $>$ \& neo\+::consensus\+::\+Recovery\+Message\+::\+Get\+Change\+View\+Messages (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the change view messages. 
+
+\begin{DoxyReturn}{Returns}
+The change view messages. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_a9e395b973f58862dbe4fdbfad93ad3e7}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}!GetCommitMessages@{GetCommitMessages}}
+\index{GetCommitMessages@{GetCommitMessages}!neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+\doxysubsubsection{\texorpdfstring{GetCommitMessages()}{GetCommitMessages()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_recovery_message_a9e395b973f58862dbe4fdbfad93ad3e7} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1consensus_1_1_commit_message}{Commit\+Message}} $>$ $>$ \& neo\+::consensus\+::\+Recovery\+Message\+::\+Get\+Commit\+Messages (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the commit messages. 
+
+\begin{DoxyReturn}{Returns}
+The commit messages. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_a8a94109fe9a8ce4b51740a6fc2592c4b}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}!GetData@{GetData}}
+\index{GetData@{GetData}!neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+\doxysubsubsection{\texorpdfstring{GetData()}{GetData()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_recovery_message_a8a94109fe9a8ce4b51740a6fc2592c4b} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::consensus\+::\+Recovery\+Message\+::\+Get\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the message data. 
+
+\begin{DoxyReturn}{Returns}
+The message data. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_a7b333aaaa5b230d703aebb157fbbd3b6}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}!GetPrepareRequest@{GetPrepareRequest}}
+\index{GetPrepareRequest@{GetPrepareRequest}!neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+\doxysubsubsection{\texorpdfstring{GetPrepareRequest()}{GetPrepareRequest()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_recovery_message_a7b333aaaa5b230d703aebb157fbbd3b6} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_aed5c6243594d76ea9fe4ad10bc57dea6}{Prepare\+Request}} $>$ neo\+::consensus\+::\+Recovery\+Message\+::\+Get\+Prepare\+Request (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the prepare request. 
+
+\begin{DoxyReturn}{Returns}
+The prepare request. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_a0e78c0ed7f024c0e19c9be72ff8448c7}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}!GetPrepareResponses@{GetPrepareResponses}}
+\index{GetPrepareResponses@{GetPrepareResponses}!neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+\doxysubsubsection{\texorpdfstring{GetPrepareResponses()}{GetPrepareResponses()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_recovery_message_a0e78c0ed7f024c0e19c9be72ff8448c7} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_aa91ad7e4dd3969cbc2685eb001bc8baa}{Prepare\+Response}} $>$ $>$ \& neo\+::consensus\+::\+Recovery\+Message\+::\+Get\+Prepare\+Responses (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the prepare responses. 
+
+\begin{DoxyReturn}{Returns}
+The prepare responses. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_adb95e7908651c6a77d188bc91e78942f}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_recovery_message_adb95e7908651c6a77d188bc91e78942f} 
+void neo\+::consensus\+::\+Recovery\+Message\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The writer. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message_a4cc52b2b35b33b1dd13c5584c9ae50aa}{neo\+::consensus\+::\+Consensus\+Message}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_a8bc6ca1767f424f3e109e707aee7aa85}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}!SetPrepareRequest@{SetPrepareRequest}}
+\index{SetPrepareRequest@{SetPrepareRequest}!neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+\doxysubsubsection{\texorpdfstring{SetPrepareRequest()}{SetPrepareRequest()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_recovery_message_a8bc6ca1767f424f3e109e707aee7aa85} 
+void neo\+::consensus\+::\+Recovery\+Message\+::\+Set\+Prepare\+Request (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1consensus_aed5c6243594d76ea9fe4ad10bc57dea6}{Prepare\+Request}} $>$}]{prepare\+Request}{}\end{DoxyParamCaption})}
+
+
+
+Sets the prepare request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prepare\+Request} & The prepare request. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_a736f9ce427500ce1570161c2630b995a}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}!changeViewMessages\_@{changeViewMessages\_}}
+\index{changeViewMessages\_@{changeViewMessages\_}!neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+\doxysubsubsection{\texorpdfstring{changeViewMessages\_}{changeViewMessages\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_recovery_message_a736f9ce427500ce1570161c2630b995a} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1consensus_ac98cd7545831399ea9075416af6efc16}{Change\+View\+Message}}$>$ $>$ neo\+::consensus\+::\+Recovery\+Message\+::change\+View\+Messages\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_aac4b1bc540184e618aa1b8443bcb7de3}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}!commitMessages\_@{commitMessages\_}}
+\index{commitMessages\_@{commitMessages\_}!neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+\doxysubsubsection{\texorpdfstring{commitMessages\_}{commitMessages\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_recovery_message_aac4b1bc540184e618aa1b8443bcb7de3} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1consensus_1_1_commit_message}{Commit\+Message}}$>$ $>$ neo\+::consensus\+::\+Recovery\+Message\+::commit\+Messages\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_aa7d3a1dedc16fb717de500c3e83c6b8b}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}!prepareRequest\_@{prepareRequest\_}}
+\index{prepareRequest\_@{prepareRequest\_}!neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+\doxysubsubsection{\texorpdfstring{prepareRequest\_}{prepareRequest\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_recovery_message_aa7d3a1dedc16fb717de500c3e83c6b8b} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1consensus_aed5c6243594d76ea9fe4ad10bc57dea6}{Prepare\+Request}}$>$ neo\+::consensus\+::\+Recovery\+Message\+::prepare\+Request\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_recovery_message_a2bc5ca4afb3f4b40deb9988f1fcc072c}\index{neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}!prepareResponses\_@{prepareResponses\_}}
+\index{prepareResponses\_@{prepareResponses\_}!neo::consensus::RecoveryMessage@{neo::consensus::RecoveryMessage}}
+\doxysubsubsection{\texorpdfstring{prepareResponses\_}{prepareResponses\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_recovery_message_a2bc5ca4afb3f4b40deb9988f1fcc072c} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1consensus_aa91ad7e4dd3969cbc2685eb001bc8baa}{Prepare\+Response}}$>$ $>$ neo\+::consensus\+::\+Recovery\+Message\+::prepare\+Responses\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/consensus/\mbox{\hyperlink{recovery__message_8h}{recovery\+\_\+message.\+h}}\item 
+src/consensus/\mbox{\hyperlink{recovery__message_8cpp}{recovery\+\_\+message.\+cpp}}\item 
+src/consensus/\mbox{\hyperlink{recovery__message__stub_8cpp}{recovery\+\_\+message\+\_\+stub.\+cpp}}\end{DoxyCompactItemize}

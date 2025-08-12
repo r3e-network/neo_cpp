@@ -1,0 +1,196 @@
+\doxysection{neo\+::monitoring\+::Counter Class Reference}
+\hypertarget{classneo_1_1monitoring_1_1_counter}{}\label{classneo_1_1monitoring_1_1_counter}\index{neo::monitoring::Counter@{neo::monitoring::Counter}}
+
+
+\doxylink{classneo_1_1monitoring_1_1_counter}{Counter} metric -\/ monotonically increasing value.  
+
+
+
+
+{\ttfamily \#include $<$metrics.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::monitoring\+::Counter\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::monitoring\+::Counter\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_a7a9df48773c3f3aee287fce1773ae0c9}{Counter}} (const std\+::string \&name, const std\+::string \&description)
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_a90df1357d58bd2130f7a9c8a4dccc068}{Increment}} (uint64\+\_\+t delta=1)
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_a9304b012386d2f3b6a74b9ba60348ca9}{Get}} () const
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_ad4c30c1f7966813a5588ffbda5068cc4}{To\+Prometheus}} () const override
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_a84d6cc3c879796a033c0dd94db3796c9}{Counter}} (const std\+::string \&name, const std\+::string \&help)
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_af298de9931db453de379f3575929559f}{Increment}} (double value=1.\+0)
+\item 
+double \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_a85908663fb4dc59e2f3b050eb109b221}{Get}} () const
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_a50c00789bd59a9a6b15df7fcc919c44c}{Serialize}} () const override
+\begin{DoxyCompactList}\small\item\em Serialize metric to Prometheus format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{neo\+::monitoring\+::\+Metric}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a2fabc388c640698b8ea800e0cc8b5d5f}{Metric}} (const std\+::string \&name, const std\+::string \&description, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} type)
+\item 
+virtual \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_ad3f062c16fa8a54f2babb1fa1f247c29}{\texorpdfstring{$\sim$}{\string~}\+Metric}} ()=default
+\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a514f8ad2bb1ee128016785a4705b5084}{Get\+Name}} () const
+\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_af756fcfeb3ffd38d255411a1fe363e72}{Get\+Description}} () const
+\item 
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a194d6b9b3862300250c9f91129f8d486}{Get\+Type}} () const
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a787fd65928f94768a49fb42f538d91b6}{Set\+Label}} (const std\+::string \&key, const std\+::string \&value)
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_af5a69c403e3784d99aa03c6f534ea602}{Metric}} (const std\+::string \&name, const std\+::string \&help, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} type)
+\item 
+virtual \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_ad3f062c16fa8a54f2babb1fa1f247c29}{\texorpdfstring{$\sim$}{\string~}\+Metric}} ()=default
+\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a514f8ad2bb1ee128016785a4705b5084}{Get\+Name}} () const
+\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a02fc58e08ab7760cffd98d1c5166d3a3}{Get\+Help}} () const
+\item 
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a194d6b9b3862300250c9f91129f8d486}{Get\+Type}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_abf59aeac7ea460eed964a73b476cca59}{value\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ double $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_counter_a1976ab6c266857efcf5d27a040caf500}{value\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{neo\+::monitoring\+::\+Metric}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_ac02de7bc213735d2d47ab1dd388937fd}{Type\+String}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{neo\+::monitoring\+::\+Metric}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a08cd309a2371946ba5df2fd96e1f4e04}{description\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_aeeef931c32528d9756ac041df70cdec8}{labels\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_aaa32b50e25a5eb197834638167fc871d}{type\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a7d477b0164ecefab56c843ab76998b7b}{help\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1monitoring_1_1_counter}{Counter} metric -\/ monotonically increasing value. 
+
+\doxylink{classneo_1_1monitoring_1_1_counter}{Counter} metric (monotonically increasing) 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1monitoring_1_1_counter_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_counter_a7a9df48773c3f3aee287fce1773ae0c9}\index{neo::monitoring::Counter@{neo::monitoring::Counter}!Counter@{Counter}}
+\index{Counter@{Counter}!neo::monitoring::Counter@{neo::monitoring::Counter}}
+\doxysubsubsection{\texorpdfstring{Counter()}{Counter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_counter_a7a9df48773c3f3aee287fce1773ae0c9} 
+neo\+::monitoring\+::\+Counter\+::\+Counter (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{const std\+::string \&}]{description}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1monitoring_1_1_counter_a84d6cc3c879796a033c0dd94db3796c9}\index{neo::monitoring::Counter@{neo::monitoring::Counter}!Counter@{Counter}}
+\index{Counter@{Counter}!neo::monitoring::Counter@{neo::monitoring::Counter}}
+\doxysubsubsection{\texorpdfstring{Counter()}{Counter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_counter_a84d6cc3c879796a033c0dd94db3796c9} 
+neo\+::monitoring\+::\+Counter\+::\+Counter (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{const std\+::string \&}]{help}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1monitoring_1_1_counter_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_counter_a9304b012386d2f3b6a74b9ba60348ca9}\index{neo::monitoring::Counter@{neo::monitoring::Counter}!Get@{Get}}
+\index{Get@{Get}!neo::monitoring::Counter@{neo::monitoring::Counter}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_counter_a9304b012386d2f3b6a74b9ba60348ca9} 
+uint64\+\_\+t neo\+::monitoring\+::\+Counter\+::\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_counter_a85908663fb4dc59e2f3b050eb109b221}\index{neo::monitoring::Counter@{neo::monitoring::Counter}!Get@{Get}}
+\index{Get@{Get}!neo::monitoring::Counter@{neo::monitoring::Counter}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_counter_a85908663fb4dc59e2f3b050eb109b221} 
+double neo\+::monitoring\+::\+Counter\+::\+Get (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_counter_af298de9931db453de379f3575929559f}\index{neo::monitoring::Counter@{neo::monitoring::Counter}!Increment@{Increment}}
+\index{Increment@{Increment}!neo::monitoring::Counter@{neo::monitoring::Counter}}
+\doxysubsubsection{\texorpdfstring{Increment()}{Increment()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_counter_af298de9931db453de379f3575929559f} 
+void neo\+::monitoring\+::\+Counter\+::\+Increment (\begin{DoxyParamCaption}\item[{double}]{value}{ = {\ttfamily 1.0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_counter_a90df1357d58bd2130f7a9c8a4dccc068}\index{neo::monitoring::Counter@{neo::monitoring::Counter}!Increment@{Increment}}
+\index{Increment@{Increment}!neo::monitoring::Counter@{neo::monitoring::Counter}}
+\doxysubsubsection{\texorpdfstring{Increment()}{Increment()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_counter_a90df1357d58bd2130f7a9c8a4dccc068} 
+void neo\+::monitoring\+::\+Counter\+::\+Increment (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{delta}{ = {\ttfamily 1}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_counter_a50c00789bd59a9a6b15df7fcc919c44c}\index{neo::monitoring::Counter@{neo::monitoring::Counter}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::monitoring::Counter@{neo::monitoring::Counter}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_counter_a50c00789bd59a9a6b15df7fcc919c44c} 
+std\+::string neo\+::monitoring\+::\+Counter\+::\+Serialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize metric to Prometheus format. 
+
+\begin{DoxyReturn}{Returns}
+Prometheus formatted string 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a814cbfc8ab1f5c2df22440a5a507a461}{neo\+::monitoring\+::\+Metric}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1monitoring_1_1_counter_ad4c30c1f7966813a5588ffbda5068cc4}\index{neo::monitoring::Counter@{neo::monitoring::Counter}!ToPrometheus@{ToPrometheus}}
+\index{ToPrometheus@{ToPrometheus}!neo::monitoring::Counter@{neo::monitoring::Counter}}
+\doxysubsubsection{\texorpdfstring{ToPrometheus()}{ToPrometheus()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_counter_ad4c30c1f7966813a5588ffbda5068cc4} 
+std\+::string neo\+::monitoring\+::\+Counter\+::\+To\+Prometheus (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a62a05fbe49c84ce9e8ce44cb2224c883}{neo\+::monitoring\+::\+Metric}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1monitoring_1_1_counter_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_counter_abf59aeac7ea460eed964a73b476cca59}\index{neo::monitoring::Counter@{neo::monitoring::Counter}!value\_@{value\_}}
+\index{value\_@{value\_}!neo::monitoring::Counter@{neo::monitoring::Counter}}
+\doxysubsubsection{\texorpdfstring{value\_}{value\_}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_counter_abf59aeac7ea460eed964a73b476cca59} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::monitoring\+::\+Counter\+::value\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_counter_a1976ab6c266857efcf5d27a040caf500}\index{neo::monitoring::Counter@{neo::monitoring::Counter}!value\_@{value\_}}
+\index{value\_@{value\_}!neo::monitoring::Counter@{neo::monitoring::Counter}}
+\doxysubsubsection{\texorpdfstring{value\_}{value\_}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_counter_a1976ab6c266857efcf5d27a040caf500} 
+std\+::atomic$<$double$>$ neo\+::monitoring\+::\+Counter\+::value\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/monitoring/\mbox{\hyperlink{monitoring_2metrics_8h}{metrics.\+h}}\item 
+include/neo/monitoring/\mbox{\hyperlink{prometheus__exporter_8h}{prometheus\+\_\+exporter.\+h}}\end{DoxyCompactItemize}

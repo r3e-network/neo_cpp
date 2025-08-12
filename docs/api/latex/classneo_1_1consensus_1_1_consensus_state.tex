@@ -1,0 +1,458 @@
+\doxysection{neo\+::consensus\+::Consensus\+State Class Reference}
+\hypertarget{classneo_1_1consensus_1_1_consensus_state}{}\label{classneo_1_1consensus_1_1_consensus_state}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+
+
+State tracking for d\+BFT consensus.  
+
+
+
+
+{\ttfamily \#include $<$consensus\+\_\+state.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::consensus\+::Consensus\+State\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a30a3a4fff96b7c5113cff354df72d76b}{Get\+View\+Number}} () const
+\begin{DoxyCompactList}\small\item\em Get current view number. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a2a4250d51666f192206c51c5121bdc1c}{Set\+View\+Number}} (uint32\+\_\+t view)
+\begin{DoxyCompactList}\small\item\em Set view number. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_af146794c34ad091ffc4f36e13be9a64d}{Get\+Block\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Get current block index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_ad150e031815580bbdfb5ce025a102961}{Set\+Block\+Index}} (uint32\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Set block index. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805}{Consensus\+Phase}} \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_abf208467e8981fd038e354793695ec97}{Get\+Phase}} () const
+\begin{DoxyCompactList}\small\item\em Get current consensus phase. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_af677a1595b8c38578c731ba345fe16ed}{Set\+Phase}} (\mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805}{Consensus\+Phase}} phase)
+\begin{DoxyCompactList}\small\item\em Set consensus phase. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a16766f08114802ec64cf61bb3e489c03}{Get\+Prepare\+Request\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Get prepare request hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a5103b5d7b0b7dba05c4513fc5fe3a56c}{Set\+Prepare\+Request}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} $>$ \&txs, std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point timestamp, uint64\+\_\+t nonce)
+\begin{DoxyCompactList}\small\item\em Set prepare request details. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_aeaa4bfd2945af0c7499edcdb42d83a5d}{Add\+Prepare\+Response}} (uint32\+\_\+t validator\+\_\+index, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Add prepare response. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a95e9734a08f7b892aeac33bee7acbcc4}{Get\+Prepare\+Response\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Get prepare response count. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a9787642b0c57e53129083de60e0f242c}{Has\+Prepare\+Response}} (uint32\+\_\+t validator\+\_\+index) const
+\begin{DoxyCompactList}\small\item\em Check if we have prepare response from validator. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_ac830c87570231bb50a1ae9fcec4f8b06}{Add\+Commit}} (uint32\+\_\+t validator\+\_\+index, const std\+::vector$<$ uint8\+\_\+t $>$ \&signature)
+\begin{DoxyCompactList}\small\item\em Add commit. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a05034ecbf087f0d591c302fce2689535}{Get\+Commit\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Get commit count. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a125d1fe5fcd1aeb09011979e21417e92}{Has\+Commit}} (uint32\+\_\+t validator\+\_\+index) const
+\begin{DoxyCompactList}\small\item\em Check if we have commit from validator. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_ad6293484809b5b47c7debe61151880f0}{Add\+View\+Change}} (uint32\+\_\+t validator\+\_\+index)
+\begin{DoxyCompactList}\small\item\em Add view change request. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_adb2a6124af286345603d5ba9730e5af4}{Get\+View\+Change\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Get view change count. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_afe672afb85510fc6d92aea9e1d36fcc2}{Add\+Transaction}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} \&tx)
+\begin{DoxyCompactList}\small\item\em Add transaction to pool. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_ac5f0c74a643b639cf97b46fba58cf42b}{Remove\+Transaction}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Remove transaction from pool. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a20f1cd66fa950ac760ffadcdfaeded9d}{Get\+Transactions\+For\+Block}} (size\+\_\+t max\+\_\+count) const
+\begin{DoxyCompactList}\small\item\em Get transactions for next block. \end{DoxyCompactList}\item 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a5e169d8408aee633ea1b0b80c9dff190}{Get\+Timestamp}} () const
+\begin{DoxyCompactList}\small\item\em Get timestamp. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a1565aa1625bf1455bed95d2a60c51077}{Get\+Nonce}} () const
+\begin{DoxyCompactList}\small\item\em Get nonce. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a42db6db33f3b9640a03f7aad7f7b620b}{Get\+Transactions}} () const
+\begin{DoxyCompactList}\small\item\em Get all transactions. \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+map$<$ uint32\+\_\+t, std\+::vector$<$ uint8\+\_\+t $>$ $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a39ca6770ce374ada98c65fb168d4e4e4}{Get\+Commits}} () const
+\begin{DoxyCompactList}\small\item\em Get all commits for block creation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a2772ef77072818ce35074578ca15839d}{Reset}} ()
+\begin{DoxyCompactList}\small\item\em Reset state for new consensus round. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_ae71eabbf41368507e0fe6ed772abebe2}{Reset\+For\+View\+Change}} ()
+\begin{DoxyCompactList}\small\item\em Reset for view change. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_aca3dc164465299f9570d52bb990c0771}{mutex\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a9dbf94cb63b95e638b3864e48b0c0200}{view\+\_\+number\+\_\+}} \{0\}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a4ba649c9a791250c0b9b00b5161b6b71}{block\+\_\+index\+\_\+}} \{0\}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805}{Consensus\+Phase}} \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a1f8b9f91b78835fbf66a9b9d1291f171}{phase\+\_\+}} \{\mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a4f2a91e15af2631ff9424564b8a45fb2}{Consensus\+Phase\+::\+Initial}}\}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_aba1502d599e20e7499f501ccb6240c32}{prepare\+\_\+request\+\_\+hash\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a6ed2bf65ebeb4a53fd78a88aac7563c8}{proposed\+\_\+transactions\+\_\+}}
+\item 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_af5b8cc4552ff05097df89e09a50c2e08}{timestamp\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a0d48a3dbdbdb3b2b6e9edf95de6ff504}{nonce\+\_\+}} \{0\}
+\item 
+std\+::unordered\+\_\+map$<$ uint32\+\_\+t, \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a7f6caf4f8d560585dc556ec95cf65a22}{prepare\+\_\+responses\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ uint32\+\_\+t, std\+::vector$<$ uint8\+\_\+t $>$ $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a88a0b859980b249caecdac544b1676c4}{commits\+\_\+}}
+\item 
+std\+::unordered\+\_\+set$<$ uint32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_a983803f3848a134b36110e6869a0356c}{view\+\_\+changes\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} $>$ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state_ab7d035815bc99b0865c1c7d224d6ba8d}{transaction\+\_\+pool\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+State tracking for d\+BFT consensus. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_ac830c87570231bb50a1ae9fcec4f8b06}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!AddCommit@{AddCommit}}
+\index{AddCommit@{AddCommit}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{AddCommit()}{AddCommit()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_ac830c87570231bb50a1ae9fcec4f8b06} 
+bool neo\+::consensus\+::\+Consensus\+State\+::\+Add\+Commit (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{validator\+\_\+index}{, }\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{signature}{}\end{DoxyParamCaption})}
+
+
+
+Add commit. 
+
+\begin{DoxyReturn}{Returns}
+true if this was a new commit 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_aeaa4bfd2945af0c7499edcdb42d83a5d}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!AddPrepareResponse@{AddPrepareResponse}}
+\index{AddPrepareResponse@{AddPrepareResponse}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{AddPrepareResponse()}{AddPrepareResponse()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_aeaa4bfd2945af0c7499edcdb42d83a5d} 
+bool neo\+::consensus\+::\+Consensus\+State\+::\+Add\+Prepare\+Response (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{validator\+\_\+index}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})}
+
+
+
+Add prepare response. 
+
+\begin{DoxyReturn}{Returns}
+true if this was a new response 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_afe672afb85510fc6d92aea9e1d36fcc2}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!AddTransaction@{AddTransaction}}
+\index{AddTransaction@{AddTransaction}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{AddTransaction()}{AddTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_afe672afb85510fc6d92aea9e1d36fcc2} 
+bool neo\+::consensus\+::\+Consensus\+State\+::\+Add\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} \&}]{tx}{}\end{DoxyParamCaption})}
+
+
+
+Add transaction to pool. 
+
+\begin{DoxyReturn}{Returns}
+true if transaction was added 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_ad6293484809b5b47c7debe61151880f0}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!AddViewChange@{AddViewChange}}
+\index{AddViewChange@{AddViewChange}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{AddViewChange()}{AddViewChange()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_ad6293484809b5b47c7debe61151880f0} 
+bool neo\+::consensus\+::\+Consensus\+State\+::\+Add\+View\+Change (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{validator\+\_\+index}{}\end{DoxyParamCaption})}
+
+
+
+Add view change request. 
+
+\begin{DoxyReturn}{Returns}
+true if this was a new request 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_af146794c34ad091ffc4f36e13be9a64d}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!GetBlockIndex@{GetBlockIndex}}
+\index{GetBlockIndex@{GetBlockIndex}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{GetBlockIndex()}{GetBlockIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_af146794c34ad091ffc4f36e13be9a64d} 
+uint32\+\_\+t neo\+::consensus\+::\+Consensus\+State\+::\+Get\+Block\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get current block index. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a05034ecbf087f0d591c302fce2689535}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!GetCommitCount@{GetCommitCount}}
+\index{GetCommitCount@{GetCommitCount}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{GetCommitCount()}{GetCommitCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a05034ecbf087f0d591c302fce2689535} 
+size\+\_\+t neo\+::consensus\+::\+Consensus\+State\+::\+Get\+Commit\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get commit count. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a39ca6770ce374ada98c65fb168d4e4e4}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!GetCommits@{GetCommits}}
+\index{GetCommits@{GetCommits}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{GetCommits()}{GetCommits()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a39ca6770ce374ada98c65fb168d4e4e4} 
+std\+::unordered\+\_\+map$<$ uint32\+\_\+t, std\+::vector$<$ uint8\+\_\+t $>$ $>$ neo\+::consensus\+::\+Consensus\+State\+::\+Get\+Commits (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get all commits for block creation. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a1565aa1625bf1455bed95d2a60c51077}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!GetNonce@{GetNonce}}
+\index{GetNonce@{GetNonce}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{GetNonce()}{GetNonce()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a1565aa1625bf1455bed95d2a60c51077} 
+uint64\+\_\+t neo\+::consensus\+::\+Consensus\+State\+::\+Get\+Nonce (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get nonce. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_abf208467e8981fd038e354793695ec97}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!GetPhase@{GetPhase}}
+\index{GetPhase@{GetPhase}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{GetPhase()}{GetPhase()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_abf208467e8981fd038e354793695ec97} 
+\mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805}{Consensus\+Phase}} neo\+::consensus\+::\+Consensus\+State\+::\+Get\+Phase (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get current consensus phase. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a16766f08114802ec64cf61bb3e489c03}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!GetPrepareRequestHash@{GetPrepareRequestHash}}
+\index{GetPrepareRequestHash@{GetPrepareRequestHash}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{GetPrepareRequestHash()}{GetPrepareRequestHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a16766f08114802ec64cf61bb3e489c03} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::consensus\+::\+Consensus\+State\+::\+Get\+Prepare\+Request\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get prepare request hash. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a95e9734a08f7b892aeac33bee7acbcc4}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!GetPrepareResponseCount@{GetPrepareResponseCount}}
+\index{GetPrepareResponseCount@{GetPrepareResponseCount}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{GetPrepareResponseCount()}{GetPrepareResponseCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a95e9734a08f7b892aeac33bee7acbcc4} 
+size\+\_\+t neo\+::consensus\+::\+Consensus\+State\+::\+Get\+Prepare\+Response\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get prepare response count. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a5e169d8408aee633ea1b0b80c9dff190}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!GetTimestamp@{GetTimestamp}}
+\index{GetTimestamp@{GetTimestamp}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{GetTimestamp()}{GetTimestamp()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a5e169d8408aee633ea1b0b80c9dff190} 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point neo\+::consensus\+::\+Consensus\+State\+::\+Get\+Timestamp (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get timestamp. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a42db6db33f3b9640a03f7aad7f7b620b}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!GetTransactions@{GetTransactions}}
+\index{GetTransactions@{GetTransactions}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{GetTransactions()}{GetTransactions()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a42db6db33f3b9640a03f7aad7f7b620b} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} $>$ neo\+::consensus\+::\+Consensus\+State\+::\+Get\+Transactions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get all transactions. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a20f1cd66fa950ac760ffadcdfaeded9d}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!GetTransactionsForBlock@{GetTransactionsForBlock}}
+\index{GetTransactionsForBlock@{GetTransactionsForBlock}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{GetTransactionsForBlock()}{GetTransactionsForBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a20f1cd66fa950ac760ffadcdfaeded9d} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} $>$ neo\+::consensus\+::\+Consensus\+State\+::\+Get\+Transactions\+For\+Block (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{max\+\_\+count}{}\end{DoxyParamCaption}) const}
+
+
+
+Get transactions for next block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+\_\+count} & Maximum number of transactions \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Selected transactions 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_adb2a6124af286345603d5ba9730e5af4}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!GetViewChangeCount@{GetViewChangeCount}}
+\index{GetViewChangeCount@{GetViewChangeCount}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{GetViewChangeCount()}{GetViewChangeCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_adb2a6124af286345603d5ba9730e5af4} 
+size\+\_\+t neo\+::consensus\+::\+Consensus\+State\+::\+Get\+View\+Change\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get view change count. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a30a3a4fff96b7c5113cff354df72d76b}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!GetViewNumber@{GetViewNumber}}
+\index{GetViewNumber@{GetViewNumber}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{GetViewNumber()}{GetViewNumber()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a30a3a4fff96b7c5113cff354df72d76b} 
+uint32\+\_\+t neo\+::consensus\+::\+Consensus\+State\+::\+Get\+View\+Number (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get current view number. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a125d1fe5fcd1aeb09011979e21417e92}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!HasCommit@{HasCommit}}
+\index{HasCommit@{HasCommit}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{HasCommit()}{HasCommit()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a125d1fe5fcd1aeb09011979e21417e92} 
+bool neo\+::consensus\+::\+Consensus\+State\+::\+Has\+Commit (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{validator\+\_\+index}{}\end{DoxyParamCaption}) const}
+
+
+
+Check if we have commit from validator. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a9787642b0c57e53129083de60e0f242c}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!HasPrepareResponse@{HasPrepareResponse}}
+\index{HasPrepareResponse@{HasPrepareResponse}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{HasPrepareResponse()}{HasPrepareResponse()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a9787642b0c57e53129083de60e0f242c} 
+bool neo\+::consensus\+::\+Consensus\+State\+::\+Has\+Prepare\+Response (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{validator\+\_\+index}{}\end{DoxyParamCaption}) const}
+
+
+
+Check if we have prepare response from validator. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_ac5f0c74a643b639cf97b46fba58cf42b}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!RemoveTransaction@{RemoveTransaction}}
+\index{RemoveTransaction@{RemoveTransaction}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{RemoveTransaction()}{RemoveTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_ac5f0c74a643b639cf97b46fba58cf42b} 
+void neo\+::consensus\+::\+Consensus\+State\+::\+Remove\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})}
+
+
+
+Remove transaction from pool. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a2772ef77072818ce35074578ca15839d}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!Reset@{Reset}}
+\index{Reset@{Reset}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{Reset()}{Reset()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a2772ef77072818ce35074578ca15839d} 
+void neo\+::consensus\+::\+Consensus\+State\+::\+Reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Reset state for new consensus round. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_ae71eabbf41368507e0fe6ed772abebe2}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!ResetForViewChange@{ResetForViewChange}}
+\index{ResetForViewChange@{ResetForViewChange}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{ResetForViewChange()}{ResetForViewChange()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_ae71eabbf41368507e0fe6ed772abebe2} 
+void neo\+::consensus\+::\+Consensus\+State\+::\+Reset\+For\+View\+Change (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Reset for view change. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_ad150e031815580bbdfb5ce025a102961}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!SetBlockIndex@{SetBlockIndex}}
+\index{SetBlockIndex@{SetBlockIndex}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{SetBlockIndex()}{SetBlockIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_ad150e031815580bbdfb5ce025a102961} 
+void neo\+::consensus\+::\+Consensus\+State\+::\+Set\+Block\+Index (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption})}
+
+
+
+Set block index. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_af677a1595b8c38578c731ba345fe16ed}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!SetPhase@{SetPhase}}
+\index{SetPhase@{SetPhase}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{SetPhase()}{SetPhase()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_af677a1595b8c38578c731ba345fe16ed} 
+void neo\+::consensus\+::\+Consensus\+State\+::\+Set\+Phase (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805}{Consensus\+Phase}}}]{phase}{}\end{DoxyParamCaption})}
+
+
+
+Set consensus phase. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a5103b5d7b0b7dba05c4513fc5fe3a56c}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!SetPrepareRequest@{SetPrepareRequest}}
+\index{SetPrepareRequest@{SetPrepareRequest}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{SetPrepareRequest()}{SetPrepareRequest()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a5103b5d7b0b7dba05c4513fc5fe3a56c} 
+void neo\+::consensus\+::\+Consensus\+State\+::\+Set\+Prepare\+Request (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} $>$ \&}]{txs}{, }\item[{std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point}]{timestamp}{, }\item[{uint64\+\_\+t}]{nonce}{}\end{DoxyParamCaption})}
+
+
+
+Set prepare request details. 
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a2a4250d51666f192206c51c5121bdc1c}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!SetViewNumber@{SetViewNumber}}
+\index{SetViewNumber@{SetViewNumber}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{SetViewNumber()}{SetViewNumber()}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a2a4250d51666f192206c51c5121bdc1c} 
+void neo\+::consensus\+::\+Consensus\+State\+::\+Set\+View\+Number (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{view}{}\end{DoxyParamCaption})}
+
+
+
+Set view number. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a4ba649c9a791250c0b9b00b5161b6b71}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!block\_index\_@{block\_index\_}}
+\index{block\_index\_@{block\_index\_}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{block\_index\_}{block\_index\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a4ba649c9a791250c0b9b00b5161b6b71} 
+uint32\+\_\+t neo\+::consensus\+::\+Consensus\+State\+::block\+\_\+index\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a88a0b859980b249caecdac544b1676c4}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!commits\_@{commits\_}}
+\index{commits\_@{commits\_}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{commits\_}{commits\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a88a0b859980b249caecdac544b1676c4} 
+std\+::unordered\+\_\+map$<$uint32\+\_\+t, std\+::vector$<$uint8\+\_\+t$>$ $>$ neo\+::consensus\+::\+Consensus\+State\+::commits\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_aca3dc164465299f9570d52bb990c0771}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_aca3dc164465299f9570d52bb990c0771} 
+std\+::mutex neo\+::consensus\+::\+Consensus\+State\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a0d48a3dbdbdb3b2b6e9edf95de6ff504}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!nonce\_@{nonce\_}}
+\index{nonce\_@{nonce\_}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{nonce\_}{nonce\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a0d48a3dbdbdb3b2b6e9edf95de6ff504} 
+uint64\+\_\+t neo\+::consensus\+::\+Consensus\+State\+::nonce\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a1f8b9f91b78835fbf66a9b9d1291f171}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!phase\_@{phase\_}}
+\index{phase\_@{phase\_}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{phase\_}{phase\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a1f8b9f91b78835fbf66a9b9d1291f171} 
+\mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805}{Consensus\+Phase}} neo\+::consensus\+::\+Consensus\+State\+::phase\+\_\+ \{\mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a4f2a91e15af2631ff9424564b8a45fb2}{Consensus\+Phase\+::\+Initial}}\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_aba1502d599e20e7499f501ccb6240c32}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!prepare\_request\_hash\_@{prepare\_request\_hash\_}}
+\index{prepare\_request\_hash\_@{prepare\_request\_hash\_}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{prepare\_request\_hash\_}{prepare\_request\_hash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_aba1502d599e20e7499f501ccb6240c32} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::consensus\+::\+Consensus\+State\+::prepare\+\_\+request\+\_\+hash\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a7f6caf4f8d560585dc556ec95cf65a22}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!prepare\_responses\_@{prepare\_responses\_}}
+\index{prepare\_responses\_@{prepare\_responses\_}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{prepare\_responses\_}{prepare\_responses\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a7f6caf4f8d560585dc556ec95cf65a22} 
+std\+::unordered\+\_\+map$<$uint32\+\_\+t, \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}$>$ neo\+::consensus\+::\+Consensus\+State\+::prepare\+\_\+responses\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a6ed2bf65ebeb4a53fd78a88aac7563c8}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!proposed\_transactions\_@{proposed\_transactions\_}}
+\index{proposed\_transactions\_@{proposed\_transactions\_}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{proposed\_transactions\_}{proposed\_transactions\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a6ed2bf65ebeb4a53fd78a88aac7563c8} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}}$>$ neo\+::consensus\+::\+Consensus\+State\+::proposed\+\_\+transactions\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_af5b8cc4552ff05097df89e09a50c2e08}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!timestamp\_@{timestamp\_}}
+\index{timestamp\_@{timestamp\_}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{timestamp\_}{timestamp\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_af5b8cc4552ff05097df89e09a50c2e08} 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point neo\+::consensus\+::\+Consensus\+State\+::timestamp\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_ab7d035815bc99b0865c1c7d224d6ba8d}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!transaction\_pool\_@{transaction\_pool\_}}
+\index{transaction\_pool\_@{transaction\_pool\_}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{transaction\_pool\_}{transaction\_pool\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_ab7d035815bc99b0865c1c7d224d6ba8d} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}}$>$ neo\+::consensus\+::\+Consensus\+State\+::transaction\+\_\+pool\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a983803f3848a134b36110e6869a0356c}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!view\_changes\_@{view\_changes\_}}
+\index{view\_changes\_@{view\_changes\_}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{view\_changes\_}{view\_changes\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a983803f3848a134b36110e6869a0356c} 
+std\+::unordered\+\_\+set$<$uint32\+\_\+t$>$ neo\+::consensus\+::\+Consensus\+State\+::view\+\_\+changes\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1consensus_1_1_consensus_state_a9dbf94cb63b95e638b3864e48b0c0200}\index{neo::consensus::ConsensusState@{neo::consensus::ConsensusState}!view\_number\_@{view\_number\_}}
+\index{view\_number\_@{view\_number\_}!neo::consensus::ConsensusState@{neo::consensus::ConsensusState}}
+\doxysubsubsection{\texorpdfstring{view\_number\_}{view\_number\_}}
+{\footnotesize\ttfamily \label{classneo_1_1consensus_1_1_consensus_state_a9dbf94cb63b95e638b3864e48b0c0200} 
+uint32\+\_\+t neo\+::consensus\+::\+Consensus\+State\+::view\+\_\+number\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/consensus/\mbox{\hyperlink{consensus__state_8h}{consensus\+\_\+state.\+h}}\item 
+src/consensus/\mbox{\hyperlink{consensus__state_8cpp}{consensus\+\_\+state.\+cpp}}\end{DoxyCompactItemize}

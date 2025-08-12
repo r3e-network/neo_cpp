@@ -1,0 +1,227 @@
+\doxysection{neo\+::consensus Namespace Reference}
+\hypertarget{namespaceneo_1_1consensus}{}\label{namespaceneo_1_1consensus}\index{neo::consensus@{neo::consensus}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_commit_message}{Commit\+Message}}
+\begin{DoxyCompactList}\small\item\em Commit message with signature. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1consensus_1_1_consensus_config}{Consensus\+Config}}
+\begin{DoxyCompactList}\small\item\em Configuration for d\+BFT consensus. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context}{Consensus\+Context}}
+\begin{DoxyCompactList}\small\item\em Represents the consensus context for Neo N3 d\+BFT. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_message}{Consensus\+Message}}
+\begin{DoxyCompactList}\small\item\em Base class for all consensus messages. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_payload_helper}{Consensus\+Payload\+Helper}}
+\begin{DoxyCompactList}\small\item\em Helper class for working with consensus messages in Extensible\+Payload. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_service}{Consensus\+Service}}
+\begin{DoxyCompactList}\small\item\em Represents the consensus service. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_state}{Consensus\+State}}
+\begin{DoxyCompactList}\small\item\em State tracking for d\+BFT consensus. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_dbft_consensus}{Dbft\+Consensus}}
+\begin{DoxyCompactList}\small\item\em d\+BFT (Delegated Byzantine Fault Tolerance) consensus implementation \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_prepare_request_message}{Prepare\+Request\+Message}}
+\begin{DoxyCompactList}\small\item\em Prepare request from primary node. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_prepare_response_message}{Prepare\+Response\+Message}}
+\begin{DoxyCompactList}\small\item\em Prepare response from backup nodes. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_message}{Recovery\+Message}}
+\begin{DoxyCompactList}\small\item\em Represents a recovery message. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_request_message}{Recovery\+Request\+Message}}
+\begin{DoxyCompactList}\small\item\em Recovery request message. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1consensus_1_1_view_change_message}{View\+Change\+Message}}
+\begin{DoxyCompactList}\small\item\em View change request message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1consensus_ac98cd7545831399ea9075416af6efc16}{Change\+View\+Message}} = \mbox{\hyperlink{classneo_1_1consensus_1_1_view_change_message}{View\+Change\+Message}}
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1consensus_aed5c6243594d76ea9fe4ad10bc57dea6}{Prepare\+Request}} = \mbox{\hyperlink{classneo_1_1consensus_1_1_prepare_request_message}{Prepare\+Request\+Message}}
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1consensus_aa91ad7e4dd3969cbc2685eb001bc8baa}{Prepare\+Response}} = \mbox{\hyperlink{classneo_1_1consensus_1_1_prepare_response_message}{Prepare\+Response\+Message}}
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1consensus_a15616904aa168d646f1e18dbdc4b5061}{Recovery\+Request}} = \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_request_message}{Recovery\+Request\+Message}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5}{Consensus\+Message\+Type}} \+: uint8\+\_\+t \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5adfe36a0ed1bbdd0235930d52d3cf983a}{Change\+View}} = 0x00
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a4a2ad61cb85d4a1dfca176b76cef401e}{Prepare\+Request}} = 0x20
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a1e98dddf1daa1f4bbf1400ed998bfe58}{Prepare\+Response}} = 0x21
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a59d5b10c3a447f036d85cb5ce524c96c}{Commit}} = 0x30
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a80ffa03f8219c0562b12e1f12d4fc5cf}{Recovery\+Request}} = 0x40
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a8825e191ed248b28f1299e19923df06e}{Recovery\+Message}} = 0x41
+ \}
+\begin{DoxyCompactList}\small\item\em Type of consensus message. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805}{Consensus\+Phase}} \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a4f2a91e15af2631ff9424564b8a45fb2}{Initial}}
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a074de7e7c226d5c60f8af14c20725352}{Primary}}
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a3500ba09d0538297440ca620c9dd46bf}{Backup}}
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805abd6598ad25882fac85535d16e7e2f305}{Request\+Sent}}
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805ac0061f0229809369b6525fea6a9c5dea}{Request\+Received}}
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a51a5293d3af2049e564db11edd4efdaf}{Signature\+Sent}}
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a1694bbbd8c3e377a63b2020183699911}{Block\+Sent}}
+, \mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805aec27f40ee956b0fc3b2b35c9e5e7ac85}{View\+Changing}}
+ \}
+\begin{DoxyCompactList}\small\item\em Current phase of consensus. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22df}{Message\+Type}} \+: uint8\+\_\+t \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfadfe36a0ed1bbdd0235930d52d3cf983a}{Change\+View}} = 0x00
+, \mbox{\hyperlink{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfa4a2ad61cb85d4a1dfca176b76cef401e}{Prepare\+Request}} = 0x20
+, \mbox{\hyperlink{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfa1e98dddf1daa1f4bbf1400ed998bfe58}{Prepare\+Response}} = 0x21
+, \mbox{\hyperlink{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfa59d5b10c3a447f036d85cb5ce524c96c}{Commit}} = 0x30
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfa8825e191ed248b28f1299e19923df06e}{Recovery\+Message}} = 0x40
+, \mbox{\hyperlink{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfa80ffa03f8219c0562b12e1f12d4fc5cf}{Recovery\+Request}} = 0x41
+ \}
+\begin{DoxyCompactList}\small\item\em Represents the type of a consensus message. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-typedef-members}
+\Hypertarget{namespaceneo_1_1consensus_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{namespaceneo_1_1consensus_ac98cd7545831399ea9075416af6efc16}\index{neo::consensus@{neo::consensus}!ChangeViewMessage@{ChangeViewMessage}}
+\index{ChangeViewMessage@{ChangeViewMessage}!neo::consensus@{neo::consensus}}
+\doxysubsubsection{\texorpdfstring{ChangeViewMessage}{ChangeViewMessage}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1consensus_ac98cd7545831399ea9075416af6efc16} 
+neo\+::consensus\+::\+Change\+View\+Message\+::\+Change\+View\+Message = \mbox{\hyperlink{classneo_1_1consensus_1_1_view_change_message}{View\+Change\+Message}}}
+
+\Hypertarget{namespaceneo_1_1consensus_aed5c6243594d76ea9fe4ad10bc57dea6}\index{neo::consensus@{neo::consensus}!PrepareRequest@{PrepareRequest}}
+\index{PrepareRequest@{PrepareRequest}!neo::consensus@{neo::consensus}}
+\doxysubsubsection{\texorpdfstring{PrepareRequest}{PrepareRequest}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1consensus_aed5c6243594d76ea9fe4ad10bc57dea6} 
+neo\+::consensus\+::\+Prepare\+Request\+::\+Prepare\+Request = \mbox{\hyperlink{classneo_1_1consensus_1_1_prepare_request_message}{Prepare\+Request\+Message}}}
+
+\Hypertarget{namespaceneo_1_1consensus_aa91ad7e4dd3969cbc2685eb001bc8baa}\index{neo::consensus@{neo::consensus}!PrepareResponse@{PrepareResponse}}
+\index{PrepareResponse@{PrepareResponse}!neo::consensus@{neo::consensus}}
+\doxysubsubsection{\texorpdfstring{PrepareResponse}{PrepareResponse}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1consensus_aa91ad7e4dd3969cbc2685eb001bc8baa} 
+neo\+::consensus\+::\+Prepare\+Response\+::\+Prepare\+Response = \mbox{\hyperlink{classneo_1_1consensus_1_1_prepare_response_message}{Prepare\+Response\+Message}}}
+
+\Hypertarget{namespaceneo_1_1consensus_a15616904aa168d646f1e18dbdc4b5061}\index{neo::consensus@{neo::consensus}!RecoveryRequest@{RecoveryRequest}}
+\index{RecoveryRequest@{RecoveryRequest}!neo::consensus@{neo::consensus}}
+\doxysubsubsection{\texorpdfstring{RecoveryRequest}{RecoveryRequest}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1consensus_a15616904aa168d646f1e18dbdc4b5061} 
+neo\+::consensus\+::\+Recovery\+Request\+::\+Recovery\+Request = \mbox{\hyperlink{classneo_1_1consensus_1_1_recovery_request_message}{Recovery\+Request\+Message}}}
+
+
+
+\label{doc-enum-members}
+\Hypertarget{namespaceneo_1_1consensus_doc-enum-members}
+\doxysubsection{Enumeration Type Documentation}
+\Hypertarget{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5}\index{neo::consensus@{neo::consensus}!ConsensusMessageType@{ConsensusMessageType}}
+\index{ConsensusMessageType@{ConsensusMessageType}!neo::consensus@{neo::consensus}}
+\doxysubsubsection{\texorpdfstring{ConsensusMessageType}{ConsensusMessageType}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5} 
+enum class \mbox{\hyperlink{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5}{neo\+::consensus\+::\+Consensus\+Message\+Type}} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Type of consensus message. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ChangeView@{ChangeView}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!ChangeView@{ChangeView}}}\Hypertarget{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5adfe36a0ed1bbdd0235930d52d3cf983a}\label{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5adfe36a0ed1bbdd0235930d52d3cf983a} 
+Change\+View&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PrepareRequest@{PrepareRequest}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!PrepareRequest@{PrepareRequest}}}\Hypertarget{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a4a2ad61cb85d4a1dfca176b76cef401e}\label{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a4a2ad61cb85d4a1dfca176b76cef401e} 
+Prepare\+Request&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PrepareResponse@{PrepareResponse}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!PrepareResponse@{PrepareResponse}}}\Hypertarget{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a1e98dddf1daa1f4bbf1400ed998bfe58}\label{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a1e98dddf1daa1f4bbf1400ed998bfe58} 
+Prepare\+Response&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Commit@{Commit}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!Commit@{Commit}}}\Hypertarget{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a59d5b10c3a447f036d85cb5ce524c96c}\label{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a59d5b10c3a447f036d85cb5ce524c96c} 
+Commit&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RecoveryRequest@{RecoveryRequest}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!RecoveryRequest@{RecoveryRequest}}}\Hypertarget{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a80ffa03f8219c0562b12e1f12d4fc5cf}\label{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a80ffa03f8219c0562b12e1f12d4fc5cf} 
+Recovery\+Request&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RecoveryMessage@{RecoveryMessage}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!RecoveryMessage@{RecoveryMessage}}}\Hypertarget{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a8825e191ed248b28f1299e19923df06e}\label{namespaceneo_1_1consensus_a25af3796960adc4d61c8e5e519bd3ab5a8825e191ed248b28f1299e19923df06e} 
+Recovery\+Message&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805}\index{neo::consensus@{neo::consensus}!ConsensusPhase@{ConsensusPhase}}
+\index{ConsensusPhase@{ConsensusPhase}!neo::consensus@{neo::consensus}}
+\doxysubsubsection{\texorpdfstring{ConsensusPhase}{ConsensusPhase}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805} 
+enum class \mbox{\hyperlink{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805}{neo\+::consensus\+::\+Consensus\+Phase}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Current phase of consensus. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Initial@{Initial}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!Initial@{Initial}}}\Hypertarget{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a4f2a91e15af2631ff9424564b8a45fb2}\label{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a4f2a91e15af2631ff9424564b8a45fb2} 
+Initial&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Primary@{Primary}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!Primary@{Primary}}}\Hypertarget{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a074de7e7c226d5c60f8af14c20725352}\label{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a074de7e7c226d5c60f8af14c20725352} 
+Primary&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Backup@{Backup}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!Backup@{Backup}}}\Hypertarget{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a3500ba09d0538297440ca620c9dd46bf}\label{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a3500ba09d0538297440ca620c9dd46bf} 
+Backup&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RequestSent@{RequestSent}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!RequestSent@{RequestSent}}}\Hypertarget{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805abd6598ad25882fac85535d16e7e2f305}\label{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805abd6598ad25882fac85535d16e7e2f305} 
+Request\+Sent&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RequestReceived@{RequestReceived}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!RequestReceived@{RequestReceived}}}\Hypertarget{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805ac0061f0229809369b6525fea6a9c5dea}\label{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805ac0061f0229809369b6525fea6a9c5dea} 
+Request\+Received&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{SignatureSent@{SignatureSent}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!SignatureSent@{SignatureSent}}}\Hypertarget{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a51a5293d3af2049e564db11edd4efdaf}\label{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a51a5293d3af2049e564db11edd4efdaf} 
+Signature\+Sent&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{BlockSent@{BlockSent}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!BlockSent@{BlockSent}}}\Hypertarget{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a1694bbbd8c3e377a63b2020183699911}\label{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805a1694bbbd8c3e377a63b2020183699911} 
+Block\+Sent&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ViewChanging@{ViewChanging}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!ViewChanging@{ViewChanging}}}\Hypertarget{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805aec27f40ee956b0fc3b2b35c9e5e7ac85}\label{namespaceneo_1_1consensus_a1f31011f0d70db613209aeab1a60b805aec27f40ee956b0fc3b2b35c9e5e7ac85} 
+View\+Changing&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22df}\index{neo::consensus@{neo::consensus}!MessageType@{MessageType}}
+\index{MessageType@{MessageType}!neo::consensus@{neo::consensus}}
+\doxysubsubsection{\texorpdfstring{MessageType}{MessageType}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22df} 
+enum class \mbox{\hyperlink{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22df}{neo\+::consensus\+::\+Message\+Type}} \+: uint8\+\_\+t\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Represents the type of a consensus message. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{ChangeView@{ChangeView}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!ChangeView@{ChangeView}}}\Hypertarget{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfadfe36a0ed1bbdd0235930d52d3cf983a}\label{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfadfe36a0ed1bbdd0235930d52d3cf983a} 
+Change\+View&Change view message. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PrepareRequest@{PrepareRequest}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!PrepareRequest@{PrepareRequest}}}\Hypertarget{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfa4a2ad61cb85d4a1dfca176b76cef401e}\label{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfa4a2ad61cb85d4a1dfca176b76cef401e} 
+Prepare\+Request&Prepare request message. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{PrepareResponse@{PrepareResponse}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!PrepareResponse@{PrepareResponse}}}\Hypertarget{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfa1e98dddf1daa1f4bbf1400ed998bfe58}\label{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfa1e98dddf1daa1f4bbf1400ed998bfe58} 
+Prepare\+Response&Prepare response message. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Commit@{Commit}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!Commit@{Commit}}}\Hypertarget{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfa59d5b10c3a447f036d85cb5ce524c96c}\label{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfa59d5b10c3a447f036d85cb5ce524c96c} 
+Commit&Commit message. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RecoveryMessage@{RecoveryMessage}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!RecoveryMessage@{RecoveryMessage}}}\Hypertarget{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfa8825e191ed248b28f1299e19923df06e}\label{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfa8825e191ed248b28f1299e19923df06e} 
+Recovery\+Message&Recovery message. \\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{RecoveryRequest@{RecoveryRequest}!neo::consensus@{neo::consensus}}\index{neo::consensus@{neo::consensus}!RecoveryRequest@{RecoveryRequest}}}\Hypertarget{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfa80ffa03f8219c0562b12e1f12d4fc5cf}\label{namespaceneo_1_1consensus_ab0dd929194ec5b09a224196778ad22dfa80ffa03f8219c0562b12e1f12d4fc5cf} 
+Recovery\+Request&Recovery request message. \\
+\hline
+
+\end{DoxyEnumFields}

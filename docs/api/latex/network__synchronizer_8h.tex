@@ -1,0 +1,48 @@
+\doxysection{include/neo/network/p2p/network\+\_\+synchronizer.h File Reference}
+\hypertarget{network__synchronizer_8h}{}\label{network__synchronizer_8h}\index{include/neo/network/p2p/network\_synchronizer.h@{include/neo/network/p2p/network\_synchronizer.h}}
+{\ttfamily \#include $<$neo/io/uint256.\+h$>$}\newline
+{\ttfamily \#include $<$neo/ledger/block.\+h$>$}\newline
+{\ttfamily \#include $<$neo/ledger/blockchain.\+h$>$}\newline
+{\ttfamily \#include $<$neo/ledger/transaction.\+h$>$}\newline
+{\ttfamily \#include $<$neo/network/p2p/local\+\_\+node.\+h$>$}\newline
+{\ttfamily \#include $<$neo/network/p2p/payloads/get\+\_\+block\+\_\+by\+\_\+index\+\_\+payload.\+h$>$}\newline
+{\ttfamily \#include $<$neo/network/p2p/payloads/get\+\_\+blocks\+\_\+payload.\+h$>$}\newline
+{\ttfamily \#include $<$neo/network/p2p/payloads/headers\+\_\+payload.\+h$>$}\newline
+{\ttfamily \#include $<$neo/network/p2p/payloads/inv\+\_\+payload.\+h$>$}\newline
+{\ttfamily \#include $<$neo/network/p2p/remote\+\_\+node.\+h$>$}\newline
+{\ttfamily \#include $<$atomic$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+set$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for network\+\_\+synchronizer.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_synchronizer}{neo\+::network\+::p2p\+::\+Network\+Synchronizer}}
+\begin{DoxyCompactList}\small\item\em Handles network synchronization. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1network}{neo\+::network}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p}{neo\+::network\+::p2p}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a01f93adca275721693b79100eb5b9009}{neo\+::network\+::p2p\+::\+Synchronization\+State}} \{ \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a01f93adca275721693b79100eb5b9009a3f4034177a9218dee631834537ba1a61}{neo\+::network\+::p2p\+::\+Not\+Synchronizing}}
+, \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a01f93adca275721693b79100eb5b9009ae12177384b13d191743db2624387f525}{neo\+::network\+::p2p\+::\+Synchronizing\+Headers}}
+, \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a01f93adca275721693b79100eb5b9009a5a3810beb9c166a21e8746648fa6e478}{neo\+::network\+::p2p\+::\+Synchronizing\+Blocks}}
+, \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a01f93adca275721693b79100eb5b9009afda39cc5b167799979a72d7ebb73171e}{neo\+::network\+::p2p\+::\+Synchronized}}
+ \}
+\begin{DoxyCompactList}\small\item\em Represents the synchronization state. \end{DoxyCompactList}\end{DoxyCompactItemize}

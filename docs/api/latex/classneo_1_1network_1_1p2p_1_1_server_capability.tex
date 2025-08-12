@@ -1,0 +1,254 @@
+\doxysection{neo\+::network\+::p2p\+::Server\+Capability Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1_server_capability}{}\label{classneo_1_1network_1_1p2p_1_1_server_capability}\index{neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}}
+
+
+Represents a server capability of a node.  
+
+
+
+
+{\ttfamily \#include $<$node\+\_\+capability.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::p2p\+::Server\+Capability\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::Server\+Capability\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability_a265dc3ba94d7d1a82d8d3a546ba62a0c}{Server\+Capability}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1_server_capability}{Server\+Capability}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability_a0d3ef3e2a71ffc5d4ff5c8ce6acdded7}{Server\+Capability}} (\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737b}{Node\+Capability\+Type}} type, uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_server_capability}{Server\+Capability} with the specified type and port. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability_a21c8c1ba757ceeff23eca2bbab3deb4c}{Get\+Port}} () const
+\begin{DoxyCompactList}\small\item\em Gets the port. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability_a2a2cfcaee52aa4ac44f6110c5833f15d}{Set\+Port}} (uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em Sets the port. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability_ad4696ab2b11846a77f6a6025d683dba4}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1_server_capability}{Server\+Capability} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability_acc06101a2c4b85fd3b89cdcb2f3a10e9}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1_server_capability}{Server\+Capability} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability_a807e1eef8ce0acb53cf40ab9770b99dc}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1_server_capability}{Server\+Capability} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability_a44f014bb87bd6286ef6cb92b13b6db55}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1_server_capability}{Server\+Capability} from a JSON reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{neo\+::network\+::p2p\+::\+Node\+Capability}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability_a7c3901db0bb84cf1a617a509dabf4834}{Node\+Capability}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability_a6b576802ccde7dc7110ec48182a46195}{Node\+Capability}} (\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737b}{Node\+Capability\+Type}} type)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability} with the specified type. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737b}{Node\+Capability\+Type}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability_ac6e0dc054302ae92cd1bd4ffce3a349b}{Get\+Type}} () const
+\begin{DoxyCompactList}\small\item\em Gets the type of the capability. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability_a389bb7c124c400518da7bffef895d46d}{Set\+Type}} (\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737b}{Node\+Capability\+Type}} type)
+\begin{DoxyCompactList}\small\item\em Sets the type of the capability. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability_af423aed132514567459c2541179fb62a}{port\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{neo\+::network\+::p2p\+::\+Node\+Capability}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737b}{Node\+Capability\+Type}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability_a95b71b58f2ee5c001ae0704c7a9b8d78}{type\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a server capability of a node. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_server_capability_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_server_capability_a265dc3ba94d7d1a82d8d3a546ba62a0c}\index{neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}!ServerCapability@{ServerCapability}}
+\index{ServerCapability@{ServerCapability}!neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}}
+\doxysubsubsection{\texorpdfstring{ServerCapability()}{ServerCapability()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_server_capability_a265dc3ba94d7d1a82d8d3a546ba62a0c} 
+neo\+::network\+::p2p\+::\+Server\+Capability\+::\+Server\+Capability (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1_server_capability}{Server\+Capability}. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_server_capability_a0d3ef3e2a71ffc5d4ff5c8ce6acdded7}\index{neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}!ServerCapability@{ServerCapability}}
+\index{ServerCapability@{ServerCapability}!neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}}
+\doxysubsubsection{\texorpdfstring{ServerCapability()}{ServerCapability()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_server_capability_a0d3ef3e2a71ffc5d4ff5c8ce6acdded7} 
+neo\+::network\+::p2p\+::\+Server\+Capability\+::\+Server\+Capability (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a1ce463beece1216f641b9f3c7bf3737b}{Node\+Capability\+Type}}}]{type}{, }\item[{uint16\+\_\+t}]{port}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_server_capability}{Server\+Capability} with the specified type and port. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type. \\
+\hline
+{\em port} & The port. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_server_capability_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_server_capability_acc06101a2c4b85fd3b89cdcb2f3a10e9}\index{neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_server_capability_acc06101a2c4b85fd3b89cdcb2f3a10e9} 
+void neo\+::network\+::p2p\+::\+Server\+Capability\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1_server_capability}{Server\+Capability} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability_ae0d9e065c6780e09689284f763a08bad}{neo\+::network\+::p2p\+::\+Node\+Capability}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_server_capability_a44f014bb87bd6286ef6cb92b13b6db55}\index{neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_server_capability_a44f014bb87bd6286ef6cb92b13b6db55} 
+void neo\+::network\+::p2p\+::\+Server\+Capability\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1_server_capability}{Server\+Capability} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability_aad466a95b382d60a1fee8d4493b267bd}{neo\+::network\+::p2p\+::\+Node\+Capability}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_server_capability_a21c8c1ba757ceeff23eca2bbab3deb4c}\index{neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}!GetPort@{GetPort}}
+\index{GetPort@{GetPort}!neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}}
+\doxysubsubsection{\texorpdfstring{GetPort()}{GetPort()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_server_capability_a21c8c1ba757ceeff23eca2bbab3deb4c} 
+uint16\+\_\+t neo\+::network\+::p2p\+::\+Server\+Capability\+::\+Get\+Port (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the port. 
+
+\begin{DoxyReturn}{Returns}
+The port. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_server_capability_ad4696ab2b11846a77f6a6025d683dba4}\index{neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_server_capability_ad4696ab2b11846a77f6a6025d683dba4} 
+void neo\+::network\+::p2p\+::\+Server\+Capability\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1_server_capability}{Server\+Capability} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability_a7a0dddda30f7a506d2eccca6a83e0299}{neo\+::network\+::p2p\+::\+Node\+Capability}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_server_capability_a807e1eef8ce0acb53cf40ab9770b99dc}\index{neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_server_capability_a807e1eef8ce0acb53cf40ab9770b99dc} 
+void neo\+::network\+::p2p\+::\+Server\+Capability\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1_server_capability}{Server\+Capability} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability_a964243bfe3381c05a281bb2b30dfc3a8}{neo\+::network\+::p2p\+::\+Node\+Capability}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_server_capability_a2a2cfcaee52aa4ac44f6110c5833f15d}\index{neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}!SetPort@{SetPort}}
+\index{SetPort@{SetPort}!neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}}
+\doxysubsubsection{\texorpdfstring{SetPort()}{SetPort()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_server_capability_a2a2cfcaee52aa4ac44f6110c5833f15d} 
+void neo\+::network\+::p2p\+::\+Server\+Capability\+::\+Set\+Port (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{port}{}\end{DoxyParamCaption})}
+
+
+
+Sets the port. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em port} & The port. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_server_capability_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_server_capability_af423aed132514567459c2541179fb62a}\index{neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}!port\_@{port\_}}
+\index{port\_@{port\_}!neo::network::p2p::ServerCapability@{neo::network::p2p::ServerCapability}}
+\doxysubsubsection{\texorpdfstring{port\_}{port\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_server_capability_af423aed132514567459c2541179fb62a} 
+uint16\+\_\+t neo\+::network\+::p2p\+::\+Server\+Capability\+::port\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/\mbox{\hyperlink{node__capability_8h}{node\+\_\+capability.\+h}}\end{DoxyCompactItemize}

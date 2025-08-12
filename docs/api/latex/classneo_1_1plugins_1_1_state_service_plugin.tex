@@ -1,0 +1,282 @@
+\doxysection{neo\+::plugins\+::State\+Service\+Plugin Class Reference}
+\hypertarget{classneo_1_1plugins_1_1_state_service_plugin}{}\label{classneo_1_1plugins_1_1_state_service_plugin}\index{neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}}
+
+
+Represents a state service plugin.  
+
+
+
+
+{\ttfamily \#include $<$state\+\_\+service\+\_\+plugin.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::plugins\+::State\+Service\+Plugin\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::plugins\+::State\+Service\+Plugin\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a78036433b1273d6372f1a1459e3c0737}{State\+Service\+Plugin}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1plugins_1_1_state_service_plugin}{State\+Service\+Plugin}. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1plugins_1_1_state_root}{State\+Root}} $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_afccddb3fec463274f00b8e70ff1e6ba3}{Get\+State\+Root}} (uint32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets the state root for a block index. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1plugins_1_1_state_root}{State\+Root}} $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_af76ece89dbf9c6a9a9711f2c70c434cb}{Get\+State\+Root}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Gets the state root for a block hash. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base}{neo\+::plugins\+::\+Plugin\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_ae2713af7147395e3f7230925418aa28d}{Plugin\+Base}} (const std\+::string \&name, const std\+::string \&description, const std\+::string \&version, const std\+::string \&author)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1plugins_1_1_plugin_base}{Plugin\+Base}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_ad52bbcbde275ae0dc3fde4a92f10bde6}{\texorpdfstring{$\sim$}{\string~}\+Plugin\+Base}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_add9eee171ca11e6d15bd9b024f92f7dd}{Get\+Name}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the name. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a44eff3017b07b2d8c46b21abaf1dabf4}{Get\+Description}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the description. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a1060247300f8288aded7ce8487947546}{Get\+Version}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the version. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_ae185958e6ee4d9b509aad4a04b2845be}{Get\+Author}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the author. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_aa09dbaf0a4a281ed5098cb04bee9a614}{Initialize}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ neo\+System, const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&settings) override
+\begin{DoxyCompactList}\small\item\em Initializes the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a247def5567cf352878b0d393e2fe18f8}{Start}} () override
+\begin{DoxyCompactList}\small\item\em Starts the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_abc80c400e1460dabf596acd8406c81bf}{Stop}} () override
+\begin{DoxyCompactList}\small\item\em Stops the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a37cd2ae749afcc1dafc56ba9e37d5e4d}{Is\+Running}} () const override
+\begin{DoxyCompactList}\small\item\em Checks if the plugin is running. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin}{neo\+::plugins\+::\+Plugin}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_aa3d82c04241154d0ea425b5b8cf1aa52}{\texorpdfstring{$\sim$}{\string~}\+Plugin}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a4270ddf36e6bac02f0c81c3182471ba4}{On\+Initialize}} (const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&settings) override
+\begin{DoxyCompactList}\small\item\em Initializes the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a672b596e16506a9ae7fb00c23f13deae}{On\+Start}} () override
+\begin{DoxyCompactList}\small\item\em Starts the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_ae9b40f56a7b6b33549c0c4cac6402749}{On\+Stop}} () override
+\begin{DoxyCompactList}\small\item\em Stops the plugin. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base}{neo\+::plugins\+::\+Plugin\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_af9916e44d745847ea6a2c847b55fffb1}{Get\+Neo\+System}} () const
+\begin{DoxyCompactList}\small\item\em Gets the Neo system. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}} $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a79fc4101cc2a9af9cd4155ac2c07802f}{Get\+RPCServer}} () const
+\begin{DoxyCompactList}\small\item\em Gets the RPC server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a96af382a46435875270190e2bdb1144b}{On\+Block\+Persisted}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ block)
+\item 
+void \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a66746880cf6e7e03272f40c1752aa486}{Save\+State\+Roots}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a3d09643d3e263646d73a15060e867803}{Load\+State\+Roots}} ()
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a6f737dad8beefed1d2e169976202d0ed}{Calculate\+State\+Root}} (uint32\+\_\+t index, const std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}}, \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{persistence\+::\+Storage\+Item}} $>$ $>$ \&changes)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a0a9ee755a6e3409e6314e46624792dfd}{state\+Path\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ uint32\+\_\+t, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1plugins_1_1_state_root}{State\+Root}} $>$ $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a9e7b7f2cbe86eaa30ebd93a8ddd8b58e}{state\+Roots\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1plugins_1_1_state_root}{State\+Root}} $>$ $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a90af8673035df425064b6c2d7ef831c8}{state\+Roots\+By\+Hash\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a8da4087990c8afd2b8d17bce0229d224}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a state service plugin. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_a78036433b1273d6372f1a1459e3c0737}\index{neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}!StateServicePlugin@{StateServicePlugin}}
+\index{StateServicePlugin@{StateServicePlugin}!neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}}
+\doxysubsubsection{\texorpdfstring{StateServicePlugin()}{StateServicePlugin()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_state_service_plugin_a78036433b1273d6372f1a1459e3c0737} 
+neo\+::plugins\+::\+State\+Service\+Plugin\+::\+State\+Service\+Plugin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1plugins_1_1_state_service_plugin}{State\+Service\+Plugin}. 
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_a6f737dad8beefed1d2e169976202d0ed}\index{neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}!CalculateStateRoot@{CalculateStateRoot}}
+\index{CalculateStateRoot@{CalculateStateRoot}!neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}}
+\doxysubsubsection{\texorpdfstring{CalculateStateRoot()}{CalculateStateRoot()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_state_service_plugin_a6f737dad8beefed1d2e169976202d0ed} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::plugins\+::\+State\+Service\+Plugin\+::\+Calculate\+State\+Root (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{, }\item[{const std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}}, \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{persistence\+::\+Storage\+Item}} $>$ $>$ \&}]{changes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_af76ece89dbf9c6a9a9711f2c70c434cb}\index{neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}!GetStateRoot@{GetStateRoot}}
+\index{GetStateRoot@{GetStateRoot}!neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}}
+\doxysubsubsection{\texorpdfstring{GetStateRoot()}{GetStateRoot()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_state_service_plugin_af76ece89dbf9c6a9a9711f2c70c434cb} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1plugins_1_1_state_root}{State\+Root}} $>$ neo\+::plugins\+::\+State\+Service\+Plugin\+::\+Get\+State\+Root (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the state root for a block hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The block hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The state root, or nullptr if not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_afccddb3fec463274f00b8e70ff1e6ba3}\index{neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}!GetStateRoot@{GetStateRoot}}
+\index{GetStateRoot@{GetStateRoot}!neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}}
+\doxysubsubsection{\texorpdfstring{GetStateRoot()}{GetStateRoot()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_state_service_plugin_afccddb3fec463274f00b8e70ff1e6ba3} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{structneo_1_1plugins_1_1_state_root}{State\+Root}} $>$ neo\+::plugins\+::\+State\+Service\+Plugin\+::\+Get\+State\+Root (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the state root for a block index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The block index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The state root, or nullptr if not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_a3d09643d3e263646d73a15060e867803}\index{neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}!LoadStateRoots@{LoadStateRoots}}
+\index{LoadStateRoots@{LoadStateRoots}!neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}}
+\doxysubsubsection{\texorpdfstring{LoadStateRoots()}{LoadStateRoots()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_state_service_plugin_a3d09643d3e263646d73a15060e867803} 
+void neo\+::plugins\+::\+State\+Service\+Plugin\+::\+Load\+State\+Roots (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_a96af382a46435875270190e2bdb1144b}\index{neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}!OnBlockPersisted@{OnBlockPersisted}}
+\index{OnBlockPersisted@{OnBlockPersisted}!neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}}
+\doxysubsubsection{\texorpdfstring{OnBlockPersisted()}{OnBlockPersisted()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_state_service_plugin_a96af382a46435875270190e2bdb1144b} 
+void neo\+::plugins\+::\+State\+Service\+Plugin\+::\+On\+Block\+Persisted (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$}]{block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_a4270ddf36e6bac02f0c81c3182471ba4}\index{neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}!OnInitialize@{OnInitialize}}
+\index{OnInitialize@{OnInitialize}!neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}}
+\doxysubsubsection{\texorpdfstring{OnInitialize()}{OnInitialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_state_service_plugin_a4270ddf36e6bac02f0c81c3182471ba4} 
+bool neo\+::plugins\+::\+State\+Service\+Plugin\+::\+On\+Initialize (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&}]{settings}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Initializes the plugin. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em settings} & The settings. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the plugin was initialized, false otherwise. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a73e21bf341eaf38562a3e45452013152}{neo\+::plugins\+::\+Plugin\+Base}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_a672b596e16506a9ae7fb00c23f13deae}\index{neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}!OnStart@{OnStart}}
+\index{OnStart@{OnStart}!neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}}
+\doxysubsubsection{\texorpdfstring{OnStart()}{OnStart()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_state_service_plugin_a672b596e16506a9ae7fb00c23f13deae} 
+bool neo\+::plugins\+::\+State\+Service\+Plugin\+::\+On\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Starts the plugin. 
+
+\begin{DoxyReturn}{Returns}
+True if the plugin was started, false otherwise. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a6792009d892718fdb3d605c8d4cb01d6}{neo\+::plugins\+::\+Plugin\+Base}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_ae9b40f56a7b6b33549c0c4cac6402749}\index{neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}!OnStop@{OnStop}}
+\index{OnStop@{OnStop}!neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}}
+\doxysubsubsection{\texorpdfstring{OnStop()}{OnStop()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_state_service_plugin_ae9b40f56a7b6b33549c0c4cac6402749} 
+bool neo\+::plugins\+::\+State\+Service\+Plugin\+::\+On\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Stops the plugin. 
+
+\begin{DoxyReturn}{Returns}
+True if the plugin was stopped, false otherwise. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_af88eee48057086589f386ff78e20d09f}{neo\+::plugins\+::\+Plugin\+Base}}.
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_a66746880cf6e7e03272f40c1752aa486}\index{neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}!SaveStateRoots@{SaveStateRoots}}
+\index{SaveStateRoots@{SaveStateRoots}!neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}}
+\doxysubsubsection{\texorpdfstring{SaveStateRoots()}{SaveStateRoots()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_state_service_plugin_a66746880cf6e7e03272f40c1752aa486} 
+void neo\+::plugins\+::\+State\+Service\+Plugin\+::\+Save\+State\+Roots (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_a8da4087990c8afd2b8d17bce0229d224}\index{neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_state_service_plugin_a8da4087990c8afd2b8d17bce0229d224} 
+std\+::mutex neo\+::plugins\+::\+State\+Service\+Plugin\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_a0a9ee755a6e3409e6314e46624792dfd}\index{neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}!statePath\_@{statePath\_}}
+\index{statePath\_@{statePath\_}!neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}}
+\doxysubsubsection{\texorpdfstring{statePath\_}{statePath\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_state_service_plugin_a0a9ee755a6e3409e6314e46624792dfd} 
+std\+::string neo\+::plugins\+::\+State\+Service\+Plugin\+::state\+Path\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_a9e7b7f2cbe86eaa30ebd93a8ddd8b58e}\index{neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}!stateRoots\_@{stateRoots\_}}
+\index{stateRoots\_@{stateRoots\_}!neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}}
+\doxysubsubsection{\texorpdfstring{stateRoots\_}{stateRoots\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_state_service_plugin_a9e7b7f2cbe86eaa30ebd93a8ddd8b58e} 
+std\+::unordered\+\_\+map$<$uint32\+\_\+t, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{structneo_1_1plugins_1_1_state_root}{State\+Root}}$>$ $>$ neo\+::plugins\+::\+State\+Service\+Plugin\+::state\+Roots\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1_state_service_plugin_a90af8673035df425064b6c2d7ef831c8}\index{neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}!stateRootsByHash\_@{stateRootsByHash\_}}
+\index{stateRootsByHash\_@{stateRootsByHash\_}!neo::plugins::StateServicePlugin@{neo::plugins::StateServicePlugin}}
+\doxysubsubsection{\texorpdfstring{stateRootsByHash\_}{stateRootsByHash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_state_service_plugin_a90af8673035df425064b6c2d7ef831c8} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{structneo_1_1plugins_1_1_state_root}{State\+Root}}$>$ $>$ neo\+::plugins\+::\+State\+Service\+Plugin\+::state\+Roots\+By\+Hash\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/plugins/\mbox{\hyperlink{state__service__plugin_8h}{state\+\_\+service\+\_\+plugin.\+h}}\item 
+src/plugins/\mbox{\hyperlink{state__service__plugin_8cpp}{state\+\_\+service\+\_\+plugin.\+cpp}}\end{DoxyCompactItemize}

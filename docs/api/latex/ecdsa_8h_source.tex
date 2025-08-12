@@ -1,0 +1,33 @@
+\doxysection{ecdsa.\+h}
+\hypertarget{ecdsa_8h_source}{}\label{ecdsa_8h_source}\index{include/neo/cryptography/ecdsa.h@{include/neo/cryptography/ecdsa.h}}
+\mbox{\hyperlink{ecdsa_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cryptography}{neo::cryptography}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_e_c_d_s_a_a018890b496521838f23fe408d261394e}{Verify}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ message,\ \textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ signature,}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ publicKey);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_e_c_d_s_a_ad0d866a11cc0f9380c084d83c2b33c61}{VerifyHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash,\ \textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ signature,}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ publicKey);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_e_c_d_s_a_a842a23318fbb522b3c61e62c9790d763}{Sign}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ message,\ \textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ privateKey);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_e_c_d_s_a_a30effad5579d7298df856b342e2974b8}{SignHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash,\ \textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ privateKey);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_e_c_d_s_a_aa235ab39fc248709a0aaa39ca4eb28c8}{GenerateKeyPair}}(std::vector<uint8\_t>\&\ privateKey,\ std::vector<uint8\_t>\&\ publicKey);}
+\DoxyCodeLine{00059\ \};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cryptography}}
+
+\end{DoxyCode}

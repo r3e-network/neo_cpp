@@ -1,0 +1,239 @@
+\doxysection{neo\+::io\+::caching\+::LRUCache\texorpdfstring{$<$}{<} TKey, TValue, THash \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{}\label{classneo_1_1io_1_1caching_1_1_l_r_u_cache}\index{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}}
+
+
+A thread-\/safe LRU (Least Recently Used) cache implementation.  
+
+
+
+
+{\ttfamily \#include $<$lru\+\_\+cache.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_aa20bb15750dff29cca487d18975bf3d3}{LRUCache}} (size\+\_\+t capacity)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache} with the specified capacity. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a689eaa08b668eaeae86ed3fcf87b9efe}{Add}} (const TKey \&key, const TValue \&value)
+\begin{DoxyCompactList}\small\item\em Adds or updates an item in the cache. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_ab3798b8c699b31628e7d1aec991148a3}{Try\+Get}} (const TKey \&key, TValue \&value)
+\begin{DoxyCompactList}\small\item\em Tries to get an item from the cache. \end{DoxyCompactList}\item 
+std\+::optional$<$ TValue $>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_aaa05d3465548c5709379a9efd12e5f50}{Get}} (const TKey \&key)
+\begin{DoxyCompactList}\small\item\em Gets an item from the cache. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_ad388347115b1df8ba345a9b3cb090ecc}{Remove}} (const TKey \&key)
+\begin{DoxyCompactList}\small\item\em Removes an item from the cache. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a8902b11705702e6949731ae9c0601be8}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears the cache. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_aa010152b956bc44350da8af07053fc3d}{Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of items in the cache. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_afd6e0d50f9facb58b21df75d09af2f34}{Capacity}} () const
+\begin{DoxyCompactList}\small\item\em Gets the capacity of the cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_ac8474ea35c09c014f90a6764c5cbb8c0}{capacity\+\_\+}}
+\item 
+std\+::list$<$ std\+::pair$<$ TKey, TValue $>$ $>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}{items\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ TKey, std\+::pair$<$ typename std\+::list$<$ std\+::pair$<$ TKey, TValue $>$ $>$\+::iterator, TValue $>$, THash $>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_af55abed4924d9c5d9ccb8923a343e298}{cache\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a62b59fd64ce88df76e62abaf699ed655}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename TKey, typename TValue, typename THash = std\+::hash$<$\+TKey$>$$>$\newline
+class neo\+::io\+::caching\+::\+LRUCache$<$ TKey, TValue, THash $>$}
+A thread-\/safe LRU (Least Recently Used) cache implementation. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TKey} & The type of the keys. \\
+\hline
+{\em TValue} & The type of the values. \\
+\hline
+{\em THash} & The hash function for the keys. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_l_r_u_cache_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_l_r_u_cache_aa20bb15750dff29cca487d18975bf3d3}\index{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}!LRUCache@{LRUCache}}
+\index{LRUCache@{LRUCache}!neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}}
+\doxysubsubsection{\texorpdfstring{LRUCache()}{LRUCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_l_r_u_cache_aa20bb15750dff29cca487d18975bf3d3} 
+template$<$typename TKey, typename TValue, typename THash = std\+::hash$<$\+TKey$>$$>$ \\
+\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{neo\+::io\+::caching\+::\+LRUCache}}$<$ TKey, TValue, THash $>$\+::\+LRUCache (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{capacity}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs an \doxylink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache} with the specified capacity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em capacity} & The maximum number of items the cache can hold. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_l_r_u_cache_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a689eaa08b668eaeae86ed3fcf87b9efe}\index{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}!Add@{Add}}
+\index{Add@{Add}!neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a689eaa08b668eaeae86ed3fcf87b9efe} 
+template$<$typename TKey, typename TValue, typename THash = std\+::hash$<$\+TKey$>$$>$ \\
+void \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{neo\+::io\+::caching\+::\+LRUCache}}$<$ TKey, TValue, THash $>$\+::\+Add (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{, }\item[{const TValue \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds or updates an item in the cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the item. \\
+\hline
+{\em value} & The value of the item. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_l_r_u_cache_afd6e0d50f9facb58b21df75d09af2f34}\index{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}!Capacity@{Capacity}}
+\index{Capacity@{Capacity}!neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}}
+\doxysubsubsection{\texorpdfstring{Capacity()}{Capacity()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_l_r_u_cache_afd6e0d50f9facb58b21df75d09af2f34} 
+template$<$typename TKey, typename TValue, typename THash = std\+::hash$<$\+TKey$>$$>$ \\
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{neo\+::io\+::caching\+::\+LRUCache}}$<$ TKey, TValue, THash $>$\+::\+Capacity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the capacity of the cache. 
+
+\begin{DoxyReturn}{Returns}
+The capacity of the cache. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a8902b11705702e6949731ae9c0601be8}\index{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a8902b11705702e6949731ae9c0601be8} 
+template$<$typename TKey, typename TValue, typename THash = std\+::hash$<$\+TKey$>$$>$ \\
+void \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{neo\+::io\+::caching\+::\+LRUCache}}$<$ TKey, TValue, THash $>$\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears the cache. 
+
+\Hypertarget{classneo_1_1io_1_1caching_1_1_l_r_u_cache_aaa05d3465548c5709379a9efd12e5f50}\index{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}!Get@{Get}}
+\index{Get@{Get}!neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_l_r_u_cache_aaa05d3465548c5709379a9efd12e5f50} 
+template$<$typename TKey, typename TValue, typename THash = std\+::hash$<$\+TKey$>$$>$ \\
+std\+::optional$<$ TValue $>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{neo\+::io\+::caching\+::\+LRUCache}}$<$ TKey, TValue, THash $>$\+::\+Get (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets an item from the cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the item. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value of the item if found, std\+::nullopt otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1io_1_1caching_1_1_l_r_u_cache_ad388347115b1df8ba345a9b3cb090ecc}\index{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}!Remove@{Remove}}
+\index{Remove@{Remove}!neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}}
+\doxysubsubsection{\texorpdfstring{Remove()}{Remove()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_l_r_u_cache_ad388347115b1df8ba345a9b3cb090ecc} 
+template$<$typename TKey, typename TValue, typename THash = std\+::hash$<$\+TKey$>$$>$ \\
+bool \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{neo\+::io\+::caching\+::\+LRUCache}}$<$ TKey, TValue, THash $>$\+::\+Remove (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes an item from the cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the item. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the item was removed, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_l_r_u_cache_aa010152b956bc44350da8af07053fc3d}\index{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}!Size@{Size}}
+\index{Size@{Size}!neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_l_r_u_cache_aa010152b956bc44350da8af07053fc3d} 
+template$<$typename TKey, typename TValue, typename THash = std\+::hash$<$\+TKey$>$$>$ \\
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{neo\+::io\+::caching\+::\+LRUCache}}$<$ TKey, TValue, THash $>$\+::\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the number of items in the cache. 
+
+\begin{DoxyReturn}{Returns}
+The number of items in the cache. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_l_r_u_cache_ab3798b8c699b31628e7d1aec991148a3}\index{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}!TryGet@{TryGet}}
+\index{TryGet@{TryGet}!neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}}
+\doxysubsubsection{\texorpdfstring{TryGet()}{TryGet()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_l_r_u_cache_ab3798b8c699b31628e7d1aec991148a3} 
+template$<$typename TKey, typename TValue, typename THash = std\+::hash$<$\+TKey$>$$>$ \\
+bool \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{neo\+::io\+::caching\+::\+LRUCache}}$<$ TKey, TValue, THash $>$\+::\+Try\+Get (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{, }\item[{TValue \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to get an item from the cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the item. \\
+\hline
+{\em value} & The value of the item if found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the item was found, false otherwise. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_l_r_u_cache_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_l_r_u_cache_af55abed4924d9c5d9ccb8923a343e298}\index{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}!cache\_@{cache\_}}
+\index{cache\_@{cache\_}!neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}}
+\doxysubsubsection{\texorpdfstring{cache\_}{cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_l_r_u_cache_af55abed4924d9c5d9ccb8923a343e298} 
+template$<$typename TKey, typename TValue, typename THash = std\+::hash$<$\+TKey$>$$>$ \\
+std\+::unordered\+\_\+map$<$TKey, std\+::pair$<$typename std\+::list$<$std\+::pair$<$TKey, TValue$>$ $>$\+::iterator, TValue$>$, THash$>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{neo\+::io\+::caching\+::\+LRUCache}}$<$ TKey, TValue, THash $>$\+::cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1io_1_1caching_1_1_l_r_u_cache_ac8474ea35c09c014f90a6764c5cbb8c0}\index{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}!capacity\_@{capacity\_}}
+\index{capacity\_@{capacity\_}!neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}}
+\doxysubsubsection{\texorpdfstring{capacity\_}{capacity\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_l_r_u_cache_ac8474ea35c09c014f90a6764c5cbb8c0} 
+template$<$typename TKey, typename TValue, typename THash = std\+::hash$<$\+TKey$>$$>$ \\
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{neo\+::io\+::caching\+::\+LRUCache}}$<$ TKey, TValue, THash $>$\+::capacity\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3}\index{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}!items\_@{items\_}}
+\index{items\_@{items\_}!neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}}
+\doxysubsubsection{\texorpdfstring{items\_}{items\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a6c046dadbba79ebd85d2f1bfb5dd73d3} 
+template$<$typename TKey, typename TValue, typename THash = std\+::hash$<$\+TKey$>$$>$ \\
+std\+::list$<$std\+::pair$<$TKey, TValue$>$ $>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{neo\+::io\+::caching\+::\+LRUCache}}$<$ TKey, TValue, THash $>$\+::items\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a62b59fd64ce88df76e62abaf699ed655}\index{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$@{neo::io::caching::LRUCache$<$ TKey, TValue, THash $>$}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_l_r_u_cache_a62b59fd64ce88df76e62abaf699ed655} 
+template$<$typename TKey, typename TValue, typename THash = std\+::hash$<$\+TKey$>$$>$ \\
+std\+::mutex \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{neo\+::io\+::caching\+::\+LRUCache}}$<$ TKey, TValue, THash $>$\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/io/caching/\mbox{\hyperlink{caching_2lru__cache_8h}{lru\+\_\+cache.\+h}}\end{DoxyCompactItemize}

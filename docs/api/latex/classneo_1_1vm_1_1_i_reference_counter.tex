@@ -1,0 +1,113 @@
+\doxysection{neo\+::vm\+::IReference\+Counter Class Reference}
+\hypertarget{classneo_1_1vm_1_1_i_reference_counter}{}\label{classneo_1_1vm_1_1_i_reference_counter}\index{neo::vm::IReferenceCounter@{neo::vm::IReferenceCounter}}
+
+
+Interface for reference counting in the VM.  
+
+
+
+
+{\ttfamily \#include $<$ireference\+\_\+counter.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1vm_1_1_i_reference_counter_a780fc7c116ca03a44c6cbdfd5510665e}{\texorpdfstring{$\sim$}{\string~}\+IReference\+Counter}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1vm_1_1_i_reference_counter_a64445ac3360e8573163ebd1ed3a5319e}{Add\+Reference}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item)=0
+\begin{DoxyCompactList}\small\item\em Adds a reference to a stack item. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1vm_1_1_i_reference_counter_a59767023e3434e32c10a480066e2acb0}{Remove\+Reference}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item)=0
+\begin{DoxyCompactList}\small\item\em Removes a reference to a stack item. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1vm_1_1_i_reference_counter_a236fcf9e0f96c285923343db98391fbe}{Is\+Tracked}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item) const =0
+\begin{DoxyCompactList}\small\item\em Checks if an item is being tracked. \end{DoxyCompactList}\item 
+virtual size\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_i_reference_counter_a55009f6fa45ebefd6698ec6b5dbb04b3}{Get\+Reference\+Count}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the current reference count. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for reference counting in the VM. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1vm_1_1_i_reference_counter_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1vm_1_1_i_reference_counter_a780fc7c116ca03a44c6cbdfd5510665e}\index{neo::vm::IReferenceCounter@{neo::vm::IReferenceCounter}!````~IReferenceCounter@{\texorpdfstring{$\sim$}{\string~}IReferenceCounter}}
+\index{````~IReferenceCounter@{\texorpdfstring{$\sim$}{\string~}IReferenceCounter}!neo::vm::IReferenceCounter@{neo::vm::IReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IReferenceCounter()}{\string~IReferenceCounter()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_i_reference_counter_a780fc7c116ca03a44c6cbdfd5510665e} 
+virtual neo\+::vm\+::\+IReference\+Counter\+::\texorpdfstring{$\sim$}{\string~}\+IReference\+Counter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1vm_1_1_i_reference_counter_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1vm_1_1_i_reference_counter_a64445ac3360e8573163ebd1ed3a5319e}\index{neo::vm::IReferenceCounter@{neo::vm::IReferenceCounter}!AddReference@{AddReference}}
+\index{AddReference@{AddReference}!neo::vm::IReferenceCounter@{neo::vm::IReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{AddReference()}{AddReference()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_i_reference_counter_a64445ac3360e8573163ebd1ed3a5319e} 
+virtual void neo\+::vm\+::\+IReference\+Counter\+::\+Add\+Reference (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Adds a reference to a stack item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The stack item to add a reference to. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_i_reference_counter_a55009f6fa45ebefd6698ec6b5dbb04b3}\index{neo::vm::IReferenceCounter@{neo::vm::IReferenceCounter}!GetReferenceCount@{GetReferenceCount}}
+\index{GetReferenceCount@{GetReferenceCount}!neo::vm::IReferenceCounter@{neo::vm::IReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{GetReferenceCount()}{GetReferenceCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_i_reference_counter_a55009f6fa45ebefd6698ec6b5dbb04b3} 
+virtual size\+\_\+t neo\+::vm\+::\+IReference\+Counter\+::\+Get\+Reference\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the current reference count. 
+
+\begin{DoxyReturn}{Returns}
+The current reference count. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_i_reference_counter_a236fcf9e0f96c285923343db98391fbe}\index{neo::vm::IReferenceCounter@{neo::vm::IReferenceCounter}!IsTracked@{IsTracked}}
+\index{IsTracked@{IsTracked}!neo::vm::IReferenceCounter@{neo::vm::IReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{IsTracked()}{IsTracked()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_i_reference_counter_a236fcf9e0f96c285923343db98391fbe} 
+virtual bool neo\+::vm\+::\+IReference\+Counter\+::\+Is\+Tracked (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Checks if an item is being tracked. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The stack item to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the item is being tracked. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_i_reference_counter_a59767023e3434e32c10a480066e2acb0}\index{neo::vm::IReferenceCounter@{neo::vm::IReferenceCounter}!RemoveReference@{RemoveReference}}
+\index{RemoveReference@{RemoveReference}!neo::vm::IReferenceCounter@{neo::vm::IReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{RemoveReference()}{RemoveReference()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_i_reference_counter_a59767023e3434e32c10a480066e2acb0} 
+virtual void neo\+::vm\+::\+IReference\+Counter\+::\+Remove\+Reference (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Removes a reference to a stack item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The stack item to remove a reference from. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/vm/\mbox{\hyperlink{ireference__counter_8h}{ireference\+\_\+counter.\+h}}\end{DoxyCompactItemize}

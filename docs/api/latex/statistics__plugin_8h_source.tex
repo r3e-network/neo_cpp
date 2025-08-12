@@ -1,0 +1,63 @@
+\doxysection{statistics\+\_\+plugin.\+h}
+\hypertarget{statistics__plugin_8h_source}{}\label{statistics__plugin_8h_source}\index{include/neo/plugins/statistics\_plugin.h@{include/neo/plugins/statistics\_plugin.h}}
+\mbox{\hyperlink{statistics__plugin_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2block_8h}{neo/ledger/block.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2transaction_8h}{neo/ledger/transaction.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{plugin__base_8h}{neo/plugins/plugin\_base.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1plugins}{neo::plugins}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_aac7a95d6e98fea1437ef4db047bd3c75}{StatisticsPlugin}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_ae2713af7147395e3f7230925418aa28d}{PluginBase}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_aac7a95d6e98fea1437ef4db047bd3c75}{StatisticsPlugin}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_a15369f89287ce85e1730d73b312da764}{\string~StatisticsPlugin}}();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_ae91b391e17c905aabf26f4e3b731794d}{OnInitialize}}(\textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::string>\&\ settings)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_a932df864d795be0f0737bc337bd54314}{OnStart}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_ab94b75a1229ad8adbaa4c12a9a1a7b06}{OnStop}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00054\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_a1edbec4b38fed4eab31c27408f3e20dd}{blockCount\_}};}
+\DoxyCodeLine{00055\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_aaa6055e02c9fdd044d29438dc2752035}{transactionCount\_}};}
+\DoxyCodeLine{00056\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_a8cca08e404df750bf0b4ec335490b32c}{peerCount\_}};}
+\DoxyCodeLine{00057\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_a62b25f80a9446dffc4760d993b32f203}{memoryPoolSize\_}};}
+\DoxyCodeLine{00058\ \ \ \ \ std::chrono::seconds\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_a78f5ee382aad6be69dec18a04067113b}{interval\_}};}
+\DoxyCodeLine{00059\ \ \ \ \ std::thread\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_a5aaaa4d846a92e165d16c3dc5bb7373f}{statisticsThread\_}};}
+\DoxyCodeLine{00060\ \ \ \ \ std::mutex\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_ad33a3e0cc879094b90468ded58bbb86d}{mutex\_}};}
+\DoxyCodeLine{00061\ \ \ \ \ std::condition\_variable\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_aee06bf60440ac9e78cc5b7cbed16ac69}{condition\_}};}
+\DoxyCodeLine{00062\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_ac19f67d8d454e668c8d620d1772dd8f4}{blockCallbackId\_}};}
+\DoxyCodeLine{00063\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_a7b726d45670a1b1a9a9e9ac3a273161d}{transactionCallbackId\_}};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_a0ddf9294329059c15bb3bbc2606f1467}{RunStatistics}}();}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_a6100df47b6cbd9faff02e21b4594ede6}{OnBlockPersisted}}(std::shared\_ptr<ledger::Block>\ block);}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_aa2605fb5c976d9cc1d885cd4728428d9}{OnTransactionExecuted}}(std::shared\_ptr<ledger::Transaction>\ transaction);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_a07f23df49e0d44fcbb9bf388bfe02047}{CollectStatistics}}();}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_statistics_plugin_aaf3474b79232359294a42359578f95e2}{ReportStatistics}}();}
+\DoxyCodeLine{00091\ \};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00096\ \textcolor{comment}{//\ class\ StatisticsPluginFactory\ :\ public\ PluginFactoryBase<StatisticsPlugin>}}
+\DoxyCodeLine{00097\ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{00098\ \textcolor{comment}{//\ \};}}
+\DoxyCodeLine{00099\ \}\ \ \textcolor{comment}{//\ namespace\ neo::plugins}}
+
+\end{DoxyCode}

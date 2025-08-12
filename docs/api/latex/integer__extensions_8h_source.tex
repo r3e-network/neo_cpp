@@ -1,0 +1,60 @@
+\doxysection{integer\+\_\+extensions.\+h}
+\hypertarget{integer__extensions_8h_source}{}\label{integer__extensions_8h_source}\index{include/neo/extensions/integer\_extensions.h@{include/neo/extensions/integer\_extensions.h}}
+\mbox{\hyperlink{integer__extensions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1extensions}{neo::extensions}}}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions}{IntegerExtensions}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_aefdb24d869b72931073a4264c64452fa}{GetVarSize}}(int32\_t\ value);}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_aefdb24d869b72931073a4264c64452fa}{GetVarSize}}(uint16\_t\ value);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_aefdb24d869b72931073a4264c64452fa}{GetVarSize}}(uint32\_t\ value);}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_aefdb24d869b72931073a4264c64452fa}{GetVarSize}}(int64\_t\ value);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_aefdb24d869b72931073a4264c64452fa}{GetVarSize}}(uint64\_t\ value);}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_abd1da1d17d63fe12f08cfe564aa6098d}{ToLittleEndianBytes}}(int16\_t\ value);}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_abd1da1d17d63fe12f08cfe564aa6098d}{ToLittleEndianBytes}}(uint16\_t\ value);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_abd1da1d17d63fe12f08cfe564aa6098d}{ToLittleEndianBytes}}(int32\_t\ value);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_abd1da1d17d63fe12f08cfe564aa6098d}{ToLittleEndianBytes}}(uint32\_t\ value);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_abd1da1d17d63fe12f08cfe564aa6098d}{ToLittleEndianBytes}}(int64\_t\ value);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_abd1da1d17d63fe12f08cfe564aa6098d}{ToLittleEndianBytes}}(uint64\_t\ value);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{keyword}{static}\ int16\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_a0782a975d73d99540d5e5a65026cff0e}{FromLittleEndianBytes16}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ bytes,\ \textcolor{keywordtype}{size\_t}\ offset\ =\ 0);}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keyword}{static}\ uint16\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_af3f652beafdabf2c2707c0cefb2c00f0}{FromLittleEndianBytesU16}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ bytes,\ \textcolor{keywordtype}{size\_t}\ offset\ =\ 0);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keyword}{static}\ int32\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_a4a21e62d220531def3bf5e1ce26469d6}{FromLittleEndianBytes32}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ bytes,\ \textcolor{keywordtype}{size\_t}\ offset\ =\ 0);}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keyword}{static}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_ac6ae3df7e0d0e8f30d1fa2b4bac2f420}{FromLittleEndianBytesU32}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ bytes,\ \textcolor{keywordtype}{size\_t}\ offset\ =\ 0);}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keyword}{static}\ int64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_a674859453aa6b9d1c532e480b48b83d5}{FromLittleEndianBytes64}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ bytes,\ \textcolor{keywordtype}{size\_t}\ offset\ =\ 0);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keyword}{static}\ uint64\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_a631b997a0497f3c01c6c3139194562a2}{FromLittleEndianBytesU64}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ bytes,\ \textcolor{keywordtype}{size\_t}\ offset\ =\ 0);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_ae98e95c4eddf1579045da29c6cd88cd8}{IsLittleEndian}}();}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_a282627a5efcdd111e5489a14e958f1bb}{ToLittleEndianBytesImpl}}(T\ value);}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keyword}{static}\ T\ \mbox{\hyperlink{classneo_1_1extensions_1_1_integer_extensions_af32cbec2a7f6dc49aa55f229bdaeb928}{FromLittleEndianBytesImpl}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ bytes,\ \textcolor{keywordtype}{size\_t}\ offset);}
+\DoxyCodeLine{00170\ \};}
+\DoxyCodeLine{00171\ \}\ \ \textcolor{comment}{//\ namespace\ neo::extensions}}
+
+\end{DoxyCode}

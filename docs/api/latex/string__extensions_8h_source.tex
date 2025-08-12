@@ -1,0 +1,65 @@
+\doxysection{string\+\_\+extensions.\+h}
+\hypertarget{string__extensions_8h_source}{}\label{string__extensions_8h_source}\index{include/neo/extensions/string\_extensions.h@{include/neo/extensions/string\_extensions.h}}
+\mbox{\hyperlink{string__extensions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <span>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1extensions}{neo::extensions}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions}{StringExtensions}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_aa14476e33d4831760d40855d4e588096}{TryToStrictUtf8String}}(std::span<const\ uint8\_t>\ bytes,\ std::string\&\ value);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a09b95ab57e61d07a6d1aad342e7bda92}{ToStrictUtf8String}}(std::span<const\ uint8\_t>\ value);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a09b95ab57e61d07a6d1aad342e7bda92}{ToStrictUtf8String}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ value);}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a09b95ab57e61d07a6d1aad342e7bda92}{ToStrictUtf8String}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ value,\ \textcolor{keywordtype}{size\_t}\ start,\ \textcolor{keywordtype}{size\_t}\ count);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a2d638881a518324c8814e9c1bdaca3b3}{ToStrictUtf8Bytes}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a08a9dcb4cc88847c1cb2826b61f5c207}{GetStrictUtf8ByteCount}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a869a0efadbb201cf4a1a3cdd39f1f647}{IsHex}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_ac2e3ec1ee23661fbd315e0b193c60c26}{HexToBytes}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a39822a072850a2f2085d6bff9d6a7147}{HexToBytesReversed}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a46a8e0635d3d555cf8526c0d2e648933}{GetVarSize}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a6fc2c8fa4f927c7a856d95b94bcd09ba}{Trim}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_ac2bc473a181253f07926ae6b379fd151}{TrimStart}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_aacaeba56d9571a2f4eed2e5a8e03a8fc}{TrimEnd}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a5193f1805c37f4cbac2df7865c7b29f4}{ToLower}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_ad025bff840ad1fbebb7b6657b28c6aef}{ToUpper}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a12eb573b4452eb67d4c36452fef98172}{StartsWith}}(\textcolor{keyword}{const}\ std::string\&\ value,\ \textcolor{keyword}{const}\ std::string\&\ prefix);}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a47c1d8b05781ceb9793418123bbff136}{EndsWith}}(\textcolor{keyword}{const}\ std::string\&\ value,\ \textcolor{keyword}{const}\ std::string\&\ suffix);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::string>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a2f218679ce9369de2b13ac7ebb42be1e}{Split}}(\textcolor{keyword}{const}\ std::string\&\ value,\ \textcolor{keywordtype}{char}\ delimiter);}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a76f67c331abd239dd2dc1ece5bb3f186}{Join}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ values,\ \textcolor{keyword}{const}\ std::string\&\ delimiter);}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00162\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a29dba978ee426c9b67b5656887b24a69}{IsHexDigit}}(\textcolor{keywordtype}{char}\ c);}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keyword}{static}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a06a8e6e7fbc340b2b9640f5e68f34bc4}{HexCharToValue}}(\textcolor{keywordtype}{char}\ c);}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a992803633efcef9f05175f45a3bf6638}{IsWhitespace}}(\textcolor{keywordtype}{char}\ c);}
+\DoxyCodeLine{00184\ \};}
+\DoxyCodeLine{00185\ \}\ \ \textcolor{comment}{//\ namespace\ neo::extensions}}
+
+\end{DoxyCode}

@@ -1,0 +1,25 @@
+var classneo_1_1extensions_1_1_string_extensions =
+[
+    [ "EndsWith", "classneo_1_1extensions_1_1_string_extensions.html#a47c1d8b05781ceb9793418123bbff136", null ],
+    [ "GetStrictUtf8ByteCount", "classneo_1_1extensions_1_1_string_extensions.html#a08a9dcb4cc88847c1cb2826b61f5c207", null ],
+    [ "GetVarSize", "classneo_1_1extensions_1_1_string_extensions.html#a46a8e0635d3d555cf8526c0d2e648933", null ],
+    [ "HexCharToValue", "classneo_1_1extensions_1_1_string_extensions.html#a06a8e6e7fbc340b2b9640f5e68f34bc4", null ],
+    [ "HexToBytes", "classneo_1_1extensions_1_1_string_extensions.html#ac2e3ec1ee23661fbd315e0b193c60c26", null ],
+    [ "HexToBytesReversed", "classneo_1_1extensions_1_1_string_extensions.html#a39822a072850a2f2085d6bff9d6a7147", null ],
+    [ "IsHex", "classneo_1_1extensions_1_1_string_extensions.html#a869a0efadbb201cf4a1a3cdd39f1f647", null ],
+    [ "IsHexDigit", "classneo_1_1extensions_1_1_string_extensions.html#a29dba978ee426c9b67b5656887b24a69", null ],
+    [ "IsWhitespace", "classneo_1_1extensions_1_1_string_extensions.html#a992803633efcef9f05175f45a3bf6638", null ],
+    [ "Join", "classneo_1_1extensions_1_1_string_extensions.html#a76f67c331abd239dd2dc1ece5bb3f186", null ],
+    [ "Split", "classneo_1_1extensions_1_1_string_extensions.html#a2f218679ce9369de2b13ac7ebb42be1e", null ],
+    [ "StartsWith", "classneo_1_1extensions_1_1_string_extensions.html#a12eb573b4452eb67d4c36452fef98172", null ],
+    [ "ToLower", "classneo_1_1extensions_1_1_string_extensions.html#a5193f1805c37f4cbac2df7865c7b29f4", null ],
+    [ "ToStrictUtf8Bytes", "classneo_1_1extensions_1_1_string_extensions.html#a2d638881a518324c8814e9c1bdaca3b3", null ],
+    [ "ToStrictUtf8String", "classneo_1_1extensions_1_1_string_extensions.html#af3d51aece4a1049c1e7c37de91901cd4", null ],
+    [ "ToStrictUtf8String", "classneo_1_1extensions_1_1_string_extensions.html#a2e4d2d5656f84239d6cf97d47fe2aa1e", null ],
+    [ "ToStrictUtf8String", "classneo_1_1extensions_1_1_string_extensions.html#a09b95ab57e61d07a6d1aad342e7bda92", null ],
+    [ "ToUpper", "classneo_1_1extensions_1_1_string_extensions.html#ad025bff840ad1fbebb7b6657b28c6aef", null ],
+    [ "Trim", "classneo_1_1extensions_1_1_string_extensions.html#a6fc2c8fa4f927c7a856d95b94bcd09ba", null ],
+    [ "TrimEnd", "classneo_1_1extensions_1_1_string_extensions.html#aacaeba56d9571a2f4eed2e5a8e03a8fc", null ],
+    [ "TrimStart", "classneo_1_1extensions_1_1_string_extensions.html#ac2bc473a181253f07926ae6b379fd151", null ],
+    [ "TryToStrictUtf8String", "classneo_1_1extensions_1_1_string_extensions.html#aa14476e33d4831760d40855d4e588096", null ]
+];

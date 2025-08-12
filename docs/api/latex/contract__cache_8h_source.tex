@@ -1,0 +1,51 @@
+\doxysection{contract\+\_\+cache.\+h}
+\hypertarget{contract__cache_8h_source}{}\label{contract__cache_8h_source}\index{include/neo/io/caching/contract\_cache.h@{include/neo/io/caching/contract\_cache.h}}
+\mbox{\hyperlink{contract__cache_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{caching_2lru__cache_8h}{neo/io/caching/lru\_cache.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{contract__state_8h}{neo/smartcontract/contract\_state.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1io_1_1caching}{neo::io::caching}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_a10cdbf963deb5009625ee775b4e0f3ad}{ContractCache}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_a10cdbf963deb5009625ee775b4e0f3ad}{ContractCache}}(\textcolor{keywordtype}{size\_t}\ capacity)\ :\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_aa125aab2b1a476adf8533b2e3e3c56b2}{cache\_}}(capacity)\ \{\}}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_ace073052cfb203bfd3f311cff3ea178c}{Add}}(std::shared\_ptr<smartcontract::ContractState>\ contract)}
+\DoxyCodeLine{00028\ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!contract)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ to\ cache}}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_aa125aab2b1a476adf8533b2e3e3c56b2}{cache\_}}.Add(contract-\/>GetScriptHash(),\ contract);}
+\DoxyCodeLine{00033\ \ \ \ \ \}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00040\ \ \ \ \ std::optional<std::shared\_ptr<smartcontract::ContractState>>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_a3445b72c41faf727f9084e9c78f9328f}{Get}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}}\&\ scriptHash)}
+\DoxyCodeLine{00041\ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_aa125aab2b1a476adf8533b2e3e3c56b2}{cache\_}}.Get(scriptHash);}
+\DoxyCodeLine{00043\ \ \ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_a80da263334fdf68da8709b0fddd8b8c7}{TryGet}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}}\&\ scriptHash,\ std::shared\_ptr<smartcontract::ContractState>\&\ contract)}
+\DoxyCodeLine{00052\ \ \ \ \ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_aa125aab2b1a476adf8533b2e3e3c56b2}{cache\_}}.TryGet(scriptHash,\ contract);}
+\DoxyCodeLine{00054\ \ \ \ \ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_ac46930045603831a884f14d9c47747ee}{Remove}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}}\&\ scriptHash)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_aa125aab2b1a476adf8533b2e3e3c56b2}{cache\_}}.Remove(scriptHash);\ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_adac3f0c401d19ce4c2f7d11242d55deb}{Clear}}()\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_aa125aab2b1a476adf8533b2e3e3c56b2}{cache\_}}.Clear();\ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_a7726a64e46b400acf37fc81119e5953e}{Size}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_aa125aab2b1a476adf8533b2e3e3c56b2}{cache\_}}.Size();\ \}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_a8a1f32773b6571bf1e1147b7c4efcc15}{Capacity}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_aa125aab2b1a476adf8533b2e3e3c56b2}{cache\_}}.Capacity();\ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache<UInt160,\ std::shared\_ptr<smartcontract::ContractState>}}>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_aa125aab2b1a476adf8533b2e3e3c56b2}{cache\_}};}
+\DoxyCodeLine{00082\ \};}
+\DoxyCodeLine{00083\ \}\ \ \textcolor{comment}{//\ namespace\ neo::io::caching}}
+
+\end{DoxyCode}

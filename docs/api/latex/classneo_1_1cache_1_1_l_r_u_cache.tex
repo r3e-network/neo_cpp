@@ -1,0 +1,132 @@
+\doxysection{neo\+::cache\+::LRUCache\texorpdfstring{$<$}{<} Key, Value \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classneo_1_1cache_1_1_l_r_u_cache}{}\label{classneo_1_1cache_1_1_l_r_u_cache}\index{neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}}
+
+
+LRU \doxylink{classneo_1_1cache_1_1_cache}{Cache} implementation.  
+
+
+
+
+{\ttfamily \#include $<$cache.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache_a70ee69e239a5ed9b020cb046caa07b34}{LRUCache}} (size\+\_\+t capacity)
+\item 
+std\+::shared\+\_\+ptr$<$ Value $>$ \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache_a2a0ddc4324f545b8e171bb6fe0bd312b}{Get}} (const Key \&key)
+\item 
+void \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache_ab6175c2a4e046fb3db6e93f2e123ca5b}{Put}} (const Key \&key, const Value \&value)
+\item 
+bool \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache_a5b806ce132cd23ebf9b9604a9697f997}{Remove}} (const Key \&key)
+\item 
+void \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache_a62475f1af15b3900f35f60188beab3d2}{Clear}} ()
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache_a0e1efcdbb46816cf4df45faa982810fc}{Size}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache_a06789a95714d6ec59c2c82682c52a7ed}{mutex\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache_aec4947629efdd8ab7dc6b86f7953aa2c}{capacity\+\_\+}}
+\item 
+std\+::list$<$ Key $>$ \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache_a6a0f409ccd7a3d4380f06ce109ee43ba}{order\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ Key, std\+::pair$<$ Value, typename std\+::list$<$ Key $>$\+::iterator $>$ $>$ \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache_a8d9ed7137dfb1fac017bb4d6e08c21e2}{cache\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Key, typename Value$>$\newline
+class neo\+::cache\+::\+LRUCache$<$ Key, Value $>$}
+LRU \doxylink{classneo_1_1cache_1_1_cache}{Cache} implementation. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cache_1_1_l_r_u_cache_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cache_1_1_l_r_u_cache_a70ee69e239a5ed9b020cb046caa07b34}\index{neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}!LRUCache@{LRUCache}}
+\index{LRUCache@{LRUCache}!neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{LRUCache()}{LRUCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_l_r_u_cache_a70ee69e239a5ed9b020cb046caa07b34} 
+template$<$typename Key, typename Value$>$ \\
+\mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache}{neo\+::cache\+::\+LRUCache}}$<$ Key, Value $>$\+::\+LRUCache (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{capacity}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cache_1_1_l_r_u_cache_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cache_1_1_l_r_u_cache_a62475f1af15b3900f35f60188beab3d2}\index{neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_l_r_u_cache_a62475f1af15b3900f35f60188beab3d2} 
+template$<$typename Key, typename Value$>$ \\
+void \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache}{neo\+::cache\+::\+LRUCache}}$<$ Key, Value $>$\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1cache_1_1_l_r_u_cache_a2a0ddc4324f545b8e171bb6fe0bd312b}\index{neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}!Get@{Get}}
+\index{Get@{Get}!neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_l_r_u_cache_a2a0ddc4324f545b8e171bb6fe0bd312b} 
+template$<$typename Key, typename Value$>$ \\
+std\+::shared\+\_\+ptr$<$ Value $>$ \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache}{neo\+::cache\+::\+LRUCache}}$<$ Key, Value $>$\+::\+Get (\begin{DoxyParamCaption}\item[{const Key \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1cache_1_1_l_r_u_cache_ab6175c2a4e046fb3db6e93f2e123ca5b}\index{neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}!Put@{Put}}
+\index{Put@{Put}!neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{Put()}{Put()}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_l_r_u_cache_ab6175c2a4e046fb3db6e93f2e123ca5b} 
+template$<$typename Key, typename Value$>$ \\
+void \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache}{neo\+::cache\+::\+LRUCache}}$<$ Key, Value $>$\+::\+Put (\begin{DoxyParamCaption}\item[{const Key \&}]{key}{, }\item[{const Value \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1cache_1_1_l_r_u_cache_a5b806ce132cd23ebf9b9604a9697f997}\index{neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}!Remove@{Remove}}
+\index{Remove@{Remove}!neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{Remove()}{Remove()}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_l_r_u_cache_a5b806ce132cd23ebf9b9604a9697f997} 
+template$<$typename Key, typename Value$>$ \\
+bool \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache}{neo\+::cache\+::\+LRUCache}}$<$ Key, Value $>$\+::\+Remove (\begin{DoxyParamCaption}\item[{const Key \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1cache_1_1_l_r_u_cache_a0e1efcdbb46816cf4df45faa982810fc}\index{neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}!Size@{Size}}
+\index{Size@{Size}!neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_l_r_u_cache_a0e1efcdbb46816cf4df45faa982810fc} 
+template$<$typename Key, typename Value$>$ \\
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache}{neo\+::cache\+::\+LRUCache}}$<$ Key, Value $>$\+::\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cache_1_1_l_r_u_cache_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cache_1_1_l_r_u_cache_a8d9ed7137dfb1fac017bb4d6e08c21e2}\index{neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}!cache\_@{cache\_}}
+\index{cache\_@{cache\_}!neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{cache\_}{cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_l_r_u_cache_a8d9ed7137dfb1fac017bb4d6e08c21e2} 
+template$<$typename Key, typename Value$>$ \\
+std\+::unordered\+\_\+map$<$Key, std\+::pair$<$Value, typename std\+::list$<$Key$>$\+::iterator$>$ $>$ \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache}{neo\+::cache\+::\+LRUCache}}$<$ Key, Value $>$\+::cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cache_1_1_l_r_u_cache_aec4947629efdd8ab7dc6b86f7953aa2c}\index{neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}!capacity\_@{capacity\_}}
+\index{capacity\_@{capacity\_}!neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{capacity\_}{capacity\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_l_r_u_cache_aec4947629efdd8ab7dc6b86f7953aa2c} 
+template$<$typename Key, typename Value$>$ \\
+size\+\_\+t \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache}{neo\+::cache\+::\+LRUCache}}$<$ Key, Value $>$\+::capacity\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cache_1_1_l_r_u_cache_a06789a95714d6ec59c2c82682c52a7ed}\index{neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_l_r_u_cache_a06789a95714d6ec59c2c82682c52a7ed} 
+template$<$typename Key, typename Value$>$ \\
+std\+::mutex \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache}{neo\+::cache\+::\+LRUCache}}$<$ Key, Value $>$\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cache_1_1_l_r_u_cache_a6a0f409ccd7a3d4380f06ce109ee43ba}\index{neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}!order\_@{order\_}}
+\index{order\_@{order\_}!neo::cache::LRUCache$<$ Key, Value $>$@{neo::cache::LRUCache$<$ Key, Value $>$}}
+\doxysubsubsection{\texorpdfstring{order\_}{order\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cache_1_1_l_r_u_cache_a6a0f409ccd7a3d4380f06ce109ee43ba} 
+template$<$typename Key, typename Value$>$ \\
+std\+::list$<$Key$>$ \mbox{\hyperlink{classneo_1_1cache_1_1_l_r_u_cache}{neo\+::cache\+::\+LRUCache}}$<$ Key, Value $>$\+::order\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cache/\mbox{\hyperlink{cache_2cache_8h}{cache.\+h}}\end{DoxyCompactItemize}

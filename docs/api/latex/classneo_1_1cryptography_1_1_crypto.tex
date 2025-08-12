@@ -1,0 +1,380 @@
+\doxysection{neo\+::cryptography\+::Crypto Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1_crypto}{}\label{classneo_1_1cryptography_1_1_crypto}\index{neo::cryptography::Crypto@{neo::cryptography::Crypto}}
+
+
+Provides cryptographic utility functions.  
+
+
+
+
+{\ttfamily \#include $<$crypto.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_crypto_acd807ce84bce1d39d8819bacd4604794}{Generate\+Random\+Bytes}} (size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Generates random bytes. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_crypto_a8dc659be79d79438521da1ad195cf607}{Hash256}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Computes the SHA256 hash of the input data. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_crypto_a5ec4e1ffa7d86842d57d5957d27c5515}{Hash256}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Computes the SHA256 hash of the input data. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_crypto_a52b4c99a401fc87bfa58757bb09c0946}{Hash256}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data)
+\begin{DoxyCompactList}\small\item\em Computes the double SHA256 hash (SHA256 of SHA256) of the input data. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_crypto_a6aa19278fb79a9b49df55c06d23cfe84}{Hash160}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Computes the SHA160 hash (RIPEMD160 of SHA256) of the input data. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_crypto_a2c7de08b2be0721fdaebccb0cf6b5e19}{Aes\+Encrypt}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&iv)
+\begin{DoxyCompactList}\small\item\em Encrypts data using AES-\/256-\/\+CBC. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_crypto_aaff57090fc3d04415ccbd610142772b4}{Aes\+Decrypt}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&iv)
+\begin{DoxyCompactList}\small\item\em Decrypts data using AES-\/256-\/\+CBC. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_crypto_af0556b96a171950b58a5ecdedc99dd42}{PBKDF2}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&password, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&salt, int iterations, int key\+Length)
+\begin{DoxyCompactList}\small\item\em Derives a key using PBKDF2-\/\+HMAC-\/\+SHA256. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_crypto_a5e2f2816414cb5b2f37ca436ca0398ab}{Hmac\+Sha256}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Computes the HMAC-\/\+SHA256 of the input data. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1_crypto_a7499009e0716a7e3926c1767f6b7532d}{Base64\+Encode}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Computes the \doxylink{classneo_1_1cryptography_1_1_base64}{Base64} encoding of the input data. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_crypto_a78c98a6d796a7261e088652884ee3e03}{Base64\+Decode}} (const std\+::string \&base64)
+\begin{DoxyCompactList}\small\item\em Decodes a \doxylink{classneo_1_1cryptography_1_1_base64}{Base64} encoded string. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_crypto_a52610b1b0c3615836fed8ab749fdc426}{Create\+Signature\+Redeem\+Script}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ecc\+::\+ECPoint}} \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Creates a signature redeem script for a public key. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1cryptography_1_1_crypto_ab8f7b7fd3cbef11030acce3439ea5800}{Verify\+Signature}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&message, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&signature, const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ecc\+::\+ECPoint}} \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Verifies a signature. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_crypto_ae4f7e8b8c5dcbb8042b9d136d04a6ce8}{Sign}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&message, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Signs a message with a private key. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ecc\+::\+ECPoint}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_crypto_ae942e9cb4cd0caa7fb09f975e9886a36}{Compute\+Public\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Computes the public key from a private key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides cryptographic utility functions. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1_crypto_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_crypto_aaff57090fc3d04415ccbd610142772b4}\index{neo::cryptography::Crypto@{neo::cryptography::Crypto}!AesDecrypt@{AesDecrypt}}
+\index{AesDecrypt@{AesDecrypt}!neo::cryptography::Crypto@{neo::cryptography::Crypto}}
+\doxysubsubsection{\texorpdfstring{AesDecrypt()}{AesDecrypt()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_crypto_aaff57090fc3d04415ccbd610142772b4} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Crypto\+::\+Aes\+Decrypt (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{key}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{iv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Decrypts data using AES-\/256-\/\+CBC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to decrypt. \\
+\hline
+{\em key} & The decryption key (must be 32 bytes). \\
+\hline
+{\em iv} & The initialization vector (must be 16 bytes). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The decrypted data. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1cryptography_1_1_crypto_a2c7de08b2be0721fdaebccb0cf6b5e19}\index{neo::cryptography::Crypto@{neo::cryptography::Crypto}!AesEncrypt@{AesEncrypt}}
+\index{AesEncrypt@{AesEncrypt}!neo::cryptography::Crypto@{neo::cryptography::Crypto}}
+\doxysubsubsection{\texorpdfstring{AesEncrypt()}{AesEncrypt()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_crypto_a2c7de08b2be0721fdaebccb0cf6b5e19} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Crypto\+::\+Aes\+Encrypt (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{key}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{iv}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Encrypts data using AES-\/256-\/\+CBC. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to encrypt. \\
+\hline
+{\em key} & The encryption key (must be 32 bytes). \\
+\hline
+{\em iv} & The initialization vector (must be 16 bytes). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The encrypted data. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cryptography_1_1_crypto_a78c98a6d796a7261e088652884ee3e03}\index{neo::cryptography::Crypto@{neo::cryptography::Crypto}!Base64Decode@{Base64Decode}}
+\index{Base64Decode@{Base64Decode}!neo::cryptography::Crypto@{neo::cryptography::Crypto}}
+\doxysubsubsection{\texorpdfstring{Base64Decode()}{Base64Decode()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_crypto_a78c98a6d796a7261e088652884ee3e03} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Crypto\+::\+Base64\+Decode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{base64}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Decodes a \doxylink{classneo_1_1cryptography_1_1_base64}{Base64} encoded string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base64} & The \doxylink{classneo_1_1cryptography_1_1_base64}{Base64} encoded string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The decoded data. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cryptography_1_1_crypto_a7499009e0716a7e3926c1767f6b7532d}\index{neo::cryptography::Crypto@{neo::cryptography::Crypto}!Base64Encode@{Base64Encode}}
+\index{Base64Encode@{Base64Encode}!neo::cryptography::Crypto@{neo::cryptography::Crypto}}
+\doxysubsubsection{\texorpdfstring{Base64Encode()}{Base64Encode()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_crypto_a7499009e0716a7e3926c1767f6b7532d} 
+std\+::string neo\+::cryptography\+::\+Crypto\+::\+Base64\+Encode (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the \doxylink{classneo_1_1cryptography_1_1_base64}{Base64} encoding of the input data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The input data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1cryptography_1_1_base64}{Base64} encoded string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1cryptography_1_1_crypto_ae942e9cb4cd0caa7fb09f975e9886a36}\index{neo::cryptography::Crypto@{neo::cryptography::Crypto}!ComputePublicKey@{ComputePublicKey}}
+\index{ComputePublicKey@{ComputePublicKey}!neo::cryptography::Crypto@{neo::cryptography::Crypto}}
+\doxysubsubsection{\texorpdfstring{ComputePublicKey()}{ComputePublicKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_crypto_ae942e9cb4cd0caa7fb09f975e9886a36} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ecc\+::\+ECPoint}} neo\+::cryptography\+::\+Crypto\+::\+Compute\+Public\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{private\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the public key from a private key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em private\+Key} & The private key (must be 32 bytes). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The computed public key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1cryptography_1_1_crypto_a52610b1b0c3615836fed8ab749fdc426}\index{neo::cryptography::Crypto@{neo::cryptography::Crypto}!CreateSignatureRedeemScript@{CreateSignatureRedeemScript}}
+\index{CreateSignatureRedeemScript@{CreateSignatureRedeemScript}!neo::cryptography::Crypto@{neo::cryptography::Crypto}}
+\doxysubsubsection{\texorpdfstring{CreateSignatureRedeemScript()}{CreateSignatureRedeemScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_crypto_a52610b1b0c3615836fed8ab749fdc426} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Crypto\+::\+Create\+Signature\+Redeem\+Script (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ecc\+::\+ECPoint}} \&}]{public\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a signature redeem script for a public key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em public\+Key} & The public key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The signature redeem script. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1cryptography_1_1_crypto_acd807ce84bce1d39d8819bacd4604794}\index{neo::cryptography::Crypto@{neo::cryptography::Crypto}!GenerateRandomBytes@{GenerateRandomBytes}}
+\index{GenerateRandomBytes@{GenerateRandomBytes}!neo::cryptography::Crypto@{neo::cryptography::Crypto}}
+\doxysubsubsection{\texorpdfstring{GenerateRandomBytes()}{GenerateRandomBytes()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_crypto_acd807ce84bce1d39d8819bacd4604794} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Crypto\+::\+Generate\+Random\+Bytes (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generates random bytes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em length} & The number of bytes to generate. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The random bytes. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1cryptography_1_1_crypto_a6aa19278fb79a9b49df55c06d23cfe84}\index{neo::cryptography::Crypto@{neo::cryptography::Crypto}!Hash160@{Hash160}}
+\index{Hash160@{Hash160}!neo::cryptography::Crypto@{neo::cryptography::Crypto}}
+\doxysubsubsection{\texorpdfstring{Hash160()}{Hash160()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_crypto_a6aa19278fb79a9b49df55c06d23cfe84} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::cryptography\+::\+Crypto\+::\+Hash160 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the SHA160 hash (RIPEMD160 of SHA256) of the input data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The input data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The SHA160 hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1cryptography_1_1_crypto_a5ec4e1ffa7d86842d57d5957d27c5515}\index{neo::cryptography::Crypto@{neo::cryptography::Crypto}!Hash256@{Hash256}}
+\index{Hash256@{Hash256}!neo::cryptography::Crypto@{neo::cryptography::Crypto}}
+\doxysubsubsection{\texorpdfstring{Hash256()}{Hash256()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_crypto_a5ec4e1ffa7d86842d57d5957d27c5515} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::cryptography\+::\+Crypto\+::\+Hash256 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the SHA256 hash of the input data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The input data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The SHA256 hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1cryptography_1_1_crypto_a52b4c99a401fc87bfa58757bb09c0946}\index{neo::cryptography::Crypto@{neo::cryptography::Crypto}!Hash256@{Hash256}}
+\index{Hash256@{Hash256}!neo::cryptography::Crypto@{neo::cryptography::Crypto}}
+\doxysubsubsection{\texorpdfstring{Hash256()}{Hash256()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_crypto_a52b4c99a401fc87bfa58757bb09c0946} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::cryptography\+::\+Crypto\+::\+Hash256 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the double SHA256 hash (SHA256 of SHA256) of the input data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The input data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The double SHA256 hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1cryptography_1_1_crypto_a8dc659be79d79438521da1ad195cf607}\index{neo::cryptography::Crypto@{neo::cryptography::Crypto}!Hash256@{Hash256}}
+\index{Hash256@{Hash256}!neo::cryptography::Crypto@{neo::cryptography::Crypto}}
+\doxysubsubsection{\texorpdfstring{Hash256()}{Hash256()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_crypto_a8dc659be79d79438521da1ad195cf607} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::cryptography\+::\+Crypto\+::\+Hash256 (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the SHA256 hash of the input data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The input data. \\
+\hline
+{\em length} & The length of the input data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The SHA256 hash. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1_crypto_a5e2f2816414cb5b2f37ca436ca0398ab}\index{neo::cryptography::Crypto@{neo::cryptography::Crypto}!HmacSha256@{HmacSha256}}
+\index{HmacSha256@{HmacSha256}!neo::cryptography::Crypto@{neo::cryptography::Crypto}}
+\doxysubsubsection{\texorpdfstring{HmacSha256()}{HmacSha256()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_crypto_a5e2f2816414cb5b2f37ca436ca0398ab} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Crypto\+::\+Hmac\+Sha256 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{key}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes the HMAC-\/\+SHA256 of the input data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+{\em data} & The input data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The HMAC-\/\+SHA256. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1cryptography_1_1_crypto_af0556b96a171950b58a5ecdedc99dd42}\index{neo::cryptography::Crypto@{neo::cryptography::Crypto}!PBKDF2@{PBKDF2}}
+\index{PBKDF2@{PBKDF2}!neo::cryptography::Crypto@{neo::cryptography::Crypto}}
+\doxysubsubsection{\texorpdfstring{PBKDF2()}{PBKDF2()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_crypto_af0556b96a171950b58a5ecdedc99dd42} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Crypto\+::\+PBKDF2 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{password}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{salt}{, }\item[{int}]{iterations}{, }\item[{int}]{key\+Length}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Derives a key using PBKDF2-\/\+HMAC-\/\+SHA256. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em password} & The password. \\
+\hline
+{\em salt} & The salt. \\
+\hline
+{\em iterations} & The number of iterations. \\
+\hline
+{\em key\+Length} & The desired key length in bytes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The derived key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1cryptography_1_1_crypto_ae4f7e8b8c5dcbb8042b9d136d04a6ce8}\index{neo::cryptography::Crypto@{neo::cryptography::Crypto}!Sign@{Sign}}
+\index{Sign@{Sign}!neo::cryptography::Crypto@{neo::cryptography::Crypto}}
+\doxysubsubsection{\texorpdfstring{Sign()}{Sign()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_crypto_ae4f7e8b8c5dcbb8042b9d136d04a6ce8} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Crypto\+::\+Sign (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{message}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{private\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Signs a message with a private key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to sign. \\
+\hline
+{\em private\+Key} & The private key (must be 32 bytes). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The signature. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1cryptography_1_1_crypto_ab8f7b7fd3cbef11030acce3439ea5800}\index{neo::cryptography::Crypto@{neo::cryptography::Crypto}!VerifySignature@{VerifySignature}}
+\index{VerifySignature@{VerifySignature}!neo::cryptography::Crypto@{neo::cryptography::Crypto}}
+\doxysubsubsection{\texorpdfstring{VerifySignature()}{VerifySignature()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_crypto_ab8f7b7fd3cbef11030acce3439ea5800} 
+bool neo\+::cryptography\+::\+Crypto\+::\+Verify\+Signature (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{message}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{signature}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ecc\+::\+ECPoint}} \&}]{public\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Verifies a signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message that was signed. \\
+\hline
+{\em signature} & The signature to verify. \\
+\hline
+{\em public\+Key} & The public key to verify against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the signature is valid, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/\mbox{\hyperlink{crypto_8h}{crypto.\+h}}\item 
+src/cryptography/\mbox{\hyperlink{crypto_8cpp}{crypto.\+cpp}}\end{DoxyCompactItemize}

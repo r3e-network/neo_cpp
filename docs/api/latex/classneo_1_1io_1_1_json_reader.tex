@@ -1,0 +1,575 @@
+\doxysection{neo\+::io\+::Json\+Reader Class Reference}
+\hypertarget{classneo_1_1io_1_1_json_reader}{}\label{classneo_1_1io_1_1_json_reader}\index{neo::io::JsonReader@{neo::io::JsonReader}}
+
+
+Reads primitive types and complex objects from a JSON value.  
+
+
+
+
+{\ttfamily \#include $<$json\+\_\+reader.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a83a9c671b033295095b4749e4b089d2b}{Json\+Reader}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_json_reader}{Json\+Reader} that reads from the specified JSON value. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a8c4d8de0848d1bedb38008260d536e5f}{Read\+Bool}} (const std\+::string \&key, bool default\+Value=false) const
+\begin{DoxyCompactList}\small\item\em Reads a boolean value from the JSON. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a9d3b1ba50bf4022c8c8b5e11077c92c4}{Read\+UInt8}} (const std\+::string \&key, uint8\+\_\+t default\+Value=0) const
+\begin{DoxyCompactList}\small\item\em Reads an 8-\/bit unsigned integer from the JSON. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a3bcdbb00de258d271a3ac007fe97343b}{Read\+UInt16}} (const std\+::string \&key, uint16\+\_\+t default\+Value=0) const
+\begin{DoxyCompactList}\small\item\em Reads a 16-\/bit unsigned integer from the JSON. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a84942f70d9e3196fb447a71d1c51a200}{Read\+UInt32}} (const std\+::string \&key, uint32\+\_\+t default\+Value=0) const
+\begin{DoxyCompactList}\small\item\em Reads a 32-\/bit unsigned integer from the JSON. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ae978cb75a319b20d6eafd40220700834}{Read\+UInt64}} (const std\+::string \&key, uint64\+\_\+t default\+Value=0) const
+\begin{DoxyCompactList}\small\item\em Reads a 64-\/bit unsigned integer from the JSON. \end{DoxyCompactList}\item 
+int8\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a5909f135bc1360e7dbf4bd04b785aca8}{Read\+Int8}} (const std\+::string \&key, int8\+\_\+t default\+Value=0) const
+\begin{DoxyCompactList}\small\item\em Reads an 8-\/bit signed integer from the JSON. \end{DoxyCompactList}\item 
+int16\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a11624522c2aed41a98c0defc7cf870df}{Read\+Int16}} (const std\+::string \&key, int16\+\_\+t default\+Value=0) const
+\begin{DoxyCompactList}\small\item\em Reads a 16-\/bit signed integer from the JSON. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a26a50e4580529f1bbbf2e94ade9b0fbb}{Read\+Int32}} (const std\+::string \&key, int32\+\_\+t default\+Value=0) const
+\begin{DoxyCompactList}\small\item\em Reads a 32-\/bit signed integer from the JSON. \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_af8dce636399cafa85a8f20b187a62920}{Read\+Int64}} (const std\+::string \&key, int64\+\_\+t default\+Value=0) const
+\begin{DoxyCompactList}\small\item\em Reads a 64-\/bit signed integer from the JSON. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_abee15c3ce4f6e37ff476a804bd037372}{Read\+String}} (const std\+::string \&key, const std\+::string \&default\+Value="{}"{}) const
+\begin{DoxyCompactList}\small\item\em Reads a string from the JSON. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a9c841273975b9e942c1d1a1fb1fbe633}{Read\+Base64\+String}} (const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Reads a base64 string from the JSON and decodes it to a byte array. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_adad1fbc94a434de86af05a7e2fc674ae}{Read\+Number}} (const std\+::string \&key, double default\+Value=0.\+0) const
+\begin{DoxyCompactList}\small\item\em Reads a number from the JSON as a double. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a1a2320cd9f71543030ddaf7cb7b781bd}{Read\+Bytes}} (const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Reads a byte array from the JSON. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a8f5bca32942a51055c062486ac28ff07}{Read\+UInt160}} (const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Reads a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} from the JSON. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}} \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ac64e5dd59840f79e757a66e0ba3f7d3e}{Read\+UInt256}} (const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Reads a \doxylink{classneo_1_1io_1_1_u_int256}{UInt256} from the JSON. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{Fixed8}} \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_abe438cb1da2ea82c4238c792241d40ba}{Read\+Fixed8}} (const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Reads a \doxylink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{Fixed8} from the JSON. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a23efe34d564aba433f4270fdb6067fef}{Read\+Object}} (const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Reads a JSON object from the JSON. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a2286a2af4ba8fd609d753cfd2b19f5ec}{Read\+Array}} (const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Reads a JSON array from the JSON. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\std\+::optional$<$ T $>$ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a4bfa9de68dd8c793803113a177b00fb3}{Read\+Serializable}} (const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Reads a serializable object from the JSON. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\std\+::vector$<$ T $>$ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ad93f0ab1687b6553eea05366a6062952}{Read\+Vector}} (const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Reads a vector of serializable objects from the JSON. \end{DoxyCompactList}\item 
+const nlohmann\+::json \& \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a14db70fd3bfbcc09eafb91bcc5d0d7e0}{Get\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Gets the underlying JSON value. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ad2a7890156bf4a23baf63a1a4b95060f}{Has\+Key}} (const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Checks if the JSON contains the specified key. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_a298f852ae1eb1f9921fd7cb9653add7f}{Read\+Start\+Object}} () const
+\begin{DoxyCompactList}\small\item\em Reads the start of an object from the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_aac2ae2b1e638dc8dcbc59026746371d7}{Read\+End\+Object}} () const
+\begin{DoxyCompactList}\small\item\em Reads the end of an object from the JSON. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const nlohmann\+::json \& \mbox{\hyperlink{classneo_1_1io_1_1_json_reader_ae9b3593d026f8640d5a2e03abda22320}{json\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Reads primitive types and complex objects from a JSON value. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1io_1_1_json_reader_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1io_1_1_json_reader_a83a9c671b033295095b4749e4b089d2b}\index{neo::io::JsonReader@{neo::io::JsonReader}!JsonReader@{JsonReader}}
+\index{JsonReader@{JsonReader}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{JsonReader()}{JsonReader()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_a83a9c671b033295095b4749e4b089d2b} 
+neo\+::io\+::\+Json\+Reader\+::\+Json\+Reader (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_json_reader}{Json\+Reader} that reads from the specified JSON value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & The JSON value to read from. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1io_1_1_json_reader_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1io_1_1_json_reader_a14db70fd3bfbcc09eafb91bcc5d0d7e0}\index{neo::io::JsonReader@{neo::io::JsonReader}!GetJson@{GetJson}}
+\index{GetJson@{GetJson}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{GetJson()}{GetJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_a14db70fd3bfbcc09eafb91bcc5d0d7e0} 
+const nlohmann\+::json \& neo\+::io\+::\+Json\+Reader\+::\+Get\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the underlying JSON value. 
+
+\begin{DoxyReturn}{Returns}
+The underlying JSON value. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_json_reader_ad2a7890156bf4a23baf63a1a4b95060f}\index{neo::io::JsonReader@{neo::io::JsonReader}!HasKey@{HasKey}}
+\index{HasKey@{HasKey}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{HasKey()}{HasKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_ad2a7890156bf4a23baf63a1a4b95060f} 
+bool neo\+::io\+::\+Json\+Reader\+::\+Has\+Key (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if the JSON contains the specified key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the JSON contains the key, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_json_reader_a2286a2af4ba8fd609d753cfd2b19f5ec}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadArray@{ReadArray}}
+\index{ReadArray@{ReadArray}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadArray()}{ReadArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_a2286a2af4ba8fd609d753cfd2b19f5ec} 
+nlohmann\+::json neo\+::io\+::\+Json\+Reader\+::\+Read\+Array (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const}
+
+
+
+Reads a JSON array from the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or an empty JSON array if the key is not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_json_reader_a9c841273975b9e942c1d1a1fb1fbe633}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadBase64String@{ReadBase64String}}
+\index{ReadBase64String@{ReadBase64String}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadBase64String()}{ReadBase64String()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_a9c841273975b9e942c1d1a1fb1fbe633} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} neo\+::io\+::\+Json\+Reader\+::\+Read\+Base64\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const}
+
+
+
+Reads a base64 string from the JSON and decodes it to a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The decoded byte array, or an empty byte array if the key is not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1io_1_1_json_reader_a8c4d8de0848d1bedb38008260d536e5f}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadBool@{ReadBool}}
+\index{ReadBool@{ReadBool}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadBool()}{ReadBool()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_a8c4d8de0848d1bedb38008260d536e5f} 
+bool neo\+::io\+::\+Json\+Reader\+::\+Read\+Bool (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{bool}]{default\+Value}{ = {\ttfamily false}}\end{DoxyParamCaption}) const}
+
+
+
+Reads a boolean value from the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+{\em default\+Value} & The default value to return if the key is not found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or the default value if the key is not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_json_reader_a1a2320cd9f71543030ddaf7cb7b781bd}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadBytes@{ReadBytes}}
+\index{ReadBytes@{ReadBytes}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadBytes()}{ReadBytes()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_a1a2320cd9f71543030ddaf7cb7b781bd} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} neo\+::io\+::\+Json\+Reader\+::\+Read\+Bytes (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const}
+
+
+
+Reads a byte array from the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or an empty byte array if the key is not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1io_1_1_json_reader_aac2ae2b1e638dc8dcbc59026746371d7}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadEndObject@{ReadEndObject}}
+\index{ReadEndObject@{ReadEndObject}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadEndObject()}{ReadEndObject()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_aac2ae2b1e638dc8dcbc59026746371d7} 
+void neo\+::io\+::\+Json\+Reader\+::\+Read\+End\+Object (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reads the end of an object from the JSON. 
+
+\Hypertarget{classneo_1_1io_1_1_json_reader_abe438cb1da2ea82c4238c792241d40ba}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadFixed8@{ReadFixed8}}
+\index{ReadFixed8@{ReadFixed8}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadFixed8()}{ReadFixed8()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_abe438cb1da2ea82c4238c792241d40ba} 
+\mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{Fixed8}} neo\+::io\+::\+Json\+Reader\+::\+Read\+Fixed8 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const}
+
+
+
+Reads a \doxylink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{Fixed8} from the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or \doxylink{classneo_1_1core_1_1_fixed8_a80eaa05a52ba69534eb0250fe93796fe}{Fixed8\+::\+Zero()} if the key is not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1io_1_1_json_reader_a11624522c2aed41a98c0defc7cf870df}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadInt16@{ReadInt16}}
+\index{ReadInt16@{ReadInt16}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadInt16()}{ReadInt16()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_a11624522c2aed41a98c0defc7cf870df} 
+int16\+\_\+t neo\+::io\+::\+Json\+Reader\+::\+Read\+Int16 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{int16\+\_\+t}]{default\+Value}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const}
+
+
+
+Reads a 16-\/bit signed integer from the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+{\em default\+Value} & The default value to return if the key is not found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or the default value if the key is not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_json_reader_a26a50e4580529f1bbbf2e94ade9b0fbb}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadInt32@{ReadInt32}}
+\index{ReadInt32@{ReadInt32}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadInt32()}{ReadInt32()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_a26a50e4580529f1bbbf2e94ade9b0fbb} 
+int32\+\_\+t neo\+::io\+::\+Json\+Reader\+::\+Read\+Int32 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{int32\+\_\+t}]{default\+Value}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const}
+
+
+
+Reads a 32-\/bit signed integer from the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+{\em default\+Value} & The default value to return if the key is not found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or the default value if the key is not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_json_reader_af8dce636399cafa85a8f20b187a62920}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadInt64@{ReadInt64}}
+\index{ReadInt64@{ReadInt64}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadInt64()}{ReadInt64()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_af8dce636399cafa85a8f20b187a62920} 
+int64\+\_\+t neo\+::io\+::\+Json\+Reader\+::\+Read\+Int64 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{int64\+\_\+t}]{default\+Value}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const}
+
+
+
+Reads a 64-\/bit signed integer from the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+{\em default\+Value} & The default value to return if the key is not found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or the default value if the key is not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_json_reader_a5909f135bc1360e7dbf4bd04b785aca8}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadInt8@{ReadInt8}}
+\index{ReadInt8@{ReadInt8}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadInt8()}{ReadInt8()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_a5909f135bc1360e7dbf4bd04b785aca8} 
+int8\+\_\+t neo\+::io\+::\+Json\+Reader\+::\+Read\+Int8 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{int8\+\_\+t}]{default\+Value}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const}
+
+
+
+Reads an 8-\/bit signed integer from the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+{\em default\+Value} & The default value to return if the key is not found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or the default value if the key is not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_json_reader_adad1fbc94a434de86af05a7e2fc674ae}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadNumber@{ReadNumber}}
+\index{ReadNumber@{ReadNumber}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadNumber()}{ReadNumber()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_adad1fbc94a434de86af05a7e2fc674ae} 
+double neo\+::io\+::\+Json\+Reader\+::\+Read\+Number (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{double}]{default\+Value}{ = {\ttfamily 0.0}}\end{DoxyParamCaption}) const}
+
+
+
+Reads a number from the JSON as a double. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+{\em default\+Value} & The default value to return if the key is not found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or the default value if the key is not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_json_reader_a23efe34d564aba433f4270fdb6067fef}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadObject@{ReadObject}}
+\index{ReadObject@{ReadObject}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadObject()}{ReadObject()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_a23efe34d564aba433f4270fdb6067fef} 
+nlohmann\+::json neo\+::io\+::\+Json\+Reader\+::\+Read\+Object (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const}
+
+
+
+Reads a JSON object from the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or an empty JSON object if the key is not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1io_1_1_json_reader_a4bfa9de68dd8c793803113a177b00fb3}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadSerializable@{ReadSerializable}}
+\index{ReadSerializable@{ReadSerializable}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadSerializable()}{ReadSerializable()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_a4bfa9de68dd8c793803113a177b00fb3} 
+template$<$typename T$>$ \\
+std\+::optional$<$ T $>$ neo\+::io\+::\+Json\+Reader\+::\+Read\+Serializable (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reads a serializable object from the JSON. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of the object to read. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or std\+::nullopt if the key is not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1io_1_1_json_reader_a298f852ae1eb1f9921fd7cb9653add7f}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadStartObject@{ReadStartObject}}
+\index{ReadStartObject@{ReadStartObject}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadStartObject()}{ReadStartObject()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_a298f852ae1eb1f9921fd7cb9653add7f} 
+void neo\+::io\+::\+Json\+Reader\+::\+Read\+Start\+Object (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reads the start of an object from the JSON. 
+
+\Hypertarget{classneo_1_1io_1_1_json_reader_abee15c3ce4f6e37ff476a804bd037372}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadString@{ReadString}}
+\index{ReadString@{ReadString}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadString()}{ReadString()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_abee15c3ce4f6e37ff476a804bd037372} 
+std\+::string neo\+::io\+::\+Json\+Reader\+::\+Read\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const std\+::string \&}]{default\+Value}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption}) const}
+
+
+
+Reads a string from the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+{\em default\+Value} & The default value to return if the key is not found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or the default value if the key is not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_json_reader_a3bcdbb00de258d271a3ac007fe97343b}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadUInt16@{ReadUInt16}}
+\index{ReadUInt16@{ReadUInt16}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadUInt16()}{ReadUInt16()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_a3bcdbb00de258d271a3ac007fe97343b} 
+uint16\+\_\+t neo\+::io\+::\+Json\+Reader\+::\+Read\+UInt16 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{uint16\+\_\+t}]{default\+Value}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const}
+
+
+
+Reads a 16-\/bit unsigned integer from the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+{\em default\+Value} & The default value to return if the key is not found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or the default value if the key is not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_json_reader_a8f5bca32942a51055c062486ac28ff07}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadUInt160@{ReadUInt160}}
+\index{ReadUInt160@{ReadUInt160}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadUInt160()}{ReadUInt160()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_a8f5bca32942a51055c062486ac28ff07} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} neo\+::io\+::\+Json\+Reader\+::\+Read\+UInt160 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const}
+
+
+
+Reads a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} from the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or \doxylink{classneo_1_1io_1_1_u_int160_a28fac5fc86c25257391996114918ac94}{UInt160\+::\+Zero()} if the key is not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1io_1_1_json_reader_ac64e5dd59840f79e757a66e0ba3f7d3e}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadUInt256@{ReadUInt256}}
+\index{ReadUInt256@{ReadUInt256}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadUInt256()}{ReadUInt256()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_ac64e5dd59840f79e757a66e0ba3f7d3e} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}} neo\+::io\+::\+Json\+Reader\+::\+Read\+UInt256 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const}
+
+
+
+Reads a \doxylink{classneo_1_1io_1_1_u_int256}{UInt256} from the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or \doxylink{classneo_1_1io_1_1_u_int256_a8420fa428f11a40d77b9578d06b2f85f}{UInt256\+::\+Zero()} if the key is not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1io_1_1_json_reader_a84942f70d9e3196fb447a71d1c51a200}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadUInt32@{ReadUInt32}}
+\index{ReadUInt32@{ReadUInt32}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadUInt32()}{ReadUInt32()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_a84942f70d9e3196fb447a71d1c51a200} 
+uint32\+\_\+t neo\+::io\+::\+Json\+Reader\+::\+Read\+UInt32 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{uint32\+\_\+t}]{default\+Value}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const}
+
+
+
+Reads a 32-\/bit unsigned integer from the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+{\em default\+Value} & The default value to return if the key is not found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or the default value if the key is not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_json_reader_ae978cb75a319b20d6eafd40220700834}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadUInt64@{ReadUInt64}}
+\index{ReadUInt64@{ReadUInt64}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadUInt64()}{ReadUInt64()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_ae978cb75a319b20d6eafd40220700834} 
+uint64\+\_\+t neo\+::io\+::\+Json\+Reader\+::\+Read\+UInt64 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{uint64\+\_\+t}]{default\+Value}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const}
+
+
+
+Reads a 64-\/bit unsigned integer from the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+{\em default\+Value} & The default value to return if the key is not found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or the default value if the key is not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_json_reader_a9d3b1ba50bf4022c8c8b5e11077c92c4}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadUInt8@{ReadUInt8}}
+\index{ReadUInt8@{ReadUInt8}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadUInt8()}{ReadUInt8()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_a9d3b1ba50bf4022c8c8b5e11077c92c4} 
+uint8\+\_\+t neo\+::io\+::\+Json\+Reader\+::\+Read\+UInt8 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{uint8\+\_\+t}]{default\+Value}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const}
+
+
+
+Reads an 8-\/bit unsigned integer from the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+{\em default\+Value} & The default value to return if the key is not found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or the default value if the key is not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_json_reader_ad93f0ab1687b6553eea05366a6062952}\index{neo::io::JsonReader@{neo::io::JsonReader}!ReadVector@{ReadVector}}
+\index{ReadVector@{ReadVector}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{ReadVector()}{ReadVector()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_ad93f0ab1687b6553eea05366a6062952} 
+template$<$typename T$>$ \\
+std\+::vector$<$ T $>$ neo\+::io\+::\+Json\+Reader\+::\+Read\+Vector (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reads a vector of serializable objects from the JSON. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of the objects in the vector. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key of the value to read. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value read, or an empty vector if the key is not found. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1io_1_1_json_reader_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1io_1_1_json_reader_ae9b3593d026f8640d5a2e03abda22320}\index{neo::io::JsonReader@{neo::io::JsonReader}!json\_@{json\_}}
+\index{json\_@{json\_}!neo::io::JsonReader@{neo::io::JsonReader}}
+\doxysubsubsection{\texorpdfstring{json\_}{json\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_reader_ae9b3593d026f8640d5a2e03abda22320} 
+const nlohmann\+::json\& neo\+::io\+::\+Json\+Reader\+::json\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/io/\mbox{\hyperlink{json__reader_8h}{json\+\_\+reader.\+h}}\item 
+src/io/\mbox{\hyperlink{json__reader_8cpp}{json\+\_\+reader.\+cpp}}\end{DoxyCompactItemize}

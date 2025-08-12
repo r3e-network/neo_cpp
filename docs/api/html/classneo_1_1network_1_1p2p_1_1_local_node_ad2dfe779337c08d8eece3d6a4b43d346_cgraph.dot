@@ -1,0 +1,24 @@
+digraph "neo::network::p2p::LocalNode::RequestBlocks"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::network::p2p::\lLocalNode::RequestBlocks",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Request blocks from a remote node."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::network::p2p::\lLocalNode::GetBlockchain",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1p2p_1_1_local_node.html#a5019d74b876397754a595f789f298cbc",tooltip="Get blockchain and mempool instances."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::network::p2p::\lRemoteNode::GetLastBlockIndex",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1p2p_1_1_remote_node.html#a729b40856d14585eb75f23ee76632cc8",tooltip="Gets the last block index of the remote node."];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::network::p2p::\lRemoteNode::SendGetBlockBy\lIndex",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1p2p_1_1_remote_node.html#a0d23d9930ab2932eb5457ec531bc4063",tooltip="Sends a getblockbyindex message to the remote node."];
+  Node4 -> Node5 [id="edge4_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::network::p2p::\lMessage::Create",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1p2p_1_1_message.html#ae3142f00d9d6d585d97648bdf6d62759",tooltip="Creates a new Message."];
+  Node5 -> Node6 [id="edge5_Node000005_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::network::p2p::\lMessage::Message",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1p2p_1_1_message.html#ad500547950c4cfac21e99587e0f8f05a",tooltip="Constructs an empty Message."];
+  Node4 -> Node7 [id="edge6_Node000004_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::network::p2p::\lRemoteNode::IsConnected",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1p2p_1_1_remote_node.html#a6245444a7151bc867f35bdd01f13d720",tooltip="Gets whether the remote node is connected."];
+  Node4 -> Node8 [id="edge7_Node000004_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="neo::network::p2p::\lRemoteNode::Send",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1network_1_1p2p_1_1_remote_node.html#a57ce01b12cac829366b308b5f9b6114a",tooltip="Sends a message to the remote node."];
+  Node8 -> Node7 [id="edge8_Node000008_Node000007",color="steelblue1",style="solid",tooltip=" "];
+}

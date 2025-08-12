@@ -1,0 +1,60 @@
+\doxysection{thread\+\_\+safe\+\_\+queue.\+h}
+\hypertarget{thread__safe__queue_8h_source}{}\label{thread__safe__queue_8h_source}\index{include/neo/network/thread\_safe\_queue.h@{include/neo/network/thread\_safe\_queue.h}}
+\mbox{\hyperlink{thread__safe__queue_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <condition\_variable>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <queue>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network}{neo::network}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue}{ThreadSafeQueue}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_ae258fcc38e6f727cf94e5b0dc190737d}{Push}}(T\ item)}
+\DoxyCodeLine{00021\ \ \ \ \ \{}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a907347c78466c4dc05745eda240deb4d}{mutex\_}});}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_adbfa75a7d45513eb44bf460471f16236}{queue\_}}.push(std::move(item));}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a470c21d29fdff1bb41946692b31d2020}{condition\_}}.notify\_one();}
+\DoxyCodeLine{00025\ \ \ \ \ \}}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_ae3504a296c76dbac76322bda65ae6a30}{TryPop}}(T\&\ item)}
+\DoxyCodeLine{00033\ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a907347c78466c4dc05745eda240deb4d}{mutex\_}});}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_adbfa75a7d45513eb44bf460471f16236}{queue\_}}.empty())\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ item\ =\ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_adbfa75a7d45513eb44bf460471f16236}{queue\_}}.front();}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_adbfa75a7d45513eb44bf460471f16236}{queue\_}}.pop();}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00039\ \ \ \ \ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a81a26784bb6cd22962ec55fef0790aa7}{WaitAndPop}}(T\&\ item)}
+\DoxyCodeLine{00046\ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ std::unique\_lock<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a907347c78466c4dc05745eda240deb4d}{mutex\_}});}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a470c21d29fdff1bb41946692b31d2020}{condition\_}}.wait(lock,\ [\textcolor{keyword}{this}]\ \{\ \textcolor{keywordflow}{return}\ !\mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_adbfa75a7d45513eb44bf460471f16236}{queue\_}}.empty();\ \});}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ item\ =\ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_adbfa75a7d45513eb44bf460471f16236}{queue\_}}.front();}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_adbfa75a7d45513eb44bf460471f16236}{queue\_}}.pop();}
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a0659bd58de68ea46e385df2f8cff9621}{Empty}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00058\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a907347c78466c4dc05745eda240deb4d}{mutex\_}});}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_adbfa75a7d45513eb44bf460471f16236}{queue\_}}.empty();}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a2ee565c3477c92abe817d0bd4fb8cef2}{Size}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00068\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a907347c78466c4dc05745eda240deb4d}{mutex\_}});}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_adbfa75a7d45513eb44bf460471f16236}{queue\_}}.size();}
+\DoxyCodeLine{00071\ \ \ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a907347c78466c4dc05745eda240deb4d}{mutex\_}};}
+\DoxyCodeLine{00075\ \ \ \ \ std::queue<T>\ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_adbfa75a7d45513eb44bf460471f16236}{queue\_}};}
+\DoxyCodeLine{00076\ \ \ \ \ std::condition\_variable\ \mbox{\hyperlink{classneo_1_1network_1_1_thread_safe_queue_a470c21d29fdff1bb41946692b31d2020}{condition\_}};}
+\DoxyCodeLine{00077\ \};}
+\DoxyCodeLine{00078\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network}}
+
+\end{DoxyCode}

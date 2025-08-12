@@ -1,0 +1,686 @@
+\doxysection{neo\+::io\+::Json\+Writer Class Reference}
+\hypertarget{classneo_1_1io_1_1_json_writer}{}\label{classneo_1_1io_1_1_json_writer}\index{neo::io::JsonWriter@{neo::io::JsonWriter}}
+
+
+Writes primitive types and complex objects to a JSON value.  
+
+
+
+
+{\ttfamily \#include $<$json\+\_\+writer.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a44f3d134b37b1d41662ef15d1fe8f1a8}{Json\+Writer}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_json_writer}{Json\+Writer} that writes to a new JSON object. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_writer_ab664b1dad796184edfc0b6fa97d76e2a}{Json\+Writer}} (nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_json_writer}{Json\+Writer} that writes to the specified JSON value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a2b08922bfa2b4e19d0c035cf0079068f}{Write}} (const std\+::string \&key, bool value)
+\begin{DoxyCompactList}\small\item\em Writes a boolean value to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_ab2a144afdd824a4a55bb743162653231}{Write}} (const std\+::string \&key, uint8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Writes an 8-\/bit unsigned integer to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_aad4793b7facfa9256cd3ae253ebe67ca}{Write}} (const std\+::string \&key, uint16\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Writes a 16-\/bit unsigned integer to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_ad7e59d961f697d61aede55522e288bc5}{Write}} (const std\+::string \&key, uint32\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Writes a 32-\/bit unsigned integer to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a77474f6737367dbe747c21f0941ead90}{Write}} (const std\+::string \&key, uint64\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Writes a 64-\/bit unsigned integer to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a766ce66bb4a7b978cd066636f9614d39}{Write}} (const std\+::string \&key, int8\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Writes an 8-\/bit signed integer to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a36062163e38ead847b57d64737082b72}{Write}} (const std\+::string \&key, int16\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Writes a 16-\/bit signed integer to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a7b0bc3d2b1eeb9a2b12b3c4ea60ebac3}{Write}} (const std\+::string \&key, int32\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Writes a 32-\/bit signed integer to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a15bb9c70cfed2b262eb18da9d41991c2}{Write}} (const std\+::string \&key, int64\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Writes a 64-\/bit signed integer to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a5f8bbceed159e155e74ffd30c3e653cc}{Write}} (const std\+::string \&key, const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Writes a string to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a3a17b31a06c8986a8b90abd1280c8f0e}{Write\+Base64\+String}} (const std\+::string \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&value)
+\begin{DoxyCompactList}\small\item\em Writes a base64 encoded byte array to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a404ffa2f90bf844ae52793a6c6d3962f}{Write\+String}} (const std\+::string \&key, const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Writes a string value to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a3f1e86eab0a9da0b98669dd4451efbfb}{Write\+Number}} (const std\+::string \&key, double value)
+\begin{DoxyCompactList}\small\item\em Writes a numeric value to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_acb716ecf4586a1bbafa3038ffa0b314f}{Write}} (const std\+::string \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&value)
+\begin{DoxyCompactList}\small\item\em Writes a byte array to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a1cfc41e2e2070e74e25117b73970fb74}{Write}} (const std\+::string \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&value)
+\begin{DoxyCompactList}\small\item\em Writes a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a804902196832876ff029809bf78627f9}{Write}} (const std\+::string \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}} \&value)
+\begin{DoxyCompactList}\small\item\em Writes a \doxylink{classneo_1_1io_1_1_u_int256}{UInt256} to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_abee7dbcdccf3646e2f3773585f3d0043}{Write}} (const std\+::string \&key, const \mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{Fixed8}} \&value)
+\begin{DoxyCompactList}\small\item\em Writes a \doxylink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{Fixed8} to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a87faf214ceac2d55c8ba13387cf92364}{Write}} (const std\+::string \&key, const nlohmann\+::json \&value)
+\begin{DoxyCompactList}\small\item\em Writes a JSON object to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a70f047dcc1c8832fcb39b5fdbf8d2fde}{Write}} (const std\+::string \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{IJson\+Serializable}} \&value)
+\begin{DoxyCompactList}\small\item\em Writes a serializable object to the JSON. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_abd34b5afcc640075203a6dadafd04c83}{Write\+Vector}} (const std\+::string \&key, const std\+::vector$<$ T $>$ \&value)
+\begin{DoxyCompactList}\small\item\em Writes a vector of serializable objects to the JSON. \end{DoxyCompactList}\item 
+const nlohmann\+::json \& \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a56a02d9b2d82757ea2edf82a5ee8bcfc}{Get\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Gets the underlying JSON value. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_ab6c27aeffe44c3e67505de0985c7959d}{Write\+Property}} (const std\+::string \&name, const T \&value)
+\begin{DoxyCompactList}\small\item\em Writes a property to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a8b3a39f599afb76f4b60a896735de028}{Write\+Property\+Name}} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Writes a property name to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_ae5b20ba458615a5ab33ec308666c5115}{Write\+Start\+Array}} ()
+\begin{DoxyCompactList}\small\item\em Writes the start of an array to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a2862aa3cc33a93ec6f928c7ce3ed8e1e}{Write\+End\+Array}} ()
+\begin{DoxyCompactList}\small\item\em Writes the end of an array to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a269b48a85f95a9d69788767fce1740c0}{Write\+Start\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Writes the start of an object to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_abf158ca5f3cee2d601b78423db17c03a}{Write\+End\+Object}} ()
+\begin{DoxyCompactList}\small\item\em Writes the end of an object to the JSON. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a725d1b3a2c957b9c665079bc427f70f6}{Write\+Array}} (const std\+::string \&key, const std\+::vector$<$ T $>$ \&value, std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{Json\+Writer}} \&, const T \&)$>$ writer)
+\begin{DoxyCompactList}\small\item\em Writes an array to the JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a111c20f1bd1f935746699987b0ac065e}{Write\+String}} (const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Writes a string value to the JSON for streaming writing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a072b54d4a741cb79ed41a466a5f7d60a}{Write\+Number}} (double value)
+\begin{DoxyCompactList}\small\item\em Writes a numeric value to the JSON for streaming writing. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_aca655c8381ce2317e84bc18b2c5281c1}{Write\+Number}} (int value)
+\begin{DoxyCompactList}\small\item\em Writes an integer value to the JSON for streaming writing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+nlohmann\+::json \& \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a117aa10b4374c6bd1b005a48b11f3674}{json\+\_\+}}
+\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a39265502fe34a3e4ea77ed4be321a74f}{owned\+Json\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a150636d2a4c04816979fad64b83fee04}{current\+Property\+Name\+\_\+}}
+\item 
+nlohmann\+::json \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a169813e108839b0aec1fb74e84335b4b}{current\+Array\+\_\+}} = nullptr
+\item 
+nlohmann\+::json \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1io_1_1_json_writer_a1b01f5e82364e94a847db6daf3c6c2d6}{current\+Object\+\_\+}} = nullptr
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Writes primitive types and complex objects to a JSON value. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1io_1_1_json_writer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a44f3d134b37b1d41662ef15d1fe8f1a8}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!JsonWriter@{JsonWriter}}
+\index{JsonWriter@{JsonWriter}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{JsonWriter()}{JsonWriter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a44f3d134b37b1d41662ef15d1fe8f1a8} 
+neo\+::io\+::\+Json\+Writer\+::\+Json\+Writer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_json_writer}{Json\+Writer} that writes to a new JSON object. 
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1io_1_1_json_writer_ab664b1dad796184edfc0b6fa97d76e2a}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!JsonWriter@{JsonWriter}}
+\index{JsonWriter@{JsonWriter}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{JsonWriter()}{JsonWriter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_ab664b1dad796184edfc0b6fa97d76e2a} 
+neo\+::io\+::\+Json\+Writer\+::\+Json\+Writer (\begin{DoxyParamCaption}\item[{nlohmann\+::json \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_json_writer}{Json\+Writer} that writes to the specified JSON value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & The JSON value to write to. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1io_1_1_json_writer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a56a02d9b2d82757ea2edf82a5ee8bcfc}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!GetJson@{GetJson}}
+\index{GetJson@{GetJson}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{GetJson()}{GetJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a56a02d9b2d82757ea2edf82a5ee8bcfc} 
+const nlohmann\+::json \& neo\+::io\+::\+Json\+Writer\+::\+Get\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the underlying JSON value. 
+
+\begin{DoxyReturn}{Returns}
+The underlying JSON value. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a2b08922bfa2b4e19d0c035cf0079068f}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!Write@{Write}}
+\index{Write@{Write}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [1/16]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a2b08922bfa2b4e19d0c035cf0079068f} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{bool}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a boolean value to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_acb716ecf4586a1bbafa3038ffa0b314f}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!Write@{Write}}
+\index{Write@{Write}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [2/16]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_acb716ecf4586a1bbafa3038ffa0b314f} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a byte array to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_abee7dbcdccf3646e2f3773585f3d0043}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!Write@{Write}}
+\index{Write@{Write}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [3/16]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_abee7dbcdccf3646e2f3773585f3d0043} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const \mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{Fixed8}} \&}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a \doxylink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{Fixed8} to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a70f047dcc1c8832fcb39b5fdbf8d2fde}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!Write@{Write}}
+\index{Write@{Write}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [4/16]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a70f047dcc1c8832fcb39b5fdbf8d2fde} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{IJson\+Serializable}} \&}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a serializable object to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1io_1_1_json_writer_a87faf214ceac2d55c8ba13387cf92364}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!Write@{Write}}
+\index{Write@{Write}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [5/16]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a87faf214ceac2d55c8ba13387cf92364} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const nlohmann\+::json \&}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a JSON object to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a5f8bbceed159e155e74ffd30c3e653cc}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!Write@{Write}}
+\index{Write@{Write}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [6/16]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a5f8bbceed159e155e74ffd30c3e653cc} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a string to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a1cfc41e2e2070e74e25117b73970fb74}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!Write@{Write}}
+\index{Write@{Write}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [7/16]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a1cfc41e2e2070e74e25117b73970fb74} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a804902196832876ff029809bf78627f9}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!Write@{Write}}
+\index{Write@{Write}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [8/16]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a804902196832876ff029809bf78627f9} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}} \&}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a \doxylink{classneo_1_1io_1_1_u_int256}{UInt256} to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a36062163e38ead847b57d64737082b72}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!Write@{Write}}
+\index{Write@{Write}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [9/16]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a36062163e38ead847b57d64737082b72} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{int16\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a 16-\/bit signed integer to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a7b0bc3d2b1eeb9a2b12b3c4ea60ebac3}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!Write@{Write}}
+\index{Write@{Write}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [10/16]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a7b0bc3d2b1eeb9a2b12b3c4ea60ebac3} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{int32\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a 32-\/bit signed integer to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a15bb9c70cfed2b262eb18da9d41991c2}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!Write@{Write}}
+\index{Write@{Write}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [11/16]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a15bb9c70cfed2b262eb18da9d41991c2} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{int64\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a 64-\/bit signed integer to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a766ce66bb4a7b978cd066636f9614d39}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!Write@{Write}}
+\index{Write@{Write}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [12/16]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a766ce66bb4a7b978cd066636f9614d39} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{int8\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes an 8-\/bit signed integer to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_aad4793b7facfa9256cd3ae253ebe67ca}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!Write@{Write}}
+\index{Write@{Write}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [13/16]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_aad4793b7facfa9256cd3ae253ebe67ca} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{uint16\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a 16-\/bit unsigned integer to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_ad7e59d961f697d61aede55522e288bc5}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!Write@{Write}}
+\index{Write@{Write}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [14/16]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_ad7e59d961f697d61aede55522e288bc5} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{uint32\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a 32-\/bit unsigned integer to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a77474f6737367dbe747c21f0941ead90}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!Write@{Write}}
+\index{Write@{Write}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [15/16]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a77474f6737367dbe747c21f0941ead90} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{uint64\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a 64-\/bit unsigned integer to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_ab2a144afdd824a4a55bb743162653231}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!Write@{Write}}
+\index{Write@{Write}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}\hspace{0.1cm}{\footnotesize\ttfamily [16/16]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_ab2a144afdd824a4a55bb743162653231} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{uint8\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes an 8-\/bit unsigned integer to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a725d1b3a2c957b9c665079bc427f70f6}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!WriteArray@{WriteArray}}
+\index{WriteArray@{WriteArray}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{WriteArray()}{WriteArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a725d1b3a2c957b9c665079bc427f70f6} 
+template$<$typename T$>$ \\
+void neo\+::io\+::\+Json\+Writer\+::\+Write\+Array (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const std\+::vector$<$ T $>$ \&}]{value}{, }\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{Json\+Writer}} \&, const T \&)$>$}]{writer}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Writes an array to the JSON. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of the elements in the array. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the array to. \\
+\hline
+{\em value} & The array to write. \\
+\hline
+{\em writer} & The function to write each element. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1io_1_1_json_writer_a3a17b31a06c8986a8b90abd1280c8f0e}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!WriteBase64String@{WriteBase64String}}
+\index{WriteBase64String@{WriteBase64String}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{WriteBase64String()}{WriteBase64String()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a3a17b31a06c8986a8b90abd1280c8f0e} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write\+Base64\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a base64 encoded byte array to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The byte array to encode and write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a2862aa3cc33a93ec6f928c7ce3ed8e1e}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!WriteEndArray@{WriteEndArray}}
+\index{WriteEndArray@{WriteEndArray}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{WriteEndArray()}{WriteEndArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a2862aa3cc33a93ec6f928c7ce3ed8e1e} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write\+End\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Writes the end of an array to the JSON. 
+
+\Hypertarget{classneo_1_1io_1_1_json_writer_abf158ca5f3cee2d601b78423db17c03a}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!WriteEndObject@{WriteEndObject}}
+\index{WriteEndObject@{WriteEndObject}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{WriteEndObject()}{WriteEndObject()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_abf158ca5f3cee2d601b78423db17c03a} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write\+End\+Object (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Writes the end of an object to the JSON. 
+
+\Hypertarget{classneo_1_1io_1_1_json_writer_a3f1e86eab0a9da0b98669dd4451efbfb}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!WriteNumber@{WriteNumber}}
+\index{WriteNumber@{WriteNumber}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{WriteNumber()}{WriteNumber()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a3f1e86eab0a9da0b98669dd4451efbfb} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write\+Number (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{double}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a numeric value to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The numeric value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a072b54d4a741cb79ed41a466a5f7d60a}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!WriteNumber@{WriteNumber}}
+\index{WriteNumber@{WriteNumber}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{WriteNumber()}{WriteNumber()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a072b54d4a741cb79ed41a466a5f7d60a} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write\+Number (\begin{DoxyParamCaption}\item[{double}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a numeric value to the JSON for streaming writing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The numeric value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_aca655c8381ce2317e84bc18b2c5281c1}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!WriteNumber@{WriteNumber}}
+\index{WriteNumber@{WriteNumber}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{WriteNumber()}{WriteNumber()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_aca655c8381ce2317e84bc18b2c5281c1} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write\+Number (\begin{DoxyParamCaption}\item[{int}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes an integer value to the JSON for streaming writing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The integer value to write. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1io_1_1_json_writer_ab6c27aeffe44c3e67505de0985c7959d}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!WriteProperty@{WriteProperty}}
+\index{WriteProperty@{WriteProperty}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{WriteProperty()}{WriteProperty()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_ab6c27aeffe44c3e67505de0985c7959d} 
+template$<$typename T$>$ \\
+void neo\+::io\+::\+Json\+Writer\+::\+Write\+Property (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{const T \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Writes a property to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the property. \\
+\hline
+{\em value} & The value of the property. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a8b3a39f599afb76f4b60a896735de028}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!WritePropertyName@{WritePropertyName}}
+\index{WritePropertyName@{WritePropertyName}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{WritePropertyName()}{WritePropertyName()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a8b3a39f599afb76f4b60a896735de028} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write\+Property\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Writes a property name to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name of the property. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_ae5b20ba458615a5ab33ec308666c5115}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!WriteStartArray@{WriteStartArray}}
+\index{WriteStartArray@{WriteStartArray}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{WriteStartArray()}{WriteStartArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_ae5b20ba458615a5ab33ec308666c5115} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write\+Start\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Writes the start of an array to the JSON. 
+
+\Hypertarget{classneo_1_1io_1_1_json_writer_a269b48a85f95a9d69788767fce1740c0}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!WriteStartObject@{WriteStartObject}}
+\index{WriteStartObject@{WriteStartObject}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{WriteStartObject()}{WriteStartObject()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a269b48a85f95a9d69788767fce1740c0} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write\+Start\+Object (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Writes the start of an object to the JSON. 
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1io_1_1_json_writer_a404ffa2f90bf844ae52793a6c6d3962f}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!WriteString@{WriteString}}
+\index{WriteString@{WriteString}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{WriteString()}{WriteString()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a404ffa2f90bf844ae52793a6c6d3962f} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a string value to the JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The string value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a111c20f1bd1f935746699987b0ac065e}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!WriteString@{WriteString}}
+\index{WriteString@{WriteString}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{WriteString()}{WriteString()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a111c20f1bd1f935746699987b0ac065e} 
+void neo\+::io\+::\+Json\+Writer\+::\+Write\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Writes a string value to the JSON for streaming writing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The string value to write. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_json_writer_abd34b5afcc640075203a6dadafd04c83}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!WriteVector@{WriteVector}}
+\index{WriteVector@{WriteVector}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{WriteVector()}{WriteVector()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_abd34b5afcc640075203a6dadafd04c83} 
+template$<$typename T$>$ \\
+void neo\+::io\+::\+Json\+Writer\+::\+Write\+Vector (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const std\+::vector$<$ T $>$ \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Writes a vector of serializable objects to the JSON. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of the objects in the vector. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to write the value to. \\
+\hline
+{\em value} & The value to write. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1io_1_1_json_writer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1io_1_1_json_writer_a169813e108839b0aec1fb74e84335b4b}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!currentArray\_@{currentArray\_}}
+\index{currentArray\_@{currentArray\_}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{currentArray\_}{currentArray\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a169813e108839b0aec1fb74e84335b4b} 
+nlohmann\+::json\texorpdfstring{$\ast$}{*} neo\+::io\+::\+Json\+Writer\+::current\+Array\+\_\+ = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_writer_a1b01f5e82364e94a847db6daf3c6c2d6}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!currentObject\_@{currentObject\_}}
+\index{currentObject\_@{currentObject\_}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{currentObject\_}{currentObject\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a1b01f5e82364e94a847db6daf3c6c2d6} 
+nlohmann\+::json\texorpdfstring{$\ast$}{*} neo\+::io\+::\+Json\+Writer\+::current\+Object\+\_\+ = nullptr\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_writer_a150636d2a4c04816979fad64b83fee04}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!currentPropertyName\_@{currentPropertyName\_}}
+\index{currentPropertyName\_@{currentPropertyName\_}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{currentPropertyName\_}{currentPropertyName\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a150636d2a4c04816979fad64b83fee04} 
+std\+::string neo\+::io\+::\+Json\+Writer\+::current\+Property\+Name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_writer_a117aa10b4374c6bd1b005a48b11f3674}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!json\_@{json\_}}
+\index{json\_@{json\_}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{json\_}{json\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a117aa10b4374c6bd1b005a48b11f3674} 
+nlohmann\+::json\& neo\+::io\+::\+Json\+Writer\+::json\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_writer_a39265502fe34a3e4ea77ed4be321a74f}\index{neo::io::JsonWriter@{neo::io::JsonWriter}!ownedJson\_@{ownedJson\_}}
+\index{ownedJson\_@{ownedJson\_}!neo::io::JsonWriter@{neo::io::JsonWriter}}
+\doxysubsubsection{\texorpdfstring{ownedJson\_}{ownedJson\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_writer_a39265502fe34a3e4ea77ed4be321a74f} 
+nlohmann\+::json neo\+::io\+::\+Json\+Writer\+::owned\+Json\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/io/\mbox{\hyperlink{json__writer_8h}{json\+\_\+writer.\+h}}\item 
+src/io/\mbox{\hyperlink{json__writer_8cpp}{json\+\_\+writer.\+cpp}}\end{DoxyCompactItemize}

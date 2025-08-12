@@ -1,0 +1,551 @@
+\doxysection{neo\+::cli\+::Command\+Handler Class Reference}
+\hypertarget{classneo_1_1cli_1_1_command_handler}{}\label{classneo_1_1cli_1_1_command_handler}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+
+
+Handles \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI} commands.  
+
+
+
+
+{\ttfamily \#include $<$command\+\_\+handler.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a65f8082fae88d7c46197a8c80182647f}{Command\+Handler}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ neo\+System, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}} $>$ rpc\+Server)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1cli_1_1_command_handler}{Command\+Handler}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_af1ac2f2b37a599478eef67784e42312b}{Set\+Wallet}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{wallets\+::\+Wallet}} $>$ wallet)
+\begin{DoxyCompactList}\small\item\em Sets the wallet. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{wallets\+::\+Wallet}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a26cca26d7d8c35f6f1707323bad290cd}{Get\+Wallet}} () const
+\begin{DoxyCompactList}\small\item\em Gets the wallet. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a81803421ff3ff97cb39ec7d2bbda976b}{Handle\+Help}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the help command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_ae0d16a4dcae6b2a45f1da9f65aa7b324}{Handle\+Exit}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the exit command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a1a2e4277f851d531a38d98e70f06d85c}{Handle\+Clear}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the clear command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a494631dc8da5df11a3135e06aefe256b}{Handle\+Version}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the version command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a3facb12bbe3e3fc4cbf68058dc31e815}{Handle\+Show\+State}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the show state command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a15227313571a3b1ad79218ca90945c42}{Handle\+Show\+Node}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the show node command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a766a6b5b0b4f7b5bb416fef49673aff8}{Handle\+Show\+Pool}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the show pool command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_aeb011541ac0c44e916f31bc0920b40af}{Handle\+Open\+Wallet}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the open wallet command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a21ffeee3f5c825de8fb3001792d8fdd1}{Handle\+Close\+Wallet}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the close wallet command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_aa74489c90136bac112202cbf2dbc469a}{Handle\+Create\+Wallet}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the create wallet command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a2262332a6c1c110edf07914d105eb89e}{Handle\+Import\+Key}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the import key command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a1c41cf97789ebb3a5592c8dba6960832}{Handle\+Export\+Key}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the export key command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a9dc55541b8f942c61a9fcec762b9f0a3}{Handle\+List\+Address}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the list address command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a5b5a2543985bf43b1902c4f3235f6538}{Handle\+List\+Asset}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the list asset command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a791808604564987412ce8de395873a0c}{Handle\+Transfer}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the transfer command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_ab47d8f964790830b4f89d91740e08182}{Handle\+Claim\+Gas}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the claim gas command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a51ae0c6d3d8168435f05cc6cc0f731de}{Handle\+Send}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the send command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_aaf8b9e7b6824f6fd31054ec94dcb7d13}{Handle\+Deploy}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the deploy command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_aba26d9e015b45b442d52745ba5822a88}{Handle\+Invoke}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the invoke command. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_af3ca6ae4fdfd6344591efbea5eb1b3d0}{Handle\+Import\+NEP2}} (const std\+::vector$<$ std\+::string $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the import NEP2 command. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_ad907e0d397462fba371a43e2ff800d52}{Initialize\+Command\+Help}} ()
+\begin{DoxyCompactList}\small\item\em Initializes the command help. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a304a442a81245012062ab9f4f946e4a6}{neo\+System\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_ab849bf1c434137fb990a0b588720c935}{rpc\+Server\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{wallets\+::\+Wallet}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_aecdc9c20d9cfa497e6bd16a7446489c0}{wallet\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler_a783dec1ab90652f1cfcd3e828b21785a}{command\+Help\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI} commands. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a65f8082fae88d7c46197a8c80182647f}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!CommandHandler@{CommandHandler}}
+\index{CommandHandler@{CommandHandler}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{CommandHandler()}{CommandHandler()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a65f8082fae88d7c46197a8c80182647f} 
+neo\+::cli\+::\+Command\+Handler\+::\+Command\+Handler (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$}]{neo\+System}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}} $>$}]{rpc\+Server}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1cli_1_1_command_handler}{Command\+Handler}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neo\+System} & The Neo system. \\
+\hline
+{\em rpc\+Server} & The RPC server. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a26cca26d7d8c35f6f1707323bad290cd}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!GetWallet@{GetWallet}}
+\index{GetWallet@{GetWallet}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{GetWallet()}{GetWallet()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a26cca26d7d8c35f6f1707323bad290cd} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{wallets\+::\+Wallet}} $>$ neo\+::cli\+::\+Command\+Handler\+::\+Get\+Wallet (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the wallet. 
+
+\begin{DoxyReturn}{Returns}
+The wallet. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_ab47d8f964790830b4f89d91740e08182}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleClaimGas@{HandleClaimGas}}
+\index{HandleClaimGas@{HandleClaimGas}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleClaimGas()}{HandleClaimGas()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_ab47d8f964790830b4f89d91740e08182} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Claim\+Gas (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the claim gas command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a1a2e4277f851d531a38d98e70f06d85c}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleClear@{HandleClear}}
+\index{HandleClear@{HandleClear}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleClear()}{HandleClear()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a1a2e4277f851d531a38d98e70f06d85c} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Clear (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the clear command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a21ffeee3f5c825de8fb3001792d8fdd1}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleCloseWallet@{HandleCloseWallet}}
+\index{HandleCloseWallet@{HandleCloseWallet}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleCloseWallet()}{HandleCloseWallet()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a21ffeee3f5c825de8fb3001792d8fdd1} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Close\+Wallet (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the close wallet command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_aa74489c90136bac112202cbf2dbc469a}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleCreateWallet@{HandleCreateWallet}}
+\index{HandleCreateWallet@{HandleCreateWallet}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleCreateWallet()}{HandleCreateWallet()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_aa74489c90136bac112202cbf2dbc469a} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Create\+Wallet (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the create wallet command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1cli_1_1_command_handler_aaf8b9e7b6824f6fd31054ec94dcb7d13}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleDeploy@{HandleDeploy}}
+\index{HandleDeploy@{HandleDeploy}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleDeploy()}{HandleDeploy()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_aaf8b9e7b6824f6fd31054ec94dcb7d13} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Deploy (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the deploy command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cli_1_1_command_handler_ae0d16a4dcae6b2a45f1da9f65aa7b324}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleExit@{HandleExit}}
+\index{HandleExit@{HandleExit}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleExit()}{HandleExit()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_ae0d16a4dcae6b2a45f1da9f65aa7b324} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Exit (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the exit command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a1c41cf97789ebb3a5592c8dba6960832}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleExportKey@{HandleExportKey}}
+\index{HandleExportKey@{HandleExportKey}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleExportKey()}{HandleExportKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a1c41cf97789ebb3a5592c8dba6960832} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Export\+Key (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the export key command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a81803421ff3ff97cb39ec7d2bbda976b}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleHelp@{HandleHelp}}
+\index{HandleHelp@{HandleHelp}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleHelp()}{HandleHelp()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a81803421ff3ff97cb39ec7d2bbda976b} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Help (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the help command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a2262332a6c1c110edf07914d105eb89e}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleImportKey@{HandleImportKey}}
+\index{HandleImportKey@{HandleImportKey}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleImportKey()}{HandleImportKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a2262332a6c1c110edf07914d105eb89e} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Import\+Key (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the import key command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_af3ca6ae4fdfd6344591efbea5eb1b3d0}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleImportNEP2@{HandleImportNEP2}}
+\index{HandleImportNEP2@{HandleImportNEP2}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleImportNEP2()}{HandleImportNEP2()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_af3ca6ae4fdfd6344591efbea5eb1b3d0} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Import\+NEP2 (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the import NEP2 command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_aba26d9e015b45b442d52745ba5822a88}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleInvoke@{HandleInvoke}}
+\index{HandleInvoke@{HandleInvoke}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleInvoke()}{HandleInvoke()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_aba26d9e015b45b442d52745ba5822a88} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Invoke (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the invoke command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a9dc55541b8f942c61a9fcec762b9f0a3}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleListAddress@{HandleListAddress}}
+\index{HandleListAddress@{HandleListAddress}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleListAddress()}{HandleListAddress()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a9dc55541b8f942c61a9fcec762b9f0a3} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+List\+Address (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the list address command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a5b5a2543985bf43b1902c4f3235f6538}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleListAsset@{HandleListAsset}}
+\index{HandleListAsset@{HandleListAsset}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleListAsset()}{HandleListAsset()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a5b5a2543985bf43b1902c4f3235f6538} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+List\+Asset (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the list asset command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_aeb011541ac0c44e916f31bc0920b40af}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleOpenWallet@{HandleOpenWallet}}
+\index{HandleOpenWallet@{HandleOpenWallet}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleOpenWallet()}{HandleOpenWallet()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_aeb011541ac0c44e916f31bc0920b40af} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Open\+Wallet (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the open wallet command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a51ae0c6d3d8168435f05cc6cc0f731de}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleSend@{HandleSend}}
+\index{HandleSend@{HandleSend}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleSend()}{HandleSend()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a51ae0c6d3d8168435f05cc6cc0f731de} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Send (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the send command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a15227313571a3b1ad79218ca90945c42}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleShowNode@{HandleShowNode}}
+\index{HandleShowNode@{HandleShowNode}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleShowNode()}{HandleShowNode()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a15227313571a3b1ad79218ca90945c42} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Show\+Node (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the show node command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a766a6b5b0b4f7b5bb416fef49673aff8}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleShowPool@{HandleShowPool}}
+\index{HandleShowPool@{HandleShowPool}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleShowPool()}{HandleShowPool()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a766a6b5b0b4f7b5bb416fef49673aff8} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Show\+Pool (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the show pool command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a3facb12bbe3e3fc4cbf68058dc31e815}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleShowState@{HandleShowState}}
+\index{HandleShowState@{HandleShowState}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleShowState()}{HandleShowState()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a3facb12bbe3e3fc4cbf68058dc31e815} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Show\+State (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the show state command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a791808604564987412ce8de395873a0c}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleTransfer@{HandleTransfer}}
+\index{HandleTransfer@{HandleTransfer}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleTransfer()}{HandleTransfer()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a791808604564987412ce8de395873a0c} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Transfer (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the transfer command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a494631dc8da5df11a3135e06aefe256b}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!HandleVersion@{HandleVersion}}
+\index{HandleVersion@{HandleVersion}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{HandleVersion()}{HandleVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a494631dc8da5df11a3135e06aefe256b} 
+bool neo\+::cli\+::\+Command\+Handler\+::\+Handle\+Version (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{}\end{DoxyParamCaption})}
+
+
+
+Handles the version command. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the command was executed successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_ad907e0d397462fba371a43e2ff800d52}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!InitializeCommandHelp@{InitializeCommandHelp}}
+\index{InitializeCommandHelp@{InitializeCommandHelp}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{InitializeCommandHelp()}{InitializeCommandHelp()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_ad907e0d397462fba371a43e2ff800d52} 
+void neo\+::cli\+::\+Command\+Handler\+::\+Initialize\+Command\+Help (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Initializes the command help. 
+
+\Hypertarget{classneo_1_1cli_1_1_command_handler_af1ac2f2b37a599478eef67784e42312b}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!SetWallet@{SetWallet}}
+\index{SetWallet@{SetWallet}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{SetWallet()}{SetWallet()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_af1ac2f2b37a599478eef67784e42312b} 
+void neo\+::cli\+::\+Command\+Handler\+::\+Set\+Wallet (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{wallets\+::\+Wallet}} $>$}]{wallet}{}\end{DoxyParamCaption})}
+
+
+
+Sets the wallet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em wallet} & The wallet. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a783dec1ab90652f1cfcd3e828b21785a}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!commandHelp\_@{commandHelp\_}}
+\index{commandHelp\_@{commandHelp\_}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{commandHelp\_}{commandHelp\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a783dec1ab90652f1cfcd3e828b21785a} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::string$>$ neo\+::cli\+::\+Command\+Handler\+::command\+Help\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_command_handler_a304a442a81245012062ab9f4f946e4a6}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!neoSystem\_@{neoSystem\_}}
+\index{neoSystem\_@{neoSystem\_}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{neoSystem\_}{neoSystem\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_a304a442a81245012062ab9f4f946e4a6} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}}$>$ neo\+::cli\+::\+Command\+Handler\+::neo\+System\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_command_handler_ab849bf1c434137fb990a0b588720c935}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!rpcServer\_@{rpcServer\_}}
+\index{rpcServer\_@{rpcServer\_}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{rpcServer\_}{rpcServer\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_ab849bf1c434137fb990a0b588720c935} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}}$>$ neo\+::cli\+::\+Command\+Handler\+::rpc\+Server\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cli_1_1_command_handler_aecdc9c20d9cfa497e6bd16a7446489c0}\index{neo::cli::CommandHandler@{neo::cli::CommandHandler}!wallet\_@{wallet\_}}
+\index{wallet\_@{wallet\_}!neo::cli::CommandHandler@{neo::cli::CommandHandler}}
+\doxysubsubsection{\texorpdfstring{wallet\_}{wallet\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_command_handler_aecdc9c20d9cfa497e6bd16a7446489c0} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{wallets\+::\+Wallet}}$>$ neo\+::cli\+::\+Command\+Handler\+::wallet\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cli/\mbox{\hyperlink{command__handler_8h}{command\+\_\+handler.\+h}}\item 
+src/cli/\mbox{\hyperlink{contract__commands_8cpp}{contract\+\_\+commands.\+cpp}}\item 
+src/cli/\mbox{\hyperlink{transaction__commands_8cpp}{transaction\+\_\+commands.\+cpp}}\item 
+src/cli/\mbox{\hyperlink{wallet__commands_8cpp}{wallet\+\_\+commands.\+cpp}}\end{DoxyCompactItemize}

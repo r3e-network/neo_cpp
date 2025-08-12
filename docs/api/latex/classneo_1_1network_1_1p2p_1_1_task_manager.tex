@@ -1,0 +1,354 @@
+\doxysection{neo\+::network\+::p2p\+::Task\+Manager Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager}{}\label{classneo_1_1network_1_1p2p_1_1_task_manager}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+
+
+Manages tasks for the P2P network.  
+
+
+
+
+{\ttfamily \#include $<$task\+\_\+manager.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a421e4b5d740d575da5fdba3d4bb8becf}{Task\+Manager}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}} $>$ blockchain, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{ledger\+::\+Memory\+Pool}} $>$ mem\+Pool)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_task_manager}{Task\+Manager}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_aee00699a1642de7fcd9e9ba8d1548c5a}{\texorpdfstring{$\sim$}{\string~}\+Task\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a357cf93bcbe2b86104b3f92665d4dbc1}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Starts the task manager. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a40249eda284b4f07bc7fe1b577d18147}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stops the task manager. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a2261cb8cb6c63dad96b63431f995253c}{Is\+Running}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the task manager is running. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a5e4152ca0319155cbc9ebd7ebd7b6cfc}{Add\+Block\+Task}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Adds a block task. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a19a0610972281a264aff6c7eb57c48e9}{Add\+Transaction\+Task}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Adds a transaction task. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_abaea481c4575596b1abe9d4fc4b8ff78}{Get\+Block\+Tasks}} () const
+\begin{DoxyCompactList}\small\item\em Gets the block tasks. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a7dd409d6cdf025acedfd79d96fc81bc3}{Get\+Transaction\+Tasks}} () const
+\begin{DoxyCompactList}\small\item\em Gets the transaction tasks. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_ac916ba3e51dc7e436ff3ab0d071b7e13}{Remove\+Block\+Task}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Removes a block task. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a3c2475df371eecdf03a5628b8b72960b}{Remove\+Transaction\+Task}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash)
+\begin{DoxyCompactList}\small\item\em Removes a transaction task. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a301c95ed541f7192a299246696cc718e}{Process\+Tasks}} ()
+\begin{DoxyCompactList}\small\item\em Processes tasks. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_ac2023e9a1bce5ce603df8e883b756539}{Process\+Block\+Tasks}} ()
+\begin{DoxyCompactList}\small\item\em Processes block tasks. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_aa63358cb65e5ec4cccdd84bb5b6fdd39}{Process\+Transaction\+Tasks}} ()
+\begin{DoxyCompactList}\small\item\em Processes transaction tasks. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_aff3c0106795c57bcb1d8408ddbf2b7d0}{Cleanup\+Expired\+Tasks}} ()
+\begin{DoxyCompactList}\small\item\em Cleans up expired tasks. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a8cbb9cb7a96d4bca0a1f44f51c376075}{blockchain\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{ledger\+::\+Memory\+Pool}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a4ca5dc9b2dde718490de2dbfd34f6a70}{mem\+Pool\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a0ee209b316c04b59f4762050f2cbca3b}{block\+Tasks\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a04d57352bd26a151febd1ea1ec0df7b2}{transaction\+Tasks\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a835c1769d2091188a161253d9eb7bc12}{tasks\+Mutex\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a07a9806afe06029e4f151f3d30912e00}{running\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a771999b445feb45f5498dcfb51dad87c}{task\+Thread\+\_\+}}
+\item 
+std\+::condition\+\_\+variable \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_aca993a02801b1818e5a6b2b71fcab418}{task\+Condition\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a65b455c4e7e04376bddae8264e89b73c}{task\+Mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages tasks for the P2P network. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a421e4b5d740d575da5fdba3d4bb8becf}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!TaskManager@{TaskManager}}
+\index{TaskManager@{TaskManager}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{TaskManager()}{TaskManager()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a421e4b5d740d575da5fdba3d4bb8becf} 
+neo\+::network\+::p2p\+::\+Task\+Manager\+::\+Task\+Manager (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}} $>$}]{blockchain}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{ledger\+::\+Memory\+Pool}} $>$}]{mem\+Pool}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_task_manager}{Task\+Manager}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em blockchain} & The blockchain. \\
+\hline
+{\em mem\+Pool} & The memory pool. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_aee00699a1642de7fcd9e9ba8d1548c5a}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!````~TaskManager@{\texorpdfstring{$\sim$}{\string~}TaskManager}}
+\index{````~TaskManager@{\texorpdfstring{$\sim$}{\string~}TaskManager}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TaskManager()}{\string~TaskManager()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_aee00699a1642de7fcd9e9ba8d1548c5a} 
+neo\+::network\+::p2p\+::\+Task\+Manager\+::\texorpdfstring{$\sim$}{\string~}\+Task\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+Here is the call graph for this function\+:
+% FIG 0
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a5e4152ca0319155cbc9ebd7ebd7b6cfc}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!AddBlockTask@{AddBlockTask}}
+\index{AddBlockTask@{AddBlockTask}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{AddBlockTask()}{AddBlockTask()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a5e4152ca0319155cbc9ebd7ebd7b6cfc} 
+bool neo\+::network\+::p2p\+::\+Task\+Manager\+::\+Add\+Block\+Task (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})}
+
+
+
+Adds a block task. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the task was added, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a19a0610972281a264aff6c7eb57c48e9}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!AddTransactionTask@{AddTransactionTask}}
+\index{AddTransactionTask@{AddTransactionTask}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{AddTransactionTask()}{AddTransactionTask()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a19a0610972281a264aff6c7eb57c48e9} 
+bool neo\+::network\+::p2p\+::\+Task\+Manager\+::\+Add\+Transaction\+Task (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})}
+
+
+
+Adds a transaction task. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the transaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the task was added, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_aff3c0106795c57bcb1d8408ddbf2b7d0}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!CleanupExpiredTasks@{CleanupExpiredTasks}}
+\index{CleanupExpiredTasks@{CleanupExpiredTasks}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{CleanupExpiredTasks()}{CleanupExpiredTasks()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_aff3c0106795c57bcb1d8408ddbf2b7d0} 
+void neo\+::network\+::p2p\+::\+Task\+Manager\+::\+Cleanup\+Expired\+Tasks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Cleans up expired tasks. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_abaea481c4575596b1abe9d4fc4b8ff78}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!GetBlockTasks@{GetBlockTasks}}
+\index{GetBlockTasks@{GetBlockTasks}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{GetBlockTasks()}{GetBlockTasks()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_abaea481c4575596b1abe9d4fc4b8ff78} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ neo\+::network\+::p2p\+::\+Task\+Manager\+::\+Get\+Block\+Tasks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the block tasks. 
+
+\begin{DoxyReturn}{Returns}
+The block tasks. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a7dd409d6cdf025acedfd79d96fc81bc3}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!GetTransactionTasks@{GetTransactionTasks}}
+\index{GetTransactionTasks@{GetTransactionTasks}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{GetTransactionTasks()}{GetTransactionTasks()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a7dd409d6cdf025acedfd79d96fc81bc3} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ neo\+::network\+::p2p\+::\+Task\+Manager\+::\+Get\+Transaction\+Tasks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the transaction tasks. 
+
+\begin{DoxyReturn}{Returns}
+The transaction tasks. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a2261cb8cb6c63dad96b63431f995253c}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!IsRunning@{IsRunning}}
+\index{IsRunning@{IsRunning}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{IsRunning()}{IsRunning()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a2261cb8cb6c63dad96b63431f995253c} 
+bool neo\+::network\+::p2p\+::\+Task\+Manager\+::\+Is\+Running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if the task manager is running. 
+
+\begin{DoxyReturn}{Returns}
+True if the task manager is running, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_ac2023e9a1bce5ce603df8e883b756539}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!ProcessBlockTasks@{ProcessBlockTasks}}
+\index{ProcessBlockTasks@{ProcessBlockTasks}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{ProcessBlockTasks()}{ProcessBlockTasks()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_ac2023e9a1bce5ce603df8e883b756539} 
+void neo\+::network\+::p2p\+::\+Task\+Manager\+::\+Process\+Block\+Tasks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Processes block tasks. 
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a301c95ed541f7192a299246696cc718e}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!ProcessTasks@{ProcessTasks}}
+\index{ProcessTasks@{ProcessTasks}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{ProcessTasks()}{ProcessTasks()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a301c95ed541f7192a299246696cc718e} 
+void neo\+::network\+::p2p\+::\+Task\+Manager\+::\+Process\+Tasks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Processes tasks. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_aa63358cb65e5ec4cccdd84bb5b6fdd39}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!ProcessTransactionTasks@{ProcessTransactionTasks}}
+\index{ProcessTransactionTasks@{ProcessTransactionTasks}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{ProcessTransactionTasks()}{ProcessTransactionTasks()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_aa63358cb65e5ec4cccdd84bb5b6fdd39} 
+void neo\+::network\+::p2p\+::\+Task\+Manager\+::\+Process\+Transaction\+Tasks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Processes transaction tasks. 
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_ac916ba3e51dc7e436ff3ab0d071b7e13}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!RemoveBlockTask@{RemoveBlockTask}}
+\index{RemoveBlockTask@{RemoveBlockTask}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{RemoveBlockTask()}{RemoveBlockTask()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_ac916ba3e51dc7e436ff3ab0d071b7e13} 
+bool neo\+::network\+::p2p\+::\+Task\+Manager\+::\+Remove\+Block\+Task (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})}
+
+
+
+Removes a block task. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the block. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the task was removed, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a3c2475df371eecdf03a5628b8b72960b}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!RemoveTransactionTask@{RemoveTransactionTask}}
+\index{RemoveTransactionTask@{RemoveTransactionTask}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{RemoveTransactionTask()}{RemoveTransactionTask()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a3c2475df371eecdf03a5628b8b72960b} 
+bool neo\+::network\+::p2p\+::\+Task\+Manager\+::\+Remove\+Transaction\+Task (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption})}
+
+
+
+Removes a transaction task. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the transaction. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the task was removed, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a357cf93bcbe2b86104b3f92665d4dbc1}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!Start@{Start}}
+\index{Start@{Start}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a357cf93bcbe2b86104b3f92665d4dbc1} 
+void neo\+::network\+::p2p\+::\+Task\+Manager\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Starts the task manager. 
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a40249eda284b4f07bc7fe1b577d18147}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a40249eda284b4f07bc7fe1b577d18147} 
+void neo\+::network\+::p2p\+::\+Task\+Manager\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the task manager. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a8cbb9cb7a96d4bca0a1f44f51c376075}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!blockchain\_@{blockchain\_}}
+\index{blockchain\_@{blockchain\_}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{blockchain\_}{blockchain\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a8cbb9cb7a96d4bca0a1f44f51c376075} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain}{ledger\+::\+Blockchain}}$>$ neo\+::network\+::p2p\+::\+Task\+Manager\+::blockchain\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a0ee209b316c04b59f4762050f2cbca3b}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!blockTasks\_@{blockTasks\_}}
+\index{blockTasks\_@{blockTasks\_}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{blockTasks\_}{blockTasks\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a0ee209b316c04b59f4762050f2cbca3b} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point$>$ neo\+::network\+::p2p\+::\+Task\+Manager\+::block\+Tasks\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a4ca5dc9b2dde718490de2dbfd34f6a70}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!memPool\_@{memPool\_}}
+\index{memPool\_@{memPool\_}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{memPool\_}{memPool\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a4ca5dc9b2dde718490de2dbfd34f6a70} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{ledger\+::\+Memory\+Pool}}$>$ neo\+::network\+::p2p\+::\+Task\+Manager\+::mem\+Pool\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a07a9806afe06029e4f151f3d30912e00}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a07a9806afe06029e4f151f3d30912e00} 
+std\+::atomic$<$bool$>$ neo\+::network\+::p2p\+::\+Task\+Manager\+::running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_aca993a02801b1818e5a6b2b71fcab418}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!taskCondition\_@{taskCondition\_}}
+\index{taskCondition\_@{taskCondition\_}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{taskCondition\_}{taskCondition\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_aca993a02801b1818e5a6b2b71fcab418} 
+std\+::condition\+\_\+variable neo\+::network\+::p2p\+::\+Task\+Manager\+::task\+Condition\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a65b455c4e7e04376bddae8264e89b73c}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!taskMutex\_@{taskMutex\_}}
+\index{taskMutex\_@{taskMutex\_}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{taskMutex\_}{taskMutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a65b455c4e7e04376bddae8264e89b73c} 
+std\+::mutex neo\+::network\+::p2p\+::\+Task\+Manager\+::task\+Mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a835c1769d2091188a161253d9eb7bc12}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!tasksMutex\_@{tasksMutex\_}}
+\index{tasksMutex\_@{tasksMutex\_}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{tasksMutex\_}{tasksMutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a835c1769d2091188a161253d9eb7bc12} 
+std\+::mutex neo\+::network\+::p2p\+::\+Task\+Manager\+::tasks\+Mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a771999b445feb45f5498dcfb51dad87c}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!taskThread\_@{taskThread\_}}
+\index{taskThread\_@{taskThread\_}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{taskThread\_}{taskThread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a771999b445feb45f5498dcfb51dad87c} 
+std\+::thread neo\+::network\+::p2p\+::\+Task\+Manager\+::task\+Thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_task_manager_a04d57352bd26a151febd1ea1ec0df7b2}\index{neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}!transactionTasks\_@{transactionTasks\_}}
+\index{transactionTasks\_@{transactionTasks\_}!neo::network::p2p::TaskManager@{neo::network::p2p::TaskManager}}
+\doxysubsubsection{\texorpdfstring{transactionTasks\_}{transactionTasks\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_task_manager_a04d57352bd26a151febd1ea1ec0df7b2} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point$>$ neo\+::network\+::p2p\+::\+Task\+Manager\+::transaction\+Tasks\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/\mbox{\hyperlink{task__manager_8h}{task\+\_\+manager.\+h}}\item 
+src/network/p2p/\mbox{\hyperlink{task__manager_8cpp}{task\+\_\+manager.\+cpp}}\end{DoxyCompactItemize}

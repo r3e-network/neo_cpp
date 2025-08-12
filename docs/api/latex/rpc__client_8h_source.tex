@@ -1,0 +1,115 @@
+\doxysection{rpc\+\_\+client.\+h}
+\hypertarget{rpc__client_8h_source}{}\label{rpc__client_8h_source}\index{include/neo/rpc/rpc\_client.h@{include/neo/rpc/rpc\_client.h}}
+\mbox{\hyperlink{rpc__client_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json_2json_8h}{neo/json/json.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{rpc__request_8h}{neo/rpc/rpc\_request.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{rpc__response_8h}{neo/rpc/rpc\_response.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <future>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json_8hpp}{nlohmann/json.hpp}}>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1rpc}{neo::rpc}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client}{IHttpClient}}}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client_aadb034e69dc308d030b568e4483da4b4}{\string~IHttpClient}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client_ad91739ffca753fb0d40f9bcc34bd3b19}{Post}}(\textcolor{keyword}{const}\ std::string\&\ url,\ \textcolor{keyword}{const}\ std::string\&\ content,}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::map<std::string,\ std::string>\&\ headers\ =\ \{\})\ =\ 0;}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{virtual}\ std::future<std::string>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client_a98736cd1783b4435d419cf31ac11dc68}{PostAsync}}(\textcolor{keyword}{const}\ std::string\&\ url,\ \textcolor{keyword}{const}\ std::string\&\ content,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::map<std::string,\ std::string>\&\ headers\ =\ \{\})\ =\ 0;}
+\DoxyCodeLine{00043\ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00048\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1rpc_1_1_simple_http_client_ab9eb173017c2ba068079b172e45d7623}{SimpleHttpClient}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_i_http_client}{IHttpClient}}}
+\DoxyCodeLine{00049\ \{}
+\DoxyCodeLine{00050\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{classneo_1_1rpc_1_1_simple_http_client_ab9eb173017c2ba068079b172e45d7623}{SimpleHttpClient}}();}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00059\ \ \ \ \ \mbox{\hyperlink{classneo_1_1rpc_1_1_simple_http_client_ae8c5044a46b03fbe864c014517bf07de}{\string~SimpleHttpClient}}()\ \textcolor{keyword}{override}\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_simple_http_client_aa6f82b14fac517a2ef6f6c347539e66d}{SetBasicAuth}}(\textcolor{keyword}{const}\ std::string\&\ username,\ \textcolor{keyword}{const}\ std::string\&\ password);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{comment}{//\ IHttpClient\ implementation}}
+\DoxyCodeLine{00069\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1rpc_1_1_simple_http_client_ab1f76bd7be758adee75929d975752845}{Post}}(\textcolor{keyword}{const}\ std::string\&\ url,\ \textcolor{keyword}{const}\ std::string\&\ content,}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::map<std::string,\ std::string>\&\ headers\ =\ \{\})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00071\ \ \ \ \ std::future<std::string>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_simple_http_client_a267162a6c8aedb361b57d69430316154}{PostAsync}}(\textcolor{keyword}{const}\ std::string\&\ url,\ \textcolor{keyword}{const}\ std::string\&\ content,}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::map<std::string,\ std::string>\&\ headers\ =\ \{\})\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00075\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1rpc_1_1_simple_http_client_a43c27b4c21936adb0c85155d92679f3d}{auth\_header\_}};}
+\DoxyCodeLine{00076\ \};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00081\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_ad2de209f3346a0a8abf6001843ae4520}{RpcClient}}}
+\DoxyCodeLine{00082\ \{}
+\DoxyCodeLine{00083\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_ad2de209f3346a0a8abf6001843ae4520}{RpcClient}}(\textcolor{keyword}{const}\ std::string\&\ base\_url,\ std::unique\_ptr<IHttpClient>\ http\_client\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_ad2de209f3346a0a8abf6001843ae4520}{RpcClient}}(\textcolor{keyword}{const}\ std::string\&\ base\_url,\ \textcolor{keyword}{const}\ std::string\&\ username,\ \textcolor{keyword}{const}\ std::string\&\ password,}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::unique\_ptr<IHttpClient>\ http\_client\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00104\ \ \ \ \ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_ad32690b425fc003191882405f1c02521}{\string~RpcClient}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00112\ \ \ \ \ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response}{RpcResponse}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_ad09c177c2f41d3558543206f2e331db0}{Send}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request}{RpcRequest}}\&\ request,\ \textcolor{keywordtype}{bool}\ throw\_on\_error\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00120\ \ \ \ \ std::future<RpcResponse>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a07a3fd5dc730c4d73c07af78ec403b9f}{SendAsync}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request}{RpcRequest}}\&\ request,\ \textcolor{keywordtype}{bool}\ throw\_on\_error\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00128\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a39612be405e7d8da1c5a67b7a537df98}{RpcSend}}(\textcolor{keyword}{const}\ std::string\&\ method,\ \textcolor{keyword}{const}\ std::vector<nlohmann::json>\&\ params\ =\ \{\});}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00136\ \ \ \ \ std::future<nlohmann::json>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a07246806da0d00ad8c9d003741ebef63}{RpcSendAsync}}(\textcolor{keyword}{const}\ std::string\&\ method,\ \textcolor{keyword}{const}\ std::vector<nlohmann::json>\&\ params\ =\ \{\});}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{comment}{//\ Blockchain\ methods}}
+\DoxyCodeLine{00143\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a86b99640bb96cd80e28c26fa96a091c1}{GetBestBlockHash}}();}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00149\ \ \ \ \ std::future<std::string>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_ac42b225c84bd389443e58e3bdbd47d3c}{GetBestBlockHashAsync}}();}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00155\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_aa5d908e819e6742527756bf1afd38757}{GetBlockCount}}();}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00161\ \ \ \ \ std::future<uint32\_t>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a48da467ea34361ccba9cc8ebfeb1be84}{GetBlockCountAsync}}();}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00169\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a1de090a641c83742e3707f080998e41f}{GetBlock}}(\textcolor{keyword}{const}\ std::string\&\ hash,\ \textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00177\ \ \ \ \ std::future<nlohmann::json>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a0931dee29eb2cda442cc72098ee36b8d}{GetBlockAsync}}(\textcolor{keyword}{const}\ std::string\&\ hash,\ \textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00185\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a1de090a641c83742e3707f080998e41f}{GetBlock}}(uint32\_t\ index,\ \textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00193\ \ \ \ \ std::future<nlohmann::json>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a0931dee29eb2cda442cc72098ee36b8d}{GetBlockAsync}}(uint32\_t\ index,\ \textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00201\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a868055442a07164c11cc76405b7a5cda}{GetTransaction}}(\textcolor{keyword}{const}\ std::string\&\ hash,\ \textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00209\ \ \ \ \ std::future<nlohmann::json>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a78d0f840f7329d17eaa56f695650a957}{GetTransactionAsync}}(\textcolor{keyword}{const}\ std::string\&\ hash,\ \textcolor{keywordtype}{bool}\ verbose\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00216\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_acd431bcbaa24b62465fcfa085c55d0dd}{SendRawTransaction}}(\textcolor{keyword}{const}\ std::string\&\ hex);}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00223\ \ \ \ \ std::future<std::string>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a62f9ea792c854e80f0f9babe34249e02}{SendRawTransactionAsync}}(\textcolor{keyword}{const}\ std::string\&\ hex);}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00232\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a850b020ee54e33f844161039d05d4dde}{InvokeFunction}}(\textcolor{keyword}{const}\ std::string\&\ script\_hash,\ \textcolor{keyword}{const}\ std::string\&\ operation,}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<nlohmann::json>\&\ params\ =\ \{\});}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00242\ \ \ \ \ std::future<nlohmann::json>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a7d3ebbec52300c7e20dc205ea1cda9bf}{InvokeFunctionAsync}}(\textcolor{keyword}{const}\ std::string\&\ script\_hash,\ \textcolor{keyword}{const}\ std::string\&\ operation,}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<nlohmann::json>\&\ params\ =\ \{\});}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00249\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_ac638c71a2dfdcbdfd279c887ca2f60fe}{GetVersion}}();}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00255\ \ \ \ \ std::future<nlohmann::json>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a10a4260b0e8b3c83df5fd5b7ee0a0c0b}{GetVersionAsync}}();}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00257\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00258\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_aee14ff326821a513862420cb89609706}{base\_url\_}};}
+\DoxyCodeLine{00259\ \ \ \ \ std::unique\_ptr<IHttpClient>\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a974e59e98963ba4434d61eb3cbdad875}{http\_client\_}};}
+\DoxyCodeLine{00260\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a23a96153cc53844461803b068f4f8258}{next\_id\_}};}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00268\ \ \ \ \ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_request}{RpcRequest}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_ad1e5893f991a8a70835d1b90fdd11a6b}{CreateRequest}}(\textcolor{keyword}{const}\ std::string\&\ method,\ \textcolor{keyword}{const}\ std::vector<nlohmann::json>\&\ params\ =\ \{\});}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00276\ \ \ \ \ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_response}{RpcResponse}}\ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_client_a2a354f4ca91fd55887055433f6d3b8a4}{ProcessResponse}}(\textcolor{keyword}{const}\ std::string\&\ response,\ \textcolor{keywordtype}{bool}\ throw\_on\_error);}
+\DoxyCodeLine{00277\ \};}
+\DoxyCodeLine{00278\ \}\ \ \textcolor{comment}{//\ namespace\ neo::rpc}}
+
+\end{DoxyCode}

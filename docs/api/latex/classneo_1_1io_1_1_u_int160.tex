@@ -1,0 +1,678 @@
+\doxysection{neo\+::io\+::UInt160 Class Reference}
+\hypertarget{classneo_1_1io_1_1_u_int160}{}\label{classneo_1_1io_1_1_u_int160}\index{neo::io::UInt160@{neo::io::UInt160}}
+
+
+Represents a 160-\/bit unsigned integer.  
+
+
+
+
+{\ttfamily \#include $<$uint160.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::io\+::UInt160\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::io\+::UInt160\+:
+% FIG 1
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_abb8cfe8a31823b61e6d428a067f6e957}{value\+\_\+type}} = std\+::array$<$uint8\+\_\+t, \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a59bed6a0865a244d255f4f62be88f479}{Size}}$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a975ac19e433b0ceb17f5b56454667fa5}{UInt160}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} initialized to zero. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a0fec06d247b1fe63a5e4a8bf1fc76b2d}{UInt160}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} from a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a142b1fe4b9a63a1a881f644ba3d17d71}{UInt160}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_abb8cfe8a31823b61e6d428a067f6e957}{value\+\_\+type}} \&data)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} from a byte array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a4c5b042da1a5fb040855fca140145c8f}{UInt160}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} from a raw byte array. \end{DoxyCompactList}\item 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_ad3022981ff7dc5b1928972035b8c81e6}{Data}} () noexcept
+\begin{DoxyCompactList}\small\item\em Gets a pointer to the data. \end{DoxyCompactList}\item 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a0c7416b63a10277ffcd785e77115affe}{Data}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets a const pointer to the data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a7e537e6035701cc08bf7eb8e9ff5d8e6}{As\+Span}} () const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} to a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a947ec4601aad300d141e2a5f3584d4d3}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} to a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a0a41551364494347f42d572706a30694}{To\+Hex\+String}} () const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} to a hexadecimal string. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a4a16aab4a80f517c91b698c4e1102c5d}{To\+String}} () const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} to a string. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a4460e29cdcdf5a3c160f9e73acb56663}{operator==}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is equal to another \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_ae86fe020ed4f2cc40ac0d6637f754777}{operator!=}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is not equal to another \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_af02aecba4d316b96aedfa2eca9b45144}{operator$<$}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is less than another \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a70025830e2b91504e28c94a7a6b3e4d0}{operator$>$}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is greater than another \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a5d65799bc49f4588eb0f7e7bc771ca30}{operator$<$=}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is less than or equal to another \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a741b6031d803cfa0ad83d8986a34e135}{operator$>$=}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is greater than or equal to another \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_af6eb7ff964875651d53f8195bf3dcea1}{Is\+Zero}} () const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is zero. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a218231095fa409dde809cb5968541586}{To\+Address}} (uint8\+\_\+t version=0x17) const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} to a Neo address. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a6d5c4e94dd0c4bfe7d076ce16c7f0c4a}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_aa8c9930741a805d1b3b3fb1d72c01d25}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} from a binary reader. \end{DoxyCompactList}\item 
+uint8\+\_\+t \& \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_af4f4ed7891315157725d175965e67f83}{operator\mbox{[}$\,$\mbox{]}}} (size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Array subscript operator. \end{DoxyCompactList}\item 
+const uint8\+\_\+t \& \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_ae73d0a3d20c8cd374bab3b1ff76b32d1}{operator\mbox{[}$\,$\mbox{]}}} (size\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Array subscript operator (const). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_aff15950166fb8a9a018e85e419500115}{Parse}} (const std\+::string \&hex)
+\begin{DoxyCompactList}\small\item\em Parses a hexadecimal string into a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_ab05ad86c095702985a3c48b025c6e0bc}{Try\+Parse}} (const std\+::string \&hex, \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&result)
+\begin{DoxyCompactList}\small\item\em Tries to parse a hexadecimal string into a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_ac6525a2b7cc473818274027ead1c6688}{From\+String}} (const std\+::string \&hex\+\_\+string)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} from a hex string. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a28fac5fc86c25257391996114918ac94}{Zero}} ()
+\begin{DoxyCompactList}\small\item\em Gets a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} with all bits set to zero. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a2fe1e02c0e2a3b1bc843d5ead7f35e39}{From\+Bytes}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} from a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_ae5fa6ea20d674314c1d7d3c4f1694eeb}{From\+Address}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} from a Neo address. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a59bed6a0865a244d255f4f62be88f479}{Size}} = 20
+\begin{DoxyCompactList}\small\item\em The size of the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} in bytes. \end{DoxyCompactList}\item 
+static constexpr size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_afc50ad58f7da64fd66852d896308e60d}{SIZE}} = 20
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160_abb8cfe8a31823b61e6d428a067f6e957}{value\+\_\+type}} \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a2e40fbf0c131fccc06b759097e546681}{data\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a 160-\/bit unsigned integer. 
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1io_1_1_u_int160_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1io_1_1_u_int160_abb8cfe8a31823b61e6d428a067f6e957}\index{neo::io::UInt160@{neo::io::UInt160}!value\_type@{value\_type}}
+\index{value\_type@{value\_type}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{value\_type}{value\_type}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_abb8cfe8a31823b61e6d428a067f6e957} 
+using \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_abb8cfe8a31823b61e6d428a067f6e957}{neo\+::io\+::\+UInt160\+::value\+\_\+type}} = std\+::array$<$uint8\+\_\+t, \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_a59bed6a0865a244d255f4f62be88f479}{Size}}$>$}
+
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1io_1_1_u_int160_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1io_1_1_u_int160_a975ac19e433b0ceb17f5b56454667fa5}\index{neo::io::UInt160@{neo::io::UInt160}!UInt160@{UInt160}}
+\index{UInt160@{UInt160}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{UInt160()}{UInt160()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a975ac19e433b0ceb17f5b56454667fa5} 
+neo\+::io\+::\+UInt160\+::\+UInt160 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} initialized to zero. 
+
+\Hypertarget{classneo_1_1io_1_1_u_int160_a0fec06d247b1fe63a5e4a8bf1fc76b2d}\index{neo::io::UInt160@{neo::io::UInt160}!UInt160@{UInt160}}
+\index{UInt160@{UInt160}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{UInt160()}{UInt160()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a0fec06d247b1fe63a5e4a8bf1fc76b2d} 
+neo\+::io\+::\+UInt160\+::\+UInt160 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} from a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} size is not equal to \doxylink{classneo_1_1io_1_1_u_int160_a59bed6a0865a244d255f4f62be88f479}{UInt160\+::\+Size}. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1io_1_1_u_int160_a142b1fe4b9a63a1a881f644ba3d17d71}\index{neo::io::UInt160@{neo::io::UInt160}!UInt160@{UInt160}}
+\index{UInt160@{UInt160}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{UInt160()}{UInt160()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a142b1fe4b9a63a1a881f644ba3d17d71} 
+neo\+::io\+::\+UInt160\+::\+UInt160 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160_abb8cfe8a31823b61e6d428a067f6e957}{value\+\_\+type}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} from a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The byte array. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_u_int160_a4c5b042da1a5fb040855fca140145c8f}\index{neo::io::UInt160@{neo::io::UInt160}!UInt160@{UInt160}}
+\index{UInt160@{UInt160}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{UInt160()}{UInt160()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a4c5b042da1a5fb040855fca140145c8f} 
+neo\+::io\+::\+UInt160\+::\+UInt160 (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} from a raw byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The raw byte array. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1io_1_1_u_int160_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1io_1_1_u_int160_a7e537e6035701cc08bf7eb8e9ff5d8e6}\index{neo::io::UInt160@{neo::io::UInt160}!AsSpan@{AsSpan}}
+\index{AsSpan@{AsSpan}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{AsSpan()}{AsSpan()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a7e537e6035701cc08bf7eb8e9ff5d8e6} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} neo\+::io\+::\+UInt160\+::\+As\+Span (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} to a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+
+\begin{DoxyReturn}{Returns}
+A \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} view of the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_u_int160_a0c7416b63a10277ffcd785e77115affe}\index{neo::io::UInt160@{neo::io::UInt160}!Data@{Data}}
+\index{Data@{Data}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a0c7416b63a10277ffcd785e77115affe} 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} neo\+::io\+::\+UInt160\+::\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets a const pointer to the data. 
+
+\begin{DoxyReturn}{Returns}
+Const pointer to the data. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_u_int160_ad3022981ff7dc5b1928972035b8c81e6}\index{neo::io::UInt160@{neo::io::UInt160}!Data@{Data}}
+\index{Data@{Data}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_ad3022981ff7dc5b1928972035b8c81e6} 
+uint8\+\_\+t \texorpdfstring{$\ast$}{*} neo\+::io\+::\+UInt160\+::\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets a pointer to the data. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to the data. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_u_int160_aa8c9930741a805d1b3b3fb1d72c01d25}\index{neo::io::UInt160@{neo::io::UInt160}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_aa8c9930741a805d1b3b3fb1d72c01d25} 
+void neo\+::io\+::\+UInt160\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1io_1_1_u_int160_ae5fa6ea20d674314c1d7d3c4f1694eeb}\index{neo::io::UInt160@{neo::io::UInt160}!FromAddress@{FromAddress}}
+\index{FromAddress@{FromAddress}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{FromAddress()}{FromAddress()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_ae5fa6ea20d674314c1d7d3c4f1694eeb} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} neo\+::io\+::\+UInt160\+::\+From\+Address (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} from a Neo address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The Neo address string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} script hash. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the address is invalid. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1io_1_1_u_int160_a2fe1e02c0e2a3b1bc843d5ead7f35e39}\index{neo::io::UInt160@{neo::io::UInt160}!FromBytes@{FromBytes}}
+\index{FromBytes@{FromBytes}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{FromBytes()}{FromBytes()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a2fe1e02c0e2a3b1bc843d5ead7f35e39} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} neo\+::io\+::\+UInt160\+::\+From\+Bytes (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Creates a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} from a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} containing the data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} created from the data. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} size is not equal to \doxylink{classneo_1_1io_1_1_u_int160_a59bed6a0865a244d255f4f62be88f479}{UInt160\+::\+Size}. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1io_1_1_u_int160_ac6525a2b7cc473818274027ead1c6688}\index{neo::io::UInt160@{neo::io::UInt160}!FromString@{FromString}}
+\index{FromString@{FromString}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{FromString()}{FromString()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_ac6525a2b7cc473818274027ead1c6688} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} neo\+::io\+::\+UInt160\+::\+From\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex\+\_\+string}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} from a hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex\+\_\+string} & The hex string (with or without 0x prefix). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} value. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1io_1_1_u_int160_af6eb7ff964875651d53f8195bf3dcea1}\index{neo::io::UInt160@{neo::io::UInt160}!IsZero@{IsZero}}
+\index{IsZero@{IsZero}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{IsZero()}{IsZero()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_af6eb7ff964875651d53f8195bf3dcea1} 
+bool neo\+::io\+::\+UInt160\+::\+Is\+Zero (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is zero. 
+
+\begin{DoxyReturn}{Returns}
+True if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is zero, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_u_int160_ae86fe020ed4f2cc40ac0d6637f754777}\index{neo::io::UInt160@{neo::io::UInt160}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_ae86fe020ed4f2cc40ac0d6637f754777} 
+bool neo\+::io\+::\+UInt160\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is not equal to another \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the UInt160s are not equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1io_1_1_u_int160_af02aecba4d316b96aedfa2eca9b45144}\index{neo::io::UInt160@{neo::io::UInt160}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_af02aecba4d316b96aedfa2eca9b45144} 
+bool neo\+::io\+::\+UInt160\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is less than another \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is less than the other \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1io_1_1_u_int160_a5d65799bc49f4588eb0f7e7bc771ca30}\index{neo::io::UInt160@{neo::io::UInt160}!operator$<$=@{operator$<$=}}
+\index{operator$<$=@{operator$<$=}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{operator$<$=()}{operator<=()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a5d65799bc49f4588eb0f7e7bc771ca30} 
+bool neo\+::io\+::\+UInt160\+::operator$<$= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is less than or equal to another \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is less than or equal to the other \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1io_1_1_u_int160_a4460e29cdcdf5a3c160f9e73acb56663}\index{neo::io::UInt160@{neo::io::UInt160}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a4460e29cdcdf5a3c160f9e73acb56663} 
+bool neo\+::io\+::\+UInt160\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is equal to another \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the UInt160s are equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1io_1_1_u_int160_a70025830e2b91504e28c94a7a6b3e4d0}\index{neo::io::UInt160@{neo::io::UInt160}!operator$>$@{operator$>$}}
+\index{operator$>$@{operator$>$}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{operator$>$()}{operator>()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a70025830e2b91504e28c94a7a6b3e4d0} 
+bool neo\+::io\+::\+UInt160\+::operator$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is greater than another \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is greater than the other \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1io_1_1_u_int160_a741b6031d803cfa0ad83d8986a34e135}\index{neo::io::UInt160@{neo::io::UInt160}!operator$>$=@{operator$>$=}}
+\index{operator$>$=@{operator$>$=}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{operator$>$=()}{operator>=()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a741b6031d803cfa0ad83d8986a34e135} 
+bool neo\+::io\+::\+UInt160\+::operator$>$= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is greater than or equal to another \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} is greater than or equal to the other \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1io_1_1_u_int160_af4f4ed7891315157725d175965e67f83}\index{neo::io::UInt160@{neo::io::UInt160}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_af4f4ed7891315157725d175965e67f83} 
+uint8\+\_\+t \& neo\+::io\+::\+UInt160\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Array subscript operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the byte at the index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_u_int160_ae73d0a3d20c8cd374bab3b1ff76b32d1}\index{neo::io::UInt160@{neo::io::UInt160}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_ae73d0a3d20c8cd374bab3b1ff76b32d1} 
+const uint8\+\_\+t \& neo\+::io\+::\+UInt160\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Array subscript operator (const). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Const reference to the byte at the index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_u_int160_aff15950166fb8a9a018e85e419500115}\index{neo::io::UInt160@{neo::io::UInt160}!Parse@{Parse}}
+\index{Parse@{Parse}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_aff15950166fb8a9a018e85e419500115} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} neo\+::io\+::\+UInt160\+::\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Parses a hexadecimal string into a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The hexadecimal string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The parsed \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the hexadecimal string is invalid. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1io_1_1_u_int160_a6d5c4e94dd0c4bfe7d076ce16c7f0c4a}\index{neo::io::UInt160@{neo::io::UInt160}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a6d5c4e94dd0c4bfe7d076ce16c7f0c4a} 
+void neo\+::io\+::\+UInt160\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1io_1_1_u_int160_a218231095fa409dde809cb5968541586}\index{neo::io::UInt160@{neo::io::UInt160}!ToAddress@{ToAddress}}
+\index{ToAddress@{ToAddress}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{ToAddress()}{ToAddress()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a218231095fa409dde809cb5968541586} 
+std\+::string neo\+::io\+::\+UInt160\+::\+To\+Address (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{version}{ = {\ttfamily 0x17}}\end{DoxyParamCaption}) const}
+
+
+
+Converts the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} to a Neo address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em version} & The address version (default is 0x17 for Neo mainnet). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Neo address string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1io_1_1_u_int160_a947ec4601aad300d141e2a5f3584d4d3}\index{neo::io::UInt160@{neo::io::UInt160}!ToArray@{ToArray}}
+\index{ToArray@{ToArray}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{ToArray()}{ToArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a947ec4601aad300d141e2a5f3584d4d3} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} neo\+::io\+::\+UInt160\+::\+To\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} to a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+\begin{DoxyReturn}{Returns}
+A \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector} copy of the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1io_1_1_u_int160_a0a41551364494347f42d572706a30694}\index{neo::io::UInt160@{neo::io::UInt160}!ToHexString@{ToHexString}}
+\index{ToHexString@{ToHexString}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{ToHexString()}{ToHexString()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a0a41551364494347f42d572706a30694} 
+std\+::string neo\+::io\+::\+UInt160\+::\+To\+Hex\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} to a hexadecimal string. 
+
+\begin{DoxyReturn}{Returns}
+The hexadecimal string representation of the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1io_1_1_u_int160_a4a16aab4a80f517c91b698c4e1102c5d}\index{neo::io::UInt160@{neo::io::UInt160}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a4a16aab4a80f517c91b698c4e1102c5d} 
+std\+::string neo\+::io\+::\+UInt160\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} to a string. 
+
+\begin{DoxyReturn}{Returns}
+The string representation of the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1io_1_1_u_int160_ab05ad86c095702985a3c48b025c6e0bc}\index{neo::io::UInt160@{neo::io::UInt160}!TryParse@{TryParse}}
+\index{TryParse@{TryParse}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{TryParse()}{TryParse()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_ab05ad86c095702985a3c48b025c6e0bc} 
+bool neo\+::io\+::\+UInt160\+::\+Try\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{, }\item[{\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&}]{result}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Tries to parse a hexadecimal string into a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The hexadecimal string. \\
+\hline
+{\em result} & The parsed \doxylink{classneo_1_1io_1_1_u_int160}{UInt160}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the parsing was successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1io_1_1_u_int160_a28fac5fc86c25257391996114918ac94}\index{neo::io::UInt160@{neo::io::UInt160}!Zero@{Zero}}
+\index{Zero@{Zero}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{Zero()}{Zero()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a28fac5fc86c25257391996114918ac94} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} neo\+::io\+::\+UInt160\+::\+Zero (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Gets a \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} with all bits set to zero. 
+
+\begin{DoxyReturn}{Returns}
+A \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} with all bits set to zero. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 20
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1io_1_1_u_int160_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1io_1_1_u_int160_a2e40fbf0c131fccc06b759097e546681}\index{neo::io::UInt160@{neo::io::UInt160}!data\_@{data\_}}
+\index{data\_@{data\_}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a2e40fbf0c131fccc06b759097e546681} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160_abb8cfe8a31823b61e6d428a067f6e957}{value\+\_\+type}} neo\+::io\+::\+UInt160\+::data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1io_1_1_u_int160_afc50ad58f7da64fd66852d896308e60d}\index{neo::io::UInt160@{neo::io::UInt160}!SIZE@{SIZE}}
+\index{SIZE@{SIZE}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{SIZE}{SIZE}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_afc50ad58f7da64fd66852d896308e60d} 
+size\+\_\+t neo\+::io\+::\+UInt160\+::\+SIZE = 20\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1io_1_1_u_int160_a59bed6a0865a244d255f4f62be88f479}\index{neo::io::UInt160@{neo::io::UInt160}!Size@{Size}}
+\index{Size@{Size}!neo::io::UInt160@{neo::io::UInt160}}
+\doxysubsubsection{\texorpdfstring{Size}{Size}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_u_int160_a59bed6a0865a244d255f4f62be88f479} 
+size\+\_\+t neo\+::io\+::\+UInt160\+::\+Size = 20\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The size of the \doxylink{classneo_1_1io_1_1_u_int160}{UInt160} in bytes. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/io/\mbox{\hyperlink{uint160_8h}{uint160.\+h}}\item 
+src/io/\mbox{\hyperlink{uint160_8cpp}{uint160.\+cpp}}\end{DoxyCompactItemize}

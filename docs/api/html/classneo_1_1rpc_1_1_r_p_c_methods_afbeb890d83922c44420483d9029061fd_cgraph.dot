@@ -1,0 +1,20 @@
+digraph "neo::rpc::RPCMethods::GetBlock"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::rpc::RPCMethods\l::GetBlock",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Gets a block."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::rpc::RPCMethods\l::BlockToJson",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1rpc_1_1_r_p_c_methods.html#ad1de15165b7ea273b5b8c8c16f3ddef3",tooltip="Converts a block to JSON."];
+  Node2 -> Node3 [id="edge2_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::cryptography::\lBase64::Encode",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cryptography_1_1_base64.html#a9401ccf738d0fd6a8b8125b395abf392",tooltip="Encodes data to Base64."];
+  Node3 -> Node4 [id="edge3_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::io::ByteSpan::Data",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_span.html#a0285a19eb5cd212ecd1079e0bc5e494c",tooltip="Gets a pointer to the data."];
+  Node3 -> Node5 [id="edge4_Node000003_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::io::ByteSpan::Size",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_span.html#a4a869430800a37dcbeefac6f36468fcb",tooltip="Gets the size of the ByteSpan."];
+  Node2 -> Node6 [id="edge5_Node000002_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::rpc::RPCMethods\l::TransactionToJson",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1rpc_1_1_r_p_c_methods.html#a74686388bdde3a7dc1b0ecdcf406695a",tooltip="Converts a transaction to JSON."];
+  Node6 -> Node3 [id="edge6_Node000006_Node000003",color="steelblue1",style="solid",tooltip=" "];
+}

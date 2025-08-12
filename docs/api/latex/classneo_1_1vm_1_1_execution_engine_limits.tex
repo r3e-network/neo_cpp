@@ -1,0 +1,199 @@
+\doxysection{neo\+::vm\+::Execution\+Engine\+Limits Class Reference}
+\hypertarget{classneo_1_1vm_1_1_execution_engine_limits}{}\label{classneo_1_1vm_1_1_execution_engine_limits}\index{neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}}
+
+
+Represents the restrictions on the VM.  
+
+
+
+
+{\ttfamily \#include $<$execution\+\_\+engine\+\_\+limits.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::vm\+::Execution\+Engine\+Limits\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits_a37c7ce6cfc82b12e008b0674556071d5}{Execution\+Engine\+Limits}} ()=default
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{classneo_1_1vm_1_1_execution_engine_limits}{Execution\+Engine\+Limits} with default values. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits_a880a52c15f1693c0fc50d0eadf3ea846}{Max\+Shift}} = 256
+\begin{DoxyCompactList}\small\item\em The maximum number of bits that SHL and SHR can shift. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits_ab685929e566ef51d0e3bac6c196bbba0}{Max\+Stack\+Size}} = 2 \texorpdfstring{$\ast$}{*} 1024
+\begin{DoxyCompactList}\small\item\em The maximum number of items that can be contained in the VM\textquotesingle{}s evaluation stacks and slots. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits_a672ecf56831c504a01a6c8d579c0ac90}{Max\+Item\+Size}} = 65535 \texorpdfstring{$\ast$}{*} 2
+\begin{DoxyCompactList}\small\item\em The maximum size of an item in the VM. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits_a823a3fe2c859280100189bd34aed0702}{Max\+Invocation\+Stack\+Size}} = 1024
+\begin{DoxyCompactList}\small\item\em The maximum number of frames in the invocation stack. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits_a910d376a636e1d1cb4e965283b53406c}{Max\+Comparable\+Size}} = 65536
+\begin{DoxyCompactList}\small\item\em The largest comparable size. If a Byte\+String or \doxylink{namespaceneo_1_1vm_a43faf876f054d0c6da8b213ea630d520}{Struct} exceeds this size, comparison operations on it cannot be performed in the VM. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits_a307a65396f1b7109bceb46e08e231f37}{Max\+Try\+Nesting\+Depth}} = 16
+\begin{DoxyCompactList}\small\item\em The maximum nesting depth of try-\/catch-\/finally blocks. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits_ac90a13495be0da7611528b731e13a4c4}{Max\+Initial\+Element\+Count}} = 1024 \texorpdfstring{$\ast$}{*} 1024
+\begin{DoxyCompactList}\small\item\em The maximum number of initial elements in an array or structure. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits_a6f8d983473c56c0ec4fa105a4d5db10d}{Max\+Element\+Count}} = 1024 \texorpdfstring{$\ast$}{*} 1024
+\begin{DoxyCompactList}\small\item\em The maximum number of elements in an array or structure. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits_af90b92c17c113de2cffceef514f9a7af}{Max\+Return\+Size}} = 1024 \texorpdfstring{$\ast$}{*} 1024
+\begin{DoxyCompactList}\small\item\em The maximum number of bytes that can be returned by a script. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits_a598ec7e95afbb74cc5faac4c486b777c}{Max\+Slot\+Count}} = 1024
+\begin{DoxyCompactList}\small\item\em The maximum number of bytes that can be stored in a slot. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits_af980eabc0da66030a48a4bf1d769829e}{Catch\+Engine\+Exceptions}} = true
+\begin{DoxyCompactList}\small\item\em Whether to catch engine exceptions. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits}{Execution\+Engine\+Limits}} \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits_a21dedd593947fe0ca57b8c73b68c9897}{Default}}
+\begin{DoxyCompactList}\small\item\em The default strategy. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the restrictions on the VM. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_limits_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_limits_a37c7ce6cfc82b12e008b0674556071d5}\index{neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}!ExecutionEngineLimits@{ExecutionEngineLimits}}
+\index{ExecutionEngineLimits@{ExecutionEngineLimits}!neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}}
+\doxysubsubsection{\texorpdfstring{ExecutionEngineLimits()}{ExecutionEngineLimits()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_limits_a37c7ce6cfc82b12e008b0674556071d5} 
+neo\+::vm\+::\+Execution\+Engine\+Limits\+::\+Execution\+Engine\+Limits (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Constructs a new \doxylink{classneo_1_1vm_1_1_execution_engine_limits}{Execution\+Engine\+Limits} with default values. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_limits_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_limits_af980eabc0da66030a48a4bf1d769829e}\index{neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}!CatchEngineExceptions@{CatchEngineExceptions}}
+\index{CatchEngineExceptions@{CatchEngineExceptions}!neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}}
+\doxysubsubsection{\texorpdfstring{CatchEngineExceptions}{CatchEngineExceptions}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_limits_af980eabc0da66030a48a4bf1d769829e} 
+bool neo\+::vm\+::\+Execution\+Engine\+Limits\+::\+Catch\+Engine\+Exceptions = true}
+
+
+
+Whether to catch engine exceptions. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_limits_a21dedd593947fe0ca57b8c73b68c9897}\index{neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}!Default@{Default}}
+\index{Default@{Default}!neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}}
+\doxysubsubsection{\texorpdfstring{Default}{Default}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_limits_a21dedd593947fe0ca57b8c73b68c9897} 
+const \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits}{Execution\+Engine\+Limits}} neo\+::vm\+::\+Execution\+Engine\+Limits\+::\+Default\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+The default strategy. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_limits_a910d376a636e1d1cb4e965283b53406c}\index{neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}!MaxComparableSize@{MaxComparableSize}}
+\index{MaxComparableSize@{MaxComparableSize}!neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}}
+\doxysubsubsection{\texorpdfstring{MaxComparableSize}{MaxComparableSize}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_limits_a910d376a636e1d1cb4e965283b53406c} 
+uint32\+\_\+t neo\+::vm\+::\+Execution\+Engine\+Limits\+::\+Max\+Comparable\+Size = 65536}
+
+
+
+The largest comparable size. If a Byte\+String or \doxylink{namespaceneo_1_1vm_a43faf876f054d0c6da8b213ea630d520}{Struct} exceeds this size, comparison operations on it cannot be performed in the VM. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_limits_a6f8d983473c56c0ec4fa105a4d5db10d}\index{neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}!MaxElementCount@{MaxElementCount}}
+\index{MaxElementCount@{MaxElementCount}!neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}}
+\doxysubsubsection{\texorpdfstring{MaxElementCount}{MaxElementCount}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_limits_a6f8d983473c56c0ec4fa105a4d5db10d} 
+uint32\+\_\+t neo\+::vm\+::\+Execution\+Engine\+Limits\+::\+Max\+Element\+Count = 1024 \texorpdfstring{$\ast$}{*} 1024}
+
+
+
+The maximum number of elements in an array or structure. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_limits_ac90a13495be0da7611528b731e13a4c4}\index{neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}!MaxInitialElementCount@{MaxInitialElementCount}}
+\index{MaxInitialElementCount@{MaxInitialElementCount}!neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}}
+\doxysubsubsection{\texorpdfstring{MaxInitialElementCount}{MaxInitialElementCount}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_limits_ac90a13495be0da7611528b731e13a4c4} 
+uint32\+\_\+t neo\+::vm\+::\+Execution\+Engine\+Limits\+::\+Max\+Initial\+Element\+Count = 1024 \texorpdfstring{$\ast$}{*} 1024}
+
+
+
+The maximum number of initial elements in an array or structure. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_limits_a823a3fe2c859280100189bd34aed0702}\index{neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}!MaxInvocationStackSize@{MaxInvocationStackSize}}
+\index{MaxInvocationStackSize@{MaxInvocationStackSize}!neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}}
+\doxysubsubsection{\texorpdfstring{MaxInvocationStackSize}{MaxInvocationStackSize}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_limits_a823a3fe2c859280100189bd34aed0702} 
+uint32\+\_\+t neo\+::vm\+::\+Execution\+Engine\+Limits\+::\+Max\+Invocation\+Stack\+Size = 1024}
+
+
+
+The maximum number of frames in the invocation stack. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_limits_a672ecf56831c504a01a6c8d579c0ac90}\index{neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}!MaxItemSize@{MaxItemSize}}
+\index{MaxItemSize@{MaxItemSize}!neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}}
+\doxysubsubsection{\texorpdfstring{MaxItemSize}{MaxItemSize}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_limits_a672ecf56831c504a01a6c8d579c0ac90} 
+uint32\+\_\+t neo\+::vm\+::\+Execution\+Engine\+Limits\+::\+Max\+Item\+Size = 65535 \texorpdfstring{$\ast$}{*} 2}
+
+
+
+The maximum size of an item in the VM. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_limits_af90b92c17c113de2cffceef514f9a7af}\index{neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}!MaxReturnSize@{MaxReturnSize}}
+\index{MaxReturnSize@{MaxReturnSize}!neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}}
+\doxysubsubsection{\texorpdfstring{MaxReturnSize}{MaxReturnSize}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_limits_af90b92c17c113de2cffceef514f9a7af} 
+uint32\+\_\+t neo\+::vm\+::\+Execution\+Engine\+Limits\+::\+Max\+Return\+Size = 1024 \texorpdfstring{$\ast$}{*} 1024}
+
+
+
+The maximum number of bytes that can be returned by a script. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_limits_a880a52c15f1693c0fc50d0eadf3ea846}\index{neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}!MaxShift@{MaxShift}}
+\index{MaxShift@{MaxShift}!neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}}
+\doxysubsubsection{\texorpdfstring{MaxShift}{MaxShift}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_limits_a880a52c15f1693c0fc50d0eadf3ea846} 
+int32\+\_\+t neo\+::vm\+::\+Execution\+Engine\+Limits\+::\+Max\+Shift = 256}
+
+
+
+The maximum number of bits that SHL and SHR can shift. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_limits_a598ec7e95afbb74cc5faac4c486b777c}\index{neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}!MaxSlotCount@{MaxSlotCount}}
+\index{MaxSlotCount@{MaxSlotCount}!neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}}
+\doxysubsubsection{\texorpdfstring{MaxSlotCount}{MaxSlotCount}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_limits_a598ec7e95afbb74cc5faac4c486b777c} 
+uint32\+\_\+t neo\+::vm\+::\+Execution\+Engine\+Limits\+::\+Max\+Slot\+Count = 1024}
+
+
+
+The maximum number of bytes that can be stored in a slot. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_limits_ab685929e566ef51d0e3bac6c196bbba0}\index{neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}!MaxStackSize@{MaxStackSize}}
+\index{MaxStackSize@{MaxStackSize}!neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}}
+\doxysubsubsection{\texorpdfstring{MaxStackSize}{MaxStackSize}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_limits_ab685929e566ef51d0e3bac6c196bbba0} 
+uint32\+\_\+t neo\+::vm\+::\+Execution\+Engine\+Limits\+::\+Max\+Stack\+Size = 2 \texorpdfstring{$\ast$}{*} 1024}
+
+
+
+The maximum number of items that can be contained in the VM\textquotesingle{}s evaluation stacks and slots. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_engine_limits_a307a65396f1b7109bceb46e08e231f37}\index{neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}!MaxTryNestingDepth@{MaxTryNestingDepth}}
+\index{MaxTryNestingDepth@{MaxTryNestingDepth}!neo::vm::ExecutionEngineLimits@{neo::vm::ExecutionEngineLimits}}
+\doxysubsubsection{\texorpdfstring{MaxTryNestingDepth}{MaxTryNestingDepth}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_engine_limits_a307a65396f1b7109bceb46e08e231f37} 
+uint32\+\_\+t neo\+::vm\+::\+Execution\+Engine\+Limits\+::\+Max\+Try\+Nesting\+Depth = 16}
+
+
+
+The maximum nesting depth of try-\/catch-\/finally blocks. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/vm/\mbox{\hyperlink{execution__engine__limits_8h}{execution\+\_\+engine\+\_\+limits.\+h}}\item 
+src/vm/\mbox{\hyperlink{execution__engine__limits_8cpp}{execution\+\_\+engine\+\_\+limits.\+cpp}}\end{DoxyCompactItemize}

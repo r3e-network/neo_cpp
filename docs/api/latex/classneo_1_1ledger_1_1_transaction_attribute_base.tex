@@ -1,0 +1,115 @@
+\doxysection{neo\+::ledger\+::Transaction\+Attribute\+Base Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_transaction_attribute_base}{}\label{classneo_1_1ledger_1_1_transaction_attribute_base}\index{neo::ledger::TransactionAttributeBase@{neo::ledger::TransactionAttributeBase}}
+
+
+Base class for Neo N3 transaction attributes.  
+
+
+
+
+{\ttfamily \#include $<$transaction\+\_\+attribute\+\_\+type.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_base_a824e2ae06d7e81ef4a80cef5c57262c7}{\texorpdfstring{$\sim$}{\string~}\+Transaction\+Attribute\+Base}} ()=default
+\item 
+virtual \mbox{\hyperlink{namespaceneo_1_1ledger_aea5b06a37f6a35c035ae9375d13830f0}{Transaction\+Attribute\+Type}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_base_ae3bd576bffd94c2fbda691502e6dea14}{Get\+Type}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the transaction attribute type. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_base_a02fb147d2483bb9a2d3460f99d9be00a}{Allow\+Multiple}} () const =0
+\begin{DoxyCompactList}\small\item\em Checks if multiple instances of this attribute are allowed. \end{DoxyCompactList}\item 
+virtual int \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_base_aba1f43bab4c243dc0eabae2edca7199a}{Get\+Size}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the size of the attribute. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_base_a790f8b385bd5123fffbe6f3d53cd5398}{Verify}} () const =0
+\begin{DoxyCompactList}\small\item\em Verifies the attribute. \end{DoxyCompactList}\item 
+virtual int64\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_base_ae570cbe33f950b485c1f85ed8be5dd21}{Calculate\+Network\+Fee}} () const =0
+\begin{DoxyCompactList}\small\item\em Calculates the network fee for this attribute. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for Neo N3 transaction attributes. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_base_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_base_a824e2ae06d7e81ef4a80cef5c57262c7}\index{neo::ledger::TransactionAttributeBase@{neo::ledger::TransactionAttributeBase}!````~TransactionAttributeBase@{\texorpdfstring{$\sim$}{\string~}TransactionAttributeBase}}
+\index{````~TransactionAttributeBase@{\texorpdfstring{$\sim$}{\string~}TransactionAttributeBase}!neo::ledger::TransactionAttributeBase@{neo::ledger::TransactionAttributeBase}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TransactionAttributeBase()}{\string~TransactionAttributeBase()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_base_a824e2ae06d7e81ef4a80cef5c57262c7} 
+virtual neo\+::ledger\+::\+Transaction\+Attribute\+Base\+::\texorpdfstring{$\sim$}{\string~}\+Transaction\+Attribute\+Base (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_base_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_base_a02fb147d2483bb9a2d3460f99d9be00a}\index{neo::ledger::TransactionAttributeBase@{neo::ledger::TransactionAttributeBase}!AllowMultiple@{AllowMultiple}}
+\index{AllowMultiple@{AllowMultiple}!neo::ledger::TransactionAttributeBase@{neo::ledger::TransactionAttributeBase}}
+\doxysubsubsection{\texorpdfstring{AllowMultiple()}{AllowMultiple()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_base_a02fb147d2483bb9a2d3460f99d9be00a} 
+virtual bool neo\+::ledger\+::\+Transaction\+Attribute\+Base\+::\+Allow\+Multiple (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Checks if multiple instances of this attribute are allowed. 
+
+\begin{DoxyReturn}{Returns}
+True if multiple instances are allowed. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_base_ae570cbe33f950b485c1f85ed8be5dd21}\index{neo::ledger::TransactionAttributeBase@{neo::ledger::TransactionAttributeBase}!CalculateNetworkFee@{CalculateNetworkFee}}
+\index{CalculateNetworkFee@{CalculateNetworkFee}!neo::ledger::TransactionAttributeBase@{neo::ledger::TransactionAttributeBase}}
+\doxysubsubsection{\texorpdfstring{CalculateNetworkFee()}{CalculateNetworkFee()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_base_ae570cbe33f950b485c1f85ed8be5dd21} 
+virtual int64\+\_\+t neo\+::ledger\+::\+Transaction\+Attribute\+Base\+::\+Calculate\+Network\+Fee (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Calculates the network fee for this attribute. 
+
+\begin{DoxyReturn}{Returns}
+The network fee. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_base_aba1f43bab4c243dc0eabae2edca7199a}\index{neo::ledger::TransactionAttributeBase@{neo::ledger::TransactionAttributeBase}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::ledger::TransactionAttributeBase@{neo::ledger::TransactionAttributeBase}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_base_aba1f43bab4c243dc0eabae2edca7199a} 
+virtual int neo\+::ledger\+::\+Transaction\+Attribute\+Base\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the size of the attribute. 
+
+\begin{DoxyReturn}{Returns}
+The size in bytes. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_base_ae3bd576bffd94c2fbda691502e6dea14}\index{neo::ledger::TransactionAttributeBase@{neo::ledger::TransactionAttributeBase}!GetType@{GetType}}
+\index{GetType@{GetType}!neo::ledger::TransactionAttributeBase@{neo::ledger::TransactionAttributeBase}}
+\doxysubsubsection{\texorpdfstring{GetType()}{GetType()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_base_ae3bd576bffd94c2fbda691502e6dea14} 
+virtual \mbox{\hyperlink{namespaceneo_1_1ledger_aea5b06a37f6a35c035ae9375d13830f0}{Transaction\+Attribute\+Type}} neo\+::ledger\+::\+Transaction\+Attribute\+Base\+::\+Get\+Type (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the transaction attribute type. 
+
+\begin{DoxyReturn}{Returns}
+The type. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_attribute_base_a790f8b385bd5123fffbe6f3d53cd5398}\index{neo::ledger::TransactionAttributeBase@{neo::ledger::TransactionAttributeBase}!Verify@{Verify}}
+\index{Verify@{Verify}!neo::ledger::TransactionAttributeBase@{neo::ledger::TransactionAttributeBase}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_attribute_base_a790f8b385bd5123fffbe6f3d53cd5398} 
+virtual bool neo\+::ledger\+::\+Transaction\+Attribute\+Base\+::\+Verify (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Verifies the attribute. 
+
+\begin{DoxyReturn}{Returns}
+True if valid. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{transaction__attribute__type_8h}{transaction\+\_\+attribute\+\_\+type.\+h}}\end{DoxyCompactItemize}

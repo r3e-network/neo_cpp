@@ -1,0 +1,67 @@
+\doxysection{include/neo/smartcontract/transaction\+\_\+verifier.h File Reference}
+\hypertarget{transaction__verifier_8h}{}\label{transaction__verifier_8h}\index{include/neo/smartcontract/transaction\_verifier.h@{include/neo/smartcontract/transaction\_verifier.h}}
+{\ttfamily \#include $<$neo/cache/cache.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/uint160.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/uint256.\+h$>$}\newline
+{\ttfamily \#include $<$neo/ledger/transaction.\+h$>$}\newline
+{\ttfamily \#include $<$neo/logging/logger.\+h$>$}\newline
+{\ttfamily \#include $<$neo/metrics/metrics.\+h$>$}\newline
+{\ttfamily \#include $<$neo/persistence/data\+\_\+cache.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/application\+\_\+engine.\+h$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for transaction\+\_\+verifier.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_context}{neo\+::smartcontract\+::\+Verification\+Context}}
+\begin{DoxyCompactList}\small\item\em Transaction verification context. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1smartcontract_1_1_verification_output}{neo\+::smartcontract\+::\+Verification\+Output}}
+\begin{DoxyCompactList}\small\item\em Transaction verification result. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier}{neo\+::smartcontract\+::\+Transaction\+Verifier}}
+\begin{DoxyCompactList}\small\item\em Transaction verifier. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_cache_entry}{neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Verification\+Cache\+Entry}}
+\item 
+struct \mbox{\hyperlink{structneo_1_1smartcontract_1_1_transaction_verifier_1_1_verification_metrics}{neo\+::smartcontract\+::\+Transaction\+Verifier\+::\+Verification\+Metrics}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1smartcontract}{neo\+::smartcontract}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{neo\+::smartcontract\+::\+Verification\+Result}} \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9aa6c3f75313c0227d7828d5c0ece9fa7d}{neo\+::smartcontract\+::\+Succeed}}
+, \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9ad7c8c85bf79bbe1b7188497c32c3b0ca}{neo\+::smartcontract\+::\+Failed}}
+, \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a4bbb8f967da6d1a610596d7257179c2b}{neo\+::smartcontract\+::\+Invalid}}
+, \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a351caf723532f9ba7a371b5dfa868eed}{neo\+::smartcontract\+::\+Invalid\+Signature}}
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a82d1add8ae3d392a5fab58994bb1947b}{neo\+::smartcontract\+::\+Policy\+Fail}}
+, \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a09d9ff5c9cf461998dc29f4c90f2c60c}{neo\+::smartcontract\+::\+Insufficient\+Funds}}
+, \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a89b69484680b18e9179e826c6e023805}{neo\+::smartcontract\+::\+Already\+Exists}}
+, \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a890e26b772933624a04f7e16f9222927}{neo\+::smartcontract\+::\+Already\+In\+Pool}}
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9ab498327feeb51430af73e07deac268fd}{neo\+::smartcontract\+::\+Out\+Of\+Memory}}
+, \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a710ae8fdf26bc4ed61c68be7c4a6f539}{neo\+::smartcontract\+::\+Unable\+To\+Verify}}
+, \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9a24fe48030f7d3097d5882535b04c3fa8}{neo\+::smartcontract\+::\+Expired}}
+, \mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9ac0c3b9b8686544ecb0f564a91fb3dc9d}{neo\+::smartcontract\+::\+Insufficient\+Network\+Fee}}
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9aa58fc443ef37aa89d2704c2d10f112ac}{neo\+::smartcontract\+::\+Insufficient\+System\+Fee}}
+ \}
+\begin{DoxyCompactList}\small\item\em Result of transaction verification. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{namespaceneo_1_1smartcontract_a6e44b9c80f6e18588aa8d2e5ceb90481}{neo\+::smartcontract\+::\+Verification\+Result\+To\+String}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_a5c9294c36490fb0b244c1cc10f1d1cf9}{Verification\+Result}} result)
+\begin{DoxyCompactList}\small\item\em Converts a verification result to a string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_transaction_verifier}{Transaction\+Verifier}} \& \mbox{\hyperlink{namespaceneo_1_1smartcontract_acf2953769644a8f31004bda7f1e714f9}{neo\+::smartcontract\+::\+Verifier}} ()
+\begin{DoxyCompactList}\small\item\em Gets the singleton instance of the transaction verifier. \end{DoxyCompactList}\end{DoxyCompactItemize}

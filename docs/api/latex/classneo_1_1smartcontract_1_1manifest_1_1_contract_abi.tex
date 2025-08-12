@@ -1,0 +1,202 @@
+\doxysection{neo\+::smartcontract\+::manifest\+::Contract\+Abi Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi}{}\label{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi}\index{neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}}
+
+
+Represents a contract ABI.  
+
+
+
+
+{\ttfamily \#include $<$contract\+\_\+abi.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::smartcontract\+::manifest\+::Contract\+Abi\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::smartcontract\+::manifest\+::Contract\+Abi\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_ae12c506b7172133774d40678c61e5da2}{Contract\+Abi}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi}{Contract\+Abi}. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_method_descriptor}{Contract\+Method\+Descriptor}} $>$ \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_a35f76625dbff9e7e956f0fa0ec88eeb5}{Get\+Methods}} () const
+\begin{DoxyCompactList}\small\item\em Gets the methods. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_a47e0b710635a4417ece585708ab68f47}{Set\+Methods}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_method_descriptor}{Contract\+Method\+Descriptor}} $>$ \&methods)
+\begin{DoxyCompactList}\small\item\em Sets the methods. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor}{Contract\+Event\+Descriptor}} $>$ \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_a352aa005c24d0159d0720bc902e1bf39}{Get\+Events}} () const
+\begin{DoxyCompactList}\small\item\em Gets the events. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_ae05e3c2fb95ed8f95762d6dd5045b731}{Set\+Events}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor}{Contract\+Event\+Descriptor}} $>$ \&events)
+\begin{DoxyCompactList}\small\item\em Sets the events. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_a395a777ac539628a12b5980c8a5ceb30}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_a6fcbbcd4854467d4e95eaf1b00e88163}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_method_descriptor}{Contract\+Method\+Descriptor}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_afe3835409f9092673160c1b8f29d5333}{methods\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor}{Contract\+Event\+Descriptor}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_adc08a962083c921032a7406aadecef1a}{events\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a contract ABI. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_ae12c506b7172133774d40678c61e5da2}\index{neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}!ContractAbi@{ContractAbi}}
+\index{ContractAbi@{ContractAbi}!neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}}
+\doxysubsubsection{\texorpdfstring{ContractAbi()}{ContractAbi()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_ae12c506b7172133774d40678c61e5da2} 
+neo\+::smartcontract\+::manifest\+::\+Contract\+Abi\+::\+Contract\+Abi (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi}{Contract\+Abi}. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_a6fcbbcd4854467d4e95eaf1b00e88163}\index{neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_a6fcbbcd4854467d4e95eaf1b00e88163} 
+void neo\+::smartcontract\+::manifest\+::\+Contract\+Abi\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_a352aa005c24d0159d0720bc902e1bf39}\index{neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}!GetEvents@{GetEvents}}
+\index{GetEvents@{GetEvents}!neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}}
+\doxysubsubsection{\texorpdfstring{GetEvents()}{GetEvents()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_a352aa005c24d0159d0720bc902e1bf39} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor}{Contract\+Event\+Descriptor}} $>$ \& neo\+::smartcontract\+::manifest\+::\+Contract\+Abi\+::\+Get\+Events (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the events. 
+
+\begin{DoxyReturn}{Returns}
+The events. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_a35f76625dbff9e7e956f0fa0ec88eeb5}\index{neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}!GetMethods@{GetMethods}}
+\index{GetMethods@{GetMethods}!neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}}
+\doxysubsubsection{\texorpdfstring{GetMethods()}{GetMethods()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_a35f76625dbff9e7e956f0fa0ec88eeb5} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_method_descriptor}{Contract\+Method\+Descriptor}} $>$ \& neo\+::smartcontract\+::manifest\+::\+Contract\+Abi\+::\+Get\+Methods (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the methods. 
+
+\begin{DoxyReturn}{Returns}
+The methods. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_a395a777ac539628a12b5980c8a5ceb30}\index{neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_a395a777ac539628a12b5980c8a5ceb30} 
+void neo\+::smartcontract\+::manifest\+::\+Contract\+Abi\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_ae05e3c2fb95ed8f95762d6dd5045b731}\index{neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}!SetEvents@{SetEvents}}
+\index{SetEvents@{SetEvents}!neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}}
+\doxysubsubsection{\texorpdfstring{SetEvents()}{SetEvents()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_ae05e3c2fb95ed8f95762d6dd5045b731} 
+void neo\+::smartcontract\+::manifest\+::\+Contract\+Abi\+::\+Set\+Events (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor}{Contract\+Event\+Descriptor}} $>$ \&}]{events}{}\end{DoxyParamCaption})}
+
+
+
+Sets the events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em events} & The events. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_a47e0b710635a4417ece585708ab68f47}\index{neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}!SetMethods@{SetMethods}}
+\index{SetMethods@{SetMethods}!neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}}
+\doxysubsubsection{\texorpdfstring{SetMethods()}{SetMethods()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_a47e0b710635a4417ece585708ab68f47} 
+void neo\+::smartcontract\+::manifest\+::\+Contract\+Abi\+::\+Set\+Methods (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_method_descriptor}{Contract\+Method\+Descriptor}} $>$ \&}]{methods}{}\end{DoxyParamCaption})}
+
+
+
+Sets the methods. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em methods} & The methods. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_adc08a962083c921032a7406aadecef1a}\index{neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}!events\_@{events\_}}
+\index{events\_@{events\_}!neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}}
+\doxysubsubsection{\texorpdfstring{events\_}{events\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_adc08a962083c921032a7406aadecef1a} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor}{Contract\+Event\+Descriptor}}$>$ neo\+::smartcontract\+::manifest\+::\+Contract\+Abi\+::events\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_afe3835409f9092673160c1b8f29d5333}\index{neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}!methods\_@{methods\_}}
+\index{methods\_@{methods\_}!neo::smartcontract::manifest::ContractAbi@{neo::smartcontract::manifest::ContractAbi}}
+\doxysubsubsection{\texorpdfstring{methods\_}{methods\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_abi_afe3835409f9092673160c1b8f29d5333} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_method_descriptor}{Contract\+Method\+Descriptor}}$>$ neo\+::smartcontract\+::manifest\+::\+Contract\+Abi\+::methods\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/manifest/\mbox{\hyperlink{contract__abi_8h}{contract\+\_\+abi.\+h}}\item 
+src/smartcontract/manifest/\mbox{\hyperlink{contract__abi_8cpp}{contract\+\_\+abi.\+cpp}}\end{DoxyCompactItemize}

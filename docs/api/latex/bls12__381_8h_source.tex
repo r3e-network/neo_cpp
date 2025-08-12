@@ -1,0 +1,181 @@
+\doxysection{bls12\+\_\+381.\+h}
+\hypertarget{bls12__381_8h_source}{}\label{bls12__381_8h_source}\index{include/neo/cryptography/bls12\_381.h@{include/neo/cryptography/bls12\_381.h}}
+\mbox{\hyperlink{bls12__381_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__span_8h}{neo/io/byte\_span.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381}{neo::cryptography::bls12\_381}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ac1683be67c27afed01b788f920cd709c}{G1Point}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ac1683be67c27afed01b788f920cd709c}{G1Point}}();}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_a76478f962c43559839ed02995d3901a9}{\string~G1Point}}();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ac1683be67c27afed01b788f920cd709c}{G1Point}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ac1683be67c27afed01b788f920cd709c}{G1Point}}\&\ other);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ac1683be67c27afed01b788f920cd709c}{G1Point}}\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_a0691740ce0d42636531d9093d606c495}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ac1683be67c27afed01b788f920cd709c}{G1Point}}\&\ other);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ac1683be67c27afed01b788f920cd709c}{G1Point}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ data);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ac1683be67c27afed01b788f920cd709c}{G1Point}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_aaedb2fc676b7dd3d294e35469cc9a57c}{FromHex}}(\textcolor{keyword}{const}\ std::string\&\ hex);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ac1683be67c27afed01b788f920cd709c}{G1Point}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_a9531bf0d32c8e297749362db841e1fbc}{Generator}}();}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00062\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_a558f9cef0b8bde05987a7006dce2415f}{ToBytes}}(\textcolor{keywordtype}{bool}\ compressed\ =\ \textcolor{keyword}{true})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00069\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_a71f6871f981a90bf5d4b79f6eff6776c}{ToHex}}(\textcolor{keywordtype}{bool}\ compressed\ =\ \textcolor{keyword}{true})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ac1683be67c27afed01b788f920cd709c}{G1Point}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ae7b5cc812b8b93ba123b41c3e2b8b54f}{Add}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ac1683be67c27afed01b788f920cd709c}{G1Point}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00083\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ac1683be67c27afed01b788f920cd709c}{G1Point}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ad1f9183a9a7911dd597c94fb70f8be2b}{Multiply}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ scalar)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ab2399001457cc9658262a94f553af4f5}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ac1683be67c27afed01b788f920cd709c}{G1Point}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_a5f1c17a63ee2f3ef26954e52e63a586f}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ac1683be67c27afed01b788f920cd709c}{G1Point}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_a4efc04f4b0cbde502b1373fe505d89ec}{IsInfinity}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ae64856d5906cf4b94adb235d7aae0f48}{CompressedSize}}\ =\ 48;}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_a3d770f44c1f42e7083ca94d8e8960778}{UncompressedSize}}\ =\ 96;}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_1_1_impl}{Impl}};}
+\DoxyCodeLine{00119\ \ \ \ \ std::unique\_ptr<Impl>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_a19037ec66b62c3d3ba9cbb874a18fb9d}{impl\_}};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point_ac1683be67c27afed01b788f920cd709c}{G1Point}}(std::unique\_ptr<Impl>\ impl);}
+\DoxyCodeLine{00122\ \};}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00127\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}{G2Point}}}
+\DoxyCodeLine{00128\ \{}
+\DoxyCodeLine{00129\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}{G2Point}}();}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00138\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_ad47365425f925c83b5ebe0c320daec9d}{\string~G2Point}}();}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00143\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}{G2Point}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}{G2Point}}\&\ other);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00148\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}{G2Point}}\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_aa2d8db827c6a8ca59a2122a047e34791}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}{G2Point}}\&\ other);}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}{G2Point}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ data);}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}{G2Point}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a72b964250ac0877ae595d320bf346ed3}{FromHex}}(\textcolor{keyword}{const}\ std::string\&\ hex);}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}{G2Point}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_af976176bc43763b4448498ac1286fa2b}{Generator}}();}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00175\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_aae77af2bd15fd5072349c73d375517f2}{ToBytes}}(\textcolor{keywordtype}{bool}\ compressed\ =\ \textcolor{keyword}{true})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00182\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_ab0293d41e63bd8c070d2b53a59a9f1df}{ToHex}}(\textcolor{keywordtype}{bool}\ compressed\ =\ \textcolor{keyword}{true})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00189\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}{G2Point}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a4e2ac4368835290d40d5b8b66958edc0}{Add}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}{G2Point}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00196\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}{G2Point}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_af69df43b165b459c29b8462053ddee80}{Multiply}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ scalar)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a64dc55f64cf95f37e289e4ee8f098b6f}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}{G2Point}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00210\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_ae446511c61fddbfc3039b6171dd4bd5f}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}{G2Point}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a170ae3a425fd91b5c8ca74eaf510f927}{IsInfinity}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_ac58350c33cd1f9a606b5b88a3d89fafb}{CompressedSize}}\ =\ 96;}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a3e77def5cdaa4a23e406a66358522aed}{UncompressedSize}}\ =\ 192;}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_1_1_impl}{Impl}};}
+\DoxyCodeLine{00232\ \ \ \ \ std::unique\_ptr<Impl>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a6669458e17d91f9e006829e8a2014a9c}{impl\_}};}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point_a8725c864daf824a1209619b91aee33e5}{G2Point}}(std::unique\_ptr<Impl>\ impl);}
+\DoxyCodeLine{00235\ \};}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00240\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7b181242b25694b14e606a1999dd997d}{GTPoint}}}
+\DoxyCodeLine{00241\ \{}
+\DoxyCodeLine{00242\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00246\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7b181242b25694b14e606a1999dd997d}{GTPoint}}();}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00251\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a35fd2a2b0c93811909ccb81ab745f3e7}{\string~GTPoint}}();}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00256\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7b181242b25694b14e606a1999dd997d}{GTPoint}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7b181242b25694b14e606a1999dd997d}{GTPoint}}\&\ other);}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00261\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7b181242b25694b14e606a1999dd997d}{GTPoint}}\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a483d5bbc39628a8854274ef1c94d2667}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7b181242b25694b14e606a1999dd997d}{GTPoint}}\&\ other);}
+\DoxyCodeLine{00262\ }
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7b181242b25694b14e606a1999dd997d}{GTPoint}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ data);}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7b181242b25694b14e606a1999dd997d}{GTPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a1ac241b5eadbcc51650385b492930cc8}{FromHex}}(\textcolor{keyword}{const}\ std::string\&\ hex);}
+\DoxyCodeLine{00276\ }
+\DoxyCodeLine{00281\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a70bfdebf05c32c74b81a10233c4ac642}{ToBytes}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00287\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a5149a62cbe5744a6d20348ca4b5624b6}{ToHex}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00294\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7b181242b25694b14e606a1999dd997d}{GTPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a2c5a88870fc083d251c0072078fe9f92}{Multiply}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7b181242b25694b14e606a1999dd997d}{GTPoint}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00301\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7b181242b25694b14e606a1999dd997d}{GTPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7431ddb74bb35881893f7d532a7c8535}{Pow}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ scalar)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00308\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a76f955d33c4f624a19fdef31c5767e61}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7b181242b25694b14e606a1999dd997d}{GTPoint}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00309\ }
+\DoxyCodeLine{00315\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_aaea33d9eb7a253889c8e5bacfbb405f9}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7b181242b25694b14e606a1999dd997d}{GTPoint}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00321\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a9c7b4a85e77f37b51fff9e409ec704e5}{IsIdentity}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00327\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a6a9b7cf003b0c206199ffd4953390103}{Size}}\ =\ 576;}
+\DoxyCodeLine{00328\ }
+\DoxyCodeLine{00329\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00330\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_1_1_impl}{Impl}};}
+\DoxyCodeLine{00331\ \ \ \ \ std::unique\_ptr<Impl>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a07c535f69a4c78a93a6e832ec9b7396c}{impl\_}};}
+\DoxyCodeLine{00332\ }
+\DoxyCodeLine{00333\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7b181242b25694b14e606a1999dd997d}{GTPoint}}(std::unique\_ptr<Impl>\ impl);}
+\DoxyCodeLine{00334\ }
+\DoxyCodeLine{00335\ \ \ \ \ \textcolor{comment}{//\ Friend\ functions\ that\ need\ access\ to\ Impl}}
+\DoxyCodeLine{00336\ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7b181242b25694b14e606a1999dd997d}{GTPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_ab089988f4cd172327a848996633f5d99}{Pairing}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1Point}}\&\ p,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2Point}}\&\ q);}
+\DoxyCodeLine{00337\ \ \ \ \ \textcolor{keyword}{friend}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a7b181242b25694b14e606a1999dd997d}{GTPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point_a231f9ee99d41c6c89122eb53ccb5863d}{MultiPairing}}(\textcolor{keyword}{const}\ std::vector<G1Point>\&\ ps,\ \textcolor{keyword}{const}\ std::vector<G2Point>\&\ qs);}
+\DoxyCodeLine{00338\ \};}
+\DoxyCodeLine{00339\ }
+\DoxyCodeLine{00346\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_aedc5a5435eedc791382a89ccf4750a38}{Pairing}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1Point}}\&\ p,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2Point}}\&\ q);}
+\DoxyCodeLine{00347\ }
+\DoxyCodeLine{00355\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a95196382dbfa42bdf7e388501f89a63e}{MultiPairing}}(\textcolor{keyword}{const}\ std::vector<G1Point>\&\ ps,\ \textcolor{keyword}{const}\ std::vector<G2Point>\&\ qs);}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00363\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a024d21676620b4597e74e6e1e4830044}{MillerLoop}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1Point}}\&\ p,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2Point}}\&\ q);}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00370\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a9a6d3ed7c51198a295181e19f4fe169e}{Gt}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}}\&\ f);}
+\DoxyCodeLine{00371\ }
+\DoxyCodeLine{00379\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a80406277b1586adaf98f67297a4b26f6}{VerifySignature}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2Point}}\&\ publicKey,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ message,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1Point}}\&\ signature);}
+\DoxyCodeLine{00380\ }
+\DoxyCodeLine{00387\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1Point}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_abd861f68efc84380af2413cca4ae7cc5}{Sign}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ privateKey,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ message);}
+\DoxyCodeLine{00388\ }
+\DoxyCodeLine{00394\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2Point}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_aa28c5788f90b0d7cc9f4a155cb078603}{GeneratePublicKey}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ privateKey);}
+\DoxyCodeLine{00395\ }
+\DoxyCodeLine{00401\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1Point}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a78471b992c70946d177ab00f163badae}{AggregateSignatures}}(\textcolor{keyword}{const}\ std::vector<G1Point>\&\ signatures);}
+\DoxyCodeLine{00402\ }
+\DoxyCodeLine{00411\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a02160903d084c76363825867d52ed54c}{VerifyAggregateSignature}}(\textcolor{keyword}{const}\ std::vector<G2Point>\&\ publicKeys,\ \textcolor{keyword}{const}\ std::vector<io::ByteSpan>\&\ messages,}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1Point}}\&\ signature);}
+\DoxyCodeLine{00413\ }
+\DoxyCodeLine{00420\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_aadf995d05dc641a38f159306fa6f2e6c}{DeserializeG1Point}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ data,\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1Point}}\&\ out);}
+\DoxyCodeLine{00421\ }
+\DoxyCodeLine{00428\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a08fba5b446175286e49a1450b5ed0b6f}{DeserializeG2Point}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ data,\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2Point}}\&\ out);}
+\DoxyCodeLine{00429\ }
+\DoxyCodeLine{00434\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2Point}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a1548872821a7a5396e045f191d2f70a3}{GetG2Generator}}();}
+\DoxyCodeLine{00435\ }
+\DoxyCodeLine{00441\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2Point}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_acf88aa73b86497934d607e968df3b083}{NegateG2}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g2_point}{G2Point}}\&\ point);}
+\DoxyCodeLine{00442\ }
+\DoxyCodeLine{00449\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a291d49d0f0d09b508e41027091f71d63}{MultiplyGT}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}}\&\ a,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}}\&\ b);}
+\DoxyCodeLine{00450\ }
+\DoxyCodeLine{00456\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a1e6be6cd890cd2824d0f2c28c364a7cf}{IsIdentityGT}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}}\&\ point);}
+\DoxyCodeLine{00457\ }
+\DoxyCodeLine{00463\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1Point}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_af0a1a9ac13370eabf491b108c00d5a6d}{HashToG1}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ message);}
+\DoxyCodeLine{00464\ }
+\DoxyCodeLine{00470\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1Point}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a57cb208405fc91b3fdf3f1cae2c96ae2}{G1PointDouble}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1Point}}\&\ point);}
+\DoxyCodeLine{00471\ }
+\DoxyCodeLine{00477\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1Point}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a53ccc2bcc3d8cd6b967fa817032488e3}{G1PointNegate}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g1_point}{G1Point}}\&\ point);}
+\DoxyCodeLine{00478\ }
+\DoxyCodeLine{00483\ \mbox{\hyperlink{classneo_1_1cryptography_1_1bls12__381_1_1_g_t_point}{GTPoint}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1bls12__381_a28c5238d29c03fb198a09d807877fa81}{GTPointIdentity}}();}
+\DoxyCodeLine{00484\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cryptography::bls12\_381}}
+
+\end{DoxyCode}

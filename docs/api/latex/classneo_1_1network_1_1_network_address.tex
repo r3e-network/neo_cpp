@@ -1,0 +1,303 @@
+\doxysection{neo\+::network\+::Network\+Address Class Reference}
+\hypertarget{classneo_1_1network_1_1_network_address}{}\label{classneo_1_1network_1_1_network_address}\index{neo::network::NetworkAddress@{neo::network::NetworkAddress}}
+
+
+Represents a network address.  
+
+
+
+
+{\ttfamily \#include $<$network\+\_\+address.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::Network\+Address\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::Network\+Address\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_network_address_a6f1bf796f41cda5495c44f9ddb70ed09}{Network\+Address}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1network_1_1_network_address}{Network\+Address}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_network_address_a8a8a9ba6c70123111f22c7c65c5681e9}{Network\+Address}} (uint32\+\_\+t timestamp, uint64\+\_\+t services, const std\+::string \&address, uint16\+\_\+t port)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1_network_address}{Network\+Address} with the specified parameters. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a1953ded2c2f4d2fdfc912e2edf2e2971}{Get\+Timestamp}} () const
+\begin{DoxyCompactList}\small\item\em Gets the timestamp. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a838cde1886730a25ecd1d77bb8b834fb}{Get\+Services}} () const
+\begin{DoxyCompactList}\small\item\em Gets the services provided by the node. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1network_1_1_network_address_ac28886d3efa9142f9b3d4dfbe73563b5}{Get\+Address}} () const
+\begin{DoxyCompactList}\small\item\em Gets the address. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a544731572043cfea98cbf14a9554cb3c}{Get\+Port}} () const
+\begin{DoxyCompactList}\small\item\em Gets the port. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a7e71f63c834f816a9ff39a191e8f4533}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1_network_address}{Network\+Address} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a9082b26aeb2918e369e4acb5d894b2fc}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1_network_address}{Network\+Address} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a5c1bf5a20f8fa5ef97a8cfb69da5e35e}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1_network_address}{Network\+Address} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a8ee800f3166273e4cfa862c9ac79a14e}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1_network_address}{Network\+Address} from a JSON reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_network_address_aee7d81b292fc5f3ee627c8b60122cd9a}{timestamp\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_network_address_abd190a8bda0556484b24943ccdf7f607}{services\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1network_1_1_network_address_aad4b5f1a0a4d888c17ca881bd0a7be00}{address\+\_\+}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a205d5b55229f0c4a546d6c4198156327}{port\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a network address. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1_network_address_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1_network_address_a6f1bf796f41cda5495c44f9ddb70ed09}\index{neo::network::NetworkAddress@{neo::network::NetworkAddress}!NetworkAddress@{NetworkAddress}}
+\index{NetworkAddress@{NetworkAddress}!neo::network::NetworkAddress@{neo::network::NetworkAddress}}
+\doxysubsubsection{\texorpdfstring{NetworkAddress()}{NetworkAddress()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_network_address_a6f1bf796f41cda5495c44f9ddb70ed09} 
+neo\+::network\+::\+Network\+Address\+::\+Network\+Address (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1network_1_1_network_address}{Network\+Address}. 
+
+\Hypertarget{classneo_1_1network_1_1_network_address_a8a8a9ba6c70123111f22c7c65c5681e9}\index{neo::network::NetworkAddress@{neo::network::NetworkAddress}!NetworkAddress@{NetworkAddress}}
+\index{NetworkAddress@{NetworkAddress}!neo::network::NetworkAddress@{neo::network::NetworkAddress}}
+\doxysubsubsection{\texorpdfstring{NetworkAddress()}{NetworkAddress()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_network_address_a8a8a9ba6c70123111f22c7c65c5681e9} 
+neo\+::network\+::\+Network\+Address\+::\+Network\+Address (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{timestamp}{, }\item[{uint64\+\_\+t}]{services}{, }\item[{const std\+::string \&}]{address}{, }\item[{uint16\+\_\+t}]{port}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1_network_address}{Network\+Address} with the specified parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & The timestamp. \\
+\hline
+{\em services} & The services provided by the node. \\
+\hline
+{\em address} & The address. \\
+\hline
+{\em port} & The port. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1_network_address_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1_network_address_a9082b26aeb2918e369e4acb5d894b2fc}\index{neo::network::NetworkAddress@{neo::network::NetworkAddress}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::NetworkAddress@{neo::network::NetworkAddress}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_network_address_a9082b26aeb2918e369e4acb5d894b2fc} 
+void neo\+::network\+::\+Network\+Address\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1_network_address}{Network\+Address} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1_network_address_a8ee800f3166273e4cfa862c9ac79a14e}\index{neo::network::NetworkAddress@{neo::network::NetworkAddress}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::NetworkAddress@{neo::network::NetworkAddress}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_network_address_a8ee800f3166273e4cfa862c9ac79a14e} 
+void neo\+::network\+::\+Network\+Address\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1_network_address}{Network\+Address} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1_network_address_ac28886d3efa9142f9b3d4dfbe73563b5}\index{neo::network::NetworkAddress@{neo::network::NetworkAddress}!GetAddress@{GetAddress}}
+\index{GetAddress@{GetAddress}!neo::network::NetworkAddress@{neo::network::NetworkAddress}}
+\doxysubsubsection{\texorpdfstring{GetAddress()}{GetAddress()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_network_address_ac28886d3efa9142f9b3d4dfbe73563b5} 
+const std\+::string \& neo\+::network\+::\+Network\+Address\+::\+Get\+Address (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the address. 
+
+\begin{DoxyReturn}{Returns}
+The address. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_network_address_a544731572043cfea98cbf14a9554cb3c}\index{neo::network::NetworkAddress@{neo::network::NetworkAddress}!GetPort@{GetPort}}
+\index{GetPort@{GetPort}!neo::network::NetworkAddress@{neo::network::NetworkAddress}}
+\doxysubsubsection{\texorpdfstring{GetPort()}{GetPort()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_network_address_a544731572043cfea98cbf14a9554cb3c} 
+uint16\+\_\+t neo\+::network\+::\+Network\+Address\+::\+Get\+Port (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the port. 
+
+\begin{DoxyReturn}{Returns}
+The port. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_network_address_a838cde1886730a25ecd1d77bb8b834fb}\index{neo::network::NetworkAddress@{neo::network::NetworkAddress}!GetServices@{GetServices}}
+\index{GetServices@{GetServices}!neo::network::NetworkAddress@{neo::network::NetworkAddress}}
+\doxysubsubsection{\texorpdfstring{GetServices()}{GetServices()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_network_address_a838cde1886730a25ecd1d77bb8b834fb} 
+uint64\+\_\+t neo\+::network\+::\+Network\+Address\+::\+Get\+Services (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the services provided by the node. 
+
+\begin{DoxyReturn}{Returns}
+The services provided by the node. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_network_address_a1953ded2c2f4d2fdfc912e2edf2e2971}\index{neo::network::NetworkAddress@{neo::network::NetworkAddress}!GetTimestamp@{GetTimestamp}}
+\index{GetTimestamp@{GetTimestamp}!neo::network::NetworkAddress@{neo::network::NetworkAddress}}
+\doxysubsubsection{\texorpdfstring{GetTimestamp()}{GetTimestamp()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_network_address_a1953ded2c2f4d2fdfc912e2edf2e2971} 
+uint32\+\_\+t neo\+::network\+::\+Network\+Address\+::\+Get\+Timestamp (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the timestamp. 
+
+\begin{DoxyReturn}{Returns}
+The timestamp. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_network_address_a7e71f63c834f816a9ff39a191e8f4533}\index{neo::network::NetworkAddress@{neo::network::NetworkAddress}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::NetworkAddress@{neo::network::NetworkAddress}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_network_address_a7e71f63c834f816a9ff39a191e8f4533} 
+void neo\+::network\+::\+Network\+Address\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1_network_address}{Network\+Address} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1_network_address_a5c1bf5a20f8fa5ef97a8cfb69da5e35e}\index{neo::network::NetworkAddress@{neo::network::NetworkAddress}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::NetworkAddress@{neo::network::NetworkAddress}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_network_address_a5c1bf5a20f8fa5ef97a8cfb69da5e35e} 
+void neo\+::network\+::\+Network\+Address\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1_network_address}{Network\+Address} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1_network_address_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1_network_address_aad4b5f1a0a4d888c17ca881bd0a7be00}\index{neo::network::NetworkAddress@{neo::network::NetworkAddress}!address\_@{address\_}}
+\index{address\_@{address\_}!neo::network::NetworkAddress@{neo::network::NetworkAddress}}
+\doxysubsubsection{\texorpdfstring{address\_}{address\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_network_address_aad4b5f1a0a4d888c17ca881bd0a7be00} 
+std\+::string neo\+::network\+::\+Network\+Address\+::address\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_network_address_a205d5b55229f0c4a546d6c4198156327}\index{neo::network::NetworkAddress@{neo::network::NetworkAddress}!port\_@{port\_}}
+\index{port\_@{port\_}!neo::network::NetworkAddress@{neo::network::NetworkAddress}}
+\doxysubsubsection{\texorpdfstring{port\_}{port\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_network_address_a205d5b55229f0c4a546d6c4198156327} 
+uint16\+\_\+t neo\+::network\+::\+Network\+Address\+::port\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_network_address_abd190a8bda0556484b24943ccdf7f607}\index{neo::network::NetworkAddress@{neo::network::NetworkAddress}!services\_@{services\_}}
+\index{services\_@{services\_}!neo::network::NetworkAddress@{neo::network::NetworkAddress}}
+\doxysubsubsection{\texorpdfstring{services\_}{services\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_network_address_abd190a8bda0556484b24943ccdf7f607} 
+uint64\+\_\+t neo\+::network\+::\+Network\+Address\+::services\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_network_address_aee7d81b292fc5f3ee627c8b60122cd9a}\index{neo::network::NetworkAddress@{neo::network::NetworkAddress}!timestamp\_@{timestamp\_}}
+\index{timestamp\_@{timestamp\_}!neo::network::NetworkAddress@{neo::network::NetworkAddress}}
+\doxysubsubsection{\texorpdfstring{timestamp\_}{timestamp\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_network_address_aee7d81b292fc5f3ee627c8b60122cd9a} 
+uint32\+\_\+t neo\+::network\+::\+Network\+Address\+::timestamp\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/\mbox{\hyperlink{network__address_8h}{network\+\_\+address.\+h}}\item 
+src/network/\mbox{\hyperlink{network__address_8cpp}{network\+\_\+address.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,64 @@
+\doxysection{ecfieldelement.\+h}
+\hypertarget{ecfieldelement_8h_source}{}\label{ecfieldelement_8h_source}\index{include/neo/cryptography/ecc/ecfieldelement.h@{include/neo/cryptography/ecc/ecfieldelement.h}}
+\mbox{\hyperlink{ecfieldelement_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{biginteger__extensions_8h}{neo/extensions/biginteger\_extensions.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cryptography_1_1ecc}{neo::cryptography::ecc}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{extensions::BigIntegerExtensions::BigInteger}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a0f53c648ec2c23b2a8c08f4c151d1e5f}{value\_}};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{extensions::BigIntegerExtensions::BigInteger}}\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a9127b72cf03d4bccf9e086aa9f405eaa}{GetFieldModulus}}();}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{extensions::BigIntegerExtensions::BigInteger}}\&\ value);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ bytes);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a5a97a3c8ef00b3f2358778fb9a73cc8a}{Zero}}();}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a6601f7a4e29ddb1094a1666578373b49}{One}}();}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00054\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_abb70ee7d4f847deecec0c50c42c1dcad}{Add}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00061\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a07957f900196ae3d3eadbcf3c8ac8e58}{Subtract}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00068\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_afdb805260f57fadb1227130a109fa20f}{Multiply}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_abe4581ce9e8c725d25921e2403b44eb7}{Divide}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00082\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a875596581e2a8daa32900280456abb0f}{Negate}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a9bbe0d5cec356227041e7ef4fb4ee1b8}{Square}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00096\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_ae5f11f28ea28816e2326787cedc45cbb}{ModularInverse}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00102\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_af2288336a17a2cf0eed1df44d1481847}{Sqrt}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_aeb7e789edca5975bc1bd07310bf30684}{IsZero}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a6fb17e9cd571e035d7a520591873b328}{IsOne}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a8f620f6d7edc0c740e0611db297f8556}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_aca2bde71ff94b83710ee5229ce9137b4}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a118b1726a9c62bb59cf1b6fd6de7dd90}{ECFieldElement}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{extensions::BigIntegerExtensions::BigInteger}}\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_a8fd7d67de2588ef5f0ee5fd8dbfaf4b7}{GetValue}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00140\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_aa88356720254ce29b64e723a3775b72d}{ToByteArray}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00146\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_field_element_aa2d06c2d68483dadf156ee860d8ae4a8}{ToString}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00147\ \};}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cryptography::ecc}}
+
+\end{DoxyCode}

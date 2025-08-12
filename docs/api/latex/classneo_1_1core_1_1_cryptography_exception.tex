@@ -1,0 +1,137 @@
+\doxysection{neo\+::core\+::Cryptography\+Exception Class Reference}
+\hypertarget{classneo_1_1core_1_1_cryptography_exception}{}\label{classneo_1_1core_1_1_cryptography_exception}\index{neo::core::CryptographyException@{neo::core::CryptographyException}}
+
+
+Exception for cryptographic operations.  
+
+
+
+
+{\ttfamily \#include $<$exceptions.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::core\+::Cryptography\+Exception\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::core\+::Cryptography\+Exception\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_cryptography_exception_aced6f6ba5c69e71e5f107d43b0474b7d}{Cryptography\+Exception}} (const std\+::string \&message, const std\+::string \&context="{}"{})
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_cryptography_exception_a071d0c0da4ca325a17c0d67e6e9e4672}{Cryptography\+Exception}} (\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}} code, const std\+::string \&message, const std\+::string \&context="{}"{})
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{neo\+::core\+::\+Neo\+Exception}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{Neo\+Exception}} (\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}} code, const std\+::string \&message, const std\+::string \&context="{}"{})
+\begin{DoxyCompactList}\small\item\em Construct a new Neo Exception. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}} \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_af071bd842839f2d8192e6999f23fb08e}{Get\+Error\+Code}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Get the error code. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a46f921257b699d6301a426b242973375}{Get\+Original\+Message}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Get the original message without formatting. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a3c956a25c4699bde2067bda176dcec0e}{Get\+Context}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Get the context information. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{neo\+::core\+::\+Neo\+Exception}}}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}} \+: uint32\+\_\+t \{ \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9a10f345b0f755d461a8673a5e9ef6b4}{UNKNOWN\+\_\+\+ERROR}} = 1000
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af295a0c3e37c94f078e1c5476479132d}{INVALID\+\_\+\+ARGUMENT}} = 1001
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a5e6a8de74c8f7d4b04d91a3dc3bf7659}{INVALID\+\_\+\+STATE}} = 1002
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad07995fa8f4a3a019d134fcbfca4669a}{NOT\+\_\+\+AVAILABLE}} = 1003
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6feaf66704b269610cff9431d5519cad}{OUT\+\_\+\+OF\+\_\+\+RANGE}} = 1004
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a070a0fb40f6c308ab544b227660aadff}{TIMEOUT}} = 1005
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6b03470e24be0d9a73494f9491575db3}{SERIALIZATION\+\_\+\+ERROR}} = 2000
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aaf7685d125c5b33467c4f7783cb22e29}{DESERIALIZATION\+\_\+\+ERROR}} = 2001
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a252d8e34178da47f2208605a66051241}{INVALID\+\_\+\+FORMAT}} = 2002
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad53c9f7d5b985bba6cb80cdf8ae665e4}{BUFFER\+\_\+\+OVERFLOW}} = 2003
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af83ed13db581f1569713429e43a96bb2}{BUFFER\+\_\+\+UNDERFLOW}} = 2004
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad8e13f08667a0b31e93bd54a7302e91d}{CRYPTO\+\_\+\+ERROR}} = 3000
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a14eddb1ed548833eb26b0325f17b967e}{INVALID\+\_\+\+KEY}} = 3001
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad0eb6b378baae0b4b64c2933674e61fc}{INVALID\+\_\+\+SIGNATURE}} = 3002
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a3328769dfe2ed33f689689663ff18877}{HASH\+\_\+\+CALCULATION\+\_\+\+FAILED}} = 3003
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6dccefab5234f98839821f3106e8e3e3}{ENCRYPTION\+\_\+\+FAILED}} = 3004
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ac32948a3a3b3b746526320f675f6c583}{DECRYPTION\+\_\+\+FAILED}} = 3005
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a547ba52b62f9302ee1b6950111c36f9f}{NETWORK\+\_\+\+ERROR}} = 4000
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a042ec2cfe6c78a6a49b3a6555302947c}{CONNECTION\+\_\+\+FAILED}} = 4001
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a4ca5a319d1b3065c5f8fc8b20e69f0ce}{INVALID\+\_\+\+MESSAGE}} = 4002
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aa224afc9af395429edad294f94a9ae14}{PROTOCOL\+\_\+\+VIOLATION}} = 4003
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a002982bd4378347e2a41ce37bb95f17d}{PEER\+\_\+\+DISCONNECTED}} = 4004
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1caaf6711640dcf25bee1a8a8dc9236d}{BLOCKCHAIN\+\_\+\+ERROR}} = 5000
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a2ec46db67908a0fa69ee0c7558c4bc8f}{INVALID\+\_\+\+BLOCK}} = 5001
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1dd057fa369b981429d016ad2fb12de7}{INVALID\+\_\+\+TRANSACTION}} = 5002
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aaac4d4690679f0c9c4c65d6bcf36214f}{CONSENSUS\+\_\+\+FAILURE}} = 5003
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a4eed0177f2593a164543593202187281}{VERIFICATION\+\_\+\+FAILED}} = 5004
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad93c4d456f42793a014f8d32aa437962}{INVALID\+\_\+\+CONTRACT}} = 5005
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a7ae7f2a13f0d5a18b0db91af9c5aef34}{STORAGE\+\_\+\+ERROR}} = 6000
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1f14ca382a4431d278aba810e59070c1}{KEY\+\_\+\+NOT\+\_\+\+FOUND}} = 6001
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9424c68422cd1dc9bbd817cea013bb1d}{STORAGE\+\_\+\+CORRUPTION}} = 6002
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af50f3ad3a92a014d1f69bcaa20e67b32}{INSUFFICIENT\+\_\+\+SPACE}} = 6003
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a2eaec33b2d6224f90e7222e4b7a49183}{ACCESS\+\_\+\+DENIED}} = 6004
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a15af281710fb0b50726a2b6f560db9c6}{VM\+\_\+\+ERROR}} = 7000
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aaf5dcc114f4d3618802f0cd7bad2ccd8}{STACK\+\_\+\+OVERFLOW}} = 7001
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a4a0a7f755cbb064fb44e2201ab5c57c4}{STACK\+\_\+\+UNDERFLOW}} = 7002
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a78e364cbd50bcd6e731cc156bded135e}{INVALID\+\_\+\+OPCODE}} = 7003
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab23f1844d7ffdcacd50686f46c0345dc}{EXECUTION\+\_\+\+TIMEOUT}} = 7004
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a917fc6224ece5d998c2602aaa7ea3d8b}{OUT\+\_\+\+OF\+\_\+\+GAS}} = 7005
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9edfc5e4293ea1de2e980b0200a48db4}{CONTRACT\+\_\+\+ERROR}} = 8000
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1a9326f1eb071f13673054b74eb95feb}{CONTRACT\+\_\+\+NOT\+\_\+\+FOUND}} = 8001
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab0bf8bc74a483faf7290985969175419}{CONTRACT\+\_\+\+EXECUTION\+\_\+\+FAILED}} = 8002
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab478fed760f994b2ecf33a6e23402ed5}{INVALID\+\_\+\+CONTRACT\+\_\+\+STATE}} = 8003
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a08882b2afdb1b387f4af528ee0005ab3}{WALLET\+\_\+\+ERROR}} = 9000
+, \newline
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab11372f0cbdfce0208b24001349a60b8}{WALLET\+\_\+\+NOT\+\_\+\+FOUND}} = 9001
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af3291c3248dc6fad08d3c6eaa7c87332}{WALLET\+\_\+\+LOCKED}} = 9002
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a15f5afe7f7c311db6b8a5e549081d671}{INVALID\+\_\+\+PASSWORD}} = 9003
+, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aed37ceb30665ea11467e944311ffe598}{INSUFFICIENT\+\_\+\+FUNDS}} = 9004
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{neo\+::core\+::\+Neo\+Exception}}}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_ad58f1d173cfb1122460d3f92486f0ed9}{Error\+Code\+To\+String}} (\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}} code)
+\begin{DoxyCompactList}\small\item\em Convert error code to string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Exception for cryptographic operations. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1core_1_1_cryptography_exception_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1core_1_1_cryptography_exception_aced6f6ba5c69e71e5f107d43b0474b7d}\index{neo::core::CryptographyException@{neo::core::CryptographyException}!CryptographyException@{CryptographyException}}
+\index{CryptographyException@{CryptographyException}!neo::core::CryptographyException@{neo::core::CryptographyException}}
+\doxysubsubsection{\texorpdfstring{CryptographyException()}{CryptographyException()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_cryptography_exception_aced6f6ba5c69e71e5f107d43b0474b7d} 
+neo\+::core\+::\+Cryptography\+Exception\+::\+Cryptography\+Exception (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{message}{, }\item[{const std\+::string \&}]{context}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1core_1_1_cryptography_exception_a071d0c0da4ca325a17c0d67e6e9e4672}\index{neo::core::CryptographyException@{neo::core::CryptographyException}!CryptographyException@{CryptographyException}}
+\index{CryptographyException@{CryptographyException}!neo::core::CryptographyException@{neo::core::CryptographyException}}
+\doxysubsubsection{\texorpdfstring{CryptographyException()}{CryptographyException()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_cryptography_exception_a071d0c0da4ca325a17c0d67e6e9e4672} 
+neo\+::core\+::\+Cryptography\+Exception\+::\+Cryptography\+Exception (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Error\+Code}}}]{code}{, }\item[{const std\+::string \&}]{message}{, }\item[{const std\+::string \&}]{context}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{core_2exceptions_8h}{exceptions.\+h}}\end{DoxyCompactItemize}

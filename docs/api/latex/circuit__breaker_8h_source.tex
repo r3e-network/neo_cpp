@@ -1,0 +1,392 @@
+\doxysection{circuit\+\_\+breaker.\+h}
+\hypertarget{circuit__breaker_8h_source}{}\label{circuit__breaker_8h_source}\index{include/neo/core/circuit\_breaker.h@{include/neo/core/circuit\_breaker.h}}
+\mbox{\hyperlink{circuit__breaker_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1core}{neo::core}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab2a1924e0840bce5736faf5d219288fb}{CircuitBreaker}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}}}
+\DoxyCodeLine{00025\ \ \ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a110ccf2f5d2ff4eda1fd1a494293467d}{CLOSED}},}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837aa38bd5138bf35514df41a1795ebbf5c3}{OPEN}},}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a5c1c0fca237f238d3c656d55a4db3ca4}{HALF\_OPEN}}}
+\DoxyCodeLine{00029\ \ \ \ \ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config}{Config}}}
+\DoxyCodeLine{00032\ \ \ \ \ \{}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config_ac413b0952d2d66569328d8a549fd9b89}{failureThreshold}}\ =\ 5;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Failures\ before\ opening}}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config_a05076ad0dc78161f043a55106bfbc518}{failureRateThreshold}}\ =\ 0.5;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Failure\ rate\ to\ open\ (50\%)}}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config_a946828c8214d99c41d33776ed5ca5ea5}{requestVolumeThreshold}}\ =\ 10;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Minimum\ requests\ for\ rate\ calculation}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config_a557d7426df57cdf4d948d79e142b67a8}{timeout}}\ =\ std::chrono::milliseconds(60000);\ \ \textcolor{comment}{//\ Open\ state\ timeout}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config_a05ef58f9ed15cebfaeba11f903be574a}{successThreshold}}\ =\ 3;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Successes\ in\ half-\/open\ to\ close}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config_a757fdf74f05bb629a31d6798e55a9931}{windowSize}}\ =\ std::chrono::milliseconds(60000);\ \ \textcolor{comment}{//\ Rolling\ window}}
+\DoxyCodeLine{00039\ \ \ \ \ \};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a9e10d44ba56757a75ba1794f75eb963b}{OnStateChangeCallback}}\ =\ std::function<void(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}},\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}})>;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab2a1924e0840bce5736faf5d219288fb}{CircuitBreaker}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config}{Config}}\&\ \mbox{\hyperlink{namespaceneo_1_1config}{config}})}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_aeec4fa08c435019c53800efdd0d2f213}{name\_}}(name),\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_acbb1a8688cdfc873723648676e4f3a25}{config\_}}(\mbox{\hyperlink{namespaceneo_1_1config}{config}}),\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}{state\_}}(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}}::\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a110ccf2f5d2ff4eda1fd1a494293467d}{CLOSED}})}
+\DoxyCodeLine{00045\ \ \ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \}}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ae826bf019679edcb3bf35cfefc1fe1b9}{CircuitBreaker}}(\textcolor{keyword}{const}\ std::string\&\ name)\ :\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_aeec4fa08c435019c53800efdd0d2f213}{name\_}}(name),\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_acbb1a8688cdfc873723648676e4f3a25}{config\_}}(\mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config}{Config}}\{\}),\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}{state\_}}(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}}::\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a110ccf2f5d2ff4eda1fd1a494293467d}{CLOSED}})\ \{\}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Func>}
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a66cc71530c245c3c79d7e98c7bd54da6}{Execute}}(Func\&\&\ func)\ -\/>\ \textcolor{keyword}{decltype}(func())}
+\DoxyCodeLine{00058\ \ \ \ \ \{}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ we\ should\ allow\ the\ request}}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d27a4aa30297d396155edf69ce48279}{AllowRequest}}())}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Circuit\ breaker\ '"{}}\ +\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_aeec4fa08c435019c53800efdd0d2f213}{name\_}}\ +\ \textcolor{stringliteral}{"{}'\ is\ OPEN"{}});}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ startTime\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ result\ =\ func();}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_acee7e88c13d432eacb63091de7badda4}{RecordSuccess}}(startTime);}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&)}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_aa2cb389e122224ed86d8a6304869cd08}{RecordFailure}}(startTime);}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw};}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00078\ \ \ \ \ \}}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Func,\ \textcolor{keyword}{typename}\ Fallback>}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{auto}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a5c600725471df817523f0406926dac29}{ExecuteWithFallback}}(Func\&\&\ func,\ Fallback\&\&\ fallback)\ -\/>\ \textcolor{keyword}{decltype}(func())}
+\DoxyCodeLine{00088\ \ \ \ \ \{}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a66cc71530c245c3c79d7e98c7bd54da6}{Execute}}(std::forward<Func>(func));}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::runtime\_error\&\ e)}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Circuit\ is\ open,\ use\ fallback}}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ fallback();}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00098\ \ \ \ \ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00104\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a7390eec73885b5907b4ca092e5261576}{GetState}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00105\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a07a04dcf5c1826b65f2afa9fd5c8f791}{mutex\_}});}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}{state\_}};}
+\DoxyCodeLine{00108\ \ \ \ \ \}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_stats}{Stats}}}
+\DoxyCodeLine{00114\ \ \ \ \ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_stats_a7422be200a38bb6fc7b6809cb108efd0}{totalRequests}};}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_stats_a12e800252b4a7ca7ba9449da35b75c7a}{successCount}};}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_stats_ad502c1809c7a8614571513fd12f5266e}{failureCount}};}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_stats_a8ad76a6ec6eb95bb6effd7d7fd3713c7}{failureRate}};}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}}\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_stats_a89336fe867ff9c3cb2a3cbdd25fa8026}{currentState}};}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ std::chrono::system\_clock::time\_point\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_stats_aedb3f2e057725c19ed7323e50b7de61d}{lastStateChange}};}
+\DoxyCodeLine{00121\ \ \ \ \ \};}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_stats}{Stats}}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_aceaf77f50e7a0ccd4cbb48e378882d6a}{GetStats}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00124\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a07a04dcf5c1826b65f2afa9fd5c8f791}{mutex\_}});}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ total\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.successCount\ +\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.failureCount;}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ rate\ =\ total\ >\ 0\ ?\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.failureCount)\ /\ total\ :\ 0.0;}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \{total,\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.successCount,\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.failureCount,\ rate,\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}{state\_}},\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ac5c74323fd187e438a682cd87613fe0e}{lastStateChange\_}}\};}
+\DoxyCodeLine{00131\ \ \ \ \ \}}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ac0f069da1deab642db1875b57568a508}{Reset}}()}
+\DoxyCodeLine{00137\ \ \ \ \ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a07a04dcf5c1826b65f2afa9fd5c8f791}{mutex\_}});}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}}\ oldState\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}{state\_}};}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}{state\_}}\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a110ccf2f5d2ff4eda1fd1a494293467d}{State::CLOSED}};}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.successCount.store(0);}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.failureCount.store(0);}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.totalResponseTime.store(0);}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.maxResponseTime.store(0);}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab5d47057a7ff113b9fa5a9eab6d26d34}{consecutiveSuccesses\_}}\ =\ 0;}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_afe808eb19f3f48d27e378fa714c089b0}{lastFailureTime\_}}\ =\ std::chrono::steady\_clock::time\_point\{\};}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ac5c74323fd187e438a682cd87613fe0e}{lastStateChange\_}}\ =\ std::chrono::system\_clock::now();}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00150\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a0e899ef665543d9aaf0411bf135a3904}{onStateChange\_}}\ \&\&\ oldState\ !=\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}{state\_}})}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a0e899ef665543d9aaf0411bf135a3904}{onStateChange\_}}(oldState,\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}{state\_}});}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00154\ \ \ \ \ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_aaab4ea2eaf59f50ca69980c6d782ac35}{SetOnStateChange}}(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a9e10d44ba56757a75ba1794f75eb963b}{OnStateChangeCallback}}\ callback)}
+\DoxyCodeLine{00161\ \ \ \ \ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a07a04dcf5c1826b65f2afa9fd5c8f791}{mutex\_}});}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a0e899ef665543d9aaf0411bf135a3904}{onStateChange\_}}\ =\ callback;}
+\DoxyCodeLine{00164\ \ \ \ \ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a2d6e57638126ee7fd72dc31e76c76c93}{Trip}}()}
+\DoxyCodeLine{00170\ \ \ \ \ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a07a04dcf5c1826b65f2afa9fd5c8f791}{mutex\_}});}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a8de617feb98b2947db68da679bc745ef}{TransitionTo}}(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837aa38bd5138bf35514df41a1795ebbf5c3}{State::OPEN}});}
+\DoxyCodeLine{00173\ \ \ \ \ \}}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d27a4aa30297d396155edf69ce48279}{AllowRequest}}()}
+\DoxyCodeLine{00177\ \ \ \ \ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a07a04dcf5c1826b65f2afa9fd5c8f791}{mutex\_}});}
+\DoxyCodeLine{00179\ }
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}{state\_}})}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a110ccf2f5d2ff4eda1fd1a494293467d}{State::CLOSED}}:}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837aa38bd5138bf35514df41a1795ebbf5c3}{State::OPEN}}:}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ timeout\ has\ passed}}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (std::chrono::steady\_clock::now()\ -\/\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_afe808eb19f3f48d27e378fa714c089b0}{lastFailureTime\_}}\ >=\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_acbb1a8688cdfc873723648676e4f3a25}{config\_}}.timeout)}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a8de617feb98b2947db68da679bc745ef}{TransitionTo}}(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a5c1c0fca237f238d3c656d55a4db3ca4}{State::HALF\_OPEN}});}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a5c1c0fca237f238d3c656d55a4db3ca4}{State::HALF\_OPEN}}:}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Allow\ limited\ requests\ in\ half-\/open\ state}}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00200\ \ \ \ \ \}}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_acee7e88c13d432eacb63091de7badda4}{RecordSuccess}}(\textcolor{keyword}{const}\ std::chrono::steady\_clock::time\_point\&\ startTime)}
+\DoxyCodeLine{00203\ \ \ \ \ \{}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a07a04dcf5c1826b65f2afa9fd5c8f791}{mutex\_}});}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ metrics}}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.successCount++;}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a8b4f99b4a38b4abecd9a8639e1893da8}{UpdateResponseTime}}(startTime);}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ state\ transitions}}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}{state\_}})}
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a5c1c0fca237f238d3c656d55a4db3ca4}{State::HALF\_OPEN}}:}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab5d47057a7ff113b9fa5a9eab6d26d34}{consecutiveSuccesses\_}}++;}
+\DoxyCodeLine{00215\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab5d47057a7ff113b9fa5a9eab6d26d34}{consecutiveSuccesses\_}}\ >=\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_acbb1a8688cdfc873723648676e4f3a25}{config\_}}.successThreshold)}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a8de617feb98b2947db68da679bc745ef}{TransitionTo}}(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a110ccf2f5d2ff4eda1fd1a494293467d}{State::CLOSED}});}
+\DoxyCodeLine{00218\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00219\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a110ccf2f5d2ff4eda1fd1a494293467d}{State::CLOSED}}:}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Clean\ old\ metrics\ periodically}}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a6799dfc5afb45efeac1ad47eee26deb8}{CleanOldMetrics}}();}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837aa38bd5138bf35514df41a1795ebbf5c3}{State::OPEN}}:}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Shouldn't\ happen}}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00230\ \ \ \ \ \}}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_aa2cb389e122224ed86d8a6304869cd08}{RecordFailure}}(\textcolor{keyword}{const}\ std::chrono::steady\_clock::time\_point\&\ startTime)}
+\DoxyCodeLine{00233\ \ \ \ \ \{}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a07a04dcf5c1826b65f2afa9fd5c8f791}{mutex\_}});}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ metrics}}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.failureCount++;}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_afe808eb19f3f48d27e378fa714c089b0}{lastFailureTime\_}}\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a8b4f99b4a38b4abecd9a8639e1893da8}{UpdateResponseTime}}(startTime);}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Handle\ state\ transitions}}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}{state\_}})}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a110ccf2f5d2ff4eda1fd1a494293467d}{State::CLOSED}}:}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_aed8caf2cb36af81eb6d51e817bb10025}{ShouldTrip}}())}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a8de617feb98b2947db68da679bc745ef}{TransitionTo}}(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837aa38bd5138bf35514df41a1795ebbf5c3}{State::OPEN}});}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a5c1c0fca237f238d3c656d55a4db3ca4}{State::HALF\_OPEN}}:}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Any\ failure\ in\ half-\/open\ state\ reopens\ the\ circuit}}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a8de617feb98b2947db68da679bc745ef}{TransitionTo}}(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837aa38bd5138bf35514df41a1795ebbf5c3}{State::OPEN}});}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837aa38bd5138bf35514df41a1795ebbf5c3}{State::OPEN}}:}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Already\ open}}
+\DoxyCodeLine{00258\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00260\ \ \ \ \ \}}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_aed8caf2cb36af81eb6d51e817bb10025}{ShouldTrip}}()}
+\DoxyCodeLine{00263\ \ \ \ \ \{}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ failure\ threshold}}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.failureCount\ >=\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_acbb1a8688cdfc873723648676e4f3a25}{config\_}}.failureThreshold)}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ failure\ rate}}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ totalRequests\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.successCount\ +\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.failureCount;}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (totalRequests\ >=\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_acbb1a8688cdfc873723648676e4f3a25}{config\_}}.requestVolumeThreshold)}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ failureRate\ =\ \textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{double}\textcolor{keyword}{>}(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.failureCount)\ /\ totalRequests;}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (failureRate\ >=\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_acbb1a8688cdfc873723648676e4f3a25}{config\_}}.failureRateThreshold)}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00280\ }
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00282\ \ \ \ \ \}}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a8de617feb98b2947db68da679bc745ef}{TransitionTo}}(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}}\ newState)}
+\DoxyCodeLine{00285\ \ \ \ \ \{}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}{state\_}}\ ==\ newState)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}}\ oldState\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}{state\_}};}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}{state\_}}\ =\ newState;}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ac5c74323fd187e438a682cd87613fe0e}{lastStateChange\_}}\ =\ std::chrono::system\_clock::now();}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reset\ state-\/specific\ counters}}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (newState)}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a110ccf2f5d2ff4eda1fd1a494293467d}{State::CLOSED}}:}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.successCount.store(0);}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.failureCount.store(0);}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.totalResponseTime.store(0);}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.maxResponseTime.store(0);}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab5d47057a7ff113b9fa5a9eab6d26d34}{consecutiveSuccesses\_}}\ =\ 0;}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a5c1c0fca237f238d3c656d55a4db3ca4}{State::HALF\_OPEN}}:}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab5d47057a7ff113b9fa5a9eab6d26d34}{consecutiveSuccesses\_}}\ =\ 0;}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837aa38bd5138bf35514df41a1795ebbf5c3}{State::OPEN}}:}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Keep\ metrics\ for\ analysis}}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Notify\ callback}}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a0e899ef665543d9aaf0411bf135a3904}{onStateChange\_}})}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a0e899ef665543d9aaf0411bf135a3904}{onStateChange\_}}(oldState,\ newState);}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00317\ \ \ \ \ \}}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00319\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a8b4f99b4a38b4abecd9a8639e1893da8}{UpdateResponseTime}}(\textcolor{keyword}{const}\ std::chrono::steady\_clock::time\_point\&\ startTime)}
+\DoxyCodeLine{00320\ \ \ \ \ \{}
+\DoxyCodeLine{00321\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ duration\ =\ std::chrono::steady\_clock::now()\ -\/\ startTime;}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ ms\ =\ std::chrono::duration\_cast<std::chrono::milliseconds>(duration).count();}
+\DoxyCodeLine{00323\ }
+\DoxyCodeLine{00324\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.totalResponseTime\ +=\ ms;}
+\DoxyCodeLine{00325\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ms\ >\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.maxResponseTime)}
+\DoxyCodeLine{00326\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00327\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.maxResponseTime\ =\ ms;}
+\DoxyCodeLine{00328\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00329\ \ \ \ \ \}}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00331\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a6799dfc5afb45efeac1ad47eee26deb8}{CleanOldMetrics}}()}
+\DoxyCodeLine{00332\ \ \ \ \ \{}
+\DoxyCodeLine{00333\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reset\ metrics\ periodically\ based\ on\ window\ size}}
+\DoxyCodeLine{00334\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ now\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{00335\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (now\ -\/\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a299baf0767b4848f3fee13a9a1797f7d}{lastMetricsReset\_}}\ >\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_acbb1a8688cdfc873723648676e4f3a25}{config\_}}.windowSize)}
+\DoxyCodeLine{00336\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00337\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Reset\ counters\ while\ preserving\ max\ response\ time}}
+\DoxyCodeLine{00338\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ prevMax\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.maxResponseTime.load();}
+\DoxyCodeLine{00339\ }
+\DoxyCodeLine{00340\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.successCount.store(0);}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.failureCount.store(0);}
+\DoxyCodeLine{00342\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.totalResponseTime.store(0);}
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}}.maxResponseTime.store(prevMax);}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a299baf0767b4848f3fee13a9a1797f7d}{lastMetricsReset\_}}\ =\ now;}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00346\ \ \ \ \ \}}
+\DoxyCodeLine{00347\ }
+\DoxyCodeLine{00348\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_metrics}{Metrics}}}
+\DoxyCodeLine{00349\ \ \ \ \ \{}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ std::atomic<size\_t>\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_metrics_a2a2d9c3f7801c2ad471ec629868079e2}{successCount}}\{0\};}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ std::atomic<size\_t>\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_metrics_a62dda01e854d3df94b44386f1a80863b}{failureCount}}\{0\};}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ std::atomic<int64\_t>\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_metrics_adfa1e9cc6f38b12b6463ac52e537be91}{totalResponseTime}}\{0\};}
+\DoxyCodeLine{00353\ \ \ \ \ \ \ \ \ std::atomic<int64\_t>\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_metrics_a785a5fd51fadaf1211f15714c9788b9b}{maxResponseTime}}\{0\};}
+\DoxyCodeLine{00354\ \ \ \ \ \};}
+\DoxyCodeLine{00355\ }
+\DoxyCodeLine{00356\ \ \ \ \ \textcolor{keyword}{const}\ std::string\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_aeec4fa08c435019c53800efdd0d2f213}{name\_}};}
+\DoxyCodeLine{00357\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config}{Config}}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_acbb1a8688cdfc873723648676e4f3a25}{config\_}};}
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00359\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}{state\_}};}
+\DoxyCodeLine{00360\ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_metrics}{Metrics}}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\_}};}
+\DoxyCodeLine{00361\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab5d47057a7ff113b9fa5a9eab6d26d34}{consecutiveSuccesses\_}}\ =\ 0;}
+\DoxyCodeLine{00362\ \ \ \ \ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_afe808eb19f3f48d27e378fa714c089b0}{lastFailureTime\_}};}
+\DoxyCodeLine{00363\ \ \ \ \ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a299baf0767b4848f3fee13a9a1797f7d}{lastMetricsReset\_}};}
+\DoxyCodeLine{00364\ \ \ \ \ std::chrono::system\_clock::time\_point\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ac5c74323fd187e438a682cd87613fe0e}{lastStateChange\_}};}
+\DoxyCodeLine{00365\ }
+\DoxyCodeLine{00366\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a9e10d44ba56757a75ba1794f75eb963b}{OnStateChangeCallback}}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a0e899ef665543d9aaf0411bf135a3904}{onStateChange\_}};}
+\DoxyCodeLine{00367\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a07a04dcf5c1826b65f2afa9fd5c8f791}{mutex\_}};}
+\DoxyCodeLine{00368\ \};}
+\DoxyCodeLine{00369\ }
+\DoxyCodeLine{00373\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_a5edaee08a114ff97d9a26854bd336431}{CircuitBreakerManager}}}
+\DoxyCodeLine{00374\ \{}
+\DoxyCodeLine{00375\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00376\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_a5edaee08a114ff97d9a26854bd336431}{CircuitBreakerManager}}\&\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_abe61e6b8f662368a000d16822b398f6e}{GetInstance}}()}
+\DoxyCodeLine{00377\ \ \ \ \ \{}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_a5edaee08a114ff97d9a26854bd336431}{CircuitBreakerManager}}\ instance;}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00380\ \ \ \ \ \}}
+\DoxyCodeLine{00381\ }
+\DoxyCodeLine{00388\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker}{CircuitBreaker}}\&\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_a823bc859ca8fd24c4a8119f7899c531f}{GetCircuitBreaker}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config}{CircuitBreaker::Config}}\&\ \mbox{\hyperlink{namespaceneo_1_1config}{config}}\ =\ \{\})}
+\DoxyCodeLine{00389\ \ \ \ \ \{}
+\DoxyCodeLine{00390\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_ac0e803b99c0eee1d540a226028429972}{mutex\_}});}
+\DoxyCodeLine{00391\ }
+\DoxyCodeLine{00392\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_ae52102d197cebd1c656f3b9c09517599}{breakers\_}}.find(name);}
+\DoxyCodeLine{00393\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (it\ ==\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_ae52102d197cebd1c656f3b9c09517599}{breakers\_}}.end())}
+\DoxyCodeLine{00394\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00395\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ result\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_ae52102d197cebd1c656f3b9c09517599}{breakers\_}}.emplace(name,\ std::make\_unique<CircuitBreaker>(name,\ \mbox{\hyperlink{namespaceneo_1_1config}{config}}));}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *result.first-\/>second;}
+\DoxyCodeLine{00397\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00398\ }
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *it-\/>second;}
+\DoxyCodeLine{00400\ \ \ \ \ \}}
+\DoxyCodeLine{00401\ }
+\DoxyCodeLine{00405\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_a338dd20eeb1661af81ce5d2fd467ff7e}{ResetAll}}()}
+\DoxyCodeLine{00406\ \ \ \ \ \{}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_ac0e803b99c0eee1d540a226028429972}{mutex\_}});}
+\DoxyCodeLine{00408\ }
+\DoxyCodeLine{00409\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{auto}\&\ [name,\ breaker]\ :\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_ae52102d197cebd1c656f3b9c09517599}{breakers\_}})}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00411\ \ \ \ \ \ \ \ \ \ \ \ \ breaker-\/>Reset();}
+\DoxyCodeLine{00412\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00413\ \ \ \ \ \}}
+\DoxyCodeLine{00414\ }
+\DoxyCodeLine{00419\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_a369b4a0c1d563dbf6b39a643652a82e7}{GetAllNames}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00420\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_ac0e803b99c0eee1d540a226028429972}{mutex\_}});}
+\DoxyCodeLine{00422\ }
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ std::vector<std::string>\ names;}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [name,\ \_]\ :\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_ae52102d197cebd1c656f3b9c09517599}{breakers\_}})}
+\DoxyCodeLine{00425\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00426\ \ \ \ \ \ \ \ \ \ \ \ \ names.push\_back(name);}
+\DoxyCodeLine{00427\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00428\ }
+\DoxyCodeLine{00429\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ names;}
+\DoxyCodeLine{00430\ \ \ \ \ \}}
+\DoxyCodeLine{00431\ }
+\DoxyCodeLine{00432\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00433\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_a5edaee08a114ff97d9a26854bd336431}{CircuitBreakerManager}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00434\ }
+\DoxyCodeLine{00435\ \ \ \ \ std::unordered\_map<std::string,\ std::unique\_ptr<CircuitBreaker>>\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_ae52102d197cebd1c656f3b9c09517599}{breakers\_}};}
+\DoxyCodeLine{00436\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_ac0e803b99c0eee1d540a226028429972}{mutex\_}};}
+\DoxyCodeLine{00437\ \};}
+\DoxyCodeLine{00438\ }
+\DoxyCodeLine{00439\ \}\ \ \textcolor{comment}{//\ namespace\ neo::core}}
+
+\end{DoxyCode}

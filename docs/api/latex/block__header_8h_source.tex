@@ -1,0 +1,102 @@
+\doxysection{block\+\_\+header.\+h}
+\hypertarget{block__header_8h_source}{}\label{block__header_8h_source}\index{include/neo/ledger/block\_header.h@{include/neo/ledger/block\_header.h}}
+\mbox{\hyperlink{block__header_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__reader_8h}{neo/io/binary\_reader.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__writer_8h}{neo/io/binary\_writer.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ijson__serializable_8h}{neo/io/ijson\_serializable.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{iserializable_8h}{neo/io/iserializable.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2witness_8h}{neo/ledger/witness.h}}>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}};}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a732dd30fc18bcec39262f497a3bdf0e1}{BlockHeader}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{io::ISerializable}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{io::IJsonSerializable}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a732dd30fc18bcec39262f497a3bdf0e1}{BlockHeader}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a732dd30fc18bcec39262f497a3bdf0e1}{BlockHeader}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}}\&\ block);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00038\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a2c149d8da0ed43742c220a5fda03f2a3}{GetVersion}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_aaa6aacb8333331fca4a72e55b1133eb8}{SetVersion}}(uint32\_t\ version);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a847b1ef298d9c583d8f3009444e4ba6b}{GetPrevHash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_afb20a478701a450f9ff98f87c413268b}{SetPrevHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ prevHash);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a7d4deb819d7e1ed94ca3de24eb30a6d2}{GetMerkleRoot}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a6716cb8e33b3c791e6ff9fa4c5050b31}{SetMerkleRoot}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ merkleRoot);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00074\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_ab1d5526507aa46a2bb962acbf7a0024a}{GetTimestamp}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_afd69257fb48353613b49001069431608}{SetTimestamp}}(uint64\_t\ timestamp);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00086\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_ad9aaf7c64fa80f72c37a85e8fa5b0fca}{GetNonce}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_ab7111389ecde12b8a33fa8ab7b5f2d77}{SetNonce}}(uint64\_t\ nonce);}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00098\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_adcacb78fda17baa0e2fabbac4182957b}{GetIndex}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_ab29eda25252176d5a46ad200d7646e6a}{SetIndex}}(uint32\_t\ index);}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00110\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a45a74c111a96e6b2849d9aa0caac2945}{GetPrimaryIndex}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a701b327a2c765067dc15f4edd5360fdd}{SetPrimaryIndex}}(uint8\_t\ primaryIndex);}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_ac8cb43366b71971baa4cf7e711ed7f0c}{GetNextConsensus}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_ac571c1e4914c0a14bbb24ae775bba27e}{SetNextConsensus}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ nextConsensus);}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{Witness}}\&\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a5ea674f5bf72f208909d6516a53be4cb}{GetWitness}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_ab124de1a16b9abc97da6678fb8f0ef97}{SetWitness}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{Witness}}\&\ witness);}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00146\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_adc4d2971e7b9bddfab4640aa58f28e91}{GetHash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a0c806f43599eebfe3597b602c7821909}{GetSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a08251dda511abd39b97375765906d5c2}{Verify}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a65ab02d63d43a88795d4bb2d679f9669}{VerifyWitness}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a96ceab4223eaa21b231a587310fd6bac}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_acf0d51d46db6408467d31986c359579f}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_aa17343fc10ce779c8f0f2d6f64d242a7}{SerializeJson}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io::JsonWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a57131938eb6f44600ed01845c03b0476}{DeserializeJson}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io::JsonReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a8a1ec0ed9e5c470586a8af57d310b00d}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a732dd30fc18bcec39262f497a3bdf0e1}{BlockHeader}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_ab2444d8df68b0a0fe926b0d4949d6769}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a732dd30fc18bcec39262f497a3bdf0e1}{BlockHeader}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00205\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_afb18a108dbb8aa084f59a5c05175ab10}{version\_}};}
+\DoxyCodeLine{00206\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a7662a715aa87d99481b0d17cba8f611d}{prevHash\_}};}
+\DoxyCodeLine{00207\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a6245302eb0063d07a6a5fbae035e3774}{merkleRoot\_}};}
+\DoxyCodeLine{00208\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_ab2d014d7bbb1e7dfddcec89301e49938}{timestamp\_}};}
+\DoxyCodeLine{00209\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_af1444e0e4753e9099089a4b8eae06a67}{nonce\_}};}
+\DoxyCodeLine{00210\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a4d966da4490cf47739c8eca68ba24006}{index\_}};}
+\DoxyCodeLine{00211\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a24cc7f1aa238194988446f9d8e21a375}{primaryIndex\_}};}
+\DoxyCodeLine{00212\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_abd7a06bfbe0d3ba1acfbdd3b8a52677b}{nextConsensus\_}};}
+\DoxyCodeLine{00213\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{Witness}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a1d1c3776ed3487445121081fa823cfab}{witness\_}};}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{comment}{//\ Helper\ methods\ for\ witness\ verification}}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_ab0db5b89e19ec8dfe439ab3408898d19}{IsMultiSignatureContract}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ script)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a2bb6a275bcfb49bbb6ea9298eafc154d}{VerifyMultiSignatureWitness}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{Witness}}\&\ witness)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00218\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a7f1e88ec65bc7eded0cb5f30402b38b6}{GetSignData}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00219\ \};}
+\DoxyCodeLine{00220\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}

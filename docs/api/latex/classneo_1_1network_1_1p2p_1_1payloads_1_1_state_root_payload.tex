@@ -1,0 +1,275 @@
+\doxysection{neo\+::network\+::p2p\+::payloads\+::State\+Root\+Payload Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload}{}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload}\index{neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}}
+
+
+State root payload for network transmission.  
+
+
+
+
+{\ttfamily \#include $<$state\+\_\+root\+\_\+payload.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::p2p\+::payloads\+::State\+Root\+Payload\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::payloads\+::State\+Root\+Payload\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a45ce8df98925f06b7bd3c985c3f65f09}{State\+Root\+Payload}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a584ef7c8b6b7679c56bc37eebd85eddb}{State\+Root\+Payload}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root}{ledger\+::\+State\+Root}} \&state\+\_\+root, uint32\+\_\+t request\+\_\+id=0, bool is\+\_\+response=false)
+\begin{DoxyCompactList}\small\item\em Constructor with state root. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root}{ledger\+::\+State\+Root}} \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a7d39769fd0e0be8c1fa85e4223670e3f}{Get\+State\+Root}} () const
+\begin{DoxyCompactList}\small\item\em Get the state root. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a92fed93785ba58ad2219a7264fb4f8ed}{Set\+State\+Root}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root}{ledger\+::\+State\+Root}} \&state\+\_\+root)
+\begin{DoxyCompactList}\small\item\em Set the state root. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a8c321dbbe6ba8df09ca609c299ca68f6}{Get\+Request\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Get request identifier. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a54b1c124b4be2e93bf26a370b40090eb}{Set\+Request\+Id}} (uint32\+\_\+t request\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Set request identifier. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_aeba76058e470676d81735dcfc0934fd9}{Is\+Response}} () const
+\begin{DoxyCompactList}\small\item\em Check if this is a response. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a0af2669891435acdc7d45938b51fe25c}{Set\+Is\+Response}} (bool is\+\_\+response)
+\begin{DoxyCompactList}\small\item\em Set response flag. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_affa60eb17aa63779117ddcb98e1edaf9}{Get\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Get the size of serialized data. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a20c36c5cb9735c3b3c84984887de31c7}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serialize to writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_afa6fd334b44ec801f8fe7e49c1582486}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserialize from reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_state_root}{ledger\+::\+State\+Root}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a5a27e31374d78fe36dae5c79b109c9ad}{state\+\_\+root\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a08ebfedca3905679b1f2e218aee5fd04}{request\+\_\+id\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a9b966c85df7a216cc36ea137bbd5688f}{is\+\_\+response\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+State root payload for network transmission. 
+
+This payload is used to transmit state roots between nodes for state synchronization. It follows the C\# Neo protocol format. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a45ce8df98925f06b7bd3c985c3f65f09}\index{neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}!StateRootPayload@{StateRootPayload}}
+\index{StateRootPayload@{StateRootPayload}!neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}}
+\doxysubsubsection{\texorpdfstring{StateRootPayload()}{StateRootPayload()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a45ce8df98925f06b7bd3c985c3f65f09} 
+neo\+::network\+::p2p\+::payloads\+::\+State\+Root\+Payload\+::\+State\+Root\+Payload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a584ef7c8b6b7679c56bc37eebd85eddb}\index{neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}!StateRootPayload@{StateRootPayload}}
+\index{StateRootPayload@{StateRootPayload}!neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}}
+\doxysubsubsection{\texorpdfstring{StateRootPayload()}{StateRootPayload()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a584ef7c8b6b7679c56bc37eebd85eddb} 
+neo\+::network\+::p2p\+::payloads\+::\+State\+Root\+Payload\+::\+State\+Root\+Payload (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root}{ledger\+::\+State\+Root}} \&}]{state\+\_\+root}{, }\item[{uint32\+\_\+t}]{request\+\_\+id}{ = {\ttfamily 0}, }\item[{bool}]{is\+\_\+response}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructor with state root. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state\+\_\+root} & State root to transmit \\
+\hline
+{\em request\+\_\+id} & Request identifier \\
+\hline
+{\em is\+\_\+response} & Whether this is a response \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_afa6fd334b44ec801f8fe7e49c1582486}\index{neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_afa6fd334b44ec801f8fe7e49c1582486} 
+void neo\+::network\+::p2p\+::payloads\+::\+State\+Root\+Payload\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserialize from reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & Binary reader \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a8c321dbbe6ba8df09ca609c299ca68f6}\index{neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}!GetRequestId@{GetRequestId}}
+\index{GetRequestId@{GetRequestId}!neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}}
+\doxysubsubsection{\texorpdfstring{GetRequestId()}{GetRequestId()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a8c321dbbe6ba8df09ca609c299ca68f6} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+State\+Root\+Payload\+::\+Get\+Request\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get request identifier. 
+
+\begin{DoxyReturn}{Returns}
+Request ID 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_affa60eb17aa63779117ddcb98e1edaf9}\index{neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_affa60eb17aa63779117ddcb98e1edaf9} 
+size\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+State\+Root\+Payload\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the size of serialized data. 
+
+\begin{DoxyReturn}{Returns}
+Size in bytes 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a7d39769fd0e0be8c1fa85e4223670e3f}\index{neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}!GetStateRoot@{GetStateRoot}}
+\index{GetStateRoot@{GetStateRoot}!neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}}
+\doxysubsubsection{\texorpdfstring{GetStateRoot()}{GetStateRoot()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a7d39769fd0e0be8c1fa85e4223670e3f} 
+const \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root}{ledger\+::\+State\+Root}} \& neo\+::network\+::p2p\+::payloads\+::\+State\+Root\+Payload\+::\+Get\+State\+Root (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get the state root. 
+
+\begin{DoxyReturn}{Returns}
+State root 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_aeba76058e470676d81735dcfc0934fd9}\index{neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}!IsResponse@{IsResponse}}
+\index{IsResponse@{IsResponse}!neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}}
+\doxysubsubsection{\texorpdfstring{IsResponse()}{IsResponse()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_aeba76058e470676d81735dcfc0934fd9} 
+bool neo\+::network\+::p2p\+::payloads\+::\+State\+Root\+Payload\+::\+Is\+Response (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if this is a response. 
+
+\begin{DoxyReturn}{Returns}
+True if response 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a20c36c5cb9735c3b3c84984887de31c7}\index{neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a20c36c5cb9735c3b3c84984887de31c7} 
+void neo\+::network\+::p2p\+::payloads\+::\+State\+Root\+Payload\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize to writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & Binary writer \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a0af2669891435acdc7d45938b51fe25c}\index{neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}!SetIsResponse@{SetIsResponse}}
+\index{SetIsResponse@{SetIsResponse}!neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}}
+\doxysubsubsection{\texorpdfstring{SetIsResponse()}{SetIsResponse()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a0af2669891435acdc7d45938b51fe25c} 
+void neo\+::network\+::p2p\+::payloads\+::\+State\+Root\+Payload\+::\+Set\+Is\+Response (\begin{DoxyParamCaption}\item[{bool}]{is\+\_\+response}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set response flag. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em is\+\_\+response} & Response flag \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a54b1c124b4be2e93bf26a370b40090eb}\index{neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}!SetRequestId@{SetRequestId}}
+\index{SetRequestId@{SetRequestId}!neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}}
+\doxysubsubsection{\texorpdfstring{SetRequestId()}{SetRequestId()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a54b1c124b4be2e93bf26a370b40090eb} 
+void neo\+::network\+::p2p\+::payloads\+::\+State\+Root\+Payload\+::\+Set\+Request\+Id (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{request\+\_\+id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set request identifier. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em request\+\_\+id} & Request ID \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a92fed93785ba58ad2219a7264fb4f8ed}\index{neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}!SetStateRoot@{SetStateRoot}}
+\index{SetStateRoot@{SetStateRoot}!neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}}
+\doxysubsubsection{\texorpdfstring{SetStateRoot()}{SetStateRoot()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a92fed93785ba58ad2219a7264fb4f8ed} 
+void neo\+::network\+::p2p\+::payloads\+::\+State\+Root\+Payload\+::\+Set\+State\+Root (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root}{ledger\+::\+State\+Root}} \&}]{state\+\_\+root}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set the state root. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em state\+\_\+root} & State root to set \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a9b966c85df7a216cc36ea137bbd5688f}\index{neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}!is\_response\_@{is\_response\_}}
+\index{is\_response\_@{is\_response\_}!neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}}
+\doxysubsubsection{\texorpdfstring{is\_response\_}{is\_response\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a9b966c85df7a216cc36ea137bbd5688f} 
+bool neo\+::network\+::p2p\+::payloads\+::\+State\+Root\+Payload\+::is\+\_\+response\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a08ebfedca3905679b1f2e218aee5fd04}\index{neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}!request\_id\_@{request\_id\_}}
+\index{request\_id\_@{request\_id\_}!neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}}
+\doxysubsubsection{\texorpdfstring{request\_id\_}{request\_id\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a08ebfedca3905679b1f2e218aee5fd04} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+State\+Root\+Payload\+::request\+\_\+id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a5a27e31374d78fe36dae5c79b109c9ad}\index{neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}!state\_root\_@{state\_root\_}}
+\index{state\_root\_@{state\_root\_}!neo::network::p2p::payloads::StateRootPayload@{neo::network::p2p::payloads::StateRootPayload}}
+\doxysubsubsection{\texorpdfstring{state\_root\_}{state\_root\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_state_root_payload_a5a27e31374d78fe36dae5c79b109c9ad} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_state_root}{ledger\+::\+State\+Root}} neo\+::network\+::p2p\+::payloads\+::\+State\+Root\+Payload\+::state\+\_\+root\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/payloads/\mbox{\hyperlink{state__root__payload_8h}{state\+\_\+root\+\_\+payload.\+h}}\end{DoxyCompactItemize}

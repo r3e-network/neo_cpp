@@ -1,0 +1,117 @@
+\doxysection{consensus\+\_\+context.\+h}
+\hypertarget{consensus__context_8h_source}{}\label{consensus__context_8h_source}\index{include/neo/consensus/consensus\_context.h@{include/neo/consensus/consensus\_context.h}}
+\mbox{\hyperlink{consensus__context_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{consensus__message_8h}{neo/consensus/consensus\_message.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{consensus__payload__helper_8h}{neo/consensus/consensus\_payload\_helper.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ecpoint_8h}{neo/cryptography/ecc/ecpoint.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2block_8h}{neo/ledger/block.h}}>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2neo__system_8h}{neo/ledger/neo\_system.h}}>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2transaction_8h}{neo/ledger/transaction.h}}>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{transaction__verification__context_8h}{neo/ledger/transaction\_verification\_context.h}}>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{p2p_2payloads_2extensible__payload_8h}{neo/network/p2p/payloads/extensible\_payload.h}}>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{data__cache_8h}{neo/persistence/data\_cache.h}}>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{protocol__settings_8h}{neo/protocol\_settings.h}}>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{isigner_8h}{neo/sign/isigner.h}}>}}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1consensus}{neo::consensus}}}
+\DoxyCodeLine{00025\ \{}
+\DoxyCodeLine{00032\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a323e2013070e62d5a0af727e693d7b0e}{ConsensusContext}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{io::ISerializable}}}
+\DoxyCodeLine{00033\ \{}
+\DoxyCodeLine{00034\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a323e2013070e62d5a0af727e693d7b0e}{ConsensusContext}}(std::shared\_ptr<ledger::NeoSystem>\ neoSystem,\ std::shared\_ptr<ProtocolSettings>\ settings,}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<sign::ISigner>\ signer);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{comment}{//\ Block\ and\ consensus\ state}}
+\DoxyCodeLine{00045\ \ \ \ \ std::shared\_ptr<ledger::Block>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a1157872cbafa3fdd4c1bbf467094c774}{Block}};}
+\DoxyCodeLine{00046\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_aa6fea89f613cd9b1f02b161105e6d5fb}{ViewNumber}}\ =\ 0;}
+\DoxyCodeLine{00047\ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a469f808407d5b6387ec493581a5d350f}{TimePerBlock}};}
+\DoxyCodeLine{00048\ \ \ \ \ std::vector<cryptography::ecc::ECPoint>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_ad17dcf61ae30116fa82c2ca2bdbce35e}{Validators}};}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a7951d8c96764aee03c612af24777ce75}{MyIndex}}\ =\ -\/1;}
+\DoxyCodeLine{00050\ \ \ \ \ std::vector<io::UInt256>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_afd975da1adba2841f2455634a086803a}{TransactionHashes}};}
+\DoxyCodeLine{00051\ \ \ \ \ std::unordered\_map<io::UInt256,\ std::shared\_ptr<ledger::Transaction>>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_af0cdec341361c1db10b32d087765339a}{Transactions}};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{comment}{//\ Consensus\ message\ storage\ (using\ ExtensiblePayload)}}
+\DoxyCodeLine{00054\ \ \ \ \ std::vector<std::shared\_ptr<network::p2p::payloads::ExtensiblePayload>>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a3c299a0dcf6b1a4bea1832d2d51a3b47}{PreparationPayloads}};}
+\DoxyCodeLine{00055\ \ \ \ \ std::vector<std::shared\_ptr<network::p2p::payloads::ExtensiblePayload>>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a2e0db3de307bedb187fa40180f36d921}{CommitPayloads}};}
+\DoxyCodeLine{00056\ \ \ \ \ std::vector<std::shared\_ptr<network::p2p::payloads::ExtensiblePayload>>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a6cbf92551deaa63e80d063c06a3f818d}{ChangeViewPayloads}};}
+\DoxyCodeLine{00057\ \ \ \ \ std::vector<std::shared\_ptr<network::p2p::payloads::ExtensiblePayload>>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_aaf15f4e6748d364337a97ab75fab4d72}{LastChangeViewPayloads}};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{comment}{//\ Last\ seen\ message\ tracking}}
+\DoxyCodeLine{00060\ \ \ \ \ std::unordered\_map<cryptography::ecc::ECPoint,\ uint32\_t>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_aadaf7282a330d113eaaf500a753a2690}{LastSeenMessage}};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{comment}{//\ Transaction\ verification\ context}}
+\DoxyCodeLine{00063\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_verification_context}{ledger::TransactionVerificationContext}}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a71971d872e675fa35446908e0994650e}{VerificationContext}};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{comment}{//\ Snapshot\ of\ the\ blockchain\ state}}
+\DoxyCodeLine{00066\ \ \ \ \ std::shared\_ptr<persistence::DataCache>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_ad977fbfc57c0bb963fdb06169cef3c8b}{Snapshot}};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{comment}{//\ Consensus\ parameters}}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a5d7b918614a91a438f46504d5834f832}{F}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ (\mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_ad17dcf61ae30116fa82c2ca2bdbce35e}{Validators}}.size()\ -\/\ 1)\ /\ 3;\ \}}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a1f1d7eb4db725683588a3013cc8d5bab}{M}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_ad17dcf61ae30116fa82c2ca2bdbce35e}{Validators}}.size()\ -\/\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a5d7b918614a91a438f46504d5834f832}{F}}();\ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a2d92270aef08dce7712c6c04e02ca63e}{IsPrimary}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a7951d8c96764aee03c612af24777ce75}{MyIndex}}\ ==\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a1157872cbafa3fdd4c1bbf467094c774}{Block}}-\/>GetPrimaryIndex();\ \}}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a9eb62355bab2b36c85cc1af54db64a1a}{IsBackup}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a7951d8c96764aee03c612af24777ce75}{MyIndex}}\ >=\ 0\ \&\&\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a7951d8c96764aee03c612af24777ce75}{MyIndex}}\ !=\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a1157872cbafa3fdd4c1bbf467094c774}{Block}}-\/>GetPrimaryIndex();\ \}}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a86c44afe91051f7c4aa125df4ea565a5}{WatchOnly}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a7951d8c96764aee03c612af24777ce75}{MyIndex}}\ <\ 0;\ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{comment}{//\ State\ queries}}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a48a3063a0b5cfbcc2f739258ccd8d693}{RequestSentOrReceived}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_ac83bd8e557becc3347292b54f4a0ddc4}{ResponseSent}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_ac144e3d33101398e62fa9929c12c1a43}{CommitSent}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a1c915b53db6aa8d0756e78ce9e09a03f}{BlockSent}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_afaab61a7ae149cbd78b92fe54615c0de}{ViewChanging}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a950b7b378f250c96bf2493b470dde91a}{Reset}}(uint8\_t\ viewNumber);}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00093\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_ac62d5a119c1801fffd7c27b92f41511e}{GetPrimaryIndex}}(uint8\_t\ viewNumber)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00100\ \ \ \ \ std::shared\_ptr<network::p2p::payloads::ExtensiblePayload>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a8d533040842d9fdb0fa3b0e7edc8aa92}{MakeSignedPayload}}(}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ std::shared\_ptr<ConsensusMessage>\ message);}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00108\ \ \ \ \ std::shared\_ptr<network::p2p::payloads::ExtensiblePayload>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a7824c3c3f7947493a428b26ef20302d2}{MakeChangeView}}(uint8\_t\ reason);}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00114\ \ \ \ \ std::shared\_ptr<network::p2p::payloads::ExtensiblePayload>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a13d94cdd40d26cc8d936035ca9e315c6}{MakePrepareRequest}}();}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00120\ \ \ \ \ std::shared\_ptr<network::p2p::payloads::ExtensiblePayload>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_ad2829382cf5564c77c8498a685bd70dc}{MakePrepareResponse}}();}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00126\ \ \ \ \ std::shared\_ptr<network::p2p::payloads::ExtensiblePayload>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a1e94f2e8e8ec55c7dba8b21340f1e946}{MakeCommit}}();}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00132\ \ \ \ \ std::shared\_ptr<network::p2p::payloads::ExtensiblePayload>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_af74326b9c241269541a705335ce842ae}{MakeRecoveryRequest}}();}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00138\ \ \ \ \ std::shared\_ptr<network::p2p::payloads::ExtensiblePayload>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_af1f8e7502593ded17268b77971708636}{MakeRecoveryMessage}}();}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a140179f63e80a44ca1de0fab666e0ab8}{EnsureMaxBlockLimitation}}(\textcolor{keyword}{const}\ std::vector<std::shared\_ptr<ledger::Transaction>>\&\ txs);}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_ad22ae3b75a66f505b1caf5a0c045746c}{Save}}();}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{comment}{//\ ISerializable\ implementation}}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_af259e4963920b411df1db73c8a4d39e1}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a00fd49d0787daec8c5c30a5bc2ca247d}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00155\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00156\ \ \ \ \ std::shared\_ptr<ledger::NeoSystem>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_ac040ed928df9ed18f7afb94c0dc89eba}{neoSystem\_}};}
+\DoxyCodeLine{00157\ \ \ \ \ std::shared\_ptr<ProtocolSettings>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_aa119ff830d60882524fe676ba1ecbf86}{settings\_}};}
+\DoxyCodeLine{00158\ \ \ \ \ std::shared\_ptr<sign::ISigner>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a7e31d85a77d54861450d435933798130}{signer\_}};}
+\DoxyCodeLine{00159\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography::ecc::ECPoint}}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_afa75c89534c35d910a16410552564c61}{myPublicKey\_}};}
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_aa16a9375f9dcdc818e5f573c1adb8260}{witnessSize\_}}\ =\ 0;}
+\DoxyCodeLine{00161\ \ \ \ \ std::unordered\_map<io::UInt256,\ std::shared\_ptr<ConsensusMessage>>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a991e84288db7365c8abff6298333d8d6}{cachedMessages\_}};}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a703300a1a934d166fb4e79fc7963c869}{SignPayload}}(std::shared\_ptr<network::p2p::payloads::ExtensiblePayload>\ payload);}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_a2d17d7c4d9feaa95f50f567d4744931b}{GetExpectedBlockSizeWithoutTransactions}}(\textcolor{keywordtype}{size\_t}\ txCount)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00180\ \ \ \ \ std::shared\_ptr<ledger::Block>\ \mbox{\hyperlink{classneo_1_1consensus_1_1_consensus_context_ae18ff61abd88bbaec7ba9101d7826cca}{EnsureHeader}}();}
+\DoxyCodeLine{00181\ \};}
+\DoxyCodeLine{00182\ \}\ \ \textcolor{comment}{//\ namespace\ neo::consensus}}
+
+\end{DoxyCode}

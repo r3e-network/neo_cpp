@@ -1,0 +1,46 @@
+\doxysection{transaction\+\_\+payload.\+h}
+\hypertarget{transaction__payload_8h_source}{}\label{transaction__payload_8h_source}\index{include/neo/network/p2p/payloads/transaction\_payload.h@{include/neo/network/p2p/payloads/transaction\_payload.h}}
+\mbox{\hyperlink{transaction__payload_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__reader_8h}{neo/io/binary\_reader.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__writer_8h}{neo/io/binary\_writer.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__reader_8h}{neo/io/json\_reader.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__writer_8h}{neo/io/json\_writer.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{p2p_2ipayload_8h}{neo/network/p2p/ipayload.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{neo3__transaction_8h}{neo/network/p2p/payloads/neo3\_transaction.h}}>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads}{neo::network::p2p::payloads}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload_a74b8cec997d1b26db84f5444b0d45b3f}{TransactionPayload}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{IPayload}}}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload_a74b8cec997d1b26db84f5444b0d45b3f}{TransactionPayload}}();}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload_a74b8cec997d1b26db84f5444b0d45b3f}{TransactionPayload}}(std::shared\_ptr<Neo3Transaction>\ transaction);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \ \ \ \ std::shared\_ptr<Neo3Transaction>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload_aa2cb2fb40158fbaca9de9aa0092563ef}{GetTransaction}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload_a09c794d2fda76245201a6e3c4ab3ee53}{SetTransaction}}(std::shared\_ptr<Neo3Transaction>\ transaction);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload_a0db5e5eaab10ab12ea36eeeafbe2e6e2}{GetSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload_a74b8cec997d1b26db84f5444b0d45b3f}{TransactionPayload}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload_ab3a962be2376bd5f915063bf24b21e3b}{Create}}(std::shared\_ptr<Neo3Transaction>\ transaction);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload_a54777f5056bea5e2a128e2ee147de032}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload_acde06b952fdb5bb1d801c00318f22476}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload_a6bb00785ffbfcd2b6d92599b3ee76a81}{SerializeJson}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io::JsonWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload_a04174d3c8d78d2aa1b2e1fed3a2c65c7}{DeserializeJson}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io::JsonReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00083\ \ \ \ \ std::shared\_ptr<Neo3Transaction>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload_a87cbeccdedb0fdb2ae28facdde57be36}{transaction\_}};}
+\DoxyCodeLine{00084\ \};}
+\DoxyCodeLine{00085\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p::payloads}}
+
+\end{DoxyCode}

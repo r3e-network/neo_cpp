@@ -1,0 +1,398 @@
+\doxysection{neo\+::network\+::p2p\+::payloads\+::Ping\+Payload Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+
+
+Represents a ping payload.  
+
+
+
+
+{\ttfamily \#include $<$ping\+\_\+payload.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::p2p\+::payloads\+::Ping\+Payload\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::payloads\+::Ping\+Payload\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a9c80798558c24fee4156922edd990ee9}{Ping\+Payload}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a0c8e47bd62877b04e579c672c6219b1a}{Ping\+Payload}} (uint32\+\_\+t last\+Block\+Index, uint32\+\_\+t timestamp, uint32\+\_\+t nonce)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload}. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_aa0eba10e23f75c373176a790d81253bc}{Get\+Last\+Block\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Gets the latest block index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a007965c0b9543b043a16bda7b19a12fc}{Set\+Last\+Block\+Index}} (uint32\+\_\+t last\+Block\+Index)
+\begin{DoxyCompactList}\small\item\em Sets the latest block index. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_aca491295e6f0f5727060cc34c1d364c7}{Get\+Timestamp}} () const
+\begin{DoxyCompactList}\small\item\em Gets the timestamp. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a207b94846756b36b903ac9fa7519442a}{Set\+Timestamp}} (uint32\+\_\+t timestamp)
+\begin{DoxyCompactList}\small\item\em Sets the timestamp. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_aa89889da0c1c8628d82d093583cc13f7}{Get\+Nonce}} () const
+\begin{DoxyCompactList}\small\item\em Gets the nonce. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a5cf0e9e09b91a44d9a90a253a3629042}{Set\+Nonce}} (uint32\+\_\+t nonce)
+\begin{DoxyCompactList}\small\item\em Sets the nonce. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_adc655a891befa5db3178b5f887af26bd}{Get\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the size of the payload in bytes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_ac828c24d8e748c37c06f6afc7736d221}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a7ccbf7b10f7b38e25c4975c06004276a}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a32ee266c5a435f17c97822d90d65c640}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a44ce4f92a5af9fb8eb94b3e4e4e816a1}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader)
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload} from a JSON reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{neo\+::network\+::p2p\+::\+IPayload}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload_a1702136f068aff6bbc90418bc0259c9f}{\texorpdfstring{$\sim$}{\string~}\+IPayload}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a10957b3763057bd30531fa40dffc5cec}{Create}} (uint32\+\_\+t height)
+\begin{DoxyCompactList}\small\item\em Creates a new \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload} with the specified height. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_afd201bd26455c22a978dd38e028acbb9}{Create}} (uint32\+\_\+t height, uint32\+\_\+t nonce)
+\begin{DoxyCompactList}\small\item\em Creates a new \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload} with the specified height and nonce. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_ad2287a90610e441f7464ad4ff3d2069c}{last\+Block\+Index\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a19505df047ff40f47494fea9b921dc52}{timestamp\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_abb1971fa07e5ae9d06cc0990e1ba72a1}{nonce\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a ping payload. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a9c80798558c24fee4156922edd990ee9}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!PingPayload@{PingPayload}}
+\index{PingPayload@{PingPayload}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{PingPayload()}{PingPayload()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a9c80798558c24fee4156922edd990ee9} 
+neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::\+Ping\+Payload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload}. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a0c8e47bd62877b04e579c672c6219b1a}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!PingPayload@{PingPayload}}
+\index{PingPayload@{PingPayload}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{PingPayload()}{PingPayload()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a0c8e47bd62877b04e579c672c6219b1a} 
+neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::\+Ping\+Payload (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{last\+Block\+Index}{, }\item[{uint32\+\_\+t}]{timestamp}{, }\item[{uint32\+\_\+t}]{nonce}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em last\+Block\+Index} & The latest block index. \\
+\hline
+{\em timestamp} & The current timestamp. \\
+\hline
+{\em nonce} & The random nonce. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a10957b3763057bd30531fa40dffc5cec}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!Create@{Create}}
+\index{Create@{Create}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a10957b3763057bd30531fa40dffc5cec} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload}} neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::\+Create (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{height}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a new \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload} with the specified height. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em height} & The latest block height. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_afd201bd26455c22a978dd38e028acbb9}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!Create@{Create}}
+\index{Create@{Create}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_afd201bd26455c22a978dd38e028acbb9} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload}} neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::\+Create (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{height}{, }\item[{uint32\+\_\+t}]{nonce}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a new \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload} with the specified height and nonce. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em height} & The latest block height. \\
+\hline
+{\em nonce} & The random nonce. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a7ccbf7b10f7b38e25c4975c06004276a}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a7ccbf7b10f7b38e25c4975c06004276a} 
+void neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a44ce4f92a5af9fb8eb94b3e4e4e816a1}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a44ce4f92a5af9fb8eb94b3e4e4e816a1} 
+void neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_aa0eba10e23f75c373176a790d81253bc}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!GetLastBlockIndex@{GetLastBlockIndex}}
+\index{GetLastBlockIndex@{GetLastBlockIndex}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{GetLastBlockIndex()}{GetLastBlockIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_aa0eba10e23f75c373176a790d81253bc} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::\+Get\+Last\+Block\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the latest block index. 
+
+\begin{DoxyReturn}{Returns}
+The latest block index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_aa89889da0c1c8628d82d093583cc13f7}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!GetNonce@{GetNonce}}
+\index{GetNonce@{GetNonce}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{GetNonce()}{GetNonce()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_aa89889da0c1c8628d82d093583cc13f7} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::\+Get\+Nonce (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the nonce. 
+
+\begin{DoxyReturn}{Returns}
+The nonce. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_adc655a891befa5db3178b5f887af26bd}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_adc655a891befa5db3178b5f887af26bd} 
+size\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the size of the payload in bytes. 
+
+\begin{DoxyReturn}{Returns}
+The size of the payload. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_aca491295e6f0f5727060cc34c1d364c7}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!GetTimestamp@{GetTimestamp}}
+\index{GetTimestamp@{GetTimestamp}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{GetTimestamp()}{GetTimestamp()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_aca491295e6f0f5727060cc34c1d364c7} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::\+Get\+Timestamp (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the timestamp. 
+
+\begin{DoxyReturn}{Returns}
+The timestamp. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_ac828c24d8e748c37c06f6afc7736d221}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_ac828c24d8e748c37c06f6afc7736d221} 
+void neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a32ee266c5a435f17c97822d90d65c640}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a32ee266c5a435f17c97822d90d65c640} 
+void neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{Ping\+Payload} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a007965c0b9543b043a16bda7b19a12fc}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!SetLastBlockIndex@{SetLastBlockIndex}}
+\index{SetLastBlockIndex@{SetLastBlockIndex}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{SetLastBlockIndex()}{SetLastBlockIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a007965c0b9543b043a16bda7b19a12fc} 
+void neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::\+Set\+Last\+Block\+Index (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{last\+Block\+Index}{}\end{DoxyParamCaption})}
+
+
+
+Sets the latest block index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em last\+Block\+Index} & The latest block index. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a5cf0e9e09b91a44d9a90a253a3629042}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!SetNonce@{SetNonce}}
+\index{SetNonce@{SetNonce}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{SetNonce()}{SetNonce()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a5cf0e9e09b91a44d9a90a253a3629042} 
+void neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::\+Set\+Nonce (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{nonce}{}\end{DoxyParamCaption})}
+
+
+
+Sets the nonce. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em nonce} & The nonce. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a207b94846756b36b903ac9fa7519442a}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!SetTimestamp@{SetTimestamp}}
+\index{SetTimestamp@{SetTimestamp}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{SetTimestamp()}{SetTimestamp()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a207b94846756b36b903ac9fa7519442a} 
+void neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::\+Set\+Timestamp (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{timestamp}{}\end{DoxyParamCaption})}
+
+
+
+Sets the timestamp. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em timestamp} & The timestamp. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_ad2287a90610e441f7464ad4ff3d2069c}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!lastBlockIndex\_@{lastBlockIndex\_}}
+\index{lastBlockIndex\_@{lastBlockIndex\_}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{lastBlockIndex\_}{lastBlockIndex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_ad2287a90610e441f7464ad4ff3d2069c} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::last\+Block\+Index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_abb1971fa07e5ae9d06cc0990e1ba72a1}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!nonce\_@{nonce\_}}
+\index{nonce\_@{nonce\_}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{nonce\_}{nonce\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_abb1971fa07e5ae9d06cc0990e1ba72a1} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::nonce\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a19505df047ff40f47494fea9b921dc52}\index{neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}!timestamp\_@{timestamp\_}}
+\index{timestamp\_@{timestamp\_}!neo::network::p2p::payloads::PingPayload@{neo::network::p2p::payloads::PingPayload}}
+\doxysubsubsection{\texorpdfstring{timestamp\_}{timestamp\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a19505df047ff40f47494fea9b921dc52} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload\+::timestamp\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/payloads/\mbox{\hyperlink{ping__payload_8h}{ping\+\_\+payload.\+h}}\item 
+src/network/p2p/payloads/\mbox{\hyperlink{ping__payload_8cpp}{ping\+\_\+payload.\+cpp}}\item 
+src/network/\mbox{\hyperlink{payload__fixes_8cpp}{payload\+\_\+fixes.\+cpp}}\end{DoxyCompactItemize}

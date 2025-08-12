@@ -1,0 +1,88 @@
+\doxysection{witness\+\_\+rule.\+h}
+\hypertarget{witness__rule_8h_source}{}\label{witness__rule_8h_source}\index{include/neo/ledger/witness\_rule.h@{include/neo/ledger/witness\_rule.h}}
+\mbox{\hyperlink{witness__rule_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__reader_8h}{neo/io/binary\_reader.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__writer_8h}{neo/io/binary\_writer.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ijson__serializable_8h}{neo/io/ijson\_serializable.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{iserializable_8h}{neo/io/iserializable.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__reader_8h}{neo/io/json\_reader.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__writer_8h}{neo/io/json\_writer.h}}>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespaceneo_1_1ledger_a7d8879256a79ec4790b74fe9c40c3bac}{WitnessRuleAction}}\ :\ uint8\_t}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1ledger_a7d8879256a79ec4790b74fe9c40c3baca3682d1665cf331373000c20680732d3a}{Deny}}\ =\ 0x00,}
+\DoxyCodeLine{00020\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1ledger_a7d8879256a79ec4790b74fe9c40c3baca45f0fb72a0defdfdb01de4b5a5a6876b}{Allow}}\ =\ 0x01}
+\DoxyCodeLine{00021\ \};}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \textcolor{comment}{//\ Forward\ declaration}}
+\DoxyCodeLine{00024\ \textcolor{keyword}{class\ }WitnessCondition;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a9c2157efd0422c9234c4cbd11d4e7fff}{WitnessRule}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{io::ISerializable}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{io::IJsonSerializable}}}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a9c2157efd0422c9234c4cbd11d4e7fff}{WitnessRule}}();}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a9c2157efd0422c9234c4cbd11d4e7fff}{WitnessRule}}(\mbox{\hyperlink{namespaceneo_1_1ledger_a7d8879256a79ec4790b74fe9c40c3bac}{WitnessRuleAction}}\ action,\ std::shared\_ptr<WitnessCondition>\ condition);}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_ab4c13abc272c4c5976c8c00bfe2363f1}{\string~WitnessRule}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1ledger_a7d8879256a79ec4790b74fe9c40c3bac}{WitnessRuleAction}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a57e1de38e493b293e9879500bbc40580}{GetAction}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_afb546e734474616ce9a5a0561c086ed5}{action\_}};\ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a80191bed4d830bd8924316431e94ce94}{SetAction}}(\mbox{\hyperlink{namespaceneo_1_1ledger_a7d8879256a79ec4790b74fe9c40c3bac}{WitnessRuleAction}}\ action)\ \{\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_afb546e734474616ce9a5a0561c086ed5}{action\_}}\ =\ action;\ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00060\ \ \ \ \ std::shared\_ptr<WitnessCondition>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a2e87d14ffff8665f8232da4a8970dc7c}{GetCondition}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a550e6b31850935dcc2a9d18ebf988b0e}{condition\_}};\ \}}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_aab8eeac269684aab458ddf7dbb0ffc81}{SetCondition}}(std::shared\_ptr<WitnessCondition>\ condition)\ \{\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a550e6b31850935dcc2a9d18ebf988b0e}{condition\_}}\ =\ condition;\ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_ae0f6e83658ada680cf6d27f068ea3a2c}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a064584b1983d9a4ee6c8f6444bf57a58}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_ae6a4e5a282a68cd4dbadabcf533ba356}{SerializeJson}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io::JsonWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_acc0b5e96fcd50d217659a4d76e4e114b}{DeserializeJson}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io::JsonReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a27b85a416d0c2b78fc7e7a050dcce496}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule}{WitnessRule}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a5722f026e95af289f3c0017d5c779d53}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule}{WitnessRule}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1ledger_a7d8879256a79ec4790b74fe9c40c3bac}{WitnessRuleAction}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_afb546e734474616ce9a5a0561c086ed5}{action\_}};}
+\DoxyCodeLine{00099\ \ \ \ \ std::shared\_ptr<WitnessCondition>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_a550e6b31850935dcc2a9d18ebf988b0e}{condition\_}};}
+\DoxyCodeLine{00100\ \};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00105\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition}{WitnessCondition}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{io::ISerializable}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{io::IJsonSerializable}}}
+\DoxyCodeLine{00106\ \{}
+\DoxyCodeLine{00107\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_a37054dff6ce6a421d591cd6ec2e6f82d}{MaxNestingDepth}}\ =\ 2;}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46}{Type}}\ :\ uint8\_t}
+\DoxyCodeLine{00117\ \ \ \ \ \{}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46a27226c864bac7454a8504f8edb15d95b}{Boolean}}\ =\ 0x00,}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46aa74c05d080620f087c4e523977230666}{Not}}\ =\ 0x01,}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46ac33315685a0cba3ce53be378b3c7874b}{And}}\ =\ 0x02,}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46a3a2d5fe857d8f9541136a124c2edec6c}{Or}}\ =\ 0x03,}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46a142a90538a1f96e3fadbda11e30feeb1}{ScriptHash}}\ =\ 0x18,}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46a03937134cedab9078be39a77ee3a48a0}{Group}}\ =\ 0x19,}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46a32eb81c8766434800c20866b73452d5d}{CalledByEntry}}\ =\ 0x20,}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46aff21988db8b36aa5ffcd1c1d872a325f}{CalledByContract}}\ =\ 0x28,}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46a8616f1884f81b23aafc088bc0910778c}{CalledByGroup}}\ =\ 0x29}
+\DoxyCodeLine{00127\ \ \ \ \ \};}
+\DoxyCodeLine{00128\ }
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_a4f0d48631c66fcab03e30a413858ec06}{\string~WitnessCondition}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_add68eaa309bba46acaa7e2fba27aea46}{Type}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_af64bdf66401cad61e07c6ff46bc34e5b}{GetType}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<WitnessCondition>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_condition_afc52151489baf7e9440383b1810173f9}{DeserializeFrom}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader,\ uint8\_t\ maxDepth);}
+\DoxyCodeLine{00143\ \};}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}

@@ -1,0 +1,855 @@
+\doxysection{neo\+::smartcontract\+::native\+::Gas\+Token Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token}{}\label{classneo_1_1smartcontract_1_1native_1_1_gas_token}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+
+
+Represents the Gas token native contract.  
+
+
+
+
+{\ttfamily \#include $<$gas\+\_\+token.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::smartcontract\+::native\+::Gas\+Token\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::smartcontract\+::native\+::Gas\+Token\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a982528aec48b97d7be3d5793a5a819bb}{Gas\+Token}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_gas_token}{Gas\+Token}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_afd112fff9f2c2d112c704e9f2110d6e1}{Get\+Symbol}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the symbol of the token. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a256eb723a30fa5fc9d9f3685ed6f6f0b}{Get\+Decimals}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the number of decimal places of the token. \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a38233dbc6ca280267ebb92ec8c450256}{Get\+Balance}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account) const override
+\begin{DoxyCompactList}\small\item\em Gets the balance. \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a3592a7b1336cb52933164661f90b8ea6}{Get\+Total\+Supply}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot) const override
+\begin{DoxyCompactList}\small\item\em Gets the total supply. \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_abdf68a39917ada4e65e252e5a2139019}{Get\+Gas\+Per\+Block}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot) const
+\begin{DoxyCompactList}\small\item\em Gets the gas per block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_ac7bc5d56f48e72a718ba889ec1b897ba}{Set\+Gas\+Per\+Block}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, int64\+\_\+t gas\+Per\+Block)
+\begin{DoxyCompactList}\small\item\em Sets the gas per block. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a324edc9fdf647c2f8a44e83d25975ab0}{Transfer}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&from, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&to, int64\+\_\+t amount) override
+\begin{DoxyCompactList}\small\item\em Transfers tokens between accounts. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_afe9652741c8245c433006a309dd8e537}{Transfer}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&from, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&to, int64\+\_\+t amount, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ data, bool call\+On\+Payment) override
+\begin{DoxyCompactList}\small\item\em Transfers tokens between accounts with callback. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_af9b610049a6bebdcd6d22acb63ae5795}{Mint}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account, int64\+\_\+t amount) override
+\begin{DoxyCompactList}\small\item\em Mints tokens to an account. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a9e4746b07b4a23db285a128524ee44c8}{Mint}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account, int64\+\_\+t amount, bool call\+On\+Payment) override
+\begin{DoxyCompactList}\small\item\em Mints tokens to an account with callback. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a499a519a33b53a1af6b8a555fb1cff82}{Burn}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account, int64\+\_\+t amount) override
+\begin{DoxyCompactList}\small\item\em Burns tokens from an account. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a900719bc376ed5f1cb6385ac01e11c2e}{Burn}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account, int64\+\_\+t amount) override
+\begin{DoxyCompactList}\small\item\em Burns tokens from an account with callback. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a60899dc7314167fb0c8d42b318ef0a73}{Post\+Transfer}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&from, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&to, int64\+\_\+t amount, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ data, bool call\+On\+Payment) override
+\begin{DoxyCompactList}\small\item\em Handles post-\/transfer operations. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a2cff650a3727497ef8e87d2ed0dd52b5}{On\+Persist}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine)
+\begin{DoxyCompactList}\small\item\em Handles the On\+Persist event. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a4d409ded8c6a1397d392da695a1acace}{Post\+Persist}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine)
+\begin{DoxyCompactList}\small\item\em Handles the Post\+Persist event. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a9d4a6158767789af6ab7c394480a9b0a}{Initialize\+Contract}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, uint32\+\_\+t hardfork)
+\begin{DoxyCompactList}\small\item\em Initializes the contract when it\textquotesingle{}s first deployed. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token}{neo\+::smartcontract\+::native\+::\+Fungible\+Token}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token_a1e69c0cf3dcbd60981a8f248fdc395a8}{Fungible\+Token}} (const char \texorpdfstring{$\ast$}{*}name, uint32\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_fungible_token}{Fungible\+Token}. \end{DoxyCompactList}\item 
+virtual int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token_a686ee0d103d77c01f643526b79130b60}{Get\+Factor}} () const
+\begin{DoxyCompactList}\small\item\em Gets the factor used when calculating the displayed value of the token value. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a60667ade06e1b9a3c3ef7e2c6a68a632}{Native\+Contract}} (const std\+::string \&name, uint32\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{Native\+Contract}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_ae37e44a3d146975a024466fc40a8dc53}{\texorpdfstring{$\sim$}{\string~}\+Native\+Contract}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a36ffe7bef8e2b15c1992c7fd51735e04}{Get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Gets the name. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a514770635cb55d0e5c59a8d2b5231ea3}{Get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Gets the ID. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_adee5386515d940f614d7f680b5d0edb7}{Get\+Script\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script hash. \end{DoxyCompactList}\item 
+const std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}}, std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&)$>$ $>$ $>$ \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aefb916eb8825a724a48d75e9c5c69acf}{Get\+Methods}} () const
+\begin{DoxyCompactList}\small\item\em Gets the methods. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a3ed2d00b721434cf15b180038e4fa4f2}{Invoke}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::string \&method, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags)
+\begin{DoxyCompactList}\small\item\em Invokes a method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_acbf33ca368ff4d13541b9c12e0a34cad}{Call}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::string \&method, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Calls a method on the contract (alias for Invoke). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aef8498874e1b666ab258a891c2f05a56}{Check\+Call\+Flags}} (const std\+::string \&method, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags) const
+\begin{DoxyCompactList}\small\item\em Checks if the contract has the specified call flags. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a6d9998fc6c7dbedcc447f403fddb6d08}{Get\+Storage\+Prefix}} () const
+\begin{DoxyCompactList}\small\item\em Gets the storage prefix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aaa080efcc4d7deced7aded7bb968cd9c}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a44c7d768e39be1ed6933cdcf2350a2e8}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a50c32e2fa8e736183a0135b44ac5438d}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a2a46f86ca8b2d541f8623821d389eb8b}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aa8eed221a7bf2bce103f7e1fef187e6c}{Get\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a88e6f4aa548d073c5740d1eb0f59f91e}{Put\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value) const
+\begin{DoxyCompactList}\small\item\em Puts the storage value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a041e040e9fbf45d8d8ba9c0dcf87afe4}{Delete\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Deletes the storage value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a5a9ec24cc4c1584fb00fdf32f614dbd8}{Create\+Storage\+Key}} (uint8\+\_\+t prefix) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aacd0961fef8aaa618f43294e4561a72a}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_ac60e9957320d04ffd697e023f94bf233}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a4c42d353f5328c9fbc06f5fd38e406cd}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a8221750790b1aa223a4351bb81ec8a59}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, uint32\+\_\+t key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token}{Gas\+Token}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a0a5458f42995bd194a55d5f24d3a72a6}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets the instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a0e557bbac7021faac6a9de2fbec85bca}{ID}} = 3
+\begin{DoxyCompactList}\small\item\em The contract ID. \end{DoxyCompactList}\item 
+static constexpr const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_aab30c76d2b03136ce197b19ad4f08387}{NAME}} = "{}Gas"{}
+\begin{DoxyCompactList}\small\item\em The contract name. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_adeb341bf6f27fe0e3aa2d6981334ed46}{PREFIX\+\_\+\+BALANCE}} = 1
+\begin{DoxyCompactList}\small\item\em The storage prefix for balances. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_af614cf0c9c212c48f565a5ce8c8549b8}{PREFIX\+\_\+\+TOTAL\+\_\+\+SUPPLY}} = 2
+\begin{DoxyCompactList}\small\item\em The storage prefix for total supply. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a26f770347f27690d4a609c9f8e28cecb}{PREFIX\+\_\+\+GAS\+\_\+\+PER\+\_\+\+BLOCK}} = 3
+\begin{DoxyCompactList}\small\item\em The storage prefix for gas per block. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_ad45cbf5c2c181f3d9a09e4ee3db0feb3}{PREFIX\+\_\+\+GAS\+\_\+\+DISTRIBUTION}} = 4
+\begin{DoxyCompactList}\small\item\em The storage prefix for gas distribution. \end{DoxyCompactList}\item 
+static constexpr int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_ad90e9d91d1be1499a1e46b11ad315d9e}{FACTOR}} = 100000000
+\begin{DoxyCompactList}\small\item\em The factor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Attributes inherited from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token}{neo\+::smartcontract\+::native\+::\+Fungible\+Token}}}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token_a47ac92901431db976b6ee84a5c8a1547}{PREFIX\+\_\+\+BALANCE}} = 1
+\begin{DoxyCompactList}\small\item\em The storage prefix for balances. \end{DoxyCompactList}\item 
+static constexpr uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token_aafe622fb71adbeda53c98abb6ee41456}{PREFIX\+\_\+\+TOTAL\+\_\+\+SUPPLY}} = 11
+\begin{DoxyCompactList}\small\item\em The storage prefix for total supply. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_aaf39b874a370b2a3869000a096fe4333}{Initialize}} () override
+\begin{DoxyCompactList}\small\item\em Initializes the contract. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token}{neo\+::smartcontract\+::native\+::\+Fungible\+Token}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token_a0462dab0409fe179a335ae8b89e517a4}{On\+Balance\+Changing}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account, int64\+\_\+t amount)
+\begin{DoxyCompactList}\small\item\em Called when a balance is changing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a26af9bcd266b59f910293081ef334993}{Register\+Method}} (const std\+::string \&name, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags, std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&)$>$ handler)
+\begin{DoxyCompactList}\small\item\em Registers a method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_ae643249f446f06099ff582b65a430eea}{On\+Symbol}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the symbol method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a0d55b974cc2be45e40cf33220b0ceb38}{On\+Decimals}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the decimals method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a76a6572e767562acba050cdfaae37c8c}{On\+Total\+Supply}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the total\+Supply method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_aa83a9896bbe9bbeb88736bd5fda87077}{On\+Balance\+Of}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the balance\+Of method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a8959b594b9e9f2a3255914c665f0f285}{On\+Transfer}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the transfer method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_afeabfd16afd398226f84063163368b5c}{On\+NEP17\+Payment}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the on\+NEP17\+Payment method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_a42ea0ca50925a8d114e2eb1370923f22}{Native\+Contract\+Test}}
+\item 
+class \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token_af07bb6afddb94337c45ef0075c7935a8}{Gas\+Token\+Test}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the Gas token native contract. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a982528aec48b97d7be3d5793a5a819bb}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!GasToken@{GasToken}}
+\index{GasToken@{GasToken}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{GasToken()}{GasToken()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a982528aec48b97d7be3d5793a5a819bb} 
+neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Gas\+Token (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_gas_token}{Gas\+Token}. 
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a900719bc376ed5f1cb6385ac01e11c2e}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!Burn@{Burn}}
+\index{Burn@{Burn}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{Burn()}{Burn()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a900719bc376ed5f1cb6385ac01e11c2e} 
+bool neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Burn (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{, }\item[{int64\+\_\+t}]{amount}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Burns tokens from an account with callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The application engine. \\
+\hline
+{\em account} & The account. \\
+\hline
+{\em amount} & The amount to burn. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the burning was successful, false otherwise. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token_a7dc80e9a54e39092a0447addb5202b51}{neo\+::smartcontract\+::native\+::\+Fungible\+Token}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a499a519a33b53a1af6b8a555fb1cff82}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!Burn@{Burn}}
+\index{Burn@{Burn}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{Burn()}{Burn()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a499a519a33b53a1af6b8a555fb1cff82} 
+bool neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Burn (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{, }\item[{int64\+\_\+t}]{amount}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Burns tokens from an account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em account} & The account. \\
+\hline
+{\em amount} & The amount to burn. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the burning was successful, false otherwise. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token_a1001799dc64f7b400c36b00e9d9b2133}{neo\+::smartcontract\+::native\+::\+Fungible\+Token}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a38233dbc6ca280267ebb92ec8c450256}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!GetBalance@{GetBalance}}
+\index{GetBalance@{GetBalance}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{GetBalance()}{GetBalance()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a38233dbc6ca280267ebb92ec8c450256} 
+int64\+\_\+t neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Get\+Balance (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the balance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em account} & The account. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The balance. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token_acad335ad31ba8846af201439430277d4}{neo\+::smartcontract\+::native\+::\+Fungible\+Token}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a256eb723a30fa5fc9d9f3685ed6f6f0b}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!GetDecimals@{GetDecimals}}
+\index{GetDecimals@{GetDecimals}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{GetDecimals()}{GetDecimals()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a256eb723a30fa5fc9d9f3685ed6f6f0b} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Get\+Decimals (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the number of decimal places of the token. 
+
+\begin{DoxyReturn}{Returns}
+The number of decimal places. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token_ae84ab5189a61849883d0cf2ce51d3f8c}{neo\+::smartcontract\+::native\+::\+Fungible\+Token}}.
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_abdf68a39917ada4e65e252e5a2139019}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!GetGasPerBlock@{GetGasPerBlock}}
+\index{GetGasPerBlock@{GetGasPerBlock}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{GetGasPerBlock()}{GetGasPerBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_abdf68a39917ada4e65e252e5a2139019} 
+int64\+\_\+t neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Get\+Gas\+Per\+Block (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the gas per block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The gas per block. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a0a5458f42995bd194a55d5f24d3a72a6}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a0a5458f42995bd194a55d5f24d3a72a6} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token}{Gas\+Token}} $>$ neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the instance. 
+
+\begin{DoxyReturn}{Returns}
+The instance. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_afd112fff9f2c2d112c704e9f2110d6e1}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!GetSymbol@{GetSymbol}}
+\index{GetSymbol@{GetSymbol}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{GetSymbol()}{GetSymbol()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_afd112fff9f2c2d112c704e9f2110d6e1} 
+std\+::string neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Get\+Symbol (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the symbol of the token. 
+
+\begin{DoxyReturn}{Returns}
+The symbol. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token_a4b5f9ac4a90d7ed3072a2cda2b72f865}{neo\+::smartcontract\+::native\+::\+Fungible\+Token}}.
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a3592a7b1336cb52933164661f90b8ea6}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!GetTotalSupply@{GetTotalSupply}}
+\index{GetTotalSupply@{GetTotalSupply}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{GetTotalSupply()}{GetTotalSupply()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a3592a7b1336cb52933164661f90b8ea6} 
+int64\+\_\+t neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Get\+Total\+Supply (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the total supply. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The total supply. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token_a354cfac84adb6896bc98511a90a35358}{neo\+::smartcontract\+::native\+::\+Fungible\+Token}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_aaf39b874a370b2a3869000a096fe4333}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_aaf39b874a370b2a3869000a096fe4333} 
+void neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Initializes the contract. 
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a427aae1fe42c2264c5f6979a84092a5d}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}.
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a9d4a6158767789af6ab7c394480a9b0a}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!InitializeContract@{InitializeContract}}
+\index{InitializeContract@{InitializeContract}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{InitializeContract()}{InitializeContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a9d4a6158767789af6ab7c394480a9b0a} 
+bool neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Initialize\+Contract (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{uint32\+\_\+t}]{hardfork}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the contract when it\textquotesingle{}s first deployed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The application engine. \\
+\hline
+{\em hardfork} & The hardfork version. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the initialization was successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a9e4746b07b4a23db285a128524ee44c8}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!Mint@{Mint}}
+\index{Mint@{Mint}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{Mint()}{Mint()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a9e4746b07b4a23db285a128524ee44c8} 
+bool neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Mint (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{, }\item[{int64\+\_\+t}]{amount}{, }\item[{bool}]{call\+On\+Payment}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Mints tokens to an account with callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The application engine. \\
+\hline
+{\em account} & The account. \\
+\hline
+{\em amount} & The amount to mint. \\
+\hline
+{\em call\+On\+Payment} & Whether to call the on\+NEP17\+Payment callback. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the minting was successful, false otherwise. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token_a5971cd4f8f82ea2df61bc277c8030f00}{neo\+::smartcontract\+::native\+::\+Fungible\+Token}}.
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_af9b610049a6bebdcd6d22acb63ae5795}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!Mint@{Mint}}
+\index{Mint@{Mint}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{Mint()}{Mint()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_af9b610049a6bebdcd6d22acb63ae5795} 
+bool neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Mint (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{, }\item[{int64\+\_\+t}]{amount}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Mints tokens to an account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em account} & The account. \\
+\hline
+{\em amount} & The amount to mint. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the minting was successful, false otherwise. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token_a2c604ecf08787bee075eeb9c3b4a230a}{neo\+::smartcontract\+::native\+::\+Fungible\+Token}}.
+
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_aa83a9896bbe9bbeb88736bd5fda87077}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!OnBalanceOf@{OnBalanceOf}}
+\index{OnBalanceOf@{OnBalanceOf}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{OnBalanceOf()}{OnBalanceOf()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_aa83a9896bbe9bbeb88736bd5fda87077} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+On\+Balance\+Of (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the balance\+Of method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a0d55b974cc2be45e40cf33220b0ceb38}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!OnDecimals@{OnDecimals}}
+\index{OnDecimals@{OnDecimals}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{OnDecimals()}{OnDecimals()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a0d55b974cc2be45e40cf33220b0ceb38} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+On\+Decimals (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the decimals method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_afeabfd16afd398226f84063163368b5c}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!OnNEP17Payment@{OnNEP17Payment}}
+\index{OnNEP17Payment@{OnNEP17Payment}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{OnNEP17Payment()}{OnNEP17Payment()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_afeabfd16afd398226f84063163368b5c} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+On\+NEP17\+Payment (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the on\+NEP17\+Payment method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a2cff650a3727497ef8e87d2ed0dd52b5}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!OnPersist@{OnPersist}}
+\index{OnPersist@{OnPersist}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{OnPersist()}{OnPersist()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a2cff650a3727497ef8e87d2ed0dd52b5} 
+bool neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+On\+Persist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})}
+
+
+
+Handles the On\+Persist event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the event was handled, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_ae643249f446f06099ff582b65a430eea}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!OnSymbol@{OnSymbol}}
+\index{OnSymbol@{OnSymbol}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{OnSymbol()}{OnSymbol()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_ae643249f446f06099ff582b65a430eea} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+On\+Symbol (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the symbol method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a76a6572e767562acba050cdfaae37c8c}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!OnTotalSupply@{OnTotalSupply}}
+\index{OnTotalSupply@{OnTotalSupply}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{OnTotalSupply()}{OnTotalSupply()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a76a6572e767562acba050cdfaae37c8c} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+On\+Total\+Supply (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the total\+Supply method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a8959b594b9e9f2a3255914c665f0f285}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!OnTransfer@{OnTransfer}}
+\index{OnTransfer@{OnTransfer}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{OnTransfer()}{OnTransfer()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a8959b594b9e9f2a3255914c665f0f285} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+On\+Transfer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the transfer method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a4d409ded8c6a1397d392da695a1acace}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!PostPersist@{PostPersist}}
+\index{PostPersist@{PostPersist}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{PostPersist()}{PostPersist()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a4d409ded8c6a1397d392da695a1acace} 
+bool neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Post\+Persist (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})}
+
+
+
+Handles the Post\+Persist event. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the event was handled, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a60899dc7314167fb0c8d42b318ef0a73}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!PostTransfer@{PostTransfer}}
+\index{PostTransfer@{PostTransfer}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{PostTransfer()}{PostTransfer()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a60899dc7314167fb0c8d42b318ef0a73} 
+bool neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Post\+Transfer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{from}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{to}{, }\item[{int64\+\_\+t}]{amount}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$}]{data}{, }\item[{bool}]{call\+On\+Payment}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Handles post-\/transfer operations. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The application engine. \\
+\hline
+{\em from} & The from account. \\
+\hline
+{\em to} & The to account. \\
+\hline
+{\em amount} & The amount transferred. \\
+\hline
+{\em data} & The data passed to the transfer. \\
+\hline
+{\em call\+On\+Payment} & Whether to call the on\+NEP17\+Payment callback. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the post-\/transfer was successful, false otherwise. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token_a7c8b015f7d315102a0b2026c335aa5e4}{neo\+::smartcontract\+::native\+::\+Fungible\+Token}}.
+
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_ac7bc5d56f48e72a718ba889ec1b897ba}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!SetGasPerBlock@{SetGasPerBlock}}
+\index{SetGasPerBlock@{SetGasPerBlock}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{SetGasPerBlock()}{SetGasPerBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_ac7bc5d56f48e72a718ba889ec1b897ba} 
+void neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Set\+Gas\+Per\+Block (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{int64\+\_\+t}]{gas\+Per\+Block}{}\end{DoxyParamCaption})}
+
+
+
+Sets the gas per block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em gas\+Per\+Block} & The gas per block. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_afe9652741c8245c433006a309dd8e537}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!Transfer@{Transfer}}
+\index{Transfer@{Transfer}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{Transfer()}{Transfer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_afe9652741c8245c433006a309dd8e537} 
+bool neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Transfer (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{from}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{to}{, }\item[{int64\+\_\+t}]{amount}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$}]{data}{, }\item[{bool}]{call\+On\+Payment}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Transfers tokens between accounts with callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The application engine. \\
+\hline
+{\em from} & The from account. \\
+\hline
+{\em to} & The to account. \\
+\hline
+{\em amount} & The amount to transfer. \\
+\hline
+{\em data} & The data to pass to the callback. \\
+\hline
+{\em call\+On\+Payment} & Whether to call the on\+NEP17\+Payment callback. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the transfer was successful, false otherwise. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token_a9275c451be01ce52360f21727ab20810}{neo\+::smartcontract\+::native\+::\+Fungible\+Token}}.
+
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a324edc9fdf647c2f8a44e83d25975ab0}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!Transfer@{Transfer}}
+\index{Transfer@{Transfer}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{Transfer()}{Transfer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a324edc9fdf647c2f8a44e83d25975ab0} 
+bool neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+Transfer (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{from}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{to}{, }\item[{int64\+\_\+t}]{amount}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Transfers tokens between accounts. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+{\em from} & The from account. \\
+\hline
+{\em to} & The to account. \\
+\hline
+{\em amount} & The amount to transfer. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the transfer was successful, false otherwise. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_fungible_token_a48b20270a52c92d4b12e1577314520f0}{neo\+::smartcontract\+::native\+::\+Fungible\+Token}}.
+
+Here is the call graph for this function\+:
+% FIG 22
+
+
+\label{doc-related-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_doc-related-members}
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_af07bb6afddb94337c45ef0075c7935a8}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!GasTokenTest@{GasTokenTest}}
+\index{GasTokenTest@{GasTokenTest}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{GasTokenTest}{GasTokenTest}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_af07bb6afddb94337c45ef0075c7935a8} 
+friend class Gas\+Token\+Test\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a42ea0ca50925a8d114e2eb1370923f22}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!NativeContractTest@{NativeContractTest}}
+\index{NativeContractTest@{NativeContractTest}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{NativeContractTest}{NativeContractTest}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a42ea0ca50925a8d114e2eb1370923f22} 
+friend class Native\+Contract\+Test\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_ad90e9d91d1be1499a1e46b11ad315d9e}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!FACTOR@{FACTOR}}
+\index{FACTOR@{FACTOR}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{FACTOR}{FACTOR}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_ad90e9d91d1be1499a1e46b11ad315d9e} 
+int64\+\_\+t neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+FACTOR = 100000000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The factor. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a0e557bbac7021faac6a9de2fbec85bca}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!ID@{ID}}
+\index{ID@{ID}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{ID}{ID}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a0e557bbac7021faac6a9de2fbec85bca} 
+int32\+\_\+t neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+ID = 3\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The contract ID. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_aab30c76d2b03136ce197b19ad4f08387}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!NAME@{NAME}}
+\index{NAME@{NAME}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{NAME}{NAME}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_aab30c76d2b03136ce197b19ad4f08387} 
+const char\texorpdfstring{$\ast$}{*} neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+NAME = "{}Gas"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The contract name. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_adeb341bf6f27fe0e3aa2d6981334ed46}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!PREFIX\_BALANCE@{PREFIX\_BALANCE}}
+\index{PREFIX\_BALANCE@{PREFIX\_BALANCE}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_BALANCE}{PREFIX\_BALANCE}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_adeb341bf6f27fe0e3aa2d6981334ed46} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+PREFIX\+\_\+\+BALANCE = 1\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for balances. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_ad45cbf5c2c181f3d9a09e4ee3db0feb3}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!PREFIX\_GAS\_DISTRIBUTION@{PREFIX\_GAS\_DISTRIBUTION}}
+\index{PREFIX\_GAS\_DISTRIBUTION@{PREFIX\_GAS\_DISTRIBUTION}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_GAS\_DISTRIBUTION}{PREFIX\_GAS\_DISTRIBUTION}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_ad45cbf5c2c181f3d9a09e4ee3db0feb3} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+PREFIX\+\_\+\+GAS\+\_\+\+DISTRIBUTION = 4\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for gas distribution. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_a26f770347f27690d4a609c9f8e28cecb}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!PREFIX\_GAS\_PER\_BLOCK@{PREFIX\_GAS\_PER\_BLOCK}}
+\index{PREFIX\_GAS\_PER\_BLOCK@{PREFIX\_GAS\_PER\_BLOCK}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_GAS\_PER\_BLOCK}{PREFIX\_GAS\_PER\_BLOCK}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_a26f770347f27690d4a609c9f8e28cecb} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+PREFIX\+\_\+\+GAS\+\_\+\+PER\+\_\+\+BLOCK = 3\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for gas per block. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_gas_token_af614cf0c9c212c48f565a5ce8c8549b8}\index{neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}!PREFIX\_TOTAL\_SUPPLY@{PREFIX\_TOTAL\_SUPPLY}}
+\index{PREFIX\_TOTAL\_SUPPLY@{PREFIX\_TOTAL\_SUPPLY}!neo::smartcontract::native::GasToken@{neo::smartcontract::native::GasToken}}
+\doxysubsubsection{\texorpdfstring{PREFIX\_TOTAL\_SUPPLY}{PREFIX\_TOTAL\_SUPPLY}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_gas_token_af614cf0c9c212c48f565a5ce8c8549b8} 
+uint8\+\_\+t neo\+::smartcontract\+::native\+::\+Gas\+Token\+::\+PREFIX\+\_\+\+TOTAL\+\_\+\+SUPPLY = 2\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The storage prefix for total supply. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/native/\mbox{\hyperlink{gas__token_8h}{gas\+\_\+token.\+h}}\item 
+src/smartcontract/native/\mbox{\hyperlink{gas__token_8cpp}{gas\+\_\+token.\+cpp}}\end{DoxyCompactItemize}

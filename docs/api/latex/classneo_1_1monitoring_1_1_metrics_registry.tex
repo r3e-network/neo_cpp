@@ -1,0 +1,150 @@
+\doxysection{neo\+::monitoring\+::Metrics\+Registry Class Reference}
+\hypertarget{classneo_1_1monitoring_1_1_metrics_registry}{}\label{classneo_1_1monitoring_1_1_metrics_registry}\index{neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}}
+
+
+Metrics registry for managing all metrics.  
+
+
+
+
+{\ttfamily \#include $<$metrics.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\std\+::shared\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry_a2a082db18c379a7058b1587708d37c9e}{Register}} (const std\+::string \&name, const std\+::string \&description)
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{Metric}} $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry_a86e7a1fac3281da2ff7bd155dd9b57c9}{Get}} (const std\+::string \&name) const
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry_aa724e527a472a46d63b74bbfa6747440}{Export\+Prometheus}} () const
+\begin{DoxyCompactList}\small\item\em Export all metrics in Prometheus format. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry_ae1a47f0f93fd2807b59af258cb43964b}{Export\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Export all metrics as JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry_a6a9db5759a046dd2813bee6436381eaa}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clear all metrics. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry}{Metrics\+Registry}} $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry_a0d290d51ab1a1cde3929503664011e4c}{Get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry_a91e0695ab7c76c28384260ad2c23414c}{Metrics\+Registry}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry_ab4e03f96ee7767ad32127572c9471d0c}{mutex\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{Metric}} $>$ $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry_a554fc06689a06fbb2c50872a18ed5aa7}{metrics\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry}{Metrics\+Registry}} $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry_add29c19b75e64fba5091948549634fcc}{instance\+\_\+}}
+\item 
+static std\+::mutex \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry_a8390a95e6a5a4384117382cab820b5b4}{instance\+\_\+mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Metrics registry for managing all metrics. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1monitoring_1_1_metrics_registry_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_metrics_registry_a91e0695ab7c76c28384260ad2c23414c}\index{neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}!MetricsRegistry@{MetricsRegistry}}
+\index{MetricsRegistry@{MetricsRegistry}!neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}}
+\doxysubsubsection{\texorpdfstring{MetricsRegistry()}{MetricsRegistry()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_metrics_registry_a91e0695ab7c76c28384260ad2c23414c} 
+neo\+::monitoring\+::\+Metrics\+Registry\+::\+Metrics\+Registry (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1monitoring_1_1_metrics_registry_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_metrics_registry_a6a9db5759a046dd2813bee6436381eaa}\index{neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_metrics_registry_a6a9db5759a046dd2813bee6436381eaa} 
+void neo\+::monitoring\+::\+Metrics\+Registry\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clear all metrics. 
+
+\Hypertarget{classneo_1_1monitoring_1_1_metrics_registry_ae1a47f0f93fd2807b59af258cb43964b}\index{neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}!ExportJson@{ExportJson}}
+\index{ExportJson@{ExportJson}!neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}}
+\doxysubsubsection{\texorpdfstring{ExportJson()}{ExportJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_metrics_registry_ae1a47f0f93fd2807b59af258cb43964b} 
+std\+::string neo\+::monitoring\+::\+Metrics\+Registry\+::\+Export\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Export all metrics as JSON. 
+
+\Hypertarget{classneo_1_1monitoring_1_1_metrics_registry_aa724e527a472a46d63b74bbfa6747440}\index{neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}!ExportPrometheus@{ExportPrometheus}}
+\index{ExportPrometheus@{ExportPrometheus}!neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}}
+\doxysubsubsection{\texorpdfstring{ExportPrometheus()}{ExportPrometheus()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_metrics_registry_aa724e527a472a46d63b74bbfa6747440} 
+std\+::string neo\+::monitoring\+::\+Metrics\+Registry\+::\+Export\+Prometheus (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Export all metrics in Prometheus format. 
+
+\Hypertarget{classneo_1_1monitoring_1_1_metrics_registry_a86e7a1fac3281da2ff7bd155dd9b57c9}\index{neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}!Get@{Get}}
+\index{Get@{Get}!neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_metrics_registry_a86e7a1fac3281da2ff7bd155dd9b57c9} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{Metric}} $>$ neo\+::monitoring\+::\+Metrics\+Registry\+::\+Get (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classneo_1_1monitoring_1_1_metrics_registry_a0d290d51ab1a1cde3929503664011e4c}\index{neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_metrics_registry_a0d290d51ab1a1cde3929503664011e4c} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry}{Metrics\+Registry}} $>$ neo\+::monitoring\+::\+Metrics\+Registry\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_metrics_registry_a2a082db18c379a7058b1587708d37c9e}\index{neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}!Register@{Register}}
+\index{Register@{Register}!neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}}
+\doxysubsubsection{\texorpdfstring{Register()}{Register()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_metrics_registry_a2a082db18c379a7058b1587708d37c9e} 
+template$<$typename T$>$ \\
+std\+::shared\+\_\+ptr$<$ T $>$ neo\+::monitoring\+::\+Metrics\+Registry\+::\+Register (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{const std\+::string \&}]{description}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1monitoring_1_1_metrics_registry_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_metrics_registry_add29c19b75e64fba5091948549634fcc}\index{neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}!instance\_@{instance\_}}
+\index{instance\_@{instance\_}!neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}}
+\doxysubsubsection{\texorpdfstring{instance\_}{instance\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_metrics_registry_add29c19b75e64fba5091948549634fcc} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1monitoring_1_1_metrics_registry}{Metrics\+Registry}}$>$ neo\+::monitoring\+::\+Metrics\+Registry\+::instance\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_metrics_registry_a8390a95e6a5a4384117382cab820b5b4}\index{neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}!instance\_mutex\_@{instance\_mutex\_}}
+\index{instance\_mutex\_@{instance\_mutex\_}!neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}}
+\doxysubsubsection{\texorpdfstring{instance\_mutex\_}{instance\_mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_metrics_registry_a8390a95e6a5a4384117382cab820b5b4} 
+std\+::mutex neo\+::monitoring\+::\+Metrics\+Registry\+::instance\+\_\+mutex\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_metrics_registry_a554fc06689a06fbb2c50872a18ed5aa7}\index{neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}!metrics\_@{metrics\_}}
+\index{metrics\_@{metrics\_}!neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}}
+\doxysubsubsection{\texorpdfstring{metrics\_}{metrics\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_metrics_registry_a554fc06689a06fbb2c50872a18ed5aa7} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{Metric}}$>$ $>$ neo\+::monitoring\+::\+Metrics\+Registry\+::metrics\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_metrics_registry_ab4e03f96ee7767ad32127572c9471d0c}\index{neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::monitoring::MetricsRegistry@{neo::monitoring::MetricsRegistry}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_metrics_registry_ab4e03f96ee7767ad32127572c9471d0c} 
+std\+::mutex neo\+::monitoring\+::\+Metrics\+Registry\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/monitoring/\mbox{\hyperlink{monitoring_2metrics_8h}{metrics.\+h}}\end{DoxyCompactItemize}

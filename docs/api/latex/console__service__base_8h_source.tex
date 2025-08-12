@@ -1,0 +1,106 @@
+\doxysection{console\+\_\+service\+\_\+base.\+h}
+\hypertarget{console__service__base_8h_source}{}\label{console__service__base_8h_source}\index{include/neo/console\_service/console\_service\_base.h@{include/neo/console\_service/console\_service\_base.h}}
+\mbox{\hyperlink{console__service__base_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{command__token_8h}{neo/console\_service/command\_token.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{console__service_2console__command__attribute_8h}{neo/console\_service/console\_command\_attribute.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{console__command__method_8h}{neo/console\_service/console\_command\_method.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{console__service_2console__helper_8h}{neo/console\_service/console\_helper.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1console__service}{neo::console\_service}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a9f98c83e37704c31c38f3a3634f9ecbe}{ConsoleServiceBase}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a9f98c83e37704c31c38f3a3634f9ecbe}{ConsoleServiceBase}}();}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a165f8da2a07bbcff5bee64f5323c4bba}{\string~ConsoleServiceBase}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_af28af92b7882cf923d7b9aadd6effd6b}{GetServiceName}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_aa62d49bab736fbe55b4e5ea17104276b}{GetDepends}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a4bd88f99ad25e2393010bd81e8b6e773}{GetPrompt}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a26d25cfda101f278e65130237bdc5019}{GetShowPrompt}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a10c809b5e79d63f6d7a28585dea13dbc}{SetShowPrompt}}(\textcolor{keywordtype}{bool}\ show\_prompt);}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a052bd858f5e0856a6848d197537f8e99}{OnStart}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ args);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a036e72e58cb88bdfeea1cfcd81532b5e}{OnStop}}();}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_acf3bd224eea8b9fb0b763f81a6ed83ec}{Run}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ args);}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_abacd3ce4c2574e5d66bd9a19be90caa5}{RegisterCommand}}(std::shared\_ptr<void>\ instance,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a21cfb445a572abb165fd9845b4887ccf}{RegisterCommandHandler}}(std::function<T(std::vector<std::shared\_ptr<CommandToken>>\&,\ \textcolor{keywordtype}{bool})>\ handler);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_aa85cee40c02ad268a90c9e0969382d1b}{OnCommand}}(\textcolor{keyword}{const}\ std::string\&\ command\_line);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_ae1c7b4bc0d16ed2699e341056add3756}{OnHelpCommand}}(\textcolor{keyword}{const}\ std::string\&\ key\ =\ \textcolor{stringliteral}{"{}"{}});}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a861cfdacc2699533b89056f0b29531e6}{OnClear}}();}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_afbfe7361800b63daa8bdce7779797010}{OnVersion}}();}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a2d0ec961fd1d4034034b0b32d4e72b84}{OnExit}}();}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \textcolor{preprocessor}{\#ifdef\ \_WIN32}\textcolor{preprocessor}{}}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{bool}\ InstallWindowsService();}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{bool}\ UninstallWindowsService();}
+\DoxyCodeLine{00138\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_ae8a592cd0c4a6d684d9824005987301b}{HistorySize}}\ =\ 100;}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a96560cc718a9d05344bb45f749c313ee}{show\_prompt\_}};}
+\DoxyCodeLine{00144\ \ \ \ \ std::atomic<bool>\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_aa70ed48641ab7b4fb719df81c1ec24f9}{running\_}};}
+\DoxyCodeLine{00145\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_ad64ae8d66aed12f940fbd11c94e4aee9}{command\_history\_}};}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ std::map<std::string,\ std::vector<ConsoleCommandMethod>>\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a9f24549f8da6e3589edb43139a95520c}{verbs\_}};}
+\DoxyCodeLine{00148\ \ \ \ \ std::map<std::string,\ std::shared\_ptr<void>>\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_af797ca8ffa6a1c2e3933a68e43641e6d}{instances\_}};}
+\DoxyCodeLine{00149\ \ \ \ \ std::map<\textcolor{keyword}{const}\ std::type\_info*,\ std::function<\textcolor{keywordtype}{void}*(std::vector<std::shared\_ptr<CommandToken>>\&,\ bool)>>\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a98f92d1b07ca08069583e7d809b51561}{handlers\_}};}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a0cf9b80793a332a5b7cdad0d0c64d338}{RunConsole}}();}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00160\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a8f84cbcc2567f9001d79e68f61b83d0e}{ReadTask}}();}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a6ad841c9e98c5c6275b9c1b8442aae92}{TryProcessValue}}(\textcolor{keyword}{const}\ std::type\_info\&\ parameter\_type,\ std::vector<std::shared\_ptr<CommandToken>>\&\ args,}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ can\_consume\_all,\ \textcolor{keywordtype}{void}*\&\ value);}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_acf01b451aa8f33452886882ac45c3063}{TriggerGracefulShutdown}}();}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_af7acbabab548c7b924cd8ec2346aea8c}{SigTermEventHandler}}(\textcolor{keywordtype}{int}\ signal);}
+\DoxyCodeLine{00182\ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a15fedfd6368585bd027d4e9e0cd1468f}{CancelHandler}}(\textcolor{keywordtype}{int}\ signal);}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a36c6177f84cb69a9e2e3abb97f3700f3}{RegisterDefaultHandlers}}();}
+\DoxyCodeLine{00192\ \};}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00194\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00195\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a21cfb445a572abb165fd9845b4887ccf}{ConsoleServiceBase::RegisterCommandHandler}}(}
+\DoxyCodeLine{00196\ \ \ \ \ std::function<T(std::vector<std::shared\_ptr<CommandToken>>\&,\ \textcolor{keywordtype}{bool})>\ handler)}
+\DoxyCodeLine{00197\ \{}
+\DoxyCodeLine{00198\ \ \ \ \ \mbox{\hyperlink{classneo_1_1console__service_1_1_console_service_base_a98f92d1b07ca08069583e7d809b51561}{handlers\_}}[\&\textcolor{keyword}{typeid}(T)]\ =\ [handler](std::vector<std::shared\_ptr<CommandToken>>\&\ args,\ \textcolor{keywordtype}{bool}\ consume\_all)\ -\/>\ \textcolor{keywordtype}{void}*}
+\DoxyCodeLine{00199\ \ \ \ \ \{}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ T\ result\ =\ handler(args,\ consume\_all);}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{new}\ T(std::move(result));}
+\DoxyCodeLine{00202\ \ \ \ \ \};}
+\DoxyCodeLine{00203\ \}}
+\DoxyCodeLine{00204\ \}\ \ \textcolor{comment}{//\ namespace\ neo::console\_service}}
+
+\end{DoxyCode}

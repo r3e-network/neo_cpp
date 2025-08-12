@@ -1,0 +1,533 @@
+\doxysection{neo\+::extensions\+::String\+Extensions Class Reference}
+\hypertarget{classneo_1_1extensions_1_1_string_extensions}{}\label{classneo_1_1extensions_1_1_string_extensions}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+
+
+Extension methods for strings.  
+
+
+
+
+{\ttfamily \#include $<$string\+\_\+extensions.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_aa14476e33d4831760d40855d4e588096}{Try\+To\+Strict\+Utf8\+String}} (std\+::span$<$ const uint8\+\_\+t $>$ bytes, std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Converts a byte span to a strict UTF8 string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a09b95ab57e61d07a6d1aad342e7bda92}{To\+Strict\+Utf8\+String}} (std\+::span$<$ const uint8\+\_\+t $>$ value)
+\begin{DoxyCompactList}\small\item\em Converts a byte span to a strict UTF8 string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_af3d51aece4a1049c1e7c37de91901cd4}{To\+Strict\+Utf8\+String}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&value)
+\begin{DoxyCompactList}\small\item\em Converts a byte array to a strict UTF8 string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a2e4d2d5656f84239d6cf97d47fe2aa1e}{To\+Strict\+Utf8\+String}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&value, size\+\_\+t start, size\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Converts a byte array to a strict UTF8 string. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a2d638881a518324c8814e9c1bdaca3b3}{To\+Strict\+Utf8\+Bytes}} (const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Converts a string to a strict UTF8 byte array. \end{DoxyCompactList}\item 
+static size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a08a9dcb4cc88847c1cb2826b61f5c207}{Get\+Strict\+Utf8\+Byte\+Count}} (const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Gets the size of the specified string encoded in strict UTF8. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a869a0efadbb201cf4a1a3cdd39f1f647}{Is\+Hex}} (const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Determines if the specified string is a valid hex string. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_ac2e3ec1ee23661fbd315e0b193c60c26}{Hex\+To\+Bytes}} (const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Converts a hex string to byte array. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a39822a072850a2f2085d6bff9d6a7147}{Hex\+To\+Bytes\+Reversed}} (const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Converts a hex string to byte array then reverses the order of the bytes. \end{DoxyCompactList}\item 
+static size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a46a8e0635d3d555cf8526c0d2e648933}{Get\+Var\+Size}} (const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Gets the size of the specified string encoded in variable-\/length encoding. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a6fc2c8fa4f927c7a856d95b94bcd09ba}{Trim}} (const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Trims whitespace from the beginning and end of a string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_ac2bc473a181253f07926ae6b379fd151}{Trim\+Start}} (const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Trims whitespace from the beginning of a string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_aacaeba56d9571a2f4eed2e5a8e03a8fc}{Trim\+End}} (const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Trims whitespace from the end of a string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a5193f1805c37f4cbac2df7865c7b29f4}{To\+Lower}} (const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Converts a string to lowercase. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_ad025bff840ad1fbebb7b6657b28c6aef}{To\+Upper}} (const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Converts a string to uppercase. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a12eb573b4452eb67d4c36452fef98172}{Starts\+With}} (const std\+::string \&value, const std\+::string \&prefix)
+\begin{DoxyCompactList}\small\item\em Checks if a string starts with a specified prefix. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a47c1d8b05781ceb9793418123bbff136}{Ends\+With}} (const std\+::string \&value, const std\+::string \&suffix)
+\begin{DoxyCompactList}\small\item\em Checks if a string ends with a specified suffix. \end{DoxyCompactList}\item 
+static std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a2f218679ce9369de2b13ac7ebb42be1e}{Split}} (const std\+::string \&value, char delimiter)
+\begin{DoxyCompactList}\small\item\em Splits a string by a delimiter. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a76f67c331abd239dd2dc1ece5bb3f186}{Join}} (const std\+::vector$<$ std\+::string $>$ \&values, const std\+::string \&delimiter)
+\begin{DoxyCompactList}\small\item\em Joins a vector of strings with a delimiter. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a29dba978ee426c9b67b5656887b24a69}{Is\+Hex\+Digit}} (char c)
+\begin{DoxyCompactList}\small\item\em Checks if a character is a valid hex digit. \end{DoxyCompactList}\item 
+static uint8\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a06a8e6e7fbc340b2b9640f5e68f34bc4}{Hex\+Char\+To\+Value}} (char c)
+\begin{DoxyCompactList}\small\item\em Converts a hex character to its numeric value. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_string_extensions_a992803633efcef9f05175f45a3bf6638}{Is\+Whitespace}} (char c)
+\begin{DoxyCompactList}\small\item\em Checks if a character is whitespace. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Extension methods for strings. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_a47c1d8b05781ceb9793418123bbff136}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!EndsWith@{EndsWith}}
+\index{EndsWith@{EndsWith}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{EndsWith()}{EndsWith()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_a47c1d8b05781ceb9793418123bbff136} 
+bool neo\+::extensions\+::\+String\+Extensions\+::\+Ends\+With (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{, }\item[{const std\+::string \&}]{suffix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Checks if a string ends with a specified suffix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The string to check. \\
+\hline
+{\em suffix} & The suffix to look for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the string ends with the suffix, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_a08a9dcb4cc88847c1cb2826b61f5c207}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!GetStrictUtf8ByteCount@{GetStrictUtf8ByteCount}}
+\index{GetStrictUtf8ByteCount@{GetStrictUtf8ByteCount}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{GetStrictUtf8ByteCount()}{GetStrictUtf8ByteCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_a08a9dcb4cc88847c1cb2826b61f5c207} 
+size\+\_\+t neo\+::extensions\+::\+String\+Extensions\+::\+Get\+Strict\+Utf8\+Byte\+Count (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the size of the specified string encoded in strict UTF8. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The specified string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The size of the string. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_a46a8e0635d3d555cf8526c0d2e648933}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!GetVarSize@{GetVarSize}}
+\index{GetVarSize@{GetVarSize}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{GetVarSize()}{GetVarSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_a46a8e0635d3d555cf8526c0d2e648933} 
+size\+\_\+t neo\+::extensions\+::\+String\+Extensions\+::\+Get\+Var\+Size (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the size of the specified string encoded in variable-\/length encoding. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The specified string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The size of the string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_a06a8e6e7fbc340b2b9640f5e68f34bc4}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!HexCharToValue@{HexCharToValue}}
+\index{HexCharToValue@{HexCharToValue}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{HexCharToValue()}{HexCharToValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_a06a8e6e7fbc340b2b9640f5e68f34bc4} 
+uint8\+\_\+t neo\+::extensions\+::\+String\+Extensions\+::\+Hex\+Char\+To\+Value (\begin{DoxyParamCaption}\item[{char}]{c}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Converts a hex character to its numeric value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & The hex character. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The numeric value. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if character is not a valid hex digit. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_ac2e3ec1ee23661fbd315e0b193c60c26}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!HexToBytes@{HexToBytes}}
+\index{HexToBytes@{HexToBytes}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{HexToBytes()}{HexToBytes()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_ac2e3ec1ee23661fbd315e0b193c60c26} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::extensions\+::\+String\+Extensions\+::\+Hex\+To\+Bytes (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a hex string to byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The hex string to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted byte array. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the hex string is invalid. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_a39822a072850a2f2085d6bff9d6a7147}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!HexToBytesReversed@{HexToBytesReversed}}
+\index{HexToBytesReversed@{HexToBytesReversed}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{HexToBytesReversed()}{HexToBytesReversed()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_a39822a072850a2f2085d6bff9d6a7147} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::extensions\+::\+String\+Extensions\+::\+Hex\+To\+Bytes\+Reversed (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a hex string to byte array then reverses the order of the bytes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The hex string to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted reversed byte array. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the hex string is invalid. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_a869a0efadbb201cf4a1a3cdd39f1f647}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!IsHex@{IsHex}}
+\index{IsHex@{IsHex}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{IsHex()}{IsHex()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_a869a0efadbb201cf4a1a3cdd39f1f647} 
+bool neo\+::extensions\+::\+String\+Extensions\+::\+Is\+Hex (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Determines if the specified string is a valid hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The specified string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the string is a valid hex string (or empty); otherwise false. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_a29dba978ee426c9b67b5656887b24a69}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!IsHexDigit@{IsHexDigit}}
+\index{IsHexDigit@{IsHexDigit}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{IsHexDigit()}{IsHexDigit()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_a29dba978ee426c9b67b5656887b24a69} 
+bool neo\+::extensions\+::\+String\+Extensions\+::\+Is\+Hex\+Digit (\begin{DoxyParamCaption}\item[{char}]{c}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Checks if a character is a valid hex digit. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & The character to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the character is a valid hex digit, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_a992803633efcef9f05175f45a3bf6638}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!IsWhitespace@{IsWhitespace}}
+\index{IsWhitespace@{IsWhitespace}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{IsWhitespace()}{IsWhitespace()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_a992803633efcef9f05175f45a3bf6638} 
+bool neo\+::extensions\+::\+String\+Extensions\+::\+Is\+Whitespace (\begin{DoxyParamCaption}\item[{char}]{c}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Checks if a character is whitespace. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em c} & The character to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the character is whitespace, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_a76f67c331abd239dd2dc1ece5bb3f186}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!Join@{Join}}
+\index{Join@{Join}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{Join()}{Join()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_a76f67c331abd239dd2dc1ece5bb3f186} 
+std\+::string neo\+::extensions\+::\+String\+Extensions\+::\+Join (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{values}{, }\item[{const std\+::string \&}]{delimiter}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Joins a vector of strings with a delimiter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em values} & The strings to join. \\
+\hline
+{\em delimiter} & The delimiter string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The joined string. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_a2f218679ce9369de2b13ac7ebb42be1e}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!Split@{Split}}
+\index{Split@{Split}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{Split()}{Split()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_a2f218679ce9369de2b13ac7ebb42be1e} 
+std\+::vector$<$ std\+::string $>$ neo\+::extensions\+::\+String\+Extensions\+::\+Split (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{, }\item[{char}]{delimiter}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Splits a string by a delimiter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The string to split. \\
+\hline
+{\em delimiter} & The delimiter character. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A vector of split strings. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_a12eb573b4452eb67d4c36452fef98172}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!StartsWith@{StartsWith}}
+\index{StartsWith@{StartsWith}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{StartsWith()}{StartsWith()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_a12eb573b4452eb67d4c36452fef98172} 
+bool neo\+::extensions\+::\+String\+Extensions\+::\+Starts\+With (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{, }\item[{const std\+::string \&}]{prefix}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Checks if a string starts with a specified prefix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The string to check. \\
+\hline
+{\em prefix} & The prefix to look for. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the string starts with the prefix, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_a5193f1805c37f4cbac2df7865c7b29f4}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!ToLower@{ToLower}}
+\index{ToLower@{ToLower}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{ToLower()}{ToLower()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_a5193f1805c37f4cbac2df7865c7b29f4} 
+std\+::string neo\+::extensions\+::\+String\+Extensions\+::\+To\+Lower (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a string to lowercase. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The string to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The lowercase string. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_a2d638881a518324c8814e9c1bdaca3b3}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!ToStrictUtf8Bytes@{ToStrictUtf8Bytes}}
+\index{ToStrictUtf8Bytes@{ToStrictUtf8Bytes}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{ToStrictUtf8Bytes()}{ToStrictUtf8Bytes()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_a2d638881a518324c8814e9c1bdaca3b3} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::extensions\+::\+String\+Extensions\+::\+To\+Strict\+Utf8\+Bytes (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a string to a strict UTF8 byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The string to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted byte array. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_af3d51aece4a1049c1e7c37de91901cd4}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!ToStrictUtf8String@{ToStrictUtf8String}}
+\index{ToStrictUtf8String@{ToStrictUtf8String}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{ToStrictUtf8String()}{ToStrictUtf8String()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_af3d51aece4a1049c1e7c37de91901cd4} 
+std\+::string neo\+::extensions\+::\+String\+Extensions\+::\+To\+Strict\+Utf8\+String (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a byte array to a strict UTF8 string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The byte array to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted string. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if conversion fails. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_a2e4d2d5656f84239d6cf97d47fe2aa1e}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!ToStrictUtf8String@{ToStrictUtf8String}}
+\index{ToStrictUtf8String@{ToStrictUtf8String}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{ToStrictUtf8String()}{ToStrictUtf8String()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_a2e4d2d5656f84239d6cf97d47fe2aa1e} 
+std\+::string neo\+::extensions\+::\+String\+Extensions\+::\+To\+Strict\+Utf8\+String (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{value}{, }\item[{size\+\_\+t}]{start}{, }\item[{size\+\_\+t}]{count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a byte array to a strict UTF8 string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The byte array to convert. \\
+\hline
+{\em start} & The start index of the byte array. \\
+\hline
+{\em count} & The count of the byte array. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted string. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if conversion fails. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_a09b95ab57e61d07a6d1aad342e7bda92}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!ToStrictUtf8String@{ToStrictUtf8String}}
+\index{ToStrictUtf8String@{ToStrictUtf8String}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{ToStrictUtf8String()}{ToStrictUtf8String()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_a09b95ab57e61d07a6d1aad342e7bda92} 
+std\+::string neo\+::extensions\+::\+String\+Extensions\+::\+To\+Strict\+Utf8\+String (\begin{DoxyParamCaption}\item[{std\+::span$<$ const uint8\+\_\+t $>$}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a byte span to a strict UTF8 string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The byte span to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted string. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if conversion fails. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_ad025bff840ad1fbebb7b6657b28c6aef}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!ToUpper@{ToUpper}}
+\index{ToUpper@{ToUpper}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{ToUpper()}{ToUpper()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_ad025bff840ad1fbebb7b6657b28c6aef} 
+std\+::string neo\+::extensions\+::\+String\+Extensions\+::\+To\+Upper (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a string to uppercase. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The string to convert. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The uppercase string. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_a6fc2c8fa4f927c7a856d95b94bcd09ba}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!Trim@{Trim}}
+\index{Trim@{Trim}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{Trim()}{Trim()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_a6fc2c8fa4f927c7a856d95b94bcd09ba} 
+std\+::string neo\+::extensions\+::\+String\+Extensions\+::\+Trim (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Trims whitespace from the beginning and end of a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The string to trim. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The trimmed string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_aacaeba56d9571a2f4eed2e5a8e03a8fc}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!TrimEnd@{TrimEnd}}
+\index{TrimEnd@{TrimEnd}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{TrimEnd()}{TrimEnd()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_aacaeba56d9571a2f4eed2e5a8e03a8fc} 
+std\+::string neo\+::extensions\+::\+String\+Extensions\+::\+Trim\+End (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Trims whitespace from the end of a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The string to trim. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The trimmed string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_ac2bc473a181253f07926ae6b379fd151}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!TrimStart@{TrimStart}}
+\index{TrimStart@{TrimStart}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{TrimStart()}{TrimStart()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_ac2bc473a181253f07926ae6b379fd151} 
+std\+::string neo\+::extensions\+::\+String\+Extensions\+::\+Trim\+Start (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Trims whitespace from the beginning of a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The string to trim. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The trimmed string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1extensions_1_1_string_extensions_aa14476e33d4831760d40855d4e588096}\index{neo::extensions::StringExtensions@{neo::extensions::StringExtensions}!TryToStrictUtf8String@{TryToStrictUtf8String}}
+\index{TryToStrictUtf8String@{TryToStrictUtf8String}!neo::extensions::StringExtensions@{neo::extensions::StringExtensions}}
+\doxysubsubsection{\texorpdfstring{TryToStrictUtf8String()}{TryToStrictUtf8String()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_string_extensions_aa14476e33d4831760d40855d4e588096} 
+bool neo\+::extensions\+::\+String\+Extensions\+::\+Try\+To\+Strict\+Utf8\+String (\begin{DoxyParamCaption}\item[{std\+::span$<$ const uint8\+\_\+t $>$}]{bytes}{, }\item[{std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a byte span to a strict UTF8 string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & The byte span to convert. \\
+\hline
+{\em value} & The converted string (output parameter). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the conversion is successful, otherwise false. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/extensions/\mbox{\hyperlink{string__extensions_8h}{string\+\_\+extensions.\+h}}\item 
+src/extensions/\mbox{\hyperlink{string__extensions_8cpp}{string\+\_\+extensions.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,180 @@
+\doxysection{neo\+::wallets\+::Asset\+Descriptor Class Reference}
+\hypertarget{classneo_1_1wallets_1_1_asset_descriptor}{}\label{classneo_1_1wallets_1_1_asset_descriptor}\index{neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}}
+
+
+Represents the descriptor of an asset.  
+
+
+
+
+{\ttfamily \#include $<$asset\+\_\+descriptor.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::wallets\+::Asset\+Descriptor\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_asset_descriptor_a95abf2c33d9ee6b76b07c37b39064265}{Asset\+Descriptor}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} \&snapshot, const \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings}{config\+::\+Protocol\+Settings}} \&settings, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&asset\+Id)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \doxylink{classneo_1_1wallets_1_1_asset_descriptor}{Asset\+Descriptor} class. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1wallets_1_1_asset_descriptor_ab2fffb2b395b2a96e008f4b1470efd9b}{Get\+Asset\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Gets the id of the asset. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1wallets_1_1_asset_descriptor_a3ac6e776a6d5508e3d85fb49690ec0e0}{Get\+Asset\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Gets the name of the asset. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1wallets_1_1_asset_descriptor_aa80779ac123d76922feb157bd0e53c64}{Get\+Symbol}} () const
+\begin{DoxyCompactList}\small\item\em Gets the symbol of the asset. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1wallets_1_1_asset_descriptor_a280172c8d118c41ec5e5396ad2a8ea61}{Get\+Decimals}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of decimal places of the token. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_asset_descriptor_a25429f310611b6c0b38612748556bea3}{To\+String}} () const
+\begin{DoxyCompactList}\small\item\em Converts the asset descriptor to a string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1wallets_1_1_asset_descriptor_ab355c385bfa96925796d76b7e4e19ea7}{asset\+Id\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_asset_descriptor_ab6273b929dda35982c29c837c1450c37}{asset\+Name\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_asset_descriptor_abe96e46907f079dc43caae748c8f36ab}{symbol\+\_\+}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1wallets_1_1_asset_descriptor_a4d6241126c734f23156bf1ff04b18b6c}{decimals\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the descriptor of an asset. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1wallets_1_1_asset_descriptor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_asset_descriptor_a95abf2c33d9ee6b76b07c37b39064265}\index{neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}!AssetDescriptor@{AssetDescriptor}}
+\index{AssetDescriptor@{AssetDescriptor}!neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}}
+\doxysubsubsection{\texorpdfstring{AssetDescriptor()}{AssetDescriptor()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_asset_descriptor_a95abf2c33d9ee6b76b07c37b39064265} 
+neo\+::wallets\+::\+Asset\+Descriptor\+::\+Asset\+Descriptor (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} \&}]{snapshot}{, }\item[{const \mbox{\hyperlink{structneo_1_1config_1_1_protocol_settings}{config\+::\+Protocol\+Settings}} \&}]{settings}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{asset\+Id}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \doxylink{classneo_1_1wallets_1_1_asset_descriptor}{Asset\+Descriptor} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot used to read data. \\
+\hline
+{\em settings} & The protocol settings used by the Application\+Engine. \\
+\hline
+{\em asset\+Id} & The id of the asset. \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the asset id is invalid. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1wallets_1_1_asset_descriptor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_asset_descriptor_ab2fffb2b395b2a96e008f4b1470efd9b}\index{neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}!GetAssetId@{GetAssetId}}
+\index{GetAssetId@{GetAssetId}!neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}}
+\doxysubsubsection{\texorpdfstring{GetAssetId()}{GetAssetId()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_asset_descriptor_ab2fffb2b395b2a96e008f4b1470efd9b} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& neo\+::wallets\+::\+Asset\+Descriptor\+::\+Get\+Asset\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the id of the asset. 
+
+\begin{DoxyReturn}{Returns}
+The id of the asset. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_asset_descriptor_a3ac6e776a6d5508e3d85fb49690ec0e0}\index{neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}!GetAssetName@{GetAssetName}}
+\index{GetAssetName@{GetAssetName}!neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}}
+\doxysubsubsection{\texorpdfstring{GetAssetName()}{GetAssetName()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_asset_descriptor_a3ac6e776a6d5508e3d85fb49690ec0e0} 
+const std\+::string \& neo\+::wallets\+::\+Asset\+Descriptor\+::\+Get\+Asset\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the name of the asset. 
+
+\begin{DoxyReturn}{Returns}
+The name of the asset. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_asset_descriptor_a280172c8d118c41ec5e5396ad2a8ea61}\index{neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}!GetDecimals@{GetDecimals}}
+\index{GetDecimals@{GetDecimals}!neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}}
+\doxysubsubsection{\texorpdfstring{GetDecimals()}{GetDecimals()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_asset_descriptor_a280172c8d118c41ec5e5396ad2a8ea61} 
+uint8\+\_\+t neo\+::wallets\+::\+Asset\+Descriptor\+::\+Get\+Decimals (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of decimal places of the token. 
+
+\begin{DoxyReturn}{Returns}
+The number of decimal places of the token. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_asset_descriptor_aa80779ac123d76922feb157bd0e53c64}\index{neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}!GetSymbol@{GetSymbol}}
+\index{GetSymbol@{GetSymbol}!neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}}
+\doxysubsubsection{\texorpdfstring{GetSymbol()}{GetSymbol()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_asset_descriptor_aa80779ac123d76922feb157bd0e53c64} 
+const std\+::string \& neo\+::wallets\+::\+Asset\+Descriptor\+::\+Get\+Symbol (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the symbol of the asset. 
+
+\begin{DoxyReturn}{Returns}
+The symbol of the asset. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_asset_descriptor_a25429f310611b6c0b38612748556bea3}\index{neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_asset_descriptor_a25429f310611b6c0b38612748556bea3} 
+std\+::string neo\+::wallets\+::\+Asset\+Descriptor\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Converts the asset descriptor to a string. 
+
+\begin{DoxyReturn}{Returns}
+The name of the asset. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1wallets_1_1_asset_descriptor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_asset_descriptor_ab355c385bfa96925796d76b7e4e19ea7}\index{neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}!assetId\_@{assetId\_}}
+\index{assetId\_@{assetId\_}!neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}}
+\doxysubsubsection{\texorpdfstring{assetId\_}{assetId\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_asset_descriptor_ab355c385bfa96925796d76b7e4e19ea7} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::wallets\+::\+Asset\+Descriptor\+::asset\+Id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1_asset_descriptor_ab6273b929dda35982c29c837c1450c37}\index{neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}!assetName\_@{assetName\_}}
+\index{assetName\_@{assetName\_}!neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}}
+\doxysubsubsection{\texorpdfstring{assetName\_}{assetName\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_asset_descriptor_ab6273b929dda35982c29c837c1450c37} 
+std\+::string neo\+::wallets\+::\+Asset\+Descriptor\+::asset\+Name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1_asset_descriptor_a4d6241126c734f23156bf1ff04b18b6c}\index{neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}!decimals\_@{decimals\_}}
+\index{decimals\_@{decimals\_}!neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}}
+\doxysubsubsection{\texorpdfstring{decimals\_}{decimals\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_asset_descriptor_a4d6241126c734f23156bf1ff04b18b6c} 
+uint8\+\_\+t neo\+::wallets\+::\+Asset\+Descriptor\+::decimals\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1_asset_descriptor_abe96e46907f079dc43caae748c8f36ab}\index{neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}!symbol\_@{symbol\_}}
+\index{symbol\_@{symbol\_}!neo::wallets::AssetDescriptor@{neo::wallets::AssetDescriptor}}
+\doxysubsubsection{\texorpdfstring{symbol\_}{symbol\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_asset_descriptor_abe96e46907f079dc43caae748c8f36ab} 
+std\+::string neo\+::wallets\+::\+Asset\+Descriptor\+::symbol\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/wallets/\mbox{\hyperlink{asset__descriptor_8h}{asset\+\_\+descriptor.\+h}}\item 
+src/wallets/\mbox{\hyperlink{asset__descriptor_8cpp}{asset\+\_\+descriptor.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,104 @@
+\doxysection{neo\+::core\+::Protocol\+Settings\+Singleton Class Reference}
+\hypertarget{classneo_1_1core_1_1_protocol_settings_singleton}{}\label{classneo_1_1core_1_1_protocol_settings_singleton}\index{neo::core::ProtocolSettingsSingleton@{neo::core::ProtocolSettingsSingleton}}
+
+
+Global protocol settings instance (C\# compatible)  
+
+
+
+
+{\ttfamily \#include $<$protocol\+\_\+settings.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classneo_1_1core_1_1_protocol_settings_singleton_a6820e3840269dcc761604a673d9ac904}{Initialize}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_settings}{Protocol\+Settings}} $>$ settings)
+\begin{DoxyCompactList}\small\item\em Initialize global settings. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_settings}{Protocol\+Settings}} $>$ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_settings_singleton_a43e87fb8a5d0319fb40ec00a540e9f1f}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Get global settings instance. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1core_1_1_protocol_settings_singleton_af81ddc350e1bf9e97e880fc63801e767}{Load}} (const std\+::string \&config\+\_\+path)
+\begin{DoxyCompactList}\small\item\em Load settings from file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_settings}{Protocol\+Settings}} $>$ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_settings_singleton_a2e1e173ad594b047aa73a913078a3eb3}{instance\+\_\+}}
+\item 
+static std\+::mutex \mbox{\hyperlink{classneo_1_1core_1_1_protocol_settings_singleton_a25bae24e9f777618a8f8677f9200dea7}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Global protocol settings instance (C\# compatible) 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1core_1_1_protocol_settings_singleton_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1core_1_1_protocol_settings_singleton_a43e87fb8a5d0319fb40ec00a540e9f1f}\index{neo::core::ProtocolSettingsSingleton@{neo::core::ProtocolSettingsSingleton}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::core::ProtocolSettingsSingleton@{neo::core::ProtocolSettingsSingleton}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_protocol_settings_singleton_a43e87fb8a5d0319fb40ec00a540e9f1f} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_settings}{Protocol\+Settings}} $>$ neo\+::core\+::\+Protocol\+Settings\+Singleton\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get global settings instance. 
+
+\begin{DoxyReturn}{Returns}
+Protocol settings 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_protocol_settings_singleton_a6820e3840269dcc761604a673d9ac904}\index{neo::core::ProtocolSettingsSingleton@{neo::core::ProtocolSettingsSingleton}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neo::core::ProtocolSettingsSingleton@{neo::core::ProtocolSettingsSingleton}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_protocol_settings_singleton_a6820e3840269dcc761604a673d9ac904} 
+void neo\+::core\+::\+Protocol\+Settings\+Singleton\+::\+Initialize (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_settings}{Protocol\+Settings}} $>$}]{settings}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Initialize global settings. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em settings} & Protocol settings \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1core_1_1_protocol_settings_singleton_af81ddc350e1bf9e97e880fc63801e767}\index{neo::core::ProtocolSettingsSingleton@{neo::core::ProtocolSettingsSingleton}!Load@{Load}}
+\index{Load@{Load}!neo::core::ProtocolSettingsSingleton@{neo::core::ProtocolSettingsSingleton}}
+\doxysubsubsection{\texorpdfstring{Load()}{Load()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_protocol_settings_singleton_af81ddc350e1bf9e97e880fc63801e767} 
+bool neo\+::core\+::\+Protocol\+Settings\+Singleton\+::\+Load (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{config\+\_\+path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Load settings from file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config\+\_\+path} & Configuration file path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if loaded successfully 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1core_1_1_protocol_settings_singleton_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1core_1_1_protocol_settings_singleton_a2e1e173ad594b047aa73a913078a3eb3}\index{neo::core::ProtocolSettingsSingleton@{neo::core::ProtocolSettingsSingleton}!instance\_@{instance\_}}
+\index{instance\_@{instance\_}!neo::core::ProtocolSettingsSingleton@{neo::core::ProtocolSettingsSingleton}}
+\doxysubsubsection{\texorpdfstring{instance\_}{instance\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_protocol_settings_singleton_a2e1e173ad594b047aa73a913078a3eb3} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1core_1_1_protocol_settings}{Protocol\+Settings}} $>$ neo\+::core\+::\+Protocol\+Settings\+Singleton\+::instance\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_protocol_settings_singleton_a25bae24e9f777618a8f8677f9200dea7}\index{neo::core::ProtocolSettingsSingleton@{neo::core::ProtocolSettingsSingleton}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::core::ProtocolSettingsSingleton@{neo::core::ProtocolSettingsSingleton}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_protocol_settings_singleton_a25bae24e9f777618a8f8677f9200dea7} 
+std\+::mutex neo\+::core\+::\+Protocol\+Settings\+Singleton\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{core_2protocol__settings_8h}{protocol\+\_\+settings.\+h}}\item 
+src/core/\mbox{\hyperlink{core_2protocol__settings_8cpp}{protocol\+\_\+settings.\+cpp}}\end{DoxyCompactItemize}

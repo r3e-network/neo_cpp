@@ -1,0 +1,95 @@
+\doxysection{neo\+::monitoring\+::Health\+Check Class Reference}
+\hypertarget{classneo_1_1monitoring_1_1_health_check}{}\label{classneo_1_1monitoring_1_1_health_check}\index{neo::monitoring::HealthCheck@{neo::monitoring::HealthCheck}}
+
+
+Base class for health checks.  
+
+
+
+
+{\ttfamily \#include $<$health\+\_\+check.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::monitoring\+::Health\+Check\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_afbf1da7d3f3e4b31c1e96fd4d04b87c5}{Health\+Check}} (const std\+::string \&name)
+\item 
+virtual \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_ac4e9c8f35d5f93924cda620a0ab3c658}{\texorpdfstring{$\sim$}{\string~}\+Health\+Check}} ()=default
+\item 
+virtual \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{Health\+Check\+Result}} \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_a02255d78577a3ca0476d444900677085}{Check}} ()=0
+\begin{DoxyCompactList}\small\item\em Perform health check. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_aa2fea5a1ec2d033eefc0347d4703436c}{Get\+Name}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_a382d5ab51c1806241ccbbcbafe0c8599}{name\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Base class for health checks. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_afbf1da7d3f3e4b31c1e96fd4d04b87c5}\index{neo::monitoring::HealthCheck@{neo::monitoring::HealthCheck}!HealthCheck@{HealthCheck}}
+\index{HealthCheck@{HealthCheck}!neo::monitoring::HealthCheck@{neo::monitoring::HealthCheck}}
+\doxysubsubsection{\texorpdfstring{HealthCheck()}{HealthCheck()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_afbf1da7d3f3e4b31c1e96fd4d04b87c5} 
+neo\+::monitoring\+::\+Health\+Check\+::\+Health\+Check (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_ac4e9c8f35d5f93924cda620a0ab3c658}\index{neo::monitoring::HealthCheck@{neo::monitoring::HealthCheck}!````~HealthCheck@{\texorpdfstring{$\sim$}{\string~}HealthCheck}}
+\index{````~HealthCheck@{\texorpdfstring{$\sim$}{\string~}HealthCheck}!neo::monitoring::HealthCheck@{neo::monitoring::HealthCheck}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}HealthCheck()}{\string~HealthCheck()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_ac4e9c8f35d5f93924cda620a0ab3c658} 
+virtual neo\+::monitoring\+::\+Health\+Check\+::\texorpdfstring{$\sim$}{\string~}\+Health\+Check (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_a02255d78577a3ca0476d444900677085}\index{neo::monitoring::HealthCheck@{neo::monitoring::HealthCheck}!Check@{Check}}
+\index{Check@{Check}!neo::monitoring::HealthCheck@{neo::monitoring::HealthCheck}}
+\doxysubsubsection{\texorpdfstring{Check()}{Check()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_a02255d78577a3ca0476d444900677085} 
+virtual \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{Health\+Check\+Result}} neo\+::monitoring\+::\+Health\+Check\+::\+Check (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Perform health check. 
+
+\begin{DoxyReturn}{Returns}
+Health check result 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1monitoring_1_1_blockchain_health_check_a6759a952dd27598b8bd35e091f0649b5}{neo\+::monitoring\+::\+Blockchain\+Health\+Check}}, \mbox{\hyperlink{classneo_1_1monitoring_1_1_memory_health_check_a92dd3f355474dfb114f0489228d66b92}{neo\+::monitoring\+::\+Memory\+Health\+Check}}, \mbox{\hyperlink{classneo_1_1monitoring_1_1_memory_health_check_a92dd3f355474dfb114f0489228d66b92}{neo\+::monitoring\+::\+Memory\+Health\+Check}}, and \mbox{\hyperlink{classneo_1_1monitoring_1_1_p2_p_health_check_af7c456ae1f6181c6db52e3f637953d66}{neo\+::monitoring\+::\+P2\+PHealth\+Check}}.
+
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_aa2fea5a1ec2d033eefc0347d4703436c}\index{neo::monitoring::HealthCheck@{neo::monitoring::HealthCheck}!GetName@{GetName}}
+\index{GetName@{GetName}!neo::monitoring::HealthCheck@{neo::monitoring::HealthCheck}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_aa2fea5a1ec2d033eefc0347d4703436c} 
+const std\+::string \& neo\+::monitoring\+::\+Health\+Check\+::\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_health_check_a382d5ab51c1806241ccbbcbafe0c8599}\index{neo::monitoring::HealthCheck@{neo::monitoring::HealthCheck}!name\_@{name\_}}
+\index{name\_@{name\_}!neo::monitoring::HealthCheck@{neo::monitoring::HealthCheck}}
+\doxysubsubsection{\texorpdfstring{name\_}{name\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_health_check_a382d5ab51c1806241ccbbcbafe0c8599} 
+std\+::string neo\+::monitoring\+::\+Health\+Check\+::name\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/monitoring/\mbox{\hyperlink{health__check_8h}{health\+\_\+check.\+h}}\end{DoxyCompactItemize}

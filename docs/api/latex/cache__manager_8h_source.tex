@@ -1,0 +1,63 @@
+\doxysection{cache\+\_\+manager.\+h}
+\hypertarget{cache__manager_8h_source}{}\label{cache__manager_8h_source}\index{include/neo/io/caching/cache\_manager.h@{include/neo/io/caching/cache\_manager.h}}
+\mbox{\hyperlink{cache__manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{block__cache_8h}{neo/io/caching/block\_cache.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{contract__cache_8h}{neo/io/caching/contract\_cache.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ecpoint__cache_8h}{neo/io/caching/ecpoint\_cache.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{transaction__cache_8h}{neo/io/caching/transaction\_cache.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1io_1_1caching}{neo::io::caching}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_a119ec283da4adfdd83249ff9ccc59e01}{CacheManager}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_a119ec283da4adfdd83249ff9ccc59e01}{CacheManager}}\&\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_aabe818f2d553435b6c023a540a019997}{GetInstance}}()}
+\DoxyCodeLine{00023\ \ \ \ \ \{}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_a119ec283da4adfdd83249ff9ccc59e01}{CacheManager}}\ instance;}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00026\ \ \ \ \ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache}{ECPointCache}}\&\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_ad2f89e7a0b9b21084cb074501a9a9173}{GetECPointCache}}()\ \{\ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_ab417cb1a33e500a29e1b365d1331aa14}{ecpointCache\_}};\ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00038\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache}{BlockCache}}\&\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_a16abd010081997b0c9cfc9dccce1b684}{GetBlockCache}}()\ \{\ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_ab485150e25557b288e167cdcb7c89321}{blockCache\_}};\ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache}{TransactionCache}}\&\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_aafc037869be11817f4020307d9ee45da}{GetTransactionCache}}()\ \{\ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_a7d66dba167ffb1a788750478eebeea90}{transactionCache\_}};\ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache}{ContractCache}}\&\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_a24eb63feeb93a449fe265ffe263abf1b}{GetContractCache}}()\ \{\ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_af95e44b7dff6d22da7e3fa4d95f92f64}{contractCache\_}};\ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_acf28d903962dfb43b1eb0e9f55b97ec6}{ClearAll}}()}
+\DoxyCodeLine{00056\ \ \ \ \ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_ab417cb1a33e500a29e1b365d1331aa14}{ecpointCache\_}}-\/>Clear();}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_ab485150e25557b288e167cdcb7c89321}{blockCache\_}}-\/>Clear();}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_a7d66dba167ffb1a788750478eebeea90}{transactionCache\_}}-\/>Clear();}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_af95e44b7dff6d22da7e3fa4d95f92f64}{contractCache\_}}-\/>Clear();}
+\DoxyCodeLine{00061\ \ \ \ \ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_a119ec283da4adfdd83249ff9ccc59e01}{CacheManager}}()}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_ab417cb1a33e500a29e1b365d1331aa14}{ecpointCache\_}}(\mbox{\hyperlink{namespacestd}{std}}::make\_unique<\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache}{ECPointCache}}>(1000)),}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_ab485150e25557b288e167cdcb7c89321}{blockCache\_}}(\mbox{\hyperlink{namespacestd}{std}}::make\_unique<\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_block_cache}{BlockCache}}>(1000)),}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_a7d66dba167ffb1a788750478eebeea90}{transactionCache\_}}(\mbox{\hyperlink{namespacestd}{std}}::make\_unique<\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_transaction_cache}{TransactionCache}}>(10000)),}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_af95e44b7dff6d22da7e3fa4d95f92f64}{contractCache\_}}(\mbox{\hyperlink{namespacestd}{std}}::make\_unique<\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache}{ContractCache}}>(1000))}
+\DoxyCodeLine{00072\ \ \ \ \ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00078\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_ab66537d6003d48309dd8ec18af687645}{\string~CacheManager}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{comment}{//\ Delete\ copy\ constructor\ and\ assignment\ operator}}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_a75f1ed7cfaec68138710e6fd77331807}{CacheManager}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_a119ec283da4adfdd83249ff9ccc59e01}{CacheManager}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00082\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_a119ec283da4adfdd83249ff9ccc59e01}{CacheManager}}\&\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_a36b6804e496d589e153798b95c6845f9}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_a119ec283da4adfdd83249ff9ccc59e01}{CacheManager}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ std::unique\_ptr<ECPointCache>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_ab417cb1a33e500a29e1b365d1331aa14}{ecpointCache\_}};}
+\DoxyCodeLine{00085\ \ \ \ \ std::unique\_ptr<BlockCache>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_ab485150e25557b288e167cdcb7c89321}{blockCache\_}};}
+\DoxyCodeLine{00086\ \ \ \ \ std::unique\_ptr<TransactionCache>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_a7d66dba167ffb1a788750478eebeea90}{transactionCache\_}};}
+\DoxyCodeLine{00087\ \ \ \ \ std::unique\_ptr<ContractCache>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_cache_manager_af95e44b7dff6d22da7e3fa4d95f92f64}{contractCache\_}};}
+\DoxyCodeLine{00088\ \};}
+\DoxyCodeLine{00089\ \}\ \ \textcolor{comment}{//\ namespace\ neo::io::caching}}
+
+\end{DoxyCode}

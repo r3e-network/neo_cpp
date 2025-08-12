@@ -1,0 +1,124 @@
+\doxysection{remote\+\_\+node.\+h}
+\hypertarget{remote__node_8h_source}{}\label{remote__node_8h_source}\index{include/neo/network/p2p/remote\_node.h@{include/neo/network/p2p/remote\_node.h}}
+\mbox{\hyperlink{remote__node_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ip__endpoint_8h}{neo/network/ip\_endpoint.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{connection_8h}{neo/network/p2p/connection.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{message_8h}{neo/network/p2p/message.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{node__capability_8h}{neo/network/p2p/node\_capability.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{addr__payload_8h}{neo/network/p2p/payloads/addr\_payload.h}}>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{get__block__by__index__payload_8h}{neo/network/p2p/payloads/get\_block\_by\_index\_payload.h}}>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{get__blocks__payload_8h}{neo/network/p2p/payloads/get\_blocks\_payload.h}}>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{get__data__payload_8h}{neo/network/p2p/payloads/get\_data\_payload.h}}>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{get__headers__payload_8h}{neo/network/p2p/payloads/get\_headers\_payload.h}}>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{headers__payload_8h}{neo/network/p2p/payloads/headers\_payload.h}}>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{inv__payload_8h}{neo/network/p2p/payloads/inv\_payload.h}}>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{mempool__payload_8h}{neo/network/p2p/payloads/mempool\_payload.h}}>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ping__payload_8h}{neo/network/p2p/payloads/ping\_payload.h}}>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{verack__payload_8h}{neo/network/p2p/payloads/verack\_payload.h}}>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{version__payload_8h}{neo/network/p2p/payloads/version\_payload.h}}>}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p}{neo::network::p2p}}}
+\DoxyCodeLine{00027\ \{}
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{LocalNode}};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a30a4a270872f3443004f1d873b96c2de}{RemoteNode}}}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a30a4a270872f3443004f1d873b96c2de}{RemoteNode}}(\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{LocalNode}}*\ localNode,\ std::shared\_ptr<Connection>\ connection);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a584f8314f11c1d2c9d979581d718e9b1}{\string~RemoteNode}}();}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00052\ \ \ \ \ std::shared\_ptr<Connection>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a036f5322572c87ed5876505a700c3a93}{GetConnection}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00058\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEndPoint}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ac72d0bc7106295eae165ad02b3c5d908}{GetRemoteEndPoint}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEndPoint}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a08351342cd2b5406da4e0d3fd1a76d09}{GetLocalEndPoint}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00070\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ab6f35269328ca0a70a80ff59ae66ecbc}{GetVersion}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ad22a4f6ecc4fd23acc5e8ada0ed34f6e}{GetUserAgent}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<NodeCapability>\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a42704f4b8cc21250f3166659d4e67e6e}{GetCapabilities}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{virtual}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a729b40856d14585eb75f23ee76632cc8}{GetLastBlockIndex}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a6245444a7151bc867f35bdd01f13d720}{IsConnected}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_aa2f23f1eae925773f7d4180fed01f2b5}{IsHandshaked}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a8d2e059ddc49af68e501750f33264f2b}{Disconnect}}();}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a57ce01b12cac829366b308b5f9b6114a}{Send}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message,\ \textcolor{keywordtype}{bool}\ enableCompression\ =\ \textcolor{keyword}{true});}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ad8fc10229290e3d7df7c83ae3343d074}{SendVersion}}();}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a2c194c7c253f3e18f87de0292fc73e4d}{SendVerack}}();}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a6a84652ae3925ff14a4e9cdc5b385f3f}{SendPing}}();}
+\DoxyCodeLine{00132\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a0ba6f31174a3cd35b31ba4637b39a98c}{SendPong}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{payloads::PingPayload}}\&\ payload);}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a771239425494016879dbf6ea3b70dad8}{SendGetAddr}}();}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a1e82d1bbd5d391c27a6f91d7b7a2b323}{SendAddr}}(\textcolor{keyword}{const}\ std::vector<payloads::NetworkAddressWithTime>\&\ addresses);}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_afd585de516bb0c656f782978c1cb014e}{SendInv}}(\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a16679b1d56245299fcef623d2997dddc}{InventoryType}}\ type,\ \textcolor{keyword}{const}\ std::vector<io::UInt256>\&\ hashes);}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_adeef46ab53ba9b9f8f8677617031c779}{SendGetData}}(\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a16679b1d56245299fcef623d2997dddc}{InventoryType}}\ type,\ \textcolor{keyword}{const}\ std::vector<io::UInt256>\&\ hashes);}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a46e5d64e382315c2d74a961efa34c754}{SendGetBlocks}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hashStart,\ int16\_t\ count\ =\ -\/1);}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a0d23d9930ab2932eb5457ec531bc4063}{SendGetBlockByIndex}}(uint32\_t\ indexStart,\ uint16\_t\ count\ =\ 500);}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a3d0f76331d395657f92c8e406d0571e1}{SendGetHeaders}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hashStart,\ int16\_t\ count\ =\ -\/1);}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_aaf05b5c36df0e009fb0dad22cdff6f6f}{SendHeaders}}(\textcolor{keyword}{const}\ std::vector<std::shared\_ptr<ledger::BlockHeader>>\&\ headers);}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00204\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a6b28c92b247748986c659bf7fd8236e8}{SendMempool}}();}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00207\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{LocalNode}}*\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a9343f1c9a781ba8085ef321149d2c1e6}{localNode\_}};}
+\DoxyCodeLine{00208\ \ \ \ \ std::shared\_ptr<Connection>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a1ec95755bd015e7b1d2a928c34650c4b}{connection\_}};}
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ad513460f0307708c4570dbbedbbde702}{handshaked\_}};}
+\DoxyCodeLine{00210\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_af6a00f05ce4d85c82dff0e58c6b75e12}{version\_}};}
+\DoxyCodeLine{00211\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a4be10fdc955404645b32875f54c3729c}{userAgent\_}};}
+\DoxyCodeLine{00212\ \ \ \ \ std::vector<NodeCapability>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a9c060380af715fd2c309177cb944cfa0}{capabilities\_}};}
+\DoxyCodeLine{00213\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a81cb886ae067dd701a6b59a8ed841af3}{lastBlockIndex\_}};}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_af3fba5b51f0d97d07c256b5dbfc1f63c}{OnMessageReceived}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ac7b707f0fdb4356ab73bf2f74a652247}{OnDisconnected}}();}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a74b522da67c84638a72cb949e45d7498}{ProcessVersionMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00219\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_aba5f3f03bf76cbc86cc5ebb2a3cc1996}{ProcessVerackMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a280aa1a74baf51127d387c466861d52d}{ProcessPingMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a2c3857f1cf86a62f9e576ff5ee799599}{ProcessPongMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a74ce48da575ec34be123c8e18d4221ad}{ProcessAddrMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a2943e79b14f52d6f5e1b308800a697fc}{ProcessInvMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ad5c31c36ce7157c7bda00eaa7be3e40c}{ProcessGetDataMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a42d612319d243f24ee55d53a0d8d6d4d}{ProcessGetBlocksMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00226\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_adce3bdbedf1477755809391b6a1f50f0}{ProcessGetBlockByIndexMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00227\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ac5745df7b23ffa073204f5b3835d08ab}{ProcessGetHeadersMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a3d1fa906aef0a4be1441e85520ba51fc}{ProcessHeadersMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00229\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a2a1633bc7e0b225c0cf71140141c1c38}{ProcessMempoolMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_addff757023c74afc78d94058a6d130d5}{ProcessFilterAddMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00231\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a15155752e25803e30dce51724ac19c03}{ProcessFilterClearMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00232\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a734b07b45fe86cf8203928b129279815}{ProcessFilterLoadMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00233\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a005f9ce7118c9f39ca83f0d304701094}{ProcessGetAddrMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00234\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_aa16d198542064ecc3650a2b57fe28381}{ProcessRejectMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a1f18bed1a7ee5d131b182f876979b020}{ProcessNotFoundMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00236\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a7a96f1180a9a06b82ffa0588c386ca88}{ProcessTransactionMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ad0ab7900381bfd0b1de218979ae22fe7}{ProcessBlockMessage}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}}\&\ message);}
+\DoxyCodeLine{00238\ \};}
+\DoxyCodeLine{00239\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p}}
+
+\end{DoxyCode}

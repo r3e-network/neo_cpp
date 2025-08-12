@@ -1,0 +1,68 @@
+\doxysection{task\+\_\+manager.\+h}
+\hypertarget{task__manager_8h_source}{}\label{task__manager_8h_source}\index{include/neo/network/p2p/task\_manager.h@{include/neo/network/p2p/task\_manager.h}}
+\mbox{\hyperlink{task__manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{blockchain_8h}{neo/ledger/blockchain.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{mempool_8h}{neo/ledger/mempool.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <condition\_variable>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p}{neo::network::p2p}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a421e4b5d740d575da5fdba3d4bb8becf}{TaskManager}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a421e4b5d740d575da5fdba3d4bb8becf}{TaskManager}}(std::shared\_ptr<ledger::Blockchain>\ blockchain,\ std::shared\_ptr<ledger::MemoryPool>\ memPool);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_aee00699a1642de7fcd9e9ba8d1548c5a}{\string~TaskManager}}();}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a357cf93bcbe2b86104b3f92665d4dbc1}{Start}}();}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a40249eda284b4f07bc7fe1b577d18147}{Stop}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a2261cb8cb6c63dad96b63431f995253c}{IsRunning}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a5e4152ca0319155cbc9ebd7ebd7b6cfc}{AddBlockTask}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash);}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a19a0610972281a264aff6c7eb57c48e9}{AddTransactionTask}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00070\ \ \ \ \ std::vector<io::UInt256>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_abaea481c4575596b1abe9d4fc4b8ff78}{GetBlockTasks}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00076\ \ \ \ \ std::vector<io::UInt256>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a7dd409d6cdf025acedfd79d96fc81bc3}{GetTransactionTasks}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_ac916ba3e51dc7e436ff3ab0d071b7e13}{RemoveBlockTask}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a3c2475df371eecdf03a5628b8b72960b}{RemoveTransactionTask}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash);}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00093\ \ \ \ \ std::shared\_ptr<ledger::Blockchain>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a8cbb9cb7a96d4bca0a1f44f51c376075}{blockchain\_}};}
+\DoxyCodeLine{00094\ \ \ \ \ std::shared\_ptr<ledger::MemoryPool>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a4ca5dc9b2dde718490de2dbfd34f6a70}{memPool\_}};}
+\DoxyCodeLine{00095\ \ \ \ \ std::unordered\_map<io::UInt256,\ std::chrono::system\_clock::time\_point>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a0ee209b316c04b59f4762050f2cbca3b}{blockTasks\_}};}
+\DoxyCodeLine{00096\ \ \ \ \ std::unordered\_map<io::UInt256,\ std::chrono::system\_clock::time\_point>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a04d57352bd26a151febd1ea1ec0df7b2}{transactionTasks\_}};}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a835c1769d2091188a161253d9eb7bc12}{tasksMutex\_}};}
+\DoxyCodeLine{00098\ \ \ \ \ std::atomic<bool>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a07a9806afe06029e4f151f3d30912e00}{running\_}};}
+\DoxyCodeLine{00099\ \ \ \ \ std::thread\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a771999b445feb45f5498dcfb51dad87c}{taskThread\_}};}
+\DoxyCodeLine{00100\ \ \ \ \ std::condition\_variable\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_aca993a02801b1818e5a6b2b71fcab418}{taskCondition\_}};}
+\DoxyCodeLine{00101\ \ \ \ \ std::mutex\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a65b455c4e7e04376bddae8264e89b73c}{taskMutex\_}};}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_a301c95ed541f7192a299246696cc718e}{ProcessTasks}}();}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_ac2023e9a1bce5ce603df8e883b756539}{ProcessBlockTasks}}();}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00116\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_aa63358cb65e5ec4cccdd84bb5b6fdd39}{ProcessTransactionTasks}}();}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_task_manager_aff3c0106795c57bcb1d8408ddbf2b7d0}{CleanupExpiredTasks}}();}
+\DoxyCodeLine{00122\ \};}
+\DoxyCodeLine{00123\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p}}
+
+\end{DoxyCode}

@@ -1,0 +1,175 @@
+\doxysection{configuration\+\_\+manager.\+h}
+\hypertarget{configuration__manager_8h_source}{}\label{configuration__manager_8h_source}\index{include/neo/config/configuration\_manager.h@{include/neo/config/configuration\_manager.h}}
+\mbox{\hyperlink{configuration__manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{core_2logging_8h}{neo/core/logging.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <neo/io/json/jobject.h>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1config}{neo::config}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source}{IConfigurationSource}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_a83d167353ac4aedcc27eeefc024cf081}{\string~IConfigurationSource}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_af6c30f50cc5bbbfce633ff5f07eb731e}{Load}}()\ =\ 0;}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_adc91f20c043dff2f651f581c8c60b9d2}{Get}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_adf411f181e5ad17760d2d91a5c3d80f5}{Contains}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{virtual}\ json::JObject\ \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_a8faf3e0abfa77ccbdd0aa19a6531641c}{GetSection}}(\textcolor{keyword}{const}\ std::string\&\ section)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{virtual}\ std::string\ \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_a65a018b6e12e5ee334b2ad5d317a6ef8}{GetName}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_aec866b5735ecabacc566e2d07bbbe1bf}{GetPriority}}()\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00028\ \};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a4471b1338a1d667b493a736999d8ff40}{JsonFileConfigSource}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source}{IConfigurationSource}}}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00036\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a421dc532166abe3852910494e3ad31ad}{filepath\_}};}
+\DoxyCodeLine{00037\ \ \ \ \ json::JObject\ \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a63017cc823cb2be432ca87ab454b1459}{config\_}};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_ada10b28c2cbe060d1b69d4be1952db42}{priority\_}};}
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a6337b44ed0160635619580e7fa62bb0b}{mutex\_}};}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a4471b1338a1d667b493a736999d8ff40}{JsonFileConfigSource}}(\textcolor{keyword}{const}\ std::string\&\ filepath,\ \textcolor{keywordtype}{int}\ priority\ =\ 0);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_aa0c0858b48a04449905d384903673f72}{Load}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00045\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a94f9731b47f632f43ba81cfb86c54c12}{Get}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a8529a06a0001f0e8fdfde3e7f606e470}{Contains}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00047\ \ \ \ \ json::JObject\ \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a8e6782473f81906cb237dcba14fff7a3}{GetSection}}(\textcolor{keyword}{const}\ std::string\&\ section)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00048\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a06e2a70cbb53bc148e400876df5d264d}{GetName}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}JsonFile:"{}}\ +\ \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a421dc532166abe3852910494e3ad31ad}{filepath\_}};\ \}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_aa5f20aeecab8bd832bcfcc761b419124}{GetPriority}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_ada10b28c2cbe060d1b69d4be1952db42}{priority\_}};\ \}}
+\DoxyCodeLine{00050\ \};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_ab322f4a24ff91a9188a93047d57a079f}{EnvironmentConfigSource}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source}{IConfigurationSource}}}
+\DoxyCodeLine{00056\ \{}
+\DoxyCodeLine{00057\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00058\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_a63c3abe625da3f784593548a173e890d}{prefix\_}};}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{mutable}\ std::unordered\_map<std::string,\ std::string>\ \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_af51b94fe784206b1564bc1a582bee475}{cache\_}};}
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_a9420f35a0dfdcd92151b2112dfa18d02}{priority\_}};}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_a2123ab679fb85f49a4d037f4fbeb066e}{mutex\_}};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00064\ \ \ \ \ \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_ab322f4a24ff91a9188a93047d57a079f}{EnvironmentConfigSource}}(\textcolor{keyword}{const}\ std::string\&\ prefix\ =\ \textcolor{stringliteral}{"{}NEO\_"{}},\ \textcolor{keywordtype}{int}\ priority\ =\ 10);}
+\DoxyCodeLine{00065\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_a778b3bc97e6d2ccaf0602dd1b92f4a7b}{Load}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00067\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_a6e8703317776978328a0bc35d99dc68e}{Get}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_afb0efd49b17f419d93db7067a7e9993e}{Contains}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00069\ \ \ \ \ json::JObject\ \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_acd8e5f0c0bd576c5d0bc6dbfc3317021}{GetSection}}(\textcolor{keyword}{const}\ std::string\&\ section)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00070\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_a1f1f24e8c67ff34d81f0ec05f76e2d34}{GetName}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}Environment"{}};\ \}}
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_a32e68b1e15c992f859effd6cfeddad7a}{GetPriority}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_environment_config_source_a9420f35a0dfdcd92151b2112dfa18d02}{priority\_}};\ \}}
+\DoxyCodeLine{00072\ \};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00077\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1config_1_1_command_line_config_source_af85329776c5d8448259567cb733bbda4}{CommandLineConfigSource}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source}{IConfigurationSource}}}
+\DoxyCodeLine{00078\ \{}
+\DoxyCodeLine{00079\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00080\ \ \ \ \ std::unordered\_map<std::string,\ std::string>\ \mbox{\hyperlink{classneo_1_1config_1_1_command_line_config_source_abd4f26a34d7314ce0ef48b53963dc735}{args\_}};}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1config_1_1_command_line_config_source_abf9fea4ac02b784b4fa65a561f9b9cb6}{priority\_}};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00083\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00084\ \ \ \ \ \mbox{\hyperlink{classneo_1_1config_1_1_command_line_config_source_af85329776c5d8448259567cb733bbda4}{CommandLineConfigSource}}(\textcolor{keywordtype}{int}\ argc,\ \textcolor{keywordtype}{char}*\ argv[],\ \textcolor{keywordtype}{int}\ priority\ =\ 20);}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_command_line_config_source_a4ca10d8845f93fd0f52ec8d7104f375e}{Load}}()\textcolor{keyword}{\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};\ \}}
+\DoxyCodeLine{00087\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1config_1_1_command_line_config_source_a547bbb57510347c49b07a9037da932c8}{Get}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_command_line_config_source_ab7022f7b7027613d01629622de26c1af}{Contains}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00089\ \ \ \ \ json::JObject\ \mbox{\hyperlink{classneo_1_1config_1_1_command_line_config_source_a7b2a93f3f2641ab0dc961aa6b288fc78}{GetSection}}(\textcolor{keyword}{const}\ std::string\&\ section)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00090\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1config_1_1_command_line_config_source_a375d82198e8bce929cf703c2637c6ccb}{GetName}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}CommandLine"{}};\ \}}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1config_1_1_command_line_config_source_a13189d8b6bd1a02b415749e048bda491}{GetPriority}}()\textcolor{keyword}{\ const\ override\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1config_1_1_command_line_config_source_abf9fea4ac02b784b4fa65a561f9b9cb6}{priority\_}};\ \}}
+\DoxyCodeLine{00092\ \};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00097\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceneo_1_1config_a6ee4d76b6cf8f4d1270e434ec44272cd}{ConfigChangeCallback}}\ =}
+\DoxyCodeLine{00098\ \ \ \ \ std::function<void(\textcolor{keyword}{const}\ std::string\&\ key,\ \textcolor{keyword}{const}\ std::string\&\ old\_value,\ \textcolor{keyword}{const}\ std::string\&\ new\_value)>;}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00106\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager}{ConfigurationManager}}}
+\DoxyCodeLine{00107\ \{}
+\DoxyCodeLine{00108\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00109\ \ \ \ \ std::vector<std::shared\_ptr<IConfigurationSource>>\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_aa3082dae98903e3bb31afd17049e3148}{sources\_}};}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a4127308810a8e47db04a138eaa635ce0}{mutex\_}};}
+\DoxyCodeLine{00111\ \ \ \ \ std::shared\_ptr<core::Logger>\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ac951bd9212e389fe3455cd6fe78e83da}{logger\_}};}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{comment}{//\ Cache\ for\ resolved\ values}}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{mutable}\ std::unordered\_map<std::string,\ std::string>\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ad6746366e3a302adcd3ab2b9404f3644}{cache\_}};}
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keyword}{mutable}\ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_af2790f71b1b9a61626f92e3d2811a284}{cache\_expiry\_}};}
+\DoxyCodeLine{00116\ \ \ \ \ std::chrono::seconds\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ac283679cadd5fcf6e234b73a4ec04b52}{cache\_duration\_}}\{60\};}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{comment}{//\ Change\ notifications}}
+\DoxyCodeLine{00119\ \ \ \ \ std::unordered\_map<std::string,\ std::vector<ConfigChangeCallback>>\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a7af3f36cd03b297db74bda3e5621f9ce}{callbacks\_}};}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{comment}{//\ Singleton}}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<ConfigurationManager>\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_abfb4e69fd2b3db7672deadb8a8d886e9}{instance\_}};}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keyword}{static}\ std::mutex\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a9f93aa56f57bd9f0a858523c430662e8}{instance\_mutex\_}};}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a0b74e69c1fe87951a055891a8fe31bee}{ConfigurationManager}}();}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<ConfigurationManager>\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a45fc069fe55d8ca28af02665fc6e1bbf}{GetInstance}}();}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a80cf75ce9e28f957fc78a3cf66ec408d}{AddSource}}(std::shared\_ptr<IConfigurationSource>\ source);}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a07869ba4bc953aa01b8ca4354bbb356d}{RemoveSource}}(\textcolor{keyword}{const}\ std::string\&\ name);}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a2f951aecaa113a6aa6e3c0ecdbf64c19}{Reload}}();}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00154\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a2acb6dfe4ed8c11f4ec61780e3f47625}{Get}}(\textcolor{keyword}{const}\ std::string\&\ key,\ \textcolor{keyword}{const}\ std::string\&\ default\_value\ =\ \textcolor{stringliteral}{"{}"{}})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a3305226d425e4efadf211682aeb0bc8b}{GetInt}}(\textcolor{keyword}{const}\ std::string\&\ key,\ \textcolor{keywordtype}{int}\ default\_value\ =\ 0)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a3b23d2e17016587834a64709628ca22e}{GetBool}}(\textcolor{keyword}{const}\ std::string\&\ key,\ \textcolor{keywordtype}{bool}\ default\_value\ =\ \textcolor{keyword}{false})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a7b6e78b1283dd6512823332b99e926ec}{GetDouble}}(\textcolor{keyword}{const}\ std::string\&\ key,\ \textcolor{keywordtype}{double}\ default\_value\ =\ 0.0)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00174\ \ \ \ \ json::JObject\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a17235e1e26d2a3a597ea82f5471ad9df}{GetSection}}(\textcolor{keyword}{const}\ std::string\&\ section)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00179\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ac42029f93946272fd42fab1e09b665dc}{Contains}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a3d31670cb4ccf3bb4b1a9d7a27b41e73}{RegisterChangeCallback}}(\textcolor{keyword}{const}\ std::string\&\ key,\ \mbox{\hyperlink{namespaceneo_1_1config_a6ee4d76b6cf8f4d1270e434ec44272cd}{ConfigChangeCallback}}\ callback);}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00193\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ac762fb6ad38196df46693c7dea7b765e}{Validate}}(\textcolor{keyword}{const}\ json::JObject\&\ schema)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00199\ \ \ \ \ json::JObject\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a187f1fd54ff6daa11771c94ac40de9e0}{Export}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00205\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ac6832055295ddb9f793f9f96162c44c2}{SetCacheDuration}}(std::chrono::seconds\ duration)\ \{\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ac283679cadd5fcf6e234b73a4ec04b52}{cache\_duration\_}}\ =\ duration;\ \}}
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00211\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a1c718d2a9a679b0f4812bac29cf5d962}{ClearCache}}();}
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00216\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_a17ff85402da164ae32cbf21271ae884a}{IsCacheExpired}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00221\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ade2ae78acffbc220b206e77436e91148}{NotifyChange}}(\textcolor{keyword}{const}\ std::string\&\ key,\ \textcolor{keyword}{const}\ std::string\&\ old\_value,\ \textcolor{keyword}{const}\ std::string\&\ new\_value);}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00226\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1config_1_1_configuration_manager_ae23b88412bc22144177a3db750a28926}{ResolveValue}}(\textcolor{keyword}{const}\ std::string\&\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00227\ \};}
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00232\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1config_1_1_config_validator}{ConfigValidator}}}
+\DoxyCodeLine{00233\ \{}
+\DoxyCodeLine{00234\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1config_1_1_config_validator_1_1_rule}{Rule}}}
+\DoxyCodeLine{00236\ \ \ \ \ \{}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1config_1_1_config_validator_1_1_rule_abc0920a65c0aa0cae3926965edf0e6c5}{key}};}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ std::function<bool(\textcolor{keyword}{const}\ std::string\&)>\ \mbox{\hyperlink{structneo_1_1config_1_1_config_validator_1_1_rule_a82e0790c9738614579c1c101f5adb082}{validator}};}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1config_1_1_config_validator_1_1_rule_af54d18dc69640323ace4dcf8b2e77031}{error\_message}};}
+\DoxyCodeLine{00240\ \ \ \ \ \};}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00242\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_config_validator_a393ba889a6fe5a9e697236146f5d9dc5}{ValidatePort}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00243\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_config_validator_a1f055f74c1adc3e9ac3c2c15bb575bf0}{ValidateIPAddress}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_config_validator_ad4383a89d9dd12176cf8de0700cac670}{ValidatePath}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_config_validator_aaa8ae76695c9e76e85d53be5a49fc333}{ValidatePositiveInteger}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00246\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1config_1_1_config_validator_a09695db34c0318704d26b915da9a84ce}{ValidatePercentage}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00248\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<Rule>\ \mbox{\hyperlink{classneo_1_1config_1_1_config_validator_a04826cd9e0507d82d6dcf8e1da7bb0c0}{GetDefaultRules}}();}
+\DoxyCodeLine{00249\ \};}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00251\ \textcolor{comment}{//\ Convenience\ macros}}
+\DoxyCodeLine{00252\ \textcolor{preprocessor}{\#define\ CONFIG\_GET(key)\ neo::config::ConfigurationManager::GetInstance()-\/>Get(key)}}
+\DoxyCodeLine{00253\ \textcolor{preprocessor}{\#define\ CONFIG\_GET\_INT(key)\ neo::config::ConfigurationManager::GetInstance()-\/>GetInt(key)}}
+\DoxyCodeLine{00254\ \textcolor{preprocessor}{\#define\ CONFIG\_GET\_BOOL(key)\ neo::config::ConfigurationManager::GetInstance()-\/>GetBool(key)}}
+\DoxyCodeLine{00255\ \textcolor{preprocessor}{\#define\ CONFIG\_GET\_DOUBLE(key)\ neo::config::ConfigurationManager::GetInstance()-\/>GetDouble(key)}}
+\DoxyCodeLine{00256\ \}\ \ \textcolor{comment}{//\ namespace\ neo::config}}
+
+\end{DoxyCode}

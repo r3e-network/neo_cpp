@@ -1,0 +1,214 @@
+\doxysection{neo\+::network\+::Tcp\+Client Class Reference}
+\hypertarget{classneo_1_1network_1_1_tcp_client}{}\label{classneo_1_1network_1_1_tcp_client}\index{neo::network::TcpClient@{neo::network::TcpClient}}
+
+
+Represents a TCP client.  
+
+
+
+
+{\ttfamily \#include $<$tcp\+\_\+client.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_tcp_client_ae613aef1101a4fea5d0c89744921c3d9}{Tcp\+Client}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1_tcp_client}{Tcp\+Client}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_tcp_client_a653f7ca690585d6194fc75ed250d9083}{Tcp\+Client}} (boost\+::asio\+::io\+\_\+context \&io\+Context)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1_tcp_client}{Tcp\+Client} with an existing io\+\_\+context. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_tcp_client_a1bb2d1d1185422d0d76e3fe15716f1bb}{\texorpdfstring{$\sim$}{\string~}\+Tcp\+Client}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection}{Tcp\+Connection}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_client_acbb5a8668921def189f3b68bcaa41900}{Connect}} (const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}} \&endpoint, uint32\+\_\+t timeout=10000)
+\begin{DoxyCompactList}\small\item\em Connects to a server. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_tcp_client_ab3add17d6b569403af8338cabc622e64}{Connect\+Async}} (const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}} \&endpoint, std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection}{Tcp\+Connection}} $>$, const std\+::error\+\_\+code \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Connects to a server asynchronously. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_tcp_client_a6accbf93f18b60ea41dc7491f0278f4e}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stops the client. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_tcp_client_a23de74a1135a14710f08677a8fac8c10}{Handle\+Connection\+Closed}} (const std\+::string \&endpoint)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ boost\+::asio\+::io\+\_\+context $>$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_client_aa6e9897339c511e88e3a7142cbbb2576}{io\+Context\+\_\+}}
+\item 
+boost\+::asio\+::io\+\_\+context \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1network_1_1_tcp_client_a031e12851ab437c6052168db6c98b530}{io\+Context\+Ptr\+\_\+}}
+\item 
+std\+::vector$<$ std\+::thread $>$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_client_a016c401a5d58a87f851e4bfb83666d74}{io\+Threads\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ boost\+::asio\+::executor\+\_\+work\+\_\+guard$<$ boost\+::asio\+::io\+\_\+context\+::executor\+\_\+type $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_client_af272b31461503846dd77b4612b8c95a6}{work\+Guard\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_client_a87e143eaeb51c5ec3230cd5d9b8f4910}{running\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1network_1_1_tcp_client_a601077d0f8e4159bc0bd12f050194ac1}{connections\+Mutex\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection}{Tcp\+Connection}} $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_client_a2f9ed329a249496bfd07de48e104566c}{connections\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a TCP client. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1_tcp_client_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1_tcp_client_ae613aef1101a4fea5d0c89744921c3d9}\index{neo::network::TcpClient@{neo::network::TcpClient}!TcpClient@{TcpClient}}
+\index{TcpClient@{TcpClient}!neo::network::TcpClient@{neo::network::TcpClient}}
+\doxysubsubsection{\texorpdfstring{TcpClient()}{TcpClient()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_client_ae613aef1101a4fea5d0c89744921c3d9} 
+neo\+::network\+::\+Tcp\+Client\+::\+Tcp\+Client (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1_tcp_client}{Tcp\+Client}. 
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1network_1_1_tcp_client_a653f7ca690585d6194fc75ed250d9083}\index{neo::network::TcpClient@{neo::network::TcpClient}!TcpClient@{TcpClient}}
+\index{TcpClient@{TcpClient}!neo::network::TcpClient@{neo::network::TcpClient}}
+\doxysubsubsection{\texorpdfstring{TcpClient()}{TcpClient()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_client_a653f7ca690585d6194fc75ed250d9083} 
+neo\+::network\+::\+Tcp\+Client\+::\+Tcp\+Client (\begin{DoxyParamCaption}\item[{boost\+::asio\+::io\+\_\+context \&}]{io\+Context}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1_tcp_client}{Tcp\+Client} with an existing io\+\_\+context. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em io\+Context} & The IO context to use. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_tcp_client_a1bb2d1d1185422d0d76e3fe15716f1bb}\index{neo::network::TcpClient@{neo::network::TcpClient}!````~TcpClient@{\texorpdfstring{$\sim$}{\string~}TcpClient}}
+\index{````~TcpClient@{\texorpdfstring{$\sim$}{\string~}TcpClient}!neo::network::TcpClient@{neo::network::TcpClient}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TcpClient()}{\string~TcpClient()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_client_a1bb2d1d1185422d0d76e3fe15716f1bb} 
+neo\+::network\+::\+Tcp\+Client\+::\texorpdfstring{$\sim$}{\string~}\+Tcp\+Client (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1_tcp_client_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1_tcp_client_acbb5a8668921def189f3b68bcaa41900}\index{neo::network::TcpClient@{neo::network::TcpClient}!Connect@{Connect}}
+\index{Connect@{Connect}!neo::network::TcpClient@{neo::network::TcpClient}}
+\doxysubsubsection{\texorpdfstring{Connect()}{Connect()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_client_acbb5a8668921def189f3b68bcaa41900} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection}{Tcp\+Connection}} $>$ neo\+::network\+::\+Tcp\+Client\+::\+Connect (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}} \&}]{endpoint}{, }\item[{uint32\+\_\+t}]{timeout}{ = {\ttfamily 10000}}\end{DoxyParamCaption})}
+
+
+
+Connects to a server. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & The endpoint to connect to. \\
+\hline
+{\em timeout} & The timeout in milliseconds (0 for no timeout). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The connection. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1_tcp_client_ab3add17d6b569403af8338cabc622e64}\index{neo::network::TcpClient@{neo::network::TcpClient}!ConnectAsync@{ConnectAsync}}
+\index{ConnectAsync@{ConnectAsync}!neo::network::TcpClient@{neo::network::TcpClient}}
+\doxysubsubsection{\texorpdfstring{ConnectAsync()}{ConnectAsync()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_client_ab3add17d6b569403af8338cabc622e64} 
+void neo\+::network\+::\+Tcp\+Client\+::\+Connect\+Async (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_end_point}{IPEnd\+Point}} \&}]{endpoint}{, }\item[{std\+::function$<$ void(std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection}{Tcp\+Connection}} $>$, const std\+::error\+\_\+code \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Connects to a server asynchronously. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & The endpoint to connect to. \\
+\hline
+{\em callback} & The callback to invoke when the connection completes. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1_tcp_client_a23de74a1135a14710f08677a8fac8c10}\index{neo::network::TcpClient@{neo::network::TcpClient}!HandleConnectionClosed@{HandleConnectionClosed}}
+\index{HandleConnectionClosed@{HandleConnectionClosed}!neo::network::TcpClient@{neo::network::TcpClient}}
+\doxysubsubsection{\texorpdfstring{HandleConnectionClosed()}{HandleConnectionClosed()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_client_a23de74a1135a14710f08677a8fac8c10} 
+void neo\+::network\+::\+Tcp\+Client\+::\+Handle\+Connection\+Closed (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{endpoint}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1_tcp_client_a6accbf93f18b60ea41dc7491f0278f4e}\index{neo::network::TcpClient@{neo::network::TcpClient}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::network::TcpClient@{neo::network::TcpClient}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_client_a6accbf93f18b60ea41dc7491f0278f4e} 
+void neo\+::network\+::\+Tcp\+Client\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stops the client. 
+
+Here is the call graph for this function\+:
+% FIG 5
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1_tcp_client_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1_tcp_client_a2f9ed329a249496bfd07de48e104566c}\index{neo::network::TcpClient@{neo::network::TcpClient}!connections\_@{connections\_}}
+\index{connections\_@{connections\_}!neo::network::TcpClient@{neo::network::TcpClient}}
+\doxysubsubsection{\texorpdfstring{connections\_}{connections\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_client_a2f9ed329a249496bfd07de48e104566c} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1_tcp_connection}{Tcp\+Connection}}$>$ $>$ neo\+::network\+::\+Tcp\+Client\+::connections\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_tcp_client_a601077d0f8e4159bc0bd12f050194ac1}\index{neo::network::TcpClient@{neo::network::TcpClient}!connectionsMutex\_@{connectionsMutex\_}}
+\index{connectionsMutex\_@{connectionsMutex\_}!neo::network::TcpClient@{neo::network::TcpClient}}
+\doxysubsubsection{\texorpdfstring{connectionsMutex\_}{connectionsMutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_client_a601077d0f8e4159bc0bd12f050194ac1} 
+std\+::mutex neo\+::network\+::\+Tcp\+Client\+::connections\+Mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_tcp_client_aa6e9897339c511e88e3a7142cbbb2576}\index{neo::network::TcpClient@{neo::network::TcpClient}!ioContext\_@{ioContext\_}}
+\index{ioContext\_@{ioContext\_}!neo::network::TcpClient@{neo::network::TcpClient}}
+\doxysubsubsection{\texorpdfstring{ioContext\_}{ioContext\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_client_aa6e9897339c511e88e3a7142cbbb2576} 
+std\+::unique\+\_\+ptr$<$boost\+::asio\+::io\+\_\+context$>$ neo\+::network\+::\+Tcp\+Client\+::io\+Context\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_tcp_client_a031e12851ab437c6052168db6c98b530}\index{neo::network::TcpClient@{neo::network::TcpClient}!ioContextPtr\_@{ioContextPtr\_}}
+\index{ioContextPtr\_@{ioContextPtr\_}!neo::network::TcpClient@{neo::network::TcpClient}}
+\doxysubsubsection{\texorpdfstring{ioContextPtr\_}{ioContextPtr\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_client_a031e12851ab437c6052168db6c98b530} 
+boost\+::asio\+::io\+\_\+context\texorpdfstring{$\ast$}{*} neo\+::network\+::\+Tcp\+Client\+::io\+Context\+Ptr\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_tcp_client_a016c401a5d58a87f851e4bfb83666d74}\index{neo::network::TcpClient@{neo::network::TcpClient}!ioThreads\_@{ioThreads\_}}
+\index{ioThreads\_@{ioThreads\_}!neo::network::TcpClient@{neo::network::TcpClient}}
+\doxysubsubsection{\texorpdfstring{ioThreads\_}{ioThreads\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_client_a016c401a5d58a87f851e4bfb83666d74} 
+std\+::vector$<$std\+::thread$>$ neo\+::network\+::\+Tcp\+Client\+::io\+Threads\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_tcp_client_a87e143eaeb51c5ec3230cd5d9b8f4910}\index{neo::network::TcpClient@{neo::network::TcpClient}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::network::TcpClient@{neo::network::TcpClient}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_client_a87e143eaeb51c5ec3230cd5d9b8f4910} 
+std\+::atomic$<$bool$>$ neo\+::network\+::\+Tcp\+Client\+::running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_tcp_client_af272b31461503846dd77b4612b8c95a6}\index{neo::network::TcpClient@{neo::network::TcpClient}!workGuard\_@{workGuard\_}}
+\index{workGuard\_@{workGuard\_}!neo::network::TcpClient@{neo::network::TcpClient}}
+\doxysubsubsection{\texorpdfstring{workGuard\_}{workGuard\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_tcp_client_af272b31461503846dd77b4612b8c95a6} 
+std\+::unique\+\_\+ptr$<$boost\+::asio\+::executor\+\_\+work\+\_\+guard$<$boost\+::asio\+::io\+\_\+context\+::executor\+\_\+type$>$ $>$ neo\+::network\+::\+Tcp\+Client\+::work\+Guard\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/\mbox{\hyperlink{tcp__client_8h}{tcp\+\_\+client.\+h}}\item 
+src/network/\mbox{\hyperlink{tcp__client_8cpp}{tcp\+\_\+client.\+cpp}}\end{DoxyCompactItemize}

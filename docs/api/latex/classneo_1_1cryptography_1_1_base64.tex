@@ -1,0 +1,126 @@
+\doxysection{neo\+::cryptography\+::Base64 Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1_base64}{}\label{classneo_1_1cryptography_1_1_base64}\index{neo::cryptography::Base64@{neo::cryptography::Base64}}
+
+
+Provides \doxylink{classneo_1_1cryptography_1_1_base64}{Base64} encoding and decoding.  
+
+
+
+
+{\ttfamily \#include $<$base64.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1_base64_a9401ccf738d0fd6a8b8125b395abf392}{Encode}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Encodes data to \doxylink{classneo_1_1cryptography_1_1_base64}{Base64}. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1_base64_a63d49b8fce0e18acb766944de73ceaad}{Encode}} (const std\+::string \&data)
+\begin{DoxyCompactList}\small\item\em Encodes a string to \doxylink{classneo_1_1cryptography_1_1_base64}{Base64}. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_base64_a03e5a1a4dbb4b75c7b89770d2ba3191d}{Decode}} (const std\+::string \&data)
+\begin{DoxyCompactList}\small\item\em Decodes a \doxylink{classneo_1_1cryptography_1_1_base64}{Base64} string to bytes. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1cryptography_1_1_base64_a4562d226b09201e202653e43a4e44f53}{Decode\+To\+String}} (const std\+::string \&data)
+\begin{DoxyCompactList}\small\item\em Decodes a \doxylink{classneo_1_1cryptography_1_1_base64}{Base64} string to a string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides \doxylink{classneo_1_1cryptography_1_1_base64}{Base64} encoding and decoding. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1_base64_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_base64_a03e5a1a4dbb4b75c7b89770d2ba3191d}\index{neo::cryptography::Base64@{neo::cryptography::Base64}!Decode@{Decode}}
+\index{Decode@{Decode}!neo::cryptography::Base64@{neo::cryptography::Base64}}
+\doxysubsubsection{\texorpdfstring{Decode()}{Decode()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base64_a03e5a1a4dbb4b75c7b89770d2ba3191d} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Base64\+::\+Decode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Decodes a \doxylink{classneo_1_1cryptography_1_1_base64}{Base64} string to bytes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The \doxylink{classneo_1_1cryptography_1_1_base64}{Base64} string to decode. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The decoded bytes. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if the string is not valid \doxylink{classneo_1_1cryptography_1_1_base64}{Base64}. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1cryptography_1_1_base64_a4562d226b09201e202653e43a4e44f53}\index{neo::cryptography::Base64@{neo::cryptography::Base64}!DecodeToString@{DecodeToString}}
+\index{DecodeToString@{DecodeToString}!neo::cryptography::Base64@{neo::cryptography::Base64}}
+\doxysubsubsection{\texorpdfstring{DecodeToString()}{DecodeToString()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base64_a4562d226b09201e202653e43a4e44f53} 
+std\+::string neo\+::cryptography\+::\+Base64\+::\+Decode\+To\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Decodes a \doxylink{classneo_1_1cryptography_1_1_base64}{Base64} string to a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The \doxylink{classneo_1_1cryptography_1_1_base64}{Base64} string to decode. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The decoded string. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if the string is not valid \doxylink{classneo_1_1cryptography_1_1_base64}{Base64}. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cryptography_1_1_base64_a9401ccf738d0fd6a8b8125b395abf392}\index{neo::cryptography::Base64@{neo::cryptography::Base64}!Encode@{Encode}}
+\index{Encode@{Encode}!neo::cryptography::Base64@{neo::cryptography::Base64}}
+\doxysubsubsection{\texorpdfstring{Encode()}{Encode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base64_a9401ccf738d0fd6a8b8125b395abf392} 
+std\+::string neo\+::cryptography\+::\+Base64\+::\+Encode (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Encodes data to \doxylink{classneo_1_1cryptography_1_1_base64}{Base64}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to encode. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1cryptography_1_1_base64}{Base64} encoded string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cryptography_1_1_base64_a63d49b8fce0e18acb766944de73ceaad}\index{neo::cryptography::Base64@{neo::cryptography::Base64}!Encode@{Encode}}
+\index{Encode@{Encode}!neo::cryptography::Base64@{neo::cryptography::Base64}}
+\doxysubsubsection{\texorpdfstring{Encode()}{Encode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_base64_a63d49b8fce0e18acb766944de73ceaad} 
+std\+::string neo\+::cryptography\+::\+Base64\+::\+Encode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Encodes a string to \doxylink{classneo_1_1cryptography_1_1_base64}{Base64}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The string to encode. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1cryptography_1_1_base64}{Base64} encoded string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/\mbox{\hyperlink{cryptography_2base64_8h}{base64.\+h}}\item 
+src/cryptography/\mbox{\hyperlink{cryptography_2base64_8cpp}{base64.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,450 @@
+\doxysection{neo\+::smartcontract\+::Contract\+Parameters\+Context Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context}{}\label{classneo_1_1smartcontract_1_1_contract_parameters_context}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+
+
+The context used to add witnesses for IVerifiable.  
+
+
+
+
+{\ttfamily \#include $<$contract\+\_\+parameters\+\_\+context.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::smartcontract\+::Contract\+Parameters\+Context\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_1_1_context_item}{Context\+Item}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a0ef90c8f91944fc5f8edb275d3681dd8}{Is\+Completed}} () const
+\begin{DoxyCompactList}\small\item\em Determines whether all witnesses are ready to be added. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a1201b8279069d58de6bce2f781fe9d97}{Get\+Script\+Hashes}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script hashes to be verified for the IVerifiable. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a91f27074afefb63d5b98c891f209d674}{Contract\+Parameters\+Context}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} \&\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a626501f84c15275b552b995ed7a029e3}{snapshot\+Cache}}, const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_verifiable}{network\+::p2p\+::payloads\+::\+IVerifiable}} \&\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a68ade531b93660d2da7fff9e047e1efb}{verifiable}}, uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a2b417c5a624b8ad9e593b8c573f304ae}{network}})
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \doxylink{classneo_1_1smartcontract_1_1_contract_parameters_context}{Contract\+Parameters\+Context} class. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a875da386bcad55218e04c8f9b82955bc}{Add}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}} \&contract, int index, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&parameter)
+\begin{DoxyCompactList}\small\item\em Adds a parameter to the specified witness script. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_ae57975380293e130d578e7be82c1002c}{Add}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}} \&contract, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ \&parameters)
+\begin{DoxyCompactList}\small\item\em Adds parameters to the specified witness script. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a015b08386ae93c30a426ae29cfacc400}{Add\+Signature}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}} \&contract, const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&pubkey, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&signature)
+\begin{DoxyCompactList}\small\item\em Adds a signature to the specified witness script. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a10bc2977071c09644d074a1b018e6001}{Add\+With\+Script\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash)
+\begin{DoxyCompactList}\small\item\em Try to add a deployed contract to this context. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameter}{Contract\+Parameter}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a688273999616597b529bf86aa8c2eda4}{Get\+Parameter}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash, int index) const
+\begin{DoxyCompactList}\small\item\em Gets the parameter with the specified index from the witness script. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameter}{Contract\+Parameter}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a30ce815b8e494ed1a436f1267c87c92a}{Get\+Parameters}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash) const
+\begin{DoxyCompactList}\small\item\em Gets the parameters from the witness script. \end{DoxyCompactList}\item 
+const std\+::map$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a92098fd7097cef55d695f6f9a55fbd4e}{Get\+Signatures}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash) const
+\begin{DoxyCompactList}\small\item\em Gets the signatures from the witness script. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a06a6986a4ce3d40b1ef8d66992e0eedf}{Get\+Witnesses}} () const
+\begin{DoxyCompactList}\small\item\em Gets the witnesses for the IVerifiable. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a82029be07bc0b7e6295d2b6738528181}{To\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const
+\begin{DoxyCompactList}\small\item\em Converts the context to a JSON object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context}{Contract\+Parameters\+Context}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a689829585affc8aacd26640e2797f494}{From\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader, const \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} \&\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a626501f84c15275b552b995ed7a029e3}{snapshot\+Cache}})
+\begin{DoxyCompactList}\small\item\em Converts the context from a JSON object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_verifiable}{network\+::p2p\+::payloads\+::\+IVerifiable}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a68ade531b93660d2da7fff9e047e1efb}{verifiable}}
+\begin{DoxyCompactList}\small\item\em The IVerifiable to add witnesses. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a626501f84c15275b552b995ed7a029e3}{snapshot\+Cache}}
+\begin{DoxyCompactList}\small\item\em The snapshot used to read data. \end{DoxyCompactList}\item 
+const uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a2b417c5a624b8ad9e593b8c573f304ae}{network}}
+\begin{DoxyCompactList}\small\item\em The magic number of the network. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_1_1_context_item}{Context\+Item}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_ab29edb12f5e63a0c57e7f1c2d5a97083}{Create\+Item}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}} \&contract)
+\begin{DoxyCompactList}\small\item\em Creates a context item for the specified contract. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_aa5d75e9011d529bdc8408ed3a41f5e6f}{Is\+Multi\+Sig\+Contract}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&script, int \&m, int \&n, std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \&public\+Keys) const
+\begin{DoxyCompactList}\small\item\em Checks if the script is a multi-\/sig contract. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a511b260798fc0be9364cb30ed67f7c39}{Create\+Multi\+Sig\+Witness}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}} \&contract) const
+\begin{DoxyCompactList}\small\item\em Creates a multi-\/sig witness for the specified contract. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}}, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_1_1_context_item}{Context\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a77593930d80161710cb72e4e4e9e3ab2}{context\+Items}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_add94ce6e1c5f503b21a2daea4634fd23}{script\+Hashes}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+The context used to add witnesses for IVerifiable. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a91f27074afefb63d5b98c891f209d674}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!ContractParametersContext@{ContractParametersContext}}
+\index{ContractParametersContext@{ContractParametersContext}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{ContractParametersContext()}{ContractParametersContext()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a91f27074afefb63d5b98c891f209d674} 
+neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::\+Contract\+Parameters\+Context (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} \&}]{snapshot\+Cache}{, }\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_verifiable}{network\+::p2p\+::payloads\+::\+IVerifiable}} \&}]{verifiable}{, }\item[{uint32\+\_\+t}]{network}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \doxylink{classneo_1_1smartcontract_1_1_contract_parameters_context}{Contract\+Parameters\+Context} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot\+Cache} & The snapshot used to read data. \\
+\hline
+{\em verifiable} & The IVerifiable to add witnesses. \\
+\hline
+{\em network} & The magic number of the network. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_ae57975380293e130d578e7be82c1002c}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!Add@{Add}}
+\index{Add@{Add}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_ae57975380293e130d578e7be82c1002c} 
+bool neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::\+Add (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}} \&}]{contract}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ \&}]{parameters}{}\end{DoxyParamCaption})}
+
+
+
+Adds parameters to the specified witness script. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em contract} & The contract contains the script. \\
+\hline
+{\em parameters} & The values of the parameters. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the parameters are added successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a875da386bcad55218e04c8f9b82955bc}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!Add@{Add}}
+\index{Add@{Add}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a875da386bcad55218e04c8f9b82955bc} 
+bool neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::\+Add (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}} \&}]{contract}{, }\item[{int}]{index}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{parameter}{}\end{DoxyParamCaption})}
+
+
+
+Adds a parameter to the specified witness script. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em contract} & The contract contains the script. \\
+\hline
+{\em index} & The index of the parameter. \\
+\hline
+{\em parameter} & The value of the parameter. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the parameter is added successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a015b08386ae93c30a426ae29cfacc400}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!AddSignature@{AddSignature}}
+\index{AddSignature@{AddSignature}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{AddSignature()}{AddSignature()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a015b08386ae93c30a426ae29cfacc400} 
+bool neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::\+Add\+Signature (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}} \&}]{contract}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{pubkey}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{signature}{}\end{DoxyParamCaption})}
+
+
+
+Adds a signature to the specified witness script. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em contract} & The contract contains the script. \\
+\hline
+{\em pubkey} & The public key for the signature. \\
+\hline
+{\em signature} & The signature. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the signature is added successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a10bc2977071c09644d074a1b018e6001}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!AddWithScriptHash@{AddWithScriptHash}}
+\index{AddWithScriptHash@{AddWithScriptHash}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{AddWithScriptHash()}{AddWithScriptHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a10bc2977071c09644d074a1b018e6001} 
+bool neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::\+Add\+With\+Script\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{}\end{DoxyParamCaption})}
+
+
+
+Try to add a deployed contract to this context. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The script hash of the contract. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the contract is added successfully, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_ab29edb12f5e63a0c57e7f1c2d5a97083}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!CreateItem@{CreateItem}}
+\index{CreateItem@{CreateItem}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{CreateItem()}{CreateItem()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_ab29edb12f5e63a0c57e7f1c2d5a97083} 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_1_1_context_item}{Contract\+Parameters\+Context\+::\+Context\+Item}} \texorpdfstring{$\ast$}{*} neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::\+Create\+Item (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}} \&}]{contract}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Creates a context item for the specified contract. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em contract} & The contract. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created context item. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a511b260798fc0be9364cb30ed67f7c39}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!CreateMultiSigWitness@{CreateMultiSigWitness}}
+\index{CreateMultiSigWitness@{CreateMultiSigWitness}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{CreateMultiSigWitness()}{CreateMultiSigWitness()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a511b260798fc0be9364cb30ed67f7c39} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} $>$ neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::\+Create\+Multi\+Sig\+Witness (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}} \&}]{contract}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Creates a multi-\/sig witness for the specified contract. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em contract} & The contract. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created witness. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a689829585affc8aacd26640e2797f494}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!FromJson@{FromJson}}
+\index{FromJson@{FromJson}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{FromJson()}{FromJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a689829585affc8aacd26640e2797f494} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context}{Contract\+Parameters\+Context}} $>$ neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::\+From\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{, }\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} \&}]{snapshot\+Cache}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts the context from a JSON object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+{\em snapshot\+Cache} & The snapshot used to read data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The converted context. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a688273999616597b529bf86aa8c2eda4}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!GetParameter@{GetParameter}}
+\index{GetParameter@{GetParameter}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{GetParameter()}{GetParameter()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a688273999616597b529bf86aa8c2eda4} 
+const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameter}{Contract\+Parameter}} \texorpdfstring{$\ast$}{*} neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::\+Get\+Parameter (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{, }\item[{int}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the parameter with the specified index from the witness script. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The hash of the witness script. \\
+\hline
+{\em index} & The specified index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The parameter with the specified index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a30ce815b8e494ed1a436f1267c87c92a}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!GetParameters@{GetParameters}}
+\index{GetParameters@{GetParameters}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{GetParameters()}{GetParameters()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a30ce815b8e494ed1a436f1267c87c92a} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameter}{Contract\+Parameter}} $>$ \texorpdfstring{$\ast$}{*} neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::\+Get\+Parameters (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the parameters from the witness script. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The hash of the witness script. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The parameters from the witness script. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a1201b8279069d58de6bce2f781fe9d97}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!GetScriptHashes@{GetScriptHashes}}
+\index{GetScriptHashes@{GetScriptHashes}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{GetScriptHashes()}{GetScriptHashes()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a1201b8279069d58de6bce2f781fe9d97} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \& neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::\+Get\+Script\+Hashes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the script hashes to be verified for the IVerifiable. 
+
+\begin{DoxyReturn}{Returns}
+The script hashes to be verified. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a92098fd7097cef55d695f6f9a55fbd4e}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!GetSignatures@{GetSignatures}}
+\index{GetSignatures@{GetSignatures}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{GetSignatures()}{GetSignatures()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a92098fd7097cef55d695f6f9a55fbd4e} 
+const std\+::map$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ \texorpdfstring{$\ast$}{*} neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::\+Get\+Signatures (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+Hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the signatures from the witness script. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The hash of the witness script. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The signatures from the witness script. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a06a6986a4ce3d40b1ef8d66992e0eedf}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!GetWitnesses@{GetWitnesses}}
+\index{GetWitnesses@{GetWitnesses}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{GetWitnesses()}{GetWitnesses()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a06a6986a4ce3d40b1ef8d66992e0eedf} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_witness}{ledger\+::\+Witness}} $>$ neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::\+Get\+Witnesses (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the witnesses for the IVerifiable. 
+
+\begin{DoxyReturn}{Returns}
+The witnesses for the IVerifiable. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a0ef90c8f91944fc5f8edb275d3681dd8}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!IsCompleted@{IsCompleted}}
+\index{IsCompleted@{IsCompleted}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{IsCompleted()}{IsCompleted()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a0ef90c8f91944fc5f8edb275d3681dd8} 
+bool neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::\+Is\+Completed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Determines whether all witnesses are ready to be added. 
+
+\begin{DoxyReturn}{Returns}
+True if all witnesses are ready to be added, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_aa5d75e9011d529bdc8408ed3a41f5e6f}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!IsMultiSigContract@{IsMultiSigContract}}
+\index{IsMultiSigContract@{IsMultiSigContract}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{IsMultiSigContract()}{IsMultiSigContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_aa5d75e9011d529bdc8408ed3a41f5e6f} 
+bool neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::\+Is\+Multi\+Sig\+Contract (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{script}{, }\item[{int \&}]{m}{, }\item[{int \&}]{n}{, }\item[{std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \&}]{public\+Keys}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Checks if the script is a multi-\/sig contract. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & The script to check. \\
+\hline
+{\em m} & The minimum required signatures. \\
+\hline
+{\em n} & The total number of public keys. \\
+\hline
+{\em public\+Keys} & The public keys. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the script is a multi-\/sig contract, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a82029be07bc0b7e6295d2b6738528181}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!ToJson@{ToJson}}
+\index{ToJson@{ToJson}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{ToJson()}{ToJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a82029be07bc0b7e6295d2b6738528181} 
+void neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::\+To\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const}
+
+
+
+Converts the context to a JSON object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 8
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a77593930d80161710cb72e4e4e9e3ab2}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!contextItems@{contextItems}}
+\index{contextItems@{contextItems}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{contextItems}{contextItems}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a77593930d80161710cb72e4e4e9e3ab2} 
+std\+::map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}}, std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_1_1_context_item}{Context\+Item}}$>$ $>$ neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::context\+Items\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a2b417c5a624b8ad9e593b8c573f304ae}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!network@{network}}
+\index{network@{network}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{network}{network}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a2b417c5a624b8ad9e593b8c573f304ae} 
+const uint32\+\_\+t neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::network}
+
+
+
+The magic number of the network. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_add94ce6e1c5f503b21a2daea4634fd23}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!scriptHashes@{scriptHashes}}
+\index{scriptHashes@{scriptHashes}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{scriptHashes}{scriptHashes}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_add94ce6e1c5f503b21a2daea4634fd23} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}}$>$ neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::script\+Hashes\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a626501f84c15275b552b995ed7a029e3}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!snapshotCache@{snapshotCache}}
+\index{snapshotCache@{snapshotCache}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{snapshotCache}{snapshotCache}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a626501f84c15275b552b995ed7a029e3} 
+const \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}}\& neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::snapshot\+Cache}
+
+
+
+The snapshot used to read data. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1_contract_parameters_context_a68ade531b93660d2da7fff9e047e1efb}\index{neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}!verifiable@{verifiable}}
+\index{verifiable@{verifiable}!neo::smartcontract::ContractParametersContext@{neo::smartcontract::ContractParametersContext}}
+\doxysubsubsection{\texorpdfstring{verifiable}{verifiable}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_contract_parameters_context_a68ade531b93660d2da7fff9e047e1efb} 
+const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_verifiable}{network\+::p2p\+::payloads\+::\+IVerifiable}}\& neo\+::smartcontract\+::\+Contract\+Parameters\+Context\+::verifiable}
+
+
+
+The IVerifiable to add witnesses. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/\mbox{\hyperlink{contract__parameters__context_8h}{contract\+\_\+parameters\+\_\+context.\+h}}\item 
+src/smartcontract/\mbox{\hyperlink{contract__parameters__context_8cpp}{contract\+\_\+parameters\+\_\+context.\+cpp}}\end{DoxyCompactItemize}

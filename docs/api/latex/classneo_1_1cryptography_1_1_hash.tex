@@ -1,0 +1,208 @@
+\doxysection{neo\+::cryptography\+::Hash Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1_hash}{}\label{classneo_1_1cryptography_1_1_hash}\index{neo::cryptography::Hash@{neo::cryptography::Hash}}
+
+
+Provides cryptographic hash functions.  
+
+
+
+
+{\ttfamily \#include $<$hash.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_hash_a45b12e21ad2391d1919f3eb7b61f683a}{Sha256}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Computes SHA256 hash. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_hash_a9bf517bfa4abd122aaaa37a1047403c3}{Ripemd160}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Computes RIPEMD160 hash. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_hash_a7232977d38fc72caff4cd95b22342d10}{Hash160}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Computes Hash160 (RIPEMD160 of SHA256). \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_hash_a1f27587bba8d21efdec839f2679e1a90}{Hash256}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Computes Hash256 (double SHA256). \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_hash_a93b6d8f5e9dadf720ae30a8c8f99423b}{Keccak256}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Computes Keccak256 hash (WARNING\+: Currently using SHA3-\/256). \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_hash_a2131eb7a9fccca86045f8ea4119c12a8}{Keccak256\+Proper}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Computes proper Keccak256 hash (Ethereum-\/compatible). \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_hash_a43c64894b2c37bd641e9bf3093409f84}{Keccak256\+Simple}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Simple verified Keccak-\/256 implementation. \end{DoxyCompactList}\item 
+static uint32\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1_hash_aa7fbad2532e69aa85d949074c9264d1b}{Murmur32}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data, uint32\+\_\+t seed=0)
+\begin{DoxyCompactList}\small\item\em Computes \doxylink{classneo_1_1cryptography_1_1_murmur32}{Murmur32} hash. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Provides cryptographic hash functions. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1_hash_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_hash_a7232977d38fc72caff4cd95b22342d10}\index{neo::cryptography::Hash@{neo::cryptography::Hash}!Hash160@{Hash160}}
+\index{Hash160@{Hash160}!neo::cryptography::Hash@{neo::cryptography::Hash}}
+\doxysubsubsection{\texorpdfstring{Hash160()}{Hash160()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_hash_a7232977d38fc72caff4cd95b22342d10} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::cryptography\+::\+Hash\+::\+Hash160 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes Hash160 (RIPEMD160 of SHA256). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Hash160. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1cryptography_1_1_hash_a1f27587bba8d21efdec839f2679e1a90}\index{neo::cryptography::Hash@{neo::cryptography::Hash}!Hash256@{Hash256}}
+\index{Hash256@{Hash256}!neo::cryptography::Hash@{neo::cryptography::Hash}}
+\doxysubsubsection{\texorpdfstring{Hash256()}{Hash256()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_hash_a1f27587bba8d21efdec839f2679e1a90} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::cryptography\+::\+Hash\+::\+Hash256 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes Hash256 (double SHA256). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Hash256. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cryptography_1_1_hash_a93b6d8f5e9dadf720ae30a8c8f99423b}\index{neo::cryptography::Hash@{neo::cryptography::Hash}!Keccak256@{Keccak256}}
+\index{Keccak256@{Keccak256}!neo::cryptography::Hash@{neo::cryptography::Hash}}
+\doxysubsubsection{\texorpdfstring{Keccak256()}{Keccak256()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_hash_a93b6d8f5e9dadf720ae30a8c8f99423b} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::cryptography\+::\+Hash\+::\+Keccak256 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes Keccak256 hash (WARNING\+: Currently using SHA3-\/256). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Keccak256 hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cryptography_1_1_hash_a2131eb7a9fccca86045f8ea4119c12a8}\index{neo::cryptography::Hash@{neo::cryptography::Hash}!Keccak256Proper@{Keccak256Proper}}
+\index{Keccak256Proper@{Keccak256Proper}!neo::cryptography::Hash@{neo::cryptography::Hash}}
+\doxysubsubsection{\texorpdfstring{Keccak256Proper()}{Keccak256Proper()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_hash_a2131eb7a9fccca86045f8ea4119c12a8} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::cryptography\+::\+Hash\+::\+Keccak256\+Proper (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes proper Keccak256 hash (Ethereum-\/compatible). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The true Keccak256 hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1cryptography_1_1_hash_a43c64894b2c37bd641e9bf3093409f84}\index{neo::cryptography::Hash@{neo::cryptography::Hash}!Keccak256Simple@{Keccak256Simple}}
+\index{Keccak256Simple@{Keccak256Simple}!neo::cryptography::Hash@{neo::cryptography::Hash}}
+\doxysubsubsection{\texorpdfstring{Keccak256Simple()}{Keccak256Simple()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_hash_a43c64894b2c37bd641e9bf3093409f84} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::cryptography\+::\+Hash\+::\+Keccak256\+Simple (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Simple verified Keccak-\/256 implementation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Keccak-\/256 hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1cryptography_1_1_hash_aa7fbad2532e69aa85d949074c9264d1b}\index{neo::cryptography::Hash@{neo::cryptography::Hash}!Murmur32@{Murmur32}}
+\index{Murmur32@{Murmur32}!neo::cryptography::Hash@{neo::cryptography::Hash}}
+\doxysubsubsection{\texorpdfstring{Murmur32()}{Murmur32()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_hash_aa7fbad2532e69aa85d949074c9264d1b} 
+uint32\+\_\+t neo\+::cryptography\+::\+Hash\+::\+Murmur32 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{, }\item[{uint32\+\_\+t}]{seed}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes \doxylink{classneo_1_1cryptography_1_1_murmur32}{Murmur32} hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to hash. \\
+\hline
+{\em seed} & The seed value. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1cryptography_1_1_murmur32}{Murmur32} hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1cryptography_1_1_hash_a9bf517bfa4abd122aaaa37a1047403c3}\index{neo::cryptography::Hash@{neo::cryptography::Hash}!Ripemd160@{Ripemd160}}
+\index{Ripemd160@{Ripemd160}!neo::cryptography::Hash@{neo::cryptography::Hash}}
+\doxysubsubsection{\texorpdfstring{Ripemd160()}{Ripemd160()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_hash_a9bf517bfa4abd122aaaa37a1047403c3} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::cryptography\+::\+Hash\+::\+Ripemd160 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes RIPEMD160 hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The RIPEMD160 hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1cryptography_1_1_hash_a45b12e21ad2391d1919f3eb7b61f683a}\index{neo::cryptography::Hash@{neo::cryptography::Hash}!Sha256@{Sha256}}
+\index{Sha256@{Sha256}!neo::cryptography::Hash@{neo::cryptography::Hash}}
+\doxysubsubsection{\texorpdfstring{Sha256()}{Sha256()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_hash_a45b12e21ad2391d1919f3eb7b61f683a} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::cryptography\+::\+Hash\+::\+Sha256 (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes SHA256 hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to hash. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The SHA256 hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/\mbox{\hyperlink{hash_8h}{hash.\+h}}\item 
+src/cryptography/\mbox{\hyperlink{hash_8cpp}{hash.\+cpp}}\item 
+src/cryptography/\mbox{\hyperlink{keccak256_8cpp}{keccak256.\+cpp}}\item 
+src/cryptography/\mbox{\hyperlink{keccak256__simple_8cpp}{keccak256\+\_\+simple.\+cpp}}\end{DoxyCompactItemize}

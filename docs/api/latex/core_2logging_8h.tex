@@ -1,0 +1,140 @@
+\doxysection{include/neo/core/logging.h File Reference}
+\hypertarget{core_2logging_8h}{}\label{core_2logging_8h}\index{include/neo/core/logging.h@{include/neo/core/logging.h}}
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$cstdint$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$mutex$>$}\newline
+Include dependency graph for logging.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_log_config}{neo\+::core\+::\+Log\+Config}}
+\begin{DoxyCompactList}\small\item\em \doxylink{classneo_1_1core_1_1_logger}{Logger} configuration. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_logger}{neo\+::core\+::\+Logger}}
+\begin{DoxyCompactList}\small\item\em Production-\/ready logger for Neo C++. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_perf_logger}{neo\+::core\+::\+Perf\+Logger}}
+\begin{DoxyCompactList}\small\item\em Performance logger for tracking execution times. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_structured_log}{neo\+::core\+::\+Structured\+Log}}
+\begin{DoxyCompactList}\small\item\em Structured logging helper. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1core_1_1_logger_factory}{neo\+::core\+::\+Logger\+Factory}}
+\begin{DoxyCompactList}\small\item\em Factory for creating named loggers. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1core}{neo\+::core}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{core_2logging_8h_a58c994180e09d2f6400133b19b1d7036}{LOG\+\_\+\+TRACE}}(...)
+\item 
+\#define \mbox{\hyperlink{core_2logging_8h_a754b3d074e0af4ad3c7b918dd77ecb2d}{LOG\+\_\+\+DEBUG}}(...)
+\item 
+\#define \mbox{\hyperlink{core_2logging_8h_a378e28bfcb78d17285210d6bbb70a083}{LOG\+\_\+\+INFO}}(...)
+\item 
+\#define \mbox{\hyperlink{core_2logging_8h_afef5ff03ea272d388345cf47148953d4}{LOG\+\_\+\+WARNING}}(...)
+\item 
+\#define \mbox{\hyperlink{core_2logging_8h_ad4a9117ce894e3319e903142347a0f63}{LOG\+\_\+\+ERROR}}(...)
+\item 
+\#define \mbox{\hyperlink{core_2logging_8h_a4091a2d7d849a8b5eded40d8723b8768}{LOG\+\_\+\+CRITICAL}}(...)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1core_a2fe169d5a7b8cb552d9a887c6de58521}{neo\+::core\+::\+Log\+Level}} \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1core_a2fe169d5a7b8cb552d9a887c6de58521add4ec0ac4e58f7c32a01244ae91150b1}{neo\+::core\+::\+Trace}} = 0
+, \mbox{\hyperlink{namespaceneo_1_1core_a2fe169d5a7b8cb552d9a887c6de58521aa603905470e2a5b8c13e96b579ef0dba}{neo\+::core\+::\+Debug}} = 1
+, \mbox{\hyperlink{namespaceneo_1_1core_a2fe169d5a7b8cb552d9a887c6de58521a4059b0251f66a18cb56f544728796875}{neo\+::core\+::\+Info}} = 2
+, \mbox{\hyperlink{namespaceneo_1_1core_a2fe169d5a7b8cb552d9a887c6de58521a0eaadb4fcb48a0a0ed7bc9868be9fbaa}{neo\+::core\+::\+Warning}} = 3
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1core_a2fe169d5a7b8cb552d9a887c6de58521a902b0d55fddef6f8d651fe1035b7d4bd}{neo\+::core\+::\+Error}} = 4
+, \mbox{\hyperlink{namespaceneo_1_1core_a2fe169d5a7b8cb552d9a887c6de58521a278d01e5af56273bae1bb99a98b370cd}{neo\+::core\+::\+Critical}} = 5
+, \mbox{\hyperlink{namespaceneo_1_1core_a2fe169d5a7b8cb552d9a887c6de58521ad15305d7a4e34e02489c74a5ef542f36}{neo\+::core\+::\+Off}} = 6
+ \}
+\begin{DoxyCompactList}\small\item\em Log levels for the Neo logger. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\void \mbox{\hyperlink{namespaceneo_1_1core_aa0800d4f179fc8ea17f4d11edf57b34a}{neo\+::core\+::\+Format\+String}} (std\+::stringstream \&ss, const std\+::string \&fmt, T \&\&value)
+\item 
+{\footnotesize template$<$typename T, typename... Args$>$ }\\void \mbox{\hyperlink{namespaceneo_1_1core_af94605b951cf0bd3bf38af6ed2265006}{neo\+::core\+::\+Format\+String}} (std\+::stringstream \&ss, const std\+::string \&fmt, T \&\&value, Args \&\&... args)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{core_2logging_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{core_2logging_8h_a4091a2d7d849a8b5eded40d8723b8768}\index{logging.h@{logging.h}!LOG\_CRITICAL@{LOG\_CRITICAL}}
+\index{LOG\_CRITICAL@{LOG\_CRITICAL}!logging.h@{logging.h}}
+\doxysubsubsection{\texorpdfstring{LOG\_CRITICAL}{LOG\_CRITICAL}}
+{\footnotesize\ttfamily \label{core_2logging_8h_a4091a2d7d849a8b5eded40d8723b8768} 
+\#define LOG\+\_\+\+CRITICAL(\begin{DoxyParamCaption}\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1core_1_1_logger_ae7ab15f1277f56e09e160691a04a7c7a}{neo::core::Logger::GetInstance}}()-\/>Critical(\_\_VA\_ARGS\_\_)}
+
+\end{DoxyCode}
+\Hypertarget{core_2logging_8h_a754b3d074e0af4ad3c7b918dd77ecb2d}\index{logging.h@{logging.h}!LOG\_DEBUG@{LOG\_DEBUG}}
+\index{LOG\_DEBUG@{LOG\_DEBUG}!logging.h@{logging.h}}
+\doxysubsubsection{\texorpdfstring{LOG\_DEBUG}{LOG\_DEBUG}}
+{\footnotesize\ttfamily \label{core_2logging_8h_a754b3d074e0af4ad3c7b918dd77ecb2d} 
+\#define LOG\+\_\+\+DEBUG(\begin{DoxyParamCaption}\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1core_1_1_logger_ae7ab15f1277f56e09e160691a04a7c7a}{neo::core::Logger::GetInstance}}()-\/>Debug(\_\_VA\_ARGS\_\_)}
+
+\end{DoxyCode}
+\Hypertarget{core_2logging_8h_ad4a9117ce894e3319e903142347a0f63}\index{logging.h@{logging.h}!LOG\_ERROR@{LOG\_ERROR}}
+\index{LOG\_ERROR@{LOG\_ERROR}!logging.h@{logging.h}}
+\doxysubsubsection{\texorpdfstring{LOG\_ERROR}{LOG\_ERROR}}
+{\footnotesize\ttfamily \label{core_2logging_8h_ad4a9117ce894e3319e903142347a0f63} 
+\#define LOG\+\_\+\+ERROR(\begin{DoxyParamCaption}\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1core_1_1_logger_ae7ab15f1277f56e09e160691a04a7c7a}{neo::core::Logger::GetInstance}}()-\/>Error(\_\_VA\_ARGS\_\_)}
+
+\end{DoxyCode}
+\Hypertarget{core_2logging_8h_a378e28bfcb78d17285210d6bbb70a083}\index{logging.h@{logging.h}!LOG\_INFO@{LOG\_INFO}}
+\index{LOG\_INFO@{LOG\_INFO}!logging.h@{logging.h}}
+\doxysubsubsection{\texorpdfstring{LOG\_INFO}{LOG\_INFO}}
+{\footnotesize\ttfamily \label{core_2logging_8h_a378e28bfcb78d17285210d6bbb70a083} 
+\#define LOG\+\_\+\+INFO(\begin{DoxyParamCaption}\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1core_1_1_logger_ae7ab15f1277f56e09e160691a04a7c7a}{neo::core::Logger::GetInstance}}()-\/>Info(\_\_VA\_ARGS\_\_)}
+
+\end{DoxyCode}
+\Hypertarget{core_2logging_8h_a58c994180e09d2f6400133b19b1d7036}\index{logging.h@{logging.h}!LOG\_TRACE@{LOG\_TRACE}}
+\index{LOG\_TRACE@{LOG\_TRACE}!logging.h@{logging.h}}
+\doxysubsubsection{\texorpdfstring{LOG\_TRACE}{LOG\_TRACE}}
+{\footnotesize\ttfamily \label{core_2logging_8h_a58c994180e09d2f6400133b19b1d7036} 
+\#define LOG\+\_\+\+TRACE(\begin{DoxyParamCaption}\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1core_1_1_logger_ae7ab15f1277f56e09e160691a04a7c7a}{neo::core::Logger::GetInstance}}()-\/>Trace(\_\_VA\_ARGS\_\_)}
+
+\end{DoxyCode}
+\Hypertarget{core_2logging_8h_afef5ff03ea272d388345cf47148953d4}\index{logging.h@{logging.h}!LOG\_WARNING@{LOG\_WARNING}}
+\index{LOG\_WARNING@{LOG\_WARNING}!logging.h@{logging.h}}
+\doxysubsubsection{\texorpdfstring{LOG\_WARNING}{LOG\_WARNING}}
+{\footnotesize\ttfamily \label{core_2logging_8h_afef5ff03ea272d388345cf47148953d4} 
+\#define LOG\+\_\+\+WARNING(\begin{DoxyParamCaption}\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\mbox{\hyperlink{classneo_1_1core_1_1_logger_ae7ab15f1277f56e09e160691a04a7c7a}{neo::core::Logger::GetInstance}}()-\/>Warning(\_\_VA\_ARGS\_\_)}
+
+\end{DoxyCode}

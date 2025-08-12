@@ -1,0 +1,179 @@
+\doxysection{neo\+::cli\+::Safe\+Type\+Converters Class Reference}
+\hypertarget{classneo_1_1cli_1_1_safe_type_converters}{}\label{classneo_1_1cli_1_1_safe_type_converters}\index{neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}}
+
+
+RAII-\/safe type converter that returns smart pointers instead of raw pointers.  
+
+
+
+
+{\ttfamily \#include $<$safe\+\_\+type\+\_\+converters.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a4687237bfcd4f48347855c7492b5f980}{Safe\+Type\+Converter}} = std\+::function$<$std\+::any(const std\+::vector$<$std\+::string$>$\&, bool)$>$
+\begin{DoxyCompactList}\small\item\em Type converter function that returns std\+::any for type safety. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\void \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a4aeb6cc4d04d289a0159c16795b1ef38}{Register\+Converter}} (const std\+::string \&type\+Name, std\+::function$<$ T(const std\+::vector$<$ std\+::string $>$ \&, bool)$>$ converter)
+\begin{DoxyCompactList}\small\item\em Register a type converter. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\std\+::shared\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_acd50de6501c7ce348b5c88eed23997af}{Convert}} (const std\+::string \&type\+Name, const std\+::vector$<$ std\+::string $>$ \&args, bool can\+Consume\+All=false)
+\begin{DoxyCompactList}\small\item\em Get a converted value as smart pointer. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a4ecdbefd90f6c49adcdd0fb9caf17a95}{Has\+Converter}} (const std\+::string \&type\+Name) const
+\begin{DoxyCompactList}\small\item\em Check if converter exists. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a108d1534dc56d8095bc6fac7d2791ae9}{Initialize\+Default\+Converters}} ()
+\begin{DoxyCompactList}\small\item\em Initialize default converters. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters}{Safe\+Type\+Converters}} \& \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a21cc3745e87043b19c0dac96d281cba1}{Instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets the singleton instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a7fe17714fab09ad461a4895798c5571b}{Safe\+Type\+Converters}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a4687237bfcd4f48347855c7492b5f980}{Safe\+Type\+Converter}} $>$ \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a7cac8f1b90c8cecdfb997e018a6f70c6}{converters\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+RAII-\/safe type converter that returns smart pointers instead of raw pointers. 
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1cli_1_1_safe_type_converters_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1cli_1_1_safe_type_converters_a4687237bfcd4f48347855c7492b5f980}\index{neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}!SafeTypeConverter@{SafeTypeConverter}}
+\index{SafeTypeConverter@{SafeTypeConverter}!neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}}
+\doxysubsubsection{\texorpdfstring{SafeTypeConverter}{SafeTypeConverter}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_safe_type_converters_a4687237bfcd4f48347855c7492b5f980} 
+using \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a4687237bfcd4f48347855c7492b5f980}{neo\+::cli\+::\+Safe\+Type\+Converters\+::\+Safe\+Type\+Converter}} = std\+::function$<$std\+::any(const std\+::vector$<$std\+::string$>$\&, bool)$>$}
+
+
+
+Type converter function that returns std\+::any for type safety. 
+
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cli_1_1_safe_type_converters_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cli_1_1_safe_type_converters_a7fe17714fab09ad461a4895798c5571b}\index{neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}!SafeTypeConverters@{SafeTypeConverters}}
+\index{SafeTypeConverters@{SafeTypeConverters}!neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}}
+\doxysubsubsection{\texorpdfstring{SafeTypeConverters()}{SafeTypeConverters()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_safe_type_converters_a7fe17714fab09ad461a4895798c5571b} 
+neo\+::cli\+::\+Safe\+Type\+Converters\+::\+Safe\+Type\+Converters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cli_1_1_safe_type_converters_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cli_1_1_safe_type_converters_acd50de6501c7ce348b5c88eed23997af}\index{neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}!Convert@{Convert}}
+\index{Convert@{Convert}!neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}}
+\doxysubsubsection{\texorpdfstring{Convert()}{Convert()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_safe_type_converters_acd50de6501c7ce348b5c88eed23997af} 
+template$<$typename T$>$ \\
+std\+::shared\+\_\+ptr$<$ T $>$ neo\+::cli\+::\+Safe\+Type\+Converters\+::\+Convert (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type\+Name}{, }\item[{const std\+::vector$<$ std\+::string $>$ \&}]{args}{, }\item[{bool}]{can\+Consume\+All}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get a converted value as smart pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Name} & The type name \\
+\hline
+{\em args} & The arguments \\
+\hline
+{\em can\+Consume\+All} & Whether all args can be consumed \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Smart pointer to converted object 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_safe_type_converters_a4ecdbefd90f6c49adcdd0fb9caf17a95}\index{neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}!HasConverter@{HasConverter}}
+\index{HasConverter@{HasConverter}!neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}}
+\doxysubsubsection{\texorpdfstring{HasConverter()}{HasConverter()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_safe_type_converters_a4ecdbefd90f6c49adcdd0fb9caf17a95} 
+bool neo\+::cli\+::\+Safe\+Type\+Converters\+::\+Has\+Converter (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type\+Name}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if converter exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Name} & The type name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if exists 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cli_1_1_safe_type_converters_a108d1534dc56d8095bc6fac7d2791ae9}\index{neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}!InitializeDefaultConverters@{InitializeDefaultConverters}}
+\index{InitializeDefaultConverters@{InitializeDefaultConverters}!neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}}
+\doxysubsubsection{\texorpdfstring{InitializeDefaultConverters()}{InitializeDefaultConverters()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_safe_type_converters_a108d1534dc56d8095bc6fac7d2791ae9} 
+void neo\+::cli\+::\+Safe\+Type\+Converters\+::\+Initialize\+Default\+Converters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Initialize default converters. 
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1cli_1_1_safe_type_converters_a21cc3745e87043b19c0dac96d281cba1}\index{neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}!Instance@{Instance}}
+\index{Instance@{Instance}!neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}}
+\doxysubsubsection{\texorpdfstring{Instance()}{Instance()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_safe_type_converters_a21cc3745e87043b19c0dac96d281cba1} 
+\mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters}{Safe\+Type\+Converters}} \& neo\+::cli\+::\+Safe\+Type\+Converters\+::\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Gets the singleton instance. 
+
+\begin{DoxyReturn}{Returns}
+The instance 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cli_1_1_safe_type_converters_a4aeb6cc4d04d289a0159c16795b1ef38}\index{neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}!RegisterConverter@{RegisterConverter}}
+\index{RegisterConverter@{RegisterConverter}!neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}}
+\doxysubsubsection{\texorpdfstring{RegisterConverter()}{RegisterConverter()}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_safe_type_converters_a4aeb6cc4d04d289a0159c16795b1ef38} 
+template$<$typename T$>$ \\
+void neo\+::cli\+::\+Safe\+Type\+Converters\+::\+Register\+Converter (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{type\+Name}{, }\item[{std\+::function$<$ T(const std\+::vector$<$ std\+::string $>$ \&, bool)$>$}]{converter}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Register a type converter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type\+Name} & The type name \\
+\hline
+{\em converter} & The converter function \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cli_1_1_safe_type_converters_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cli_1_1_safe_type_converters_a7cac8f1b90c8cecdfb997e018a6f70c6}\index{neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}!converters\_@{converters\_}}
+\index{converters\_@{converters\_}!neo::cli::SafeTypeConverters@{neo::cli::SafeTypeConverters}}
+\doxysubsubsection{\texorpdfstring{converters\_}{converters\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cli_1_1_safe_type_converters_a7cac8f1b90c8cecdfb997e018a6f70c6} 
+std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters_a4687237bfcd4f48347855c7492b5f980}{Safe\+Type\+Converter}}$>$ neo\+::cli\+::\+Safe\+Type\+Converters\+::converters\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cli/\mbox{\hyperlink{safe__type__converters_8h}{safe\+\_\+type\+\_\+converters.\+h}}\item 
+src/cli/\mbox{\hyperlink{safe__type__converters_8cpp}{safe\+\_\+type\+\_\+converters.\+cpp}}\end{DoxyCompactItemize}

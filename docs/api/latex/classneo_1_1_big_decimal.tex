@@ -1,0 +1,519 @@
+\doxysection{neo\+::Big\+Decimal Class Reference}
+\hypertarget{classneo_1_1_big_decimal}{}\label{classneo_1_1_big_decimal}\index{neo::BigDecimal@{neo::BigDecimal}}
+
+
+Represents a fixed-\/point number of arbitrary precision.  
+
+
+
+
+{\ttfamily \#include $<$big\+\_\+decimal.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer}} = boost\+::multiprecision\+::cpp\+\_\+int
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal_a3916c64ca0374e8a2d4ee5898f0271b0}{Big\+Decimal}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor -\/ creates a \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} with value 0 and 0 decimals. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal_abbf585c33b3ed58a8d8c9652774d5035}{Big\+Decimal}} (const \mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer}} \&\mbox{\hyperlink{classneo_1_1_big_decimal_ace79a09b93edd014178bec687ffb8013}{value}}, uint8\+\_\+t \mbox{\hyperlink{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c}{decimals}})
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} with the specified value and decimals. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal_a89f5f0e8828bf4e918a40f3da1912baa}{Big\+Decimal}} (double \mbox{\hyperlink{classneo_1_1_big_decimal_ace79a09b93edd014178bec687ffb8013}{value}})
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} from a double value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal_a71797563d4505d97672b67d78813ca44}{Big\+Decimal}} (double \mbox{\hyperlink{classneo_1_1_big_decimal_ace79a09b93edd014178bec687ffb8013}{value}}, uint8\+\_\+t \mbox{\hyperlink{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c}{decimals}})
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} from a double value with specified decimals. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ \newline
+requires std\+::is\+\_\+integral\+\_\+v$<$T$>$}\\\mbox{\hyperlink{classneo_1_1_big_decimal_a68ee4c6d5688a56e252ede0386f0e7bd}{Big\+Decimal}} (T \mbox{\hyperlink{classneo_1_1_big_decimal_ace79a09b93edd014178bec687ffb8013}{value}}, uint8\+\_\+t \mbox{\hyperlink{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c}{decimals}}=0)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} from an integer value. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer}} \& \mbox{\hyperlink{classneo_1_1_big_decimal_ace79a09b93edd014178bec687ffb8013}{value}} () const
+\begin{DoxyCompactList}\small\item\em Gets the \doxylink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer} value of the number. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c}{decimals}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of decimal places for this number. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1_big_decimal_af74a3e45f68b4e40e9d4ad9731903fa5}{sign}} () const
+\begin{DoxyCompactList}\small\item\em Gets the sign of the number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \mbox{\hyperlink{classneo_1_1_big_decimal_a7b5fb7d805a4d000834f2312a7fdcb56}{change\+\_\+decimals}} (uint8\+\_\+t \mbox{\hyperlink{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c}{decimals}}) const
+\begin{DoxyCompactList}\small\item\em Changes the number of decimal places for this \doxylink{classneo_1_1_big_decimal}{Big\+Decimal}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1_big_decimal_a24beb3d4823daa80e3a5e4891cf23751}{to\+\_\+string}} () const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} to a string representation. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classneo_1_1_big_decimal_a4beef9ba3cd228d9c68e1a39e10da620}{To\+Double}} () const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} to a double value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \mbox{\hyperlink{classneo_1_1_big_decimal_ae36d8241914d1e18b1c0a34d832519c4}{operator+}} (const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&other) const
+\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \mbox{\hyperlink{classneo_1_1_big_decimal_adff2cd7bfa5b83ce3983778fb2c5bb35}{operator-\/}} (const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&other) const
+\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \mbox{\hyperlink{classneo_1_1_big_decimal_a3e46dd37935e273a657f6fe49d23e418}{operator\texorpdfstring{$\ast$}{*}}} (const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&other) const
+\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \mbox{\hyperlink{classneo_1_1_big_decimal_a4e48a546b9775f068093038ef926752b}{operator/}} (const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&other) const
+\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \mbox{\hyperlink{classneo_1_1_big_decimal_abc2472983a3b4ba6f9c87856ac2a675d}{operator\%}} (const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&other) const
+\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \& \mbox{\hyperlink{classneo_1_1_big_decimal_a5aaacf46e17d1bd502bc6be311641924}{operator+=}} (const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&other)
+\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \& \mbox{\hyperlink{classneo_1_1_big_decimal_aa28101dec21a538e6816c06582e5a967}{operator-\/=}} (const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&other)
+\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \& \mbox{\hyperlink{classneo_1_1_big_decimal_a1b03ed15ed05813e59aee85f97c59881}{operator\texorpdfstring{$\ast$}{*}=}} (const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&other)
+\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \& \mbox{\hyperlink{classneo_1_1_big_decimal_a3f8ddd89dab52ff54dec279004cededf}{operator/=}} (const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&other)
+\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \& \mbox{\hyperlink{classneo_1_1_big_decimal_a173e33a2e4821c668233ca2a57315fe6}{operator\%=}} (const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&other)
+\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \mbox{\hyperlink{classneo_1_1_big_decimal_aa783ec1d9fa789d9d4b095dd09dfcd0e}{operator-\/}} () const
+\item 
+std\+::strong\+\_\+ordering \mbox{\hyperlink{classneo_1_1_big_decimal_a3333653c232ccf10e5ae8dd4f252d19b}{operator$<$=$>$}} (const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&other) const
+\item 
+bool \mbox{\hyperlink{classneo_1_1_big_decimal_a3003fef452390694e3f5d49a27944896}{operator==}} (const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&other) const
+\item 
+std\+::size\+\_\+t \mbox{\hyperlink{classneo_1_1_big_decimal_ae0508663a4b2291bec547228e3bd05f4}{hash}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \mbox{\hyperlink{classneo_1_1_big_decimal_ac466b1d51053a2781fb2978cce897cc6}{parse}} (const std\+::string \&s, uint8\+\_\+t \mbox{\hyperlink{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c}{decimals}})
+\begin{DoxyCompactList}\small\item\em Parses a \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} from a string. \end{DoxyCompactList}\item 
+static std\+::optional$<$ \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} $>$ \mbox{\hyperlink{classneo_1_1_big_decimal_a21f9c76f79cd2d7fd0cbe15b1157f764}{try\+\_\+parse}} (const std\+::string \&s, uint8\+\_\+t \mbox{\hyperlink{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c}{decimals}})
+\begin{DoxyCompactList}\small\item\em Attempts to parse a \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} from a string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::pair$<$ \mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer}}, \mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer}} $>$ \mbox{\hyperlink{classneo_1_1_big_decimal_a32850fb45a85d4588f0979227c6c3733}{normalize}} (const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&left, const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&right)
+\begin{DoxyCompactList}\small\item\em Normalizes two Big\+Decimals to have the same number of decimal places. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1_big_decimal_a0a22bb99e8462309061611ba38b19236}{pow10}} (int exponent)
+\begin{DoxyCompactList}\small\item\em Calculates 10\texorpdfstring{$^\wedge$}{\string^}exponent using \doxylink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1_big_decimal_a6c78bce9b08bb013cb98aed6ecc2d7ea}{value\+\_\+}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1_big_decimal_af8dcd9fb11fb6503f14343e0da40ce37}{decimals\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a fixed-\/point number of arbitrary precision. 
+
+This class provides a decimal number representation with arbitrary precision using a \doxylink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer} value and a fixed number of decimal places. 
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1_big_decimal_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}\index{neo::BigDecimal@{neo::BigDecimal}!BigInteger@{BigInteger}}
+\index{BigInteger@{BigInteger}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{BigInteger}{BigInteger}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510} 
+using \mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{neo\+::\+Big\+Decimal\+::\+Big\+Integer}} = boost\+::multiprecision\+::cpp\+\_\+int}
+
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1_big_decimal_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1_big_decimal_a3916c64ca0374e8a2d4ee5898f0271b0}\index{neo::BigDecimal@{neo::BigDecimal}!BigDecimal@{BigDecimal}}
+\index{BigDecimal@{BigDecimal}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{BigDecimal()}{BigDecimal()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a3916c64ca0374e8a2d4ee5898f0271b0} 
+neo\+::\+Big\+Decimal\+::\+Big\+Decimal (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Default constructor -\/ creates a \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} with value 0 and 0 decimals. 
+
+\Hypertarget{classneo_1_1_big_decimal_abbf585c33b3ed58a8d8c9652774d5035}\index{neo::BigDecimal@{neo::BigDecimal}!BigDecimal@{BigDecimal}}
+\index{BigDecimal@{BigDecimal}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{BigDecimal()}{BigDecimal()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_abbf585c33b3ed58a8d8c9652774d5035} 
+neo\+::\+Big\+Decimal\+::\+Big\+Decimal (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer}} \&}]{value}{, }\item[{uint8\+\_\+t}]{decimals}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} with the specified value and decimals. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The \doxylink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer} value of the number \\
+\hline
+{\em decimals} & The number of decimal places for this number \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1_big_decimal_a89f5f0e8828bf4e918a40f3da1912baa}\index{neo::BigDecimal@{neo::BigDecimal}!BigDecimal@{BigDecimal}}
+\index{BigDecimal@{BigDecimal}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{BigDecimal()}{BigDecimal()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a89f5f0e8828bf4e918a40f3da1912baa} 
+neo\+::\+Big\+Decimal\+::\+Big\+Decimal (\begin{DoxyParamCaption}\item[{double}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} from a double value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The double value to convert \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1_big_decimal_a71797563d4505d97672b67d78813ca44}\index{neo::BigDecimal@{neo::BigDecimal}!BigDecimal@{BigDecimal}}
+\index{BigDecimal@{BigDecimal}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{BigDecimal()}{BigDecimal()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a71797563d4505d97672b67d78813ca44} 
+neo\+::\+Big\+Decimal\+::\+Big\+Decimal (\begin{DoxyParamCaption}\item[{double}]{value}{, }\item[{uint8\+\_\+t}]{decimals}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} from a double value with specified decimals. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The double value to convert \\
+\hline
+{\em decimals} & The number of decimal places for this number \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1_big_decimal_a68ee4c6d5688a56e252ede0386f0e7bd}\index{neo::BigDecimal@{neo::BigDecimal}!BigDecimal@{BigDecimal}}
+\index{BigDecimal@{BigDecimal}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{BigDecimal()}{BigDecimal()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a68ee4c6d5688a56e252ede0386f0e7bd} 
+template$<$typename T$>$ \newline
+requires std\+::is\+\_\+integral\+\_\+v$<$T$>$\\
+neo\+::\+Big\+Decimal\+::\+Big\+Decimal (\begin{DoxyParamCaption}\item[{T}]{value}{, }\item[{uint8\+\_\+t}]{decimals}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} from an integer value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The integer value to convert \\
+\hline
+{\em decimals} & The number of decimal places for this number (default\+: 0) \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1_big_decimal_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1_big_decimal_a7b5fb7d805a4d000834f2312a7fdcb56}\index{neo::BigDecimal@{neo::BigDecimal}!change\_decimals@{change\_decimals}}
+\index{change\_decimals@{change\_decimals}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{change\_decimals()}{change\_decimals()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a7b5fb7d805a4d000834f2312a7fdcb56} 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} neo\+::\+Big\+Decimal\+::change\+\_\+decimals (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{decimals}{}\end{DoxyParamCaption}) const}
+
+
+
+Changes the number of decimal places for this \doxylink{classneo_1_1_big_decimal}{Big\+Decimal}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em decimals} & The new number of decimal places \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} with the specified decimal places 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the conversion would lose precision \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c}\index{neo::BigDecimal@{neo::BigDecimal}!decimals@{decimals}}
+\index{decimals@{decimals}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{decimals()}{decimals()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_ab4f36b6403378db416589e35b8f8162c} 
+uint8\+\_\+t neo\+::\+Big\+Decimal\+::decimals (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the number of decimal places for this number. 
+
+\begin{DoxyReturn}{Returns}
+The number of decimal places 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_big_decimal_ae0508663a4b2291bec547228e3bd05f4}\index{neo::BigDecimal@{neo::BigDecimal}!hash@{hash}}
+\index{hash@{hash}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{hash()}{hash()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_ae0508663a4b2291bec547228e3bd05f4} 
+std\+::size\+\_\+t neo\+::\+Big\+Decimal\+::hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1_big_decimal_a32850fb45a85d4588f0979227c6c3733}\index{neo::BigDecimal@{neo::BigDecimal}!normalize@{normalize}}
+\index{normalize@{normalize}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{normalize()}{normalize()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a32850fb45a85d4588f0979227c6c3733} 
+std\+::pair$<$ \mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Decimal\+::\+Big\+Integer}}, \mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Decimal\+::\+Big\+Integer}} $>$ neo\+::\+Big\+Decimal\+::normalize (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&}]{left}{, }\item[{const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Normalizes two Big\+Decimals to have the same number of decimal places. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & The first \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} \\
+\hline
+{\em right} & The second \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A pair of Big\+Integers with the same scale 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1_big_decimal_abc2472983a3b4ba6f9c87856ac2a675d}\index{neo::BigDecimal@{neo::BigDecimal}!operator\%@{operator\%}}
+\index{operator\%@{operator\%}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{operator\%()}{operator\%()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_abc2472983a3b4ba6f9c87856ac2a675d} 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} neo\+::\+Big\+Decimal\+::operator\% (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1_big_decimal_a173e33a2e4821c668233ca2a57315fe6}\index{neo::BigDecimal@{neo::BigDecimal}!operator\%=@{operator\%=}}
+\index{operator\%=@{operator\%=}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{operator\%=()}{operator\%=()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a173e33a2e4821c668233ca2a57315fe6} 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \& neo\+::\+Big\+Decimal\+::operator\%= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&}]{other}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1_big_decimal_a3e46dd37935e273a657f6fe49d23e418}\index{neo::BigDecimal@{neo::BigDecimal}!operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}}
+\index{operator\texorpdfstring{$\ast$}{*}@{operator\texorpdfstring{$\ast$}{*}}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}()}{operator*()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a3e46dd37935e273a657f6fe49d23e418} 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} neo\+::\+Big\+Decimal\+::operator\texorpdfstring{$\ast$}{*} (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1_big_decimal_a1b03ed15ed05813e59aee85f97c59881}\index{neo::BigDecimal@{neo::BigDecimal}!operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}}
+\index{operator\texorpdfstring{$\ast$}{*}=@{operator\texorpdfstring{$\ast$}{*}=}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{operator\texorpdfstring{$\ast$}{*}=()}{operator*=()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a1b03ed15ed05813e59aee85f97c59881} 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \& neo\+::\+Big\+Decimal\+::operator\texorpdfstring{$\ast$}{*}= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&}]{other}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1_big_decimal_ae36d8241914d1e18b1c0a34d832519c4}\index{neo::BigDecimal@{neo::BigDecimal}!operator+@{operator+}}
+\index{operator+@{operator+}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{operator+()}{operator+()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_ae36d8241914d1e18b1c0a34d832519c4} 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} neo\+::\+Big\+Decimal\+::operator+ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1_big_decimal_a5aaacf46e17d1bd502bc6be311641924}\index{neo::BigDecimal@{neo::BigDecimal}!operator+=@{operator+=}}
+\index{operator+=@{operator+=}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{operator+=()}{operator+=()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a5aaacf46e17d1bd502bc6be311641924} 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \& neo\+::\+Big\+Decimal\+::operator+= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&}]{other}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1_big_decimal_aa783ec1d9fa789d9d4b095dd09dfcd0e}\index{neo::BigDecimal@{neo::BigDecimal}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_aa783ec1d9fa789d9d4b095dd09dfcd0e} 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} neo\+::\+Big\+Decimal\+::operator-\/ (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1_big_decimal_adff2cd7bfa5b83ce3983778fb2c5bb35}\index{neo::BigDecimal@{neo::BigDecimal}!operator-\/@{operator-\/}}
+\index{operator-\/@{operator-\/}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{operator-\/()}{operator-()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_adff2cd7bfa5b83ce3983778fb2c5bb35} 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} neo\+::\+Big\+Decimal\+::operator-\/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1_big_decimal_aa28101dec21a538e6816c06582e5a967}\index{neo::BigDecimal@{neo::BigDecimal}!operator-\/=@{operator-\/=}}
+\index{operator-\/=@{operator-\/=}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{operator-\/=()}{operator-=()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_aa28101dec21a538e6816c06582e5a967} 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \& neo\+::\+Big\+Decimal\+::operator-\/= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&}]{other}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1_big_decimal_a4e48a546b9775f068093038ef926752b}\index{neo::BigDecimal@{neo::BigDecimal}!operator/@{operator/}}
+\index{operator/@{operator/}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{operator/()}{operator/()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a4e48a546b9775f068093038ef926752b} 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} neo\+::\+Big\+Decimal\+::operator/ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1_big_decimal_a3f8ddd89dab52ff54dec279004cededf}\index{neo::BigDecimal@{neo::BigDecimal}!operator/=@{operator/=}}
+\index{operator/=@{operator/=}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{operator/=()}{operator/=()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a3f8ddd89dab52ff54dec279004cededf} 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \& neo\+::\+Big\+Decimal\+::operator/= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&}]{other}{}\end{DoxyParamCaption})}
+
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1_big_decimal_a3333653c232ccf10e5ae8dd4f252d19b}\index{neo::BigDecimal@{neo::BigDecimal}!operator$<$=$>$@{operator$<$=$>$}}
+\index{operator$<$=$>$@{operator$<$=$>$}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{operator$<$=$>$()}{operator<=>()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a3333653c232ccf10e5ae8dd4f252d19b} 
+std\+::strong\+\_\+ordering neo\+::\+Big\+Decimal\+::operator$<$=$>$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1_big_decimal_a3003fef452390694e3f5d49a27944896}\index{neo::BigDecimal@{neo::BigDecimal}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a3003fef452390694e3f5d49a27944896} 
+bool neo\+::\+Big\+Decimal\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1_big_decimal_ac466b1d51053a2781fb2978cce897cc6}\index{neo::BigDecimal@{neo::BigDecimal}!parse@{parse}}
+\index{parse@{parse}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{parse()}{parse()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_ac466b1d51053a2781fb2978cce897cc6} 
+\mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} neo\+::\+Big\+Decimal\+::parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{s}{, }\item[{uint8\+\_\+t}]{decimals}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Parses a \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} from a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & The string to parse \\
+\hline
+{\em decimals} & The number of decimal places for the result \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The parsed \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if the string is not in the correct format \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1_big_decimal_a0a22bb99e8462309061611ba38b19236}\index{neo::BigDecimal@{neo::BigDecimal}!pow10@{pow10}}
+\index{pow10@{pow10}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{pow10()}{pow10()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a0a22bb99e8462309061611ba38b19236} 
+\mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Decimal\+::\+Big\+Integer}} neo\+::\+Big\+Decimal\+::pow10 (\begin{DoxyParamCaption}\item[{int}]{exponent}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Calculates 10\texorpdfstring{$^\wedge$}{\string^}exponent using \doxylink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em exponent} & The exponent \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+10\texorpdfstring{$^\wedge$}{\string^}exponent as \doxylink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer} 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_big_decimal_af74a3e45f68b4e40e9d4ad9731903fa5}\index{neo::BigDecimal@{neo::BigDecimal}!sign@{sign}}
+\index{sign@{sign}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{sign()}{sign()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_af74a3e45f68b4e40e9d4ad9731903fa5} 
+int neo\+::\+Big\+Decimal\+::sign (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the sign of the number. 
+
+\begin{DoxyReturn}{Returns}
+1 if positive, -\/1 if negative, 0 if zero 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_big_decimal_a24beb3d4823daa80e3a5e4891cf23751}\index{neo::BigDecimal@{neo::BigDecimal}!to\_string@{to\_string}}
+\index{to\_string@{to\_string}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{to\_string()}{to\_string()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a24beb3d4823daa80e3a5e4891cf23751} 
+std\+::string neo\+::\+Big\+Decimal\+::to\+\_\+string (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Converts the \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} to a string representation. 
+
+\begin{DoxyReturn}{Returns}
+String representation of the number 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1_big_decimal_a4beef9ba3cd228d9c68e1a39e10da620}\index{neo::BigDecimal@{neo::BigDecimal}!ToDouble@{ToDouble}}
+\index{ToDouble@{ToDouble}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{ToDouble()}{ToDouble()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a4beef9ba3cd228d9c68e1a39e10da620} 
+double neo\+::\+Big\+Decimal\+::\+To\+Double (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Converts the \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} to a double value. 
+
+\begin{DoxyReturn}{Returns}
+Double representation of the number 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_big_decimal_a21f9c76f79cd2d7fd0cbe15b1157f764}\index{neo::BigDecimal@{neo::BigDecimal}!try\_parse@{try\_parse}}
+\index{try\_parse@{try\_parse}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{try\_parse()}{try\_parse()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a21f9c76f79cd2d7fd0cbe15b1157f764} 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1_big_decimal}{Big\+Decimal}} $>$ neo\+::\+Big\+Decimal\+::try\+\_\+parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{s}{, }\item[{uint8\+\_\+t}]{decimals}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Attempts to parse a \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} from a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & The string to parse \\
+\hline
+{\em decimals} & The number of decimal places for the result \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The parsed \doxylink{classneo_1_1_big_decimal}{Big\+Decimal} if successful, std\+::nullopt otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{classneo_1_1_big_decimal_ace79a09b93edd014178bec687ffb8013}\index{neo::BigDecimal@{neo::BigDecimal}!value@{value}}
+\index{value@{value}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{value()}{value()}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_ace79a09b93edd014178bec687ffb8013} 
+const \mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer}} \& neo\+::\+Big\+Decimal\+::value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the \doxylink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer} value of the number. 
+
+\begin{DoxyReturn}{Returns}
+The \doxylink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer} value 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1_big_decimal_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1_big_decimal_af8dcd9fb11fb6503f14343e0da40ce37}\index{neo::BigDecimal@{neo::BigDecimal}!decimals\_@{decimals\_}}
+\index{decimals\_@{decimals\_}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{decimals\_}{decimals\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_af8dcd9fb11fb6503f14343e0da40ce37} 
+uint8\+\_\+t neo\+::\+Big\+Decimal\+::decimals\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1_big_decimal_a6c78bce9b08bb013cb98aed6ecc2d7ea}\index{neo::BigDecimal@{neo::BigDecimal}!value\_@{value\_}}
+\index{value\_@{value\_}!neo::BigDecimal@{neo::BigDecimal}}
+\doxysubsubsection{\texorpdfstring{value\_}{value\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_big_decimal_a6c78bce9b08bb013cb98aed6ecc2d7ea} 
+\mbox{\hyperlink{classneo_1_1_big_decimal_a75eb460cae8c115b19c5b667604ab510}{Big\+Integer}} neo\+::\+Big\+Decimal\+::value\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{big__decimal_8h}{big\+\_\+decimal.\+h}}\item 
+src/core/\mbox{\hyperlink{big__decimal_8cpp}{big\+\_\+decimal.\+cpp}}\end{DoxyCompactItemize}

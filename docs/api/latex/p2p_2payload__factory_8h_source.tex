@@ -1,0 +1,24 @@
+\doxysection{payload\+\_\+factory.\+h}
+\hypertarget{p2p_2payload__factory_8h_source}{}\label{p2p_2payload__factory_8h_source}\index{include/neo/network/p2p/payload\_factory.h@{include/neo/network/p2p/payload\_factory.h}}
+\mbox{\hyperlink{p2p_2payload__factory_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__reader_8h}{neo/io/binary\_reader.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{p2p_2ipayload_8h}{neo/network/p2p/ipayload.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{p2p_2message__command_8h}{neo/network/p2p/message\_command.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p}{neo::network::p2p}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_payload_factory}{PayloadFactory}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IPayload>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_payload_factory_aa5b21e7d366197587798bc26d3196026}{Create}}(\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{MessageCommand}}\ command);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IPayload>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_payload_factory_a8fc9fb6bdb630268ac09f8a9dd71bb63}{DeserializePayload}}(\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{MessageCommand}}\ command,\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader);}
+\DoxyCodeLine{00031\ \};}
+\DoxyCodeLine{00032\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p}}
+
+\end{DoxyCode}

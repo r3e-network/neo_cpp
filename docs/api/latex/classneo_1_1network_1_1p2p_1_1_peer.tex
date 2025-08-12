@@ -1,0 +1,602 @@
+\doxysection{neo\+::network\+::p2p\+::Peer Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1_peer}{}\label{classneo_1_1network_1_1p2p_1_1_peer}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+
+
+Represents a peer in the P2P network.  
+
+
+
+
+{\ttfamily \#include $<$peer.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::p2p\+::Peer\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::Peer\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_ab5ac3e4decc887be40f105d748e8472b}{Peer}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a5bfbcddf86e218c7646ae4c5d0ff8c24}{Peer}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&endpoint)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} with the specified endpoint. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a2c208a88b98dbcc4156eb3f5591c2c6c}{Peer}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&endpoint, uint32\+\_\+t version, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \&capabilities)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} with the specified endpoint, version, and capabilities. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_acc8d1d94ef46cb801f0b7dcaba0ed0e3}{Get\+End\+Point}} () const
+\begin{DoxyCompactList}\small\item\em Gets the endpoint of the peer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a3b97dfd1f79c44660f64d1e9439aaac7}{Set\+End\+Point}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&endpoint)
+\begin{DoxyCompactList}\small\item\em Sets the endpoint of the peer. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a350f7ee6878ae710c2e3bb932c27e996}{Get\+Version}} () const
+\begin{DoxyCompactList}\small\item\em Gets the version of the peer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a64baa21faca75c78b7ae998aa1a70ee4}{Set\+Version}} (uint32\+\_\+t version)
+\begin{DoxyCompactList}\small\item\em Sets the version of the peer. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a7aaf5715b66ca0f909ed6881813b1d80}{Get\+Capabilities}} () const
+\begin{DoxyCompactList}\small\item\em Gets the capabilities of the peer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_aa8c56a257e51a270a6f7c9148005f616}{Set\+Capabilities}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \&capabilities)
+\begin{DoxyCompactList}\small\item\em Sets the capabilities of the peer. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_ab1c222c27a7c9f40ff752e0ca524c67d}{Get\+Last\+Connection\+Time}} () const
+\begin{DoxyCompactList}\small\item\em Gets the last connection time of the peer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_aedc8dfd0e53e7674571a671cb00e1200}{Set\+Last\+Connection\+Time}} (uint64\+\_\+t last\+Connection\+Time)
+\begin{DoxyCompactList}\small\item\em Sets the last connection time of the peer. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a54d23cc5f67703127c3c6e909fadb82b}{Get\+Last\+Seen\+Time}} () const
+\begin{DoxyCompactList}\small\item\em Gets the last seen time of the peer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a17d76d7ddf64d62c24b7954472cd685b}{Set\+Last\+Seen\+Time}} (uint64\+\_\+t last\+Seen\+Time)
+\begin{DoxyCompactList}\small\item\em Sets the last seen time of the peer. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a7c28764b099aa64ba516dcf9f3f3426f}{Get\+Connection\+Attempts}} () const
+\begin{DoxyCompactList}\small\item\em Gets the connection attempts of the peer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a769bf9ee018f1ca21f37b95ab453cecb}{Set\+Connection\+Attempts}} (uint32\+\_\+t connection\+Attempts)
+\begin{DoxyCompactList}\small\item\em Sets the connection attempts of the peer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a2212481f17277c0ad9f744edf9a33419}{Increment\+Connection\+Attempts}} ()
+\begin{DoxyCompactList}\small\item\em Increments the connection attempts of the peer. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_aa73170d4b947e1a3feecf077b96ebc38}{Is\+Connected}} () const
+\begin{DoxyCompactList}\small\item\em Gets whether the peer is connected. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a36dba91e8bc40b94f61b4203b6ab0cd4}{Set\+Connected}} (bool connected)
+\begin{DoxyCompactList}\small\item\em Sets whether the peer is connected. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a0e5ce0687248491d99a89b45a3fca2fd}{Is\+Bad}} () const
+\begin{DoxyCompactList}\small\item\em Gets whether the peer is bad. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_aa9ca51a46824e9b092a38793f7a26a68}{Set\+Bad}} (bool bad)
+\begin{DoxyCompactList}\small\item\em Sets whether the peer is bad. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a3ee198d48c632e6fb9e7df1f6bfd98e6}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_aab7cf31e084311dd8ea24a3c66b18685}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_acd698e88f073bb8a1f6b061dde9a75de}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a50f3304b409a3668298c85739a3e2485}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} from a JSON reader. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_afa7c0135f07124b820d99d2d1c66e0f2}{operator==}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer}{Peer}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} is equal to another \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a906043b2fd946e01920b57856b3cd6b8}{operator!=}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer}{Peer}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} is not equal to another \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_accf8c18ff2716c1ac0eb57912dc588f0}{endpoint\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a490d254859dc7cc14d85f0ccc5c0c5da}{version\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a6e070fd05df4bdf8eac08b4c5f705580}{capabilities\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_addc8662459576079c4b1071d3f164564}{last\+Connection\+Time\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_ab9837283611574c51303d1ec64669893}{last\+Seen\+Time\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_aa076df809a19e341d6eb593b799bb6dc}{connection\+Attempts\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a75fa00e9f1a5f1f2c0b468dd7abbb3c3}{connected\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_ad7b32156720e767f9fbf81c1c13d8e97}{bad\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a peer in the P2P network. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_ab5ac3e4decc887be40f105d748e8472b}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!Peer@{Peer}}
+\index{Peer@{Peer}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{Peer()}{Peer()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_ab5ac3e4decc887be40f105d748e8472b} 
+neo\+::network\+::p2p\+::\+Peer\+::\+Peer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer}. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a5bfbcddf86e218c7646ae4c5d0ff8c24}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!Peer@{Peer}}
+\index{Peer@{Peer}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{Peer()}{Peer()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a5bfbcddf86e218c7646ae4c5d0ff8c24} 
+neo\+::network\+::p2p\+::\+Peer\+::\+Peer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&}]{endpoint}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} with the specified endpoint. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & The endpoint. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a2c208a88b98dbcc4156eb3f5591c2c6c}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!Peer@{Peer}}
+\index{Peer@{Peer}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{Peer()}{Peer()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a2c208a88b98dbcc4156eb3f5591c2c6c} 
+neo\+::network\+::p2p\+::\+Peer\+::\+Peer (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&}]{endpoint}{, }\item[{uint32\+\_\+t}]{version}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \&}]{capabilities}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} with the specified endpoint, version, and capabilities. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & The endpoint. \\
+\hline
+{\em version} & The version. \\
+\hline
+{\em capabilities} & The capabilities. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_aab7cf31e084311dd8ea24a3c66b18685}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_aab7cf31e084311dd8ea24a3c66b18685} 
+void neo\+::network\+::p2p\+::\+Peer\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a50f3304b409a3668298c85739a3e2485}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a50f3304b409a3668298c85739a3e2485} 
+void neo\+::network\+::p2p\+::\+Peer\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a7aaf5715b66ca0f909ed6881813b1d80}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!GetCapabilities@{GetCapabilities}}
+\index{GetCapabilities@{GetCapabilities}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{GetCapabilities()}{GetCapabilities()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a7aaf5715b66ca0f909ed6881813b1d80} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \& neo\+::network\+::p2p\+::\+Peer\+::\+Get\+Capabilities (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the capabilities of the peer. 
+
+\begin{DoxyReturn}{Returns}
+The capabilities. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a7c28764b099aa64ba516dcf9f3f3426f}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!GetConnectionAttempts@{GetConnectionAttempts}}
+\index{GetConnectionAttempts@{GetConnectionAttempts}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{GetConnectionAttempts()}{GetConnectionAttempts()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a7c28764b099aa64ba516dcf9f3f3426f} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Peer\+::\+Get\+Connection\+Attempts (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the connection attempts of the peer. 
+
+\begin{DoxyReturn}{Returns}
+The connection attempts. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_acc8d1d94ef46cb801f0b7dcaba0ed0e3}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!GetEndPoint@{GetEndPoint}}
+\index{GetEndPoint@{GetEndPoint}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{GetEndPoint()}{GetEndPoint()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_acc8d1d94ef46cb801f0b7dcaba0ed0e3} 
+const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \& neo\+::network\+::p2p\+::\+Peer\+::\+Get\+End\+Point (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the endpoint of the peer. 
+
+\begin{DoxyReturn}{Returns}
+The endpoint. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_ab1c222c27a7c9f40ff752e0ca524c67d}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!GetLastConnectionTime@{GetLastConnectionTime}}
+\index{GetLastConnectionTime@{GetLastConnectionTime}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{GetLastConnectionTime()}{GetLastConnectionTime()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_ab1c222c27a7c9f40ff752e0ca524c67d} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Peer\+::\+Get\+Last\+Connection\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the last connection time of the peer. 
+
+\begin{DoxyReturn}{Returns}
+The last connection time. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a54d23cc5f67703127c3c6e909fadb82b}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!GetLastSeenTime@{GetLastSeenTime}}
+\index{GetLastSeenTime@{GetLastSeenTime}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{GetLastSeenTime()}{GetLastSeenTime()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a54d23cc5f67703127c3c6e909fadb82b} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Peer\+::\+Get\+Last\+Seen\+Time (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the last seen time of the peer. 
+
+\begin{DoxyReturn}{Returns}
+The last seen time. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a350f7ee6878ae710c2e3bb932c27e996}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!GetVersion@{GetVersion}}
+\index{GetVersion@{GetVersion}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{GetVersion()}{GetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a350f7ee6878ae710c2e3bb932c27e996} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Peer\+::\+Get\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the version of the peer. 
+
+\begin{DoxyReturn}{Returns}
+The version. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a2212481f17277c0ad9f744edf9a33419}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!IncrementConnectionAttempts@{IncrementConnectionAttempts}}
+\index{IncrementConnectionAttempts@{IncrementConnectionAttempts}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{IncrementConnectionAttempts()}{IncrementConnectionAttempts()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a2212481f17277c0ad9f744edf9a33419} 
+void neo\+::network\+::p2p\+::\+Peer\+::\+Increment\+Connection\+Attempts (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Increments the connection attempts of the peer. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a0e5ce0687248491d99a89b45a3fca2fd}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!IsBad@{IsBad}}
+\index{IsBad@{IsBad}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{IsBad()}{IsBad()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a0e5ce0687248491d99a89b45a3fca2fd} 
+bool neo\+::network\+::p2p\+::\+Peer\+::\+Is\+Bad (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets whether the peer is bad. 
+
+\begin{DoxyReturn}{Returns}
+True if the peer is bad, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_aa73170d4b947e1a3feecf077b96ebc38}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!IsConnected@{IsConnected}}
+\index{IsConnected@{IsConnected}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{IsConnected()}{IsConnected()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_aa73170d4b947e1a3feecf077b96ebc38} 
+bool neo\+::network\+::p2p\+::\+Peer\+::\+Is\+Connected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets whether the peer is connected. 
+
+\begin{DoxyReturn}{Returns}
+True if the peer is connected, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a906043b2fd946e01920b57856b3cd6b8}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a906043b2fd946e01920b57856b3cd6b8} 
+bool neo\+::network\+::p2p\+::\+Peer\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer}{Peer}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} is not equal to another \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Peers are not equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_afa7c0135f07124b820d99d2d1c66e0f2}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_afa7c0135f07124b820d99d2d1c66e0f2} 
+bool neo\+::network\+::p2p\+::\+Peer\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer}{Peer}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} is equal to another \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Peers are equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a3ee198d48c632e6fb9e7df1f6bfd98e6}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a3ee198d48c632e6fb9e7df1f6bfd98e6} 
+void neo\+::network\+::p2p\+::\+Peer\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_acd698e88f073bb8a1f6b061dde9a75de}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_acd698e88f073bb8a1f6b061dde9a75de} 
+void neo\+::network\+::p2p\+::\+Peer\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1_peer}{Peer} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_aa9ca51a46824e9b092a38793f7a26a68}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!SetBad@{SetBad}}
+\index{SetBad@{SetBad}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{SetBad()}{SetBad()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_aa9ca51a46824e9b092a38793f7a26a68} 
+void neo\+::network\+::p2p\+::\+Peer\+::\+Set\+Bad (\begin{DoxyParamCaption}\item[{bool}]{bad}{}\end{DoxyParamCaption})}
+
+
+
+Sets whether the peer is bad. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bad} & Whether the peer is bad. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_aa8c56a257e51a270a6f7c9148005f616}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!SetCapabilities@{SetCapabilities}}
+\index{SetCapabilities@{SetCapabilities}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{SetCapabilities()}{SetCapabilities()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_aa8c56a257e51a270a6f7c9148005f616} 
+void neo\+::network\+::p2p\+::\+Peer\+::\+Set\+Capabilities (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \&}]{capabilities}{}\end{DoxyParamCaption})}
+
+
+
+Sets the capabilities of the peer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em capabilities} & The capabilities. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a36dba91e8bc40b94f61b4203b6ab0cd4}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!SetConnected@{SetConnected}}
+\index{SetConnected@{SetConnected}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{SetConnected()}{SetConnected()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a36dba91e8bc40b94f61b4203b6ab0cd4} 
+void neo\+::network\+::p2p\+::\+Peer\+::\+Set\+Connected (\begin{DoxyParamCaption}\item[{bool}]{connected}{}\end{DoxyParamCaption})}
+
+
+
+Sets whether the peer is connected. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em connected} & Whether the peer is connected. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a769bf9ee018f1ca21f37b95ab453cecb}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!SetConnectionAttempts@{SetConnectionAttempts}}
+\index{SetConnectionAttempts@{SetConnectionAttempts}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{SetConnectionAttempts()}{SetConnectionAttempts()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a769bf9ee018f1ca21f37b95ab453cecb} 
+void neo\+::network\+::p2p\+::\+Peer\+::\+Set\+Connection\+Attempts (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{connection\+Attempts}{}\end{DoxyParamCaption})}
+
+
+
+Sets the connection attempts of the peer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em connection\+Attempts} & The connection attempts. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a3b97dfd1f79c44660f64d1e9439aaac7}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!SetEndPoint@{SetEndPoint}}
+\index{SetEndPoint@{SetEndPoint}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{SetEndPoint()}{SetEndPoint()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a3b97dfd1f79c44660f64d1e9439aaac7} 
+void neo\+::network\+::p2p\+::\+Peer\+::\+Set\+End\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \&}]{endpoint}{}\end{DoxyParamCaption})}
+
+
+
+Sets the endpoint of the peer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em endpoint} & The endpoint. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_aedc8dfd0e53e7674571a671cb00e1200}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!SetLastConnectionTime@{SetLastConnectionTime}}
+\index{SetLastConnectionTime@{SetLastConnectionTime}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{SetLastConnectionTime()}{SetLastConnectionTime()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_aedc8dfd0e53e7674571a671cb00e1200} 
+void neo\+::network\+::p2p\+::\+Peer\+::\+Set\+Last\+Connection\+Time (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{last\+Connection\+Time}{}\end{DoxyParamCaption})}
+
+
+
+Sets the last connection time of the peer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em last\+Connection\+Time} & The last connection time. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a17d76d7ddf64d62c24b7954472cd685b}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!SetLastSeenTime@{SetLastSeenTime}}
+\index{SetLastSeenTime@{SetLastSeenTime}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{SetLastSeenTime()}{SetLastSeenTime()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a17d76d7ddf64d62c24b7954472cd685b} 
+void neo\+::network\+::p2p\+::\+Peer\+::\+Set\+Last\+Seen\+Time (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{last\+Seen\+Time}{}\end{DoxyParamCaption})}
+
+
+
+Sets the last seen time of the peer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em last\+Seen\+Time} & The last seen time. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a64baa21faca75c78b7ae998aa1a70ee4}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!SetVersion@{SetVersion}}
+\index{SetVersion@{SetVersion}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{SetVersion()}{SetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a64baa21faca75c78b7ae998aa1a70ee4} 
+void neo\+::network\+::p2p\+::\+Peer\+::\+Set\+Version (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{version}{}\end{DoxyParamCaption})}
+
+
+
+Sets the version of the peer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em version} & The version. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_ad7b32156720e767f9fbf81c1c13d8e97}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!bad\_@{bad\_}}
+\index{bad\_@{bad\_}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{bad\_}{bad\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_ad7b32156720e767f9fbf81c1c13d8e97} 
+bool neo\+::network\+::p2p\+::\+Peer\+::bad\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a6e070fd05df4bdf8eac08b4c5f705580}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!capabilities\_@{capabilities\_}}
+\index{capabilities\_@{capabilities\_}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{capabilities\_}{capabilities\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a6e070fd05df4bdf8eac08b4c5f705580} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}}$>$ neo\+::network\+::p2p\+::\+Peer\+::capabilities\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a75fa00e9f1a5f1f2c0b468dd7abbb3c3}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!connected\_@{connected\_}}
+\index{connected\_@{connected\_}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{connected\_}{connected\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a75fa00e9f1a5f1f2c0b468dd7abbb3c3} 
+bool neo\+::network\+::p2p\+::\+Peer\+::connected\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_aa076df809a19e341d6eb593b799bb6dc}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!connectionAttempts\_@{connectionAttempts\_}}
+\index{connectionAttempts\_@{connectionAttempts\_}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{connectionAttempts\_}{connectionAttempts\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_aa076df809a19e341d6eb593b799bb6dc} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Peer\+::connection\+Attempts\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_accf8c18ff2716c1ac0eb57912dc588f0}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!endpoint\_@{endpoint\_}}
+\index{endpoint\_@{endpoint\_}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{endpoint\_}{endpoint\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_accf8c18ff2716c1ac0eb57912dc588f0} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} neo\+::network\+::p2p\+::\+Peer\+::endpoint\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_addc8662459576079c4b1071d3f164564}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!lastConnectionTime\_@{lastConnectionTime\_}}
+\index{lastConnectionTime\_@{lastConnectionTime\_}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{lastConnectionTime\_}{lastConnectionTime\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_addc8662459576079c4b1071d3f164564} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Peer\+::last\+Connection\+Time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_ab9837283611574c51303d1ec64669893}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!lastSeenTime\_@{lastSeenTime\_}}
+\index{lastSeenTime\_@{lastSeenTime\_}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{lastSeenTime\_}{lastSeenTime\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_ab9837283611574c51303d1ec64669893} 
+uint64\+\_\+t neo\+::network\+::p2p\+::\+Peer\+::last\+Seen\+Time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_peer_a490d254859dc7cc14d85f0ccc5c0c5da}\index{neo::network::p2p::Peer@{neo::network::p2p::Peer}!version\_@{version\_}}
+\index{version\_@{version\_}!neo::network::p2p::Peer@{neo::network::p2p::Peer}}
+\doxysubsubsection{\texorpdfstring{version\_}{version\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_peer_a490d254859dc7cc14d85f0ccc5c0c5da} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Peer\+::version\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/\mbox{\hyperlink{peer_8h}{peer.\+h}}\item 
+src/network/p2p/\mbox{\hyperlink{peer_8cpp}{peer.\+cpp}}\end{DoxyCompactItemize}

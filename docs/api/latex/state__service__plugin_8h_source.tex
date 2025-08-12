@@ -1,0 +1,66 @@
+\doxysection{state\+\_\+service\+\_\+plugin.\+h}
+\hypertarget{state__service__plugin_8h_source}{}\label{state__service__plugin_8h_source}\index{include/neo/plugins/state\_service\_plugin.h@{include/neo/plugins/state\_service\_plugin.h}}
+\mbox{\hyperlink{state__service__plugin_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2block_8h}{neo/ledger/block.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{persistence_2storage__item_8h}{neo/persistence/storage\_item.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{persistence_2storage__key_8h}{neo/persistence/storage\_key.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{plugin__base_8h}{neo/plugins/plugin\_base.h}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1plugins}{neo::plugins}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1plugins_1_1_state_root}{StateRoot}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1plugins_1_1_state_root_a4801d85542cf5f7628328a8132d24039}{Index}};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{structneo_1_1plugins_1_1_state_root_a6a5756ba17f92b20359102e41ffef98e}{BlockHash}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{structneo_1_1plugins_1_1_state_root_adc628bd3dff5629c5dee41f2a3c1370b}{Root}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00040\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{structneo_1_1plugins_1_1_state_root_a6e1021696b0071745f0f93eb4dc0aaa9}{Version}};}
+\DoxyCodeLine{00041\ \};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a78036433b1273d6372f1a1459e3c0737}{StateServicePlugin}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_ae2713af7147395e3f7230925418aa28d}{PluginBase}}}
+\DoxyCodeLine{00047\ \{}
+\DoxyCodeLine{00048\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00052\ \ \ \ \ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a78036433b1273d6372f1a1459e3c0737}{StateServicePlugin}}();}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00059\ \ \ \ \ std::shared\_ptr<StateRoot>\ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_afccddb3fec463274f00b8e70ff1e6ba3}{GetStateRoot}}(uint32\_t\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00066\ \ \ \ \ std::shared\_ptr<StateRoot>\ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_afccddb3fec463274f00b8e70ff1e6ba3}{GetStateRoot}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a4270ddf36e6bac02f0c81c3182471ba4}{OnInitialize}}(\textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::string>\&\ settings)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a672b596e16506a9ae7fb00c23f13deae}{OnStart}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_ae9b40f56a7b6b33549c0c4cac6402749}{OnStop}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00089\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a0a9ee755a6e3409e6314e46624792dfd}{statePath\_}};}
+\DoxyCodeLine{00090\ \ \ \ \ std::unordered\_map<uint32\_t,\ std::shared\_ptr<StateRoot>>\ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a9e7b7f2cbe86eaa30ebd93a8ddd8b58e}{stateRoots\_}};}
+\DoxyCodeLine{00091\ \ \ \ \ std::unordered\_map<io::UInt256,\ std::shared\_ptr<StateRoot>>\ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a90af8673035df425064b6c2d7ef831c8}{stateRootsByHash\_}};}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a8da4087990c8afd2b8d17bce0229d224}{mutex\_}};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a96af382a46435875270190e2bdb1144b}{OnBlockPersisted}}(std::shared\_ptr<ledger::Block>\ block);}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a66746880cf6e7e03272f40c1752aa486}{SaveStateRoots}}();}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a3d09643d3e263646d73a15060e867803}{LoadStateRoots}}();}
+\DoxyCodeLine{00097\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_a6f737dad8beefed1d2e169976202d0ed}{CalculateStateRoot}}(}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ uint32\_t\ index,\ \textcolor{keyword}{const}\ std::vector<std::pair<persistence::StorageKey,\ persistence::StorageItem>>\&\ changes);}
+\DoxyCodeLine{00099\ \};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00104\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1plugins_1_1_state_service_plugin_factory}{StateServicePluginFactory}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_factory_base}{PluginFactoryBase}}<StateServicePlugin>}
+\DoxyCodeLine{00105\ \{}
+\DoxyCodeLine{00106\ \};}
+\DoxyCodeLine{00107\ \}\ \ \textcolor{comment}{//\ namespace\ neo::plugins}}
+
+\end{DoxyCode}

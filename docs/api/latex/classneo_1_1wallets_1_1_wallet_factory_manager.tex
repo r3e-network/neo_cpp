@@ -1,0 +1,169 @@
+\doxysection{neo\+::wallets\+::Wallet\+Factory\+Manager Class Reference}
+\hypertarget{classneo_1_1wallets_1_1_wallet_factory_manager}{}\label{classneo_1_1wallets_1_1_wallet_factory_manager}\index{neo::wallets::WalletFactoryManager@{neo::wallets::WalletFactoryManager}}
+
+
+Manages wallet factories.  
+
+
+
+
+{\ttfamily \#include $<$wallet\+\_\+factory.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager_ad9de26823a776647f0f21eddd9041c39}{Register\+Factory}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory}{Wallet\+Factory}} $>$ factory)
+\begin{DoxyCompactList}\small\item\em Registers a wallet factory. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory}{Wallet\+Factory}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager_ae4a44ad01f9602c7b71a8c07722b2c68}{Get\+Factory}} (const std\+::string \&path) const
+\begin{DoxyCompactList}\small\item\em Gets a factory that can handle the specified path. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{Wallet}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager_aec124b5677f532f21552e87b9576174f}{Create\+Wallet}} (const std\+::string \&path, const std\+::string \&password, const std\+::string \&name) const
+\begin{DoxyCompactList}\small\item\em Creates a new wallet. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{Wallet}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager_a6fa573598a220e3ed9414fd2d3173583}{Open\+Wallet}} (const std\+::string \&path, const std\+::string \&password) const
+\begin{DoxyCompactList}\small\item\em Opens an existing wallet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager}{Wallet\+Factory\+Manager}} \& \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager_af9da082261ad4bab022fee39ac271e22}{Get\+Instance}} ()
+\begin{DoxyCompactList}\small\item\em Gets the singleton instance of the \doxylink{classneo_1_1wallets_1_1_wallet_factory_manager}{Wallet\+Factory\+Manager}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager_a5b530023d39f7431e98f5d0d840b8c6a}{Wallet\+Factory\+Manager}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory}{Wallet\+Factory}} $>$ $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager_adaacb6db5eb3cdd2bf2d4a415954ff27}{factories\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Manages wallet factories. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_factory_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_factory_manager_a5b530023d39f7431e98f5d0d840b8c6a}\index{neo::wallets::WalletFactoryManager@{neo::wallets::WalletFactoryManager}!WalletFactoryManager@{WalletFactoryManager}}
+\index{WalletFactoryManager@{WalletFactoryManager}!neo::wallets::WalletFactoryManager@{neo::wallets::WalletFactoryManager}}
+\doxysubsubsection{\texorpdfstring{WalletFactoryManager()}{WalletFactoryManager()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_factory_manager_a5b530023d39f7431e98f5d0d840b8c6a} 
+neo\+::wallets\+::\+Wallet\+Factory\+Manager\+::\+Wallet\+Factory\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_factory_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_factory_manager_aec124b5677f532f21552e87b9576174f}\index{neo::wallets::WalletFactoryManager@{neo::wallets::WalletFactoryManager}!CreateWallet@{CreateWallet}}
+\index{CreateWallet@{CreateWallet}!neo::wallets::WalletFactoryManager@{neo::wallets::WalletFactoryManager}}
+\doxysubsubsection{\texorpdfstring{CreateWallet()}{CreateWallet()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_factory_manager_aec124b5677f532f21552e87b9576174f} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{Wallet}} $>$ neo\+::wallets\+::\+Wallet\+Factory\+Manager\+::\+Create\+Wallet (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{, }\item[{const std\+::string \&}]{password}{, }\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption}) const}
+
+
+
+Creates a new wallet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path. \\
+\hline
+{\em password} & The password. \\
+\hline
+{\em name} & The name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The new wallet. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1wallets_1_1_wallet_factory_manager_ae4a44ad01f9602c7b71a8c07722b2c68}\index{neo::wallets::WalletFactoryManager@{neo::wallets::WalletFactoryManager}!GetFactory@{GetFactory}}
+\index{GetFactory@{GetFactory}!neo::wallets::WalletFactoryManager@{neo::wallets::WalletFactoryManager}}
+\doxysubsubsection{\texorpdfstring{GetFactory()}{GetFactory()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_factory_manager_ae4a44ad01f9602c7b71a8c07722b2c68} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory}{Wallet\+Factory}} $>$ neo\+::wallets\+::\+Wallet\+Factory\+Manager\+::\+Get\+Factory (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a factory that can handle the specified path. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The factory, or nullptr if no factory can handle the path. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_factory_manager_af9da082261ad4bab022fee39ac271e22}\index{neo::wallets::WalletFactoryManager@{neo::wallets::WalletFactoryManager}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::wallets::WalletFactoryManager@{neo::wallets::WalletFactoryManager}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_factory_manager_af9da082261ad4bab022fee39ac271e22} 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory_manager}{Wallet\+Factory\+Manager}} \& neo\+::wallets\+::\+Wallet\+Factory\+Manager\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the singleton instance of the \doxylink{classneo_1_1wallets_1_1_wallet_factory_manager}{Wallet\+Factory\+Manager}. 
+
+\begin{DoxyReturn}{Returns}
+The singleton instance. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1wallets_1_1_wallet_factory_manager_a6fa573598a220e3ed9414fd2d3173583}\index{neo::wallets::WalletFactoryManager@{neo::wallets::WalletFactoryManager}!OpenWallet@{OpenWallet}}
+\index{OpenWallet@{OpenWallet}!neo::wallets::WalletFactoryManager@{neo::wallets::WalletFactoryManager}}
+\doxysubsubsection{\texorpdfstring{OpenWallet()}{OpenWallet()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_factory_manager_a6fa573598a220e3ed9414fd2d3173583} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet}{Wallet}} $>$ neo\+::wallets\+::\+Wallet\+Factory\+Manager\+::\+Open\+Wallet (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{, }\item[{const std\+::string \&}]{password}{}\end{DoxyParamCaption}) const}
+
+
+
+Opens an existing wallet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path. \\
+\hline
+{\em password} & The password. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The opened wallet. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1wallets_1_1_wallet_factory_manager_ad9de26823a776647f0f21eddd9041c39}\index{neo::wallets::WalletFactoryManager@{neo::wallets::WalletFactoryManager}!RegisterFactory@{RegisterFactory}}
+\index{RegisterFactory@{RegisterFactory}!neo::wallets::WalletFactoryManager@{neo::wallets::WalletFactoryManager}}
+\doxysubsubsection{\texorpdfstring{RegisterFactory()}{RegisterFactory()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_factory_manager_ad9de26823a776647f0f21eddd9041c39} 
+void neo\+::wallets\+::\+Wallet\+Factory\+Manager\+::\+Register\+Factory (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory}{Wallet\+Factory}} $>$}]{factory}{}\end{DoxyParamCaption})}
+
+
+
+Registers a wallet factory. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em factory} & The factory. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_factory_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_factory_manager_adaacb6db5eb3cdd2bf2d4a415954ff27}\index{neo::wallets::WalletFactoryManager@{neo::wallets::WalletFactoryManager}!factories\_@{factories\_}}
+\index{factories\_@{factories\_}!neo::wallets::WalletFactoryManager@{neo::wallets::WalletFactoryManager}}
+\doxysubsubsection{\texorpdfstring{factories\_}{factories\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_factory_manager_adaacb6db5eb3cdd2bf2d4a415954ff27} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_factory}{Wallet\+Factory}}$>$ $>$ neo\+::wallets\+::\+Wallet\+Factory\+Manager\+::factories\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/wallets/\mbox{\hyperlink{wallet__factory_8h}{wallet\+\_\+factory.\+h}}\item 
+src/wallets/\mbox{\hyperlink{wallet__factory_8cpp}{wallet\+\_\+factory.\+cpp}}\end{DoxyCompactItemize}

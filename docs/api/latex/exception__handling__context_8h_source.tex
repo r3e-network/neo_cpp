@@ -1,0 +1,52 @@
+\doxysection{exception\+\_\+handling\+\_\+context.\+h}
+\hypertarget{exception__handling__context_8h_source}{}\label{exception__handling__context_8h_source}\index{include/neo/vm/exception\_handling\_context.h@{include/neo/vm/exception\_handling\_context.h}}
+\mbox{\hyperlink{exception__handling__context_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stack__item_8h}{neo/vm/stack\_item.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespaceneo_1_1vm_a6075537e926e96deaea01659ca6a3270}{ExceptionHandlingState}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a6075537e926e96deaea01659ca6a3270aeead05a01ff69770e90ba2a541988cab}{Try}},}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a6075537e926e96deaea01659ca6a3270ac5d59568835d0760e318829b800ee06d}{Catch}},}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a6075537e926e96deaea01659ca6a3270a5f12a06561716fe48aa95eaa7cec02cd}{Finally}}}
+\DoxyCodeLine{00029\ \};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00034\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_ad4990d4d28190c9dddbc8750601d9973}{ExceptionHandlingContext}}}
+\DoxyCodeLine{00035\ \{}
+\DoxyCodeLine{00036\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00042\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_ad4990d4d28190c9dddbc8750601d9973}{ExceptionHandlingContext}}(int32\_t\ catchPointer,\ int32\_t\ finallyPointer);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00048\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a1d5f903661eb1aa52feaed69e844db34}{GetCatchPointer}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00054\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a264f2fb1dd69f7483936be005241fea8}{GetFinallyPointer}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00060\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a2b49bd41efdb45f0eb587bde13ac4aa2}{GetEndPointer}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_aad0395e0ca725752d4bf5f1816886d4f}{SetEndPointer}}(int32\_t\ endPointer);}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00072\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a6075537e926e96deaea01659ca6a3270}{ExceptionHandlingState}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a4aae5692f3fd501277e864157f529060}{GetState}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a63985ce40a7f37de2465fa3c3e21d921}{SetState}}(\mbox{\hyperlink{namespaceneo_1_1vm_a6075537e926e96deaea01659ca6a3270}{ExceptionHandlingState}}\ state);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_ae841c6c144b54ce4231fb15294e442fc}{HasCatch}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a626389bfd29e296a81bd3182ca4f9515}{HasFinally}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00093\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a2a7280312586762343f6e23d7187ef7a}{catchPointer\_}};}
+\DoxyCodeLine{00094\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a2daf036df8b85d799c38103ec31ed46e}{finallyPointer\_}};}
+\DoxyCodeLine{00095\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a9d2001cce126562abd3a765cba8a5455}{endPointer\_}};}
+\DoxyCodeLine{00096\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a6075537e926e96deaea01659ca6a3270}{ExceptionHandlingState}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context_a210c24bb7fca50c08d2869f7fc52f9db}{state\_}};}
+\DoxyCodeLine{00097\ \};}
+\DoxyCodeLine{00098\ \}\ \ \textcolor{comment}{//\ namespace\ neo::vm}}
+
+\end{DoxyCode}

@@ -1,0 +1,89 @@
+\doxysection{contract\+\_\+parameters\+\_\+context.\+h}
+\hypertarget{contract__parameters__context_8h_source}{}\label{contract__parameters__context_8h_source}\index{include/neo/smartcontract/contract\_parameters\_context.h@{include/neo/smartcontract/contract\_parameters\_context.h}}
+\mbox{\hyperlink{contract__parameters__context_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ecpoint_8h}{neo/cryptography/ecc/ecpoint.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ijson__serializable_8h}{neo/io/ijson\_serializable.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{iserializable_8h}{neo/io/iserializable.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{iverifiable_8h}{neo/network/p2p/payloads/iverifiable.h}}>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{data__cache_8h}{neo/persistence/data\_cache.h}}>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{contract_8h}{neo/smartcontract/contract.h}}>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract}{neo::smartcontract}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a91f27074afefb63d5b98c891f209d674}{ContractParametersContext}}}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_1_1_context_item_a27719da6b2f2fbf1472e21246266f5c5}{ContextItem}}}
+\DoxyCodeLine{00026\ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_1_1_context_item_ac1d1909f19b51a9f01bc4481c67d9069}{script}};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ std::vector<ContractParameter>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_1_1_context_item_a3beb82fa017ed18f41c413b8f1b454fa}{parameters}};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ std::map<cryptography::ecc::ECPoint,\ io::ByteVector>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_1_1_context_item_afd66fa62eab0dba136710462da7385f6}{signatures}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_1_1_context_item_a27719da6b2f2fbf1472e21246266f5c5}{ContextItem}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}}\&\ contract);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_1_1_context_item_a27719da6b2f2fbf1472e21246266f5c5}{ContextItem}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io::JsonReader}}\&\ reader);}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_1_1_context_item_a680de3cd5c72d1e8af0b0b626ca338d9}{ToJson}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io::JsonWriter}}\&\ writer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00049\ \ \ \ \ \};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00051\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_verifiable}{network::p2p::payloads::IVerifiable}}\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a68ade531b93660d2da7fff9e047e1efb}{verifiable}};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence::DataCache}}\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a626501f84c15275b552b995ed7a029e3}{snapshotCache}};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{const}\ uint32\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a2b417c5a624b8ad9e593b8c573f304ae}{network}};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a0ef90c8f91944fc5f8edb275d3681dd8}{IsCompleted}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<io::UInt160>\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a1201b8279069d58de6bce2f781fe9d97}{GetScriptHashes}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00085\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a91f27074afefb63d5b98c891f209d674}{ContractParametersContext}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence::DataCache}}\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a626501f84c15275b552b995ed7a029e3}{snapshotCache}},}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_i_verifiable}{network::p2p::payloads::IVerifiable}}\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a68ade531b93660d2da7fff9e047e1efb}{verifiable}},\ uint32\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a2b417c5a624b8ad9e593b8c573f304ae}{network}});}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a875da386bcad55218e04c8f9b82955bc}{Add}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}}\&\ contract,\ \textcolor{keywordtype}{int}\ index,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ parameter);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a875da386bcad55218e04c8f9b82955bc}{Add}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}}\&\ contract,\ \textcolor{keyword}{const}\ std::vector<io::ByteVector>\&\ parameters);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a015b08386ae93c30a426ae29cfacc400}{AddSignature}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}}\&\ contract,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography::ecc::ECPoint}}\&\ pubkey,}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ signature);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a10bc2977071c09644d074a1b018e6001}{AddWithScriptHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ scriptHash);}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameter}{ContractParameter}}*\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a688273999616597b529bf86aa8c2eda4}{GetParameter}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ scriptHash,\ \textcolor{keywordtype}{int}\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<ContractParameter>*\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a30ce815b8e494ed1a436f1267c87c92a}{GetParameters}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ scriptHash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keyword}{const}\ std::map<cryptography::ecc::ECPoint,\ io::ByteVector>*\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a92098fd7097cef55d695f6f9a55fbd4e}{GetSignatures}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ scriptHash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00148\ \ \ \ \ std::vector<ledger::Witness>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a06a6986a4ce3d40b1ef8d66992e0eedf}{GetWitnesses}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keyword}{static}\ std::unique\_ptr<ContractParametersContext>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a689829585affc8aacd26640e2797f494}{FromJson}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io::JsonReader}}\&\ reader,}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence::DataCache}}\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a626501f84c15275b552b995ed7a029e3}{snapshotCache}});}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00163\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a82029be07bc0b7e6295d2b6738528181}{ToJson}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io::JsonWriter}}\&\ writer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00166\ \ \ \ \ std::map<io::UInt160,\ std::unique\_ptr<ContextItem>>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a77593930d80161710cb72e4e4e9e3ab2}{contextItems}};}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keyword}{mutable}\ std::vector<io::UInt160>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_add94ce6e1c5f503b21a2daea4634fd23}{scriptHashes}};}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00174\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_1_1_context_item}{ContextItem}}*\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_ab29edb12f5e63a0c57e7f1c2d5a97083}{CreateItem}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}}\&\ contract);}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_aa5d75e9011d529bdc8408ed3a41f5e6f}{IsMultiSigContract}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\&\ script,\ \textcolor{keywordtype}{int}\&\ m,\ \textcolor{keywordtype}{int}\&\ n,}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::vector<cryptography::ecc::ECPoint>\&\ publicKeys)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00192\ \ \ \ \ std::shared\_ptr<ledger::Witness>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_parameters_context_a511b260798fc0be9364cb30ed67f7c39}{CreateMultiSigWitness}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{Contract}}\&\ contract)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00193\ \};}
+\DoxyCodeLine{00194\ \}\ \ \textcolor{comment}{//\ namespace\ neo::smartcontract}}
+
+\end{DoxyCode}

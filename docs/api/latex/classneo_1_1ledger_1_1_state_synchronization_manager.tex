@@ -1,0 +1,1045 @@
+\doxysection{neo\+::ledger\+::State\+Synchronization\+Manager Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager}{}\label{classneo_1_1ledger_1_1_state_synchronization_manager}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+
+
+State Synchronization Manager for blockchain state consistency.  
+
+
+
+
+{\ttfamily \#include $<$state\+\_\+synchronization\+\_\+manager.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::ledger\+::State\+Synchronization\+Manager\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration}{Configuration}}
+\begin{DoxyCompactList}\small\item\em \doxylink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration}{Configuration} for state synchronization. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_peer_state}{Peer\+State}}
+\begin{DoxyCompactList}\small\item\em Peer state information. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_state_chunk}{State\+Chunk}}
+\begin{DoxyCompactList}\small\item\em State chunk for incremental synchronization. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats}{Sync\+Stats}}
+\begin{DoxyCompactList}\small\item\em Synchronization statistics. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result}{Validation\+Result}}
+\begin{DoxyCompactList}\small\item\em State validation result. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{Sync\+Status}} \{ \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07ae599161956d626eda4cb0a5ffb85271c}{Idle}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07a7e1907b268e3b1261c98c5bf7a368fe5}{Syncing}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07ac423b2af9f3f373c6576a8512645da9b}{Validating}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07afda39cc5b167799979a72d7ebb73171e}{Synchronized}}
+, \newline
+\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07ad7c8c85bf79bbe1b7188497c32c3b0ca}{Failed}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07a74e9d494d732494a8362f360203bbb68}{Recovering}}
+ \}
+\begin{DoxyCompactList}\small\item\em Synchronization status enumeration. \end{DoxyCompactList}\item 
+enum class \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3}{Sync\+Mode}} \{ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3abbd47109890259c0127154db1af26c75}{Full}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3ae16b5b7f26f54214445cbe38d72c2828}{Fast}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3a9914a0ce04a7b7b6a8e39bec55064b82}{Light}}
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3ae727b00944f81e1d0a95c12886ac4641}{Archive}}
+ \}
+\begin{DoxyCompactList}\small\item\em State synchronization mode. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a054902fe8870604d4029c58090c89e99}{State\+Synchronization\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a77ef3aca7acf636445221db1be5533d3}{State\+Synchronization\+Manager}} (const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration}{Configuration}} \&config, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ data\+\_\+cache=nullptr)
+\begin{DoxyCompactList}\small\item\em Constructor with configuration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a0ab9182ffaf5d6ba7edadfcf6c57db85}{\texorpdfstring{$\sim$}{\string~}\+State\+Synchronization\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Destructor -\/ ensures threads are stopped. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_abbe48a3ff1e3322ee5cb3664c9bfa773}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Start state synchronization. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_abca08d58c09e20b3a64908ac605a5ca9}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stop state synchronization. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_ab8e9e6cf496a86130dc6a8cd3e638575}{Request\+State\+Sync}} (const std\+::string \&peer\+\_\+id, uint32\+\_\+t start\+\_\+height, uint32\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Request state synchronization with specific peer. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result}{Validation\+Result}} \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a9b21e2a898fe012801b65a2e2089f5ec}{Process\+State\+Root}} (uint32\+\_\+t height, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&state\+\_\+root, const std\+::string \&peer\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Process received state root. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa3d954db7a5d8efefb386dc096da3488}{Process\+State\+Chunk}} (const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_state_chunk}{State\+Chunk}} \&chunk, const std\+::string \&peer\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Process received state chunk. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result}{Validation\+Result}} \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_abce3fea789768c7bb33eae5eba17341b}{Validate\+State\+At\+Height}} (uint32\+\_\+t height)
+\begin{DoxyCompactList}\small\item\em Validate state at specific height. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{Sync\+Status}} \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4ffe54e6d1c0eba356fad3fd4a32e9f4}{Get\+Sync\+Status}} () const
+\begin{DoxyCompactList}\small\item\em Get current synchronization status. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats}{Sync\+Stats}} \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a0ba4dc9bcbd76fa948a63731ea66945d}{Get\+Statistics}} () const
+\begin{DoxyCompactList}\small\item\em Get synchronization statistics. \end{DoxyCompactList}\item 
+std\+::optional$<$ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_peer_state}{Peer\+State}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_adf34e54234925a7c35e5938cda02fff1}{Get\+Peer\+State}} (const std\+::string \&peer\+\_\+id) const
+\begin{DoxyCompactList}\small\item\em Get peer state information. \end{DoxyCompactList}\item 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_peer_state}{Peer\+State}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a7c9d26b50b2ad0165efbea525e250e43}{Get\+All\+Peer\+States}} () const
+\begin{DoxyCompactList}\small\item\em Get all peer states. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a103ae19cd9779b234d68c83cb52fd5ce}{Add\+Trusted\+Peer}} (const std\+::string \&peer\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Add trusted peer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a7bec7488607cb5c97749861df033437a}{Remove\+Trusted\+Peer}} (const std\+::string \&peer\+\_\+id)
+\begin{DoxyCompactList}\small\item\em Remove trusted peer. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_ab6e7eb9c11dbbbcdc9dba0088174a624}{Is\+Synchronized}} () const
+\begin{DoxyCompactList}\small\item\em Check if state is synchronized. \end{DoxyCompactList}\item 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a03a7645d0484a493cb9a21eecc0bd144}{Get\+Current\+State\+Root}} () const
+\begin{DoxyCompactList}\small\item\em Get current state root. \end{DoxyCompactList}\item 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a25082d3fca98d3a9d85d2544cac051a9}{Get\+State\+Root\+At\+Height}} (uint32\+\_\+t height) const
+\begin{DoxyCompactList}\small\item\em Get state root at specific height. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a37774a64c2c0fe1e69b17255a3d8c24f}{Force\+Validation}} (uint32\+\_\+t start\+\_\+height, uint32\+\_\+t end\+\_\+height)
+\begin{DoxyCompactList}\small\item\em Force state validation. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_af1d8f3f14c31bec0f82fd8f6d4b19346}{Reset}} (bool clear\+\_\+cache=false)
+\begin{DoxyCompactList}\small\item\em Reset synchronization state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aee71512fc6af7219f3b9c63c7f070531}{Update\+Configuration}} (const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration}{Configuration}} \&config)
+\begin{DoxyCompactList}\small\item\em Update configuration. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration}{Configuration}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_ad00e5cbfbb313d351d2a9088eeb06824}{Get\+Configuration}} () const
+\begin{DoxyCompactList}\small\item\em Get current configuration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a742766c2ef89db8e911d60cea8c5d405}{Set\+On\+State\+Validated}} (std\+::function$<$ void(uint32\+\_\+t, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&)$>$ callback)
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_ad12c4c292c762d1ef29da113326f62fd}{Set\+On\+Validation\+Failed}} (std\+::function$<$ void(const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result}{Validation\+Result}} \&)$>$ callback)
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a6cdb6b0d50416690980f03c5e0f4ae9c}{Set\+On\+Sync\+Progress}} (std\+::function$<$ void(const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats}{Sync\+Stats}} \&)$>$ callback)
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_af130d138c434cbd9127e27960e35753d}{Set\+On\+Status\+Changed}} (std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{Sync\+Status}})$>$ callback)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a49353ee2cc7ebf97fc613b878a617139}{Synchronization\+Thread}} ()
+\begin{DoxyCompactList}\small\item\em Main synchronization thread function. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a7a0e9c5b06a92c91d7f02118e12fdd9e}{Validation\+Thread}} ()
+\begin{DoxyCompactList}\small\item\em Validation thread function. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_ad00549bb5c528e9bc8328280c84b4bd0}{Select\+Best\+Peers}} (size\+\_\+t count) const
+\begin{DoxyCompactList}\small\item\em Select best peers for synchronization. \end{DoxyCompactList}\item 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_af02c137d6927c2611ca2e231c7b44255}{Calculate\+State\+Consensus}} (uint32\+\_\+t height) const
+\begin{DoxyCompactList}\small\item\em Calculate state root consensus among peers. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a7a1a165c57ea79dd1e8f04d86364fc80}{Validate\+Chunk\+Integrity}} (const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_state_chunk}{State\+Chunk}} \&chunk) const
+\begin{DoxyCompactList}\small\item\em Validate state chunk integrity. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a6973461636a8e3ad4859f3ca0374b7be}{Persist\+State}} (uint32\+\_\+t height, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&state\+\_\+root, const std\+::vector$<$ uint8\+\_\+t $>$ \&state\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Persist state to cache. \end{DoxyCompactList}\item 
+std\+::optional$<$ std\+::vector$<$ uint8\+\_\+t $>$ $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a489cc2c9866480559b488cb81e7a4071}{Load\+State}} (uint32\+\_\+t height) const
+\begin{DoxyCompactList}\small\item\em Load state from cache. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aee0bf879bf60a9ff37a1bc558b42944e}{Handle\+Sync\+Failure}} (const std\+::string \&reason)
+\begin{DoxyCompactList}\small\item\em Handle synchronization failure. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aeb5e6505ed8c2fbcd22c1666e2bf5693}{Attempt\+Recovery}} ()
+\begin{DoxyCompactList}\small\item\em Attempt recovery from failure. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a76d44156c1d4aa3b1cbd45b00e74c0a7}{Update\+Peer\+State}} (const std\+::string \&peer\+\_\+id, uint32\+\_\+t height, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&state\+\_\+root)
+\begin{DoxyCompactList}\small\item\em Update peer state information. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a8da4bf1773c7a5c412e38f999f5cf16f}{Remove\+Stale\+Peers}} ()
+\begin{DoxyCompactList}\small\item\em Remove stale peers. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a449ba50782a8e07c1f6e41fccff67a6b}{Update\+Metrics}} ()
+\begin{DoxyCompactList}\small\item\em Update synchronization metrics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_af9eca8e0f4b06152a77dc1ab88a4d8ef}{Change\+Sync\+Status}} (\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{Sync\+Status}} new\+\_\+status)
+\begin{DoxyCompactList}\small\item\em Change synchronization status. \end{DoxyCompactList}\item 
+double \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a28315c0db824e6509ded92384de1152c}{Calculate\+Sync\+Progress}} () const
+\begin{DoxyCompactList}\small\item\em Calculate synchronization progress. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a54a8085aa14bff2184ab4519b1251487}{Is\+Trusted\+Peer}} (const std\+::string \&peer\+\_\+id) const
+\begin{DoxyCompactList}\small\item\em Check if peer is trusted. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration}{Configuration}} \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a9eeaa02a5c200be4cfeb0499494c622a}{config\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_ac69c076d6d25c6e7e9ee690f84cc4cd4}{data\+\_\+cache\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_root}{State\+Root}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_ad29a8aacf7f36dc9767d227db17ec1cb}{current\+\_\+state\+\_\+root\+\_\+}}
+\item 
+std\+::atomic$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{Sync\+Status}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a1528b35addd6ed549763f46801dd802b}{sync\+\_\+status\+\_\+}} \{\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07ae599161956d626eda4cb0a5ffb85271c}{Sync\+Status\+::\+Idle}}\}
+\item 
+std\+::atomic$<$ uint32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a796f519ce64b117ce176faa6cfc32e4d}{current\+\_\+height\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ uint32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a036b9f2a8cbf0d36c8421e3e0ca9d34b}{target\+\_\+height\+\_\+}} \{0\}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_peer_state}{Peer\+State}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a447fa2d1a9b72bdc79553c34fd829567}{peer\+\_\+states\+\_\+}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_af3b972fd1b1ddd8325ec20fd731dc75a}{trusted\+\_\+peers\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ uint32\+\_\+t, \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_state_chunk}{State\+Chunk}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_af59be2822b7e20f3bcaa08dce55e4dd8}{pending\+\_\+chunks\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result}{Validation\+Result}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a946358f07e3b821eac1f9ec9ffb594c9}{validation\+\_\+cache\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a898a24bbe5cae98b8ef178569d7021e7}{sync\+\_\+thread\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a9a9cf6fdb405f93b14f241fef77bf339}{validation\+\_\+thread\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a5fef1463d94849d225dcaaab8c105c91}{running\+\_\+}} \{false\}
+\item 
+std\+::shared\+\_\+mutex \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_afdc16a43837bccd9b93d30ea0be20d8f}{mutex\+\_\+}}
+\item 
+std\+::atomic$<$ size\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_ad8c48fe96e5b3ba169f0e0e1bba63a13}{states\+\_\+processed\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ size\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a728ce3f5c39904489e9635cb36486096}{states\+\_\+validated\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ size\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a6a9d8160ae6e06acd6a2b1aa37557120}{states\+\_\+failed\+\_\+}} \{0\}
+\item 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a427879be3c8df3f64e6df0ab02a4299b}{sync\+\_\+start\+\_\+time\+\_\+}}
+\item 
+std\+::function$<$ void(uint32\+\_\+t, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&)$>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4577fad8b6de6fec4c88449cc76016fd}{on\+\_\+state\+\_\+validated\+\_\+}}
+\item 
+std\+::function$<$ void(const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result}{Validation\+Result}} \&)$>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a1d1ca9bfd12daabdac0e8bbbfeb69273}{on\+\_\+validation\+\_\+failed\+\_\+}}
+\item 
+std\+::function$<$ void(const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats}{Sync\+Stats}} \&)$>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a102205dd22ed9f968733393ce4e4e03e}{on\+\_\+sync\+\_\+progress\+\_\+}}
+\item 
+std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{Sync\+Status}})$>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0b878ff163450c92ab166d7ba709255}{on\+\_\+status\+\_\+changed\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+State Synchronization Manager for blockchain state consistency. 
+
+This class manages the synchronization of blockchain state across the network, ensuring consistency of state roots, MPT (Merkle Patricia Trie) data, and state transitions between peers. It provides C\# Neo compatibility while adding monitoring and recovery capabilities. 
+
+\label{doc-enum-members}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!SyncMode@{SyncMode}}
+\index{SyncMode@{SyncMode}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{SyncMode}{SyncMode}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3} 
+enum class \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3}{neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Sync\+Mode}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+State synchronization mode. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Full@{Full}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!Full@{Full}}}\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3abbd47109890259c0127154db1af26c75}\label{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3abbd47109890259c0127154db1af26c75} 
+Full&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Fast@{Fast}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!Fast@{Fast}}}\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3ae16b5b7f26f54214445cbe38d72c2828}\label{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3ae16b5b7f26f54214445cbe38d72c2828} 
+Fast&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Light@{Light}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!Light@{Light}}}\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3a9914a0ce04a7b7b6a8e39bec55064b82}\label{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3a9914a0ce04a7b7b6a8e39bec55064b82} 
+Light&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Archive@{Archive}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!Archive@{Archive}}}\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3ae727b00944f81e1d0a95c12886ac4641}\label{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3ae727b00944f81e1d0a95c12886ac4641} 
+Archive&\\
+\hline
+
+\end{DoxyEnumFields}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!SyncStatus@{SyncStatus}}
+\index{SyncStatus@{SyncStatus}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{SyncStatus}{SyncStatus}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07} 
+enum class \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Sync\+Status}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+Synchronization status enumeration. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Idle@{Idle}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!Idle@{Idle}}}\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07ae599161956d626eda4cb0a5ffb85271c}\label{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07ae599161956d626eda4cb0a5ffb85271c} 
+Idle&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Syncing@{Syncing}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!Syncing@{Syncing}}}\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07a7e1907b268e3b1261c98c5bf7a368fe5}\label{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07a7e1907b268e3b1261c98c5bf7a368fe5} 
+Syncing&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Validating@{Validating}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!Validating@{Validating}}}\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07ac423b2af9f3f373c6576a8512645da9b}\label{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07ac423b2af9f3f373c6576a8512645da9b} 
+Validating&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Synchronized@{Synchronized}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!Synchronized@{Synchronized}}}\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07afda39cc5b167799979a72d7ebb73171e}\label{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07afda39cc5b167799979a72d7ebb73171e} 
+Synchronized&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Failed@{Failed}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!Failed@{Failed}}}\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07ad7c8c85bf79bbe1b7188497c32c3b0ca}\label{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07ad7c8c85bf79bbe1b7188497c32c3b0ca} 
+Failed&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Recovering@{Recovering}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!Recovering@{Recovering}}}\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07a74e9d494d732494a8362f360203bbb68}\label{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07a74e9d494d732494a8362f360203bbb68} 
+Recovering&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a054902fe8870604d4029c58090c89e99}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!StateSynchronizationManager@{StateSynchronizationManager}}
+\index{StateSynchronizationManager@{StateSynchronizationManager}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{StateSynchronizationManager()}{StateSynchronizationManager()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a054902fe8870604d4029c58090c89e99} 
+neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+State\+Synchronization\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a77ef3aca7acf636445221db1be5533d3}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!StateSynchronizationManager@{StateSynchronizationManager}}
+\index{StateSynchronizationManager@{StateSynchronizationManager}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{StateSynchronizationManager()}{StateSynchronizationManager()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a77ef3aca7acf636445221db1be5533d3} 
+neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+State\+Synchronization\+Manager (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration}{Configuration}} \&}]{config}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{data\+\_\+cache}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor with configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & Synchronization configuration \\
+\hline
+{\em data\+\_\+cache} & Data cache for state persistence \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a0ab9182ffaf5d6ba7edadfcf6c57db85}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!````~StateSynchronizationManager@{\texorpdfstring{$\sim$}{\string~}StateSynchronizationManager}}
+\index{````~StateSynchronizationManager@{\texorpdfstring{$\sim$}{\string~}StateSynchronizationManager}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}StateSynchronizationManager()}{\string~StateSynchronizationManager()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a0ab9182ffaf5d6ba7edadfcf6c57db85} 
+neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\texorpdfstring{$\sim$}{\string~}\+State\+Synchronization\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor -\/ ensures threads are stopped. 
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a103ae19cd9779b234d68c83cb52fd5ce}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!AddTrustedPeer@{AddTrustedPeer}}
+\index{AddTrustedPeer@{AddTrustedPeer}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{AddTrustedPeer()}{AddTrustedPeer()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a103ae19cd9779b234d68c83cb52fd5ce} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Add\+Trusted\+Peer (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{peer\+\_\+id}{}\end{DoxyParamCaption})}
+
+
+
+Add trusted peer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em peer\+\_\+id} & Peer identifier to trust \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_aeb5e6505ed8c2fbcd22c1666e2bf5693}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!AttemptRecovery@{AttemptRecovery}}
+\index{AttemptRecovery@{AttemptRecovery}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{AttemptRecovery()}{AttemptRecovery()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_aeb5e6505ed8c2fbcd22c1666e2bf5693} 
+bool neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Attempt\+Recovery (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Attempt recovery from failure. 
+
+\begin{DoxyReturn}{Returns}
+True if recovery successful 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_af02c137d6927c2611ca2e231c7b44255}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!CalculateStateConsensus@{CalculateStateConsensus}}
+\index{CalculateStateConsensus@{CalculateStateConsensus}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{CalculateStateConsensus()}{CalculateStateConsensus()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_af02c137d6927c2611ca2e231c7b44255} 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Calculate\+State\+Consensus (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{height}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculate state root consensus among peers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em height} & \doxylink{classneo_1_1ledger_1_1_block}{Block} height \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Consensus state root if agreement reached 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a28315c0db824e6509ded92384de1152c}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!CalculateSyncProgress@{CalculateSyncProgress}}
+\index{CalculateSyncProgress@{CalculateSyncProgress}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{CalculateSyncProgress()}{CalculateSyncProgress()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a28315c0db824e6509ded92384de1152c} 
+double neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Calculate\+Sync\+Progress (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculate synchronization progress. 
+
+\begin{DoxyReturn}{Returns}
+Progress percentage (0-\/100) 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_af9eca8e0f4b06152a77dc1ab88a4d8ef}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!ChangeSyncStatus@{ChangeSyncStatus}}
+\index{ChangeSyncStatus@{ChangeSyncStatus}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{ChangeSyncStatus()}{ChangeSyncStatus()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_af9eca8e0f4b06152a77dc1ab88a4d8ef} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Change\+Sync\+Status (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{Sync\+Status}}}]{new\+\_\+status}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Change synchronization status. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+status} & New status \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a37774a64c2c0fe1e69b17255a3d8c24f}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!ForceValidation@{ForceValidation}}
+\index{ForceValidation@{ForceValidation}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{ForceValidation()}{ForceValidation()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a37774a64c2c0fe1e69b17255a3d8c24f} 
+size\+\_\+t neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Force\+Validation (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{start\+\_\+height}{, }\item[{uint32\+\_\+t}]{end\+\_\+height}{}\end{DoxyParamCaption})}
+
+
+
+Force state validation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start\+\_\+height} & Starting height \\
+\hline
+{\em end\+\_\+height} & Ending height \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of states validated 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a7c9d26b50b2ad0165efbea525e250e43}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!GetAllPeerStates@{GetAllPeerStates}}
+\index{GetAllPeerStates@{GetAllPeerStates}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{GetAllPeerStates()}{GetAllPeerStates()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a7c9d26b50b2ad0165efbea525e250e43} 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_peer_state}{State\+Synchronization\+Manager\+::\+Peer\+State}} $>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Get\+All\+Peer\+States (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get all peer states. 
+
+\begin{DoxyReturn}{Returns}
+Map of peer states 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_ad00e5cbfbb313d351d2a9088eeb06824}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!GetConfiguration@{GetConfiguration}}
+\index{GetConfiguration@{GetConfiguration}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{GetConfiguration()}{GetConfiguration()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_ad00e5cbfbb313d351d2a9088eeb06824} 
+const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration}{Configuration}} \& neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Get\+Configuration (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get current configuration. 
+
+\begin{DoxyReturn}{Returns}
+Current configuration 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a03a7645d0484a493cb9a21eecc0bd144}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!GetCurrentStateRoot@{GetCurrentStateRoot}}
+\index{GetCurrentStateRoot@{GetCurrentStateRoot}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{GetCurrentStateRoot()}{GetCurrentStateRoot()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a03a7645d0484a493cb9a21eecc0bd144} 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Get\+Current\+State\+Root (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get current state root. 
+
+\begin{DoxyReturn}{Returns}
+Current state root if available 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_adf34e54234925a7c35e5938cda02fff1}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!GetPeerState@{GetPeerState}}
+\index{GetPeerState@{GetPeerState}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{GetPeerState()}{GetPeerState()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_adf34e54234925a7c35e5938cda02fff1} 
+std\+::optional$<$ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_peer_state}{State\+Synchronization\+Manager\+::\+Peer\+State}} $>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Get\+Peer\+State (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{peer\+\_\+id}{}\end{DoxyParamCaption}) const}
+
+
+
+Get peer state information. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em peer\+\_\+id} & Peer identifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Optional peer state if found 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a25082d3fca98d3a9d85d2544cac051a9}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!GetStateRootAtHeight@{GetStateRootAtHeight}}
+\index{GetStateRootAtHeight@{GetStateRootAtHeight}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{GetStateRootAtHeight()}{GetStateRootAtHeight()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a25082d3fca98d3a9d85d2544cac051a9} 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Get\+State\+Root\+At\+Height (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{height}{}\end{DoxyParamCaption}) const}
+
+
+
+Get state root at specific height. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em height} & \doxylink{classneo_1_1ledger_1_1_block}{Block} height \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+State root if available 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a0ba4dc9bcbd76fa948a63731ea66945d}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!GetStatistics@{GetStatistics}}
+\index{GetStatistics@{GetStatistics}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{GetStatistics()}{GetStatistics()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a0ba4dc9bcbd76fa948a63731ea66945d} 
+\mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats}{State\+Synchronization\+Manager\+::\+Sync\+Stats}} neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Get\+Statistics (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get synchronization statistics. 
+
+\begin{DoxyReturn}{Returns}
+Current statistics 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a4ffe54e6d1c0eba356fad3fd4a32e9f4}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!GetSyncStatus@{GetSyncStatus}}
+\index{GetSyncStatus@{GetSyncStatus}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{GetSyncStatus()}{GetSyncStatus()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a4ffe54e6d1c0eba356fad3fd4a32e9f4} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{Sync\+Status}} neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Get\+Sync\+Status (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get current synchronization status. 
+
+\begin{DoxyReturn}{Returns}
+Current sync status 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_aee0bf879bf60a9ff37a1bc558b42944e}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!HandleSyncFailure@{HandleSyncFailure}}
+\index{HandleSyncFailure@{HandleSyncFailure}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{HandleSyncFailure()}{HandleSyncFailure()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_aee0bf879bf60a9ff37a1bc558b42944e} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Handle\+Sync\+Failure (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{reason}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handle synchronization failure. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reason} & Failure reason \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_ab6e7eb9c11dbbbcdc9dba0088174a624}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!IsSynchronized@{IsSynchronized}}
+\index{IsSynchronized@{IsSynchronized}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{IsSynchronized()}{IsSynchronized()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_ab6e7eb9c11dbbbcdc9dba0088174a624} 
+bool neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Is\+Synchronized (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Check if state is synchronized. 
+
+\begin{DoxyReturn}{Returns}
+True if fully synchronized 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a54a8085aa14bff2184ab4519b1251487}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!IsTrustedPeer@{IsTrustedPeer}}
+\index{IsTrustedPeer@{IsTrustedPeer}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{IsTrustedPeer()}{IsTrustedPeer()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a54a8085aa14bff2184ab4519b1251487} 
+bool neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Is\+Trusted\+Peer (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{peer\+\_\+id}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Check if peer is trusted. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em peer\+\_\+id} & Peer identifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if trusted 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a489cc2c9866480559b488cb81e7a4071}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!LoadState@{LoadState}}
+\index{LoadState@{LoadState}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{LoadState()}{LoadState()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a489cc2c9866480559b488cb81e7a4071} 
+std\+::optional$<$ std\+::vector$<$ uint8\+\_\+t $>$ $>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Load\+State (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{height}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Load state from cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em height} & \doxylink{classneo_1_1ledger_1_1_block}{Block} height \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+State data if available 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a6973461636a8e3ad4859f3ca0374b7be}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!PersistState@{PersistState}}
+\index{PersistState@{PersistState}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{PersistState()}{PersistState()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a6973461636a8e3ad4859f3ca0374b7be} 
+bool neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Persist\+State (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{height}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{state\+\_\+root}{, }\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{state\+\_\+data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Persist state to cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em height} & \doxylink{classneo_1_1ledger_1_1_block}{Block} height \\
+\hline
+{\em state\+\_\+root} & State root hash \\
+\hline
+{\em state\+\_\+data} & State data \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if persisted successfully 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_aa3d954db7a5d8efefb386dc096da3488}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!ProcessStateChunk@{ProcessStateChunk}}
+\index{ProcessStateChunk@{ProcessStateChunk}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{ProcessStateChunk()}{ProcessStateChunk()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_aa3d954db7a5d8efefb386dc096da3488} 
+bool neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Process\+State\+Chunk (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_state_chunk}{State\+Chunk}} \&}]{chunk}{, }\item[{const std\+::string \&}]{peer\+\_\+id}{}\end{DoxyParamCaption})}
+
+
+
+Process received state chunk. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chunk} & State chunk data \\
+\hline
+{\em peer\+\_\+id} & Source peer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if chunk processed successfully 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a9b21e2a898fe012801b65a2e2089f5ec}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!ProcessStateRoot@{ProcessStateRoot}}
+\index{ProcessStateRoot@{ProcessStateRoot}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{ProcessStateRoot()}{ProcessStateRoot()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a9b21e2a898fe012801b65a2e2089f5ec} 
+\mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result}{State\+Synchronization\+Manager\+::\+Validation\+Result}} neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Process\+State\+Root (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{height}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{state\+\_\+root}{, }\item[{const std\+::string \&}]{peer\+\_\+id}{}\end{DoxyParamCaption})}
+
+
+
+Process received state root. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em height} & \doxylink{classneo_1_1ledger_1_1_block}{Block} height \\
+\hline
+{\em state\+\_\+root} & State root hash \\
+\hline
+{\em peer\+\_\+id} & Source peer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Validation result 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a8da4bf1773c7a5c412e38f999f5cf16f}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!RemoveStalePeers@{RemoveStalePeers}}
+\index{RemoveStalePeers@{RemoveStalePeers}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{RemoveStalePeers()}{RemoveStalePeers()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a8da4bf1773c7a5c412e38f999f5cf16f} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Remove\+Stale\+Peers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Remove stale peers. 
+
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a7bec7488607cb5c97749861df033437a}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!RemoveTrustedPeer@{RemoveTrustedPeer}}
+\index{RemoveTrustedPeer@{RemoveTrustedPeer}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{RemoveTrustedPeer()}{RemoveTrustedPeer()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a7bec7488607cb5c97749861df033437a} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Remove\+Trusted\+Peer (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{peer\+\_\+id}{}\end{DoxyParamCaption})}
+
+
+
+Remove trusted peer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em peer\+\_\+id} & Peer identifier to remove \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_ab8e9e6cf496a86130dc6a8cd3e638575}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!RequestStateSync@{RequestStateSync}}
+\index{RequestStateSync@{RequestStateSync}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{RequestStateSync()}{RequestStateSync()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_ab8e9e6cf496a86130dc6a8cd3e638575} 
+bool neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Request\+State\+Sync (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{peer\+\_\+id}{, }\item[{uint32\+\_\+t}]{start\+\_\+height}{, }\item[{uint32\+\_\+t}]{count}{}\end{DoxyParamCaption})}
+
+
+
+Request state synchronization with specific peer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em peer\+\_\+id} & Target peer identifier \\
+\hline
+{\em start\+\_\+height} & Starting block height \\
+\hline
+{\em count} & Number of states to sync \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if request initiated successfully 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_af1d8f3f14c31bec0f82fd8f6d4b19346}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!Reset@{Reset}}
+\index{Reset@{Reset}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{Reset()}{Reset()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_af1d8f3f14c31bec0f82fd8f6d4b19346} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Reset (\begin{DoxyParamCaption}\item[{bool}]{clear\+\_\+cache}{ = {\ttfamily false}}\end{DoxyParamCaption})}
+
+
+
+Reset synchronization state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em clear\+\_\+cache} & Clear validation cache \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_ad00549bb5c528e9bc8328280c84b4bd0}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!SelectBestPeers@{SelectBestPeers}}
+\index{SelectBestPeers@{SelectBestPeers}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{SelectBestPeers()}{SelectBestPeers()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_ad00549bb5c528e9bc8328280c84b4bd0} 
+std\+::vector$<$ std\+::string $>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Select\+Best\+Peers (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{count}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Select best peers for synchronization. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em count} & Number of peers to select \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector of selected peer IDs 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a742766c2ef89db8e911d60cea8c5d405}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!SetOnStateValidated@{SetOnStateValidated}}
+\index{SetOnStateValidated@{SetOnStateValidated}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{SetOnStateValidated()}{SetOnStateValidated()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a742766c2ef89db8e911d60cea8c5d405} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Set\+On\+State\+Validated (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(uint32\+\_\+t, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&)$>$}]{callback}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_af130d138c434cbd9127e27960e35753d}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!SetOnStatusChanged@{SetOnStatusChanged}}
+\index{SetOnStatusChanged@{SetOnStatusChanged}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{SetOnStatusChanged()}{SetOnStatusChanged()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_af130d138c434cbd9127e27960e35753d} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Set\+On\+Status\+Changed (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{Sync\+Status}})$>$}]{callback}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a6cdb6b0d50416690980f03c5e0f4ae9c}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!SetOnSyncProgress@{SetOnSyncProgress}}
+\index{SetOnSyncProgress@{SetOnSyncProgress}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{SetOnSyncProgress()}{SetOnSyncProgress()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a6cdb6b0d50416690980f03c5e0f4ae9c} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Set\+On\+Sync\+Progress (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats}{Sync\+Stats}} \&)$>$}]{callback}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_ad12c4c292c762d1ef29da113326f62fd}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!SetOnValidationFailed@{SetOnValidationFailed}}
+\index{SetOnValidationFailed@{SetOnValidationFailed}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{SetOnValidationFailed()}{SetOnValidationFailed()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_ad12c4c292c762d1ef29da113326f62fd} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Set\+On\+Validation\+Failed (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result}{Validation\+Result}} \&)$>$}]{callback}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_abbe48a3ff1e3322ee5cb3664c9bfa773}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!Start@{Start}}
+\index{Start@{Start}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_abbe48a3ff1e3322ee5cb3664c9bfa773} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Start state synchronization. 
+
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_abca08d58c09e20b3a64908ac605a5ca9}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_abca08d58c09e20b3a64908ac605a5ca9} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stop state synchronization. 
+
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a49353ee2cc7ebf97fc613b878a617139}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!SynchronizationThread@{SynchronizationThread}}
+\index{SynchronizationThread@{SynchronizationThread}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{SynchronizationThread()}{SynchronizationThread()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a49353ee2cc7ebf97fc613b878a617139} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Synchronization\+Thread (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Main synchronization thread function. 
+
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_aee71512fc6af7219f3b9c63c7f070531}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!UpdateConfiguration@{UpdateConfiguration}}
+\index{UpdateConfiguration@{UpdateConfiguration}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{UpdateConfiguration()}{UpdateConfiguration()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_aee71512fc6af7219f3b9c63c7f070531} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Update\+Configuration (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration}{Configuration}} \&}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Update configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & New configuration \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a449ba50782a8e07c1f6e41fccff67a6b}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!UpdateMetrics@{UpdateMetrics}}
+\index{UpdateMetrics@{UpdateMetrics}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{UpdateMetrics()}{UpdateMetrics()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a449ba50782a8e07c1f6e41fccff67a6b} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Update\+Metrics (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Update synchronization metrics. 
+
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a76d44156c1d4aa3b1cbd45b00e74c0a7}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!UpdatePeerState@{UpdatePeerState}}
+\index{UpdatePeerState@{UpdatePeerState}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{UpdatePeerState()}{UpdatePeerState()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a76d44156c1d4aa3b1cbd45b00e74c0a7} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Update\+Peer\+State (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{peer\+\_\+id}{, }\item[{uint32\+\_\+t}]{height}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{state\+\_\+root}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Update peer state information. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em peer\+\_\+id} & Peer identifier \\
+\hline
+{\em height} & State height \\
+\hline
+{\em state\+\_\+root} & State root hash \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 23
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a7a1a165c57ea79dd1e8f04d86364fc80}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!ValidateChunkIntegrity@{ValidateChunkIntegrity}}
+\index{ValidateChunkIntegrity@{ValidateChunkIntegrity}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{ValidateChunkIntegrity()}{ValidateChunkIntegrity()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a7a1a165c57ea79dd1e8f04d86364fc80} 
+bool neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Validate\+Chunk\+Integrity (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_state_chunk}{State\+Chunk}} \&}]{chunk}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Validate state chunk integrity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em chunk} & State chunk to validate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if valid 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 24
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_abce3fea789768c7bb33eae5eba17341b}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!ValidateStateAtHeight@{ValidateStateAtHeight}}
+\index{ValidateStateAtHeight@{ValidateStateAtHeight}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{ValidateStateAtHeight()}{ValidateStateAtHeight()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_abce3fea789768c7bb33eae5eba17341b} 
+\mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result}{State\+Synchronization\+Manager\+::\+Validation\+Result}} neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Validate\+State\+At\+Height (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{height}{}\end{DoxyParamCaption})}
+
+
+
+Validate state at specific height. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em height} & \doxylink{classneo_1_1ledger_1_1_block}{Block} height to validate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Validation result 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 25
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a7a0e9c5b06a92c91d7f02118e12fdd9e}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!ValidationThread@{ValidationThread}}
+\index{ValidationThread@{ValidationThread}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{ValidationThread()}{ValidationThread()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a7a0e9c5b06a92c91d7f02118e12fdd9e} 
+void neo\+::ledger\+::\+State\+Synchronization\+Manager\+::\+Validation\+Thread (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Validation thread function. 
+
+Here is the call graph for this function\+:
+% FIG 26
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a9eeaa02a5c200be4cfeb0499494c622a}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!config\_@{config\_}}
+\index{config\_@{config\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{config\_}{config\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a9eeaa02a5c200be4cfeb0499494c622a} 
+\mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration}{Configuration}} neo\+::ledger\+::\+State\+Synchronization\+Manager\+::config\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a796f519ce64b117ce176faa6cfc32e4d}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!current\_height\_@{current\_height\_}}
+\index{current\_height\_@{current\_height\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{current\_height\_}{current\_height\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a796f519ce64b117ce176faa6cfc32e4d} 
+std\+::atomic$<$uint32\+\_\+t$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::current\+\_\+height\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_ad29a8aacf7f36dc9767d227db17ec1cb}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!current\_state\_root\_@{current\_state\_root\_}}
+\index{current\_state\_root\_@{current\_state\_root\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{current\_state\_root\_}{current\_state\_root\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_ad29a8aacf7f36dc9767d227db17ec1cb} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_state_root}{State\+Root}}$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::current\+\_\+state\+\_\+root\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_ac69c076d6d25c6e7e9ee690f84cc4cd4}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!data\_cache\_@{data\_cache\_}}
+\index{data\_cache\_@{data\_cache\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{data\_cache\_}{data\_cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_ac69c076d6d25c6e7e9ee690f84cc4cd4} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}}$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::data\+\_\+cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_afdc16a43837bccd9b93d30ea0be20d8f}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_afdc16a43837bccd9b93d30ea0be20d8f} 
+std\+::shared\+\_\+mutex neo\+::ledger\+::\+State\+Synchronization\+Manager\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a4577fad8b6de6fec4c88449cc76016fd}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!on\_state\_validated\_@{on\_state\_validated\_}}
+\index{on\_state\_validated\_@{on\_state\_validated\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{on\_state\_validated\_}{on\_state\_validated\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a4577fad8b6de6fec4c88449cc76016fd} 
+std\+::function$<$void(uint32\+\_\+t, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}\&)$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::on\+\_\+state\+\_\+validated\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_aa0b878ff163450c92ab166d7ba709255}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!on\_status\_changed\_@{on\_status\_changed\_}}
+\index{on\_status\_changed\_@{on\_status\_changed\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{on\_status\_changed\_}{on\_status\_changed\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_aa0b878ff163450c92ab166d7ba709255} 
+std\+::function$<$void(\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{Sync\+Status}})$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::on\+\_\+status\+\_\+changed\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a102205dd22ed9f968733393ce4e4e03e}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!on\_sync\_progress\_@{on\_sync\_progress\_}}
+\index{on\_sync\_progress\_@{on\_sync\_progress\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{on\_sync\_progress\_}{on\_sync\_progress\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a102205dd22ed9f968733393ce4e4e03e} 
+std\+::function$<$void(const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats}{Sync\+Stats}}\&)$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::on\+\_\+sync\+\_\+progress\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a1d1ca9bfd12daabdac0e8bbbfeb69273}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!on\_validation\_failed\_@{on\_validation\_failed\_}}
+\index{on\_validation\_failed\_@{on\_validation\_failed\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{on\_validation\_failed\_}{on\_validation\_failed\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a1d1ca9bfd12daabdac0e8bbbfeb69273} 
+std\+::function$<$void(const \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result}{Validation\+Result}}\&)$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::on\+\_\+validation\+\_\+failed\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a447fa2d1a9b72bdc79553c34fd829567}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!peer\_states\_@{peer\_states\_}}
+\index{peer\_states\_@{peer\_states\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{peer\_states\_}{peer\_states\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a447fa2d1a9b72bdc79553c34fd829567} 
+std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_peer_state}{Peer\+State}}$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::peer\+\_\+states\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_af59be2822b7e20f3bcaa08dce55e4dd8}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!pending\_chunks\_@{pending\_chunks\_}}
+\index{pending\_chunks\_@{pending\_chunks\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{pending\_chunks\_}{pending\_chunks\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_af59be2822b7e20f3bcaa08dce55e4dd8} 
+std\+::unordered\+\_\+map$<$uint32\+\_\+t, \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_state_chunk}{State\+Chunk}}$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::pending\+\_\+chunks\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a5fef1463d94849d225dcaaab8c105c91}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a5fef1463d94849d225dcaaab8c105c91} 
+std\+::atomic$<$bool$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::running\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a6a9d8160ae6e06acd6a2b1aa37557120}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!states\_failed\_@{states\_failed\_}}
+\index{states\_failed\_@{states\_failed\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{states\_failed\_}{states\_failed\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a6a9d8160ae6e06acd6a2b1aa37557120} 
+std\+::atomic$<$size\+\_\+t$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::states\+\_\+failed\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_ad8c48fe96e5b3ba169f0e0e1bba63a13}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!states\_processed\_@{states\_processed\_}}
+\index{states\_processed\_@{states\_processed\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{states\_processed\_}{states\_processed\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_ad8c48fe96e5b3ba169f0e0e1bba63a13} 
+std\+::atomic$<$size\+\_\+t$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::states\+\_\+processed\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a728ce3f5c39904489e9635cb36486096}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!states\_validated\_@{states\_validated\_}}
+\index{states\_validated\_@{states\_validated\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{states\_validated\_}{states\_validated\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a728ce3f5c39904489e9635cb36486096} 
+std\+::atomic$<$size\+\_\+t$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::states\+\_\+validated\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a427879be3c8df3f64e6df0ab02a4299b}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!sync\_start\_time\_@{sync\_start\_time\_}}
+\index{sync\_start\_time\_@{sync\_start\_time\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{sync\_start\_time\_}{sync\_start\_time\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a427879be3c8df3f64e6df0ab02a4299b} 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point neo\+::ledger\+::\+State\+Synchronization\+Manager\+::sync\+\_\+start\+\_\+time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a1528b35addd6ed549763f46801dd802b}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!sync\_status\_@{sync\_status\_}}
+\index{sync\_status\_@{sync\_status\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{sync\_status\_}{sync\_status\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a1528b35addd6ed549763f46801dd802b} 
+std\+::atomic$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{Sync\+Status}}$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::sync\+\_\+status\+\_\+ \{\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07ae599161956d626eda4cb0a5ffb85271c}{Sync\+Status\+::\+Idle}}\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a898a24bbe5cae98b8ef178569d7021e7}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!sync\_thread\_@{sync\_thread\_}}
+\index{sync\_thread\_@{sync\_thread\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{sync\_thread\_}{sync\_thread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a898a24bbe5cae98b8ef178569d7021e7} 
+std\+::thread neo\+::ledger\+::\+State\+Synchronization\+Manager\+::sync\+\_\+thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a036b9f2a8cbf0d36c8421e3e0ca9d34b}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!target\_height\_@{target\_height\_}}
+\index{target\_height\_@{target\_height\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{target\_height\_}{target\_height\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a036b9f2a8cbf0d36c8421e3e0ca9d34b} 
+std\+::atomic$<$uint32\+\_\+t$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::target\+\_\+height\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_af3b972fd1b1ddd8325ec20fd731dc75a}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!trusted\_peers\_@{trusted\_peers\_}}
+\index{trusted\_peers\_@{trusted\_peers\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{trusted\_peers\_}{trusted\_peers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_af3b972fd1b1ddd8325ec20fd731dc75a} 
+std\+::vector$<$std\+::string$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::trusted\+\_\+peers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a946358f07e3b821eac1f9ec9ffb594c9}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!validation\_cache\_@{validation\_cache\_}}
+\index{validation\_cache\_@{validation\_cache\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{validation\_cache\_}{validation\_cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a946358f07e3b821eac1f9ec9ffb594c9} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result}{Validation\+Result}}$>$ neo\+::ledger\+::\+State\+Synchronization\+Manager\+::validation\+\_\+cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_state_synchronization_manager_a9a9cf6fdb405f93b14f241fef77bf339}\index{neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}!validation\_thread\_@{validation\_thread\_}}
+\index{validation\_thread\_@{validation\_thread\_}!neo::ledger::StateSynchronizationManager@{neo::ledger::StateSynchronizationManager}}
+\doxysubsubsection{\texorpdfstring{validation\_thread\_}{validation\_thread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_state_synchronization_manager_a9a9cf6fdb405f93b14f241fef77bf339} 
+std\+::thread neo\+::ledger\+::\+State\+Synchronization\+Manager\+::validation\+\_\+thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{state__synchronization__manager_8h}{state\+\_\+synchronization\+\_\+manager.\+h}}\item 
+src/ledger/\mbox{\hyperlink{state__synchronization__manager_8cpp}{state\+\_\+synchronization\+\_\+manager.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,212 @@
+\doxysection{shutdown\+\_\+manager.\+h}
+\hypertarget{shutdown__manager_8h_source}{}\label{shutdown__manager_8h_source}\index{include/neo/core/shutdown\_manager.h@{include/neo/core/shutdown\_manager.h}}
+\mbox{\hyperlink{shutdown__manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <signal.h>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <condition\_variable>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1core}{neo::core}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_acd68db08f480ae1ae482cee0a546c98b}{ShutdownManager}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a5978e483f53f9420eec79deadc7cc9e5}{ShutdownHandler}}\ =\ std::function<void()>;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_shutdown_manager_1_1_handler_info}{HandlerInfo}}}
+\DoxyCodeLine{00027\ \ \ \ \ \{}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1core_1_1_shutdown_manager_1_1_handler_info_a6cd35656ec9095ff4d5affcae8c4a37c}{name}};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a5978e483f53f9420eec79deadc7cc9e5}{ShutdownHandler}}\ \mbox{\hyperlink{structneo_1_1core_1_1_shutdown_manager_1_1_handler_info_a786e87c83fa8b0918a04cc82f9c38fff}{handler}};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{structneo_1_1core_1_1_shutdown_manager_1_1_handler_info_aeb6a937ce129881487f57e42a4ab4adb}{priority}};\ \ \textcolor{comment}{//\ Lower\ number\ =\ higher\ priority}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{structneo_1_1core_1_1_shutdown_manager_1_1_handler_info_ab2341d3e1a37aded405d82fa1193e41e}{timeout}};}
+\DoxyCodeLine{00032\ \ \ \ \ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_acd68db08f480ae1ae482cee0a546c98b}{ShutdownManager}}\&\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a7a2411a4c51d9bb5cc42f4035d894869}{GetInstance}}()}
+\DoxyCodeLine{00035\ \ \ \ \ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_acd68db08f480ae1ae482cee0a546c98b}{ShutdownManager}}\ instance;}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00038\ \ \ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a396923cf60d7b88f76d30fdb7ba91e85}{RegisterHandler}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a5978e483f53f9420eec79deadc7cc9e5}{ShutdownHandler}}\ handler,\ \textcolor{keywordtype}{int}\ priority\ =\ 100,}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::chrono::milliseconds\ timeout\ =\ std::chrono::milliseconds(30000))}
+\DoxyCodeLine{00049\ \ \ \ \ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a3478fa0b4a94984e8051e6a521e2b4b2}{mutex\_}});}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_afbad07afc4498690eebf4b932ed7deaf}{handlers\_}}.push\_back(\{name,\ handler,\ priority,\ timeout\});}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Sort\ by\ priority}}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ std::sort(\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_afbad07afc4498690eebf4b932ed7deaf}{handlers\_}}.begin(),\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_afbad07afc4498690eebf4b932ed7deaf}{handlers\_}}.end(),}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [](\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1core_1_1_shutdown_manager_1_1_handler_info}{HandlerInfo}}\&\ a,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1core_1_1_shutdown_manager_1_1_handler_info}{HandlerInfo}}\&\ b)\ \{\ return\ a.priority\ <\ b.priority;\ \});}
+\DoxyCodeLine{00057\ \ \ \ \ \}}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a5aad44215373687241a5b7f9579df359}{RequestShutdown}}(\textcolor{keyword}{const}\ std::string\&\ reason\ =\ \textcolor{stringliteral}{"{}User\ requested"{}})}
+\DoxyCodeLine{00064\ \ \ \ \ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ expected\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_aec0031d7b1d8fa391ae0455e59cd0bfa}{shutdownRequested\_}}.compare\_exchange\_strong(expected,\ \textcolor{keyword}{true}))}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Shutdown\ already\ requested}}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n🛑\ Shutdown\ requested:\ "{}}\ <<\ reason\ <<\ std::endl;}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Notify\ waiting\ threads}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a297be314c12d429c53c6368d716d3e0d}{cv\_}}.notify\_all();}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Start\ shutdown\ sequence}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a7b748fcc29a3340532da504e43f67f8a}{shutdownThread\_}}.joinable())}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a7b748fcc29a3340532da504e43f67f8a}{shutdownThread\_}}\ =\ std::thread(\&\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a8758b5b611ab70c83f8903923f4155a8}{ShutdownManager::ExecuteShutdown}},\ \textcolor{keyword}{this});}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00082\ \ \ \ \ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a53c55247167c253b3a3dd14356cbb540}{IsShutdownRequested}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_aec0031d7b1d8fa391ae0455e59cd0bfa}{shutdownRequested\_}}.load();\ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a279ec20572d09415b5aab0e3bcd8f019}{WaitForShutdown}}(std::chrono::milliseconds\ timeout\ =\ std::chrono::milliseconds::max())}
+\DoxyCodeLine{00096\ \ \ \ \ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ std::unique\_lock<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a3478fa0b4a94984e8051e6a521e2b4b2}{mutex\_}});}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (timeout\ ==\ std::chrono::milliseconds::max())}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a297be314c12d429c53c6368d716d3e0d}{cv\_}}.wait(lock,\ [\textcolor{keyword}{this}]\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_aec0031d7b1d8fa391ae0455e59cd0bfa}{shutdownRequested\_}}.load();\ \});}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a297be314c12d429c53c6368d716d3e0d}{cv\_}}.wait\_for(lock,\ timeout,\ [\textcolor{keyword}{this}]\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_aec0031d7b1d8fa391ae0455e59cd0bfa}{shutdownRequested\_}}.load();\ \});}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00108\ \ \ \ \ \}}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a4b6b0cac9e08978ce0a738c5a585020d}{InstallSignalHandlers}}()}
+\DoxyCodeLine{00114\ \ \ \ \ \{}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Install\ SIGINT\ handler\ (Ctrl+C)}}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ signal(SIGINT,\ [](\textcolor{keywordtype}{int}\ sig)\ \{\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a7a2411a4c51d9bb5cc42f4035d894869}{ShutdownManager::GetInstance}}().\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a5aad44215373687241a5b7f9579df359}{RequestShutdown}}(\textcolor{stringliteral}{"{}SIGINT\ received"{}});\ \});}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Install\ SIGTERM\ handler}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ signal(SIGTERM,\ [](\textcolor{keywordtype}{int}\ sig)\ \{\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a7a2411a4c51d9bb5cc42f4035d894869}{ShutdownManager::GetInstance}}().\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a5aad44215373687241a5b7f9579df359}{RequestShutdown}}(\textcolor{stringliteral}{"{}SIGTERM\ received"{}});\ \});}
+\DoxyCodeLine{00120\ }
+\DoxyCodeLine{00121\ \textcolor{preprocessor}{\#ifdef\ SIGHUP}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Install\ SIGHUP\ handler\ (terminal\ hangup)}}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ signal(SIGHUP,\ [](\textcolor{keywordtype}{int}\ sig)\ \{\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a7a2411a4c51d9bb5cc42f4035d894869}{ShutdownManager::GetInstance}}().\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a5aad44215373687241a5b7f9579df359}{RequestShutdown}}(\textcolor{stringliteral}{"{}SIGHUP\ received"{}});\ \});}
+\DoxyCodeLine{00124\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00125\ \ \ \ \ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a8a76baa6498623fb7b1155899e926806}{WaitForShutdownComplete}}()}
+\DoxyCodeLine{00131\ \ \ \ \ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a7b748fcc29a3340532da504e43f67f8a}{shutdownThread\_}}.joinable())}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a7b748fcc29a3340532da504e43f67f8a}{shutdownThread\_}}.join();}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00136\ \ \ \ \ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a65a0bdf2cc260a74aea45241258aa714}{SetMaxShutdownTime}}(std::chrono::milliseconds\ timeout)\ \{\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a06943021014b14b974bee8ae0514b4b8}{maxShutdownTime\_}}\ =\ timeout;\ \}}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00144\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00145\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_acd68db08f480ae1ae482cee0a546c98b}{ShutdownManager}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a8758b5b611ab70c83f8903923f4155a8}{ExecuteShutdown}}()}
+\DoxyCodeLine{00148\ \ \ \ \ \{}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ startTime\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n🔄\ Starting\ graceful\ shutdown\ sequence..."{}}\ <<\ std::endl;}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}📋\ "{}}\ <<\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_afbad07afc4498690eebf4b932ed7deaf}{handlers\_}}.size()\ <<\ \textcolor{stringliteral}{"{}\ shutdown\ handlers\ to\ execute"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00154\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Execute\ handlers\ in\ priority\ order}}
+\DoxyCodeLine{00155\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ info\ :\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_afbad07afc4498690eebf4b932ed7deaf}{handlers\_}})}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ \ ⏳\ Executing:\ "{}}\ <<\ info.name\ <<\ \textcolor{stringliteral}{"{}..."{}}\ <<\ std::flush;}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ completed\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ std::thread\ handlerThread(}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ [\&]()}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00164\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ info.handler();}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ completed\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&\ e)}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ ❌\ Handler\ '"{}}\ <<\ info.name\ <<\ \textcolor{stringliteral}{"{}'\ failed:\ "{}}\ <<\ e.what()\ <<\ std::endl;}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Wait\ for\ handler\ with\ timeout}}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ deadline\ =\ std::chrono::steady\_clock::now()\ +\ info.timeout;}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (handlerThread.joinable()\ \&\&\ std::chrono::steady\_clock::now()\ <\ deadline)}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (completed)\ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::this\_thread::sleep\_for(std::chrono::milliseconds(100));}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00181\ }
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (handlerThread.joinable())}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!completed)}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n\ \ ⚠️\ \ Handler\ '"{}}\ <<\ info.name\ <<\ \textcolor{stringliteral}{"{}'\ timed\ out\ after\ "{}}\ <<\ info.timeout.count()\ <<\ \textcolor{stringliteral}{"{}ms"{}}}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <<\ std::endl;}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handlerThread.detach();\ \ \textcolor{comment}{//\ Let\ it\ finish\ in\ background}}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ handlerThread.join();}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\ ✓"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ we've\ exceeded\ max\ shutdown\ time}}
+\DoxyCodeLine{00198\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ elapsed\ =\ std::chrono::steady\_clock::now()\ -\/\ startTime;}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (elapsed\ >\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a06943021014b14b974bee8ae0514b4b8}{maxShutdownTime\_}})}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00201\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n⚠️\ \ Maximum\ shutdown\ time\ exceeded,\ forcing\ exit"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00204\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00205\ }
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ totalTime\ =\ std::chrono::steady\_clock::now()\ -\/\ startTime;}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ seconds\ =\ std::chrono::duration\_cast<std::chrono::seconds>(totalTime).count();}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}\(\backslash\)n✅\ Shutdown\ sequence\ completed\ in\ "{}}\ <<\ seconds\ <<\ \textcolor{stringliteral}{"{}\ seconds"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ std::cout\ <<\ \textcolor{stringliteral}{"{}👋\ Goodbye!"{}}\ <<\ std::endl;}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_aaba99d4002f144fd560e3033bd12993a}{shutdownComplete\_}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00213\ \ \ \ \ \}}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \ \ std::vector<HandlerInfo>\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_afbad07afc4498690eebf4b932ed7deaf}{handlers\_}};}
+\DoxyCodeLine{00216\ \ \ \ \ std::atomic<bool>\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_aec0031d7b1d8fa391ae0455e59cd0bfa}{shutdownRequested\_}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00217\ \ \ \ \ std::atomic<bool>\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_aaba99d4002f144fd560e3033bd12993a}{shutdownComplete\_}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00218\ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a06943021014b14b974bee8ae0514b4b8}{maxShutdownTime\_}}\{std::chrono::minutes(5)\};}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \ \ \ \ std::mutex\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a3478fa0b4a94984e8051e6a521e2b4b2}{mutex\_}};}
+\DoxyCodeLine{00221\ \ \ \ \ std::condition\_variable\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a297be314c12d429c53c6368d716d3e0d}{cv\_}};}
+\DoxyCodeLine{00222\ \ \ \ \ std::thread\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a7b748fcc29a3340532da504e43f67f8a}{shutdownThread\_}};}
+\DoxyCodeLine{00223\ \};}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00228\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_handler_guard_ac3bd55472df665ecb65327f0fccafa2a}{ShutdownHandlerGuard}}}
+\DoxyCodeLine{00229\ \{}
+\DoxyCodeLine{00230\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00231\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_handler_guard_ac3bd55472df665ecb65327f0fccafa2a}{ShutdownHandlerGuard}}(\textcolor{keyword}{const}\ std::string\&\ name,\ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a5978e483f53f9420eec79deadc7cc9e5}{ShutdownManager::ShutdownHandler}}\ handler,\ \textcolor{keywordtype}{int}\ priority\ =\ 100,}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::chrono::milliseconds\ timeout\ =\ std::chrono::milliseconds(30000))}
+\DoxyCodeLine{00233\ \ \ \ \ \{}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a7a2411a4c51d9bb5cc42f4035d894869}{ShutdownManager::GetInstance}}().\mbox{\hyperlink{classneo_1_1core_1_1_shutdown_manager_a396923cf60d7b88f76d30fdb7ba91e85}{RegisterHandler}}(name,\ handler,\ priority,\ timeout);}
+\DoxyCodeLine{00235\ \ \ \ \ \}}
+\DoxyCodeLine{00236\ \};}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00241\ \textcolor{preprocessor}{\#define\ REGISTER\_SHUTDOWN\_HANDLER(name,\ priority,\ timeout,\ code)\ \(\backslash\)}}
+\DoxyCodeLine{00242\ \textcolor{preprocessor}{\ \ \ \ static\ neo::core::ShutdownHandlerGuard\ \_shutdown\_\#\#name(\ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00243\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ \#name,\ []()\ \{\ code\ \},\ priority,\ std::chrono::milliseconds(timeout))}}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \}\ \ \textcolor{comment}{//\ namespace\ neo::core}}
+
+\end{DoxyCode}

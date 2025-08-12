@@ -1,0 +1,377 @@
+\doxysection{neo\+::io\+::Byte\+Span Class Reference}
+\hypertarget{classneo_1_1io_1_1_byte_span}{}\label{classneo_1_1io_1_1_byte_span}\index{neo::io::ByteSpan@{neo::io::ByteSpan}}
+
+
+A non-\/owning view of a byte array.  
+
+
+
+
+{\ttfamily \#include $<$byte\+\_\+span.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a88c53a63bc63f79ce1a29314b17fca51}{Byte\+Span}} () noexcept
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a86001375f735ab2a78359d7ddd9d31ec}{Byte\+Span}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a98dea1d6bbdab2a63e66b80efad928fc}{size}}) noexcept
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} from a pointer and size. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Allocator$>$ }\\\mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ad59f3fd3205b3544dd41023032ec3387}{Byte\+Span}} (const std\+::vector$<$ uint8\+\_\+t, Allocator $>$ \&data) noexcept
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} from a vector. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a4a869430800a37dcbeefac6f36468fcb}{Size}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets the size of the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a98dea1d6bbdab2a63e66b80efad928fc}{size}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets the size of the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} (STL compatibility). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a1a44ac09ac50847323a100002f530d5b}{Is\+Empty}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Checks if the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} is empty. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_aab84b50728599e4c9424a7cf8f62e155}{empty}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Checks if the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} is empty (STL compatibility). \end{DoxyCompactList}\item 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a0285a19eb5cd212ecd1079e0bc5e494c}{Data}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets a pointer to the data. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a4138db37cf66218489cd8ce318922175}{operator\mbox{[}$\,$\mbox{]}}} (size\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets the byte at the specified index. \end{DoxyCompactList}\item 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a2c5a23c38ba2ed3237664f856267e7d2}{begin}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets an iterator to the beginning of the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a3516b96c1701dd2139095b217b739b10}{end}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets an iterator to the end of the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a46cbc4490cd6d66b1bdf0fbc0d31a937}{subspan}} (size\+\_\+t offset, size\+\_\+t count) const
+\begin{DoxyCompactList}\small\item\em Gets a subspan of this \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae1d35cb2b38ff63ae9b20aeec5070e4d}{subspan}} (size\+\_\+t offset) const
+\begin{DoxyCompactList}\small\item\em Gets a subspan of this \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} from the specified offset to the end. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_acb9fdb2c2d7d0f827b06d1adcd1657f4}{Slice}} (size\+\_\+t start, size\+\_\+t length) const
+\begin{DoxyCompactList}\small\item\em Creates a new \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} that is a slice of this \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a5bdc6499f1966458a9ceda1274ba0c2e}{To\+Hex\+String}} () const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} to a hexadecimal string. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ac7685a9001e90a5c1aebc7581179007f}{To\+Base64\+String}} () const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} to a base64 string. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_af9dfe5a4ef692ded6f23193595029662}{operator==}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} is equal to another \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae110c04b4d05fcb4be8aaa2d30839173}{operator!=}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} is not equal to another \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_a8ad00ca24a4b3c82432ae375845a2ee6}{data\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}{size\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A non-\/owning view of a byte array. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1io_1_1_byte_span_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1io_1_1_byte_span_a88c53a63bc63f79ce1a29314b17fca51}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!ByteSpan@{ByteSpan}}
+\index{ByteSpan@{ByteSpan}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{ByteSpan()}{ByteSpan()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_a88c53a63bc63f79ce1a29314b17fca51} 
+neo\+::io\+::\+Byte\+Span\+::\+Byte\+Span (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Constructs an empty \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+
+\Hypertarget{classneo_1_1io_1_1_byte_span_a86001375f735ab2a78359d7ddd9d31ec}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!ByteSpan@{ByteSpan}}
+\index{ByteSpan@{ByteSpan}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{ByteSpan()}{ByteSpan()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_a86001375f735ab2a78359d7ddd9d31ec} 
+neo\+::io\+::\+Byte\+Span\+::\+Byte\+Span (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} from a pointer and size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Pointer to the data. \\
+\hline
+{\em size} & Size of the data. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1io_1_1_byte_span_ad59f3fd3205b3544dd41023032ec3387}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!ByteSpan@{ByteSpan}}
+\index{ByteSpan@{ByteSpan}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{ByteSpan()}{ByteSpan()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_ad59f3fd3205b3544dd41023032ec3387} 
+template$<$typename Allocator$>$ \\
+neo\+::io\+::\+Byte\+Span\+::\+Byte\+Span (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t, Allocator $>$ \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} from a vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Vector containing the data. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1io_1_1_byte_span_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1io_1_1_byte_span_a2c5a23c38ba2ed3237664f856267e7d2}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!begin@{begin}}
+\index{begin@{begin}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_a2c5a23c38ba2ed3237664f856267e7d2} 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} neo\+::io\+::\+Byte\+Span\+::begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets an iterator to the beginning of the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+
+\begin{DoxyReturn}{Returns}
+Iterator to the beginning. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_span_a0285a19eb5cd212ecd1079e0bc5e494c}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!Data@{Data}}
+\index{Data@{Data}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_a0285a19eb5cd212ecd1079e0bc5e494c} 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} neo\+::io\+::\+Byte\+Span\+::\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets a pointer to the data. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to the data. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_span_aab84b50728599e4c9424a7cf8f62e155}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!empty@{empty}}
+\index{empty@{empty}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_aab84b50728599e4c9424a7cf8f62e155} 
+bool neo\+::io\+::\+Byte\+Span\+::empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Checks if the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} is empty (STL compatibility). 
+
+\begin{DoxyReturn}{Returns}
+True if the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} is empty, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_span_a3516b96c1701dd2139095b217b739b10}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!end@{end}}
+\index{end@{end}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_a3516b96c1701dd2139095b217b739b10} 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} neo\+::io\+::\+Byte\+Span\+::end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets an iterator to the end of the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+
+\begin{DoxyReturn}{Returns}
+Iterator to the end. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_span_a1a44ac09ac50847323a100002f530d5b}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!IsEmpty@{IsEmpty}}
+\index{IsEmpty@{IsEmpty}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{IsEmpty()}{IsEmpty()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_a1a44ac09ac50847323a100002f530d5b} 
+bool neo\+::io\+::\+Byte\+Span\+::\+Is\+Empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Checks if the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} is empty. 
+
+\begin{DoxyReturn}{Returns}
+True if the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} is empty, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_span_ae110c04b4d05fcb4be8aaa2d30839173}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_ae110c04b4d05fcb4be8aaa2d30839173} 
+bool neo\+::io\+::\+Byte\+Span\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} is not equal to another \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Byte\+Spans are not equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1io_1_1_byte_span_af9dfe5a4ef692ded6f23193595029662}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_af9dfe5a4ef692ded6f23193595029662} 
+bool neo\+::io\+::\+Byte\+Span\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if this \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} is equal to another \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Byte\+Spans are equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1io_1_1_byte_span_a4138db37cf66218489cd8ce318922175}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_a4138db37cf66218489cd8ce318922175} 
+uint8\+\_\+t neo\+::io\+::\+Byte\+Span\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the byte at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The byte at the specified index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_span_a4a869430800a37dcbeefac6f36468fcb}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!Size@{Size}}
+\index{Size@{Size}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_a4a869430800a37dcbeefac6f36468fcb} 
+size\+\_\+t neo\+::io\+::\+Byte\+Span\+::\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets the size of the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+
+\begin{DoxyReturn}{Returns}
+The size of the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_span_a98dea1d6bbdab2a63e66b80efad928fc}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!size@{size}}
+\index{size@{size}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_a98dea1d6bbdab2a63e66b80efad928fc} 
+size\+\_\+t neo\+::io\+::\+Byte\+Span\+::size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets the size of the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} (STL compatibility). 
+
+\begin{DoxyReturn}{Returns}
+The size of the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_span_acb9fdb2c2d7d0f827b06d1adcd1657f4}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!Slice@{Slice}}
+\index{Slice@{Slice}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{Slice()}{Slice()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_acb9fdb2c2d7d0f827b06d1adcd1657f4} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} neo\+::io\+::\+Byte\+Span\+::\+Slice (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{start}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} that is a slice of this \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & The start index. \\
+\hline
+{\em length} & The length of the slice. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} that is a slice of this \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1io_1_1_byte_span_ae1d35cb2b38ff63ae9b20aeec5070e4d}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!subspan@{subspan}}
+\index{subspan@{subspan}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{subspan()}{subspan()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_ae1d35cb2b38ff63ae9b20aeec5070e4d} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} neo\+::io\+::\+Byte\+Span\+::subspan (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{offset}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a subspan of this \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} from the specified offset to the end. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & The offset of the subspan. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The subspan. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1io_1_1_byte_span_a46cbc4490cd6d66b1bdf0fbc0d31a937}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!subspan@{subspan}}
+\index{subspan@{subspan}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{subspan()}{subspan()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_a46cbc4490cd6d66b1bdf0fbc0d31a937} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} neo\+::io\+::\+Byte\+Span\+::subspan (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{offset}{, }\item[{size\+\_\+t}]{count}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a subspan of this \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & The offset of the subspan. \\
+\hline
+{\em count} & The size of the subspan. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The subspan. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1io_1_1_byte_span_ac7685a9001e90a5c1aebc7581179007f}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!ToBase64String@{ToBase64String}}
+\index{ToBase64String@{ToBase64String}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{ToBase64String()}{ToBase64String()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_ac7685a9001e90a5c1aebc7581179007f} 
+std\+::string neo\+::io\+::\+Byte\+Span\+::\+To\+Base64\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Converts the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} to a base64 string. 
+
+\begin{DoxyReturn}{Returns}
+The base64 string representation of the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_byte_span_a5bdc6499f1966458a9ceda1274ba0c2e}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!ToHexString@{ToHexString}}
+\index{ToHexString@{ToHexString}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{ToHexString()}{ToHexString()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_a5bdc6499f1966458a9ceda1274ba0c2e} 
+std\+::string neo\+::io\+::\+Byte\+Span\+::\+To\+Hex\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Converts the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span} to a hexadecimal string. 
+
+\begin{DoxyReturn}{Returns}
+The hexadecimal string representation of the \doxylink{classneo_1_1io_1_1_byte_span}{Byte\+Span}. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1io_1_1_byte_span_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1io_1_1_byte_span_a8ad00ca24a4b3c82432ae375845a2ee6}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!data\_@{data\_}}
+\index{data\_@{data\_}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_a8ad00ca24a4b3c82432ae375845a2ee6} 
+const uint8\+\_\+t\texorpdfstring{$\ast$}{*} neo\+::io\+::\+Byte\+Span\+::data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714}\index{neo::io::ByteSpan@{neo::io::ByteSpan}!size\_@{size\_}}
+\index{size\_@{size\_}!neo::io::ByteSpan@{neo::io::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{size\_}{size\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_byte_span_ae0e7535410d4c0403ecb133f9b33d714} 
+size\+\_\+t neo\+::io\+::\+Byte\+Span\+::size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/io/\mbox{\hyperlink{io_2byte__span_8h}{byte\+\_\+span.\+h}}\item 
+src/io/\mbox{\hyperlink{byte__span_8cpp}{byte\+\_\+span.\+cpp}}\end{DoxyCompactItemize}

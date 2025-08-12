@@ -1,0 +1,583 @@
+\doxysection{neo\+::io\+::Json\+Value Class Reference}
+\hypertarget{classneo_1_1io_1_1_json_value}{}\label{classneo_1_1io_1_1_json_value}\index{neo::io::JsonValue@{neo::io::JsonValue}}
+
+
+JSON handling interface for Neo C++ node.  
+
+
+
+
+{\ttfamily \#include $<$json.\+h$>$}
+
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}} = nlohmann\+::json
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{Json\+Value}} ()
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac251265780f50234a090763f6204b140}{Json\+Value}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}} \&j)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value_a221fe391f12573bdedbcbc293567c131}{Json\+Value}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}} \&\&j)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value_a7228f5da622f11600517601e286a83c7}{Json\+Value}} (const std\+::string \&str)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value_a3020b1f7390f269d0e3a9ca103b701c4}{Json\+Value}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \&other)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac09891d7395de8ee5a6ec7a75516cb8e}{Json\+Value}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \&\&other) noexcept
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \& \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a60f034f083e8a7b2a7b96bb7ae623649}{operator=}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \&other)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \& \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a767891698302a237062489f6b4b96df1}{operator=}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \&\&other) noexcept
+\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_json_value_aa48854d6209e5f3f5d51c85ae4f6723e}{Is\+Null}} () const
+\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a2125810da5f3372a7fec8cf1767f585f}{Is\+Boolean}} () const
+\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a729b58ef935578108fbf94fb2773ca48}{Is\+Number}} () const
+\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a5656b1a27a59a2675b9babf6a45294a3}{Is\+String}} () const
+\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4fc53609de63eb42eab8e9b36e944b73}{Is\+Array}} () const
+\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a61c3424fa6458bba0c35aedd256f1d27}{Is\+Object}} () const
+\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a71126eca2d61534ca1a98ce493d92fbb}{Get\+Boolean}} () const
+\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a1705cb722cdb3c8552b697772a347867}{Get\+Int32}} () const
+\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_json_value_abf943a4642b890868ea52fe3e83d1cea}{Get\+Int64}} () const
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a1f59528c1a1a9e989c27ce6a4389f99c}{Get\+UInt32}} () const
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a0e0403e14e7fcb8ce485fbfe08daae0d}{Get\+UInt64}} () const
+\item 
+double \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ab3ffd28e12790557a3883133d23a753a}{Get\+Double}} () const
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a8051807d68cb947e3b4ee9de48cd6b93}{Get\+String}} () const
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ae9cfc0eb9df63a1188926b4642cff32c}{Size}} () const
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a6ad57ac0685f1f583ba1ee1d4f4abdfc}{operator\mbox{[}$\,$\mbox{]}}} (size\+\_\+t index) const
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \& \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a73ddff394338a386e74402c6b6ab8174}{operator\mbox{[}$\,$\mbox{]}}} (size\+\_\+t index)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a92e27ac0f8202b5739b7b83c875667f1}{operator\mbox{[}$\,$\mbox{]}}} (const std\+::string \&key) const
+\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ae7c61b9654423de8d841702311851676}{Has\+Member}} (const std\+::string \&key) const
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a6a213a58045e6d572c7719f74f518344}{Set\+Boolean}} (bool value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_abab09ad06c47af864a39d97a7fac9f15}{Set\+Int32}} (int32\+\_\+t value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a0b32956027c938b8b038b0dda03c1069}{Set\+Int64}} (int64\+\_\+t value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a13165eaa3aa9e8e2ca0ccca9871876ba}{Set\+UInt32}} (uint32\+\_\+t value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ae12404cf3948adeaac0d7579b92d13e5}{Set\+UInt64}} (uint64\+\_\+t value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a8954daba9f407ac8a424d2c8eb29aac1}{Set\+Double}} (double value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a17fbdd1d3a33c335b17feddd6cb3fd96}{Set\+String}} (const std\+::string \&value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a7d34157115a98111c3d0fa71af02c529}{Set\+Null}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a2b83a444959ced787f0ab9c3f96dce24}{Add\+Member}} (const std\+::string \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \&value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a9adac7bf8f51c43ca3253db6491894b8}{Add\+Member}} (const std\+::string \&key, bool value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a6a786ea2dce3d0fc5b7434a9f12d6fc2}{Add\+Member}} (const std\+::string \&key, int32\+\_\+t value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a48873f4ebf9526d5f7f4bac5b8999914}{Add\+Member}} (const std\+::string \&key, int64\+\_\+t value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac46a44624dc5d76b1eb00ae6905363b9}{Add\+Member}} (const std\+::string \&key, uint32\+\_\+t value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a8e97e371f45df76cda78d9fe87fa5cba}{Add\+Member}} (const std\+::string \&key, uint64\+\_\+t value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a95d449a5c43d208718402021fe6108ae}{Add\+Member}} (const std\+::string \&key, double value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a07589127e1671bf472e0aba9fbfbd86d}{Add\+Member}} (const std\+::string \&key, const std\+::string \&value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a85c5e3eff73ad99af9f06ef1c825a4e9}{Add\+Member}} (const std\+::string \&key, const char \texorpdfstring{$\ast$}{*}value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a6d8f6382ad314ab5d4c05de4a7cdbbb1}{Push\+Back}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \&value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a45643ffadaff0e3e19403346becd2279}{Push\+Back}} (bool value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a2346ea8ee55909ccbeffa446be52a4b2}{Push\+Back}} (int32\+\_\+t value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_aaef87aa7038c8a6ca9b8dbf0d580a405}{Push\+Back}} (int64\+\_\+t value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a1defe64ad5b491cdca9a359430c3f732}{Push\+Back}} (uint32\+\_\+t value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_af06ef928e2bd7e1c6438e7aa0649c739}{Push\+Back}} (uint64\+\_\+t value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_afdd28979ec5f34b20a9613a347474a48}{Push\+Back}} (double value)
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a84ab605adfc556abbf3bdc02edf68770}{Push\+Back}} (const std\+::string \&value)
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a657b36258c734cc6900b4ab8f8ee2390}{To\+String}} () const
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4948a42a7e6c913cc67b330d2ab7e6fd}{To\+String}} (int indent) const
+\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a91990e9632b88eecd4ec0106de0e3616}{Add\+Byte\+Array}} (const std\+::string \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&bytes)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a1cf883c3e7cd5d96aa08a76548de1d1e}{Get\+Byte\+Array}} (const std\+::string \&key) const
+\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}} \& \mbox{\hyperlink{classneo_1_1io_1_1_json_value_abe5332e88b98f1edcc1af3babf8f38d8}{Get\+Json}} () const
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}} \& \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac9df4f8f85cbc87db66f4434316dcf5b}{Get\+Json}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a3093b602f5df31945dc6fc21d194fad7}{Create\+Object}} ()
+\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \mbox{\hyperlink{classneo_1_1io_1_1_json_value_aed2f90dbb67da48a831e62f9dc03a65e}{Create\+Array}} ()
+\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a59fcf296e9daf16537b4a037f499e635}{Parse}} (const std\+::string \&str)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}} \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ size\+\_\+t, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} $>$ $>$ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a9045db6864c407b95deca79ec2c2048d}{cached\+\_\+elements\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+JSON handling interface for Neo C++ node. 
+
+This provides a wrapper around nlohmann/json with Neo-\/specific functionality for blockchain data serialization/deserialization. 
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1io_1_1_json_value_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}\index{neo::io::JsonValue@{neo::io::JsonValue}!json@{json}}
+\index{json@{json}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{json}{json}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9} 
+using \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{neo\+::io\+::\+Json\+Value\+::json}} = nlohmann\+::json}
+
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1io_1_1_json_value_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}\index{neo::io::JsonValue@{neo::io::JsonValue}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{JsonValue()}{JsonValue()}\hspace{0.1cm}{\footnotesize\ttfamily [1/6]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3} 
+neo\+::io\+::\+Json\+Value\+::\+Json\+Value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_ac251265780f50234a090763f6204b140}\index{neo::io::JsonValue@{neo::io::JsonValue}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{JsonValue()}{JsonValue()}\hspace{0.1cm}{\footnotesize\ttfamily [2/6]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_ac251265780f50234a090763f6204b140} 
+neo\+::io\+::\+Json\+Value\+::\+Json\+Value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}} \&}]{j}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a221fe391f12573bdedbcbc293567c131}\index{neo::io::JsonValue@{neo::io::JsonValue}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{JsonValue()}{JsonValue()}\hspace{0.1cm}{\footnotesize\ttfamily [3/6]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a221fe391f12573bdedbcbc293567c131} 
+neo\+::io\+::\+Json\+Value\+::\+Json\+Value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}} \&\&}]{j}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a7228f5da622f11600517601e286a83c7}\index{neo::io::JsonValue@{neo::io::JsonValue}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{JsonValue()}{JsonValue()}\hspace{0.1cm}{\footnotesize\ttfamily [4/6]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a7228f5da622f11600517601e286a83c7} 
+neo\+::io\+::\+Json\+Value\+::\+Json\+Value (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a3020b1f7390f269d0e3a9ca103b701c4}\index{neo::io::JsonValue@{neo::io::JsonValue}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{JsonValue()}{JsonValue()}\hspace{0.1cm}{\footnotesize\ttfamily [5/6]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a3020b1f7390f269d0e3a9ca103b701c4} 
+neo\+::io\+::\+Json\+Value\+::\+Json\+Value (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1io_1_1_json_value_ac09891d7395de8ee5a6ec7a75516cb8e}\index{neo::io::JsonValue@{neo::io::JsonValue}!JsonValue@{JsonValue}}
+\index{JsonValue@{JsonValue}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{JsonValue()}{JsonValue()}\hspace{0.1cm}{\footnotesize\ttfamily [6/6]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_ac09891d7395de8ee5a6ec7a75516cb8e} 
+neo\+::io\+::\+Json\+Value\+::\+Json\+Value (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \&\&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1io_1_1_json_value_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1io_1_1_json_value_a91990e9632b88eecd4ec0106de0e3616}\index{neo::io::JsonValue@{neo::io::JsonValue}!AddByteArray@{AddByteArray}}
+\index{AddByteArray@{AddByteArray}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{AddByteArray()}{AddByteArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a91990e9632b88eecd4ec0106de0e3616} 
+void neo\+::io\+::\+Json\+Value\+::\+Add\+Byte\+Array (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&}]{bytes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a9adac7bf8f51c43ca3253db6491894b8}\index{neo::io::JsonValue@{neo::io::JsonValue}!AddMember@{AddMember}}
+\index{AddMember@{AddMember}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{AddMember()}{AddMember()}\hspace{0.1cm}{\footnotesize\ttfamily [1/9]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a9adac7bf8f51c43ca3253db6491894b8} 
+void neo\+::io\+::\+Json\+Value\+::\+Add\+Member (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{bool}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a85c5e3eff73ad99af9f06ef1c825a4e9}\index{neo::io::JsonValue@{neo::io::JsonValue}!AddMember@{AddMember}}
+\index{AddMember@{AddMember}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{AddMember()}{AddMember()}\hspace{0.1cm}{\footnotesize\ttfamily [2/9]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a85c5e3eff73ad99af9f06ef1c825a4e9} 
+void neo\+::io\+::\+Json\+Value\+::\+Add\+Member (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const char \texorpdfstring{$\ast$}{*}}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a2b83a444959ced787f0ab9c3f96dce24}\index{neo::io::JsonValue@{neo::io::JsonValue}!AddMember@{AddMember}}
+\index{AddMember@{AddMember}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{AddMember()}{AddMember()}\hspace{0.1cm}{\footnotesize\ttfamily [3/9]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a2b83a444959ced787f0ab9c3f96dce24} 
+void neo\+::io\+::\+Json\+Value\+::\+Add\+Member (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1io_1_1_json_value_a07589127e1671bf472e0aba9fbfbd86d}\index{neo::io::JsonValue@{neo::io::JsonValue}!AddMember@{AddMember}}
+\index{AddMember@{AddMember}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{AddMember()}{AddMember()}\hspace{0.1cm}{\footnotesize\ttfamily [4/9]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a07589127e1671bf472e0aba9fbfbd86d} 
+void neo\+::io\+::\+Json\+Value\+::\+Add\+Member (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a95d449a5c43d208718402021fe6108ae}\index{neo::io::JsonValue@{neo::io::JsonValue}!AddMember@{AddMember}}
+\index{AddMember@{AddMember}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{AddMember()}{AddMember()}\hspace{0.1cm}{\footnotesize\ttfamily [5/9]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a95d449a5c43d208718402021fe6108ae} 
+void neo\+::io\+::\+Json\+Value\+::\+Add\+Member (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{double}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a6a786ea2dce3d0fc5b7434a9f12d6fc2}\index{neo::io::JsonValue@{neo::io::JsonValue}!AddMember@{AddMember}}
+\index{AddMember@{AddMember}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{AddMember()}{AddMember()}\hspace{0.1cm}{\footnotesize\ttfamily [6/9]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a6a786ea2dce3d0fc5b7434a9f12d6fc2} 
+void neo\+::io\+::\+Json\+Value\+::\+Add\+Member (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{int32\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a48873f4ebf9526d5f7f4bac5b8999914}\index{neo::io::JsonValue@{neo::io::JsonValue}!AddMember@{AddMember}}
+\index{AddMember@{AddMember}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{AddMember()}{AddMember()}\hspace{0.1cm}{\footnotesize\ttfamily [7/9]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a48873f4ebf9526d5f7f4bac5b8999914} 
+void neo\+::io\+::\+Json\+Value\+::\+Add\+Member (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{int64\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_ac46a44624dc5d76b1eb00ae6905363b9}\index{neo::io::JsonValue@{neo::io::JsonValue}!AddMember@{AddMember}}
+\index{AddMember@{AddMember}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{AddMember()}{AddMember()}\hspace{0.1cm}{\footnotesize\ttfamily [8/9]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_ac46a44624dc5d76b1eb00ae6905363b9} 
+void neo\+::io\+::\+Json\+Value\+::\+Add\+Member (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{uint32\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a8e97e371f45df76cda78d9fe87fa5cba}\index{neo::io::JsonValue@{neo::io::JsonValue}!AddMember@{AddMember}}
+\index{AddMember@{AddMember}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{AddMember()}{AddMember()}\hspace{0.1cm}{\footnotesize\ttfamily [9/9]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a8e97e371f45df76cda78d9fe87fa5cba} 
+void neo\+::io\+::\+Json\+Value\+::\+Add\+Member (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{, }\item[{uint64\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_aed2f90dbb67da48a831e62f9dc03a65e}\index{neo::io::JsonValue@{neo::io::JsonValue}!CreateArray@{CreateArray}}
+\index{CreateArray@{CreateArray}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{CreateArray()}{CreateArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_aed2f90dbb67da48a831e62f9dc03a65e} 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} neo\+::io\+::\+Json\+Value\+::\+Create\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1io_1_1_json_value_a3093b602f5df31945dc6fc21d194fad7}\index{neo::io::JsonValue@{neo::io::JsonValue}!CreateObject@{CreateObject}}
+\index{CreateObject@{CreateObject}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{CreateObject()}{CreateObject()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a3093b602f5df31945dc6fc21d194fad7} 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} neo\+::io\+::\+Json\+Value\+::\+Create\+Object (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1io_1_1_json_value_a71126eca2d61534ca1a98ce493d92fbb}\index{neo::io::JsonValue@{neo::io::JsonValue}!GetBoolean@{GetBoolean}}
+\index{GetBoolean@{GetBoolean}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{GetBoolean()}{GetBoolean()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a71126eca2d61534ca1a98ce493d92fbb} 
+bool neo\+::io\+::\+Json\+Value\+::\+Get\+Boolean (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a1cf883c3e7cd5d96aa08a76548de1d1e}\index{neo::io::JsonValue@{neo::io::JsonValue}!GetByteArray@{GetByteArray}}
+\index{GetByteArray@{GetByteArray}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{GetByteArray()}{GetByteArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a1cf883c3e7cd5d96aa08a76548de1d1e} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} neo\+::io\+::\+Json\+Value\+::\+Get\+Byte\+Array (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1io_1_1_json_value_ab3ffd28e12790557a3883133d23a753a}\index{neo::io::JsonValue@{neo::io::JsonValue}!GetDouble@{GetDouble}}
+\index{GetDouble@{GetDouble}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{GetDouble()}{GetDouble()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_ab3ffd28e12790557a3883133d23a753a} 
+double neo\+::io\+::\+Json\+Value\+::\+Get\+Double (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a1705cb722cdb3c8552b697772a347867}\index{neo::io::JsonValue@{neo::io::JsonValue}!GetInt32@{GetInt32}}
+\index{GetInt32@{GetInt32}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{GetInt32()}{GetInt32()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a1705cb722cdb3c8552b697772a347867} 
+int32\+\_\+t neo\+::io\+::\+Json\+Value\+::\+Get\+Int32 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_abf943a4642b890868ea52fe3e83d1cea}\index{neo::io::JsonValue@{neo::io::JsonValue}!GetInt64@{GetInt64}}
+\index{GetInt64@{GetInt64}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{GetInt64()}{GetInt64()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_abf943a4642b890868ea52fe3e83d1cea} 
+int64\+\_\+t neo\+::io\+::\+Json\+Value\+::\+Get\+Int64 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_ac9df4f8f85cbc87db66f4434316dcf5b}\index{neo::io::JsonValue@{neo::io::JsonValue}!GetJson@{GetJson}}
+\index{GetJson@{GetJson}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{GetJson()}{GetJson()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_ac9df4f8f85cbc87db66f4434316dcf5b} 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}} \& neo\+::io\+::\+Json\+Value\+::\+Get\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_abe5332e88b98f1edcc1af3babf8f38d8}\index{neo::io::JsonValue@{neo::io::JsonValue}!GetJson@{GetJson}}
+\index{GetJson@{GetJson}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{GetJson()}{GetJson()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_abe5332e88b98f1edcc1af3babf8f38d8} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}} \& neo\+::io\+::\+Json\+Value\+::\+Get\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a8051807d68cb947e3b4ee9de48cd6b93}\index{neo::io::JsonValue@{neo::io::JsonValue}!GetString@{GetString}}
+\index{GetString@{GetString}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{GetString()}{GetString()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a8051807d68cb947e3b4ee9de48cd6b93} 
+std\+::string neo\+::io\+::\+Json\+Value\+::\+Get\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a1f59528c1a1a9e989c27ce6a4389f99c}\index{neo::io::JsonValue@{neo::io::JsonValue}!GetUInt32@{GetUInt32}}
+\index{GetUInt32@{GetUInt32}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{GetUInt32()}{GetUInt32()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a1f59528c1a1a9e989c27ce6a4389f99c} 
+uint32\+\_\+t neo\+::io\+::\+Json\+Value\+::\+Get\+UInt32 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a0e0403e14e7fcb8ce485fbfe08daae0d}\index{neo::io::JsonValue@{neo::io::JsonValue}!GetUInt64@{GetUInt64}}
+\index{GetUInt64@{GetUInt64}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{GetUInt64()}{GetUInt64()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a0e0403e14e7fcb8ce485fbfe08daae0d} 
+uint64\+\_\+t neo\+::io\+::\+Json\+Value\+::\+Get\+UInt64 (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_ae7c61b9654423de8d841702311851676}\index{neo::io::JsonValue@{neo::io::JsonValue}!HasMember@{HasMember}}
+\index{HasMember@{HasMember}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{HasMember()}{HasMember()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_ae7c61b9654423de8d841702311851676} 
+bool neo\+::io\+::\+Json\+Value\+::\+Has\+Member (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a4fc53609de63eb42eab8e9b36e944b73}\index{neo::io::JsonValue@{neo::io::JsonValue}!IsArray@{IsArray}}
+\index{IsArray@{IsArray}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{IsArray()}{IsArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a4fc53609de63eb42eab8e9b36e944b73} 
+bool neo\+::io\+::\+Json\+Value\+::\+Is\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a2125810da5f3372a7fec8cf1767f585f}\index{neo::io::JsonValue@{neo::io::JsonValue}!IsBoolean@{IsBoolean}}
+\index{IsBoolean@{IsBoolean}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{IsBoolean()}{IsBoolean()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a2125810da5f3372a7fec8cf1767f585f} 
+bool neo\+::io\+::\+Json\+Value\+::\+Is\+Boolean (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_aa48854d6209e5f3f5d51c85ae4f6723e}\index{neo::io::JsonValue@{neo::io::JsonValue}!IsNull@{IsNull}}
+\index{IsNull@{IsNull}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{IsNull()}{IsNull()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_aa48854d6209e5f3f5d51c85ae4f6723e} 
+bool neo\+::io\+::\+Json\+Value\+::\+Is\+Null (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a729b58ef935578108fbf94fb2773ca48}\index{neo::io::JsonValue@{neo::io::JsonValue}!IsNumber@{IsNumber}}
+\index{IsNumber@{IsNumber}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{IsNumber()}{IsNumber()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a729b58ef935578108fbf94fb2773ca48} 
+bool neo\+::io\+::\+Json\+Value\+::\+Is\+Number (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a61c3424fa6458bba0c35aedd256f1d27}\index{neo::io::JsonValue@{neo::io::JsonValue}!IsObject@{IsObject}}
+\index{IsObject@{IsObject}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{IsObject()}{IsObject()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a61c3424fa6458bba0c35aedd256f1d27} 
+bool neo\+::io\+::\+Json\+Value\+::\+Is\+Object (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a5656b1a27a59a2675b9babf6a45294a3}\index{neo::io::JsonValue@{neo::io::JsonValue}!IsString@{IsString}}
+\index{IsString@{IsString}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{IsString()}{IsString()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a5656b1a27a59a2675b9babf6a45294a3} 
+bool neo\+::io\+::\+Json\+Value\+::\+Is\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a60f034f083e8a7b2a7b96bb7ae623649}\index{neo::io::JsonValue@{neo::io::JsonValue}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a60f034f083e8a7b2a7b96bb7ae623649} 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \& neo\+::io\+::\+Json\+Value\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1io_1_1_json_value_a767891698302a237062489f6b4b96df1}\index{neo::io::JsonValue@{neo::io::JsonValue}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a767891698302a237062489f6b4b96df1} 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \& neo\+::io\+::\+Json\+Value\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \&\&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1io_1_1_json_value_a92e27ac0f8202b5739b7b83c875667f1}\index{neo::io::JsonValue@{neo::io::JsonValue}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a92e27ac0f8202b5739b7b83c875667f1} 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} neo\+::io\+::\+Json\+Value\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1io_1_1_json_value_a73ddff394338a386e74402c6b6ab8174}\index{neo::io::JsonValue@{neo::io::JsonValue}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a73ddff394338a386e74402c6b6ab8174} 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \& neo\+::io\+::\+Json\+Value\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1io_1_1_json_value_a6ad57ac0685f1f583ba1ee1d4f4abdfc}\index{neo::io::JsonValue@{neo::io::JsonValue}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a6ad57ac0685f1f583ba1ee1d4f4abdfc} 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} neo\+::io\+::\+Json\+Value\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1io_1_1_json_value_a59fcf296e9daf16537b4a037f499e635}\index{neo::io::JsonValue@{neo::io::JsonValue}!Parse@{Parse}}
+\index{Parse@{Parse}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a59fcf296e9daf16537b4a037f499e635} 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} neo\+::io\+::\+Json\+Value\+::\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1io_1_1_json_value_a45643ffadaff0e3e19403346becd2279}\index{neo::io::JsonValue@{neo::io::JsonValue}!PushBack@{PushBack}}
+\index{PushBack@{PushBack}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{PushBack()}{PushBack()}\hspace{0.1cm}{\footnotesize\ttfamily [1/8]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a45643ffadaff0e3e19403346becd2279} 
+void neo\+::io\+::\+Json\+Value\+::\+Push\+Back (\begin{DoxyParamCaption}\item[{bool}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a6d8f6382ad314ab5d4c05de4a7cdbbb1}\index{neo::io::JsonValue@{neo::io::JsonValue}!PushBack@{PushBack}}
+\index{PushBack@{PushBack}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{PushBack()}{PushBack()}\hspace{0.1cm}{\footnotesize\ttfamily [2/8]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a6d8f6382ad314ab5d4c05de4a7cdbbb1} 
+void neo\+::io\+::\+Json\+Value\+::\+Push\+Back (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1io_1_1_json_value_a84ab605adfc556abbf3bdc02edf68770}\index{neo::io::JsonValue@{neo::io::JsonValue}!PushBack@{PushBack}}
+\index{PushBack@{PushBack}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{PushBack()}{PushBack()}\hspace{0.1cm}{\footnotesize\ttfamily [3/8]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a84ab605adfc556abbf3bdc02edf68770} 
+void neo\+::io\+::\+Json\+Value\+::\+Push\+Back (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_afdd28979ec5f34b20a9613a347474a48}\index{neo::io::JsonValue@{neo::io::JsonValue}!PushBack@{PushBack}}
+\index{PushBack@{PushBack}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{PushBack()}{PushBack()}\hspace{0.1cm}{\footnotesize\ttfamily [4/8]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_afdd28979ec5f34b20a9613a347474a48} 
+void neo\+::io\+::\+Json\+Value\+::\+Push\+Back (\begin{DoxyParamCaption}\item[{double}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a2346ea8ee55909ccbeffa446be52a4b2}\index{neo::io::JsonValue@{neo::io::JsonValue}!PushBack@{PushBack}}
+\index{PushBack@{PushBack}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{PushBack()}{PushBack()}\hspace{0.1cm}{\footnotesize\ttfamily [5/8]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a2346ea8ee55909ccbeffa446be52a4b2} 
+void neo\+::io\+::\+Json\+Value\+::\+Push\+Back (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_aaef87aa7038c8a6ca9b8dbf0d580a405}\index{neo::io::JsonValue@{neo::io::JsonValue}!PushBack@{PushBack}}
+\index{PushBack@{PushBack}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{PushBack()}{PushBack()}\hspace{0.1cm}{\footnotesize\ttfamily [6/8]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_aaef87aa7038c8a6ca9b8dbf0d580a405} 
+void neo\+::io\+::\+Json\+Value\+::\+Push\+Back (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a1defe64ad5b491cdca9a359430c3f732}\index{neo::io::JsonValue@{neo::io::JsonValue}!PushBack@{PushBack}}
+\index{PushBack@{PushBack}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{PushBack()}{PushBack()}\hspace{0.1cm}{\footnotesize\ttfamily [7/8]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a1defe64ad5b491cdca9a359430c3f732} 
+void neo\+::io\+::\+Json\+Value\+::\+Push\+Back (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_af06ef928e2bd7e1c6438e7aa0649c739}\index{neo::io::JsonValue@{neo::io::JsonValue}!PushBack@{PushBack}}
+\index{PushBack@{PushBack}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{PushBack()}{PushBack()}\hspace{0.1cm}{\footnotesize\ttfamily [8/8]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_af06ef928e2bd7e1c6438e7aa0649c739} 
+void neo\+::io\+::\+Json\+Value\+::\+Push\+Back (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a6a213a58045e6d572c7719f74f518344}\index{neo::io::JsonValue@{neo::io::JsonValue}!SetBoolean@{SetBoolean}}
+\index{SetBoolean@{SetBoolean}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{SetBoolean()}{SetBoolean()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a6a213a58045e6d572c7719f74f518344} 
+void neo\+::io\+::\+Json\+Value\+::\+Set\+Boolean (\begin{DoxyParamCaption}\item[{bool}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a8954daba9f407ac8a424d2c8eb29aac1}\index{neo::io::JsonValue@{neo::io::JsonValue}!SetDouble@{SetDouble}}
+\index{SetDouble@{SetDouble}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{SetDouble()}{SetDouble()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a8954daba9f407ac8a424d2c8eb29aac1} 
+void neo\+::io\+::\+Json\+Value\+::\+Set\+Double (\begin{DoxyParamCaption}\item[{double}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_abab09ad06c47af864a39d97a7fac9f15}\index{neo::io::JsonValue@{neo::io::JsonValue}!SetInt32@{SetInt32}}
+\index{SetInt32@{SetInt32}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{SetInt32()}{SetInt32()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_abab09ad06c47af864a39d97a7fac9f15} 
+void neo\+::io\+::\+Json\+Value\+::\+Set\+Int32 (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a0b32956027c938b8b038b0dda03c1069}\index{neo::io::JsonValue@{neo::io::JsonValue}!SetInt64@{SetInt64}}
+\index{SetInt64@{SetInt64}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{SetInt64()}{SetInt64()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a0b32956027c938b8b038b0dda03c1069} 
+void neo\+::io\+::\+Json\+Value\+::\+Set\+Int64 (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a7d34157115a98111c3d0fa71af02c529}\index{neo::io::JsonValue@{neo::io::JsonValue}!SetNull@{SetNull}}
+\index{SetNull@{SetNull}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{SetNull()}{SetNull()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a7d34157115a98111c3d0fa71af02c529} 
+void neo\+::io\+::\+Json\+Value\+::\+Set\+Null (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a17fbdd1d3a33c335b17feddd6cb3fd96}\index{neo::io::JsonValue@{neo::io::JsonValue}!SetString@{SetString}}
+\index{SetString@{SetString}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{SetString()}{SetString()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a17fbdd1d3a33c335b17feddd6cb3fd96} 
+void neo\+::io\+::\+Json\+Value\+::\+Set\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a13165eaa3aa9e8e2ca0ccca9871876ba}\index{neo::io::JsonValue@{neo::io::JsonValue}!SetUInt32@{SetUInt32}}
+\index{SetUInt32@{SetUInt32}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{SetUInt32()}{SetUInt32()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a13165eaa3aa9e8e2ca0ccca9871876ba} 
+void neo\+::io\+::\+Json\+Value\+::\+Set\+UInt32 (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_ae12404cf3948adeaac0d7579b92d13e5}\index{neo::io::JsonValue@{neo::io::JsonValue}!SetUInt64@{SetUInt64}}
+\index{SetUInt64@{SetUInt64}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{SetUInt64()}{SetUInt64()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_ae12404cf3948adeaac0d7579b92d13e5} 
+void neo\+::io\+::\+Json\+Value\+::\+Set\+UInt64 (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_ae9cfc0eb9df63a1188926b4642cff32c}\index{neo::io::JsonValue@{neo::io::JsonValue}!Size@{Size}}
+\index{Size@{Size}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_ae9cfc0eb9df63a1188926b4642cff32c} 
+size\+\_\+t neo\+::io\+::\+Json\+Value\+::\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a657b36258c734cc6900b4ab8f8ee2390}\index{neo::io::JsonValue@{neo::io::JsonValue}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a657b36258c734cc6900b4ab8f8ee2390} 
+std\+::string neo\+::io\+::\+Json\+Value\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a4948a42a7e6c913cc67b330d2ab7e6fd}\index{neo::io::JsonValue@{neo::io::JsonValue}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a4948a42a7e6c913cc67b330d2ab7e6fd} 
+std\+::string neo\+::io\+::\+Json\+Value\+::\+To\+String (\begin{DoxyParamCaption}\item[{int}]{indent}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1io_1_1_json_value_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1io_1_1_json_value_a9045db6864c407b95deca79ec2c2048d}\index{neo::io::JsonValue@{neo::io::JsonValue}!cached\_elements\_@{cached\_elements\_}}
+\index{cached\_elements\_@{cached\_elements\_}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{cached\_elements\_}{cached\_elements\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a9045db6864c407b95deca79ec2c2048d} 
+std\+::unordered\+\_\+map$<$size\+\_\+t, std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{Json\+Value}}$>$ $>$ neo\+::io\+::\+Json\+Value\+::cached\+\_\+elements\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}\index{neo::io::JsonValue@{neo::io::JsonValue}!data\_@{data\_}}
+\index{data\_@{data\_}!neo::io::JsonValue@{neo::io::JsonValue}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c} 
+\mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}} neo\+::io\+::\+Json\+Value\+::data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/io/\mbox{\hyperlink{io_2json_8h}{json.\+h}}\end{DoxyCompactItemize}

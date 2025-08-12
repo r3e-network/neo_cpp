@@ -1,0 +1,435 @@
+\doxysection{neo\+::vm\+::Reference\+Counter Class Reference}
+\hypertarget{classneo_1_1vm_1_1_reference_counter}{}\label{classneo_1_1vm_1_1_reference_counter}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+
+
+Represents a reference counter for stack items.  
+
+
+
+
+{\ttfamily \#include $<$reference\+\_\+counter.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1vm_1_1_reference_counter_1_1_reference_entry}{Reference\+Entry}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_a27231b5b5402a5458addb349d88dc474}{Reference\+Counter}} ()=default
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{classneo_1_1vm_1_1_reference_counter}{Reference\+Counter}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_afd89710924fd82dd4de79fc8a0de6bb0}{Add\+Reference}} ()
+\begin{DoxyCompactList}\small\item\em Increments the reference count. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_ab934ee12ea08c935454f3e2867252512}{Remove\+Reference}} ()
+\begin{DoxyCompactList}\small\item\em Decrements the reference count. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_ad11fdcfb3abbaea775c400315488102b}{Add\+Reference}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ child, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ parent)
+\begin{DoxyCompactList}\small\item\em Adds a reference from a parent to a child. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_abff2150cf0eadbb9eb88a9bddad461e7}{Remove\+Reference}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ child, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ parent)
+\begin{DoxyCompactList}\small\item\em Removes a reference from a parent to a child. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_a1425cb9be73694a2e0e3b42e089a4f16}{Add\+Stack\+Reference}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item, size\+\_\+t count=1)
+\begin{DoxyCompactList}\small\item\em Adds a stack reference to an item. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_a6b1f8a1951cc4cb3e585e277f473bcb8}{Remove\+Stack\+Reference}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item)
+\begin{DoxyCompactList}\small\item\em Removes a stack reference from an item. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_ae62a2a0aaefc48e05e227abf0d61ca68}{Add\+Zero\+Referred}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item)
+\begin{DoxyCompactList}\small\item\em Adds an item to the zero-\/referred list. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_a6f7b339be376c26ad8f76f6b3931b497}{Check\+Zero\+Referred}} ()
+\begin{DoxyCompactList}\small\item\em Checks and processes items that have zero references. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_a722f1e519e3b7987c7d7d9e4d27e45c3}{Get\+Reference\+Count}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item) const
+\begin{DoxyCompactList}\small\item\em Gets the number of references to an item. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_abd9af47acf5a0573a92eae694e42f928}{Get\+Stack\+References}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item) const
+\begin{DoxyCompactList}\small\item\em Gets the number of stack references to an item. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_a895696c2e3caf8272060e67ccba20f8c}{Count}} () const
+\begin{DoxyCompactList}\small\item\em Gets the total number of references. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_a48c0492517a969ff82f29619b3564984}{Is\+Referenced}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item) const
+\begin{DoxyCompactList}\small\item\em Checks if an item is referenced. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_a4a20412b9d9ae5cd0c19f028418d43b5}{Has\+Circular\+Reference}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ root) const
+\begin{DoxyCompactList}\small\item\em Checks if there is a circular reference. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_a36bf54264e6b3a967b9fa38815f23855}{Find\+Strongly\+Connected\+Components}} (std\+::vector$<$ std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ $>$ \&components)
+\begin{DoxyCompactList}\small\item\em Finds strongly connected components using Tarjan\textquotesingle{}s algorithm. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_a8ba0eeb2a1a3673f08aace6154939f3e}{Strong\+Connect}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ v, std\+::unordered\+\_\+map$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$, int $>$ \&indices, std\+::unordered\+\_\+map$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$, int $>$ \&lowlinks, std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \&stack, std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \&on\+Stack, int \&index, std\+::vector$<$ std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ $>$ \&components)
+\begin{DoxyCompactList}\small\item\em Helper method for Tarjan\textquotesingle{}s algorithm to find strongly connected components. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_af52a2053351f7f329786f7106e6ca917}{Has\+Circular\+Reference}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ root, std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \&visited) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_ad756063b6db0f17910b852b001de10c5}{Need\+Track}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item)
+\begin{DoxyCompactList}\small\item\em Determines if an item needs to be tracked based on its type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$, std\+::unordered\+\_\+map$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$, \mbox{\hyperlink{structneo_1_1vm_1_1_reference_counter_1_1_reference_entry}{Reference\+Entry}} $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_a178770d3fdce69f294eb401d20e193b6}{references\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$, size\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_a890e88e442051b4bb5c247a1c6247b55}{stack\+\_\+references\+\_\+}}
+\item 
+std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_a2f1a854fb921a4cf0781c9dbd24417e1}{tracked\+\_\+items\+\_\+}}
+\item 
+std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_ac6983e7da2bf99e4ab0dd8e2487c604e}{zero\+\_\+referred\+\_\+}}
+\item 
+std\+::list$<$ std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_a3ec4a6bc0f00318313450414faa7629c}{cached\+\_\+components\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter_a94fd9da71f1408886a6e7d8825d5c2e5}{references\+\_\+count\+\_\+}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a reference counter for stack items. 
+
+This class is used to track references between stack items to prevent memory leaks and circular references. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_a27231b5b5402a5458addb349d88dc474}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!ReferenceCounter@{ReferenceCounter}}
+\index{ReferenceCounter@{ReferenceCounter}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{ReferenceCounter()}{ReferenceCounter()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_a27231b5b5402a5458addb349d88dc474} 
+neo\+::vm\+::\+Reference\+Counter\+::\+Reference\+Counter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Constructs a new \doxylink{classneo_1_1vm_1_1_reference_counter}{Reference\+Counter}. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_afd89710924fd82dd4de79fc8a0de6bb0}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!AddReference@{AddReference}}
+\index{AddReference@{AddReference}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{AddReference()}{AddReference()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_afd89710924fd82dd4de79fc8a0de6bb0} 
+void neo\+::vm\+::\+Reference\+Counter\+::\+Add\+Reference (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Increments the reference count. 
+
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_ad11fdcfb3abbaea775c400315488102b}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!AddReference@{AddReference}}
+\index{AddReference@{AddReference}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{AddReference()}{AddReference()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_ad11fdcfb3abbaea775c400315488102b} 
+void neo\+::vm\+::\+Reference\+Counter\+::\+Add\+Reference (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{child}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{parent}{}\end{DoxyParamCaption})}
+
+
+
+Adds a reference from a parent to a child. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em child} & The child item. \\
+\hline
+{\em parent} & The parent item. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_a1425cb9be73694a2e0e3b42e089a4f16}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!AddStackReference@{AddStackReference}}
+\index{AddStackReference@{AddStackReference}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{AddStackReference()}{AddStackReference()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_a1425cb9be73694a2e0e3b42e089a4f16} 
+void neo\+::vm\+::\+Reference\+Counter\+::\+Add\+Stack\+Reference (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{, }\item[{size\+\_\+t}]{count}{ = {\ttfamily 1}}\end{DoxyParamCaption})}
+
+
+
+Adds a stack reference to an item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item. \\
+\hline
+{\em count} & The number of references to add. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_ae62a2a0aaefc48e05e227abf0d61ca68}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!AddZeroReferred@{AddZeroReferred}}
+\index{AddZeroReferred@{AddZeroReferred}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{AddZeroReferred()}{AddZeroReferred()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_ae62a2a0aaefc48e05e227abf0d61ca68} 
+void neo\+::vm\+::\+Reference\+Counter\+::\+Add\+Zero\+Referred (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Adds an item to the zero-\/referred list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_a6f7b339be376c26ad8f76f6b3931b497}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!CheckZeroReferred@{CheckZeroReferred}}
+\index{CheckZeroReferred@{CheckZeroReferred}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{CheckZeroReferred()}{CheckZeroReferred()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_a6f7b339be376c26ad8f76f6b3931b497} 
+size\+\_\+t neo\+::vm\+::\+Reference\+Counter\+::\+Check\+Zero\+Referred (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Checks and processes items that have zero references. 
+
+\begin{DoxyReturn}{Returns}
+The current reference count. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_a895696c2e3caf8272060e67ccba20f8c}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!Count@{Count}}
+\index{Count@{Count}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{Count()}{Count()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_a895696c2e3caf8272060e67ccba20f8c} 
+size\+\_\+t neo\+::vm\+::\+Reference\+Counter\+::\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the total number of references. 
+
+\begin{DoxyReturn}{Returns}
+The total number of references. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_a36bf54264e6b3a967b9fa38815f23855}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!FindStronglyConnectedComponents@{FindStronglyConnectedComponents}}
+\index{FindStronglyConnectedComponents@{FindStronglyConnectedComponents}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{FindStronglyConnectedComponents()}{FindStronglyConnectedComponents()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_a36bf54264e6b3a967b9fa38815f23855} 
+void neo\+::vm\+::\+Reference\+Counter\+::\+Find\+Strongly\+Connected\+Components (\begin{DoxyParamCaption}\item[{std\+::vector$<$ std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ $>$ \&}]{components}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Finds strongly connected components using Tarjan\textquotesingle{}s algorithm. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em components} & The vector to store the components. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_a722f1e519e3b7987c7d7d9e4d27e45c3}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!GetReferenceCount@{GetReferenceCount}}
+\index{GetReferenceCount@{GetReferenceCount}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{GetReferenceCount()}{GetReferenceCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_a722f1e519e3b7987c7d7d9e4d27e45c3} 
+size\+\_\+t neo\+::vm\+::\+Reference\+Counter\+::\+Get\+Reference\+Count (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of references to an item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of references. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_abd9af47acf5a0573a92eae694e42f928}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!GetStackReferences@{GetStackReferences}}
+\index{GetStackReferences@{GetStackReferences}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{GetStackReferences()}{GetStackReferences()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_abd9af47acf5a0573a92eae694e42f928} 
+size\+\_\+t neo\+::vm\+::\+Reference\+Counter\+::\+Get\+Stack\+References (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of stack references to an item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of stack references. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_a4a20412b9d9ae5cd0c19f028418d43b5}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!HasCircularReference@{HasCircularReference}}
+\index{HasCircularReference@{HasCircularReference}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{HasCircularReference()}{HasCircularReference()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_a4a20412b9d9ae5cd0c19f028418d43b5} 
+bool neo\+::vm\+::\+Reference\+Counter\+::\+Has\+Circular\+Reference (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{root}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if there is a circular reference. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em root} & The root item. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if there is a circular reference, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_af52a2053351f7f329786f7106e6ca917}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!HasCircularReference@{HasCircularReference}}
+\index{HasCircularReference@{HasCircularReference}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{HasCircularReference()}{HasCircularReference()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_af52a2053351f7f329786f7106e6ca917} 
+bool neo\+::vm\+::\+Reference\+Counter\+::\+Has\+Circular\+Reference (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{root}{, }\item[{std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \&}]{visited}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_a48c0492517a969ff82f29619b3564984}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!IsReferenced@{IsReferenced}}
+\index{IsReferenced@{IsReferenced}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{IsReferenced()}{IsReferenced()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_a48c0492517a969ff82f29619b3564984} 
+bool neo\+::vm\+::\+Reference\+Counter\+::\+Is\+Referenced (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if an item is referenced. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the item is referenced, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_ad756063b6db0f17910b852b001de10c5}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!NeedTrack@{NeedTrack}}
+\index{NeedTrack@{NeedTrack}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{NeedTrack()}{NeedTrack()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_ad756063b6db0f17910b852b001de10c5} 
+bool neo\+::vm\+::\+Reference\+Counter\+::\+Need\+Track (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Determines if an item needs to be tracked based on its type. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the item needs to be tracked, otherwise false. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_ab934ee12ea08c935454f3e2867252512}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!RemoveReference@{RemoveReference}}
+\index{RemoveReference@{RemoveReference}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{RemoveReference()}{RemoveReference()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_ab934ee12ea08c935454f3e2867252512} 
+void neo\+::vm\+::\+Reference\+Counter\+::\+Remove\+Reference (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Decrements the reference count. 
+
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_abff2150cf0eadbb9eb88a9bddad461e7}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!RemoveReference@{RemoveReference}}
+\index{RemoveReference@{RemoveReference}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{RemoveReference()}{RemoveReference()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_abff2150cf0eadbb9eb88a9bddad461e7} 
+void neo\+::vm\+::\+Reference\+Counter\+::\+Remove\+Reference (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{child}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{parent}{}\end{DoxyParamCaption})}
+
+
+
+Removes a reference from a parent to a child. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em child} & The child item. \\
+\hline
+{\em parent} & The parent item. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_a6b1f8a1951cc4cb3e585e277f473bcb8}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!RemoveStackReference@{RemoveStackReference}}
+\index{RemoveStackReference@{RemoveStackReference}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{RemoveStackReference()}{RemoveStackReference()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_a6b1f8a1951cc4cb3e585e277f473bcb8} 
+void neo\+::vm\+::\+Reference\+Counter\+::\+Remove\+Stack\+Reference (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Removes a stack reference from an item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_a8ba0eeb2a1a3673f08aace6154939f3e}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!StrongConnect@{StrongConnect}}
+\index{StrongConnect@{StrongConnect}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{StrongConnect()}{StrongConnect()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_a8ba0eeb2a1a3673f08aace6154939f3e} 
+void neo\+::vm\+::\+Reference\+Counter\+::\+Strong\+Connect (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{v}{, }\item[{std\+::unordered\+\_\+map$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$, int $>$ \&}]{indices}{, }\item[{std\+::unordered\+\_\+map$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$, int $>$ \&}]{lowlinks}{, }\item[{std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \&}]{stack}{, }\item[{std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \&}]{on\+Stack}{, }\item[{int \&}]{index}{, }\item[{std\+::vector$<$ std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ $>$ \&}]{components}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Helper method for Tarjan\textquotesingle{}s algorithm to find strongly connected components. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em v} & The current vertex (stack item). \\
+\hline
+{\em indices} & Map of vertices to their indices. \\
+\hline
+{\em lowlinks} & Map of vertices to their lowlink values. \\
+\hline
+{\em stack} & Stack of vertices. \\
+\hline
+{\em on\+Stack} & Set of vertices on the stack. \\
+\hline
+{\em index} & Current index. \\
+\hline
+{\em components} & Vector to store the components. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 10
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_a3ec4a6bc0f00318313450414faa7629c}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!cached\_components\_@{cached\_components\_}}
+\index{cached\_components\_@{cached\_components\_}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{cached\_components\_}{cached\_components\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_a3ec4a6bc0f00318313450414faa7629c} 
+std\+::list$<$std\+::unordered\+\_\+set$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}}$>$ $>$ $>$ neo\+::vm\+::\+Reference\+Counter\+::cached\+\_\+components\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_a178770d3fdce69f294eb401d20e193b6}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!references\_@{references\_}}
+\index{references\_@{references\_}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{references\_}{references\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_a178770d3fdce69f294eb401d20e193b6} 
+std\+::unordered\+\_\+map$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}}$>$, std\+::unordered\+\_\+map$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}}$>$, \mbox{\hyperlink{structneo_1_1vm_1_1_reference_counter_1_1_reference_entry}{Reference\+Entry}}$>$ $>$ neo\+::vm\+::\+Reference\+Counter\+::references\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_a94fd9da71f1408886a6e7d8825d5c2e5}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!references\_count\_@{references\_count\_}}
+\index{references\_count\_@{references\_count\_}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{references\_count\_}{references\_count\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_a94fd9da71f1408886a6e7d8825d5c2e5} 
+size\+\_\+t neo\+::vm\+::\+Reference\+Counter\+::references\+\_\+count\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_a890e88e442051b4bb5c247a1c6247b55}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!stack\_references\_@{stack\_references\_}}
+\index{stack\_references\_@{stack\_references\_}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{stack\_references\_}{stack\_references\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_a890e88e442051b4bb5c247a1c6247b55} 
+std\+::unordered\+\_\+map$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}}$>$, size\+\_\+t$>$ neo\+::vm\+::\+Reference\+Counter\+::stack\+\_\+references\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_a2f1a854fb921a4cf0781c9dbd24417e1}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!tracked\_items\_@{tracked\_items\_}}
+\index{tracked\_items\_@{tracked\_items\_}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{tracked\_items\_}{tracked\_items\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_a2f1a854fb921a4cf0781c9dbd24417e1} 
+std\+::unordered\+\_\+set$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}}$>$ $>$ neo\+::vm\+::\+Reference\+Counter\+::tracked\+\_\+items\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_reference_counter_ac6983e7da2bf99e4ab0dd8e2487c604e}\index{neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}!zero\_referred\_@{zero\_referred\_}}
+\index{zero\_referred\_@{zero\_referred\_}!neo::vm::ReferenceCounter@{neo::vm::ReferenceCounter}}
+\doxysubsubsection{\texorpdfstring{zero\_referred\_}{zero\_referred\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_reference_counter_ac6983e7da2bf99e4ab0dd8e2487c604e} 
+std\+::unordered\+\_\+set$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}}$>$ $>$ neo\+::vm\+::\+Reference\+Counter\+::zero\+\_\+referred\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/vm/\mbox{\hyperlink{reference__counter_8h}{reference\+\_\+counter.\+h}}\item 
+src/vm/\mbox{\hyperlink{reference__counter_8cpp}{reference\+\_\+counter.\+cpp}}\end{DoxyCompactItemize}

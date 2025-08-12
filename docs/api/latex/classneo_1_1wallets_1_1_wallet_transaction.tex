@@ -1,0 +1,253 @@
+\doxysection{neo\+::wallets\+::Wallet\+Transaction Class Reference}
+\hypertarget{classneo_1_1wallets_1_1_wallet_transaction}{}\label{classneo_1_1wallets_1_1_wallet_transaction}\index{neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}}
+
+
+Represents a wallet transaction.  
+
+
+
+
+{\ttfamily \#include $<$wallet\+\_\+transaction.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::wallets\+::Wallet\+Transaction\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::wallets\+::Wallet\+Transaction\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a3d874eaf1a085f4beb01b00e67790f92}{Wallet\+Transaction}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1wallets_ae63dc5f96bc6e5f5f5a8810fdd4efc38}{Neo3\+Transaction}} $>$ transaction)
+\begin{DoxyCompactList}\small\item\em Constructs a wallet transaction. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1wallets_ae63dc5f96bc6e5f5f5a8810fdd4efc38}{Neo3\+Transaction}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_aacb4566203cd469849571dadd50dc918}{Get\+Transaction}} () const
+\begin{DoxyCompactList}\small\item\em Gets the transaction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_ab08764f79f7c6d31e84b116f67b5d06e}{Get\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the transaction hash. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_afd26c2a457cc3d0f2ca65ef0bf08139a}{Is\+Confirmed}} () const
+\begin{DoxyCompactList}\small\item\em Gets the confirmation status. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_ada3f2741a004d78116d3b27873825b43}{Set\+Confirmed}} (bool confirmed)
+\begin{DoxyCompactList}\small\item\em Sets the confirmation status. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a86cb13ba5a903da01ec14fc612dd810d}{Get\+Block\+Height}} () const
+\begin{DoxyCompactList}\small\item\em Gets the block height. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a6039ff20f93ff97b1a5f03eee0e24a53}{Set\+Block\+Height}} (uint32\+\_\+t height)
+\begin{DoxyCompactList}\small\item\em Sets the block height. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_ad745f60c0513234cf95a37a267c0a6b1}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1wallets_1_1_wallet_transaction}{Wallet\+Transaction} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a22eed47effee4aff58c19754fdfabddb}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1wallets_1_1_wallet_transaction}{Wallet\+Transaction} from a JSON reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1wallets_ae63dc5f96bc6e5f5f5a8810fdd4efc38}{Neo3\+Transaction}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a0b48d48db152aa15ad445c483384e16b}{transaction\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_ae4aab9c2112ebe9a5a0f1564998250be}{confirmed\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a6c0557ceee81cffd5013f24366b2cc16}{block\+\_\+height\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a wallet transaction. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_transaction_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_transaction_a3d874eaf1a085f4beb01b00e67790f92}\index{neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}!WalletTransaction@{WalletTransaction}}
+\index{WalletTransaction@{WalletTransaction}!neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}}
+\doxysubsubsection{\texorpdfstring{WalletTransaction()}{WalletTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_transaction_a3d874eaf1a085f4beb01b00e67790f92} 
+neo\+::wallets\+::\+Wallet\+Transaction\+::\+Wallet\+Transaction (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1wallets_ae63dc5f96bc6e5f5f5a8810fdd4efc38}{Neo3\+Transaction}} $>$}]{transaction}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a wallet transaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_transaction_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_transaction_a22eed47effee4aff58c19754fdfabddb}\index{neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_transaction_a22eed47effee4aff58c19754fdfabddb} 
+void neo\+::wallets\+::\+Wallet\+Transaction\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1wallets_1_1_wallet_transaction}{Wallet\+Transaction} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1wallets_1_1_wallet_transaction_a86cb13ba5a903da01ec14fc612dd810d}\index{neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}!GetBlockHeight@{GetBlockHeight}}
+\index{GetBlockHeight@{GetBlockHeight}!neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}}
+\doxysubsubsection{\texorpdfstring{GetBlockHeight()}{GetBlockHeight()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_transaction_a86cb13ba5a903da01ec14fc612dd810d} 
+uint32\+\_\+t neo\+::wallets\+::\+Wallet\+Transaction\+::\+Get\+Block\+Height (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the block height. 
+
+\begin{DoxyReturn}{Returns}
+The block height. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_transaction_ab08764f79f7c6d31e84b116f67b5d06e}\index{neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}!GetHash@{GetHash}}
+\index{GetHash@{GetHash}!neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}}
+\doxysubsubsection{\texorpdfstring{GetHash()}{GetHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_transaction_ab08764f79f7c6d31e84b116f67b5d06e} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::wallets\+::\+Wallet\+Transaction\+::\+Get\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the transaction hash. 
+
+\begin{DoxyReturn}{Returns}
+The transaction hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1wallets_1_1_wallet_transaction_aacb4566203cd469849571dadd50dc918}\index{neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}!GetTransaction@{GetTransaction}}
+\index{GetTransaction@{GetTransaction}!neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}}
+\doxysubsubsection{\texorpdfstring{GetTransaction()}{GetTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_transaction_aacb4566203cd469849571dadd50dc918} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1wallets_ae63dc5f96bc6e5f5f5a8810fdd4efc38}{Neo3\+Transaction}} $>$ neo\+::wallets\+::\+Wallet\+Transaction\+::\+Get\+Transaction (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the transaction. 
+
+\begin{DoxyReturn}{Returns}
+The transaction. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_transaction_afd26c2a457cc3d0f2ca65ef0bf08139a}\index{neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}!IsConfirmed@{IsConfirmed}}
+\index{IsConfirmed@{IsConfirmed}!neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}}
+\doxysubsubsection{\texorpdfstring{IsConfirmed()}{IsConfirmed()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_transaction_afd26c2a457cc3d0f2ca65ef0bf08139a} 
+bool neo\+::wallets\+::\+Wallet\+Transaction\+::\+Is\+Confirmed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the confirmation status. 
+
+\begin{DoxyReturn}{Returns}
+True if confirmed, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_transaction_ad745f60c0513234cf95a37a267c0a6b1}\index{neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_transaction_ad745f60c0513234cf95a37a267c0a6b1} 
+void neo\+::wallets\+::\+Wallet\+Transaction\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1wallets_1_1_wallet_transaction}{Wallet\+Transaction} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1wallets_1_1_wallet_transaction_a6039ff20f93ff97b1a5f03eee0e24a53}\index{neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}!SetBlockHeight@{SetBlockHeight}}
+\index{SetBlockHeight@{SetBlockHeight}!neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}}
+\doxysubsubsection{\texorpdfstring{SetBlockHeight()}{SetBlockHeight()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_transaction_a6039ff20f93ff97b1a5f03eee0e24a53} 
+void neo\+::wallets\+::\+Wallet\+Transaction\+::\+Set\+Block\+Height (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{height}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the block height. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em height} & The block height. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_transaction_ada3f2741a004d78116d3b27873825b43}\index{neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}!SetConfirmed@{SetConfirmed}}
+\index{SetConfirmed@{SetConfirmed}!neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}}
+\doxysubsubsection{\texorpdfstring{SetConfirmed()}{SetConfirmed()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_transaction_ada3f2741a004d78116d3b27873825b43} 
+void neo\+::wallets\+::\+Wallet\+Transaction\+::\+Set\+Confirmed (\begin{DoxyParamCaption}\item[{bool}]{confirmed}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Sets the confirmation status. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em confirmed} & The confirmation status. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_transaction_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_wallet_transaction_a6c0557ceee81cffd5013f24366b2cc16}\index{neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}!block\_height\_@{block\_height\_}}
+\index{block\_height\_@{block\_height\_}!neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}}
+\doxysubsubsection{\texorpdfstring{block\_height\_}{block\_height\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_transaction_a6c0557ceee81cffd5013f24366b2cc16} 
+uint32\+\_\+t neo\+::wallets\+::\+Wallet\+Transaction\+::block\+\_\+height\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1_wallet_transaction_ae4aab9c2112ebe9a5a0f1564998250be}\index{neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}!confirmed\_@{confirmed\_}}
+\index{confirmed\_@{confirmed\_}!neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}}
+\doxysubsubsection{\texorpdfstring{confirmed\_}{confirmed\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_transaction_ae4aab9c2112ebe9a5a0f1564998250be} 
+bool neo\+::wallets\+::\+Wallet\+Transaction\+::confirmed\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1_wallet_transaction_a0b48d48db152aa15ad445c483384e16b}\index{neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}!transaction\_@{transaction\_}}
+\index{transaction\_@{transaction\_}!neo::wallets::WalletTransaction@{neo::wallets::WalletTransaction}}
+\doxysubsubsection{\texorpdfstring{transaction\_}{transaction\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_wallet_transaction_a0b48d48db152aa15ad445c483384e16b} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1wallets_ae63dc5f96bc6e5f5f5a8810fdd4efc38}{Neo3\+Transaction}}$>$ neo\+::wallets\+::\+Wallet\+Transaction\+::transaction\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/wallets/\mbox{\hyperlink{wallet__transaction_8h}{wallet\+\_\+transaction.\+h}}\item 
+src/wallets/\mbox{\hyperlink{wallet__transaction_8cpp}{wallet\+\_\+transaction.\+cpp}}\end{DoxyCompactItemize}

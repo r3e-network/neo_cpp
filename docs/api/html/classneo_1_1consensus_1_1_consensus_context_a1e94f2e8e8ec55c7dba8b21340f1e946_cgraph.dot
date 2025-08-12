@@ -1,0 +1,43 @@
+digraph "neo::consensus::ConsensusContext::MakeCommit"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::consensus::Consensus\lContext::MakeCommit",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Makes a commit message."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::consensus::Consensus\lContext::EnsureHeader",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1consensus_1_1_consensus_context.html#ae18ff61abd88bbaec7ba9101d7826cca",tooltip="Ensures the block header is properly set."];
+  Node2 -> Node3 [id="edge2_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::cryptography::\lMerkleTree::ComputeRoot",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cryptography_1_1_merkle_tree.html#a7ff59d2461b31524567790673ba5e7cc",tooltip="Computes the Merkle root of the specified hashes."];
+  Node3 -> Node4 [id="edge3_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::cryptography::\lMerkleTree::ComputeParent",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cryptography_1_1_merkle_tree.html#a3c921ec593629214541ff6d5a6654f44",tooltip="Computes the parent hash of the specified left and right hashes."];
+  Node4 -> Node5 [id="edge4_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::io::ByteVector\l::Data",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#a971af50d2778c4435c924cf4b839e8a1",tooltip="Gets a pointer to the data."];
+  Node4 -> Node6 [id="edge5_Node000004_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::io::ByteVector::end",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#a6b53dac8823a4dd0b729471dd7855d61",tooltip="Gets an iterator to the end of the ByteVector."];
+  Node4 -> Node7 [id="edge6_Node000004_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::io::UInt256::GetData",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_u_int256.html#acfbaffdd04333184ae240d86014d7923",tooltip="Gets the raw data."];
+  Node4 -> Node8 [id="edge7_Node000004_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="neo::cryptography::\lHash::Hash256",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cryptography_1_1_hash.html#a1f27587bba8d21efdec839f2679e1a90",tooltip="Computes Hash256 (double SHA256)."];
+  Node8 -> Node9 [id="edge8_Node000008_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="neo::io::ByteSpan::Data",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_span.html#a0285a19eb5cd212ecd1079e0bc5e494c",tooltip="Gets a pointer to the data."];
+  Node8 -> Node10 [id="edge9_Node000008_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="neo::io::ByteSpan::Size",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_span.html#a4a869430800a37dcbeefac6f36468fcb",tooltip="Gets the size of the ByteSpan."];
+  Node4 -> Node11 [id="edge10_Node000004_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="neo::io::ByteVector\l::insert",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#a2d7a8711fbe8b4351fd18b7a45314de5",tooltip="Inserts data at the specified position."];
+  Node11 -> Node12 [id="edge11_Node000011_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="neo::io::ByteVector\l::size",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#aa810a2a94af643c2ec1e2400da53d3d7",tooltip="Gets the size of the ByteVector (STL compatibility)."];
+  Node4 -> Node13 [id="edge12_Node000004_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node13 [id="Node000013",label="neo::io::ByteVector\l::Size",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_byte_vector.html#ac0d1a1751d25fde82c44ba55d9d68e24",tooltip="Gets the size of the ByteVector."];
+  Node2 -> Node14 [id="edge13_Node000002_Node000014",color="steelblue1",style="solid",tooltip=" "];
+  Node14 [id="Node000014",label="neo::io::UInt256::Zero",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_u_int256.html#a8420fa428f11a40d77b9578d06b2f85f",tooltip="Gets a UInt256 with all bits set to zero."];
+  Node14 -> Node15 [id="edge14_Node000014_Node000015",color="steelblue1",style="solid",tooltip=" "];
+  Node15 [id="Node000015",label="neo::io::UInt256::UInt256",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_u_int256.html#a96e96c9590720abc1c4f8c086ff6c051",tooltip="Constructs a UInt256 initialized to zero."];
+  Node1 -> Node16 [id="edge15_Node000001_Node000016",color="steelblue1",style="solid",tooltip=" "];
+  Node16 [id="Node000016",label="neo::consensus::Consensus\lContext::MakeSignedPayload",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1consensus_1_1_consensus_context.html#a8d533040842d9fdb0fa3b0e7edc8aa92",tooltip="Creates a signed ExtensiblePayload for a consensus message."];
+  Node16 -> Node17 [id="edge16_Node000016_Node000017",color="steelblue1",style="solid",tooltip=" "];
+  Node17 [id="Node000017",label="neo::consensus::Consensus\lPayloadHelper::CreatePayload",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1consensus_1_1_consensus_payload_helper.html#a35a74e896ce8907b1a988a43a1ab1e23",tooltip="Creates an ExtensiblePayload containing a consensus message."];
+  Node16 -> Node18 [id="edge17_Node000016_Node000018",color="steelblue1",style="solid",tooltip=" "];
+  Node18 [id="Node000018",label="neo::consensus::Consensus\lContext::SignPayload",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1consensus_1_1_consensus_context.html#a703300a1a934d166fb4e79fc7963c869",tooltip="Signs an ExtensiblePayload."];
+}

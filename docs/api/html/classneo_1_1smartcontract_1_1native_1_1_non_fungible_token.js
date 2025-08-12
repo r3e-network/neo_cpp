@@ -1,0 +1,25 @@
+var classneo_1_1smartcontract_1_1native_1_1_non_fungible_token =
+[
+    [ "NonFungibleToken", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#a4e6165112bc54065e1da9fd62e285847", null ],
+    [ "Burn", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#aa7f490202d4a1fac942aa863176cc641", null ],
+    [ "Burn", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#a9fc2378d34c95abd7f2425c2f3375d1e", null ],
+    [ "GetBalanceOf", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#a04b8e63eb726dc32f5367446fa9317bb", null ],
+    [ "GetDecimals", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#ab2d6b969af3b442970cd1e2f5c42b7ff", null ],
+    [ "GetOwnerOf", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#ae5cee616f47ee01f3e1de2af8d90c8d8", null ],
+    [ "GetProperties", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#ad5265173d5a6ada33c6c5e54b8d39158", null ],
+    [ "GetSymbol", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#a67dd2939614a4a6f5162ae6184a6912f", null ],
+    [ "GetTokens", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#aa0ba73d0477cf9aa2a1d4ae04ee0ed70", null ],
+    [ "GetTokensOf", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#aaf843f6fe5baa1b85643cc496fd316f7", null ],
+    [ "GetTotalSupply", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#acb380e78f03837b19f0b835c1ae1cb73", null ],
+    [ "Mint", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#ac2350d9b57953facc5c1da039a95a6fc", null ],
+    [ "Mint", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#ae9367d1e153a80a08b451b0580e9a573", null ],
+    [ "PostTransfer", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#a3f6fda33bf9f0fcb0bb7b43257f72007", null ],
+    [ "Transfer", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#a3e1948f679dff84e8f1d5f7ceacb9849", null ],
+    [ "Transfer", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#a057f9c119950ef5b1c64bfe99af1c517", null ],
+    [ "PREFIX_ACCOUNT_TOKEN", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#a040f81a2e5361b27309f5a36237c2ead", null ],
+    [ "PREFIX_BALANCE", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#a0c878aae6a13faca5d940e03cff17d6c", null ],
+    [ "PREFIX_OWNER", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#af4e7c35392694895336a3ec804a6dd3c", null ],
+    [ "PREFIX_PROPERTIES", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#a59835a20336772eb4834c5d9ff46e657", null ],
+    [ "PREFIX_SUPPLY", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#acbc7bb39ae99e6bba992ab9de3de8f9a", null ],
+    [ "PREFIX_TOKEN", "classneo_1_1smartcontract_1_1native_1_1_non_fungible_token.html#a4e5ae15164ac5905ec2300c6d00ed9f1", null ]
+];

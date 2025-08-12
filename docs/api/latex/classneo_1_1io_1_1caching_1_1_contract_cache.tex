@@ -1,0 +1,190 @@
+\doxysection{neo\+::io\+::caching\+::Contract\+Cache Class Reference}
+\hypertarget{classneo_1_1io_1_1caching_1_1_contract_cache}{}\label{classneo_1_1io_1_1caching_1_1_contract_cache}\index{neo::io::caching::ContractCache@{neo::io::caching::ContractCache}}
+
+
+A cache for Contract\+State objects.  
+
+
+
+
+{\ttfamily \#include $<$contract\+\_\+cache.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::io\+::caching\+::Contract\+Cache\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_a10cdbf963deb5009625ee775b4e0f3ad}{Contract\+Cache}} (size\+\_\+t capacity)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1io_1_1caching_1_1_contract_cache}{Contract\+Cache} with the specified capacity. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_ace073052cfb203bfd3f311cff3ea178c}{Add}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{smartcontract\+::\+Contract\+State}} $>$ contract)
+\begin{DoxyCompactList}\small\item\em Adds a contract to the cache. \end{DoxyCompactList}\item 
+std\+::optional$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{smartcontract\+::\+Contract\+State}} $>$ $>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_a3445b72c41faf727f9084e9c78f9328f}{Get}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&script\+Hash)
+\begin{DoxyCompactList}\small\item\em Gets a contract by script hash. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_a80da263334fdf68da8709b0fddd8b8c7}{Try\+Get}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&script\+Hash, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{smartcontract\+::\+Contract\+State}} $>$ \&contract)
+\begin{DoxyCompactList}\small\item\em Tries to get a contract by script hash. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_ac46930045603831a884f14d9c47747ee}{Remove}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&script\+Hash)
+\begin{DoxyCompactList}\small\item\em Removes a contract by script hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_adac3f0c401d19ce4c2f7d11242d55deb}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears the cache. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_a7726a64e46b400acf37fc81119e5953e}{Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of items in the cache. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_a8a1f32773b6571bf1e1147b7c4efcc15}{Capacity}} () const
+\begin{DoxyCompactList}\small\item\em Gets the capacity of the cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache}}$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{smartcontract\+::\+Contract\+State}} $>$ $>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_contract_cache_aa125aab2b1a476adf8533b2e3e3c56b2}{cache\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A cache for Contract\+State objects. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_contract_cache_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_contract_cache_a10cdbf963deb5009625ee775b4e0f3ad}\index{neo::io::caching::ContractCache@{neo::io::caching::ContractCache}!ContractCache@{ContractCache}}
+\index{ContractCache@{ContractCache}!neo::io::caching::ContractCache@{neo::io::caching::ContractCache}}
+\doxysubsubsection{\texorpdfstring{ContractCache()}{ContractCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_contract_cache_a10cdbf963deb5009625ee775b4e0f3ad} 
+neo\+::io\+::caching\+::\+Contract\+Cache\+::\+Contract\+Cache (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{capacity}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1io_1_1caching_1_1_contract_cache}{Contract\+Cache} with the specified capacity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em capacity} & The maximum number of items the cache can hold. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_contract_cache_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_contract_cache_ace073052cfb203bfd3f311cff3ea178c}\index{neo::io::caching::ContractCache@{neo::io::caching::ContractCache}!Add@{Add}}
+\index{Add@{Add}!neo::io::caching::ContractCache@{neo::io::caching::ContractCache}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_contract_cache_ace073052cfb203bfd3f311cff3ea178c} 
+void neo\+::io\+::caching\+::\+Contract\+Cache\+::\+Add (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{smartcontract\+::\+Contract\+State}} $>$}]{contract}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds a contract to the cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em contract} & The contract to add. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_contract_cache_a8a1f32773b6571bf1e1147b7c4efcc15}\index{neo::io::caching::ContractCache@{neo::io::caching::ContractCache}!Capacity@{Capacity}}
+\index{Capacity@{Capacity}!neo::io::caching::ContractCache@{neo::io::caching::ContractCache}}
+\doxysubsubsection{\texorpdfstring{Capacity()}{Capacity()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_contract_cache_a8a1f32773b6571bf1e1147b7c4efcc15} 
+size\+\_\+t neo\+::io\+::caching\+::\+Contract\+Cache\+::\+Capacity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the capacity of the cache. 
+
+\begin{DoxyReturn}{Returns}
+The capacity of the cache. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_contract_cache_adac3f0c401d19ce4c2f7d11242d55deb}\index{neo::io::caching::ContractCache@{neo::io::caching::ContractCache}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::io::caching::ContractCache@{neo::io::caching::ContractCache}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_contract_cache_adac3f0c401d19ce4c2f7d11242d55deb} 
+void neo\+::io\+::caching\+::\+Contract\+Cache\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears the cache. 
+
+\Hypertarget{classneo_1_1io_1_1caching_1_1_contract_cache_a3445b72c41faf727f9084e9c78f9328f}\index{neo::io::caching::ContractCache@{neo::io::caching::ContractCache}!Get@{Get}}
+\index{Get@{Get}!neo::io::caching::ContractCache@{neo::io::caching::ContractCache}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_contract_cache_a3445b72c41faf727f9084e9c78f9328f} 
+std\+::optional$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{smartcontract\+::\+Contract\+State}} $>$ $>$ neo\+::io\+::caching\+::\+Contract\+Cache\+::\+Get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&}]{script\+Hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a contract by script hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The script hash of the contract. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The contract if found, std\+::nullopt otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_contract_cache_ac46930045603831a884f14d9c47747ee}\index{neo::io::caching::ContractCache@{neo::io::caching::ContractCache}!Remove@{Remove}}
+\index{Remove@{Remove}!neo::io::caching::ContractCache@{neo::io::caching::ContractCache}}
+\doxysubsubsection{\texorpdfstring{Remove()}{Remove()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_contract_cache_ac46930045603831a884f14d9c47747ee} 
+bool neo\+::io\+::caching\+::\+Contract\+Cache\+::\+Remove (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&}]{script\+Hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes a contract by script hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The script hash of the contract. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the contract was removed, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_contract_cache_a7726a64e46b400acf37fc81119e5953e}\index{neo::io::caching::ContractCache@{neo::io::caching::ContractCache}!Size@{Size}}
+\index{Size@{Size}!neo::io::caching::ContractCache@{neo::io::caching::ContractCache}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_contract_cache_a7726a64e46b400acf37fc81119e5953e} 
+size\+\_\+t neo\+::io\+::caching\+::\+Contract\+Cache\+::\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the number of items in the cache. 
+
+\begin{DoxyReturn}{Returns}
+The number of items in the cache. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_contract_cache_a80da263334fdf68da8709b0fddd8b8c7}\index{neo::io::caching::ContractCache@{neo::io::caching::ContractCache}!TryGet@{TryGet}}
+\index{TryGet@{TryGet}!neo::io::caching::ContractCache@{neo::io::caching::ContractCache}}
+\doxysubsubsection{\texorpdfstring{TryGet()}{TryGet()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_contract_cache_a80da263334fdf68da8709b0fddd8b8c7} 
+bool neo\+::io\+::caching\+::\+Contract\+Cache\+::\+Try\+Get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}} \&}]{script\+Hash}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{smartcontract\+::\+Contract\+State}} $>$ \&}]{contract}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Tries to get a contract by script hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+Hash} & The script hash of the contract. \\
+\hline
+{\em contract} & The contract if found. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the contract was found, false otherwise. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_contract_cache_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_contract_cache_aa125aab2b1a476adf8533b2e3e3c56b2}\index{neo::io::caching::ContractCache@{neo::io::caching::ContractCache}!cache\_@{cache\_}}
+\index{cache\_@{cache\_}!neo::io::caching::ContractCache@{neo::io::caching::ContractCache}}
+\doxysubsubsection{\texorpdfstring{cache\_}{cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_contract_cache_aa125aab2b1a476adf8533b2e3e3c56b2} 
+\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache}}$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{smartcontract\+::\+Contract\+State}}$>$ $>$ neo\+::io\+::caching\+::\+Contract\+Cache\+::cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/io/caching/\mbox{\hyperlink{contract__cache_8h}{contract\+\_\+cache.\+h}}\end{DoxyCompactItemize}

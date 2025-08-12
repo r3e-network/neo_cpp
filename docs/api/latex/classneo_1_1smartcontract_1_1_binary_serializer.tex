@@ -1,0 +1,138 @@
+\doxysection{neo\+::smartcontract\+::Binary\+Serializer Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1_binary_serializer}{}\label{classneo_1_1smartcontract_1_1_binary_serializer}\index{neo::smartcontract::BinarySerializer@{neo::smartcontract::BinarySerializer}}
+
+
+A binary serializer for Stack\+Item objects. This class provides functionality to serialize and deserialize Stack\+Item objects to and from binary format, exactly matching the C\# \doxylink{classneo_1_1smartcontract_1_1_binary_serializer}{Binary\+Serializer} implementation.  
+
+
+
+
+{\ttfamily \#include $<$binary\+\_\+serializer.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_binary_serializer_aa44e3de74babc55b2ad0d4b02002aeba}{Serialize}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ item, int64\+\_\+t max\+Size=2048, int64\+\_\+t max\+Items=2048)
+\begin{DoxyCompactList}\small\item\em Serializes a Stack\+Item to a byte array. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_binary_serializer_a09a2b0f6c9501563e0bcc907f20ec2f8}{Deserialize}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data, int64\+\_\+t max\+Size=2048, int64\+\_\+t max\+Items=2048)
+\begin{DoxyCompactList}\small\item\em Deserializes a Stack\+Item from a byte array. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_binary_serializer_a0b374242da0c39c92a136c4e889eba8c}{Serialize\+Stack\+Item}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ item, int64\+\_\+t max\+Size, int64\+\_\+t max\+Items, int64\+\_\+t \&item\+Count)
+\begin{DoxyCompactList}\small\item\em Serializes a Stack\+Item to a Binary\+Writer. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_binary_serializer_a787fa93352152c40c9632cd88bd90209}{Deserialize\+Stack\+Item}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader, int64\+\_\+t max\+Size, int64\+\_\+t max\+Items, int64\+\_\+t \&item\+Count)
+\begin{DoxyCompactList}\small\item\em Deserializes a Stack\+Item from a Binary\+Reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A binary serializer for Stack\+Item objects. This class provides functionality to serialize and deserialize Stack\+Item objects to and from binary format, exactly matching the C\# \doxylink{classneo_1_1smartcontract_1_1_binary_serializer}{Binary\+Serializer} implementation. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_binary_serializer_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_binary_serializer_a09a2b0f6c9501563e0bcc907f20ec2f8}\index{neo::smartcontract::BinarySerializer@{neo::smartcontract::BinarySerializer}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::smartcontract::BinarySerializer@{neo::smartcontract::BinarySerializer}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_binary_serializer_a09a2b0f6c9501563e0bcc907f20ec2f8} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::\+Binary\+Serializer\+::\+Deserialize (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{, }\item[{int64\+\_\+t}]{max\+Size}{ = {\ttfamily 2048}, }\item[{int64\+\_\+t}]{max\+Items}{ = {\ttfamily 2048}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Deserializes a Stack\+Item from a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The byte array to deserialize. \\
+\hline
+{\em max\+Size} & The maximum size allowed. \\
+\hline
+{\em max\+Items} & The maximum number of items allowed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The deserialized Stack\+Item. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1smartcontract_1_1_binary_serializer_a787fa93352152c40c9632cd88bd90209}\index{neo::smartcontract::BinarySerializer@{neo::smartcontract::BinarySerializer}!DeserializeStackItem@{DeserializeStackItem}}
+\index{DeserializeStackItem@{DeserializeStackItem}!neo::smartcontract::BinarySerializer@{neo::smartcontract::BinarySerializer}}
+\doxysubsubsection{\texorpdfstring{DeserializeStackItem()}{DeserializeStackItem()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_binary_serializer_a787fa93352152c40c9632cd88bd90209} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::\+Binary\+Serializer\+::\+Deserialize\+Stack\+Item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{, }\item[{int64\+\_\+t}]{max\+Size}{, }\item[{int64\+\_\+t}]{max\+Items}{, }\item[{int64\+\_\+t \&}]{item\+Count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Deserializes a Stack\+Item from a Binary\+Reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The Binary\+Reader to read from. \\
+\hline
+{\em max\+Size} & The maximum size allowed. \\
+\hline
+{\em max\+Items} & The maximum number of items allowed. \\
+\hline
+{\em item\+Count} & Reference to the current item count. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The deserialized Stack\+Item. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1smartcontract_1_1_binary_serializer_aa44e3de74babc55b2ad0d4b02002aeba}\index{neo::smartcontract::BinarySerializer@{neo::smartcontract::BinarySerializer}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::smartcontract::BinarySerializer@{neo::smartcontract::BinarySerializer}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_binary_serializer_aa44e3de74babc55b2ad0d4b02002aeba} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::smartcontract\+::\+Binary\+Serializer\+::\+Serialize (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$}]{item}{, }\item[{int64\+\_\+t}]{max\+Size}{ = {\ttfamily 2048}, }\item[{int64\+\_\+t}]{max\+Items}{ = {\ttfamily 2048}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Serializes a Stack\+Item to a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The Stack\+Item to serialize. \\
+\hline
+{\em max\+Size} & The maximum size of the result. \\
+\hline
+{\em max\+Items} & The maximum number of items to serialize. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The serialized byte array. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1_binary_serializer_a0b374242da0c39c92a136c4e889eba8c}\index{neo::smartcontract::BinarySerializer@{neo::smartcontract::BinarySerializer}!SerializeStackItem@{SerializeStackItem}}
+\index{SerializeStackItem@{SerializeStackItem}!neo::smartcontract::BinarySerializer@{neo::smartcontract::BinarySerializer}}
+\doxysubsubsection{\texorpdfstring{SerializeStackItem()}{SerializeStackItem()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_binary_serializer_a0b374242da0c39c92a136c4e889eba8c} 
+void neo\+::smartcontract\+::\+Binary\+Serializer\+::\+Serialize\+Stack\+Item (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$}]{item}{, }\item[{int64\+\_\+t}]{max\+Size}{, }\item[{int64\+\_\+t}]{max\+Items}{, }\item[{int64\+\_\+t \&}]{item\+Count}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Serializes a Stack\+Item to a Binary\+Writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The Binary\+Writer to write to. \\
+\hline
+{\em item} & The Stack\+Item to serialize. \\
+\hline
+{\em max\+Size} & The maximum size allowed. \\
+\hline
+{\em max\+Items} & The maximum number of items allowed. \\
+\hline
+{\em item\+Count} & Reference to the current item count. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/\mbox{\hyperlink{binary__serializer_8h}{binary\+\_\+serializer.\+h}}\item 
+src/smartcontract/\mbox{\hyperlink{binary__serializer_8cpp}{binary\+\_\+serializer.\+cpp}}\end{DoxyCompactItemize}

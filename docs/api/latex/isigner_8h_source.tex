@@ -1,0 +1,34 @@
+\doxysection{isigner.\+h}
+\hypertarget{isigner_8h_source}{}\label{isigner_8h_source}\index{include/neo/sign/isigner.h@{include/neo/sign/isigner.h}}
+\mbox{\hyperlink{isigner_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ecpoint_8h}{neo/cryptography/ecc/ecpoint.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{cryptography_2witness_8h}{neo/cryptography/witness.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2block_8h}{neo/ledger/block.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{p2p_2payloads_2extensible__payload_8h}{neo/network/p2p/payloads/extensible\_payload.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{data__cache_8h}{neo/persistence/data\_cache.h}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1sign}{neo::sign}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1sign_1_1_i_signer}{ISigner}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1sign_1_1_i_signer_af038a58c765a78caf7066c99650b5317}{\string~ISigner}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1sign_1_1_i_signer_a8acbf46212ed999519546e82d99e6abd}{ContainsSignable}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography::ecc::ECPoint}}\&\ publicKey)\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1sign_1_1_i_signer_a4cc785aff73c045ad9049c0e2d342393}{SignBlock}}(std::shared\_ptr<ledger::Block>\ block,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography::ecc::ECPoint}}\&\ publicKey,}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{namespaceneo_1_1network}{network}})\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_witness}{cryptography::Witness}}\ \mbox{\hyperlink{classneo_1_1sign_1_1_i_signer_ad2a2a78bee4cf6bd90e4ecc18dcccc5d}{SignExtensiblePayload}}(}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ std::shared\_ptr<network::p2p::payloads::ExtensiblePayload>\ payload,}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ std::shared\_ptr<persistence::DataCache>\ snapshot,\ uint32\_t\ \mbox{\hyperlink{namespaceneo_1_1network}{network}})\ \textcolor{keyword}{const}\ =\ 0;}
+\DoxyCodeLine{00052\ \};}
+\DoxyCodeLine{00053\ \}\ \ \textcolor{comment}{//\ namespace\ neo::sign}}
+
+\end{DoxyCode}

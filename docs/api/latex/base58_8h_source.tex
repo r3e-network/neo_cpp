@@ -1,0 +1,73 @@
+\doxysection{base58.\+h}
+\hypertarget{base58_8h_source}{}\label{base58_8h_source}\index{include/neo/cryptography/base58.h@{include/neo/cryptography/base58.h}}
+\mbox{\hyperlink{base58_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cryptography}{neo::cryptography}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1_base58}{Base58}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a49f77f0e94585ee10b21838a3026e3fd}{Encode}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ data);}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a49f77f0e94585ee10b21838a3026e3fd}{Encode}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo::io::ByteVector}}\&\ data);}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a49f77f0e94585ee10b21838a3026e3fd}{Encode}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{neo::io::ByteSpan}}\&\ data);}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a063133b21ab7c5bf5f7ed7fc153015b0}{Decode}}(\textcolor{keyword}{const}\ std::string\&\ encoded);}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo::io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a0064605a1faa6071a5bf627a6ec9b6a8}{DecodeToByteVector}}(\textcolor{keyword}{const}\ std::string\&\ encoded);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00042\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_aad9bf1248544b85ed8d9d01b1583bc30}{EncodeCheck}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ data);}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_aad9bf1248544b85ed8d9d01b1583bc30}{EncodeCheck}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo::io::ByteVector}}\&\ data);}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_aad9bf1248544b85ed8d9d01b1583bc30}{EncodeCheck}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{neo::io::ByteSpan}}\&\ data);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{comment}{//\ Legacy\ aliases\ for\ compatibility}}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a32b3e9ad71e884888d968a2451028a4a}{EncodeWithChecksum}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{neo::io::ByteSpan}}\&\ data)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_aad9bf1248544b85ed8d9d01b1583bc30}{EncodeCheck}}(data);\ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a513281f3ec39ac6d265a272f23f52bf1}{DecodeCheck}}(\textcolor{keyword}{const}\ std::string\&\ encoded);}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo::io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a2e9e9c7b86ae93e90449145b119f4bee}{DecodeCheckToByteVector}}(\textcolor{keyword}{const}\ std::string\&\ encoded);}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \textcolor{comment}{//\ Legacy\ aliases\ for\ compatibility}}
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo::io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a13d062c7e6bee59c8d495a0b0cb6bec3}{DecodeWithChecksum}}(\textcolor{keyword}{const}\ std::string\&\ encoded)}
+\DoxyCodeLine{00060\ \ \ \ \ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a2e9e9c7b86ae93e90449145b119f4bee}{DecodeCheckToByteVector}}(encoded);}
+\DoxyCodeLine{00062\ \ \ \ \ \}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_aadac28e9fe85742239cb89bd57aacf5f}{IsValid}}(\textcolor{keyword}{const}\ std::string\&\ str);}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_aa3efc73c09ca63cc945c641ba660a646}{IsValidCheck}}(\textcolor{keyword}{const}\ std::string\&\ str);}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{comment}{//\ Base58\ alphabet\ used\ by\ Bitcoin/Neo}}
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a69e349bec522cafed2a2d771f1cfd3c1}{ALPHABET}}\ =\ \textcolor{stringliteral}{"{}123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"{}};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_ad90529cf8e6bc33c8273b9df02155c95}{CalculateChecksum}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ data);}
+\DoxyCodeLine{00088\ \};}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \textcolor{comment}{//\ Convenience\ functions}}
+\DoxyCodeLine{00091\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cryptography_1_1base58}{base58}}}
+\DoxyCodeLine{00092\ \{}
+\DoxyCodeLine{00093\ \textcolor{keyword}{inline}\ std::string\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1base58_af4c461b5aabf3255ecb47f84cde9e9fd}{encode}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ data)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a49f77f0e94585ee10b21838a3026e3fd}{Base58::Encode}}(data);\ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \textcolor{keyword}{inline}\ std::string\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1base58_af4c461b5aabf3255ecb47f84cde9e9fd}{encode}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo::io::ByteVector}}\&\ data)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a49f77f0e94585ee10b21838a3026e3fd}{Base58::Encode}}(data);\ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \textcolor{keyword}{inline}\ std::vector<uint8\_t>\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1base58_a2b00f0948efdb779f86ed025903b5ccd}{decode}}(\textcolor{keyword}{const}\ std::string\&\ encoded)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a063133b21ab7c5bf5f7ed7fc153015b0}{Base58::Decode}}(encoded);\ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \textcolor{keyword}{inline}\ std::string\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1base58_a495024518e880f8dea5604e3807db7f1}{encode\_check}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ data)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_aad9bf1248544b85ed8d9d01b1583bc30}{Base58::EncodeCheck}}(data);\ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \textcolor{keyword}{inline}\ std::string\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1base58_a495024518e880f8dea5604e3807db7f1}{encode\_check}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{neo::io::ByteVector}}\&\ data)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_aad9bf1248544b85ed8d9d01b1583bc30}{Base58::EncodeCheck}}(data);\ \}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \textcolor{keyword}{inline}\ std::vector<uint8\_t>\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1base58_a306071ef9726e6ebd3f2267822ddad07}{decode\_check}}(\textcolor{keyword}{const}\ std::string\&\ encoded)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_a513281f3ec39ac6d265a272f23f52bf1}{Base58::DecodeCheck}}(encoded);\ \}}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00105\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1base58_a9e3cbcb51eb685c5579853643ead4e64}{is\_valid}}(\textcolor{keyword}{const}\ std::string\&\ str)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_aadac28e9fe85742239cb89bd57aacf5f}{Base58::IsValid}}(str);\ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1base58_a64d9b8a003ee8493e9b5b6eb1ba73816}{is\_valid\_check}}(\textcolor{keyword}{const}\ std::string\&\ str)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_base58_aa3efc73c09ca63cc945c641ba660a646}{Base58::IsValidCheck}}(str);\ \}}
+\DoxyCodeLine{00108\ \}\ \ \textcolor{comment}{//\ namespace\ base58}}
+\DoxyCodeLine{00109\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cryptography}}
+
+\end{DoxyCode}

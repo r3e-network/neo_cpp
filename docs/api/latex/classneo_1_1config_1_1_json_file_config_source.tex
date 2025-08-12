@@ -1,0 +1,165 @@
+\doxysection{neo\+::config\+::Json\+File\+Config\+Source Class Reference}
+\hypertarget{classneo_1_1config_1_1_json_file_config_source}{}\label{classneo_1_1config_1_1_json_file_config_source}\index{neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}}
+
+
+JSON file configuration source.  
+
+
+
+
+{\ttfamily \#include $<$configuration\+\_\+manager.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::config\+::Json\+File\+Config\+Source\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::config\+::Json\+File\+Config\+Source\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a4471b1338a1d667b493a736999d8ff40}{Json\+File\+Config\+Source}} (const std\+::string \&filepath, int priority=0)
+\item 
+bool \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_aa0c0858b48a04449905d384903673f72}{Load}} () override
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a94f9731b47f632f43ba81cfb86c54c12}{Get}} (const std\+::string \&key) const override
+\item 
+bool \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a8529a06a0001f0e8fdfde3e7f606e470}{Contains}} (const std\+::string \&key) const override
+\item 
+json\+::\+JObject \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a8e6782473f81906cb237dcba14fff7a3}{Get\+Section}} (const std\+::string \&section) const override
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a06e2a70cbb53bc148e400876df5d264d}{Get\+Name}} () const override
+\item 
+int \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_aa5f20aeecab8bd832bcfcc761b419124}{Get\+Priority}} () const override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source}{neo\+::config\+::\+IConfiguration\+Source}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_a83d167353ac4aedcc27eeefc024cf081}{\texorpdfstring{$\sim$}{\string~}\+IConfiguration\+Source}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a421dc532166abe3852910494e3ad31ad}{filepath\+\_\+}}
+\item 
+json\+::\+JObject \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a63017cc823cb2be432ca87ab454b1459}{config\+\_\+}}
+\item 
+int \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_ada10b28c2cbe060d1b69d4be1952db42}{priority\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1config_1_1_json_file_config_source_a6337b44ed0160635619580e7fa62bb0b}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+JSON file configuration source. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1config_1_1_json_file_config_source_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1config_1_1_json_file_config_source_a4471b1338a1d667b493a736999d8ff40}\index{neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}!JsonFileConfigSource@{JsonFileConfigSource}}
+\index{JsonFileConfigSource@{JsonFileConfigSource}!neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}}
+\doxysubsubsection{\texorpdfstring{JsonFileConfigSource()}{JsonFileConfigSource()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_json_file_config_source_a4471b1338a1d667b493a736999d8ff40} 
+neo\+::config\+::\+Json\+File\+Config\+Source\+::\+Json\+File\+Config\+Source (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{filepath}{, }\item[{int}]{priority}{ = {\ttfamily 0}}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1config_1_1_json_file_config_source_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1config_1_1_json_file_config_source_a8529a06a0001f0e8fdfde3e7f606e470}\index{neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}!Contains@{Contains}}
+\index{Contains@{Contains}!neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}}
+\doxysubsubsection{\texorpdfstring{Contains()}{Contains()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_json_file_config_source_a8529a06a0001f0e8fdfde3e7f606e470} 
+bool neo\+::config\+::\+Json\+File\+Config\+Source\+::\+Contains (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_adf411f181e5ad17760d2d91a5c3d80f5}{neo\+::config\+::\+IConfiguration\+Source}}.
+
+\Hypertarget{classneo_1_1config_1_1_json_file_config_source_a94f9731b47f632f43ba81cfb86c54c12}\index{neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}!Get@{Get}}
+\index{Get@{Get}!neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_json_file_config_source_a94f9731b47f632f43ba81cfb86c54c12} 
+std\+::string neo\+::config\+::\+Json\+File\+Config\+Source\+::\+Get (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_adc91f20c043dff2f651f581c8c60b9d2}{neo\+::config\+::\+IConfiguration\+Source}}.
+
+\Hypertarget{classneo_1_1config_1_1_json_file_config_source_a06e2a70cbb53bc148e400876df5d264d}\index{neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}!GetName@{GetName}}
+\index{GetName@{GetName}!neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_json_file_config_source_a06e2a70cbb53bc148e400876df5d264d} 
+std\+::string neo\+::config\+::\+Json\+File\+Config\+Source\+::\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_a65a018b6e12e5ee334b2ad5d317a6ef8}{neo\+::config\+::\+IConfiguration\+Source}}.
+
+\Hypertarget{classneo_1_1config_1_1_json_file_config_source_aa5f20aeecab8bd832bcfcc761b419124}\index{neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}!GetPriority@{GetPriority}}
+\index{GetPriority@{GetPriority}!neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}}
+\doxysubsubsection{\texorpdfstring{GetPriority()}{GetPriority()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_json_file_config_source_aa5f20aeecab8bd832bcfcc761b419124} 
+int neo\+::config\+::\+Json\+File\+Config\+Source\+::\+Get\+Priority (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_aec866b5735ecabacc566e2d07bbbe1bf}{neo\+::config\+::\+IConfiguration\+Source}}.
+
+\Hypertarget{classneo_1_1config_1_1_json_file_config_source_a8e6782473f81906cb237dcba14fff7a3}\index{neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}!GetSection@{GetSection}}
+\index{GetSection@{GetSection}!neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}}
+\doxysubsubsection{\texorpdfstring{GetSection()}{GetSection()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_json_file_config_source_a8e6782473f81906cb237dcba14fff7a3} 
+json\+::\+JObject neo\+::config\+::\+Json\+File\+Config\+Source\+::\+Get\+Section (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{section}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_a8faf3e0abfa77ccbdd0aa19a6531641c}{neo\+::config\+::\+IConfiguration\+Source}}.
+
+\Hypertarget{classneo_1_1config_1_1_json_file_config_source_aa0c0858b48a04449905d384903673f72}\index{neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}!Load@{Load}}
+\index{Load@{Load}!neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}}
+\doxysubsubsection{\texorpdfstring{Load()}{Load()}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_json_file_config_source_aa0c0858b48a04449905d384903673f72} 
+bool neo\+::config\+::\+Json\+File\+Config\+Source\+::\+Load (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1config_1_1_i_configuration_source_af6c30f50cc5bbbfce633ff5f07eb731e}{neo\+::config\+::\+IConfiguration\+Source}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1config_1_1_json_file_config_source_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1config_1_1_json_file_config_source_a63017cc823cb2be432ca87ab454b1459}\index{neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}!config\_@{config\_}}
+\index{config\_@{config\_}!neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}}
+\doxysubsubsection{\texorpdfstring{config\_}{config\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_json_file_config_source_a63017cc823cb2be432ca87ab454b1459} 
+json\+::\+JObject neo\+::config\+::\+Json\+File\+Config\+Source\+::config\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_json_file_config_source_a421dc532166abe3852910494e3ad31ad}\index{neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}!filepath\_@{filepath\_}}
+\index{filepath\_@{filepath\_}!neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}}
+\doxysubsubsection{\texorpdfstring{filepath\_}{filepath\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_json_file_config_source_a421dc532166abe3852910494e3ad31ad} 
+std\+::string neo\+::config\+::\+Json\+File\+Config\+Source\+::filepath\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_json_file_config_source_a6337b44ed0160635619580e7fa62bb0b}\index{neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_json_file_config_source_a6337b44ed0160635619580e7fa62bb0b} 
+std\+::mutex neo\+::config\+::\+Json\+File\+Config\+Source\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1config_1_1_json_file_config_source_ada10b28c2cbe060d1b69d4be1952db42}\index{neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}!priority\_@{priority\_}}
+\index{priority\_@{priority\_}!neo::config::JsonFileConfigSource@{neo::config::JsonFileConfigSource}}
+\doxysubsubsection{\texorpdfstring{priority\_}{priority\_}}
+{\footnotesize\ttfamily \label{classneo_1_1config_1_1_json_file_config_source_ada10b28c2cbe060d1b69d4be1952db42} 
+int neo\+::config\+::\+Json\+File\+Config\+Source\+::priority\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/config/\mbox{\hyperlink{configuration__manager_8h}{configuration\+\_\+manager.\+h}}\end{DoxyCompactItemize}

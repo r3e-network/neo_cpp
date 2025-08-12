@@ -1,0 +1,267 @@
+\doxysection{neo\+::smartcontract\+::native\+::Neo\+Token\+Gas Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas}{}\label{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas}\index{neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}}
+
+
+Gas-\/related methods for the NEO token.  
+
+
+
+
+{\ttfamily \#include $<$neo\+\_\+token\+\_\+gas.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_ac0707f949766032ef529753b92ed4832}{Get\+Gas\+Per\+Block}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot)
+\begin{DoxyCompactList}\small\item\em Gets the gas per block. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_a3e4b121ed99574da22c2264c0eb66040}{Set\+Gas\+Per\+Block}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, int64\+\_\+t gas\+Per\+Block)
+\begin{DoxyCompactList}\small\item\em Sets the gas per block. \end{DoxyCompactList}\item 
+static int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_af2a52ed5d4e758517609258cbcb8139a}{Get\+Unclaimed\+Gas}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account, uint32\+\_\+t end)
+\begin{DoxyCompactList}\small\item\em Gets the unclaimed gas for an account. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_gas_distribution}{Neo\+Token\+::\+Gas\+Distribution}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_abc02924b2b4f87ce329645102227578c}{Distribute\+Gas}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account, const \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_account_state}{Neo\+Token\+::\+Account\+State}} \&state)
+\begin{DoxyCompactList}\small\item\em Distributes gas to an account. \end{DoxyCompactList}\item 
+static int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_a19394969b1d4cd80db769b987ae40b33}{Calculate\+Bonus}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, const \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_account_state}{Neo\+Token\+::\+Account\+State}} \&state, uint32\+\_\+t end)
+\begin{DoxyCompactList}\small\item\em Calculates the bonus for an account. \end{DoxyCompactList}\item 
+static int64\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_a328aca7945c2601fc20fefe77e9f4cfc}{Calculate\+Neo\+Holder\+Reward}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, int64\+\_\+t value, uint32\+\_\+t start, uint32\+\_\+t end)
+\begin{DoxyCompactList}\small\item\em Calculates the NEO holder reward. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_a32ed166a439ae4563ec9ff001b503346}{On\+Get\+Gas\+Per\+Block}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the get\+Gas\+Per\+Block method. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_a0f64ab5fcf6c033ecc450d7c899dcd93}{On\+Set\+Gas\+Per\+Block}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the set\+Gas\+Per\+Block method. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_ad089a55244d464ebfb0bfa926cea67b8}{On\+Get\+Unclaimed\+Gas}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, \mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the get\+Unclaimed\+Gas method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Gas-\/related methods for the NEO token. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_a19394969b1d4cd80db769b987ae40b33}\index{neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}!CalculateBonus@{CalculateBonus}}
+\index{CalculateBonus@{CalculateBonus}!neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}}
+\doxysubsubsection{\texorpdfstring{CalculateBonus()}{CalculateBonus()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_a19394969b1d4cd80db769b987ae40b33} 
+int64\+\_\+t neo\+::smartcontract\+::native\+::\+Neo\+Token\+Gas\+::\+Calculate\+Bonus (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_account_state}{Neo\+Token\+::\+Account\+State}} \&}]{state}{, }\item[{uint32\+\_\+t}]{end}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the bonus for an account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+{\em state} & The account state. \\
+\hline
+{\em end} & The block index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The bonus. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_a328aca7945c2601fc20fefe77e9f4cfc}\index{neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}!CalculateNeoHolderReward@{CalculateNeoHolderReward}}
+\index{CalculateNeoHolderReward@{CalculateNeoHolderReward}!neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}}
+\doxysubsubsection{\texorpdfstring{CalculateNeoHolderReward()}{CalculateNeoHolderReward()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_a328aca7945c2601fc20fefe77e9f4cfc} 
+int64\+\_\+t neo\+::smartcontract\+::native\+::\+Neo\+Token\+Gas\+::\+Calculate\+Neo\+Holder\+Reward (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{int64\+\_\+t}]{value}{, }\item[{uint32\+\_\+t}]{start}{, }\item[{uint32\+\_\+t}]{end}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the NEO holder reward. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+{\em value} & The value. \\
+\hline
+{\em start} & The start block index. \\
+\hline
+{\em end} & The end block index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The reward. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_abc02924b2b4f87ce329645102227578c}\index{neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}!DistributeGas@{DistributeGas}}
+\index{DistributeGas@{DistributeGas}!neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}}
+\doxysubsubsection{\texorpdfstring{DistributeGas()}{DistributeGas()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_abc02924b2b4f87ce329645102227578c} 
+\mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_gas_distribution}{Neo\+Token\+::\+Gas\+Distribution}} neo\+::smartcontract\+::native\+::\+Neo\+Token\+Gas\+::\+Distribute\+Gas (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{, }\item[{const \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_account_state}{Neo\+Token\+::\+Account\+State}} \&}]{state}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Distributes gas to an account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em engine} & The engine. \\
+\hline
+{\em account} & The account. \\
+\hline
+{\em state} & The account state. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The gas distribution. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_ac0707f949766032ef529753b92ed4832}\index{neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}!GetGasPerBlock@{GetGasPerBlock}}
+\index{GetGasPerBlock@{GetGasPerBlock}!neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}}
+\doxysubsubsection{\texorpdfstring{GetGasPerBlock()}{GetGasPerBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_ac0707f949766032ef529753b92ed4832} 
+int64\+\_\+t neo\+::smartcontract\+::native\+::\+Neo\+Token\+Gas\+::\+Get\+Gas\+Per\+Block (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the gas per block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The gas per block. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_af2a52ed5d4e758517609258cbcb8139a}\index{neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}!GetUnclaimedGas@{GetUnclaimedGas}}
+\index{GetUnclaimedGas@{GetUnclaimedGas}!neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}}
+\doxysubsubsection{\texorpdfstring{GetUnclaimedGas()}{GetUnclaimedGas()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_af2a52ed5d4e758517609258cbcb8139a} 
+int64\+\_\+t neo\+::smartcontract\+::native\+::\+Neo\+Token\+Gas\+::\+Get\+Unclaimed\+Gas (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{, }\item[{uint32\+\_\+t}]{end}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the unclaimed gas for an account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+{\em account} & The account. \\
+\hline
+{\em end} & The block index used when calculating GAS. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The unclaimed gas. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_a32ed166a439ae4563ec9ff001b503346}\index{neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}!OnGetGasPerBlock@{OnGetGasPerBlock}}
+\index{OnGetGasPerBlock@{OnGetGasPerBlock}!neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}}
+\doxysubsubsection{\texorpdfstring{OnGetGasPerBlock()}{OnGetGasPerBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_a32ed166a439ae4563ec9ff001b503346} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Gas\+::\+On\+Get\+Gas\+Per\+Block (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Handles the get\+Gas\+Per\+Block method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_ad089a55244d464ebfb0bfa926cea67b8}\index{neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}!OnGetUnclaimedGas@{OnGetUnclaimedGas}}
+\index{OnGetUnclaimedGas@{OnGetUnclaimedGas}!neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}}
+\doxysubsubsection{\texorpdfstring{OnGetUnclaimedGas()}{OnGetUnclaimedGas()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_ad089a55244d464ebfb0bfa926cea67b8} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Gas\+::\+On\+Get\+Unclaimed\+Gas (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Handles the get\+Unclaimed\+Gas method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_a0f64ab5fcf6c033ecc450d7c899dcd93}\index{neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}!OnSetGasPerBlock@{OnSetGasPerBlock}}
+\index{OnSetGasPerBlock@{OnSetGasPerBlock}!neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}}
+\doxysubsubsection{\texorpdfstring{OnSetGasPerBlock()}{OnSetGasPerBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_a0f64ab5fcf6c033ecc450d7c899dcd93} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Gas\+::\+On\+Set\+Gas\+Per\+Block (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Handles the set\+Gas\+Per\+Block method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_a3e4b121ed99574da22c2264c0eb66040}\index{neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}!SetGasPerBlock@{SetGasPerBlock}}
+\index{SetGasPerBlock@{SetGasPerBlock}!neo::smartcontract::native::NeoTokenGas@{neo::smartcontract::native::NeoTokenGas}}
+\doxysubsubsection{\texorpdfstring{SetGasPerBlock()}{SetGasPerBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas_a3e4b121ed99574da22c2264c0eb66040} 
+void neo\+::smartcontract\+::native\+::\+Neo\+Token\+Gas\+::\+Set\+Gas\+Per\+Block (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{int64\+\_\+t}]{gas\+Per\+Block}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Sets the gas per block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+{\em gas\+Per\+Block} & The gas per block. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 8
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/native/\mbox{\hyperlink{neo__token__gas_8h}{neo\+\_\+token\+\_\+gas.\+h}}\item 
+src/smartcontract/native/\mbox{\hyperlink{neo__token__gas_8cpp}{neo\+\_\+token\+\_\+gas.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,58 @@
+\doxysection{ip\+\_\+endpoint.\+h}
+\hypertarget{p2p_2ip__endpoint_8h_source}{}\label{p2p_2ip__endpoint_8h_source}\index{include/neo/network/p2p/ip\_endpoint.h@{include/neo/network/p2p/ip\_endpoint.h}}
+\mbox{\hyperlink{p2p_2ip__endpoint_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__reader_8h}{neo/io/binary\_reader.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__writer_8h}{neo/io/binary\_writer.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ijson__serializable_8h}{neo/io/ijson\_serializable.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{iserializable_8h}{neo/io/iserializable.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__reader_8h}{neo/io/json\_reader.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__writer_8h}{neo/io/json\_writer.h}}>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p}{neo::network::p2p}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a7629e2e379abaeed364f54a522db2445}{IPEndPoint}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{io::ISerializable}},\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{io::IJsonSerializable}}}
+\DoxyCodeLine{00019\ \{}
+\DoxyCodeLine{00020\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a7629e2e379abaeed364f54a522db2445}{IPEndPoint}}();}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a7629e2e379abaeed364f54a522db2445}{IPEndPoint}}(\textcolor{keyword}{const}\ std::string\&\ address,\ uint16\_t\ port);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_aed4ca27231117c03bf187c3d69600429}{GetAddress}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a5b099b8b7d95a242758f405539e576fb}{SetAddress}}(\textcolor{keyword}{const}\ std::string\&\ address);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a016dba7f929778d7fbb8e024e85fb840}{GetPort}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a3ec6527734a7855eeb4fa5e7440bf6eb}{SetPort}}(uint16\_t\ port);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_ade00a67210673b34d1e01482fcb4b2c8}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a2ece39efe185101430192c1e07d566f0}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a3e1e94f59676838e2224dbe0dbe219bf}{SerializeJson}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io::JsonWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_af4de4bdbb73deabc7724a841d10d0c85}{DeserializeJson}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io::JsonReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a767fa48fb207a9e3dfad4b5c3d551f41}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a7629e2e379abaeed364f54a522db2445}{IPEndPoint}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a9343eedf8a9b2238e4bf9e31baa532fe}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a7629e2e379abaeed364f54a522db2445}{IPEndPoint}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00099\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_af49b11257534fe055d087ba6f934518d}{ToString}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a7629e2e379abaeed364f54a522db2445}{IPEndPoint}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a8d14f92b0811570371d289736830d5fd}{Parse}}(\textcolor{keyword}{const}\ std::string\&\ str);}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_af582a3a034a49f578c697a91834f4097}{TryParse}}(\textcolor{keyword}{const}\ std::string\&\ str,\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a7629e2e379abaeed364f54a522db2445}{IPEndPoint}}\&\ result);}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00116\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00117\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a89cf43b1e72e88749ab93f3c9f175490}{address\_}};}
+\DoxyCodeLine{00118\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a9f6632c3260acb021a00e8fe6ae84134}{port\_}};}
+\DoxyCodeLine{00119\ \};}
+\DoxyCodeLine{00120\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p}}
+
+\end{DoxyCode}

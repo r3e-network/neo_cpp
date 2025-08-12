@@ -1,0 +1,102 @@
+\doxysection{neo\+::persistence\+::Level\+Db\+Store\+::Write\+Batch Class Reference}
+\hypertarget{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch}{}\label{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch}\index{neo::persistence::LevelDbStore::WriteBatch@{neo::persistence::LevelDbStore::WriteBatch}}
+
+
+Batch write operations for efficiency.  
+
+
+
+
+{\ttfamily \#include $<$leveldb\+\_\+store.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::persistence\+::Level\+Db\+Store\+::Write\+Batch\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_a3f51b0cc3d74d267e153437e000bfa07}{Write\+Batch}} (\mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store}{Level\+Db\+Store}} \texorpdfstring{$\ast$}{*}store)
+\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_acdf2d0097aedd722e6bb4ed2063b4e58}{Put}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&key, const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} \&value)
+\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_af3bd6d665b8c9cc8d9a560f15456deee}{Delete}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&key)
+\item 
+bool \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_ab5c7b3498c8f6809898f2677f91106f7}{Commit}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_a40d5b24be72a4f05da4651401174c58a}{Clear}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+leveldb\+::\+Write\+Batch \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_a0f2812602b89df23a7381e17d9a859a4}{batch\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store}{Level\+Db\+Store}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_aafa72e6582ec39832604d3e18b7a40a0}{store\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Batch write operations for efficiency. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_a3f51b0cc3d74d267e153437e000bfa07}\index{neo::persistence::LevelDbStore::WriteBatch@{neo::persistence::LevelDbStore::WriteBatch}!WriteBatch@{WriteBatch}}
+\index{WriteBatch@{WriteBatch}!neo::persistence::LevelDbStore::WriteBatch@{neo::persistence::LevelDbStore::WriteBatch}}
+\doxysubsubsection{\texorpdfstring{WriteBatch()}{WriteBatch()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_a3f51b0cc3d74d267e153437e000bfa07} 
+neo\+::persistence\+::\+Level\+Db\+Store\+::\+Write\+Batch\+::\+Write\+Batch (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store}{Level\+Db\+Store}} \texorpdfstring{$\ast$}{*}}]{store}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_a40d5b24be72a4f05da4651401174c58a}\index{neo::persistence::LevelDbStore::WriteBatch@{neo::persistence::LevelDbStore::WriteBatch}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::persistence::LevelDbStore::WriteBatch@{neo::persistence::LevelDbStore::WriteBatch}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_a40d5b24be72a4f05da4651401174c58a} 
+void neo\+::persistence\+::\+Level\+Db\+Store\+::\+Write\+Batch\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_ab5c7b3498c8f6809898f2677f91106f7}\index{neo::persistence::LevelDbStore::WriteBatch@{neo::persistence::LevelDbStore::WriteBatch}!Commit@{Commit}}
+\index{Commit@{Commit}!neo::persistence::LevelDbStore::WriteBatch@{neo::persistence::LevelDbStore::WriteBatch}}
+\doxysubsubsection{\texorpdfstring{Commit()}{Commit()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_ab5c7b3498c8f6809898f2677f91106f7} 
+bool neo\+::persistence\+::\+Level\+Db\+Store\+::\+Write\+Batch\+::\+Commit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_af3bd6d665b8c9cc8d9a560f15456deee}\index{neo::persistence::LevelDbStore::WriteBatch@{neo::persistence::LevelDbStore::WriteBatch}!Delete@{Delete}}
+\index{Delete@{Delete}!neo::persistence::LevelDbStore::WriteBatch@{neo::persistence::LevelDbStore::WriteBatch}}
+\doxysubsubsection{\texorpdfstring{Delete()}{Delete()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_af3bd6d665b8c9cc8d9a560f15456deee} 
+void neo\+::persistence\+::\+Level\+Db\+Store\+::\+Write\+Batch\+::\+Delete (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{key}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_acdf2d0097aedd722e6bb4ed2063b4e58}\index{neo::persistence::LevelDbStore::WriteBatch@{neo::persistence::LevelDbStore::WriteBatch}!Put@{Put}}
+\index{Put@{Put}!neo::persistence::LevelDbStore::WriteBatch@{neo::persistence::LevelDbStore::WriteBatch}}
+\doxysubsubsection{\texorpdfstring{Put()}{Put()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_acdf2d0097aedd722e6bb4ed2063b4e58} 
+void neo\+::persistence\+::\+Level\+Db\+Store\+::\+Write\+Batch\+::\+Put (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{key}{, }\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} \&}]{value}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_a0f2812602b89df23a7381e17d9a859a4}\index{neo::persistence::LevelDbStore::WriteBatch@{neo::persistence::LevelDbStore::WriteBatch}!batch\_@{batch\_}}
+\index{batch\_@{batch\_}!neo::persistence::LevelDbStore::WriteBatch@{neo::persistence::LevelDbStore::WriteBatch}}
+\doxysubsubsection{\texorpdfstring{batch\_}{batch\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_a0f2812602b89df23a7381e17d9a859a4} 
+leveldb\+::\+Write\+Batch neo\+::persistence\+::\+Level\+Db\+Store\+::\+Write\+Batch\+::batch\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_aafa72e6582ec39832604d3e18b7a40a0}\index{neo::persistence::LevelDbStore::WriteBatch@{neo::persistence::LevelDbStore::WriteBatch}!store\_@{store\_}}
+\index{store\_@{store\_}!neo::persistence::LevelDbStore::WriteBatch@{neo::persistence::LevelDbStore::WriteBatch}}
+\doxysubsubsection{\texorpdfstring{store\_}{store\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_level_db_store_1_1_write_batch_aafa72e6582ec39832604d3e18b7a40a0} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store}{Level\+Db\+Store}}\texorpdfstring{$\ast$}{*} neo\+::persistence\+::\+Level\+Db\+Store\+::\+Write\+Batch\+::store\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/persistence/\mbox{\hyperlink{leveldb__store_8h}{leveldb\+\_\+store.\+h}}\end{DoxyCompactItemize}

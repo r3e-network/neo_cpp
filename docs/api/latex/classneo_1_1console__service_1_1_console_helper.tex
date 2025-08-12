@@ -1,0 +1,325 @@
+\doxysection{neo\+::console\+\_\+service\+::Console\+Helper Class Reference}
+\hypertarget{classneo_1_1console__service_1_1_console_helper}{}\label{classneo_1_1console__service_1_1_console_helper}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+
+
+Helper class for console operations.  
+
+
+
+
+{\ttfamily \#include $<$console\+\_\+helper.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::console\+\_\+service\+::Console\+Helper\+:
+% FIG 0
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_ae71bc4a82651125970caee6f29ef0bb8}{Is\+Reading\+Password}} ()
+\begin{DoxyCompactList}\small\item\em Gets whether currently reading a password. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_ab642e394e5888564d72aeae8b67906f1}{Info}} (const std\+::vector$<$ std\+::string $>$ \&values)
+\begin{DoxyCompactList}\small\item\em Info handles message in the format of "{}\mbox{[}tag\mbox{]}\+:\mbox{[}message\mbox{]}"{}. Avoid using Info if the {\ttfamily tag} is too long. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a08767b218fbb119a8337f7c97853b462}{Info}} (const std\+::string \&tag, const std\+::string \&message)
+\begin{DoxyCompactList}\small\item\em Info with tag and message. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a938a7621f9da2b69d3fdba371894fc47}{Warning}} (const std\+::string \&msg)
+\begin{DoxyCompactList}\small\item\em Use warning if something unexpected happens or the execution result is not correct. Also use warning if you just want to remind user of doing something. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_af878d40f46f977b2ace0905bac5bd277}{Error}} (const std\+::string \&msg)
+\begin{DoxyCompactList}\small\item\em Use Error if the verification or input format check fails or exception that breaks the execution of interactive command throws. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a67dae3781fc80b59e4dd58939467fa0b}{Read\+User\+Input}} (const std\+::string \&prompt="{}"{}, bool password=false)
+\begin{DoxyCompactList}\small\item\em Reads user input with optional prompt and password masking. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a6eef8f5a19d7b720447c12bd20ac5256}{Read\+Secure\+String}} (const std\+::string \&prompt="{}"{})
+\begin{DoxyCompactList}\small\item\em Reads a secure string (password) with masking. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_acfe57c1d11c7eda1259b9c2f3bfe6dcc}{Set\+Foreground\+Color}} (\mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{Console\+Color}} color)
+\begin{DoxyCompactList}\small\item\em Sets the console foreground color. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_aa37ebc95f4755c553a0a9cf60b4c8b36}{Set\+Background\+Color}} (\mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{Console\+Color}} color)
+\begin{DoxyCompactList}\small\item\em Sets the console background color. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_ab3a75d702b8810e1367ae28b10f64aa5}{Reset\+Color}} ()
+\begin{DoxyCompactList}\small\item\em Resets console colors to default. \end{DoxyCompactList}\item 
+static void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a59c6522877e5ae438acaf8ab65f9f89b}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears the console screen. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{Console\+Color}} \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_aaecf3ad8fbc2adc400366a3c57a342aa}{Get\+Current\+Foreground\+Color}} ()
+\begin{DoxyCompactList}\small\item\em Gets the current console foreground color. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{Console\+Color}} \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_ae44359a859525528eb81b913e1c7bafb}{Get\+Current\+Background\+Color}} ()
+\begin{DoxyCompactList}\small\item\em Gets the current console background color. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a579394432774591530787e9da2b2f540}{Log}} (const std\+::string \&tag, const \mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set}{Console\+Color\+Set}} \&color\+\_\+set, const std\+::string \&msg)
+\begin{DoxyCompactList}\small\item\em Internal logging function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_ad725c42b976d962309bcfa88941ee077}{reading\+\_\+password\+\_\+}} = false
+\item 
+static \mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set}{Console\+Color\+Set}} \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a525450b51c5c99bf255b93004fdb414a}{info\+\_\+color\+\_\+}}
+\item 
+static \mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set}{Console\+Color\+Set}} \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a0e5d75f73668d5de490b68b999b9d926}{warning\+\_\+color\+\_\+}}
+\item 
+static \mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set}{Console\+Color\+Set}} \mbox{\hyperlink{classneo_1_1console__service_1_1_console_helper_a58ac67c0b84868afa3ca36b50e2b1640}{error\+\_\+color\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Helper class for console operations. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_a59c6522877e5ae438acaf8ab65f9f89b}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_a59c6522877e5ae438acaf8ab65f9f89b} 
+void neo\+::console\+\_\+service\+::\+Console\+Helper\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Clears the console screen. 
+
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_af878d40f46f977b2ace0905bac5bd277}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!Error@{Error}}
+\index{Error@{Error}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{Error()}{Error()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_af878d40f46f977b2ace0905bac5bd277} 
+void neo\+::console\+\_\+service\+::\+Console\+Helper\+::\+Error (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{msg}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Use Error if the verification or input format check fails or exception that breaks the execution of interactive command throws. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Error message. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_ae44359a859525528eb81b913e1c7bafb}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!GetCurrentBackgroundColor@{GetCurrentBackgroundColor}}
+\index{GetCurrentBackgroundColor@{GetCurrentBackgroundColor}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{GetCurrentBackgroundColor()}{GetCurrentBackgroundColor()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_ae44359a859525528eb81b913e1c7bafb} 
+\mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{Console\+Color}} neo\+::console\+\_\+service\+::\+Console\+Helper\+::\+Get\+Current\+Background\+Color (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the current console background color. 
+
+\begin{DoxyReturn}{Returns}
+The current background color. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_aaecf3ad8fbc2adc400366a3c57a342aa}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!GetCurrentForegroundColor@{GetCurrentForegroundColor}}
+\index{GetCurrentForegroundColor@{GetCurrentForegroundColor}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{GetCurrentForegroundColor()}{GetCurrentForegroundColor()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_aaecf3ad8fbc2adc400366a3c57a342aa} 
+\mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{Console\+Color}} neo\+::console\+\_\+service\+::\+Console\+Helper\+::\+Get\+Current\+Foreground\+Color (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the current console foreground color. 
+
+\begin{DoxyReturn}{Returns}
+The current foreground color. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_a08767b218fbb119a8337f7c97853b462}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!Info@{Info}}
+\index{Info@{Info}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{Info()}{Info()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_a08767b218fbb119a8337f7c97853b462} 
+void neo\+::console\+\_\+service\+::\+Console\+Helper\+::\+Info (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{tag}{, }\item[{const std\+::string \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Info with tag and message. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tag} & The tag. \\
+\hline
+{\em message} & The message. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_ab642e394e5888564d72aeae8b67906f1}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!Info@{Info}}
+\index{Info@{Info}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{Info()}{Info()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_ab642e394e5888564d72aeae8b67906f1} 
+void neo\+::console\+\_\+service\+::\+Console\+Helper\+::\+Info (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{values}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Info handles message in the format of "{}\mbox{[}tag\mbox{]}\+:\mbox{[}message\mbox{]}"{}. Avoid using Info if the {\ttfamily tag} is too long. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em values} & The log message in pairs of (tag, message). \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_ae71bc4a82651125970caee6f29ef0bb8}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!IsReadingPassword@{IsReadingPassword}}
+\index{IsReadingPassword@{IsReadingPassword}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{IsReadingPassword()}{IsReadingPassword()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_ae71bc4a82651125970caee6f29ef0bb8} 
+bool neo\+::console\+\_\+service\+::\+Console\+Helper\+::\+Is\+Reading\+Password (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets whether currently reading a password. 
+
+\begin{DoxyReturn}{Returns}
+True if reading password, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_a579394432774591530787e9da2b2f540}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!Log@{Log}}
+\index{Log@{Log}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{Log()}{Log()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_a579394432774591530787e9da2b2f540} 
+void neo\+::console\+\_\+service\+::\+Console\+Helper\+::\+Log (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{tag}{, }\item[{const \mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set}{Console\+Color\+Set}} \&}]{color\+\_\+set}{, }\item[{const std\+::string \&}]{msg}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Internal logging function. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tag} & The log tag. \\
+\hline
+{\em color\+\_\+set} & The color set to use. \\
+\hline
+{\em msg} & The message. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_a6eef8f5a19d7b720447c12bd20ac5256}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!ReadSecureString@{ReadSecureString}}
+\index{ReadSecureString@{ReadSecureString}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{ReadSecureString()}{ReadSecureString()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_a6eef8f5a19d7b720447c12bd20ac5256} 
+std\+::string neo\+::console\+\_\+service\+::\+Console\+Helper\+::\+Read\+Secure\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{prompt}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Reads a secure string (password) with masking. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prompt} & The prompt to display. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The secure input. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_a67dae3781fc80b59e4dd58939467fa0b}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!ReadUserInput@{ReadUserInput}}
+\index{ReadUserInput@{ReadUserInput}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{ReadUserInput()}{ReadUserInput()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_a67dae3781fc80b59e4dd58939467fa0b} 
+std\+::string neo\+::console\+\_\+service\+::\+Console\+Helper\+::\+Read\+User\+Input (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{prompt}{ = {\ttfamily "{}"{}}, }\item[{bool}]{password}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Reads user input with optional prompt and password masking. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prompt} & The prompt to display. \\
+\hline
+{\em password} & Whether to mask input as password. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The user input. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_ab3a75d702b8810e1367ae28b10f64aa5}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!ResetColor@{ResetColor}}
+\index{ResetColor@{ResetColor}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{ResetColor()}{ResetColor()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_ab3a75d702b8810e1367ae28b10f64aa5} 
+void neo\+::console\+\_\+service\+::\+Console\+Helper\+::\+Reset\+Color (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Resets console colors to default. 
+
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_aa37ebc95f4755c553a0a9cf60b4c8b36}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!SetBackgroundColor@{SetBackgroundColor}}
+\index{SetBackgroundColor@{SetBackgroundColor}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{SetBackgroundColor()}{SetBackgroundColor()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_aa37ebc95f4755c553a0a9cf60b4c8b36} 
+void neo\+::console\+\_\+service\+::\+Console\+Helper\+::\+Set\+Background\+Color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{Console\+Color}}}]{color}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Sets the console background color. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & The color to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_acfe57c1d11c7eda1259b9c2f3bfe6dcc}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!SetForegroundColor@{SetForegroundColor}}
+\index{SetForegroundColor@{SetForegroundColor}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{SetForegroundColor()}{SetForegroundColor()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_acfe57c1d11c7eda1259b9c2f3bfe6dcc} 
+void neo\+::console\+\_\+service\+::\+Console\+Helper\+::\+Set\+Foreground\+Color (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1console__service_a4fa78f1852453a3aef29d2a5da274466}{Console\+Color}}}]{color}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Sets the console foreground color. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em color} & The color to set. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_a938a7621f9da2b69d3fdba371894fc47}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!Warning@{Warning}}
+\index{Warning@{Warning}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{Warning()}{Warning()}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_a938a7621f9da2b69d3fdba371894fc47} 
+void neo\+::console\+\_\+service\+::\+Console\+Helper\+::\+Warning (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{msg}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Use warning if something unexpected happens or the execution result is not correct. Also use warning if you just want to remind user of doing something. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & Warning message. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 7
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_a58ac67c0b84868afa3ca36b50e2b1640}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!error\_color\_@{error\_color\_}}
+\index{error\_color\_@{error\_color\_}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{error\_color\_}{error\_color\_}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_a58ac67c0b84868afa3ca36b50e2b1640} 
+\mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set}{Console\+Color\+Set}} neo\+::console\+\_\+service\+::\+Console\+Helper\+::error\+\_\+color\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_a525450b51c5c99bf255b93004fdb414a}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!info\_color\_@{info\_color\_}}
+\index{info\_color\_@{info\_color\_}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{info\_color\_}{info\_color\_}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_a525450b51c5c99bf255b93004fdb414a} 
+\mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set}{Console\+Color\+Set}} neo\+::console\+\_\+service\+::\+Console\+Helper\+::info\+\_\+color\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_ad725c42b976d962309bcfa88941ee077}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!reading\_password\_@{reading\_password\_}}
+\index{reading\_password\_@{reading\_password\_}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{reading\_password\_}{reading\_password\_}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_ad725c42b976d962309bcfa88941ee077} 
+bool neo\+::console\+\_\+service\+::\+Console\+Helper\+::reading\+\_\+password\+\_\+ = false\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1console__service_1_1_console_helper_a0e5d75f73668d5de490b68b999b9d926}\index{neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}!warning\_color\_@{warning\_color\_}}
+\index{warning\_color\_@{warning\_color\_}!neo::console\_service::ConsoleHelper@{neo::console\_service::ConsoleHelper}}
+\doxysubsubsection{\texorpdfstring{warning\_color\_}{warning\_color\_}}
+{\footnotesize\ttfamily \label{classneo_1_1console__service_1_1_console_helper_a0e5d75f73668d5de490b68b999b9d926} 
+\mbox{\hyperlink{classneo_1_1console__service_1_1_console_color_set}{Console\+Color\+Set}} neo\+::console\+\_\+service\+::\+Console\+Helper\+::warning\+\_\+color\+\_\+\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/console\+\_\+service/\mbox{\hyperlink{console__service_2console__helper_8h}{console\+\_\+helper.\+h}}\item 
+src/console\+\_\+service/\mbox{\hyperlink{console__service_2console__helper_8cpp}{console\+\_\+helper.\+cpp}}\end{DoxyCompactItemize}

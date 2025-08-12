@@ -1,0 +1,102 @@
+\doxysection{collection\+\_\+extensions.\+h}
+\hypertarget{collection__extensions_8h_source}{}\label{collection__extensions_8h_source}\index{include/neo/extensions/collection\_extensions.h@{include/neo/extensions/collection\_extensions.h}}
+\mbox{\hyperlink{collection__extensions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <iterator>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <set>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <unordered\_set>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1extensions}{neo::extensions}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00032\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions}{CollectionExtensions}}}
+\DoxyCodeLine{00033\ \{}
+\DoxyCodeLine{00034\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Container,\ \textcolor{keyword}{typename}\ Predicate>}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ Container\ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_a1cdafc036546d85dbfe18749aa31075d}{Where}}(\textcolor{keyword}{const}\ Container\&\ container,\ Predicate\ predicate)}
+\DoxyCodeLine{00045\ \ \ \ \ \{}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ Container\ result;}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ std::copy\_if(container.begin(),\ container.end(),\ std::back\_inserter(result),\ predicate);}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00049\ \ \ \ \ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Container,\ \textcolor{keyword}{typename}\ Selector,}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{typename}\ ResultType\ =\ std::invoke\_result\_t<Selector,\ typename\ Container::value\_type>>}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<ResultType>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_ae71ba71076ee20b9171a83e1a57a3c36}{Select}}(\textcolor{keyword}{const}\ Container\&\ container,\ Selector\ selector)}
+\DoxyCodeLine{00063\ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ std::vector<ResultType>\ result;}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ result.reserve(container.size());}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ std::transform(container.begin(),\ container.end(),\ std::back\_inserter(result),\ selector);}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00068\ \ \ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Container,\ \textcolor{keyword}{typename}\ Predicate>}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_ae4483f97d83e2c1a1d1d9f8a11836c5e}{Any}}(\textcolor{keyword}{const}\ Container\&\ container,\ Predicate\ predicate)}
+\DoxyCodeLine{00080\ \ \ \ \ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::any\_of(container.begin(),\ container.end(),\ predicate);}
+\DoxyCodeLine{00082\ \ \ \ \ \}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Container,\ \textcolor{keyword}{typename}\ Predicate>}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_ac3f236639d5968eee08376ef9773f449}{All}}(\textcolor{keyword}{const}\ Container\&\ container,\ Predicate\ predicate)}
+\DoxyCodeLine{00094\ \ \ \ \ \{}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::all\_of(container.begin(),\ container.end(),\ predicate);}
+\DoxyCodeLine{00096\ \ \ \ \ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Container,\ \textcolor{keyword}{typename}\ Predicate>}
+\DoxyCodeLine{00107\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_a0776666d2838bf9767cc4cf74eb66ebc}{Count}}(\textcolor{keyword}{const}\ Container\&\ container,\ Predicate\ predicate)}
+\DoxyCodeLine{00108\ \ \ \ \ \{}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::count\_if(container.begin(),\ container.end(),\ predicate);}
+\DoxyCodeLine{00110\ \ \ \ \ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Container>}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<typename\ Container::value\_type>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_a8cd7759569ef99997ddc162ec5c5ff47}{ToVector}}(\textcolor{keyword}{const}\ Container\&\ container)}
+\DoxyCodeLine{00120\ \ \ \ \ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::vector<typename\ Container::value\_type>(container.begin(),\ container.end());}
+\DoxyCodeLine{00122\ \ \ \ \ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Container>}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keyword}{static}\ std::set<typename\ Container::value\_type>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_a40f0430e919a041e152849575a839f23}{ToSet}}(\textcolor{keyword}{const}\ Container\&\ container)}
+\DoxyCodeLine{00132\ \ \ \ \ \{}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::set<typename\ Container::value\_type>(container.begin(),\ container.end());}
+\DoxyCodeLine{00134\ \ \ \ \ \}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Container,\ \textcolor{keyword}{typename}\ Range>}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_ae8a14943307675ec8f3841eb90a2269b}{AddRange}}(Container\&\ container,\ \textcolor{keyword}{const}\ Range\&\ range)}
+\DoxyCodeLine{00145\ \ \ \ \ \{}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ container.insert(container.end(),\ range.begin(),\ range.end());}
+\DoxyCodeLine{00147\ \ \ \ \ \}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Container,\ \textcolor{keyword}{typename}\ Predicate>}
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_a0828d51f3e77a8da7d67e38afbdccf3b}{RemoveWhere}}(Container\&\ container,\ Predicate\ predicate)}
+\DoxyCodeLine{00159\ \ \ \ \ \{}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ originalSize\ =\ container.size();}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ container.erase(std::remove\_if(container.begin(),\ container.end(),\ predicate),\ container.end());}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ originalSize\ -\/\ container.size();}
+\DoxyCodeLine{00163\ \ \ \ \ \}}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00173\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Container,\ \textcolor{keyword}{typename}\ Predicate>}
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{typename}\ Container::const\_iterator\ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_ab8709930c039a60fc11c7ec235dc137a}{FirstOrDefault}}(\textcolor{keyword}{const}\ Container\&\ container,\ Predicate\ predicate)}
+\DoxyCodeLine{00175\ \ \ \ \ \{}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::find\_if(container.begin(),\ container.end(),\ predicate);}
+\DoxyCodeLine{00177\ \ \ \ \ \}}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Container,\ \textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_af2860464620790c15d3652c6bdbbe5b0}{Contains}}(\textcolor{keyword}{const}\ Container\&\ container,\ \textcolor{keyword}{const}\ T\&\ element)}
+\DoxyCodeLine{00189\ \ \ \ \ \{}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::find(container.begin(),\ container.end(),\ element)\ !=\ container.end();}
+\DoxyCodeLine{00191\ \ \ \ \ \}}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00199\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ Container>}
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<typename\ Container::value\_type>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_collection_extensions_a60da8bad3ab40aae4e940adb5f2a8df6}{Distinct}}(\textcolor{keyword}{const}\ Container\&\ container)}
+\DoxyCodeLine{00201\ \ \ \ \ \{}
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ std::set<typename\ Container::value\_type>\ uniqueSet(container.begin(),\ container.end());}
+\DoxyCodeLine{00203\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::vector<typename\ Container::value\_type>(uniqueSet.begin(),\ uniqueSet.end());}
+\DoxyCodeLine{00204\ \ \ \ \ \}}
+\DoxyCodeLine{00205\ \};}
+\DoxyCodeLine{00206\ \}\ \ \textcolor{comment}{//\ namespace\ neo::extensions}}
+
+\end{DoxyCode}

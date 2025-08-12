@@ -1,0 +1,27 @@
+var classneo_1_1ledger_1_1_signer =
+[
+    [ "Signer", "classneo_1_1ledger_1_1_signer.html#a214cdf540b906392a75ac9e1a7c7ddba", null ],
+    [ "~Signer", "classneo_1_1ledger_1_1_signer.html#a04716f02cefc7fd6144d1600a3f0ec63", null ],
+    [ "Signer", "classneo_1_1ledger_1_1_signer.html#aa0469537df6345a173bda8178855585f", null ],
+    [ "Deserialize", "classneo_1_1ledger_1_1_signer.html#a0362fa29d1445b70811f2725f0e427a6", null ],
+    [ "DeserializeJson", "classneo_1_1ledger_1_1_signer.html#ab5fee6657c94549a4a4426948dbf0fac", null ],
+    [ "GetAccount", "classneo_1_1ledger_1_1_signer.html#ab6e972f93ebe85abd3488d1674cae733", null ],
+    [ "GetAllowedContracts", "classneo_1_1ledger_1_1_signer.html#ac6550386081f7752e99e7a6bfc94a39c", null ],
+    [ "GetAllowedGroups", "classneo_1_1ledger_1_1_signer.html#ac73aee5a50eadf23e16479c4cd9052fa", null ],
+    [ "GetRules", "classneo_1_1ledger_1_1_signer.html#a22dc4ef600e1bd23a661347f9f01c199", null ],
+    [ "GetScopes", "classneo_1_1ledger_1_1_signer.html#aaab875fe0d77ef8aadcda8bb70ec8405", null ],
+    [ "operator!=", "classneo_1_1ledger_1_1_signer.html#a9f21558a41dead62d1345634addc4101", null ],
+    [ "operator==", "classneo_1_1ledger_1_1_signer.html#a978d087be7b2fe8cfa0cabfd3b49e82c", null ],
+    [ "Serialize", "classneo_1_1ledger_1_1_signer.html#ad5f38990bc95a4703834c50a714bef46", null ],
+    [ "SerializeJson", "classneo_1_1ledger_1_1_signer.html#a1ace7e9e7d6d63072fbee7ae59514619", null ],
+    [ "SetAccount", "classneo_1_1ledger_1_1_signer.html#a8d339d686c3e2a831012322f0fead402", null ],
+    [ "SetAllowedContracts", "classneo_1_1ledger_1_1_signer.html#a5af9b6385bbfd2a4fa260c92c0a921fd", null ],
+    [ "SetAllowedGroups", "classneo_1_1ledger_1_1_signer.html#a1b4199316b6e55f4ead87f412273951a", null ],
+    [ "SetRules", "classneo_1_1ledger_1_1_signer.html#a2d48ae4ba76e0b1589b3cf5025a8c12c", null ],
+    [ "SetScopes", "classneo_1_1ledger_1_1_signer.html#abc12898537ce6e5593d43824dad086e4", null ],
+    [ "account_", "classneo_1_1ledger_1_1_signer.html#a16d726225839003773bd6be8749c596d", null ],
+    [ "allowedContracts_", "classneo_1_1ledger_1_1_signer.html#af88b775eb7d439af2c36456429fb775b", null ],
+    [ "allowedGroups_", "classneo_1_1ledger_1_1_signer.html#a9bc8be18ccf9a37c7a37d75891d29cb5", null ],
+    [ "rules_", "classneo_1_1ledger_1_1_signer.html#a95f31a8d19a31313e2cbb5d57ccc6f7e", null ],
+    [ "scopes_", "classneo_1_1ledger_1_1_signer.html#afa774fab222af89635737ac9863972ef", null ]
+];

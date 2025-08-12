@@ -1,0 +1,29 @@
+\doxysection{scrypt.\+h}
+\hypertarget{scrypt_8h_source}{}\label{scrypt_8h_source}\index{include/neo/cryptography/scrypt.h@{include/neo/cryptography/scrypt.h}}
+\mbox{\hyperlink{scrypt_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cryptography}{neo::cryptography}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1_scrypt}{Scrypt}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_scrypt_ace60a229f0dd4c90a19b8c8e01f909e8}{DeriveKey}}(\textcolor{keyword}{const}\ std::string\&\ password,\ \textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ salt,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ n\ =\ 16384,\ uint32\_t\ r\ =\ 8,\ uint32\_t\ p\ =\ 8,\ uint32\_t\ dkLen\ =\ 64);}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_scrypt_adaaa5468b7c659784d172f9fece6c042}{DeriveKey}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ password,\ \textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ salt,}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ n\ =\ 16384,\ uint32\_t\ r\ =\ 8,\ uint32\_t\ p\ =\ 8,\ uint32\_t\ dkLen\ =\ 64);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_scrypt_a4a0b5492069a13dcd1a07cb0ee91f7c4}{BlockMix}}(std::vector<uint8\_t>\&\ B,\ uint32\_t\ r);}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_scrypt_a713c6d750ba932af1d1b6d669ee55e67}{Salsa20\_8}}(std::vector<uint8\_t>\&\ B);}
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1_scrypt_a0aaeb37bf9c34fcc2c565a127d8d703d}{XorBytes}}(std::vector<uint8\_t>\&\ dest,\ \textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ src);}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cryptography}}
+
+\end{DoxyCode}

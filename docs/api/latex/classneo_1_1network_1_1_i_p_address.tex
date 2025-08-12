@@ -1,0 +1,296 @@
+\doxysection{neo\+::network\+::IPAddress Class Reference}
+\hypertarget{classneo_1_1network_1_1_i_p_address}{}\label{classneo_1_1network_1_1_i_p_address}\index{neo::network::IPAddress@{neo::network::IPAddress}}
+
+
+Represents an IP address.  
+
+
+
+
+{\ttfamily \#include $<$ip\+\_\+address.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_af3841f07eb754ead04973a5b6bb9afba}{IPAddress}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_aeba2ccf54350ed48a7ddd8cd0cccf39f}{IPAddress}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress} from a string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_acb0b42f3e9552635cc727f1a3e524644}{IPAddress}} (uint32\+\_\+t address)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress} from a 32-\/bit integer (IPv4). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_aaeb137807e06f93c3d2a411b361a033e}{IPAddress}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}address, size\+\_\+t length)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress} from a byte array. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_ac69227f4906b32be6a1712beff5b897a}{To\+String}} () const
+\begin{DoxyCompactList}\small\item\em Gets the IP address as a string. \end{DoxyCompactList}\item 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_a46700168dc0d5e40a5bfd2f16fb56f93}{Get\+Address\+Bytes}} () const
+\begin{DoxyCompactList}\small\item\em Gets the IP address as a byte array. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_af7fffdd03c7076b1162ad6729ef247d7}{Get\+Address\+Length}} () const
+\begin{DoxyCompactList}\small\item\em Gets the length of the IP address in bytes. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_ad60b7e6439c656899d98511470ba129f}{operator==}} (const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress} is equal to another \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_abb5e28bc266c54b877a48fec3ea3bd47}{operator!=}} (const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress} is not equal to another \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_a4895cacec4642d083b972c1913bf7b7b}{Loopback}} ()
+\begin{DoxyCompactList}\small\item\em Gets the loopback address (127.\+0.\+0.\+1). \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_a6c88f7623fed2b8f03de6955feecc47a}{Any}} ()
+\begin{DoxyCompactList}\small\item\em Gets the any address (0.\+0.\+0.\+0). \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_a820906d2b6a5444d97445609bac6e7f0}{Parse}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Parses an IP address string. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_acd99b489199839e45dac01d20cbcef64}{Try\+Parse}} (const std\+::string \&address, \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \&result)
+\begin{DoxyCompactList}\small\item\em Tries to parse an IP address string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_a0bd8a6b072af18069b47c7752f744e51}{address\+\_\+}} \mbox{[}16\mbox{]}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address_a106fb022f11e7ceae630735c648587fb}{length\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an IP address. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1_i_p_address_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1_i_p_address_af3841f07eb754ead04973a5b6bb9afba}\index{neo::network::IPAddress@{neo::network::IPAddress}!IPAddress@{IPAddress}}
+\index{IPAddress@{IPAddress}!neo::network::IPAddress@{neo::network::IPAddress}}
+\doxysubsubsection{\texorpdfstring{IPAddress()}{IPAddress()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_address_af3841f07eb754ead04973a5b6bb9afba} 
+neo\+::network\+::\+IPAddress\+::\+IPAddress (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress}. 
+
+\Hypertarget{classneo_1_1network_1_1_i_p_address_aeba2ccf54350ed48a7ddd8cd0cccf39f}\index{neo::network::IPAddress@{neo::network::IPAddress}!IPAddress@{IPAddress}}
+\index{IPAddress@{IPAddress}!neo::network::IPAddress@{neo::network::IPAddress}}
+\doxysubsubsection{\texorpdfstring{IPAddress()}{IPAddress()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_address_aeba2ccf54350ed48a7ddd8cd0cccf39f} 
+neo\+::network\+::\+IPAddress\+::\+IPAddress (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs an \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress} from a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The IP address string. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1network_1_1_i_p_address_acb0b42f3e9552635cc727f1a3e524644}\index{neo::network::IPAddress@{neo::network::IPAddress}!IPAddress@{IPAddress}}
+\index{IPAddress@{IPAddress}!neo::network::IPAddress@{neo::network::IPAddress}}
+\doxysubsubsection{\texorpdfstring{IPAddress()}{IPAddress()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_address_acb0b42f3e9552635cc727f1a3e524644} 
+neo\+::network\+::\+IPAddress\+::\+IPAddress (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs an \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress} from a 32-\/bit integer (IPv4). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The IP address as a 32-\/bit integer. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_i_p_address_aaeb137807e06f93c3d2a411b361a033e}\index{neo::network::IPAddress@{neo::network::IPAddress}!IPAddress@{IPAddress}}
+\index{IPAddress@{IPAddress}!neo::network::IPAddress@{neo::network::IPAddress}}
+\doxysubsubsection{\texorpdfstring{IPAddress()}{IPAddress()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_address_aaeb137807e06f93c3d2a411b361a033e} 
+neo\+::network\+::\+IPAddress\+::\+IPAddress (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{address}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress} from a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The IP address as a byte array. \\
+\hline
+{\em length} & The length of the byte array. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1_i_p_address_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1_i_p_address_a6c88f7623fed2b8f03de6955feecc47a}\index{neo::network::IPAddress@{neo::network::IPAddress}!Any@{Any}}
+\index{Any@{Any}!neo::network::IPAddress@{neo::network::IPAddress}}
+\doxysubsubsection{\texorpdfstring{Any()}{Any()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_address_a6c88f7623fed2b8f03de6955feecc47a} 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} neo\+::network\+::\+IPAddress\+::\+Any (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the any address (0.\+0.\+0.\+0). 
+
+\begin{DoxyReturn}{Returns}
+The any address. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1network_1_1_i_p_address_a46700168dc0d5e40a5bfd2f16fb56f93}\index{neo::network::IPAddress@{neo::network::IPAddress}!GetAddressBytes@{GetAddressBytes}}
+\index{GetAddressBytes@{GetAddressBytes}!neo::network::IPAddress@{neo::network::IPAddress}}
+\doxysubsubsection{\texorpdfstring{GetAddressBytes()}{GetAddressBytes()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_address_a46700168dc0d5e40a5bfd2f16fb56f93} 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} neo\+::network\+::\+IPAddress\+::\+Get\+Address\+Bytes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the IP address as a byte array. 
+
+\begin{DoxyReturn}{Returns}
+The IP address as a byte array. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_i_p_address_af7fffdd03c7076b1162ad6729ef247d7}\index{neo::network::IPAddress@{neo::network::IPAddress}!GetAddressLength@{GetAddressLength}}
+\index{GetAddressLength@{GetAddressLength}!neo::network::IPAddress@{neo::network::IPAddress}}
+\doxysubsubsection{\texorpdfstring{GetAddressLength()}{GetAddressLength()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_address_af7fffdd03c7076b1162ad6729ef247d7} 
+size\+\_\+t neo\+::network\+::\+IPAddress\+::\+Get\+Address\+Length (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the length of the IP address in bytes. 
+
+\begin{DoxyReturn}{Returns}
+The length of the IP address in bytes. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_i_p_address_a4895cacec4642d083b972c1913bf7b7b}\index{neo::network::IPAddress@{neo::network::IPAddress}!Loopback@{Loopback}}
+\index{Loopback@{Loopback}!neo::network::IPAddress@{neo::network::IPAddress}}
+\doxysubsubsection{\texorpdfstring{Loopback()}{Loopback()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_address_a4895cacec4642d083b972c1913bf7b7b} 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} neo\+::network\+::\+IPAddress\+::\+Loopback (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the loopback address (127.\+0.\+0.\+1). 
+
+\begin{DoxyReturn}{Returns}
+The loopback address. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1_i_p_address_abb5e28bc266c54b877a48fec3ea3bd47}\index{neo::network::IPAddress@{neo::network::IPAddress}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::network::IPAddress@{neo::network::IPAddress}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_address_abb5e28bc266c54b877a48fec3ea3bd47} 
+bool neo\+::network\+::\+IPAddress\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress} is not equal to another \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the IPAddresses are not equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1_i_p_address_ad60b7e6439c656899d98511470ba129f}\index{neo::network::IPAddress@{neo::network::IPAddress}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::network::IPAddress@{neo::network::IPAddress}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_address_ad60b7e6439c656899d98511470ba129f} 
+bool neo\+::network\+::\+IPAddress\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress} is equal to another \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the IPAddresses are equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1_i_p_address_a820906d2b6a5444d97445609bac6e7f0}\index{neo::network::IPAddress@{neo::network::IPAddress}!Parse@{Parse}}
+\index{Parse@{Parse}!neo::network::IPAddress@{neo::network::IPAddress}}
+\doxysubsubsection{\texorpdfstring{Parse()}{Parse()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_address_a820906d2b6a5444d97445609bac6e7f0} 
+\mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} neo\+::network\+::\+IPAddress\+::\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Parses an IP address string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The IP address string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The parsed \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1_i_p_address_ac69227f4906b32be6a1712beff5b897a}\index{neo::network::IPAddress@{neo::network::IPAddress}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::network::IPAddress@{neo::network::IPAddress}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_address_ac69227f4906b32be6a1712beff5b897a} 
+std\+::string neo\+::network\+::\+IPAddress\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the IP address as a string. 
+
+\begin{DoxyReturn}{Returns}
+The IP address as a string. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_i_p_address_acd99b489199839e45dac01d20cbcef64}\index{neo::network::IPAddress@{neo::network::IPAddress}!TryParse@{TryParse}}
+\index{TryParse@{TryParse}!neo::network::IPAddress@{neo::network::IPAddress}}
+\doxysubsubsection{\texorpdfstring{TryParse()}{TryParse()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_address_acd99b489199839e45dac01d20cbcef64} 
+bool neo\+::network\+::\+IPAddress\+::\+Try\+Parse (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{, }\item[{\mbox{\hyperlink{classneo_1_1network_1_1_i_p_address}{IPAddress}} \&}]{result}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Tries to parse an IP address string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The IP address string. \\
+\hline
+{\em result} & The parsed \doxylink{classneo_1_1network_1_1_i_p_address}{IPAddress}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the parsing was successful, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1_i_p_address_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1_i_p_address_a0bd8a6b072af18069b47c7752f744e51}\index{neo::network::IPAddress@{neo::network::IPAddress}!address\_@{address\_}}
+\index{address\_@{address\_}!neo::network::IPAddress@{neo::network::IPAddress}}
+\doxysubsubsection{\texorpdfstring{address\_}{address\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_address_a0bd8a6b072af18069b47c7752f744e51} 
+uint8\+\_\+t neo\+::network\+::\+IPAddress\+::address\+\_\+\mbox{[}16\mbox{]}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_i_p_address_a106fb022f11e7ceae630735c648587fb}\index{neo::network::IPAddress@{neo::network::IPAddress}!length\_@{length\_}}
+\index{length\_@{length\_}!neo::network::IPAddress@{neo::network::IPAddress}}
+\doxysubsubsection{\texorpdfstring{length\_}{length\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_i_p_address_a106fb022f11e7ceae630735c648587fb} 
+size\+\_\+t neo\+::network\+::\+IPAddress\+::length\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/\mbox{\hyperlink{ip__address_8h}{ip\+\_\+address.\+h}}\item 
+src/network/\mbox{\hyperlink{ip__endpoint_8cpp}{ip\+\_\+endpoint.\+cpp}}\end{DoxyCompactItemize}

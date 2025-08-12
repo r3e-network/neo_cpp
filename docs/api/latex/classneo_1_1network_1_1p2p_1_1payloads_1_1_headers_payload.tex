@@ -1,0 +1,309 @@
+\doxysection{neo\+::network\+::p2p\+::payloads\+::Headers\+Payload Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}\index{neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}}
+
+
+Represents a headers payload.  
+
+
+
+
+{\ttfamily \#include $<$headers\+\_\+payload.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::p2p\+::payloads\+::Headers\+Payload\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::payloads\+::Headers\+Payload\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a31ddbd8a2a43d7e32802f70d656242ca}{Headers\+Payload}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{Headers\+Payload}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a2bcc8bcfc4ca5063f9dcc51cd5176fb3}{Headers\+Payload}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{ledger\+::\+Block\+Header}} $>$ $>$ \&headers)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{Headers\+Payload}. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{ledger\+::\+Block\+Header}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a6a621120d5ae7b19137cb7dc995194a4}{Get\+Headers}} () const
+\begin{DoxyCompactList}\small\item\em Gets the headers. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_acfee849d4e8db9460e9d6ab20334ecb5}{Set\+Headers}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{ledger\+::\+Block\+Header}} $>$ $>$ \&headers)
+\begin{DoxyCompactList}\small\item\em Sets the headers. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_ab06fd6bb787d466a80ebad88370ceb05}{Get\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the size of the payload. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a5308e6f399793f50378e80523a593fd4}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{Headers\+Payload} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a265cda24257a72cd3ee78ec4b0ac1a4d}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{Headers\+Payload} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a4c912b90ce56f7f025cdb83c1f351d8d}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{Headers\+Payload} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_ae4f8516861439a3398181a8e683dcc28}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader)
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{Headers\+Payload} from a JSON reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{neo\+::network\+::p2p\+::\+IPayload}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload_a1702136f068aff6bbc90418bc0259c9f}{\texorpdfstring{$\sim$}{\string~}\+IPayload}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{Headers\+Payload}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a1957e45b45283b93749e3f9835258211}{Create}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{ledger\+::\+Block\+Header}} $>$ $>$ \&headers)
+\begin{DoxyCompactList}\small\item\em Creates a new instance of the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{Headers\+Payload} class. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_aa89c2e2d174e924dcbeb206f7a6cdcbf}{Max\+Headers\+Count}} = 2000
+\begin{DoxyCompactList}\small\item\em Indicates the maximum number of headers sent each time. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{ledger\+::\+Block\+Header}} $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a33842998bbc6abeb6ee9c6b01147b63a}{headers\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a headers payload. 
+
+This message is sent to respond to Get\+Headers messages. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a31ddbd8a2a43d7e32802f70d656242ca}\index{neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}!HeadersPayload@{HeadersPayload}}
+\index{HeadersPayload@{HeadersPayload}!neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}}
+\doxysubsubsection{\texorpdfstring{HeadersPayload()}{HeadersPayload()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a31ddbd8a2a43d7e32802f70d656242ca} 
+neo\+::network\+::p2p\+::payloads\+::\+Headers\+Payload\+::\+Headers\+Payload (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{Headers\+Payload}. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a2bcc8bcfc4ca5063f9dcc51cd5176fb3}\index{neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}!HeadersPayload@{HeadersPayload}}
+\index{HeadersPayload@{HeadersPayload}!neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}}
+\doxysubsubsection{\texorpdfstring{HeadersPayload()}{HeadersPayload()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a2bcc8bcfc4ca5063f9dcc51cd5176fb3} 
+neo\+::network\+::p2p\+::payloads\+::\+Headers\+Payload\+::\+Headers\+Payload (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{ledger\+::\+Block\+Header}} $>$ $>$ \&}]{headers}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{Headers\+Payload}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em headers} & The block headers. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a1957e45b45283b93749e3f9835258211}\index{neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}!Create@{Create}}
+\index{Create@{Create}!neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}}
+\doxysubsubsection{\texorpdfstring{Create()}{Create()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a1957e45b45283b93749e3f9835258211} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{Headers\+Payload}} neo\+::network\+::p2p\+::payloads\+::\+Headers\+Payload\+::\+Create (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{ledger\+::\+Block\+Header}} $>$ $>$ \&}]{headers}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a new instance of the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{Headers\+Payload} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em headers} & The list of headers. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The created payload. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a265cda24257a72cd3ee78ec4b0ac1a4d}\index{neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a265cda24257a72cd3ee78ec4b0ac1a4d} 
+void neo\+::network\+::p2p\+::payloads\+::\+Headers\+Payload\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{Headers\+Payload} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_ae4f8516861439a3398181a8e683dcc28}\index{neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_ae4f8516861439a3398181a8e683dcc28} 
+void neo\+::network\+::p2p\+::payloads\+::\+Headers\+Payload\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{Headers\+Payload} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a6a621120d5ae7b19137cb7dc995194a4}\index{neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}!GetHeaders@{GetHeaders}}
+\index{GetHeaders@{GetHeaders}!neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}}
+\doxysubsubsection{\texorpdfstring{GetHeaders()}{GetHeaders()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a6a621120d5ae7b19137cb7dc995194a4} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{ledger\+::\+Block\+Header}} $>$ $>$ \& neo\+::network\+::p2p\+::payloads\+::\+Headers\+Payload\+::\+Get\+Headers (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the headers. 
+
+\begin{DoxyReturn}{Returns}
+The headers. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_ab06fd6bb787d466a80ebad88370ceb05}\index{neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_ab06fd6bb787d466a80ebad88370ceb05} 
+size\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Headers\+Payload\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the size of the payload. 
+
+\begin{DoxyReturn}{Returns}
+The size of the payload. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a5308e6f399793f50378e80523a593fd4}\index{neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a5308e6f399793f50378e80523a593fd4} 
+void neo\+::network\+::p2p\+::payloads\+::\+Headers\+Payload\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{Headers\+Payload} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a4c912b90ce56f7f025cdb83c1f351d8d}\index{neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a4c912b90ce56f7f025cdb83c1f351d8d} 
+void neo\+::network\+::p2p\+::payloads\+::\+Headers\+Payload\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload}{Headers\+Payload} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_acfee849d4e8db9460e9d6ab20334ecb5}\index{neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}!SetHeaders@{SetHeaders}}
+\index{SetHeaders@{SetHeaders}!neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}}
+\doxysubsubsection{\texorpdfstring{SetHeaders()}{SetHeaders()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_acfee849d4e8db9460e9d6ab20334ecb5} 
+void neo\+::network\+::p2p\+::payloads\+::\+Headers\+Payload\+::\+Set\+Headers (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{ledger\+::\+Block\+Header}} $>$ $>$ \&}]{headers}{}\end{DoxyParamCaption})}
+
+
+
+Sets the headers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em headers} & The headers. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a33842998bbc6abeb6ee9c6b01147b63a}\index{neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}!headers\_@{headers\_}}
+\index{headers\_@{headers\_}!neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}}
+\doxysubsubsection{\texorpdfstring{headers\_}{headers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a33842998bbc6abeb6ee9c6b01147b63a} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{ledger\+::\+Block\+Header}}$>$ $>$ neo\+::network\+::p2p\+::payloads\+::\+Headers\+Payload\+::headers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_aa89c2e2d174e924dcbeb206f7a6cdcbf}\index{neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}!MaxHeadersCount@{MaxHeadersCount}}
+\index{MaxHeadersCount@{MaxHeadersCount}!neo::network::p2p::payloads::HeadersPayload@{neo::network::p2p::payloads::HeadersPayload}}
+\doxysubsubsection{\texorpdfstring{MaxHeadersCount}{MaxHeadersCount}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_aa89c2e2d174e924dcbeb206f7a6cdcbf} 
+int neo\+::network\+::p2p\+::payloads\+::\+Headers\+Payload\+::\+Max\+Headers\+Count = 2000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Indicates the maximum number of headers sent each time. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/payloads/\mbox{\hyperlink{headers__payload_8h}{headers\+\_\+payload.\+h}}\item 
+src/network/p2p/payloads/\mbox{\hyperlink{headers__payload_8cpp}{headers\+\_\+payload.\+cpp}}\item 
+src/network/\mbox{\hyperlink{payload__fixes_8cpp}{payload\+\_\+fixes.\+cpp}}\end{DoxyCompactItemize}

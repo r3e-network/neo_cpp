@@ -1,0 +1,81 @@
+\doxysection{contract\+\_\+permission.\+h}
+\hypertarget{contract__permission_8h_source}{}\label{contract__permission_8h_source}\index{include/neo/smartcontract/manifest/contract\_permission.h@{include/neo/smartcontract/manifest/contract\_permission.h}}
+\mbox{\hyperlink{contract__permission_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ecpoint_8h}{neo/cryptography/ecc/ecpoint.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{serializable_8h}{neo/io/serializable.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1manifest}{neo::smartcontract::manifest}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a8fe469dfbadca33d1eebffb5105e2e41}{ContractPermissionDescriptor}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{io::ISerializable}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a8fe469dfbadca33d1eebffb5105e2e41}{ContractPermissionDescriptor}}();}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a8fe469dfbadca33d1eebffb5105e2e41}{ContractPermissionDescriptor}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ hash);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a8fe469dfbadca33d1eebffb5105e2e41}{ContractPermissionDescriptor}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography::ecc::ECPoint}}\&\ group);}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_ab5b5c26d4fd15a37b6053c99625f2bd2}{GetHash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography::ecc::ECPoint}}\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a95cb29c82391599b3464f3bc4ecd26e5}{GetGroup}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_aa7bbae2bd1a6113c4dddcd1272251b24}{IsHash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_aef5f9f8c1358d754246a5096f2d3d0f6}{IsGroup}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_ae71c0972ac7aaae4773986175c12491b}{IsWildcard}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a8fe469dfbadca33d1eebffb5105e2e41}{ContractPermissionDescriptor}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a696a393c0e9f882209cd718c54ae0f61}{CreateWildcard}}();}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a8fe469dfbadca33d1eebffb5105e2e41}{ContractPermissionDescriptor}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_ad38914eb1b34009aed4124c51d72e175}{Create}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ hash);}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a8fe469dfbadca33d1eebffb5105e2e41}{ContractPermissionDescriptor}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_ad38914eb1b34009aed4124c51d72e175}{Create}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography::ecc::ECPoint}}\&\ group);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a5757762bced5510ed0cf7628f5581cc7}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_aa9c2f8d1cfd66061b1377ccee5dfa533}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a3953338520e9c3de12458dd1ca5e1858}{hash\_}};}
+\DoxyCodeLine{00101\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography::ecc::ECPoint}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a9774ea0cdf7f3c893976eadf34f0b4de}{group\_}};}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor_a6b2c2253a6c736ddf1d34216f1dad99b}{isWildcard\_}};}
+\DoxyCodeLine{00103\ \};}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00112\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_a79d97e9003ac79523c9858cd1a887212}{ContractPermission}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{io::ISerializable}}}
+\DoxyCodeLine{00113\ \{}
+\DoxyCodeLine{00114\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00118\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_a79d97e9003ac79523c9858cd1a887212}{ContractPermission}}();}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}{ContractPermissionDescriptor}}\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_ad87036093c0e04cc14d3a173ef8dc691}{GetContract}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_afd5f0d3503a7c1e9d3f28bcbe1aa74e5}{SetContract}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}{ContractPermissionDescriptor}}\&\ contract);}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::string>\&\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_af5eac82fd893c019ab7b347f949815f9}{GetMethods}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_aeea72f8718a1a93e7a9493a7524430c6}{SetMethods}}(\textcolor{keyword}{const}\ std::vector<std::string>\&\ methods);}
+\DoxyCodeLine{00143\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_ace87048ab78525b86c4272042465ae3d}{IsMethodsWildcard}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_a4db217e9f81c110d5eab5207dc5d935d}{SetMethodsWildcard}}(\textcolor{keywordtype}{bool}\ isWildcard);}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_a79d97e9003ac79523c9858cd1a887212}{ContractPermission}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_a17ae732e8de83a493942084144d83330}{CreateDefault}}();}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_a41c92e609eb181df9c7c039e3ffc349d}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_a3a98323b90f02f351ddc125fba5b0fd3}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00175\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_descriptor}{ContractPermissionDescriptor}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_a5aa9c0b201151f6f4411962a6d6d2515}{contract\_}};}
+\DoxyCodeLine{00176\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_aca5fc8ede784313898c26a1ec9324ef8}{methods\_}};}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_permission_ac7d4c6fd3788dd65b6b52a196ad99336}{isMethodsWildcard\_}};}
+\DoxyCodeLine{00178\ \};}
+\DoxyCodeLine{00179\ \}\ \ \textcolor{comment}{//\ namespace\ neo::smartcontract::manifest}}
+
+\end{DoxyCode}

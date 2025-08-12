@@ -1,0 +1,51 @@
+\doxysection{block\+\_\+storage.\+h}
+\hypertarget{block__storage_8h_source}{}\label{block__storage_8h_source}\index{include/neo/ledger/block\_storage.h@{include/neo/ledger/block\_storage.h}}
+\mbox{\hyperlink{block__storage_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2block_8h}{neo/ledger/block.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{data__cache_8h}{neo/persistence/data\_cache.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a078467efe93263e5cbca3023d385536b}{BlockStorage}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a078467efe93263e5cbca3023d385536b}{BlockStorage}}(std::shared\_ptr<persistence::DataCache>\ dataCache);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00031\ \ \ \ \ std::shared\_ptr<Block>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a044f560af514e64eb29965e3078fc3f7}{GetBlock}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00038\ \ \ \ \ std::shared\_ptr<Block>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a044f560af514e64eb29965e3078fc3f7}{GetBlock}}(uint32\_t\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00045\ \ \ \ \ std::shared\_ptr<BlockHeader>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a5d8aa35025d8ec77697ea76a51792e5e}{GetBlockHeader}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00052\ \ \ \ \ std::shared\_ptr<BlockHeader>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a5d8aa35025d8ec77697ea76a51792e5e}{GetBlockHeader}}(uint32\_t\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00060\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a7b821e58c4dcd2f946c8b14f2d7de7d2}{AddBlock}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}}\&\ block,\ std::shared\_ptr<persistence::DataCache>\ snapshot);}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a1da3501b29dffb634e9379c163595528}{AddBlockHeader}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{BlockHeader}}\&\ header,\ std::shared\_ptr<persistence::DataCache>\ snapshot);}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_af6a6c5aa77fc99eceef132974d133910}{ContainsBlock}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00082\ \ \ \ \ std::optional<io::UInt256>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a0f208cfc6a059e04271156b15c064d50}{GetBlockHash}}(uint32\_t\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00089\ \ \ \ \ std::optional<io::UInt256>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a0863d93f810b8e4541769555b0c01a2d}{GetNextBlockHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00092\ \ \ \ \ std::shared\_ptr<persistence::DataCache>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a3cbdd138499c9b08f75f5e8181401099}{dataCache\_}};}
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a30d73d9f4932af97a6ddf1662256b66d}{mutex\_}};}
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keyword}{mutable}\ std::unordered\_map<io::UInt256,\ std::shared\_ptr<Block>>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a56e088cbdfd3eb7d2e0e60a192fd207d}{blocks\_}};}
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keyword}{mutable}\ std::unordered\_map<io::UInt256,\ std::shared\_ptr<BlockHeader>>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_ada301870ab80548d8cd89eb5bdd8f8b4}{headers\_}};}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{mutable}\ std::unordered\_map<uint32\_t,\ io::UInt256>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a0638d5d3fde2ba890a8ce3e25427188b}{blockHashes\_}};}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{mutable}\ std::unordered\_map<io::UInt256,\ io::UInt256>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_storage_a0556bf8c2674a58eaff05108ee125053}{nextBlockHashes\_}};}
+\DoxyCodeLine{00098\ \};}
+\DoxyCodeLine{00099\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}

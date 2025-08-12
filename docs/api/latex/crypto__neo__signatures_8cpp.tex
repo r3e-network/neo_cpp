@@ -1,0 +1,47 @@
+\doxysection{src/cryptography/crypto\+\_\+neo\+\_\+signatures.cpp File Reference}
+\hypertarget{crypto__neo__signatures_8cpp}{}\label{crypto__neo__signatures_8cpp}\index{src/cryptography/crypto\_neo\_signatures.cpp@{src/cryptography/crypto\_neo\_signatures.cpp}}
+{\ttfamily \#include $<$neo/cryptography/crypto.\+h$>$}\newline
+{\ttfamily \#include $<$neo/cryptography/ecc.\+h$>$}\newline
+{\ttfamily \#include $<$neo/cryptography/hash.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/byte\+\_\+vector.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/uint160.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/uint256.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/bn.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/ec.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/ecdsa.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/evp.\+h$>$}\newline
+{\ttfamily \#include $<$openssl/obj\+\_\+mac.\+h$>$}\newline
+{\ttfamily \#include $<$cstring$>$}\newline
+{\ttfamily \#include $<$stdexcept$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for crypto\+\_\+neo\+\_\+signatures.\+cpp\+:
+% FIG 0
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1cryptography}{neo\+::cryptography}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures}{neo\+::cryptography\+::neo\+\_\+signatures}}
+\begin{DoxyCompactList}\small\item\em Neo-\/specific cryptographic signature operations. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a1aea7d06e1aad26e2757eca9a8fa8afd}{neo\+::cryptography\+::neo\+\_\+signatures\+::\+Create\+Single\+Signature\+Redeem\+Script}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Neo-\/specific cryptographic signature operations header. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a5d8bc32b2245a59ca85e6d2c9eb113cf}{neo\+::cryptography\+::neo\+\_\+signatures\+::\+Create\+Multi\+Signature\+Redeem\+Script}} (int m, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} $>$ \&public\+Keys)
+\begin{DoxyCompactList}\small\item\em Creates a Neo-\/style multi-\/signature redeem script. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_ad3dffba1699027176fc91bc5294fa386}{neo\+::cryptography\+::neo\+\_\+signatures\+::\+Sign\+Message\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&message\+Hash, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Signs a message hash using \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} with secp256r1 curve. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_ae0bc8ad86bfe5fcfde6cf569112358f5}{neo\+::cryptography\+::neo\+\_\+signatures\+::\+Verify\+Message\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&message\+Hash, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&signature, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Verifies an \doxylink{classneo_1_1cryptography_1_1_e_c_d_s_a}{ECDSA} signature using secp256r1 curve. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a823cd7b4ad5e7266ea3dbcb48d2e73d5}{neo\+::cryptography\+::neo\+\_\+signatures\+::\+Compute\+Script\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&redeem\+Script)
+\begin{DoxyCompactList}\small\item\em Computes the script hash (Hash160) for a redeem script. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a6ccfa85b9ca27a686c5d449684724003}{neo\+::cryptography\+::neo\+\_\+signatures\+::\+Create\+Verification\+Script}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+Hash)
+\begin{DoxyCompactList}\small\item\em Creates a verification script for a given script hash. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a62a662eff77131538bbc8a34c90b9c21}{neo\+::cryptography\+::neo\+\_\+signatures\+::\+Derive\+Public\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Derives a public key from a private key using secp256r1. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a69c7ccfc91ce492165817e3d42962dac}{neo\+::cryptography\+::neo\+\_\+signatures\+::\+Validate\+Public\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Validates that a public key is valid on the secp256r1 curve. \end{DoxyCompactList}\end{DoxyCompactItemize}

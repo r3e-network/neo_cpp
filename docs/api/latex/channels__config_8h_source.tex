@@ -1,0 +1,63 @@
+\doxysection{channels\+\_\+config.\+h}
+\hypertarget{channels__config_8h_source}{}\label{channels__config_8h_source}\index{include/neo/network/p2p/channels\_config.h@{include/neo/network/p2p/channels\_config.h}}
+\mbox{\hyperlink{channels__config_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ip__endpoint_8h}{neo/network/ip\_endpoint.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p}{neo::network::p2p}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a3b4bd0ee4546991bf3ca80b1bb5af1a2}{ChannelsConfig}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a3b4bd0ee4546991bf3ca80b1bb5af1a2}{ChannelsConfig}}();}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEndPoint}}\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a5376fe284dc9f0d5ce5a87e9e79f9d58}{GetTcp}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a29d23a983f5da2bbfe60084d3f05da71}{SetTcp}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEndPoint}}\&\ endpoint);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEndPoint}}\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a4fb3ea3ab90595b9904ab6704571c497}{GetWebSocket}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_ac2a7eafe95aa118cc9094771c05532d7}{SetWebSocket}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEndPoint}}\&\ endpoint);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_ac066b9f014a011cd73ff0415f9d3f0b5}{GetMinDesiredConnections}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_acaa984f506333d5b52697b9d1587fc90}{SetMinDesiredConnections}}(uint32\_t\ minDesiredConnections);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a680bde098ec55e7ead939abca8fd525e}{GetMaxConnections}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a37d65c3418eea9160c4b8af8b7f691dd}{SetMaxConnections}}(uint32\_t\ maxConnections);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a9432af1644aee797506940dcf14bbf66}{GetMaxConnectionsPerAddress}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_ae1bf7d52b4edabe1dc53b05fd0fb827b}{SetMaxConnectionsPerAddress}}(uint32\_t\ maxConnectionsPerAddress);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00085\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a37e588441d4de87204d195ae7042ce6f}{GetMaxKnownAddresses}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a9112ed26ee514a73a940d0148c7b219d}{SetMaxKnownAddresses}}(uint32\_t\ maxKnownAddresses);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00097\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_afe45e2d101d31839bc9bd940bdafd933}{GetMaxKnownHashes}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_af1f7216861c7f535b1f6023de38e3968}{SetMaxKnownHashes}}(uint32\_t\ maxKnownHashes);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<IPEndPoint>\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a75391c4b4d65f18a0bd15368039ffe0e}{GetSeedList}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_ae9bddf0e17879aa5e7a573069d602ba7}{SetSeedList}}(\textcolor{keyword}{const}\ std::vector<IPEndPoint>\&\ seedList);}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00118\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEndPoint}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a4605ef5d0c81880d77792f0df14ceda7}{tcp\_}};}
+\DoxyCodeLine{00119\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEndPoint}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_ad3c8e7eaf9947b810a672a767e345fc2}{webSocket\_}};}
+\DoxyCodeLine{00120\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a7fc92f2c10837f8fa3e4c60e0538263f}{minDesiredConnections\_}};}
+\DoxyCodeLine{00121\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a2db081dcd6c560946bc744808925338a}{maxConnections\_}};}
+\DoxyCodeLine{00122\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a612a792dbbbb886edc38e756ea867aef}{maxConnectionsPerAddress\_}};}
+\DoxyCodeLine{00123\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a533845515b85d2c4e0198f1aa0411af4}{maxKnownAddresses\_}};}
+\DoxyCodeLine{00124\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a31f296bc2aeb4e7f40ad4221e8ae13f7}{maxKnownHashes\_}};}
+\DoxyCodeLine{00125\ \ \ \ \ std::vector<IPEndPoint>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_channels_config_a73f1c81f8d34c955d91ff1cb8fd89d3b}{seedList\_}};}
+\DoxyCodeLine{00126\ \};}
+\DoxyCodeLine{00127\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p}}
+
+\end{DoxyCode}

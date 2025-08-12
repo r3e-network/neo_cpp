@@ -1,0 +1,218 @@
+\doxysection{neo\+::rpc\+::Rate\+Limiter Class Reference}
+\hypertarget{classneo_1_1rpc_1_1_rate_limiter}{}\label{classneo_1_1rpc_1_1_rate_limiter}\index{neo::rpc::RateLimiter@{neo::rpc::RateLimiter}}
+
+
+Token bucket rate limiter for RPC endpoints.  
+
+
+
+
+{\ttfamily \#include $<$rate\+\_\+limiter.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::rpc\+::Rate\+Limiter\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1rpc_1_1_rate_limiter_1_1_client_state}{Client\+State}}
+\item 
+struct \mbox{\hyperlink{structneo_1_1rpc_1_1_rate_limiter_1_1_config}{Config}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter_ab019b5520f75f41191cd20cc92c813ac}{Rate\+Limiter}} (const \mbox{\hyperlink{structneo_1_1rpc_1_1_rate_limiter_1_1_config}{Config}} \&config)
+\item 
+\mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter_a716e6163c16c1d576318639123ea50df}{Rate\+Limiter}} ()
+\item 
+bool \mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter_a6563808fec1bb205c9f5349b43044ef9}{Is\+Allowed}} (const std\+::string \&client\+Id, const std\+::string \&method="{}"{})
+\begin{DoxyCompactList}\small\item\em Check if a request is allowed. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter_a69d621473cfe9840cd19bca157981a4f}{Get\+Remaining\+Requests}} (const std\+::string \&client\+Id)
+\begin{DoxyCompactList}\small\item\em Get current rate limit status for a client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter_a26ed5d548f5477855eae718606dcbe6d}{Reset\+Client}} (const std\+::string \&client\+Id)
+\begin{DoxyCompactList}\small\item\em Reset rate limit for a specific client. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter_a59178a6a8d8774c9d0bd1e2e609d2a33}{Reset\+All}} ()
+\begin{DoxyCompactList}\small\item\em Reset all rate limits. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter_a8f89a0d37f8ab6e106f54d4617567c3f}{Update\+Config}} (const \mbox{\hyperlink{structneo_1_1rpc_1_1_rate_limiter_1_1_config}{Config}} \&config)
+\begin{DoxyCompactList}\small\item\em Update rate limiter configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter_a9fe883556d9f08135c29b6ca1685266d}{Clean\+Old\+Requests}} (\mbox{\hyperlink{structneo_1_1rpc_1_1_rate_limiter_1_1_client_state}{Client\+State}} \&client, const std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \&now)
+\item 
+void \mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter_ab14e04be79c925576c39408b7b97aead}{Refill\+Tokens}} (const std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \&now)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structneo_1_1rpc_1_1_rate_limiter_1_1_config}{Config}} \mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter_aa7eca7596eab8ba2b7b0dfab4ed7479c}{config\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{structneo_1_1rpc_1_1_rate_limiter_1_1_client_state}{Client\+State}} $>$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter_a683f940d939343f43ce7887fd43924bf}{clients\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter_abbab8e1e4c41e3cdfdbdc1d4202f5d7d}{tokens\+\_\+}}
+\item 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter_ab92125690eb5ce29603ca419f220e0ac}{last\+Refill\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1rpc_1_1_rate_limiter_a4d5032082108b5853c613114f45bf80b}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Token bucket rate limiter for RPC endpoints. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_ab019b5520f75f41191cd20cc92c813ac}\index{neo::rpc::RateLimiter@{neo::rpc::RateLimiter}!RateLimiter@{RateLimiter}}
+\index{RateLimiter@{RateLimiter}!neo::rpc::RateLimiter@{neo::rpc::RateLimiter}}
+\doxysubsubsection{\texorpdfstring{RateLimiter()}{RateLimiter()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rate_limiter_ab019b5520f75f41191cd20cc92c813ac} 
+neo\+::rpc\+::\+Rate\+Limiter\+::\+Rate\+Limiter (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1rpc_1_1_rate_limiter_1_1_config}{Config}} \&}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_a716e6163c16c1d576318639123ea50df}\index{neo::rpc::RateLimiter@{neo::rpc::RateLimiter}!RateLimiter@{RateLimiter}}
+\index{RateLimiter@{RateLimiter}!neo::rpc::RateLimiter@{neo::rpc::RateLimiter}}
+\doxysubsubsection{\texorpdfstring{RateLimiter()}{RateLimiter()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rate_limiter_a716e6163c16c1d576318639123ea50df} 
+neo\+::rpc\+::\+Rate\+Limiter\+::\+Rate\+Limiter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_a9fe883556d9f08135c29b6ca1685266d}\index{neo::rpc::RateLimiter@{neo::rpc::RateLimiter}!CleanOldRequests@{CleanOldRequests}}
+\index{CleanOldRequests@{CleanOldRequests}!neo::rpc::RateLimiter@{neo::rpc::RateLimiter}}
+\doxysubsubsection{\texorpdfstring{CleanOldRequests()}{CleanOldRequests()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rate_limiter_a9fe883556d9f08135c29b6ca1685266d} 
+void neo\+::rpc\+::\+Rate\+Limiter\+::\+Clean\+Old\+Requests (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{structneo_1_1rpc_1_1_rate_limiter_1_1_client_state}{Client\+State}} \&}]{client}{, }\item[{const std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \&}]{now}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_a69d621473cfe9840cd19bca157981a4f}\index{neo::rpc::RateLimiter@{neo::rpc::RateLimiter}!GetRemainingRequests@{GetRemainingRequests}}
+\index{GetRemainingRequests@{GetRemainingRequests}!neo::rpc::RateLimiter@{neo::rpc::RateLimiter}}
+\doxysubsubsection{\texorpdfstring{GetRemainingRequests()}{GetRemainingRequests()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rate_limiter_a69d621473cfe9840cd19bca157981a4f} 
+size\+\_\+t neo\+::rpc\+::\+Rate\+Limiter\+::\+Get\+Remaining\+Requests (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{client\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get current rate limit status for a client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+Id} & Client identifier \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Remaining requests in current window 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_a6563808fec1bb205c9f5349b43044ef9}\index{neo::rpc::RateLimiter@{neo::rpc::RateLimiter}!IsAllowed@{IsAllowed}}
+\index{IsAllowed@{IsAllowed}!neo::rpc::RateLimiter@{neo::rpc::RateLimiter}}
+\doxysubsubsection{\texorpdfstring{IsAllowed()}{IsAllowed()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rate_limiter_a6563808fec1bb205c9f5349b43044ef9} 
+bool neo\+::rpc\+::\+Rate\+Limiter\+::\+Is\+Allowed (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{client\+Id}{, }\item[{const std\+::string \&}]{method}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if a request is allowed. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+Id} & Client identifier (IP address) \\
+\hline
+{\em method} & RPC method name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if allowed, false if rate limited 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_ab14e04be79c925576c39408b7b97aead}\index{neo::rpc::RateLimiter@{neo::rpc::RateLimiter}!RefillTokens@{RefillTokens}}
+\index{RefillTokens@{RefillTokens}!neo::rpc::RateLimiter@{neo::rpc::RateLimiter}}
+\doxysubsubsection{\texorpdfstring{RefillTokens()}{RefillTokens()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rate_limiter_ab14e04be79c925576c39408b7b97aead} 
+void neo\+::rpc\+::\+Rate\+Limiter\+::\+Refill\+Tokens (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \&}]{now}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_a59178a6a8d8774c9d0bd1e2e609d2a33}\index{neo::rpc::RateLimiter@{neo::rpc::RateLimiter}!ResetAll@{ResetAll}}
+\index{ResetAll@{ResetAll}!neo::rpc::RateLimiter@{neo::rpc::RateLimiter}}
+\doxysubsubsection{\texorpdfstring{ResetAll()}{ResetAll()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rate_limiter_a59178a6a8d8774c9d0bd1e2e609d2a33} 
+void neo\+::rpc\+::\+Rate\+Limiter\+::\+Reset\+All (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reset all rate limits. 
+
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_a26ed5d548f5477855eae718606dcbe6d}\index{neo::rpc::RateLimiter@{neo::rpc::RateLimiter}!ResetClient@{ResetClient}}
+\index{ResetClient@{ResetClient}!neo::rpc::RateLimiter@{neo::rpc::RateLimiter}}
+\doxysubsubsection{\texorpdfstring{ResetClient()}{ResetClient()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rate_limiter_a26ed5d548f5477855eae718606dcbe6d} 
+void neo\+::rpc\+::\+Rate\+Limiter\+::\+Reset\+Client (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{client\+Id}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reset rate limit for a specific client. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em client\+Id} & Client identifier \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_a8f89a0d37f8ab6e106f54d4617567c3f}\index{neo::rpc::RateLimiter@{neo::rpc::RateLimiter}!UpdateConfig@{UpdateConfig}}
+\index{UpdateConfig@{UpdateConfig}!neo::rpc::RateLimiter@{neo::rpc::RateLimiter}}
+\doxysubsubsection{\texorpdfstring{UpdateConfig()}{UpdateConfig()}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rate_limiter_a8f89a0d37f8ab6e106f54d4617567c3f} 
+void neo\+::rpc\+::\+Rate\+Limiter\+::\+Update\+Config (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1rpc_1_1_rate_limiter_1_1_config}{Config}} \&}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Update rate limiter configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & New configuration \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_a683f940d939343f43ce7887fd43924bf}\index{neo::rpc::RateLimiter@{neo::rpc::RateLimiter}!clients\_@{clients\_}}
+\index{clients\_@{clients\_}!neo::rpc::RateLimiter@{neo::rpc::RateLimiter}}
+\doxysubsubsection{\texorpdfstring{clients\_}{clients\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rate_limiter_a683f940d939343f43ce7887fd43924bf} 
+std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{structneo_1_1rpc_1_1_rate_limiter_1_1_client_state}{Client\+State}}$>$ neo\+::rpc\+::\+Rate\+Limiter\+::clients\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_aa7eca7596eab8ba2b7b0dfab4ed7479c}\index{neo::rpc::RateLimiter@{neo::rpc::RateLimiter}!config\_@{config\_}}
+\index{config\_@{config\_}!neo::rpc::RateLimiter@{neo::rpc::RateLimiter}}
+\doxysubsubsection{\texorpdfstring{config\_}{config\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rate_limiter_aa7eca7596eab8ba2b7b0dfab4ed7479c} 
+\mbox{\hyperlink{structneo_1_1rpc_1_1_rate_limiter_1_1_config}{Config}} neo\+::rpc\+::\+Rate\+Limiter\+::config\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_ab92125690eb5ce29603ca419f220e0ac}\index{neo::rpc::RateLimiter@{neo::rpc::RateLimiter}!lastRefill\_@{lastRefill\_}}
+\index{lastRefill\_@{lastRefill\_}!neo::rpc::RateLimiter@{neo::rpc::RateLimiter}}
+\doxysubsubsection{\texorpdfstring{lastRefill\_}{lastRefill\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rate_limiter_ab92125690eb5ce29603ca419f220e0ac} 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point neo\+::rpc\+::\+Rate\+Limiter\+::last\+Refill\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_a4d5032082108b5853c613114f45bf80b}\index{neo::rpc::RateLimiter@{neo::rpc::RateLimiter}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::rpc::RateLimiter@{neo::rpc::RateLimiter}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rate_limiter_a4d5032082108b5853c613114f45bf80b} 
+std\+::mutex neo\+::rpc\+::\+Rate\+Limiter\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1rpc_1_1_rate_limiter_abbab8e1e4c41e3cdfdbdc1d4202f5d7d}\index{neo::rpc::RateLimiter@{neo::rpc::RateLimiter}!tokens\_@{tokens\_}}
+\index{tokens\_@{tokens\_}!neo::rpc::RateLimiter@{neo::rpc::RateLimiter}}
+\doxysubsubsection{\texorpdfstring{tokens\_}{tokens\_}}
+{\footnotesize\ttfamily \label{classneo_1_1rpc_1_1_rate_limiter_abbab8e1e4c41e3cdfdbdc1d4202f5d7d} 
+size\+\_\+t neo\+::rpc\+::\+Rate\+Limiter\+::tokens\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/rpc/\mbox{\hyperlink{rate__limiter_8h}{rate\+\_\+limiter.\+h}}\end{DoxyCompactItemize}

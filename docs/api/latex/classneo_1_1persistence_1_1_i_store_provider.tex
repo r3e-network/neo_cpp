@@ -1,0 +1,91 @@
+\doxysection{neo\+::persistence\+::IStore\+Provider Class Reference}
+\hypertarget{classneo_1_1persistence_1_1_i_store_provider}{}\label{classneo_1_1persistence_1_1_i_store_provider}\index{neo::persistence::IStoreProvider@{neo::persistence::IStoreProvider}}
+
+
+Interface for a store provider.  
+
+
+
+
+{\ttfamily \#include $<$istore.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::persistence\+::IStore\+Provider\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider_a91a47cf95a1208e466d0f117ea96d63b}{\texorpdfstring{$\sim$}{\string~}\+IStore\+Provider}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual std\+::string \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider_a591196a061e23ed3d3d1f1f28b27f892}{Get\+Name}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the name of the store provider. \end{DoxyCompactList}\item 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store}{IStore}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider_a33feec0052b85bdb3014e8d089199a2d}{Get\+Store}} (const std\+::string \&path)=0
+\begin{DoxyCompactList}\small\item\em Gets a store. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for a store provider. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1persistence_1_1_i_store_provider_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_i_store_provider_a91a47cf95a1208e466d0f117ea96d63b}\index{neo::persistence::IStoreProvider@{neo::persistence::IStoreProvider}!````~IStoreProvider@{\texorpdfstring{$\sim$}{\string~}IStoreProvider}}
+\index{````~IStoreProvider@{\texorpdfstring{$\sim$}{\string~}IStoreProvider}!neo::persistence::IStoreProvider@{neo::persistence::IStoreProvider}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IStoreProvider()}{\string~IStoreProvider()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_i_store_provider_a91a47cf95a1208e466d0f117ea96d63b} 
+virtual neo\+::persistence\+::\+IStore\+Provider\+::\texorpdfstring{$\sim$}{\string~}\+IStore\+Provider (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1persistence_1_1_i_store_provider_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_i_store_provider_a591196a061e23ed3d3d1f1f28b27f892}\index{neo::persistence::IStoreProvider@{neo::persistence::IStoreProvider}!GetName@{GetName}}
+\index{GetName@{GetName}!neo::persistence::IStoreProvider@{neo::persistence::IStoreProvider}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_i_store_provider_a591196a061e23ed3d3d1f1f28b27f892} 
+virtual std\+::string neo\+::persistence\+::\+IStore\+Provider\+::\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the name of the store provider. 
+
+\begin{DoxyReturn}{Returns}
+The name of the store provider. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_provider_aabf4b15d75f394c0d24d600821f3401c}{neo\+::persistence\+::\+Memory\+Store\+Provider}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_i_store_provider_a33feec0052b85bdb3014e8d089199a2d}\index{neo::persistence::IStoreProvider@{neo::persistence::IStoreProvider}!GetStore@{GetStore}}
+\index{GetStore@{GetStore}!neo::persistence::IStoreProvider@{neo::persistence::IStoreProvider}}
+\doxysubsubsection{\texorpdfstring{GetStore()}{GetStore()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_i_store_provider_a33feec0052b85bdb3014e8d089199a2d} 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store}{IStore}} $>$ neo\+::persistence\+::\+IStore\+Provider\+::\+Get\+Store (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets a store. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to the store. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The store. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_provider_af23091ca2efccd03f01a3cb04604ce9b}{neo\+::persistence\+::\+Memory\+Store\+Provider}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/persistence/\mbox{\hyperlink{istore_8h}{istore.\+h}}\end{DoxyCompactItemize}

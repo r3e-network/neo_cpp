@@ -1,0 +1,356 @@
+\doxysection{neo\+::ledger\+::Pool\+Item Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_pool_item}{}\label{classneo_1_1ledger_1_1_pool_item}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+
+
+Represents an item in the memory pool.  
+
+
+
+
+{\ttfamily \#include $<$pool\+\_\+item.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::ledger\+::Pool\+Item\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a889731516273afa60bd2cfe15876613c}{Pool\+Item}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a36364cb1e362f92429ef9e4ac511bb60}{Pool\+Item}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ transaction)
+\begin{DoxyCompactList}\small\item\em Constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a9855de5e13810935636b423cc747d0d4}{\texorpdfstring{$\sim$}{\string~}\+Pool\+Item}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a46b4766c54c0dfd2bf6b6067c65d4a8e}{Get\+Transaction}} () const
+\begin{DoxyCompactList}\small\item\em Gets the transaction. \end{DoxyCompactList}\item 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_aa296614d475696f7071f83ed9504ee3d}{Get\+Timestamp}} () const
+\begin{DoxyCompactList}\small\item\em Gets the timestamp when the item was added to the pool. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_af8008e8a866dc9e64a258924d865ffee}{Get\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the transaction hash. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_ab6b9a41fd326b31d5f66e53b03205a57}{Get\+Fee\+Per\+Byte}} () const
+\begin{DoxyCompactList}\small\item\em Gets the network fee per byte. \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_af7a68a8c3869345bff4f25415560908f}{Get\+Network\+Fee}} () const
+\begin{DoxyCompactList}\small\item\em Gets the network fee. \end{DoxyCompactList}\item 
+int64\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a5452f2d3a03dc90f86156ef42870935e}{Get\+System\+Fee}} () const
+\begin{DoxyCompactList}\small\item\em Gets the system fee. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a2bf16f4374ccb7dcddedd960c41d858f}{Get\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the transaction size. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_af249b7750d63f18bdce5ea08e05f3569}{Conflicts\+With}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item}{Pool\+Item}} \&other) const
+\begin{DoxyCompactList}\small\item\em Check if this item conflicts with another transaction. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a0173aaafaf9531a63f6bf6312e7b3a72}{Has\+Higher\+Priority\+Than}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item}{Pool\+Item}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this item has higher priority than another. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a27695aaddd3b90fa2b20cb0877912752}{operator$<$}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item}{Pool\+Item}} \&other) const
+\begin{DoxyCompactList}\small\item\em Comparison operator for priority ordering. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a846c661769aa54e78811444568c7029c}{operator==}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item}{Pool\+Item}} \&other) const
+\begin{DoxyCompactList}\small\item\em Equality operator. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_aeae4cdd8ff6eba3c72f5e3fa741b405a}{operator!=}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item}{Pool\+Item}} \&other) const
+\begin{DoxyCompactList}\small\item\em Inequality operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a7a585766b40b01199e6a86abbc342d71}{Calculate\+Fee\+Per\+Byte}} () const
+\begin{DoxyCompactList}\small\item\em Calculates the fee per byte for the transaction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a25a7f3ad096b82429f8118f532c3b9a6}{transaction\+\_\+}}
+\item 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a4a9557df295e60f862d1c201688c147d}{timestamp\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_aa094ce1da652149e51c7c5b544377d93}{fee\+\_\+per\+\_\+byte\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item_a579eaa585620acd83c4f2fa95c199bdb}{hash\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an item in the memory pool. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_a889731516273afa60bd2cfe15876613c}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!PoolItem@{PoolItem}}
+\index{PoolItem@{PoolItem}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{PoolItem()}{PoolItem()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_a889731516273afa60bd2cfe15876613c} 
+neo\+::ledger\+::\+Pool\+Item\+::\+Pool\+Item (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor. 
+
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_a36364cb1e362f92429ef9e4ac511bb60}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!PoolItem@{PoolItem}}
+\index{PoolItem@{PoolItem}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{PoolItem()}{PoolItem()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_a36364cb1e362f92429ef9e4ac511bb60} 
+neo\+::ledger\+::\+Pool\+Item\+::\+Pool\+Item (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$}]{transaction}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_a9855de5e13810935636b423cc747d0d4}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!````~PoolItem@{\texorpdfstring{$\sim$}{\string~}PoolItem}}
+\index{````~PoolItem@{\texorpdfstring{$\sim$}{\string~}PoolItem}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}PoolItem()}{\string~PoolItem()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_a9855de5e13810935636b423cc747d0d4} 
+neo\+::ledger\+::\+Pool\+Item\+::\texorpdfstring{$\sim$}{\string~}\+Pool\+Item (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Destructor. 
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_a7a585766b40b01199e6a86abbc342d71}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!CalculateFeePerByte@{CalculateFeePerByte}}
+\index{CalculateFeePerByte@{CalculateFeePerByte}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{CalculateFeePerByte()}{CalculateFeePerByte()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_a7a585766b40b01199e6a86abbc342d71} 
+uint64\+\_\+t neo\+::ledger\+::\+Pool\+Item\+::\+Calculate\+Fee\+Per\+Byte (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculates the fee per byte for the transaction. 
+
+\begin{DoxyReturn}{Returns}
+The fee per byte. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_af249b7750d63f18bdce5ea08e05f3569}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!ConflictsWith@{ConflictsWith}}
+\index{ConflictsWith@{ConflictsWith}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{ConflictsWith()}{ConflictsWith()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_af249b7750d63f18bdce5ea08e05f3569} 
+bool neo\+::ledger\+::\+Pool\+Item\+::\+Conflicts\+With (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item}{Pool\+Item}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Check if this item conflicts with another transaction. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other pool item. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if there\textquotesingle{}s a conflict. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_ab6b9a41fd326b31d5f66e53b03205a57}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!GetFeePerByte@{GetFeePerByte}}
+\index{GetFeePerByte@{GetFeePerByte}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{GetFeePerByte()}{GetFeePerByte()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_ab6b9a41fd326b31d5f66e53b03205a57} 
+uint64\+\_\+t neo\+::ledger\+::\+Pool\+Item\+::\+Get\+Fee\+Per\+Byte (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the network fee per byte. 
+
+\begin{DoxyReturn}{Returns}
+The network fee per byte. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_af8008e8a866dc9e64a258924d865ffee}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!GetHash@{GetHash}}
+\index{GetHash@{GetHash}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{GetHash()}{GetHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_af8008e8a866dc9e64a258924d865ffee} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::ledger\+::\+Pool\+Item\+::\+Get\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the transaction hash. 
+
+\begin{DoxyReturn}{Returns}
+The transaction hash. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_af7a68a8c3869345bff4f25415560908f}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!GetNetworkFee@{GetNetworkFee}}
+\index{GetNetworkFee@{GetNetworkFee}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{GetNetworkFee()}{GetNetworkFee()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_af7a68a8c3869345bff4f25415560908f} 
+int64\+\_\+t neo\+::ledger\+::\+Pool\+Item\+::\+Get\+Network\+Fee (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the network fee. 
+
+\begin{DoxyReturn}{Returns}
+The network fee. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_a2bf16f4374ccb7dcddedd960c41d858f}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_a2bf16f4374ccb7dcddedd960c41d858f} 
+int neo\+::ledger\+::\+Pool\+Item\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the transaction size. 
+
+\begin{DoxyReturn}{Returns}
+The size in bytes. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_a5452f2d3a03dc90f86156ef42870935e}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!GetSystemFee@{GetSystemFee}}
+\index{GetSystemFee@{GetSystemFee}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{GetSystemFee()}{GetSystemFee()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_a5452f2d3a03dc90f86156ef42870935e} 
+int64\+\_\+t neo\+::ledger\+::\+Pool\+Item\+::\+Get\+System\+Fee (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the system fee. 
+
+\begin{DoxyReturn}{Returns}
+The system fee. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_aa296614d475696f7071f83ed9504ee3d}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!GetTimestamp@{GetTimestamp}}
+\index{GetTimestamp@{GetTimestamp}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{GetTimestamp()}{GetTimestamp()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_aa296614d475696f7071f83ed9504ee3d} 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point neo\+::ledger\+::\+Pool\+Item\+::\+Get\+Timestamp (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the timestamp when the item was added to the pool. 
+
+\begin{DoxyReturn}{Returns}
+The timestamp. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_a46b4766c54c0dfd2bf6b6067c65d4a8e}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!GetTransaction@{GetTransaction}}
+\index{GetTransaction@{GetTransaction}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{GetTransaction()}{GetTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_a46b4766c54c0dfd2bf6b6067c65d4a8e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}} $>$ neo\+::ledger\+::\+Pool\+Item\+::\+Get\+Transaction (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the transaction. 
+
+\begin{DoxyReturn}{Returns}
+The transaction. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_a0173aaafaf9531a63f6bf6312e7b3a72}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!HasHigherPriorityThan@{HasHigherPriorityThan}}
+\index{HasHigherPriorityThan@{HasHigherPriorityThan}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{HasHigherPriorityThan()}{HasHigherPriorityThan()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_a0173aaafaf9531a63f6bf6312e7b3a72} 
+bool neo\+::ledger\+::\+Pool\+Item\+::\+Has\+Higher\+Priority\+Than (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item}{Pool\+Item}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this item has higher priority than another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other item. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this item has higher priority. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_aeae4cdd8ff6eba3c72f5e3fa741b405a}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_aeae4cdd8ff6eba3c72f5e3fa741b405a} 
+bool neo\+::ledger\+::\+Pool\+Item\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item}{Pool\+Item}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Inequality operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other item. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if not equal. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_a27695aaddd3b90fa2b20cb0877912752}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_a27695aaddd3b90fa2b20cb0877912752} 
+bool neo\+::ledger\+::\+Pool\+Item\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item}{Pool\+Item}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Comparison operator for priority ordering. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other item. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if this item has lower priority (for max heap). 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_a846c661769aa54e78811444568c7029c}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_a846c661769aa54e78811444568c7029c} 
+bool neo\+::ledger\+::\+Pool\+Item\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_pool_item}{Pool\+Item}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Equality operator. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other item. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if equal. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_aa094ce1da652149e51c7c5b544377d93}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!fee\_per\_byte\_@{fee\_per\_byte\_}}
+\index{fee\_per\_byte\_@{fee\_per\_byte\_}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{fee\_per\_byte\_}{fee\_per\_byte\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_aa094ce1da652149e51c7c5b544377d93} 
+uint64\+\_\+t neo\+::ledger\+::\+Pool\+Item\+::fee\+\_\+per\+\_\+byte\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_a579eaa585620acd83c4f2fa95c199bdb}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!hash\_@{hash\_}}
+\index{hash\_@{hash\_}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{hash\_}{hash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_a579eaa585620acd83c4f2fa95c199bdb} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::ledger\+::\+Pool\+Item\+::hash\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_a4a9557df295e60f862d1c201688c147d}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!timestamp\_@{timestamp\_}}
+\index{timestamp\_@{timestamp\_}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{timestamp\_}{timestamp\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_a4a9557df295e60f862d1c201688c147d} 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point neo\+::ledger\+::\+Pool\+Item\+::timestamp\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_pool_item_a25a7f3ad096b82429f8118f532c3b9a6}\index{neo::ledger::PoolItem@{neo::ledger::PoolItem}!transaction\_@{transaction\_}}
+\index{transaction\_@{transaction\_}!neo::ledger::PoolItem@{neo::ledger::PoolItem}}
+\doxysubsubsection{\texorpdfstring{transaction\_}{transaction\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_pool_item_a25a7f3ad096b82429f8118f532c3b9a6} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction}}$>$ neo\+::ledger\+::\+Pool\+Item\+::transaction\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{pool__item_8h}{pool\+\_\+item.\+h}}\item 
+src/ledger/\mbox{\hyperlink{mempool_8cpp}{mempool.\+cpp}}\item 
+src/ledger/\mbox{\hyperlink{pool__item_8cpp}{pool\+\_\+item.\+cpp}}\end{DoxyCompactItemize}

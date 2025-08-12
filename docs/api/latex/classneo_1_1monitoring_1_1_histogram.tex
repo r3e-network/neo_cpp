@@ -1,0 +1,208 @@
+\doxysection{neo\+::monitoring\+::Histogram Class Reference}
+\hypertarget{classneo_1_1monitoring_1_1_histogram}{}\label{classneo_1_1monitoring_1_1_histogram}\index{neo::monitoring::Histogram@{neo::monitoring::Histogram}}
+
+
+\doxylink{classneo_1_1monitoring_1_1_histogram}{Histogram} metric -\/ distribution of values.  
+
+
+
+
+{\ttfamily \#include $<$metrics.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::monitoring\+::Histogram\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::monitoring\+::Histogram\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_ac7df19dfb4e3b5abe1df428d7e46b50f}{Histogram}} (const std\+::string \&name, const std\+::string \&description, const std\+::vector$<$ double $>$ \&buckets=\{0.\+005, 0.\+01, 0.\+025, 0.\+05, 0.\+1, 0.\+25, 0.\+5, 1, 2.\+5, 5, 10\})
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_abee1f58bf335d4f9df797881cd09fb71}{Observe}} (double value)
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a7e8705b82f4b871b09df16e319341f12}{To\+Prometheus}} () const override
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a96e7d1287b789898c9ba264e8ebb0eaf}{Histogram}} (const std\+::string \&name, const std\+::string \&help, const std\+::vector$<$ double $>$ \&buckets=\{0.\+005, 0.\+01, 0.\+025, 0.\+05, 0.\+1, 0.\+25, 0.\+5, 1, 2.\+5, 5, 10\})
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_abee1f58bf335d4f9df797881cd09fb71}{Observe}} (double value)
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_aa2b2495ee83e350287c63aa7125be11e}{Serialize}} () const override
+\begin{DoxyCompactList}\small\item\em Serialize metric to Prometheus format. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{neo\+::monitoring\+::\+Metric}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a2fabc388c640698b8ea800e0cc8b5d5f}{Metric}} (const std\+::string \&name, const std\+::string \&description, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} type)
+\item 
+virtual \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_ad3f062c16fa8a54f2babb1fa1f247c29}{\texorpdfstring{$\sim$}{\string~}\+Metric}} ()=default
+\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a514f8ad2bb1ee128016785a4705b5084}{Get\+Name}} () const
+\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_af756fcfeb3ffd38d255411a1fe363e72}{Get\+Description}} () const
+\item 
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a194d6b9b3862300250c9f91129f8d486}{Get\+Type}} () const
+\item 
+void \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a787fd65928f94768a49fb42f538d91b6}{Set\+Label}} (const std\+::string \&key, const std\+::string \&value)
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_af5a69c403e3784d99aa03c6f534ea602}{Metric}} (const std\+::string \&name, const std\+::string \&help, \mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} type)
+\item 
+virtual \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_ad3f062c16fa8a54f2babb1fa1f247c29}{\texorpdfstring{$\sim$}{\string~}\+Metric}} ()=default
+\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a514f8ad2bb1ee128016785a4705b5084}{Get\+Name}} () const
+\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a02fc58e08ab7760cffd98d1c5166d3a3}{Get\+Help}} () const
+\item 
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a194d6b9b3862300250c9f91129f8d486}{Get\+Type}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_ae0bbee5f33d8d010e92ca17e855b5ba4}{mutex\+\_\+}}
+\item 
+std\+::vector$<$ double $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a20f0f185f6066a51c8ecbbcdde422739}{buckets\+\_\+}}
+\item 
+std\+::vector$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a4d89115b006c101f5af9ce4a23347b5a}{bucket\+\_\+counts\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a03555558e7867ea9368e6f28a01710a5}{count\+\_\+}} \{0\}
+\item 
+double \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a8f0f7aee8e787cab47e04b1842a0ecb7}{sum\+\_\+}} \{0.\+0\}
+\item 
+std\+::vector$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_histogram_a143331292503c562acce3bba4f05eed2}{bucket\+Counts\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{neo\+::monitoring\+::\+Metric}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_ac02de7bc213735d2d47ab1dd388937fd}{Type\+String}} () const
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric}{neo\+::monitoring\+::\+Metric}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_adea0a4bb11fa49d328742e9c4aac7c44}{name\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a08cd309a2371946ba5df2fd96e1f4e04}{description\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_aeeef931c32528d9756ac041df70cdec8}{labels\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1monitoring_aca80e0b6379470c829b1ccadea88cf35}{Metric\+Type}} \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_aaa32b50e25a5eb197834638167fc871d}{type\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a7d477b0164ecefab56c843ab76998b7b}{help\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1monitoring_1_1_histogram}{Histogram} metric -\/ distribution of values. 
+
+\doxylink{classneo_1_1monitoring_1_1_histogram}{Histogram} metric with buckets. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1monitoring_1_1_histogram_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_histogram_ac7df19dfb4e3b5abe1df428d7e46b50f}\index{neo::monitoring::Histogram@{neo::monitoring::Histogram}!Histogram@{Histogram}}
+\index{Histogram@{Histogram}!neo::monitoring::Histogram@{neo::monitoring::Histogram}}
+\doxysubsubsection{\texorpdfstring{Histogram()}{Histogram()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_histogram_ac7df19dfb4e3b5abe1df428d7e46b50f} 
+neo\+::monitoring\+::\+Histogram\+::\+Histogram (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{const std\+::string \&}]{description}{, }\item[{const std\+::vector$<$ double $>$ \&}]{buckets}{ = {\ttfamily \{0.005,~0.01,~0.025,~0.05,~0.1,~0.25,~0.5,~1,~2.5,~5,~10\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_histogram_a96e7d1287b789898c9ba264e8ebb0eaf}\index{neo::monitoring::Histogram@{neo::monitoring::Histogram}!Histogram@{Histogram}}
+\index{Histogram@{Histogram}!neo::monitoring::Histogram@{neo::monitoring::Histogram}}
+\doxysubsubsection{\texorpdfstring{Histogram()}{Histogram()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_histogram_a96e7d1287b789898c9ba264e8ebb0eaf} 
+neo\+::monitoring\+::\+Histogram\+::\+Histogram (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{const std\+::string \&}]{help}{, }\item[{const std\+::vector$<$ double $>$ \&}]{buckets}{ = {\ttfamily \{0.005,~0.01,~0.025,~0.05,~0.1,~0.25,~0.5,~1,~2.5,~5,~10\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1monitoring_1_1_histogram_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_histogram_abee1f58bf335d4f9df797881cd09fb71}\index{neo::monitoring::Histogram@{neo::monitoring::Histogram}!Observe@{Observe}}
+\index{Observe@{Observe}!neo::monitoring::Histogram@{neo::monitoring::Histogram}}
+\doxysubsubsection{\texorpdfstring{Observe()}{Observe()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_histogram_abee1f58bf335d4f9df797881cd09fb71} 
+void neo\+::monitoring\+::\+Histogram\+::\+Observe (\begin{DoxyParamCaption}\item[{double}]{value}{}\end{DoxyParamCaption})}
+
+\Hypertarget{classneo_1_1monitoring_1_1_histogram_abee1f58bf335d4f9df797881cd09fb71}\index{neo::monitoring::Histogram@{neo::monitoring::Histogram}!Observe@{Observe}}
+\index{Observe@{Observe}!neo::monitoring::Histogram@{neo::monitoring::Histogram}}
+\doxysubsubsection{\texorpdfstring{Observe()}{Observe()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_histogram_abee1f58bf335d4f9df797881cd09fb71} 
+void neo\+::monitoring\+::\+Histogram\+::\+Observe (\begin{DoxyParamCaption}\item[{double}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_histogram_aa2b2495ee83e350287c63aa7125be11e}\index{neo::monitoring::Histogram@{neo::monitoring::Histogram}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::monitoring::Histogram@{neo::monitoring::Histogram}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_histogram_aa2b2495ee83e350287c63aa7125be11e} 
+std\+::string neo\+::monitoring\+::\+Histogram\+::\+Serialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serialize metric to Prometheus format. 
+
+\begin{DoxyReturn}{Returns}
+Prometheus formatted string 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a814cbfc8ab1f5c2df22440a5a507a461}{neo\+::monitoring\+::\+Metric}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1monitoring_1_1_histogram_a7e8705b82f4b871b09df16e319341f12}\index{neo::monitoring::Histogram@{neo::monitoring::Histogram}!ToPrometheus@{ToPrometheus}}
+\index{ToPrometheus@{ToPrometheus}!neo::monitoring::Histogram@{neo::monitoring::Histogram}}
+\doxysubsubsection{\texorpdfstring{ToPrometheus()}{ToPrometheus()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_histogram_a7e8705b82f4b871b09df16e319341f12} 
+std\+::string neo\+::monitoring\+::\+Histogram\+::\+To\+Prometheus (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1monitoring_1_1_metric_a62a05fbe49c84ce9e8ce44cb2224c883}{neo\+::monitoring\+::\+Metric}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1monitoring_1_1_histogram_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_histogram_a4d89115b006c101f5af9ce4a23347b5a}\index{neo::monitoring::Histogram@{neo::monitoring::Histogram}!bucket\_counts\_@{bucket\_counts\_}}
+\index{bucket\_counts\_@{bucket\_counts\_}!neo::monitoring::Histogram@{neo::monitoring::Histogram}}
+\doxysubsubsection{\texorpdfstring{bucket\_counts\_}{bucket\_counts\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_histogram_a4d89115b006c101f5af9ce4a23347b5a} 
+std\+::vector$<$uint64\+\_\+t$>$ neo\+::monitoring\+::\+Histogram\+::bucket\+\_\+counts\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_histogram_a143331292503c562acce3bba4f05eed2}\index{neo::monitoring::Histogram@{neo::monitoring::Histogram}!bucketCounts\_@{bucketCounts\_}}
+\index{bucketCounts\_@{bucketCounts\_}!neo::monitoring::Histogram@{neo::monitoring::Histogram}}
+\doxysubsubsection{\texorpdfstring{bucketCounts\_}{bucketCounts\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_histogram_a143331292503c562acce3bba4f05eed2} 
+std\+::vector$<$uint64\+\_\+t$>$ neo\+::monitoring\+::\+Histogram\+::bucket\+Counts\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_histogram_a20f0f185f6066a51c8ecbbcdde422739}\index{neo::monitoring::Histogram@{neo::monitoring::Histogram}!buckets\_@{buckets\_}}
+\index{buckets\_@{buckets\_}!neo::monitoring::Histogram@{neo::monitoring::Histogram}}
+\doxysubsubsection{\texorpdfstring{buckets\_}{buckets\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_histogram_a20f0f185f6066a51c8ecbbcdde422739} 
+std\+::vector$<$ double $>$ neo\+::monitoring\+::\+Histogram\+::buckets\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_histogram_a03555558e7867ea9368e6f28a01710a5}\index{neo::monitoring::Histogram@{neo::monitoring::Histogram}!count\_@{count\_}}
+\index{count\_@{count\_}!neo::monitoring::Histogram@{neo::monitoring::Histogram}}
+\doxysubsubsection{\texorpdfstring{count\_}{count\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_histogram_a03555558e7867ea9368e6f28a01710a5} 
+uint64\+\_\+t neo\+::monitoring\+::\+Histogram\+::count\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_histogram_ae0bbee5f33d8d010e92ca17e855b5ba4}\index{neo::monitoring::Histogram@{neo::monitoring::Histogram}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::monitoring::Histogram@{neo::monitoring::Histogram}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_histogram_ae0bbee5f33d8d010e92ca17e855b5ba4} 
+std\+::mutex neo\+::monitoring\+::\+Histogram\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_histogram_a8f0f7aee8e787cab47e04b1842a0ecb7}\index{neo::monitoring::Histogram@{neo::monitoring::Histogram}!sum\_@{sum\_}}
+\index{sum\_@{sum\_}!neo::monitoring::Histogram@{neo::monitoring::Histogram}}
+\doxysubsubsection{\texorpdfstring{sum\_}{sum\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_histogram_a8f0f7aee8e787cab47e04b1842a0ecb7} 
+double neo\+::monitoring\+::\+Histogram\+::sum\+\_\+ \{0.\+0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/monitoring/\mbox{\hyperlink{monitoring_2metrics_8h}{metrics.\+h}}\item 
+include/neo/monitoring/\mbox{\hyperlink{prometheus__exporter_8h}{prometheus\+\_\+exporter.\+h}}\end{DoxyCompactItemize}

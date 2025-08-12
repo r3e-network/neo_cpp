@@ -1,0 +1,232 @@
+\doxysection{neo\+::plugins\+::Rpc\+Server\+Plugin Class Reference}
+\hypertarget{classneo_1_1plugins_1_1_rpc_server_plugin}{}\label{classneo_1_1plugins_1_1_rpc_server_plugin}\index{neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}}
+
+
+Represents an RPC server plugin.  
+
+
+
+
+{\ttfamily \#include $<$rpc\+\_\+server\+\_\+plugin.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::plugins\+::Rpc\+Server\+Plugin\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::plugins\+::Rpc\+Server\+Plugin\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1plugins_1_1_rpc_server_plugin_a6d69f0410e400d8815c8eef8275be5ec}{Rpc\+Server\+Plugin}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1plugins_1_1_rpc_server_plugin}{Rpc\+Server\+Plugin}. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1plugins_1_1_rpc_server_plugin_a2116cef7a37f0780d2cb547afac7e679}{Register\+Method}} (const std\+::string \&method, std\+::function$<$ nlohmann\+::json(const nlohmann\+::json \&)$>$ handler)
+\begin{DoxyCompactList}\small\item\em Registers an RPC method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base}{neo\+::plugins\+::\+Plugin\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_ae2713af7147395e3f7230925418aa28d}{Plugin\+Base}} (const std\+::string \&name, const std\+::string \&description, const std\+::string \&version, const std\+::string \&author)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1plugins_1_1_plugin_base}{Plugin\+Base}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_ad52bbcbde275ae0dc3fde4a92f10bde6}{\texorpdfstring{$\sim$}{\string~}\+Plugin\+Base}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_add9eee171ca11e6d15bd9b024f92f7dd}{Get\+Name}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the name. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a44eff3017b07b2d8c46b21abaf1dabf4}{Get\+Description}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the description. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a1060247300f8288aded7ce8487947546}{Get\+Version}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the version. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_ae185958e6ee4d9b509aad4a04b2845be}{Get\+Author}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the author. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_aa09dbaf0a4a281ed5098cb04bee9a614}{Initialize}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ neo\+System, const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&settings) override
+\begin{DoxyCompactList}\small\item\em Initializes the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a247def5567cf352878b0d393e2fe18f8}{Start}} () override
+\begin{DoxyCompactList}\small\item\em Starts the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_abc80c400e1460dabf596acd8406c81bf}{Stop}} () override
+\begin{DoxyCompactList}\small\item\em Stops the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a37cd2ae749afcc1dafc56ba9e37d5e4d}{Is\+Running}} () const override
+\begin{DoxyCompactList}\small\item\em Checks if the plugin is running. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin}{neo\+::plugins\+::\+Plugin}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_aa3d82c04241154d0ea425b5b8cf1aa52}{\texorpdfstring{$\sim$}{\string~}\+Plugin}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_rpc_server_plugin_a9c3e79928429f32f2662609a181848b7}{On\+Initialize}} (const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&settings) override
+\begin{DoxyCompactList}\small\item\em Initializes the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_rpc_server_plugin_a59000fabcfd865184bcc41bcb5ac68af}{On\+Start}} () override
+\begin{DoxyCompactList}\small\item\em Starts the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_rpc_server_plugin_aaef9d8e4d5fda31813500c9a38255aea}{On\+Stop}} () override
+\begin{DoxyCompactList}\small\item\em Stops the plugin. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base}{neo\+::plugins\+::\+Plugin\+Base}}}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_af9916e44d745847ea6a2c847b55fffb1}{Get\+Neo\+System}} () const
+\begin{DoxyCompactList}\small\item\em Gets the Neo system. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}} $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a79fc4101cc2a9af9cd4155ac2c07802f}{Get\+RPCServer}} () const
+\begin{DoxyCompactList}\small\item\em Gets the RPC server. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}} $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1_rpc_server_plugin_a087f400bba37e7a861fb76bce2a344e1}{rpc\+Server\+\_\+}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1plugins_1_1_rpc_server_plugin_a9eb4c72eefbaa6d5173716429442cb36}{port\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_rpc_server_plugin_a3c1e4c06ce7198e7d822086cfb6433ab}{enable\+Cors\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1_rpc_server_plugin_aee3df0ef738cabed05c80afe7ca8d48a}{enable\+Auth\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1_rpc_server_plugin_a58d41df62c9d4889226611714e286065}{username\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1_rpc_server_plugin_a137e050521b25fdcee90453857aabcfb}{password\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an RPC server plugin. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1plugins_1_1_rpc_server_plugin_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1plugins_1_1_rpc_server_plugin_a6d69f0410e400d8815c8eef8275be5ec}\index{neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}!RpcServerPlugin@{RpcServerPlugin}}
+\index{RpcServerPlugin@{RpcServerPlugin}!neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}}
+\doxysubsubsection{\texorpdfstring{RpcServerPlugin()}{RpcServerPlugin()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_rpc_server_plugin_a6d69f0410e400d8815c8eef8275be5ec} 
+neo\+::plugins\+::\+Rpc\+Server\+Plugin\+::\+Rpc\+Server\+Plugin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an \doxylink{classneo_1_1plugins_1_1_rpc_server_plugin}{Rpc\+Server\+Plugin}. 
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1plugins_1_1_rpc_server_plugin_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1plugins_1_1_rpc_server_plugin_a9c3e79928429f32f2662609a181848b7}\index{neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}!OnInitialize@{OnInitialize}}
+\index{OnInitialize@{OnInitialize}!neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}}
+\doxysubsubsection{\texorpdfstring{OnInitialize()}{OnInitialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_rpc_server_plugin_a9c3e79928429f32f2662609a181848b7} 
+bool neo\+::plugins\+::\+Rpc\+Server\+Plugin\+::\+On\+Initialize (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&}]{settings}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Initializes the plugin. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em settings} & The settings. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the plugin was initialized, false otherwise. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a73e21bf341eaf38562a3e45452013152}{neo\+::plugins\+::\+Plugin\+Base}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1plugins_1_1_rpc_server_plugin_a59000fabcfd865184bcc41bcb5ac68af}\index{neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}!OnStart@{OnStart}}
+\index{OnStart@{OnStart}!neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}}
+\doxysubsubsection{\texorpdfstring{OnStart()}{OnStart()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_rpc_server_plugin_a59000fabcfd865184bcc41bcb5ac68af} 
+bool neo\+::plugins\+::\+Rpc\+Server\+Plugin\+::\+On\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Starts the plugin. 
+
+\begin{DoxyReturn}{Returns}
+True if the plugin was started, false otherwise. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_a6792009d892718fdb3d605c8d4cb01d6}{neo\+::plugins\+::\+Plugin\+Base}}.
+
+\Hypertarget{classneo_1_1plugins_1_1_rpc_server_plugin_aaef9d8e4d5fda31813500c9a38255aea}\index{neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}!OnStop@{OnStop}}
+\index{OnStop@{OnStop}!neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}}
+\doxysubsubsection{\texorpdfstring{OnStop()}{OnStop()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_rpc_server_plugin_aaef9d8e4d5fda31813500c9a38255aea} 
+bool neo\+::plugins\+::\+Rpc\+Server\+Plugin\+::\+On\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Stops the plugin. 
+
+\begin{DoxyReturn}{Returns}
+True if the plugin was stopped, false otherwise. 
+\end{DoxyReturn}
+
+
+Reimplemented from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_af88eee48057086589f386ff78e20d09f}{neo\+::plugins\+::\+Plugin\+Base}}.
+
+\Hypertarget{classneo_1_1plugins_1_1_rpc_server_plugin_a2116cef7a37f0780d2cb547afac7e679}\index{neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}!RegisterMethod@{RegisterMethod}}
+\index{RegisterMethod@{RegisterMethod}!neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}}
+\doxysubsubsection{\texorpdfstring{RegisterMethod()}{RegisterMethod()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_rpc_server_plugin_a2116cef7a37f0780d2cb547afac7e679} 
+void neo\+::plugins\+::\+Rpc\+Server\+Plugin\+::\+Register\+Method (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{method}{, }\item[{std\+::function$<$ nlohmann\+::json(const nlohmann\+::json \&)$>$}]{handler}{}\end{DoxyParamCaption})}
+
+
+
+Registers an RPC method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em method} & The method name. \\
+\hline
+{\em handler} & The method handler. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1plugins_1_1_rpc_server_plugin_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1plugins_1_1_rpc_server_plugin_aee3df0ef738cabed05c80afe7ca8d48a}\index{neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}!enableAuth\_@{enableAuth\_}}
+\index{enableAuth\_@{enableAuth\_}!neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}}
+\doxysubsubsection{\texorpdfstring{enableAuth\_}{enableAuth\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_rpc_server_plugin_aee3df0ef738cabed05c80afe7ca8d48a} 
+bool neo\+::plugins\+::\+Rpc\+Server\+Plugin\+::enable\+Auth\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1_rpc_server_plugin_a3c1e4c06ce7198e7d822086cfb6433ab}\index{neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}!enableCors\_@{enableCors\_}}
+\index{enableCors\_@{enableCors\_}!neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}}
+\doxysubsubsection{\texorpdfstring{enableCors\_}{enableCors\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_rpc_server_plugin_a3c1e4c06ce7198e7d822086cfb6433ab} 
+bool neo\+::plugins\+::\+Rpc\+Server\+Plugin\+::enable\+Cors\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1_rpc_server_plugin_a137e050521b25fdcee90453857aabcfb}\index{neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}!password\_@{password\_}}
+\index{password\_@{password\_}!neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}}
+\doxysubsubsection{\texorpdfstring{password\_}{password\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_rpc_server_plugin_a137e050521b25fdcee90453857aabcfb} 
+std\+::string neo\+::plugins\+::\+Rpc\+Server\+Plugin\+::password\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1_rpc_server_plugin_a9eb4c72eefbaa6d5173716429442cb36}\index{neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}!port\_@{port\_}}
+\index{port\_@{port\_}!neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}}
+\doxysubsubsection{\texorpdfstring{port\_}{port\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_rpc_server_plugin_a9eb4c72eefbaa6d5173716429442cb36} 
+uint16\+\_\+t neo\+::plugins\+::\+Rpc\+Server\+Plugin\+::port\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1_rpc_server_plugin_a087f400bba37e7a861fb76bce2a344e1}\index{neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}!rpcServer\_@{rpcServer\_}}
+\index{rpcServer\_@{rpcServer\_}!neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}}
+\doxysubsubsection{\texorpdfstring{rpcServer\_}{rpcServer\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_rpc_server_plugin_a087f400bba37e7a861fb76bce2a344e1} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{rpc\+::\+Rpc\+Server}}$>$ neo\+::plugins\+::\+Rpc\+Server\+Plugin\+::rpc\+Server\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1_rpc_server_plugin_a58d41df62c9d4889226611714e286065}\index{neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}!username\_@{username\_}}
+\index{username\_@{username\_}!neo::plugins::RpcServerPlugin@{neo::plugins::RpcServerPlugin}}
+\doxysubsubsection{\texorpdfstring{username\_}{username\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1_rpc_server_plugin_a58d41df62c9d4889226611714e286065} 
+std\+::string neo\+::plugins\+::\+Rpc\+Server\+Plugin\+::username\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/plugins/\mbox{\hyperlink{rpc__server__plugin_8h}{rpc\+\_\+server\+\_\+plugin.\+h}}\item 
+src/plugins/\mbox{\hyperlink{rpc__server__plugin_8cpp}{rpc\+\_\+server\+\_\+plugin.\+cpp}}\end{DoxyCompactItemize}

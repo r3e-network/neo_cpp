@@ -1,0 +1,159 @@
+\doxysection{execution\+\_\+engine.\+h}
+\hypertarget{execution__engine_8h_source}{}\label{execution__engine_8h_source}\index{include/neo/vm/execution\_engine.h@{include/neo/vm/execution\_engine.h}}
+\mbox{\hyperlink{execution__engine_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{execution__context_8h}{neo/vm/execution\_context.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{execution__engine__limits_8h}{neo/vm/execution\_engine\_limits.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{vm_2internal_2byte__vector_8h}{neo/vm/internal/byte\_vector.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{jump__table_8h}{neo/vm/jump\_table.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{reference__counter_8h}{neo/vm/reference\_counter.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{script_8h}{neo/vm/script.h}}>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stack__item_8h}{neo/vm/stack\_item.h}}>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{vm__state_8h}{neo/vm/vm\_state.h}}>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <map>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ Forward\ declaration}}
+\DoxyCodeLine{00023\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{ExecutionContext}};}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00028\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_system_call_a7b7d03f8eba10a75aaee955f860a0332}{SystemCall}}}
+\DoxyCodeLine{00029\ \{}
+\DoxyCodeLine{00030\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_system_call_a7b7d03f8eba10a75aaee955f860a0332}{SystemCall}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_system_call_a7b7d03f8eba10a75aaee955f860a0332}{SystemCall}}(\textcolor{keyword}{const}\ std::string\&\ name,\ std::function<\textcolor{keywordtype}{bool}(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{ExecutionEngine}}\&)>\ handler);}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_system_call_ab6fd9ff98a9d196d13431c4fc61fa22c}{GetName}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keyword}{const}\ std::function<bool(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{ExecutionEngine}}\&)>\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_system_call_af149e6dc68161821a79f44091a8b4b2e}{GetHandler}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00056\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1vm_1_1_system_call_a661f64ebcb0c5a4d45ba51830e56a39e}{name\_}};}
+\DoxyCodeLine{00057\ \ \ \ \ std::function<bool(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{ExecutionEngine}}\&)>\ \mbox{\hyperlink{classneo_1_1vm_1_1_system_call_ace2fb8f863241667b3e0dad7350c9e24}{handler\_}};}
+\DoxyCodeLine{00058\ \};}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00063\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a38a40d2a3f057dc24de928ac55b02610}{ExecutionEngine}}}
+\DoxyCodeLine{00064\ \{}
+\DoxyCodeLine{00065\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00069\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a38a40d2a3f057dc24de928ac55b02610}{ExecutionEngine}}();}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a38a40d2a3f057dc24de928ac55b02610}{ExecutionEngine}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_jump_table}{JumpTable}}\&\ jumpTable);}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a38a40d2a3f057dc24de928ac55b02610}{ExecutionEngine}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits}{ExecutionEngineLimits}}\&\ limits);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00088\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a38a40d2a3f057dc24de928ac55b02610}{ExecutionEngine}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_jump_table}{JumpTable}}\&\ jumpTable,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits}{ExecutionEngineLimits}}\&\ limits);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a9acd3f9e5557d8f4bcbd572edeac928b}{\string~ExecutionEngine}}();}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits}{ExecutionEngineLimits}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a060e47c3ca0c38760557eeaf809edce3}{GetLimits}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00105\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{ExecutionContext}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a8301f5b182f15a7c9302c1b65cbf9220}{GetCurrentContext}}();}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{ExecutionContext}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a8301f5b182f15a7c9302c1b65cbf9220}{GetCurrentContext}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00117\ \ \ \ \ std::shared\_ptr<ExecutionContext>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a47c99722921aa20538c1c9fb1a95cd1e}{GetEntryContext}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<ExecutionContext>>\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a91d0c0db6d95f8ceb2969cf9a397b21c}{GetInvocationStack}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00129\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ad7fc9ab3700721a410684027e7319b90}{GetState}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a994592a88beaec9c69b75978b7287211}{SetState}}(\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}}\ state);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<StackItem>>\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_aabd43fe9b13eae0aa647d36162b3e1aa}{GetResultStack}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00150\ \ \ \ \ std::shared\_ptr<ExecutionContext>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_aacf27014a586581058c54c957aa03fe2}{LoadScript}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}}\&\ script,\ int32\_t\ initialPosition\ =\ 0,}
+\DoxyCodeLine{00151\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{ExecutionContext}}\&)>\ configureContext\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a1921ea21d5b30b013d05de9b1d4392eb}{LoadContext}}(std::shared\_ptr<ExecutionContext>\ context);}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00164\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_aef0a932b710f409f9c6845f88b2e6d87}{Execute}}(int64\_t\ gasLimit\ =\ -\/1);}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a87adfe2fadc6d9fd5f988c8cd96c5a42}{ExecuteNext}}();}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_afe200b4848d86d0267024cb7c92ece44}{RegisterSystemCall}}(\textcolor{keyword}{const}\ std::string\&\ name,\ std::function<\textcolor{keywordtype}{bool}(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a38a40d2a3f057dc24de928ac55b02610}{ExecutionEngine}}\&)>\ handler);}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_system_call}{SystemCall}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a3707d38d6cd39817cf27fe9e78c88b84}{GetSystemCall}}(uint32\_t\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ac4c7337cbe6847beb734f3b788d8b6de}{Push}}(std::shared\_ptr<StackItem>\ item);}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00195\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a394ac4f0ef4a6c3e6ad98c2fc8e6ed68}{Pop}}();}
+\DoxyCodeLine{00196\ }
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00203\ \ \ \ \ std::shared\_ptr<T>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a6e1763051f2c590011a928640dc4a1f0}{Pop}}()}
+\DoxyCodeLine{00204\ \ \ \ \ \{}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ item\ =\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a394ac4f0ef4a6c3e6ad98c2fc8e6ed68}{Pop}}();}
+\DoxyCodeLine{00206\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ typed\ =\ std::dynamic\_pointer\_cast<T>(item);}
+\DoxyCodeLine{00207\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!typed)\ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}Invalid\ cast"{}});}
+\DoxyCodeLine{00208\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ typed;}
+\DoxyCodeLine{00209\ \ \ \ \ \}}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00216\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ad0dd6909d826e680bc5eba06763d6863}{Peek}}(int32\_t\ index\ =\ 0)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ae90860e6f9f9747ba4b863b0d364db25}{SetJumping}}(\textcolor{keywordtype}{bool}\ jumping);}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a733ba1b420b5d5b40715a66ba10d92b2}{IsJumping}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00234\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{ReferenceCounter}}*\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a186db6d93382d4b0b58874cbb59f44a7}{GetReferenceCounter}}();}
+\DoxyCodeLine{00235\ }
+\DoxyCodeLine{00240\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_af81689dff0a9d07a5530a50222bba191}{HasUncaughtException}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00246\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ab649c832d415ae0082440b44a0c50287}{GetUncaughtException}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00247\ }
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_af642629fc69c551c62d90655de46a9da}{ClearUncaughtException}}();}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00257\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a334349f8f8abf73db8ca86ad42704029}{SetUncaughtException}}(std::shared\_ptr<StackItem>\ exception);}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_aab3565ade0499baf294d618a726bfacd}{ExecuteRet}}();}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00270\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ad1c076193afbdc57abacee84bf248d8e}{ExecuteSysCall}}(uint32\_t\ hash);}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a75840461e0aabbc1cec1b9bb076e502a}{ExecuteCall}}(int32\_t\ position);}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00284\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a9c1f5ae18961a2b8d61b7f95e28ffbaa}{ExecuteJump}}(int32\_t\ position);}
+\DoxyCodeLine{00285\ }
+\DoxyCodeLine{00291\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a67845f8e8923da7e7e9a24eb1a6a30a0}{ExecuteThrow}}(std::shared\_ptr<StackItem>\ exception);}
+\DoxyCodeLine{00292\ }
+\DoxyCodeLine{00299\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a5cd2f17ac8d8c243afd3b6899d41aaf2}{ExecuteTry}}(int32\_t\ catchPosition,\ int32\_t\ finallyPosition);}
+\DoxyCodeLine{00300\ }
+\DoxyCodeLine{00306\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ac57b083da8a73b101651553d63a17ef6}{ExecuteEndTry}}(int32\_t\ position);}
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00312\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_aa8fe265c8b001d504fa6f63980cb36f5}{UnloadContext}}(\mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{ExecutionContext}}\&\ context);}
+\DoxyCodeLine{00313\ }
+\DoxyCodeLine{00314\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00322\ \ \ \ \ std::shared\_ptr<ExecutionContext>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ab03d0b186aa18d278d68b170a84c8b71}{CreateContext}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}}\&\ script,\ int32\_t\ rvcount,\ int32\_t\ initialPosition);}
+\DoxyCodeLine{00323\ }
+\DoxyCodeLine{00328\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a21463339ec67269ea8da1e3b5572a767}{PreExecuteInstruction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}}\&\ instruction);}
+\DoxyCodeLine{00329\ }
+\DoxyCodeLine{00334\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a8ea4c212771daaa6f020da2a9540bd36}{PostExecuteInstruction}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}}\&\ instruction);}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00340\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ac23a7b72be4d6502528322aa279c6d37}{OnFault}}(std::exception\_ptr\ ex);}
+\DoxyCodeLine{00341\ }
+\DoxyCodeLine{00345\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ac23a7b72be4d6502528322aa279c6d37}{OnFault}}();}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00350\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a5a446f549aeccf031ac65e107d71659c}{OnStateChanged}}();}
+\DoxyCodeLine{00351\ }
+\DoxyCodeLine{00352\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00353\ \ \ \ \ std::vector<std::shared\_ptr<ExecutionContext>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ad09358b57285696e97b04adc37676a92}{invocationStack\_}};}
+\DoxyCodeLine{00354\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a507c77f914b81d94fcd593d7417b86be}{state\_}};}
+\DoxyCodeLine{00355\ \ \ \ \ std::vector<std::shared\_ptr<StackItem>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_aa1f781371657a418ff82e4cfbecde764}{resultStack\_}};}
+\DoxyCodeLine{00356\ \ \ \ \ std::unordered\_map<uint32\_t,\ SystemCall>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_adb62313442c3bff6d7d460d68dd27f27}{systemCalls\_}};}
+\DoxyCodeLine{00357\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_jump_table}{JumpTable}}\&\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a8a26de2f0b60265d701e2f72296ac36e}{jumpTable\_}};}
+\DoxyCodeLine{00358\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a18b9f1f468b2aed039891627f6b97765}{jumping\_}};}
+\DoxyCodeLine{00359\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{ReferenceCounter}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_ae7819127d898c3d7d0976cbcf5dc3d74}{referenceCounter\_}};}
+\DoxyCodeLine{00360\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a7a8721ef69424c7469bf14c3bd2bf633}{uncaughtException\_}};}
+\DoxyCodeLine{00361\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_limits}{ExecutionEngineLimits}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a869aa741fd826941a3b81ba6470e43fa}{limits\_}};}
+\DoxyCodeLine{00362\ \ \ \ \ std::shared\_ptr<ExecutionContext>\ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine_a475f2081f7d851b08c34ab3329343527}{entryContext\_}};}
+\DoxyCodeLine{00363\ \};}
+\DoxyCodeLine{00364\ \}\ \ \textcolor{comment}{//\ namespace\ neo::vm}}
+
+\end{DoxyCode}

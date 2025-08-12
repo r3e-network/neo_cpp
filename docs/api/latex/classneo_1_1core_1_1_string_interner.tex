@@ -1,0 +1,149 @@
+\doxysection{neo\+::core\+::String\+Interner Class Reference}
+\hypertarget{classneo_1_1core_1_1_string_interner}{}\label{classneo_1_1core_1_1_string_interner}\index{neo::core::StringInterner@{neo::core::StringInterner}}
+
+
+Thread-\/safe string interning pool.  
+
+
+
+
+{\ttfamily \#include $<$string\+\_\+intern.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_ptr_equal}{String\+Ptr\+Equal}}
+\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_ptr_hash}{String\+Ptr\+Hash}}
+\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_view_equal}{String\+View\+Equal}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_interned_string}{Interned\+String}} \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a3b99fa165ee337db6734846c51b70d0a}{intern}} (std\+::string\+\_\+view str)
+\begin{DoxyCompactList}\small\item\em Interns a string, returning a handle to the shared instance. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a978beb9647f04eacf1cd7c74c1aa753f}{size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of interned strings. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_ad87dca512246c458e0f95b90f9fc8046}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears the intern pool (use with caution) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a360ee6e19b9c42af3c9c67b686ea0eab}{report\+\_\+stats}} () const
+\begin{DoxyCompactList}\small\item\em Reports interning statistics. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1core_1_1_string_interner}{String\+Interner}} \& \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_aed49bd93e056970dd33af35fe81a492d}{instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a9c0f934ef4165700c0af41f2b12e14ba}{String\+Interner}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_aec2f622867718e7eee78138016f00c78}{mutex\+\_\+}}
+\item 
+std\+::unordered\+\_\+set$<$ std\+::shared\+\_\+ptr$<$ const std\+::string $>$, \mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_ptr_hash}{String\+Ptr\+Hash}}, \mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_view_equal}{String\+View\+Equal}} $>$ \mbox{\hyperlink{classneo_1_1core_1_1_string_interner_a554b90d871a06a6eb2b24cb9427d33a9}{pool\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Thread-\/safe string interning pool. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1core_1_1_string_interner_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1core_1_1_string_interner_a9c0f934ef4165700c0af41f2b12e14ba}\index{neo::core::StringInterner@{neo::core::StringInterner}!StringInterner@{StringInterner}}
+\index{StringInterner@{StringInterner}!neo::core::StringInterner@{neo::core::StringInterner}}
+\doxysubsubsection{\texorpdfstring{StringInterner()}{StringInterner()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_string_interner_a9c0f934ef4165700c0af41f2b12e14ba} 
+neo\+::core\+::\+String\+Interner\+::\+String\+Interner (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1core_1_1_string_interner_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1core_1_1_string_interner_ad87dca512246c458e0f95b90f9fc8046}\index{neo::core::StringInterner@{neo::core::StringInterner}!clear@{clear}}
+\index{clear@{clear}!neo::core::StringInterner@{neo::core::StringInterner}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_string_interner_ad87dca512246c458e0f95b90f9fc8046} 
+void neo\+::core\+::\+String\+Interner\+::clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears the intern pool (use with caution) 
+
+\Hypertarget{classneo_1_1core_1_1_string_interner_aed49bd93e056970dd33af35fe81a492d}\index{neo::core::StringInterner@{neo::core::StringInterner}!instance@{instance}}
+\index{instance@{instance}!neo::core::StringInterner@{neo::core::StringInterner}}
+\doxysubsubsection{\texorpdfstring{instance()}{instance()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_string_interner_aed49bd93e056970dd33af35fe81a492d} 
+\mbox{\hyperlink{classneo_1_1core_1_1_string_interner}{String\+Interner}} \& neo\+::core\+::\+String\+Interner\+::instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1core_1_1_string_interner_a3b99fa165ee337db6734846c51b70d0a}\index{neo::core::StringInterner@{neo::core::StringInterner}!intern@{intern}}
+\index{intern@{intern}!neo::core::StringInterner@{neo::core::StringInterner}}
+\doxysubsubsection{\texorpdfstring{intern()}{intern()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_string_interner_a3b99fa165ee337db6734846c51b70d0a} 
+\mbox{\hyperlink{classneo_1_1core_1_1_interned_string}{Interned\+String}} neo\+::core\+::\+String\+Interner\+::intern (\begin{DoxyParamCaption}\item[{std\+::string\+\_\+view}]{str}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Interns a string, returning a handle to the shared instance. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em str} & The string to intern \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Handle to the interned string 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_string_interner_a360ee6e19b9c42af3c9c67b686ea0eab}\index{neo::core::StringInterner@{neo::core::StringInterner}!report\_stats@{report\_stats}}
+\index{report\_stats@{report\_stats}!neo::core::StringInterner@{neo::core::StringInterner}}
+\doxysubsubsection{\texorpdfstring{report\_stats()}{report\_stats()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_string_interner_a360ee6e19b9c42af3c9c67b686ea0eab} 
+void neo\+::core\+::\+String\+Interner\+::report\+\_\+stats (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Reports interning statistics. 
+
+\Hypertarget{classneo_1_1core_1_1_string_interner_a978beb9647f04eacf1cd7c74c1aa753f}\index{neo::core::StringInterner@{neo::core::StringInterner}!size@{size}}
+\index{size@{size}!neo::core::StringInterner@{neo::core::StringInterner}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_string_interner_a978beb9647f04eacf1cd7c74c1aa753f} 
+size\+\_\+t neo\+::core\+::\+String\+Interner\+::size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the number of interned strings. 
+
+\begin{DoxyReturn}{Returns}
+Number of unique strings in the pool 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1core_1_1_string_interner_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1core_1_1_string_interner_aec2f622867718e7eee78138016f00c78}\index{neo::core::StringInterner@{neo::core::StringInterner}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::core::StringInterner@{neo::core::StringInterner}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_string_interner_aec2f622867718e7eee78138016f00c78} 
+std\+::mutex neo\+::core\+::\+String\+Interner\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_string_interner_a554b90d871a06a6eb2b24cb9427d33a9}\index{neo::core::StringInterner@{neo::core::StringInterner}!pool\_@{pool\_}}
+\index{pool\_@{pool\_}!neo::core::StringInterner@{neo::core::StringInterner}}
+\doxysubsubsection{\texorpdfstring{pool\_}{pool\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_string_interner_a554b90d871a06a6eb2b24cb9427d33a9} 
+std\+::unordered\+\_\+set$<$std\+::shared\+\_\+ptr$<$const std\+::string$>$, \mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_ptr_hash}{String\+Ptr\+Hash}}, \mbox{\hyperlink{structneo_1_1core_1_1_string_interner_1_1_string_view_equal}{String\+View\+Equal}}$>$ neo\+::core\+::\+String\+Interner\+::pool\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{string__intern_8h}{string\+\_\+intern.\+h}}\item 
+src/core/\mbox{\hyperlink{string__intern_8cpp}{string\+\_\+intern.\+cpp}}\end{DoxyCompactItemize}

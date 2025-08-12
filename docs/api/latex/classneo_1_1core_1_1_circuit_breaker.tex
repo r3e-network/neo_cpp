@@ -1,0 +1,386 @@
+\doxysection{neo\+::core\+::Circuit\+Breaker Class Reference}
+\hypertarget{classneo_1_1core_1_1_circuit_breaker}{}\label{classneo_1_1core_1_1_circuit_breaker}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+
+
+Circuit breaker pattern implementation for fault tolerance.  
+
+
+
+
+{\ttfamily \#include $<$circuit\+\_\+breaker.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::core\+::Circuit\+Breaker\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config}{Config}}
+\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_metrics}{Metrics}}
+\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_stats}{Stats}}
+\begin{DoxyCompactList}\small\item\em Get circuit breaker statistics. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}} \{ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a110ccf2f5d2ff4eda1fd1a494293467d}{CLOSED}}
+, \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837aa38bd5138bf35514df41a1795ebbf5c3}{OPEN}}
+, \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a5c1c0fca237f238d3c656d55a4db3ca4}{HALF\+\_\+\+OPEN}}
+ \}
+\item 
+using \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a9e10d44ba56757a75ba1794f75eb963b}{On\+State\+Change\+Callback}} = std\+::function$<$void(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}}, \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}})$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab2a1924e0840bce5736faf5d219288fb}{Circuit\+Breaker}} (const std\+::string \&name, const \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config}{Config}} \&config)
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ae826bf019679edcb3bf35cfefc1fe1b9}{Circuit\+Breaker}} (const std\+::string \&name)
+\item 
+{\footnotesize template$<$typename Func$>$ }\\auto \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a66cc71530c245c3c79d7e98c7bd54da6}{Execute}} (Func \&\&func) -\/$>$ decltype(func())
+\begin{DoxyCompactList}\small\item\em Execute a function through the circuit breaker. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Func, typename Fallback$>$ }\\auto \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a5c600725471df817523f0406926dac29}{Execute\+With\+Fallback}} (Func \&\&func, Fallback \&\&fallback) -\/$>$ decltype(func())
+\begin{DoxyCompactList}\small\item\em Execute a function with fallback. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}} \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a7390eec73885b5907b4ca092e5261576}{Get\+State}} () const
+\begin{DoxyCompactList}\small\item\em Get current circuit breaker state. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_stats}{Stats}} \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_aceaf77f50e7a0ccd4cbb48e378882d6a}{Get\+Stats}} () const
+\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ac0f069da1deab642db1875b57568a508}{Reset}} ()
+\begin{DoxyCompactList}\small\item\em Reset the circuit breaker. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_aaab4ea2eaf59f50ca69980c6d782ac35}{Set\+On\+State\+Change}} (\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a9e10d44ba56757a75ba1794f75eb963b}{On\+State\+Change\+Callback}} callback)
+\begin{DoxyCompactList}\small\item\em Set state change callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a2d6e57638126ee7fd72dc31e76c76c93}{Trip}} ()
+\begin{DoxyCompactList}\small\item\em Force the circuit breaker to open state. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d27a4aa30297d396155edf69ce48279}{Allow\+Request}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_acee7e88c13d432eacb63091de7badda4}{Record\+Success}} (const std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \&start\+Time)
+\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_aa2cb389e122224ed86d8a6304869cd08}{Record\+Failure}} (const std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \&start\+Time)
+\item 
+bool \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_aed8caf2cb36af81eb6d51e817bb10025}{Should\+Trip}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a8de617feb98b2947db68da679bc745ef}{Transition\+To}} (\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}} new\+State)
+\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a8b4f99b4a38b4abecd9a8639e1893da8}{Update\+Response\+Time}} (const std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \&start\+Time)
+\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a6799dfc5afb45efeac1ad47eee26deb8}{Clean\+Old\+Metrics}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const std\+::string \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_aeec4fa08c435019c53800efdd0d2f213}{name\+\_\+}}
+\item 
+const \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config}{Config}} \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_acbb1a8688cdfc873723648676e4f3a25}{config\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}} \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}{state\+\_\+}}
+\item 
+\mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_metrics}{Metrics}} \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}{metrics\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab5d47057a7ff113b9fa5a9eab6d26d34}{consecutive\+Successes\+\_\+}} = 0
+\item 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_afe808eb19f3f48d27e378fa714c089b0}{last\+Failure\+Time\+\_\+}}
+\item 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a299baf0767b4848f3fee13a9a1797f7d}{last\+Metrics\+Reset\+\_\+}}
+\item 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ac5c74323fd187e438a682cd87613fe0e}{last\+State\+Change\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a9e10d44ba56757a75ba1794f75eb963b}{On\+State\+Change\+Callback}} \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a0e899ef665543d9aaf0411bf135a3904}{on\+State\+Change\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a07a04dcf5c1826b65f2afa9fd5c8f791}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Circuit breaker pattern implementation for fault tolerance. 
+
+States\+:
+\begin{DoxyItemize}
+\item CLOSED\+: Normal operation, requests pass through
+\item OPEN\+: Failures exceeded threshold, requests fail fast
+\item HALF\+\_\+\+OPEN\+: Testing if service recovered 
+\end{DoxyItemize}
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_a9e10d44ba56757a75ba1794f75eb963b}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!OnStateChangeCallback@{OnStateChangeCallback}}
+\index{OnStateChangeCallback@{OnStateChangeCallback}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{OnStateChangeCallback}{OnStateChangeCallback}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_a9e10d44ba56757a75ba1794f75eb963b} 
+using \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a9e10d44ba56757a75ba1794f75eb963b}{neo\+::core\+::\+Circuit\+Breaker\+::\+On\+State\+Change\+Callback}} = std\+::function$<$void(\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}}, \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}})$>$}
+
+
+
+\label{doc-enum-members}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!State@{State}}
+\index{State@{State}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{State}{State}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837} 
+enum class \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{neo\+::core\+::\+Circuit\+Breaker\+::\+State}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CLOSED@{CLOSED}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!CLOSED@{CLOSED}}}\Hypertarget{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a110ccf2f5d2ff4eda1fd1a494293467d}\label{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a110ccf2f5d2ff4eda1fd1a494293467d} 
+CLOSED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OPEN@{OPEN}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!OPEN@{OPEN}}}\Hypertarget{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837aa38bd5138bf35514df41a1795ebbf5c3}\label{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837aa38bd5138bf35514df41a1795ebbf5c3} 
+OPEN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HALF\_OPEN@{HALF\_OPEN}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!HALF\_OPEN@{HALF\_OPEN}}}\Hypertarget{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a5c1c0fca237f238d3c656d55a4db3ca4}\label{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837a5c1c0fca237f238d3c656d55a4db3ca4} 
+HALF\+\_\+\+OPEN&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_ab2a1924e0840bce5736faf5d219288fb}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!CircuitBreaker@{CircuitBreaker}}
+\index{CircuitBreaker@{CircuitBreaker}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{CircuitBreaker()}{CircuitBreaker()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_ab2a1924e0840bce5736faf5d219288fb} 
+neo\+::core\+::\+Circuit\+Breaker\+::\+Circuit\+Breaker (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{const \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config}{Config}} \&}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_ae826bf019679edcb3bf35cfefc1fe1b9}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!CircuitBreaker@{CircuitBreaker}}
+\index{CircuitBreaker@{CircuitBreaker}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{CircuitBreaker()}{CircuitBreaker()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_ae826bf019679edcb3bf35cfefc1fe1b9} 
+neo\+::core\+::\+Circuit\+Breaker\+::\+Circuit\+Breaker (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_a4d27a4aa30297d396155edf69ce48279}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!AllowRequest@{AllowRequest}}
+\index{AllowRequest@{AllowRequest}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{AllowRequest()}{AllowRequest()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_a4d27a4aa30297d396155edf69ce48279} 
+bool neo\+::core\+::\+Circuit\+Breaker\+::\+Allow\+Request (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_a6799dfc5afb45efeac1ad47eee26deb8}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!CleanOldMetrics@{CleanOldMetrics}}
+\index{CleanOldMetrics@{CleanOldMetrics}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{CleanOldMetrics()}{CleanOldMetrics()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_a6799dfc5afb45efeac1ad47eee26deb8} 
+void neo\+::core\+::\+Circuit\+Breaker\+::\+Clean\+Old\+Metrics (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_a66cc71530c245c3c79d7e98c7bd54da6}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!Execute@{Execute}}
+\index{Execute@{Execute}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_a66cc71530c245c3c79d7e98c7bd54da6} 
+template$<$typename Func$>$ \\
+auto neo\+::core\+::\+Circuit\+Breaker\+::\+Execute (\begin{DoxyParamCaption}\item[{Func \&\&}]{func}{}\end{DoxyParamCaption}) -\/$>$ decltype(func())     \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Execute a function through the circuit breaker. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & Function to execute \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Function result 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if circuit is open \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_a5c600725471df817523f0406926dac29}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!ExecuteWithFallback@{ExecuteWithFallback}}
+\index{ExecuteWithFallback@{ExecuteWithFallback}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{ExecuteWithFallback()}{ExecuteWithFallback()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_a5c600725471df817523f0406926dac29} 
+template$<$typename Func, typename Fallback$>$ \\
+auto neo\+::core\+::\+Circuit\+Breaker\+::\+Execute\+With\+Fallback (\begin{DoxyParamCaption}\item[{Func \&\&}]{func}{, }\item[{Fallback \&\&}]{fallback}{}\end{DoxyParamCaption}) -\/$>$ decltype(func())     \hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Execute a function with fallback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em func} & Function to execute \\
+\hline
+{\em fallback} & Fallback function if circuit is open \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Function result or fallback result 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_a7390eec73885b5907b4ca092e5261576}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!GetState@{GetState}}
+\index{GetState@{GetState}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_a7390eec73885b5907b4ca092e5261576} 
+\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}} neo\+::core\+::\+Circuit\+Breaker\+::\+Get\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get current circuit breaker state. 
+
+\begin{DoxyReturn}{Returns}
+Current state 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_aceaf77f50e7a0ccd4cbb48e378882d6a}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!GetStats@{GetStats}}
+\index{GetStats@{GetStats}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{GetStats()}{GetStats()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_aceaf77f50e7a0ccd4cbb48e378882d6a} 
+\mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_stats}{Stats}} neo\+::core\+::\+Circuit\+Breaker\+::\+Get\+Stats (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_aa2cb389e122224ed86d8a6304869cd08}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!RecordFailure@{RecordFailure}}
+\index{RecordFailure@{RecordFailure}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{RecordFailure()}{RecordFailure()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_aa2cb389e122224ed86d8a6304869cd08} 
+void neo\+::core\+::\+Circuit\+Breaker\+::\+Record\+Failure (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \&}]{start\+Time}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_acee7e88c13d432eacb63091de7badda4}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!RecordSuccess@{RecordSuccess}}
+\index{RecordSuccess@{RecordSuccess}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{RecordSuccess()}{RecordSuccess()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_acee7e88c13d432eacb63091de7badda4} 
+void neo\+::core\+::\+Circuit\+Breaker\+::\+Record\+Success (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \&}]{start\+Time}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_ac0f069da1deab642db1875b57568a508}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!Reset@{Reset}}
+\index{Reset@{Reset}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{Reset()}{Reset()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_ac0f069da1deab642db1875b57568a508} 
+void neo\+::core\+::\+Circuit\+Breaker\+::\+Reset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reset the circuit breaker. 
+
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_aaab4ea2eaf59f50ca69980c6d782ac35}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!SetOnStateChange@{SetOnStateChange}}
+\index{SetOnStateChange@{SetOnStateChange}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{SetOnStateChange()}{SetOnStateChange()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_aaab4ea2eaf59f50ca69980c6d782ac35} 
+void neo\+::core\+::\+Circuit\+Breaker\+::\+Set\+On\+State\+Change (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a9e10d44ba56757a75ba1794f75eb963b}{On\+State\+Change\+Callback}}}]{callback}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set state change callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & Callback function \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_aed8caf2cb36af81eb6d51e817bb10025}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!ShouldTrip@{ShouldTrip}}
+\index{ShouldTrip@{ShouldTrip}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{ShouldTrip()}{ShouldTrip()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_aed8caf2cb36af81eb6d51e817bb10025} 
+bool neo\+::core\+::\+Circuit\+Breaker\+::\+Should\+Trip (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_a8de617feb98b2947db68da679bc745ef}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!TransitionTo@{TransitionTo}}
+\index{TransitionTo@{TransitionTo}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{TransitionTo()}{TransitionTo()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_a8de617feb98b2947db68da679bc745ef} 
+void neo\+::core\+::\+Circuit\+Breaker\+::\+Transition\+To (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}}}]{new\+State}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_a2d6e57638126ee7fd72dc31e76c76c93}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!Trip@{Trip}}
+\index{Trip@{Trip}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{Trip()}{Trip()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_a2d6e57638126ee7fd72dc31e76c76c93} 
+void neo\+::core\+::\+Circuit\+Breaker\+::\+Trip (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Force the circuit breaker to open state. 
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_a8b4f99b4a38b4abecd9a8639e1893da8}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!UpdateResponseTime@{UpdateResponseTime}}
+\index{UpdateResponseTime@{UpdateResponseTime}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{UpdateResponseTime()}{UpdateResponseTime()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_a8b4f99b4a38b4abecd9a8639e1893da8} 
+void neo\+::core\+::\+Circuit\+Breaker\+::\+Update\+Response\+Time (\begin{DoxyParamCaption}\item[{const std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \&}]{start\+Time}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_acbb1a8688cdfc873723648676e4f3a25}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!config\_@{config\_}}
+\index{config\_@{config\_}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{config\_}{config\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_acbb1a8688cdfc873723648676e4f3a25} 
+const \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config}{Config}} neo\+::core\+::\+Circuit\+Breaker\+::config\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_ab5d47057a7ff113b9fa5a9eab6d26d34}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!consecutiveSuccesses\_@{consecutiveSuccesses\_}}
+\index{consecutiveSuccesses\_@{consecutiveSuccesses\_}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{consecutiveSuccesses\_}{consecutiveSuccesses\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_ab5d47057a7ff113b9fa5a9eab6d26d34} 
+size\+\_\+t neo\+::core\+::\+Circuit\+Breaker\+::consecutive\+Successes\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_afe808eb19f3f48d27e378fa714c089b0}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!lastFailureTime\_@{lastFailureTime\_}}
+\index{lastFailureTime\_@{lastFailureTime\_}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{lastFailureTime\_}{lastFailureTime\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_afe808eb19f3f48d27e378fa714c089b0} 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point neo\+::core\+::\+Circuit\+Breaker\+::last\+Failure\+Time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_a299baf0767b4848f3fee13a9a1797f7d}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!lastMetricsReset\_@{lastMetricsReset\_}}
+\index{lastMetricsReset\_@{lastMetricsReset\_}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{lastMetricsReset\_}{lastMetricsReset\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_a299baf0767b4848f3fee13a9a1797f7d} 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point neo\+::core\+::\+Circuit\+Breaker\+::last\+Metrics\+Reset\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_ac5c74323fd187e438a682cd87613fe0e}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!lastStateChange\_@{lastStateChange\_}}
+\index{lastStateChange\_@{lastStateChange\_}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{lastStateChange\_}{lastStateChange\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_ac5c74323fd187e438a682cd87613fe0e} 
+std\+::chrono\+::system\+\_\+clock\+::time\+\_\+point neo\+::core\+::\+Circuit\+Breaker\+::last\+State\+Change\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!metrics\_@{metrics\_}}
+\index{metrics\_@{metrics\_}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{metrics\_}{metrics\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_a4d37cc968d382c255e9b207862549a21} 
+\mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_metrics}{Metrics}} neo\+::core\+::\+Circuit\+Breaker\+::metrics\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_a07a04dcf5c1826b65f2afa9fd5c8f791}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_a07a04dcf5c1826b65f2afa9fd5c8f791} 
+std\+::mutex neo\+::core\+::\+Circuit\+Breaker\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_aeec4fa08c435019c53800efdd0d2f213}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!name\_@{name\_}}
+\index{name\_@{name\_}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{name\_}{name\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_aeec4fa08c435019c53800efdd0d2f213} 
+const std\+::string neo\+::core\+::\+Circuit\+Breaker\+::name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_a0e899ef665543d9aaf0411bf135a3904}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!onStateChange\_@{onStateChange\_}}
+\index{onStateChange\_@{onStateChange\_}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{onStateChange\_}{onStateChange\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_a0e899ef665543d9aaf0411bf135a3904} 
+\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_a9e10d44ba56757a75ba1794f75eb963b}{On\+State\+Change\+Callback}} neo\+::core\+::\+Circuit\+Breaker\+::on\+State\+Change\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739}\index{neo::core::CircuitBreaker@{neo::core::CircuitBreaker}!state\_@{state\_}}
+\index{state\_@{state\_}!neo::core::CircuitBreaker@{neo::core::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{state\_}{state\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_a419c397f1b737e1dc0014d0075241739} 
+\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_ab9d7aef5f3a7dfe26d1ea778326d5837}{State}} neo\+::core\+::\+Circuit\+Breaker\+::state\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{circuit__breaker_8h}{circuit\+\_\+breaker.\+h}}\end{DoxyCompactItemize}

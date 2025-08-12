@@ -1,0 +1,241 @@
+\doxysection{state\+\_\+synchronization\+\_\+manager.\+h}
+\hypertarget{state__synchronization__manager_8h_source}{}\label{state__synchronization__manager_8h_source}\index{include/neo/ledger/state\_synchronization\_manager.h@{include/neo/ledger/state\_synchronization\_manager.h}}
+\mbox{\hyperlink{state__synchronization__manager_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2block_8h}{neo/ledger/block.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{state__root_8h}{neo/ledger/state\_root.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{state__root__payload_8h}{neo/network/p2p/payloads/state\_root\_payload.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{data__cache_8h}{neo/persistence/data\_cache.h}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00029\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a054902fe8870604d4029c58090c89e99}{StateSynchronizationManager}}}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{SyncStatus}}}
+\DoxyCodeLine{00036\ \ \ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07ae599161956d626eda4cb0a5ffb85271c}{Idle}},\ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Not\ syncing}}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07a7e1907b268e3b1261c98c5bf7a368fe5}{Syncing}},\ \ \ \ \ \ \ \textcolor{comment}{//\ Active\ synchronization}}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07ac423b2af9f3f373c6576a8512645da9b}{Validating}},\ \ \ \ \textcolor{comment}{//\ Validating\ received\ state}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07afda39cc5b167799979a72d7ebb73171e}{Synchronized}},\ \ \textcolor{comment}{//\ Fully\ synchronized}}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07ad7c8c85bf79bbe1b7188497c32c3b0ca}{Failed}},\ \ \ \ \ \ \ \ \textcolor{comment}{//\ Synchronization\ failed}}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07a74e9d494d732494a8362f360203bbb68}{Recovering}}\ \ \ \ \ \textcolor{comment}{//\ Recovering\ from\ failure}}
+\DoxyCodeLine{00043\ \ \ \ \ \};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3}{SyncMode}}}
+\DoxyCodeLine{00049\ \ \ \ \ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3abbd47109890259c0127154db1af26c75}{Full}},\ \ \ \ \textcolor{comment}{//\ Full\ state\ synchronization}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3ae16b5b7f26f54214445cbe38d72c2828}{Fast}},\ \ \ \ \textcolor{comment}{//\ Fast\ sync\ with\ state\ roots\ only}}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3a9914a0ce04a7b7b6a8e39bec55064b82}{Light}},\ \ \ \textcolor{comment}{//\ Light\ client\ mode}}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3ae727b00944f81e1d0a95c12886ac4641}{Archive}}\ \ \textcolor{comment}{//\ Archive\ node\ with\ full\ history}}
+\DoxyCodeLine{00054\ \ \ \ \ \};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result}{ValidationResult}}}
+\DoxyCodeLine{00060\ \ \ \ \ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result_a2de8bb3d022eff02d9dea412b3a44e16}{is\_valid}};}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result_adc11d7b228f9780ee778a012b797e4f8}{error\_message}};}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result_a4d81ed22c70034535021f4389c6c35be}{expected\_root}};}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result_a1f7ef4a0afb8dd760489a7e116eed3b4}{actual\_root}};}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result_a174d9e69453d7ec9f4a3589a9be03ea8}{validation\_height}};}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result_ada444456882665bf215405a17e494b9f}{validation\_time}};}
+\DoxyCodeLine{00067\ \ \ \ \ \};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_peer_state}{PeerState}}}
+\DoxyCodeLine{00073\ \ \ \ \ \{}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_peer_state_a7f251cb925f4c4a762b5fcbc45bb82b4}{peer\_id}};}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_peer_state_af6a8017f8cce7bd4b5645f2d6bbcfec1}{state\_height}};}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_peer_state_a374a90e7c4e1355db96783b708bdfc73}{state\_root}};}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{SyncStatus}}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_peer_state_abc1962caa44e9ac0502e9437f68de69e}{sync\_status}};}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_peer_state_a86029c52ce6648d7fe8e492674b0405e}{last\_update}};}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_peer_state_a788f876b4992cf9b960af3cdc9a2220f}{retry\_count}};}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_peer_state_a8d3e2842bd4fc5a8763b50d27d7fd963}{is\_trusted}};}
+\DoxyCodeLine{00081\ \ \ \ \ \};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats}{SyncStats}}}
+\DoxyCodeLine{00087\ \ \ \ \ \{}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats_a6b2c0515645c1c7b55b5a7648a2d79db}{current\_height}};}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats_a59c5b8e640a6ad0a1f28e59c91fa480e}{target\_height}};}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats_a2bfd1a8ddd6f86ef96c9f568bba3364c}{validated\_height}};}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats_aaf0795fc878fb089e455b53c983d9019}{states\_processed}};}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats_afcb656298dd5fd75afbcb32d6cf030b5}{states\_validated}};}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats_ad905285f9d3a7fc3a898817e5ff2fdf8}{states\_failed}};}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats_a26f013dc6bdc37b578ab283a7de9c78e}{peer\_count}};}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats_af8532bc5e9b10679448dfea4fb85dcb5}{sync\_progress\_percent}};}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats_a9cf68f4bcda6e987a371de7e5f26f9b8}{average\_validation\_time}};}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats_a6180ac2c6301c93b10f97483452501d2}{sync\_start\_time}};}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats_ae4039ff9c3d2c52877c6c9225fdbb53d}{last\_sync\_time}};}
+\DoxyCodeLine{00099\ \ \ \ \ \};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_state_chunk}{StateChunk}}}
+\DoxyCodeLine{00105\ \ \ \ \ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_state_chunk_acb45ded1bb259d8069bc4bcf86e62fac}{start\_height}};}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_state_chunk_a5ee851b029017c23e20184d636d7201f}{end\_height}};}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ std::vector<io::UInt256>\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_state_chunk_aff47d54c008e2d3b21c9116ac716bdb7}{state\_roots}};}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ std::vector<std::vector<uint8\_t>>\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_state_chunk_afe14024902141b17779f7004ad14c8f3}{state\_data}};}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_state_chunk_a559dd58411fc19b4fa6acd30c8d12347}{chunk\_hash}};}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_state_chunk_a25b3427340f0b056844c59aeed823d52}{chunk\_size}};}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_state_chunk_a94f978e09817a76720bc595b48255a6f}{is\_verified}};}
+\DoxyCodeLine{00113\ \ \ \ \ \};}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration}{Configuration}}}
+\DoxyCodeLine{00119\ \ \ \ \ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3}{SyncMode}}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration_ac0c44bd79cea2ccb227c5502f9ca8655}{sync\_mode}}\ =\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4cef07135e9a9e2ede2cc6eaa72e5bc3ae16b5b7f26f54214445cbe38d72c2828}{SyncMode::Fast}};}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration_a6a1f1677536c5cae6073469dcbdea9ac}{chunk\_size}}\ =\ 1000;\ \ \textcolor{comment}{//\ States\ per\ chunk}}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration_adcaba7cf09878745d7c2bf7a3f4cf3e0}{max\_concurrent\_chunks}}\ =\ 5;}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ std::chrono::seconds\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration_acc777469a25e09b87a4ae257c751f2ad}{sync\_interval}}\{30\};}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ std::chrono::seconds\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration_a3027a488ebd50205754cf8ea37e1b12c}{peer\_timeout}}\{60\};}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ std::chrono::seconds\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration_afc1512588a5118b9b3946b508d38d76b}{validation\_timeout}}\{10\};}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration_abcbd2326ed6795f35d6a9b12f0448f9c}{max\_retry\_attempts}}\ =\ 3;}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration_a69c4a939338d11dd240a62eb62081aab}{enable\_parallel\_validation}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration_a2f23b4c92475324fdd5b5c605c921452}{enable\_state\_persistence}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration_afae9779eca7e36408ba5c66573aa0f13}{enable\_auto\_recovery}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration_aede85bb545ace3a42c2d5f481ebb070a}{max\_state\_cache\_size}}\ =\ 10000;}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration_ad3f24054087448d12dc56a60334a39cf}{min\_peer\_agreement}}\ =\ 0.66;\ \ \textcolor{comment}{//\ 66\%\ peer\ agreement\ required}}
+\DoxyCodeLine{00132\ \ \ \ \ \};}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{comment}{//\ Core\ components}}
+\DoxyCodeLine{00136\ \ \ \ \ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration}{Configuration}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a9eeaa02a5c200be4cfeb0499494c622a}{config\_}};}
+\DoxyCodeLine{00137\ \ \ \ \ std::shared\_ptr<persistence::DataCache>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_ac69c076d6d25c6e7e9ee690f84cc4cd4}{data\_cache\_}};}
+\DoxyCodeLine{00138\ \ \ \ \ std::shared\_ptr<StateRoot>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_ad29a8aacf7f36dc9767d227db17ec1cb}{current\_state\_root\_}};}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{comment}{//\ Synchronization\ state}}
+\DoxyCodeLine{00141\ \ \ \ \ std::atomic<SyncStatus>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a1528b35addd6ed549763f46801dd802b}{sync\_status\_}}\{\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07ae599161956d626eda4cb0a5ffb85271c}{SyncStatus::Idle}}\};}
+\DoxyCodeLine{00142\ \ \ \ \ std::atomic<uint32\_t>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a796f519ce64b117ce176faa6cfc32e4d}{current\_height\_}}\{0\};}
+\DoxyCodeLine{00143\ \ \ \ \ std::atomic<uint32\_t>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a036b9f2a8cbf0d36c8421e3e0ca9d34b}{target\_height\_}}\{0\};}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{comment}{//\ Peer\ management}}
+\DoxyCodeLine{00146\ \ \ \ \ std::unordered\_map<std::string,\ PeerState>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a447fa2d1a9b72bdc79553c34fd829567}{peer\_states\_}};}
+\DoxyCodeLine{00147\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_af3b972fd1b1ddd8325ec20fd731dc75a}{trusted\_peers\_}};}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{comment}{//\ State\ chunks\ and\ validation}}
+\DoxyCodeLine{00150\ \ \ \ \ std::unordered\_map<uint32\_t,\ StateChunk>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_af59be2822b7e20f3bcaa08dce55e4dd8}{pending\_chunks\_}};}
+\DoxyCodeLine{00151\ \ \ \ \ std::unordered\_map<io::UInt256,\ ValidationResult>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a946358f07e3b821eac1f9ec9ffb594c9}{validation\_cache\_}};}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{comment}{//\ Threading\ and\ synchronization}}
+\DoxyCodeLine{00154\ \ \ \ \ std::thread\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a898a24bbe5cae98b8ef178569d7021e7}{sync\_thread\_}};}
+\DoxyCodeLine{00155\ \ \ \ \ std::thread\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a9a9cf6fdb405f93b14f241fef77bf339}{validation\_thread\_}};}
+\DoxyCodeLine{00156\ \ \ \ \ std::atomic<bool>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a5fef1463d94849d225dcaaab8c105c91}{running\_}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keyword}{mutable}\ std::shared\_mutex\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_afdc16a43837bccd9b93d30ea0be20d8f}{mutex\_}};}
+\DoxyCodeLine{00158\ }
+\DoxyCodeLine{00159\ \ \ \ \ \textcolor{comment}{//\ Metrics\ and\ monitoring}}
+\DoxyCodeLine{00160\ \ \ \ \ std::atomic<size\_t>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_ad8c48fe96e5b3ba169f0e0e1bba63a13}{states\_processed\_}}\{0\};}
+\DoxyCodeLine{00161\ \ \ \ \ std::atomic<size\_t>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a728ce3f5c39904489e9635cb36486096}{states\_validated\_}}\{0\};}
+\DoxyCodeLine{00162\ \ \ \ \ std::atomic<size\_t>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a6a9d8160ae6e06acd6a2b1aa37557120}{states\_failed\_}}\{0\};}
+\DoxyCodeLine{00163\ \ \ \ \ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a427879be3c8df3f64e6df0ab02a4299b}{sync\_start\_time\_}};}
+\DoxyCodeLine{00164\ }
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{comment}{//\ Callbacks}}
+\DoxyCodeLine{00166\ \ \ \ \ std::function<void(uint32\_t,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&)>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4577fad8b6de6fec4c88449cc76016fd}{on\_state\_validated\_}};}
+\DoxyCodeLine{00167\ \ \ \ \ std::function<void(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result}{ValidationResult}}\&)>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a1d1ca9bfd12daabdac0e8bbbfeb69273}{on\_validation\_failed\_}};}
+\DoxyCodeLine{00168\ \ \ \ \ std::function<void(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats}{SyncStats}}\&)>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a102205dd22ed9f968733393ce4e4e03e}{on\_sync\_progress\_}};}
+\DoxyCodeLine{00169\ \ \ \ \ std::function<void(\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{SyncStatus}})>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0b878ff163450c92ab166d7ba709255}{on\_status\_changed\_}};}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00175\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a054902fe8870604d4029c58090c89e99}{StateSynchronizationManager}}();}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a054902fe8870604d4029c58090c89e99}{StateSynchronizationManager}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration}{Configuration}}\&\ \mbox{\hyperlink{namespaceneo_1_1config}{config}},}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<persistence::DataCache>\ data\_cache\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00188\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a0ab9182ffaf5d6ba7edadfcf6c57db85}{\string~StateSynchronizationManager}}();}
+\DoxyCodeLine{00189\ }
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_abbe48a3ff1e3322ee5cb3664c9bfa773}{Start}}();}
+\DoxyCodeLine{00194\ }
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_abca08d58c09e20b3a64908ac605a5ca9}{Stop}}();}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_ab8e9e6cf496a86130dc6a8cd3e638575}{RequestStateSync}}(\textcolor{keyword}{const}\ std::string\&\ peer\_id,\ uint32\_t\ start\_height,\ uint32\_t\ count);}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00216\ \ \ \ \ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result}{ValidationResult}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a9b21e2a898fe012801b65a2e2089f5ec}{ProcessStateRoot}}(uint32\_t\ height,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ state\_root,\ \textcolor{keyword}{const}\ std::string\&\ peer\_id);}
+\DoxyCodeLine{00217\ }
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa3d954db7a5d8efefb386dc096da3488}{ProcessStateChunk}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_state_chunk}{StateChunk}}\&\ chunk,\ \textcolor{keyword}{const}\ std::string\&\ peer\_id);}
+\DoxyCodeLine{00225\ }
+\DoxyCodeLine{00231\ \ \ \ \ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result}{ValidationResult}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_abce3fea789768c7bb33eae5eba17341b}{ValidateStateAtHeight}}(uint32\_t\ height);}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00237\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{SyncStatus}}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4ffe54e6d1c0eba356fad3fd4a32e9f4}{GetSyncStatus}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a1528b35addd6ed549763f46801dd802b}{sync\_status\_}}.load();\ \}}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00243\ \ \ \ \ SyncStats\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a0ba4dc9bcbd76fa948a63731ea66945d}{GetStatistics}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00250\ \ \ \ \ std::optional<PeerState>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_adf34e54234925a7c35e5938cda02fff1}{GetPeerState}}(\textcolor{keyword}{const}\ std::string\&\ peer\_id)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00256\ \ \ \ \ std::unordered\_map<std::string,\ PeerState>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a7c9d26b50b2ad0165efbea525e250e43}{GetAllPeerStates}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00262\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a103ae19cd9779b234d68c83cb52fd5ce}{AddTrustedPeer}}(\textcolor{keyword}{const}\ std::string\&\ peer\_id);}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00268\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a7bec7488607cb5c97749861df033437a}{RemoveTrustedPeer}}(\textcolor{keyword}{const}\ std::string\&\ peer\_id);}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_ab6e7eb9c11dbbbcdc9dba0088174a624}{IsSynchronized}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00280\ \ \ \ \ std::optional<io::UInt256>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a03a7645d0484a493cb9a21eecc0bd144}{GetCurrentStateRoot}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00287\ \ \ \ \ std::optional<io::UInt256>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a25082d3fca98d3a9d85d2544cac051a9}{GetStateRootAtHeight}}(uint32\_t\ height)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00288\ }
+\DoxyCodeLine{00295\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a37774a64c2c0fe1e69b17255a3d8c24f}{ForceValidation}}(uint32\_t\ start\_height,\ uint32\_t\ end\_height);}
+\DoxyCodeLine{00296\ }
+\DoxyCodeLine{00301\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_af1d8f3f14c31bec0f82fd8f6d4b19346}{Reset}}(\textcolor{keywordtype}{bool}\ clear\_cache\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00307\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aee71512fc6af7219f3b9c63c7f070531}{UpdateConfiguration}}(\textcolor{keyword}{const}\ Configuration\&\ \mbox{\hyperlink{namespaceneo_1_1config}{config}});}
+\DoxyCodeLine{00308\ }
+\DoxyCodeLine{00313\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_configuration}{Configuration}}\&\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_ad00e5cbfbb313d351d2a9088eeb06824}{GetConfiguration}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a9eeaa02a5c200be4cfeb0499494c622a}{config\_}};\ \}}
+\DoxyCodeLine{00314\ }
+\DoxyCodeLine{00315\ \ \ \ \ \textcolor{comment}{//\ Callback\ setters}}
+\DoxyCodeLine{00316\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a742766c2ef89db8e911d60cea8c5d405}{SetOnStateValidated}}(std::function<\textcolor{keywordtype}{void}(uint32\_t,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&)>\ callback)}
+\DoxyCodeLine{00317\ \ \ \ \ \{}
+\DoxyCodeLine{00318\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a4577fad8b6de6fec4c88449cc76016fd}{on\_state\_validated\_}}\ =\ callback;}
+\DoxyCodeLine{00319\ \ \ \ \ \}}
+\DoxyCodeLine{00320\ }
+\DoxyCodeLine{00321\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_ad12c4c292c762d1ef29da113326f62fd}{SetOnValidationFailed}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_validation_result}{ValidationResult}}\&)>\ callback)}
+\DoxyCodeLine{00322\ \ \ \ \ \{}
+\DoxyCodeLine{00323\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a1d1ca9bfd12daabdac0e8bbbfeb69273}{on\_validation\_failed\_}}\ =\ callback;}
+\DoxyCodeLine{00324\ \ \ \ \ \}}
+\DoxyCodeLine{00325\ }
+\DoxyCodeLine{00326\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a6cdb6b0d50416690980f03c5e0f4ae9c}{SetOnSyncProgress}}(std::function<\textcolor{keywordtype}{void}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1ledger_1_1_state_synchronization_manager_1_1_sync_stats}{SyncStats}}\&)>\ callback)\ \{\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a102205dd22ed9f968733393ce4e4e03e}{on\_sync\_progress\_}}\ =\ callback;\ \}}
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00328\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_af130d138c434cbd9127e27960e35753d}{SetOnStatusChanged}}(std::function<\textcolor{keywordtype}{void}(\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{SyncStatus}})>\ callback)\ \{\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0b878ff163450c92ab166d7ba709255}{on\_status\_changed\_}}\ =\ callback;\ \}}
+\DoxyCodeLine{00329\ }
+\DoxyCodeLine{00330\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00334\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a49353ee2cc7ebf97fc613b878a617139}{SynchronizationThread}}();}
+\DoxyCodeLine{00335\ }
+\DoxyCodeLine{00339\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a7a0e9c5b06a92c91d7f02118e12fdd9e}{ValidationThread}}();}
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00346\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_ad00549bb5c528e9bc8328280c84b4bd0}{SelectBestPeers}}(\textcolor{keywordtype}{size\_t}\ count)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00347\ }
+\DoxyCodeLine{00353\ \ \ \ \ std::optional<io::UInt256>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_af02c137d6927c2611ca2e231c7b44255}{CalculateStateConsensus}}(uint32\_t\ height)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00354\ }
+\DoxyCodeLine{00360\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a7a1a165c57ea79dd1e8f04d86364fc80}{ValidateChunkIntegrity}}(\textcolor{keyword}{const}\ StateChunk\&\ chunk)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00361\ }
+\DoxyCodeLine{00369\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a6973461636a8e3ad4859f3ca0374b7be}{PersistState}}(uint32\_t\ height,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ state\_root,\ \textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ state\_data);}
+\DoxyCodeLine{00370\ }
+\DoxyCodeLine{00376\ \ \ \ \ std::optional<std::vector<uint8\_t>>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a489cc2c9866480559b488cb81e7a4071}{LoadState}}(uint32\_t\ height)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00377\ }
+\DoxyCodeLine{00382\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aee0bf879bf60a9ff37a1bc558b42944e}{HandleSyncFailure}}(\textcolor{keyword}{const}\ std::string\&\ reason);}
+\DoxyCodeLine{00383\ }
+\DoxyCodeLine{00388\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aeb5e6505ed8c2fbcd22c1666e2bf5693}{AttemptRecovery}}();}
+\DoxyCodeLine{00389\ }
+\DoxyCodeLine{00396\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a76d44156c1d4aa3b1cbd45b00e74c0a7}{UpdatePeerState}}(\textcolor{keyword}{const}\ std::string\&\ peer\_id,\ uint32\_t\ height,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ state\_root);}
+\DoxyCodeLine{00397\ }
+\DoxyCodeLine{00401\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a8da4bf1773c7a5c412e38f999f5cf16f}{RemoveStalePeers}}();}
+\DoxyCodeLine{00402\ }
+\DoxyCodeLine{00406\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a449ba50782a8e07c1f6e41fccff67a6b}{UpdateMetrics}}();}
+\DoxyCodeLine{00407\ }
+\DoxyCodeLine{00412\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_af9eca8e0f4b06152a77dc1ab88a4d8ef}{ChangeSyncStatus}}(\mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_aa0dd90092b996ccffdcca0eb0d483a07}{SyncStatus}}\ new\_status);}
+\DoxyCodeLine{00413\ }
+\DoxyCodeLine{00418\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a28315c0db824e6509ded92384de1152c}{CalculateSyncProgress}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00419\ }
+\DoxyCodeLine{00425\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_state_synchronization_manager_a54a8085aa14bff2184ab4519b1251487}{IsTrustedPeer}}(\textcolor{keyword}{const}\ std::string\&\ peer\_id)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00426\ \};}
+\DoxyCodeLine{00427\ }
+\DoxyCodeLine{00428\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}

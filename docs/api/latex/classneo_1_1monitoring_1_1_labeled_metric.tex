@@ -1,0 +1,144 @@
+\doxysection{neo\+::monitoring\+::Labeled\+Metric\texorpdfstring{$<$}{<} MetricT \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classneo_1_1monitoring_1_1_labeled_metric}{}\label{classneo_1_1monitoring_1_1_labeled_metric}\index{neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}}
+
+
+Labeled metric wrapper.  
+
+
+
+
+{\ttfamily \#include $<$prometheus\+\_\+exporter.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1monitoring_1_1_labeled_metric_1_1_metric_entry}{Metric\+Entry}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a0c1496fe5820b5485e38155028459600}{Labeled\+Metric}} (const std\+::string \&name, const std\+::string \&help, const std\+::vector$<$ std\+::string $>$ \&label\+Names)
+\item 
+MetricT \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a37044cffb4c5104b7a82111181299f0e}{With\+Labels}} (const std\+::vector$<$ std\+::string $>$ \&label\+Values)
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_ab2c96622bbc111530afc2f9ee7e8ab8b}{Serialize}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_af86b238651a1bed4ff53f79d357c5f6a}{Create\+Key}} (const std\+::vector$<$ std\+::string $>$ \&label\+Values) const
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a295b997bf31ebf6351bdc5071c40b401}{Create\+Label\+String}} (const std\+::vector$<$ std\+::string $>$ \&label\+Values) const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a9d87b60491574a63ec32681493b23a59}{name\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_ade7e4adf03c6919efe0272a8c448c902}{help\+\_\+}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a3a9a921162f6098d64d6aa1636fc3221}{label\+Names\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, \mbox{\hyperlink{structneo_1_1monitoring_1_1_labeled_metric_1_1_metric_entry}{Metric\+Entry}} $>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a10a2df18c82b100d9c91891c6de5f9aa}{metrics\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric_a60aafff9fd4ae7c4e692904238a885de}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename MetricT$>$\newline
+class neo\+::monitoring\+::\+Labeled\+Metric$<$ Metric\+T $>$}
+Labeled metric wrapper. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1monitoring_1_1_labeled_metric_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_labeled_metric_a0c1496fe5820b5485e38155028459600}\index{neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}!LabeledMetric@{LabeledMetric}}
+\index{LabeledMetric@{LabeledMetric}!neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}}
+\doxysubsubsection{\texorpdfstring{LabeledMetric()}{LabeledMetric()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_labeled_metric_a0c1496fe5820b5485e38155028459600} 
+template$<$typename MetricT$>$ \\
+\mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric}{neo\+::monitoring\+::\+Labeled\+Metric}}$<$ MetricT $>$\+::\+Labeled\+Metric (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{const std\+::string \&}]{help}{, }\item[{const std\+::vector$<$ std\+::string $>$ \&}]{label\+Names}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1monitoring_1_1_labeled_metric_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_labeled_metric_af86b238651a1bed4ff53f79d357c5f6a}\index{neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}!CreateKey@{CreateKey}}
+\index{CreateKey@{CreateKey}!neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}}
+\doxysubsubsection{\texorpdfstring{CreateKey()}{CreateKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_labeled_metric_af86b238651a1bed4ff53f79d357c5f6a} 
+template$<$typename MetricT$>$ \\
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric}{neo\+::monitoring\+::\+Labeled\+Metric}}$<$ MetricT $>$\+::\+Create\+Key (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{label\+Values}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_labeled_metric_a295b997bf31ebf6351bdc5071c40b401}\index{neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}!CreateLabelString@{CreateLabelString}}
+\index{CreateLabelString@{CreateLabelString}!neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}}
+\doxysubsubsection{\texorpdfstring{CreateLabelString()}{CreateLabelString()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_labeled_metric_a295b997bf31ebf6351bdc5071c40b401} 
+template$<$typename MetricT$>$ \\
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric}{neo\+::monitoring\+::\+Labeled\+Metric}}$<$ MetricT $>$\+::\+Create\+Label\+String (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{label\+Values}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_labeled_metric_ab2c96622bbc111530afc2f9ee7e8ab8b}\index{neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_labeled_metric_ab2c96622bbc111530afc2f9ee7e8ab8b} 
+template$<$typename MetricT$>$ \\
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric}{neo\+::monitoring\+::\+Labeled\+Metric}}$<$ MetricT $>$\+::\+Serialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1monitoring_1_1_labeled_metric_a37044cffb4c5104b7a82111181299f0e}\index{neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}!WithLabels@{WithLabels}}
+\index{WithLabels@{WithLabels}!neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}}
+\doxysubsubsection{\texorpdfstring{WithLabels()}{WithLabels()}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_labeled_metric_a37044cffb4c5104b7a82111181299f0e} 
+template$<$typename MetricT$>$ \\
+MetricT \& \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric}{neo\+::monitoring\+::\+Labeled\+Metric}}$<$ MetricT $>$\+::\+With\+Labels (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{label\+Values}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1monitoring_1_1_labeled_metric_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1monitoring_1_1_labeled_metric_ade7e4adf03c6919efe0272a8c448c902}\index{neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}!help\_@{help\_}}
+\index{help\_@{help\_}!neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}}
+\doxysubsubsection{\texorpdfstring{help\_}{help\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_labeled_metric_ade7e4adf03c6919efe0272a8c448c902} 
+template$<$typename MetricT$>$ \\
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric}{neo\+::monitoring\+::\+Labeled\+Metric}}$<$ MetricT $>$\+::help\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_labeled_metric_a3a9a921162f6098d64d6aa1636fc3221}\index{neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}!labelNames\_@{labelNames\_}}
+\index{labelNames\_@{labelNames\_}!neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}}
+\doxysubsubsection{\texorpdfstring{labelNames\_}{labelNames\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_labeled_metric_a3a9a921162f6098d64d6aa1636fc3221} 
+template$<$typename MetricT$>$ \\
+std\+::vector$<$std\+::string$>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric}{neo\+::monitoring\+::\+Labeled\+Metric}}$<$ MetricT $>$\+::label\+Names\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_labeled_metric_a10a2df18c82b100d9c91891c6de5f9aa}\index{neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}!metrics\_@{metrics\_}}
+\index{metrics\_@{metrics\_}!neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}}
+\doxysubsubsection{\texorpdfstring{metrics\_}{metrics\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_labeled_metric_a10a2df18c82b100d9c91891c6de5f9aa} 
+template$<$typename MetricT$>$ \\
+std\+::unordered\+\_\+map$<$std\+::string, \mbox{\hyperlink{structneo_1_1monitoring_1_1_labeled_metric_1_1_metric_entry}{Metric\+Entry}}$>$ \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric}{neo\+::monitoring\+::\+Labeled\+Metric}}$<$ MetricT $>$\+::metrics\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_labeled_metric_a60aafff9fd4ae7c4e692904238a885de}\index{neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_labeled_metric_a60aafff9fd4ae7c4e692904238a885de} 
+template$<$typename MetricT$>$ \\
+std\+::mutex \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric}{neo\+::monitoring\+::\+Labeled\+Metric}}$<$ MetricT $>$\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1monitoring_1_1_labeled_metric_a9d87b60491574a63ec32681493b23a59}\index{neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}!name\_@{name\_}}
+\index{name\_@{name\_}!neo::monitoring::LabeledMetric$<$ MetricT $>$@{neo::monitoring::LabeledMetric$<$ MetricT $>$}}
+\doxysubsubsection{\texorpdfstring{name\_}{name\_}}
+{\footnotesize\ttfamily \label{classneo_1_1monitoring_1_1_labeled_metric_a9d87b60491574a63ec32681493b23a59} 
+template$<$typename MetricT$>$ \\
+std\+::string \mbox{\hyperlink{classneo_1_1monitoring_1_1_labeled_metric}{neo\+::monitoring\+::\+Labeled\+Metric}}$<$ MetricT $>$\+::name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/monitoring/\mbox{\hyperlink{prometheus__exporter_8h}{prometheus\+\_\+exporter.\+h}}\end{DoxyCompactItemize}

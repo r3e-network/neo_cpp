@@ -1,0 +1,423 @@
+\doxysection{neo\+::wallets\+::Key\+Pair Class Reference}
+\hypertarget{classneo_1_1wallets_1_1_key_pair}{}\label{classneo_1_1wallets_1_1_key_pair}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+
+
+Represents a cryptographic key pair (private key + public key)  
+
+
+
+
+{\ttfamily \#include $<$key\+\_\+pair.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::wallets\+::Key\+Pair\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_abec7eee8c98b032a8443dae93f138f75}{Key\+Pair}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Constructor with private key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_aeffa7f68b1e99431f5f897f0abe59321}{\texorpdfstring{$\sim$}{\string~}\+Key\+Pair}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_a537c000a20c89768c90d7c76564c1af3}{Key\+Pair}} (const \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_ab3a6b6aa569daa5864db65d6691f8b09}{Key\+Pair}} (\mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \&\&other) noexcept
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \& \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_aa966d90f7ce85b43b2bbe8df5390a9f9}{operator=}} (const \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \& \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_a9794f7e5e7e4c7be9811f3323d3d80b2}{operator=}} (\mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \&\&other) noexcept
+\begin{DoxyCompactList}\small\item\em Move assignment operator. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_a39640f04a681d29200659077406f5d07}{Get\+Private\+Key}} () const
+\begin{DoxyCompactList}\small\item\em Get the private key. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \& \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_a83044646daea9e430d517f5e4a5cd9d6}{Get\+Public\+Key}} () const
+\begin{DoxyCompactList}\small\item\em Get the public key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_a455dae5ec3ea2fa562eb7b63ad493ba5}{Get\+Script\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Get the script hash. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_a4560795af7013fc761902b5eaba37312}{Get\+Address}} (uint8\+\_\+t address\+\_\+version=0x17) const
+\begin{DoxyCompactList}\small\item\em Get the address. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_a1f978352d3fc33cf515a2119868f4482}{To\+WIF}} () const
+\begin{DoxyCompactList}\small\item\em Export private key to WIF format. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_adc82f830c9a0121c054e14e1fea69717}{To\+Hex}} () const
+\begin{DoxyCompactList}\small\item\em Export private key to hex format. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_aa3aa633318a3f8a73d8ee3c418b2d863}{Is\+Valid}} () const
+\begin{DoxyCompactList}\small\item\em Check if the key pair is valid. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_aeebbae7eeb9b78c9e59b4a9fccdf384c}{Sign}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data) const
+\begin{DoxyCompactList}\small\item\em Sign data with this key pair. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_a4ddb5e0a5862f061163db1ddb6ee273a}{Verify}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&signature) const
+\begin{DoxyCompactList}\small\item\em Verify signature with this key pair\textquotesingle{}s public key. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_affd6cfc0084e4c0cf4735a1da53232d7}{operator==}} (const \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \&other) const
+\begin{DoxyCompactList}\small\item\em Equality operator. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_afdfeb0fa59a16f8a8b5d0edd03a430d8}{operator!=}} (const \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \&other) const
+\begin{DoxyCompactList}\small\item\em Inequality operator. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_a4fd973cd38d81d7d0dac1cc3b8018d05}{Generate}} ()
+\begin{DoxyCompactList}\small\item\em Generate a new random key pair. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_ad25bb7e08e457cc9ead4443483131030}{From\+WIF}} (const std\+::string \&wif)
+\begin{DoxyCompactList}\small\item\em Create key pair from WIF (\doxylink{classneo_1_1wallets_1_1_wallet}{Wallet} Import Format) \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_ac20750c1a7cb540ae483e0d82aa1a005}{From\+Hex}} (const std\+::string \&hex)
+\begin{DoxyCompactList}\small\item\em Create key pair from hex string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_ab7faf1168a001adaf72fc23722532d6e}{Compute\+Public\+Key}} () const
+\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_a6116c309ad1c48204839801deddfa714}{Compute\+Script\+Hash}} () const
+\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_a5b75f00b6ae73cc7273ba676c7342b1a}{Clear}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_a80010fb7c8f31d7e14d2eb11c780d4bc}{Is\+Valid\+Private\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Validate if private key is valid for secp256r1 curve. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_a7395eee84dfb4f2e6ac76f292ec1358f}{Validate\+Private\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&private\+Key)
+\begin{DoxyCompactList}\small\item\em Validate private key (alias) \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_a66c28d2e7654c9ef377058e3fa650b20}{Base58\+Encode}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data)
+\begin{DoxyCompactList}\small\item\em Base58 encode data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_a975750c2754e9182d1a111abade11821}{private\+Key\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_a5d9e8c9d3d06c092dd941bc92c25c9f4}{public\+Key\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair_add7e26a0d06e5c5a5a854939ce5af8e2}{script\+Hash\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a cryptographic key pair (private key + public key) 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_abec7eee8c98b032a8443dae93f138f75}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!KeyPair@{KeyPair}}
+\index{KeyPair@{KeyPair}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{KeyPair()}{KeyPair()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_abec7eee8c98b032a8443dae93f138f75} 
+neo\+::wallets\+::\+Key\+Pair\+::\+Key\+Pair (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{private\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor with private key. 
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_aeffa7f68b1e99431f5f897f0abe59321}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!````~KeyPair@{\texorpdfstring{$\sim$}{\string~}KeyPair}}
+\index{````~KeyPair@{\texorpdfstring{$\sim$}{\string~}KeyPair}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}KeyPair()}{\string~KeyPair()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_aeffa7f68b1e99431f5f897f0abe59321} 
+neo\+::wallets\+::\+Key\+Pair\+::\texorpdfstring{$\sim$}{\string~}\+Key\+Pair (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_a537c000a20c89768c90d7c76564c1af3}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!KeyPair@{KeyPair}}
+\index{KeyPair@{KeyPair}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{KeyPair()}{KeyPair()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_a537c000a20c89768c90d7c76564c1af3} 
+neo\+::wallets\+::\+Key\+Pair\+::\+Key\+Pair (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_ab3a6b6aa569daa5864db65d6691f8b09}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!KeyPair@{KeyPair}}
+\index{KeyPair@{KeyPair}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{KeyPair()}{KeyPair()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_ab3a6b6aa569daa5864db65d6691f8b09} 
+neo\+::wallets\+::\+Key\+Pair\+::\+Key\+Pair (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \&\&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Move constructor. 
+
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_a66c28d2e7654c9ef377058e3fa650b20}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!Base58Encode@{Base58Encode}}
+\index{Base58Encode@{Base58Encode}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{Base58Encode()}{Base58Encode()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_a66c28d2e7654c9ef377058e3fa650b20} 
+std\+::string neo\+::wallets\+::\+Key\+Pair\+::\+Base58\+Encode (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Base58 encode data. 
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_a5b75f00b6ae73cc7273ba676c7342b1a}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_a5b75f00b6ae73cc7273ba676c7342b1a} 
+void neo\+::wallets\+::\+Key\+Pair\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_ab7faf1168a001adaf72fc23722532d6e}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!ComputePublicKey@{ComputePublicKey}}
+\index{ComputePublicKey@{ComputePublicKey}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{ComputePublicKey()}{ComputePublicKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_ab7faf1168a001adaf72fc23722532d6e} 
+void neo\+::wallets\+::\+Key\+Pair\+::\+Compute\+Public\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_a6116c309ad1c48204839801deddfa714}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!ComputeScriptHash@{ComputeScriptHash}}
+\index{ComputeScriptHash@{ComputeScriptHash}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{ComputeScriptHash()}{ComputeScriptHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_a6116c309ad1c48204839801deddfa714} 
+void neo\+::wallets\+::\+Key\+Pair\+::\+Compute\+Script\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_ac20750c1a7cb540ae483e0d82aa1a005}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!FromHex@{FromHex}}
+\index{FromHex@{FromHex}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{FromHex()}{FromHex()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_ac20750c1a7cb540ae483e0d82aa1a005} 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} neo\+::wallets\+::\+Key\+Pair\+::\+From\+Hex (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create key pair from hex string. 
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_ad25bb7e08e457cc9ead4443483131030}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!FromWIF@{FromWIF}}
+\index{FromWIF@{FromWIF}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{FromWIF()}{FromWIF()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_ad25bb7e08e457cc9ead4443483131030} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} $>$ neo\+::wallets\+::\+Key\+Pair\+::\+From\+WIF (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{wif}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create key pair from WIF (\doxylink{classneo_1_1wallets_1_1_wallet}{Wallet} Import Format) 
+
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_a4fd973cd38d81d7d0dac1cc3b8018d05}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!Generate@{Generate}}
+\index{Generate@{Generate}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{Generate()}{Generate()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_a4fd973cd38d81d7d0dac1cc3b8018d05} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} $>$ neo\+::wallets\+::\+Key\+Pair\+::\+Generate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generate a new random key pair. 
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_a4560795af7013fc761902b5eaba37312}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!GetAddress@{GetAddress}}
+\index{GetAddress@{GetAddress}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{GetAddress()}{GetAddress()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_a4560795af7013fc761902b5eaba37312} 
+std\+::string neo\+::wallets\+::\+Key\+Pair\+::\+Get\+Address (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{address\+\_\+version}{ = {\ttfamily 0x17}}\end{DoxyParamCaption}) const}
+
+
+
+Get the address. 
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_a39640f04a681d29200659077406f5d07}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!GetPrivateKey@{GetPrivateKey}}
+\index{GetPrivateKey@{GetPrivateKey}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{GetPrivateKey()}{GetPrivateKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_a39640f04a681d29200659077406f5d07} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::wallets\+::\+Key\+Pair\+::\+Get\+Private\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the private key. 
+
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_a83044646daea9e430d517f5e4a5cd9d6}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!GetPublicKey@{GetPublicKey}}
+\index{GetPublicKey@{GetPublicKey}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{GetPublicKey()}{GetPublicKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_a83044646daea9e430d517f5e4a5cd9d6} 
+const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \& neo\+::wallets\+::\+Key\+Pair\+::\+Get\+Public\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the public key. 
+
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_a455dae5ec3ea2fa562eb7b63ad493ba5}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!GetScriptHash@{GetScriptHash}}
+\index{GetScriptHash@{GetScriptHash}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{GetScriptHash()}{GetScriptHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_a455dae5ec3ea2fa562eb7b63ad493ba5} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::wallets\+::\+Key\+Pair\+::\+Get\+Script\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get the script hash. 
+
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_aa3aa633318a3f8a73d8ee3c418b2d863}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!IsValid@{IsValid}}
+\index{IsValid@{IsValid}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{IsValid()}{IsValid()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_aa3aa633318a3f8a73d8ee3c418b2d863} 
+bool neo\+::wallets\+::\+Key\+Pair\+::\+Is\+Valid (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Check if the key pair is valid. 
+
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_a80010fb7c8f31d7e14d2eb11c780d4bc}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!IsValidPrivateKey@{IsValidPrivateKey}}
+\index{IsValidPrivateKey@{IsValidPrivateKey}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{IsValidPrivateKey()}{IsValidPrivateKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_a80010fb7c8f31d7e14d2eb11c780d4bc} 
+bool neo\+::wallets\+::\+Key\+Pair\+::\+Is\+Valid\+Private\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{private\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Validate if private key is valid for secp256r1 curve. 
+
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_afdfeb0fa59a16f8a8b5d0edd03a430d8}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_afdfeb0fa59a16f8a8b5d0edd03a430d8} 
+bool neo\+::wallets\+::\+Key\+Pair\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Inequality operator. 
+
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_aa966d90f7ce85b43b2bbe8df5390a9f9}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_aa966d90f7ce85b43b2bbe8df5390a9f9} 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \& neo\+::wallets\+::\+Key\+Pair\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Copy assignment operator. 
+
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_a9794f7e5e7e4c7be9811f3323d3d80b2}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_a9794f7e5e7e4c7be9811f3323d3d80b2} 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \& neo\+::wallets\+::\+Key\+Pair\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \&\&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [noexcept]}}
+
+
+
+Move assignment operator. 
+
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_affd6cfc0084e4c0cf4735a1da53232d7}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_affd6cfc0084e4c0cf4735a1da53232d7} 
+bool neo\+::wallets\+::\+Key\+Pair\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1wallets_1_1_key_pair}{Key\+Pair}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Equality operator. 
+
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_aeebbae7eeb9b78c9e59b4a9fccdf384c}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!Sign@{Sign}}
+\index{Sign@{Sign}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{Sign()}{Sign()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_aeebbae7eeb9b78c9e59b4a9fccdf384c} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::wallets\+::\+Key\+Pair\+::\+Sign (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption}) const}
+
+
+
+Sign data with this key pair. 
+
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_adc82f830c9a0121c054e14e1fea69717}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!ToHex@{ToHex}}
+\index{ToHex@{ToHex}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{ToHex()}{ToHex()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_adc82f830c9a0121c054e14e1fea69717} 
+std\+::string neo\+::wallets\+::\+Key\+Pair\+::\+To\+Hex (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Export private key to hex format. 
+
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_a1f978352d3fc33cf515a2119868f4482}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!ToWIF@{ToWIF}}
+\index{ToWIF@{ToWIF}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{ToWIF()}{ToWIF()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_a1f978352d3fc33cf515a2119868f4482} 
+std\+::string neo\+::wallets\+::\+Key\+Pair\+::\+To\+WIF (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Export private key to WIF format. 
+
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_a7395eee84dfb4f2e6ac76f292ec1358f}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!ValidatePrivateKey@{ValidatePrivateKey}}
+\index{ValidatePrivateKey@{ValidatePrivateKey}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{ValidatePrivateKey()}{ValidatePrivateKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_a7395eee84dfb4f2e6ac76f292ec1358f} 
+bool neo\+::wallets\+::\+Key\+Pair\+::\+Validate\+Private\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{private\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Validate private key (alias) 
+
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_a4ddb5e0a5862f061163db1ddb6ee273a}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!Verify@{Verify}}
+\index{Verify@{Verify}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{Verify()}{Verify()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_a4ddb5e0a5862f061163db1ddb6ee273a} 
+bool neo\+::wallets\+::\+Key\+Pair\+::\+Verify (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{signature}{}\end{DoxyParamCaption}) const}
+
+
+
+Verify signature with this key pair\textquotesingle{}s public key. 
+
+Here is the call graph for this function\+:
+% FIG 22
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_a975750c2754e9182d1a111abade11821}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!privateKey\_@{privateKey\_}}
+\index{privateKey\_@{privateKey\_}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{privateKey\_}{privateKey\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_a975750c2754e9182d1a111abade11821} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::wallets\+::\+Key\+Pair\+::private\+Key\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_a5d9e8c9d3d06c092dd941bc92c25c9f4}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!publicKey\_@{publicKey\_}}
+\index{publicKey\_@{publicKey\_}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{publicKey\_}{publicKey\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_a5d9e8c9d3d06c092dd941bc92c25c9f4} 
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}}$>$ neo\+::wallets\+::\+Key\+Pair\+::public\+Key\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1_key_pair_add7e26a0d06e5c5a5a854939ce5af8e2}\index{neo::wallets::KeyPair@{neo::wallets::KeyPair}!scriptHash\_@{scriptHash\_}}
+\index{scriptHash\_@{scriptHash\_}!neo::wallets::KeyPair@{neo::wallets::KeyPair}}
+\doxysubsubsection{\texorpdfstring{scriptHash\_}{scriptHash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_key_pair_add7e26a0d06e5c5a5a854939ce5af8e2} 
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}}$>$ neo\+::wallets\+::\+Key\+Pair\+::script\+Hash\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/wallets/\mbox{\hyperlink{wallets_2key__pair_8h}{key\+\_\+pair.\+h}}\item 
+src/wallets/\mbox{\hyperlink{key__pair_8cpp}{key\+\_\+pair.\+cpp}}\item 
+src/wallets/\mbox{\hyperlink{key__pair__proper_8cpp}{key\+\_\+pair\+\_\+proper.\+cpp}}\end{DoxyCompactItemize}

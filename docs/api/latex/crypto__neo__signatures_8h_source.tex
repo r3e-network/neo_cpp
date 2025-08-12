@@ -1,0 +1,34 @@
+\doxysection{crypto\+\_\+neo\+\_\+signatures.\+h}
+\hypertarget{crypto__neo__signatures_8h_source}{}\label{crypto__neo__signatures_8h_source}\index{include/neo/cryptography/crypto\_neo\_signatures.h@{include/neo/cryptography/crypto\_neo\_signatures.h}}
+\mbox{\hyperlink{crypto__neo__signatures_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__span_8h}{neo/io/byte\_span.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures}{neo::cryptography::neo\_signatures}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00031\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a1aea7d06e1aad26e2757eca9a8fa8afd}{CreateSingleSignatureRedeemScript}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ publicKey);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00044\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a5d8bc32b2245a59ca85e6d2c9eb113cf}{CreateMultiSignatureRedeemScript}}(\textcolor{keywordtype}{int}\ m,\ \textcolor{keyword}{const}\ std::vector<io::ByteSpan>\&\ publicKeys);}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00058\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_ad3dffba1699027176fc91bc5294fa386}{SignMessageHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ messageHash,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ privateKey);}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00071\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_ae0bc8ad86bfe5fcfde6cf569112358f5}{VerifyMessageHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ messageHash,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ signature,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ publicKey);}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00082\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a823cd7b4ad5e7266ea3dbcb48d2e73d5}{ComputeScriptHash}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ redeemScript);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00093\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a6ccfa85b9ca27a686c5d449684724003}{CreateVerificationScript}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ scriptHash);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00106\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a62a662eff77131538bbc8a34c90b9c21}{DerivePublicKey}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ privateKey);}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00119\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1cryptography_1_1neo__signatures_a69c7ccfc91ce492165817e3d42962dac}{ValidatePublicKey}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ publicKey);}
+\DoxyCodeLine{00120\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cryptography::neo\_signatures}}
+
+\end{DoxyCode}

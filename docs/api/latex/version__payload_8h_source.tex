@@ -1,0 +1,82 @@
+\doxysection{version\+\_\+payload.\+h}
+\hypertarget{version__payload_8h_source}{}\label{version__payload_8h_source}\index{include/neo/network/p2p/payloads/version\_payload.h@{include/neo/network/p2p/payloads/version\_payload.h}}
+\mbox{\hyperlink{version__payload_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__reader_8h}{neo/io/binary\_reader.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__writer_8h}{neo/io/binary\_writer.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__reader_8h}{neo/io/json\_reader.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__writer_8h}{neo/io/json\_writer.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ip__endpoint_8h}{neo/network/ip\_endpoint.h}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{p2p_2ipayload_8h}{neo/network/p2p/ipayload.h}}>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{node__capability_8h}{neo/network/p2p/node\_capability.h}}>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads}{neo::network::p2p::payloads}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a17359f8d119e6df326a8f331a92af7db}{VersionPayload}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{IPayload}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a0381c71155b8a37913d0919c6f08f70f}{MaxCapabilities}}\ =\ 32;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a17359f8d119e6df326a8f331a92af7db}{VersionPayload}}();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a67ed7131799347d90d6ec85a65b5b82d}{GetNetwork}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a0e510cd605c64d6f428f9bdd34999b39}{SetNetwork}}(uint32\_t\ \mbox{\hyperlink{namespaceneo_1_1network}{network}});}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_afcb949e0a4314420e91ff5f70086638f}{GetVersion}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a8a3eb125340ff667bb53eb1d77f90199}{SetVersion}}(uint32\_t\ version);}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a2e8deed92c07769b0d96ae918967d86b}{GetTimestamp}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_ac42345c8f172dd7a127ddb5036c479fd}{SetTimestamp}}(uint32\_t\ timestamp);}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_ac00a1066588d83e3d72e915ad9fab384}{GetNonce}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_abc57cc85aef4b11b1d0091195318837b}{SetNonce}}(uint32\_t\ nonce);}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a05e8c2271a513210db13f5721208287a}{GetUserAgent}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a3144d10d967ab3aaeb3eb85c05150394}{SetUserAgent}}(\textcolor{keyword}{const}\ std::string\&\ userAgent);}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_ab448dcc7699a76b888d9e28899cccc01}{GetAllowCompression}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_ab0c42ae29dc7106d2478377ba548d611}{SetAllowCompression}}(\textcolor{keywordtype}{bool}\ allowCompression);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keyword}{const}\ std::vector<NodeCapability>\&\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a6eb71a29ecd27faf2c473108832c25ad}{GetCapabilities}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a00b0874506e87655331a049f280009a9}{SetCapabilities}}(\textcolor{keyword}{const}\ std::vector<NodeCapability>\&\ capabilities);}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a17359f8d119e6df326a8f331a92af7db}{VersionPayload}}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_acfd2dbcb6f167e59cbbb69b4b797a77d}{Create}}(uint32\_t\ \mbox{\hyperlink{namespaceneo_1_1network}{network}},\ uint32\_t\ nonce,\ \textcolor{keyword}{const}\ std::string\&\ userAgent,}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<NodeCapability>\&\ capabilities);}
+\DoxyCodeLine{00127\ }
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a36e27438e28dbd0b3670a70ac7f13a70}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a79f6a66ff5bc3e17a3e42cc16c5554a9}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_ae2539eb221ad3a8f28901df3bde4cc03}{SerializeJson}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io::JsonWriter}}\&\ writer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a0c0c01a910a59bc33c2d8c4b49c6c5fc}{DeserializeJson}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io::JsonReader}}\&\ reader);}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00156\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_aedf5293cc6facd8f569487a8a1aeb02d}{GetStartHeight}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00162\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_ab245cf7f8a1b9400e44ba70dd24b83d4}{GetSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00165\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_aa96b540e0bb18bb75039ae309165ee27}{network\_}};}
+\DoxyCodeLine{00166\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a44a62ce93d1074a9c55d5f56176966ee}{version\_}};}
+\DoxyCodeLine{00167\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a2adf3d742942340a8e920d4c9470032c}{timestamp\_}};}
+\DoxyCodeLine{00168\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a52271f536cb12a2b2b8e6a935b5b639e}{nonce\_}};}
+\DoxyCodeLine{00169\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a867042540e5333e02ea2681c6d622ebc}{userAgent\_}};}
+\DoxyCodeLine{00170\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a465d35aa719addd59c8bfa41387beeab}{allowCompression\_}};}
+\DoxyCodeLine{00171\ \ \ \ \ std::vector<NodeCapability>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a634b3ea68b99586def5df4d751ca37e6}{capabilities\_}};}
+\DoxyCodeLine{00172\ \};}
+\DoxyCodeLine{00173\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p::payloads}}
+
+\end{DoxyCode}

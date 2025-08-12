@@ -1,0 +1,69 @@
+\doxysection{neo\+::persistence\+::IStore Class Reference}
+\hypertarget{classneo_1_1persistence_1_1_i_store}{}\label{classneo_1_1persistence_1_1_i_store}\index{neo::persistence::IStore@{neo::persistence::IStore}}
+
+
+Interface for a key-\/value store.  
+
+
+
+
+{\ttfamily \#include $<$istore.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::persistence\+::IStore\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::persistence\+::IStore\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_a8d36de22d454c5bcf0ca208e82452422}{\texorpdfstring{$\sim$}{\string~}\+IStore}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store}{neo\+::persistence\+::\+IRead\+Only\+Store$<$ io\+::\+Byte\+Vector, io\+::\+Byte\+Vector $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store_a1b27c3a9d1e10a3d76a73ab26d84d9db}{\texorpdfstring{$\sim$}{\string~}\+IRead\+Only\+Store}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store_a736304330e73c7397781fbca2e645e8a}{Try\+Get}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const=0
+\begin{DoxyCompactList}\small\item\em Tries to get a value from the store. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store_a9a1be56aad7b2a711d558a1b87c90b26}{Contains}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const=0
+\begin{DoxyCompactList}\small\item\em Checks if the store contains a key. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}, \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_read_only_store_a16cb41b5d9ff43393989524da3793f8f}{Find}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \texorpdfstring{$\ast$}{*}prefix=nullptr, \mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575}{Seek\+Direction}} direction=\mbox{\hyperlink{namespaceneo_1_1persistence_a5c88d742e351cc7bfaf86bc63fee1575a67d2f6740a8eaebf4d5c6f79be8da481}{Seek\+Direction\+::\+Forward}}) const=0
+\begin{DoxyCompactList}\small\item\em Finds all key-\/value pairs with keys that start with the specified prefix. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store}{neo\+::persistence\+::\+IWrite\+Store$<$ io\+::\+Byte\+Vector, io\+::\+Byte\+Vector $>$}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store_a065391106a57c3b2c61bf98ad9711ecd}{\texorpdfstring{$\sim$}{\string~}\+IWrite\+Store}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store_ad372b058fc7a706856e68a1a43e1f0f8}{Put}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value)=0
+\begin{DoxyCompactList}\small\item\em Puts a value in the store. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store_a8a3c7a21edac74f32f8a982102c6ccb0}{Delete}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key)=0
+\begin{DoxyCompactList}\small\item\em Deletes a value from the store. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store_a1f5b97ab542dea7844fb8f888c83bb57}{Put\+Sync}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value)
+\begin{DoxyCompactList}\small\item\em Puts a value in the store and syncs to disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for a key-\/value store. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1persistence_1_1_i_store_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_i_store_a8d36de22d454c5bcf0ca208e82452422}\index{neo::persistence::IStore@{neo::persistence::IStore}!````~IStore@{\texorpdfstring{$\sim$}{\string~}IStore}}
+\index{````~IStore@{\texorpdfstring{$\sim$}{\string~}IStore}!neo::persistence::IStore@{neo::persistence::IStore}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IStore()}{\string~IStore()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_i_store_a8d36de22d454c5bcf0ca208e82452422} 
+virtual neo\+::persistence\+::\+IStore\+::\texorpdfstring{$\sim$}{\string~}\+IStore (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/persistence/\mbox{\hyperlink{istore_8h}{istore.\+h}}\end{DoxyCompactItemize}

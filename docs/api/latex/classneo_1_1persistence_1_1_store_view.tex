@@ -1,0 +1,261 @@
+\doxysection{neo\+::persistence\+::Store\+View Class Reference}
+\hypertarget{classneo_1_1persistence_1_1_store_view}{}\label{classneo_1_1persistence_1_1_store_view}\index{neo::persistence::StoreView@{neo::persistence::StoreView}}
+
+
+Represents a view of a storage.  
+
+
+
+
+{\ttfamily \#include $<$store\+\_\+view.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::persistence\+::Store\+View\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_a471eec4a9fb0600ca0178202f3966e4f}{Store\+View}} ()=default
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1persistence_1_1_store_view}{Store\+View}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_a49a00f60203e4d62797ef45a7313c5ad}{\texorpdfstring{$\sim$}{\string~}\+Store\+View}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual std\+::optional$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_acbd18190cacb6e807fb87f41aa0bb1ac}{Try\+Get}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&key) const =0
+\begin{DoxyCompactList}\small\item\em Gets a storage item by key. \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_ae8d99e5bf1222b649716a4f1b542ccb8}{Try\+Get}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&key)=0
+\begin{DoxyCompactList}\small\item\em Gets a pointer to a storage item by key. \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_a7541930dc86d8935761fde5359ca6b82}{Get\+And\+Change}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&key, std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} $>$()$>$ factory=nullptr)=0
+\begin{DoxyCompactList}\small\item\em Gets a storage item by key, creating it if it doesn\textquotesingle{}t exist. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_a153d917929e5621719a1a637c077a865}{Add}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&key, const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} \&item)=0
+\begin{DoxyCompactList}\small\item\em Adds or updates a storage item. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_af57ac843f5fcbf63f8f89ebf3357de67}{Delete}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&key)=0
+\begin{DoxyCompactList}\small\item\em Deletes a storage item. \end{DoxyCompactList}\item 
+virtual std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}}, \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_abc3a45388dcc4a58d9a19fe35dcee678}{Find}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \texorpdfstring{$\ast$}{*}prefix=nullptr) const =0
+\begin{DoxyCompactList}\small\item\em Finds storage items by prefix. \end{DoxyCompactList}\item 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_iterator}{Storage\+Iterator}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_a41ae313dfb75b256c33846a16978a88e}{Seek}} (const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&prefix) const =0
+\begin{DoxyCompactList}\small\item\em Creates an iterator for storage items with the specified prefix. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_a53d2963f4ff65b3c4681da83aa4813a4}{Commit}} ()=0
+\begin{DoxyCompactList}\small\item\em Commits the changes. \end{DoxyCompactList}\item 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{Store\+View}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view_a184cb585aff9bf2daec4a4be842e9db3}{Create\+Snapshot}} ()=0
+\begin{DoxyCompactList}\small\item\em Creates a snapshot of the store view. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a view of a storage. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1persistence_1_1_store_view_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_store_view_a471eec4a9fb0600ca0178202f3966e4f}\index{neo::persistence::StoreView@{neo::persistence::StoreView}!StoreView@{StoreView}}
+\index{StoreView@{StoreView}!neo::persistence::StoreView@{neo::persistence::StoreView}}
+\doxysubsubsection{\texorpdfstring{StoreView()}{StoreView()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_view_a471eec4a9fb0600ca0178202f3966e4f} 
+neo\+::persistence\+::\+Store\+View\+::\+Store\+View (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Constructs an empty \doxylink{classneo_1_1persistence_1_1_store_view}{Store\+View}. 
+
+\Hypertarget{classneo_1_1persistence_1_1_store_view_a49a00f60203e4d62797ef45a7313c5ad}\index{neo::persistence::StoreView@{neo::persistence::StoreView}!````~StoreView@{\texorpdfstring{$\sim$}{\string~}StoreView}}
+\index{````~StoreView@{\texorpdfstring{$\sim$}{\string~}StoreView}!neo::persistence::StoreView@{neo::persistence::StoreView}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}StoreView()}{\string~StoreView()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_view_a49a00f60203e4d62797ef45a7313c5ad} 
+virtual neo\+::persistence\+::\+Store\+View\+::\texorpdfstring{$\sim$}{\string~}\+Store\+View (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1persistence_1_1_store_view_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_store_view_a153d917929e5621719a1a637c077a865}\index{neo::persistence::StoreView@{neo::persistence::StoreView}!Add@{Add}}
+\index{Add@{Add}!neo::persistence::StoreView@{neo::persistence::StoreView}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_view_a153d917929e5621719a1a637c077a865} 
+virtual void neo\+::persistence\+::\+Store\+View\+::\+Add (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{key}{, }\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} \&}]{item}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Adds or updates a storage item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+{\em item} & The storage item. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_view_a01c5466ce799756b90250f978eff25a0}{neo\+::persistence\+::\+Memory\+Store\+View}}, and \mbox{\hyperlink{classneo_1_1persistence_1_1_store_cache_abd9adb5078a7a1b3f1a9f68d094d32e1}{neo\+::persistence\+::\+Store\+Cache}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_store_view_a53d2963f4ff65b3c4681da83aa4813a4}\index{neo::persistence::StoreView@{neo::persistence::StoreView}!Commit@{Commit}}
+\index{Commit@{Commit}!neo::persistence::StoreView@{neo::persistence::StoreView}}
+\doxysubsubsection{\texorpdfstring{Commit()}{Commit()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_view_a53d2963f4ff65b3c4681da83aa4813a4} 
+virtual void neo\+::persistence\+::\+Store\+View\+::\+Commit (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Commits the changes. 
+
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_view_a75283b5376b1659128a0ebb88b0cfa5b}{neo\+::persistence\+::\+Memory\+Store\+View}}, and \mbox{\hyperlink{classneo_1_1persistence_1_1_store_cache_a3752df611777a56e08bdbdae482ab40d}{neo\+::persistence\+::\+Store\+Cache}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_store_view_a184cb585aff9bf2daec4a4be842e9db3}\index{neo::persistence::StoreView@{neo::persistence::StoreView}!CreateSnapshot@{CreateSnapshot}}
+\index{CreateSnapshot@{CreateSnapshot}!neo::persistence::StoreView@{neo::persistence::StoreView}}
+\doxysubsubsection{\texorpdfstring{CreateSnapshot()}{CreateSnapshot()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_view_a184cb585aff9bf2daec4a4be842e9db3} 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{Store\+View}} $>$ neo\+::persistence\+::\+Store\+View\+::\+Create\+Snapshot (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Creates a snapshot of the store view. 
+
+\begin{DoxyReturn}{Returns}
+The snapshot. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache_a9c9b388f2889718b12699013b594b93e}{neo\+::persistence\+::\+Data\+Cache}}, \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_view_a3a2a5b427ee36cb3b66644c273c3de92}{neo\+::persistence\+::\+Memory\+Store\+View}}, and \mbox{\hyperlink{classneo_1_1persistence_1_1_store_cache_a8a31ddd49ac9e6bc9685a89114f90238}{neo\+::persistence\+::\+Store\+Cache}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_store_view_af57ac843f5fcbf63f8f89ebf3357de67}\index{neo::persistence::StoreView@{neo::persistence::StoreView}!Delete@{Delete}}
+\index{Delete@{Delete}!neo::persistence::StoreView@{neo::persistence::StoreView}}
+\doxysubsubsection{\texorpdfstring{Delete()}{Delete()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_view_af57ac843f5fcbf63f8f89ebf3357de67} 
+virtual void neo\+::persistence\+::\+Store\+View\+::\+Delete (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Deletes a storage item. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_view_aac71c6f667103d4012c1423502a44313}{neo\+::persistence\+::\+Memory\+Store\+View}}, and \mbox{\hyperlink{classneo_1_1persistence_1_1_store_cache_ae67c382c114805ef78fca2a388d19073}{neo\+::persistence\+::\+Store\+Cache}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_store_view_abc3a45388dcc4a58d9a19fe35dcee678}\index{neo::persistence::StoreView@{neo::persistence::StoreView}!Find@{Find}}
+\index{Find@{Find}!neo::persistence::StoreView@{neo::persistence::StoreView}}
+\doxysubsubsection{\texorpdfstring{Find()}{Find()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_view_abc3a45388dcc4a58d9a19fe35dcee678} 
+virtual std\+::vector$<$ std\+::pair$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}}, \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} $>$ $>$ neo\+::persistence\+::\+Store\+View\+::\+Find (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \texorpdfstring{$\ast$}{*}}]{prefix}{ = {\ttfamily nullptr}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Finds storage items by prefix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prefix} & The prefix. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage items. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_view_aaff9e3db84e746c6895e25578486e3be}{neo\+::persistence\+::\+Memory\+Store\+View}}, and \mbox{\hyperlink{classneo_1_1persistence_1_1_store_cache_a9fca12d1ce6c388762f27ff62941ad8e}{neo\+::persistence\+::\+Store\+Cache}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_store_view_a7541930dc86d8935761fde5359ca6b82}\index{neo::persistence::StoreView@{neo::persistence::StoreView}!GetAndChange@{GetAndChange}}
+\index{GetAndChange@{GetAndChange}!neo::persistence::StoreView@{neo::persistence::StoreView}}
+\doxysubsubsection{\texorpdfstring{GetAndChange()}{GetAndChange()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_view_a7541930dc86d8935761fde5359ca6b82} 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} $>$ neo\+::persistence\+::\+Store\+View\+::\+Get\+And\+Change (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{key}{, }\item[{std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} $>$()$>$}]{factory}{ = {\ttfamily nullptr}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets a storage item by key, creating it if it doesn\textquotesingle{}t exist. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+{\em factory} & Optional factory function to create new item. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the storage item. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache_a1687660c3953a75c408886d139ad45da}{neo\+::persistence\+::\+Data\+Cache}}, \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_view_ae187c7de8391ae24462d08129a7559d2}{neo\+::persistence\+::\+Memory\+Store\+View}}, and \mbox{\hyperlink{classneo_1_1persistence_1_1_store_cache_a01e3ad6553aa2255c14b44f96f116cbd}{neo\+::persistence\+::\+Store\+Cache}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_store_view_a41ae313dfb75b256c33846a16978a88e}\index{neo::persistence::StoreView@{neo::persistence::StoreView}!Seek@{Seek}}
+\index{Seek@{Seek}!neo::persistence::StoreView@{neo::persistence::StoreView}}
+\doxysubsubsection{\texorpdfstring{Seek()}{Seek()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_view_a41ae313dfb75b256c33846a16978a88e} 
+virtual std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_iterator}{Storage\+Iterator}} $>$ neo\+::persistence\+::\+Store\+View\+::\+Seek (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{prefix}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Creates an iterator for storage items with the specified prefix. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prefix} & The prefix. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage iterator. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_view_ab88e88adba56a05997a7bbcab4f768d2}{neo\+::persistence\+::\+Memory\+Store\+View}}, and \mbox{\hyperlink{classneo_1_1persistence_1_1_store_cache_a9b2c4c21e41c43a0b258dad7139137a7}{neo\+::persistence\+::\+Store\+Cache}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_store_view_acbd18190cacb6e807fb87f41aa0bb1ac}\index{neo::persistence::StoreView@{neo::persistence::StoreView}!TryGet@{TryGet}}
+\index{TryGet@{TryGet}!neo::persistence::StoreView@{neo::persistence::StoreView}}
+\doxysubsubsection{\texorpdfstring{TryGet()}{TryGet()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_view_acbd18190cacb6e807fb87f41aa0bb1ac} 
+virtual std\+::optional$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} $>$ neo\+::persistence\+::\+Store\+View\+::\+Try\+Get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets a storage item by key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage item, or std\+::nullopt if not found. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_view_a09f8b53ff8f56b0dd9dd7f7e61236340}{neo\+::persistence\+::\+Memory\+Store\+View}}, and \mbox{\hyperlink{classneo_1_1persistence_1_1_store_cache_abfbf82eb882049a5024a18686e403465}{neo\+::persistence\+::\+Store\+Cache}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_store_view_ae8d99e5bf1222b649716a4f1b542ccb8}\index{neo::persistence::StoreView@{neo::persistence::StoreView}!TryGet@{TryGet}}
+\index{TryGet@{TryGet}!neo::persistence::StoreView@{neo::persistence::StoreView}}
+\doxysubsubsection{\texorpdfstring{TryGet()}{TryGet()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_store_view_ae8d99e5bf1222b649716a4f1b542ccb8} 
+virtual std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_item}{Storage\+Item}} $>$ neo\+::persistence\+::\+Store\+View\+::\+Try\+Get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{Storage\+Key}} \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets a pointer to a storage item by key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Pointer to the storage item, or nullptr if not found. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache_a1a8c29387783d01c734f16d4589c6134}{neo\+::persistence\+::\+Data\+Cache}}, \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_view_a4a665f2d7f7c6fc8997281149c9389bc}{neo\+::persistence\+::\+Memory\+Store\+View}}, and \mbox{\hyperlink{classneo_1_1persistence_1_1_store_cache_a11845464408542ad8f7b1a71332a7db9}{neo\+::persistence\+::\+Store\+Cache}}.
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/persistence/\mbox{\hyperlink{store__view_8h}{store\+\_\+view.\+h}}\end{DoxyCompactItemize}

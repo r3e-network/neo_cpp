@@ -1,0 +1,125 @@
+\doxysection{biginteger\+\_\+extensions.\+h}
+\hypertarget{biginteger__extensions_8h_source}{}\label{biginteger__extensions_8h_source}\index{include/neo/extensions/biginteger\_extensions.h@{include/neo/extensions/biginteger\_extensions.h}}
+\mbox{\hyperlink{biginteger__extensions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <iostream>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1extensions}{neo::extensions}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00039\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions}{BigIntegerExtensions}}}
+\DoxyCodeLine{00040\ \{}
+\DoxyCodeLine{00041\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00045\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a1b4334a343353cd621654a614838b4b2}{BigInteger}}}
+\DoxyCodeLine{00046\ \ \ \ \ \{}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ std::vector<uint64\_t>\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a00db37e2f10d837e135346bab3895bea}{words}};\ \ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a18af49831bbb68718b61fa6c2aed4af7}{isNegative}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a1b4334a343353cd621654a614838b4b2}{BigInteger}}()\ :\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a18af49831bbb68718b61fa6c2aed4af7}{isNegative}}(false)\ \{\}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a1b4334a343353cd621654a614838b4b2}{BigInteger}}(int64\_t\ value);}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a1b4334a343353cd621654a614838b4b2}{BigInteger}}(uint64\_t\ value);}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a1b4334a343353cd621654a614838b4b2}{BigInteger}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Basic\ operators}}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a43cdf6b1235b1c6860737c9898cdae5a}{operator+}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_adacddd5de5b591d27800c1dbd533c1eb}{operator-\/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_ad8b8526e2cd4ddecbe3490ce4443415d}{operator*}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a75f794f451b0f0a1c73930a6ee2f0516}{operator/}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a30bbe2d3dcaf3ab7e46a0654ef206304}{operator\%}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00061\ }
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a70e10aadbd38444caf70024bcf021197}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a8539c545ae0fc02c937329a1b5b11674}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a7d8874b78fa795cfacacecf69b5b2cf4}{operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_acc26576ffe487fba67b3a674a1c6b56d}{operator>}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a85ad1dde1b3e0b31a224f57133724727}{operator<=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a32fd21ddd73917da8041b65ffc570f9d}{operator>=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a0d7b732975fac3e3e6824d472be479bb}{operator+=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ other);}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a3647039db1d63e8f0f002b3c190ef757}{operator-\/=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ other);}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a4cba1bc9b4b22e3986def50bf7ae68d3}{operator*=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ other);}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a15b240f223ab8210c29e0e18e5b60be5}{operator/=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ other);}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a28329a09b47ffe99ca5e2241f5e62422}{operator\%=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\&\ other);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Conversion\ methods}}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_ad8fa2b98006f69cc610342f8cc5d6d8b}{ToString}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a3b2a30146b1f8b30a4b24093e92abc3b}{ToHexString}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ std::vector<uint8\_t>\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a3f802034a8c8227c1444510a396f896d}{ToByteArray}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ int64\_t\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_aca80f140032307b1c76dee3f7c94fecd}{ToInt64}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ uint64\_t\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a415310e14004bd1dd50508ed13ddaeae}{ToUInt64}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Utility\ methods}}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a5678a4138aa2b7d1395ecf1091be4334}{IsZero}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_af2f5a8d6d47fc8c6f0bfc8949fdadd18}{IsOne}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_abed24ce76467bfd47d7882314b0e0cf5}{IsEven}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a7c633455c001697464d347e1240200a2}{IsOdd}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_ab4e104bdc0d83188a4cfd49822702571}{Abs}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a13b8dcd3fe33a577652cde92afb6288f}{Negate}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer_a8bbd767e82093b5143e241f6786f711e}{Normalize}}();}
+\DoxyCodeLine{00092\ \ \ \ \ \};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a1eeb3a3e191d78ed1c2a6b9161db8c98}{FromString}}(\textcolor{keyword}{const}\ std::string\&\ value);}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a2d57b3382fd7ba4eada76c5fe4f6b3d8}{FromHexString}}(\textcolor{keyword}{const}\ std::string\&\ hex);}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_aa71d664741dd7572f71eb47d044c5d5a}{FromByteArray}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ bytes,\ \textcolor{keywordtype}{bool}\ isNegative\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a23eb0a78085f32f5a3ad0b680b5c36ef}{FromInt64}}(int64\_t\ value);}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_ae99e2c8d8bf7881f2dd11ac409de1a97}{FromUInt64}}(uint64\_t\ value);}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_ab80c153b2a4adf36fc631309d4794d28}{ToString}}(\textcolor{keyword}{const}\ BigInteger\&\ value);}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a4da73263b1831c2e2bf3471de2e7149f}{ToHexString}}(\textcolor{keyword}{const}\ BigInteger\&\ value,\ \textcolor{keywordtype}{bool}\ prefix\ =\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<uint8\_t>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_acb5e841108ee6bf7835c14d132c16db3}{ToByteArray}}(\textcolor{keyword}{const}\ BigInteger\&\ value);}
+\DoxyCodeLine{00151\ }
+\DoxyCodeLine{00158\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a43bb1d4c21295fce34a108540f56b805}{Add}}(\textcolor{keyword}{const}\ BigInteger\&\ left,\ \textcolor{keyword}{const}\ BigInteger\&\ right);}
+\DoxyCodeLine{00159\ }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a9bb4f8270323224c45e9d77d6af3d4b4}{Subtract}}(\textcolor{keyword}{const}\ BigInteger\&\ left,\ \textcolor{keyword}{const}\ BigInteger\&\ right);}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00174\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_ac6627f6c998190f7a2c372f8e4e54efb}{Multiply}}(\textcolor{keyword}{const}\ BigInteger\&\ left,\ \textcolor{keyword}{const}\ BigInteger\&\ right);}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_aa306dd6eec049f3f19b22027633c2612}{Divide}}(\textcolor{keyword}{const}\ BigInteger\&\ dividend,\ \textcolor{keyword}{const}\ BigInteger\&\ divisor);}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a7c3f8c3cbe30676d091774e65c0d01b1}{Modulo}}(\textcolor{keyword}{const}\ BigInteger\&\ dividend,\ \textcolor{keyword}{const}\ BigInteger\&\ divisor);}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a8b5b508aa662442065d451388adab037}{Power}}(\textcolor{keyword}{const}\ BigInteger\&\ baseValue,\ uint32\_t\ exponent);}
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a95a118d3083a134be244a6a43ec23e96}{ModularPower}}(\textcolor{keyword}{const}\ BigInteger\&\ baseValue,\ \textcolor{keyword}{const}\ BigInteger\&\ exponent,\ \textcolor{keyword}{const}\ BigInteger\&\ modulus);}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00215\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a51e7053f4fece2d7ff8f3284cf87cd5b}{GreatestCommonDivisor}}(\textcolor{keyword}{const}\ BigInteger\&\ left,\ \textcolor{keyword}{const}\ BigInteger\&\ right);}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_ad0d4a34aaab8b612a96a95820908c2cd}{Compare}}(\textcolor{keyword}{const}\ BigInteger\&\ left,\ \textcolor{keyword}{const}\ BigInteger\&\ right);}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00230\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_adec1f3008ed21ede159b8a3f5311834a}{Abs}}(\textcolor{keyword}{const}\ BigInteger\&\ value);}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00237\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_afe154f6bd4b09a7320f92eec52d47ffe}{Negate}}(\textcolor{keyword}{const}\ BigInteger\&\ value);}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00244\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a5529b409b988d0711184e47d8b5a5155}{IsZero}}(\textcolor{keyword}{const}\ BigInteger\&\ value);}
+\DoxyCodeLine{00245\ }
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a1af735495627d506abf89e61ec2cdb86}{IsOne}}(\textcolor{keyword}{const}\ BigInteger\&\ value);}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00258\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_abff783eb2f8ab40c7502ec83b8862cdc}{IsEven}}(\textcolor{keyword}{const}\ BigInteger\&\ value);}
+\DoxyCodeLine{00259\ }
+\DoxyCodeLine{00266\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a0553aeef5e2f7234b339a24dd1c30090}{LeftShift}}(\textcolor{keyword}{const}\ BigInteger\&\ value,\ uint32\_t\ shift);}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00274\ \ \ \ \ \textcolor{keyword}{static}\ BigInteger\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a7af52e40b44a1068e1fac6f3ea35d1f7}{RightShift}}(\textcolor{keyword}{const}\ BigInteger\&\ value,\ uint32\_t\ shift);}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00276\ \ \ \ \ \textcolor{comment}{//\ Constants}}
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a262f5fb5d21897e422a1208cd142087d}{Zero}};}
+\DoxyCodeLine{00278\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_aaeac036afa9f0534b96ccb459a2a5be2}{One}};}
+\DoxyCodeLine{00279\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigInteger}}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a204f4a9a5b1b72ad3594c3c569b7daf4}{MinusOne}};}
+\DoxyCodeLine{00280\ \};}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00282\ \textcolor{comment}{//\ Stream\ operators}}
+\DoxyCodeLine{00283\ std::ostream\&\ \mbox{\hyperlink{namespaceneo_1_1extensions_a990244e01cb742312b366c8b9ffbc686}{operator<<}}(std::ostream\&\ os,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigIntegerExtensions::BigInteger}}\&\ value);}
+\DoxyCodeLine{00284\ std::istream\&\ \mbox{\hyperlink{namespaceneo_1_1extensions_abefb0600cd6c5a599b5ff926d5b5cb77}{operator>>}}(std::istream\&\ is,\ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigIntegerExtensions::BigInteger}}\&\ value);}
+\DoxyCodeLine{00285\ \}\ \ \textcolor{comment}{//\ namespace\ neo::extensions}}
+
+\end{DoxyCode}

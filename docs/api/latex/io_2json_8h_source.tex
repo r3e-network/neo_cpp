@@ -1,0 +1,211 @@
+\doxysection{json.\+h}
+\hypertarget{io_2json_8h_source}{}\label{io_2json_8h_source}\index{include/neo/io/json.h@{include/neo/io/json.h}}
+\mbox{\hyperlink{io_2json_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json_8hpp}{nlohmann/json.hpp}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1io}{neo::io}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}}\ =\ nlohmann::json;}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ Constructors}}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}()\ :\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}}::object())\ \{\}}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac251265780f50234a090763f6204b140}{JsonValue}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}}\&\ j)\ :\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}(j)\ \{\}}
+\DoxyCodeLine{00027\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a221fe391f12573bdedbcbc293567c131}{JsonValue}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}}\&\&\ j)\ :\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}(\mbox{\hyperlink{namespacestd}{std}}::move(j))\ \{\}}
+\DoxyCodeLine{00028\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a7228f5da622f11600517601e286a83c7}{JsonValue}}(\textcolor{keyword}{const}\ std::string\&\ str)\ :\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}}::parse(str))\ \{\}}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{comment}{//\ Copy\ constructor\ -\/\ don't\ copy\ cached\ elements}}
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a3020b1f7390f269d0e3a9ca103b701c4}{JsonValue}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}\&\ other)\ :\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}(other.\mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}})\ \{\}}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \textcolor{comment}{//\ Move\ constructor}}
+\DoxyCodeLine{00034\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac09891d7395de8ee5a6ec7a75516cb8e}{JsonValue}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}\&\&\ other)\ noexcept}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}(std::move(other.data\_)),\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a9045db6864c407b95deca79ec2c2048d}{cached\_elements\_}}(std::move(other.cached\_elements\_))}
+\DoxyCodeLine{00036\ \ \ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \}}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \textcolor{comment}{//\ Copy\ assignment}}
+\DoxyCodeLine{00040\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}\&\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a60f034f083e8a7b2a7b96bb7ae623649}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}\&\ other)}
+\DoxyCodeLine{00041\ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ !=\ \&other)}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}\ =\ other.\mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}};}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a9045db6864c407b95deca79ec2c2048d}{cached\_elements\_}}.clear();\ \ \textcolor{comment}{//\ Clear\ cache\ on\ copy}}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{comment}{//\ Move\ assignment}}
+\DoxyCodeLine{00051\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}\&\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a767891698302a237062489f6b4b96df1}{operator=}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}\&\&\ other)\ \textcolor{keyword}{noexcept}}
+\DoxyCodeLine{00052\ \ \ \ \ \{}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\textcolor{keyword}{this}\ !=\ \&other)}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}\ =\ std::move(other.data\_);}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a9045db6864c407b95deca79ec2c2048d}{cached\_elements\_}}\ =\ std::move(other.cached\_elements\_);}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\textcolor{keyword}{this};}
+\DoxyCodeLine{00059\ \ \ \ \ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{comment}{//\ Type\ checks}}
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_aa48854d6209e5f3f5d51c85ae4f6723e}{IsNull}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.is\_null();\ \}}
+\DoxyCodeLine{00063\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a2125810da5f3372a7fec8cf1767f585f}{IsBoolean}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.is\_boolean();\ \}}
+\DoxyCodeLine{00064\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a729b58ef935578108fbf94fb2773ca48}{IsNumber}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.is\_number();\ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a5656b1a27a59a2675b9babf6a45294a3}{IsString}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.is\_string();\ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4fc53609de63eb42eab8e9b36e944b73}{IsArray}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.is\_array();\ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a61c3424fa6458bba0c35aedd256f1d27}{IsObject}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.is\_object();\ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{comment}{//\ Value\ getters}}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a71126eca2d61534ca1a98ce493d92fbb}{GetBoolean}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.get<\textcolor{keywordtype}{bool}>();\ \}}
+\DoxyCodeLine{00071\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a1705cb722cdb3c8552b697772a347867}{GetInt32}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.get<int32\_t>();\ \}}
+\DoxyCodeLine{00072\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_abf943a4642b890868ea52fe3e83d1cea}{GetInt64}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.get<int64\_t>();\ \}}
+\DoxyCodeLine{00073\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a1f59528c1a1a9e989c27ce6a4389f99c}{GetUInt32}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.get<uint32\_t>();\ \}}
+\DoxyCodeLine{00074\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a0e0403e14e7fcb8ce485fbfe08daae0d}{GetUInt64}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.get<uint64\_t>();\ \}}
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ab3ffd28e12790557a3883133d23a753a}{GetDouble}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.get<\textcolor{keywordtype}{double}>();\ \}}
+\DoxyCodeLine{00076\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a8051807d68cb947e3b4ee9de48cd6b93}{GetString}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.get<std::string>();\ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{comment}{//\ Array\ operations}}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ae9cfc0eb9df63a1188926b4642cff32c}{Size}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.size();\ \}}
+\DoxyCodeLine{00080\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a6ad57ac0685f1f583ba1ee1d4f4abdfc}{operator[]}}(\textcolor{keywordtype}{size\_t}\ index)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}[index]);\ \}}
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}\&\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a73ddff394338a386e74402c6b6ab8174}{operator[]}}(\textcolor{keywordtype}{size\_t}\ index)}
+\DoxyCodeLine{00082\ \ \ \ \ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Complete\ array\ element\ access\ implementation\ with\ proper\ reference\ handling}}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.is\_array())}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ std::runtime\_error(\textcolor{stringliteral}{"{}JsonValue\ is\ not\ an\ array"{}});}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Ensure\ the\ array\ is\ large\ enough}}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (index\ >=\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.size())}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ null\ elements\ until\ we\ reach\ the\ desired\ index}}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.push\_back(\textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Return\ a\ JsonValue\ that\ wraps\ a\ reference\ to\ the\ actual\ array\ element}}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ approach\ maintains\ proper\ reference\ semantics\ while\ avoiding\ thread\_local\ issues}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Use\ placement\ new\ to\ create\ a\ JsonValue\ wrapper\ that\ maintains\ reference\ to\ the\ element}}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ a\ reference\ wrapper\ that\ shares\ the\ same\ underlying\ json\ object}}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{classneo_1_1io_1_1_json_value_a9045db6864c407b95deca79ec2c2048d}{cached\_elements\_}}[index])}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a9045db6864c407b95deca79ec2c2048d}{cached\_elements\_}}[index]\ =\ std::make\_unique<JsonValue>(\mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}[index]);}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ *\mbox{\hyperlink{classneo_1_1io_1_1_json_value_a9045db6864c407b95deca79ec2c2048d}{cached\_elements\_}}[index];}
+\DoxyCodeLine{00106\ \ \ \ \ \}}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ \textcolor{comment}{//\ Object\ operations}}
+\DoxyCodeLine{00109\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a92e27ac0f8202b5739b7b83c875667f1}{operator[]}}(\textcolor{keyword}{const}\ std::string\&\ key)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00110\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ it\ =\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.find(key);}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ it\ !=\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.end()\ ?\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}(*it)\ :\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}(json::value\_t::null);}
+\DoxyCodeLine{00113\ \ \ \ \ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ae7c61b9654423de8d841702311851676}{HasMember}}(\textcolor{keyword}{const}\ std::string\&\ key)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.contains(key);\ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{comment}{//\ Value\ setters}}
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a6a213a58045e6d572c7719f74f518344}{SetBoolean}}(\textcolor{keywordtype}{bool}\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}\ =\ value;\ \}}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_abab09ad06c47af864a39d97a7fac9f15}{SetInt32}}(int32\_t\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}\ =\ value;\ \}}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a0b32956027c938b8b038b0dda03c1069}{SetInt64}}(int64\_t\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}\ =\ value;\ \}}
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a13165eaa3aa9e8e2ca0ccca9871876ba}{SetUInt32}}(uint32\_t\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}\ =\ value;\ \}}
+\DoxyCodeLine{00122\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ae12404cf3948adeaac0d7579b92d13e5}{SetUInt64}}(uint64\_t\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}\ =\ value;\ \}}
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a8954daba9f407ac8a424d2c8eb29aac1}{SetDouble}}(\textcolor{keywordtype}{double}\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}\ =\ value;\ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a17fbdd1d3a33c335b17feddd6cb3fd96}{SetString}}(\textcolor{keyword}{const}\ std::string\&\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}\ =\ value;\ \}}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a7d34157115a98111c3d0fa71af02c529}{SetNull}}()\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}\ =\ json::value\_t::null;\ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00127\ \ \ \ \ \textcolor{comment}{//\ Object\ member\ operations}}
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a2b83a444959ced787f0ab9c3f96dce24}{AddMember}}(\textcolor{keyword}{const}\ std::string\&\ key,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}\&\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}[key]\ =\ value.data\_;\ \}}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a9adac7bf8f51c43ca3253db6491894b8}{AddMember}}(\textcolor{keyword}{const}\ std::string\&\ key,\ \textcolor{keywordtype}{bool}\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}[key]\ =\ value;\ \}}
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a6a786ea2dce3d0fc5b7434a9f12d6fc2}{AddMember}}(\textcolor{keyword}{const}\ std::string\&\ key,\ int32\_t\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}[key]\ =\ value;\ \}}
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a48873f4ebf9526d5f7f4bac5b8999914}{AddMember}}(\textcolor{keyword}{const}\ std::string\&\ key,\ int64\_t\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}[key]\ =\ value;\ \}}
+\DoxyCodeLine{00133\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac46a44624dc5d76b1eb00ae6905363b9}{AddMember}}(\textcolor{keyword}{const}\ std::string\&\ key,\ uint32\_t\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}[key]\ =\ value;\ \}}
+\DoxyCodeLine{00134\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a8e97e371f45df76cda78d9fe87fa5cba}{AddMember}}(\textcolor{keyword}{const}\ std::string\&\ key,\ uint64\_t\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}[key]\ =\ value;\ \}}
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a95d449a5c43d208718402021fe6108ae}{AddMember}}(\textcolor{keyword}{const}\ std::string\&\ key,\ \textcolor{keywordtype}{double}\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}[key]\ =\ value;\ \}}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a07589127e1671bf472e0aba9fbfbd86d}{AddMember}}(\textcolor{keyword}{const}\ std::string\&\ key,\ \textcolor{keyword}{const}\ std::string\&\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}[key]\ =\ value;\ \}}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a85c5e3eff73ad99af9f06ef1c825a4e9}{AddMember}}(\textcolor{keyword}{const}\ std::string\&\ key,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}[key]\ =\ std::string(value);\ \}}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{comment}{//\ Array\ operations}}
+\DoxyCodeLine{00140\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a6d8f6382ad314ab5d4c05de4a7cdbbb1}{PushBack}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}\&\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.push\_back(value.data\_);\ \}}
+\DoxyCodeLine{00141\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a45643ffadaff0e3e19403346becd2279}{PushBack}}(\textcolor{keywordtype}{bool}\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.push\_back(value);\ \}}
+\DoxyCodeLine{00142\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a2346ea8ee55909ccbeffa446be52a4b2}{PushBack}}(int32\_t\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.push\_back(value);\ \}}
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_aaef87aa7038c8a6ca9b8dbf0d580a405}{PushBack}}(int64\_t\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.push\_back(value);\ \}}
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a1defe64ad5b491cdca9a359430c3f732}{PushBack}}(uint32\_t\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.push\_back(value);\ \}}
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_af06ef928e2bd7e1c6438e7aa0649c739}{PushBack}}(uint64\_t\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.push\_back(value);\ \}}
+\DoxyCodeLine{00146\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_afdd28979ec5f34b20a9613a347474a48}{PushBack}}(\textcolor{keywordtype}{double}\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.push\_back(value);\ \}}
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a84ab605adfc556abbf3bdc02edf68770}{PushBack}}(\textcolor{keyword}{const}\ std::string\&\ value)\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.push\_back(value);\ \}}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{comment}{//\ Serialization}}
+\DoxyCodeLine{00150\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a657b36258c734cc6900b4ab8f8ee2390}{ToString}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.dump();\ \}}
+\DoxyCodeLine{00151\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4948a42a7e6c913cc67b330d2ab7e6fd}{ToString}}(\textcolor{keywordtype}{int}\ indent)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}.dump(indent);\ \}}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{comment}{//\ Neo-\/specific\ helpers}}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a91990e9632b88eecd4ec0106de0e3616}{AddByteArray}}(\textcolor{keyword}{const}\ std::string\&\ key,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\&\ bytes)}
+\DoxyCodeLine{00155\ \ \ \ \ \{}
+\DoxyCodeLine{00156\ \ \ \ \ \ \ \ \ std::string\ hex\ =\ \textcolor{stringliteral}{"{}0x"{}};}
+\DoxyCodeLine{00157\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (uint8\_t\ \textcolor{keywordtype}{byte}\ :\ bytes)}
+\DoxyCodeLine{00158\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{char}\ buf[3];}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \ \ \ \ snprintf(buf,\ \textcolor{keyword}{sizeof}(buf),\ \textcolor{stringliteral}{"{}\%02x"{}},\ \textcolor{keywordtype}{byte});}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \ \ \ \ hex\ +=\ buf;}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}[key]\ =\ hex;}
+\DoxyCodeLine{00164\ \ \ \ \ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a1cf883c3e7cd5d96aa08a76548de1d1e}{GetByteArray}}(\textcolor{keyword}{const}\ std::string\&\ key)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00167\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ std::string\ hex\ =\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}}[key].get<std::string>();}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (hex.substr(0,\ 2)\ ==\ \textcolor{stringliteral}{"{}0x"{}})}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \ \ \ \ hex\ =\ hex.substr(2);}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00173\ }
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\ result;}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ hex.length();\ i\ +=\ 2)}
+\DoxyCodeLine{00176\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ std::string\ byteStr\ =\ hex.substr(i,\ 2);}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ uint8\_t\ \textcolor{keywordtype}{byte}\ =\ \textcolor{keyword}{static\_cast<}uint8\_t\textcolor{keyword}{>}(std::stoul(byteStr,\ \textcolor{keyword}{nullptr},\ 16));}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a57eb840afcbc9cd7b784081f9f546dab}{Push}}(\textcolor{keywordtype}{byte});}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00182\ \ \ \ \ \}}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{comment}{//\ Access\ to\ underlying\ json}}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}}\&\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_abe5332e88b98f1edcc1af3babf8f38d8}{GetJson}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}};\ \}}
+\DoxyCodeLine{00186\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}}\&\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac9df4f8f85cbc87db66f4434316dcf5b}{GetJson}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}};\ \}}
+\DoxyCodeLine{00187\ }
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{comment}{//\ Static\ factory\ methods}}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a3093b602f5df31945dc6fc21d194fad7}{CreateObject}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}(\mbox{\hyperlink{classbasic__json_a50a0e8dacc0f4aa12162da666595e6fd}{json::object}}());\ \}}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_aed2f90dbb67da48a831e62f9dc03a65e}{CreateArray}}()\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}(\mbox{\hyperlink{classbasic__json_a5299b166ebd27030235e2314a0cf5882}{json::array}}());\ \}}
+\DoxyCodeLine{00191\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a59fcf296e9daf16537b4a037f499e635}{Parse}}(\textcolor{keyword}{const}\ std::string\&\ str)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a4c424d01730d7e5e1117ecc35fa5a3c3}{JsonValue}}(json::parse(str));\ \}}
+\DoxyCodeLine{00192\ }
+\DoxyCodeLine{00193\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00194\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_ac345210ccdbf4f49719e031b566b97f9}{json}}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a492c46773b06c215590864761cdc4b9c}{data\_}};}
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keyword}{mutable}\ std::unordered\_map<size\_t,\ std::unique\_ptr<JsonValue>>}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a9045db6864c407b95deca79ec2c2048d}{cached\_elements\_}};\ \ \textcolor{comment}{//\ Cache\ for\ array\ element\ references}}
+\DoxyCodeLine{00197\ \};}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \textcolor{comment}{//\ Type\ aliases\ for\ compatibility}}
+\DoxyCodeLine{00200\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceneo_1_1io_a1f05d078d0288396ff2cee5d32e3e9a6}{Json}}\ =\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{JsonValue}};}
+\DoxyCodeLine{00201\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceneo_1_1io_a2eb7f65a4c422e0701943cac684086bb}{JsonObject}}\ =\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{JsonValue}};}
+\DoxyCodeLine{00202\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceneo_1_1io_a0f3ebba7baf9cdf8660e27b82a5e1209}{JsonArray}}\ =\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{JsonValue}};}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00204\ \textcolor{comment}{//\ Utility\ functions}}
+\DoxyCodeLine{00205\ \textcolor{keyword}{inline}\ std::string\ \mbox{\hyperlink{namespaceneo_1_1io_ab3f7d3a0573011b90a82123b9bcce486}{ToJsonString}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{JsonValue}}\&\ value,\ \textcolor{keywordtype}{int}\ indent\ =\ -\/1)}
+\DoxyCodeLine{00206\ \{}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordflow}{return}\ indent\ >=\ 0\ ?\ value.ToString(indent)\ :\ value.ToString();}
+\DoxyCodeLine{00208\ \}}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00210\ \textcolor{keyword}{inline}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{JsonValue}}\ \mbox{\hyperlink{namespaceneo_1_1io_af7422213b523c32c6941f62b26a9669b}{ParseJson}}(\textcolor{keyword}{const}\ std::string\&\ str)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_value_a59fcf296e9daf16537b4a037f499e635}{JsonValue::Parse}}(str);\ \}}
+\DoxyCodeLine{00211\ \}\ \ \textcolor{comment}{//\ namespace\ neo::io}}
+
+\end{DoxyCode}

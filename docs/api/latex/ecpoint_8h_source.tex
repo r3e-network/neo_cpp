@@ -1,0 +1,103 @@
+\doxysection{ecpoint.\+h}
+\hypertarget{ecpoint_8h_source}{}\label{ecpoint_8h_source}\index{include/neo/cryptography/ecc/ecpoint.h@{include/neo/cryptography/ecc/ecpoint.h}}
+\mbox{\hyperlink{ecpoint_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__span_8h}{neo/io/byte\_span.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{iserializable_8h}{neo/io/iserializable.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1cryptography_1_1ecc}{neo::cryptography::ecc}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae4a83f7a5dcc95b65abd3e694adff846}{ECPoint}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{io::ISerializable}}}
+\DoxyCodeLine{00017\ \{}
+\DoxyCodeLine{00018\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a978656bba5a36f67594d2230a2ac0884}{MaxSize}}\ =\ 33;}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae4a83f7a5dcc95b65abd3e694adff846}{ECPoint}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a46871ed885a17ef15e7d25afe4bfbe78}{\string~ECPoint}}();}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae4a83f7a5dcc95b65abd3e694adff846}{ECPoint}}(\textcolor{keyword}{const}\ std::string\&\ curveName);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af32099891207ca77a1a621585cac577c}{GetCurveName}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a564016425b75bba617ecd82eefcfc2d1}{SetCurveName}}(\textcolor{keyword}{const}\ std::string\&\ curveName);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a635b1f023273b7557e605b238d9fecea}{IsInfinity}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a1dd6d4a8073b2c4effa350fd1eaecb73}{SetInfinity}}(\textcolor{keywordtype}{bool}\ isInfinity);}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ad064eba9012e9f80d896401bccf09bf5}{GetX}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_abea50aec908986d1271d824ae00400b7}{SetX}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ x);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a991a79b4400146aed93f34d58d5cfba3}{GetY}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a052a97ced0b56150a48256bbece321c5}{SetY}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ y);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00092\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_acaf3aa20394e9261354877c0e64c8f37}{ToBytes}}(\textcolor{keywordtype}{bool}\ compressed\ =\ \textcolor{keyword}{true})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00099\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ac78e405cf844e51af4f0830b2b392368}{ToArray}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00106\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af8f851ebb5374591aeccf5baa946bba7}{ToHex}}(\textcolor{keywordtype}{bool}\ compressed\ =\ \textcolor{keyword}{true})\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae4a83f7a5dcc95b65abd3e694adff846}{ECPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a76149bc8215c7297d3bd54d273bdaaca}{FromBytes}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ data,\ \textcolor{keyword}{const}\ std::string\&\ curveName);}
+\DoxyCodeLine{00115\ }
+\DoxyCodeLine{00121\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae4a83f7a5dcc95b65abd3e694adff846}{ECPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a21d43136701acbe053589c058f667e3d}{FromBytes}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ data)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a21d43136701acbe053589c058f667e3d}{FromBytes}}(data,\ \textcolor{stringliteral}{"{}secp256r1"{}});\ \}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00129\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_aee2f331e27180796eeaea7f7a195c7e4}{FromHex}}(\textcolor{keyword}{const}\ std::string\&\ hex,\ \textcolor{keyword}{const}\ std::string\&\ curveName);}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae4a83f7a5dcc95b65abd3e694adff846}{ECPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ab290ff411acaebdc51054a183f9469eb}{FromHex}}(\textcolor{keyword}{const}\ std::string\&\ hex)\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ab290ff411acaebdc51054a183f9469eb}{FromHex}}(hex,\ \textcolor{stringliteral}{"{}secp256r1"{}});\ \}}
+\DoxyCodeLine{00137\ }
+\DoxyCodeLine{00143\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a293a06f69967165553f5b7bdd2266a38}{ToString}}(\textcolor{keywordtype}{bool}\ compressed\ =\ \textcolor{keyword}{true})\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af8f851ebb5374591aeccf5baa946bba7}{ToHex}}(compressed);\ \}}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae4a83f7a5dcc95b65abd3e694adff846}{ECPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a1c75d3fc7ae853e91db5d592b39a2ebb}{Parse}}(\textcolor{keyword}{const}\ std::string\&\ hex,\ \textcolor{keyword}{const}\ std::string\&\ curveName\ =\ \textcolor{stringliteral}{"{}secp256r1"{}})}
+\DoxyCodeLine{00152\ \ \ \ \ \{}
+\DoxyCodeLine{00153\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_aee2f331e27180796eeaea7f7a195c7e4}{FromHex}}(hex,\ curveName);}
+\DoxyCodeLine{00154\ \ \ \ \ \}}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a1d1785d3555fb8028d2e74b0e8799179}{Infinity}}(\textcolor{keyword}{const}\ std::string\&\ curveName\ =\ \textcolor{stringliteral}{"{}secp256r1"{}});}
+\DoxyCodeLine{00162\ }
+\DoxyCodeLine{00168\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_afa55bd274c1bddbb2dbb1f7a8ce3051f}{operator==}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae766c7fde0b49693382eb5aa146037db}{operator!=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ac048320971409d232afc836a1e784e3a}{operator<}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00183\ }
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a0d0c7778812f160fad68e569538232db}{operator>}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ad785370bd6cf1a6d64d373d3bdaef758}{operator<=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af7280ce6f25e80a96f5807b3ac6038e7}{operator>=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00210\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_aba5c22b4cccded869d51a3bad2f29b65}{Add}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}}\&\ other)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00217\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a10005ae5e3ab366170479b4d54673cc0}{Multiply}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ scalar)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00223\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{ECPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a8fa9b2f6798db92a2304b2d153740880}{Negate}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00224\ }
+\DoxyCodeLine{00230\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae4a83f7a5dcc95b65abd3e694adff846}{ECPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_afe3ee7ec2c222368b7a82fea71d97983}{operator+}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae4a83f7a5dcc95b65abd3e694adff846}{ECPoint}}\&\ other)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_aba5c22b4cccded869d51a3bad2f29b65}{Add}}(other);\ \}}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00237\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae4a83f7a5dcc95b65abd3e694adff846}{ECPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a8165957be104292ff5b5e6e9e7ef9765}{operator*}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ scalar)\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a10005ae5e3ab366170479b4d54673cc0}{Multiply}}(scalar);\ \}}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00243\ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ae4a83f7a5dcc95b65abd3e694adff846}{ECPoint}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a4d2fa743f0dc0166e794aacdf60409a9}{operator-\/}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a8fa9b2f6798db92a2304b2d153740880}{Negate}}();\ \}}
+\DoxyCodeLine{00244\ }
+\DoxyCodeLine{00245\ \ \ \ \ \textcolor{comment}{//\ ISerializable\ implementation}}
+\DoxyCodeLine{00250\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a124e7eea95413fabb39bc28d08b931ad}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00251\ }
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a0b36bcdae2c3be68011386f14baec8bf}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00257\ }
+\DoxyCodeLine{00258\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00259\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a392b066d6acce0fcc98a0c8eb5dd75b6}{curveName\_}};}
+\DoxyCodeLine{00260\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_af7295168e07146ace69717464d810dc7}{isInfinity\_}};}
+\DoxyCodeLine{00261\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_a16de53fb50283597cf9295b087597c5d}{x\_}};}
+\DoxyCodeLine{00262\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point_ac240a1989366c5bf13bfd23297a43906}{y\_}};}
+\DoxyCodeLine{00263\ \};}
+\DoxyCodeLine{00264\ \}\ \ \textcolor{comment}{//\ namespace\ neo::cryptography::ecc}}
+
+\end{DoxyCode}

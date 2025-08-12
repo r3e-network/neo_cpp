@@ -1,0 +1,67 @@
+\doxysection{include/neo/rpc/rpc\+\_\+server.h File Reference}
+\hypertarget{rpc__server_8h}{}\label{rpc__server_8h}\index{include/neo/rpc/rpc\_server.h@{include/neo/rpc/rpc\_server.h}}
+{\ttfamily \#include $<$neo/core/logging.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/json.\+h$>$}\newline
+{\ttfamily \#include $<$neo/ledger/transaction\+\_\+pool\+\_\+manager.\+h$>$}\newline
+{\ttfamily \#include $<$neo/network/p2p/local\+\_\+node.\+h$>$}\newline
+{\ttfamily \#include $<$neo/persistence/data\+\_\+cache.\+h$>$}\newline
+{\ttfamily \#include $<$atomic$>$}\newline
+{\ttfamily \#include $<$chrono$>$}\newline
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$thread$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for rpc\+\_\+server.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1rpc_1_1_rpc_config}{neo\+::rpc\+::\+Rpc\+Config}}
+\begin{DoxyCompactList}\small\item\em RPC server configuration. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_server}{neo\+::rpc\+::\+Rpc\+Server}}
+\begin{DoxyCompactList}\small\item\em JSON-\/\+RPC 2.\+0 server implementation for Neo. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1rpc}{neo\+::rpc}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1rpc_ae59496dacbfe510de572856b2cc6bf5f}{neo\+::rpc\+::\+Rpc\+Method\+Handler}} = std\+::function$<$\mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}}(const \mbox{\hyperlink{classneo_1_1io_1_1_json_value}{io\+::\+Json\+Value}}\& params)$>$
+\begin{DoxyCompactList}\small\item\em RPC method handler function type. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Enumerations}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444df}{neo\+::rpc\+::\+Rpc\+Error}} \+: int \{ \newline
+\mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfae41199faa7290c167f70f314c5e6c165}{neo\+::rpc\+::\+Parse\+Error}} = -\/32700
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfad544eb3da2f68d24cf92a8519ed53a31}{neo\+::rpc\+::\+Invalid\+Request}} = -\/32600
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa011fb1f694f7b928964b898fc5d0ca5c}{neo\+::rpc\+::\+Method\+Not\+Found}} = -\/32601
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfad4c4700b7580ce00c94ddf7b363de696}{neo\+::rpc\+::\+Invalid\+Params}} = -\/32602
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa8462b58246e70e5c83e5b939a9332cb5}{neo\+::rpc\+::\+Internal\+Error}} = -\/32603
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa16461fe6ee0203b1459e0dfde67ad6aa}{neo\+::rpc\+::\+Invalid\+Block\+Index}} = -\/100
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa005a7ef5c05d0f5144c5ae4c13e3c07a}{neo\+::rpc\+::\+Invalid\+Block\+Hash}} = -\/101
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfab27dafdc5272249d05bf3747fcf45572}{neo\+::rpc\+::\+Invalid\+Transaction\+Hash}} = -\/102
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa37ee560e952dca34f4454d8eadf39d10}{neo\+::rpc\+::\+Invalid\+Contract\+Hash}} = -\/103
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfae73c6fdc0c9755fd108e7105f5ae5984}{neo\+::rpc\+::\+Unknown\+Block}} = -\/104
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa1b2cfd4159b25f1e06ebd7003c788985}{neo\+::rpc\+::\+Unknown\+Transaction}} = -\/105
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfabf21bb521a33136f645325635cc5da1b}{neo\+::rpc\+::\+Unknown\+Contract}} = -\/106
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa09d9ff5c9cf461998dc29f4c90f2c60c}{neo\+::rpc\+::\+Insufficient\+Funds}} = -\/107
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa351caf723532f9ba7a371b5dfa868eed}{neo\+::rpc\+::\+Invalid\+Signature}} = -\/108
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfac7c6ed78835571574206e575db1c719b}{neo\+::rpc\+::\+Invalid\+Script}} = -\/109
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa49069827e26a70a158193ed0595b485b}{neo\+::rpc\+::\+Invalid\+Attribute}} = -\/110
+, \newline
+\mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa29a1c64a7b67b37c3dc14b57f058b6db}{neo\+::rpc\+::\+Invalid\+Witness}} = -\/111
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa57cf8a557bcdf4ee3d16eda354d95bfa}{neo\+::rpc\+::\+Policy\+Failed}} = -\/112
+, \mbox{\hyperlink{namespaceneo_1_1rpc_aad2e091eb39de34dd6188f7d837444dfa88183b946cc5f0e8c96b2e66e1c74a7e}{neo\+::rpc\+::\+Unknown}} = -\/113
+ \}
+\begin{DoxyCompactList}\small\item\em JSON-\/\+RPC error codes. \end{DoxyCompactList}\end{DoxyCompactItemize}

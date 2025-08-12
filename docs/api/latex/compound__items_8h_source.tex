@@ -1,0 +1,135 @@
+\doxysection{compound\+\_\+items.\+h}
+\hypertarget{compound__items_8h_source}{}\label{compound__items_8h_source}\index{include/neo/vm/compound\_items.h@{include/neo/vm/compound\_items.h}}
+\mbox{\hyperlink{compound__items_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stack__item_8h}{neo/vm/stack\_item.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <optional>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_array_item_ac852ec3dcde8d9be224a45a62ac744a1}{ArrayItem}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{StackItem}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_ac852ec3dcde8d9be224a45a62ac744a1}{ArrayItem}}(\textcolor{keyword}{const}\ std::vector<std::shared\_ptr<StackItem>>\&\ value,\ \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{ReferenceCounter}}*\ refCounter\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{operator}\ std::shared\_ptr<StackItem>()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ std::const\_pointer\_cast<StackItem>(shared\_from\_this());\ \}}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00031\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_a5e72d7338430ec1313d13ad13c671d93}{\string~ArrayItem}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_ab2645dad7a9f2f6248b4626f73475d97}{InitializeReferences}}();}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7}{StackItemType}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_acb156a691e1ba060f6a254696568fcc2}{GetType}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_a63da7a0f81255c5061755b68c0dc9405}{GetBoolean}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_a600b762c00898666aa8a57aa44189334}{GetInteger}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ std::vector<std::shared\_ptr<StackItem>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_a39b51d36d1e7812e86c61dd8303baa47}{GetArray}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ std::vector<std::shared\_ptr<StackItem>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_a94eeb55288bd2d0bbc1053a99524762b}{GetStruct}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_acdca860972dc618d72b6cc6179f59115}{Add}}(std::shared\_ptr<StackItem>\ item)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00080\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_a2144b100aeffb88d835d6508273e3d9d}{Get}}(\textcolor{keywordtype}{size\_t}\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_a4a78f60ecadedce10846b36926524a1f}{Set}}(\textcolor{keywordtype}{size\_t}\ index,\ std::shared\_ptr<StackItem>\ item);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00093\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_ae3b2cf7154afa12917d094dad485e514}{Remove}}(\textcolor{keywordtype}{size\_t}\ index);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_ab501f5bf20666db9ee68f13fedfebe57}{Size}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_ad5bb56b086119fb11094e3b64ed88bf4}{Clear}}();}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_a52f090a0404e11a4d3e5ae7a91ff0646}{Equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{StackItem}}\&\ other)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00119\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_a163a1689efa276acedff3fadc1b3813a}{DeepCopy}}(\mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{ReferenceCounter}}*\ refCounter\ =\ \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ asImmutable\ =\ \textcolor{keyword}{false})\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00123\ \ \ \ \ std::vector<std::shared\_ptr<StackItem>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_a6f8be91ca6c716b6304e8b38177f6b2a}{value\_}};}
+\DoxyCodeLine{00124\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{ReferenceCounter}}*\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_a01c38f452f53330ee79fda02db3e07e0}{refCounter\_}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00125\ \};}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00130\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_struct_item_ac6994cd11ea65e00486b44708c23de72}{StructItem}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_ac852ec3dcde8d9be224a45a62ac744a1}{ArrayItem}}}
+\DoxyCodeLine{00131\ \{}
+\DoxyCodeLine{00132\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00138\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_struct_item_ac6994cd11ea65e00486b44708c23de72}{StructItem}}(\textcolor{keyword}{const}\ std::vector<std::shared\_ptr<StackItem>>\&\ value,\ \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{ReferenceCounter}}*\ refCounter\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00139\ }
+\DoxyCodeLine{00144\ \ \ \ \ \textcolor{keyword}{operator}\ std::shared\_ptr<StackItem>()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ std::const\_pointer\_cast<StackItem>(shared\_from\_this());\ \}}
+\DoxyCodeLine{00145\ }
+\DoxyCodeLine{00150\ \ \ \ \ \textcolor{keyword}{operator}\ std::shared\_ptr<ArrayItem>()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00151\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00152\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ std::dynamic\_pointer\_cast<ArrayItem>(std::const\_pointer\_cast<StackItem>(shared\_from\_this()));}
+\DoxyCodeLine{00153\ \ \ \ \ \}}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00159\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7}{StackItemType}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_struct_item_a29e8a721c7fe3d5dad5e9c428efba419}{GetType}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00160\ }
+\DoxyCodeLine{00165\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_struct_item_a76d019ab4a3bc95f0c31d6d02866bf4d}{GetBoolean}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00166\ }
+\DoxyCodeLine{00171\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1vm_1_1_struct_item_a31424783e55506208c76dc4d09512a78}{Count}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_array_item_ab501f5bf20666db9ee68f13fedfebe57}{Size}}();\ \}}
+\DoxyCodeLine{00172\ }
+\DoxyCodeLine{00177\ \ \ \ \ std::shared\_ptr<StructItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_struct_item_a0eae9f8e668c27baf402f6b76e89d81e}{Clone}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_struct_item_a8b1895a86588da279f8794744ff7a30e}{Equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{StackItem}}\&\ other)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00185\ }
+\DoxyCodeLine{00192\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_struct_item_a520cfe2f4495d6a2efbba0b48db35ef3}{DeepCopy}}(\mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{ReferenceCounter}}*\ refCounter\ =\ \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ asImmutable\ =\ \textcolor{keyword}{false})\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00194\ \};}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00201\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1vm_1_1_stack_item_ptr_comparator}{StackItemPtrComparator}}}
+\DoxyCodeLine{00202\ \{}
+\DoxyCodeLine{00203\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1vm_1_1_stack_item_ptr_comparator_a58e37a42c8751135963125bb73ae5e80}{operator()}}(\textcolor{keyword}{const}\ std::shared\_ptr<StackItem>\&\ lhs,\ \textcolor{keyword}{const}\ std::shared\_ptr<StackItem>\&\ rhs)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00204\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00205\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ lhs.get()\ <\ rhs.get();}
+\DoxyCodeLine{00206\ \ \ \ \ \}}
+\DoxyCodeLine{00207\ \};}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00212\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_map_item_a40d3910d0435f61357caf8bcb411ea51}{MapItem}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{StackItem}}}
+\DoxyCodeLine{00213\ \{}
+\DoxyCodeLine{00214\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00220\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_map_item_a40d3910d0435f61357caf8bcb411ea51}{MapItem}}(}
+\DoxyCodeLine{00221\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::map<std::shared\_ptr<StackItem>,\ std::shared\_ptr<StackItem>,\ \mbox{\hyperlink{structneo_1_1vm_1_1_stack_item_ptr_comparator}{StackItemPtrComparator}}>\&\ value\ =\ \{\},}
+\DoxyCodeLine{00222\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{ReferenceCounter}}*\ refCounter\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{keyword}{operator}\ std::shared\_ptr<StackItem>()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ std::const\_pointer\_cast<StackItem>(shared\_from\_this());\ \}}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00233\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_map_item_a220ea62b4eff274f6efa8a63ae27ed7a}{\string~MapItem}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00239\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_map_item_a0875070ae9f1341e999772903b36e99c}{InitializeReferences}}();}
+\DoxyCodeLine{00240\ }
+\DoxyCodeLine{00245\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_a23b0cfeb1300edcff45b99a10a0813f7}{StackItemType}}\ \mbox{\hyperlink{classneo_1_1vm_1_1_map_item_ac2cfcbd7abbfc5ea413be915c8763582}{GetType}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00251\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_map_item_acf5637d2db92cb1c21cc9091dc974285}{GetBoolean}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00252\ }
+\DoxyCodeLine{00257\ \ \ \ \ std::map<std::shared\_ptr<StackItem>,\ std::shared\_ptr<StackItem>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_map_item_a5ff8463534280de98e991a4701ca1226}{GetMap}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00263\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1vm_1_1_map_item_a6887d010ed3497ffda3c8e766cec5bd2}{GetSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00270\ \ \ \ \ std::optional<std::shared\_ptr<StackItem>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_map_item_af79f664227d001ee52cd68d4315e6ca8}{Get}}(\textcolor{keyword}{const}\ std::shared\_ptr<StackItem>\&\ key)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00277\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_map_item_a8dd9ba6820592723bc25a3629908ef7c}{Set}}(\textcolor{keyword}{const}\ std::shared\_ptr<StackItem>\&\ key,\ \textcolor{keyword}{const}\ std::shared\_ptr<StackItem>\&\ value);}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00283\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_map_item_af27cb3143be1a3dba04325acf7ee7e47}{Remove}}(\textcolor{keyword}{const}\ std::shared\_ptr<StackItem>\&\ key);}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00289\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1vm_1_1_map_item_a557f08ddf3cddee1c2aa37cf11b9ced4}{Size}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00294\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_map_item_a9f8065237183ffe03a54f00408a47eac}{Clear}}();}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00301\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_map_item_a9ea198598904be846381215e3449580a}{Equals}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{StackItem}}\&\ other)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00309\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_map_item_a7d6062ace8f457796bff10563bc3e1e3}{DeepCopy}}(\mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{ReferenceCounter}}*\ refCounter\ =\ \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ asImmutable\ =\ \textcolor{keyword}{false})\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00311\ }
+\DoxyCodeLine{00312\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00313\ \ \ \ \ std::map<std::shared\_ptr<StackItem>,\ std::shared\_ptr<StackItem>,\ \mbox{\hyperlink{structneo_1_1vm_1_1_stack_item_ptr_comparator}{StackItemPtrComparator}}>\ \mbox{\hyperlink{classneo_1_1vm_1_1_map_item_ab460f9477290691ab0ee08146175cd08}{value\_}};}
+\DoxyCodeLine{00314\ \ \ \ \ \mbox{\hyperlink{classneo_1_1vm_1_1_reference_counter}{ReferenceCounter}}*\ \mbox{\hyperlink{classneo_1_1vm_1_1_map_item_aed6147da5067d6f0e94a229fc7ac629a}{refCounter\_}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00315\ \};}
+\DoxyCodeLine{00316\ }
+\DoxyCodeLine{00317\ \textcolor{comment}{//\ Type\ alias\ for\ compatibility\ with\ C\#\ naming}}
+\DoxyCodeLine{00318\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceneo_1_1vm_a43faf876f054d0c6da8b213ea630d520}{Struct}}\ =\ \mbox{\hyperlink{classneo_1_1vm_1_1_struct_item}{StructItem}};}
+\DoxyCodeLine{00319\ \}\ \ \textcolor{comment}{//\ namespace\ neo::vm}}
+
+\end{DoxyCode}

@@ -1,0 +1,654 @@
+\doxysection{neo\+::smartcontract\+::native\+::Crypto\+Lib Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib}{}\label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+
+
+Represents the crypto library native contract.  
+
+
+
+
+{\ttfamily \#include $<$crypto\+\_\+lib.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::smartcontract\+::native\+::Crypto\+Lib\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::smartcontract\+::native\+::Crypto\+Lib\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a280044025e82c5c286555761fde3f799}{Crypto\+Lib}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib}{Crypto\+Lib}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a60667ade06e1b9a3c3ef7e2c6a68a632}{Native\+Contract}} (const std\+::string \&name, uint32\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{Native\+Contract}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_ae37e44a3d146975a024466fc40a8dc53}{\texorpdfstring{$\sim$}{\string~}\+Native\+Contract}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a36ffe7bef8e2b15c1992c7fd51735e04}{Get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Gets the name. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a514770635cb55d0e5c59a8d2b5231ea3}{Get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Gets the ID. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_adee5386515d940f614d7f680b5d0edb7}{Get\+Script\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script hash. \end{DoxyCompactList}\item 
+const std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}}, std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&)$>$ $>$ $>$ \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aefb916eb8825a724a48d75e9c5c69acf}{Get\+Methods}} () const
+\begin{DoxyCompactList}\small\item\em Gets the methods. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a3ed2d00b721434cf15b180038e4fa4f2}{Invoke}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::string \&method, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags)
+\begin{DoxyCompactList}\small\item\em Invokes a method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_acbf33ca368ff4d13541b9c12e0a34cad}{Call}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::string \&method, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Calls a method on the contract (alias for Invoke). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aef8498874e1b666ab258a891c2f05a56}{Check\+Call\+Flags}} (const std\+::string \&method, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags) const
+\begin{DoxyCompactList}\small\item\em Checks if the contract has the specified call flags. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a6d9998fc6c7dbedcc447f403fddb6d08}{Get\+Storage\+Prefix}} () const
+\begin{DoxyCompactList}\small\item\em Gets the storage prefix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aaa080efcc4d7deced7aded7bb968cd9c}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a44c7d768e39be1ed6933cdcf2350a2e8}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a50c32e2fa8e736183a0135b44ac5438d}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a2a46f86ca8b2d541f8623821d389eb8b}{Get\+Storage\+Key}} (uint8\+\_\+t prefix, const std\+::string \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aa8eed221a7bf2bce103f7e1fef187e6c}{Get\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Gets the storage value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a88e6f4aa548d073c5740d1eb0f59f91e}{Put\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value) const
+\begin{DoxyCompactList}\small\item\em Puts the storage value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a041e040e9fbf45d8d8ba9c0dcf87afe4}{Delete\+Storage\+Value}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_view}{persistence\+::\+Store\+View}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Deletes the storage value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a5a9ec24cc4c1584fb00fdf32f614dbd8}{Create\+Storage\+Key}} (uint8\+\_\+t prefix) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_aacd0961fef8aaa618f43294e4561a72a}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_ac60e9957320d04ffd697e023f94bf233}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a4c42d353f5328c9fbc06f5fd38e406cd}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key with the specified prefix and key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a8221750790b1aa223a4351bb81ec8a59}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, uint32\+\_\+t key) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr int32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aa38beb1cefa30353f90975e174b3877f}{ID}} = 4
+\begin{DoxyCompactList}\small\item\em The contract ID (matches Neo C\# implementation). \end{DoxyCompactList}\item 
+static constexpr const char \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_ac81e5c92ebacf60c58b20915225b3fae}{NAME}} = "{}Crypto\+Lib"{}
+\begin{DoxyCompactList}\small\item\em The contract name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a9bd3a3579c93b46f1c0e43b52ba9096e}{Initialize}} () override
+\begin{DoxyCompactList}\small\item\em Initializes the contract. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a26af9bcd266b59f910293081ef334993}{Register\+Method}} (const std\+::string \&name, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags, std\+::function$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&)$>$ handler)
+\begin{DoxyCompactList}\small\item\em Registers a method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a4bf465baf7d9183eef1b790e3ae695e6}{On\+Sha256}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the sha256 method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_ab97c93ce1f0087928a9411133f17d87d}{On\+Ripemd160}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the ripemd160 method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_afc65e9f8962ce147204f365046f0e0c3}{On\+Hash160}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the hash160 method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_af2d2be618dc5ba34093846ae7698a243}{On\+Hash256}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the hash256 method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a30af7aef6527d7c62ba9fdd127221c9e}{On\+Verify\+Signature}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the verify\+Signature method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a5fc9f008c349aa8def97736087f60395}{On\+Verify\+With\+ECDsa}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the verify\+With\+ECDsa method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a39bf62953f999940fe97e92eb65d2369}{On\+Bls12381\+Serialize}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the bls12381\+Serialize method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a7c26a2e7608724f3ca92988efe99fff1}{On\+Bls12381\+Deserialize}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the bls12381\+Deserialize method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aa45315a8b53038315d8ebc5c835bb75f}{On\+Bls12381\+Equal}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the bls12381\+Equal method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a9873cde3f0deaea7720cd1bba5c149ed}{On\+Bls12381\+Add}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the bls12381\+Add method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a59db1ae854053118b10e2fabb2c4bcea}{On\+Bls12381\+Mul}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the bls12381\+Mul method. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a7b7a55d398afb47720b2481776b48064}{On\+Bls12381\+Pairing}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the bls12381\+Pairing method. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aaf9ce97058cd37b684d8ee12dec87fdc}{Verify\+Secp256k1\+Signature}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&message, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&signature, const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&public\+Key)
+\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a10f05dacf8f94a967f1e17ee2e096522}{Is\+Valid\+Secp256k1\+Public\+Key}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&public\+Key)
+\item 
+std\+::pair$<$ std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$, std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a2477f7f4b64059240d885a1f071dc755}{Parse\+Secp256k1\+Signature}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&signature)
+\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a08e6f3f57440ad6849b69f64aa4c911f}{Verify\+Secp256k1\+ECDSA}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&message\+Hash, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&r, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&s, const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&public\+Key)
+\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a76a46e6ed2a4621687f2dfa0c619e311}{Is\+Zero}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&value)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a995b086c452adfed12d70c63f1b733df}{Serialize\+G1\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&point, bool compressed)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a14ab941685b8dda601cc7a27d983c758}{Serialize\+G2\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&point, bool compressed)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_ab12b56f877755097057f9026403182f2}{Deserialize\+G1\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a78c850f1fb76a96ef567cd3724ce41d3}{Deserialize\+G2\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data)
+\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a7eb38ae18ec3f82e10f34adcc255c5fb}{Is\+G2\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data)
+\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aa0af48f59e191a17f6a7bb79407d08aa}{Validate\+G1\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&point)
+\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_acd13df2d8ce32074ed7a75568800608e}{Validate\+G2\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&point)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a67d993ee766bf99cc0054562b23f05a0}{Normalize\+Bls12381\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&point)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a03e7eea2480b65007e05b54abe397646}{Add\+G1\+Points}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&point1, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&point2)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aed74da193408c329be0039446ea51f00}{Add\+G2\+Points}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&point1, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&point2)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a9793aa525cd37e33e780ac9a0d862255}{Mul\+G1\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&point, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&scalar)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aa2d9e87f8e0320fa83749657d9ef95b7}{Mul\+G2\+Point}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&point, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&scalar)
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a58783dd80b8c07129ef9179ee0331631}{Compute\+Bls12381\+Pairing}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&g1\+Point, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&g2\+Point)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a42ea0ca50925a8d114e2eb1370923f22}{Native\+Contract\+Test}}
+\item 
+class \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a2d5aa299c07a9c950c7d79bd14d3f4a6}{Crypto\+Lib\+Test}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the crypto library native contract. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a280044025e82c5c286555761fde3f799}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!CryptoLib@{CryptoLib}}
+\index{CryptoLib@{CryptoLib}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{CryptoLib()}{CryptoLib()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a280044025e82c5c286555761fde3f799} 
+neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Crypto\+Lib (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1smartcontract_1_1native_1_1_crypto_lib}{Crypto\+Lib}. 
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a03e7eea2480b65007e05b54abe397646}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!AddG1Points@{AddG1Points}}
+\index{AddG1Points@{AddG1Points}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{AddG1Points()}{AddG1Points()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a03e7eea2480b65007e05b54abe397646} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Add\+G1\+Points (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{point1}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{point2}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aed74da193408c329be0039446ea51f00}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!AddG2Points@{AddG2Points}}
+\index{AddG2Points@{AddG2Points}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{AddG2Points()}{AddG2Points()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aed74da193408c329be0039446ea51f00} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Add\+G2\+Points (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{point1}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{point2}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a58783dd80b8c07129ef9179ee0331631}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!ComputeBls12381Pairing@{ComputeBls12381Pairing}}
+\index{ComputeBls12381Pairing@{ComputeBls12381Pairing}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{ComputeBls12381Pairing()}{ComputeBls12381Pairing()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a58783dd80b8c07129ef9179ee0331631} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Compute\+Bls12381\+Pairing (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{g1\+Point}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{g2\+Point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_ab12b56f877755097057f9026403182f2}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!DeserializeG1Point@{DeserializeG1Point}}
+\index{DeserializeG1Point@{DeserializeG1Point}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{DeserializeG1Point()}{DeserializeG1Point()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_ab12b56f877755097057f9026403182f2} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Deserialize\+G1\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a78c850f1fb76a96ef567cd3724ce41d3}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!DeserializeG2Point@{DeserializeG2Point}}
+\index{DeserializeG2Point@{DeserializeG2Point}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{DeserializeG2Point()}{DeserializeG2Point()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a78c850f1fb76a96ef567cd3724ce41d3} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Deserialize\+G2\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a9bd3a3579c93b46f1c0e43b52ba9096e}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a9bd3a3579c93b46f1c0e43b52ba9096e} 
+void neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Initializes the contract. 
+
+
+
+Implements \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a427aae1fe42c2264c5f6979a84092a5d}{neo\+::smartcontract\+::native\+::\+Native\+Contract}}.
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a7eb38ae18ec3f82e10f34adcc255c5fb}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!IsG2Point@{IsG2Point}}
+\index{IsG2Point@{IsG2Point}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{IsG2Point()}{IsG2Point()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a7eb38ae18ec3f82e10f34adcc255c5fb} 
+bool neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Is\+G2\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a10f05dacf8f94a967f1e17ee2e096522}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!IsValidSecp256k1PublicKey@{IsValidSecp256k1PublicKey}}
+\index{IsValidSecp256k1PublicKey@{IsValidSecp256k1PublicKey}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{IsValidSecp256k1PublicKey()}{IsValidSecp256k1PublicKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a10f05dacf8f94a967f1e17ee2e096522} 
+bool neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Is\+Valid\+Secp256k1\+Public\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{public\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a76a46e6ed2a4621687f2dfa0c619e311}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!IsZero@{IsZero}}
+\index{IsZero@{IsZero}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{IsZero()}{IsZero()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a76a46e6ed2a4621687f2dfa0c619e311} 
+bool neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Is\+Zero (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a9793aa525cd37e33e780ac9a0d862255}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!MulG1Point@{MulG1Point}}
+\index{MulG1Point@{MulG1Point}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{MulG1Point()}{MulG1Point()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a9793aa525cd37e33e780ac9a0d862255} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Mul\+G1\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{point}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{scalar}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aa2d9e87f8e0320fa83749657d9ef95b7}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!MulG2Point@{MulG2Point}}
+\index{MulG2Point@{MulG2Point}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{MulG2Point()}{MulG2Point()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aa2d9e87f8e0320fa83749657d9ef95b7} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Mul\+G2\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{point}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{scalar}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a67d993ee766bf99cc0054562b23f05a0}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!NormalizeBls12381Point@{NormalizeBls12381Point}}
+\index{NormalizeBls12381Point@{NormalizeBls12381Point}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{NormalizeBls12381Point()}{NormalizeBls12381Point()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a67d993ee766bf99cc0054562b23f05a0} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Normalize\+Bls12381\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a9873cde3f0deaea7720cd1bba5c149ed}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!OnBls12381Add@{OnBls12381Add}}
+\index{OnBls12381Add@{OnBls12381Add}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{OnBls12381Add()}{OnBls12381Add()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a9873cde3f0deaea7720cd1bba5c149ed} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+On\+Bls12381\+Add (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the bls12381\+Add method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a7c26a2e7608724f3ca92988efe99fff1}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!OnBls12381Deserialize@{OnBls12381Deserialize}}
+\index{OnBls12381Deserialize@{OnBls12381Deserialize}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{OnBls12381Deserialize()}{OnBls12381Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a7c26a2e7608724f3ca92988efe99fff1} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+On\+Bls12381\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the bls12381\+Deserialize method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aa45315a8b53038315d8ebc5c835bb75f}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!OnBls12381Equal@{OnBls12381Equal}}
+\index{OnBls12381Equal@{OnBls12381Equal}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{OnBls12381Equal()}{OnBls12381Equal()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aa45315a8b53038315d8ebc5c835bb75f} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+On\+Bls12381\+Equal (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the bls12381\+Equal method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a59db1ae854053118b10e2fabb2c4bcea}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!OnBls12381Mul@{OnBls12381Mul}}
+\index{OnBls12381Mul@{OnBls12381Mul}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{OnBls12381Mul()}{OnBls12381Mul()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a59db1ae854053118b10e2fabb2c4bcea} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+On\+Bls12381\+Mul (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the bls12381\+Mul method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a7b7a55d398afb47720b2481776b48064}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!OnBls12381Pairing@{OnBls12381Pairing}}
+\index{OnBls12381Pairing@{OnBls12381Pairing}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{OnBls12381Pairing()}{OnBls12381Pairing()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a7b7a55d398afb47720b2481776b48064} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+On\+Bls12381\+Pairing (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the bls12381\+Pairing method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a39bf62953f999940fe97e92eb65d2369}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!OnBls12381Serialize@{OnBls12381Serialize}}
+\index{OnBls12381Serialize@{OnBls12381Serialize}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{OnBls12381Serialize()}{OnBls12381Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a39bf62953f999940fe97e92eb65d2369} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+On\+Bls12381\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the bls12381\+Serialize method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_afc65e9f8962ce147204f365046f0e0c3}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!OnHash160@{OnHash160}}
+\index{OnHash160@{OnHash160}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{OnHash160()}{OnHash160()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_afc65e9f8962ce147204f365046f0e0c3} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+On\+Hash160 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the hash160 method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_af2d2be618dc5ba34093846ae7698a243}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!OnHash256@{OnHash256}}
+\index{OnHash256@{OnHash256}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{OnHash256()}{OnHash256()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_af2d2be618dc5ba34093846ae7698a243} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+On\+Hash256 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the hash256 method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_ab97c93ce1f0087928a9411133f17d87d}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!OnRipemd160@{OnRipemd160}}
+\index{OnRipemd160@{OnRipemd160}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{OnRipemd160()}{OnRipemd160()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_ab97c93ce1f0087928a9411133f17d87d} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+On\+Ripemd160 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the ripemd160 method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a4bf465baf7d9183eef1b790e3ae695e6}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!OnSha256@{OnSha256}}
+\index{OnSha256@{OnSha256}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{OnSha256()}{OnSha256()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a4bf465baf7d9183eef1b790e3ae695e6} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+On\+Sha256 (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the sha256 method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 23
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a30af7aef6527d7c62ba9fdd127221c9e}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!OnVerifySignature@{OnVerifySignature}}
+\index{OnVerifySignature@{OnVerifySignature}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{OnVerifySignature()}{OnVerifySignature()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a30af7aef6527d7c62ba9fdd127221c9e} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+On\+Verify\+Signature (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the verify\+Signature method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 24
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a5fc9f008c349aa8def97736087f60395}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!OnVerifyWithECDsa@{OnVerifyWithECDsa}}
+\index{OnVerifyWithECDsa@{OnVerifyWithECDsa}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{OnVerifyWithECDsa()}{OnVerifyWithECDsa()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a5fc9f008c349aa8def97736087f60395} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+On\+Verify\+With\+ECDsa (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the verify\+With\+ECDsa method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 25
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a2477f7f4b64059240d885a1f071dc755}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!ParseSecp256k1Signature@{ParseSecp256k1Signature}}
+\index{ParseSecp256k1Signature@{ParseSecp256k1Signature}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{ParseSecp256k1Signature()}{ParseSecp256k1Signature()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a2477f7f4b64059240d885a1f071dc755} 
+std\+::pair$<$ std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$, std\+::optional$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} $>$ $>$ neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Parse\+Secp256k1\+Signature (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{signature}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 26
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a995b086c452adfed12d70c63f1b733df}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!SerializeG1Point@{SerializeG1Point}}
+\index{SerializeG1Point@{SerializeG1Point}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{SerializeG1Point()}{SerializeG1Point()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a995b086c452adfed12d70c63f1b733df} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Serialize\+G1\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{point}{, }\item[{bool}]{compressed}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 27
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a14ab941685b8dda601cc7a27d983c758}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!SerializeG2Point@{SerializeG2Point}}
+\index{SerializeG2Point@{SerializeG2Point}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{SerializeG2Point()}{SerializeG2Point()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a14ab941685b8dda601cc7a27d983c758} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Serialize\+G2\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{point}{, }\item[{bool}]{compressed}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 28
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aa0af48f59e191a17f6a7bb79407d08aa}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!ValidateG1Point@{ValidateG1Point}}
+\index{ValidateG1Point@{ValidateG1Point}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{ValidateG1Point()}{ValidateG1Point()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aa0af48f59e191a17f6a7bb79407d08aa} 
+bool neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Validate\+G1\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 29
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_acd13df2d8ce32074ed7a75568800608e}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!ValidateG2Point@{ValidateG2Point}}
+\index{ValidateG2Point@{ValidateG2Point}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{ValidateG2Point()}{ValidateG2Point()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_acd13df2d8ce32074ed7a75568800608e} 
+bool neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Validate\+G2\+Point (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{point}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 30
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a08e6f3f57440ad6849b69f64aa4c911f}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!VerifySecp256k1ECDSA@{VerifySecp256k1ECDSA}}
+\index{VerifySecp256k1ECDSA@{VerifySecp256k1ECDSA}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{VerifySecp256k1ECDSA()}{VerifySecp256k1ECDSA()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a08e6f3f57440ad6849b69f64aa4c911f} 
+bool neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Verify\+Secp256k1\+ECDSA (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{message\+Hash}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{r}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{s}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{public\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 31
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aaf9ce97058cd37b684d8ee12dec87fdc}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!VerifySecp256k1Signature@{VerifySecp256k1Signature}}
+\index{VerifySecp256k1Signature@{VerifySecp256k1Signature}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{VerifySecp256k1Signature()}{VerifySecp256k1Signature()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aaf9ce97058cd37b684d8ee12dec87fdc} 
+bool neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+Verify\+Secp256k1\+Signature (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{message}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{signature}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{public\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 32
+
+
+\label{doc-related-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_doc-related-members}
+\doxysubsection{Friends And Related Symbol Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a2d5aa299c07a9c950c7d79bd14d3f4a6}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!CryptoLibTest@{CryptoLibTest}}
+\index{CryptoLibTest@{CryptoLibTest}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{CryptoLibTest}{CryptoLibTest}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a2d5aa299c07a9c950c7d79bd14d3f4a6} 
+friend class Crypto\+Lib\+Test\hspace{0.3cm}{\ttfamily [friend]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a42ea0ca50925a8d114e2eb1370923f22}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!NativeContractTest@{NativeContractTest}}
+\index{NativeContractTest@{NativeContractTest}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{NativeContractTest}{NativeContractTest}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_a42ea0ca50925a8d114e2eb1370923f22} 
+friend class Native\+Contract\+Test\hspace{0.3cm}{\ttfamily [friend]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aa38beb1cefa30353f90975e174b3877f}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!ID@{ID}}
+\index{ID@{ID}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{ID}{ID}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_aa38beb1cefa30353f90975e174b3877f} 
+int32\+\_\+t neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+ID = 4\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The contract ID (matches Neo C\# implementation). 
+
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_ac81e5c92ebacf60c58b20915225b3fae}\index{neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}!NAME@{NAME}}
+\index{NAME@{NAME}!neo::smartcontract::native::CryptoLib@{neo::smartcontract::native::CryptoLib}}
+\doxysubsubsection{\texorpdfstring{NAME}{NAME}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_crypto_lib_ac81e5c92ebacf60c58b20915225b3fae} 
+const char\texorpdfstring{$\ast$}{*} neo\+::smartcontract\+::native\+::\+Crypto\+Lib\+::\+NAME = "{}Crypto\+Lib"{}\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+The contract name. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/native/\mbox{\hyperlink{crypto__lib_8h}{crypto\+\_\+lib.\+h}}\item 
+src/smartcontract/native/\mbox{\hyperlink{crypto__lib_8cpp}{crypto\+\_\+lib.\+cpp}}\item 
+src/smartcontract/native/\mbox{\hyperlink{crypto__lib__bls12__381_8cpp}{crypto\+\_\+lib\+\_\+bls12\+\_\+381.\+cpp}}\end{DoxyCompactItemize}

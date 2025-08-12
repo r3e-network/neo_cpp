@@ -1,0 +1,597 @@
+\doxysection{neo\+::json\+::Ordered\+Dictionary\texorpdfstring{$<$}{<} TKey, TValue \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classneo_1_1json_1_1_ordered_dictionary}{}\label{classneo_1_1json_1_1_ordered_dictionary}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+
+
+An ordered dictionary that maintains insertion order.  
+
+
+
+
+{\ttfamily \#include $<$ordered\+\_\+dictionary.\+h$>$}
+
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1json_1_1_ordered_dictionary_1_1_item}{Item}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ae30775608548da293a78547cc6dc5e3d}{iterator}} = typename std\+::vector$<$\mbox{\hyperlink{structneo_1_1json_1_1_ordered_dictionary_1_1_item}{Item}}$>$\+::iterator
+\item 
+using \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a14fa3c223c045f735e5ac5295f16cea1}{const\+\_\+iterator}} = typename std\+::vector$<$\mbox{\hyperlink{structneo_1_1json_1_1_ordered_dictionary_1_1_item}{Item}}$>$\+::const\+\_\+iterator
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ac3af84333bb5e6c86207361ca54c31e8}{Ordered\+Dictionary}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a04469533952b0094a1fdd289a7477744}{Ordered\+Dictionary}} (const \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{Ordered\+Dictionary}} \&other)=default
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_af0a7bf3b839b9a94f8b0bc6b1028ab3b}{Ordered\+Dictionary}} (\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{Ordered\+Dictionary}} \&\&other) noexcept=default
+\begin{DoxyCompactList}\small\item\em Move constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{Ordered\+Dictionary}} \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a9b9a1503e73f89f2fcd43504299a3e00}{operator=}} (const \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{Ordered\+Dictionary}} \&other)=default
+\begin{DoxyCompactList}\small\item\em Copy assignment operator. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{Ordered\+Dictionary}} \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a713f11a2935a64bffe2ccf3f80927016}{operator=}} (\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{Ordered\+Dictionary}} \&\&other) noexcept=default
+\begin{DoxyCompactList}\small\item\em Move assignment operator. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a581a6a729ec7f7f78899291b58cc07c1}{size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of elements. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a1e04db4425e45fab5af870490136cbb0}{empty}} () const
+\begin{DoxyCompactList}\small\item\em Checks if the dictionary is empty. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a87346cdb70844938cc5453651491988e}{clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears all elements. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a401d252f604259b4da24b3cf4f749e59}{insert\+\_\+or\+\_\+assign}} (const TKey \&key, const TValue \&value)
+\begin{DoxyCompactList}\small\item\em Adds or updates an element. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_af1ae8253e75d17a59dbc57543a0f98ba}{insert\+\_\+or\+\_\+assign}} (TKey \&\&key, TValue \&\&value)
+\begin{DoxyCompactList}\small\item\em Adds or updates an element (move version). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a288c3ce8de9a6c31ddde6acfc109d24f}{contains}} (const TKey \&key) const
+\begin{DoxyCompactList}\small\item\em Checks if a key exists. \end{DoxyCompactList}\item 
+TValue \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ad1cefe85bcaffed0460e9c07f7f04005}{at}} (const TKey \&key)
+\begin{DoxyCompactList}\small\item\em Gets a value by key. \end{DoxyCompactList}\item 
+const TValue \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ab839d986d3c07aefab8180df5d17ad5d}{at}} (const TKey \&key) const
+\begin{DoxyCompactList}\small\item\em Gets a value by key (const version). \end{DoxyCompactList}\item 
+TValue \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a3fa97ab1e8015247520fc5025ae4b195}{at}} (size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Gets a value by index. \end{DoxyCompactList}\item 
+const TValue \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ae397a4f382c580d0f66c489ad6a414fe}{at}} (size\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets a value by index (const version). \end{DoxyCompactList}\item 
+TValue \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_abb8fbf9fa57e421db30474bd106b57ae}{operator\mbox{[}$\,$\mbox{]}}} (const TKey \&key)
+\begin{DoxyCompactList}\small\item\em Operator\mbox{[}\mbox{]} for key access. \end{DoxyCompactList}\item 
+TValue \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a356489acf6176463a8e5189d17d5d2d9}{operator\mbox{[}$\,$\mbox{]}}} (size\+\_\+t index)
+\begin{DoxyCompactList}\small\item\em Operator\mbox{[}\mbox{]} for index access. \end{DoxyCompactList}\item 
+const TValue \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a4107420a8bc1b179361dee65af77d700}{operator\mbox{[}$\,$\mbox{]}}} (size\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Operator\mbox{[}\mbox{]} for index access (const version). \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a33bfbd00b2fc86f0b71074b2544c9428}{erase}} (const TKey \&key)
+\begin{DoxyCompactList}\small\item\em Removes an element by key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ae30775608548da293a78547cc6dc5e3d}{iterator}} \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a66dc9cd43be61b8c398767f77ef18fdd}{begin}} ()
+\begin{DoxyCompactList}\small\item\em Gets an iterator to the beginning. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ae30775608548da293a78547cc6dc5e3d}{iterator}} \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a08211312752f47c6e269aa7e7389cf07}{end}} ()
+\begin{DoxyCompactList}\small\item\em Gets an iterator to the end. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a14fa3c223c045f735e5ac5295f16cea1}{const\+\_\+iterator}} \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a11282d697c22a0ee0c0787ddd9f44ab2}{begin}} () const
+\begin{DoxyCompactList}\small\item\em Gets a const iterator to the beginning. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a14fa3c223c045f735e5ac5295f16cea1}{const\+\_\+iterator}} \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ab27a5b4f029c4f1ac515d01d627e00d5}{end}} () const
+\begin{DoxyCompactList}\small\item\em Gets a const iterator to the end. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a14fa3c223c045f735e5ac5295f16cea1}{const\+\_\+iterator}} \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ac28ffaa5c7a7868866ced607466ad950}{cbegin}} () const
+\begin{DoxyCompactList}\small\item\em Gets a const iterator to the beginning. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a14fa3c223c045f735e5ac5295f16cea1}{const\+\_\+iterator}} \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a46d16e3b67d7e8c22fbca112d7a6ccf6}{cend}} () const
+\begin{DoxyCompactList}\small\item\em Gets a const iterator to the end. \end{DoxyCompactList}\item 
+const TKey \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_aa934de1d33d2f82cbfeb5a36d304a9a3}{key\+\_\+at}} (size\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets the key at the specified index. \end{DoxyCompactList}\item 
+const TValue \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a78211e752daaf2472619e0351bd01a3e}{value\+\_\+at}} (size\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets the value at the specified index. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{structneo_1_1json_1_1_ordered_dictionary_1_1_item}{Item}} $>$ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}{items\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ TKey, size\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}{key\+\_\+to\+\_\+index\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename TKey, typename TValue$>$\newline
+class neo\+::json\+::\+Ordered\+Dictionary$<$ TKey, TValue $>$}
+An ordered dictionary that maintains insertion order. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TKey} & The key type. \\
+\hline
+{\em TValue} & The value type. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a14fa3c223c045f735e5ac5295f16cea1}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!const\_iterator@{const\_iterator}}
+\index{const\_iterator@{const\_iterator}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{const\_iterator}{const\_iterator}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a14fa3c223c045f735e5ac5295f16cea1} 
+template$<$typename TKey, typename TValue$>$ \\
+using \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::const\+\_\+iterator = typename std\+::vector$<$\mbox{\hyperlink{structneo_1_1json_1_1_ordered_dictionary_1_1_item}{Item}}$>$\+::const\+\_\+iterator}
+
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_ae30775608548da293a78547cc6dc5e3d}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!iterator@{iterator}}
+\index{iterator@{iterator}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{iterator}{iterator}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_ae30775608548da293a78547cc6dc5e3d} 
+template$<$typename TKey, typename TValue$>$ \\
+using \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::iterator = typename std\+::vector$<$\mbox{\hyperlink{structneo_1_1json_1_1_ordered_dictionary_1_1_item}{Item}}$>$\+::iterator}
+
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_ac3af84333bb5e6c86207361ca54c31e8}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!OrderedDictionary@{OrderedDictionary}}
+\index{OrderedDictionary@{OrderedDictionary}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{OrderedDictionary()}{OrderedDictionary()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_ac3af84333bb5e6c86207361ca54c31e8} 
+template$<$typename TKey, typename TValue$>$ \\
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::\+Ordered\+Dictionary (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor. 
+
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a04469533952b0094a1fdd289a7477744}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!OrderedDictionary@{OrderedDictionary}}
+\index{OrderedDictionary@{OrderedDictionary}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{OrderedDictionary()}{OrderedDictionary()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a04469533952b0094a1fdd289a7477744} 
+template$<$typename TKey, typename TValue$>$ \\
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::\+Ordered\+Dictionary (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{Ordered\+Dictionary}}$<$ TKey, TValue $>$ \&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Copy constructor. 
+
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_af0a7bf3b839b9a94f8b0bc6b1028ab3b}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!OrderedDictionary@{OrderedDictionary}}
+\index{OrderedDictionary@{OrderedDictionary}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{OrderedDictionary()}{OrderedDictionary()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_af0a7bf3b839b9a94f8b0bc6b1028ab3b} 
+template$<$typename TKey, typename TValue$>$ \\
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::\+Ordered\+Dictionary (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{Ordered\+Dictionary}}$<$ TKey, TValue $>$ \&\&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+
+
+Move constructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_ad1cefe85bcaffed0460e9c07f7f04005}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!at@{at}}
+\index{at@{at}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_ad1cefe85bcaffed0460e9c07f7f04005} 
+template$<$typename TKey, typename TValue$>$ \\
+TValue \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::at (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a value by key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the value. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & if key not found. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_ab839d986d3c07aefab8180df5d17ad5d}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!at@{at}}
+\index{at@{at}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_ab839d986d3c07aefab8180df5d17ad5d} 
+template$<$typename TKey, typename TValue$>$ \\
+const TValue \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::at (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a value by key (const version). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Const reference to the value. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & if key not found. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a3fa97ab1e8015247520fc5025ae4b195}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!at@{at}}
+\index{at@{at}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a3fa97ab1e8015247520fc5025ae4b195} 
+template$<$typename TKey, typename TValue$>$ \\
+TValue \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::at (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a value by index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the value. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & if index is invalid. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_ae397a4f382c580d0f66c489ad6a414fe}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!at@{at}}
+\index{at@{at}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{at()}{at()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_ae397a4f382c580d0f66c489ad6a414fe} 
+template$<$typename TKey, typename TValue$>$ \\
+const TValue \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::at (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a value by index (const version). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Const reference to the value. 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::out\+\_\+of\+\_\+range} & if index is invalid. \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a66dc9cd43be61b8c398767f77ef18fdd}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!begin@{begin}}
+\index{begin@{begin}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a66dc9cd43be61b8c398767f77ef18fdd} 
+template$<$typename TKey, typename TValue$>$ \\
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ae30775608548da293a78547cc6dc5e3d}{iterator}} \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets an iterator to the beginning. 
+
+\begin{DoxyReturn}{Returns}
+Iterator to the beginning. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a11282d697c22a0ee0c0787ddd9f44ab2}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!begin@{begin}}
+\index{begin@{begin}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{begin()}{begin()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a11282d697c22a0ee0c0787ddd9f44ab2} 
+template$<$typename TKey, typename TValue$>$ \\
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a14fa3c223c045f735e5ac5295f16cea1}{const\+\_\+iterator}} \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::begin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a const iterator to the beginning. 
+
+\begin{DoxyReturn}{Returns}
+Const iterator to the beginning. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_ac28ffaa5c7a7868866ced607466ad950}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!cbegin@{cbegin}}
+\index{cbegin@{cbegin}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{cbegin()}{cbegin()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_ac28ffaa5c7a7868866ced607466ad950} 
+template$<$typename TKey, typename TValue$>$ \\
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a14fa3c223c045f735e5ac5295f16cea1}{const\+\_\+iterator}} \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::cbegin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a const iterator to the beginning. 
+
+\begin{DoxyReturn}{Returns}
+Const iterator to the beginning. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a46d16e3b67d7e8c22fbca112d7a6ccf6}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!cend@{cend}}
+\index{cend@{cend}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{cend()}{cend()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a46d16e3b67d7e8c22fbca112d7a6ccf6} 
+template$<$typename TKey, typename TValue$>$ \\
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a14fa3c223c045f735e5ac5295f16cea1}{const\+\_\+iterator}} \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::cend (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a const iterator to the end. 
+
+\begin{DoxyReturn}{Returns}
+Const iterator to the end. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a87346cdb70844938cc5453651491988e}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!clear@{clear}}
+\index{clear@{clear}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{clear()}{clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a87346cdb70844938cc5453651491988e} 
+template$<$typename TKey, typename TValue$>$ \\
+void \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears all elements. 
+
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a288c3ce8de9a6c31ddde6acfc109d24f}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!contains@{contains}}
+\index{contains@{contains}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{contains()}{contains()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a288c3ce8de9a6c31ddde6acfc109d24f} 
+template$<$typename TKey, typename TValue$>$ \\
+bool \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::contains (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if a key exists. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to check. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the key exists, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a1e04db4425e45fab5af870490136cbb0}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!empty@{empty}}
+\index{empty@{empty}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{empty()}{empty()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a1e04db4425e45fab5af870490136cbb0} 
+template$<$typename TKey, typename TValue$>$ \\
+bool \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Checks if the dictionary is empty. 
+
+\begin{DoxyReturn}{Returns}
+True if empty, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a08211312752f47c6e269aa7e7389cf07}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!end@{end}}
+\index{end@{end}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a08211312752f47c6e269aa7e7389cf07} 
+template$<$typename TKey, typename TValue$>$ \\
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_ae30775608548da293a78547cc6dc5e3d}{iterator}} \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets an iterator to the end. 
+
+\begin{DoxyReturn}{Returns}
+Iterator to the end. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_ab27a5b4f029c4f1ac515d01d627e00d5}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!end@{end}}
+\index{end@{end}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{end()}{end()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_ab27a5b4f029c4f1ac515d01d627e00d5} 
+template$<$typename TKey, typename TValue$>$ \\
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary_a14fa3c223c045f735e5ac5295f16cea1}{const\+\_\+iterator}} \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::end (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a const iterator to the end. 
+
+\begin{DoxyReturn}{Returns}
+Const iterator to the end. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a33bfbd00b2fc86f0b71074b2544c9428}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!erase@{erase}}
+\index{erase@{erase}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{erase()}{erase()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a33bfbd00b2fc86f0b71074b2544c9428} 
+template$<$typename TKey, typename TValue$>$ \\
+bool \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::erase (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Removes an element by key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key to remove. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if removed, false if not found. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a401d252f604259b4da24b3cf4f749e59}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!insert\_or\_assign@{insert\_or\_assign}}
+\index{insert\_or\_assign@{insert\_or\_assign}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{insert\_or\_assign()}{insert\_or\_assign()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a401d252f604259b4da24b3cf4f749e59} 
+template$<$typename TKey, typename TValue$>$ \\
+void \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::insert\+\_\+or\+\_\+assign (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{, }\item[{const TValue \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds or updates an element. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+{\em value} & The value. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_af1ae8253e75d17a59dbc57543a0f98ba}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!insert\_or\_assign@{insert\_or\_assign}}
+\index{insert\_or\_assign@{insert\_or\_assign}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{insert\_or\_assign()}{insert\_or\_assign()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_af1ae8253e75d17a59dbc57543a0f98ba} 
+template$<$typename TKey, typename TValue$>$ \\
+void \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::insert\+\_\+or\+\_\+assign (\begin{DoxyParamCaption}\item[{TKey \&\&}]{key}{, }\item[{TValue \&\&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds or updates an element (move version). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+{\em value} & The value. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_aa934de1d33d2f82cbfeb5a36d304a9a3}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!key\_at@{key\_at}}
+\index{key\_at@{key\_at}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{key\_at()}{key\_at()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_aa934de1d33d2f82cbfeb5a36d304a9a3} 
+template$<$typename TKey, typename TValue$>$ \\
+const TKey \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::key\+\_\+at (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the key at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The key at the index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a9b9a1503e73f89f2fcd43504299a3e00}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a9b9a1503e73f89f2fcd43504299a3e00} 
+template$<$typename TKey, typename TValue$>$ \\
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{Ordered\+Dictionary}} \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{Ordered\+Dictionary}}$<$ TKey, TValue $>$ \&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Copy assignment operator. 
+
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a713f11a2935a64bffe2ccf3f80927016}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a713f11a2935a64bffe2ccf3f80927016} 
+template$<$typename TKey, typename TValue$>$ \\
+\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{Ordered\+Dictionary}} \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::operator= (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{Ordered\+Dictionary}}$<$ TKey, TValue $>$ \&\&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}, {\ttfamily [noexcept]}}
+
+
+
+Move assignment operator. 
+
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_abb8fbf9fa57e421db30474bd106b57ae}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_abb8fbf9fa57e421db30474bd106b57ae} 
+template$<$typename TKey, typename TValue$>$ \\
+TValue \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Operator\mbox{[}\mbox{]} for key access. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the value. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a356489acf6176463a8e5189d17d5d2d9}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a356489acf6176463a8e5189d17d5d2d9} 
+template$<$typename TKey, typename TValue$>$ \\
+TValue \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Operator\mbox{[}\mbox{]} for index access. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Reference to the value. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a4107420a8bc1b179361dee65af77d700}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a4107420a8bc1b179361dee65af77d700} 
+template$<$typename TKey, typename TValue$>$ \\
+const TValue \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Operator\mbox{[}\mbox{]} for index access (const version). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Const reference to the value. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a581a6a729ec7f7f78899291b58cc07c1}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!size@{size}}
+\index{size@{size}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{size()}{size()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a581a6a729ec7f7f78899291b58cc07c1} 
+template$<$typename TKey, typename TValue$>$ \\
+size\+\_\+t \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the number of elements. 
+
+\begin{DoxyReturn}{Returns}
+The number of elements. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a78211e752daaf2472619e0351bd01a3e}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!value\_at@{value\_at}}
+\index{value\_at@{value\_at}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{value\_at()}{value\_at()}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a78211e752daaf2472619e0351bd01a3e} 
+template$<$typename TKey, typename TValue$>$ \\
+const TValue \& \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::value\+\_\+at (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the value at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The value at the index. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!items\_@{items\_}}
+\index{items\_@{items\_}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{items\_}{items\_}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a6d724bf19a8b47074c4f3f9090d5cfad} 
+template$<$typename TKey, typename TValue$>$ \\
+std\+::vector$<$\mbox{\hyperlink{structneo_1_1json_1_1_ordered_dictionary_1_1_item}{Item}}$>$ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::items\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076}\index{neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}!key\_to\_index\_@{key\_to\_index\_}}
+\index{key\_to\_index\_@{key\_to\_index\_}!neo::json::OrderedDictionary$<$ TKey, TValue $>$@{neo::json::OrderedDictionary$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{key\_to\_index\_}{key\_to\_index\_}}
+{\footnotesize\ttfamily \label{classneo_1_1json_1_1_ordered_dictionary_a2cff30c7ac032aeae51a0d844498d076} 
+template$<$typename TKey, typename TValue$>$ \\
+std\+::unordered\+\_\+map$<$TKey, size\+\_\+t$>$ \mbox{\hyperlink{classneo_1_1json_1_1_ordered_dictionary}{neo\+::json\+::\+Ordered\+Dictionary}}$<$ TKey, TValue $>$\+::key\+\_\+to\+\_\+index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/json/\mbox{\hyperlink{ordered__dictionary_8h}{ordered\+\_\+dictionary.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,104 @@
+\doxysection{neo\+::network\+::p2p\+::payloads\+::Transaction\+Factory Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_factory}{}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_factory}\index{neo::network::p2p::payloads::TransactionFactory@{neo::network::p2p::payloads::TransactionFactory}}
+
+
+Factory for creating transactions from various sources.  
+
+
+
+
+{\ttfamily \#include $<$transaction\+\_\+factory.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_factory_ac1580148d785196ea3a0192ee2a941e4}{From\+Bytes}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data)
+\begin{DoxyCompactList}\small\item\em Creates a transaction from raw bytes. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_factory_a20751a8d9aab923b2776d50a16533cf8}{From\+Bytes}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Creates a transaction from a byte array. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_factory_a6bacfd8fdd5b22643a9a31f2c56dcb50}{From\+Hex\+String}} (const std\+::string \&hex)
+\begin{DoxyCompactList}\small\item\em Creates a transaction from a hex string. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_factory_a5c43077c637093142fcd55763342f2e9}{Create\+Empty}} ()
+\begin{DoxyCompactList}\small\item\em Creates an empty transaction. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Factory for creating transactions from various sources. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_factory_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_factory_a5c43077c637093142fcd55763342f2e9}\index{neo::network::p2p::payloads::TransactionFactory@{neo::network::p2p::payloads::TransactionFactory}!CreateEmpty@{CreateEmpty}}
+\index{CreateEmpty@{CreateEmpty}!neo::network::p2p::payloads::TransactionFactory@{neo::network::p2p::payloads::TransactionFactory}}
+\doxysubsubsection{\texorpdfstring{CreateEmpty()}{CreateEmpty()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_factory_a5c43077c637093142fcd55763342f2e9} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ neo\+::network\+::p2p\+::payloads\+::\+Transaction\+Factory\+::\+Create\+Empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates an empty transaction. 
+
+\begin{DoxyReturn}{Returns}
+A new empty transaction instance. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_factory_ac1580148d785196ea3a0192ee2a941e4}\index{neo::network::p2p::payloads::TransactionFactory@{neo::network::p2p::payloads::TransactionFactory}!FromBytes@{FromBytes}}
+\index{FromBytes@{FromBytes}!neo::network::p2p::payloads::TransactionFactory@{neo::network::p2p::payloads::TransactionFactory}}
+\doxysubsubsection{\texorpdfstring{FromBytes()}{FromBytes()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_factory_ac1580148d785196ea3a0192ee2a941e4} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ neo\+::network\+::p2p\+::payloads\+::\+Transaction\+Factory\+::\+From\+Bytes (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a transaction from raw bytes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The raw transaction data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new transaction instance. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_factory_a20751a8d9aab923b2776d50a16533cf8}\index{neo::network::p2p::payloads::TransactionFactory@{neo::network::p2p::payloads::TransactionFactory}!FromBytes@{FromBytes}}
+\index{FromBytes@{FromBytes}!neo::network::p2p::payloads::TransactionFactory@{neo::network::p2p::payloads::TransactionFactory}}
+\doxysubsubsection{\texorpdfstring{FromBytes()}{FromBytes()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_factory_a20751a8d9aab923b2776d50a16533cf8} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ neo\+::network\+::p2p\+::payloads\+::\+Transaction\+Factory\+::\+From\+Bytes (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a transaction from a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The raw transaction data. \\
+\hline
+{\em size} & The size of the data. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new transaction instance. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_factory_a6bacfd8fdd5b22643a9a31f2c56dcb50}\index{neo::network::p2p::payloads::TransactionFactory@{neo::network::p2p::payloads::TransactionFactory}!FromHexString@{FromHexString}}
+\index{FromHexString@{FromHexString}!neo::network::p2p::payloads::TransactionFactory@{neo::network::p2p::payloads::TransactionFactory}}
+\doxysubsubsection{\texorpdfstring{FromHexString()}{FromHexString()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_factory_a6bacfd8fdd5b22643a9a31f2c56dcb50} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{ledger\+::\+Transaction}} $>$ neo\+::network\+::p2p\+::payloads\+::\+Transaction\+Factory\+::\+From\+Hex\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a transaction from a hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The hex string representation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new transaction instance. 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/payloads/\mbox{\hyperlink{transaction__factory_8h}{transaction\+\_\+factory.\+h}}\end{DoxyCompactItemize}

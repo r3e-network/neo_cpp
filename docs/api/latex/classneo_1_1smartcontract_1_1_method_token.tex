@@ -1,0 +1,388 @@
+\doxysection{neo\+::smartcontract\+::Method\+Token Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1_method_token}{}\label{classneo_1_1smartcontract_1_1_method_token}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+
+
+Represents the methods that a contract will call statically.  
+
+
+
+
+{\ttfamily \#include $<$method\+\_\+token.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::smartcontract\+::Method\+Token\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::smartcontract\+::Method\+Token\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_ab19e8586352e5ddf4d2076772a215c80}{Method\+Token}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1smartcontract_1_1_method_token}{Method\+Token}. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_aa1260a457f40192fc8bdf5afaa5c5c8b}{Get\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the hash of the contract to be called. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_a7604d1e83fdc2d13cf3288860bfcc361}{Set\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&hash)
+\begin{DoxyCompactList}\small\item\em Sets the hash of the contract to be called. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_ab0a4a1b66a3470e146d0e7e02b04d89e}{Get\+Method}} () const
+\begin{DoxyCompactList}\small\item\em Gets the name of the method to be called. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_a6404f03d6b3b2b2ee08994a67b3f6830}{Set\+Method}} (const std\+::string \&method)
+\begin{DoxyCompactList}\small\item\em Sets the name of the method to be called. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_a3d36e0edbc30c1e9548e6b8bd26b0466}{Get\+Parameters\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of parameters of the method to be called. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_aaaa26090476eba184d827b0550f6f6b7}{Set\+Parameters\+Count}} (uint16\+\_\+t parameters\+Count)
+\begin{DoxyCompactList}\small\item\em Sets the number of parameters of the method to be called. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_a7873500c41d00a3a80e3c63fc8bb836d}{Get\+Has\+Return\+Value}} () const
+\begin{DoxyCompactList}\small\item\em Gets whether the method to be called has a return value. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_ac8f513c032894f66382cdcc286a5d46b}{Set\+Has\+Return\+Value}} (bool has\+Return\+Value)
+\begin{DoxyCompactList}\small\item\em Sets whether the method to be called has a return value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_a30a0aafaf093cc802e8c86caf1418bfb}{Get\+Call\+Flags}} () const
+\begin{DoxyCompactList}\small\item\em Gets the call flags to be used to call the contract. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_a30906c3474b1fe33a772813537ca277a}{Set\+Call\+Flags}} (\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} call\+Flags)
+\begin{DoxyCompactList}\small\item\em Sets the call flags to be used to call the contract. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_a4e58e78a6b133653fa4307a17f8ee080}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1smartcontract_1_1_method_token}{Method\+Token} to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_a62984ec81e8d8852a0bfc4c5250977ca}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1smartcontract_1_1_method_token}{Method\+Token} from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_accae8ea8d83dbc43fb5666c196929a47}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1smartcontract_1_1_method_token}{Method\+Token} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_aad26ccd12b878b1ddd66ef671203ba79}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1smartcontract_1_1_method_token}{Method\+Token} from a JSON reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_aeb040528de7700bd8c0c55f6daaa44ba}{hash\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_af98125288422dd1a7c20b72339e44a2a}{method\+\_\+}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_a5a2dd8f3322bbb29701262fa34c97258}{parameters\+Count\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_af2cfcaf87ec6d039732bfa9d00ab5f67}{has\+Return\+Value\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_a25b838178032686a0dc5022edc3c7277}{call\+Flags\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the methods that a contract will call statically. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_ab19e8586352e5ddf4d2076772a215c80}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!MethodToken@{MethodToken}}
+\index{MethodToken@{MethodToken}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{MethodToken()}{MethodToken()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_ab19e8586352e5ddf4d2076772a215c80} 
+neo\+::smartcontract\+::\+Method\+Token\+::\+Method\+Token (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1smartcontract_1_1_method_token}{Method\+Token}. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_a62984ec81e8d8852a0bfc4c5250977ca}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_a62984ec81e8d8852a0bfc4c5250977ca} 
+void neo\+::smartcontract\+::\+Method\+Token\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1smartcontract_1_1_method_token}{Method\+Token} from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_aad26ccd12b878b1ddd66ef671203ba79}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_aad26ccd12b878b1ddd66ef671203ba79} 
+void neo\+::smartcontract\+::\+Method\+Token\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1smartcontract_1_1_method_token}{Method\+Token} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_a30a0aafaf093cc802e8c86caf1418bfb}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!GetCallFlags@{GetCallFlags}}
+\index{GetCallFlags@{GetCallFlags}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{GetCallFlags()}{GetCallFlags()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_a30a0aafaf093cc802e8c86caf1418bfb} 
+\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} neo\+::smartcontract\+::\+Method\+Token\+::\+Get\+Call\+Flags (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the call flags to be used to call the contract. 
+
+\begin{DoxyReturn}{Returns}
+The call flags to be used to call the contract. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_aa1260a457f40192fc8bdf5afaa5c5c8b}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!GetHash@{GetHash}}
+\index{GetHash@{GetHash}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{GetHash()}{GetHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_aa1260a457f40192fc8bdf5afaa5c5c8b} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& neo\+::smartcontract\+::\+Method\+Token\+::\+Get\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the hash of the contract to be called. 
+
+\begin{DoxyReturn}{Returns}
+The hash of the contract to be called. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_a7873500c41d00a3a80e3c63fc8bb836d}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!GetHasReturnValue@{GetHasReturnValue}}
+\index{GetHasReturnValue@{GetHasReturnValue}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{GetHasReturnValue()}{GetHasReturnValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_a7873500c41d00a3a80e3c63fc8bb836d} 
+bool neo\+::smartcontract\+::\+Method\+Token\+::\+Get\+Has\+Return\+Value (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets whether the method to be called has a return value. 
+
+\begin{DoxyReturn}{Returns}
+Whether the method to be called has a return value. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_ab0a4a1b66a3470e146d0e7e02b04d89e}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!GetMethod@{GetMethod}}
+\index{GetMethod@{GetMethod}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{GetMethod()}{GetMethod()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_ab0a4a1b66a3470e146d0e7e02b04d89e} 
+const std\+::string \& neo\+::smartcontract\+::\+Method\+Token\+::\+Get\+Method (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the name of the method to be called. 
+
+\begin{DoxyReturn}{Returns}
+The name of the method to be called. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_a3d36e0edbc30c1e9548e6b8bd26b0466}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!GetParametersCount@{GetParametersCount}}
+\index{GetParametersCount@{GetParametersCount}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{GetParametersCount()}{GetParametersCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_a3d36e0edbc30c1e9548e6b8bd26b0466} 
+uint16\+\_\+t neo\+::smartcontract\+::\+Method\+Token\+::\+Get\+Parameters\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of parameters of the method to be called. 
+
+\begin{DoxyReturn}{Returns}
+The number of parameters of the method to be called. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_a4e58e78a6b133653fa4307a17f8ee080}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_a4e58e78a6b133653fa4307a17f8ee080} 
+void neo\+::smartcontract\+::\+Method\+Token\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1smartcontract_1_1_method_token}{Method\+Token} to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_accae8ea8d83dbc43fb5666c196929a47}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_accae8ea8d83dbc43fb5666c196929a47} 
+void neo\+::smartcontract\+::\+Method\+Token\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1smartcontract_1_1_method_token}{Method\+Token} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_a30906c3474b1fe33a772813537ca277a}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!SetCallFlags@{SetCallFlags}}
+\index{SetCallFlags@{SetCallFlags}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{SetCallFlags()}{SetCallFlags()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_a30906c3474b1fe33a772813537ca277a} 
+void neo\+::smartcontract\+::\+Method\+Token\+::\+Set\+Call\+Flags (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}}}]{call\+Flags}{}\end{DoxyParamCaption})}
+
+
+
+Sets the call flags to be used to call the contract. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em call\+Flags} & The call flags to be used to call the contract. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_a7604d1e83fdc2d13cf3288860bfcc361}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!SetHash@{SetHash}}
+\index{SetHash@{SetHash}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{SetHash()}{SetHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_a7604d1e83fdc2d13cf3288860bfcc361} 
+void neo\+::smartcontract\+::\+Method\+Token\+::\+Set\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{hash}{}\end{DoxyParamCaption})}
+
+
+
+Sets the hash of the contract to be called. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & The hash of the contract to be called. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_ac8f513c032894f66382cdcc286a5d46b}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!SetHasReturnValue@{SetHasReturnValue}}
+\index{SetHasReturnValue@{SetHasReturnValue}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{SetHasReturnValue()}{SetHasReturnValue()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_ac8f513c032894f66382cdcc286a5d46b} 
+void neo\+::smartcontract\+::\+Method\+Token\+::\+Set\+Has\+Return\+Value (\begin{DoxyParamCaption}\item[{bool}]{has\+Return\+Value}{}\end{DoxyParamCaption})}
+
+
+
+Sets whether the method to be called has a return value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em has\+Return\+Value} & Whether the method to be called has a return value. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_a6404f03d6b3b2b2ee08994a67b3f6830}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!SetMethod@{SetMethod}}
+\index{SetMethod@{SetMethod}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{SetMethod()}{SetMethod()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_a6404f03d6b3b2b2ee08994a67b3f6830} 
+void neo\+::smartcontract\+::\+Method\+Token\+::\+Set\+Method (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{method}{}\end{DoxyParamCaption})}
+
+
+
+Sets the name of the method to be called. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em method} & The name of the method to be called. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_aaaa26090476eba184d827b0550f6f6b7}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!SetParametersCount@{SetParametersCount}}
+\index{SetParametersCount@{SetParametersCount}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{SetParametersCount()}{SetParametersCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_aaaa26090476eba184d827b0550f6f6b7} 
+void neo\+::smartcontract\+::\+Method\+Token\+::\+Set\+Parameters\+Count (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{parameters\+Count}{}\end{DoxyParamCaption})}
+
+
+
+Sets the number of parameters of the method to be called. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parameters\+Count} & The number of parameters of the method to be called. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_a25b838178032686a0dc5022edc3c7277}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!callFlags\_@{callFlags\_}}
+\index{callFlags\_@{callFlags\_}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{callFlags\_}{callFlags\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_a25b838178032686a0dc5022edc3c7277} 
+\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} neo\+::smartcontract\+::\+Method\+Token\+::call\+Flags\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_aeb040528de7700bd8c0c55f6daaa44ba}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!hash\_@{hash\_}}
+\index{hash\_@{hash\_}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{hash\_}{hash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_aeb040528de7700bd8c0c55f6daaa44ba} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::smartcontract\+::\+Method\+Token\+::hash\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_af2cfcaf87ec6d039732bfa9d00ab5f67}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!hasReturnValue\_@{hasReturnValue\_}}
+\index{hasReturnValue\_@{hasReturnValue\_}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{hasReturnValue\_}{hasReturnValue\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_af2cfcaf87ec6d039732bfa9d00ab5f67} 
+bool neo\+::smartcontract\+::\+Method\+Token\+::has\+Return\+Value\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_af98125288422dd1a7c20b72339e44a2a}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!method\_@{method\_}}
+\index{method\_@{method\_}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{method\_}{method\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_af98125288422dd1a7c20b72339e44a2a} 
+std\+::string neo\+::smartcontract\+::\+Method\+Token\+::method\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_method_token_a5a2dd8f3322bbb29701262fa34c97258}\index{neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}!parametersCount\_@{parametersCount\_}}
+\index{parametersCount\_@{parametersCount\_}!neo::smartcontract::MethodToken@{neo::smartcontract::MethodToken}}
+\doxysubsubsection{\texorpdfstring{parametersCount\_}{parametersCount\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_method_token_a5a2dd8f3322bbb29701262fa34c97258} 
+uint16\+\_\+t neo\+::smartcontract\+::\+Method\+Token\+::parameters\+Count\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/\mbox{\hyperlink{method__token_8h}{method\+\_\+token.\+h}}\item 
+src/smartcontract/\mbox{\hyperlink{method__token_8cpp}{method\+\_\+token.\+cpp}}\end{DoxyCompactItemize}

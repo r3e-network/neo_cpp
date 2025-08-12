@@ -1,0 +1,129 @@
+\doxysection{neo\+::io\+::Json\+Serializable Class Reference}
+\hypertarget{classneo_1_1io_1_1_json_serializable}{}\label{classneo_1_1io_1_1_json_serializable}\index{neo::io::JsonSerializable@{neo::io::JsonSerializable}}
+
+
+Interface for objects that can be serialized/deserialized to/from JSON.  
+
+
+
+
+{\ttfamily \#include $<$json\+\_\+serializable.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::io\+::Json\+Serializable\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_ae7dd2d7bd2b036df8dc47c8df95b66f0}{\texorpdfstring{$\sim$}{\string~}\+Json\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_a3fc4f510ac608ac070cb3c3f85b09113}{To\+Json}} () const =0
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON value. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_a21a577bd492fc899597f33618a1da2eb}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})=0
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a JSON value. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_a1f7a1b4f0576d1bcf90ddf88c05d0e45}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_a4f9aff66b2ffc198345b53e597811363}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for objects that can be serialized/deserialized to/from JSON. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1io_1_1_json_serializable_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1io_1_1_json_serializable_ae7dd2d7bd2b036df8dc47c8df95b66f0}\index{neo::io::JsonSerializable@{neo::io::JsonSerializable}!````~JsonSerializable@{\texorpdfstring{$\sim$}{\string~}JsonSerializable}}
+\index{````~JsonSerializable@{\texorpdfstring{$\sim$}{\string~}JsonSerializable}!neo::io::JsonSerializable@{neo::io::JsonSerializable}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}JsonSerializable()}{\string~JsonSerializable()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_serializable_ae7dd2d7bd2b036df8dc47c8df95b66f0} 
+virtual neo\+::io\+::\+Json\+Serializable\+::\texorpdfstring{$\sim$}{\string~}\+Json\+Serializable (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1io_1_1_json_serializable_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1io_1_1_json_serializable_a21a577bd492fc899597f33618a1da2eb}\index{neo::io::JsonSerializable@{neo::io::JsonSerializable}!FromJson@{FromJson}}
+\index{FromJson@{FromJson}!neo::io::JsonSerializable@{neo::io::JsonSerializable}}
+\doxysubsubsection{\texorpdfstring{FromJson()}{FromJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_serializable_a21a577bd492fc899597f33618a1da2eb} 
+virtual void neo\+::io\+::\+Json\+Serializable\+::\+From\+Json (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Deserializes the object from a JSON value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & The JSON representation of the object. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a90db21b72cfe123d3c49344c86741490}{neo\+::wallets\+::nep6\+::\+NEP6\+Account}}, \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_a18dec0e21817dba7094029e0bde81cfe}{neo\+::wallets\+::nep6\+::\+NEP6\+Wallet}}, \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a080ad578b22387ae1b18e1eeda02d2c4}{neo\+::wallets\+::nep6\+::\+Scrypt\+Parameters}}, \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_a81ff3b7aac263cc40b115f0dc8cb89fc}{neo\+::wallets\+::\+Wallet}}, and \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_a05fed9367a01d241d8ab4f57eb93194d}{neo\+::wallets\+::\+Wallet\+Account}}.
+
+\Hypertarget{classneo_1_1io_1_1_json_serializable_a4f9aff66b2ffc198345b53e597811363}\index{neo::io::JsonSerializable@{neo::io::JsonSerializable}!FromJsonString@{FromJsonString}}
+\index{FromJsonString@{FromJsonString}!neo::io::JsonSerializable@{neo::io::JsonSerializable}}
+\doxysubsubsection{\texorpdfstring{FromJsonString()}{FromJsonString()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_serializable_a4f9aff66b2ffc198345b53e597811363} 
+void neo\+::io\+::\+Json\+Serializable\+::\+From\+Json\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Deserializes the object from a JSON string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & The JSON string representation of the object. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1io_1_1_json_serializable_a3fc4f510ac608ac070cb3c3f85b09113}\index{neo::io::JsonSerializable@{neo::io::JsonSerializable}!ToJson@{ToJson}}
+\index{ToJson@{ToJson}!neo::io::JsonSerializable@{neo::io::JsonSerializable}}
+\doxysubsubsection{\texorpdfstring{ToJson()}{ToJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_serializable_a3fc4f510ac608ac070cb3c3f85b09113} 
+virtual nlohmann\+::json neo\+::io\+::\+Json\+Serializable\+::\+To\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Serializes the object to a JSON value. 
+
+\begin{DoxyReturn}{Returns}
+The JSON representation of the object. 
+\end{DoxyReturn}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_account_a7d2fdc1fdcddbad3c09c1dbb3b809087}{neo\+::wallets\+::nep6\+::\+NEP6\+Account}}, \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_n_e_p6_wallet_aed8dd2ed958754ca1379d6754544c7ef}{neo\+::wallets\+::nep6\+::\+NEP6\+Wallet}}, \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a49ba59b9142827564ebfe3deb7ab8dcb}{neo\+::wallets\+::nep6\+::\+Scrypt\+Parameters}}, \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_ad22dfd462e56e65ed760028721c02118}{neo\+::wallets\+::\+Wallet}}, and \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_account_a7a8d069bd351b98b76dc610f6ea17a12}{neo\+::wallets\+::\+Wallet\+Account}}.
+
+\Hypertarget{classneo_1_1io_1_1_json_serializable_a1f7a1b4f0576d1bcf90ddf88c05d0e45}\index{neo::io::JsonSerializable@{neo::io::JsonSerializable}!ToJsonString@{ToJsonString}}
+\index{ToJsonString@{ToJsonString}!neo::io::JsonSerializable@{neo::io::JsonSerializable}}
+\doxysubsubsection{\texorpdfstring{ToJsonString()}{ToJsonString()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_json_serializable_a1f7a1b4f0576d1bcf90ddf88c05d0e45} 
+std\+::string neo\+::io\+::\+Json\+Serializable\+::\+To\+Json\+String (\begin{DoxyParamCaption}\item[{bool}]{pretty}{ = {\ttfamily false}}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Serializes the object to a JSON string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pretty} & Whether to format the JSON string with indentation. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The JSON string representation of the object. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/io/\mbox{\hyperlink{json__serializable_8h}{json\+\_\+serializable.\+h}}\end{DoxyCompactItemize}

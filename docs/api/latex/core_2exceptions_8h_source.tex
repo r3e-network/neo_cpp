@@ -1,0 +1,252 @@
+\doxysection{exceptions.\+h}
+\hypertarget{core_2exceptions_8h_source}{}\label{core_2exceptions_8h_source}\index{include/neo/core/exceptions.h@{include/neo/core/exceptions.h}}
+\mbox{\hyperlink{core_2exceptions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <stdexcept>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1core}{neo::core}}}
+\DoxyCodeLine{00008\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}\ :\ \textcolor{keyword}{public}\ std::runtime\_error}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}\ :\ uint32\_t}
+\DoxyCodeLine{00019\ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ General\ errors\ (1000-\/1999)}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9a10f345b0f755d461a8673a5e9ef6b4}{UNKNOWN\_ERROR}}\ =\ 1000,}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af295a0c3e37c94f078e1c5476479132d}{INVALID\_ARGUMENT}}\ =\ 1001,}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a5e6a8de74c8f7d4b04d91a3dc3bf7659}{INVALID\_STATE}}\ =\ 1002,}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad07995fa8f4a3a019d134fcbfca4669a}{NOT\_AVAILABLE}}\ =\ 1003,}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6feaf66704b269610cff9431d5519cad}{OUT\_OF\_RANGE}}\ =\ 1004,}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a070a0fb40f6c308ab544b227660aadff}{TIMEOUT}}\ =\ 1005,}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Serialization\ errors\ (2000-\/2999)}}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6b03470e24be0d9a73494f9491575db3}{SERIALIZATION\_ERROR}}\ =\ 2000,}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aaf7685d125c5b33467c4f7783cb22e29}{DESERIALIZATION\_ERROR}}\ =\ 2001,}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a252d8e34178da47f2208605a66051241}{INVALID\_FORMAT}}\ =\ 2002,}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad53c9f7d5b985bba6cb80cdf8ae665e4}{BUFFER\_OVERFLOW}}\ =\ 2003,}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af83ed13db581f1569713429e43a96bb2}{BUFFER\_UNDERFLOW}}\ =\ 2004,}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Cryptography\ errors\ (3000-\/3999)}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad8e13f08667a0b31e93bd54a7302e91d}{CRYPTO\_ERROR}}\ =\ 3000,}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a14eddb1ed548833eb26b0325f17b967e}{INVALID\_KEY}}\ =\ 3001,}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad0eb6b378baae0b4b64c2933674e61fc}{INVALID\_SIGNATURE}}\ =\ 3002,}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a3328769dfe2ed33f689689663ff18877}{HASH\_CALCULATION\_FAILED}}\ =\ 3003,}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6dccefab5234f98839821f3106e8e3e3}{ENCRYPTION\_FAILED}}\ =\ 3004,}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ac32948a3a3b3b746526320f675f6c583}{DECRYPTION\_FAILED}}\ =\ 3005,}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Network\ errors\ (4000-\/4999)}}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a547ba52b62f9302ee1b6950111c36f9f}{NETWORK\_ERROR}}\ =\ 4000,}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a042ec2cfe6c78a6a49b3a6555302947c}{CONNECTION\_FAILED}}\ =\ 4001,}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a4ca5a319d1b3065c5f8fc8b20e69f0ce}{INVALID\_MESSAGE}}\ =\ 4002,}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aa224afc9af395429edad294f94a9ae14}{PROTOCOL\_VIOLATION}}\ =\ 4003,}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a002982bd4378347e2a41ce37bb95f17d}{PEER\_DISCONNECTED}}\ =\ 4004,}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Blockchain\ errors\ (5000-\/5999)}}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1caaf6711640dcf25bee1a8a8dc9236d}{BLOCKCHAIN\_ERROR}}\ =\ 5000,}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a2ec46db67908a0fa69ee0c7558c4bc8f}{INVALID\_BLOCK}}\ =\ 5001,}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1dd057fa369b981429d016ad2fb12de7}{INVALID\_TRANSACTION}}\ =\ 5002,}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aaac4d4690679f0c9c4c65d6bcf36214f}{CONSENSUS\_FAILURE}}\ =\ 5003,}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a4eed0177f2593a164543593202187281}{VERIFICATION\_FAILED}}\ =\ 5004,}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad93c4d456f42793a014f8d32aa437962}{INVALID\_CONTRACT}}\ =\ 5005,}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Storage\ errors\ (6000-\/6999)}}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a7ae7f2a13f0d5a18b0db91af9c5aef34}{STORAGE\_ERROR}}\ =\ 6000,}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1f14ca382a4431d278aba810e59070c1}{KEY\_NOT\_FOUND}}\ =\ 6001,}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9424c68422cd1dc9bbd817cea013bb1d}{STORAGE\_CORRUPTION}}\ =\ 6002,}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af50f3ad3a92a014d1f69bcaa20e67b32}{INSUFFICIENT\_SPACE}}\ =\ 6003,}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a2eaec33b2d6224f90e7222e4b7a49183}{ACCESS\_DENIED}}\ =\ 6004,}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ VM\ errors\ (7000-\/7999)}}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a15af281710fb0b50726a2b6f560db9c6}{VM\_ERROR}}\ =\ 7000,}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aaf5dcc114f4d3618802f0cd7bad2ccd8}{STACK\_OVERFLOW}}\ =\ 7001,}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a4a0a7f755cbb064fb44e2201ab5c57c4}{STACK\_UNDERFLOW}}\ =\ 7002,}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a78e364cbd50bcd6e731cc156bded135e}{INVALID\_OPCODE}}\ =\ 7003,}
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab23f1844d7ffdcacd50686f46c0345dc}{EXECUTION\_TIMEOUT}}\ =\ 7004,}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a917fc6224ece5d998c2602aaa7ea3d8b}{OUT\_OF\_GAS}}\ =\ 7005,}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Smart\ contract\ errors\ (8000-\/8999)}}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9edfc5e4293ea1de2e980b0200a48db4}{CONTRACT\_ERROR}}\ =\ 8000,}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1a9326f1eb071f13673054b74eb95feb}{CONTRACT\_NOT\_FOUND}}\ =\ 8001,}
+\DoxyCodeLine{00076\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab0bf8bc74a483faf7290985969175419}{CONTRACT\_EXECUTION\_FAILED}}\ =\ 8002,}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab478fed760f994b2ecf33a6e23402ed5}{INVALID\_CONTRACT\_STATE}}\ =\ 8003,}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Wallet\ errors\ (9000-\/9999)}}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a08882b2afdb1b387f4af528ee0005ab3}{WALLET\_ERROR}}\ =\ 9000,}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ab11372f0cbdfce0208b24001349a60b8}{WALLET\_NOT\_FOUND}}\ =\ 9001,}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af3291c3248dc6fad08d3c6eaa7c87332}{WALLET\_LOCKED}}\ =\ 9002,}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a15f5afe7f7c311db6b8a5e549081d671}{INVALID\_PASSWORD}}\ =\ 9003,}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8aed37ceb30665ea11467e944311ffe598}{INSUFFICIENT\_FUNDS}}\ =\ 9004}
+\DoxyCodeLine{00085\ \ \ \ \ \};}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}\ code,\ \textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{namespacestd}{std}}::runtime\_error(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_aefbf7a0000f4d6e61b05bc27ec3c961f}{FormatMessage}}(code,\ message,\ context)),}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a60a71444b6c6d5e8938a1a00e1a9c8d5}{error\_code\_}}(code),}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_aff706d3df4d7c39531931069f0ac319a}{original\_message\_}}(message),}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a1486aa7564bd5e7519c267fa22895b3c}{context\_}}(context)}
+\DoxyCodeLine{00098\ \ \ \ \ \{}
+\DoxyCodeLine{00099\ \ \ \ \ \}}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00105\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_af071bd842839f2d8192e6999f23fb08e}{GetErrorCode}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a60a71444b6c6d5e8938a1a00e1a9c8d5}{error\_code\_}};\ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a46f921257b699d6301a426b242973375}{GetOriginalMessage}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_aff706d3df4d7c39531931069f0ac319a}{original\_message\_}};\ \}}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a3c956a25c4699bde2067bda176dcec0e}{GetContext}}()\ const\ noexcept\ \{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a1486aa7564bd5e7519c267fa22895b3c}{context\_}};\ \}}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_ad58f1d173cfb1122460d3f92486f0ed9}{ErrorCodeToString}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}\ code);}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00126\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00127\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a60a71444b6c6d5e8938a1a00e1a9c8d5}{error\_code\_}};}
+\DoxyCodeLine{00128\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_aff706d3df4d7c39531931069f0ac319a}{original\_message\_}};}
+\DoxyCodeLine{00129\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a1486aa7564bd5e7519c267fa22895b3c}{context\_}};}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00131\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_aefbf7a0000f4d6e61b05bc27ec3c961f}{FormatMessage}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}\ code,\ \textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context);}
+\DoxyCodeLine{00132\ \};}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00134\ \textcolor{comment}{//\ Specific\ exception\ classes\ for\ different\ categories}}
+\DoxyCodeLine{00135\ }
+\DoxyCodeLine{00139\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_serialization_exception_a6fc827be2e4318d7bf7308173610edff}{SerializationException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}}
+\DoxyCodeLine{00140\ \{}
+\DoxyCodeLine{00141\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00142\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_serialization_exception_a6fc827be2e4318d7bf7308173610edff}{SerializationException}}(\textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}::\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6b03470e24be0d9a73494f9491575db3}{SERIALIZATION\_ERROR}},\ message,\ context)}
+\DoxyCodeLine{00144\ \ \ \ \ \{}
+\DoxyCodeLine{00145\ \ \ \ \ \}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_serialization_exception_abcccddc1bd7b5c0104fa5120787b2d9c}{SerializationException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}\ code,\ \textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00148\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(code,\ message,\ context)}
+\DoxyCodeLine{00149\ \ \ \ \ \{}
+\DoxyCodeLine{00150\ \ \ \ \ \}}
+\DoxyCodeLine{00151\ \};}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00156\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_cryptography_exception_aced6f6ba5c69e71e5f107d43b0474b7d}{CryptographyException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}}
+\DoxyCodeLine{00157\ \{}
+\DoxyCodeLine{00158\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00159\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_cryptography_exception_aced6f6ba5c69e71e5f107d43b0474b7d}{CryptographyException}}(\textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}::\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8ad8e13f08667a0b31e93bd54a7302e91d}{CRYPTO\_ERROR}},\ message,\ context)}
+\DoxyCodeLine{00161\ \ \ \ \ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_cryptography_exception_a071d0c0da4ca325a17c0d67e6e9e4672}{CryptographyException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}\ code,\ \textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00165\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(code,\ message,\ context)}
+\DoxyCodeLine{00166\ \ \ \ \ \{}
+\DoxyCodeLine{00167\ \ \ \ \ \}}
+\DoxyCodeLine{00168\ \};}
+\DoxyCodeLine{00169\ }
+\DoxyCodeLine{00173\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_network_exception_a6cc0435f849ecf783bb1598074a42127}{NetworkException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}}
+\DoxyCodeLine{00174\ \{}
+\DoxyCodeLine{00175\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00176\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_network_exception_a6cc0435f849ecf783bb1598074a42127}{NetworkException}}(\textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}::\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a547ba52b62f9302ee1b6950111c36f9f}{NETWORK\_ERROR}},\ message,\ context)}
+\DoxyCodeLine{00178\ \ \ \ \ \{}
+\DoxyCodeLine{00179\ \ \ \ \ \}}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_network_exception_a9a0baea2e8724b3faf3e2c26afb208b4}{NetworkException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}\ code,\ \textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(code,\ message,\ context)}
+\DoxyCodeLine{00183\ \ \ \ \ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \}}
+\DoxyCodeLine{00185\ \};}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00190\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_blockchain_exception_adca32ace607ad51637576780d21de159}{BlockchainException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}}
+\DoxyCodeLine{00191\ \{}
+\DoxyCodeLine{00192\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00193\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_blockchain_exception_adca32ace607ad51637576780d21de159}{BlockchainException}}(\textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}::\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a1caaf6711640dcf25bee1a8a8dc9236d}{BLOCKCHAIN\_ERROR}},\ message,\ context)}
+\DoxyCodeLine{00195\ \ \ \ \ \{}
+\DoxyCodeLine{00196\ \ \ \ \ \}}
+\DoxyCodeLine{00197\ }
+\DoxyCodeLine{00198\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_blockchain_exception_aeec9dd05a88cbec696618c67b869db34}{BlockchainException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}\ code,\ \textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(code,\ message,\ context)}
+\DoxyCodeLine{00200\ \ \ \ \ \{}
+\DoxyCodeLine{00201\ \ \ \ \ \}}
+\DoxyCodeLine{00202\ \};}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00207\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_storage_exception_af62474fc8f6d0c268d5e61e170e0dab1}{StorageException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}}
+\DoxyCodeLine{00208\ \{}
+\DoxyCodeLine{00209\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00210\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_storage_exception_af62474fc8f6d0c268d5e61e170e0dab1}{StorageException}}(\textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00211\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}::\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a7ae7f2a13f0d5a18b0db91af9c5aef34}{STORAGE\_ERROR}},\ message,\ context)}
+\DoxyCodeLine{00212\ \ \ \ \ \{}
+\DoxyCodeLine{00213\ \ \ \ \ \}}
+\DoxyCodeLine{00214\ }
+\DoxyCodeLine{00215\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_storage_exception_ae96f634fff8dcd9a114908fdb0db553d}{StorageException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}\ code,\ \textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00216\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(code,\ message,\ context)}
+\DoxyCodeLine{00217\ \ \ \ \ \{}
+\DoxyCodeLine{00218\ \ \ \ \ \}}
+\DoxyCodeLine{00219\ \};}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00224\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_v_m_exception_a40f5086c3909df3d3319098641923a04}{VMException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}}
+\DoxyCodeLine{00225\ \{}
+\DoxyCodeLine{00226\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00227\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_v_m_exception_a40f5086c3909df3d3319098641923a04}{VMException}}(\textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}::\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a15af281710fb0b50726a2b6f560db9c6}{VM\_ERROR}},\ message,\ context)}
+\DoxyCodeLine{00229\ \ \ \ \ \{}
+\DoxyCodeLine{00230\ \ \ \ \ \}}
+\DoxyCodeLine{00231\ }
+\DoxyCodeLine{00232\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_v_m_exception_a8710f063f95d5ab14f0549a3f4cf40c7}{VMException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}\ code,\ \textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(code,\ message,\ context)}
+\DoxyCodeLine{00234\ \ \ \ \ \{}
+\DoxyCodeLine{00235\ \ \ \ \ \}}
+\DoxyCodeLine{00236\ \};}
+\DoxyCodeLine{00237\ }
+\DoxyCodeLine{00241\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_contract_exception_acce214b0317163efb24eb794a5b48319}{ContractException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}}
+\DoxyCodeLine{00242\ \{}
+\DoxyCodeLine{00243\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00244\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_contract_exception_acce214b0317163efb24eb794a5b48319}{ContractException}}(\textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}::\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a9edfc5e4293ea1de2e980b0200a48db4}{CONTRACT\_ERROR}},\ message,\ context)}
+\DoxyCodeLine{00246\ \ \ \ \ \{}
+\DoxyCodeLine{00247\ \ \ \ \ \}}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00249\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_contract_exception_a5acff81f7143549d06e55c7d87078070}{ContractException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}\ code,\ \textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(code,\ message,\ context)}
+\DoxyCodeLine{00251\ \ \ \ \ \{}
+\DoxyCodeLine{00252\ \ \ \ \ \}}
+\DoxyCodeLine{00253\ \};}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00258\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_wallet_exception_a0efb2cdca9e21211f61aaa0c8c7cd424}{WalletException}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}}
+\DoxyCodeLine{00259\ \{}
+\DoxyCodeLine{00260\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00261\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_wallet_exception_a0efb2cdca9e21211f61aaa0c8c7cd424}{WalletException}}(\textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}::\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a08882b2afdb1b387f4af528ee0005ab3}{WALLET\_ERROR}},\ message,\ context)}
+\DoxyCodeLine{00263\ \ \ \ \ \{}
+\DoxyCodeLine{00264\ \ \ \ \ \}}
+\DoxyCodeLine{00265\ }
+\DoxyCodeLine{00266\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_wallet_exception_a511e8f051218b2a0a43687680dbc296b}{WalletException}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{ErrorCode}}\ code,\ \textcolor{keyword}{const}\ std::string\&\ message,\ \textcolor{keyword}{const}\ std::string\&\ context\ =\ \textcolor{stringliteral}{"{}"{}})}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a731f6ff1cd20ef90de66c9e786d79562}{NeoException}}(code,\ message,\ context)}
+\DoxyCodeLine{00268\ \ \ \ \ \{}
+\DoxyCodeLine{00269\ \ \ \ \ \}}
+\DoxyCodeLine{00270\ \};}
+\DoxyCodeLine{00271\ }
+\DoxyCodeLine{00272\ \textcolor{comment}{//\ Utility\ macros\ for\ throwing\ exceptions\ with\ context}}
+\DoxyCodeLine{00273\ \textcolor{preprocessor}{\#define\ THROW\_NEO\_EXCEPTION(code,\ message)\ \(\backslash\)}}
+\DoxyCodeLine{00274\ \textcolor{preprocessor}{\ \ \ \ throw\ neo::core::NeoException(code,\ message,\ \_\_FILE\_\_\ "{}:"{}\ +\ std::to\_string(\_\_LINE\_\_))}}
+\DoxyCodeLine{00275\ }
+\DoxyCodeLine{00276\ \textcolor{preprocessor}{\#define\ THROW\_SERIALIZATION\_EXCEPTION(message)\ \(\backslash\)}}
+\DoxyCodeLine{00277\ \textcolor{preprocessor}{\ \ \ \ throw\ neo::core::SerializationException(message,\ \_\_FILE\_\_\ "{}:"{}\ +\ std::to\_string(\_\_LINE\_\_))}}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00279\ \textcolor{preprocessor}{\#define\ THROW\_CRYPTO\_EXCEPTION(message)\ \(\backslash\)}}
+\DoxyCodeLine{00280\ \textcolor{preprocessor}{\ \ \ \ throw\ neo::core::CryptographyException(message,\ \_\_FILE\_\_\ "{}:"{}\ +\ std::to\_string(\_\_LINE\_\_))}}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00282\ \textcolor{preprocessor}{\#define\ THROW\_NETWORK\_EXCEPTION(message)\ \(\backslash\)}}
+\DoxyCodeLine{00283\ \textcolor{preprocessor}{\ \ \ \ throw\ neo::core::NetworkException(message,\ \_\_FILE\_\_\ "{}:"{}\ +\ std::to\_string(\_\_LINE\_\_))}}
+\DoxyCodeLine{00284\ }
+\DoxyCodeLine{00285\ \textcolor{preprocessor}{\#define\ THROW\_BLOCKCHAIN\_EXCEPTION(message)\ \(\backslash\)}}
+\DoxyCodeLine{00286\ \textcolor{preprocessor}{\ \ \ \ throw\ neo::core::BlockchainException(message,\ \_\_FILE\_\_\ "{}:"{}\ +\ std::to\_string(\_\_LINE\_\_))}}
+\DoxyCodeLine{00287\ }
+\DoxyCodeLine{00288\ \textcolor{preprocessor}{\#define\ THROW\_STORAGE\_EXCEPTION(message)\ \(\backslash\)}}
+\DoxyCodeLine{00289\ \textcolor{preprocessor}{\ \ \ \ throw\ neo::core::StorageException(message,\ \_\_FILE\_\_\ "{}:"{}\ +\ std::to\_string(\_\_LINE\_\_))}}
+\DoxyCodeLine{00290\ }
+\DoxyCodeLine{00291\ \textcolor{preprocessor}{\#define\ THROW\_VM\_EXCEPTION(message)\ throw\ neo::core::VMException(message,\ \_\_FILE\_\_\ "{}:"{}\ +\ std::to\_string(\_\_LINE\_\_))}}
+\DoxyCodeLine{00292\ }
+\DoxyCodeLine{00293\ \textcolor{preprocessor}{\#define\ THROW\_CONTRACT\_EXCEPTION(message)\ \(\backslash\)}}
+\DoxyCodeLine{00294\ \textcolor{preprocessor}{\ \ \ \ throw\ neo::core::ContractException(message,\ \_\_FILE\_\_\ "{}:"{}\ +\ std::to\_string(\_\_LINE\_\_))}}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \textcolor{preprocessor}{\#define\ THROW\_WALLET\_EXCEPTION(message)\ \(\backslash\)}}
+\DoxyCodeLine{00297\ \textcolor{preprocessor}{\ \ \ \ throw\ neo::core::WalletException(message,\ \_\_FILE\_\_\ "{}:"{}\ +\ std::to\_string(\_\_LINE\_\_))}}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00299\ \}\ \ \textcolor{comment}{//\ namespace\ neo::core}}
+
+\end{DoxyCode}

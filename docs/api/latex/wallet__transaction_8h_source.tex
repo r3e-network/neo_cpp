@@ -1,0 +1,51 @@
+\doxysection{wallet\+\_\+transaction.\+h}
+\hypertarget{wallet__transaction_8h_source}{}\label{wallet__transaction_8h_source}\index{include/neo/wallets/wallet\_transaction.h@{include/neo/wallets/wallet\_transaction.h}}
+\mbox{\hyperlink{wallet__transaction_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ijson__serializable_8h}{neo/io/ijson\_serializable.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__reader_8h}{neo/io/json\_reader.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json__writer_8h}{neo/io/json\_writer.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{neo3__transaction_8h}{neo/network/p2p/payloads/neo3\_transaction.h}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1wallets}{neo::wallets}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ Use\ Neo3Transaction\ from\ network\ namespace}}
+\DoxyCodeLine{00017\ \textcolor{keyword}{using\ }\mbox{\hyperlink{namespaceneo_1_1wallets_ae63dc5f96bc6e5f5f5a8810fdd4efc38}{Neo3Transaction}}\ =\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network::p2p::payloads::Neo3Transaction}};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a3d874eaf1a085f4beb01b00e67790f92}{WalletTransaction}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{io::IJsonSerializable}}}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a3d874eaf1a085f4beb01b00e67790f92}{WalletTransaction}}(std::shared\_ptr<Neo3Transaction>\ transaction);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00035\ \ \ \ \ std::shared\_ptr<Neo3Transaction>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_aacb4566203cd469849571dadd50dc918}{GetTransaction}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a0b48d48db152aa15ad445c483384e16b}{transaction\_}};\ \}}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00041\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_ab08764f79f7c6d31e84b116f67b5d06e}{GetHash}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_afd26c2a457cc3d0f2ca65ef0bf08139a}{IsConfirmed}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_ae4aab9c2112ebe9a5a0f1564998250be}{confirmed\_}};\ \}}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_ada3f2741a004d78116d3b27873825b43}{SetConfirmed}}(\textcolor{keywordtype}{bool}\ confirmed)\ \{\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_ae4aab9c2112ebe9a5a0f1564998250be}{confirmed\_}}\ =\ confirmed;\ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00059\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a86cb13ba5a903da01ec14fc612dd810d}{GetBlockHeight}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a6c0557ceee81cffd5013f24366b2cc16}{block\_height\_}};\ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a6039ff20f93ff97b1a5f03eee0e24a53}{SetBlockHeight}}(uint32\_t\ height)\ \{\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a6c0557ceee81cffd5013f24366b2cc16}{block\_height\_}}\ =\ height;\ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00071\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_ad745f60c0513234cf95a37a267c0a6b1}{SerializeJson}}(\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io::JsonWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a22eed47effee4aff58c19754fdfabddb}{DeserializeJson}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io::JsonReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00080\ \ \ \ \ std::shared\_ptr<Neo3Transaction>\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a0b48d48db152aa15ad445c483384e16b}{transaction\_}};}
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_ae4aab9c2112ebe9a5a0f1564998250be}{confirmed\_}};}
+\DoxyCodeLine{00082\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a6c0557ceee81cffd5013f24366b2cc16}{block\_height\_}};}
+\DoxyCodeLine{00083\ \};}
+\DoxyCodeLine{00084\ \}\ \ \textcolor{comment}{//\ namespace\ neo::wallets}}
+
+\end{DoxyCode}

@@ -1,0 +1,223 @@
+\doxysection{neo\+::io\+::IJson\+Serializable Class Reference}
+\hypertarget{classneo_1_1io_1_1_i_json_serializable}{}\label{classneo_1_1io_1_1_i_json_serializable}\index{neo::io::IJsonSerializable@{neo::io::IJsonSerializable}}
+
+
+Interface for objects that can be serialized/deserialized to/from JSON.  
+
+
+
+
+{\ttfamily \#include $<$ijson\+\_\+serializable.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::io\+::IJson\+Serializable\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{Json\+Writer}} \&writer) const =0
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON writer. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{Json\+Reader}} \&reader)=0
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a JSON reader. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Interface for objects that can be serialized/deserialized to/from JSON. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1io_1_1_i_json_serializable_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}\index{neo::io::IJsonSerializable@{neo::io::IJsonSerializable}!````~IJsonSerializable@{\texorpdfstring{$\sim$}{\string~}IJsonSerializable}}
+\index{````~IJsonSerializable@{\texorpdfstring{$\sim$}{\string~}IJsonSerializable}!neo::io::IJsonSerializable@{neo::io::IJsonSerializable}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IJsonSerializable()}{\string~IJsonSerializable()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec} 
+virtual neo\+::io\+::\+IJson\+Serializable\+::\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1io_1_1_i_json_serializable_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}\index{neo::io::IJsonSerializable@{neo::io::IJsonSerializable}!DeserializeFromJson@{DeserializeFromJson}}
+\index{DeserializeFromJson@{DeserializeFromJson}!neo::io::IJsonSerializable@{neo::io::IJsonSerializable}}
+\doxysubsubsection{\texorpdfstring{DeserializeFromJson()}{DeserializeFromJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce} 
+void neo\+::io\+::\+IJson\+Serializable\+::\+Deserialize\+From\+Json (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{json}{}\end{DoxyParamCaption})}
+
+
+
+Deserializes an object from a JSON object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & The JSON object. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}\index{neo::io::IJsonSerializable@{neo::io::IJsonSerializable}!DeserializeFromJsonString@{DeserializeFromJsonString}}
+\index{DeserializeFromJsonString@{DeserializeFromJsonString}!neo::io::IJsonSerializable@{neo::io::IJsonSerializable}}
+\doxysubsubsection{\texorpdfstring{DeserializeFromJsonString()}{DeserializeFromJsonString()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce} 
+void neo\+::io\+::\+IJson\+Serializable\+::\+Deserialize\+From\+Json\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{json}{}\end{DoxyParamCaption})}
+
+
+
+Deserializes an object from a JSON string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & The JSON string. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}\index{neo::io::IJsonSerializable@{neo::io::IJsonSerializable}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::io::IJsonSerializable@{neo::io::IJsonSerializable}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c} 
+virtual void neo\+::io\+::\+IJson\+Serializable\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Deserializes the object from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_witness_a5a9ff9ac7499deb7008721a3786c63b2}{neo\+::cryptography\+::ecc\+::\+Witness}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_a57131938eb6f44600ed01845c03b0476}{neo\+::ledger\+::\+Block\+Header}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_boolean_condition_a9eb87d9da15d81d675c8ecec671a0b24}{neo\+::ledger\+::\+Boolean\+Condition}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_a6140211a92b3e6cb046aa0008d489611}{neo\+::ledger\+::\+Coin\+Reference}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_neo2_transaction_a795eae94c795dddda998a84adbab1242}{neo\+::ledger\+::\+Neo2\+Transaction}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_ab5fee6657c94549a4a4426948dbf0fac}{neo\+::ledger\+::\+Signer}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_a6503d86729d8f97f6c470ae083befdd5}{neo\+::ledger\+::\+Transaction\+Attribute}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_aa58c0344d8b6676559532cf1b4aec740}{neo\+::ledger\+::\+Transaction\+Output}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_ab5baa151f0b0dff44ef62c9167da7ffd}{neo\+::ledger\+::\+Witness}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_acc0b5e96fcd50d217659a4d76e4e114b}{neo\+::ledger\+::\+Witness\+Rule}}, \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a8ee800f3166273e4cfa862c9ac79a14e}{neo\+::network\+::\+Network\+Address}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_full_node_capability_a54be955d8b33f493a784bb3625c91667}{neo\+::network\+::p2p\+::\+Full\+Node\+Capability}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_inventory_vector_a3b26fe23b895339fa8eae245e90eddc6}{neo\+::network\+::p2p\+::\+Inventory\+Vector}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_af4de4bdbb73deabc7724a841d10d0c85}{neo\+::network\+::p2p\+::\+IPEnd\+Point}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a3eb99bb76a199d3d64a7b261cf3bc139}{neo\+::network\+::p2p\+::\+Message}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aea2c59ba1bec0b58c861642a7cd7797f}{neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aea2c59ba1bec0b58c861642a7cd7797f}{neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability_aad466a95b382d60a1fee8d4493b267bd}{neo\+::network\+::p2p\+::\+Node\+Capability}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload_a197cdc86c1efe7f8cb8ea0e192aab36f}{neo\+::network\+::p2p\+::payloads\+::\+Addr\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_ad488987872b448b7474ece09aab3423d}{neo\+::network\+::p2p\+::payloads\+::\+Block}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_a11b982bd8a2c7dd7577b4127ded82aed}{neo\+::network\+::p2p\+::payloads\+::\+Block\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_a20c3ae321b6b9b9023af19400fadad7e}{neo\+::network\+::p2p\+::payloads\+::\+Conflicts}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload_aaf9cf6bdbc37cb1e715833d7d549daef}{neo\+::network\+::p2p\+::payloads\+::\+Extensible\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_add_payload_aa46c5b57808ad104202cd0dafe168ae6}{neo\+::network\+::p2p\+::payloads\+::\+Filter\+Add\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_clear_payload_aa9350d69176d42baa0e5c06fbd4ddfb9}{neo\+::network\+::p2p\+::payloads\+::\+Filter\+Clear\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a74bd85ad476f9032a837910b421794f7}{neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_addr_payload_a15b0b1ebe287763522e0627ac5838fc7}{neo\+::network\+::p2p\+::payloads\+::\+Get\+Addr\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_block_by_index_payload_a817102eabbb2d423200c38389c44265d}{neo\+::network\+::p2p\+::payloads\+::\+Get\+Block\+By\+Index\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_blocks_payload_a4211fcc395da4b7b0c4d6d5be4cbd037}{neo\+::network\+::p2p\+::payloads\+::\+Get\+Blocks\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a5959524aeb012969b5ef7c46baf43de4}{neo\+::network\+::p2p\+::payloads\+::\+Header}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_ae4f8516861439a3398181a8e683dcc28}{neo\+::network\+::p2p\+::payloads\+::\+Headers\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_high_priority_ac325e460ae0f96fe4e74e983b5262efb}{neo\+::network\+::p2p\+::payloads\+::\+High\+Priority}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_inv_payload_a804cdfec597fe6aa193b1f50b0511831}{neo\+::network\+::p2p\+::payloads\+::\+Inv\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_mempool_payload_adba989dfb8fd00982ff7719e434e6d23}{neo\+::network\+::p2p\+::payloads\+::\+Mempool\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a2203e636e28df0b8f4c00b73ba38d542}{neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_network_address_with_time_a1740fdf7815b0d4f4f7f0c7c14ccbb13}{neo\+::network\+::p2p\+::payloads\+::\+Network\+Address\+With\+Time}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_a49d49a2a8a0e30763d1f2e0e057378c5}{neo\+::network\+::p2p\+::payloads\+::\+Not\+Valid\+Before}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a194d0ed72aff612e7ea044b79aed7a11}{neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a44ce4f92a5af9fb8eb94b3e4e4e816a1}{neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_reject_payload_a6ffa6813282eba6e8a4f79ac6c20cdad}{neo\+::network\+::p2p\+::payloads\+::\+Reject\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload_a04174d3c8d78d2aa1b2e1fed3a2c65c7}{neo\+::network\+::p2p\+::payloads\+::\+Transaction\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_a2d83f563492dedb479cae91e4c380ed9}{neo\+::network\+::p2p\+::payloads\+::\+Ver\+Ack\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_a0c0c01a910a59bc33c2d8c4b49c6c5fc}{neo\+::network\+::p2p\+::payloads\+::\+Version\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_a50f3304b409a3668298c85739a3e2485}{neo\+::network\+::p2p\+::\+Peer}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_list_ac711c0c656c33baf1f223e1f828d5b1e}{neo\+::network\+::p2p\+::\+Peer\+List}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability_a44f014bb87bd6286ef6cb92b13b6db55}{neo\+::network\+::p2p\+::\+Server\+Capability}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_unknown_capability_a641308ec1e550cad3d1961f8183ebda7}{neo\+::network\+::p2p\+::\+Unknown\+Capability}}, \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_a39ccb0e7b1a12961c1539f14fbfcb3f6}{neo\+::network\+::payloads\+::\+Consensus\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_inventory_payload_a7763ea077333edc4db1f4f5b5d29f05c}{neo\+::network\+::payloads\+::\+Inventory\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a5e7fe62d2cc6ad9ac6fc43f1edca6e91}{neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload}}, \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_aad26ccd12b878b1ddd66ef671203ba79}{neo\+::smartcontract\+::\+Method\+Token}}, \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a1af3bf05070b9b60540453428d46c02f}{neo\+::smartcontract\+::\+Nef\+File}}, \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_ac7263cf513837c203a0182adaa19e294}{neo\+::wallets\+::\+Verification\+Contract}}, and \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_a22eed47effee4aff58c19754fdfabddb}{neo\+::wallets\+::\+Wallet\+Transaction}}.
+
+\Hypertarget{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}\index{neo::io::IJsonSerializable@{neo::io::IJsonSerializable}!FromJson@{FromJson}}
+\index{FromJson@{FromJson}!neo::io::IJsonSerializable@{neo::io::IJsonSerializable}}
+\doxysubsubsection{\texorpdfstring{FromJson()}{FromJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e} 
+template$<$typename T$>$ \\
+T neo\+::io\+::\+IJson\+Serializable\+::\+From\+Json (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Deserializes an object from a JSON object. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of the object to deserialize. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em json} & The JSON object. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The deserialized object. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}\index{neo::io::IJsonSerializable@{neo::io::IJsonSerializable}!FromJsonString@{FromJsonString}}
+\index{FromJsonString@{FromJsonString}!neo::io::IJsonSerializable@{neo::io::IJsonSerializable}}
+\doxysubsubsection{\texorpdfstring{FromJsonString()}{FromJsonString()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8} 
+template$<$typename T$>$ \\
+T neo\+::io\+::\+IJson\+Serializable\+::\+From\+Json\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Deserializes an object from a JSON string. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of the object to deserialize. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em json} & The JSON string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The deserialized object. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}\index{neo::io::IJsonSerializable@{neo::io::IJsonSerializable}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::io::IJsonSerializable@{neo::io::IJsonSerializable}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf} 
+virtual void neo\+::io\+::\+IJson\+Serializable\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Serializes the object to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_witness_a3dbacfb69ad4b0f5b6b2035927ad9556}{neo\+::cryptography\+::ecc\+::\+Witness}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header_aa17343fc10ce779c8f0f2d6f64d242a7}{neo\+::ledger\+::\+Block\+Header}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_boolean_condition_aa063c27c43db1d133dd423b88f6055b9}{neo\+::ledger\+::\+Boolean\+Condition}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_ad875bdf64808e8fe90295143b238217c}{neo\+::ledger\+::\+Coin\+Reference}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_neo2_transaction_ab3d17e77d4f5026f5d740bf161f1f8de}{neo\+::ledger\+::\+Neo2\+Transaction}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_signer_a1ace7e9e7d6d63072fbee7ae59514619}{neo\+::ledger\+::\+Signer}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_attribute_ac4fafdf9d03ffb86c3501dbaeb9404f7}{neo\+::ledger\+::\+Transaction\+Attribute}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_output_a97edec72a9a0135901e3b655a2354cfc}{neo\+::ledger\+::\+Transaction\+Output}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_a97ccba85142abc17f36cc86222c6e63e}{neo\+::ledger\+::\+Witness}}, \mbox{\hyperlink{classneo_1_1ledger_1_1_witness_rule_ae6a4e5a282a68cd4dbadabcf533ba356}{neo\+::ledger\+::\+Witness\+Rule}}, \mbox{\hyperlink{classneo_1_1network_1_1_network_address_a5c1bf5a20f8fa5ef97a8cfb69da5e35e}{neo\+::network\+::\+Network\+Address}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_full_node_capability_a694448b5c0893862b6a0ef1c2ba170eb}{neo\+::network\+::p2p\+::\+Full\+Node\+Capability}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_inventory_vector_a46a6531454ceecdafcf13e9780551f2c}{neo\+::network\+::p2p\+::\+Inventory\+Vector}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point_a3e1e94f59676838e2224dbe0dbe219bf}{neo\+::network\+::p2p\+::\+IPEnd\+Point}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message_a4bb4e5bda2aef4a75407206c24e96e10}{neo\+::network\+::p2p\+::\+Message}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aeaa31da72bbfb191d21e51716082a045}{neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_network_address_with_time_aeaa31da72bbfb191d21e51716082a045}{neo\+::network\+::p2p\+::\+Network\+Address\+With\+Time}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability_a964243bfe3381c05a281bb2b30dfc3a8}{neo\+::network\+::p2p\+::\+Node\+Capability}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_addr_payload_acf0f8da45fd52f2ef4bcf10e5e6eb05e}{neo\+::network\+::p2p\+::payloads\+::\+Addr\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_af656c9737a432f0db88dc6a1006631c9}{neo\+::network\+::p2p\+::payloads\+::\+Block}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_block_payload_ae428ff51f936f328f95f57743bb9b5d2}{neo\+::network\+::p2p\+::payloads\+::\+Block\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_conflicts_ad267fc7979290ca094808e23ad3a5185}{neo\+::network\+::p2p\+::payloads\+::\+Conflicts}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_extensible_payload_ab345868b6579f7eb6599883d9b9c9047}{neo\+::network\+::p2p\+::payloads\+::\+Extensible\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_add_payload_af8adce0543e49df0c5ab01ba528fc8bf}{neo\+::network\+::p2p\+::payloads\+::\+Filter\+Add\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_clear_payload_ac8d0618210bcdd5ef271b352376fde2c}{neo\+::network\+::p2p\+::payloads\+::\+Filter\+Clear\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_filter_load_payload_a028f43da160a47c5fdfd6b2030cfdd33}{neo\+::network\+::p2p\+::payloads\+::\+Filter\+Load\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_addr_payload_ac4c785524c55fe198147c505d97011b0}{neo\+::network\+::p2p\+::payloads\+::\+Get\+Addr\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_block_by_index_payload_aa682494fe7670a1c673c205874a49d4a}{neo\+::network\+::p2p\+::payloads\+::\+Get\+Block\+By\+Index\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_get_blocks_payload_a3e0a308364c5d8485c6fae5558c4f1f5}{neo\+::network\+::p2p\+::payloads\+::\+Get\+Blocks\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_header_a7a0ff4e1a9346da85e878bd5bfeb5272}{neo\+::network\+::p2p\+::payloads\+::\+Header}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_headers_payload_a4c912b90ce56f7f025cdb83c1f351d8d}{neo\+::network\+::p2p\+::payloads\+::\+Headers\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_high_priority_ac79bdfab60937b14041ab0d550abb73d}{neo\+::network\+::p2p\+::payloads\+::\+High\+Priority}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_inv_payload_aeeab8c87ca6ebff86166000ecfeae63d}{neo\+::network\+::p2p\+::payloads\+::\+Inv\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_mempool_payload_ab09939c5882911d9df6335bf9d9c0846}{neo\+::network\+::p2p\+::payloads\+::\+Mempool\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction_a162a772a646f6f029f83d02113374256}{neo\+::network\+::p2p\+::payloads\+::\+Neo3\+Transaction}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_network_address_with_time_afca5ac18a129b4e5f09467db674fece9}{neo\+::network\+::p2p\+::payloads\+::\+Network\+Address\+With\+Time}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_not_valid_before_abb4ef1fc9ca3e9bac5ae3c2bfe4c7ef3}{neo\+::network\+::p2p\+::payloads\+::\+Not\+Valid\+Before}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a1ad42ce4ef872de64a821235226f0b14}{neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload_a32ee266c5a435f17c97822d90d65c640}{neo\+::network\+::p2p\+::payloads\+::\+Ping\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_reject_payload_a564afb101da7a06e8cf72ebca6567842}{neo\+::network\+::p2p\+::payloads\+::\+Reject\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_transaction_payload_a6bb00785ffbfcd2b6d92599b3ee76a81}{neo\+::network\+::p2p\+::payloads\+::\+Transaction\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ver_ack_payload_ac1362a409f0eddcd1c6cf85944efbc1d}{neo\+::network\+::p2p\+::payloads\+::\+Ver\+Ack\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_version_payload_ae2539eb221ad3a8f28901df3bde4cc03}{neo\+::network\+::p2p\+::payloads\+::\+Version\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_acd698e88f073bb8a1f6b061dde9a75de}{neo\+::network\+::p2p\+::\+Peer}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_peer_list_ac87bbd666720be1bad50efe20492337b}{neo\+::network\+::p2p\+::\+Peer\+List}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_server_capability_a807e1eef8ce0acb53cf40ab9770b99dc}{neo\+::network\+::p2p\+::\+Server\+Capability}}, \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_unknown_capability_abbd8618ccf8469e8db0c19923a37632e}{neo\+::network\+::p2p\+::\+Unknown\+Capability}}, \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_consensus_payload_af1264c3b741d1318abfa1b62ba2f7492}{neo\+::network\+::payloads\+::\+Consensus\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_inventory_payload_a6a657155d9ea9f3bf81e9d7fa3eb21ec}{neo\+::network\+::payloads\+::\+Inventory\+Payload}}, \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_merkle_block_payload_a811fc3f7490ff7366a0a02299d8af887}{neo\+::network\+::payloads\+::\+Merkle\+Block\+Payload}}, \mbox{\hyperlink{classneo_1_1smartcontract_1_1_method_token_accae8ea8d83dbc43fb5666c196929a47}{neo\+::smartcontract\+::\+Method\+Token}}, \mbox{\hyperlink{classneo_1_1smartcontract_1_1_nef_file_a759d34d9b47b19a823010c429e2c841d}{neo\+::smartcontract\+::\+Nef\+File}}, \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_a9aa8de57dcfd730a30948de94856478e}{neo\+::wallets\+::\+Verification\+Contract}}, and \mbox{\hyperlink{classneo_1_1wallets_1_1_wallet_transaction_ad745f60c0513234cf95a37a267c0a6b1}{neo\+::wallets\+::\+Wallet\+Transaction}}.
+
+\Hypertarget{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}\index{neo::io::IJsonSerializable@{neo::io::IJsonSerializable}!ToJson@{ToJson}}
+\index{ToJson@{ToJson}!neo::io::IJsonSerializable@{neo::io::IJsonSerializable}}
+\doxysubsubsection{\texorpdfstring{ToJson()}{ToJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b} 
+nlohmann\+::json neo\+::io\+::\+IJson\+Serializable\+::\+To\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Serializes the object to a JSON object. 
+
+\begin{DoxyReturn}{Returns}
+The serialized object. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}\index{neo::io::IJsonSerializable@{neo::io::IJsonSerializable}!ToJsonString@{ToJsonString}}
+\index{ToJsonString@{ToJsonString}!neo::io::IJsonSerializable@{neo::io::IJsonSerializable}}
+\doxysubsubsection{\texorpdfstring{ToJsonString()}{ToJsonString()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521} 
+std\+::string neo\+::io\+::\+IJson\+Serializable\+::\+To\+Json\+String (\begin{DoxyParamCaption}\item[{bool}]{pretty}{ = {\ttfamily false}}\end{DoxyParamCaption}) const}
+
+
+
+Serializes the object to a JSON string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pretty} & Whether to pretty-\/print the JSON. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The serialized object. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/io/\mbox{\hyperlink{ijson__serializable_8h}{ijson\+\_\+serializable.\+h}}\item 
+src/io/\mbox{\hyperlink{ijson__serializable_8cpp}{ijson\+\_\+serializable.\+cpp}}\end{DoxyCompactItemize}

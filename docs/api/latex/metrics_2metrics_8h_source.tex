@@ -1,0 +1,105 @@
+\doxysection{metrics.\+h}
+\hypertarget{metrics_2metrics_8h_source}{}\label{metrics_2metrics_8h_source}\index{include/neo/metrics/metrics.h@{include/neo/metrics/metrics.h}}
+\mbox{\hyperlink{metrics_2metrics_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1metrics}{neo::metrics}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1metrics_1_1_metrics}{Metrics}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics}{Metrics}}\&\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a3c605adcc494c8a5d0fde16002cb4fa6}{GetInstance}}()}
+\DoxyCodeLine{00019\ \ \ \ \ \{}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics}{Metrics}}\ instance;}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00022\ \ \ \ \ \}}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{comment}{//\ Transaction\ metrics}}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a38dca2d1ff910c81cfa06aff1b6d888a}{IncrementTransactionsProcessed}}()\ \{\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_ac8a45ca5982aebdb49d2a105d5f77dc6}{transactionsProcessed\_}}++;\ \}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a456d2c18689e358b121fec2f01fd458b}{IncrementTransactionsVerified}}()\ \{\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a5ed3b596b0ea0640e5a48d00153de74e}{transactionsVerified\_}}++;\ \}}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a3938032d7d614ebc6fb2907db5bbd678}{IncrementTransactionsFailed}}()\ \{\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_aff711a7ce6fd34d0efd3807e3b9abb8c}{transactionsFailed\_}}++;\ \}}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{comment}{//\ Block\ metrics}}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a00bcdf60175c570801d69d3585d2703c}{IncrementBlocksProcessed}}()\ \{\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a12d0210b15b42babb9f5a852ddf6666c}{blocksProcessed\_}}++;\ \}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a4e1f8c17b754ab354a2455e49abeb737}{IncrementBlocksVerified}}()\ \{\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_ac47ca0b83a74a8f90ec4e002b0708dee}{blocksVerified\_}}++;\ \}}
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_af29c0613613bfd7073713ce98906f6d3}{IncrementBlocksFailed}}()\ \{\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a96c8bda8491566a8e4380dd082e6144f}{blocksFailed\_}}++;\ \}}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \textcolor{comment}{//\ Network\ metrics}}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_af021d62ec2cb34782df58ebbbd127b51}{IncrementPeersConnected}}()\ \{\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a3665320e3b625cf018f62671c09402f8}{peersConnected\_}}++;\ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a9a1124c711c9b30bd3eedd60584c6217}{IncrementPeersDisconnected}}()\ \{\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a5f2a4b3c6a74b4eda2ee8231dd0c0955}{peersDisconnected\_}}++;\ \}}
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a544a09058e9e91133f7691d38565f06a}{IncrementMessagesReceived}}()\ \{\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a4450fa5c629f0afb4a7f3ab11767c8b3}{messagesReceived\_}}++;\ \}}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a2e6120f376eb7e0500d99ef426f7b3c5}{IncrementMessagesSent}}()\ \{\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_aa656eb462715af3824e25f3974733533}{messagesSent\_}}++;\ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \textcolor{comment}{//\ Getters}}
+\DoxyCodeLine{00041\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a1c25d29e12d73ca8c7ff8764d880e817}{GetTransactionsProcessed}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_ac8a45ca5982aebdb49d2a105d5f77dc6}{transactionsProcessed\_}};\ \}}
+\DoxyCodeLine{00042\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a16713aa19a3f69ac02e5f38b5c141ff4}{GetTransactionsVerified}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a5ed3b596b0ea0640e5a48d00153de74e}{transactionsVerified\_}};\ \}}
+\DoxyCodeLine{00043\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a82bc615ae9024c40f4077af471e89427}{GetTransactionsFailed}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_aff711a7ce6fd34d0efd3807e3b9abb8c}{transactionsFailed\_}};\ \}}
+\DoxyCodeLine{00044\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a59beb57bf9bad4b29886cf2c4c1c97bb}{GetBlocksProcessed}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a12d0210b15b42babb9f5a852ddf6666c}{blocksProcessed\_}};\ \}}
+\DoxyCodeLine{00045\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_ac12fcc7fdd24dff495f3ad9172734e19}{GetBlocksVerified}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_ac47ca0b83a74a8f90ec4e002b0708dee}{blocksVerified\_}};\ \}}
+\DoxyCodeLine{00046\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_ac7d7c9389f446647fff49acf9cad9633}{GetBlocksFailed}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a96c8bda8491566a8e4380dd082e6144f}{blocksFailed\_}};\ \}}
+\DoxyCodeLine{00047\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a6c3cc4be761b4634c7c71c1651aeb07f}{GetPeersConnected}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a3665320e3b625cf018f62671c09402f8}{peersConnected\_}};\ \}}
+\DoxyCodeLine{00048\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a9bfe781db133ee97d43586f931886458}{GetPeersDisconnected}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a5f2a4b3c6a74b4eda2ee8231dd0c0955}{peersDisconnected\_}};\ \}}
+\DoxyCodeLine{00049\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_acabb83b87fdd5bb040a7a3c0359b57cf}{GetMessagesReceived}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a4450fa5c629f0afb4a7f3ab11767c8b3}{messagesReceived\_}};\ \}}
+\DoxyCodeLine{00050\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_afc74127e9618511f05c93bda5d363467}{GetMessagesSent}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_aa656eb462715af3824e25f3974733533}{messagesSent\_}};\ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00053\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_ac8a45ca5982aebdb49d2a105d5f77dc6}{transactionsProcessed\_}}\{0\};}
+\DoxyCodeLine{00054\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a5ed3b596b0ea0640e5a48d00153de74e}{transactionsVerified\_}}\{0\};}
+\DoxyCodeLine{00055\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_aff711a7ce6fd34d0efd3807e3b9abb8c}{transactionsFailed\_}}\{0\};}
+\DoxyCodeLine{00056\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a12d0210b15b42babb9f5a852ddf6666c}{blocksProcessed\_}}\{0\};}
+\DoxyCodeLine{00057\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_ac47ca0b83a74a8f90ec4e002b0708dee}{blocksVerified\_}}\{0\};}
+\DoxyCodeLine{00058\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a96c8bda8491566a8e4380dd082e6144f}{blocksFailed\_}}\{0\};}
+\DoxyCodeLine{00059\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a3665320e3b625cf018f62671c09402f8}{peersConnected\_}}\{0\};}
+\DoxyCodeLine{00060\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a5f2a4b3c6a74b4eda2ee8231dd0c0955}{peersDisconnected\_}}\{0\};}
+\DoxyCodeLine{00061\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_a4450fa5c629f0afb4a7f3ab11767c8b3}{messagesReceived\_}}\{0\};}
+\DoxyCodeLine{00062\ \ \ \ \ std::atomic<uint64\_t>\ \mbox{\hyperlink{classneo_1_1metrics_1_1_metrics_aa656eb462715af3824e25f3974733533}{messagesSent\_}}\{0\};}
+\DoxyCodeLine{00063\ \};}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00068\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1metrics_1_1_counter_a1844703178b1b313932c59ea46dffedb}{Counter}}}
+\DoxyCodeLine{00069\ \{}
+\DoxyCodeLine{00070\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00071\ \ \ \ \ \mbox{\hyperlink{classneo_1_1metrics_1_1_counter_a1844703178b1b313932c59ea46dffedb}{Counter}}()\ :\ \mbox{\hyperlink{classneo_1_1metrics_1_1_counter_ac76cbaf197e5b9e731010347366b8e30}{value\_}}(0)\ \{\}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_counter_a8b6b9905d7966d704f731569c75c4a64}{Increment}}(int64\_t\ delta\ =\ 1)\ \{\ \mbox{\hyperlink{classneo_1_1metrics_1_1_counter_ac76cbaf197e5b9e731010347366b8e30}{value\_}}.fetch\_add(delta,\ std::memory\_order\_relaxed);\ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1metrics_1_1_counter_a6ce156ee3863ad6f2dc4caa20b674973}{Get}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_counter_ac76cbaf197e5b9e731010347366b8e30}{value\_}}.load(std::memory\_order\_relaxed);\ \}}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_counter_a0892a70418f487419b1834876d7bd09f}{Put}}(int64\_t\ value)\ \{\ \mbox{\hyperlink{classneo_1_1metrics_1_1_counter_ac76cbaf197e5b9e731010347366b8e30}{value\_}}.store(value,\ std::memory\_order\_relaxed);\ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00080\ \ \ \ \ std::atomic<int64\_t>\ \mbox{\hyperlink{classneo_1_1metrics_1_1_counter_ac76cbaf197e5b9e731010347366b8e30}{value\_}};}
+\DoxyCodeLine{00081\ \};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00086\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1metrics_1_1_histogram_aa12ce46c66b9d2548b0cd9b2a5274dc6}{Histogram}}}
+\DoxyCodeLine{00087\ \{}
+\DoxyCodeLine{00088\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00089\ \ \ \ \ \mbox{\hyperlink{classneo_1_1metrics_1_1_histogram_aa12ce46c66b9d2548b0cd9b2a5274dc6}{Histogram}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_histogram_a44bb5cc5eca34de264d05f11410a690f}{Observe}}(\textcolor{keywordtype}{double}\ value)}
+\DoxyCodeLine{00092\ \ \ \ \ \{}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Simple\ implementation\ -\/\ just\ track\ observations}}
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1metrics_1_1_histogram_a8c877a7196298641a0dcc41e3a036f47}{observations\_}}.push\_back(\{value,\ std::chrono::steady\_clock::now()\});}
+\DoxyCodeLine{00095\ \ \ \ \ \}}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_histogram_a71ac17bf685d3e6b59ea3a96e88d1216}{Count}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1metrics_1_1_histogram_a8c877a7196298641a0dcc41e3a036f47}{observations\_}}.size();\ \}}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1metrics_1_1_histogram_1_1_observation}{Observation}}}
+\DoxyCodeLine{00101\ \ \ \ \ \{}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{structneo_1_1metrics_1_1_histogram_1_1_observation_a42464c47ea194a985a5736e69b343c7d}{value}};}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ std::chrono::steady\_clock::time\_point\ \mbox{\hyperlink{structneo_1_1metrics_1_1_histogram_1_1_observation_af27c1a0f674c4ad02f22c2c0ebb4851c}{timestamp}};}
+\DoxyCodeLine{00104\ \ \ \ \ \};}
+\DoxyCodeLine{00105\ }
+\DoxyCodeLine{00106\ \ \ \ \ std::vector<Observation>\ \mbox{\hyperlink{classneo_1_1metrics_1_1_histogram_a8c877a7196298641a0dcc41e3a036f47}{observations\_}};}
+\DoxyCodeLine{00107\ \};}
+\DoxyCodeLine{00108\ \}\ \ \textcolor{comment}{//\ namespace\ neo::metrics}}
+
+\end{DoxyCode}

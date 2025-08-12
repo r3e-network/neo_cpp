@@ -1,0 +1,46 @@
+\doxysection{store\+\_\+factory.\+h}
+\hypertarget{store__factory_8h_source}{}\label{store__factory_8h_source}\index{include/neo/persistence/store\_factory.h@{include/neo/persistence/store\_factory.h}}
+\mbox{\hyperlink{store__factory_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{istore_8h}{neo/persistence/istore.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{memory__store_8h}{neo/persistence/memory\_store.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#ifdef\ NEO\_HAS\_ROCKSDB}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{rocksdb__store_8h}{neo/persistence/rocksdb\_store.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1persistence}{neo::persistence}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory}{StoreFactory}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IStoreProvider>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_abcc3961e9f6623199f7a15e3a2466816}{get\_store\_provider}}(\textcolor{keyword}{const}\ std::string\&\ provider\_name);}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IStoreProvider>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_abcc3961e9f6623199f7a15e3a2466816}{get\_store\_provider}}(}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ provider\_name,\ \textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::string>\&\ \mbox{\hyperlink{namespaceneo_1_1config}{config}});}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IStoreProvider>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_ab85d90fe8ce07608e93ddbb25bc0a59e}{get\_default\_store\_provider}}();}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_a0693bf11576af6482a01259334d1cf5f}{register\_store\_provider}}(\textcolor{keyword}{const}\ std::string\&\ name,\ std::shared\_ptr<IStoreProvider>\ provider);}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00057\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::string>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_a252a811820b64c2ebad8112669a8a132}{get\_available\_providers}}();}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keyword}{static}\ std::unique\_ptr<IStore>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_ac1027be13b79203aaa2c8cd0c488ee8f}{create\_store}}(\textcolor{keyword}{const}\ std::string\&\ provider\_name,\ \textcolor{keyword}{const}\ std::string\&\ path);}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{static}\ std::unordered\_map<std::string,\ std::shared\_ptr<IStoreProvider>>\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_ab538e54c2df042a97f402d4681a4d91b}{providers\_}};}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{static}\ std::mutex\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_a86ab3273efab36946c086c0d20fa8b64}{providers\_mutex\_}};}
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_a98903a33efceb189f0b6f43bf6600133}{initialized\_}};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_a6353829ae2b0bffd848718c009cddf90}{initialize}}();}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00080\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1persistence_1_1_store_factory_a45cb363377933cdae64819f7fae51703}{ensure\_initialized}}();}
+\DoxyCodeLine{00081\ \};}
+\DoxyCodeLine{00082\ \}\ \ \textcolor{comment}{//\ namespace\ neo::persistence}}
+
+\end{DoxyCode}

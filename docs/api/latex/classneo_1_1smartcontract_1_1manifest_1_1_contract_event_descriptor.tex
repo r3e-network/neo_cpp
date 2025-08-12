@@ -1,0 +1,202 @@
+\doxysection{neo\+::smartcontract\+::manifest\+::Contract\+Event\+Descriptor Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor}{}\label{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor}\index{neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}}
+
+
+Represents a contract event descriptor.  
+
+
+
+
+{\ttfamily \#include $<$contract\+\_\+abi.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::smartcontract\+::manifest\+::Contract\+Event\+Descriptor\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::smartcontract\+::manifest\+::Contract\+Event\+Descriptor\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_a8956ad97c887a95a0e414e8b6e44a6c9}{Contract\+Event\+Descriptor}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor}{Contract\+Event\+Descriptor}. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_afba9811ccb30b14be641d51543c0cda6}{Get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Gets the name. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_ae1a0a068c3332e6be429530b89daf34b}{Set\+Name}} (const std\+::string \&name)
+\begin{DoxyCompactList}\small\item\em Sets the name. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_parameter_definition}{Contract\+Parameter\+Definition}} $>$ \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_a52856f4d2b4cc1dcfd476d52cb4c8225}{Get\+Parameters}} () const
+\begin{DoxyCompactList}\small\item\em Gets the parameters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_a54bfbdfe540cadc83af61db62f438512}{Set\+Parameters}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_parameter_definition}{Contract\+Parameter\+Definition}} $>$ \&parameters)
+\begin{DoxyCompactList}\small\item\em Sets the parameters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_a566462225c0d819b7c807c211d59216b}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_adb4f3ed85c74d5b4fdbc10b6be669d94}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_ae49f60f0a649f1167068b9a67aa0aea6}{name\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_parameter_definition}{Contract\+Parameter\+Definition}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_a61069c11a102942dd1f5f23a5eda10bf}{parameters\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a contract event descriptor. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_a8956ad97c887a95a0e414e8b6e44a6c9}\index{neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}!ContractEventDescriptor@{ContractEventDescriptor}}
+\index{ContractEventDescriptor@{ContractEventDescriptor}!neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}}
+\doxysubsubsection{\texorpdfstring{ContractEventDescriptor()}{ContractEventDescriptor()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_a8956ad97c887a95a0e414e8b6e44a6c9} 
+neo\+::smartcontract\+::manifest\+::\+Contract\+Event\+Descriptor\+::\+Contract\+Event\+Descriptor (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor}{Contract\+Event\+Descriptor}. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_adb4f3ed85c74d5b4fdbc10b6be669d94}\index{neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_adb4f3ed85c74d5b4fdbc10b6be669d94} 
+void neo\+::smartcontract\+::manifest\+::\+Contract\+Event\+Descriptor\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_afba9811ccb30b14be641d51543c0cda6}\index{neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}!GetName@{GetName}}
+\index{GetName@{GetName}!neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_afba9811ccb30b14be641d51543c0cda6} 
+const std\+::string \& neo\+::smartcontract\+::manifest\+::\+Contract\+Event\+Descriptor\+::\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the name. 
+
+\begin{DoxyReturn}{Returns}
+The name. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_a52856f4d2b4cc1dcfd476d52cb4c8225}\index{neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}!GetParameters@{GetParameters}}
+\index{GetParameters@{GetParameters}!neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}}
+\doxysubsubsection{\texorpdfstring{GetParameters()}{GetParameters()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_a52856f4d2b4cc1dcfd476d52cb4c8225} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_parameter_definition}{Contract\+Parameter\+Definition}} $>$ \& neo\+::smartcontract\+::manifest\+::\+Contract\+Event\+Descriptor\+::\+Get\+Parameters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the parameters. 
+
+\begin{DoxyReturn}{Returns}
+The parameters. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_a566462225c0d819b7c807c211d59216b}\index{neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_a566462225c0d819b7c807c211d59216b} 
+void neo\+::smartcontract\+::manifest\+::\+Contract\+Event\+Descriptor\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_ae1a0a068c3332e6be429530b89daf34b}\index{neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}!SetName@{SetName}}
+\index{SetName@{SetName}!neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}}
+\doxysubsubsection{\texorpdfstring{SetName()}{SetName()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_ae1a0a068c3332e6be429530b89daf34b} 
+void neo\+::smartcontract\+::manifest\+::\+Contract\+Event\+Descriptor\+::\+Set\+Name (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{}\end{DoxyParamCaption})}
+
+
+
+Sets the name. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_a54bfbdfe540cadc83af61db62f438512}\index{neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}!SetParameters@{SetParameters}}
+\index{SetParameters@{SetParameters}!neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}}
+\doxysubsubsection{\texorpdfstring{SetParameters()}{SetParameters()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_a54bfbdfe540cadc83af61db62f438512} 
+void neo\+::smartcontract\+::manifest\+::\+Contract\+Event\+Descriptor\+::\+Set\+Parameters (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_parameter_definition}{Contract\+Parameter\+Definition}} $>$ \&}]{parameters}{}\end{DoxyParamCaption})}
+
+
+
+Sets the parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parameters} & The parameters. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_ae49f60f0a649f1167068b9a67aa0aea6}\index{neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}!name\_@{name\_}}
+\index{name\_@{name\_}!neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}}
+\doxysubsubsection{\texorpdfstring{name\_}{name\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_ae49f60f0a649f1167068b9a67aa0aea6} 
+std\+::string neo\+::smartcontract\+::manifest\+::\+Contract\+Event\+Descriptor\+::name\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_a61069c11a102942dd1f5f23a5eda10bf}\index{neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}!parameters\_@{parameters\_}}
+\index{parameters\_@{parameters\_}!neo::smartcontract::manifest::ContractEventDescriptor@{neo::smartcontract::manifest::ContractEventDescriptor}}
+\doxysubsubsection{\texorpdfstring{parameters\_}{parameters\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1manifest_1_1_contract_event_descriptor_a61069c11a102942dd1f5f23a5eda10bf} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1smartcontract_1_1manifest_1_1_contract_parameter_definition}{Contract\+Parameter\+Definition}}$>$ neo\+::smartcontract\+::manifest\+::\+Contract\+Event\+Descriptor\+::parameters\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/manifest/\mbox{\hyperlink{contract__abi_8h}{contract\+\_\+abi.\+h}}\item 
+src/smartcontract/manifest/\mbox{\hyperlink{contract__abi_8cpp}{contract\+\_\+abi.\+cpp}}\end{DoxyCompactItemize}

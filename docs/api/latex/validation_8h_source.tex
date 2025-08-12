@@ -1,0 +1,241 @@
+\doxysection{validation.\+h}
+\hypertarget{validation_8h_source}{}\label{validation_8h_source}\index{include/neo/core/validation.h@{include/neo/core/validation.h}}
+\mbox{\hyperlink{validation_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{core_2exceptions_8h}{neo/core/exceptions.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__span_8h}{neo/io/byte\_span.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <limits>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1core}{neo::core}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_validator}{Validator}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result_a63dcb8362ba44e4a37a1aeb468b907c0}{ValidationResult}}}
+\DoxyCodeLine{00028\ \ \ \ \ \{}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result_abefa2c5acda182db71fd65662493deb6}{is\_valid}};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result_a71c087f913d95217bb4b6e2488c4fabf}{error\_message}};}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{NeoException::ErrorCode}}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result_a371ea51681a0ea95eafe1fca5e11cca3}{error\_code}};}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result_a63dcb8362ba44e4a37a1aeb468b907c0}{ValidationResult}}(\textcolor{keywordtype}{bool}\ valid\ =\ \textcolor{keyword}{true})\ :\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result_abefa2c5acda182db71fd65662493deb6}{is\_valid}}(valid),\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result_a371ea51681a0ea95eafe1fca5e11cca3}{error\_code}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{NeoException}}::ErrorCode::UNKNOWN\_ERROR)\ \{\}}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result_adbce9895dbaf6b90317736afa6b975b0}{ValidationResult}}(\textcolor{keywordtype}{bool}\ valid,\ \textcolor{keyword}{const}\ std::string\&\ message)}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result_abefa2c5acda182db71fd65662493deb6}{is\_valid}}(valid),\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result_a71c087f913d95217bb4b6e2488c4fabf}{error\_message}}(message),\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result_a371ea51681a0ea95eafe1fca5e11cca3}{error\_code}}(\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{NeoException}}::ErrorCode::INVALID\_ARGUMENT)}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result_a8e40ce8e88931f30d9c653466bb94839}{ValidationResult}}(\textcolor{keywordtype}{bool}\ valid,\ \textcolor{keyword}{const}\ std::string\&\ message,\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{NeoException::ErrorCode}}\ code)}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result_abefa2c5acda182db71fd65662493deb6}{is\_valid}}(valid),\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result_a71c087f913d95217bb4b6e2488c4fabf}{error\_message}}(message),\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result_a371ea51681a0ea95eafe1fca5e11cca3}{error\_code}}(code)}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keyword}{operator}\ bool()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result_abefa2c5acda182db71fd65662493deb6}{is\_valid}};\ \}}
+\DoxyCodeLine{00046\ \ \ \ \ \};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{comment}{//\ Basic\ type\ validation}}
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a29082367c504a93d5cd11161167fae0c}{ValidateNotNull}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ ptr,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}pointer"{}});}
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a7f8d8632a5910f983a055c77c40dcb2b}{ValidateNotEmpty}}(\textcolor{keyword}{const}\ std::string\&\ str,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}string"{}});}
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a7f8d8632a5910f983a055c77c40dcb2b}{ValidateNotEmpty}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ data,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}data"{}});}
+\DoxyCodeLine{00052\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a7f8d8632a5910f983a055c77c40dcb2b}{ValidateNotEmpty}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ span,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}span"{}});}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00054\ \ \ \ \ \textcolor{comment}{//\ Numeric\ validation}}
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_af474c5c496d142040aa019ee0783cb74}{ValidateRange}}(T\ value,\ T\ min\_val,\ T\ max\_val,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}value"{}})}
+\DoxyCodeLine{00057\ \ \ \ \ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ <\ min\_val\ ||\ value\ >\ max\_val)}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}(\textcolor{keyword}{false},}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name\ +\ \textcolor{stringliteral}{"{}\ ("{}}\ +\ std::to\_string(value)\ +\ \textcolor{stringliteral}{"{})\ is\ out\ of\ range\ ["{}}\ +}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(min\_val)\ +\ \textcolor{stringliteral}{"{},\ "{}}\ +\ std::to\_string(max\_val)\ +\ \textcolor{stringliteral}{"{}]"{}},}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6feaf66704b269610cff9431d5519cad}{NeoException::ErrorCode::OUT\_OF\_RANGE}});}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00069\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_ac5d2fff3c1b6ebdcddbe8a9e3c219519}{ValidatePositive}}(T\ value,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}value"{}})}
+\DoxyCodeLine{00070\ \ \ \ \ \{}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ <=\ 0)}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}(\textcolor{keyword}{false},\ name\ +\ \textcolor{stringliteral}{"{}\ must\ be\ positive"{}},\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af295a0c3e37c94f078e1c5476479132d}{NeoException::ErrorCode::INVALID\_ARGUMENT}});}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{00076\ \ \ \ \ \}}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a221a5ac266946a598c06d310877ffc36}{ValidateNonNegative}}(T\ value,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}value"{}})}
+\DoxyCodeLine{00080\ \ \ \ \ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (value\ <\ 0)}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00083\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}(\textcolor{keyword}{false},\ name\ +\ \textcolor{stringliteral}{"{}\ must\ be\ non-\/negative"{}},\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af295a0c3e37c94f078e1c5476479132d}{NeoException::ErrorCode::INVALID\_ARGUMENT}});}
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{00086\ \ \ \ \ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{comment}{//\ Size\ validation}}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a4bb4d85ac391d7522edce4cd50605bc9}{ValidateSize}}(\textcolor{keywordtype}{size\_t}\ actual\_size,\ \textcolor{keywordtype}{size\_t}\ expected\_size,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}data"{}});}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_ad530bde19baac0a62fb11c889ad9b6ab}{ValidateMinSize}}(\textcolor{keywordtype}{size\_t}\ actual\_size,\ \textcolor{keywordtype}{size\_t}\ min\_size,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}data"{}});}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_ad59d84738b6fd4ba9ef2f27bc0d070f8}{ValidateMaxSize}}(\textcolor{keywordtype}{size\_t}\ actual\_size,\ \textcolor{keywordtype}{size\_t}\ max\_size,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}data"{}});}
+\DoxyCodeLine{00092\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a213b395c5a51af3bb3ae33c001bc49ee}{ValidateSizeRange}}(\textcolor{keywordtype}{size\_t}\ actual\_size,\ \textcolor{keywordtype}{size\_t}\ min\_size,\ \textcolor{keywordtype}{size\_t}\ max\_size,}
+\DoxyCodeLine{00093\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}data"{}});}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{comment}{//\ String\ validation}}
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a422c7f7562efcc4da9a7d3b52c4257a4}{ValidateHexString}}(\textcolor{keyword}{const}\ std::string\&\ hex,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}hex\ string"{}});}
+\DoxyCodeLine{00097\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a422c7f7562efcc4da9a7d3b52c4257a4}{ValidateHexString}}(\textcolor{keyword}{const}\ std::string\&\ hex,\ \textcolor{keywordtype}{size\_t}\ expected\_length,}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}hex\ string"{}});}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a1d7e2e85e2c9302499b624a52dcca6fb}{ValidateBase58String}}(\textcolor{keyword}{const}\ std::string\&\ base58,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}base58\ string"{}});}
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a182f515e2de986f19911c001581864ce}{ValidateAddress}}(\textcolor{keyword}{const}\ std::string\&\ address,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}address"{}});}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{comment}{//\ Neo-\/specific\ validation}}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a4eb23641652948b60a0f54fe00bb266c}{ValidateUInt160}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ value,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}UInt160"{}});}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a08a33baab724d14e05c43680bbc950f5}{ValidateUInt256}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ value,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}UInt256"{}});}
+\DoxyCodeLine{00105\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a4ea01668200a98805dd36a3dfab1545e}{ValidateByteSpan}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ span,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}ByteSpan"{}});}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a4ea01668200a98805dd36a3dfab1545e}{ValidateByteSpan}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io::ByteSpan}}\&\ span,\ \textcolor{keywordtype}{size\_t}\ expected\_size,}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}ByteSpan"{}});}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{comment}{//\ Container\ validation}}
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00111\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a1210e1a3af39e2f73eac52b60535af95}{ValidateContainer}}(\textcolor{keyword}{const}\ std::vector<T>\&\ container,\ \textcolor{keywordtype}{size\_t}\ max\_size,}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}container"{}})}
+\DoxyCodeLine{00113\ \ \ \ \ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (container.size()\ >\ max\_size)}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}(\textcolor{keyword}{false},}
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ name\ +\ \textcolor{stringliteral}{"{}\ size\ ("{}}\ +\ std::to\_string(container.size())\ +\ \textcolor{stringliteral}{"{})\ exceeds\ maximum\ ("{}}\ +}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::to\_string(max\_size)\ +\ \textcolor{stringliteral}{"{})"{}},}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8a6feaf66704b269610cff9431d5519cad}{NeoException::ErrorCode::OUT\_OF\_RANGE}});}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{00122\ \ \ \ \ \}}
+\DoxyCodeLine{00123\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00125\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a59ff6670a38eb596a6a67e3cf4c38a84}{ValidateContainerNotEmpty}}(\textcolor{keyword}{const}\ std::vector<T>\&\ container,}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}container"{}})}
+\DoxyCodeLine{00127\ \ \ \ \ \{}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (container.empty())}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}(\textcolor{keyword}{false},\ name\ +\ \textcolor{stringliteral}{"{}\ cannot\ be\ empty"{}},\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af295a0c3e37c94f078e1c5476479132d}{NeoException::ErrorCode::INVALID\_ARGUMENT}});}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{00133\ \ \ \ \ \}}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \textcolor{comment}{//\ Custom\ validation\ functions}}
+\DoxyCodeLine{00136\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00137\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a9171c0876b501c2cacd611d15bdac40c}{ValidateCustom}}(\textcolor{keyword}{const}\ T\&\ value,\ std::function<\textcolor{keywordtype}{bool}(\textcolor{keyword}{const}\ T\&)>\ validator,}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ error\_message,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}value"{}})}
+\DoxyCodeLine{00139\ \ \ \ \ \{}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!validator(value))}
+\DoxyCodeLine{00141\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}(\textcolor{keyword}{false},\ name\ +\ \textcolor{stringliteral}{"{}:\ "{}}\ +\ error\_message,\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8af295a0c3e37c94f078e1c5476479132d}{NeoException::ErrorCode::INVALID\_ARGUMENT}});}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{structneo_1_1core_1_1_validator_1_1_validation_result}{ValidationResult}}(\textcolor{keyword}{true});}
+\DoxyCodeLine{00145\ \ \ \ \ \}}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00147\ \ \ \ \ \textcolor{comment}{//\ Compound\ validation\ -\/\ validate\ multiple\ conditions}}
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_ad1d2e9f20102f04a88c7e7e31b79f791}{ValidateAll}}(\textcolor{keyword}{const}\ std::vector<ValidationResult>\&\ results);}
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a8ce4110451c0b8d3528a4e9ed269426c}{ValidateAny}}(\textcolor{keyword}{const}\ std::vector<ValidationResult>\&\ results);}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00151\ \ \ \ \ \textcolor{comment}{//\ Throwing\ validators\ -\/\ throw\ exceptions\ on\ validation\ failure}}
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_ad5125d77678529353b8a827c967a72fb}{RequireNotNull}}(\textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ ptr,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}pointer"{}});}
+\DoxyCodeLine{00153\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a8b0a5b0b5d5abfb59e26f1e2b330164f}{RequireNotEmpty}}(\textcolor{keyword}{const}\ std::string\&\ str,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}string"{}});}
+\DoxyCodeLine{00154\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a8b0a5b0b5d5abfb59e26f1e2b330164f}{RequireNotEmpty}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ data,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}data"{}});}
+\DoxyCodeLine{00155\ }
+\DoxyCodeLine{00156\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00157\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_adcfdcc7328dfd63f13eba8844ff60f76}{RequireRange}}(T\ value,\ T\ min\_val,\ T\ max\_val,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}value"{}})}
+\DoxyCodeLine{00158\ \ \ \ \ \{}
+\DoxyCodeLine{00159\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ result\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_af474c5c496d142040aa019ee0783cb74}{ValidateRange}}(value,\ min\_val,\ max\_val,\ name);}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!result)}
+\DoxyCodeLine{00161\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{NeoException}}(result.error\_code,\ result.error\_message);}
+\DoxyCodeLine{00163\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00164\ \ \ \ \ \}}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00166\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a7b8da37d197285c1642c0bd73458f139}{RequirePositive}}(T\ value,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}value"{}})}
+\DoxyCodeLine{00168\ \ \ \ \ \{}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ result\ =\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_ac5d2fff3c1b6ebdcddbe8a9e3c219519}{ValidatePositive}}(value,\ name);}
+\DoxyCodeLine{00170\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!result)}
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{throw}\ \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception}{NeoException}}(result.error\_code,\ result.error\_message);}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00174\ \ \ \ \ \}}
+\DoxyCodeLine{00175\ }
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_ac7274312436c57554e8a5838349f7be3}{RequireSize}}(\textcolor{keywordtype}{size\_t}\ actual\_size,\ \textcolor{keywordtype}{size\_t}\ expected\_size,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}data"{}});}
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_abdab875d21ac4faa35d7e6c6f8982bc5}{RequireHexString}}(\textcolor{keyword}{const}\ std::string\&\ hex,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}hex\ string"{}});}
+\DoxyCodeLine{00178\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_abdab875d21ac4faa35d7e6c6f8982bc5}{RequireHexString}}(\textcolor{keyword}{const}\ std::string\&\ hex,\ \textcolor{keywordtype}{size\_t}\ expected\_length,}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}hex\ string"{}});}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00181\ \ \ \ \ \textcolor{comment}{//\ Security\ validation}}
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a00c68d7d21c34e408d7d8c621d847fe4}{ValidateNoScriptInjection}}(\textcolor{keyword}{const}\ std::string\&\ input,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}input"{}});}
+\DoxyCodeLine{00183\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_ad85d6b47e507f937861ed50a9bc07956}{ValidateNoSQLInjection}}(\textcolor{keyword}{const}\ std::string\&\ input,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}input"{}});}
+\DoxyCodeLine{00184\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_afcdc6633a8ef7ed19832c40d37ba11c8}{ValidateFileName}}(\textcolor{keyword}{const}\ std::string\&\ filename,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}filename"{}});}
+\DoxyCodeLine{00185\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a58338dcfcfb4812e065e0dd67c142fe2}{ValidateFilePath}}(\textcolor{keyword}{const}\ std::string\&\ filepath,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}filepath"{}});}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{comment}{//\ Network\ validation}}
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_aa1141b62e68c8f142dc76cefe21575b2}{ValidateIPAddress}}(\textcolor{keyword}{const}\ std::string\&\ ip,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}IP\ address"{}});}
+\DoxyCodeLine{00189\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_ab9d42fa30a233b23a7aca6a380bf1796}{ValidatePort}}(uint16\_t\ port,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}port"{}});}
+\DoxyCodeLine{00190\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_ad335e0f390c8b5f02427f12b82b4ef5a}{ValidateURL}}(\textcolor{keyword}{const}\ std::string\&\ url,\ \textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}URL"{}});}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00192\ \ \ \ \ \textcolor{comment}{//\ Blockchain-\/specific\ validation}}
+\DoxyCodeLine{00193\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_af45c0cbe051974bd40037276d37357d1}{ValidateBlockHeight}}(uint32\_t\ height,}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ max\_height\ =\ std::numeric\_limits<uint32\_t>::max());}
+\DoxyCodeLine{00195\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_af30b21afd08e10a353110758686427bf}{ValidateTransactionFee}}(int64\_t\ fee,\ int64\_t\ max\_fee\ =\ std::numeric\_limits<int64\_t>::max());}
+\DoxyCodeLine{00196\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a782f6a444ba51974aec0113d8f9a104f}{ValidateGasAmount}}(int64\_t\ gas,\ int64\_t\ max\_gas\ =\ std::numeric\_limits<int64\_t>::max());}
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_a76cb38fe3c8b8b48a3f61a20e3b609cb}{ValidateNonce}}(uint32\_t\ nonce);}
+\DoxyCodeLine{00198\ \ \ \ \ \textcolor{keyword}{static}\ ValidationResult\ \mbox{\hyperlink{classneo_1_1core_1_1_validator_af2bd404f419b16bed87595869baaf180}{ValidateTimestamp}}(uint64\_t\ timestamp);}
+\DoxyCodeLine{00199\ \};}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00201\ \textcolor{comment}{//\ Utility\ macros\ for\ common\ validations}}
+\DoxyCodeLine{00202\ \textcolor{preprocessor}{\#define\ VALIDATE\_NOT\_NULL(ptr)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00203\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00204\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00205\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ auto\ \_\_result\ =\ neo::core::Validator::ValidateNotNull(ptr,\ \#ptr);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00206\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (!\_\_result)\ throw\ neo::core::NeoException(\_\_result.error\_code,\ \_\_result.error\_message);\ \(\backslash\)}}
+\DoxyCodeLine{00207\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (0)}}
+\DoxyCodeLine{00208\ }
+\DoxyCodeLine{00209\ \textcolor{preprocessor}{\#define\ VALIDATE\_NOT\_EMPTY(value)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00210\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00211\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00212\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ auto\ \_\_result\ =\ neo::core::Validator::ValidateNotEmpty(value,\ \#value);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00213\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (!\_\_result)\ throw\ neo::core::NeoException(\_\_result.error\_code,\ \_\_result.error\_message);\ \(\backslash\)}}
+\DoxyCodeLine{00214\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (0)}}
+\DoxyCodeLine{00215\ }
+\DoxyCodeLine{00216\ \textcolor{preprocessor}{\#define\ VALIDATE\_RANGE(value,\ min\_val,\ max\_val)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00217\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00218\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00219\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ auto\ \_\_result\ =\ neo::core::Validator::ValidateRange(value,\ min\_val,\ max\_val,\ \#value);\ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00220\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (!\_\_result)\ throw\ neo::core::NeoException(\_\_result.error\_code,\ \_\_result.error\_message);\ \(\backslash\)}}
+\DoxyCodeLine{00221\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (0)}}
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \textcolor{preprocessor}{\#define\ VALIDATE\_POSITIVE(value)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00224\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00225\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00226\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ auto\ \_\_result\ =\ neo::core::Validator::ValidatePositive(value,\ \#value);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00227\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (!\_\_result)\ throw\ neo::core::NeoException(\_\_result.error\_code,\ \_\_result.error\_message);\ \(\backslash\)}}
+\DoxyCodeLine{00228\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (0)}}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \textcolor{preprocessor}{\#define\ VALIDATE\_SIZE(actual,\ expected)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00231\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00232\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00233\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ auto\ \_\_result\ =\ neo::core::Validator::ValidateSize(actual,\ expected,\ \#actual);\ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00234\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (!\_\_result)\ throw\ neo::core::NeoException(\_\_result.error\_code,\ \_\_result.error\_message);\ \(\backslash\)}}
+\DoxyCodeLine{00235\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (0)}}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \textcolor{preprocessor}{\#define\ VALIDATE\_HEX\_STRING(hex)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00238\ \textcolor{preprocessor}{\ \ \ \ do\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00239\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00240\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ auto\ \_\_result\ =\ neo::core::Validator::ValidateHexString(hex,\ \#hex);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00241\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ if\ (!\_\_result)\ throw\ neo::core::NeoException(\_\_result.error\_code,\ \_\_result.error\_message);\ \(\backslash\)}}
+\DoxyCodeLine{00242\ \textcolor{preprocessor}{\ \ \ \ \}\ while\ (0)}}
+\DoxyCodeLine{00243\ }
+\DoxyCodeLine{00244\ \}\ \ \textcolor{comment}{//\ namespace\ neo::core}}
+
+\end{DoxyCode}

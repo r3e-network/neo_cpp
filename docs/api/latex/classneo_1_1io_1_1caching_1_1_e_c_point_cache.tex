@@ -1,0 +1,172 @@
+\doxysection{neo\+::io\+::caching\+::ECPoint\+Cache Class Reference}
+\hypertarget{classneo_1_1io_1_1caching_1_1_e_c_point_cache}{}\label{classneo_1_1io_1_1caching_1_1_e_c_point_cache}\index{neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}}
+
+
+A cache for ECPoint objects.  
+
+
+
+
+{\ttfamily \#include $<$ecpoint\+\_\+cache.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::io\+::caching\+::ECPoint\+Cache\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a45f5fb8a2f6764e9be3e2b8993cc231a}{ECPoint\+Cache}} (size\+\_\+t capacity)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1io_1_1caching_1_1_e_c_point_cache}{ECPoint\+Cache} with the specified capacity. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_aa78ee0eb398e46237efbdd2599e42c10}{Get\+Or\+Create}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&bytes, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve}{cryptography\+::ecc\+::\+ECCurve}} $>$ curve)
+\begin{DoxyCompactList}\small\item\em Gets an ECPoint from the cache or creates a new one. \end{DoxyCompactList}\item 
+std\+::optional$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ $>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a34f2ecc47d0cc44a83a01964ee214766}{Get}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&bytes)
+\begin{DoxyCompactList}\small\item\em Gets an ECPoint from the cache. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a6fcdd6ccd302ac6daf9525529a2166b8}{Add}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ ecpoint)
+\begin{DoxyCompactList}\small\item\em Adds an ECPoint to the cache. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a6d08acbcd5708f2c64dfd52d9ba0c749}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clears the cache. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a8ba0a4ae7df1c5f5892ef4e53fefa184}{Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of items in the cache. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_af3ae74cca228d3d2a61c3cffc648ce5b}{Capacity}} () const
+\begin{DoxyCompactList}\small\item\em Gets the capacity of the cache. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache}}$<$ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}}, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$, \mbox{\hyperlink{structneo_1_1io_1_1caching_1_1_byte_vector_hash}{Byte\+Vector\+Hash}} $>$ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_acaadba8516015ee733480aec73403820}{cache\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A cache for ECPoint objects. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_e_c_point_cache_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a45f5fb8a2f6764e9be3e2b8993cc231a}\index{neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}!ECPointCache@{ECPointCache}}
+\index{ECPointCache@{ECPointCache}!neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}}
+\doxysubsubsection{\texorpdfstring{ECPointCache()}{ECPointCache()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a45f5fb8a2f6764e9be3e2b8993cc231a} 
+neo\+::io\+::caching\+::\+ECPoint\+Cache\+::\+ECPoint\+Cache (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{capacity}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs an \doxylink{classneo_1_1io_1_1caching_1_1_e_c_point_cache}{ECPoint\+Cache} with the specified capacity. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em capacity} & The maximum number of items the cache can hold. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_e_c_point_cache_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a6fcdd6ccd302ac6daf9525529a2166b8}\index{neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}!Add@{Add}}
+\index{Add@{Add}!neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a6fcdd6ccd302ac6daf9525529a2166b8} 
+void neo\+::io\+::caching\+::\+ECPoint\+Cache\+::\+Add (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$}]{ecpoint}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Adds an ECPoint to the cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ecpoint} & The ECPoint to add. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_e_c_point_cache_af3ae74cca228d3d2a61c3cffc648ce5b}\index{neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}!Capacity@{Capacity}}
+\index{Capacity@{Capacity}!neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}}
+\doxysubsubsection{\texorpdfstring{Capacity()}{Capacity()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_e_c_point_cache_af3ae74cca228d3d2a61c3cffc648ce5b} 
+size\+\_\+t neo\+::io\+::caching\+::\+ECPoint\+Cache\+::\+Capacity (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the capacity of the cache. 
+
+\begin{DoxyReturn}{Returns}
+The capacity of the cache. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a6d08acbcd5708f2c64dfd52d9ba0c749}\index{neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a6d08acbcd5708f2c64dfd52d9ba0c749} 
+void neo\+::io\+::caching\+::\+ECPoint\+Cache\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Clears the cache. 
+
+\Hypertarget{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a34f2ecc47d0cc44a83a01964ee214766}\index{neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}!Get@{Get}}
+\index{Get@{Get}!neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}}
+\doxysubsubsection{\texorpdfstring{Get()}{Get()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a34f2ecc47d0cc44a83a01964ee214766} 
+std\+::optional$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ $>$ neo\+::io\+::caching\+::\+ECPoint\+Cache\+::\+Get (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&}]{bytes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets an ECPoint from the cache. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & The encoded ECPoint. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The ECPoint if found, std\+::nullopt otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_e_c_point_cache_aa78ee0eb398e46237efbdd2599e42c10}\index{neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}!GetOrCreate@{GetOrCreate}}
+\index{GetOrCreate@{GetOrCreate}!neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}}
+\doxysubsubsection{\texorpdfstring{GetOrCreate()}{GetOrCreate()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_e_c_point_cache_aa78ee0eb398e46237efbdd2599e42c10} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ neo\+::io\+::caching\+::\+ECPoint\+Cache\+::\+Get\+Or\+Create (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&}]{bytes}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_curve}{cryptography\+::ecc\+::\+ECCurve}} $>$}]{curve}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets an ECPoint from the cache or creates a new one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & The encoded ECPoint. \\
+\hline
+{\em curve} & The elliptic curve. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The ECPoint. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a8ba0a4ae7df1c5f5892ef4e53fefa184}\index{neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}!Size@{Size}}
+\index{Size@{Size}!neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a8ba0a4ae7df1c5f5892ef4e53fefa184} 
+size\+\_\+t neo\+::io\+::caching\+::\+ECPoint\+Cache\+::\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the number of items in the cache. 
+
+\begin{DoxyReturn}{Returns}
+The number of items in the cache. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_e_c_point_cache_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1io_1_1caching_1_1_e_c_point_cache_acaadba8516015ee733480aec73403820}\index{neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}!cache\_@{cache\_}}
+\index{cache\_@{cache\_}!neo::io::caching::ECPointCache@{neo::io::caching::ECPointCache}}
+\doxysubsubsection{\texorpdfstring{cache\_}{cache\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1caching_1_1_e_c_point_cache_acaadba8516015ee733480aec73403820} 
+\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache}}$<$\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}}, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}}$>$, \mbox{\hyperlink{structneo_1_1io_1_1caching_1_1_byte_vector_hash}{Byte\+Vector\+Hash}}$>$ neo\+::io\+::caching\+::\+ECPoint\+Cache\+::cache\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/io/caching/\mbox{\hyperlink{ecpoint__cache_8h}{ecpoint\+\_\+cache.\+h}}\end{DoxyCompactItemize}

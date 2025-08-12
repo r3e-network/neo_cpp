@@ -1,0 +1,26 @@
+var classneo_1_1wallets_1_1_transfer_output =
+[
+    [ "TransferOutput", "classneo_1_1wallets_1_1_transfer_output.html#a751e5ade33bb3cacc775da84bc724c93", null ],
+    [ "TransferOutput", "classneo_1_1wallets_1_1_transfer_output.html#a648e86b4d09844440dc74ea69be88964", null ],
+    [ "~TransferOutput", "classneo_1_1wallets_1_1_transfer_output.html#a04e6b5b81e00f515f83a4c357a1a7245", null ],
+    [ "TransferOutput", "classneo_1_1wallets_1_1_transfer_output.html#aaef0f0a366430119daf4e16d7a3405e9", null ],
+    [ "TransferOutput", "classneo_1_1wallets_1_1_transfer_output.html#a7b8744b4f1e81e70cccebfbc2e84adc2", null ],
+    [ "GetAmount", "classneo_1_1wallets_1_1_transfer_output.html#aa835bf14090e75affcb80b7085d86cc8", null ],
+    [ "GetAssetId", "classneo_1_1wallets_1_1_transfer_output.html#a508e14613ff98003a5e25e2fb9edc3fc", null ],
+    [ "GetData", "classneo_1_1wallets_1_1_transfer_output.html#af5fcd0534a4b2f660856350c97854619", null ],
+    [ "GetScriptHash", "classneo_1_1wallets_1_1_transfer_output.html#ac578898f6fb372d844d5df9321c9d131", null ],
+    [ "IsValid", "classneo_1_1wallets_1_1_transfer_output.html#ab0bff1a71b530f9744614085369a2d5b", null ],
+    [ "operator!=", "classneo_1_1wallets_1_1_transfer_output.html#ae01df3ecea4a1df63839c03fee09f06c", null ],
+    [ "operator=", "classneo_1_1wallets_1_1_transfer_output.html#af673250ee49dc966c1ee31404b915a3f", null ],
+    [ "operator=", "classneo_1_1wallets_1_1_transfer_output.html#a2f8adffc62706d177e556a98e32c1a80", null ],
+    [ "operator==", "classneo_1_1wallets_1_1_transfer_output.html#adeab0bce07d8fa4e6aab95326e5f9ddf", null ],
+    [ "SetAmount", "classneo_1_1wallets_1_1_transfer_output.html#a7804fa12a6511bdc8cd34f91d5cce00d", null ],
+    [ "SetAssetId", "classneo_1_1wallets_1_1_transfer_output.html#abc6c769034b9fc407e48ab6f050e2786", null ],
+    [ "SetData", "classneo_1_1wallets_1_1_transfer_output.html#a4bb1af470bc7f79d7665c4138a2d24a9", null ],
+    [ "SetScriptHash", "classneo_1_1wallets_1_1_transfer_output.html#a6ae3fd397c150b1be219ea74ef895fb2", null ],
+    [ "ToString", "classneo_1_1wallets_1_1_transfer_output.html#a54f38c3a96da5aabf8ca12b88e3b9f00", null ],
+    [ "amount_", "classneo_1_1wallets_1_1_transfer_output.html#aa9f2a5dd65030861e72269944113fb9b", null ],
+    [ "asset_id_", "classneo_1_1wallets_1_1_transfer_output.html#aae3d1bc5a616e1d751121fb45495e3c4", null ],
+    [ "data_", "classneo_1_1wallets_1_1_transfer_output.html#a13e4f0154e3f35f0f3e64e84478c898b", null ],
+    [ "script_hash_", "classneo_1_1wallets_1_1_transfer_output.html#ac754afd7ccd72b5ba26cc8c04af3f9a6", null ]
+];

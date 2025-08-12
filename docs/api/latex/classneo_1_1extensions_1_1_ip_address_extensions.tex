@@ -1,0 +1,519 @@
+\doxysection{neo\+::extensions\+::Ip\+Address\+Extensions Class Reference}
+\hypertarget{classneo_1_1extensions_1_1_ip_address_extensions}{}\label{classneo_1_1extensions_1_1_ip_address_extensions}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+
+
+Extensions for IP address operations.  
+
+
+
+
+{\ttfamily \#include $<$ipaddress\+\_\+extensions.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a8f85fe95f249bab979d9de542a724d03}{Is\+Valid\+IPv4}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Check if string is a valid IPv4 address. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a5b774a7e02849975dd03e26f9346328f}{Is\+Valid\+IPv6}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Check if string is a valid IPv6 address. \end{DoxyCompactList}\item 
+static std\+::array$<$ uint8\+\_\+t, 4 $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a2f0dd287af69c52a869a5d9dd8e8d49b}{Parse\+IPv4}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Parse IPv4 address string to 4-\/byte array. \end{DoxyCompactList}\item 
+static std\+::array$<$ uint8\+\_\+t, 16 $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a537e942b556de57bb446efc477355c5c}{Parse\+IPv6}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Parse IPv6 address string to 16-\/byte array. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a96b7c9971ba99acef3b20fb7c3a48c55}{IPv4\+To\+String}} (const std\+::array$<$ uint8\+\_\+t, 4 $>$ \&bytes)
+\begin{DoxyCompactList}\small\item\em Convert 4-\/byte array to IPv4 string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a5a5a43b67797c1950178dd41d4314efa}{IPv6\+To\+String}} (const std\+::array$<$ uint8\+\_\+t, 16 $>$ \&bytes)
+\begin{DoxyCompactList}\small\item\em Convert 16-\/byte array to IPv6 string. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a66b21b504f8cc5309668e6e83693bbd0}{Is\+Private\+IPv4}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Check if IPv4 address is in private range. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a71f6bdd4550e685ce94137d56c0b369f}{Is\+Loopback\+IPv4}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Check if IPv4 address is loopback (127.\+x.\+x.\+x) \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_aa4e2d8b6e7c80010042c9e16ef8edd0a}{Is\+Multicast\+IPv4}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Check if IPv4 address is multicast (224.\+0.\+0.\+0-\/239.\+255.\+255.\+255) \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_addf2800f297a5e50fd2362e644d38f62}{Is\+Link\+Local\+IPv4}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Check if IPv4 address is link-\/local (169.\+254.\+x.\+x) \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a21c11d4f048fa5217ea0f07bbf55bba5}{Is\+Loopback\+IPv6}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Check if IPv6 address is loopback (\+::1) \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_afe60979fbce63dc3532cf604108a15f6}{Is\+Link\+Local\+IPv6}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Check if IPv6 address is link-\/local (fe80\+:\+:/10) \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a8e423502d0ea5752da70f8786221aa69}{Get\+Network\+Address\+IPv4}} (const std\+::string \&address, const std\+::string \&subnet\+Mask)
+\begin{DoxyCompactList}\small\item\em Get network address for IPv4 with subnet mask. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_afe9764907a1742304613b4eb3ac0d679}{Get\+Broadcast\+Address\+IPv4}} (const std\+::string \&address, const std\+::string \&subnet\+Mask)
+\begin{DoxyCompactList}\small\item\em Get broadcast address for IPv4 with subnet mask. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a8c15ff61f9564025cfa34a88053e2c2a}{Is\+In\+Same\+Subnet\+IPv4}} (const std\+::string \&address1, const std\+::string \&address2, const std\+::string \&subnet\+Mask)
+\begin{DoxyCompactList}\small\item\em Check if two IPv4 addresses are in the same subnet. \end{DoxyCompactList}\item 
+static uint32\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a407f44aab0a242bbf21bade2ee046059}{IPv4\+To\+UInt32}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Convert IPv4 address to 32-\/bit integer (network byte order) \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a2ad7876c3b8d9daa93df9ba14bae66c0}{UInt32\+To\+IPv4}} (uint32\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Convert 32-\/bit integer to IPv4 address string (network byte order) \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_ab4f6bc2a832bbb7207ea281b05bf25ed}{Expand\+IPv6}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Expand IPv6 address to full format (remove abbreviations) \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_aa42a4570ee62aa0839e20a85363cd75b}{Compress\+IPv6}} (const std\+::string \&address)
+\begin{DoxyCompactList}\small\item\em Compress IPv6 address (add abbreviations where possible) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a4f4b1060200ad96068ca954b91616f50}{Is\+Valid\+IPv4\+Octet}} (const std\+::string \&octet)
+\begin{DoxyCompactList}\small\item\em Helper to validate IPv4 octet. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a10686eb4d35640aa3d2016796222625e}{Is\+Valid\+IPv6\+Hextet}} (const std\+::string \&hextet)
+\begin{DoxyCompactList}\small\item\em Helper to validate IPv6 hextet. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Extensions for IP address operations. 
+
+\hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_autotoc_md29}{}\doxysubsubsection{\texorpdfstring{Overview}{Overview}}\label{classneo_1_1extensions_1_1_ip_address_extensions_autotoc_md29}
+Provides utility methods for IP address validation, conversion, and manipulation. Supports both IPv4 and IPv6 addresses with parsing and formatting capabilities.\hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_autotoc_md30}{}\doxysubsubsection{\texorpdfstring{API Reference}{API Reference}}\label{classneo_1_1extensions_1_1_ip_address_extensions_autotoc_md30}
+
+\begin{DoxyItemize}
+\item {\bfseries{Validation}}\+: Check if strings are valid IP addresses
+\item {\bfseries{Conversion}}\+: Parse strings to binary representation
+\item {\bfseries{Utilities}}\+: Address classification, subnet operations
+\end{DoxyItemize}\hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_autotoc_md31}{}\doxysubsubsection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{classneo_1_1extensions_1_1_ip_address_extensions_autotoc_md31}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Validate\ IP\ address}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ valid\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a8f85fe95f249bab979d9de542a724d03}{IpAddressExtensions::IsValidIPv4}}(\textcolor{stringliteral}{"{}192.168.1.1"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Parse\ to\ binary}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ ipBytes\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a2f0dd287af69c52a869a5d9dd8e8d49b}{IpAddressExtensions::ParseIPv4}}(\textcolor{stringliteral}{"{}10.0.0.1"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Check\ if\ private}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ isPrivate\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_ip_address_extensions_a66b21b504f8cc5309668e6e83693bbd0}{IpAddressExtensions::IsPrivateIPv4}}(\textcolor{stringliteral}{"{}172.16.1.1"{}});}
+
+\end{DoxyCode}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_aa42a4570ee62aa0839e20a85363cd75b}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!CompressIPv6@{CompressIPv6}}
+\index{CompressIPv6@{CompressIPv6}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{CompressIPv6()}{CompressIPv6()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_aa42a4570ee62aa0839e20a85363cd75b} 
+std\+::string neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Compress\+IPv6 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Compress IPv6 address (add abbreviations where possible) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & IPv6 address string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Compressed IPv6 address string 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_ab4f6bc2a832bbb7207ea281b05bf25ed}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!ExpandIPv6@{ExpandIPv6}}
+\index{ExpandIPv6@{ExpandIPv6}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{ExpandIPv6()}{ExpandIPv6()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_ab4f6bc2a832bbb7207ea281b05bf25ed} 
+std\+::string neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Expand\+IPv6 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Expand IPv6 address to full format (remove abbreviations) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & IPv6 address string (possibly abbreviated) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Expanded IPv6 address string 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_afe9764907a1742304613b4eb3ac0d679}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!GetBroadcastAddressIPv4@{GetBroadcastAddressIPv4}}
+\index{GetBroadcastAddressIPv4@{GetBroadcastAddressIPv4}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{GetBroadcastAddressIPv4()}{GetBroadcastAddressIPv4()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_afe9764907a1742304613b4eb3ac0d679} 
+std\+::string neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Get\+Broadcast\+Address\+IPv4 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{, }\item[{const std\+::string \&}]{subnet\+Mask}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get broadcast address for IPv4 with subnet mask. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & IPv4 address string \\
+\hline
+{\em subnet\+Mask} & Subnet mask (e.\+g., "{}255.\+255.\+255.\+0"{}) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Broadcast address string 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_a8e423502d0ea5752da70f8786221aa69}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!GetNetworkAddressIPv4@{GetNetworkAddressIPv4}}
+\index{GetNetworkAddressIPv4@{GetNetworkAddressIPv4}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{GetNetworkAddressIPv4()}{GetNetworkAddressIPv4()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_a8e423502d0ea5752da70f8786221aa69} 
+std\+::string neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Get\+Network\+Address\+IPv4 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{, }\item[{const std\+::string \&}]{subnet\+Mask}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get network address for IPv4 with subnet mask. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & IPv4 address string \\
+\hline
+{\em subnet\+Mask} & Subnet mask (e.\+g., "{}255.\+255.\+255.\+0"{}) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Network address string 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_a96b7c9971ba99acef3b20fb7c3a48c55}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!IPv4ToString@{IPv4ToString}}
+\index{IPv4ToString@{IPv4ToString}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{IPv4ToString()}{IPv4ToString()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_a96b7c9971ba99acef3b20fb7c3a48c55} 
+std\+::string neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+IPv4\+To\+String (\begin{DoxyParamCaption}\item[{const std\+::array$<$ uint8\+\_\+t, 4 $>$ \&}]{bytes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert 4-\/byte array to IPv4 string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & 4-\/byte array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+IPv4 address string 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_a407f44aab0a242bbf21bade2ee046059}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!IPv4ToUInt32@{IPv4ToUInt32}}
+\index{IPv4ToUInt32@{IPv4ToUInt32}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{IPv4ToUInt32()}{IPv4ToUInt32()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_a407f44aab0a242bbf21bade2ee046059} 
+uint32\+\_\+t neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+IPv4\+To\+UInt32 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert IPv4 address to 32-\/bit integer (network byte order) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & IPv4 address string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+32-\/bit integer representation 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_a5a5a43b67797c1950178dd41d4314efa}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!IPv6ToString@{IPv6ToString}}
+\index{IPv6ToString@{IPv6ToString}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{IPv6ToString()}{IPv6ToString()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_a5a5a43b67797c1950178dd41d4314efa} 
+std\+::string neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+IPv6\+To\+String (\begin{DoxyParamCaption}\item[{const std\+::array$<$ uint8\+\_\+t, 16 $>$ \&}]{bytes}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert 16-\/byte array to IPv6 string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & 16-\/byte array \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+IPv6 address string 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_a8c15ff61f9564025cfa34a88053e2c2a}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!IsInSameSubnetIPv4@{IsInSameSubnetIPv4}}
+\index{IsInSameSubnetIPv4@{IsInSameSubnetIPv4}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{IsInSameSubnetIPv4()}{IsInSameSubnetIPv4()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_a8c15ff61f9564025cfa34a88053e2c2a} 
+bool neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Is\+In\+Same\+Subnet\+IPv4 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address1}{, }\item[{const std\+::string \&}]{address2}{, }\item[{const std\+::string \&}]{subnet\+Mask}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if two IPv4 addresses are in the same subnet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address1} & First IPv4 address \\
+\hline
+{\em address2} & Second IPv4 address \\
+\hline
+{\em subnet\+Mask} & Subnet mask \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if in same subnet 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_addf2800f297a5e50fd2362e644d38f62}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!IsLinkLocalIPv4@{IsLinkLocalIPv4}}
+\index{IsLinkLocalIPv4@{IsLinkLocalIPv4}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{IsLinkLocalIPv4()}{IsLinkLocalIPv4()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_addf2800f297a5e50fd2362e644d38f62} 
+bool neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Is\+Link\+Local\+IPv4 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if IPv4 address is link-\/local (169.\+254.\+x.\+x) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & IPv4 address string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if link-\/local address 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_afe60979fbce63dc3532cf604108a15f6}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!IsLinkLocalIPv6@{IsLinkLocalIPv6}}
+\index{IsLinkLocalIPv6@{IsLinkLocalIPv6}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{IsLinkLocalIPv6()}{IsLinkLocalIPv6()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_afe60979fbce63dc3532cf604108a15f6} 
+bool neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Is\+Link\+Local\+IPv6 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if IPv6 address is link-\/local (fe80\+:\+:/10) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & IPv6 address string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if link-\/local address 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_a71f6bdd4550e685ce94137d56c0b369f}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!IsLoopbackIPv4@{IsLoopbackIPv4}}
+\index{IsLoopbackIPv4@{IsLoopbackIPv4}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{IsLoopbackIPv4()}{IsLoopbackIPv4()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_a71f6bdd4550e685ce94137d56c0b369f} 
+bool neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Is\+Loopback\+IPv4 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if IPv4 address is loopback (127.\+x.\+x.\+x) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & IPv4 address string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if loopback address 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_a21c11d4f048fa5217ea0f07bbf55bba5}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!IsLoopbackIPv6@{IsLoopbackIPv6}}
+\index{IsLoopbackIPv6@{IsLoopbackIPv6}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{IsLoopbackIPv6()}{IsLoopbackIPv6()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_a21c11d4f048fa5217ea0f07bbf55bba5} 
+bool neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Is\+Loopback\+IPv6 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if IPv6 address is loopback (\+::1) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & IPv6 address string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if loopback address 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_aa4e2d8b6e7c80010042c9e16ef8edd0a}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!IsMulticastIPv4@{IsMulticastIPv4}}
+\index{IsMulticastIPv4@{IsMulticastIPv4}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{IsMulticastIPv4()}{IsMulticastIPv4()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_aa4e2d8b6e7c80010042c9e16ef8edd0a} 
+bool neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Is\+Multicast\+IPv4 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if IPv4 address is multicast (224.\+0.\+0.\+0-\/239.\+255.\+255.\+255) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & IPv4 address string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if multicast address 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_a66b21b504f8cc5309668e6e83693bbd0}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!IsPrivateIPv4@{IsPrivateIPv4}}
+\index{IsPrivateIPv4@{IsPrivateIPv4}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{IsPrivateIPv4()}{IsPrivateIPv4()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_a66b21b504f8cc5309668e6e83693bbd0} 
+bool neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Is\+Private\+IPv4 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if IPv4 address is in private range. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & IPv4 address string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if private address 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_a8f85fe95f249bab979d9de542a724d03}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!IsValidIPv4@{IsValidIPv4}}
+\index{IsValidIPv4@{IsValidIPv4}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{IsValidIPv4()}{IsValidIPv4()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_a8f85fe95f249bab979d9de542a724d03} 
+bool neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Is\+Valid\+IPv4 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if string is a valid IPv4 address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & String to validate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if valid IPv4 address 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_a4f4b1060200ad96068ca954b91616f50}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!IsValidIPv4Octet@{IsValidIPv4Octet}}
+\index{IsValidIPv4Octet@{IsValidIPv4Octet}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{IsValidIPv4Octet()}{IsValidIPv4Octet()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_a4f4b1060200ad96068ca954b91616f50} 
+bool neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Is\+Valid\+IPv4\+Octet (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{octet}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Helper to validate IPv4 octet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em octet} & String representation of octet \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if valid octet (0-\/255) 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_a5b774a7e02849975dd03e26f9346328f}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!IsValidIPv6@{IsValidIPv6}}
+\index{IsValidIPv6@{IsValidIPv6}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{IsValidIPv6()}{IsValidIPv6()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_a5b774a7e02849975dd03e26f9346328f} 
+bool neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Is\+Valid\+IPv6 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if string is a valid IPv6 address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & String to validate \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if valid IPv6 address 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_a10686eb4d35640aa3d2016796222625e}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!IsValidIPv6Hextet@{IsValidIPv6Hextet}}
+\index{IsValidIPv6Hextet@{IsValidIPv6Hextet}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{IsValidIPv6Hextet()}{IsValidIPv6Hextet()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_a10686eb4d35640aa3d2016796222625e} 
+bool neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Is\+Valid\+IPv6\+Hextet (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hextet}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Helper to validate IPv6 hextet. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hextet} & String representation of hextet \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if valid hextet (0-\/FFFF) 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_a2f0dd287af69c52a869a5d9dd8e8d49b}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!ParseIPv4@{ParseIPv4}}
+\index{ParseIPv4@{ParseIPv4}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{ParseIPv4()}{ParseIPv4()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_a2f0dd287af69c52a869a5d9dd8e8d49b} 
+std\+::array$<$ uint8\+\_\+t, 4 $>$ neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Parse\+IPv4 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Parse IPv4 address string to 4-\/byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & IPv4 address string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+4-\/byte array representing the address 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if address is invalid \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_a537e942b556de57bb446efc477355c5c}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!ParseIPv6@{ParseIPv6}}
+\index{ParseIPv6@{ParseIPv6}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{ParseIPv6()}{ParseIPv6()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_a537e942b556de57bb446efc477355c5c} 
+std\+::array$<$ uint8\+\_\+t, 16 $>$ neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+Parse\+IPv6 (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Parse IPv6 address string to 16-\/byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & IPv6 address string \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+16-\/byte array representing the address 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if address is invalid \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1extensions_1_1_ip_address_extensions_a2ad7876c3b8d9daa93df9ba14bae66c0}\index{neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}!UInt32ToIPv4@{UInt32ToIPv4}}
+\index{UInt32ToIPv4@{UInt32ToIPv4}!neo::extensions::IpAddressExtensions@{neo::extensions::IpAddressExtensions}}
+\doxysubsubsection{\texorpdfstring{UInt32ToIPv4()}{UInt32ToIPv4()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_ip_address_extensions_a2ad7876c3b8d9daa93df9ba14bae66c0} 
+std\+::string neo\+::extensions\+::\+Ip\+Address\+Extensions\+::\+UInt32\+To\+IPv4 (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert 32-\/bit integer to IPv4 address string (network byte order) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & 32-\/bit integer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+IPv4 address string 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/extensions/\mbox{\hyperlink{ipaddress__extensions_8h}{ipaddress\+\_\+extensions.\+h}}\item 
+src/extensions/\mbox{\hyperlink{ipaddress__extensions_8cpp}{ipaddress\+\_\+extensions.\+cpp}}\end{DoxyCompactItemize}

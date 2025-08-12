@@ -1,0 +1,28 @@
+digraph "neo::vm::StackItem::Serialize"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::vm::StackItem\l::Serialize",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Serializes a StackItem to a binary writer."];
+  Node1 -> Node1 [id="edge13_Node000001_Node000001",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node2 [id="edge14_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::io::BinaryWriter\l::WriteBoolean",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_writer.html#aede2074b9edfe88c7b0e9b89495e3f9a",tooltip="Writes a boolean value to the stream (alias for Write(bool))."];
+  Node2 -> Node3 [id="edge15_Node000002_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::io::BinaryWriter\l::Write",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_writer.html#ac50767ade20a9099ba7e6b6ed684ef45",tooltip="Writes a boolean value to the stream."];
+  Node3 -> Node3 [id="edge16_Node000003_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node4 [id="edge17_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::io::BinaryWriter\l::WriteByte",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_writer.html#a5feea4151aba02bc0dc2fcf909f8aa5f",tooltip="Writes a byte to the stream (alias for Write(uint8_t))."];
+  Node4 -> Node3 [id="edge18_Node000004_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node5 [id="edge19_Node000001_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::io::BinaryWriter\l::WriteBytes",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_writer.html#ae3c1b07c69e845d462faa589bac759e3",tooltip="Writes raw bytes to the stream."];
+  Node5 -> Node6 [id="edge20_Node000005_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::io::BinaryWriter\l::WriteRawBytes",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_writer.html#a4bc7c51a7a85bfff2189942cd831f840",tooltip="Helper method to write raw bytes to either stream or buffer."];
+  Node1 -> Node7 [id="edge21_Node000001_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::io::BinaryWriter\l::WriteInt64",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_writer.html#ad05d340408c8a415e811d785e467da07",tooltip="Writes a 64-bit signed integer to the stream (alias for Write(int64_t))."];
+  Node7 -> Node3 [id="edge22_Node000007_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node8 [id="edge23_Node000001_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="neo::io::BinaryWriter\l::WriteVarInt",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_binary_writer.html#a39fc5781e0d7a018ac8a1d86fea0cd4e",tooltip="Writes a variable-length integer to the stream."];
+  Node8 -> Node3 [id="edge24_Node000008_Node000003",color="steelblue1",style="solid",tooltip=" "];
+}

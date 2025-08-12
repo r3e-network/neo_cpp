@@ -1,0 +1,109 @@
+\doxysection{neo\+::ledger\+::Blockchain\+Execution Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_blockchain_execution}{}\label{classneo_1_1ledger_1_1_blockchain_execution}\index{neo::ledger::BlockchainExecution@{neo::ledger::BlockchainExecution}}
+
+
+Handles blockchain execution.  
+
+
+
+
+{\ttfamily \#include $<$blockchain\+\_\+execution.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_execution_a92f04ffa6c2f887462fdb28dbffb5855}{Blockchain\+Execution}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks}{Blockchain\+Callbacks}} $>$ callbacks)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1ledger_1_1_blockchain_execution}{Blockchain\+Execution}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_execution_aabebb8aa48dd70ba1ab9f9d777c8c1a3}{Execute\+Block}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} \&block, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot)
+\begin{DoxyCompactList}\small\item\em Executes a block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_execution_a5fd037261d4aa15404191cd5d87e6d08}{Initialize}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot)
+\begin{DoxyCompactList}\small\item\em Initializes the blockchain. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks}{Blockchain\+Callbacks}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_execution_aa16fa99f7582bce782f8af670936b722}{callbacks\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Handles blockchain execution. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_execution_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_execution_a92f04ffa6c2f887462fdb28dbffb5855}\index{neo::ledger::BlockchainExecution@{neo::ledger::BlockchainExecution}!BlockchainExecution@{BlockchainExecution}}
+\index{BlockchainExecution@{BlockchainExecution}!neo::ledger::BlockchainExecution@{neo::ledger::BlockchainExecution}}
+\doxysubsubsection{\texorpdfstring{BlockchainExecution()}{BlockchainExecution()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_execution_a92f04ffa6c2f887462fdb28dbffb5855} 
+neo\+::ledger\+::\+Blockchain\+Execution\+::\+Blockchain\+Execution (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks}{Blockchain\+Callbacks}} $>$}]{callbacks}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1ledger_1_1_blockchain_execution}{Blockchain\+Execution}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callbacks} & The blockchain callbacks. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_execution_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_execution_aabebb8aa48dd70ba1ab9f9d777c8c1a3}\index{neo::ledger::BlockchainExecution@{neo::ledger::BlockchainExecution}!ExecuteBlock@{ExecuteBlock}}
+\index{ExecuteBlock@{ExecuteBlock}!neo::ledger::BlockchainExecution@{neo::ledger::BlockchainExecution}}
+\doxysubsubsection{\texorpdfstring{ExecuteBlock()}{ExecuteBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_execution_aabebb8aa48dd70ba1ab9f9d777c8c1a3} 
+bool neo\+::ledger\+::\+Blockchain\+Execution\+::\+Execute\+Block (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{Block}} \&}]{block}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption})}
+
+
+
+Executes a block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em block} & The block. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the block was executed successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_execution_a5fd037261d4aa15404191cd5d87e6d08}\index{neo::ledger::BlockchainExecution@{neo::ledger::BlockchainExecution}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neo::ledger::BlockchainExecution@{neo::ledger::BlockchainExecution}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_execution_a5fd037261d4aa15404191cd5d87e6d08} 
+void neo\+::ledger\+::\+Blockchain\+Execution\+::\+Initialize (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the blockchain. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_execution_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_blockchain_execution_aa16fa99f7582bce782f8af670936b722}\index{neo::ledger::BlockchainExecution@{neo::ledger::BlockchainExecution}!callbacks\_@{callbacks\_}}
+\index{callbacks\_@{callbacks\_}!neo::ledger::BlockchainExecution@{neo::ledger::BlockchainExecution}}
+\doxysubsubsection{\texorpdfstring{callbacks\_}{callbacks\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_blockchain_execution_aa16fa99f7582bce782f8af670936b722} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_blockchain_callbacks}{Blockchain\+Callbacks}}$>$ neo\+::ledger\+::\+Blockchain\+Execution\+::callbacks\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{blockchain__execution_8h}{blockchain\+\_\+execution.\+h}}\item 
+src/ledger/\mbox{\hyperlink{blockchain__execution_8cpp}{blockchain\+\_\+execution.\+cpp}}\end{DoxyCompactItemize}

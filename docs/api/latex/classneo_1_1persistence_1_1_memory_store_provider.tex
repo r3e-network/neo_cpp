@@ -1,0 +1,125 @@
+\doxysection{neo\+::persistence\+::Memory\+Store\+Provider Class Reference}
+\hypertarget{classneo_1_1persistence_1_1_memory_store_provider}{}\label{classneo_1_1persistence_1_1_memory_store_provider}\index{neo::persistence::MemoryStoreProvider@{neo::persistence::MemoryStoreProvider}}
+
+
+A memory-\/based implementation of \doxylink{classneo_1_1persistence_1_1_i_store_provider}{IStore\+Provider}.  
+
+
+
+
+{\ttfamily \#include $<$memory\+\_\+store.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::persistence\+::Memory\+Store\+Provider\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::persistence\+::Memory\+Store\+Provider\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_provider_a0610cf161d8d2e695241d381e411a883}{Memory\+Store\+Provider}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1persistence_1_1_memory_store_provider}{Memory\+Store\+Provider}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_provider_aabf4b15d75f394c0d24d600821f3401c}{Get\+Name}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the name of the store provider. \end{DoxyCompactList}\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store}{IStore}} $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_provider_af23091ca2efccd03f01a3cb04604ce9b}{Get\+Store}} (const std\+::string \&path) override
+\begin{DoxyCompactList}\small\item\em Gets a store. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider}{neo\+::persistence\+::\+IStore\+Provider}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider_a91a47cf95a1208e466d0f117ea96d63b}{\texorpdfstring{$\sim$}{\string~}\+IStore\+Provider}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store}{Memory\+Store}} $>$ $>$ \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_provider_abf23e68218ed2608f7ae900093aa97bc}{stores\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_provider_a298b4034e72f5a835dccea57fe4218f5}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A memory-\/based implementation of \doxylink{classneo_1_1persistence_1_1_i_store_provider}{IStore\+Provider}. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_provider_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_provider_a0610cf161d8d2e695241d381e411a883}\index{neo::persistence::MemoryStoreProvider@{neo::persistence::MemoryStoreProvider}!MemoryStoreProvider@{MemoryStoreProvider}}
+\index{MemoryStoreProvider@{MemoryStoreProvider}!neo::persistence::MemoryStoreProvider@{neo::persistence::MemoryStoreProvider}}
+\doxysubsubsection{\texorpdfstring{MemoryStoreProvider()}{MemoryStoreProvider()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_provider_a0610cf161d8d2e695241d381e411a883} 
+neo\+::persistence\+::\+Memory\+Store\+Provider\+::\+Memory\+Store\+Provider (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Constructs a \doxylink{classneo_1_1persistence_1_1_memory_store_provider}{Memory\+Store\+Provider}. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_provider_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_provider_aabf4b15d75f394c0d24d600821f3401c}\index{neo::persistence::MemoryStoreProvider@{neo::persistence::MemoryStoreProvider}!GetName@{GetName}}
+\index{GetName@{GetName}!neo::persistence::MemoryStoreProvider@{neo::persistence::MemoryStoreProvider}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_provider_aabf4b15d75f394c0d24d600821f3401c} 
+std\+::string neo\+::persistence\+::\+Memory\+Store\+Provider\+::\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the name of the store provider. 
+
+\begin{DoxyReturn}{Returns}
+The name of the store provider. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider_a591196a061e23ed3d3d1f1f28b27f892}{neo\+::persistence\+::\+IStore\+Provider}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_provider_af23091ca2efccd03f01a3cb04604ce9b}\index{neo::persistence::MemoryStoreProvider@{neo::persistence::MemoryStoreProvider}!GetStore@{GetStore}}
+\index{GetStore@{GetStore}!neo::persistence::MemoryStoreProvider@{neo::persistence::MemoryStoreProvider}}
+\doxysubsubsection{\texorpdfstring{GetStore()}{GetStore()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_provider_af23091ca2efccd03f01a3cb04604ce9b} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store}{IStore}} $>$ neo\+::persistence\+::\+Memory\+Store\+Provider\+::\+Get\+Store (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets a store. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em path} & The path to the store. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The store. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1persistence_1_1_i_store_provider_a33feec0052b85bdb3014e8d089199a2d}{neo\+::persistence\+::\+IStore\+Provider}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_provider_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_provider_a298b4034e72f5a835dccea57fe4218f5}\index{neo::persistence::MemoryStoreProvider@{neo::persistence::MemoryStoreProvider}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::persistence::MemoryStoreProvider@{neo::persistence::MemoryStoreProvider}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_provider_a298b4034e72f5a835dccea57fe4218f5} 
+std\+::mutex neo\+::persistence\+::\+Memory\+Store\+Provider\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1persistence_1_1_memory_store_provider_abf23e68218ed2608f7ae900093aa97bc}\index{neo::persistence::MemoryStoreProvider@{neo::persistence::MemoryStoreProvider}!stores\_@{stores\_}}
+\index{stores\_@{stores\_}!neo::persistence::MemoryStoreProvider@{neo::persistence::MemoryStoreProvider}}
+\doxysubsubsection{\texorpdfstring{stores\_}{stores\_}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_memory_store_provider_abf23e68218ed2608f7ae900093aa97bc} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store}{Memory\+Store}}$>$ $>$ neo\+::persistence\+::\+Memory\+Store\+Provider\+::stores\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/persistence/\mbox{\hyperlink{memory__store_8h}{memory\+\_\+store.\+h}}\item 
+src/persistence/\mbox{\hyperlink{memory__store_8cpp}{memory\+\_\+store.\+cpp}}\end{DoxyCompactItemize}

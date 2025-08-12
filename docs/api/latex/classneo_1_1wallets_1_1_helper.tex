@@ -1,0 +1,706 @@
+\doxysection{neo\+::wallets\+::Helper Class Reference}
+\hypertarget{classneo_1_1wallets_1_1_helper}{}\label{classneo_1_1wallets_1_1_helper}\index{neo::wallets::Helper@{neo::wallets::Helper}}
+
+
+\doxylink{classneo_1_1wallets_1_1_helper}{Helper} functions for wallet operations.  
+
+
+
+
+{\ttfamily \#include $<$helper.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_abf6a426e36823806330a11c3203f5c1a}{To\+Address}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+\_\+hash, uint8\+\_\+t address\+\_\+version=0x35)
+\begin{DoxyCompactList}\small\item\em Converts a script hash to a Neo address. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a7de3c6a0ce64a8181087642f7b717e66}{To\+Script\+Hash}} (const std\+::string \&address, uint8\+\_\+t address\+\_\+version=0x35)
+\begin{DoxyCompactList}\small\item\em Converts a Neo address to a script hash. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a7709b78301d2cfcbac5c0bf25646f826}{Create\+Signature\+Script}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} \&public\+\_\+key)
+\begin{DoxyCompactList}\small\item\em Creates a signature script for a public key. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_af62a7050e632a2f755e49506d68df7ae}{Create\+Multi\+Sig\+Script}} (int m, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} $>$ \&public\+\_\+keys)
+\begin{DoxyCompactList}\small\item\em Creates a multi-\/signature script. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a229116f59743b5c159b6f44120272d63}{To\+Script\+Hash}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}script\+\_\+data, size\+\_\+t script\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Creates a script hash from a script. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a5b1f14110203a2146f132fbd8a6d0df7}{To\+Script\+Hash}} (\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} script)
+\begin{DoxyCompactList}\small\item\em Creates a script hash from a script (Byte\+Span overload). \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a13a2a198ca6b71eceb73aa51459bd9d9}{Is\+Valid\+Address}} (const std\+::string \&address, uint8\+\_\+t address\+\_\+version=0x35)
+\begin{DoxyCompactList}\small\item\em Checks if an address is valid. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a72544efd6da9fb5a5407e4bf88207d1d}{Sign}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}message, size\+\_\+t message\+\_\+size, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}private\+\_\+key, size\+\_\+t private\+\_\+key\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Signs a message with a private key. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a7b9494259870553108ce799f3934a63a}{Sign}} (\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} message, \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} private\+\_\+key)
+\begin{DoxyCompactList}\small\item\em Signs a message with a private key (Byte\+Span overload). \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a2209c5e7d3afebb4e71dddc3afdc0219}{Verify\+Signature}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}message, size\+\_\+t message\+\_\+size, const uint8\+\_\+t \texorpdfstring{$\ast$}{*}signature, size\+\_\+t signature\+\_\+size, const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} \&public\+\_\+key)
+\begin{DoxyCompactList}\small\item\em Verifies a signature. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a4b79c771807b37f78a94b40b356c5354}{Verify\+Signature}} (\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} message, \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} signature, const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} \&public\+\_\+key)
+\begin{DoxyCompactList}\small\item\em Verifies a signature (Byte\+Span overload). \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_af0a65316231c3c31540e5b91500d53ac}{Generate\+Private\+Key}} ()
+\begin{DoxyCompactList}\small\item\em Generates a new private key. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_ad0ea972176e4184f8634b18fe685bba7}{Get\+Public\+Key}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}private\+\_\+key, size\+\_\+t private\+\_\+key\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Gets the public key from a private key. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a6ed5ad95f3ae29a85b3751d9fce563fb}{Get\+Public\+Key}} (\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} private\+\_\+key)
+\begin{DoxyCompactList}\small\item\em Gets the public key from a private key (Byte\+Span overload). \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_af97f5f5c3975dfa237207307907e5a6b}{Get\+Script\+Hash}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} \&public\+\_\+key)
+\begin{DoxyCompactList}\small\item\em Calculates the script hash for a public key. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a85ee8ff5c81ce2c66a21a1a5a8924465}{To\+Hex\+String}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t data\+\_\+size, bool reverse=false)
+\begin{DoxyCompactList}\small\item\em Converts bytes to a hex string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a65be9bfdcef9be8928e67e3bd2168d43}{To\+Hex\+String}} (\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} data, bool reverse=false)
+\begin{DoxyCompactList}\small\item\em Converts bytes to a hex string (Byte\+Span overload). \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a45e4a4aa4a3e5a38169dd12abbbe2d8c}{From\+Hex\+String}} (const std\+::string \&hex, bool reverse=false)
+\begin{DoxyCompactList}\small\item\em Converts a hex string to bytes. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_ab04fdceda00e06d143eaa4cb6e384e78}{Calculate\+Checksum}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t data\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Calculates the checksum for address generation. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_abb0536da1be668ebe05041dd51f95d29}{Calculate\+Checksum}} (\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} data)
+\begin{DoxyCompactList}\small\item\em Calculates the checksum for address generation (Byte\+Span overload). \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a3e93c3da87aaa99b65a08b8adbdae171}{Base58\+Encode}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t data\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Base58 encodes data. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a5d658a8fc6e2ea3a4f3753b90d97bd75}{Base58\+Encode}} (\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} data)
+\begin{DoxyCompactList}\small\item\em Base58 encodes data (Byte\+Span overload). \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a1ecd12c6b696f55788a13938f4285642}{Base58\+Decode}} (const std\+::string \&encoded)
+\begin{DoxyCompactList}\small\item\em Base58 decodes a string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a1eddada918e94f391054eaef569461e0}{Base58\+Check\+Encode}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t data\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Base58\+Check encodes data. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_acce3777f77b57f44ac3497a6362e94be}{Base58\+Check\+Encode}} (\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} data)
+\begin{DoxyCompactList}\small\item\em Base58\+Check encodes data (Byte\+Span overload). \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a7434c6286dffbf405199490f21e9d642}{Base58\+Check\+Decode}} (const std\+::string \&encoded)
+\begin{DoxyCompactList}\small\item\em Base58\+Check decodes a string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a23220233f5e467d292eff23bf2e15a5e}{Validate\+Checksum}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t data\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Validates the checksum in base58check decoding. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_aa182c1404bc9406c8c1380ddf7176cf4}{Validate\+Checksum}} (\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} data)
+\begin{DoxyCompactList}\small\item\em Validates the checksum in base58check decoding (Byte\+Span overload). \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1wallets_1_1_helper}{Helper} functions for wallet operations. 
+
+\hypertarget{classneo_1_1wallets_1_1_helper_autotoc_md48}{}\doxysubsubsection{\texorpdfstring{Overview}{Overview}}\label{classneo_1_1wallets_1_1_helper_autotoc_md48}
+The \doxylink{classneo_1_1wallets_1_1_helper}{Helper} class provides essential wallet operations including address conversion, script creation, cryptographic operations, and encoding/decoding functions.\hypertarget{classneo_1_1wallets_1_1_helper_autotoc_md49}{}\doxysubsubsection{\texorpdfstring{API Reference}{API Reference}}\label{classneo_1_1wallets_1_1_helper_autotoc_md49}
+
+\begin{DoxyItemize}
+\item {\bfseries{Address Operations}}\+: To\+Address, To\+Script\+Hash, Is\+Valid\+Address
+\item {\bfseries{Script Creation}}\+: Create\+Signature\+Script, Create\+Multi\+Sig\+Script
+\item {\bfseries{Cryptographic Operations}}\+: Sign, Verify\+Signature, Generate\+Private\+Key, Get\+Public\+Key
+\item {\bfseries{Encoding/\+Decoding}}\+: To\+Hex\+String, From\+Hex\+String, Base58\+Encode, Base58\+Decode
+\item {\bfseries{Checksum Operations}}\+: Calculate\+Checksum, Validate\+Checksum
+\end{DoxyItemize}\hypertarget{classneo_1_1wallets_1_1_helper_autotoc_md50}{}\doxysubsubsection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{classneo_1_1wallets_1_1_helper_autotoc_md50}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Convert\ script\ hash\ to\ address}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ address\ =\ \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_abf6a426e36823806330a11c3203f5c1a}{Helper::ToAddress}}(scriptHash);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Create\ signature\ script}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ script\ =\ \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a7709b78301d2cfcbac5c0bf25646f826}{Helper::CreateSignatureScript}}(publicKey);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Sign\ a\ message}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ signature\ =\ \mbox{\hyperlink{classneo_1_1wallets_1_1_helper_a72544efd6da9fb5a5407e4bf88207d1d}{Helper::Sign}}(message,\ privateKey);}
+
+\end{DoxyCode}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1wallets_1_1_helper_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_helper_a7434c6286dffbf405199490f21e9d642}\index{neo::wallets::Helper@{neo::wallets::Helper}!Base58CheckDecode@{Base58CheckDecode}}
+\index{Base58CheckDecode@{Base58CheckDecode}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{Base58CheckDecode()}{Base58CheckDecode()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a7434c6286dffbf405199490f21e9d642} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::wallets\+::\+Helper\+::\+Base58\+Check\+Decode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{encoded}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Base58\+Check decodes a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em encoded} & The base58check encoded string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The decoded data. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1wallets_1_1_helper_a1eddada918e94f391054eaef569461e0}\index{neo::wallets::Helper@{neo::wallets::Helper}!Base58CheckEncode@{Base58CheckEncode}}
+\index{Base58CheckEncode@{Base58CheckEncode}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{Base58CheckEncode()}{Base58CheckEncode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a1eddada918e94f391054eaef569461e0} 
+std\+::string neo\+::wallets\+::\+Helper\+::\+Base58\+Check\+Encode (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{data\+\_\+size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Base58\+Check encodes data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to encode. \\
+\hline
+{\em data\+\_\+size} & The data size. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The base58check encoded string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1wallets_1_1_helper_acce3777f77b57f44ac3497a6362e94be}\index{neo::wallets::Helper@{neo::wallets::Helper}!Base58CheckEncode@{Base58CheckEncode}}
+\index{Base58CheckEncode@{Base58CheckEncode}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{Base58CheckEncode()}{Base58CheckEncode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_acce3777f77b57f44ac3497a6362e94be} 
+std\+::string neo\+::wallets\+::\+Helper\+::\+Base58\+Check\+Encode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}}}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Base58\+Check encodes data (Byte\+Span overload). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to encode. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The base58check encoded string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1wallets_1_1_helper_a1ecd12c6b696f55788a13938f4285642}\index{neo::wallets::Helper@{neo::wallets::Helper}!Base58Decode@{Base58Decode}}
+\index{Base58Decode@{Base58Decode}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{Base58Decode()}{Base58Decode()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a1ecd12c6b696f55788a13938f4285642} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::wallets\+::\+Helper\+::\+Base58\+Decode (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{encoded}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Base58 decodes a string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em encoded} & The base58 encoded string. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The decoded data. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1wallets_1_1_helper_a3e93c3da87aaa99b65a08b8adbdae171}\index{neo::wallets::Helper@{neo::wallets::Helper}!Base58Encode@{Base58Encode}}
+\index{Base58Encode@{Base58Encode}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{Base58Encode()}{Base58Encode()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a3e93c3da87aaa99b65a08b8adbdae171} 
+std\+::string neo\+::wallets\+::\+Helper\+::\+Base58\+Encode (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{data\+\_\+size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Base58 encodes data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to encode. \\
+\hline
+{\em data\+\_\+size} & The data size. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The base58 encoded string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1wallets_1_1_helper_a5d658a8fc6e2ea3a4f3753b90d97bd75}\index{neo::wallets::Helper@{neo::wallets::Helper}!Base58Encode@{Base58Encode}}
+\index{Base58Encode@{Base58Encode}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{Base58Encode()}{Base58Encode()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a5d658a8fc6e2ea3a4f3753b90d97bd75} 
+std\+::string neo\+::wallets\+::\+Helper\+::\+Base58\+Encode (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}}}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Base58 encodes data (Byte\+Span overload). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to encode. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The base58 encoded string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1wallets_1_1_helper_ab04fdceda00e06d143eaa4cb6e384e78}\index{neo::wallets::Helper@{neo::wallets::Helper}!CalculateChecksum@{CalculateChecksum}}
+\index{CalculateChecksum@{CalculateChecksum}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{CalculateChecksum()}{CalculateChecksum()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_ab04fdceda00e06d143eaa4cb6e384e78} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::wallets\+::\+Helper\+::\+Calculate\+Checksum (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{data\+\_\+size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the checksum for address generation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to checksum. \\
+\hline
+{\em data\+\_\+size} & The data size. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The checksum bytes. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1wallets_1_1_helper_abb0536da1be668ebe05041dd51f95d29}\index{neo::wallets::Helper@{neo::wallets::Helper}!CalculateChecksum@{CalculateChecksum}}
+\index{CalculateChecksum@{CalculateChecksum}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{CalculateChecksum()}{CalculateChecksum()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_abb0536da1be668ebe05041dd51f95d29} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::wallets\+::\+Helper\+::\+Calculate\+Checksum (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}}}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the checksum for address generation (Byte\+Span overload). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to checksum. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The checksum bytes. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1wallets_1_1_helper_af62a7050e632a2f755e49506d68df7ae}\index{neo::wallets::Helper@{neo::wallets::Helper}!CreateMultiSigScript@{CreateMultiSigScript}}
+\index{CreateMultiSigScript@{CreateMultiSigScript}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{CreateMultiSigScript()}{CreateMultiSigScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_af62a7050e632a2f755e49506d68df7ae} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::wallets\+::\+Helper\+::\+Create\+Multi\+Sig\+Script (\begin{DoxyParamCaption}\item[{int}]{m}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} $>$ \&}]{public\+\_\+keys}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a multi-\/signature script. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & The minimum number of signatures required. \\
+\hline
+{\em public\+\_\+keys} & The public keys. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The multi-\/signature script. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_helper_a7709b78301d2cfcbac5c0bf25646f826}\index{neo::wallets::Helper@{neo::wallets::Helper}!CreateSignatureScript@{CreateSignatureScript}}
+\index{CreateSignatureScript@{CreateSignatureScript}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{CreateSignatureScript()}{CreateSignatureScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a7709b78301d2cfcbac5c0bf25646f826} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::wallets\+::\+Helper\+::\+Create\+Signature\+Script (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} \&}]{public\+\_\+key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a signature script for a public key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em public\+\_\+key} & The public key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The signature script. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1wallets_1_1_helper_a45e4a4aa4a3e5a38169dd12abbbe2d8c}\index{neo::wallets::Helper@{neo::wallets::Helper}!FromHexString@{FromHexString}}
+\index{FromHexString@{FromHexString}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{FromHexString()}{FromHexString()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a45e4a4aa4a3e5a38169dd12abbbe2d8c} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::wallets\+::\+Helper\+::\+From\+Hex\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{, }\item[{bool}]{reverse}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a hex string to bytes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & The hex string. \\
+\hline
+{\em reverse} & Whether to reverse the result. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The byte data. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_helper_af0a65316231c3c31540e5b91500d53ac}\index{neo::wallets::Helper@{neo::wallets::Helper}!GeneratePrivateKey@{GeneratePrivateKey}}
+\index{GeneratePrivateKey@{GeneratePrivateKey}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{GeneratePrivateKey()}{GeneratePrivateKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_af0a65316231c3c31540e5b91500d53ac} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::wallets\+::\+Helper\+::\+Generate\+Private\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generates a new private key. 
+
+\begin{DoxyReturn}{Returns}
+A new private key. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_helper_ad0ea972176e4184f8634b18fe685bba7}\index{neo::wallets::Helper@{neo::wallets::Helper}!GetPublicKey@{GetPublicKey}}
+\index{GetPublicKey@{GetPublicKey}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{GetPublicKey()}{GetPublicKey()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_ad0ea972176e4184f8634b18fe685bba7} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} neo\+::wallets\+::\+Helper\+::\+Get\+Public\+Key (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{private\+\_\+key}{, }\item[{size\+\_\+t}]{private\+\_\+key\+\_\+size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the public key from a private key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em private\+\_\+key} & The private key. \\
+\hline
+{\em private\+\_\+key\+\_\+size} & The private key size. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The public key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1wallets_1_1_helper_a6ed5ad95f3ae29a85b3751d9fce563fb}\index{neo::wallets::Helper@{neo::wallets::Helper}!GetPublicKey@{GetPublicKey}}
+\index{GetPublicKey@{GetPublicKey}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{GetPublicKey()}{GetPublicKey()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a6ed5ad95f3ae29a85b3751d9fce563fb} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} neo\+::wallets\+::\+Helper\+::\+Get\+Public\+Key (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}}}]{private\+\_\+key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the public key from a private key (Byte\+Span overload). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em private\+\_\+key} & The private key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The public key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1wallets_1_1_helper_af97f5f5c3975dfa237207307907e5a6b}\index{neo::wallets::Helper@{neo::wallets::Helper}!GetScriptHash@{GetScriptHash}}
+\index{GetScriptHash@{GetScriptHash}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{GetScriptHash()}{GetScriptHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_af97f5f5c3975dfa237207307907e5a6b} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::wallets\+::\+Helper\+::\+Get\+Script\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} \&}]{public\+\_\+key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Calculates the script hash for a public key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em public\+\_\+key} & The public key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The script hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1wallets_1_1_helper_a13a2a198ca6b71eceb73aa51459bd9d9}\index{neo::wallets::Helper@{neo::wallets::Helper}!IsValidAddress@{IsValidAddress}}
+\index{IsValidAddress@{IsValidAddress}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{IsValidAddress()}{IsValidAddress()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a13a2a198ca6b71eceb73aa51459bd9d9} 
+bool neo\+::wallets\+::\+Helper\+::\+Is\+Valid\+Address (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{, }\item[{uint8\+\_\+t}]{address\+\_\+version}{ = {\ttfamily 0x35}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Checks if an address is valid. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The address to validate. \\
+\hline
+{\em address\+\_\+version} & The address version byte. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if valid, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1wallets_1_1_helper_a72544efd6da9fb5a5407e4bf88207d1d}\index{neo::wallets::Helper@{neo::wallets::Helper}!Sign@{Sign}}
+\index{Sign@{Sign}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{Sign()}{Sign()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a72544efd6da9fb5a5407e4bf88207d1d} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::wallets\+::\+Helper\+::\+Sign (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{message}{, }\item[{size\+\_\+t}]{message\+\_\+size}{, }\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{private\+\_\+key}{, }\item[{size\+\_\+t}]{private\+\_\+key\+\_\+size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Signs a message with a private key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to sign. \\
+\hline
+{\em message\+\_\+size} & The message size. \\
+\hline
+{\em private\+\_\+key} & The private key. \\
+\hline
+{\em private\+\_\+key\+\_\+size} & The private key size. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The signature. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1wallets_1_1_helper_a7b9494259870553108ce799f3934a63a}\index{neo::wallets::Helper@{neo::wallets::Helper}!Sign@{Sign}}
+\index{Sign@{Sign}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{Sign()}{Sign()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a7b9494259870553108ce799f3934a63a} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::wallets\+::\+Helper\+::\+Sign (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}}}]{message}{, }\item[{\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}}}]{private\+\_\+key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Signs a message with a private key (Byte\+Span overload). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to sign. \\
+\hline
+{\em private\+\_\+key} & The private key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The signature. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1wallets_1_1_helper_abf6a426e36823806330a11c3203f5c1a}\index{neo::wallets::Helper@{neo::wallets::Helper}!ToAddress@{ToAddress}}
+\index{ToAddress@{ToAddress}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{ToAddress()}{ToAddress()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_abf6a426e36823806330a11c3203f5c1a} 
+std\+::string neo\+::wallets\+::\+Helper\+::\+To\+Address (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+\_\+hash}{, }\item[{uint8\+\_\+t}]{address\+\_\+version}{ = {\ttfamily 0x35}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a script hash to a Neo address. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+\_\+hash} & The script hash. \\
+\hline
+{\em address\+\_\+version} & The address version byte. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The Neo address string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1wallets_1_1_helper_a85ee8ff5c81ce2c66a21a1a5a8924465}\index{neo::wallets::Helper@{neo::wallets::Helper}!ToHexString@{ToHexString}}
+\index{ToHexString@{ToHexString}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{ToHexString()}{ToHexString()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a85ee8ff5c81ce2c66a21a1a5a8924465} 
+std\+::string neo\+::wallets\+::\+Helper\+::\+To\+Hex\+String (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{data\+\_\+size}{, }\item[{bool}]{reverse}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts bytes to a hex string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The byte data. \\
+\hline
+{\em data\+\_\+size} & The data size. \\
+\hline
+{\em reverse} & Whether to reverse the bytes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The hex string. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_helper_a65be9bfdcef9be8928e67e3bd2168d43}\index{neo::wallets::Helper@{neo::wallets::Helper}!ToHexString@{ToHexString}}
+\index{ToHexString@{ToHexString}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{ToHexString()}{ToHexString()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a65be9bfdcef9be8928e67e3bd2168d43} 
+std\+::string neo\+::wallets\+::\+Helper\+::\+To\+Hex\+String (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}}}]{data}{, }\item[{bool}]{reverse}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts bytes to a hex string (Byte\+Span overload). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The byte data. \\
+\hline
+{\em reverse} & Whether to reverse the bytes. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The hex string. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1wallets_1_1_helper_a7de3c6a0ce64a8181087642f7b717e66}\index{neo::wallets::Helper@{neo::wallets::Helper}!ToScriptHash@{ToScriptHash}}
+\index{ToScriptHash@{ToScriptHash}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{ToScriptHash()}{ToScriptHash()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a7de3c6a0ce64a8181087642f7b717e66} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::wallets\+::\+Helper\+::\+To\+Script\+Hash (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{address}{, }\item[{uint8\+\_\+t}]{address\+\_\+version}{ = {\ttfamily 0x35}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Converts a Neo address to a script hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address} & The Neo address string. \\
+\hline
+{\em address\+\_\+version} & The address version byte. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The script hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1wallets_1_1_helper_a229116f59743b5c159b6f44120272d63}\index{neo::wallets::Helper@{neo::wallets::Helper}!ToScriptHash@{ToScriptHash}}
+\index{ToScriptHash@{ToScriptHash}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{ToScriptHash()}{ToScriptHash()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a229116f59743b5c159b6f44120272d63} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::wallets\+::\+Helper\+::\+To\+Script\+Hash (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{script\+\_\+data}{, }\item[{size\+\_\+t}]{script\+\_\+size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a script hash from a script. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+\_\+data} & The script data. \\
+\hline
+{\em script\+\_\+size} & The script size. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The script hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1wallets_1_1_helper_a5b1f14110203a2146f132fbd8a6d0df7}\index{neo::wallets::Helper@{neo::wallets::Helper}!ToScriptHash@{ToScriptHash}}
+\index{ToScriptHash@{ToScriptHash}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{ToScriptHash()}{ToScriptHash()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a5b1f14110203a2146f132fbd8a6d0df7} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::wallets\+::\+Helper\+::\+To\+Script\+Hash (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}}}]{script}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a script hash from a script (Byte\+Span overload). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & The script. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The script hash. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1wallets_1_1_helper_a23220233f5e467d292eff23bf2e15a5e}\index{neo::wallets::Helper@{neo::wallets::Helper}!ValidateChecksum@{ValidateChecksum}}
+\index{ValidateChecksum@{ValidateChecksum}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{ValidateChecksum()}{ValidateChecksum()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a23220233f5e467d292eff23bf2e15a5e} 
+bool neo\+::wallets\+::\+Helper\+::\+Validate\+Checksum (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{data\+\_\+size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Validates the checksum in base58check decoding. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data with checksum. \\
+\hline
+{\em data\+\_\+size} & The data size. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if checksum is valid, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1wallets_1_1_helper_aa182c1404bc9406c8c1380ddf7176cf4}\index{neo::wallets::Helper@{neo::wallets::Helper}!ValidateChecksum@{ValidateChecksum}}
+\index{ValidateChecksum@{ValidateChecksum}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{ValidateChecksum()}{ValidateChecksum()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_aa182c1404bc9406c8c1380ddf7176cf4} 
+bool neo\+::wallets\+::\+Helper\+::\+Validate\+Checksum (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}}}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Validates the checksum in base58check decoding (Byte\+Span overload). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data with checksum. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if checksum is valid, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1wallets_1_1_helper_a2209c5e7d3afebb4e71dddc3afdc0219}\index{neo::wallets::Helper@{neo::wallets::Helper}!VerifySignature@{VerifySignature}}
+\index{VerifySignature@{VerifySignature}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{VerifySignature()}{VerifySignature()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a2209c5e7d3afebb4e71dddc3afdc0219} 
+bool neo\+::wallets\+::\+Helper\+::\+Verify\+Signature (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{message}{, }\item[{size\+\_\+t}]{message\+\_\+size}{, }\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{signature}{, }\item[{size\+\_\+t}]{signature\+\_\+size}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} \&}]{public\+\_\+key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Verifies a signature. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The original message. \\
+\hline
+{\em message\+\_\+size} & The message size. \\
+\hline
+{\em signature} & The signature. \\
+\hline
+{\em signature\+\_\+size} & The signature size. \\
+\hline
+{\em public\+\_\+key} & The public key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if signature is valid, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{classneo_1_1wallets_1_1_helper_a4b79c771807b37f78a94b40b356c5354}\index{neo::wallets::Helper@{neo::wallets::Helper}!VerifySignature@{VerifySignature}}
+\index{VerifySignature@{VerifySignature}!neo::wallets::Helper@{neo::wallets::Helper}}
+\doxysubsubsection{\texorpdfstring{VerifySignature()}{VerifySignature()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_helper_a4b79c771807b37f78a94b40b356c5354} 
+bool neo\+::wallets\+::\+Helper\+::\+Verify\+Signature (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}}}]{message}{, }\item[{\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}}}]{signature}{, }\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} \&}]{public\+\_\+key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Verifies a signature (Byte\+Span overload). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The original message. \\
+\hline
+{\em signature} & The signature. \\
+\hline
+{\em public\+\_\+key} & The public key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if signature is valid, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 23
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/wallets/\mbox{\hyperlink{helper_8h}{helper.\+h}}\item 
+src/wallets/\mbox{\hyperlink{helper_8cpp}{helper.\+cpp}}\end{DoxyCompactItemize}

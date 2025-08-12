@@ -1,0 +1,476 @@
+\doxysection{neo\+::vm\+::Script\+Builder Class Reference}
+\hypertarget{classneo_1_1vm_1_1_script_builder}{}\label{classneo_1_1vm_1_1_script_builder}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+
+
+A helper class for building scripts.  
+
+
+
+
+{\ttfamily \#include $<$script\+\_\+builder.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::vm\+::Script\+Builder\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}{Script\+Builder}} (size\+\_\+t initial\+Capacity=0)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \doxylink{classneo_1_1vm_1_1_script_builder}{Script\+Builder} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_ab1877cdf9881d1a79f2286688ec2c562}{Emit}} (\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code}} opcode, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&operand=\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}}())
+\begin{DoxyCompactList}\small\item\em Emits an instruction with the specified \doxylink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code} and operand. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_af209c5f1f8732dcebb85025175018acd}{Emit\+Call}} (int32\+\_\+t offset)
+\begin{DoxyCompactList}\small\item\em Emits a call instruction with the specified offset. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a856c9ff0f78c0dc911b41ff0796f51ff}{Emit\+Jump}} (\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code}} opcode, int32\+\_\+t offset)
+\begin{DoxyCompactList}\small\item\em Emits a jump instruction with the specified offset. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a9c3a57dae9d66ad4d9e9200b66a0ddb7}{Emit\+Push}} (int64\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Emits a push instruction with the specified number. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a53ea4042883df1211eb167bc518509ca}{Emit\+Push}} (bool value)
+\begin{DoxyCompactList}\small\item\em Emits a push instruction with the specified boolean value. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_acb752307f28d3ad97de6dbdefa2f9534}{Emit\+Push}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Emits a push instruction with the specified data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_ae8664479c4030c62982ea7ae13c1e5a1}{Emit\+Push}} (const std\+::string \&data)
+\begin{DoxyCompactList}\small\item\em Emits a push instruction with the specified string. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a637a12d5121bee1f5bdfb9ef20e00667}{Emit\+Push}} (const char \texorpdfstring{$\ast$}{*}data)
+\begin{DoxyCompactList}\small\item\em Emits a push instruction with the specified string literal. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a9329f0fa0e8108ea816cad3a5ff68119}{Emit\+Raw}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&script=\mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}}())
+\begin{DoxyCompactList}\small\item\em Emits raw script. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_ad107af0b6cc1c8927b6650844d4afc95}{Emit\+Sys\+Call}} (uint32\+\_\+t api)
+\begin{DoxyCompactList}\small\item\em Emits an instruction with \doxylink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a45f1e61f22cb04eb7a6a39016b56db9b}{Op\+Code.\+SYSCALL}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a7a1d91c79c066b1279f9e1c04cfa4a1a}{Emit\+Sys\+Call}} (const std\+::string \&api)
+\begin{DoxyCompactList}\small\item\em Emits an instruction with \doxylink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a45f1e61f22cb04eb7a6a39016b56db9b}{Op\+Code.\+SYSCALL}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a5528baaa67d1cb2c8641773dbd80ddfb}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Converts the value of this instance to a byte vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}} \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a5ccf1bf50cd1b8049e2dda2e7196389e}{To\+Script}} () const
+\begin{DoxyCompactList}\small\item\em Creates a \doxylink{classneo_1_1vm_1_1_script}{Script} from the current state of the \doxylink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_af8f36da39599ac35aa52d319a057ef47}{Emit\+Push\+Data}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Emits a push instruction with the specified data (alias for Emit\+Push). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a3d3282243b237a1b63d01292da655b36}{Emit\+Push\+Data}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&data)
+\begin{DoxyCompactList}\small\item\em Emits a push instruction with the specified data (alias for Emit\+Push). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a1c7a4df9f158ec42bec0d8cd63953fff}{Emit\+Push\+Number}} (int64\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Emits a push instruction with the specified number (alias for Emit\+Push). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_adc7f4b380ba70c96e947dd7f69b57ce8}{Emit\+Push\+Number}} (int32\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Emits a push instruction with the specified number (alias for Emit\+Push). \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a19d48946c578e5465f348f28cda6aca2}{Emit\+Push\+Number}} (size\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Emits a push instruction with the specified number (alias for Emit\+Push). \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_a6f92a13d0036398e85cf424bf21d2fea}{script\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ std\+::stringstream $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_afd25a3ceea0854beca912ec1200e5c3d}{stream\+\_\+}}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_script_builder_abeb06cd11e56e257e8304acf9f4f8f2d}{writer\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A helper class for building scripts. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1vm_1_1_script_builder_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!ScriptBuilder@{ScriptBuilder}}
+\index{ScriptBuilder@{ScriptBuilder}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{ScriptBuilder()}{ScriptBuilder()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_a66f287c318100ac25bc4914561653961} 
+neo\+::vm\+::\+Script\+Builder\+::\+Script\+Builder (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{initial\+Capacity}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Initializes a new instance of the \doxylink{classneo_1_1vm_1_1_script_builder}{Script\+Builder} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em initial\+Capacity} & The initial capacity of the script. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1vm_1_1_script_builder_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1vm_1_1_script_builder_ab1877cdf9881d1a79f2286688ec2c562}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!Emit@{Emit}}
+\index{Emit@{Emit}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{Emit()}{Emit()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_ab1877cdf9881d1a79f2286688ec2c562} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& neo\+::vm\+::\+Script\+Builder\+::\+Emit (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code}}}]{opcode}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{operand}{ = {\ttfamily \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}}()}}\end{DoxyParamCaption})}
+
+
+
+Emits an instruction with the specified \doxylink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code} and operand. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em opcode} & The \doxylink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code} to be emitted. \\
+\hline
+{\em operand} & The operand to be emitted. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this instance after the emit operation has completed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1vm_1_1_script_builder_af209c5f1f8732dcebb85025175018acd}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!EmitCall@{EmitCall}}
+\index{EmitCall@{EmitCall}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{EmitCall()}{EmitCall()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_af209c5f1f8732dcebb85025175018acd} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& neo\+::vm\+::\+Script\+Builder\+::\+Emit\+Call (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{offset}{}\end{DoxyParamCaption})}
+
+
+
+Emits a call instruction with the specified offset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em offset} & The offset to be called. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this instance after the emit operation has completed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1vm_1_1_script_builder_a856c9ff0f78c0dc911b41ff0796f51ff}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!EmitJump@{EmitJump}}
+\index{EmitJump@{EmitJump}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{EmitJump()}{EmitJump()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_a856c9ff0f78c0dc911b41ff0796f51ff} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& neo\+::vm\+::\+Script\+Builder\+::\+Emit\+Jump (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code}}}]{opcode}{, }\item[{int32\+\_\+t}]{offset}{}\end{DoxyParamCaption})}
+
+
+
+Emits a jump instruction with the specified offset. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em opcode} & The \doxylink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code} to be emitted. It must be a jump \doxylink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code}. \\
+\hline
+{\em offset} & The offset to jump. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this instance after the emit operation has completed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1vm_1_1_script_builder_a53ea4042883df1211eb167bc518509ca}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!EmitPush@{EmitPush}}
+\index{EmitPush@{EmitPush}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{EmitPush()}{EmitPush()}\hspace{0.1cm}{\footnotesize\ttfamily [1/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_a53ea4042883df1211eb167bc518509ca} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& neo\+::vm\+::\+Script\+Builder\+::\+Emit\+Push (\begin{DoxyParamCaption}\item[{bool}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Emits a push instruction with the specified boolean value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The value to be pushed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this instance after the emit operation has completed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1vm_1_1_script_builder_a637a12d5121bee1f5bdfb9ef20e00667}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!EmitPush@{EmitPush}}
+\index{EmitPush@{EmitPush}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{EmitPush()}{EmitPush()}\hspace{0.1cm}{\footnotesize\ttfamily [2/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_a637a12d5121bee1f5bdfb9ef20e00667} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& neo\+::vm\+::\+Script\+Builder\+::\+Emit\+Push (\begin{DoxyParamCaption}\item[{const char \texorpdfstring{$\ast$}{*}}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Emits a push instruction with the specified string literal. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The string literal to be pushed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this instance after the emit operation has completed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1vm_1_1_script_builder_acb752307f28d3ad97de6dbdefa2f9534}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!EmitPush@{EmitPush}}
+\index{EmitPush@{EmitPush}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{EmitPush()}{EmitPush()}\hspace{0.1cm}{\footnotesize\ttfamily [3/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_acb752307f28d3ad97de6dbdefa2f9534} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& neo\+::vm\+::\+Script\+Builder\+::\+Emit\+Push (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Emits a push instruction with the specified data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to be pushed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this instance after the emit operation has completed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1vm_1_1_script_builder_ae8664479c4030c62982ea7ae13c1e5a1}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!EmitPush@{EmitPush}}
+\index{EmitPush@{EmitPush}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{EmitPush()}{EmitPush()}\hspace{0.1cm}{\footnotesize\ttfamily [4/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_ae8664479c4030c62982ea7ae13c1e5a1} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& neo\+::vm\+::\+Script\+Builder\+::\+Emit\+Push (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{data}{}\end{DoxyParamCaption})}
+
+
+
+Emits a push instruction with the specified string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The string to be pushed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this instance after the emit operation has completed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1vm_1_1_script_builder_a9c3a57dae9d66ad4d9e9200b66a0ddb7}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!EmitPush@{EmitPush}}
+\index{EmitPush@{EmitPush}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{EmitPush()}{EmitPush()}\hspace{0.1cm}{\footnotesize\ttfamily [5/5]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_a9c3a57dae9d66ad4d9e9200b66a0ddb7} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& neo\+::vm\+::\+Script\+Builder\+::\+Emit\+Push (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Emits a push instruction with the specified number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The number to be pushed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this instance after the emit operation has completed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1vm_1_1_script_builder_af8f36da39599ac35aa52d319a057ef47}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!EmitPushData@{EmitPushData}}
+\index{EmitPushData@{EmitPushData}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{EmitPushData()}{EmitPushData()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_af8f36da39599ac35aa52d319a057ef47} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& neo\+::vm\+::\+Script\+Builder\+::\+Emit\+Push\+Data (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Emits a push instruction with the specified data (alias for Emit\+Push). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to be pushed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this instance after the emit operation has completed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1vm_1_1_script_builder_a3d3282243b237a1b63d01292da655b36}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!EmitPushData@{EmitPushData}}
+\index{EmitPushData@{EmitPushData}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{EmitPushData()}{EmitPushData()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_a3d3282243b237a1b63d01292da655b36} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& neo\+::vm\+::\+Script\+Builder\+::\+Emit\+Push\+Data (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Emits a push instruction with the specified data (alias for Emit\+Push). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to be pushed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this instance after the emit operation has completed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1vm_1_1_script_builder_adc7f4b380ba70c96e947dd7f69b57ce8}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!EmitPushNumber@{EmitPushNumber}}
+\index{EmitPushNumber@{EmitPushNumber}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{EmitPushNumber()}{EmitPushNumber()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_adc7f4b380ba70c96e947dd7f69b57ce8} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& neo\+::vm\+::\+Script\+Builder\+::\+Emit\+Push\+Number (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Emits a push instruction with the specified number (alias for Emit\+Push). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The number to be pushed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this instance after the emit operation has completed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1vm_1_1_script_builder_a1c7a4df9f158ec42bec0d8cd63953fff}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!EmitPushNumber@{EmitPushNumber}}
+\index{EmitPushNumber@{EmitPushNumber}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{EmitPushNumber()}{EmitPushNumber()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_a1c7a4df9f158ec42bec0d8cd63953fff} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& neo\+::vm\+::\+Script\+Builder\+::\+Emit\+Push\+Number (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Emits a push instruction with the specified number (alias for Emit\+Push). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The number to be pushed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this instance after the emit operation has completed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1vm_1_1_script_builder_a19d48946c578e5465f348f28cda6aca2}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!EmitPushNumber@{EmitPushNumber}}
+\index{EmitPushNumber@{EmitPushNumber}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{EmitPushNumber()}{EmitPushNumber()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_a19d48946c578e5465f348f28cda6aca2} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& neo\+::vm\+::\+Script\+Builder\+::\+Emit\+Push\+Number (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Emits a push instruction with the specified number (alias for Emit\+Push). 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & The number to be pushed. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this instance after the emit operation has completed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1vm_1_1_script_builder_a9329f0fa0e8108ea816cad3a5ff68119}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!EmitRaw@{EmitRaw}}
+\index{EmitRaw@{EmitRaw}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{EmitRaw()}{EmitRaw()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_a9329f0fa0e8108ea816cad3a5ff68119} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& neo\+::vm\+::\+Script\+Builder\+::\+Emit\+Raw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{script}{ = {\ttfamily \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}}()}}\end{DoxyParamCaption})}
+
+
+
+Emits raw script. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & The raw script to be emitted. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this instance after the emit operation has completed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1vm_1_1_script_builder_a7a1d91c79c066b1279f9e1c04cfa4a1a}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!EmitSysCall@{EmitSysCall}}
+\index{EmitSysCall@{EmitSysCall}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{EmitSysCall()}{EmitSysCall()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_a7a1d91c79c066b1279f9e1c04cfa4a1a} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& neo\+::vm\+::\+Script\+Builder\+::\+Emit\+Sys\+Call (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{api}{}\end{DoxyParamCaption})}
+
+
+
+Emits an instruction with \doxylink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a45f1e61f22cb04eb7a6a39016b56db9b}{Op\+Code.\+SYSCALL}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em api} & The system call name. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this instance after the emit operation has completed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1vm_1_1_script_builder_ad107af0b6cc1c8927b6650844d4afc95}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!EmitSysCall@{EmitSysCall}}
+\index{EmitSysCall@{EmitSysCall}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{EmitSysCall()}{EmitSysCall()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_ad107af0b6cc1c8927b6650844d4afc95} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}} \& neo\+::vm\+::\+Script\+Builder\+::\+Emit\+Sys\+Call (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{api}{}\end{DoxyParamCaption})}
+
+
+
+Emits an instruction with \doxylink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a45f1e61f22cb04eb7a6a39016b56db9b}{Op\+Code.\+SYSCALL}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em api} & The operand of \doxylink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8a45f1e61f22cb04eb7a6a39016b56db9b}{Op\+Code.\+SYSCALL}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A reference to this instance after the emit operation has completed. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1vm_1_1_script_builder_a5528baaa67d1cb2c8641773dbd80ddfb}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!ToArray@{ToArray}}
+\index{ToArray@{ToArray}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{ToArray()}{ToArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_a5528baaa67d1cb2c8641773dbd80ddfb} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::vm\+::\+Script\+Builder\+::\+To\+Array (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Converts the value of this instance to a byte vector. 
+
+\begin{DoxyReturn}{Returns}
+A byte vector contains the script. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1vm_1_1_script_builder_a5ccf1bf50cd1b8049e2dda2e7196389e}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!ToScript@{ToScript}}
+\index{ToScript@{ToScript}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{ToScript()}{ToScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_a5ccf1bf50cd1b8049e2dda2e7196389e} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}} neo\+::vm\+::\+Script\+Builder\+::\+To\+Script (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Creates a \doxylink{classneo_1_1vm_1_1_script}{Script} from the current state of the \doxylink{classneo_1_1vm_1_1_script_builder}{Script\+Builder}. 
+
+\begin{DoxyReturn}{Returns}
+A \doxylink{classneo_1_1vm_1_1_script}{Script} object. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 18
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1vm_1_1_script_builder_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1vm_1_1_script_builder_a6f92a13d0036398e85cf424bf21d2fea}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!script\_@{script\_}}
+\index{script\_@{script\_}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{script\_}{script\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_a6f92a13d0036398e85cf424bf21d2fea} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::vm\+::\+Script\+Builder\+::script\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_script_builder_afd25a3ceea0854beca912ec1200e5c3d}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!stream\_@{stream\_}}
+\index{stream\_@{stream\_}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{stream\_}{stream\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_afd25a3ceea0854beca912ec1200e5c3d} 
+std\+::shared\+\_\+ptr$<$std\+::stringstream$>$ neo\+::vm\+::\+Script\+Builder\+::stream\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_script_builder_abeb06cd11e56e257e8304acf9f4f8f2d}\index{neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}!writer\_@{writer\_}}
+\index{writer\_@{writer\_}!neo::vm::ScriptBuilder@{neo::vm::ScriptBuilder}}
+\doxysubsubsection{\texorpdfstring{writer\_}{writer\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_script_builder_abeb06cd11e56e257e8304acf9f4f8f2d} 
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}}$>$ neo\+::vm\+::\+Script\+Builder\+::writer\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/vm/\mbox{\hyperlink{script__builder_8h}{script\+\_\+builder.\+h}}\item 
+src/vm/\mbox{\hyperlink{script__builder_8cpp}{script\+\_\+builder.\+cpp}}\end{DoxyCompactItemize}

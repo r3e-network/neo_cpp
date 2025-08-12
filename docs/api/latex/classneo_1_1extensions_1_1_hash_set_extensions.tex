@@ -1,0 +1,471 @@
+\doxysection{neo\+::extensions\+::Hash\+Set\+Extensions Class Reference}
+\hypertarget{classneo_1_1extensions_1_1_hash_set_extensions}{}\label{classneo_1_1extensions_1_1_hash_set_extensions}\index{neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}}
+
+
+Extensions for hash set operations.  
+
+
+
+
+{\ttfamily \#include $<$hashset\+\_\+extensions.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static std\+::unordered\+\_\+set$<$ T $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a3d935a5414de0ff17696ffadfefbcc5f}{Union}} (const std\+::unordered\+\_\+set$<$ T $>$ \&left, const std\+::unordered\+\_\+set$<$ T $>$ \&right)
+\begin{DoxyCompactList}\small\item\em Compute union of two unordered sets. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static std\+::unordered\+\_\+set$<$ T $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_abbc0746bba5e04fa132499a0094e5cc7}{Intersection}} (const std\+::unordered\+\_\+set$<$ T $>$ \&left, const std\+::unordered\+\_\+set$<$ T $>$ \&right)
+\begin{DoxyCompactList}\small\item\em Compute intersection of two unordered sets. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static std\+::unordered\+\_\+set$<$ T $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a897b9b72861d5d756366c0ef45ac7428}{Difference}} (const std\+::unordered\+\_\+set$<$ T $>$ \&left, const std\+::unordered\+\_\+set$<$ T $>$ \&right)
+\begin{DoxyCompactList}\small\item\em Compute difference of two unordered sets (left -\/ right) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static std\+::unordered\+\_\+set$<$ T $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a7ad9450b4192cdfaa29cd9f23fc21c97}{Symmetric\+Difference}} (const std\+::unordered\+\_\+set$<$ T $>$ \&left, const std\+::unordered\+\_\+set$<$ T $>$ \&right)
+\begin{DoxyCompactList}\small\item\em Compute symmetric difference of two unordered sets. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_aec5d2ba120f66579495c895f1aa87bc3}{Is\+Subset\+Of}} (const std\+::unordered\+\_\+set$<$ T $>$ \&left, const std\+::unordered\+\_\+set$<$ T $>$ \&right)
+\begin{DoxyCompactList}\small\item\em Check if left is subset of right. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a4c3a60fd2469b9eff87bc39f38e2a6bb}{Is\+Superset\+Of}} (const std\+::unordered\+\_\+set$<$ T $>$ \&left, const std\+::unordered\+\_\+set$<$ T $>$ \&right)
+\begin{DoxyCompactList}\small\item\em Check if left is superset of right. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_aa05830ff389aeec36854387e1330df9e}{Are\+Disjoint}} (const std\+::unordered\+\_\+set$<$ T $>$ \&left, const std\+::unordered\+\_\+set$<$ T $>$ \&right)
+\begin{DoxyCompactList}\small\item\em Check if sets are disjoint (no common elements) \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static std\+::vector$<$ T $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_afa7144501e5ce9e4c08b9b3ae28d3cb0}{To\+Vector}} (const std\+::unordered\+\_\+set$<$ T $>$ \&hash\+Set)
+\begin{DoxyCompactList}\small\item\em Convert unordered set to vector. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static std\+::unordered\+\_\+set$<$ T $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a187dac229adef9263baf59effa47c80c}{From\+Vector}} (const std\+::vector$<$ T $>$ \&vec)
+\begin{DoxyCompactList}\small\item\em Convert vector to unordered set. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T, typename Predicate$>$ }\\static std\+::unordered\+\_\+set$<$ T $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a0ed3c718abafbf596a20be7be6570b5c}{Where}} (const std\+::unordered\+\_\+set$<$ T $>$ \&hash\+Set, Predicate predicate)
+\begin{DoxyCompactList}\small\item\em Filter set by predicate. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T, typename Predicate$>$ }\\static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a6eaa3db7562770009e2975ccb5b793a5}{Any}} (const std\+::unordered\+\_\+set$<$ T $>$ \&hash\+Set, Predicate predicate)
+\begin{DoxyCompactList}\small\item\em Check if any element satisfies predicate. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T, typename Predicate$>$ }\\static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_ab959fe1ecef46a8284426cb3c2ef3617}{All}} (const std\+::unordered\+\_\+set$<$ T $>$ \&hash\+Set, Predicate predicate)
+\begin{DoxyCompactList}\small\item\em Check if all elements satisfy predicate. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T, typename Predicate$>$ }\\static size\+\_\+t \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a8ebc3dcdb99a7820d68215d52efaff67}{Remove\+Where}} (std\+::unordered\+\_\+set$<$ T $>$ \&hash\+Set, Predicate predicate)
+\begin{DoxyCompactList}\small\item\em Remove elements matching predicate. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static void \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a02c7e3583117ebd694bb9f511ef24b03}{Add\+Range}} (std\+::unordered\+\_\+set$<$ T $>$ \&hash\+Set, const std\+::vector$<$ T $>$ \&elements)
+\begin{DoxyCompactList}\small\item\em Add multiple elements to set. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static void \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_af0af4e75f5a8488dca36968fba0eb5f9}{Add\+Range}} (std\+::unordered\+\_\+set$<$ T $>$ \&hash\+Set, const std\+::unordered\+\_\+set$<$ T $>$ \&other)
+\begin{DoxyCompactList}\small\item\em Add multiple elements from another set. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Extensions for hash set operations. 
+
+\hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_autotoc_md26}{}\doxysubsubsection{\texorpdfstring{Overview}{Overview}}\label{classneo_1_1extensions_1_1_hash_set_extensions_autotoc_md26}
+Provides utility methods for set operations, conversions, and manipulations that complement the standard library set functionality.\hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_autotoc_md27}{}\doxysubsubsection{\texorpdfstring{API Reference}{API Reference}}\label{classneo_1_1extensions_1_1_hash_set_extensions_autotoc_md27}
+
+\begin{DoxyItemize}
+\item {\bfseries{Set Operations}}\+: Union, intersection, difference
+\item {\bfseries{Conversions}}\+: To/from vectors, filtering
+\item {\bfseries{Utilities}}\+: Subset checking, element operations
+\end{DoxyItemize}\hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_autotoc_md28}{}\doxysubsubsection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{classneo_1_1extensions_1_1_hash_set_extensions_autotoc_md28}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Union\ of\ two\ sets}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ result\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_a3d935a5414de0ff17696ffadfefbcc5f}{HashSetExtensions::Union}}(set1,\ set2);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Check\ if\ subset}}
+\DoxyCodeLine{\textcolor{keywordtype}{bool}\ isSubset\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_aec5d2ba120f66579495c895f1aa87bc3}{HashSetExtensions::IsSubsetOf}}(subset,\ superset);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Convert\ to\ vector}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ vec\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_hash_set_extensions_afa7144501e5ce9e4c08b9b3ae28d3cb0}{HashSetExtensions::ToVector}}(hashSet);}
+
+\end{DoxyCode}
+ 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_af0af4e75f5a8488dca36968fba0eb5f9}\index{neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}!AddRange@{AddRange}}
+\index{AddRange@{AddRange}!neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}}
+\doxysubsubsection{\texorpdfstring{AddRange()}{AddRange()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_hash_set_extensions_af0af4e75f5a8488dca36968fba0eb5f9} 
+template$<$typename T$>$ \\
+void neo\+::extensions\+::\+Hash\+Set\+Extensions\+::\+Add\+Range (\begin{DoxyParamCaption}\item[{std\+::unordered\+\_\+set$<$ T $>$ \&}]{hash\+Set}{, }\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{other}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Add multiple elements from another set. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Element type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em hash\+Set} & Set to modify \\
+\hline
+{\em other} & Set to add elements from \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_a02c7e3583117ebd694bb9f511ef24b03}\index{neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}!AddRange@{AddRange}}
+\index{AddRange@{AddRange}!neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}}
+\doxysubsubsection{\texorpdfstring{AddRange()}{AddRange()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_hash_set_extensions_a02c7e3583117ebd694bb9f511ef24b03} 
+template$<$typename T$>$ \\
+void neo\+::extensions\+::\+Hash\+Set\+Extensions\+::\+Add\+Range (\begin{DoxyParamCaption}\item[{std\+::unordered\+\_\+set$<$ T $>$ \&}]{hash\+Set}{, }\item[{const std\+::vector$<$ T $>$ \&}]{elements}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Add multiple elements to set. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Element type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em hash\+Set} & Set to modify \\
+\hline
+{\em elements} & Elements to add \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_ab959fe1ecef46a8284426cb3c2ef3617}\index{neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}!All@{All}}
+\index{All@{All}!neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}}
+\doxysubsubsection{\texorpdfstring{All()}{All()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_hash_set_extensions_ab959fe1ecef46a8284426cb3c2ef3617} 
+template$<$typename T, typename Predicate$>$ \\
+bool neo\+::extensions\+::\+Hash\+Set\+Extensions\+::\+All (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{hash\+Set}{, }\item[{Predicate}]{predicate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if all elements satisfy predicate. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Element type \\
+\hline
+{\em Predicate} & Predicate function type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em hash\+Set} & Set to check \\
+\hline
+{\em predicate} & Function to test elements \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if all elements match predicate 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_a6eaa3db7562770009e2975ccb5b793a5}\index{neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}!Any@{Any}}
+\index{Any@{Any}!neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}}
+\doxysubsubsection{\texorpdfstring{Any()}{Any()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_hash_set_extensions_a6eaa3db7562770009e2975ccb5b793a5} 
+template$<$typename T, typename Predicate$>$ \\
+bool neo\+::extensions\+::\+Hash\+Set\+Extensions\+::\+Any (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{hash\+Set}{, }\item[{Predicate}]{predicate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if any element satisfies predicate. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Element type \\
+\hline
+{\em Predicate} & Predicate function type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em hash\+Set} & Set to check \\
+\hline
+{\em predicate} & Function to test elements \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if any element matches predicate 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_aa05830ff389aeec36854387e1330df9e}\index{neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}!AreDisjoint@{AreDisjoint}}
+\index{AreDisjoint@{AreDisjoint}!neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}}
+\doxysubsubsection{\texorpdfstring{AreDisjoint()}{AreDisjoint()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_hash_set_extensions_aa05830ff389aeec36854387e1330df9e} 
+template$<$typename T$>$ \\
+bool neo\+::extensions\+::\+Hash\+Set\+Extensions\+::\+Are\+Disjoint (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{left}{, }\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if sets are disjoint (no common elements) 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Element type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First set \\
+\hline
+{\em right} & Second set \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if sets have no common elements 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_a897b9b72861d5d756366c0ef45ac7428}\index{neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}!Difference@{Difference}}
+\index{Difference@{Difference}!neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}}
+\doxysubsubsection{\texorpdfstring{Difference()}{Difference()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_hash_set_extensions_a897b9b72861d5d756366c0ef45ac7428} 
+template$<$typename T$>$ \\
+std\+::unordered\+\_\+set$<$ T $>$ neo\+::extensions\+::\+Hash\+Set\+Extensions\+::\+Difference (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{left}{, }\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Compute difference of two unordered sets (left -\/ right) 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Element type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First set \\
+\hline
+{\em right} & Second set \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Elements in left but not in right 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_a187dac229adef9263baf59effa47c80c}\index{neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}!FromVector@{FromVector}}
+\index{FromVector@{FromVector}!neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}}
+\doxysubsubsection{\texorpdfstring{FromVector()}{FromVector()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_hash_set_extensions_a187dac229adef9263baf59effa47c80c} 
+template$<$typename T$>$ \\
+std\+::unordered\+\_\+set$<$ T $>$ neo\+::extensions\+::\+Hash\+Set\+Extensions\+::\+From\+Vector (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ T $>$ \&}]{vec}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Convert vector to unordered set. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Element type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em vec} & Vector to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Unordered set containing unique elements 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_abbc0746bba5e04fa132499a0094e5cc7}\index{neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}!Intersection@{Intersection}}
+\index{Intersection@{Intersection}!neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}}
+\doxysubsubsection{\texorpdfstring{Intersection()}{Intersection()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_hash_set_extensions_abbc0746bba5e04fa132499a0094e5cc7} 
+template$<$typename T$>$ \\
+std\+::unordered\+\_\+set$<$ T $>$ neo\+::extensions\+::\+Hash\+Set\+Extensions\+::\+Intersection (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{left}{, }\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Compute intersection of two unordered sets. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Element type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First set \\
+\hline
+{\em right} & Second set \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Intersection of both sets 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_aec5d2ba120f66579495c895f1aa87bc3}\index{neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}!IsSubsetOf@{IsSubsetOf}}
+\index{IsSubsetOf@{IsSubsetOf}!neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}}
+\doxysubsubsection{\texorpdfstring{IsSubsetOf()}{IsSubsetOf()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_hash_set_extensions_aec5d2ba120f66579495c895f1aa87bc3} 
+template$<$typename T$>$ \\
+bool neo\+::extensions\+::\+Hash\+Set\+Extensions\+::\+Is\+Subset\+Of (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{left}{, }\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if left is subset of right. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Element type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em left} & Potential subset \\
+\hline
+{\em right} & Potential superset \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if left is subset of right 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_a4c3a60fd2469b9eff87bc39f38e2a6bb}\index{neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}!IsSupersetOf@{IsSupersetOf}}
+\index{IsSupersetOf@{IsSupersetOf}!neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}}
+\doxysubsubsection{\texorpdfstring{IsSupersetOf()}{IsSupersetOf()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_hash_set_extensions_a4c3a60fd2469b9eff87bc39f38e2a6bb} 
+template$<$typename T$>$ \\
+bool neo\+::extensions\+::\+Hash\+Set\+Extensions\+::\+Is\+Superset\+Of (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{left}{, }\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Check if left is superset of right. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Element type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em left} & Potential superset \\
+\hline
+{\em right} & Potential subset \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if left is superset of right 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_a8ebc3dcdb99a7820d68215d52efaff67}\index{neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}!RemoveWhere@{RemoveWhere}}
+\index{RemoveWhere@{RemoveWhere}!neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}}
+\doxysubsubsection{\texorpdfstring{RemoveWhere()}{RemoveWhere()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_hash_set_extensions_a8ebc3dcdb99a7820d68215d52efaff67} 
+template$<$typename T, typename Predicate$>$ \\
+size\+\_\+t neo\+::extensions\+::\+Hash\+Set\+Extensions\+::\+Remove\+Where (\begin{DoxyParamCaption}\item[{std\+::unordered\+\_\+set$<$ T $>$ \&}]{hash\+Set}{, }\item[{Predicate}]{predicate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Remove elements matching predicate. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Element type \\
+\hline
+{\em Predicate} & Predicate function type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em hash\+Set} & Set to modify \\
+\hline
+{\em predicate} & Function to test elements for removal \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Number of elements removed 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_a7ad9450b4192cdfaa29cd9f23fc21c97}\index{neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}!SymmetricDifference@{SymmetricDifference}}
+\index{SymmetricDifference@{SymmetricDifference}!neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}}
+\doxysubsubsection{\texorpdfstring{SymmetricDifference()}{SymmetricDifference()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_hash_set_extensions_a7ad9450b4192cdfaa29cd9f23fc21c97} 
+template$<$typename T$>$ \\
+std\+::unordered\+\_\+set$<$ T $>$ neo\+::extensions\+::\+Hash\+Set\+Extensions\+::\+Symmetric\+Difference (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{left}{, }\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Compute symmetric difference of two unordered sets. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Element type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First set \\
+\hline
+{\em right} & Second set \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Elements in either set but not in both 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_afa7144501e5ce9e4c08b9b3ae28d3cb0}\index{neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}!ToVector@{ToVector}}
+\index{ToVector@{ToVector}!neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}}
+\doxysubsubsection{\texorpdfstring{ToVector()}{ToVector()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_hash_set_extensions_afa7144501e5ce9e4c08b9b3ae28d3cb0} 
+template$<$typename T$>$ \\
+std\+::vector$<$ T $>$ neo\+::extensions\+::\+Hash\+Set\+Extensions\+::\+To\+Vector (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{hash\+Set}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Convert unordered set to vector. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Element type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em hash\+Set} & Set to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector containing all elements 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_a3d935a5414de0ff17696ffadfefbcc5f}\index{neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}!Union@{Union}}
+\index{Union@{Union}!neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}}
+\doxysubsubsection{\texorpdfstring{Union()}{Union()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_hash_set_extensions_a3d935a5414de0ff17696ffadfefbcc5f} 
+template$<$typename T$>$ \\
+std\+::unordered\+\_\+set$<$ T $>$ neo\+::extensions\+::\+Hash\+Set\+Extensions\+::\+Union (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{left}{, }\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Compute union of two unordered sets. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Element type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First set \\
+\hline
+{\em right} & Second set \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Union of both sets 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_hash_set_extensions_a0ed3c718abafbf596a20be7be6570b5c}\index{neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}!Where@{Where}}
+\index{Where@{Where}!neo::extensions::HashSetExtensions@{neo::extensions::HashSetExtensions}}
+\doxysubsubsection{\texorpdfstring{Where()}{Where()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_hash_set_extensions_a0ed3c718abafbf596a20be7be6570b5c} 
+template$<$typename T, typename Predicate$>$ \\
+std\+::unordered\+\_\+set$<$ T $>$ neo\+::extensions\+::\+Hash\+Set\+Extensions\+::\+Where (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+set$<$ T $>$ \&}]{hash\+Set}{, }\item[{Predicate}]{predicate}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Filter set by predicate. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & Element type \\
+\hline
+{\em Predicate} & Predicate function type \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em hash\+Set} & Set to filter \\
+\hline
+{\em predicate} & Function to test elements \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+New set with elements matching predicate 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/extensions/\mbox{\hyperlink{hashset__extensions_8h}{hashset\+\_\+extensions.\+h}}\end{DoxyCompactItemize}

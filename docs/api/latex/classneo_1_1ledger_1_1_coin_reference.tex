@@ -1,0 +1,340 @@
+\doxysection{neo\+::ledger\+::Coin\+Reference Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_coin_reference}{}\label{classneo_1_1ledger_1_1_coin_reference}\index{neo::ledger::CoinReference@{neo::ledger::CoinReference}}
+
+
+Represents a coin reference (Neo 2.\+x compatibility). This class is provided for test compatibility only.  
+
+
+
+
+{\ttfamily \#include $<$coin\+\_\+reference.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::ledger\+::Coin\+Reference\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::ledger\+::Coin\+Reference\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_a325754b6ef1c832326a181d15891ae20}{Coin\+Reference}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1ledger_1_1_coin_reference}{Coin\+Reference}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_a28dc7b47364589678b5c7758279723b9}{Coin\+Reference}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&prev\+Hash, uint16\+\_\+t prev\+Index)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1ledger_1_1_coin_reference}{Coin\+Reference} with the specified values. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_a0682ac56d0cd49ffd41aaffac6923f67}{Get\+Prev\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the previous transaction hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_a02335c811a112b926adf38d83a57c3d8}{Set\+Prev\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&prev\+Hash)
+\begin{DoxyCompactList}\small\item\em Sets the previous transaction hash. \end{DoxyCompactList}\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_a4cbd6a52194b7e59d509ae4d9facc890}{Get\+Prev\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Gets the previous transaction output index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_aefa87269fc91006c53011645452ad34b}{Set\+Prev\+Index}} (uint16\+\_\+t prev\+Index)
+\begin{DoxyCompactList}\small\item\em Sets the previous transaction output index. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_a2d6216c981a7409a54e3ed431723599f}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_a5439a224f73a7d3cbc84b162acaaefae}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a binary reader. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_a1b89a34038f0d8782a2671147eea33b1}{Get\+Size}} () const
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_ad875bdf64808e8fe90295143b238217c}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_a6140211a92b3e6cb046aa0008d489611}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a JSON reader. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_a5c23fd8aa7185b1a42dee26bfcb898d4}{operator==}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference}{Coin\+Reference}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this coin reference equals another. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_a5efc8c109f1160977ee5cf2689aada98}{operator!=}} (const \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference}{Coin\+Reference}} \&other) const
+\begin{DoxyCompactList}\small\item\em Checks if this coin reference does not equal another. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_a2be6e43f920d92414c0251303d401682}{prev\+Hash\+\_\+}}
+\item 
+uint16\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference_a8593919ffb26a67a61ddfd9a61c47ad5}{prev\+Index\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a coin reference (Neo 2.\+x compatibility). This class is provided for test compatibility only. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_a325754b6ef1c832326a181d15891ae20}\index{neo::ledger::CoinReference@{neo::ledger::CoinReference}!CoinReference@{CoinReference}}
+\index{CoinReference@{CoinReference}!neo::ledger::CoinReference@{neo::ledger::CoinReference}}
+\doxysubsubsection{\texorpdfstring{CoinReference()}{CoinReference()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_coin_reference_a325754b6ef1c832326a181d15891ae20} 
+neo\+::ledger\+::\+Coin\+Reference\+::\+Coin\+Reference (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1ledger_1_1_coin_reference}{Coin\+Reference}. 
+
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_a28dc7b47364589678b5c7758279723b9}\index{neo::ledger::CoinReference@{neo::ledger::CoinReference}!CoinReference@{CoinReference}}
+\index{CoinReference@{CoinReference}!neo::ledger::CoinReference@{neo::ledger::CoinReference}}
+\doxysubsubsection{\texorpdfstring{CoinReference()}{CoinReference()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_coin_reference_a28dc7b47364589678b5c7758279723b9} 
+neo\+::ledger\+::\+Coin\+Reference\+::\+Coin\+Reference (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{prev\+Hash}{, }\item[{uint16\+\_\+t}]{prev\+Index}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1ledger_1_1_coin_reference}{Coin\+Reference} with the specified values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prev\+Hash} & The previous transaction hash. \\
+\hline
+{\em prev\+Index} & The previous transaction output index. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_a5439a224f73a7d3cbc84b162acaaefae}\index{neo::ledger::CoinReference@{neo::ledger::CoinReference}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::ledger::CoinReference@{neo::ledger::CoinReference}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_coin_reference_a5439a224f73a7d3cbc84b162acaaefae} 
+void neo\+::ledger\+::\+Coin\+Reference\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_a6140211a92b3e6cb046aa0008d489611}\index{neo::ledger::CoinReference@{neo::ledger::CoinReference}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::ledger::CoinReference@{neo::ledger::CoinReference}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_coin_reference_a6140211a92b3e6cb046aa0008d489611} 
+void neo\+::ledger\+::\+Coin\+Reference\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_a0682ac56d0cd49ffd41aaffac6923f67}\index{neo::ledger::CoinReference@{neo::ledger::CoinReference}!GetPrevHash@{GetPrevHash}}
+\index{GetPrevHash@{GetPrevHash}!neo::ledger::CoinReference@{neo::ledger::CoinReference}}
+\doxysubsubsection{\texorpdfstring{GetPrevHash()}{GetPrevHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_coin_reference_a0682ac56d0cd49ffd41aaffac6923f67} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \& neo\+::ledger\+::\+Coin\+Reference\+::\+Get\+Prev\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the previous transaction hash. 
+
+\begin{DoxyReturn}{Returns}
+The previous transaction hash. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_a4cbd6a52194b7e59d509ae4d9facc890}\index{neo::ledger::CoinReference@{neo::ledger::CoinReference}!GetPrevIndex@{GetPrevIndex}}
+\index{GetPrevIndex@{GetPrevIndex}!neo::ledger::CoinReference@{neo::ledger::CoinReference}}
+\doxysubsubsection{\texorpdfstring{GetPrevIndex()}{GetPrevIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_coin_reference_a4cbd6a52194b7e59d509ae4d9facc890} 
+uint16\+\_\+t neo\+::ledger\+::\+Coin\+Reference\+::\+Get\+Prev\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the previous transaction output index. 
+
+\begin{DoxyReturn}{Returns}
+The previous transaction output index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_a1b89a34038f0d8782a2671147eea33b1}\index{neo::ledger::CoinReference@{neo::ledger::CoinReference}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::ledger::CoinReference@{neo::ledger::CoinReference}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_coin_reference_a1b89a34038f0d8782a2671147eea33b1} 
+int neo\+::ledger\+::\+Coin\+Reference\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_a5efc8c109f1160977ee5cf2689aada98}\index{neo::ledger::CoinReference@{neo::ledger::CoinReference}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::ledger::CoinReference@{neo::ledger::CoinReference}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_coin_reference_a5efc8c109f1160977ee5cf2689aada98} 
+bool neo\+::ledger\+::\+Coin\+Reference\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference}{Coin\+Reference}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this coin reference does not equal another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other coin reference. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if not equal. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_a5c23fd8aa7185b1a42dee26bfcb898d4}\index{neo::ledger::CoinReference@{neo::ledger::CoinReference}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::ledger::CoinReference@{neo::ledger::CoinReference}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_coin_reference_a5c23fd8aa7185b1a42dee26bfcb898d4} 
+bool neo\+::ledger\+::\+Coin\+Reference\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1ledger_1_1_coin_reference}{Coin\+Reference}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+
+
+Checks if this coin reference equals another. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other coin reference. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if equal. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_a2d6216c981a7409a54e3ed431723599f}\index{neo::ledger::CoinReference@{neo::ledger::CoinReference}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::ledger::CoinReference@{neo::ledger::CoinReference}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_coin_reference_a2d6216c981a7409a54e3ed431723599f} 
+void neo\+::ledger\+::\+Coin\+Reference\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_ad875bdf64808e8fe90295143b238217c}\index{neo::ledger::CoinReference@{neo::ledger::CoinReference}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::ledger::CoinReference@{neo::ledger::CoinReference}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_coin_reference_ad875bdf64808e8fe90295143b238217c} 
+void neo\+::ledger\+::\+Coin\+Reference\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_a02335c811a112b926adf38d83a57c3d8}\index{neo::ledger::CoinReference@{neo::ledger::CoinReference}!SetPrevHash@{SetPrevHash}}
+\index{SetPrevHash@{SetPrevHash}!neo::ledger::CoinReference@{neo::ledger::CoinReference}}
+\doxysubsubsection{\texorpdfstring{SetPrevHash()}{SetPrevHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_coin_reference_a02335c811a112b926adf38d83a57c3d8} 
+void neo\+::ledger\+::\+Coin\+Reference\+::\+Set\+Prev\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{prev\+Hash}{}\end{DoxyParamCaption})}
+
+
+
+Sets the previous transaction hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prev\+Hash} & The previous transaction hash. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_aefa87269fc91006c53011645452ad34b}\index{neo::ledger::CoinReference@{neo::ledger::CoinReference}!SetPrevIndex@{SetPrevIndex}}
+\index{SetPrevIndex@{SetPrevIndex}!neo::ledger::CoinReference@{neo::ledger::CoinReference}}
+\doxysubsubsection{\texorpdfstring{SetPrevIndex()}{SetPrevIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_coin_reference_aefa87269fc91006c53011645452ad34b} 
+void neo\+::ledger\+::\+Coin\+Reference\+::\+Set\+Prev\+Index (\begin{DoxyParamCaption}\item[{uint16\+\_\+t}]{prev\+Index}{}\end{DoxyParamCaption})}
+
+
+
+Sets the previous transaction output index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prev\+Index} & The previous transaction output index. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_a2be6e43f920d92414c0251303d401682}\index{neo::ledger::CoinReference@{neo::ledger::CoinReference}!prevHash\_@{prevHash\_}}
+\index{prevHash\_@{prevHash\_}!neo::ledger::CoinReference@{neo::ledger::CoinReference}}
+\doxysubsubsection{\texorpdfstring{prevHash\_}{prevHash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_coin_reference_a2be6e43f920d92414c0251303d401682} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} neo\+::ledger\+::\+Coin\+Reference\+::prev\+Hash\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_coin_reference_a8593919ffb26a67a61ddfd9a61c47ad5}\index{neo::ledger::CoinReference@{neo::ledger::CoinReference}!prevIndex\_@{prevIndex\_}}
+\index{prevIndex\_@{prevIndex\_}!neo::ledger::CoinReference@{neo::ledger::CoinReference}}
+\doxysubsubsection{\texorpdfstring{prevIndex\_}{prevIndex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_coin_reference_a8593919ffb26a67a61ddfd9a61c47ad5} 
+uint16\+\_\+t neo\+::ledger\+::\+Coin\+Reference\+::prev\+Index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{coin__reference_8h}{coin\+\_\+reference.\+h}}\item 
+src/ledger/\mbox{\hyperlink{coin__reference_8cpp}{coin\+\_\+reference.\+cpp}}\item 
+src/ledger/\mbox{\hyperlink{transaction__json_8cpp}{transaction\+\_\+json.\+cpp}}\end{DoxyCompactItemize}

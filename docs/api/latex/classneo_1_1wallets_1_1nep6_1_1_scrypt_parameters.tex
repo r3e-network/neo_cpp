@@ -1,0 +1,271 @@
+\doxysection{neo\+::wallets\+::nep6\+::Scrypt\+Parameters Class Reference}
+\hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{}\label{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}\index{neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}}
+
+
+Represents the parameters of the SCrypt algorithm.  
+
+
+
+
+{\ttfamily \#include $<$scrypt\+\_\+parameters.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::wallets\+::nep6\+::Scrypt\+Parameters\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::wallets\+::nep6\+::Scrypt\+Parameters\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a084fdaddf82fd66cc39a87677423e538}{Scrypt\+Parameters}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters} with default values. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a3840549b37c6217e7bc59323e0d7d7f7}{Scrypt\+Parameters}} (uint32\+\_\+t n, uint32\+\_\+t r, uint32\+\_\+t p)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters} with the specified values. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a884c778f307d5118ea07788e357b4760}{GetN}} () const
+\begin{DoxyCompactList}\small\item\em Gets the CPU/\+Memory cost parameter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_af91ba5c91725292d58e0615cf50103c4}{SetN}} (uint32\+\_\+t n)
+\begin{DoxyCompactList}\small\item\em Sets the CPU/\+Memory cost parameter. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a39ac44b9e9e043f123f8172db9649ddf}{GetR}} () const
+\begin{DoxyCompactList}\small\item\em Gets the block size. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_ab01f04ea916d689d0f1f24c44ba20577}{SetR}} (uint32\+\_\+t r)
+\begin{DoxyCompactList}\small\item\em Sets the block size. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_aff199688073e444afcc1cebd8291fa0d}{GetP}} () const
+\begin{DoxyCompactList}\small\item\em Gets the parallelization parameter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_aa9f968a4972a4ab9cb46f84ef7976368}{SetP}} (uint32\+\_\+t p)
+\begin{DoxyCompactList}\small\item\em Sets the parallelization parameter. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a49ba59b9142827564ebfe3deb7ab8dcb}{To\+Json}} () const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters} to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a080ad578b22387ae1b18e1eeda02d2c4}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}}) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters} from a JSON object. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable}{neo\+::io\+::\+Json\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_ae7dd2d7bd2b036df8dc47c8df95b66f0}{\texorpdfstring{$\sim$}{\string~}\+Json\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_a1f7a1b4f0576d1bcf90ddf88c05d0e45}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_a4f9aff66b2ffc198345b53e597811363}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters}} \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a6d75b262fff642fce4db03735f3a9c12}{Default}} ()
+\begin{DoxyCompactList}\small\item\em Gets the default \doxylink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a288da5d03bdba17d110bffe589998659}{n\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a311e3b2c646343eb3edc75fb45d3f297}{r\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_ad1b69f53197d282f3571d6d55f3ae9b6}{p\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the parameters of the SCrypt algorithm. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a084fdaddf82fd66cc39a87677423e538}\index{neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}!ScryptParameters@{ScryptParameters}}
+\index{ScryptParameters@{ScryptParameters}!neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}}
+\doxysubsubsection{\texorpdfstring{ScryptParameters()}{ScryptParameters()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a084fdaddf82fd66cc39a87677423e538} 
+neo\+::wallets\+::nep6\+::\+Scrypt\+Parameters\+::\+Scrypt\+Parameters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters} with default values. 
+
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a3840549b37c6217e7bc59323e0d7d7f7}\index{neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}!ScryptParameters@{ScryptParameters}}
+\index{ScryptParameters@{ScryptParameters}!neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}}
+\doxysubsubsection{\texorpdfstring{ScryptParameters()}{ScryptParameters()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a3840549b37c6217e7bc59323e0d7d7f7} 
+neo\+::wallets\+::nep6\+::\+Scrypt\+Parameters\+::\+Scrypt\+Parameters (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{n}{, }\item[{uint32\+\_\+t}]{r}{, }\item[{uint32\+\_\+t}]{p}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters} with the specified values. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The CPU/\+Memory cost parameter. \\
+\hline
+{\em r} & The block size. \\
+\hline
+{\em p} & The parallelization parameter. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a6d75b262fff642fce4db03735f3a9c12}\index{neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}!Default@{Default}}
+\index{Default@{Default}!neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}}
+\doxysubsubsection{\texorpdfstring{Default()}{Default()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a6d75b262fff642fce4db03735f3a9c12} 
+\mbox{\hyperlink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters}} neo\+::wallets\+::nep6\+::\+Scrypt\+Parameters\+::\+Default (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the default \doxylink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters}. 
+
+\begin{DoxyReturn}{Returns}
+The default \doxylink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a080ad578b22387ae1b18e1eeda02d2c4}\index{neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}!FromJson@{FromJson}}
+\index{FromJson@{FromJson}!neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}}
+\doxysubsubsection{\texorpdfstring{FromJson()}{FromJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a080ad578b22387ae1b18e1eeda02d2c4} 
+void neo\+::wallets\+::nep6\+::\+Scrypt\+Parameters\+::\+From\+Json (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters} from a JSON object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & The JSON object. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_a21a577bd492fc899597f33618a1da2eb}{neo\+::io\+::\+Json\+Serializable}}.
+
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a884c778f307d5118ea07788e357b4760}\index{neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}!GetN@{GetN}}
+\index{GetN@{GetN}!neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}}
+\doxysubsubsection{\texorpdfstring{GetN()}{GetN()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a884c778f307d5118ea07788e357b4760} 
+uint32\+\_\+t neo\+::wallets\+::nep6\+::\+Scrypt\+Parameters\+::\+GetN (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the CPU/\+Memory cost parameter. 
+
+\begin{DoxyReturn}{Returns}
+The CPU/\+Memory cost parameter. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_aff199688073e444afcc1cebd8291fa0d}\index{neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}!GetP@{GetP}}
+\index{GetP@{GetP}!neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}}
+\doxysubsubsection{\texorpdfstring{GetP()}{GetP()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_aff199688073e444afcc1cebd8291fa0d} 
+uint32\+\_\+t neo\+::wallets\+::nep6\+::\+Scrypt\+Parameters\+::\+GetP (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the parallelization parameter. 
+
+\begin{DoxyReturn}{Returns}
+The parallelization parameter. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a39ac44b9e9e043f123f8172db9649ddf}\index{neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}!GetR@{GetR}}
+\index{GetR@{GetR}!neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}}
+\doxysubsubsection{\texorpdfstring{GetR()}{GetR()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a39ac44b9e9e043f123f8172db9649ddf} 
+uint32\+\_\+t neo\+::wallets\+::nep6\+::\+Scrypt\+Parameters\+::\+GetR (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the block size. 
+
+\begin{DoxyReturn}{Returns}
+The block size. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_af91ba5c91725292d58e0615cf50103c4}\index{neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}!SetN@{SetN}}
+\index{SetN@{SetN}!neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}}
+\doxysubsubsection{\texorpdfstring{SetN()}{SetN()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_af91ba5c91725292d58e0615cf50103c4} 
+void neo\+::wallets\+::nep6\+::\+Scrypt\+Parameters\+::\+SetN (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{n}{}\end{DoxyParamCaption})}
+
+
+
+Sets the CPU/\+Memory cost parameter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n} & The CPU/\+Memory cost parameter. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_aa9f968a4972a4ab9cb46f84ef7976368}\index{neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}!SetP@{SetP}}
+\index{SetP@{SetP}!neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}}
+\doxysubsubsection{\texorpdfstring{SetP()}{SetP()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_aa9f968a4972a4ab9cb46f84ef7976368} 
+void neo\+::wallets\+::nep6\+::\+Scrypt\+Parameters\+::\+SetP (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{p}{}\end{DoxyParamCaption})}
+
+
+
+Sets the parallelization parameter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em p} & The parallelization parameter. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_ab01f04ea916d689d0f1f24c44ba20577}\index{neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}!SetR@{SetR}}
+\index{SetR@{SetR}!neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}}
+\doxysubsubsection{\texorpdfstring{SetR()}{SetR()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_ab01f04ea916d689d0f1f24c44ba20577} 
+void neo\+::wallets\+::nep6\+::\+Scrypt\+Parameters\+::\+SetR (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{r}{}\end{DoxyParamCaption})}
+
+
+
+Sets the block size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em r} & The block size. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a49ba59b9142827564ebfe3deb7ab8dcb}\index{neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}!ToJson@{ToJson}}
+\index{ToJson@{ToJson}!neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}}
+\doxysubsubsection{\texorpdfstring{ToJson()}{ToJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a49ba59b9142827564ebfe3deb7ab8dcb} 
+nlohmann\+::json neo\+::wallets\+::nep6\+::\+Scrypt\+Parameters\+::\+To\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters}{Scrypt\+Parameters} to a JSON object. 
+
+\begin{DoxyReturn}{Returns}
+The JSON object. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_json_serializable_a3fc4f510ac608ac070cb3c3f85b09113}{neo\+::io\+::\+Json\+Serializable}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a288da5d03bdba17d110bffe589998659}\index{neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}!n\_@{n\_}}
+\index{n\_@{n\_}!neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}}
+\doxysubsubsection{\texorpdfstring{n\_}{n\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a288da5d03bdba17d110bffe589998659} 
+uint32\+\_\+t neo\+::wallets\+::nep6\+::\+Scrypt\+Parameters\+::n\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_ad1b69f53197d282f3571d6d55f3ae9b6}\index{neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}!p\_@{p\_}}
+\index{p\_@{p\_}!neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}}
+\doxysubsubsection{\texorpdfstring{p\_}{p\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_ad1b69f53197d282f3571d6d55f3ae9b6} 
+uint32\+\_\+t neo\+::wallets\+::nep6\+::\+Scrypt\+Parameters\+::p\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a311e3b2c646343eb3edc75fb45d3f297}\index{neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}!r\_@{r\_}}
+\index{r\_@{r\_}!neo::wallets::nep6::ScryptParameters@{neo::wallets::nep6::ScryptParameters}}
+\doxysubsubsection{\texorpdfstring{r\_}{r\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1nep6_1_1_scrypt_parameters_a311e3b2c646343eb3edc75fb45d3f297} 
+uint32\+\_\+t neo\+::wallets\+::nep6\+::\+Scrypt\+Parameters\+::r\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/wallets/nep6/\mbox{\hyperlink{scrypt__parameters_8h}{scrypt\+\_\+parameters.\+h}}\item 
+src/wallets/nep6/\mbox{\hyperlink{scrypt__parameters_8cpp}{scrypt\+\_\+parameters.\+cpp}}\end{DoxyCompactItemize}

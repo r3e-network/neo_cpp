@@ -1,0 +1,29 @@
+\doxysection{payload\+\_\+factory.\+h}
+\hypertarget{payload__factory_8h_source}{}\label{payload__factory_8h_source}\index{include/neo/network/payload\_factory.h@{include/neo/network/payload\_factory.h}}
+\mbox{\hyperlink{payload__factory_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__reader_8h}{neo/io/binary\_reader.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{p2p_2ipayload_8h}{neo/network/p2p/ipayload.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{p2p_2message__command_8h}{neo/network/p2p/message\_command.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{payload__type_8h}{neo/network/payload\_type.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p}{neo::network::p2p}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_payload_factory}{PayloadFactory}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00023\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IPayload>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_payload_factory_a367b94eb7fc86169eb77ee64c1384ac3}{Create}}(\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{MessageCommand}}\ command);}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IPayload>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_payload_factory_aa5b21e7d366197587798bc26d3196026}{Create}}(\mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ff}{PayloadType}}\ type);}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IPayload>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_payload_factory_a20c7db455af7c6f79680c5906b2feabf}{DeserializePayload}}(\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a64120d2f2c63acfe66614bc14451b778}{MessageCommand}}\ command,\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader);}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<IPayload>\ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_payload_factory_a8fc9fb6bdb630268ac09f8a9dd71bb63}{DeserializePayload}}(\mbox{\hyperlink{namespaceneo_1_1network_a9db89f61aa784422261419e90749a8ff}{PayloadType}}\ type,\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader);}
+\DoxyCodeLine{00047\ \};}
+\DoxyCodeLine{00048\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::p2p}}
+
+\end{DoxyCode}

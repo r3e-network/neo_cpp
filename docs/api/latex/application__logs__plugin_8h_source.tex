@@ -1,0 +1,68 @@
+\doxysection{application\+\_\+logs\+\_\+plugin.\+h}
+\hypertarget{application__logs__plugin_8h_source}{}\label{application__logs__plugin_8h_source}\index{include/neo/plugins/application\_logs\_plugin.h@{include/neo/plugins/application\_logs\_plugin.h}}
+\mbox{\hyperlink{application__logs__plugin_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2block_8h}{neo/ledger/block.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{plugin__base_8h}{neo/plugins/plugin\_base.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{application__engine_8h}{neo/smartcontract/application\_engine.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{vm__state_8h}{neo/vm/vm\_state.h}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1plugins}{neo::plugins}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00020\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1plugins_1_1_application_log_a3bcd20ac1fa9ed589600a382f4c4acf0}{ApplicationLog}}}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00025\ \ \ \ \ \mbox{\hyperlink{structneo_1_1plugins_1_1_application_log_a3bcd20ac1fa9ed589600a382f4c4acf0}{ApplicationLog}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00030\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\ \mbox{\hyperlink{structneo_1_1plugins_1_1_application_log_a429f1ef3e79572287b9ac63a63f98e74}{TxHash}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{vm::VMState}}\ \mbox{\hyperlink{structneo_1_1plugins_1_1_application_log_af68431dcc4f8dbce04bc317e7953ed41}{State}}\ =\ \mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06ca6adf97f83acf6453d4a6a4b1070f3754}{vm::VMState::None}};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00040\ \ \ \ \ int64\_t\ \mbox{\hyperlink{structneo_1_1plugins_1_1_application_log_ab3180bc7a0d0bfa42537a576cb76c833}{GasConsumed}}\ =\ 0;}
+\DoxyCodeLine{00041\ }
+\DoxyCodeLine{00045\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{structneo_1_1plugins_1_1_application_log_ab6d39280529918a81a85cef917312ec8}{Stack}};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00050\ \ \ \ \ std::vector<std::string>\ \mbox{\hyperlink{structneo_1_1plugins_1_1_application_log_ade53bbe8e64a55e224a59fedfb894b31}{Notifications}};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00055\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1plugins_1_1_application_log_aa362bcc6a71bae8385ba4cfe9723a629}{Exception}};}
+\DoxyCodeLine{00056\ \};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00061\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_a21492534d7547b7ef4979c7b4f87e809}{ApplicationLogsPlugin}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_base_ae2713af7147395e3f7230925418aa28d}{PluginBase}}}
+\DoxyCodeLine{00062\ \{}
+\DoxyCodeLine{00063\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00067\ \ \ \ \ \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_a21492534d7547b7ef4979c7b4f87e809}{ApplicationLogsPlugin}}();}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00074\ \ \ \ \ std::shared\_ptr<ApplicationLog>\ \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_af6a69f6ebd1f6176811ceeea658ec58b}{GetApplicationLog}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ txHash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00076\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_ae395273a512fc6ed9e3e223f03933a8b}{OnInitialize}}(\textcolor{keyword}{const}\ std::unordered\_map<std::string,\ std::string>\&\ settings)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_aa1e234f6835a72baa56533a621ee677d}{OnStart}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_affa22dbaf1335e0a573a89203f3a9126}{OnStop}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00096\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00097\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_a4acfaadb1f6ab4ea584c57077295879c}{logPath\_}};}
+\DoxyCodeLine{00098\ \ \ \ \ std::unordered\_map<io::UInt256,\ std::shared\_ptr<ApplicationLog>>\ \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_a0543c6591b93180b30e8d0b45f95a09e}{logs\_}};}
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_a40f50312a98d786b84d4f32fb7d52c58}{mutex\_}};}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_a96c380661360c22ffcacc0991f518dd0}{OnBlockPersisted}}(std::shared\_ptr<ledger::Block>\ block);}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_afe3e5d2c86f46f572099ad6f6b33536a}{OnTransactionExecuted}}(std::shared\_ptr<ledger::Transaction>\ transaction);}
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_aacf6509f70a76f12d9bab2c77b316520}{SaveLogs}}();}
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1plugins_1_1_application_logs_plugin_a7de0bc79164795a6b2d0eadd9db241f4}{LoadLogs}}();}
+\DoxyCodeLine{00105\ \};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00110\ \textcolor{comment}{//\ class\ ApplicationLogsPluginFactory\ :\ public\ PluginFactoryBase<ApplicationLogsPlugin>}}
+\DoxyCodeLine{00111\ \textcolor{comment}{//\ \{}}
+\DoxyCodeLine{00112\ \textcolor{comment}{//\ \};}}
+\DoxyCodeLine{00113\ \}\ \ \textcolor{comment}{//\ namespace\ neo::plugins}}
+
+\end{DoxyCode}

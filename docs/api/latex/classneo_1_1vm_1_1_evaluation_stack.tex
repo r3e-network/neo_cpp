@@ -1,0 +1,341 @@
+\doxysection{neo\+::vm\+::Evaluation\+Stack Class Reference}
+\hypertarget{classneo_1_1vm_1_1_evaluation_stack}{}\label{classneo_1_1vm_1_1_evaluation_stack}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+
+
+VM evaluation stack for Neo virtual machine.  
+
+
+
+
+{\ttfamily \#include $<$evaluation\+\_\+stack.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a3eec3013e8be527f573cd06c811128ed}{Evaluation\+Stack}} (size\+\_\+t max\+\_\+size=2048)
+\begin{DoxyCompactList}\small\item\em Constructor with maximum size. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a33abd21422940b5bc59cf8037f768494}{Push}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item)
+\begin{DoxyCompactList}\small\item\em Push item onto stack. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a3c9ee9bbd0b3eb3d417e5da2a2649cf9}{Pop}} ()
+\begin{DoxyCompactList}\small\item\em Pop item from stack. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a5dc650f0318e03b230be96ea704147d2}{Peek}} (size\+\_\+t index=0) const
+\begin{DoxyCompactList}\small\item\em Peek at top item without removing. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a881489c00dfc7f90c57b2d0beaa375d0}{Size}} () const
+\begin{DoxyCompactList}\small\item\em Get stack size. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a2eb4be80ed160199bf02f1f2595c3092}{Is\+Empty}} () const
+\begin{DoxyCompactList}\small\item\em Check if stack is empty. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a1826f571a1973f1d842bd13df0b0a27a}{Is\+Full}} () const
+\begin{DoxyCompactList}\small\item\em Check if stack is full. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a7e94b5ecbf9d3864086a89feab630d36}{Clear}} ()
+\begin{DoxyCompactList}\small\item\em Clear all items from stack. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a24ccfd5e8d3cfba9086dcc2b4b7977ea}{Dup}} ()
+\begin{DoxyCompactList}\small\item\em Duplicate top item. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a1e7dedd61e1b2479ef9ee230f375e138}{Swap}} ()
+\begin{DoxyCompactList}\small\item\em Swap top two items. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a1fcbac9c940b86000d8de67d247e573c}{Rot}} ()
+\begin{DoxyCompactList}\small\item\em Rotate top 3 items (third item moves to top) \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a598942bdc27d7492c655e4ae75f33f02}{Remove}} (size\+\_\+t depth)
+\begin{DoxyCompactList}\small\item\em Remove item at specified depth. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_affce485835c70183b0f973b103b304df}{Insert}} (size\+\_\+t depth, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item)
+\begin{DoxyCompactList}\small\item\em Insert item at specified depth. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a64f7d3f796de92462121bcd91daedaad}{Get\+Max\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Get maximum stack size. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a30ad6ab1124958bb1052a32e61cbab4b}{Set\+Max\+Size}} (size\+\_\+t max\+\_\+size)
+\begin{DoxyCompactList}\small\item\em Set maximum stack size. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_ab0fd35f878892b40037fe5556b126394}{To\+Vector}} () const
+\begin{DoxyCompactList}\small\item\em Convert stack to vector (for debugging) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::stack$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a8b4e5291c1afec2d4bbcf404c6a8c6d7}{stack\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_ac1a233c307e9c620b531324c3d8d3e65}{max\+\_\+size\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+VM evaluation stack for Neo virtual machine. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_a3eec3013e8be527f573cd06c811128ed}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!EvaluationStack@{EvaluationStack}}
+\index{EvaluationStack@{EvaluationStack}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{EvaluationStack()}{EvaluationStack()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_a3eec3013e8be527f573cd06c811128ed} 
+neo\+::vm\+::\+Evaluation\+Stack\+::\+Evaluation\+Stack (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{max\+\_\+size}{ = {\ttfamily 2048}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor with maximum size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+\_\+size} & Maximum stack size (default 2048) \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_a7e94b5ecbf9d3864086a89feab630d36}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_a7e94b5ecbf9d3864086a89feab630d36} 
+void neo\+::vm\+::\+Evaluation\+Stack\+::\+Clear (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clear all items from stack. 
+
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_a24ccfd5e8d3cfba9086dcc2b4b7977ea}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!Dup@{Dup}}
+\index{Dup@{Dup}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{Dup()}{Dup()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_a24ccfd5e8d3cfba9086dcc2b4b7977ea} 
+void neo\+::vm\+::\+Evaluation\+Stack\+::\+Dup (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Duplicate top item. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if stack is empty or full \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_a64f7d3f796de92462121bcd91daedaad}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!GetMaxSize@{GetMaxSize}}
+\index{GetMaxSize@{GetMaxSize}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{GetMaxSize()}{GetMaxSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_a64f7d3f796de92462121bcd91daedaad} 
+size\+\_\+t neo\+::vm\+::\+Evaluation\+Stack\+::\+Get\+Max\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get maximum stack size. 
+
+\begin{DoxyReturn}{Returns}
+Maximum stack size 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_affce485835c70183b0f973b103b304df}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!Insert@{Insert}}
+\index{Insert@{Insert}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{Insert()}{Insert()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_affce485835c70183b0f973b103b304df} 
+void neo\+::vm\+::\+Evaluation\+Stack\+::\+Insert (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{depth}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Insert item at specified depth. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em depth} & Depth from top \\
+\hline
+{\em item} & Item to insert \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if depth is out of bounds or stack is full \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_a2eb4be80ed160199bf02f1f2595c3092}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!IsEmpty@{IsEmpty}}
+\index{IsEmpty@{IsEmpty}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{IsEmpty()}{IsEmpty()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_a2eb4be80ed160199bf02f1f2595c3092} 
+bool neo\+::vm\+::\+Evaluation\+Stack\+::\+Is\+Empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if stack is empty. 
+
+\begin{DoxyReturn}{Returns}
+True if empty 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_a1826f571a1973f1d842bd13df0b0a27a}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!IsFull@{IsFull}}
+\index{IsFull@{IsFull}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{IsFull()}{IsFull()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_a1826f571a1973f1d842bd13df0b0a27a} 
+bool neo\+::vm\+::\+Evaluation\+Stack\+::\+Is\+Full (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Check if stack is full. 
+
+\begin{DoxyReturn}{Returns}
+True if at maximum capacity 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_a5dc650f0318e03b230be96ea704147d2}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!Peek@{Peek}}
+\index{Peek@{Peek}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{Peek()}{Peek()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_a5dc650f0318e03b230be96ea704147d2} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ neo\+::vm\+::\+Evaluation\+Stack\+::\+Peek (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const}
+
+
+
+Peek at top item without removing. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & Index from top (0 = top, 1 = second from top, etc.) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Item at index 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if index is out of bounds \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_a3c9ee9bbd0b3eb3d417e5da2a2649cf9}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!Pop@{Pop}}
+\index{Pop@{Pop}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{Pop()}{Pop()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_a3c9ee9bbd0b3eb3d417e5da2a2649cf9} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ neo\+::vm\+::\+Evaluation\+Stack\+::\+Pop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Pop item from stack. 
+
+\begin{DoxyReturn}{Returns}
+Popped item 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if stack is empty \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_a33abd21422940b5bc59cf8037f768494}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!Push@{Push}}
+\index{Push@{Push}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{Push()}{Push()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_a33abd21422940b5bc59cf8037f768494} 
+void neo\+::vm\+::\+Evaluation\+Stack\+::\+Push (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Push item onto stack. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & Item to push \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if stack is full \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_a598942bdc27d7492c655e4ae75f33f02}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!Remove@{Remove}}
+\index{Remove@{Remove}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{Remove()}{Remove()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_a598942bdc27d7492c655e4ae75f33f02} 
+void neo\+::vm\+::\+Evaluation\+Stack\+::\+Remove (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{depth}{}\end{DoxyParamCaption})}
+
+
+
+Remove item at specified depth. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em depth} & Depth from top (0 = top) \\
+\hline
+\end{DoxyParams}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if depth is out of bounds \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_a1fcbac9c940b86000d8de67d247e573c}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!Rot@{Rot}}
+\index{Rot@{Rot}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{Rot()}{Rot()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_a1fcbac9c940b86000d8de67d247e573c} 
+void neo\+::vm\+::\+Evaluation\+Stack\+::\+Rot (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Rotate top 3 items (third item moves to top) 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if stack has fewer than 3 items \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_a30ad6ab1124958bb1052a32e61cbab4b}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!SetMaxSize@{SetMaxSize}}
+\index{SetMaxSize@{SetMaxSize}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{SetMaxSize()}{SetMaxSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_a30ad6ab1124958bb1052a32e61cbab4b} 
+void neo\+::vm\+::\+Evaluation\+Stack\+::\+Set\+Max\+Size (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{max\+\_\+size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set maximum stack size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+\_\+size} & New maximum size \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_a881489c00dfc7f90c57b2d0beaa375d0}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!Size@{Size}}
+\index{Size@{Size}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_a881489c00dfc7f90c57b2d0beaa375d0} 
+size\+\_\+t neo\+::vm\+::\+Evaluation\+Stack\+::\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get stack size. 
+
+\begin{DoxyReturn}{Returns}
+Number of items on stack 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_a1e7dedd61e1b2479ef9ee230f375e138}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!Swap@{Swap}}
+\index{Swap@{Swap}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{Swap()}{Swap()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_a1e7dedd61e1b2479ef9ee230f375e138} 
+void neo\+::vm\+::\+Evaluation\+Stack\+::\+Swap (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Swap top two items. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::runtime\+\_\+error} & if stack has fewer than 2 items \\
+\hline
+\end{DoxyExceptions}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_ab0fd35f878892b40037fe5556b126394}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!ToVector@{ToVector}}
+\index{ToVector@{ToVector}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{ToVector()}{ToVector()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_ab0fd35f878892b40037fe5556b126394} 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ neo\+::vm\+::\+Evaluation\+Stack\+::\+To\+Vector (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Convert stack to vector (for debugging) 
+
+\begin{DoxyReturn}{Returns}
+Vector with items from bottom to top 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_ac1a233c307e9c620b531324c3d8d3e65}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!max\_size\_@{max\_size\_}}
+\index{max\_size\_@{max\_size\_}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{max\_size\_}{max\_size\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_ac1a233c307e9c620b531324c3d8d3e65} 
+size\+\_\+t neo\+::vm\+::\+Evaluation\+Stack\+::max\+\_\+size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_evaluation_stack_a8b4e5291c1afec2d4bbcf404c6a8c6d7}\index{neo::vm::EvaluationStack@{neo::vm::EvaluationStack}!stack\_@{stack\_}}
+\index{stack\_@{stack\_}!neo::vm::EvaluationStack@{neo::vm::EvaluationStack}}
+\doxysubsubsection{\texorpdfstring{stack\_}{stack\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_evaluation_stack_a8b4e5291c1afec2d4bbcf404c6a8c6d7} 
+std\+::stack$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}}$>$ $>$ neo\+::vm\+::\+Evaluation\+Stack\+::stack\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/vm/\mbox{\hyperlink{evaluation__stack_8h}{evaluation\+\_\+stack.\+h}}\end{DoxyCompactItemize}

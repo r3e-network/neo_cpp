@@ -1,0 +1,91 @@
+\doxysection{ecpoint\+\_\+cache.\+h}
+\hypertarget{ecpoint__cache_8h_source}{}\label{ecpoint__cache_8h_source}\index{include/neo/io/caching/ecpoint\_cache.h@{include/neo/io/caching/ecpoint\_cache.h}}
+\mbox{\hyperlink{ecpoint__cache_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ecpoint_8h}{neo/cryptography/ecc/ecpoint.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{caching_2lru__cache_8h}{neo/io/caching/lru\_cache.h}}>}}
+\DoxyCodeLine{00006\ }
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1io_1_1caching}{neo::io::caching}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1io_1_1caching_1_1_byte_vector_hash}{ByteVectorHash}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1io_1_1caching_1_1_byte_vector_hash_af950c410d1c614f8d6b76046f76a644e}{operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\&\ bytes)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00022\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00023\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ hash\ =\ 0;}
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ bytes.\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ac0d1a1751d25fde82c44ba55d9d68e24}{Size}}();\ ++i)}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ \ \ \ \ hash\ =\ hash\ *\ 31\ +\ bytes[i];}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ hash;}
+\DoxyCodeLine{00029\ \ \ \ \ \}}
+\DoxyCodeLine{00030\ \};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00035\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1io_1_1caching_1_1_byte_vector_equal}{ByteVectorEqual}}}
+\DoxyCodeLine{00036\ \{}
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1io_1_1caching_1_1_byte_vector_equal_aa8f348520da03e113709aa06a1e44a0a}{operator()}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\&\ lhs,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\&\ rhs)\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00044\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (lhs.\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ac0d1a1751d25fde82c44ba55d9d68e24}{Size}}()\ !=\ rhs.\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ac0d1a1751d25fde82c44ba55d9d68e24}{Size}}())\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ lhs.\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_ac0d1a1751d25fde82c44ba55d9d68e24}{Size}}();\ ++i)}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (lhs[i]\ !=\ rhs[i])\ \textcolor{keywordflow}{return}\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00059\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a45f5fb8a2f6764e9be3e2b8993cc231a}{ECPointCache}}}
+\DoxyCodeLine{00060\ \{}
+\DoxyCodeLine{00061\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00066\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a45f5fb8a2f6764e9be3e2b8993cc231a}{ECPointCache}}(\textcolor{keywordtype}{size\_t}\ capacity)\ :\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_acaadba8516015ee733480aec73403820}{cache\_}}(capacity)\ \{\}}
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00074\ \ \ \ \ std::shared\_ptr<cryptography::ecc::ECPoint>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_aa78ee0eb398e46237efbdd2599e42c10}{GetOrCreate}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\&\ bytes,}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<cryptography::ecc::ECCurve>\ curve)}
+\DoxyCodeLine{00076\ \ \ \ \ \{}
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Try\ to\ get\ from\ cache}}
+\DoxyCodeLine{00078\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ ecpoint\ =\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_acaadba8516015ee733480aec73403820}{cache\_}}.Get(bytes);}
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (ecpoint)\ \textcolor{keywordflow}{return}\ ecpoint.value();}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Create\ new\ ECPoint}}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ newECPoint\ =\ cryptography::ecc::ECPoint::DecodePoint(bytes.\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector_a95791d958ed4ec88d32e811b51d90451}{AsSpan}}(),\ curve);}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ to\ cache}}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_acaadba8516015ee733480aec73403820}{cache\_}}.Add(bytes,\ newECPoint);}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ newECPoint;}
+\DoxyCodeLine{00088\ \ \ \ \ \}}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00095\ \ \ \ \ std::optional<std::shared\_ptr<cryptography::ecc::ECPoint>>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a34f2ecc47d0cc44a83a01964ee214766}{Get}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\&\ bytes)}
+\DoxyCodeLine{00096\ \ \ \ \ \{}
+\DoxyCodeLine{00097\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_acaadba8516015ee733480aec73403820}{cache\_}}.Get(bytes);}
+\DoxyCodeLine{00098\ \ \ \ \ \}}
+\DoxyCodeLine{00099\ }
+\DoxyCodeLine{00104\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a6fcdd6ccd302ac6daf9525529a2166b8}{Add}}(std::shared\_ptr<cryptography::ecc::ECPoint>\ ecpoint)}
+\DoxyCodeLine{00105\ \ \ \ \ \{}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!ecpoint)\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Encode\ ECPoint}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ bytes\ =\ ecpoint-\/>EncodePoint(\textcolor{keyword}{true});}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Add\ to\ cache}}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_acaadba8516015ee733480aec73403820}{cache\_}}.Add(bytes,\ ecpoint);}
+\DoxyCodeLine{00113\ \ \ \ \ \}}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00118\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a6d08acbcd5708f2c64dfd52d9ba0c749}{Clear}}()\ \{\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_acaadba8516015ee733480aec73403820}{cache\_}}.Clear();\ \}}
+\DoxyCodeLine{00119\ }
+\DoxyCodeLine{00124\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_a8ba0a4ae7df1c5f5892ef4e53fefa184}{Size}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_acaadba8516015ee733480aec73403820}{cache\_}}.Size();\ \}}
+\DoxyCodeLine{00125\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_af3ae74cca228d3d2a61c3cffc648ce5b}{Capacity}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_acaadba8516015ee733480aec73403820}{cache\_}}.Capacity();\ \}}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00133\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_l_r_u_cache}{LRUCache<ByteVector,\ std::shared\_ptr<cryptography::ecc::ECPoint>}},\ \mbox{\hyperlink{structneo_1_1io_1_1caching_1_1_byte_vector_hash}{ByteVectorHash}}>\ \mbox{\hyperlink{classneo_1_1io_1_1caching_1_1_e_c_point_cache_acaadba8516015ee733480aec73403820}{cache\_}};}
+\DoxyCodeLine{00134\ \};}
+\DoxyCodeLine{00135\ \}\ \ \textcolor{comment}{//\ namespace\ neo::io::caching}}
+
+\end{DoxyCode}

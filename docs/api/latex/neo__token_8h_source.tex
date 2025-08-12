@@ -1,0 +1,254 @@
+\doxysection{neo\+\_\+token.\+h}
+\hypertarget{neo__token_8h_source}{}\label{neo__token_8h_source}\index{include/neo/smartcontract/native/neo\_token.h@{include/neo/smartcontract/native/neo\_token.h}}
+\mbox{\hyperlink{neo__token_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ecpoint_8h}{neo/cryptography/ecc/ecpoint.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2fixed8_8h}{neo/io/fixed8.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{data__cache_8h}{neo/persistence/data\_cache.h}}>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{native_2native__contract_8h}{neo/smartcontract/native/native\_contract.h}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native}{neo::smartcontract::native}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ Forward\ declarations}}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_gas_token}{GasToken}};}
+\DoxyCodeLine{00018\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_gas}{NeoTokenGas}};}
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_candidate}{NeoTokenCandidate}};}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_committee}{NeoTokenCommittee}};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00025\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_aceca986f7aff9c371b43a17cdfa4da92}{NeoToken}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_native_contract_a60667ade06e1b9a3c3ef7e2c6a68a632}{NativeContract}}}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \textcolor{comment}{//\ Friend\ classes\ for\ testing}}
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a42ea0ca50925a8d114e2eb1370923f22}{NativeContractTest}};}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keyword}{friend}\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_abfc2e834a5014d82cd5ff6ee63b36c28}{NeoTokenTest}};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a43a134103a0ca86d171b11d641b7531a}{MethodHandler}}\ =\ std::function<std::shared\_ptr<vm::StackItem>(}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&,\ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&)>;}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int32\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a04e7ca02cc6029ede07f1f3b02377497}{ID}}\ =\ 2;}
+\DoxyCodeLine{00042\ }
+\DoxyCodeLine{00046\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_ae714d25e753a2fcb0435b64ee0af915e}{NAME}}\ =\ \textcolor{stringliteral}{"{}Neo"{}};}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00051\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_ad3ef964e30feaa0733b525f79bc8629a}{SYMBOL}}\ =\ \textcolor{stringliteral}{"{}NEO"{}};}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_aa6581beae85945e40c991296fcf60d90}{DECIMALS}}\ =\ 0;}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a47309fba716ca09b6d5acad23c8f8876}{TOTAL\_AMOUNT}}\ =\ 100000000;}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{double}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a082663726ce57a9042dd8020450b1c64}{EFFECTIVE\_VOTER\_TURNOUT}}\ =\ 0.2;}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a817d6324397ce55532567e5be6c9e57a}{COMMITTEE\_REWARD\_RATIO}}\ =\ 10;\ \ \textcolor{comment}{//\ 10\%\ of\ gas\ per\ block}}
+\DoxyCodeLine{00073\ }
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_ad6c63dccf56abc28a61e793f327087d2}{NEO\_HOLDER\_REWARD\_RATIO}}\ =\ 10;\ \ \textcolor{comment}{//\ 10\%\ of\ gas\ per\ block}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_ac4e836e5b116ebcbbcefc29abfd43d5c}{VOTER\_REWARD\_RATIO}}\ =\ 80;\ \ \textcolor{comment}{//\ 80\%\ of\ gas\ per\ block}}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{comment}{//\ Storage\ prefixes\ (matching\ C\#\ implementation)}}
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a312a244e521bbfe84a3c0e570d574ad0}{PREFIX\_VOTERS\_COUNT}}\ =\ 1;}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_ab8d3045025a35ef4cc454e315c53e9ae}{PREFIX\_CANDIDATE}}\ =\ 33;}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_add508f50d249483139d7f30aca793a41}{PREFIX\_COMMITTEE}}\ =\ 14;}
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a69ef073538e2574d5de642a150c62123}{PREFIX\_GAS\_PER\_BLOCK}}\ =\ 29;}
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_ae6864b0cc46bc1a1e20023125cd1ad00}{PREFIX\_REGISTER\_PRICE}}\ =\ 13;}
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a46185a26a7a0aaa32440c525a2bb62a4}{PREFIX\_VOTER\_REWARD\_PER\_COMMITTEE}}\ =\ 23;}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a61753d82478a21ea827b730021656c62}{GetContractId}}();}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<NeoToken>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a90cb76fc97b70fbb68bd14545704e463}{GetInstance}}();}
+\DoxyCodeLine{00103\ }
+\DoxyCodeLine{00110\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_ad3aba5d9b0282dc72d2f509da562396e}{InitializeContract}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,\ uint32\_t\ hardfork);}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00117\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{io::Fixed8}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_af5de7c0efb2cb78cb98e49dd9329b570}{GetTotalSupply}}(std::shared\_ptr<persistence::DataCache>\ snapshot)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00123\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_af56a36ac3d2c88e37a01f99d7c4191a2}{Symbol}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00129\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_aa1ce849f48cdccda70978ed6254c92e3}{Decimals}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00137\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{io::Fixed8}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_ab59b615ba5073e3fd539cd4d505f2b3f}{GetBalance}}(std::shared\_ptr<persistence::DataCache>\ snapshot,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ account)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00148\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_ae67727653e231347435e63c89a2a9af4}{Transfer}}(\mbox{\hyperlink{namespaceneo_1_1smartcontract_1_1native_a560d77ac749a6b1a12b6a680551a4460}{ApplicationEngine}}\&\ engine,\ std::shared\_ptr<persistence::DataCache>\ snapshot,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ from,}
+\DoxyCodeLine{00149\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ to,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{io::Fixed8}}\&\ amount);}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00156\ \ \ \ \ std::vector<cryptography::ecc::ECPoint>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a53e575041872827455a9cf78c27bba98}{GetValidators}}(std::shared\_ptr<persistence::DataCache>\ snapshot)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00157\ }
+\DoxyCodeLine{00164\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a1247501c08b877fe81387a4d2a374a63}{RegisterCandidate}}(std::shared\_ptr<persistence::DataCache>\ snapshot,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography::ecc::ECPoint}}\&\ pubKey);}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00172\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a347ce7c6f7cca34565d755c1af39da34}{UnregisterCandidate}}(std::shared\_ptr<persistence::DataCache>\ snapshot,}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography::ecc::ECPoint}}\&\ pubKey);}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00182\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a4dc2f3c072b3e542b1ccc2d321aec82fa7f319b8ccad7e92033b9492ddbc4b522}{Vote}}(std::shared\_ptr<persistence::DataCache>\ snapshot,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ account,}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<cryptography::ecc::ECPoint>\&\ pubKeys);}
+\DoxyCodeLine{00184\ }
+\DoxyCodeLine{00190\ \ \ \ \ std::vector<cryptography::ecc::ECPoint>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a212a2a11d1b31f12c8ad438fcc4018b8}{GetCommittee}}(std::shared\_ptr<persistence::DataCache>\ snapshot)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00198\ \ \ \ \ std::vector<cryptography::ecc::ECPoint>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_ad7c3f818af50b9c4204d42f045e9d2bc}{GetNextBlockValidators}}(std::shared\_ptr<persistence::DataCache>\ snapshot,}
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int32\_t\ validatorsCount)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00206\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_aab4197b527da0f7eebd08970e874e537}{GetRegisterPrice}}(std::shared\_ptr<persistence::DataCache>\ snapshot)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00212\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io::ByteVector}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_ae6a4bfbcc9148ffde5d407b62a6b59c2}{GetStoragePrefix}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00213\ }
+\DoxyCodeLine{00214\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00218\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_aa52b68b817bc0eca3657a4356cfc9b38}{Initialize}}()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00219\ }
+\DoxyCodeLine{00220\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_account_state}{AccountState}}}
+\DoxyCodeLine{00225\ \ \ \ \ \{}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ int64\_t\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_account_state_a8ef2cae8d3e2adbe01c48e2f6bad9f0f}{balance}};}
+\DoxyCodeLine{00227\ \ \ \ \ \ \ \ \ uint32\_t\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_account_state_a90bfe7a8dc8ca021bd51073fe605656d}{balanceHeight}};}
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography::ecc::ECPoint}}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_account_state_ad0a6d3e64a6e0b403d039f03a5950193}{voteTo}};}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ int64\_t\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_account_state_a96a2dc2bdaede90c2013d2d7c94ff0d5}{lastGasPerVote}};}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_account_state_aea3e33b6af8ce9e61be25ee829ec3e50}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_account_state_aae0ca7841f80d2abf677fa992f375fc7}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader);}
+\DoxyCodeLine{00233\ \ \ \ \ \};}
+\DoxyCodeLine{00234\ }
+\DoxyCodeLine{00238\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_candidate_state}{CandidateState}}}
+\DoxyCodeLine{00239\ \ \ \ \ \{}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_candidate_state_ae041af1b0cf2dd07a8bb7055f947d09e}{registered}};}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ int64\_t\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_candidate_state_afa77ecd865a7678d35ab11f26ba9e956}{votes}};}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_candidate_state_ad247d9b7094b93a9b09489a8f88bd3b8}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_candidate_state_a4b3588cff845e246d112020fcd7b7974}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader);}
+\DoxyCodeLine{00245\ \ \ \ \ \};}
+\DoxyCodeLine{00246\ }
+\DoxyCodeLine{00250\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_committee_member}{CommitteeMember}}}
+\DoxyCodeLine{00251\ \ \ \ \ \{}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography::ecc::ECPoint}}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_committee_member_a07358ca28c13e1085a639d0595e486be}{publicKey}};}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ int64\_t\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_committee_member_a372c347914dbd83dc219e08ff170ba37}{votes}};}
+\DoxyCodeLine{00254\ }
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_committee_member_a180c2d1fc3c608d40f0a11561420ed84}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_committee_member_afb7af033f0357f7cc829298471b90183}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader);}
+\DoxyCodeLine{00257\ \ \ \ \ \};}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00262\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_gas_distribution}{GasDistribution}}}
+\DoxyCodeLine{00263\ \ \ \ \ \{}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_gas_distribution_a3d16a5d82e3f058e5009068c402c6509}{account}};}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ int64\_t\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_gas_distribution_a94052bcff0a2250117fd29c71440d4e3}{amount}};}
+\DoxyCodeLine{00266\ \ \ \ \ \};}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00273\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a74bd9e78041c2e6f2b6447219ed31db2}{GetGasPerBlock}}(std::shared\_ptr<persistence::DataCache>\ snapshot)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00274\ }
+\DoxyCodeLine{00280\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_aabdf5705dc97c9d190ae87f2952ac6f3}{SetGasPerBlock}}(std::shared\_ptr<persistence::DataCache>\ snapshot,\ int64\_t\ gasPerBlock);}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00289\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a13232d684b2dc3dacb7f4f8ef21100a7}{GetUnclaimedGas}}(std::shared\_ptr<persistence::DataCache>\ snapshot,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ account,}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ end)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00297\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_aa399073c457503c7e90630ecca1c31ef}{GetCommitteeAddress}}(std::shared\_ptr<persistence::DataCache>\ snapshot)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00298\ }
+\DoxyCodeLine{00305\ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_account_state}{AccountState}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_aa834bbcdc28eb398fac98d17e6ab9ae7}{GetAccountState}}(std::shared\_ptr<persistence::DataCache>\ snapshot,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ account)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00313\ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_candidate_state}{CandidateState}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a97ddb9e7f2570208ec6a35baefe8ecc9}{GetCandidateState}}(std::shared\_ptr<persistence::DataCache>\ snapshot,}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography::ecc::ECPoint}}\&\ pubKey)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00315\ }
+\DoxyCodeLine{00321\ \ \ \ \ std::vector<std::pair<cryptography::ecc::ECPoint,\ CandidateState>>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_ab87c559bab8854eca9d33388ec26bb15}{GetCandidates}}(}
+\DoxyCodeLine{00322\ \ \ \ \ \ \ \ \ std::shared\_ptr<persistence::DataCache>\ snapshot)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00323\ }
+\DoxyCodeLine{00330\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a2a7e9f44574d00f0a4fe56aa140c9d67}{GetCandidateVote}}(std::shared\_ptr<persistence::DataCache>\ snapshot,}
+\DoxyCodeLine{00331\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography::ecc::ECPoint}}\&\ pubKey)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00332\ }
+\DoxyCodeLine{00340\ \ \ \ \ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_gas_distribution}{GasDistribution}}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_af384bb8a9f5df2394cbfda0887e606c4}{DistributeGas}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io::UInt160}}\&\ account,}
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_account_state}{AccountState}}\&\ state);}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00349\ \ \ \ \ std::vector<cryptography::ecc::ECPoint>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a68745391251804c7601fbb5d6683c9bf}{ComputeCommitteeMembers}}(std::shared\_ptr<persistence::DataCache>\ snapshot,}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ int32\_t\ committeeSize)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00351\ }
+\DoxyCodeLine{00357\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a61c53f3faf65ba2bb911c462510be460a0be127da4aa5d9457320f86ac56a213d}{OnPersist}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00358\ }
+\DoxyCodeLine{00364\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{namespaceneo_1_1smartcontract_a61c53f3faf65ba2bb911c462510be460a14fc0d4444079c6efd0036ffc5ef562c}{PostPersist}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine);}
+\DoxyCodeLine{00365\ }
+\DoxyCodeLine{00370\ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_aceca986f7aff9c371b43a17cdfa4da92}{NeoToken}}();}
+\DoxyCodeLine{00371\ }
+\DoxyCodeLine{00375\ \ \ \ \ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a4dc2f3c072b3e542b1ccc2d321aec82f}{StoragePrefix}}\ :\ uint8\_t}
+\DoxyCodeLine{00376\ \ \ \ \ \{}
+\DoxyCodeLine{00377\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a4dc2f3c072b3e542b1ccc2d321aec82fa82e3fb69149defdd62abc76980a180e8}{TotalSupply}}\ =\ 0x00,}
+\DoxyCodeLine{00378\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a4dc2f3c072b3e542b1ccc2d321aec82fa08bd40c7543007ad06e4fce31618f6ec}{Account}}\ =\ 0x01,}
+\DoxyCodeLine{00379\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a4dc2f3c072b3e542b1ccc2d321aec82fa25befec7033aa9feec4a5a586d4e1366}{Candidate}}\ =\ 0x21,\ \ \textcolor{comment}{//\ 33\ in\ decimal\ =\ PREFIX\_CANDIDATE}}
+\DoxyCodeLine{00380\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a37d8eaec926d8aa2a4c0d308195ffd7e}{Vote}}\ =\ 0x03,}
+\DoxyCodeLine{00381\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a4dc2f3c072b3e542b1ccc2d321aec82fa7f89f915743c34e79c7271f792cf466e}{Committee}}\ =\ 0x0E,\ \ \textcolor{comment}{//\ 14\ in\ decimal\ =\ PREFIX\_COMMITTEE}}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a4dc2f3c072b3e542b1ccc2d321aec82fa00e6858a4086e33debb3dbab85e15808}{VotersCount}}\ =\ 0x05,}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a4dc2f3c072b3e542b1ccc2d321aec82fa5a7ab49a07ba5f7754cdf8ab3803de6a}{GasPerBlock}}\ =\ 0x06,}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a4dc2f3c072b3e542b1ccc2d321aec82fab9962a8fbcc5e2389bd054871be88a9e}{RegisterPrice}}\ =\ 0x07,}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a4dc2f3c072b3e542b1ccc2d321aec82fa4eea89800b5daab96cd38ff44c77e675}{VoterReward}}\ =\ 0x08,}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a4dc2f3c072b3e542b1ccc2d321aec82fa28a82b6774cdedb7a6b14dcc820ad8ce}{Voter}}\ =\ 0x22\ \ \textcolor{comment}{//\ 34\ in\ decimal\ =\ PREFIX\_VOTER}}
+\DoxyCodeLine{00387\ \ \ \ \ \};}
+\DoxyCodeLine{00388\ }
+\DoxyCodeLine{00389\ \ \ \ \ \textcolor{comment}{//\ Storage\ prefix\ constants\ for\ compatibility}}
+\DoxyCodeLine{00390\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a071ccf7b1c5e5cad7f9015c8b094ec5c}{PREFIX\_BALANCE}}\ =\ 1;}
+\DoxyCodeLine{00391\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ uint8\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a6d9a5a1e262ddb3ae5172dd07fb88054}{PREFIX\_VOTER}}\ =\ 34;}
+\DoxyCodeLine{00392\ }
+\DoxyCodeLine{00393\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00400\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a2d822036337d48fb7dadbdd785d0f24c}{OnTotalSupply}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00402\ }
+\DoxyCodeLine{00409\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_aa5eab4f7654683aba643c5526aa9ad38}{OnBalanceOf}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00411\ }
+\DoxyCodeLine{00418\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_aa2e882c7546866036e0c17106b70dadd}{OnTransfer}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00420\ }
+\DoxyCodeLine{00427\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a6d09a738060650ff06fe7e3a76a9c832}{OnGetValidators}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00428\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00429\ }
+\DoxyCodeLine{00436\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a7912a5549eec4bfc590981f8407e9ffc}{OnGetCommittee}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00437\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00438\ }
+\DoxyCodeLine{00445\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a156ae3b41edb61586a23f7b06e70feb1}{OnGetNextBlockValidators}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00446\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00447\ }
+\DoxyCodeLine{00454\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_abda07c9040fe4643a65dd422f1646d58}{OnRegisterCandidate}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00455\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00456\ }
+\DoxyCodeLine{00463\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_ab075383943b692347b81e7a6d95edf3c}{OnUnregisterCandidate}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00464\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00465\ }
+\DoxyCodeLine{00472\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a3d73593378e911963bf82286de442048}{OnVote}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00473\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00474\ }
+\DoxyCodeLine{00481\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_aa81517176b67a68409b9222443ad220c}{OnGetGasPerBlock}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00482\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00483\ }
+\DoxyCodeLine{00490\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_adb3d5b4b23cf4a134c03f3c802cd9d1f}{OnSetGasPerBlock}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00491\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00492\ }
+\DoxyCodeLine{00499\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a2a3bb7d814a60e27bdbf130fffcdc97c}{ShouldRefreshCommittee}}(uint32\_t\ blockIndex,\ int32\_t\ committeeSize)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00500\ }
+\DoxyCodeLine{00506\ \ \ \ \ std::vector<CommitteeMember>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a6efff1669c3e9a67e5d87256d140875f}{GetCommitteeFromCache}}(std::shared\_ptr<persistence::DataCache>\ snapshot)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00507\ }
+\DoxyCodeLine{00515\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_ae27e6e074537e37b4f112dceeb9ef75d}{CalculateBonus}}(std::shared\_ptr<persistence::DataCache>\ snapshot,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_account_state}{AccountState}}\&\ state,}
+\DoxyCodeLine{00516\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ end)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00517\ }
+\DoxyCodeLine{00526\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_add1bffff044ea26af122bc44af77fa44}{CalculateNeoHolderReward}}(std::shared\_ptr<persistence::DataCache>\ snapshot,\ int64\_t\ value,\ uint32\_t\ start,}
+\DoxyCodeLine{00527\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ end)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00528\ }
+\DoxyCodeLine{00535\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a57dba6739f2bcf015d20a26ff74ba63d}{CheckCandidate}}(std::shared\_ptr<persistence::DataCache>\ snapshot,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography::ecc::ECPoint}}\&\ pubKey,}
+\DoxyCodeLine{00536\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_candidate_state}{CandidateState}}\&\ state);}
+\DoxyCodeLine{00537\ }
+\DoxyCodeLine{00544\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_afb45ed52130e572eb3b55b71906ca0be}{OnGetAccountState}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00545\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00546\ }
+\DoxyCodeLine{00553\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_ad6aa43c8e0a94b9f225f5938202a09b6}{OnGetCandidates}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00554\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00555\ }
+\DoxyCodeLine{00562\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a8477ba7b269140afbb26862d2c854a96}{OnGetCandidateVote}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00563\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00564\ }
+\DoxyCodeLine{00571\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a1b1018524b4c76d6d50cbb59e9c181b3}{OnGetRegisterPrice}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00572\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00573\ }
+\DoxyCodeLine{00580\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_a65293a454b3663a10ceb1297c16bf54e}{OnSetRegisterPrice}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00581\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00582\ }
+\DoxyCodeLine{00589\ \ \ \ \ std::shared\_ptr<vm::StackItem>\ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_ad6adac5b839bf92d84efe3d603a5b9d3}{OnGetUnclaimedGas}}(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo::smartcontract::ApplicationEngine}}\&\ engine,}
+\DoxyCodeLine{00590\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::vector<std::shared\_ptr<vm::StackItem>>\&\ args);}
+\DoxyCodeLine{00591\ \};}
+\DoxyCodeLine{00592\ \}\ \ \textcolor{comment}{//\ namespace\ neo::smartcontract::native}}
+
+\end{DoxyCode}

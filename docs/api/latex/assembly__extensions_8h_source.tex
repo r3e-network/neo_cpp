@@ -1,0 +1,131 @@
+\doxysection{assembly\+\_\+extensions.\+h}
+\hypertarget{assembly__extensions_8h_source}{}\label{assembly__extensions_8h_source}\index{include/neo/extensions/assembly\_extensions.h@{include/neo/extensions/assembly\_extensions.h}}
+\mbox{\hyperlink{assembly__extensions_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <typeinfo>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1extensions}{neo::extensions}}}
+\DoxyCodeLine{00011\ \{}
+\DoxyCodeLine{00041\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions}{AssemblyExtensions}}}
+\DoxyCodeLine{00042\ \{}
+\DoxyCodeLine{00043\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00047\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_a1b765abaa79bbeca2d1c21a93339fb9c}{TypeInfo}}}
+\DoxyCodeLine{00048\ \ \ \ \ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_a1341ddc4c190e29f13741f7798c0f740}{name}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_a3afa48041b4c788a033226657d83e6ec}{mangledName}};\ \ }
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_a5673ceea88b250102bf47b671d1eca2f}{size}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_a1888b7694e0f19f96045410159db5b58}{isPointer}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_ac18e855fa36ff2ff0396b6f87587dbc4}{isReference}};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_afef1e6052415eb63877fa7c93a6681e2}{isConst}};\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_a1b765abaa79bbeca2d1c21a93339fb9c}{TypeInfo}}()\ :\ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_a5673ceea88b250102bf47b671d1eca2f}{size}}(0),\ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_a1888b7694e0f19f96045410159db5b58}{isPointer}}(false),\ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_ac18e855fa36ff2ff0396b6f87587dbc4}{isReference}}(false),\ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_afef1e6052415eb63877fa7c93a6681e2}{isConst}}(false)\ \{\}}
+\DoxyCodeLine{00057\ \ \ \ \ \};}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_method_info_a2c032031b4ef31baaa10610aacf6161b}{MethodInfo}}}
+\DoxyCodeLine{00063\ \ \ \ \ \{}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_method_info_adf007a2f9c230ed04b0730b63cfeb60a}{name}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_method_info_a634963bb4f57540b569d55e04b9ac209}{signature}};\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}*()>\ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_method_info_a1eed32d3a6de3346d9de2bb234486961}{invoker}};\ \ }
+\DoxyCodeLine{00067\ }
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_method_info_a2c032031b4ef31baaa10610aacf6161b}{MethodInfo}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_method_info_a83ce61549619aa166d52abc40e905ced}{MethodInfo}}(\textcolor{keyword}{const}\ std::string\&\ n,\ \textcolor{keyword}{const}\ std::string\&\ sig)\ :\ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_method_info_adf007a2f9c230ed04b0730b63cfeb60a}{name}}(n),\ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_method_info_a634963bb4f57540b569d55e04b9ac209}{signature}}(sig)\ \{\}}
+\DoxyCodeLine{00070\ \ \ \ \ \};}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00075\ \ \ \ \ \textcolor{keyword}{using\ }\mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_afc6848a0a509cd28e12a6c633fb5937f}{FactoryFunction}}\ =\ std::function<std::shared\_ptr<void>()>;}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00083\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info}{TypeInfo}}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a11c155d750b733f02bc63145ba9747d8}{GetTypeInfo}}()}
+\DoxyCodeLine{00084\ \ \ \ \ \{}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info}{TypeInfo}}\ info;}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ info.\mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_a1341ddc4c190e29f13741f7798c0f740}{name}}\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_af8d620073205c622f4392a84b00f06cb}{GetTypeName<T>}}();}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ info.\mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_a3afa48041b4c788a033226657d83e6ec}{mangledName}}\ =\ \textcolor{keyword}{typeid}(T).name();}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ info.\mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_a5673ceea88b250102bf47b671d1eca2f}{size}}\ =\ \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ info.\mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_a1888b7694e0f19f96045410159db5b58}{isPointer}}\ =\ std::is\_pointer\_v<T>;}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ info.\mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_ac18e855fa36ff2ff0396b6f87587dbc4}{isReference}}\ =\ std::is\_reference\_v<T>;}
+\DoxyCodeLine{00091\ \ \ \ \ \ \ \ \ info.\mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info_afef1e6052415eb63877fa7c93a6681e2}{isConst}}\ =\ std::is\_const\_v<std::remove\_reference\_t<T>>;}
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ info;}
+\DoxyCodeLine{00093\ \ \ \ \ \}}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00100\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00101\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_af8d620073205c622f4392a84b00f06cb}{GetTypeName}}()}
+\DoxyCodeLine{00102\ \ \ \ \ \{}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ std::string\ name\ =\ \textcolor{keyword}{typeid}(T).name();}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a53b03b09511650d449f520898c2751e5}{DemangleTypeName}}(name);}
+\DoxyCodeLine{00105\ \ \ \ \ \}}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00113\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00114\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a2aac74b2041dbefd6890f13fd4ab7bd9}{RegisterType}}(\textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}"{}},\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_afc6848a0a509cd28e12a6c633fb5937f}{FactoryFunction}}\ factory\ =\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00115\ \ \ \ \ \{}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ std::string\ typeName\ =\ name.empty()\ ?\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_af8d620073205c622f4392a84b00f06cb}{GetTypeName<T>}}()\ :\ name;}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!factory)}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ factory\ =\ []()\ -\/>\ std::shared\_ptr<void>\ \{\ \textcolor{keywordflow}{return}\ std::make\_shared<T>();\ \};}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_ad4565c55aa756c84ef5701a00b5efbff}{GetTypeRegistry}}()[typeName]\ =\ factory;}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a17eb75de51ae2b509fa1b469e6a16d23}{GetTypeInfoRegistry}}()[typeName]\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a11c155d750b733f02bc63145ba9747d8}{GetTypeInfo<T>}}();}
+\DoxyCodeLine{00125\ \ \ \ \ \}}
+\DoxyCodeLine{00126\ }
+\DoxyCodeLine{00132\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a649df12dcfb65363a8d69ffd9912158b}{HasType}}(\textcolor{keyword}{const}\ std::string\&\ typeName);}
+\DoxyCodeLine{00133\ }
+\DoxyCodeLine{00139\ \ \ \ \ \textcolor{keyword}{static}\ std::shared\_ptr<void>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a8a1f4c54166fdbc19d0a9871428eb7d5}{CreateInstance}}(\textcolor{keyword}{const}\ std::string\&\ typeName);}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00145\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::string>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_aa6727334de057656fdd6dba5f29d557d}{GetRegisteredTypes}}();}
+\DoxyCodeLine{00146\ }
+\DoxyCodeLine{00152\ \ \ \ \ \textcolor{keyword}{static}\ TypeInfo\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_abd15ec5a1adac2e650f8fd79c0a2a99b}{GetRegisteredTypeInfo}}(\textcolor{keyword}{const}\ std::string\&\ typeName);}
+\DoxyCodeLine{00153\ }
+\DoxyCodeLine{00161\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a5899cdd5ed98e5f47a0c7bfe72bbd83b}{RegisterMethod}}(\textcolor{keyword}{const}\ std::string\&\ typeName,\ \textcolor{keyword}{const}\ std::string\&\ methodName,\ \textcolor{keyword}{const}\ std::string\&\ signature,}
+\DoxyCodeLine{00162\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::function<\textcolor{keywordtype}{void}*()>\ invoker);}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00169\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<MethodInfo>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a60b099bf57a8648f8d04097502601dcb}{GetMethods}}(\textcolor{keyword}{const}\ std::string\&\ typeName);}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00177\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_afaf8abaded1ff27b964609325147aac7}{HasMethod}}(\textcolor{keyword}{const}\ std::string\&\ typeName,\ \textcolor{keyword}{const}\ std::string\&\ methodName);}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00186\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}*\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a122b70607c0be941c28d123cc2714506}{InvokeMethod}}(\textcolor{keyword}{const}\ std::string\&\ typeName,\ \textcolor{keyword}{const}\ std::string\&\ methodName,}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::shared\_ptr<void>\ instance\ =\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00188\ }
+\DoxyCodeLine{00194\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_aa9e5348504e56509ea1e6dc43d2cb378}{GetTypeSize}}(\textcolor{keyword}{const}\ std::string\&\ typeName);}
+\DoxyCodeLine{00195\ }
+\DoxyCodeLine{00202\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a0a3ccd0eec0c132d75dcd473235a69fb}{AreTypesSame}}(\textcolor{keyword}{const}\ std::string\&\ typeName1,\ \textcolor{keyword}{const}\ std::string\&\ typeName2);}
+\DoxyCodeLine{00203\ }
+\DoxyCodeLine{00209\ \ \ \ \ \textcolor{keyword}{static}\ std::vector<std::string>\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_ad954b0a08f78aa63f3232863475b35b6}{GetBaseClasses}}(\textcolor{keyword}{const}\ std::string\&\ typeName);}
+\DoxyCodeLine{00210\ }
+\DoxyCodeLine{00217\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_abb9dc15e54c7cb4623244849b5061545}{IsTypeDeriviedFrom}}(\textcolor{keyword}{const}\ std::string\&\ derivedType,\ \textcolor{keyword}{const}\ std::string\&\ baseType);}
+\DoxyCodeLine{00218\ }
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a2917f17efd0a8602c65555f1219f16f5}{ClearRegistry}}();}
+\DoxyCodeLine{00223\ }
+\DoxyCodeLine{00228\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a4081087cd5c872b14ad1dc50242c9f87}{GetRegisteredTypeCount}}();}
+\DoxyCodeLine{00229\ }
+\DoxyCodeLine{00230\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00235\ \ \ \ \ \textcolor{keyword}{static}\ std::unordered\_map<std::string,\ FactoryFunction>\&\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_ad4565c55aa756c84ef5701a00b5efbff}{GetTypeRegistry}}();}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00241\ \ \ \ \ \textcolor{keyword}{static}\ std::unordered\_map<std::string,\ TypeInfo>\&\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a17eb75de51ae2b509fa1b469e6a16d23}{GetTypeInfoRegistry}}();}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00247\ \ \ \ \ \textcolor{keyword}{static}\ std::unordered\_map<std::string,\ std::vector<MethodInfo>>\&\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_af16bebe84ddd7375dae96454b0059687}{GetMethodRegistry}}();}
+\DoxyCodeLine{00248\ }
+\DoxyCodeLine{00254\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a53b03b09511650d449f520898c2751e5}{DemangleTypeName}}(\textcolor{keyword}{const}\ std::string\&\ mangledName);}
+\DoxyCodeLine{00255\ }
+\DoxyCodeLine{00261\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_ab7f0c27a9aae61d7ed68ce044efbcd71}{ExtractClassName}}(\textcolor{keyword}{const}\ std::string\&\ fullName);}
+\DoxyCodeLine{00262\ \};}
+\DoxyCodeLine{00263\ }
+\DoxyCodeLine{00268\ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00269\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1extensions_1_1_type_registrar_a9cc38ae1c632fc2dfeae5003fbf0ef1b}{TypeRegistrar}}}
+\DoxyCodeLine{00270\ \{}
+\DoxyCodeLine{00271\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00276\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_type_registrar_a9cc38ae1c632fc2dfeae5003fbf0ef1b}{TypeRegistrar}}(\textcolor{keyword}{const}\ std::string\&\ name\ =\ \textcolor{stringliteral}{"{}"{}})\ \{\ \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions_a2aac74b2041dbefd6890f13fd4ab7bd9}{AssemblyExtensions::RegisterType<T>}}(name);\ \}}
+\DoxyCodeLine{00277\ \};}
+\DoxyCodeLine{00278\ }
+\DoxyCodeLine{00282\ \textcolor{preprocessor}{\#define\ REGISTER\_TYPE(Type)\ static\ neo::extensions::TypeRegistrar<Type>\ g\_\#\#Type\#\#\_registrar(\#Type)}}
+\DoxyCodeLine{00283\ }
+\DoxyCodeLine{00287\ \textcolor{preprocessor}{\#define\ REGISTER\_TYPE\_AS(Type,\ Name)\ static\ neo::extensions::TypeRegistrar<Type>\ g\_\#\#Type\#\#\_registrar(Name)}}
+\DoxyCodeLine{00288\ \}\ \ \textcolor{comment}{//\ namespace\ neo::extensions}}
+
+\end{DoxyCode}

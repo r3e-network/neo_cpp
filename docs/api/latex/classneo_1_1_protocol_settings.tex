@@ -1,0 +1,812 @@
+\doxysection{neo\+::Protocol\+Settings Class Reference}
+\hypertarget{classneo_1_1_protocol_settings}{}\label{classneo_1_1_protocol_settings}\index{neo::ProtocolSettings@{neo::ProtocolSettings}}
+
+
+Represents the protocol settings of the NEO system.  
+
+
+
+
+{\ttfamily \#include $<$protocol\+\_\+settings.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1_protocol_settings_af6990976fcd61b485128cafb66c30b46}{Protocol\+Settings}} ()
+\begin{DoxyCompactList}\small\item\em Constructs default \doxylink{classneo_1_1_protocol_settings}{Protocol\+Settings}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1_protocol_settings_a9431b886c24a33d63ff3a4959baa8846}{Protocol\+Settings}} (const \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} \& \mbox{\hyperlink{classneo_1_1_protocol_settings_a137c6756635026215dcdf54375fc12aa}{operator=}} (const \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} \&other)
+\begin{DoxyCompactList}\small\item\em Assignment operator. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_ad306a2407147cac547a0e005441d3e51}{Get\+Network}} () const
+\begin{DoxyCompactList}\small\item\em Gets the network magic number. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_protocol_settings_a1d4d07070ae5edcea2c197dff218d6e4}{Set\+Network}} (uint32\+\_\+t network)
+\begin{DoxyCompactList}\small\item\em Sets the network magic number. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_a4454a6950368ce67fa8cca1016b692d0}{Get\+Address\+Version}} () const
+\begin{DoxyCompactList}\small\item\em Gets the address version. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_protocol_settings_a9ced92bbf3779901db356216a372a6b9}{Set\+Address\+Version}} (uint8\+\_\+t address\+Version)
+\begin{DoxyCompactList}\small\item\em Sets the address version. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} $>$ \& \mbox{\hyperlink{classneo_1_1_protocol_settings_a9b9918aa2c68562ccb1e6d11f0a5ecf4}{Get\+Standby\+Committee}} () const
+\begin{DoxyCompactList}\small\item\em Gets the standby committee members. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_protocol_settings_a32fa9cc4d39a8fb5c2b119b7378e526b}{Set\+Standby\+Committee}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} $>$ \&committee)
+\begin{DoxyCompactList}\small\item\em Sets the standby committee members. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1_protocol_settings_aee6db6e6b177bb29ba62c1908a82ea8c}{Get\+Committee\+Members\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of committee members. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1_protocol_settings_afd46ced5280f33d917185c7b60db30e6}{Get\+Validators\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Gets the number of validators. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_protocol_settings_a48b64c0c86734a511449be929a1e2094}{Set\+Validators\+Count}} (int validators\+Count)
+\begin{DoxyCompactList}\small\item\em Sets the number of validators. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1_protocol_settings_aacb474b2c2b1f849831945613346b0aa}{Get\+Standby\+Validators}} () const
+\begin{DoxyCompactList}\small\item\em Gets the standby validators (first N committee members). \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::string $>$ \& \mbox{\hyperlink{classneo_1_1_protocol_settings_a9c56143f74f244923128f6553ebde195}{Get\+Seed\+List}} () const
+\begin{DoxyCompactList}\small\item\em Gets the seed list. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_protocol_settings_abbab9f533f0d9c073be5afe3ee996f46}{Set\+Seed\+List}} (const std\+::vector$<$ std\+::string $>$ \&seed\+List)
+\begin{DoxyCompactList}\small\item\em Sets the seed list. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_a93163c96507edc4c233aeecb4224eead}{Get\+Milliseconds\+Per\+Block}} () const
+\begin{DoxyCompactList}\small\item\em Gets the time in milliseconds between two blocks. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_protocol_settings_a98c5315c471996d23687000ef2c8836f}{Set\+Milliseconds\+Per\+Block}} (uint32\+\_\+t milliseconds\+Per\+Block)
+\begin{DoxyCompactList}\small\item\em Sets the time in milliseconds between two blocks. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_abaa7cf09e190dc5850348e989116671f}{Get\+Max\+Valid\+Until\+Block\+Increment}} () const
+\begin{DoxyCompactList}\small\item\em Gets the maximum increment of Valid\+Until\+Block field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_protocol_settings_a15d891aa8ffd6eb3a99b46df53ea8e91}{Set\+Max\+Valid\+Until\+Block\+Increment}} (uint32\+\_\+t max\+Valid\+Until\+Block\+Increment)
+\begin{DoxyCompactList}\small\item\em Sets the maximum increment of Valid\+Until\+Block field. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_a9ad58af826aa516a2a111d2865ee1367}{Get\+Max\+Transactions\+Per\+Block}} () const
+\begin{DoxyCompactList}\small\item\em Gets the maximum number of transactions per block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_protocol_settings_ae41c9320667e56d2662835b8fdb12d41}{Set\+Max\+Transactions\+Per\+Block}} (uint32\+\_\+t max\+Transactions\+Per\+Block)
+\begin{DoxyCompactList}\small\item\em Sets the maximum number of transactions per block. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1_protocol_settings_aea0b7f345dc365fe4fc1567b9569d1d7}{Get\+Memory\+Pool\+Max\+Transactions}} () const
+\begin{DoxyCompactList}\small\item\em Gets the maximum number of transactions in memory pool. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_protocol_settings_abee68cfd08844e228f0d82f2217bef94}{Set\+Memory\+Pool\+Max\+Transactions}} (int memory\+Pool\+Max\+Transactions)
+\begin{DoxyCompactList}\small\item\em Sets the maximum number of transactions in memory pool. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_a10eca38d6babf35c1f71f9d4e4b7e39b}{Get\+Max\+Traceable\+Blocks}} () const
+\begin{DoxyCompactList}\small\item\em Gets the maximum number of traceable blocks. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_protocol_settings_a3a607e0d36a2b923388d106ecf44a965}{Set\+Max\+Traceable\+Blocks}} (uint32\+\_\+t max\+Traceable\+Blocks)
+\begin{DoxyCompactList}\small\item\em Sets the maximum number of traceable blocks. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_a556e2a74296a5b5816f93e6115b94a93}{Get\+Initial\+Gas\+Distribution}} () const
+\begin{DoxyCompactList}\small\item\em Gets the initial gas distribution amount. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_protocol_settings_ae20c64063a5e2d2a2646ea306d6c578a}{Set\+Initial\+Gas\+Distribution}} (uint64\+\_\+t initial\+Gas\+Distribution)
+\begin{DoxyCompactList}\small\item\em Sets the initial gas distribution amount. \end{DoxyCompactList}\item 
+const std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespaceneo_a1bd56b63c9e8617ef00d55839e486ea4}{Hardfork}}, uint32\+\_\+t $>$ \& \mbox{\hyperlink{classneo_1_1_protocol_settings_ab962e9472f91a6e2251f4993d10075a1}{Get\+Hardforks}} () const
+\begin{DoxyCompactList}\small\item\em Gets the hardfork configuration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_protocol_settings_ac5410413994e170658c5cccbdba19801}{Set\+Hardforks}} (const std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespaceneo_a1bd56b63c9e8617ef00d55839e486ea4}{Hardfork}}, uint32\+\_\+t $>$ \&hardforks)
+\begin{DoxyCompactList}\small\item\em Sets the hardfork configuration. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1_protocol_settings_ad2257f82eb6b48ff910e94bee6e06956}{Is\+Hardfork\+Enabled}} (\mbox{\hyperlink{namespaceneo_a1bd56b63c9e8617ef00d55839e486ea4}{Hardfork}} hardfork, uint32\+\_\+t block\+Height) const
+\begin{DoxyCompactList}\small\item\em Check if a hardfork is enabled at a given block height. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_protocol_settings_ac58ddd963603cdec74dcab8a167cf872}{Validate\+Hardfork\+Configuration}} () const
+\begin{DoxyCompactList}\small\item\em Validates the hardfork configuration for consistency. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} $>$ \mbox{\hyperlink{classneo_1_1_protocol_settings_a0637900d0c018e00e02a0504e435862f}{Load}} (const std\+::string \&file\+Path)
+\begin{DoxyCompactList}\small\item\em Loads protocol settings from a JSON file. \end{DoxyCompactList}\item 
+static std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} $>$ \mbox{\hyperlink{classneo_1_1_protocol_settings_a94a1687bbf8d430e1b93829c6eab180a}{Load\+From\+Json}} (const std\+::string \&json\+Content)
+\begin{DoxyCompactList}\small\item\em Loads protocol settings from a JSON string. \end{DoxyCompactList}\item 
+static const \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} \& \mbox{\hyperlink{classneo_1_1_protocol_settings_a52fdd62f15038469ca2a98e2b1fdfbab}{Get\+Default}} ()
+\begin{DoxyCompactList}\small\item\em Gets the default protocol settings. \end{DoxyCompactList}\item 
+static std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespaceneo_a1bd56b63c9e8617ef00d55839e486ea4}{Hardfork}}, uint32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1_protocol_settings_ab1b1c4b9072e2360b7030ad1ff5bf051}{Ensure\+Omitted\+Hardforks}} (const std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespaceneo_a1bd56b63c9e8617ef00d55839e486ea4}{Hardfork}}, uint32\+\_\+t $>$ \&hardforks)
+\begin{DoxyCompactList}\small\item\em Ensures all hardforks have entries in the configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_a499b1b4e82efe0f0d5b6c74b2f803da1}{MAX\+\_\+\+TRANSACTION\+\_\+\+SIZE}} = 2097152
+\item 
+static constexpr uint16\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_a967306535d3844925b4fafbf4ad75dfe}{MAX\+\_\+\+TRANSACTION\+\_\+\+ATTRIBUTES}} = 16
+\item 
+static constexpr uint16\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_ab8af5ffeb74b36753089380bf3f2842e}{MAX\+\_\+\+WITNESSES\+\_\+\+PER\+\_\+\+TX}} = 16
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_a20aaf9dbd73a332e41a1daed80d54479}{MAX\+\_\+\+SCRIPT\+\_\+\+LENGTH}} = 65536
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_a81af93aa4e5f6fe14cbc6dd5766466e2}{MAX\+\_\+\+STACK\+\_\+\+SIZE}} = 2048
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_ab83bce94b6f17438942a8db8ec068269}{MAX\+\_\+\+ITEM\+\_\+\+SIZE}} = 2097152
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_aa3cc0be984be3cbf512bd291fcf4bc0f}{MILLISECONDS\+\_\+\+PER\+\_\+\+BLOCK}} = 15000
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_a421e08fcda55efcac6ffd450cf6adeb4}{MAX\+\_\+\+TRACEABLE\+\_\+\+BLOCKS}} = 2102400
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static void \mbox{\hyperlink{classneo_1_1_protocol_settings_ae4dbcf46ad7be88d544d121c64ead5b9}{Check\+Hardfork\+Configuration}} (const \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} \&settings)
+\begin{DoxyCompactList}\small\item\em Validates hardfork configuration for continuity and ordering. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_aa02d8b548fd19226acd822fc1665a541}{network\+\_\+}}
+\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_a6a129d9972df9a5b34d85a1d17414327}{address\+Version\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1_protocol_settings_aec1222e3e5b7b88827ed7152829dbf3e}{standby\+Committee\+\_\+}}
+\item 
+int \mbox{\hyperlink{classneo_1_1_protocol_settings_a186f8879f13abd8d603a5b8c08a2eaa8}{validators\+Count\+\_\+}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1_protocol_settings_ab09550074d838c56f961193ed91a39f1}{seed\+List\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_a592143efd6d49e1b91b1db0bb5a94341}{milliseconds\+Per\+Block\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_aa64a0d4f6e70a104dac42518c3df67c2}{max\+Valid\+Until\+Block\+Increment\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_aa16199d5b7e04107e23440fdeff7aaa0}{max\+Transactions\+Per\+Block\+\_\+}}
+\item 
+int \mbox{\hyperlink{classneo_1_1_protocol_settings_a34eebcca09072eb92eacb3613188c58a}{memory\+Pool\+Max\+Transactions\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_a402b2853f6e721160e3558be2500f6a7}{max\+Traceable\+Blocks\+\_\+}}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1_protocol_settings_a939791f65c599d6d0924d624b8f0d162}{initial\+Gas\+Distribution\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespaceneo_a1bd56b63c9e8617ef00d55839e486ea4}{Hardfork}}, uint32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1_protocol_settings_a9bd7130fe1fea7bd6972c6099be71a5d}{hardforks\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents the protocol settings of the NEO system. 
+
+This class contains all configuration parameters that define the behavior of the Neo blockchain protocol, including network settings, consensus parameters, transaction limits, and hardfork configurations. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1_protocol_settings_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1_protocol_settings_af6990976fcd61b485128cafb66c30b46}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!ProtocolSettings@{ProtocolSettings}}
+\index{ProtocolSettings@{ProtocolSettings}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{ProtocolSettings()}{ProtocolSettings()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_af6990976fcd61b485128cafb66c30b46} 
+neo\+::\+Protocol\+Settings\+::\+Protocol\+Settings (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs default \doxylink{classneo_1_1_protocol_settings}{Protocol\+Settings}. 
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1_protocol_settings_a9431b886c24a33d63ff3a4959baa8846}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!ProtocolSettings@{ProtocolSettings}}
+\index{ProtocolSettings@{ProtocolSettings}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{ProtocolSettings()}{ProtocolSettings()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a9431b886c24a33d63ff3a4959baa8846} 
+neo\+::\+Protocol\+Settings\+::\+Protocol\+Settings (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1_protocol_settings_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1_protocol_settings_ae4dbcf46ad7be88d544d121c64ead5b9}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!CheckHardforkConfiguration@{CheckHardforkConfiguration}}
+\index{CheckHardforkConfiguration@{CheckHardforkConfiguration}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{CheckHardforkConfiguration()}{CheckHardforkConfiguration()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_ae4dbcf46ad7be88d544d121c64ead5b9} 
+void neo\+::\+Protocol\+Settings\+::\+Check\+Hardfork\+Configuration (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} \&}]{settings}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+Validates hardfork configuration for continuity and ordering. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em settings} & The settings to validate. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1_protocol_settings_ab1b1c4b9072e2360b7030ad1ff5bf051}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!EnsureOmittedHardforks@{EnsureOmittedHardforks}}
+\index{EnsureOmittedHardforks@{EnsureOmittedHardforks}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{EnsureOmittedHardforks()}{EnsureOmittedHardforks()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_ab1b1c4b9072e2360b7030ad1ff5bf051} 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespaceneo_a1bd56b63c9e8617ef00d55839e486ea4}{Hardfork}}, uint32\+\_\+t $>$ neo\+::\+Protocol\+Settings\+::\+Ensure\+Omitted\+Hardforks (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespaceneo_a1bd56b63c9e8617ef00d55839e486ea4}{Hardfork}}, uint32\+\_\+t $>$ \&}]{hardforks}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Ensures all hardforks have entries in the configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hardforks} & The hardfork map to process. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Processed hardfork map with all entries. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1_protocol_settings_a4454a6950368ce67fa8cca1016b692d0}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!GetAddressVersion@{GetAddressVersion}}
+\index{GetAddressVersion@{GetAddressVersion}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{GetAddressVersion()}{GetAddressVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a4454a6950368ce67fa8cca1016b692d0} 
+uint8\+\_\+t neo\+::\+Protocol\+Settings\+::\+Get\+Address\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the address version. 
+
+\begin{DoxyReturn}{Returns}
+The address version byte. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_protocol_settings_aee6db6e6b177bb29ba62c1908a82ea8c}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!GetCommitteeMembersCount@{GetCommitteeMembersCount}}
+\index{GetCommitteeMembersCount@{GetCommitteeMembersCount}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{GetCommitteeMembersCount()}{GetCommitteeMembersCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_aee6db6e6b177bb29ba62c1908a82ea8c} 
+int neo\+::\+Protocol\+Settings\+::\+Get\+Committee\+Members\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of committee members. 
+
+\begin{DoxyReturn}{Returns}
+The committee members count. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_protocol_settings_a52fdd62f15038469ca2a98e2b1fdfbab}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!GetDefault@{GetDefault}}
+\index{GetDefault@{GetDefault}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{GetDefault()}{GetDefault()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a52fdd62f15038469ca2a98e2b1fdfbab} 
+const \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} \& neo\+::\+Protocol\+Settings\+::\+Get\+Default (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the default protocol settings. 
+
+\begin{DoxyReturn}{Returns}
+Default \doxylink{classneo_1_1_protocol_settings}{Protocol\+Settings} instance. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1_protocol_settings_ab962e9472f91a6e2251f4993d10075a1}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!GetHardforks@{GetHardforks}}
+\index{GetHardforks@{GetHardforks}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{GetHardforks()}{GetHardforks()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_ab962e9472f91a6e2251f4993d10075a1} 
+const std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespaceneo_a1bd56b63c9e8617ef00d55839e486ea4}{Hardfork}}, uint32\+\_\+t $>$ \& neo\+::\+Protocol\+Settings\+::\+Get\+Hardforks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the hardfork configuration. 
+
+\begin{DoxyReturn}{Returns}
+Map of hardfork to activation block height. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_protocol_settings_a556e2a74296a5b5816f93e6115b94a93}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!GetInitialGasDistribution@{GetInitialGasDistribution}}
+\index{GetInitialGasDistribution@{GetInitialGasDistribution}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{GetInitialGasDistribution()}{GetInitialGasDistribution()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a556e2a74296a5b5816f93e6115b94a93} 
+uint64\+\_\+t neo\+::\+Protocol\+Settings\+::\+Get\+Initial\+Gas\+Distribution (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the initial gas distribution amount. 
+
+\begin{DoxyReturn}{Returns}
+The initial gas distribution in datoshi. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_protocol_settings_a10eca38d6babf35c1f71f9d4e4b7e39b}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!GetMaxTraceableBlocks@{GetMaxTraceableBlocks}}
+\index{GetMaxTraceableBlocks@{GetMaxTraceableBlocks}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{GetMaxTraceableBlocks()}{GetMaxTraceableBlocks()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a10eca38d6babf35c1f71f9d4e4b7e39b} 
+uint32\+\_\+t neo\+::\+Protocol\+Settings\+::\+Get\+Max\+Traceable\+Blocks (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the maximum number of traceable blocks. 
+
+\begin{DoxyReturn}{Returns}
+The maximum number of traceable blocks. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_protocol_settings_a9ad58af826aa516a2a111d2865ee1367}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!GetMaxTransactionsPerBlock@{GetMaxTransactionsPerBlock}}
+\index{GetMaxTransactionsPerBlock@{GetMaxTransactionsPerBlock}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{GetMaxTransactionsPerBlock()}{GetMaxTransactionsPerBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a9ad58af826aa516a2a111d2865ee1367} 
+uint32\+\_\+t neo\+::\+Protocol\+Settings\+::\+Get\+Max\+Transactions\+Per\+Block (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the maximum number of transactions per block. 
+
+\begin{DoxyReturn}{Returns}
+The maximum transactions per block. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_protocol_settings_abaa7cf09e190dc5850348e989116671f}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!GetMaxValidUntilBlockIncrement@{GetMaxValidUntilBlockIncrement}}
+\index{GetMaxValidUntilBlockIncrement@{GetMaxValidUntilBlockIncrement}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{GetMaxValidUntilBlockIncrement()}{GetMaxValidUntilBlockIncrement()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_abaa7cf09e190dc5850348e989116671f} 
+uint32\+\_\+t neo\+::\+Protocol\+Settings\+::\+Get\+Max\+Valid\+Until\+Block\+Increment (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the maximum increment of Valid\+Until\+Block field. 
+
+\begin{DoxyReturn}{Returns}
+The maximum valid until block increment. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_protocol_settings_aea0b7f345dc365fe4fc1567b9569d1d7}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!GetMemoryPoolMaxTransactions@{GetMemoryPoolMaxTransactions}}
+\index{GetMemoryPoolMaxTransactions@{GetMemoryPoolMaxTransactions}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{GetMemoryPoolMaxTransactions()}{GetMemoryPoolMaxTransactions()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_aea0b7f345dc365fe4fc1567b9569d1d7} 
+int neo\+::\+Protocol\+Settings\+::\+Get\+Memory\+Pool\+Max\+Transactions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the maximum number of transactions in memory pool. 
+
+\begin{DoxyReturn}{Returns}
+The memory pool max transactions. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_protocol_settings_a93163c96507edc4c233aeecb4224eead}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!GetMillisecondsPerBlock@{GetMillisecondsPerBlock}}
+\index{GetMillisecondsPerBlock@{GetMillisecondsPerBlock}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{GetMillisecondsPerBlock()}{GetMillisecondsPerBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a93163c96507edc4c233aeecb4224eead} 
+uint32\+\_\+t neo\+::\+Protocol\+Settings\+::\+Get\+Milliseconds\+Per\+Block (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the time in milliseconds between two blocks. 
+
+\begin{DoxyReturn}{Returns}
+The milliseconds per block. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_protocol_settings_ad306a2407147cac547a0e005441d3e51}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!GetNetwork@{GetNetwork}}
+\index{GetNetwork@{GetNetwork}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{GetNetwork()}{GetNetwork()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_ad306a2407147cac547a0e005441d3e51} 
+uint32\+\_\+t neo\+::\+Protocol\+Settings\+::\+Get\+Network (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the network magic number. 
+
+\begin{DoxyReturn}{Returns}
+The network magic number. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_protocol_settings_a9c56143f74f244923128f6553ebde195}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!GetSeedList@{GetSeedList}}
+\index{GetSeedList@{GetSeedList}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{GetSeedList()}{GetSeedList()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a9c56143f74f244923128f6553ebde195} 
+const std\+::vector$<$ std\+::string $>$ \& neo\+::\+Protocol\+Settings\+::\+Get\+Seed\+List (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the seed list. 
+
+\begin{DoxyReturn}{Returns}
+Vector of seed node addresses. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_protocol_settings_a9b9918aa2c68562ccb1e6d11f0a5ecf4}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!GetStandbyCommittee@{GetStandbyCommittee}}
+\index{GetStandbyCommittee@{GetStandbyCommittee}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{GetStandbyCommittee()}{GetStandbyCommittee()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a9b9918aa2c68562ccb1e6d11f0a5ecf4} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} $>$ \& neo\+::\+Protocol\+Settings\+::\+Get\+Standby\+Committee (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the standby committee members. 
+
+\begin{DoxyReturn}{Returns}
+Vector of ECPoint representing committee members. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_protocol_settings_aacb474b2c2b1f849831945613346b0aa}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!GetStandbyValidators@{GetStandbyValidators}}
+\index{GetStandbyValidators@{GetStandbyValidators}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{GetStandbyValidators()}{GetStandbyValidators()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_aacb474b2c2b1f849831945613346b0aa} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} $>$ neo\+::\+Protocol\+Settings\+::\+Get\+Standby\+Validators (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the standby validators (first N committee members). 
+
+\begin{DoxyReturn}{Returns}
+Vector of ECPoint representing validators. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_protocol_settings_afd46ced5280f33d917185c7b60db30e6}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!GetValidatorsCount@{GetValidatorsCount}}
+\index{GetValidatorsCount@{GetValidatorsCount}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{GetValidatorsCount()}{GetValidatorsCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_afd46ced5280f33d917185c7b60db30e6} 
+int neo\+::\+Protocol\+Settings\+::\+Get\+Validators\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the number of validators. 
+
+\begin{DoxyReturn}{Returns}
+The validators count. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_protocol_settings_ad2257f82eb6b48ff910e94bee6e06956}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!IsHardforkEnabled@{IsHardforkEnabled}}
+\index{IsHardforkEnabled@{IsHardforkEnabled}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{IsHardforkEnabled()}{IsHardforkEnabled()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_ad2257f82eb6b48ff910e94bee6e06956} 
+bool neo\+::\+Protocol\+Settings\+::\+Is\+Hardfork\+Enabled (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_a1bd56b63c9e8617ef00d55839e486ea4}{Hardfork}}}]{hardfork}{, }\item[{uint32\+\_\+t}]{block\+Height}{}\end{DoxyParamCaption}) const}
+
+
+
+Check if a hardfork is enabled at a given block height. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hardfork} & The hardfork to check. \\
+\hline
+{\em block\+Height} & The block height to check against. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the hardfork is enabled at the given height. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_protocol_settings_a0637900d0c018e00e02a0504e435862f}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!Load@{Load}}
+\index{Load@{Load}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{Load()}{Load()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a0637900d0c018e00e02a0504e435862f} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} $>$ neo\+::\+Protocol\+Settings\+::\+Load (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{file\+Path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Loads protocol settings from a JSON file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em file\+Path} & Path to the JSON configuration file. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Loaded \doxylink{classneo_1_1_protocol_settings}{Protocol\+Settings} instance. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1_protocol_settings_a94a1687bbf8d430e1b93829c6eab180a}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!LoadFromJson@{LoadFromJson}}
+\index{LoadFromJson@{LoadFromJson}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{LoadFromJson()}{LoadFromJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a94a1687bbf8d430e1b93829c6eab180a} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} $>$ neo\+::\+Protocol\+Settings\+::\+Load\+From\+Json (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{json\+Content}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Loads protocol settings from a JSON string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json\+Content} & JSON configuration content. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Loaded \doxylink{classneo_1_1_protocol_settings}{Protocol\+Settings} instance. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1_protocol_settings_a137c6756635026215dcdf54375fc12aa}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a137c6756635026215dcdf54375fc12aa} 
+\mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} \& neo\+::\+Protocol\+Settings\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Assignment operator. 
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1_protocol_settings_a9ced92bbf3779901db356216a372a6b9}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!SetAddressVersion@{SetAddressVersion}}
+\index{SetAddressVersion@{SetAddressVersion}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{SetAddressVersion()}{SetAddressVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a9ced92bbf3779901db356216a372a6b9} 
+void neo\+::\+Protocol\+Settings\+::\+Set\+Address\+Version (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{address\+Version}{}\end{DoxyParamCaption})}
+
+
+
+Sets the address version. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em address\+Version} & The address version byte. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1_protocol_settings_ac5410413994e170658c5cccbdba19801}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!SetHardforks@{SetHardforks}}
+\index{SetHardforks@{SetHardforks}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{SetHardforks()}{SetHardforks()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_ac5410413994e170658c5cccbdba19801} 
+void neo\+::\+Protocol\+Settings\+::\+Set\+Hardforks (\begin{DoxyParamCaption}\item[{const std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{namespaceneo_a1bd56b63c9e8617ef00d55839e486ea4}{Hardfork}}, uint32\+\_\+t $>$ \&}]{hardforks}{}\end{DoxyParamCaption})}
+
+
+
+Sets the hardfork configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hardforks} & Map of hardfork to activation block height. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1_protocol_settings_ae20c64063a5e2d2a2646ea306d6c578a}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!SetInitialGasDistribution@{SetInitialGasDistribution}}
+\index{SetInitialGasDistribution@{SetInitialGasDistribution}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{SetInitialGasDistribution()}{SetInitialGasDistribution()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_ae20c64063a5e2d2a2646ea306d6c578a} 
+void neo\+::\+Protocol\+Settings\+::\+Set\+Initial\+Gas\+Distribution (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{initial\+Gas\+Distribution}{}\end{DoxyParamCaption})}
+
+
+
+Sets the initial gas distribution amount. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em initial\+Gas\+Distribution} & The initial gas distribution in datoshi. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1_protocol_settings_a3a607e0d36a2b923388d106ecf44a965}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!SetMaxTraceableBlocks@{SetMaxTraceableBlocks}}
+\index{SetMaxTraceableBlocks@{SetMaxTraceableBlocks}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{SetMaxTraceableBlocks()}{SetMaxTraceableBlocks()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a3a607e0d36a2b923388d106ecf44a965} 
+void neo\+::\+Protocol\+Settings\+::\+Set\+Max\+Traceable\+Blocks (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{max\+Traceable\+Blocks}{}\end{DoxyParamCaption})}
+
+
+
+Sets the maximum number of traceable blocks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+Traceable\+Blocks} & The maximum number of traceable blocks. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1_protocol_settings_ae41c9320667e56d2662835b8fdb12d41}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!SetMaxTransactionsPerBlock@{SetMaxTransactionsPerBlock}}
+\index{SetMaxTransactionsPerBlock@{SetMaxTransactionsPerBlock}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{SetMaxTransactionsPerBlock()}{SetMaxTransactionsPerBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_ae41c9320667e56d2662835b8fdb12d41} 
+void neo\+::\+Protocol\+Settings\+::\+Set\+Max\+Transactions\+Per\+Block (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{max\+Transactions\+Per\+Block}{}\end{DoxyParamCaption})}
+
+
+
+Sets the maximum number of transactions per block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+Transactions\+Per\+Block} & The maximum transactions per block. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1_protocol_settings_a15d891aa8ffd6eb3a99b46df53ea8e91}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!SetMaxValidUntilBlockIncrement@{SetMaxValidUntilBlockIncrement}}
+\index{SetMaxValidUntilBlockIncrement@{SetMaxValidUntilBlockIncrement}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{SetMaxValidUntilBlockIncrement()}{SetMaxValidUntilBlockIncrement()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a15d891aa8ffd6eb3a99b46df53ea8e91} 
+void neo\+::\+Protocol\+Settings\+::\+Set\+Max\+Valid\+Until\+Block\+Increment (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{max\+Valid\+Until\+Block\+Increment}{}\end{DoxyParamCaption})}
+
+
+
+Sets the maximum increment of Valid\+Until\+Block field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+Valid\+Until\+Block\+Increment} & The maximum valid until block increment. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1_protocol_settings_abee68cfd08844e228f0d82f2217bef94}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!SetMemoryPoolMaxTransactions@{SetMemoryPoolMaxTransactions}}
+\index{SetMemoryPoolMaxTransactions@{SetMemoryPoolMaxTransactions}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{SetMemoryPoolMaxTransactions()}{SetMemoryPoolMaxTransactions()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_abee68cfd08844e228f0d82f2217bef94} 
+void neo\+::\+Protocol\+Settings\+::\+Set\+Memory\+Pool\+Max\+Transactions (\begin{DoxyParamCaption}\item[{int}]{memory\+Pool\+Max\+Transactions}{}\end{DoxyParamCaption})}
+
+
+
+Sets the maximum number of transactions in memory pool. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em memory\+Pool\+Max\+Transactions} & The memory pool max transactions. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1_protocol_settings_a98c5315c471996d23687000ef2c8836f}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!SetMillisecondsPerBlock@{SetMillisecondsPerBlock}}
+\index{SetMillisecondsPerBlock@{SetMillisecondsPerBlock}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{SetMillisecondsPerBlock()}{SetMillisecondsPerBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a98c5315c471996d23687000ef2c8836f} 
+void neo\+::\+Protocol\+Settings\+::\+Set\+Milliseconds\+Per\+Block (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{milliseconds\+Per\+Block}{}\end{DoxyParamCaption})}
+
+
+
+Sets the time in milliseconds between two blocks. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em milliseconds\+Per\+Block} & The milliseconds per block. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1_protocol_settings_a1d4d07070ae5edcea2c197dff218d6e4}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!SetNetwork@{SetNetwork}}
+\index{SetNetwork@{SetNetwork}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{SetNetwork()}{SetNetwork()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a1d4d07070ae5edcea2c197dff218d6e4} 
+void neo\+::\+Protocol\+Settings\+::\+Set\+Network (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{network}{}\end{DoxyParamCaption})}
+
+
+
+Sets the network magic number. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em network} & The network magic number. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1_protocol_settings_abbab9f533f0d9c073be5afe3ee996f46}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!SetSeedList@{SetSeedList}}
+\index{SetSeedList@{SetSeedList}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{SetSeedList()}{SetSeedList()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_abbab9f533f0d9c073be5afe3ee996f46} 
+void neo\+::\+Protocol\+Settings\+::\+Set\+Seed\+List (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{seed\+List}{}\end{DoxyParamCaption})}
+
+
+
+Sets the seed list. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em seed\+List} & Vector of seed node addresses. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1_protocol_settings_a32fa9cc4d39a8fb5c2b119b7378e526b}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!SetStandbyCommittee@{SetStandbyCommittee}}
+\index{SetStandbyCommittee@{SetStandbyCommittee}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{SetStandbyCommittee()}{SetStandbyCommittee()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a32fa9cc4d39a8fb5c2b119b7378e526b} 
+void neo\+::\+Protocol\+Settings\+::\+Set\+Standby\+Committee (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}} $>$ \&}]{committee}{}\end{DoxyParamCaption})}
+
+
+
+Sets the standby committee members. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em committee} & Vector of ECPoint representing committee members. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1_protocol_settings_a48b64c0c86734a511449be929a1e2094}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!SetValidatorsCount@{SetValidatorsCount}}
+\index{SetValidatorsCount@{SetValidatorsCount}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{SetValidatorsCount()}{SetValidatorsCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a48b64c0c86734a511449be929a1e2094} 
+void neo\+::\+Protocol\+Settings\+::\+Set\+Validators\+Count (\begin{DoxyParamCaption}\item[{int}]{validators\+Count}{}\end{DoxyParamCaption})}
+
+
+
+Sets the number of validators. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em validators\+Count} & The validators count. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1_protocol_settings_ac58ddd963603cdec74dcab8a167cf872}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!ValidateHardforkConfiguration@{ValidateHardforkConfiguration}}
+\index{ValidateHardforkConfiguration@{ValidateHardforkConfiguration}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{ValidateHardforkConfiguration()}{ValidateHardforkConfiguration()}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_ac58ddd963603cdec74dcab8a167cf872} 
+void neo\+::\+Protocol\+Settings\+::\+Validate\+Hardfork\+Configuration (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Validates the hardfork configuration for consistency. 
+
+
+\begin{DoxyExceptions}{Exceptions}
+{\em std\+::invalid\+\_\+argument} & if hardfork configuration is invalid. \\
+\hline
+\end{DoxyExceptions}
+Here is the call graph for this function\+:
+% FIG 8
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1_protocol_settings_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1_protocol_settings_a6a129d9972df9a5b34d85a1d17414327}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!addressVersion\_@{addressVersion\_}}
+\index{addressVersion\_@{addressVersion\_}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{addressVersion\_}{addressVersion\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a6a129d9972df9a5b34d85a1d17414327} 
+uint8\+\_\+t neo\+::\+Protocol\+Settings\+::address\+Version\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_a9bd7130fe1fea7bd6972c6099be71a5d}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!hardforks\_@{hardforks\_}}
+\index{hardforks\_@{hardforks\_}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{hardforks\_}{hardforks\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a9bd7130fe1fea7bd6972c6099be71a5d} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{namespaceneo_a1bd56b63c9e8617ef00d55839e486ea4}{Hardfork}}, uint32\+\_\+t$>$ neo\+::\+Protocol\+Settings\+::hardforks\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_a939791f65c599d6d0924d624b8f0d162}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!initialGasDistribution\_@{initialGasDistribution\_}}
+\index{initialGasDistribution\_@{initialGasDistribution\_}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{initialGasDistribution\_}{initialGasDistribution\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a939791f65c599d6d0924d624b8f0d162} 
+uint64\+\_\+t neo\+::\+Protocol\+Settings\+::initial\+Gas\+Distribution\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_ab83bce94b6f17438942a8db8ec068269}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!MAX\_ITEM\_SIZE@{MAX\_ITEM\_SIZE}}
+\index{MAX\_ITEM\_SIZE@{MAX\_ITEM\_SIZE}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{MAX\_ITEM\_SIZE}{MAX\_ITEM\_SIZE}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_ab83bce94b6f17438942a8db8ec068269} 
+uint32\+\_\+t neo\+::\+Protocol\+Settings\+::\+MAX\+\_\+\+ITEM\+\_\+\+SIZE = 2097152\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_a20aaf9dbd73a332e41a1daed80d54479}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!MAX\_SCRIPT\_LENGTH@{MAX\_SCRIPT\_LENGTH}}
+\index{MAX\_SCRIPT\_LENGTH@{MAX\_SCRIPT\_LENGTH}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{MAX\_SCRIPT\_LENGTH}{MAX\_SCRIPT\_LENGTH}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a20aaf9dbd73a332e41a1daed80d54479} 
+uint32\+\_\+t neo\+::\+Protocol\+Settings\+::\+MAX\+\_\+\+SCRIPT\+\_\+\+LENGTH = 65536\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_a81af93aa4e5f6fe14cbc6dd5766466e2}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!MAX\_STACK\_SIZE@{MAX\_STACK\_SIZE}}
+\index{MAX\_STACK\_SIZE@{MAX\_STACK\_SIZE}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{MAX\_STACK\_SIZE}{MAX\_STACK\_SIZE}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a81af93aa4e5f6fe14cbc6dd5766466e2} 
+uint32\+\_\+t neo\+::\+Protocol\+Settings\+::\+MAX\+\_\+\+STACK\+\_\+\+SIZE = 2048\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_a421e08fcda55efcac6ffd450cf6adeb4}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!MAX\_TRACEABLE\_BLOCKS@{MAX\_TRACEABLE\_BLOCKS}}
+\index{MAX\_TRACEABLE\_BLOCKS@{MAX\_TRACEABLE\_BLOCKS}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{MAX\_TRACEABLE\_BLOCKS}{MAX\_TRACEABLE\_BLOCKS}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a421e08fcda55efcac6ffd450cf6adeb4} 
+uint32\+\_\+t neo\+::\+Protocol\+Settings\+::\+MAX\+\_\+\+TRACEABLE\+\_\+\+BLOCKS = 2102400\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_a967306535d3844925b4fafbf4ad75dfe}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!MAX\_TRANSACTION\_ATTRIBUTES@{MAX\_TRANSACTION\_ATTRIBUTES}}
+\index{MAX\_TRANSACTION\_ATTRIBUTES@{MAX\_TRANSACTION\_ATTRIBUTES}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{MAX\_TRANSACTION\_ATTRIBUTES}{MAX\_TRANSACTION\_ATTRIBUTES}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a967306535d3844925b4fafbf4ad75dfe} 
+uint16\+\_\+t neo\+::\+Protocol\+Settings\+::\+MAX\+\_\+\+TRANSACTION\+\_\+\+ATTRIBUTES = 16\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_a499b1b4e82efe0f0d5b6c74b2f803da1}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!MAX\_TRANSACTION\_SIZE@{MAX\_TRANSACTION\_SIZE}}
+\index{MAX\_TRANSACTION\_SIZE@{MAX\_TRANSACTION\_SIZE}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{MAX\_TRANSACTION\_SIZE}{MAX\_TRANSACTION\_SIZE}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a499b1b4e82efe0f0d5b6c74b2f803da1} 
+uint32\+\_\+t neo\+::\+Protocol\+Settings\+::\+MAX\+\_\+\+TRANSACTION\+\_\+\+SIZE = 2097152\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_ab8af5ffeb74b36753089380bf3f2842e}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!MAX\_WITNESSES\_PER\_TX@{MAX\_WITNESSES\_PER\_TX}}
+\index{MAX\_WITNESSES\_PER\_TX@{MAX\_WITNESSES\_PER\_TX}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{MAX\_WITNESSES\_PER\_TX}{MAX\_WITNESSES\_PER\_TX}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_ab8af5ffeb74b36753089380bf3f2842e} 
+uint16\+\_\+t neo\+::\+Protocol\+Settings\+::\+MAX\+\_\+\+WITNESSES\+\_\+\+PER\+\_\+\+TX = 16\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_a402b2853f6e721160e3558be2500f6a7}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!maxTraceableBlocks\_@{maxTraceableBlocks\_}}
+\index{maxTraceableBlocks\_@{maxTraceableBlocks\_}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{maxTraceableBlocks\_}{maxTraceableBlocks\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a402b2853f6e721160e3558be2500f6a7} 
+uint32\+\_\+t neo\+::\+Protocol\+Settings\+::max\+Traceable\+Blocks\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_aa16199d5b7e04107e23440fdeff7aaa0}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!maxTransactionsPerBlock\_@{maxTransactionsPerBlock\_}}
+\index{maxTransactionsPerBlock\_@{maxTransactionsPerBlock\_}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{maxTransactionsPerBlock\_}{maxTransactionsPerBlock\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_aa16199d5b7e04107e23440fdeff7aaa0} 
+uint32\+\_\+t neo\+::\+Protocol\+Settings\+::max\+Transactions\+Per\+Block\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_aa64a0d4f6e70a104dac42518c3df67c2}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!maxValidUntilBlockIncrement\_@{maxValidUntilBlockIncrement\_}}
+\index{maxValidUntilBlockIncrement\_@{maxValidUntilBlockIncrement\_}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{maxValidUntilBlockIncrement\_}{maxValidUntilBlockIncrement\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_aa64a0d4f6e70a104dac42518c3df67c2} 
+uint32\+\_\+t neo\+::\+Protocol\+Settings\+::max\+Valid\+Until\+Block\+Increment\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_a34eebcca09072eb92eacb3613188c58a}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!memoryPoolMaxTransactions\_@{memoryPoolMaxTransactions\_}}
+\index{memoryPoolMaxTransactions\_@{memoryPoolMaxTransactions\_}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{memoryPoolMaxTransactions\_}{memoryPoolMaxTransactions\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a34eebcca09072eb92eacb3613188c58a} 
+int neo\+::\+Protocol\+Settings\+::memory\+Pool\+Max\+Transactions\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_aa3cc0be984be3cbf512bd291fcf4bc0f}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!MILLISECONDS\_PER\_BLOCK@{MILLISECONDS\_PER\_BLOCK}}
+\index{MILLISECONDS\_PER\_BLOCK@{MILLISECONDS\_PER\_BLOCK}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{MILLISECONDS\_PER\_BLOCK}{MILLISECONDS\_PER\_BLOCK}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_aa3cc0be984be3cbf512bd291fcf4bc0f} 
+uint32\+\_\+t neo\+::\+Protocol\+Settings\+::\+MILLISECONDS\+\_\+\+PER\+\_\+\+BLOCK = 15000\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_a592143efd6d49e1b91b1db0bb5a94341}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!millisecondsPerBlock\_@{millisecondsPerBlock\_}}
+\index{millisecondsPerBlock\_@{millisecondsPerBlock\_}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{millisecondsPerBlock\_}{millisecondsPerBlock\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a592143efd6d49e1b91b1db0bb5a94341} 
+uint32\+\_\+t neo\+::\+Protocol\+Settings\+::milliseconds\+Per\+Block\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_aa02d8b548fd19226acd822fc1665a541}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!network\_@{network\_}}
+\index{network\_@{network\_}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{network\_}{network\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_aa02d8b548fd19226acd822fc1665a541} 
+uint32\+\_\+t neo\+::\+Protocol\+Settings\+::network\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_ab09550074d838c56f961193ed91a39f1}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!seedList\_@{seedList\_}}
+\index{seedList\_@{seedList\_}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{seedList\_}{seedList\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_ab09550074d838c56f961193ed91a39f1} 
+std\+::vector$<$std\+::string$>$ neo\+::\+Protocol\+Settings\+::seed\+List\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_aec1222e3e5b7b88827ed7152829dbf3e}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!standbyCommittee\_@{standbyCommittee\_}}
+\index{standbyCommittee\_@{standbyCommittee\_}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{standbyCommittee\_}{standbyCommittee\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_aec1222e3e5b7b88827ed7152829dbf3e} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{neo\+::cryptography\+::ecc\+::\+ECPoint}}$>$ neo\+::\+Protocol\+Settings\+::standby\+Committee\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1_protocol_settings_a186f8879f13abd8d603a5b8c08a2eaa8}\index{neo::ProtocolSettings@{neo::ProtocolSettings}!validatorsCount\_@{validatorsCount\_}}
+\index{validatorsCount\_@{validatorsCount\_}!neo::ProtocolSettings@{neo::ProtocolSettings}}
+\doxysubsubsection{\texorpdfstring{validatorsCount\_}{validatorsCount\_}}
+{\footnotesize\ttfamily \label{classneo_1_1_protocol_settings_a186f8879f13abd8d603a5b8c08a2eaa8} 
+int neo\+::\+Protocol\+Settings\+::validators\+Count\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/\mbox{\hyperlink{protocol__settings_8h}{protocol\+\_\+settings.\+h}}\item 
+src/\mbox{\hyperlink{protocol__settings_8cpp}{protocol\+\_\+settings.\+cpp}}\item 
+src/\mbox{\hyperlink{protocol__settings__json_8cpp}{protocol\+\_\+settings\+\_\+json.\+cpp}}\end{DoxyCompactItemize}

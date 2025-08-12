@@ -1,0 +1,99 @@
+\doxysection{plugin.\+h}
+\hypertarget{core_2plugin_8h_source}{}\label{core_2plugin_8h_source}\index{include/neo/core/plugin.h@{include/neo/core/plugin.h}}
+\mbox{\hyperlink{core_2plugin_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo}{neo}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00011\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1core}{core}}}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_plugin_aa9b385178d0c3ff75463d0219814f1a1}{Plugin}}}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config}{Config}}}
+\DoxyCodeLine{00026\ \ \ \ \ \{}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config_a718d84212c9e22a673dde5fcfc0cde6e}{name}};}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config_af35ed30200ead6fdd77095b547c45e4c}{version}};}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config_addf91ee193df93d4990d06940e4796f9}{description}};}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config_a4d4ae702114739197e0f54394b74e3de}{author}};}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config_a3ca9ce767136622104fc4b9049ab301a}{enabled}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00032\ \ \ \ \ \};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_aa9b385178d0c3ff75463d0219814f1a1}{Plugin}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config}{Config}}\&\ \mbox{\hyperlink{namespaceneo_1_1config}{config}})\ :\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a31a4d4f16f358d074a92ad1a7835ea9f}{config\_}}(\mbox{\hyperlink{namespaceneo_1_1config}{config}})\ \{\}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a13b256927b0e96e6553fd1771826ed68}{\string~Plugin}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a685daca4988a003aa8b69c9b0f62f1c2}{GetName}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a31a4d4f16f358d074a92ad1a7835ea9f}{config\_}}.name;\ \}}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_abbf314b62b296ee567734d1d30621812}{GetVersion}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a31a4d4f16f358d074a92ad1a7835ea9f}{config\_}}.version;\ \}}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_aa58b4046cc58db73ddce4a1b98bd6d85}{GetDescription}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a31a4d4f16f358d074a92ad1a7835ea9f}{config\_}}.description;\ \}}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_ac1bcb4ab1af3f74a109b488fcab6d4c4}{GetAuthor}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a31a4d4f16f358d074a92ad1a7835ea9f}{config\_}}.author;\ \}}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a391d989a6796242163e5075fa9359be9}{IsEnabled}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a31a4d4f16f358d074a92ad1a7835ea9f}{config\_}}.enabled;\ \}}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a55c59e8a228988be743826cea75c9c65}{Initialize}}()\ =\ 0;}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a1b93efd03e212e7a166c97b1c21fbbd6}{Start}}()\ =\ 0;}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00090\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a374d1886a5f64c53e8037d4817e08681}{Stop}}()\ =\ 0;}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_ac68843692752da8a447ad138d9a3169e}{OnConfigChanged}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config}{Config}}\&\ newConfig)\ \{\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a31a4d4f16f358d074a92ad1a7835ea9f}{config\_}}\ =\ newConfig;\ \}}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00099\ \ \ \ \ \mbox{\hyperlink{structneo_1_1core_1_1_plugin_1_1_config}{Config}}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_a31a4d4f16f358d074a92ad1a7835ea9f}{config\_}};}
+\DoxyCodeLine{00100\ \};}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00105\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_adc90588915372a83bd95609f21ef475a}{PluginManager}}}
+\DoxyCodeLine{00106\ \{}
+\DoxyCodeLine{00107\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00112\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_adc90588915372a83bd95609f21ef475a}{PluginManager}}\&\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_a2540f4dd07d74363e797bafb17a9b30d}{GetInstance}}()}
+\DoxyCodeLine{00113\ \ \ \ \ \{}
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_adc90588915372a83bd95609f21ef475a}{PluginManager}}\ instance;}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00116\ \ \ \ \ \}}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00123\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_a8dd36ba6761820e7ae07642083c74c39}{RegisterPlugin}}(std::shared\_ptr<Plugin>\ plugin);}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00130\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_aa82ce02714d359ac8d21c629491698c9}{UnregisterPlugin}}(\textcolor{keyword}{const}\ std::string\&\ name);}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00137\ \ \ \ \ std::shared\_ptr<Plugin>\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_a5478dff33f35d7bfc5fafb5dba909afe}{GetPlugin}}(\textcolor{keyword}{const}\ std::string\&\ name)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00138\ }
+\DoxyCodeLine{00143\ \ \ \ \ std::vector<std::shared\_ptr<Plugin>>\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_a5ade47b3afac4f022c7f96837198a29d}{GetAllPlugins}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00149\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_a510598e3dd4a2b51d41151a782f09a1d}{InitializeAll}}();}
+\DoxyCodeLine{00150\ }
+\DoxyCodeLine{00155\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_a86aecdb195479eeec6e13a11832e2c16}{StartAll}}();}
+\DoxyCodeLine{00156\ }
+\DoxyCodeLine{00160\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_a31f32d6b48399779a10c80ce5339d00d}{StopAll}}();}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00167\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_a8133cc08961d05756e1796d3d21c55b3}{LoadPluginsFromDirectory}}(\textcolor{keyword}{const}\ std::string\&\ directory);}
+\DoxyCodeLine{00168\ }
+\DoxyCodeLine{00169\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00170\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_adc90588915372a83bd95609f21ef475a}{PluginManager}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00171\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_ae516649c3493596c7b4ad74485592aff}{\string~PluginManager}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00172\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_a37a35029485104ac2547f8d475fbc50f}{PluginManager}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_adc90588915372a83bd95609f21ef475a}{PluginManager}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00173\ \ \ \ \ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_adc90588915372a83bd95609f21ef475a}{PluginManager}}\&\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_a83b1d12f8d74fbeb80c2a0dda8508d61}{operator=}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_adc90588915372a83bd95609f21ef475a}{PluginManager}}\&)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00175\ \ \ \ \ std::vector<std::shared\_ptr<Plugin>>\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_ac4fe6afcfb59f1ed4be2db65c3417f8e}{plugins\_}};}
+\DoxyCodeLine{00176\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1core_1_1_plugin_manager_ac3073a66e1660ae175a324daaea26e94}{mutex\_}};}
+\DoxyCodeLine{00177\ \};}
+\DoxyCodeLine{00178\ }
+\DoxyCodeLine{00185\ \textcolor{preprocessor}{\#define\ NEO\_EXPORT\_PLUGIN(PluginClass)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00186\ \textcolor{preprocessor}{\ \ \ \ extern\ "{}C"{}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00187\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00188\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ std::shared\_ptr<neo::core::Plugin>\ CreatePlugin()\ \{\ return\ std::make\_shared<PluginClass>();\ \}\ \(\backslash\)}}
+\DoxyCodeLine{00189\ \textcolor{preprocessor}{\ \ \ \ \}}}
+\DoxyCodeLine{00190\ }
+\DoxyCodeLine{00191\ \}\ \ \textcolor{comment}{//\ namespace\ core}}
+\DoxyCodeLine{00192\ \}\ \ \textcolor{comment}{//\ namespace\ neo}}
+
+\end{DoxyCode}

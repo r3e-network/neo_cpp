@@ -1,0 +1,259 @@
+\doxysection{neo\+::network\+::Connection\+Pool\texorpdfstring{$<$}{<} Connection \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classneo_1_1network_1_1_connection_pool}{}\label{classneo_1_1network_1_1_connection_pool}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+
+
+Connection pool for managing network connections.  
+
+
+
+
+{\ttfamily \#include $<$connection\+\_\+manager.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::network\+::Connection\+Pool\texorpdfstring{$<$}{<} Connection \texorpdfstring{$>$}{>}\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_config}{Config}}
+\item 
+struct \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_stats}{Stats}}
+\begin{DoxyCompactList}\small\item\em Get current pool statistics. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_aa6bac1eb2293aa8d2088a46602b1eb68}{Connection\+Factory}} = std\+::function$<$std\+::shared\+\_\+ptr$<$Connection$>$()$>$
+\item 
+using \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_abd4b6b1d326cccdb47be3f2246a215dc}{Connection\+Validator}} = std\+::function$<$bool(const std\+::shared\+\_\+ptr$<$Connection$>$\&)$>$
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ab3bd08a69045d71e543ec9f0edf20595}{Connection\+Pool}} (const \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_config}{Config}} \&config, \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_aa6bac1eb2293aa8d2088a46602b1eb68}{Connection\+Factory}} factory, \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_abd4b6b1d326cccdb47be3f2246a215dc}{Connection\+Validator}} validator)
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ad269c15dffd7599aa375be638caec7fe}{\texorpdfstring{$\sim$}{\string~}\+Connection\+Pool}} ()
+\item 
+std\+::shared\+\_\+ptr$<$ Connection $>$ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a3dd8c1e204e06429610a722ca079af58}{Acquire}} ()
+\begin{DoxyCompactList}\small\item\em Acquire a connection from the pool. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ab643ec86f4b63ffca1553f1c2454e0b4}{Release}} (std\+::shared\+\_\+ptr$<$ Connection $>$ conn)
+\begin{DoxyCompactList}\small\item\em Release a connection back to the pool. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_stats}{Stats}} \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ae3f9da4d80c67ebdf025c9954fef9870}{Get\+Stats}} () const
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a39f2300e9ca99de5d6fe7a4b4c55c02a}{Shutdown}} ()
+\begin{DoxyCompactList}\small\item\em Shutdown the connection pool. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a6b2bf2b1feedd7871760ab88adb06a81}{Maintenance\+Loop}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_config}{Config}} \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a84c844c38cb277db48d3e8d67cd6ff16}{config\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_aa6bac1eb2293aa8d2088a46602b1eb68}{Connection\+Factory}} \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a51610020aa8e37d333feed981ecb4413}{factory\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_abd4b6b1d326cccdb47be3f2246a215dc}{Connection\+Validator}} \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a4028c08c3db10f3eee4b9596bb96b72b}{validator\+\_\+}}
+\item 
+std\+::queue$<$ std\+::shared\+\_\+ptr$<$ Connection $>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}{available\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ Connection \texorpdfstring{$\ast$}{*}, std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point $>$ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a3b3e13707fd6d0a5cf1d0fafa601aa50}{active\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ad9704ffb6dbf59fa7bee4fc8c0998912}{mutex\+\_\+}}
+\item 
+std\+::condition\+\_\+variable \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_a51437412836b08e39e54f404018402db}{cv\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_adca9f8d1a25f6a766450caaca8c7d09a}{running\+\_\+}}
+\item 
+std\+::atomic$<$ size\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_afb6ba12dd9f42c5247d8b92059bf9e26}{failed\+Connections\+\_\+}} \{0\}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_ae332f7b0112f11d1fb339abbcccfc72a}{maintenance\+Thread\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename Connection$>$\newline
+class neo\+::network\+::\+Connection\+Pool$<$ Connection $>$}
+Connection pool for managing network connections. 
+
+\label{doc-typedef-members}
+\Hypertarget{classneo_1_1network_1_1_connection_pool_doc-typedef-members}
+\doxysubsection{Member Typedef Documentation}
+\Hypertarget{classneo_1_1network_1_1_connection_pool_aa6bac1eb2293aa8d2088a46602b1eb68}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!ConnectionFactory@{ConnectionFactory}}
+\index{ConnectionFactory@{ConnectionFactory}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{ConnectionFactory}{ConnectionFactory}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_aa6bac1eb2293aa8d2088a46602b1eb68} 
+template$<$typename Connection$>$ \\
+using \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::\+Connection\+Factory = std\+::function$<$std\+::shared\+\_\+ptr$<$Connection$>$()$>$}
+
+\Hypertarget{classneo_1_1network_1_1_connection_pool_abd4b6b1d326cccdb47be3f2246a215dc}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!ConnectionValidator@{ConnectionValidator}}
+\index{ConnectionValidator@{ConnectionValidator}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{ConnectionValidator}{ConnectionValidator}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_abd4b6b1d326cccdb47be3f2246a215dc} 
+template$<$typename Connection$>$ \\
+using \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::\+Connection\+Validator = std\+::function$<$bool(const std\+::shared\+\_\+ptr$<$Connection$>$\&)$>$}
+
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1_connection_pool_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1_connection_pool_ab3bd08a69045d71e543ec9f0edf20595}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!ConnectionPool@{ConnectionPool}}
+\index{ConnectionPool@{ConnectionPool}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{ConnectionPool()}{ConnectionPool()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_ab3bd08a69045d71e543ec9f0edf20595} 
+template$<$typename Connection$>$ \\
+\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::\+Connection\+Pool (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_config}{Config}} \&}]{config}{, }\item[{\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_aa6bac1eb2293aa8d2088a46602b1eb68}{Connection\+Factory}}}]{factory}{, }\item[{\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_abd4b6b1d326cccdb47be3f2246a215dc}{Connection\+Validator}}}]{validator}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1network_1_1_connection_pool_ad269c15dffd7599aa375be638caec7fe}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!````~ConnectionPool@{\texorpdfstring{$\sim$}{\string~}ConnectionPool}}
+\index{````~ConnectionPool@{\texorpdfstring{$\sim$}{\string~}ConnectionPool}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}ConnectionPool()}{\string~ConnectionPool()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_ad269c15dffd7599aa375be638caec7fe} 
+template$<$typename Connection$>$ \\
+\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{Connection\+Pool}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1_connection_pool_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1_connection_pool_a3dd8c1e204e06429610a722ca079af58}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!Acquire@{Acquire}}
+\index{Acquire@{Acquire}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{Acquire()}{Acquire()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_a3dd8c1e204e06429610a722ca079af58} 
+template$<$typename Connection$>$ \\
+std\+::shared\+\_\+ptr$<$ Connection $>$ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::\+Acquire (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Acquire a connection from the pool. 
+
+\begin{DoxyReturn}{Returns}
+Connection or nullptr if timeout 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1_connection_pool_ae3f9da4d80c67ebdf025c9954fef9870}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!GetStats@{GetStats}}
+\index{GetStats@{GetStats}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{GetStats()}{GetStats()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_ae3f9da4d80c67ebdf025c9954fef9870} 
+template$<$typename Connection$>$ \\
+\mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_stats}{Stats}} \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::\+Get\+Stats (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_pool_a6b2bf2b1feedd7871760ab88adb06a81}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!MaintenanceLoop@{MaintenanceLoop}}
+\index{MaintenanceLoop@{MaintenanceLoop}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{MaintenanceLoop()}{MaintenanceLoop()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_a6b2bf2b1feedd7871760ab88adb06a81} 
+template$<$typename Connection$>$ \\
+void \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::\+Maintenance\+Loop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_pool_ab643ec86f4b63ffca1553f1c2454e0b4}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!Release@{Release}}
+\index{Release@{Release}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{Release()}{Release()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_ab643ec86f4b63ffca1553f1c2454e0b4} 
+template$<$typename Connection$>$ \\
+void \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::\+Release (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ Connection $>$}]{conn}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Release a connection back to the pool. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em conn} & Connection to release \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1_connection_pool_a39f2300e9ca99de5d6fe7a4b4c55c02a}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!Shutdown@{Shutdown}}
+\index{Shutdown@{Shutdown}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{Shutdown()}{Shutdown()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_a39f2300e9ca99de5d6fe7a4b4c55c02a} 
+template$<$typename Connection$>$ \\
+void \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::\+Shutdown (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Shutdown the connection pool. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1_connection_pool_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1_connection_pool_a3b3e13707fd6d0a5cf1d0fafa601aa50}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!active\_@{active\_}}
+\index{active\_@{active\_}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{active\_}{active\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_a3b3e13707fd6d0a5cf1d0fafa601aa50} 
+template$<$typename Connection$>$ \\
+std\+::unordered\+\_\+map$<$Connection\texorpdfstring{$\ast$}{*}, std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point$>$ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::active\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!available\_@{available\_}}
+\index{available\_@{available\_}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{available\_}{available\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_a0039bc12ea6ad3b1f71a0981db088e5b} 
+template$<$typename Connection$>$ \\
+std\+::queue$<$std\+::shared\+\_\+ptr$<$Connection$>$ $>$ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::available\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_pool_a84c844c38cb277db48d3e8d67cd6ff16}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!config\_@{config\_}}
+\index{config\_@{config\_}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{config\_}{config\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_a84c844c38cb277db48d3e8d67cd6ff16} 
+template$<$typename Connection$>$ \\
+\mbox{\hyperlink{structneo_1_1network_1_1_connection_pool_1_1_config}{Config}} \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::config\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_pool_a51437412836b08e39e54f404018402db}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!cv\_@{cv\_}}
+\index{cv\_@{cv\_}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{cv\_}{cv\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_a51437412836b08e39e54f404018402db} 
+template$<$typename Connection$>$ \\
+std\+::condition\+\_\+variable \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::cv\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_pool_a51610020aa8e37d333feed981ecb4413}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!factory\_@{factory\_}}
+\index{factory\_@{factory\_}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{factory\_}{factory\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_a51610020aa8e37d333feed981ecb4413} 
+template$<$typename Connection$>$ \\
+\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_aa6bac1eb2293aa8d2088a46602b1eb68}{Connection\+Factory}} \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::factory\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_pool_afb6ba12dd9f42c5247d8b92059bf9e26}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!failedConnections\_@{failedConnections\_}}
+\index{failedConnections\_@{failedConnections\_}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{failedConnections\_}{failedConnections\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_afb6ba12dd9f42c5247d8b92059bf9e26} 
+template$<$typename Connection$>$ \\
+std\+::atomic$<$size\+\_\+t$>$ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::failed\+Connections\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_pool_ae332f7b0112f11d1fb339abbcccfc72a}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!maintenanceThread\_@{maintenanceThread\_}}
+\index{maintenanceThread\_@{maintenanceThread\_}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{maintenanceThread\_}{maintenanceThread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_ae332f7b0112f11d1fb339abbcccfc72a} 
+template$<$typename Connection$>$ \\
+std\+::thread \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::maintenance\+Thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_pool_ad9704ffb6dbf59fa7bee4fc8c0998912}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_ad9704ffb6dbf59fa7bee4fc8c0998912} 
+template$<$typename Connection$>$ \\
+std\+::mutex \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_pool_adca9f8d1a25f6a766450caaca8c7d09a}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_adca9f8d1a25f6a766450caaca8c7d09a} 
+template$<$typename Connection$>$ \\
+std\+::atomic$<$bool$>$ \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1_connection_pool_a4028c08c3db10f3eee4b9596bb96b72b}\index{neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}!validator\_@{validator\_}}
+\index{validator\_@{validator\_}!neo::network::ConnectionPool$<$ Connection $>$@{neo::network::ConnectionPool$<$ Connection $>$}}
+\doxysubsubsection{\texorpdfstring{validator\_}{validator\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1_connection_pool_a4028c08c3db10f3eee4b9596bb96b72b} 
+template$<$typename Connection$>$ \\
+\mbox{\hyperlink{classneo_1_1network_1_1_connection_pool_abd4b6b1d326cccdb47be3f2246a215dc}{Connection\+Validator}} \mbox{\hyperlink{classneo_1_1network_1_1_connection_pool}{neo\+::network\+::\+Connection\+Pool}}$<$ Connection $>$\+::validator\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/\mbox{\hyperlink{connection__manager_8h}{connection\+\_\+manager.\+h}}\end{DoxyCompactItemize}

@@ -1,0 +1,291 @@
+\doxysection{neo\+::smartcontract\+::Storage\+Key Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1_storage_key}{}\label{classneo_1_1smartcontract_1_1_storage_key}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+
+
+Storage key for smart contract storage.  
+
+
+
+
+{\ttfamily \#include $<$storage\+\_\+key.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::smartcontract\+::Storage\+Key\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::smartcontract\+::Storage\+Key\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key_a00e2ce4949e4c3d635c6df37baa2495f}{Storage\+Key}} ()=default
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key_a158e0f314b70a78a37b72526c7480d29}{Storage\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+\_\+hash, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key)
+\begin{DoxyCompactList}\small\item\em Constructor with script hash and key. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key_aecb6711ecf645a7667f4616e98760d36}{Get\+Script\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Get script hash. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key_ad6c93c85bb2d7b35c216b61ca28c4ea9}{Set\+Script\+Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&script\+\_\+hash)
+\begin{DoxyCompactList}\small\item\em Set script hash. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key_aa92a0bb160961be5df99ac4994a9b238}{Get\+Key}} () const
+\begin{DoxyCompactList}\small\item\em Get key bytes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key_a682f0958f20de84e26ba918203ec33d8}{Set\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key)
+\begin{DoxyCompactList}\small\item\em Set key bytes. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key_a00b7b09a540e81608e000cb52ee59862}{Get\+Size}} () const override
+\begin{DoxyCompactList}\small\item\em Get size in bytes. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key_a82ca0272158af39901c687e414e4341d}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the object to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key_ade9fc348b246af8a9338a1572f9a93ec}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the object from a binary reader. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key_a681c7e312dbc9fddfdd863e0c606c979}{operator==}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key}{Storage\+Key}} \&other) const
+\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key_a5952dab22cd832f8be3bafdf9a547e03}{operator!=}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key}{Storage\+Key}} \&other) const
+\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key_a14b5c684c945800b0ea0d044ef92d6d3}{operator$<$}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key}{Storage\+Key}} \&other) const
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key_a594d46b4e651c8393243ff61bef0af0f}{To\+String}} () const
+\begin{DoxyCompactList}\small\item\em Convert to string representation. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key_a116c3300c355e4326d2b31003bf0b223}{Get\+Hash\+Code}} () const
+\begin{DoxyCompactList}\small\item\em Get hash code for use in hash maps. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key_afe6ec1ae5a18c322d6bdf326a403d479}{script\+\_\+hash\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key_a34fc81199397a327db80fb4b7df19e61}{key\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Storage key for smart contract storage. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_a00e2ce4949e4c3d635c6df37baa2495f}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}!StorageKey@{StorageKey}}
+\index{StorageKey@{StorageKey}!neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+\doxysubsubsection{\texorpdfstring{StorageKey()}{StorageKey()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_key_a00e2ce4949e4c3d635c6df37baa2495f} 
+neo\+::smartcontract\+::\+Storage\+Key\+::\+Storage\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Default constructor. 
+
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_a158e0f314b70a78a37b72526c7480d29}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}!StorageKey@{StorageKey}}
+\index{StorageKey@{StorageKey}!neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+\doxysubsubsection{\texorpdfstring{StorageKey()}{StorageKey()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_key_a158e0f314b70a78a37b72526c7480d29} 
+neo\+::smartcontract\+::\+Storage\+Key\+::\+Storage\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+\_\+hash}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{key}{}\end{DoxyParamCaption})}
+
+
+
+Constructor with script hash and key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+\_\+hash} & \doxylink{classneo_1_1smartcontract_1_1_contract}{Contract} script hash \\
+\hline
+{\em key} & Storage key bytes \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_ade9fc348b246af8a9338a1572f9a93ec}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_key_ade9fc348b246af8a9338a1572f9a93ec} 
+void neo\+::smartcontract\+::\+Storage\+Key\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the object from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_a116c3300c355e4326d2b31003bf0b223}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}!GetHashCode@{GetHashCode}}
+\index{GetHashCode@{GetHashCode}!neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+\doxysubsubsection{\texorpdfstring{GetHashCode()}{GetHashCode()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_key_a116c3300c355e4326d2b31003bf0b223} 
+size\+\_\+t neo\+::smartcontract\+::\+Storage\+Key\+::\+Get\+Hash\+Code (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get hash code for use in hash maps. 
+
+\begin{DoxyReturn}{Returns}
+Hash code 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_aa92a0bb160961be5df99ac4994a9b238}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}!GetKey@{GetKey}}
+\index{GetKey@{GetKey}!neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+\doxysubsubsection{\texorpdfstring{GetKey()}{GetKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_key_aa92a0bb160961be5df99ac4994a9b238} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::smartcontract\+::\+Storage\+Key\+::\+Get\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get key bytes. 
+
+\begin{DoxyReturn}{Returns}
+Key bytes 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_aecb6711ecf645a7667f4616e98760d36}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}!GetScriptHash@{GetScriptHash}}
+\index{GetScriptHash@{GetScriptHash}!neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+\doxysubsubsection{\texorpdfstring{GetScriptHash()}{GetScriptHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_key_aecb6711ecf645a7667f4616e98760d36} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& neo\+::smartcontract\+::\+Storage\+Key\+::\+Get\+Script\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get script hash. 
+
+\begin{DoxyReturn}{Returns}
+Script hash 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_a00b7b09a540e81608e000cb52ee59862}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}!GetSize@{GetSize}}
+\index{GetSize@{GetSize}!neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+\doxysubsubsection{\texorpdfstring{GetSize()}{GetSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_key_a00b7b09a540e81608e000cb52ee59862} 
+size\+\_\+t neo\+::smartcontract\+::\+Storage\+Key\+::\+Get\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Get size in bytes. 
+
+\begin{DoxyReturn}{Returns}
+Size in bytes 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_a5952dab22cd832f8be3bafdf9a547e03}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_key_a5952dab22cd832f8be3bafdf9a547e03} 
+bool neo\+::smartcontract\+::\+Storage\+Key\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key}{Storage\+Key}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_a14b5c684c945800b0ea0d044ef92d6d3}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}!operator$<$@{operator$<$}}
+\index{operator$<$@{operator$<$}!neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+\doxysubsubsection{\texorpdfstring{operator$<$()}{operator<()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_key_a14b5c684c945800b0ea0d044ef92d6d3} 
+bool neo\+::smartcontract\+::\+Storage\+Key\+::operator$<$ (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key}{Storage\+Key}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_a681c7e312dbc9fddfdd863e0c606c979}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_key_a681c7e312dbc9fddfdd863e0c606c979} 
+bool neo\+::smartcontract\+::\+Storage\+Key\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_storage_key}{Storage\+Key}} \&}]{other}{}\end{DoxyParamCaption}) const}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_a82ca0272158af39901c687e414e4341d}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_key_a82ca0272158af39901c687e414e4341d} 
+void neo\+::smartcontract\+::\+Storage\+Key\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the object to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_a682f0958f20de84e26ba918203ec33d8}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}!SetKey@{SetKey}}
+\index{SetKey@{SetKey}!neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+\doxysubsubsection{\texorpdfstring{SetKey()}{SetKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_key_a682f0958f20de84e26ba918203ec33d8} 
+void neo\+::smartcontract\+::\+Storage\+Key\+::\+Set\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set key bytes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & Key bytes \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_ad6c93c85bb2d7b35c216b61ca28c4ea9}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}!SetScriptHash@{SetScriptHash}}
+\index{SetScriptHash@{SetScriptHash}!neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+\doxysubsubsection{\texorpdfstring{SetScriptHash()}{SetScriptHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_key_ad6c93c85bb2d7b35c216b61ca28c4ea9} 
+void neo\+::smartcontract\+::\+Storage\+Key\+::\+Set\+Script\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{script\+\_\+hash}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Set script hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script\+\_\+hash} & Script hash \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_a594d46b4e651c8393243ff61bef0af0f}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_key_a594d46b4e651c8393243ff61bef0af0f} 
+std\+::string neo\+::smartcontract\+::\+Storage\+Key\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Convert to string representation. 
+
+\begin{DoxyReturn}{Returns}
+String representation 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_a34fc81199397a327db80fb4b7df19e61}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}!key\_@{key\_}}
+\index{key\_@{key\_}!neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+\doxysubsubsection{\texorpdfstring{key\_}{key\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_key_a34fc81199397a327db80fb4b7df19e61} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::smartcontract\+::\+Storage\+Key\+::key\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_storage_key_afe6ec1ae5a18c322d6bdf326a403d479}\index{neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}!script\_hash\_@{script\_hash\_}}
+\index{script\_hash\_@{script\_hash\_}!neo::smartcontract::StorageKey@{neo::smartcontract::StorageKey}}
+\doxysubsubsection{\texorpdfstring{script\_hash\_}{script\_hash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_storage_key_afe6ec1ae5a18c322d6bdf326a403d479} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::smartcontract\+::\+Storage\+Key\+::script\+\_\+hash\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/\mbox{\hyperlink{smartcontract_2storage__key_8h}{storage\+\_\+key.\+h}}\end{DoxyCompactItemize}

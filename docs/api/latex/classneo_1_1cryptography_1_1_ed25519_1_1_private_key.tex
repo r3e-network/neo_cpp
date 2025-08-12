@@ -1,0 +1,142 @@
+\doxysection{neo\+::cryptography\+::Ed25519\+::Private\+Key Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_private_key}{}\label{classneo_1_1cryptography_1_1_ed25519_1_1_private_key}\index{neo::cryptography::Ed25519::PrivateKey@{neo::cryptography::Ed25519::PrivateKey}}
+
+
+Represents an \doxylink{classneo_1_1cryptography_1_1_ed25519}{Ed25519} private key.  
+
+
+
+
+{\ttfamily \#include $<$ed25519.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_a5fab8056a57b909fbfaf5bbda42e4233}{Private\+Key}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&key\+\_\+data)
+\begin{DoxyCompactList}\small\item\em Constructs a private key from raw bytes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_a61ddc9ca63018472edb99fc1a0549d5f}{Get\+Bytes}} () const
+\begin{DoxyCompactList}\small\item\em Gets the raw private key bytes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key}{Public\+Key}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_ac7aa39cb5898e8c4e6b3a874cc42e3cb}{Get\+Public\+Key}} () const
+\begin{DoxyCompactList}\small\item\em Derives the public key from this private key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_af954f45d6cc45067fa4adbc25fdbcf34}{Sign}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&message) const
+\begin{DoxyCompactList}\small\item\em Signs a message with this private key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key}{Private\+Key}} \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_aa0cc15db43d92189ef7131a241a18a0c}{Generate}} ()
+\begin{DoxyCompactList}\small\item\em Generates a random private key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::array$<$ uint8\+\_\+t, \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_a55de8977292b22807c27dc979915a8cd}{PRIVATE\+\_\+\+KEY\+\_\+\+SIZE}} $>$ \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_aa618d5b4f536853c4f7ec6f655cb549a}{key\+\_\+data\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents an \doxylink{classneo_1_1cryptography_1_1_ed25519}{Ed25519} private key. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_a5fab8056a57b909fbfaf5bbda42e4233}\index{neo::cryptography::Ed25519::PrivateKey@{neo::cryptography::Ed25519::PrivateKey}!PrivateKey@{PrivateKey}}
+\index{PrivateKey@{PrivateKey}!neo::cryptography::Ed25519::PrivateKey@{neo::cryptography::Ed25519::PrivateKey}}
+\doxysubsubsection{\texorpdfstring{PrivateKey()}{PrivateKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_a5fab8056a57b909fbfaf5bbda42e4233} 
+neo\+::cryptography\+::\+Ed25519\+::\+Private\+Key\+::\+Private\+Key (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{key\+\_\+data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a private key from raw bytes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key\+\_\+data} & The 32-\/byte private key data. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 0
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_aa0cc15db43d92189ef7131a241a18a0c}\index{neo::cryptography::Ed25519::PrivateKey@{neo::cryptography::Ed25519::PrivateKey}!Generate@{Generate}}
+\index{Generate@{Generate}!neo::cryptography::Ed25519::PrivateKey@{neo::cryptography::Ed25519::PrivateKey}}
+\doxysubsubsection{\texorpdfstring{Generate()}{Generate()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_aa0cc15db43d92189ef7131a241a18a0c} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_private_key}{Ed25519\+::\+Private\+Key}} neo\+::cryptography\+::\+Ed25519\+::\+Private\+Key\+::\+Generate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Generates a random private key. 
+
+\begin{DoxyReturn}{Returns}
+A new random private key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_a61ddc9ca63018472edb99fc1a0549d5f}\index{neo::cryptography::Ed25519::PrivateKey@{neo::cryptography::Ed25519::PrivateKey}!GetBytes@{GetBytes}}
+\index{GetBytes@{GetBytes}!neo::cryptography::Ed25519::PrivateKey@{neo::cryptography::Ed25519::PrivateKey}}
+\doxysubsubsection{\texorpdfstring{GetBytes()}{GetBytes()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_a61ddc9ca63018472edb99fc1a0549d5f} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Ed25519\+::\+Private\+Key\+::\+Get\+Bytes (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the raw private key bytes. 
+
+\begin{DoxyReturn}{Returns}
+The private key as a byte vector. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_ac7aa39cb5898e8c4e6b3a874cc42e3cb}\index{neo::cryptography::Ed25519::PrivateKey@{neo::cryptography::Ed25519::PrivateKey}!GetPublicKey@{GetPublicKey}}
+\index{GetPublicKey@{GetPublicKey}!neo::cryptography::Ed25519::PrivateKey@{neo::cryptography::Ed25519::PrivateKey}}
+\doxysubsubsection{\texorpdfstring{GetPublicKey()}{GetPublicKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_ac7aa39cb5898e8c4e6b3a874cc42e3cb} 
+\mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_1_1_public_key}{Ed25519\+::\+Public\+Key}} neo\+::cryptography\+::\+Ed25519\+::\+Private\+Key\+::\+Get\+Public\+Key (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Derives the public key from this private key. 
+
+\begin{DoxyReturn}{Returns}
+The corresponding public key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_af954f45d6cc45067fa4adbc25fdbcf34}\index{neo::cryptography::Ed25519::PrivateKey@{neo::cryptography::Ed25519::PrivateKey}!Sign@{Sign}}
+\index{Sign@{Sign}!neo::cryptography::Ed25519::PrivateKey@{neo::cryptography::Ed25519::PrivateKey}}
+\doxysubsubsection{\texorpdfstring{Sign()}{Sign()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_af954f45d6cc45067fa4adbc25fdbcf34} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::cryptography\+::\+Ed25519\+::\+Private\+Key\+::\+Sign (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{message}{}\end{DoxyParamCaption}) const}
+
+
+
+Signs a message with this private key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to sign. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 64-\/byte signature. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_aa618d5b4f536853c4f7ec6f655cb549a}\index{neo::cryptography::Ed25519::PrivateKey@{neo::cryptography::Ed25519::PrivateKey}!key\_data\_@{key\_data\_}}
+\index{key\_data\_@{key\_data\_}!neo::cryptography::Ed25519::PrivateKey@{neo::cryptography::Ed25519::PrivateKey}}
+\doxysubsubsection{\texorpdfstring{key\_data\_}{key\_data\_}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_ed25519_1_1_private_key_aa618d5b4f536853c4f7ec6f655cb549a} 
+std\+::array$<$uint8\+\_\+t, \mbox{\hyperlink{classneo_1_1cryptography_1_1_ed25519_a55de8977292b22807c27dc979915a8cd}{PRIVATE\+\_\+\+KEY\+\_\+\+SIZE}}$>$ neo\+::cryptography\+::\+Ed25519\+::\+Private\+Key\+::key\+\_\+data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/\mbox{\hyperlink{ed25519_8h}{ed25519.\+h}}\item 
+src/cryptography/\mbox{\hyperlink{ed25519_8cpp}{ed25519.\+cpp}}\end{DoxyCompactItemize}

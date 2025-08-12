@@ -1,0 +1,647 @@
+\doxysection{neo\+::extensions\+::Big\+Integer\+Extensions Class Reference}
+\hypertarget{classneo_1_1extensions_1_1_big_integer_extensions}{}\label{classneo_1_1extensions_1_1_big_integer_extensions}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+
+
+Extensions for \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} operations.  
+
+
+
+
+{\ttfamily \#include $<$biginteger\+\_\+extensions.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::extensions\+::Big\+Integer\+Extensions\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}}
+\begin{DoxyCompactList}\small\item\em \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} representation using vector of 64-\/bit words. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a1eeb3a3e191d78ed1c2a6b9161db8c98}{From\+String}} (const std\+::string \&value)
+\begin{DoxyCompactList}\small\item\em Create \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} from decimal string. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a2d57b3382fd7ba4eada76c5fe4f6b3d8}{From\+Hex\+String}} (const std\+::string \&hex)
+\begin{DoxyCompactList}\small\item\em Create \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} from hexadecimal string. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_aa71d664741dd7572f71eb47d044c5d5a}{From\+Byte\+Array}} (const std\+::vector$<$ uint8\+\_\+t $>$ \&bytes, bool is\+Negative=false)
+\begin{DoxyCompactList}\small\item\em Create \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} from byte array. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a23eb0a78085f32f5a3ad0b680b5c36ef}{From\+Int64}} (int64\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Create \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} from 64-\/bit integer. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_ae99e2c8d8bf7881f2dd11ac409de1a97}{From\+UInt64}} (uint64\+\_\+t value)
+\begin{DoxyCompactList}\small\item\em Create \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} from 64-\/bit unsigned integer. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_ab80c153b2a4adf36fc631309d4794d28}{To\+String}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&value)
+\begin{DoxyCompactList}\small\item\em Convert \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} to decimal string. \end{DoxyCompactList}\item 
+static std\+::string \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a4da73263b1831c2e2bf3471de2e7149f}{To\+Hex\+String}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&value, bool prefix=false)
+\begin{DoxyCompactList}\small\item\em Convert \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} to hexadecimal string. \end{DoxyCompactList}\item 
+static std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_acb5e841108ee6bf7835c14d132c16db3}{To\+Byte\+Array}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&value)
+\begin{DoxyCompactList}\small\item\em Convert \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} to byte array. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a43bb1d4c21295fce34a108540f56b805}{Add}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&left, const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&right)
+\begin{DoxyCompactList}\small\item\em Add two Big\+Integers. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a9bb4f8270323224c45e9d77d6af3d4b4}{Subtract}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&left, const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&right)
+\begin{DoxyCompactList}\small\item\em Subtract two Big\+Integers. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_ac6627f6c998190f7a2c372f8e4e54efb}{Multiply}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&left, const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&right)
+\begin{DoxyCompactList}\small\item\em Multiply two Big\+Integers. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_aa306dd6eec049f3f19b22027633c2612}{Divide}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&dividend, const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&divisor)
+\begin{DoxyCompactList}\small\item\em Divide two Big\+Integers. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a7c3f8c3cbe30676d091774e65c0d01b1}{Modulo}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&dividend, const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&divisor)
+\begin{DoxyCompactList}\small\item\em Modulo operation. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a8b5b508aa662442065d451388adab037}{Power}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&base\+Value, uint32\+\_\+t exponent)
+\begin{DoxyCompactList}\small\item\em Power operation. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a95a118d3083a134be244a6a43ec23e96}{Modular\+Power}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&base\+Value, const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&exponent, const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&modulus)
+\begin{DoxyCompactList}\small\item\em Modular power operation (base\texorpdfstring{$^\wedge$}{\string^}exponent mod modulus) \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a51e7053f4fece2d7ff8f3284cf87cd5b}{Greatest\+Common\+Divisor}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&left, const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&right)
+\begin{DoxyCompactList}\small\item\em Greatest Common Divisor. \end{DoxyCompactList}\item 
+static int \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_ad0d4a34aaab8b612a96a95820908c2cd}{Compare}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&left, const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&right)
+\begin{DoxyCompactList}\small\item\em Compare two Big\+Integers. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_adec1f3008ed21ede159b8a3f5311834a}{Abs}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&value)
+\begin{DoxyCompactList}\small\item\em Get absolute value. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_afe154f6bd4b09a7320f92eec52d47ffe}{Negate}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&value)
+\begin{DoxyCompactList}\small\item\em Negate \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a5529b409b988d0711184e47d8b5a5155}{Is\+Zero}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&value)
+\begin{DoxyCompactList}\small\item\em Check if \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} is zero. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a1af735495627d506abf89e61ec2cdb86}{Is\+One}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&value)
+\begin{DoxyCompactList}\small\item\em Check if \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} is one. \end{DoxyCompactList}\item 
+static bool \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_abff783eb2f8ab40c7502ec83b8862cdc}{Is\+Even}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&value)
+\begin{DoxyCompactList}\small\item\em Check if \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} is even. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a0553aeef5e2f7234b339a24dd1c30090}{Left\+Shift}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&value, uint32\+\_\+t shift)
+\begin{DoxyCompactList}\small\item\em Bit shift left. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a7af52e40b44a1068e1fac6f3ea35d1f7}{Right\+Shift}} (const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&value, uint32\+\_\+t shift)
+\begin{DoxyCompactList}\small\item\em Bit shift right. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a262f5fb5d21897e422a1208cd142087d}{Zero}}
+\item 
+static const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_aaeac036afa9f0534b96ccb459a2a5be2}{One}}
+\item 
+static const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a204f4a9a5b1b72ad3594c3c569b7daf4}{Minus\+One}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Extensions for \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} operations. 
+
+\hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_autotoc_md10}{}\doxysubsubsection{\texorpdfstring{Overview}{Overview}}\label{classneo_1_1extensions_1_1_big_integer_extensions_autotoc_md10}
+Provides utilities for arbitrary precision integer arithmetic, conversions, and mathematical operations needed for blockchain operations.\hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_autotoc_md11}{}\doxysubsubsection{\texorpdfstring{API Reference}{API Reference}}\label{classneo_1_1extensions_1_1_big_integer_extensions_autotoc_md11}
+
+\begin{DoxyItemize}
+\item {\bfseries{Arithmetic}}\+: Add, subtract, multiply, divide operations
+\item {\bfseries{Conversion}}\+: To/from strings, byte arrays, standard integers
+\item {\bfseries{Utilities}}\+: Comparison, bit operations, modular arithmetic
+\end{DoxyItemize}\hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_autotoc_md12}{}\doxysubsubsection{\texorpdfstring{Usage Examples}{Usage Examples}}\label{classneo_1_1extensions_1_1_big_integer_extensions_autotoc_md12}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{comment}{//\ Parse\ from\ string}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ big\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a1eeb3a3e191d78ed1c2a6b9161db8c98}{BigIntegerExtensions::FromString}}(\textcolor{stringliteral}{"{}123456789012345678901234567890"{}});}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Convert\ to\ hex}}
+\DoxyCodeLine{std::string\ hex\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a4da73263b1831c2e2bf3471de2e7149f}{BigIntegerExtensions::ToHexString}}(big);}
+\DoxyCodeLine{}
+\DoxyCodeLine{\textcolor{comment}{//\ Arithmetic\ operations}}
+\DoxyCodeLine{\textcolor{keyword}{auto}\ result\ =\ \mbox{\hyperlink{classneo_1_1extensions_1_1_big_integer_extensions_a43bb1d4c21295fce34a108540f56b805}{BigIntegerExtensions::Add}}(big1,\ big2);}
+
+\end{DoxyCode}
+\hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_autotoc_md13}{}\doxysubsubsection{\texorpdfstring{Design Notes}{Design Notes}}\label{classneo_1_1extensions_1_1_big_integer_extensions_autotoc_md13}
+
+\begin{DoxyItemize}
+\item Uses vector$<$uint64\+\_\+t$>$ for internal representation
+\item Little-\/endian storage (least significant digit first)
+\item Supports both positive and negative numbers 
+\end{DoxyItemize}
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_adec1f3008ed21ede159b8a3f5311834a}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!Abs@{Abs}}
+\index{Abs@{Abs}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{Abs()}{Abs()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_adec1f3008ed21ede159b8a3f5311834a} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Abs (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Get absolute value. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Absolute value 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_a43bb1d4c21295fce34a108540f56b805}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!Add@{Add}}
+\index{Add@{Add}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{Add()}{Add()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_a43bb1d4c21295fce34a108540f56b805} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Add (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{left}{, }\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Add two Big\+Integers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First operand \\
+\hline
+{\em right} & Second operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Sum result 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_ad0d4a34aaab8b612a96a95820908c2cd}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!Compare@{Compare}}
+\index{Compare@{Compare}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{Compare()}{Compare()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_ad0d4a34aaab8b612a96a95820908c2cd} 
+int neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Compare (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{left}{, }\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Compare two Big\+Integers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First operand \\
+\hline
+{\em right} & Second operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+-\/1 if left \texorpdfstring{$<$}{<} right, 0 if equal, 1 if left \texorpdfstring{$>$}{>} right 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_aa306dd6eec049f3f19b22027633c2612}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!Divide@{Divide}}
+\index{Divide@{Divide}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{Divide()}{Divide()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_aa306dd6eec049f3f19b22027633c2612} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Divide (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{dividend}{, }\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{divisor}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Divide two Big\+Integers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dividend} & Dividend \\
+\hline
+{\em divisor} & Divisor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Quotient result 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_aa71d664741dd7572f71eb47d044c5d5a}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!FromByteArray@{FromByteArray}}
+\index{FromByteArray@{FromByteArray}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{FromByteArray()}{FromByteArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_aa71d664741dd7572f71eb47d044c5d5a} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+From\+Byte\+Array (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t $>$ \&}]{bytes}{, }\item[{bool}]{is\+Negative}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} from byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em bytes} & Byte array (big-\/endian) \\
+\hline
+{\em is\+Negative} & Whether the number is negative \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} instance 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_a2d57b3382fd7ba4eada76c5fe4f6b3d8}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!FromHexString@{FromHexString}}
+\index{FromHexString@{FromHexString}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{FromHexString()}{FromHexString()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_a2d57b3382fd7ba4eada76c5fe4f6b3d8} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+From\+Hex\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{hex}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} from hexadecimal string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hex} & Hexadecimal string (with or without 0x prefix) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} instance 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_a23eb0a78085f32f5a3ad0b680b5c36ef}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!FromInt64@{FromInt64}}
+\index{FromInt64@{FromInt64}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{FromInt64()}{FromInt64()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_a23eb0a78085f32f5a3ad0b680b5c36ef} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+From\+Int64 (\begin{DoxyParamCaption}\item[{int64\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} from 64-\/bit integer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Integer value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} instance 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_a1eeb3a3e191d78ed1c2a6b9161db8c98}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!FromString@{FromString}}
+\index{FromString@{FromString}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{FromString()}{FromString()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_a1eeb3a3e191d78ed1c2a6b9161db8c98} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+From\+String (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} from decimal string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Decimal string representation \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} instance 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_ae99e2c8d8bf7881f2dd11ac409de1a97}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!FromUInt64@{FromUInt64}}
+\index{FromUInt64@{FromUInt64}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{FromUInt64()}{FromUInt64()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_ae99e2c8d8bf7881f2dd11ac409de1a97} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+From\+UInt64 (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Create \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} from 64-\/bit unsigned integer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & Unsigned integer value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} instance 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_a51e7053f4fece2d7ff8f3284cf87cd5b}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!GreatestCommonDivisor@{GreatestCommonDivisor}}
+\index{GreatestCommonDivisor@{GreatestCommonDivisor}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{GreatestCommonDivisor()}{GreatestCommonDivisor()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_a51e7053f4fece2d7ff8f3284cf87cd5b} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Greatest\+Common\+Divisor (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{left}{, }\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Greatest Common Divisor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First number \\
+\hline
+{\em right} & Second number \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+GCD of left and right 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_abff783eb2f8ab40c7502ec83b8862cdc}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!IsEven@{IsEven}}
+\index{IsEven@{IsEven}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{IsEven()}{IsEven()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_abff783eb2f8ab40c7502ec83b8862cdc} 
+bool neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Is\+Even (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} is even. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if even 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_a1af735495627d506abf89e61ec2cdb86}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!IsOne@{IsOne}}
+\index{IsOne@{IsOne}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{IsOne()}{IsOne()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_a1af735495627d506abf89e61ec2cdb86} 
+bool neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Is\+One (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} is one. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if one 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_a5529b409b988d0711184e47d8b5a5155}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!IsZero@{IsZero}}
+\index{IsZero@{IsZero}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{IsZero()}{IsZero()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_a5529b409b988d0711184e47d8b5a5155} 
+bool neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Is\+Zero (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Check if \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} is zero. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if zero 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_a0553aeef5e2f7234b339a24dd1c30090}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!LeftShift@{LeftShift}}
+\index{LeftShift@{LeftShift}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{LeftShift()}{LeftShift()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_a0553aeef5e2f7234b339a24dd1c30090} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Left\+Shift (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{value}{, }\item[{uint32\+\_\+t}]{shift}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Bit shift left. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} value \\
+\hline
+{\em shift} & Number of bits to shift \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Shifted result 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_a95a118d3083a134be244a6a43ec23e96}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!ModularPower@{ModularPower}}
+\index{ModularPower@{ModularPower}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{ModularPower()}{ModularPower()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_a95a118d3083a134be244a6a43ec23e96} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Modular\+Power (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{base\+Value}{, }\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{exponent}{, }\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{modulus}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Modular power operation (base\texorpdfstring{$^\wedge$}{\string^}exponent mod modulus) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base\+Value} & Base value \\
+\hline
+{\em exponent} & Exponent \\
+\hline
+{\em modulus} & Modulus \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Result of (base\texorpdfstring{$^\wedge$}{\string^}exponent) mod modulus 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_a7c3f8c3cbe30676d091774e65c0d01b1}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!Modulo@{Modulo}}
+\index{Modulo@{Modulo}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{Modulo()}{Modulo()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_a7c3f8c3cbe30676d091774e65c0d01b1} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Modulo (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{dividend}{, }\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{divisor}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Modulo operation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dividend} & Dividend \\
+\hline
+{\em divisor} & Divisor \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Remainder result 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_ac6627f6c998190f7a2c372f8e4e54efb}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!Multiply@{Multiply}}
+\index{Multiply@{Multiply}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{Multiply()}{Multiply()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_ac6627f6c998190f7a2c372f8e4e54efb} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Multiply (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{left}{, }\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Multiply two Big\+Integers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First operand \\
+\hline
+{\em right} & Second operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Product result 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_afe154f6bd4b09a7320f92eec52d47ffe}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!Negate@{Negate}}
+\index{Negate@{Negate}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{Negate()}{Negate()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_afe154f6bd4b09a7320f92eec52d47ffe} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Negate (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Negate \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} value \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Negated value 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_a8b5b508aa662442065d451388adab037}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!Power@{Power}}
+\index{Power@{Power}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{Power()}{Power()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_a8b5b508aa662442065d451388adab037} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Power (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{base\+Value}{, }\item[{uint32\+\_\+t}]{exponent}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Power operation. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em base\+Value} & Base value \\
+\hline
+{\em exponent} & Exponent \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Result of base\texorpdfstring{$^\wedge$}{\string^}exponent 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_a7af52e40b44a1068e1fac6f3ea35d1f7}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!RightShift@{RightShift}}
+\index{RightShift@{RightShift}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{RightShift()}{RightShift()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_a7af52e40b44a1068e1fac6f3ea35d1f7} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Right\+Shift (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{value}{, }\item[{uint32\+\_\+t}]{shift}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Bit shift right. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} value \\
+\hline
+{\em shift} & Number of bits to shift \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Shifted result 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_a9bb4f8270323224c45e9d77d6af3d4b4}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!Subtract@{Subtract}}
+\index{Subtract@{Subtract}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{Subtract()}{Subtract()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_a9bb4f8270323224c45e9d77d6af3d4b4} 
+\mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Subtract (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{left}{, }\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{right}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Subtract two Big\+Integers. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em left} & First operand \\
+\hline
+{\em right} & Second operand \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Difference result 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_acb5e841108ee6bf7835c14d132c16db3}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!ToByteArray@{ToByteArray}}
+\index{ToByteArray@{ToByteArray}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{ToByteArray()}{ToByteArray()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_acb5e841108ee6bf7835c14d132c16db3} 
+std\+::vector$<$ uint8\+\_\+t $>$ neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+To\+Byte\+Array (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} to byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Byte array (big-\/endian) 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_a4da73263b1831c2e2bf3471de2e7149f}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!ToHexString@{ToHexString}}
+\index{ToHexString@{ToHexString}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{ToHexString()}{ToHexString()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_a4da73263b1831c2e2bf3471de2e7149f} 
+std\+::string neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+To\+Hex\+String (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{value}{, }\item[{bool}]{prefix}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} to hexadecimal string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} to convert \\
+\hline
+{\em prefix} & Whether to include "{}0x"{} prefix \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Hexadecimal string representation 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_ab80c153b2a4adf36fc631309d4794d28}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_ab80c153b2a4adf36fc631309d4794d28} 
+std\+::string neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+To\+String (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer}} \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Convert \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} to decimal string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & \doxylink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer} to convert \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Decimal string representation 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_a204f4a9a5b1b72ad3594c3c569b7daf4}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!MinusOne@{MinusOne}}
+\index{MinusOne@{MinusOne}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{MinusOne}{MinusOne}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_a204f4a9a5b1b72ad3594c3c569b7daf4} 
+const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Minus\+One\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigIntegerExtensions::BigInteger}}(\textcolor{keyword}{static\_cast<}int64\_t\textcolor{keyword}{>}(-\/1))}
+
+\end{DoxyCode}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_aaeac036afa9f0534b96ccb459a2a5be2}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!One@{One}}
+\index{One@{One}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{One}{One}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_aaeac036afa9f0534b96ccb459a2a5be2} 
+const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+One\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigIntegerExtensions::BigInteger}}(\textcolor{keyword}{static\_cast<}int64\_t\textcolor{keyword}{>}(1))}
+
+\end{DoxyCode}
+\Hypertarget{classneo_1_1extensions_1_1_big_integer_extensions_a262f5fb5d21897e422a1208cd142087d}\index{neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}!Zero@{Zero}}
+\index{Zero@{Zero}!neo::extensions::BigIntegerExtensions@{neo::extensions::BigIntegerExtensions}}
+\doxysubsubsection{\texorpdfstring{Zero}{Zero}}
+{\footnotesize\ttfamily \label{classneo_1_1extensions_1_1_big_integer_extensions_a262f5fb5d21897e422a1208cd142087d} 
+const \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{Big\+Integer\+Extensions\+::\+Big\+Integer}} neo\+::extensions\+::\+Big\+Integer\+Extensions\+::\+Zero\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{=}
+\DoxyCodeLine{\ \ \ \ \mbox{\hyperlink{structneo_1_1extensions_1_1_big_integer_extensions_1_1_big_integer}{BigIntegerExtensions::BigInteger}}(\textcolor{keyword}{static\_cast<}int64\_t\textcolor{keyword}{>}(0))}
+
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/extensions/\mbox{\hyperlink{biginteger__extensions_8h}{biginteger\+\_\+extensions.\+h}}\item 
+src/extensions/\mbox{\hyperlink{biginteger__extensions_8cpp}{biginteger\+\_\+extensions.\+cpp}}\end{DoxyCompactItemize}

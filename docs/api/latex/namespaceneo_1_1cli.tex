@@ -1,0 +1,64 @@
+\doxysection{neo\+::cli Namespace Reference}
+\hypertarget{namespaceneo_1_1cli}{}\label{namespaceneo_1_1cli}\index{neo::cli@{neo::cli}}
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1cli_1_1_base_commands}{Base\+Commands}}
+\begin{DoxyCompactList}\small\item\em Base commands for the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1cli_1_1_blockchain_commands}{Blockchain\+Commands}}
+\begin{DoxyCompactList}\small\item\em Blockchain commands for the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1cli_1_1_c_l_i}{CLI}}
+\begin{DoxyCompactList}\small\item\em Represents a \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI} (Command Line Interface). \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1cli_1_1_command_handler}{Command\+Handler}}
+\begin{DoxyCompactList}\small\item\em Handles \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI} commands. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1cli_1_1_command_line_options}{Command\+Line\+Options}}
+\begin{DoxyCompactList}\small\item\em Command line options for the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1cli_1_1_console_command_attribute}{Console\+Command\+Attribute}}
+\begin{DoxyCompactList}\small\item\em Attribute for console commands. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1cli_1_1_console_helper}{Console\+Helper}}
+\begin{DoxyCompactList}\small\item\em Console helper utilities for \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI} operations. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1cli_1_1_main_service}{Main\+Service}}
+\begin{DoxyCompactList}\small\item\em Main service for the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1cli_1_1_node_commands}{Node\+Commands}}
+\begin{DoxyCompactList}\small\item\em Node commands for the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1cli_1_1_safe_type_converters}{Safe\+Type\+Converters}}
+\begin{DoxyCompactList}\small\item\em RAII-\/safe type converter that returns smart pointers instead of raw pointers. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1cli_1_1_type_converters}{Type\+Converters}}
+\begin{DoxyCompactList}\small\item\em Manages type converters. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1cli_1_1_wallet_commands}{Wallet\+Commands}}
+\begin{DoxyCompactList}\small\item\em Wallet commands for the \doxylink{classneo_1_1cli_1_1_c_l_i}{CLI}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Typedefs}
+\begin{DoxyCompactItemize}
+\item 
+using \mbox{\hyperlink{namespaceneo_1_1cli_aced5a9d3ca7228bbcb5059f2cb3b728f}{Type\+Converter}} = std\+::function$<$void\texorpdfstring{$\ast$}{*}(const std\+::vector$<$std\+::string$>$\&, bool)$>$
+\begin{DoxyCompactList}\small\item\em Type converter function. \end{DoxyCompactList}\item 
+using \mbox{\hyperlink{namespaceneo_1_1cli_a4c549950149f746a6c68cd16b17cfea7}{Command\+Handler}} = std\+::function$<$bool(const std\+::vector$<$std\+::string$>$\&)$>$
+\begin{DoxyCompactList}\small\item\em Command handler function. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-typedef-members}
+\Hypertarget{namespaceneo_1_1cli_doc-typedef-members}
+\doxysubsection{Typedef Documentation}
+\Hypertarget{namespaceneo_1_1cli_a4c549950149f746a6c68cd16b17cfea7}\index{neo::cli@{neo::cli}!CommandHandler@{CommandHandler}}
+\index{CommandHandler@{CommandHandler}!neo::cli@{neo::cli}}
+\doxysubsubsection{\texorpdfstring{CommandHandler}{CommandHandler}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cli_a4c549950149f746a6c68cd16b17cfea7} 
+using neo\+::cli\+::\+Command\+Handler = std\+::function$<$bool(const std\+::vector$<$std\+::string$>$\&)$>$}
+
+
+
+Command handler function. 
+
+\Hypertarget{namespaceneo_1_1cli_aced5a9d3ca7228bbcb5059f2cb3b728f}\index{neo::cli@{neo::cli}!TypeConverter@{TypeConverter}}
+\index{TypeConverter@{TypeConverter}!neo::cli@{neo::cli}}
+\doxysubsubsection{\texorpdfstring{TypeConverter}{TypeConverter}}
+{\footnotesize\ttfamily \label{namespaceneo_1_1cli_aced5a9d3ca7228bbcb5059f2cb3b728f} 
+typedef std\+::function$<$ void \texorpdfstring{$\ast$}{*}(const std\+::vector$<$ std\+::string $>$ \&, bool)$>$ \mbox{\hyperlink{namespaceneo_1_1cli_aced5a9d3ca7228bbcb5059f2cb3b728f}{neo\+::cli\+::\+Type\+Converter}} = std\+::function$<$void\texorpdfstring{$\ast$}{*}(const std\+::vector$<$std\+::string$>$\&, bool)$>$}
+
+
+
+Type converter function. 
+
+\begin{DoxyWarning}{Warning}
+Returns raw pointer -\/ caller MUST take ownership and delete. Consider using \doxylink{classneo_1_1cli_1_1_safe_type_converters}{Safe\+Type\+Converters} for RAII safety. 
+\end{DoxyWarning}

@@ -1,0 +1,57 @@
+\doxysection{header\+\_\+cache.\+h}
+\hypertarget{ledger_2header__cache_8h_source}{}\label{ledger_2header__cache_8h_source}\index{include/neo/ledger/header\_cache.h@{include/neo/ledger/header\_cache.h}}
+\mbox{\hyperlink{ledger_2header__cache_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{ledger_2header_8h}{neo/ledger/header.h}}>}}
+\DoxyCodeLine{00005\ }
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <deque>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <shared\_mutex>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1ledger}{neo::ledger}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a4651fd11ddc81c3d8e9d5b15e029c818}{HeaderCache}}}
+\DoxyCodeLine{00018\ \{}
+\DoxyCodeLine{00019\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a4651fd11ddc81c3d8e9d5b15e029c818}{HeaderCache}}(\textcolor{keywordtype}{size\_t}\ max\_size\ =\ 10000);}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00029\ \ \ \ \ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a575ed1884475f8b33927eaac1c59d577}{\string~HeaderCache}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a5f06a93c7a37088ab5357a6f79635df5}{Add}}(std::shared\_ptr<Header>\ header);}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00043\ \ \ \ \ std::shared\_ptr<Header>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_aec36b4c1258a7784b1741b4eda0f32ad}{Get}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00050\ \ \ \ \ std::shared\_ptr<Header>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_aec36b4c1258a7784b1741b4eda0f32ad}{Get}}(uint32\_t\ index)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \ \ \ \ std::shared\_ptr<Header>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a9cae38309b8375595c30d1f6d4f525fa}{GetLast}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a0647c3f52e3134c9045851d5cc7c3601}{IsFull}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00068\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a6afe25953794c21b5af6672dc958de33}{Size}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00074\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_ab6550f5ec36f759ee6372ff9e57fc56b}{MaxSize}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00075\ }
+\DoxyCodeLine{00081\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_aa87042aed7aeede87d7d7767b4fd24dd}{Contains}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a3428aadd2ca13b6fb0d288c5487b1a19}{Remove}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io::UInt256}}\&\ hash);}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00094\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_af69901df6d3db0cae038956b1cc604c2}{TryRemoveFirst}}();}
+\DoxyCodeLine{00095\ }
+\DoxyCodeLine{00099\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_afe32b0a1f7aa1e62a0346ec664c491dc}{Clear}}();}
+\DoxyCodeLine{00100\ }
+\DoxyCodeLine{00101\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00102\ \ \ \ \ \textcolor{keyword}{mutable}\ std::shared\_mutex\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a6a53ca15b605bae4c59bf7584bdff7fc}{mutex\_}};}
+\DoxyCodeLine{00103\ \ \ \ \ std::deque<std::shared\_ptr<Header>>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a496d1744d1274d6719e6b1d1239db1b5}{headers\_}};}
+\DoxyCodeLine{00104\ \ \ \ \ std::unordered\_map<io::UInt256,\ std::shared\_ptr<Header>>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_af4d5ef68f87c33b0098247a01c898e7f}{hash\_index\_}};}
+\DoxyCodeLine{00105\ \ \ \ \ std::unordered\_map<uint32\_t,\ std::shared\_ptr<Header>>\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a8f722c3eb329b4fd4884460e54577597}{height\_index\_}};}
+\DoxyCodeLine{00106\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1ledger_1_1_header_cache_a73638f5824a8c0f389beb945d0e2c3e4}{max\_size\_}};}
+\DoxyCodeLine{00107\ \};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \}\ \ \textcolor{comment}{//\ namespace\ neo::ledger}}
+
+\end{DoxyCode}

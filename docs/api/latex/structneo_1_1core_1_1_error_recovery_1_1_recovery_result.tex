@@ -1,0 +1,123 @@
+\doxysection{neo\+::core\+::Error\+Recovery\+::Recovery\+Result\texorpdfstring{$<$}{<} T \texorpdfstring{$>$}{>} Struct Template Reference}
+\hypertarget{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{}\label{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}\index{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}}
+
+
+Result of an error recovery operation.  
+
+
+
+
+{\ttfamily \#include $<$error\+\_\+recovery.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a34e26375f6fa6275a4c132a80f692fe6}{Recovery\+Result}} (bool succeeded=false)
+\item 
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a374413985d64a930b88fd4f714533365}{Recovery\+Result}} (const T \&val, int attempts=1)
+\item 
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_ad39d9893e2b56a1f697c4f1bdd1fcee5}{Recovery\+Result}} (const std\+::string \&error, \mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Neo\+Exception\+::\+Error\+Code}} code, int attempts)
+\item 
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a9d03677698622668320a5442fc2c8815}{operator bool}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a4a5355d4f5a4ee26da5446b5743c7558}{success}}
+\item 
+std\+::optional$<$ T $>$ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a4c291e43144b1b776a1dbde370d356b9}{value}}
+\item 
+std\+::string \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a2a449334993964a70b29c3b851f2568c}{error\+\_\+message}}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Neo\+Exception\+::\+Error\+Code}} \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_ad92dea2a54c44e28e59a25453d9c4f70}{error\+\_\+code}}
+\item 
+int \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a6fbe47bb87936c5da2c74de64587d16e}{attempts\+\_\+made}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename T$>$\newline
+struct neo\+::core\+::\+Error\+Recovery\+::\+Recovery\+Result$<$ T $>$}
+Result of an error recovery operation. 
+
+\label{doc-constructors}
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a34e26375f6fa6275a4c132a80f692fe6}\index{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}!RecoveryResult@{RecoveryResult}}
+\index{RecoveryResult@{RecoveryResult}!neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RecoveryResult()}{RecoveryResult()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a34e26375f6fa6275a4c132a80f692fe6} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{neo\+::core\+::\+Error\+Recovery\+::\+Recovery\+Result}}$<$ T $>$\+::\+Recovery\+Result (\begin{DoxyParamCaption}\item[{bool}]{succeeded}{ = {\ttfamily false}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a374413985d64a930b88fd4f714533365}\index{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}!RecoveryResult@{RecoveryResult}}
+\index{RecoveryResult@{RecoveryResult}!neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RecoveryResult()}{RecoveryResult()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a374413985d64a930b88fd4f714533365} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{neo\+::core\+::\+Error\+Recovery\+::\+Recovery\+Result}}$<$ T $>$\+::\+Recovery\+Result (\begin{DoxyParamCaption}\item[{const T \&}]{val}{, }\item[{int}]{attempts}{ = {\ttfamily 1}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_ad39d9893e2b56a1f697c4f1bdd1fcee5}\index{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}!RecoveryResult@{RecoveryResult}}
+\index{RecoveryResult@{RecoveryResult}!neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{RecoveryResult()}{RecoveryResult()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_ad39d9893e2b56a1f697c4f1bdd1fcee5} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{neo\+::core\+::\+Error\+Recovery\+::\+Recovery\+Result}}$<$ T $>$\+::\+Recovery\+Result (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{error}{, }\item[{\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Neo\+Exception\+::\+Error\+Code}}}]{code}{, }\item[{int}]{attempts}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a9d03677698622668320a5442fc2c8815}\index{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}!operator bool@{operator bool}}
+\index{operator bool@{operator bool}!neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{operator bool()}{operator bool()}}
+{\footnotesize\ttfamily \label{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a9d03677698622668320a5442fc2c8815} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{neo\+::core\+::\+Error\+Recovery\+::\+Recovery\+Result}}$<$ T $>$\+::operator bool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a6fbe47bb87936c5da2c74de64587d16e}\index{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}!attempts\_made@{attempts\_made}}
+\index{attempts\_made@{attempts\_made}!neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{attempts\_made}{attempts\_made}}
+{\footnotesize\ttfamily \label{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a6fbe47bb87936c5da2c74de64587d16e} 
+template$<$typename T$>$ \\
+int \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{neo\+::core\+::\+Error\+Recovery\+::\+Recovery\+Result}}$<$ T $>$\+::attempts\+\_\+made}
+
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_ad92dea2a54c44e28e59a25453d9c4f70}\index{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}!error\_code@{error\_code}}
+\index{error\_code@{error\_code}!neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{error\_code}{error\_code}}
+{\footnotesize\ttfamily \label{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_ad92dea2a54c44e28e59a25453d9c4f70} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{classneo_1_1core_1_1_neo_exception_a5a658d55dbbee304e2a6c2371d8fcff8}{Neo\+Exception\+::\+Error\+Code}} \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{neo\+::core\+::\+Error\+Recovery\+::\+Recovery\+Result}}$<$ T $>$\+::error\+\_\+code}
+
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a2a449334993964a70b29c3b851f2568c}\index{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}!error\_message@{error\_message}}
+\index{error\_message@{error\_message}!neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{error\_message}{error\_message}}
+{\footnotesize\ttfamily \label{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a2a449334993964a70b29c3b851f2568c} 
+template$<$typename T$>$ \\
+std\+::string \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{neo\+::core\+::\+Error\+Recovery\+::\+Recovery\+Result}}$<$ T $>$\+::error\+\_\+message}
+
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a4a5355d4f5a4ee26da5446b5743c7558}\index{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}!success@{success}}
+\index{success@{success}!neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{success}{success}}
+{\footnotesize\ttfamily \label{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a4a5355d4f5a4ee26da5446b5743c7558} 
+template$<$typename T$>$ \\
+bool \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{neo\+::core\+::\+Error\+Recovery\+::\+Recovery\+Result}}$<$ T $>$\+::success}
+
+\Hypertarget{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a4c291e43144b1b776a1dbde370d356b9}\index{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}!value@{value}}
+\index{value@{value}!neo::core::ErrorRecovery::RecoveryResult$<$ T $>$@{neo::core::ErrorRecovery::RecoveryResult$<$ T $>$}}
+\doxysubsubsection{\texorpdfstring{value}{value}}
+{\footnotesize\ttfamily \label{structneo_1_1core_1_1_error_recovery_1_1_recovery_result_a4c291e43144b1b776a1dbde370d356b9} 
+template$<$typename T$>$ \\
+std\+::optional$<$T$>$ \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{neo\+::core\+::\+Error\+Recovery\+::\+Recovery\+Result}}$<$ T $>$\+::value}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{error__recovery_8h}{error\+\_\+recovery.\+h}}\end{DoxyCompactItemize}

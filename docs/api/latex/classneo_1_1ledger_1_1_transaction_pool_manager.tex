@@ -1,0 +1,748 @@
+\doxysection{neo\+::ledger\+::Transaction\+Pool\+Manager Class Reference}
+\hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager}{}\label{classneo_1_1ledger_1_1_transaction_pool_manager}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+
+
+Advanced transaction pool manager with monitoring and optimization.  
+
+
+
+
+{\ttfamily \#include $<$transaction\+\_\+pool\+\_\+manager.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::ledger\+::Transaction\+Pool\+Manager\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration}{Configuration}}
+\begin{DoxyCompactList}\small\item\em \doxylink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration}{Configuration} for the pool manager. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats}{Pool\+Stats}}
+\begin{DoxyCompactList}\small\item\em Pool statistics. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_comparator}{Transaction\+Comparator}}
+\item 
+struct \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata}{Transaction\+Metadata}}
+\begin{DoxyCompactList}\small\item\em \doxylink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction} metadata for tracking. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5b}{Priority}} \{ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba28d0edd045e05cf5af64e35ae0c4c6ef}{Low}} = 0
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba960b44c579bc2f6818d2daaf9e4c16f0}{Normal}} = 1
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba655d20c1ca69519ca647684edbb2db35}{High}} = 2
+, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba278d01e5af56273bae1bb99a98b370cd}{Critical}} = 3
+ \}
+\begin{DoxyCompactList}\small\item\em \doxylink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction} priority levels. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a5c012846a1b7ae74a983e58b42a974cc}{Transaction\+Pool\+Manager}} (const \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration}{Configuration}} \&config)
+\begin{DoxyCompactList}\small\item\em Constructor with configuration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab6bb6b085f25900863a9babca293f45a}{Transaction\+Pool\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor with default configuration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ae23fc5f5c8a33f9921ecb1ad7a95449d}{\texorpdfstring{$\sim$}{\string~}\+Transaction\+Pool\+Manager}} ()
+\begin{DoxyCompactList}\small\item\em Destructor -\/ ensures cleanup thread is stopped. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a53806a64ddcb80f95113ffa104cff0bb}{Start}} ()
+\begin{DoxyCompactList}\small\item\em Start the pool manager and background tasks. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a842c5438f4c45cd23e82c590d87e0a2e}{Stop}} ()
+\begin{DoxyCompactList}\small\item\em Stop the pool manager and background tasks. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_afcc2f12e635bb4f743f60c9f00ba24d4}{Add\+Transaction}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} \&transaction, \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5b}{Priority}} priority=\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba960b44c579bc2f6818d2daaf9e4c16f0}{Priority\+::\+Normal}}, const std\+::string \&source\+\_\+peer="{}"{})
+\begin{DoxyCompactList}\small\item\em Add a transaction to the pool. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a12f0d27d2c5db2c26815c5bc14ee2d07}{Remove\+Transaction}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash, const std\+::string \&reason="{}"{})
+\begin{DoxyCompactList}\small\item\em Remove a transaction from the pool. \end{DoxyCompactList}\item 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a5e8beafad18b22335c1b537cfa00687a}{Get\+Transaction}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Get a transaction by hash. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a2bb4a4f81717457f213ff40d1ea9070d}{Get\+Transactions\+For\+Block}} (size\+\_\+t max\+\_\+count=1000, size\+\_\+t max\+\_\+size=1024 \texorpdfstring{$\ast$}{*}1024) const
+\begin{DoxyCompactList}\small\item\em Get transactions ready for inclusion in a block. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_aa0ae12cfcc2253bd9709cd77acc933ea}{Contains\+Transaction}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Check if a transaction exists in the pool. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats}{Pool\+Stats}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_af8f7f4a93ff65debcc8848e96bbc7d30}{Get\+Statistics}} () const
+\begin{DoxyCompactList}\small\item\em Get current pool statistics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_aab479b4f8fea7c48996831fe3631fd4c}{Clear}} (const std\+::string \&reason="{}Manual clear"{})
+\begin{DoxyCompactList}\small\item\em Clear all transactions from the pool. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a0d863d2957b2a813c251f52f45e1b6f8}{Validate\+Unverified\+Transactions}} ()
+\begin{DoxyCompactList}\small\item\em Validate all unverified transactions. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_abc89127d0ffecae93bd7ea382e361fe9}{Remove\+Expired\+Transactions}} ()
+\begin{DoxyCompactList}\small\item\em Remove expired transactions. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a047e86afdad3c52e6fbb1b17f0a68fb8}{Detect\+And\+Resolve\+Conflicts}} ()
+\begin{DoxyCompactList}\small\item\em Detect and handle conflicting transactions. \end{DoxyCompactList}\item 
+std\+::optional$<$ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata}{Transaction\+Metadata}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a440d3b07d15e59144781890d9a9c13b8}{Get\+Transaction\+Metadata}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Get transaction metadata. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ad67d3cf8c419872566e54980adf474d3}{Set\+Validator}} (std\+::function$<$ bool(const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} \&)$>$ validator)
+\begin{DoxyCompactList}\small\item\em Set transaction validator callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a63bdcaa4769d9ac73a683b5b0f5c9674}{Set\+On\+Transaction\+Added}} (std\+::function$<$ void(const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&, const std\+::string \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Set transaction added callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_aedeaf41f01f94125fdfe3c63a25652cf}{Set\+On\+Transaction\+Removed}} (std\+::function$<$ void(const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&, const std\+::string \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Set transaction removed callback. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a4937c7281295e6d87d35301a2e8375cc}{Set\+On\+Stats\+Updated}} (std\+::function$<$ void(const \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats}{Pool\+Stats}} \&)$>$ callback)
+\begin{DoxyCompactList}\small\item\em Set statistics updated callback. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration}{Configuration}} \& \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a73d35e45aefe8b69a4d3d4a2383c39b2}{Get\+Configuration}} () const
+\begin{DoxyCompactList}\small\item\em Get pool configuration. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_adefbe1aebf1bb4bfa7809f89c4906fc7}{Update\+Configuration}} (const \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration}{Configuration}} \&config)
+\begin{DoxyCompactList}\small\item\em Update pool configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a64991c7f3b6e17a034113ca89f4f4a7e}{Cleanup\+Thread}} ()
+\begin{DoxyCompactList}\small\item\em Background cleanup thread function. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5b}{Priority}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a7212983394abca6fdeb15e05139e2ba4}{Calculate\+Priority}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} \&transaction) const
+\begin{DoxyCompactList}\small\item\em Calculate transaction priority based on fee and other factors. \end{DoxyCompactList}\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_aabab2f11044d1f622d6b512ae7229e1a}{Check\+Conflicts}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} \&transaction) const
+\begin{DoxyCompactList}\small\item\em Check if transaction conflicts with existing ones. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a99b1cd8310ec8550af3a7fa269fa0c23}{Update\+Metrics}} ()
+\begin{DoxyCompactList}\small\item\em Update internal metrics. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_aadfd162ad78caf4990bcb1eb333438bc}{Calculate\+Memory\+Usage}} () const
+\begin{DoxyCompactList}\small\item\em Calculate current memory usage. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a57e543568e9f838e02dfc89529cc7013}{Is\+In\+Unverified\+Pool}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash) const
+\begin{DoxyCompactList}\small\item\em Check if transaction is in unverified pool (C\# compatibility) \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{Memory\+Pool}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ae6019d6a76634c8bc6d5808de103d4ce}{memory\+\_\+pool\+\_\+}}
+\item 
+\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration}{Configuration}} \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_af29069915cfb1cd287aafa22efe0bc62}{config\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata}{Transaction\+Metadata}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a58e5dd475532593a2368fb3f1a44af27}{metadata\+\_\+}}
+\item 
+std\+::priority\+\_\+queue$<$ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata}{Transaction\+Metadata}}, std\+::vector$<$ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata}{Transaction\+Metadata}} $>$, \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_comparator}{Transaction\+Comparator}} $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a4083771d1243048d6c49b6af83f592a2}{priority\+\_\+queue\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ac32e2ff8e2dc1e2e01bc56e30c6a1aa0}{conflict\+\_\+groups\+\_\+}}
+\item 
+std\+::atomic$<$ size\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ad3ff04a4918496babe3f6d7a563c289a}{total\+\_\+received\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ size\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ae88efee3bd553ec247fdba2374b49863}{total\+\_\+validated\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ size\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a52b5a8cb5a37cc15cadf295010802b64}{total\+\_\+rejected\+\_\+}} \{0\}
+\item 
+std\+::atomic$<$ uint64\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_aaeb93caf4c9972d786fce8cada02f763}{total\+\_\+fees\+\_\+}} \{0\}
+\item 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a1a1bb7a86e8575067b2cb443cbb528e1}{start\+\_\+time\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a997be4fa8ceb6ef073cfb04e79d38e51}{cleanup\+\_\+thread\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a1df6cf365b7155885d75cc7df03732d2}{running\+\_\+}} \{false\}
+\item 
+std\+::shared\+\_\+mutex \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a00754c016d97b09eaec5ad0cac74945c}{mutex\+\_\+}}
+\item 
+std\+::function$<$ bool(const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} \&)$>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a5e248639b7275c3f15278d9f6e4c89d5}{validator\+\_\+}}
+\item 
+std\+::function$<$ void(const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&, const std\+::string \&)$>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a4ac58f65b98e0a3c717dbbcafc8f714f}{on\+\_\+transaction\+\_\+added\+\_\+}}
+\item 
+std\+::function$<$ void(const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&, const std\+::string \&)$>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a8e5e52ebce0e7fe73d954d2a0e8037a9}{on\+\_\+transaction\+\_\+removed\+\_\+}}
+\item 
+std\+::function$<$ void(const \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats}{Pool\+Stats}} \&)$>$ \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_a0c74a418b3728b3fae2aa619a8c31db7}{on\+\_\+stats\+\_\+updated\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Advanced transaction pool manager with monitoring and optimization. 
+
+This class provides enterprise-\/grade transaction pool management with\+:
+\begin{DoxyItemize}
+\item Priority-\/based transaction ordering
+\item Real-\/time monitoring and metrics
+\item Automatic cleanup and optimization
+\item \doxylink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction} dependency tracking
+\item Fee-\/based prioritization
+\item Conflict detection 
+\end{DoxyItemize}
+
+\label{doc-enum-members}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5b}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!Priority@{Priority}}
+\index{Priority@{Priority}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{Priority}{Priority}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5b} 
+enum class \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5b}{neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Priority}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+
+
+\doxylink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction} priority levels. 
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Low@{Low}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!Low@{Low}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba28d0edd045e05cf5af64e35ae0c4c6ef}\label{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba28d0edd045e05cf5af64e35ae0c4c6ef} 
+Low&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Normal@{Normal}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!Normal@{Normal}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba960b44c579bc2f6818d2daaf9e4c16f0}\label{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba960b44c579bc2f6818d2daaf9e4c16f0} 
+Normal&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{High@{High}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!High@{High}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba655d20c1ca69519ca647684edbb2db35}\label{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba655d20c1ca69519ca647684edbb2db35} 
+High&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{Critical@{Critical}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!Critical@{Critical}}}\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba278d01e5af56273bae1bb99a98b370cd}\label{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba278d01e5af56273bae1bb99a98b370cd} 
+Critical&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a5c012846a1b7ae74a983e58b42a974cc}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!TransactionPoolManager@{TransactionPoolManager}}
+\index{TransactionPoolManager@{TransactionPoolManager}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{TransactionPoolManager()}{TransactionPoolManager()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a5c012846a1b7ae74a983e58b42a974cc} 
+neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Transaction\+Pool\+Manager (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration}{Configuration}} \&}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructor with configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & Pool manager configuration \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_ab6bb6b085f25900863a9babca293f45a}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!TransactionPoolManager@{TransactionPoolManager}}
+\index{TransactionPoolManager@{TransactionPoolManager}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{TransactionPoolManager()}{TransactionPoolManager()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_ab6bb6b085f25900863a9babca293f45a} 
+neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Transaction\+Pool\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor with default configuration. 
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_ae23fc5f5c8a33f9921ecb1ad7a95449d}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!````~TransactionPoolManager@{\texorpdfstring{$\sim$}{\string~}TransactionPoolManager}}
+\index{````~TransactionPoolManager@{\texorpdfstring{$\sim$}{\string~}TransactionPoolManager}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}TransactionPoolManager()}{\string~TransactionPoolManager()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_ae23fc5f5c8a33f9921ecb1ad7a95449d} 
+neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\texorpdfstring{$\sim$}{\string~}\+Transaction\+Pool\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Destructor -\/ ensures cleanup thread is stopped. 
+
+Here is the call graph for this function\+:
+% FIG 3
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_afcc2f12e635bb4f743f60c9f00ba24d4}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!AddTransaction@{AddTransaction}}
+\index{AddTransaction@{AddTransaction}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{AddTransaction()}{AddTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_afcc2f12e635bb4f743f60c9f00ba24d4} 
+bool neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Add\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} \&}]{transaction}{, }\item[{\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5b}{Priority}}}]{priority}{ = {\ttfamily \mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5ba960b44c579bc2f6818d2daaf9e4c16f0}{Priority\+::\+Normal}}}, }\item[{const std\+::string \&}]{source\+\_\+peer}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
+
+
+
+Add a transaction to the pool. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to add \\
+\hline
+{\em priority} & \doxylink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction} priority \\
+\hline
+{\em source\+\_\+peer} & Source network peer \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if successfully added, false otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_aadfd162ad78caf4990bcb1eb333438bc}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!CalculateMemoryUsage@{CalculateMemoryUsage}}
+\index{CalculateMemoryUsage@{CalculateMemoryUsage}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{CalculateMemoryUsage()}{CalculateMemoryUsage()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_aadfd162ad78caf4990bcb1eb333438bc} 
+size\+\_\+t neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Calculate\+Memory\+Usage (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculate current memory usage. 
+
+\begin{DoxyReturn}{Returns}
+Memory usage in bytes 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a7212983394abca6fdeb15e05139e2ba4}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!CalculatePriority@{CalculatePriority}}
+\index{CalculatePriority@{CalculatePriority}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{CalculatePriority()}{CalculatePriority()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a7212983394abca6fdeb15e05139e2ba4} 
+\mbox{\hyperlink{classneo_1_1ledger_1_1_transaction_pool_manager_ab38c36a6e34b5187bd17ba6fdbd9ad5b}{Transaction\+Pool\+Manager\+::\+Priority}} neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Calculate\+Priority (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} \&}]{transaction}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Calculate transaction priority based on fee and other factors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Calculated priority 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_aabab2f11044d1f622d6b512ae7229e1a}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!CheckConflicts@{CheckConflicts}}
+\index{CheckConflicts@{CheckConflicts}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{CheckConflicts()}{CheckConflicts()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_aabab2f11044d1f622d6b512ae7229e1a} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Check\+Conflicts (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} \&}]{transaction}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Check if transaction conflicts with existing ones. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transaction} & The transaction to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector of conflicting transaction hashes 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a64991c7f3b6e17a034113ca89f4f4a7e}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!CleanupThread@{CleanupThread}}
+\index{CleanupThread@{CleanupThread}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{CleanupThread()}{CleanupThread()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a64991c7f3b6e17a034113ca89f4f4a7e} 
+void neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Cleanup\+Thread (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Background cleanup thread function. 
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_aab479b4f8fea7c48996831fe3631fd4c}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!Clear@{Clear}}
+\index{Clear@{Clear}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{Clear()}{Clear()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_aab479b4f8fea7c48996831fe3631fd4c} 
+void neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Clear (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{reason}{ = {\ttfamily "{}Manual~clear"{}}}\end{DoxyParamCaption})}
+
+
+
+Clear all transactions from the pool. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reason} & Reason for clearing \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_aa0ae12cfcc2253bd9709cd77acc933ea}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!ContainsTransaction@{ContainsTransaction}}
+\index{ContainsTransaction@{ContainsTransaction}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{ContainsTransaction()}{ContainsTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_aa0ae12cfcc2253bd9709cd77acc933ea} 
+bool neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Contains\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Check if a transaction exists in the pool. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & \doxylink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction} hash \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if transaction exists 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a047e86afdad3c52e6fbb1b17f0a68fb8}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!DetectAndResolveConflicts@{DetectAndResolveConflicts}}
+\index{DetectAndResolveConflicts@{DetectAndResolveConflicts}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{DetectAndResolveConflicts()}{DetectAndResolveConflicts()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a047e86afdad3c52e6fbb1b17f0a68fb8} 
+size\+\_\+t neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Detect\+And\+Resolve\+Conflicts (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Detect and handle conflicting transactions. 
+
+\begin{DoxyReturn}{Returns}
+Number of conflicts resolved 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a73d35e45aefe8b69a4d3d4a2383c39b2}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!GetConfiguration@{GetConfiguration}}
+\index{GetConfiguration@{GetConfiguration}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{GetConfiguration()}{GetConfiguration()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a73d35e45aefe8b69a4d3d4a2383c39b2} 
+const \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration}{Configuration}} \& neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Get\+Configuration (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get pool configuration. 
+
+\begin{DoxyReturn}{Returns}
+Current configuration 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_af8f7f4a93ff65debcc8848e96bbc7d30}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!GetStatistics@{GetStatistics}}
+\index{GetStatistics@{GetStatistics}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{GetStatistics()}{GetStatistics()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_af8f7f4a93ff65debcc8848e96bbc7d30} 
+\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats}{Transaction\+Pool\+Manager\+::\+Pool\+Stats}} neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Get\+Statistics (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Get current pool statistics. 
+
+\begin{DoxyReturn}{Returns}
+Pool statistics snapshot 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a5e8beafad18b22335c1b537cfa00687a}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!GetTransaction@{GetTransaction}}
+\index{GetTransaction@{GetTransaction}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{GetTransaction()}{GetTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a5e8beafad18b22335c1b537cfa00687a} 
+std\+::optional$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} $>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Get\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Get a transaction by hash. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & \doxylink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction} hash \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Optional containing the transaction if found 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a440d3b07d15e59144781890d9a9c13b8}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!GetTransactionMetadata@{GetTransactionMetadata}}
+\index{GetTransactionMetadata@{GetTransactionMetadata}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{GetTransactionMetadata()}{GetTransactionMetadata()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a440d3b07d15e59144781890d9a9c13b8} 
+std\+::optional$<$ \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata}{Transaction\+Pool\+Manager\+::\+Transaction\+Metadata}} $>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Get\+Transaction\+Metadata (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const}
+
+
+
+Get transaction metadata. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & \doxylink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction} hash \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Optional containing metadata if found 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a2bb4a4f81717457f213ff40d1ea9070d}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!GetTransactionsForBlock@{GetTransactionsForBlock}}
+\index{GetTransactionsForBlock@{GetTransactionsForBlock}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{GetTransactionsForBlock()}{GetTransactionsForBlock()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a2bb4a4f81717457f213ff40d1ea9070d} 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} $>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Get\+Transactions\+For\+Block (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{max\+\_\+count}{ = {\ttfamily 1000}, }\item[{size\+\_\+t}]{max\+\_\+size}{ = {\ttfamily 1024~\texorpdfstring{$\ast$}{*}~1024}}\end{DoxyParamCaption}) const}
+
+
+
+Get transactions ready for inclusion in a block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em max\+\_\+count} & Maximum number of transactions to return \\
+\hline
+{\em max\+\_\+size} & Maximum total size in bytes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Vector of transactions ordered by priority and fee 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a57e543568e9f838e02dfc89529cc7013}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!IsInUnverifiedPool@{IsInUnverifiedPool}}
+\index{IsInUnverifiedPool@{IsInUnverifiedPool}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{IsInUnverifiedPool()}{IsInUnverifiedPool()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a57e543568e9f838e02dfc89529cc7013} 
+bool neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Is\+In\+Unverified\+Pool (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Check if transaction is in unverified pool (C\# compatibility) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & \doxylink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction} hash \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if in unverified pool 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_abc89127d0ffecae93bd7ea382e361fe9}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!RemoveExpiredTransactions@{RemoveExpiredTransactions}}
+\index{RemoveExpiredTransactions@{RemoveExpiredTransactions}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{RemoveExpiredTransactions()}{RemoveExpiredTransactions()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_abc89127d0ffecae93bd7ea382e361fe9} 
+size\+\_\+t neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Remove\+Expired\+Transactions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Remove expired transactions. 
+
+\begin{DoxyReturn}{Returns}
+Number of transactions removed 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a12f0d27d2c5db2c26815c5bc14ee2d07}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!RemoveTransaction@{RemoveTransaction}}
+\index{RemoveTransaction@{RemoveTransaction}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{RemoveTransaction()}{RemoveTransaction()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a12f0d27d2c5db2c26815c5bc14ee2d07} 
+bool neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Remove\+Transaction (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash}{, }\item[{const std\+::string \&}]{reason}{ = {\ttfamily "{}"{}}}\end{DoxyParamCaption})}
+
+
+
+Remove a transaction from the pool. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash} & \doxylink{namespaceneo_1_1ledger_afde8d289bc01f2660248a76579fbc08c}{Transaction} hash \\
+\hline
+{\em reason} & Removal reason for logging \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if removed, false if not found 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a4937c7281295e6d87d35301a2e8375cc}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!SetOnStatsUpdated@{SetOnStatsUpdated}}
+\index{SetOnStatsUpdated@{SetOnStatsUpdated}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{SetOnStatsUpdated()}{SetOnStatsUpdated()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a4937c7281295e6d87d35301a2e8375cc} 
+void neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Set\+On\+Stats\+Updated (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(const \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats}{Pool\+Stats}} \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Set statistics updated callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & Callback function \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a63bdcaa4769d9ac73a683b5b0f5c9674}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!SetOnTransactionAdded@{SetOnTransactionAdded}}
+\index{SetOnTransactionAdded@{SetOnTransactionAdded}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{SetOnTransactionAdded()}{SetOnTransactionAdded()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a63bdcaa4769d9ac73a683b5b0f5c9674} 
+void neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Set\+On\+Transaction\+Added (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&, const std\+::string \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Set transaction added callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & Callback function \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_aedeaf41f01f94125fdfe3c63a25652cf}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!SetOnTransactionRemoved@{SetOnTransactionRemoved}}
+\index{SetOnTransactionRemoved@{SetOnTransactionRemoved}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{SetOnTransactionRemoved()}{SetOnTransactionRemoved()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_aedeaf41f01f94125fdfe3c63a25652cf} 
+void neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Set\+On\+Transaction\+Removed (\begin{DoxyParamCaption}\item[{std\+::function$<$ void(const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&, const std\+::string \&)$>$}]{callback}{}\end{DoxyParamCaption})}
+
+
+
+Set transaction removed callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em callback} & Callback function \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_ad67d3cf8c419872566e54980adf474d3}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!SetValidator@{SetValidator}}
+\index{SetValidator@{SetValidator}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{SetValidator()}{SetValidator()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_ad67d3cf8c419872566e54980adf474d3} 
+void neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Set\+Validator (\begin{DoxyParamCaption}\item[{std\+::function$<$ bool(const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} \&)$>$}]{validator}{}\end{DoxyParamCaption})}
+
+
+
+Set transaction validator callback. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em validator} & Validation function \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a53806a64ddcb80f95113ffa104cff0bb}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!Start@{Start}}
+\index{Start@{Start}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a53806a64ddcb80f95113ffa104cff0bb} 
+void neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Start the pool manager and background tasks. 
+
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a842c5438f4c45cd23e82c590d87e0a2e}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a842c5438f4c45cd23e82c590d87e0a2e} 
+void neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Stop the pool manager and background tasks. 
+
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_adefbe1aebf1bb4bfa7809f89c4906fc7}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!UpdateConfiguration@{UpdateConfiguration}}
+\index{UpdateConfiguration@{UpdateConfiguration}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{UpdateConfiguration()}{UpdateConfiguration()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_adefbe1aebf1bb4bfa7809f89c4906fc7} 
+void neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Update\+Configuration (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration}{Configuration}} \&}]{config}{}\end{DoxyParamCaption})}
+
+
+
+Update pool configuration. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config} & New configuration \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a99b1cd8310ec8550af3a7fa269fa0c23}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!UpdateMetrics@{UpdateMetrics}}
+\index{UpdateMetrics@{UpdateMetrics}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{UpdateMetrics()}{UpdateMetrics()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a99b1cd8310ec8550af3a7fa269fa0c23} 
+void neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Update\+Metrics (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Update internal metrics. 
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a0d863d2957b2a813c251f52f45e1b6f8}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!ValidateUnverifiedTransactions@{ValidateUnverifiedTransactions}}
+\index{ValidateUnverifiedTransactions@{ValidateUnverifiedTransactions}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{ValidateUnverifiedTransactions()}{ValidateUnverifiedTransactions()}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a0d863d2957b2a813c251f52f45e1b6f8} 
+size\+\_\+t neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::\+Validate\+Unverified\+Transactions (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Validate all unverified transactions. 
+
+\begin{DoxyReturn}{Returns}
+Number of transactions validated 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 16
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a997be4fa8ceb6ef073cfb04e79d38e51}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!cleanup\_thread\_@{cleanup\_thread\_}}
+\index{cleanup\_thread\_@{cleanup\_thread\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{cleanup\_thread\_}{cleanup\_thread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a997be4fa8ceb6ef073cfb04e79d38e51} 
+std\+::thread neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::cleanup\+\_\+thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_af29069915cfb1cd287aafa22efe0bc62}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!config\_@{config\_}}
+\index{config\_@{config\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{config\_}{config\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_af29069915cfb1cd287aafa22efe0bc62} 
+\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_configuration}{Configuration}} neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::config\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_ac32e2ff8e2dc1e2e01bc56e30c6a1aa0}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!conflict\_groups\_@{conflict\_groups\_}}
+\index{conflict\_groups\_@{conflict\_groups\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{conflict\_groups\_}{conflict\_groups\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_ac32e2ff8e2dc1e2e01bc56e30c6a1aa0} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::vector$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}$>$ $>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::conflict\+\_\+groups\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_ae6019d6a76634c8bc6d5808de103d4ce}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!memory\_pool\_@{memory\_pool\_}}
+\index{memory\_pool\_@{memory\_pool\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{memory\_pool\_}{memory\_pool\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_ae6019d6a76634c8bc6d5808de103d4ce} 
+std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1ledger_1_1_memory_pool}{Memory\+Pool}}$>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::memory\+\_\+pool\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a58e5dd475532593a2368fb3f1a44af27}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!metadata\_@{metadata\_}}
+\index{metadata\_@{metadata\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{metadata\_}{metadata\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a58e5dd475532593a2368fb3f1a44af27} 
+std\+::unordered\+\_\+map$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}, \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata}{Transaction\+Metadata}}$>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::metadata\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a00754c016d97b09eaec5ad0cac74945c}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a00754c016d97b09eaec5ad0cac74945c} 
+std\+::shared\+\_\+mutex neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a0c74a418b3728b3fae2aa619a8c31db7}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!on\_stats\_updated\_@{on\_stats\_updated\_}}
+\index{on\_stats\_updated\_@{on\_stats\_updated\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{on\_stats\_updated\_}{on\_stats\_updated\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a0c74a418b3728b3fae2aa619a8c31db7} 
+std\+::function$<$void(const \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_pool_stats}{Pool\+Stats}}\&)$>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::on\+\_\+stats\+\_\+updated\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a4ac58f65b98e0a3c717dbbcafc8f714f}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!on\_transaction\_added\_@{on\_transaction\_added\_}}
+\index{on\_transaction\_added\_@{on\_transaction\_added\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{on\_transaction\_added\_}{on\_transaction\_added\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a4ac58f65b98e0a3c717dbbcafc8f714f} 
+std\+::function$<$void(const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}\&, const std\+::string\&)$>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::on\+\_\+transaction\+\_\+added\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a8e5e52ebce0e7fe73d954d2a0e8037a9}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!on\_transaction\_removed\_@{on\_transaction\_removed\_}}
+\index{on\_transaction\_removed\_@{on\_transaction\_removed\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{on\_transaction\_removed\_}{on\_transaction\_removed\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a8e5e52ebce0e7fe73d954d2a0e8037a9} 
+std\+::function$<$void(const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}\&, const std\+::string\&)$>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::on\+\_\+transaction\+\_\+removed\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a4083771d1243048d6c49b6af83f592a2}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!priority\_queue\_@{priority\_queue\_}}
+\index{priority\_queue\_@{priority\_queue\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{priority\_queue\_}{priority\_queue\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a4083771d1243048d6c49b6af83f592a2} 
+std\+::priority\+\_\+queue$<$\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata}{Transaction\+Metadata}}, std\+::vector$<$\mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_metadata}{Transaction\+Metadata}}$>$, \mbox{\hyperlink{structneo_1_1ledger_1_1_transaction_pool_manager_1_1_transaction_comparator}{Transaction\+Comparator}}$>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::priority\+\_\+queue\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a1df6cf365b7155885d75cc7df03732d2}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a1df6cf365b7155885d75cc7df03732d2} 
+std\+::atomic$<$bool$>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::running\+\_\+ \{false\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a1a1bb7a86e8575067b2cb443cbb528e1}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!start\_time\_@{start\_time\_}}
+\index{start\_time\_@{start\_time\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{start\_time\_}{start\_time\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a1a1bb7a86e8575067b2cb443cbb528e1} 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::start\+\_\+time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_aaeb93caf4c9972d786fce8cada02f763}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!total\_fees\_@{total\_fees\_}}
+\index{total\_fees\_@{total\_fees\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{total\_fees\_}{total\_fees\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_aaeb93caf4c9972d786fce8cada02f763} 
+std\+::atomic$<$uint64\+\_\+t$>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::total\+\_\+fees\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_ad3ff04a4918496babe3f6d7a563c289a}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!total\_received\_@{total\_received\_}}
+\index{total\_received\_@{total\_received\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{total\_received\_}{total\_received\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_ad3ff04a4918496babe3f6d7a563c289a} 
+std\+::atomic$<$size\+\_\+t$>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::total\+\_\+received\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a52b5a8cb5a37cc15cadf295010802b64}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!total\_rejected\_@{total\_rejected\_}}
+\index{total\_rejected\_@{total\_rejected\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{total\_rejected\_}{total\_rejected\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a52b5a8cb5a37cc15cadf295010802b64} 
+std\+::atomic$<$size\+\_\+t$>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::total\+\_\+rejected\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_ae88efee3bd553ec247fdba2374b49863}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!total\_validated\_@{total\_validated\_}}
+\index{total\_validated\_@{total\_validated\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{total\_validated\_}{total\_validated\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_ae88efee3bd553ec247fdba2374b49863} 
+std\+::atomic$<$size\+\_\+t$>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::total\+\_\+validated\+\_\+ \{0\}\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1ledger_1_1_transaction_pool_manager_a5e248639b7275c3f15278d9f6e4c89d5}\index{neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}!validator\_@{validator\_}}
+\index{validator\_@{validator\_}!neo::ledger::TransactionPoolManager@{neo::ledger::TransactionPoolManager}}
+\doxysubsubsection{\texorpdfstring{validator\_}{validator\_}}
+{\footnotesize\ttfamily \label{classneo_1_1ledger_1_1_transaction_pool_manager_a5e248639b7275c3f15278d9f6e4c89d5} 
+std\+::function$<$bool(const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}}\&)$>$ neo\+::ledger\+::\+Transaction\+Pool\+Manager\+::validator\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/ledger/\mbox{\hyperlink{transaction__pool__manager_8h}{transaction\+\_\+pool\+\_\+manager.\+h}}\item 
+src/ledger/\mbox{\hyperlink{transaction__pool__manager_8cpp}{transaction\+\_\+pool\+\_\+manager.\+cpp}}\end{DoxyCompactItemize}

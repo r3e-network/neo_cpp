@@ -1,0 +1,39 @@
+\doxysection{notary\+\_\+assisted.\+h}
+\hypertarget{notary__assisted_8h_source}{}\label{notary__assisted_8h_source}\index{include/neo/network/p2p/payloads/notary\_assisted.h@{include/neo/network/p2p/payloads/notary\_assisted.h}}
+\mbox{\hyperlink{notary__assisted_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__reader_8h}{neo/io/binary\_reader.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{binary__writer_8h}{neo/io/binary\_writer.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <neo/network/payloads/transaction\_attribute.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{store__view_8h}{neo/persistence/store\_view.h}}>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1network_1_1payloads}{neo::network::payloads}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_notary_assisted_ac62d6bb865b0afe0825c20768830747e}{NotaryAssisted}}\ :\ \textcolor{keyword}{public}\ TransactionAttribute}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00020\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_notary_assisted_a244f191fd10f54e91650000af958966b}{nKeys}};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00026\ \ \ \ \ \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_notary_assisted_ac62d6bb865b0afe0825c20768830747e}{NotaryAssisted}}();}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00032\ \ \ \ \ TransactionAttributeType\ \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_notary_assisted_a760352afb7bbd46f7bd3b800cacd3c0d}{GetType}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_notary_assisted_a7b27ef915df01b9f5ae4354666a79e6a}{GetSize}}()\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00044\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_notary_assisted_a5b254e944045964744390c8ffdf39957}{GetNKeys}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00050\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_notary_assisted_af4184597ff8f570172a10dc4087b59b8}{SetNKeys}}(uint8\_t\ value);}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_notary_assisted_aa7b58fd7ad48ef49150125917131865e}{Deserialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io::BinaryReader}}\&\ reader)\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00062\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_notary_assisted_a8b5c21321d28b355eecd34ea2cfbdf1d}{Serialize}}(\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io::BinaryWriter}}\&\ writer)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1network_1_1payloads_1_1_notary_assisted_a060fe8e8df4699d9ee430d5896d57e4c}{Verify}}(std::shared\_ptr<persistence::StoreView>\ snapshot,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{namespaceneo_1_1network_1_1payloads_abaacb5ab65262bfe98ecf27f11d78865}{Transaction}}\&\ tx)\ \textcolor{keyword}{const\ override};}
+\DoxyCodeLine{00071\ \};}
+\DoxyCodeLine{00072\ \}\ \ \textcolor{comment}{//\ namespace\ neo::network::payloads}}
+
+\end{DoxyCode}

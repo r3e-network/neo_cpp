@@ -1,0 +1,132 @@
+\doxysection{neo\+::smartcontract\+::native\+::Neo\+Token\+Account Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_account}{}\label{classneo_1_1smartcontract_1_1native_1_1_neo_token_account}\index{neo::smartcontract::native::NeoTokenAccount@{neo::smartcontract::native::NeoTokenAccount}}
+
+
+Account-\/related methods for the NEO token.  
+
+
+
+
+{\ttfamily \#include $<$neo\+\_\+token\+\_\+account.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{io\+::\+Fixed8}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_account_a75b98d7ded171c5896aa6cfc5bd5add0}{Get\+Balance}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account)
+\begin{DoxyCompactList}\small\item\em Gets the balance of an account. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_account_state}{Neo\+Token\+::\+Account\+State}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_account_a6a801203667b97238e73ec31a4eeeb49}{Get\+Account\+State}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot, const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&account)
+\begin{DoxyCompactList}\small\item\em Gets the account state. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_account_ad5c381b20240729fb4efa5bbea4b4264}{On\+Balance\+Of}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, \mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the balance\+Of method. \end{DoxyCompactList}\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token_account_ac78728460022ebe0486e390f42a6f543}{On\+Get\+Account\+State}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&token, \mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&engine, const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&args)
+\begin{DoxyCompactList}\small\item\em Handles the get\+Account\+State method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Account-\/related methods for the NEO token. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_account_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_account_a6a801203667b97238e73ec31a4eeeb49}\index{neo::smartcontract::native::NeoTokenAccount@{neo::smartcontract::native::NeoTokenAccount}!GetAccountState@{GetAccountState}}
+\index{GetAccountState@{GetAccountState}!neo::smartcontract::native::NeoTokenAccount@{neo::smartcontract::native::NeoTokenAccount}}
+\doxysubsubsection{\texorpdfstring{GetAccountState()}{GetAccountState()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_account_a6a801203667b97238e73ec31a4eeeb49} 
+\mbox{\hyperlink{structneo_1_1smartcontract_1_1native_1_1_neo_token_1_1_account_state}{Neo\+Token\+::\+Account\+State}} neo\+::smartcontract\+::native\+::\+Neo\+Token\+Account\+::\+Get\+Account\+State (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the account state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+{\em account} & The account. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The account state. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_account_a75b98d7ded171c5896aa6cfc5bd5add0}\index{neo::smartcontract::native::NeoTokenAccount@{neo::smartcontract::native::NeoTokenAccount}!GetBalance@{GetBalance}}
+\index{GetBalance@{GetBalance}!neo::smartcontract::native::NeoTokenAccount@{neo::smartcontract::native::NeoTokenAccount}}
+\doxysubsubsection{\texorpdfstring{GetBalance()}{GetBalance()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_account_a75b98d7ded171c5896aa6cfc5bd5add0} 
+\mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{io\+::\+Fixed8}} neo\+::smartcontract\+::native\+::\+Neo\+Token\+Account\+::\+Get\+Balance (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \&}]{account}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the balance of an account. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em snapshot} & The snapshot. \\
+\hline
+{\em account} & The account. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The balance. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_account_ad5c381b20240729fb4efa5bbea4b4264}\index{neo::smartcontract::native::NeoTokenAccount@{neo::smartcontract::native::NeoTokenAccount}!OnBalanceOf@{OnBalanceOf}}
+\index{OnBalanceOf@{OnBalanceOf}!neo::smartcontract::native::NeoTokenAccount@{neo::smartcontract::native::NeoTokenAccount}}
+\doxysubsubsection{\texorpdfstring{OnBalanceOf()}{OnBalanceOf()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_account_ad5c381b20240729fb4efa5bbea4b4264} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Account\+::\+On\+Balance\+Of (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Handles the balance\+Of method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1native_1_1_neo_token_account_ac78728460022ebe0486e390f42a6f543}\index{neo::smartcontract::native::NeoTokenAccount@{neo::smartcontract::native::NeoTokenAccount}!OnGetAccountState@{OnGetAccountState}}
+\index{OnGetAccountState@{OnGetAccountState}!neo::smartcontract::native::NeoTokenAccount@{neo::smartcontract::native::NeoTokenAccount}}
+\doxysubsubsection{\texorpdfstring{OnGetAccountState()}{OnGetAccountState()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1native_1_1_neo_token_account_ac78728460022ebe0486e390f42a6f543} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ neo\+::smartcontract\+::native\+::\+Neo\+Token\+Account\+::\+On\+Get\+Account\+State (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1native_1_1_neo_token}{Neo\+Token}} \&}]{token}{, }\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{neo\+::smartcontract\+::\+Application\+Engine}} \&}]{engine}{, }\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ $>$ \&}]{args}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Handles the get\+Account\+State method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em token} & The NEO token. \\
+\hline
+{\em engine} & The engine. \\
+\hline
+{\em args} & The arguments. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/native/\mbox{\hyperlink{neo__token__account_8h}{neo\+\_\+token\+\_\+account.\+h}}\item 
+src/smartcontract/native/\mbox{\hyperlink{neo__token__account_8cpp}{neo\+\_\+token\+\_\+account.\+cpp}}\end{DoxyCompactItemize}

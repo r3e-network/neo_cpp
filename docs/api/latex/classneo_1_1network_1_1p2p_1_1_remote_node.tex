@@ -1,0 +1,797 @@
+\doxysection{neo\+::network\+::p2p\+::Remote\+Node Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node}{}\label{classneo_1_1network_1_1p2p_1_1_remote_node}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+
+
+Represents a remote node in the P2P network.  
+
+
+
+
+{\ttfamily \#include $<$remote\+\_\+node.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::Remote\+Node\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a30a4a270872f3443004f1d873b96c2de}{Remote\+Node}} (\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{Local\+Node}} \texorpdfstring{$\ast$}{*}local\+Node, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection}{Connection}} $>$ connection)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}. \end{DoxyCompactList}\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a584f8314f11c1d2c9d979581d718e9b1}{\texorpdfstring{$\sim$}{\string~}\+Remote\+Node}} ()
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection}{Connection}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a036f5322572c87ed5876505a700c3a93}{Get\+Connection}} () const
+\begin{DoxyCompactList}\small\item\em Gets the connection to the remote node. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ac72d0bc7106295eae165ad02b3c5d908}{Get\+Remote\+End\+Point}} () const
+\begin{DoxyCompactList}\small\item\em Gets the remote endpoint. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a08351342cd2b5406da4e0d3fd1a76d09}{Get\+Local\+End\+Point}} () const
+\begin{DoxyCompactList}\small\item\em Gets the local endpoint. \end{DoxyCompactList}\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ab6f35269328ca0a70a80ff59ae66ecbc}{Get\+Version}} () const
+\begin{DoxyCompactList}\small\item\em Gets the version of the remote node. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ad22a4f6ecc4fd23acc5e8ada0ed34f6e}{Get\+User\+Agent}} () const
+\begin{DoxyCompactList}\small\item\em Gets the user agent of the remote node. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a42704f4b8cc21250f3166659d4e67e6e}{Get\+Capabilities}} () const
+\begin{DoxyCompactList}\small\item\em Gets the capabilities of the remote node. \end{DoxyCompactList}\item 
+virtual uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a729b40856d14585eb75f23ee76632cc8}{Get\+Last\+Block\+Index}} () const
+\begin{DoxyCompactList}\small\item\em Gets the last block index of the remote node. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a6245444a7151bc867f35bdd01f13d720}{Is\+Connected}} () const
+\begin{DoxyCompactList}\small\item\em Gets whether the remote node is connected. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_aa2f23f1eae925773f7d4180fed01f2b5}{Is\+Handshaked}} () const
+\begin{DoxyCompactList}\small\item\em Gets whether the remote node is handshaked. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a8d2e059ddc49af68e501750f33264f2b}{Disconnect}} ()
+\begin{DoxyCompactList}\small\item\em Disconnects from the remote node. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a57ce01b12cac829366b308b5f9b6114a}{Send}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message, bool enable\+Compression=true)
+\begin{DoxyCompactList}\small\item\em Sends a message to the remote node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ad8fc10229290e3d7df7c83ae3343d074}{Send\+Version}} ()
+\begin{DoxyCompactList}\small\item\em Sends a version message to the remote node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a2c194c7c253f3e18f87de0292fc73e4d}{Send\+Verack}} ()
+\begin{DoxyCompactList}\small\item\em Sends a verack message to the remote node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a6a84652ae3925ff14a4e9cdc5b385f3f}{Send\+Ping}} ()
+\begin{DoxyCompactList}\small\item\em Sends a ping message to the remote node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a0ba6f31174a3cd35b31ba4637b39a98c}{Send\+Pong}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{payloads\+::\+Ping\+Payload}} \&payload)
+\begin{DoxyCompactList}\small\item\em Sends a pong message to the remote node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a771239425494016879dbf6ea3b70dad8}{Send\+Get\+Addr}} ()
+\begin{DoxyCompactList}\small\item\em Sends a getaddr message to the remote node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a1e82d1bbd5d391c27a6f91d7b7a2b323}{Send\+Addr}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_network_address_with_time}{payloads\+::\+Network\+Address\+With\+Time}} $>$ \&addresses)
+\begin{DoxyCompactList}\small\item\em Sends an addr message to the remote node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_afd585de516bb0c656f782978c1cb014e}{Send\+Inv}} (\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a16679b1d56245299fcef623d2997dddc}{Inventory\+Type}} type, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&hashes)
+\begin{DoxyCompactList}\small\item\em Sends an inv message to the remote node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_adeef46ab53ba9b9f8f8677617031c779}{Send\+Get\+Data}} (\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a16679b1d56245299fcef623d2997dddc}{Inventory\+Type}} type, const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&hashes)
+\begin{DoxyCompactList}\small\item\em Sends a getdata message to the remote node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a46e5d64e382315c2d74a961efa34c754}{Send\+Get\+Blocks}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash\+Start, int16\+\_\+t count=-\/1)
+\begin{DoxyCompactList}\small\item\em Sends a getblocks message to the remote node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a0d23d9930ab2932eb5457ec531bc4063}{Send\+Get\+Block\+By\+Index}} (uint32\+\_\+t index\+Start, uint16\+\_\+t count=500)
+\begin{DoxyCompactList}\small\item\em Sends a getblockbyindex message to the remote node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a3d0f76331d395657f92c8e406d0571e1}{Send\+Get\+Headers}} (const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&hash\+Start, int16\+\_\+t count=-\/1)
+\begin{DoxyCompactList}\small\item\em Sends a getheaders message to the remote node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_aaf05b5c36df0e009fb0dad22cdff6f6f}{Send\+Headers}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{ledger\+::\+Block\+Header}} $>$ $>$ \&headers)
+\begin{DoxyCompactList}\small\item\em Sends a headers message to the remote node. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a6b28c92b247748986c659bf7fd8236e8}{Send\+Mempool}} ()
+\begin{DoxyCompactList}\small\item\em Sends a mempool message to the remote node. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_af3fba5b51f0d97d07c256b5dbfc1f63c}{On\+Message\+Received}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ac7b707f0fdb4356ab73bf2f74a652247}{On\+Disconnected}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a74b522da67c84638a72cb949e45d7498}{Process\+Version\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_aba5f3f03bf76cbc86cc5ebb2a3cc1996}{Process\+Verack\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a280aa1a74baf51127d387c466861d52d}{Process\+Ping\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a2c3857f1cf86a62f9e576ff5ee799599}{Process\+Pong\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a74ce48da575ec34be123c8e18d4221ad}{Process\+Addr\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a2943e79b14f52d6f5e1b308800a697fc}{Process\+Inv\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ad5c31c36ce7157c7bda00eaa7be3e40c}{Process\+Get\+Data\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a42d612319d243f24ee55d53a0d8d6d4d}{Process\+Get\+Blocks\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_adce3bdbedf1477755809391b6a1f50f0}{Process\+Get\+Block\+By\+Index\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ac5745df7b23ffa073204f5b3835d08ab}{Process\+Get\+Headers\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a3d1fa906aef0a4be1441e85520ba51fc}{Process\+Headers\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a2a1633bc7e0b225c0cf71140141c1c38}{Process\+Mempool\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_addff757023c74afc78d94058a6d130d5}{Process\+Filter\+Add\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a15155752e25803e30dce51724ac19c03}{Process\+Filter\+Clear\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a734b07b45fe86cf8203928b129279815}{Process\+Filter\+Load\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a005f9ce7118c9f39ca83f0d304701094}{Process\+Get\+Addr\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_aa16d198542064ecc3650a2b57fe28381}{Process\+Reject\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a1f18bed1a7ee5d131b182f876979b020}{Process\+Not\+Found\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a7a96f1180a9a06b82ffa0588c386ca88}{Process\+Transaction\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ad0ab7900381bfd0b1de218979ae22fe7}{Process\+Block\+Message}} (const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&message)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{Local\+Node}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a9343f1c9a781ba8085ef321149d2c1e6}{local\+Node\+\_\+}}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection}{Connection}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a1ec95755bd015e7b1d2a928c34650c4b}{connection\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_ad513460f0307708c4570dbbedbbde702}{handshaked\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_af6a00f05ce4d85c82dff0e58c6b75e12}{version\+\_\+}}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a4be10fdc955404645b32875f54c3729c}{user\+Agent\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a9c060380af715fd2c309177cb944cfa0}{capabilities\+\_\+}}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_remote_node_a81cb886ae067dd701a6b59a8ed841af3}{last\+Block\+Index\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a remote node in the P2P network. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a30a4a270872f3443004f1d873b96c2de}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!RemoteNode@{RemoteNode}}
+\index{RemoteNode@{RemoteNode}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{RemoteNode()}{RemoteNode()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a30a4a270872f3443004f1d873b96c2de} 
+neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Remote\+Node (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{Local\+Node}} \texorpdfstring{$\ast$}{*}}]{local\+Node}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection}{Connection}} $>$}]{connection}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1network_1_1p2p_1_1_remote_node}{Remote\+Node}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em local\+Node} & The local node. \\
+\hline
+{\em connection} & The connection to the remote node. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a584f8314f11c1d2c9d979581d718e9b1}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!````~RemoteNode@{\texorpdfstring{$\sim$}{\string~}RemoteNode}}
+\index{````~RemoteNode@{\texorpdfstring{$\sim$}{\string~}RemoteNode}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}RemoteNode()}{\string~RemoteNode()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a584f8314f11c1d2c9d979581d718e9b1} 
+neo\+::network\+::p2p\+::\+Remote\+Node\+::\texorpdfstring{$\sim$}{\string~}\+Remote\+Node (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Destructor. 
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a8d2e059ddc49af68e501750f33264f2b}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!Disconnect@{Disconnect}}
+\index{Disconnect@{Disconnect}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{Disconnect()}{Disconnect()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a8d2e059ddc49af68e501750f33264f2b} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Disconnect (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Disconnects from the remote node. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a42704f4b8cc21250f3166659d4e67e6e}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!GetCapabilities@{GetCapabilities}}
+\index{GetCapabilities@{GetCapabilities}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{GetCapabilities()}{GetCapabilities()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a42704f4b8cc21250f3166659d4e67e6e} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}} $>$ \& neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Get\+Capabilities (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the capabilities of the remote node. 
+
+\begin{DoxyReturn}{Returns}
+The capabilities. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a036f5322572c87ed5876505a700c3a93}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!GetConnection@{GetConnection}}
+\index{GetConnection@{GetConnection}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{GetConnection()}{GetConnection()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a036f5322572c87ed5876505a700c3a93} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection}{Connection}} $>$ neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Get\+Connection (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the connection to the remote node. 
+
+\begin{DoxyReturn}{Returns}
+The connection. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a729b40856d14585eb75f23ee76632cc8}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!GetLastBlockIndex@{GetLastBlockIndex}}
+\index{GetLastBlockIndex@{GetLastBlockIndex}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{GetLastBlockIndex()}{GetLastBlockIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a729b40856d14585eb75f23ee76632cc8} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Get\+Last\+Block\+Index (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Gets the last block index of the remote node. 
+
+\begin{DoxyReturn}{Returns}
+The last block index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a08351342cd2b5406da4e0d3fd1a76d09}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!GetLocalEndPoint@{GetLocalEndPoint}}
+\index{GetLocalEndPoint@{GetLocalEndPoint}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{GetLocalEndPoint()}{GetLocalEndPoint()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a08351342cd2b5406da4e0d3fd1a76d09} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Get\+Local\+End\+Point (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the local endpoint. 
+
+\begin{DoxyReturn}{Returns}
+The local endpoint. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_ac72d0bc7106295eae165ad02b3c5d908}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!GetRemoteEndPoint@{GetRemoteEndPoint}}
+\index{GetRemoteEndPoint@{GetRemoteEndPoint}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{GetRemoteEndPoint()}{GetRemoteEndPoint()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_ac72d0bc7106295eae165ad02b3c5d908} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_p_end_point}{IPEnd\+Point}} neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Get\+Remote\+End\+Point (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the remote endpoint. 
+
+\begin{DoxyReturn}{Returns}
+The remote endpoint. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_ad22a4f6ecc4fd23acc5e8ada0ed34f6e}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!GetUserAgent@{GetUserAgent}}
+\index{GetUserAgent@{GetUserAgent}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{GetUserAgent()}{GetUserAgent()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_ad22a4f6ecc4fd23acc5e8ada0ed34f6e} 
+const std\+::string \& neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Get\+User\+Agent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the user agent of the remote node. 
+
+\begin{DoxyReturn}{Returns}
+The user agent. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_ab6f35269328ca0a70a80ff59ae66ecbc}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!GetVersion@{GetVersion}}
+\index{GetVersion@{GetVersion}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{GetVersion()}{GetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_ab6f35269328ca0a70a80ff59ae66ecbc} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Get\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the version of the remote node. 
+
+\begin{DoxyReturn}{Returns}
+The version. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a6245444a7151bc867f35bdd01f13d720}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!IsConnected@{IsConnected}}
+\index{IsConnected@{IsConnected}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{IsConnected()}{IsConnected()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a6245444a7151bc867f35bdd01f13d720} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Is\+Connected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Gets whether the remote node is connected. 
+
+\begin{DoxyReturn}{Returns}
+True if the remote node is connected, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_aa2f23f1eae925773f7d4180fed01f2b5}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!IsHandshaked@{IsHandshaked}}
+\index{IsHandshaked@{IsHandshaked}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{IsHandshaked()}{IsHandshaked()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_aa2f23f1eae925773f7d4180fed01f2b5} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Is\+Handshaked (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets whether the remote node is handshaked. 
+
+\begin{DoxyReturn}{Returns}
+True if the remote node is handshaked, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_ac7b707f0fdb4356ab73bf2f74a652247}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!OnDisconnected@{OnDisconnected}}
+\index{OnDisconnected@{OnDisconnected}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{OnDisconnected()}{OnDisconnected()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_ac7b707f0fdb4356ab73bf2f74a652247} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+On\+Disconnected (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_af3fba5b51f0d97d07c256b5dbfc1f63c}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!OnMessageReceived@{OnMessageReceived}}
+\index{OnMessageReceived@{OnMessageReceived}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{OnMessageReceived()}{OnMessageReceived()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_af3fba5b51f0d97d07c256b5dbfc1f63c} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+On\+Message\+Received (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a74ce48da575ec34be123c8e18d4221ad}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessAddrMessage@{ProcessAddrMessage}}
+\index{ProcessAddrMessage@{ProcessAddrMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessAddrMessage()}{ProcessAddrMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a74ce48da575ec34be123c8e18d4221ad} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Addr\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_ad0ab7900381bfd0b1de218979ae22fe7}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessBlockMessage@{ProcessBlockMessage}}
+\index{ProcessBlockMessage@{ProcessBlockMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessBlockMessage()}{ProcessBlockMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_ad0ab7900381bfd0b1de218979ae22fe7} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Block\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_addff757023c74afc78d94058a6d130d5}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessFilterAddMessage@{ProcessFilterAddMessage}}
+\index{ProcessFilterAddMessage@{ProcessFilterAddMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessFilterAddMessage()}{ProcessFilterAddMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_addff757023c74afc78d94058a6d130d5} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Filter\+Add\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a15155752e25803e30dce51724ac19c03}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessFilterClearMessage@{ProcessFilterClearMessage}}
+\index{ProcessFilterClearMessage@{ProcessFilterClearMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessFilterClearMessage()}{ProcessFilterClearMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a15155752e25803e30dce51724ac19c03} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Filter\+Clear\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a734b07b45fe86cf8203928b129279815}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessFilterLoadMessage@{ProcessFilterLoadMessage}}
+\index{ProcessFilterLoadMessage@{ProcessFilterLoadMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessFilterLoadMessage()}{ProcessFilterLoadMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a734b07b45fe86cf8203928b129279815} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Filter\+Load\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a005f9ce7118c9f39ca83f0d304701094}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessGetAddrMessage@{ProcessGetAddrMessage}}
+\index{ProcessGetAddrMessage@{ProcessGetAddrMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessGetAddrMessage()}{ProcessGetAddrMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a005f9ce7118c9f39ca83f0d304701094} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Get\+Addr\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_adce3bdbedf1477755809391b6a1f50f0}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessGetBlockByIndexMessage@{ProcessGetBlockByIndexMessage}}
+\index{ProcessGetBlockByIndexMessage@{ProcessGetBlockByIndexMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessGetBlockByIndexMessage()}{ProcessGetBlockByIndexMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_adce3bdbedf1477755809391b6a1f50f0} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Get\+Block\+By\+Index\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a42d612319d243f24ee55d53a0d8d6d4d}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessGetBlocksMessage@{ProcessGetBlocksMessage}}
+\index{ProcessGetBlocksMessage@{ProcessGetBlocksMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessGetBlocksMessage()}{ProcessGetBlocksMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a42d612319d243f24ee55d53a0d8d6d4d} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Get\+Blocks\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_ad5c31c36ce7157c7bda00eaa7be3e40c}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessGetDataMessage@{ProcessGetDataMessage}}
+\index{ProcessGetDataMessage@{ProcessGetDataMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessGetDataMessage()}{ProcessGetDataMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_ad5c31c36ce7157c7bda00eaa7be3e40c} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Get\+Data\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_ac5745df7b23ffa073204f5b3835d08ab}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessGetHeadersMessage@{ProcessGetHeadersMessage}}
+\index{ProcessGetHeadersMessage@{ProcessGetHeadersMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessGetHeadersMessage()}{ProcessGetHeadersMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_ac5745df7b23ffa073204f5b3835d08ab} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Get\+Headers\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a3d1fa906aef0a4be1441e85520ba51fc}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessHeadersMessage@{ProcessHeadersMessage}}
+\index{ProcessHeadersMessage@{ProcessHeadersMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessHeadersMessage()}{ProcessHeadersMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a3d1fa906aef0a4be1441e85520ba51fc} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Headers\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a2943e79b14f52d6f5e1b308800a697fc}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessInvMessage@{ProcessInvMessage}}
+\index{ProcessInvMessage@{ProcessInvMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessInvMessage()}{ProcessInvMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a2943e79b14f52d6f5e1b308800a697fc} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Inv\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a2a1633bc7e0b225c0cf71140141c1c38}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessMempoolMessage@{ProcessMempoolMessage}}
+\index{ProcessMempoolMessage@{ProcessMempoolMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessMempoolMessage()}{ProcessMempoolMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a2a1633bc7e0b225c0cf71140141c1c38} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Mempool\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 16
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a1f18bed1a7ee5d131b182f876979b020}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessNotFoundMessage@{ProcessNotFoundMessage}}
+\index{ProcessNotFoundMessage@{ProcessNotFoundMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessNotFoundMessage()}{ProcessNotFoundMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a1f18bed1a7ee5d131b182f876979b020} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Not\+Found\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 17
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a280aa1a74baf51127d387c466861d52d}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessPingMessage@{ProcessPingMessage}}
+\index{ProcessPingMessage@{ProcessPingMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessPingMessage()}{ProcessPingMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a280aa1a74baf51127d387c466861d52d} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Ping\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 18
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a2c3857f1cf86a62f9e576ff5ee799599}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessPongMessage@{ProcessPongMessage}}
+\index{ProcessPongMessage@{ProcessPongMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessPongMessage()}{ProcessPongMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a2c3857f1cf86a62f9e576ff5ee799599} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Pong\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 19
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_aa16d198542064ecc3650a2b57fe28381}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessRejectMessage@{ProcessRejectMessage}}
+\index{ProcessRejectMessage@{ProcessRejectMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessRejectMessage()}{ProcessRejectMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_aa16d198542064ecc3650a2b57fe28381} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Reject\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 20
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a7a96f1180a9a06b82ffa0588c386ca88}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessTransactionMessage@{ProcessTransactionMessage}}
+\index{ProcessTransactionMessage@{ProcessTransactionMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessTransactionMessage()}{ProcessTransactionMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a7a96f1180a9a06b82ffa0588c386ca88} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Transaction\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 21
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_aba5f3f03bf76cbc86cc5ebb2a3cc1996}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessVerackMessage@{ProcessVerackMessage}}
+\index{ProcessVerackMessage@{ProcessVerackMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessVerackMessage()}{ProcessVerackMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_aba5f3f03bf76cbc86cc5ebb2a3cc1996} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Verack\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a74b522da67c84638a72cb949e45d7498}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!ProcessVersionMessage@{ProcessVersionMessage}}
+\index{ProcessVersionMessage@{ProcessVersionMessage}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{ProcessVersionMessage()}{ProcessVersionMessage()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a74b522da67c84638a72cb949e45d7498} 
+void neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Process\+Version\+Message (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+Here is the call graph for this function\+:
+% FIG 22
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a57ce01b12cac829366b308b5f9b6114a}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!Send@{Send}}
+\index{Send@{Send}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{Send()}{Send()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a57ce01b12cac829366b308b5f9b6114a} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Send (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_message}{Message}} \&}]{message}{, }\item[{bool}]{enable\+Compression}{ = {\ttfamily true}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Sends a message to the remote node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em message} & The message to send. \\
+\hline
+{\em enable\+Compression} & Whether to enable compression. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the message was sent successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 23
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a1e82d1bbd5d391c27a6f91d7b7a2b323}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!SendAddr@{SendAddr}}
+\index{SendAddr@{SendAddr}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{SendAddr()}{SendAddr()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a1e82d1bbd5d391c27a6f91d7b7a2b323} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Send\+Addr (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_network_address_with_time}{payloads\+::\+Network\+Address\+With\+Time}} $>$ \&}]{addresses}{}\end{DoxyParamCaption})}
+
+
+
+Sends an addr message to the remote node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em addresses} & The addresses to send. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the message was sent successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 24
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a771239425494016879dbf6ea3b70dad8}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!SendGetAddr@{SendGetAddr}}
+\index{SendGetAddr@{SendGetAddr}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{SendGetAddr()}{SendGetAddr()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a771239425494016879dbf6ea3b70dad8} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Send\+Get\+Addr (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Sends a getaddr message to the remote node. 
+
+\begin{DoxyReturn}{Returns}
+True if the message was sent successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 25
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a0d23d9930ab2932eb5457ec531bc4063}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!SendGetBlockByIndex@{SendGetBlockByIndex}}
+\index{SendGetBlockByIndex@{SendGetBlockByIndex}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{SendGetBlockByIndex()}{SendGetBlockByIndex()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a0d23d9930ab2932eb5457ec531bc4063} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Send\+Get\+Block\+By\+Index (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{index\+Start}{, }\item[{uint16\+\_\+t}]{count}{ = {\ttfamily 500}}\end{DoxyParamCaption})}
+
+
+
+Sends a getblockbyindex message to the remote node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index\+Start} & The index to start from. \\
+\hline
+{\em count} & The number of blocks to request. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the message was sent successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 26
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a46e5d64e382315c2d74a961efa34c754}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!SendGetBlocks@{SendGetBlocks}}
+\index{SendGetBlocks@{SendGetBlocks}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{SendGetBlocks()}{SendGetBlocks()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a46e5d64e382315c2d74a961efa34c754} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Send\+Get\+Blocks (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash\+Start}{, }\item[{int16\+\_\+t}]{count}{ = {\ttfamily -\/1}}\end{DoxyParamCaption})}
+
+
+
+Sends a getblocks message to the remote node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash\+Start} & The hash to start from. \\
+\hline
+{\em count} & The number of blocks to request. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the message was sent successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 27
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_adeef46ab53ba9b9f8f8677617031c779}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!SendGetData@{SendGetData}}
+\index{SendGetData@{SendGetData}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{SendGetData()}{SendGetData()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_adeef46ab53ba9b9f8f8677617031c779} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Send\+Get\+Data (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a16679b1d56245299fcef623d2997dddc}{Inventory\+Type}}}]{type}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&}]{hashes}{}\end{DoxyParamCaption})}
+
+
+
+Sends a getdata message to the remote node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of inventory. \\
+\hline
+{\em hashes} & The hashes of the inventory items. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the message was sent successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 28
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a3d0f76331d395657f92c8e406d0571e1}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!SendGetHeaders@{SendGetHeaders}}
+\index{SendGetHeaders@{SendGetHeaders}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{SendGetHeaders()}{SendGetHeaders()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a3d0f76331d395657f92c8e406d0571e1} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Send\+Get\+Headers (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} \&}]{hash\+Start}{, }\item[{int16\+\_\+t}]{count}{ = {\ttfamily -\/1}}\end{DoxyParamCaption})}
+
+
+
+Sends a getheaders message to the remote node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hash\+Start} & The hash to start from. \\
+\hline
+{\em count} & The number of headers to request. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the message was sent successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 29
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_aaf05b5c36df0e009fb0dad22cdff6f6f}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!SendHeaders@{SendHeaders}}
+\index{SendHeaders@{SendHeaders}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{SendHeaders()}{SendHeaders()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_aaf05b5c36df0e009fb0dad22cdff6f6f} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Send\+Headers (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block_header}{ledger\+::\+Block\+Header}} $>$ $>$ \&}]{headers}{}\end{DoxyParamCaption})}
+
+
+
+Sends a headers message to the remote node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em headers} & The headers to send. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the message was sent successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 30
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_afd585de516bb0c656f782978c1cb014e}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!SendInv@{SendInv}}
+\index{SendInv@{SendInv}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{SendInv()}{SendInv()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_afd585de516bb0c656f782978c1cb014e} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Send\+Inv (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_a16679b1d56245299fcef623d2997dddc}{Inventory\+Type}}}]{type}{, }\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \&}]{hashes}{}\end{DoxyParamCaption})}
+
+
+
+Sends an inv message to the remote node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & The type of inventory. \\
+\hline
+{\em hashes} & The hashes of the inventory items. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the message was sent successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 31
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a6b28c92b247748986c659bf7fd8236e8}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!SendMempool@{SendMempool}}
+\index{SendMempool@{SendMempool}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{SendMempool()}{SendMempool()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a6b28c92b247748986c659bf7fd8236e8} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Send\+Mempool (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Sends a mempool message to the remote node. 
+
+\begin{DoxyReturn}{Returns}
+True if the message was sent successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 32
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a6a84652ae3925ff14a4e9cdc5b385f3f}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!SendPing@{SendPing}}
+\index{SendPing@{SendPing}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{SendPing()}{SendPing()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a6a84652ae3925ff14a4e9cdc5b385f3f} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Send\+Ping (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Sends a ping message to the remote node. 
+
+\begin{DoxyReturn}{Returns}
+True if the message was sent successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 33
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a0ba6f31174a3cd35b31ba4637b39a98c}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!SendPong@{SendPong}}
+\index{SendPong@{SendPong}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{SendPong()}{SendPong()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a0ba6f31174a3cd35b31ba4637b39a98c} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Send\+Pong (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_ping_payload}{payloads\+::\+Ping\+Payload}} \&}]{payload}{}\end{DoxyParamCaption})}
+
+
+
+Sends a pong message to the remote node. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em payload} & The ping payload to respond to. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the message was sent successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 34
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a2c194c7c253f3e18f87de0292fc73e4d}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!SendVerack@{SendVerack}}
+\index{SendVerack@{SendVerack}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{SendVerack()}{SendVerack()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a2c194c7c253f3e18f87de0292fc73e4d} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Send\+Verack (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Sends a verack message to the remote node. 
+
+\begin{DoxyReturn}{Returns}
+True if the message was sent successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 35
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_ad8fc10229290e3d7df7c83ae3343d074}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!SendVersion@{SendVersion}}
+\index{SendVersion@{SendVersion}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{SendVersion()}{SendVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_ad8fc10229290e3d7df7c83ae3343d074} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::\+Send\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Sends a version message to the remote node. 
+
+\begin{DoxyReturn}{Returns}
+True if the message was sent successfully, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 36
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a9c060380af715fd2c309177cb944cfa0}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!capabilities\_@{capabilities\_}}
+\index{capabilities\_@{capabilities\_}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{capabilities\_}{capabilities\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a9c060380af715fd2c309177cb944cfa0} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_node_capability}{Node\+Capability}}$>$ neo\+::network\+::p2p\+::\+Remote\+Node\+::capabilities\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a1ec95755bd015e7b1d2a928c34650c4b}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!connection\_@{connection\_}}
+\index{connection\_@{connection\_}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{connection\_}{connection\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a1ec95755bd015e7b1d2a928c34650c4b} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_connection}{Connection}}$>$ neo\+::network\+::p2p\+::\+Remote\+Node\+::connection\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_ad513460f0307708c4570dbbedbbde702}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!handshaked\_@{handshaked\_}}
+\index{handshaked\_@{handshaked\_}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{handshaked\_}{handshaked\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_ad513460f0307708c4570dbbedbbde702} 
+bool neo\+::network\+::p2p\+::\+Remote\+Node\+::handshaked\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a81cb886ae067dd701a6b59a8ed841af3}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!lastBlockIndex\_@{lastBlockIndex\_}}
+\index{lastBlockIndex\_@{lastBlockIndex\_}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{lastBlockIndex\_}{lastBlockIndex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a81cb886ae067dd701a6b59a8ed841af3} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Remote\+Node\+::last\+Block\+Index\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a9343f1c9a781ba8085ef321149d2c1e6}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!localNode\_@{localNode\_}}
+\index{localNode\_@{localNode\_}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{localNode\_}{localNode\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a9343f1c9a781ba8085ef321149d2c1e6} 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_local_node}{Local\+Node}}\texorpdfstring{$\ast$}{*} neo\+::network\+::p2p\+::\+Remote\+Node\+::local\+Node\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_a4be10fdc955404645b32875f54c3729c}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!userAgent\_@{userAgent\_}}
+\index{userAgent\_@{userAgent\_}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{userAgent\_}{userAgent\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_a4be10fdc955404645b32875f54c3729c} 
+std\+::string neo\+::network\+::p2p\+::\+Remote\+Node\+::user\+Agent\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1_remote_node_af6a00f05ce4d85c82dff0e58c6b75e12}\index{neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}!version\_@{version\_}}
+\index{version\_@{version\_}!neo::network::p2p::RemoteNode@{neo::network::p2p::RemoteNode}}
+\doxysubsubsection{\texorpdfstring{version\_}{version\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1_remote_node_af6a00f05ce4d85c82dff0e58c6b75e12} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Remote\+Node\+::version\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/\mbox{\hyperlink{remote__node_8h}{remote\+\_\+node.\+h}}\item 
+src/network/p2p/\mbox{\hyperlink{remote__node_8cpp}{remote\+\_\+node.\+cpp}}\end{DoxyCompactItemize}

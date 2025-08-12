@@ -1,0 +1,72 @@
+\doxysection{include/neo/extensions/assembly\+\_\+extensions.h File Reference}
+\hypertarget{assembly__extensions_8h}{}\label{assembly__extensions_8h}\index{include/neo/extensions/assembly\_extensions.h@{include/neo/extensions/assembly\_extensions.h}}
+{\ttfamily \#include $<$functional$>$}\newline
+{\ttfamily \#include $<$memory$>$}\newline
+{\ttfamily \#include $<$string$>$}\newline
+{\ttfamily \#include $<$typeinfo$>$}\newline
+{\ttfamily \#include $<$unordered\+\_\+map$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for assembly\+\_\+extensions.\+h\+:
+% FIG 0
+This graph shows which files directly or indirectly include this file\+:
+% FIG 1
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1extensions_1_1_assembly_extensions}{neo\+::extensions\+::\+Assembly\+Extensions}}
+\begin{DoxyCompactList}\small\item\em Extensions for assembly and type reflection. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_type_info}{neo\+::extensions\+::\+Assembly\+Extensions\+::\+Type\+Info}}
+\begin{DoxyCompactList}\small\item\em Type information structure. \end{DoxyCompactList}\item 
+struct \mbox{\hyperlink{structneo_1_1extensions_1_1_assembly_extensions_1_1_method_info}{neo\+::extensions\+::\+Assembly\+Extensions\+::\+Method\+Info}}
+\begin{DoxyCompactList}\small\item\em Method information structure. \end{DoxyCompactList}\item 
+class \mbox{\hyperlink{classneo_1_1extensions_1_1_type_registrar}{neo\+::extensions\+::\+Type\+Registrar$<$ T $>$}}
+\begin{DoxyCompactList}\small\item\em Automatic type registration helper. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1extensions}{neo\+::extensions}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{assembly__extensions_8h_a1a4ebcbfe4169cba5f9445a14a0c30db}{REGISTER\+\_\+\+TYPE}}(Type)
+\begin{DoxyCompactList}\small\item\em Macro to easily register a type. \end{DoxyCompactList}\item 
+\#define \mbox{\hyperlink{assembly__extensions_8h_aaf00ddac9ff682dae64194753642a277}{REGISTER\+\_\+\+TYPE\+\_\+\+AS}}(Type,  Name)
+\begin{DoxyCompactList}\small\item\em Macro to register a type with custom name. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{assembly__extensions_8h_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{assembly__extensions_8h_a1a4ebcbfe4169cba5f9445a14a0c30db}\index{assembly\_extensions.h@{assembly\_extensions.h}!REGISTER\_TYPE@{REGISTER\_TYPE}}
+\index{REGISTER\_TYPE@{REGISTER\_TYPE}!assembly\_extensions.h@{assembly\_extensions.h}}
+\doxysubsubsection{\texorpdfstring{REGISTER\_TYPE}{REGISTER\_TYPE}}
+{\footnotesize\ttfamily \label{assembly__extensions_8h_a1a4ebcbfe4169cba5f9445a14a0c30db} 
+\#define REGISTER\+\_\+\+TYPE(\begin{DoxyParamCaption}\item[{}]{Type}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_type_registrar}{neo::extensions::TypeRegistrar<Type>}}\ g\_\#\#Type\#\#\_registrar(\#Type)}
+
+\end{DoxyCode}
+
+
+Macro to easily register a type. 
+
+\Hypertarget{assembly__extensions_8h_aaf00ddac9ff682dae64194753642a277}\index{assembly\_extensions.h@{assembly\_extensions.h}!REGISTER\_TYPE\_AS@{REGISTER\_TYPE\_AS}}
+\index{REGISTER\_TYPE\_AS@{REGISTER\_TYPE\_AS}!assembly\_extensions.h@{assembly\_extensions.h}}
+\doxysubsubsection{\texorpdfstring{REGISTER\_TYPE\_AS}{REGISTER\_TYPE\_AS}}
+{\footnotesize\ttfamily \label{assembly__extensions_8h_aaf00ddac9ff682dae64194753642a277} 
+\#define REGISTER\+\_\+\+TYPE\+\_\+\+AS(\begin{DoxyParamCaption}\item[{}]{Type}{, }\item[{}]{Name}{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1extensions_1_1_type_registrar}{neo::extensions::TypeRegistrar<Type>}}\ g\_\#\#Type\#\#\_registrar(Name)}
+
+\end{DoxyCode}
+
+
+Macro to register a type with custom name. 
+

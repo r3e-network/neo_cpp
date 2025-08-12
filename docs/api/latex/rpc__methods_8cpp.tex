@@ -1,0 +1,58 @@
+\doxysection{src/rpc/rpc\+\_\+methods.cpp File Reference}
+\hypertarget{rpc__methods_8cpp}{}\label{rpc__methods_8cpp}\index{src/rpc/rpc\_methods.cpp@{src/rpc/rpc\_methods.cpp}}
+{\ttfamily \#include $<$neo/ledger/signer.\+h$>$}\newline
+{\ttfamily \#include $<$neo/persistence/storage\+\_\+key.\+h$>$}\newline
+{\ttfamily \#include $<$neo/rpc/rpc\+\_\+methods.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/application\+\_\+engine.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/contract\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/native/gas\+\_\+token.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/native/native\+\_\+contract\+\_\+manager.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/native/neo\+\_\+token.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/native/role\+\_\+management.\+h$>$}\newline
+{\ttfamily \#include $<$neo/cryptography/base64.\+h$>$}\newline
+{\ttfamily \#include $<$neo/cryptography/hash.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/binary\+\_\+reader.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/binary\+\_\+writer.\+h$>$}\newline
+{\ttfamily \#include $<$neo/network/p2p/payloads/neo3\+\_\+transaction.\+h$>$}\newline
+{\ttfamily \#include $<$neo/vm/stack\+\_\+item.\+h$>$}\newline
+{\ttfamily \#include $<$neo/vm/stack\+\_\+item\+\_\+types.\+h$>$}\newline
+{\ttfamily \#include $<$neo/vm/vm\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+Include dependency graph for rpc\+\_\+methods.\+cpp\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_session_manager}{neo\+::rpc\+::\+Rpc\+Session\+Manager}}
+\item 
+class \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_session_manager_1_1_rpc_session}{neo\+::rpc\+::\+Rpc\+Session\+Manager\+::\+Rpc\+Session}}
+\item 
+class \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_session_manager_1_1_rpc_session_1_1_rpc_iterator}{neo\+::rpc\+::\+Rpc\+Session\+Manager\+::\+Rpc\+Session\+::\+Rpc\+Iterator}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1rpc}{neo\+::rpc}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_session_manager}{Rpc\+Session\+Manager}} $>$ \mbox{\hyperlink{namespaceneo_1_1rpc_a0e255d6e95e32967de8f4a799f9cb5f7}{neo\+::rpc\+::\+Get\+Rpc\+Session\+Manager}} ()
+\item 
+nlohmann\+::json \mbox{\hyperlink{namespaceneo_1_1rpc_a9d00ff7fab9f5024fd83ba6816cbb84c}{neo\+::rpc\+::\+Convert\+Stack\+Item\+To\+Json}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{vm\+::\+Stack\+Item}} $>$ item)
+\item 
+void \mbox{\hyperlink{namespaceneo_1_1rpc_a6c6e726b117d6aab99c3c11ab9f5c52a}{neo\+::rpc\+::\+Log\+Session\+Termination}} (const std\+::string \&session\+Id)
+\item 
+static nlohmann\+::json \mbox{\hyperlink{namespaceneo_1_1rpc_acbb1c92e76a6ba40f2a56e6da8d44316}{neo\+::rpc\+::\+Transaction\+To\+Json}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_neo3_transaction}{network\+::p2p\+::payloads\+::\+Neo3\+Transaction}} $>$ tx, bool verbose)
+\item 
+static nlohmann\+::json \mbox{\hyperlink{namespaceneo_1_1rpc_a4d5e850f59de0d4e7d8582b1a7c2f19b}{neo\+::rpc\+::\+Block\+To\+Json}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1ledger_1_1_block}{ledger\+::\+Block}} $>$ block, bool verbose)
+\item 
+static nlohmann\+::json \mbox{\hyperlink{namespaceneo_1_1rpc_a6eeea40090eb7bb4253705bceb284511}{neo\+::rpc\+::\+Contract\+To\+Json}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{smartcontract\+::\+Contract\+State}} $>$ contract)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+static std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_session_manager}{Rpc\+Session\+Manager}} $>$ \mbox{\hyperlink{namespaceneo_1_1rpc_ab40808d84a22f388e60a76491188fa5f}{neo\+::rpc\+::g\+\_\+rpc\+\_\+session\+\_\+manager}} = std\+::make\+\_\+shared$<$\mbox{\hyperlink{classneo_1_1rpc_1_1_rpc_session_manager}{Rpc\+Session\+Manager}}$>$()
+\end{DoxyCompactItemize}

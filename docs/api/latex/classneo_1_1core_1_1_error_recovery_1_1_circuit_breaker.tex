@@ -1,0 +1,194 @@
+\doxysection{neo\+::core\+::Error\+Recovery\+::Circuit\+Breaker Class Reference}
+\hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker}{}\label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}
+
+
+Circuit breaker for preventing cascade failures.  
+
+
+
+
+{\ttfamily \#include $<$error\+\_\+recovery.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::core\+::Error\+Recovery\+::Circuit\+Breaker\+:
+% FIG 0
+\doxysubsubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+struct \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_1_1_config}{Config}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+enum class \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914da}{State}} \{ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daa110ccf2f5d2ff4eda1fd1a494293467d}{CLOSED}}
+, \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daaa38bd5138bf35514df41a1795ebbf5c3}{OPEN}}
+, \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daa5c1c0fca237f238d3c656d55a4db3ca4}{HALF\+\_\+\+OPEN}}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ae0c71388fe220cfcf58a128247ef6f1f}{Circuit\+Breaker}} (const \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_1_1_config}{Config}} \&config)
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a12d44269280e2ee9381c930bc6df5962}{Circuit\+Breaker}} ()
+\item 
+{\footnotesize template$<$typename T$>$ }\\\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{Recovery\+Result}}$<$ T $>$ \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a2b6eb05430cb275097579a9d5f55daaa}{Execute}} (std\+::function$<$ T()$>$ operation)
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914da}{State}} \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a2ad84e3cd624dc2c76da4119abbee7c9}{Get\+State}} () const
+\item 
+int \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_aaefbbbbccc1412e7c5fa9f383e4e5ab9}{Get\+Failure\+Count}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ad032bf19b70777a1e1a8df1e54b8374b}{On\+Success}} ()
+\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a19da94a7032997dd6eaf722f71721e2b}{On\+Failure}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_1_1_config}{Config}} \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a5d6a01859ec3b182450823069dd28012}{config\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914da}{State}} \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a21c4bfc31db1e50380a5e405694a6fc1}{state\+\_\+}} = \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daa110ccf2f5d2ff4eda1fd1a494293467d}{State\+::\+CLOSED}}
+\item 
+int \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ac8d06be24c5a87b5a913f64b90491385}{failure\+\_\+count\+\_\+}} = 0
+\item 
+int \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ac4d65d56ff7abdc8cbb91845d4e010b1}{consecutive\+\_\+successes\+\_\+}} = 0
+\item 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a899f0930e619770aaf59e59b7c4717d0}{last\+\_\+failure\+\_\+time\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a30393b10e975ec7e5bc773056fb3a513}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Circuit breaker for preventing cascade failures. 
+
+\label{doc-enum-members}
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_doc-enum-members}
+\doxysubsection{Member Enumeration Documentation}
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914da}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!State@{State}}
+\index{State@{State}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{State}{State}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914da} 
+enum class \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914da}{neo\+::core\+::\+Error\+Recovery\+::\+Circuit\+Breaker\+::\+State}}\hspace{0.3cm}{\ttfamily [strong]}}
+
+\begin{DoxyEnumFields}[2]{Enumerator}
+\raisebox{\heightof{T}}[0pt][0pt]{\index{CLOSED@{CLOSED}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!CLOSED@{CLOSED}}}\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daa110ccf2f5d2ff4eda1fd1a494293467d}\label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daa110ccf2f5d2ff4eda1fd1a494293467d} 
+CLOSED&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{OPEN@{OPEN}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!OPEN@{OPEN}}}\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daaa38bd5138bf35514df41a1795ebbf5c3}\label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daaa38bd5138bf35514df41a1795ebbf5c3} 
+OPEN&\\
+\hline
+
+\raisebox{\heightof{T}}[0pt][0pt]{\index{HALF\_OPEN@{HALF\_OPEN}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!HALF\_OPEN@{HALF\_OPEN}}}\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daa5c1c0fca237f238d3c656d55a4db3ca4}\label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daa5c1c0fca237f238d3c656d55a4db3ca4} 
+HALF\+\_\+\+OPEN&\\
+\hline
+
+\end{DoxyEnumFields}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ae0c71388fe220cfcf58a128247ef6f1f}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!CircuitBreaker@{CircuitBreaker}}
+\index{CircuitBreaker@{CircuitBreaker}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{CircuitBreaker()}{CircuitBreaker()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ae0c71388fe220cfcf58a128247ef6f1f} 
+neo\+::core\+::\+Error\+Recovery\+::\+Circuit\+Breaker\+::\+Circuit\+Breaker (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_1_1_config}{Config}} \&}]{config}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a12d44269280e2ee9381c930bc6df5962}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!CircuitBreaker@{CircuitBreaker}}
+\index{CircuitBreaker@{CircuitBreaker}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{CircuitBreaker()}{CircuitBreaker()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a12d44269280e2ee9381c930bc6df5962} 
+neo\+::core\+::\+Error\+Recovery\+::\+Circuit\+Breaker\+::\+Circuit\+Breaker (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a2b6eb05430cb275097579a9d5f55daaa}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!Execute@{Execute}}
+\index{Execute@{Execute}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a2b6eb05430cb275097579a9d5f55daaa} 
+template$<$typename T$>$ \\
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_recovery_result}{Recovery\+Result}}$<$ T $>$ neo\+::core\+::\+Error\+Recovery\+::\+Circuit\+Breaker\+::\+Execute (\begin{DoxyParamCaption}\item[{std\+::function$<$ T()$>$}]{operation}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_aaefbbbbccc1412e7c5fa9f383e4e5ab9}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!GetFailureCount@{GetFailureCount}}
+\index{GetFailureCount@{GetFailureCount}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{GetFailureCount()}{GetFailureCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_aaefbbbbccc1412e7c5fa9f383e4e5ab9} 
+int neo\+::core\+::\+Error\+Recovery\+::\+Circuit\+Breaker\+::\+Get\+Failure\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a2ad84e3cd624dc2c76da4119abbee7c9}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!GetState@{GetState}}
+\index{GetState@{GetState}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a2ad84e3cd624dc2c76da4119abbee7c9} 
+\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914da}{State}} neo\+::core\+::\+Error\+Recovery\+::\+Circuit\+Breaker\+::\+Get\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a19da94a7032997dd6eaf722f71721e2b}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!OnFailure@{OnFailure}}
+\index{OnFailure@{OnFailure}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{OnFailure()}{OnFailure()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a19da94a7032997dd6eaf722f71721e2b} 
+void neo\+::core\+::\+Error\+Recovery\+::\+Circuit\+Breaker\+::\+On\+Failure (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ad032bf19b70777a1e1a8df1e54b8374b}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!OnSuccess@{OnSuccess}}
+\index{OnSuccess@{OnSuccess}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{OnSuccess()}{OnSuccess()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ad032bf19b70777a1e1a8df1e54b8374b} 
+void neo\+::core\+::\+Error\+Recovery\+::\+Circuit\+Breaker\+::\+On\+Success (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [private]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a5d6a01859ec3b182450823069dd28012}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!config\_@{config\_}}
+\index{config\_@{config\_}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{config\_}{config\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a5d6a01859ec3b182450823069dd28012} 
+\mbox{\hyperlink{structneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_1_1_config}{Config}} neo\+::core\+::\+Error\+Recovery\+::\+Circuit\+Breaker\+::config\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ac4d65d56ff7abdc8cbb91845d4e010b1}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!consecutive\_successes\_@{consecutive\_successes\_}}
+\index{consecutive\_successes\_@{consecutive\_successes\_}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{consecutive\_successes\_}{consecutive\_successes\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ac4d65d56ff7abdc8cbb91845d4e010b1} 
+int neo\+::core\+::\+Error\+Recovery\+::\+Circuit\+Breaker\+::consecutive\+\_\+successes\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ac8d06be24c5a87b5a913f64b90491385}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!failure\_count\_@{failure\_count\_}}
+\index{failure\_count\_@{failure\_count\_}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{failure\_count\_}{failure\_count\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_ac8d06be24c5a87b5a913f64b90491385} 
+int neo\+::core\+::\+Error\+Recovery\+::\+Circuit\+Breaker\+::failure\+\_\+count\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a899f0930e619770aaf59e59b7c4717d0}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!last\_failure\_time\_@{last\_failure\_time\_}}
+\index{last\_failure\_time\_@{last\_failure\_time\_}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{last\_failure\_time\_}{last\_failure\_time\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a899f0930e619770aaf59e59b7c4717d0} 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point neo\+::core\+::\+Error\+Recovery\+::\+Circuit\+Breaker\+::last\+\_\+failure\+\_\+time\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a30393b10e975ec7e5bc773056fb3a513}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a30393b10e975ec7e5bc773056fb3a513} 
+std\+::mutex neo\+::core\+::\+Error\+Recovery\+::\+Circuit\+Breaker\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a21c4bfc31db1e50380a5e405694a6fc1}\index{neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}!state\_@{state\_}}
+\index{state\_@{state\_}!neo::core::ErrorRecovery::CircuitBreaker@{neo::core::ErrorRecovery::CircuitBreaker}}
+\doxysubsubsection{\texorpdfstring{state\_}{state\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a21c4bfc31db1e50380a5e405694a6fc1} 
+\mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914da}{State}} neo\+::core\+::\+Error\+Recovery\+::\+Circuit\+Breaker\+::state\+\_\+ = \mbox{\hyperlink{classneo_1_1core_1_1_error_recovery_1_1_circuit_breaker_a220c7a0b96e85f0f0a5945af736914daa110ccf2f5d2ff4eda1fd1a494293467d}{State\+::\+CLOSED}}\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{error__recovery_8h}{error\+\_\+recovery.\+h}}\end{DoxyCompactItemize}

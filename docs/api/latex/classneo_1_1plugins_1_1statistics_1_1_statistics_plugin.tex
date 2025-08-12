@@ -1,0 +1,356 @@
+\doxysection{neo\+::plugins\+::statistics\+::Statistics\+Plugin Class Reference}
+\hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin}{}\label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+
+
+Statistics plugin.  
+
+
+
+
+{\ttfamily \#include $<$statistics\+\_\+plugin.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::plugins\+::statistics\+::Statistics\+Plugin\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::plugins\+::statistics\+::Statistics\+Plugin\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a5e794dd84fd7166901f3026944949e08}{Statistics\+Plugin}} ()
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin}{Statistics\+Plugin}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a6d7de0347b52bd05a92f4737beca831b}{\texorpdfstring{$\sim$}{\string~}\+Statistics\+Plugin}} () override
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_abf18bed83a6a0e491c61fd686571b165}{Get\+Name}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the name of the plugin. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a980aa48a58c9293ae203e49d2840fc49}{Get\+Description}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the description of the plugin. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_acb9a9b6322fd74def73699275e44f974}{Get\+Version}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the version of the plugin. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a7a131810b5575dbf930c17532bb68913}{Get\+Author}} () const override
+\begin{DoxyCompactList}\small\item\em Gets the author of the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_aa666a2b054d42f526043b47a4baecd33}{Initialize}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ neo\+System, const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&settings) override
+\begin{DoxyCompactList}\small\item\em Initializes the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a4800498816c6b07284fdb04243624479}{Start}} () override
+\begin{DoxyCompactList}\small\item\em Starts the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a20389ba531f52856dc2d41121c7d1c21}{Stop}} () override
+\begin{DoxyCompactList}\small\item\em Stops the plugin. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a716b9d12b4778dae270997fa8c7a609b}{Is\+Running}} () const override
+\begin{DoxyCompactList}\small\item\em Checks if the plugin is running. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin}{neo\+::plugins\+::\+Plugin}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_aa3d82c04241154d0ea425b5b8cf1aa52}{\texorpdfstring{$\sim$}{\string~}\+Plugin}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a04f73858193b1e60047354ee132a1bbd}{Collect\+Statistics}} ()
+\begin{DoxyCompactList}\small\item\em Collects statistics. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a1e099efc2509a82366cd76c1f25a6689}{Handle\+Get\+Statistics}} (const nlohmann\+::json \&params)
+\begin{DoxyCompactList}\small\item\em Handles the get statistics RPC method. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a62c2636fab79428238e2cb37cfb30af7}{neo\+System\+\_\+}}
+\item 
+std\+::atomic$<$ bool $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_ae5cbcbfef728a6baf591456dfe1a672b}{running\+\_\+}}
+\item 
+std\+::thread \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a13fcfd52f93aa87d9d3c246e77fd2b02}{statistics\+Thread\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a7f482f0ae048078cdce7ecde6cd84d44}{mutex\+\_\+}}
+\item 
+std\+::atomic$<$ uint32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a7f84b561911d4c53cc38aa2ba37b9b63}{block\+Count\+\_\+}}
+\item 
+std\+::atomic$<$ uint32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a20c25c84f5aa7e5f4e71ab9ee43f0d90}{transaction\+Count\+\_\+}}
+\item 
+std\+::atomic$<$ uint32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a5d0219aeb547a8ac4f73af93009c5b64}{peer\+Count\+\_\+}}
+\item 
+std\+::atomic$<$ uint32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_ab9e5bf0692c95c463b89441caec0b358}{memory\+Pool\+Size\+\_\+}}
+\item 
+std\+::chrono\+::seconds \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_ac27dd767f5dc764d1a74bdcd58a5463e}{interval\+\_\+}}
+\item 
+bool \mbox{\hyperlink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a722dec121a0ce269d6dfd9b1ff75a65e}{enable\+RPC\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Statistics plugin. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a5e794dd84fd7166901f3026944949e08}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!StatisticsPlugin@{StatisticsPlugin}}
+\index{StatisticsPlugin@{StatisticsPlugin}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{StatisticsPlugin()}{StatisticsPlugin()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a5e794dd84fd7166901f3026944949e08} 
+neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::\+Statistics\+Plugin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin}{Statistics\+Plugin}. 
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a6d7de0347b52bd05a92f4737beca831b}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!````~StatisticsPlugin@{\texorpdfstring{$\sim$}{\string~}StatisticsPlugin}}
+\index{````~StatisticsPlugin@{\texorpdfstring{$\sim$}{\string~}StatisticsPlugin}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}StatisticsPlugin()}{\string~StatisticsPlugin()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a6d7de0347b52bd05a92f4737beca831b} 
+neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::\texorpdfstring{$\sim$}{\string~}\+Statistics\+Plugin (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}}
+
+
+
+Destructor. 
+
+Here is the call graph for this function\+:
+% FIG 2
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a04f73858193b1e60047354ee132a1bbd}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!CollectStatistics@{CollectStatistics}}
+\index{CollectStatistics@{CollectStatistics}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{CollectStatistics()}{CollectStatistics()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a04f73858193b1e60047354ee132a1bbd} 
+void neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::\+Collect\+Statistics (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Collects statistics. 
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a7a131810b5575dbf930c17532bb68913}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!GetAuthor@{GetAuthor}}
+\index{GetAuthor@{GetAuthor}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{GetAuthor()}{GetAuthor()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a7a131810b5575dbf930c17532bb68913} 
+std\+::string neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::\+Get\+Author (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the author of the plugin. 
+
+\begin{DoxyReturn}{Returns}
+The author of the plugin. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_a1fac78cd5f885092da9e4af9e4059a2f}{neo\+::plugins\+::\+Plugin}}.
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a980aa48a58c9293ae203e49d2840fc49}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!GetDescription@{GetDescription}}
+\index{GetDescription@{GetDescription}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{GetDescription()}{GetDescription()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a980aa48a58c9293ae203e49d2840fc49} 
+std\+::string neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::\+Get\+Description (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the description of the plugin. 
+
+\begin{DoxyReturn}{Returns}
+The description of the plugin. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_aa8ba3ede35b7c31e9f6a33f0e4922c07}{neo\+::plugins\+::\+Plugin}}.
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_abf18bed83a6a0e491c61fd686571b165}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!GetName@{GetName}}
+\index{GetName@{GetName}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_abf18bed83a6a0e491c61fd686571b165} 
+std\+::string neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the name of the plugin. 
+
+\begin{DoxyReturn}{Returns}
+The name of the plugin. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_a4a9054a846e3e9cf1037a57996b19227}{neo\+::plugins\+::\+Plugin}}.
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_acb9a9b6322fd74def73699275e44f974}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!GetVersion@{GetVersion}}
+\index{GetVersion@{GetVersion}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{GetVersion()}{GetVersion()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_acb9a9b6322fd74def73699275e44f974} 
+std\+::string neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::\+Get\+Version (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Gets the version of the plugin. 
+
+\begin{DoxyReturn}{Returns}
+The version of the plugin. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_aa156efd03ff026aef403cfab7d4318a5}{neo\+::plugins\+::\+Plugin}}.
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a1e099efc2509a82366cd76c1f25a6689}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!HandleGetStatistics@{HandleGetStatistics}}
+\index{HandleGetStatistics@{HandleGetStatistics}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{HandleGetStatistics()}{HandleGetStatistics()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a1e099efc2509a82366cd76c1f25a6689} 
+nlohmann\+::json neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::\+Handle\+Get\+Statistics (\begin{DoxyParamCaption}\item[{const nlohmann\+::json \&}]{params}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Handles the get statistics RPC method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em params} & The parameters. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The result. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_aa666a2b054d42f526043b47a4baecd33}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_aa666a2b054d42f526043b47a4baecd33} 
+bool neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::\+Initialize (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}} $>$}]{neo\+System}{, }\item[{const std\+::unordered\+\_\+map$<$ std\+::string, std\+::string $>$ \&}]{settings}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Initializes the plugin. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em neo\+System} & The Neo system. \\
+\hline
+{\em settings} & The settings. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the plugin was initialized, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_ab9b7974038149e0bbb14553e639309b9}{neo\+::plugins\+::\+Plugin}}.
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a716b9d12b4778dae270997fa8c7a609b}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!IsRunning@{IsRunning}}
+\index{IsRunning@{IsRunning}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{IsRunning()}{IsRunning()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a716b9d12b4778dae270997fa8c7a609b} 
+bool neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::\+Is\+Running (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Checks if the plugin is running. 
+
+\begin{DoxyReturn}{Returns}
+True if the plugin is running, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_a4ace6f4b27780ea0e380be997debca58}{neo\+::plugins\+::\+Plugin}}.
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a4800498816c6b07284fdb04243624479}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!Start@{Start}}
+\index{Start@{Start}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{Start()}{Start()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a4800498816c6b07284fdb04243624479} 
+bool neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::\+Start (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Starts the plugin. 
+
+\begin{DoxyReturn}{Returns}
+True if the plugin was started, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_ac2013eb05fc07ef33196571eb636d079}{neo\+::plugins\+::\+Plugin}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a20389ba531f52856dc2d41121c7d1c21}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!Stop@{Stop}}
+\index{Stop@{Stop}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{Stop()}{Stop()}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a20389ba531f52856dc2d41121c7d1c21} 
+bool neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::\+Stop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Stops the plugin. 
+
+\begin{DoxyReturn}{Returns}
+True if the plugin was stopped, false otherwise. 
+\end{DoxyReturn}
+
+
+Implements \mbox{\hyperlink{classneo_1_1plugins_1_1_plugin_a7d198d0b1c29e4997e4e051d2580534e}{neo\+::plugins\+::\+Plugin}}.
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a7f84b561911d4c53cc38aa2ba37b9b63}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!blockCount\_@{blockCount\_}}
+\index{blockCount\_@{blockCount\_}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{blockCount\_}{blockCount\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a7f84b561911d4c53cc38aa2ba37b9b63} 
+std\+::atomic$<$uint32\+\_\+t$>$ neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::block\+Count\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a722dec121a0ce269d6dfd9b1ff75a65e}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!enableRPC\_@{enableRPC\_}}
+\index{enableRPC\_@{enableRPC\_}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{enableRPC\_}{enableRPC\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a722dec121a0ce269d6dfd9b1ff75a65e} 
+bool neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::enable\+RPC\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_ac27dd767f5dc764d1a74bdcd58a5463e}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!interval\_@{interval\_}}
+\index{interval\_@{interval\_}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{interval\_}{interval\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_ac27dd767f5dc764d1a74bdcd58a5463e} 
+std\+::chrono\+::seconds neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::interval\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_ab9e5bf0692c95c463b89441caec0b358}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!memoryPoolSize\_@{memoryPoolSize\_}}
+\index{memoryPoolSize\_@{memoryPoolSize\_}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{memoryPoolSize\_}{memoryPoolSize\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_ab9e5bf0692c95c463b89441caec0b358} 
+std\+::atomic$<$uint32\+\_\+t$>$ neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::memory\+Pool\+Size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a7f482f0ae048078cdce7ecde6cd84d44}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a7f482f0ae048078cdce7ecde6cd84d44} 
+std\+::mutex neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a62c2636fab79428238e2cb37cfb30af7}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!neoSystem\_@{neoSystem\_}}
+\index{neoSystem\_@{neoSystem\_}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{neoSystem\_}{neoSystem\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a62c2636fab79428238e2cb37cfb30af7} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1node_1_1_neo_system}{node\+::\+Neo\+System}}$>$ neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::neo\+System\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a5d0219aeb547a8ac4f73af93009c5b64}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!peerCount\_@{peerCount\_}}
+\index{peerCount\_@{peerCount\_}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{peerCount\_}{peerCount\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a5d0219aeb547a8ac4f73af93009c5b64} 
+std\+::atomic$<$uint32\+\_\+t$>$ neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::peer\+Count\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_ae5cbcbfef728a6baf591456dfe1a672b}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!running\_@{running\_}}
+\index{running\_@{running\_}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{running\_}{running\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_ae5cbcbfef728a6baf591456dfe1a672b} 
+std\+::atomic$<$bool$>$ neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::running\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a13fcfd52f93aa87d9d3c246e77fd2b02}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!statisticsThread\_@{statisticsThread\_}}
+\index{statisticsThread\_@{statisticsThread\_}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{statisticsThread\_}{statisticsThread\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a13fcfd52f93aa87d9d3c246e77fd2b02} 
+std\+::thread neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::statistics\+Thread\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a20c25c84f5aa7e5f4e71ab9ee43f0d90}\index{neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}!transactionCount\_@{transactionCount\_}}
+\index{transactionCount\_@{transactionCount\_}!neo::plugins::statistics::StatisticsPlugin@{neo::plugins::statistics::StatisticsPlugin}}
+\doxysubsubsection{\texorpdfstring{transactionCount\_}{transactionCount\_}}
+{\footnotesize\ttfamily \label{classneo_1_1plugins_1_1statistics_1_1_statistics_plugin_a20c25c84f5aa7e5f4e71ab9ee43f0d90} 
+std\+::atomic$<$uint32\+\_\+t$>$ neo\+::plugins\+::statistics\+::\+Statistics\+Plugin\+::transaction\+Count\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/plugins/statistics/\mbox{\hyperlink{statistics_2statistics__plugin_8h}{statistics\+\_\+plugin.\+h}}\item 
+src/plugins/statistics/\mbox{\hyperlink{statistics_2statistics__plugin_8cpp}{statistics\+\_\+plugin.\+cpp}}\end{DoxyCompactItemize}

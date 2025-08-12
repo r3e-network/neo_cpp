@@ -1,0 +1,272 @@
+\doxysection{neo\+::io\+::Memory\+Stream Class Reference}
+\hypertarget{classneo_1_1io_1_1_memory_stream}{}\label{classneo_1_1io_1_1_memory_stream}\index{neo::io::MemoryStream@{neo::io::MemoryStream}}
+
+
+A stream that operates on memory.  
+
+
+
+
+{\ttfamily \#include $<$memory\+\_\+stream.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::io\+::Memory\+Stream\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::io\+::Memory\+Stream\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_aefcc30ac5b0a3872da40a6d886f5c030}{Memory\+Stream}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty memory stream. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a2d9886491e2fad072c3c941d8a37781c}{Memory\+Stream}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&data)
+\begin{DoxyCompactList}\small\item\em Constructs a memory stream from a byte vector. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a6797e504cbe388e3fd720ceacb51ada3}{Memory\+Stream}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t size)
+\begin{DoxyCompactList}\small\item\em Constructs a memory stream from a byte array. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a0ca07e2cf5c3f7343a628f7068e5e340}{\texorpdfstring{$\sim$}{\string~}\+Memory\+Stream}} ()=default
+\begin{DoxyCompactList}\small\item\em Destructor. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_ae0a4bbc5eb3341fd5e90e129d94d6d13}{Get\+Position}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current position in the stream. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a7df49bad0278721a649e8c7a6d4061d5}{Set\+Position}} (size\+\_\+t position)
+\begin{DoxyCompactList}\small\item\em Sets the current position in the stream. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a2d0b296cf4d7d9cd528c940aefa61760}{Seek}} (size\+\_\+t position)
+\begin{DoxyCompactList}\small\item\em Seeks to a specific position in the stream. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_ae140b09a408ec473dad07e372badbec3}{Get\+Length}} () const
+\begin{DoxyCompactList}\small\item\em Gets the length of the stream. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a195b5cf6e862636aac5017563315f7a6}{Read}} (uint8\+\_\+t \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Reads data from the stream. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_ab75dfbb6d4ca3002d859f436fc4d535a}{Write}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}buffer, size\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Writes data to the stream. \end{DoxyCompactList}\item 
+const std\+::vector$<$ uint8\+\_\+t $>$ \& \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a79a8d430014150d5278a8ca20821b40a}{Get\+Data}} () const
+\begin{DoxyCompactList}\small\item\em Gets the underlying data. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_aae3f75c9f1f1733c05ca7beddac81a83}{To\+Byte\+Vector}} () const
+\begin{DoxyCompactList}\small\item\em Gets the underlying data as a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::vector$<$ uint8\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a00e599d18c970692bfee4e964f2ca729}{data\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_aabdfb1f87f009023e827f79c01d24c7f}{position\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf}{Memory\+Stream\+Buf}} \mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_a91ffa94d02fd6867c56039f76e415f39}{stream\+Buf\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A stream that operates on memory. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1io_1_1_memory_stream_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1io_1_1_memory_stream_aefcc30ac5b0a3872da40a6d886f5c030}\index{neo::io::MemoryStream@{neo::io::MemoryStream}!MemoryStream@{MemoryStream}}
+\index{MemoryStream@{MemoryStream}!neo::io::MemoryStream@{neo::io::MemoryStream}}
+\doxysubsubsection{\texorpdfstring{MemoryStream()}{MemoryStream()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_memory_stream_aefcc30ac5b0a3872da40a6d886f5c030} 
+neo\+::io\+::\+Memory\+Stream\+::\+Memory\+Stream (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs an empty memory stream. 
+
+\Hypertarget{classneo_1_1io_1_1_memory_stream_a2d9886491e2fad072c3c941d8a37781c}\index{neo::io::MemoryStream@{neo::io::MemoryStream}!MemoryStream@{MemoryStream}}
+\index{MemoryStream@{MemoryStream}!neo::io::MemoryStream@{neo::io::MemoryStream}}
+\doxysubsubsection{\texorpdfstring{MemoryStream()}{MemoryStream()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_memory_stream_a2d9886491e2fad072c3c941d8a37781c} 
+neo\+::io\+::\+Memory\+Stream\+::\+Memory\+Stream (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [explicit]}}
+
+
+
+Constructs a memory stream from a byte vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The initial data. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1io_1_1_memory_stream_a6797e504cbe388e3fd720ceacb51ada3}\index{neo::io::MemoryStream@{neo::io::MemoryStream}!MemoryStream@{MemoryStream}}
+\index{MemoryStream@{MemoryStream}!neo::io::MemoryStream@{neo::io::MemoryStream}}
+\doxysubsubsection{\texorpdfstring{MemoryStream()}{MemoryStream()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_memory_stream_a6797e504cbe388e3fd720ceacb51ada3} 
+neo\+::io\+::\+Memory\+Stream\+::\+Memory\+Stream (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Constructs a memory stream from a byte array. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The initial data. \\
+\hline
+{\em size} & The size of the data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_memory_stream_a0ca07e2cf5c3f7343a628f7068e5e340}\index{neo::io::MemoryStream@{neo::io::MemoryStream}!````~MemoryStream@{\texorpdfstring{$\sim$}{\string~}MemoryStream}}
+\index{````~MemoryStream@{\texorpdfstring{$\sim$}{\string~}MemoryStream}!neo::io::MemoryStream@{neo::io::MemoryStream}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}MemoryStream()}{\string~MemoryStream()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_memory_stream_a0ca07e2cf5c3f7343a628f7068e5e340} 
+neo\+::io\+::\+Memory\+Stream\+::\texorpdfstring{$\sim$}{\string~}\+Memory\+Stream (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [default]}}
+
+
+
+Destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1io_1_1_memory_stream_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1io_1_1_memory_stream_a79a8d430014150d5278a8ca20821b40a}\index{neo::io::MemoryStream@{neo::io::MemoryStream}!GetData@{GetData}}
+\index{GetData@{GetData}!neo::io::MemoryStream@{neo::io::MemoryStream}}
+\doxysubsubsection{\texorpdfstring{GetData()}{GetData()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_memory_stream_a79a8d430014150d5278a8ca20821b40a} 
+const std\+::vector$<$ uint8\+\_\+t $>$ \& neo\+::io\+::\+Memory\+Stream\+::\+Get\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the underlying data. 
+
+\begin{DoxyReturn}{Returns}
+The data. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_memory_stream_ae140b09a408ec473dad07e372badbec3}\index{neo::io::MemoryStream@{neo::io::MemoryStream}!GetLength@{GetLength}}
+\index{GetLength@{GetLength}!neo::io::MemoryStream@{neo::io::MemoryStream}}
+\doxysubsubsection{\texorpdfstring{GetLength()}{GetLength()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_memory_stream_ae140b09a408ec473dad07e372badbec3} 
+size\+\_\+t neo\+::io\+::\+Memory\+Stream\+::\+Get\+Length (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the length of the stream. 
+
+\begin{DoxyReturn}{Returns}
+The length of the stream. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_memory_stream_ae0a4bbc5eb3341fd5e90e129d94d6d13}\index{neo::io::MemoryStream@{neo::io::MemoryStream}!GetPosition@{GetPosition}}
+\index{GetPosition@{GetPosition}!neo::io::MemoryStream@{neo::io::MemoryStream}}
+\doxysubsubsection{\texorpdfstring{GetPosition()}{GetPosition()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_memory_stream_ae0a4bbc5eb3341fd5e90e129d94d6d13} 
+size\+\_\+t neo\+::io\+::\+Memory\+Stream\+::\+Get\+Position (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the current position in the stream. 
+
+\begin{DoxyReturn}{Returns}
+The current position. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_memory_stream_a195b5cf6e862636aac5017563315f7a6}\index{neo::io::MemoryStream@{neo::io::MemoryStream}!Read@{Read}}
+\index{Read@{Read}!neo::io::MemoryStream@{neo::io::MemoryStream}}
+\doxysubsubsection{\texorpdfstring{Read()}{Read()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_memory_stream_a195b5cf6e862636aac5017563315f7a6} 
+size\+\_\+t neo\+::io\+::\+Memory\+Stream\+::\+Read (\begin{DoxyParamCaption}\item[{uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{count}{}\end{DoxyParamCaption})}
+
+
+
+Reads data from the stream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & The buffer to read into. \\
+\hline
+{\em count} & The number of bytes to read. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The number of bytes actually read. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_memory_stream_a2d0b296cf4d7d9cd528c940aefa61760}\index{neo::io::MemoryStream@{neo::io::MemoryStream}!Seek@{Seek}}
+\index{Seek@{Seek}!neo::io::MemoryStream@{neo::io::MemoryStream}}
+\doxysubsubsection{\texorpdfstring{Seek()}{Seek()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_memory_stream_a2d0b296cf4d7d9cd528c940aefa61760} 
+void neo\+::io\+::\+Memory\+Stream\+::\+Seek (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{position}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Seeks to a specific position in the stream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position to seek to. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1io_1_1_memory_stream_a7df49bad0278721a649e8c7a6d4061d5}\index{neo::io::MemoryStream@{neo::io::MemoryStream}!SetPosition@{SetPosition}}
+\index{SetPosition@{SetPosition}!neo::io::MemoryStream@{neo::io::MemoryStream}}
+\doxysubsubsection{\texorpdfstring{SetPosition()}{SetPosition()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_memory_stream_a7df49bad0278721a649e8c7a6d4061d5} 
+void neo\+::io\+::\+Memory\+Stream\+::\+Set\+Position (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Sets the current position in the stream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The new position. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1io_1_1_memory_stream_aae3f75c9f1f1733c05ca7beddac81a83}\index{neo::io::MemoryStream@{neo::io::MemoryStream}!ToByteVector@{ToByteVector}}
+\index{ToByteVector@{ToByteVector}!neo::io::MemoryStream@{neo::io::MemoryStream}}
+\doxysubsubsection{\texorpdfstring{ToByteVector()}{ToByteVector()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_memory_stream_aae3f75c9f1f1733c05ca7beddac81a83} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} neo\+::io\+::\+Memory\+Stream\+::\+To\+Byte\+Vector (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the underlying data as a \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+
+\begin{DoxyReturn}{Returns}
+The data as \doxylink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1io_1_1_memory_stream_ab75dfbb6d4ca3002d859f436fc4d535a}\index{neo::io::MemoryStream@{neo::io::MemoryStream}!Write@{Write}}
+\index{Write@{Write}!neo::io::MemoryStream@{neo::io::MemoryStream}}
+\doxysubsubsection{\texorpdfstring{Write()}{Write()}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_memory_stream_ab75dfbb6d4ca3002d859f436fc4d535a} 
+void neo\+::io\+::\+Memory\+Stream\+::\+Write (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{buffer}{, }\item[{size\+\_\+t}]{count}{}\end{DoxyParamCaption})}
+
+
+
+Writes data to the stream. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em buffer} & The buffer to write from. \\
+\hline
+{\em count} & The number of bytes to write. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1io_1_1_memory_stream_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1io_1_1_memory_stream_a00e599d18c970692bfee4e964f2ca729}\index{neo::io::MemoryStream@{neo::io::MemoryStream}!data\_@{data\_}}
+\index{data\_@{data\_}!neo::io::MemoryStream@{neo::io::MemoryStream}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_memory_stream_a00e599d18c970692bfee4e964f2ca729} 
+std\+::vector$<$uint8\+\_\+t$>$ neo\+::io\+::\+Memory\+Stream\+::data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1io_1_1_memory_stream_aabdfb1f87f009023e827f79c01d24c7f}\index{neo::io::MemoryStream@{neo::io::MemoryStream}!position\_@{position\_}}
+\index{position\_@{position\_}!neo::io::MemoryStream@{neo::io::MemoryStream}}
+\doxysubsubsection{\texorpdfstring{position\_}{position\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_memory_stream_aabdfb1f87f009023e827f79c01d24c7f} 
+size\+\_\+t neo\+::io\+::\+Memory\+Stream\+::position\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1io_1_1_memory_stream_a91ffa94d02fd6867c56039f76e415f39}\index{neo::io::MemoryStream@{neo::io::MemoryStream}!streamBuf\_@{streamBuf\_}}
+\index{streamBuf\_@{streamBuf\_}!neo::io::MemoryStream@{neo::io::MemoryStream}}
+\doxysubsubsection{\texorpdfstring{streamBuf\_}{streamBuf\_}}
+{\footnotesize\ttfamily \label{classneo_1_1io_1_1_memory_stream_a91ffa94d02fd6867c56039f76e415f39} 
+\mbox{\hyperlink{classneo_1_1io_1_1_memory_stream_buf}{Memory\+Stream\+Buf}} neo\+::io\+::\+Memory\+Stream\+::stream\+Buf\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/io/\mbox{\hyperlink{memory__stream_8h}{memory\+\_\+stream.\+h}}\item 
+src/io/\mbox{\hyperlink{memory__stream_8cpp}{memory\+\_\+stream.\+cpp}}\end{DoxyCompactItemize}

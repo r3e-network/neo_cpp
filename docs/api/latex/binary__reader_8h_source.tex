@@ -1,0 +1,198 @@
+\doxysection{binary\+\_\+reader.\+h}
+\hypertarget{binary__reader_8h_source}{}\label{binary__reader_8h_source}\index{include/neo/io/binary\_reader.h@{include/neo/io/binary\_reader.h}}
+\mbox{\hyperlink{binary__reader_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2byte__vector_8h}{neo/io/byte\_vector.h}}>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{io_2fixed8_8h}{neo/io/fixed8.h}}>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint160_8h}{neo/io/uint160.h}}>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{uint256_8h}{neo/io/uint256.h}}>}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <istream>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <limits>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1io}{neo::io}}}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{ISerializable}};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a17c876c64723a4d3c4b761756d8d5014}{BinaryReader}}}
+\DoxyCodeLine{00023\ \{}
+\DoxyCodeLine{00024\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_adb9e72273042c91c94e3ef63ebfefeed}{DEFAULT\_MAX\_ARRAY\_SIZE}}\ =\ 16\ *\ 1024\ *\ 1024;\ \ \textcolor{comment}{//\ 16MB}}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keyword}{constexpr}\ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_aa088b7eea9b30a72475180019f77eaa3}{DEFAULT\_MAX\_STRING\_SIZE}}\ =\ 1\ *\ 1024\ *\ 1024;\ \ \textcolor{comment}{//\ 1MB}}
+\DoxyCodeLine{00031\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a17c876c64723a4d3c4b761756d8d5014}{BinaryReader}}(std::istream\&\ stream);}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00037\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a17c876c64723a4d3c4b761756d8d5014}{BinaryReader}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{ByteSpan}}\&\ data);}
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00043\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a17c876c64723a4d3c4b761756d8d5014}{BinaryReader}}(\textcolor{keyword}{const}\ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\&\ data);}
+\DoxyCodeLine{00044\ }
+\DoxyCodeLine{00049\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a17c876c64723a4d3c4b761756d8d5014}{BinaryReader}}(\textcolor{keyword}{const}\ std::vector<uint8\_t>\&\ data);}
+\DoxyCodeLine{00050\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a94aba9dfe2eb624fd626466227ccf3a8}{ReadBool}}();}
+\DoxyCodeLine{00056\ }
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a83aef9bff59e7b3cbc227674fb2c0964}{ReadBoolean}}();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00067\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a3b93ff9ad86d70fb5091267936092a59}{ReadUInt8}}();}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00073\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_acdcfcae157144bbbc188ff8bf00cd55d}{ReadByte}}();}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00079\ \ \ \ \ uint8\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a04fd34a58340737dfcfda6c67f4438d6}{PeekUInt8}}();}
+\DoxyCodeLine{00080\ }
+\DoxyCodeLine{00085\ \ \ \ \ uint16\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a52c58b790f36327c1c7a11d0f3cfb5c2}{ReadUInt16}}();}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00091\ \ \ \ \ uint32\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_adc2c9cfae535b86f63855d77cdb2662b}{ReadUInt32}}();}
+\DoxyCodeLine{00092\ }
+\DoxyCodeLine{00097\ \ \ \ \ uint64\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_add3fc78c751d4893aaf0193e0a357dbd}{ReadUInt64}}();}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00103\ \ \ \ \ int8\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_ad556de7845cd98d32bf825ca177c2185}{ReadInt8}}();}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00109\ \ \ \ \ int16\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_aaf523adc34870056024357d1080cb885}{ReadInt16}}();}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00115\ \ \ \ \ int32\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_ad3e123dea7f73acd42609f1943c071c5}{ReadInt32}}();}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00121\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_aa8429b0320e5dee44f55d511457eb9bb}{ReadInt64}}();}
+\DoxyCodeLine{00122\ }
+\DoxyCodeLine{00129\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_aaa4a5f7dcf558723668d35b0b31f93f1}{ReadBytes}}(\textcolor{keywordtype}{size\_t}\ count);}
+\DoxyCodeLine{00130\ }
+\DoxyCodeLine{00135\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{UInt160}}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a6f810794f8eb71c787d4741836d3a206}{ReadUInt160}}();}
+\DoxyCodeLine{00136\ }
+\DoxyCodeLine{00141\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{UInt256}}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a103549b89c846289e3b18bb282f6876d}{ReadUInt256}}();}
+\DoxyCodeLine{00142\ }
+\DoxyCodeLine{00147\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1io_ab7543ee487ec1ebb13b0c2c54ac9343f}{Fixed8}}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a8d9aa5753c3fee7d0afba26ddacbd130}{ReadFixed8}}();}
+\DoxyCodeLine{00148\ }
+\DoxyCodeLine{00153\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_af83b01f86939c82755926ff3bac86458}{ReadVarInt}}();}
+\DoxyCodeLine{00154\ }
+\DoxyCodeLine{00160\ \ \ \ \ int64\_t\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_af83b01f86939c82755926ff3bac86458}{ReadVarInt}}(int64\_t\ max);}
+\DoxyCodeLine{00161\ }
+\DoxyCodeLine{00166\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a62705ff1d1117525166b6d22c68935d4}{ReadVarBytes}}();}
+\DoxyCodeLine{00167\ }
+\DoxyCodeLine{00173\ \ \ \ \ \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{ByteVector}}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a62705ff1d1117525166b6d22c68935d4}{ReadVarBytes}}(\textcolor{keywordtype}{size\_t}\ maxSize);}
+\DoxyCodeLine{00174\ }
+\DoxyCodeLine{00179\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_ac449aaf281ee47088613fbf4b02b0ac8}{ReadString}}();}
+\DoxyCodeLine{00180\ }
+\DoxyCodeLine{00185\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a4c1e4e8b4f6ff955d9f0c047ae6d7e88}{ReadVarString}}();}
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00192\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a4c1e4e8b4f6ff955d9f0c047ae6d7e88}{ReadVarString}}(\textcolor{keywordtype}{size\_t}\ maxLength);}
+\DoxyCodeLine{00193\ }
+\DoxyCodeLine{00199\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_ad67e876889da3577d104846b9ed608db}{ReadFixedString}}(\textcolor{keywordtype}{size\_t}\ length);}
+\DoxyCodeLine{00200\ }
+\DoxyCodeLine{00206\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00207\ \ \ \ \ T\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_adfdd39b482480819e993cc3c39a77ec2}{ReadSerializable}}()}
+\DoxyCodeLine{00208\ \ \ \ \ \{}
+\DoxyCodeLine{00209\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_base\_of<ISerializable,\ T>::value,\ \textcolor{stringliteral}{"{}T\ must\ derive\ from\ ISerializable"{}});}
+\DoxyCodeLine{00210\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_default\_constructible<T>::value,\ \textcolor{stringliteral}{"{}T\ must\ be\ default\ constructible"{}});}
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ \ \ \ \ \ \ \ \ T\ obj;}
+\DoxyCodeLine{00213\ \ \ \ \ \ \ \ \ obj.Deserialize(*\textcolor{keyword}{this});}
+\DoxyCodeLine{00214\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ obj;}
+\DoxyCodeLine{00215\ \ \ \ \ \}}
+\DoxyCodeLine{00216\ }
+\DoxyCodeLine{00222\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00223\ \ \ \ \ std::vector<T>\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a3e532dc335d4364ed63f93aa2156eb3a}{ReadVector}}()}
+\DoxyCodeLine{00224\ \ \ \ \ \{}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_base\_of<ISerializable,\ T>::value,\ \textcolor{stringliteral}{"{}T\ must\ derive\ from\ ISerializable"{}});}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_default\_constructible<T>::value,\ \textcolor{stringliteral}{"{}T\ must\ be\ default\ constructible"{}});}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ int64\_t\ count\ =\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_af83b01f86939c82755926ff3bac86458}{ReadVarInt}}();}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (count\ <\ 0\ ||\ count\ >\ std::numeric\_limits<size\_t>::max())\ \textcolor{keywordflow}{throw}\ std::out\_of\_range(\textcolor{stringliteral}{"{}Invalid\ vector\ size"{}});}
+\DoxyCodeLine{00230\ }
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ std::vector<T>\ result;}
+\DoxyCodeLine{00232\ \ \ \ \ \ \ \ \ result.reserve(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{size\_t}\textcolor{keyword}{>}(count));}
+\DoxyCodeLine{00233\ }
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (int64\_t\ i\ =\ 0;\ i\ <\ count;\ i++)}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ \ \ \ \ result.push\_back(\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_adfdd39b482480819e993cc3c39a77ec2}{ReadSerializable<T>}}());}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00238\ }
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00240\ \ \ \ \ \}}
+\DoxyCodeLine{00241\ }
+\DoxyCodeLine{00249\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_aaa4a5f7dcf558723668d35b0b31f93f1}{ReadBytes}}(uint8\_t*\ data,\ \textcolor{keywordtype}{size\_t}\ size);}
+\DoxyCodeLine{00250\ }
+\DoxyCodeLine{00256\ \ \ \ \ \textcolor{keyword}{template}\ <\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00257\ \ \ \ \ T\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a675833a1f5409f8bb4d19080bec78f37}{Read}}()}
+\DoxyCodeLine{00258\ \ \ \ \ \{}
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ UInt160>)}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00261\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a6f810794f8eb71c787d4741836d3a206}{ReadUInt160}}();}
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ UInt256>)}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a103549b89c846289e3b18bb282f6876d}{ReadUInt256}}();}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00267\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ Fixed8>)}
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00269\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a8d9aa5753c3fee7d0afba26ddacbd130}{ReadFixed8}}();}
+\DoxyCodeLine{00270\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00271\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ uint8\_t>)}
+\DoxyCodeLine{00272\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00273\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_acdcfcae157144bbbc188ff8bf00cd55d}{ReadByte}}();}
+\DoxyCodeLine{00274\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00275\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ uint16\_t>)}
+\DoxyCodeLine{00276\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a52c58b790f36327c1c7a11d0f3cfb5c2}{ReadUInt16}}();}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ uint32\_t>)}
+\DoxyCodeLine{00280\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00281\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_adc2c9cfae535b86f63855d77cdb2662b}{ReadUInt32}}();}
+\DoxyCodeLine{00282\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00283\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ uint64\_t>)}
+\DoxyCodeLine{00284\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00285\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_add3fc78c751d4893aaf0193e0a357dbd}{ReadUInt64}}();}
+\DoxyCodeLine{00286\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00287\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ int8\_t>)}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_ad556de7845cd98d32bf825ca177c2185}{ReadInt8}}();}
+\DoxyCodeLine{00290\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00291\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ int16\_t>)}
+\DoxyCodeLine{00292\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00293\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_aaf523adc34870056024357d1080cb885}{ReadInt16}}();}
+\DoxyCodeLine{00294\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00295\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ int32\_t>)}
+\DoxyCodeLine{00296\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00297\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_ad3e123dea7f73acd42609f1943c071c5}{ReadInt32}}();}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00299\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ int64\_t>)}
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_aa8429b0320e5dee44f55d511457eb9bb}{ReadInt64}}();}
+\DoxyCodeLine{00302\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ bool>)}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a94aba9dfe2eb624fd626466227ccf3a8}{ReadBool}}();}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00307\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ \textcolor{keyword}{constexpr}\ (std::is\_same\_v<T,\ std::string>)}
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a4c1e4e8b4f6ff955d9f0c047ae6d7e88}{ReadVarString}}();}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{static\_assert}(std::is\_base\_of\_v<ISerializable,\ T>,}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{stringliteral}{"{}T\ must\ be\ a\ supported\ primitive\ type\ or\ derive\ from\ ISerializable"{}});}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_adfdd39b482480819e993cc3c39a77ec2}{ReadSerializable<T>}}();}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00317\ \ \ \ \ \}}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00323\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a3aeeaed2158cdb284853a61cc30a9fe2}{GetPosition}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00329\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a0bc593bc605ba809454da58457ce2d09}{Available}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00330\ }
+\DoxyCodeLine{00336\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a2bfd19e979fbdb9b340cc8dd78a9ca72}{EnsureAvailable}}(\textcolor{keywordtype}{size\_t}\ size)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00337\ }
+\DoxyCodeLine{00338\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00339\ \ \ \ \ std::istream*\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a1ed9c58f790cdba73ff7961f6f04a2e2}{stream\_}};}
+\DoxyCodeLine{00340\ \ \ \ \ \textcolor{keyword}{const}\ uint8\_t*\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a4bd8717cdc87be9451d55af4e5f7b85a}{data\_}};}
+\DoxyCodeLine{00341\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a80b348a41f40cfd3b68fdb35ac18a9f9}{size\_}};}
+\DoxyCodeLine{00342\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_aac7e12826469aba8030b1008fa5b5adc}{position\_}};}
+\DoxyCodeLine{00343\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a8b4dd83271a3f3e1fa523f37e959c20c}{owns\_stream\_}};}
+\DoxyCodeLine{00344\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a418550f9e5f0c6632bcb0d59139f226f}{using\_data\_mode\_}};}
+\DoxyCodeLine{00345\ }
+\DoxyCodeLine{00351\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1io_1_1_binary_reader_a890faf334a0500b4474a6b2f91e63e51}{ReadRawBytes}}(uint8\_t*\ data,\ \textcolor{keywordtype}{size\_t}\ size);}
+\DoxyCodeLine{00352\ \};}
+\DoxyCodeLine{00353\ \}\ \ \textcolor{comment}{//\ namespace\ neo::io}}
+
+\end{DoxyCode}

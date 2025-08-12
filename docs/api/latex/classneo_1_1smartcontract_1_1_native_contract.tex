@@ -1,0 +1,285 @@
+\doxysection{neo\+::smartcontract\+::Native\+Contract Class Reference}
+\hypertarget{classneo_1_1smartcontract_1_1_native_contract}{}\label{classneo_1_1smartcontract_1_1_native_contract}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+
+
+Represents a native contract.  
+
+
+
+
+{\ttfamily \#include $<$native\+\_\+contract.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::smartcontract\+::Native\+Contract\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_native_contract_a0151253ef0f79495a7ecfbfc20c89136}{Native\+Contract}} (const std\+::string \&name, int32\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1smartcontract_1_1_native_contract}{Native\+Contract}. \end{DoxyCompactList}\item 
+const std\+::string \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_native_contract_a5ad6d04e993cefbdb60afd523a0698f7}{Get\+Name}} () const
+\begin{DoxyCompactList}\small\item\em Gets the name. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_native_contract_a851f399b5cb1364ec468d56c94afb714}{Get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Gets the id. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_native_contract_a533b30ad468a5bc4e00c6ff3b1c8cdb6}{Get\+Script\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script hash. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{Contract\+State}} \& \mbox{\hyperlink{classneo_1_1smartcontract_1_1_native_contract_a848a73a9abf79d17bb7617ed5502929a}{Get\+Contract\+State}} () const
+\begin{DoxyCompactList}\small\item\em Gets the contract state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_native_contract_aa4f0bd2ce1062b8ad5033234dc6cd6af}{Register\+Method}} (const std\+::string \&name, std\+::function$<$ bool(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&)$>$ handler, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} flags)
+\begin{DoxyCompactList}\small\item\em Registers a method. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1smartcontract_1_1_native_contract_a1078228356960169bacef44750628a5e}{Invoke}} (\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&engine, const std\+::string \&method)
+\begin{DoxyCompactList}\small\item\em Invokes a method. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1smartcontract_1_1_native_contract_a216bb767fe916a94f7e3f4fe6ac26bd4}{Initialize}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$ snapshot)=0
+\begin{DoxyCompactList}\small\item\em Initializes the contract. \end{DoxyCompactList}\item 
+virtual uint8\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_native_contract_a5edd2a750690294b02835b3cb830cc46}{Get\+Storage\+Prefix}} () const =0
+\begin{DoxyCompactList}\small\item\em Gets the storage prefix. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_native_contract_a17e57bc2510d11c97ec938b4ce459c07}{Create\+Storage\+Key}} (uint8\+\_\+t prefix, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&key=\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}()) const
+\begin{DoxyCompactList}\small\item\em Creates a storage key. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual std\+::string \mbox{\hyperlink{classneo_1_1smartcontract_1_1_native_contract_a43699df88273306c294ce10745a38a7c}{Create\+Manifest}} () const =0
+\begin{DoxyCompactList}\small\item\em Creates the manifest. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::string \mbox{\hyperlink{classneo_1_1smartcontract_1_1_native_contract_a5f3a292e0d5279ac14d33f38f527e9e7}{name\+\_\+}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1smartcontract_1_1_native_contract_a18e3c6b776c830e0738d9693f1fc1b5a}{id\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_native_contract_a324048a3bc762a21a82bcc74df01b865}{script\+Hash\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{Contract\+State}} \mbox{\hyperlink{classneo_1_1smartcontract_1_1_native_contract_ae2b7b12dac3abf404957eba3edd93c62}{contract\+State\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::pair$<$ std\+::function$<$ bool(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&)$>$, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}} $>$ $>$ \mbox{\hyperlink{classneo_1_1smartcontract_1_1_native_contract_ad06fc539cbeda790479b4a2899aa9dd5}{methods\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a native contract. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_a0151253ef0f79495a7ecfbfc20c89136}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}!NativeContract@{NativeContract}}
+\index{NativeContract@{NativeContract}!neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+\doxysubsubsection{\texorpdfstring{NativeContract()}{NativeContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_native_contract_a0151253ef0f79495a7ecfbfc20c89136} 
+neo\+::smartcontract\+::\+Native\+Contract\+::\+Native\+Contract (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{int32\+\_\+t}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1smartcontract_1_1_native_contract}{Native\+Contract}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name. \\
+\hline
+{\em id} & The id. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_a43699df88273306c294ce10745a38a7c}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}!CreateManifest@{CreateManifest}}
+\index{CreateManifest@{CreateManifest}!neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+\doxysubsubsection{\texorpdfstring{CreateManifest()}{CreateManifest()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_native_contract_a43699df88273306c294ce10745a38a7c} 
+virtual std\+::string neo\+::smartcontract\+::\+Native\+Contract\+::\+Create\+Manifest (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Creates the manifest. 
+
+\begin{DoxyReturn}{Returns}
+The manifest. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_a17e57bc2510d11c97ec938b4ce459c07}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}!CreateStorageKey@{CreateStorageKey}}
+\index{CreateStorageKey@{CreateStorageKey}!neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+\doxysubsubsection{\texorpdfstring{CreateStorageKey()}{CreateStorageKey()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_native_contract_a17e57bc2510d11c97ec938b4ce459c07} 
+\mbox{\hyperlink{classneo_1_1persistence_1_1_storage_key}{persistence\+::\+Storage\+Key}} neo\+::smartcontract\+::\+Native\+Contract\+::\+Create\+Storage\+Key (\begin{DoxyParamCaption}\item[{uint8\+\_\+t}]{prefix}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{key}{ = {\ttfamily \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}}()}}\end{DoxyParamCaption}) const}
+
+
+
+Creates a storage key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em prefix} & The prefix. \\
+\hline
+{\em key} & The key. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The storage key. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_a848a73a9abf79d17bb7617ed5502929a}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}!GetContractState@{GetContractState}}
+\index{GetContractState@{GetContractState}!neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+\doxysubsubsection{\texorpdfstring{GetContractState()}{GetContractState()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_native_contract_a848a73a9abf79d17bb7617ed5502929a} 
+const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{Contract\+State}} \& neo\+::smartcontract\+::\+Native\+Contract\+::\+Get\+Contract\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the contract state. 
+
+\begin{DoxyReturn}{Returns}
+The contract state. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_a851f399b5cb1364ec468d56c94afb714}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}!GetId@{GetId}}
+\index{GetId@{GetId}!neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+\doxysubsubsection{\texorpdfstring{GetId()}{GetId()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_native_contract_a851f399b5cb1364ec468d56c94afb714} 
+int32\+\_\+t neo\+::smartcontract\+::\+Native\+Contract\+::\+Get\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the id. 
+
+\begin{DoxyReturn}{Returns}
+The id. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_a5ad6d04e993cefbdb60afd523a0698f7}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}!GetName@{GetName}}
+\index{GetName@{GetName}!neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+\doxysubsubsection{\texorpdfstring{GetName()}{GetName()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_native_contract_a5ad6d04e993cefbdb60afd523a0698f7} 
+const std\+::string \& neo\+::smartcontract\+::\+Native\+Contract\+::\+Get\+Name (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the name. 
+
+\begin{DoxyReturn}{Returns}
+The name. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_a533b30ad468a5bc4e00c6ff3b1c8cdb6}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}!GetScriptHash@{GetScriptHash}}
+\index{GetScriptHash@{GetScriptHash}!neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+\doxysubsubsection{\texorpdfstring{GetScriptHash()}{GetScriptHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_native_contract_a533b30ad468a5bc4e00c6ff3b1c8cdb6} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \& neo\+::smartcontract\+::\+Native\+Contract\+::\+Get\+Script\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the script hash. 
+
+\begin{DoxyReturn}{Returns}
+The script hash. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_a5edd2a750690294b02835b3cb830cc46}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}!GetStoragePrefix@{GetStoragePrefix}}
+\index{GetStoragePrefix@{GetStoragePrefix}!neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+\doxysubsubsection{\texorpdfstring{GetStoragePrefix()}{GetStoragePrefix()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_native_contract_a5edd2a750690294b02835b3cb830cc46} 
+virtual uint8\+\_\+t neo\+::smartcontract\+::\+Native\+Contract\+::\+Get\+Storage\+Prefix (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Gets the storage prefix. 
+
+\begin{DoxyReturn}{Returns}
+The storage prefix. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_a216bb767fe916a94f7e3f4fe6ac26bd4}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_native_contract_a216bb767fe916a94f7e3f4fe6ac26bd4} 
+virtual void neo\+::smartcontract\+::\+Native\+Contract\+::\+Initialize (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1persistence_1_1_data_cache}{persistence\+::\+Data\+Cache}} $>$}]{snapshot}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Initializes the contract. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em snapshot} & The snapshot. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_a1078228356960169bacef44750628a5e}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}!Invoke@{Invoke}}
+\index{Invoke@{Invoke}!neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+\doxysubsubsection{\texorpdfstring{Invoke()}{Invoke()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_native_contract_a1078228356960169bacef44750628a5e} 
+bool neo\+::smartcontract\+::\+Native\+Contract\+::\+Invoke (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&}]{engine}{, }\item[{const std\+::string \&}]{method}{}\end{DoxyParamCaption})}
+
+
+
+Invokes a method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The engine. \\
+\hline
+{\em method} & The method. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the method was invoked, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_aa4f0bd2ce1062b8ad5033234dc6cd6af}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}!RegisterMethod@{RegisterMethod}}
+\index{RegisterMethod@{RegisterMethod}!neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+\doxysubsubsection{\texorpdfstring{RegisterMethod()}{RegisterMethod()}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_native_contract_aa4f0bd2ce1062b8ad5033234dc6cd6af} 
+void neo\+::smartcontract\+::\+Native\+Contract\+::\+Register\+Method (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{std\+::function$<$ bool(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}} \&)$>$}]{handler}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}}}]{flags}{}\end{DoxyParamCaption})}
+
+
+
+Registers a method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & The name. \\
+\hline
+{\em handler} & The handler. \\
+\hline
+{\em flags} & The flags. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_ae2b7b12dac3abf404957eba3edd93c62}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}!contractState\_@{contractState\_}}
+\index{contractState\_@{contractState\_}!neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+\doxysubsubsection{\texorpdfstring{contractState\_}{contractState\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_native_contract_ae2b7b12dac3abf404957eba3edd93c62} 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract_state}{Contract\+State}} neo\+::smartcontract\+::\+Native\+Contract\+::contract\+State\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_a18e3c6b776c830e0738d9693f1fc1b5a}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}!id\_@{id\_}}
+\index{id\_@{id\_}!neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+\doxysubsubsection{\texorpdfstring{id\_}{id\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_native_contract_a18e3c6b776c830e0738d9693f1fc1b5a} 
+int32\+\_\+t neo\+::smartcontract\+::\+Native\+Contract\+::id\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_ad06fc539cbeda790479b4a2899aa9dd5}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}!methods\_@{methods\_}}
+\index{methods\_@{methods\_}!neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+\doxysubsubsection{\texorpdfstring{methods\_}{methods\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_native_contract_ad06fc539cbeda790479b4a2899aa9dd5} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::pair$<$std\+::function$<$bool(\mbox{\hyperlink{classneo_1_1smartcontract_1_1_application_engine}{Application\+Engine}}\&)$>$, \mbox{\hyperlink{namespaceneo_1_1smartcontract_af1262d0c0e6f9a8d8940467b5771d059}{Call\+Flags}}$>$ $>$ neo\+::smartcontract\+::\+Native\+Contract\+::methods\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_a5f3a292e0d5279ac14d33f38f527e9e7}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}!name\_@{name\_}}
+\index{name\_@{name\_}!neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+\doxysubsubsection{\texorpdfstring{name\_}{name\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_native_contract_a5f3a292e0d5279ac14d33f38f527e9e7} 
+std\+::string neo\+::smartcontract\+::\+Native\+Contract\+::name\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{classneo_1_1smartcontract_1_1_native_contract_a324048a3bc762a21a82bcc74df01b865}\index{neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}!scriptHash\_@{scriptHash\_}}
+\index{scriptHash\_@{scriptHash\_}!neo::smartcontract::NativeContract@{neo::smartcontract::NativeContract}}
+\doxysubsubsection{\texorpdfstring{scriptHash\_}{scriptHash\_}}
+{\footnotesize\ttfamily \label{classneo_1_1smartcontract_1_1_native_contract_a324048a3bc762a21a82bcc74df01b865} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::smartcontract\+::\+Native\+Contract\+::script\+Hash\+\_\+\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/smartcontract/\mbox{\hyperlink{native__contract_8h}{native\+\_\+contract.\+h}}\item 
+src/smartcontract/\mbox{\hyperlink{native__contract_8cpp}{native\+\_\+contract.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,15 @@
+digraph "neo::plugins::StatisticsPlugin::RunStatistics"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::plugins::Statistics\lPlugin::RunStatistics",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Runs the statistics thread."];
+  Node1 -> Node2 [id="edge1_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::plugins::Statistics\lPlugin::CollectStatistics",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1plugins_1_1_statistics_plugin.html#a07f23df49e0d44fcbb9bf388bfe02047",tooltip="Collects statistics."];
+  Node1 -> Node3 [id="edge2_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::plugins::PluginBase\l::IsRunning",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1plugins_1_1_plugin_base.html#a37cd2ae749afcc1dafc56ba9e37d5e4d",tooltip="Checks if the plugin is running."];
+  Node1 -> Node4 [id="edge3_Node000001_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::plugins::Statistics\lPlugin::ReportStatistics",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1plugins_1_1_statistics_plugin.html#aaf3474b79232359294a42359578f95e2",tooltip="Reports statistics."];
+}

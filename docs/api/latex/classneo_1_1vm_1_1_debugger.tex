@@ -1,0 +1,192 @@
+\doxysection{neo\+::vm\+::Debugger Class Reference}
+\hypertarget{classneo_1_1vm_1_1_debugger}{}\label{classneo_1_1vm_1_1_debugger}\index{neo::vm::Debugger@{neo::vm::Debugger}}
+
+
+Represents a debugger for the VM.  
+
+
+
+
+{\ttfamily \#include $<$debugger.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::vm\+::Debugger\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_debugger_af40efc70bb2769d5310df44f1cc87024}{Debugger}} (\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine}} \&engine)
+\begin{DoxyCompactList}\small\item\em Initializes a new instance of the \doxylink{classneo_1_1vm_1_1_debugger}{Debugger} class. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}} \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_ab12a2898a19c6c820cd44c699041fc3d}{Execute}} ()
+\begin{DoxyCompactList}\small\item\em Execute the script until completion or breakpoint. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}} \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_a5418500fde0e95c4fcd47e36e95e3d61}{Step\+Into}} ()
+\begin{DoxyCompactList}\small\item\em Step into the next instruction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}} \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_afafac2a4026fa92f6a7b02c2cbf8ed64}{Step\+Over}} ()
+\begin{DoxyCompactList}\small\item\em Step over the current instruction. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}} \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_ae46c2b6101f5d5be8d8c0120c0f56788}{Step\+Out}} ()
+\begin{DoxyCompactList}\small\item\em Step out of the current context. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_af226b48da8e4c496c81f6232da5d5bf2}{Add\+Break\+Point}} (int position)
+\begin{DoxyCompactList}\small\item\em Add a breakpoint at the specified position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_ae932b748e39df9c01bb39ae6bcef2fb0}{Remove\+Break\+Point}} (int position)
+\begin{DoxyCompactList}\small\item\em Remove a breakpoint at the specified position. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_a6b4384b0449583dae84faf36f18d8643}{Clear\+Break\+Points}} ()
+\begin{DoxyCompactList}\small\item\em Clear all breakpoints. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_a25b9948ffa45e55ed6366bb10974c0ba}{engine\+\_\+}}
+\item 
+std\+::unordered\+\_\+set$<$ int $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_a7a58606ba3b85b961f75f78106d3bcbd}{breakpoints\+\_\+}}
+\item 
+int \mbox{\hyperlink{classneo_1_1vm_1_1_debugger_ab5e695fa2a9c65a78272ceed915019fd}{initial\+Context\+Count\+\_\+}} = 0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a debugger for the VM. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1vm_1_1_debugger_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1vm_1_1_debugger_af40efc70bb2769d5310df44f1cc87024}\index{neo::vm::Debugger@{neo::vm::Debugger}!Debugger@{Debugger}}
+\index{Debugger@{Debugger}!neo::vm::Debugger@{neo::vm::Debugger}}
+\doxysubsubsection{\texorpdfstring{Debugger()}{Debugger()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_debugger_af40efc70bb2769d5310df44f1cc87024} 
+neo\+::vm\+::\+Debugger\+::\+Debugger (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine}} \&}]{engine}{}\end{DoxyParamCaption})}
+
+
+
+Initializes a new instance of the \doxylink{classneo_1_1vm_1_1_debugger}{Debugger} class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em engine} & The execution engine to debug. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1vm_1_1_debugger_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1vm_1_1_debugger_af226b48da8e4c496c81f6232da5d5bf2}\index{neo::vm::Debugger@{neo::vm::Debugger}!AddBreakPoint@{AddBreakPoint}}
+\index{AddBreakPoint@{AddBreakPoint}!neo::vm::Debugger@{neo::vm::Debugger}}
+\doxysubsubsection{\texorpdfstring{AddBreakPoint()}{AddBreakPoint()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_debugger_af226b48da8e4c496c81f6232da5d5bf2} 
+void neo\+::vm\+::\+Debugger\+::\+Add\+Break\+Point (\begin{DoxyParamCaption}\item[{int}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Add a breakpoint at the specified position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position to add the breakpoint. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_debugger_a6b4384b0449583dae84faf36f18d8643}\index{neo::vm::Debugger@{neo::vm::Debugger}!ClearBreakPoints@{ClearBreakPoints}}
+\index{ClearBreakPoints@{ClearBreakPoints}!neo::vm::Debugger@{neo::vm::Debugger}}
+\doxysubsubsection{\texorpdfstring{ClearBreakPoints()}{ClearBreakPoints()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_debugger_a6b4384b0449583dae84faf36f18d8643} 
+void neo\+::vm\+::\+Debugger\+::\+Clear\+Break\+Points (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clear all breakpoints. 
+
+\Hypertarget{classneo_1_1vm_1_1_debugger_ab12a2898a19c6c820cd44c699041fc3d}\index{neo::vm::Debugger@{neo::vm::Debugger}!Execute@{Execute}}
+\index{Execute@{Execute}!neo::vm::Debugger@{neo::vm::Debugger}}
+\doxysubsubsection{\texorpdfstring{Execute()}{Execute()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_debugger_ab12a2898a19c6c820cd44c699041fc3d} 
+\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}} neo\+::vm\+::\+Debugger\+::\+Execute (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Execute the script until completion or breakpoint. 
+
+\begin{DoxyReturn}{Returns}
+The state of the VM after execution. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_debugger_ae932b748e39df9c01bb39ae6bcef2fb0}\index{neo::vm::Debugger@{neo::vm::Debugger}!RemoveBreakPoint@{RemoveBreakPoint}}
+\index{RemoveBreakPoint@{RemoveBreakPoint}!neo::vm::Debugger@{neo::vm::Debugger}}
+\doxysubsubsection{\texorpdfstring{RemoveBreakPoint()}{RemoveBreakPoint()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_debugger_ae932b748e39df9c01bb39ae6bcef2fb0} 
+void neo\+::vm\+::\+Debugger\+::\+Remove\+Break\+Point (\begin{DoxyParamCaption}\item[{int}]{position}{}\end{DoxyParamCaption})}
+
+
+
+Remove a breakpoint at the specified position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em position} & The position to remove the breakpoint. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_debugger_a5418500fde0e95c4fcd47e36e95e3d61}\index{neo::vm::Debugger@{neo::vm::Debugger}!StepInto@{StepInto}}
+\index{StepInto@{StepInto}!neo::vm::Debugger@{neo::vm::Debugger}}
+\doxysubsubsection{\texorpdfstring{StepInto()}{StepInto()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_debugger_a5418500fde0e95c4fcd47e36e95e3d61} 
+\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}} neo\+::vm\+::\+Debugger\+::\+Step\+Into (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Step into the next instruction. 
+
+\begin{DoxyReturn}{Returns}
+The state of the VM after stepping. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_debugger_ae46c2b6101f5d5be8d8c0120c0f56788}\index{neo::vm::Debugger@{neo::vm::Debugger}!StepOut@{StepOut}}
+\index{StepOut@{StepOut}!neo::vm::Debugger@{neo::vm::Debugger}}
+\doxysubsubsection{\texorpdfstring{StepOut()}{StepOut()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_debugger_ae46c2b6101f5d5be8d8c0120c0f56788} 
+\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}} neo\+::vm\+::\+Debugger\+::\+Step\+Out (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Step out of the current context. 
+
+\begin{DoxyReturn}{Returns}
+The state of the VM after stepping. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_debugger_afafac2a4026fa92f6a7b02c2cbf8ed64}\index{neo::vm::Debugger@{neo::vm::Debugger}!StepOver@{StepOver}}
+\index{StepOver@{StepOver}!neo::vm::Debugger@{neo::vm::Debugger}}
+\doxysubsubsection{\texorpdfstring{StepOver()}{StepOver()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_debugger_afafac2a4026fa92f6a7b02c2cbf8ed64} 
+\mbox{\hyperlink{namespaceneo_1_1vm_ab55ddfc3fb7df7a87a655c1c053cd06c}{VMState}} neo\+::vm\+::\+Debugger\+::\+Step\+Over (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Step over the current instruction. 
+
+\begin{DoxyReturn}{Returns}
+The state of the VM after stepping. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1vm_1_1_debugger_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1vm_1_1_debugger_a7a58606ba3b85b961f75f78106d3bcbd}\index{neo::vm::Debugger@{neo::vm::Debugger}!breakpoints\_@{breakpoints\_}}
+\index{breakpoints\_@{breakpoints\_}!neo::vm::Debugger@{neo::vm::Debugger}}
+\doxysubsubsection{\texorpdfstring{breakpoints\_}{breakpoints\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_debugger_a7a58606ba3b85b961f75f78106d3bcbd} 
+std\+::unordered\+\_\+set$<$int$>$ neo\+::vm\+::\+Debugger\+::breakpoints\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_debugger_a25b9948ffa45e55ed6366bb10974c0ba}\index{neo::vm::Debugger@{neo::vm::Debugger}!engine\_@{engine\_}}
+\index{engine\_@{engine\_}!neo::vm::Debugger@{neo::vm::Debugger}}
+\doxysubsubsection{\texorpdfstring{engine\_}{engine\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_debugger_a25b9948ffa45e55ed6366bb10974c0ba} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_execution_engine}{Execution\+Engine}}\& neo\+::vm\+::\+Debugger\+::engine\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_debugger_ab5e695fa2a9c65a78272ceed915019fd}\index{neo::vm::Debugger@{neo::vm::Debugger}!initialContextCount\_@{initialContextCount\_}}
+\index{initialContextCount\_@{initialContextCount\_}!neo::vm::Debugger@{neo::vm::Debugger}}
+\doxysubsubsection{\texorpdfstring{initialContextCount\_}{initialContextCount\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_debugger_ab5e695fa2a9c65a78272ceed915019fd} 
+int neo\+::vm\+::\+Debugger\+::initial\+Context\+Count\+\_\+ = 0\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/vm/\mbox{\hyperlink{debugger_8h}{debugger.\+h}}\item 
+src/vm/\mbox{\hyperlink{debugger_8cpp}{debugger.\+cpp}}\end{DoxyCompactItemize}

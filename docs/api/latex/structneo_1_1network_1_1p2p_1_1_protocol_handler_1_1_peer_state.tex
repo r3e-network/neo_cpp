@@ -1,0 +1,79 @@
+\doxysection{neo\+::network\+::p2p\+::Protocol\+Handler\+::Peer\+State Struct Reference}
+\hypertarget{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state}{}\label{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state}\index{neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+bool \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_a16defbea0b67c3d509acee868411e27d}{version\+\_\+received}} \{false\}
+\item 
+bool \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_a292bb3136c8f6d888d9aae9e3cf4e6e3}{verack\+\_\+received}} \{false\}
+\item 
+uint32\+\_\+t \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_ad1cb160b1543f866da1387e3cba7ff79}{start\+\_\+height}} \{0\}
+\item 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_ad8768c31647782d77d8d3f1dd555334f}{last\+\_\+ping}}
+\item 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_ac0f9599ef3476c09042b46044ebd825f}{last\+\_\+pong}}
+\item 
+std\+::unordered\+\_\+set$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_ac3ce110c53efbee0af655f7a343bac1b}{known\+\_\+hashes}}
+\item 
+std\+::queue$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_a568683382025664ac2e34cd8bc2c6e9f}{requested\+\_\+blocks}}
+\item 
+std\+::queue$<$ \mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}} $>$ \mbox{\hyperlink{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_aa301cb803a1f74f0c1f0905eb6f52700}{requested\+\_\+transactions}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-variable-members}
+\Hypertarget{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_ac3ce110c53efbee0af655f7a343bac1b}\index{neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}!known\_hashes@{known\_hashes}}
+\index{known\_hashes@{known\_hashes}!neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}}
+\doxysubsubsection{\texorpdfstring{known\_hashes}{known\_hashes}}
+{\footnotesize\ttfamily \label{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_ac3ce110c53efbee0af655f7a343bac1b} 
+std\+::unordered\+\_\+set$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}$>$ neo\+::network\+::p2p\+::\+Protocol\+Handler\+::\+Peer\+State\+::known\+\_\+hashes}
+
+\Hypertarget{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_ad8768c31647782d77d8d3f1dd555334f}\index{neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}!last\_ping@{last\_ping}}
+\index{last\_ping@{last\_ping}!neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}}
+\doxysubsubsection{\texorpdfstring{last\_ping}{last\_ping}}
+{\footnotesize\ttfamily \label{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_ad8768c31647782d77d8d3f1dd555334f} 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point neo\+::network\+::p2p\+::\+Protocol\+Handler\+::\+Peer\+State\+::last\+\_\+ping}
+
+\Hypertarget{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_ac0f9599ef3476c09042b46044ebd825f}\index{neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}!last\_pong@{last\_pong}}
+\index{last\_pong@{last\_pong}!neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}}
+\doxysubsubsection{\texorpdfstring{last\_pong}{last\_pong}}
+{\footnotesize\ttfamily \label{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_ac0f9599ef3476c09042b46044ebd825f} 
+std\+::chrono\+::steady\+\_\+clock\+::time\+\_\+point neo\+::network\+::p2p\+::\+Protocol\+Handler\+::\+Peer\+State\+::last\+\_\+pong}
+
+\Hypertarget{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_a568683382025664ac2e34cd8bc2c6e9f}\index{neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}!requested\_blocks@{requested\_blocks}}
+\index{requested\_blocks@{requested\_blocks}!neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}}
+\doxysubsubsection{\texorpdfstring{requested\_blocks}{requested\_blocks}}
+{\footnotesize\ttfamily \label{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_a568683382025664ac2e34cd8bc2c6e9f} 
+std\+::queue$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}$>$ neo\+::network\+::p2p\+::\+Protocol\+Handler\+::\+Peer\+State\+::requested\+\_\+blocks}
+
+\Hypertarget{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_aa301cb803a1f74f0c1f0905eb6f52700}\index{neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}!requested\_transactions@{requested\_transactions}}
+\index{requested\_transactions@{requested\_transactions}!neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}}
+\doxysubsubsection{\texorpdfstring{requested\_transactions}{requested\_transactions}}
+{\footnotesize\ttfamily \label{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_aa301cb803a1f74f0c1f0905eb6f52700} 
+std\+::queue$<$\mbox{\hyperlink{classneo_1_1io_1_1_u_int256}{io\+::\+UInt256}}$>$ neo\+::network\+::p2p\+::\+Protocol\+Handler\+::\+Peer\+State\+::requested\+\_\+transactions}
+
+\Hypertarget{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_ad1cb160b1543f866da1387e3cba7ff79}\index{neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}!start\_height@{start\_height}}
+\index{start\_height@{start\_height}!neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}}
+\doxysubsubsection{\texorpdfstring{start\_height}{start\_height}}
+{\footnotesize\ttfamily \label{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_ad1cb160b1543f866da1387e3cba7ff79} 
+uint32\+\_\+t neo\+::network\+::p2p\+::\+Protocol\+Handler\+::\+Peer\+State\+::start\+\_\+height \{0\}}
+
+\Hypertarget{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_a292bb3136c8f6d888d9aae9e3cf4e6e3}\index{neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}!verack\_received@{verack\_received}}
+\index{verack\_received@{verack\_received}!neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}}
+\doxysubsubsection{\texorpdfstring{verack\_received}{verack\_received}}
+{\footnotesize\ttfamily \label{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_a292bb3136c8f6d888d9aae9e3cf4e6e3} 
+bool neo\+::network\+::p2p\+::\+Protocol\+Handler\+::\+Peer\+State\+::verack\+\_\+received \{false\}}
+
+\Hypertarget{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_a16defbea0b67c3d509acee868411e27d}\index{neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}!version\_received@{version\_received}}
+\index{version\_received@{version\_received}!neo::network::p2p::ProtocolHandler::PeerState@{neo::network::p2p::ProtocolHandler::PeerState}}
+\doxysubsubsection{\texorpdfstring{version\_received}{version\_received}}
+{\footnotesize\ttfamily \label{structneo_1_1network_1_1p2p_1_1_protocol_handler_1_1_peer_state_a16defbea0b67c3d509acee868411e27d} 
+bool neo\+::network\+::p2p\+::\+Protocol\+Handler\+::\+Peer\+State\+::version\+\_\+received \{false\}}
+
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/\mbox{\hyperlink{protocol__handler_8h}{protocol\+\_\+handler.\+h}}\end{DoxyCompactItemize}

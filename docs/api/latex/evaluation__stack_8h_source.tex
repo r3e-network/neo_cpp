@@ -1,0 +1,56 @@
+\doxysection{evaluation\+\_\+stack.\+h}
+\hypertarget{evaluation__stack_8h_source}{}\label{evaluation__stack_8h_source}\index{include/neo/vm/evaluation\_stack.h@{include/neo/vm/evaluation\_stack.h}}
+\mbox{\hyperlink{evaluation__stack_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{stack__item_8h}{neo/vm/stack\_item.h}}>}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <stack>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1vm}{neo::vm}}}
+\DoxyCodeLine{00010\ \{}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a3eec3013e8be527f573cd06c811128ed}{EvaluationStack}}}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00017\ \ \ \ \ std::stack<std::shared\_ptr<StackItem>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a8b4e5291c1afec2d4bbcf404c6a8c6d7}{stack\_}};}
+\DoxyCodeLine{00018\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_ac1a233c307e9c620b531324c3d8d3e65}{max\_size\_}};}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a3eec3013e8be527f573cd06c811128ed}{EvaluationStack}}(\textcolor{keywordtype}{size\_t}\ max\_size\ =\ 2048);}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00032\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a33abd21422940b5bc59cf8037f768494}{Push}}(std::shared\_ptr<StackItem>\ item);}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00039\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a3c9ee9bbd0b3eb3d417e5da2a2649cf9}{Pop}}();}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00047\ \ \ \ \ std::shared\_ptr<StackItem>\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a5dc650f0318e03b230be96ea704147d2}{Peek}}(\textcolor{keywordtype}{size\_t}\ index\ =\ 0)\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00048\ }
+\DoxyCodeLine{00053\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a881489c00dfc7f90c57b2d0beaa375d0}{Size}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a8b4e5291c1afec2d4bbcf404c6a8c6d7}{stack\_}}.size();\ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00059\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a2eb4be80ed160199bf02f1f2595c3092}{IsEmpty}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a8b4e5291c1afec2d4bbcf404c6a8c6d7}{stack\_}}.empty();\ \}}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a1826f571a1973f1d842bd13df0b0a27a}{IsFull}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a8b4e5291c1afec2d4bbcf404c6a8c6d7}{stack\_}}.size()\ >=\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_ac1a233c307e9c620b531324c3d8d3e65}{max\_size\_}};\ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00070\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a7e94b5ecbf9d3864086a89feab630d36}{Clear}}();}
+\DoxyCodeLine{00071\ }
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a24ccfd5e8d3cfba9086dcc2b4b7977ea}{Dup}}();}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00082\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a1e7dedd61e1b2479ef9ee230f375e138}{Swap}}();}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00088\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a1fcbac9c940b86000d8de67d247e573c}{Rot}}();}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00095\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a598942bdc27d7492c655e4ae75f33f02}{Remove}}(\textcolor{keywordtype}{size\_t}\ depth);}
+\DoxyCodeLine{00096\ }
+\DoxyCodeLine{00103\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_affce485835c70183b0f973b103b304df}{Insert}}(\textcolor{keywordtype}{size\_t}\ depth,\ std::shared\_ptr<StackItem>\ item);}
+\DoxyCodeLine{00104\ }
+\DoxyCodeLine{00109\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a64f7d3f796de92462121bcd91daedaad}{GetMaxSize}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_ac1a233c307e9c620b531324c3d8d3e65}{max\_size\_}};\ \}}
+\DoxyCodeLine{00110\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_a30ad6ab1124958bb1052a32e61cbab4b}{SetMaxSize}}(\textcolor{keywordtype}{size\_t}\ max\_size)\ \{\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_ac1a233c307e9c620b531324c3d8d3e65}{max\_size\_}}\ =\ max\_size;\ \}}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00121\ \ \ \ \ std::vector<std::shared\_ptr<StackItem>>\ \mbox{\hyperlink{classneo_1_1vm_1_1_evaluation_stack_ab0fd35f878892b40037fe5556b126394}{ToVector}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00122\ \};}
+\DoxyCodeLine{00123\ \}\ \ \textcolor{comment}{//\ namespace\ neo::vm}}
+
+\end{DoxyCode}

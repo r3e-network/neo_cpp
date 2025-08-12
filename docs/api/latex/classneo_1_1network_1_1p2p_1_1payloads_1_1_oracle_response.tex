@@ -1,0 +1,349 @@
+\doxysection{neo\+::network\+::p2p\+::payloads\+::Oracle\+Response Class Reference}
+\hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response}{}\label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+
+
+Indicates that the transaction is an oracle response.  
+
+
+
+
+{\ttfamily \#include $<$oracle\+\_\+response.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::network\+::p2p\+::payloads\+::Oracle\+Response\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::network\+::p2p\+::payloads\+::Oracle\+Response\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_aabb00dbbb45f047ebf233ca9b8da4935}{Oracle\+Response}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a3e4efcf897815fff2961e9bf76eb18cf}{Oracle\+Response}} (uint64\+\_\+t id, \mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads_ab2a97039c921f49aa4b13150b39b087a}{Oracle\+Response\+Code}} code, const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em Constructs an \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response}{Oracle\+Response} with the specified parameters. \end{DoxyCompactList}\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_afbab72a4db0a0341b3af0ae4669ac0a3}{Get\+Id}} () const
+\begin{DoxyCompactList}\small\item\em Gets the ID of the oracle request. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_adfdd11dfdfa735ffada04da4a21d60e3}{Set\+Id}} (uint64\+\_\+t id)
+\begin{DoxyCompactList}\small\item\em Sets the ID of the oracle request. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads_ab2a97039c921f49aa4b13150b39b087a}{Oracle\+Response\+Code}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_ad90fe1155bd8333c8097d4e8453ef122}{Get\+Code}} () const
+\begin{DoxyCompactList}\small\item\em Gets the response code for the oracle request. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_afac3eb28087930c41c79c3e9338b5b23}{Set\+Code}} (\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads_ab2a97039c921f49aa4b13150b39b087a}{Oracle\+Response\+Code}} code)
+\begin{DoxyCompactList}\small\item\em Sets the response code for the oracle request. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a971e118d758661eebb3519508271ecdf}{Get\+Result}} () const
+\begin{DoxyCompactList}\small\item\em Gets the result for the oracle request. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_ad4b9c3850af8bd5930b933a3fc4045e8}{Set\+Result}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&result)
+\begin{DoxyCompactList}\small\item\em Sets the result for the oracle request. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a7a9b05722eb30e8212fa5d006500d2fe}{Serialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the payload to a binary writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a73f9b58c1c2457e8d1574a47b187c5f5}{Deserialize}} (\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the payload from a binary reader. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a1ad42ce4ef872de64a821235226f0b14}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the payload to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a194d0ed72aff612e7ea044b79aed7a11}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the payload from a JSON reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload}{neo\+::network\+::p2p\+::\+IPayload}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1_i_payload_a1702136f068aff6bbc90418bc0259c9f}{\texorpdfstring{$\sim$}{\string~}\+IPayload}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ab379e7a9a8a0b20079a1786e19eb6292}{\texorpdfstring{$\sim$}{\string~}\+ISerializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{Byte\+Vector}} \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a02a3d98d90a33659e68a941442aa874b}{To\+Array}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a byte vector. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_afb74c190df3c397d715d3286ed9a8d09}{Deserialize\+From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_ac6d17e3d114762fdae33224cb7cb4576}{Max\+Result\+Size}} = UINT16\+\_\+\+MAX
+\begin{DoxyCompactList}\small\item\em Indicates the maximum size of the Result field. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+uint64\+\_\+t \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a65868c1f5a00b8fc1d8b6c81bb6b9d55}{id\+\_\+}}
+\item 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads_ab2a97039c921f49aa4b13150b39b087a}{Oracle\+Response\+Code}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_aa10dbe283973dc09498c75c19f83eb01}{code\+\_\+}}
+\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \mbox{\hyperlink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a6621bb92e65f7a064b01e44dc96c3b33}{result\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable}{neo\+::io\+::\+ISerializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_aeb5faba88273447700f757321aa549d4}{From\+Array}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{Byte\+Span}} \&data)
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a byte span. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Indicates that the transaction is an oracle response. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_aabb00dbbb45f047ebf233ca9b8da4935}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}!OracleResponse@{OracleResponse}}
+\index{OracleResponse@{OracleResponse}!neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+\doxysubsubsection{\texorpdfstring{OracleResponse()}{OracleResponse()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_aabb00dbbb45f047ebf233ca9b8da4935} 
+neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response\+::\+Oracle\+Response (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a3e4efcf897815fff2961e9bf76eb18cf}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}!OracleResponse@{OracleResponse}}
+\index{OracleResponse@{OracleResponse}!neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+\doxysubsubsection{\texorpdfstring{OracleResponse()}{OracleResponse()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a3e4efcf897815fff2961e9bf76eb18cf} 
+neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response\+::\+Oracle\+Response (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{id}{, }\item[{\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads_ab2a97039c921f49aa4b13150b39b087a}{Oracle\+Response\+Code}}}]{code}{, }\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{result}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an \doxylink{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response}{Oracle\+Response} with the specified parameters. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The ID of the oracle request. \\
+\hline
+{\em code} & The response code for the oracle request. \\
+\hline
+{\em result} & The result for the oracle request. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a73f9b58c1c2457e8d1574a47b187c5f5}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}!Deserialize@{Deserialize}}
+\index{Deserialize@{Deserialize}!neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+\doxysubsubsection{\texorpdfstring{Deserialize()}{Deserialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a73f9b58c1c2457e8d1574a47b187c5f5} 
+void neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response\+::\+Deserialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_reader}{io\+::\+Binary\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the payload from a binary reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The binary reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_a3bcc6b5ba89b8f6cc0f5f45c3f949a25}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a194d0ed72aff612e7ea044b79aed7a11}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a194d0ed72aff612e7ea044b79aed7a11} 
+void neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the payload from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_ad90fe1155bd8333c8097d4e8453ef122}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}!GetCode@{GetCode}}
+\index{GetCode@{GetCode}!neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+\doxysubsubsection{\texorpdfstring{GetCode()}{GetCode()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_ad90fe1155bd8333c8097d4e8453ef122} 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads_ab2a97039c921f49aa4b13150b39b087a}{Oracle\+Response\+Code}} neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response\+::\+Get\+Code (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the response code for the oracle request. 
+
+\begin{DoxyReturn}{Returns}
+The response code for the oracle request. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_afbab72a4db0a0341b3af0ae4669ac0a3}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}!GetId@{GetId}}
+\index{GetId@{GetId}!neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+\doxysubsubsection{\texorpdfstring{GetId()}{GetId()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_afbab72a4db0a0341b3af0ae4669ac0a3} 
+uint64\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response\+::\+Get\+Id (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the ID of the oracle request. 
+
+\begin{DoxyReturn}{Returns}
+The ID of the oracle request. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a971e118d758661eebb3519508271ecdf}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}!GetResult@{GetResult}}
+\index{GetResult@{GetResult}!neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+\doxysubsubsection{\texorpdfstring{GetResult()}{GetResult()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a971e118d758661eebb3519508271ecdf} 
+const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \& neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response\+::\+Get\+Result (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the result for the oracle request. 
+
+\begin{DoxyReturn}{Returns}
+The result for the oracle request. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a7a9b05722eb30e8212fa5d006500d2fe}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}!Serialize@{Serialize}}
+\index{Serialize@{Serialize}!neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+\doxysubsubsection{\texorpdfstring{Serialize()}{Serialize()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a7a9b05722eb30e8212fa5d006500d2fe} 
+void neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response\+::\+Serialize (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_binary_writer}{io\+::\+Binary\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the payload to a binary writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The binary writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_serializable_ac9b5f2b974f8f8df3e5656f6a533e1f7}{neo\+::io\+::\+ISerializable}}.
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a1ad42ce4ef872de64a821235226f0b14}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a1ad42ce4ef872de64a821235226f0b14} 
+void neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the payload to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_afac3eb28087930c41c79c3e9338b5b23}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}!SetCode@{SetCode}}
+\index{SetCode@{SetCode}!neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+\doxysubsubsection{\texorpdfstring{SetCode()}{SetCode()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_afac3eb28087930c41c79c3e9338b5b23} 
+void neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response\+::\+Set\+Code (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads_ab2a97039c921f49aa4b13150b39b087a}{Oracle\+Response\+Code}}}]{code}{}\end{DoxyParamCaption})}
+
+
+
+Sets the response code for the oracle request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em code} & The response code for the oracle request. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_adfdd11dfdfa735ffada04da4a21d60e3}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}!SetId@{SetId}}
+\index{SetId@{SetId}!neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+\doxysubsubsection{\texorpdfstring{SetId()}{SetId()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_adfdd11dfdfa735ffada04da4a21d60e3} 
+void neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response\+::\+Set\+Id (\begin{DoxyParamCaption}\item[{uint64\+\_\+t}]{id}{}\end{DoxyParamCaption})}
+
+
+
+Sets the ID of the oracle request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & The ID of the oracle request. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_ad4b9c3850af8bd5930b933a3fc4045e8}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}!SetResult@{SetResult}}
+\index{SetResult@{SetResult}!neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+\doxysubsubsection{\texorpdfstring{SetResult()}{SetResult()}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_ad4b9c3850af8bd5930b933a3fc4045e8} 
+void neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response\+::\+Set\+Result (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} \&}]{result}{}\end{DoxyParamCaption})}
+
+
+
+Sets the result for the oracle request. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em result} & The result for the oracle request. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_aa10dbe283973dc09498c75c19f83eb01}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}!code\_@{code\_}}
+\index{code\_@{code\_}!neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+\doxysubsubsection{\texorpdfstring{code\_}{code\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_aa10dbe283973dc09498c75c19f83eb01} 
+\mbox{\hyperlink{namespaceneo_1_1network_1_1p2p_1_1payloads_ab2a97039c921f49aa4b13150b39b087a}{Oracle\+Response\+Code}} neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response\+::code\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a65868c1f5a00b8fc1d8b6c81bb6b9d55}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}!id\_@{id\_}}
+\index{id\_@{id\_}!neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+\doxysubsubsection{\texorpdfstring{id\_}{id\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a65868c1f5a00b8fc1d8b6c81bb6b9d55} 
+uint64\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response\+::id\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_ac6d17e3d114762fdae33224cb7cb4576}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}!MaxResultSize@{MaxResultSize}}
+\index{MaxResultSize@{MaxResultSize}!neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+\doxysubsubsection{\texorpdfstring{MaxResultSize}{MaxResultSize}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_ac6d17e3d114762fdae33224cb7cb4576} 
+uint32\+\_\+t neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response\+::\+Max\+Result\+Size = UINT16\+\_\+\+MAX\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}}
+
+
+
+Indicates the maximum size of the Result field. 
+
+\Hypertarget{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a6621bb92e65f7a064b01e44dc96c3b33}\index{neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}!result\_@{result\_}}
+\index{result\_@{result\_}!neo::network::p2p::payloads::OracleResponse@{neo::network::p2p::payloads::OracleResponse}}
+\doxysubsubsection{\texorpdfstring{result\_}{result\_}}
+{\footnotesize\ttfamily \label{classneo_1_1network_1_1p2p_1_1payloads_1_1_oracle_response_a6621bb92e65f7a064b01e44dc96c3b33} 
+\mbox{\hyperlink{classneo_1_1io_1_1_byte_vector}{io\+::\+Byte\+Vector}} neo\+::network\+::p2p\+::payloads\+::\+Oracle\+Response\+::result\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/network/p2p/payloads/\mbox{\hyperlink{network_2p2p_2payloads_2oracle__response_8h}{oracle\+\_\+response.\+h}}\item 
+src/network/p2p/payloads/\mbox{\hyperlink{network_2p2p_2payloads_2oracle__response_8cpp}{oracle\+\_\+response.\+cpp}}\end{DoxyCompactItemize}

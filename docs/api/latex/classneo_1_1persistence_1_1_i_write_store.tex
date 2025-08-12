@@ -1,0 +1,124 @@
+\doxysection{neo\+::persistence\+::IWrite\+Store\texorpdfstring{$<$}{<} TKey, TValue \texorpdfstring{$>$}{>} Class Template Reference}
+\hypertarget{classneo_1_1persistence_1_1_i_write_store}{}\label{classneo_1_1persistence_1_1_i_write_store}\index{neo::persistence::IWriteStore$<$ TKey, TValue $>$@{neo::persistence::IWriteStore$<$ TKey, TValue $>$}}
+
+
+Interface for write operations on a key-\/value store.  
+
+
+
+
+{\ttfamily \#include $<$istore.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store_a065391106a57c3b2c61bf98ad9711ecd}{\texorpdfstring{$\sim$}{\string~}\+IWrite\+Store}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store_ad372b058fc7a706856e68a1a43e1f0f8}{Put}} (const TKey \&key, const TValue \&value)=0
+\begin{DoxyCompactList}\small\item\em Puts a value in the store. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store_a8a3c7a21edac74f32f8a982102c6ccb0}{Delete}} (const TKey \&key)=0
+\begin{DoxyCompactList}\small\item\em Deletes a value from the store. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store_a1f5b97ab542dea7844fb8f888c83bb57}{Put\+Sync}} (const TKey \&key, const TValue \&value)
+\begin{DoxyCompactList}\small\item\em Puts a value in the store and syncs to disk. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\subsubsection*{template$<$typename TKey, typename TValue$>$\newline
+class neo\+::persistence\+::\+IWrite\+Store$<$ TKey, TValue $>$}
+Interface for write operations on a key-\/value store. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em TKey} & The type of the keys. \\
+\hline
+{\em TValue} & The type of the values. \\
+\hline
+\end{DoxyTemplParams}
+
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1persistence_1_1_i_write_store_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_i_write_store_a065391106a57c3b2c61bf98ad9711ecd}\index{neo::persistence::IWriteStore$<$ TKey, TValue $>$@{neo::persistence::IWriteStore$<$ TKey, TValue $>$}!````~IWriteStore@{\texorpdfstring{$\sim$}{\string~}IWriteStore}}
+\index{````~IWriteStore@{\texorpdfstring{$\sim$}{\string~}IWriteStore}!neo::persistence::IWriteStore$<$ TKey, TValue $>$@{neo::persistence::IWriteStore$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}IWriteStore()}{\string~IWriteStore()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_i_write_store_a065391106a57c3b2c61bf98ad9711ecd} 
+template$<$typename TKey, typename TValue$>$ \\
+virtual \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store}{neo\+::persistence\+::\+IWrite\+Store}}$<$ TKey, TValue $>$\+::\texorpdfstring{$\sim$}{\string~}\mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store}{IWrite\+Store}} (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}, {\ttfamily [default]}}
+
+
+
+Virtual destructor. 
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1persistence_1_1_i_write_store_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1persistence_1_1_i_write_store_a8a3c7a21edac74f32f8a982102c6ccb0}\index{neo::persistence::IWriteStore$<$ TKey, TValue $>$@{neo::persistence::IWriteStore$<$ TKey, TValue $>$}!Delete@{Delete}}
+\index{Delete@{Delete}!neo::persistence::IWriteStore$<$ TKey, TValue $>$@{neo::persistence::IWriteStore$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Delete()}{Delete()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_i_write_store_a8a3c7a21edac74f32f8a982102c6ccb0} 
+template$<$typename TKey, typename TValue$>$ \\
+virtual void \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store}{neo\+::persistence\+::\+IWrite\+Store}}$<$ TKey, TValue $>$\+::\+Delete (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Deletes a value from the store. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a39975111fd6e33a84bd15a036726c072}{neo\+::persistence\+::\+Level\+Db\+Store}}, \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_snapshot_ac55b510cc3a5f25018cad66ad024ac14}{neo\+::persistence\+::\+Memory\+Snapshot}}, and \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_a04e0063a0fb78537b88289a82dd62aa6}{neo\+::persistence\+::\+Memory\+Store}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_i_write_store_ad372b058fc7a706856e68a1a43e1f0f8}\index{neo::persistence::IWriteStore$<$ TKey, TValue $>$@{neo::persistence::IWriteStore$<$ TKey, TValue $>$}!Put@{Put}}
+\index{Put@{Put}!neo::persistence::IWriteStore$<$ TKey, TValue $>$@{neo::persistence::IWriteStore$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{Put()}{Put()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_i_write_store_ad372b058fc7a706856e68a1a43e1f0f8} 
+template$<$typename TKey, typename TValue$>$ \\
+virtual void \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store}{neo\+::persistence\+::\+IWrite\+Store}}$<$ TKey, TValue $>$\+::\+Put (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{, }\item[{const TValue \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [pure virtual]}}
+
+
+
+Puts a value in the store. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+{\em value} & The value. \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{classneo_1_1persistence_1_1_level_db_store_a7709d9c42c9517ab4e39a5dd445b16a5}{neo\+::persistence\+::\+Level\+Db\+Store}}, \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_snapshot_af3439023bff4c671ce625483d0ef2c60}{neo\+::persistence\+::\+Memory\+Snapshot}}, and \mbox{\hyperlink{classneo_1_1persistence_1_1_memory_store_a6b2f1228260b21f4ff679b0753ce74f1}{neo\+::persistence\+::\+Memory\+Store}}.
+
+\Hypertarget{classneo_1_1persistence_1_1_i_write_store_a1f5b97ab542dea7844fb8f888c83bb57}\index{neo::persistence::IWriteStore$<$ TKey, TValue $>$@{neo::persistence::IWriteStore$<$ TKey, TValue $>$}!PutSync@{PutSync}}
+\index{PutSync@{PutSync}!neo::persistence::IWriteStore$<$ TKey, TValue $>$@{neo::persistence::IWriteStore$<$ TKey, TValue $>$}}
+\doxysubsubsection{\texorpdfstring{PutSync()}{PutSync()}}
+{\footnotesize\ttfamily \label{classneo_1_1persistence_1_1_i_write_store_a1f5b97ab542dea7844fb8f888c83bb57} 
+template$<$typename TKey, typename TValue$>$ \\
+virtual void \mbox{\hyperlink{classneo_1_1persistence_1_1_i_write_store}{neo\+::persistence\+::\+IWrite\+Store}}$<$ TKey, TValue $>$\+::\+Put\+Sync (\begin{DoxyParamCaption}\item[{const TKey \&}]{key}{, }\item[{const TValue \&}]{value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [virtual]}}
+
+
+
+Puts a value in the store and syncs to disk. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em key} & The key. \\
+\hline
+{\em value} & The value. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 0
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/persistence/\mbox{\hyperlink{istore_8h}{istore.\+h}}\end{DoxyCompactItemize}

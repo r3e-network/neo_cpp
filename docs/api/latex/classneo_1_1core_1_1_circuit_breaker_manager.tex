@@ -1,0 +1,129 @@
+\doxysection{neo\+::core\+::Circuit\+Breaker\+Manager Class Reference}
+\hypertarget{classneo_1_1core_1_1_circuit_breaker_manager}{}\label{classneo_1_1core_1_1_circuit_breaker_manager}\index{neo::core::CircuitBreakerManager@{neo::core::CircuitBreakerManager}}
+
+
+Circuit breaker manager for multiple services.  
+
+
+
+
+{\ttfamily \#include $<$circuit\+\_\+breaker.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker}{Circuit\+Breaker}} \& \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_a823bc859ca8fd24c4a8119f7899c531f}{Get\+Circuit\+Breaker}} (const std\+::string \&name, const \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config}{Circuit\+Breaker\+::\+Config}} \&config=\{\})
+\begin{DoxyCompactList}\small\item\em Get or create a circuit breaker. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_a338dd20eeb1661af81ce5d2fd467ff7e}{Reset\+All}} ()
+\begin{DoxyCompactList}\small\item\em Reset all circuit breakers. \end{DoxyCompactList}\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_a369b4a0c1d563dbf6b39a643652a82e7}{Get\+All\+Names}} () const
+\begin{DoxyCompactList}\small\item\em Get all circuit breaker names. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager}{Circuit\+Breaker\+Manager}} \& \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_abe61e6b8f662368a000d16822b398f6e}{Get\+Instance}} ()
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_a5edaee08a114ff97d9a26854bd336431}{Circuit\+Breaker\+Manager}} ()=default
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::string, std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker}{Circuit\+Breaker}} $>$ $>$ \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_ae52102d197cebd1c656f3b9c09517599}{breakers\+\_\+}}
+\item 
+std\+::mutex \mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager_ac0e803b99c0eee1d540a226028429972}{mutex\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Circuit breaker manager for multiple services. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_manager_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_manager_a5edaee08a114ff97d9a26854bd336431}\index{neo::core::CircuitBreakerManager@{neo::core::CircuitBreakerManager}!CircuitBreakerManager@{CircuitBreakerManager}}
+\index{CircuitBreakerManager@{CircuitBreakerManager}!neo::core::CircuitBreakerManager@{neo::core::CircuitBreakerManager}}
+\doxysubsubsection{\texorpdfstring{CircuitBreakerManager()}{CircuitBreakerManager()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_manager_a5edaee08a114ff97d9a26854bd336431} 
+neo\+::core\+::\+Circuit\+Breaker\+Manager\+::\+Circuit\+Breaker\+Manager (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}, {\ttfamily [default]}}
+
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_manager_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_manager_a369b4a0c1d563dbf6b39a643652a82e7}\index{neo::core::CircuitBreakerManager@{neo::core::CircuitBreakerManager}!GetAllNames@{GetAllNames}}
+\index{GetAllNames@{GetAllNames}!neo::core::CircuitBreakerManager@{neo::core::CircuitBreakerManager}}
+\doxysubsubsection{\texorpdfstring{GetAllNames()}{GetAllNames()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_manager_a369b4a0c1d563dbf6b39a643652a82e7} 
+std\+::vector$<$ std\+::string $>$ neo\+::core\+::\+Circuit\+Breaker\+Manager\+::\+Get\+All\+Names (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get all circuit breaker names. 
+
+\begin{DoxyReturn}{Returns}
+Vector of names 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_manager_a823bc859ca8fd24c4a8119f7899c531f}\index{neo::core::CircuitBreakerManager@{neo::core::CircuitBreakerManager}!GetCircuitBreaker@{GetCircuitBreaker}}
+\index{GetCircuitBreaker@{GetCircuitBreaker}!neo::core::CircuitBreakerManager@{neo::core::CircuitBreakerManager}}
+\doxysubsubsection{\texorpdfstring{GetCircuitBreaker()}{GetCircuitBreaker()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_manager_a823bc859ca8fd24c4a8119f7899c531f} 
+\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker}{Circuit\+Breaker}} \& neo\+::core\+::\+Circuit\+Breaker\+Manager\+::\+Get\+Circuit\+Breaker (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{name}{, }\item[{const \mbox{\hyperlink{structneo_1_1core_1_1_circuit_breaker_1_1_config}{Circuit\+Breaker\+::\+Config}} \&}]{config}{ = {\ttfamily \{\}}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Get or create a circuit breaker. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em name} & Circuit breaker name \\
+\hline
+{\em config} & Configuration (used only on creation) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Circuit breaker reference 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_manager_abe61e6b8f662368a000d16822b398f6e}\index{neo::core::CircuitBreakerManager@{neo::core::CircuitBreakerManager}!GetInstance@{GetInstance}}
+\index{GetInstance@{GetInstance}!neo::core::CircuitBreakerManager@{neo::core::CircuitBreakerManager}}
+\doxysubsubsection{\texorpdfstring{GetInstance()}{GetInstance()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_manager_abe61e6b8f662368a000d16822b398f6e} 
+\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker_manager}{Circuit\+Breaker\+Manager}} \& neo\+::core\+::\+Circuit\+Breaker\+Manager\+::\+Get\+Instance (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_manager_a338dd20eeb1661af81ce5d2fd467ff7e}\index{neo::core::CircuitBreakerManager@{neo::core::CircuitBreakerManager}!ResetAll@{ResetAll}}
+\index{ResetAll@{ResetAll}!neo::core::CircuitBreakerManager@{neo::core::CircuitBreakerManager}}
+\doxysubsubsection{\texorpdfstring{ResetAll()}{ResetAll()}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_manager_a338dd20eeb1661af81ce5d2fd467ff7e} 
+void neo\+::core\+::\+Circuit\+Breaker\+Manager\+::\+Reset\+All (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Reset all circuit breakers. 
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_manager_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_manager_ae52102d197cebd1c656f3b9c09517599}\index{neo::core::CircuitBreakerManager@{neo::core::CircuitBreakerManager}!breakers\_@{breakers\_}}
+\index{breakers\_@{breakers\_}!neo::core::CircuitBreakerManager@{neo::core::CircuitBreakerManager}}
+\doxysubsubsection{\texorpdfstring{breakers\_}{breakers\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_manager_ae52102d197cebd1c656f3b9c09517599} 
+std\+::unordered\+\_\+map$<$std\+::string, std\+::unique\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1core_1_1_circuit_breaker}{Circuit\+Breaker}}$>$ $>$ neo\+::core\+::\+Circuit\+Breaker\+Manager\+::breakers\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1core_1_1_circuit_breaker_manager_ac0e803b99c0eee1d540a226028429972}\index{neo::core::CircuitBreakerManager@{neo::core::CircuitBreakerManager}!mutex\_@{mutex\_}}
+\index{mutex\_@{mutex\_}!neo::core::CircuitBreakerManager@{neo::core::CircuitBreakerManager}}
+\doxysubsubsection{\texorpdfstring{mutex\_}{mutex\_}}
+{\footnotesize\ttfamily \label{classneo_1_1core_1_1_circuit_breaker_manager_ac0e803b99c0eee1d540a226028429972} 
+std\+::mutex neo\+::core\+::\+Circuit\+Breaker\+Manager\+::mutex\+\_\+\hspace{0.3cm}{\ttfamily [mutable]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/core/\mbox{\hyperlink{circuit__breaker_8h}{circuit\+\_\+breaker.\+h}}\end{DoxyCompactItemize}

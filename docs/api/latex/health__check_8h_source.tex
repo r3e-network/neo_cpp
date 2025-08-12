@@ -1,0 +1,394 @@
+\doxysection{health\+\_\+check.\+h}
+\hypertarget{health__check_8h_source}{}\label{health__check_8h_source}\index{include/neo/monitoring/health\_check.h@{include/neo/monitoring/health\_check.h}}
+\mbox{\hyperlink{health__check_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <atomic>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <chrono>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <functional>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <mutex>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <\mbox{\hyperlink{json_8hpp}{nlohmann/json.hpp}}>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <thread>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespaceneo_1_1monitoring}{neo::monitoring}}}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{enum\ class}\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{HealthStatus}}}
+\DoxyCodeLine{00020\ \{}
+\DoxyCodeLine{00021\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6af068ebe4133e3e6563080836268ea979}{HEALTHY}},}
+\DoxyCodeLine{00022\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed}{DEGRADED}},}
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{UNHEALTHY}}}
+\DoxyCodeLine{00024\ \};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00029\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{HealthCheckResult}}}
+\DoxyCodeLine{00030\ \{}
+\DoxyCodeLine{00031\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_ac9677fe529597c5baf28a5411c371642}{name}};}
+\DoxyCodeLine{00032\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{HealthStatus}}\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a8cbd0125811fa0b8087e9b0f15e4d7c6}{status}};}
+\DoxyCodeLine{00033\ \ \ \ \ std::string\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a23381f7343c8683c16973b2d7933cf27}{message}};}
+\DoxyCodeLine{00034\ \ \ \ \ std::chrono::milliseconds\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a0c48d23adcd043d8df2f444c610bc8e9}{responseTime}};}
+\DoxyCodeLine{00035\ \ \ \ \ std::chrono::system\_clock::time\_point\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_afb06847822fea478cbe20eb3cf8f227b}{timestamp}};}
+\DoxyCodeLine{00036\ \ \ \ \ std::unordered\_map<std::string,\ std::string>\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a7e7240d7af2abe6025bcda11a9c2c4fc}{details}};}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a161512fba0e2a49c6abb0dc3e4c4e142}{ToJson}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00039\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ nlohmann::json\ j;}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}name"{}}]\ =\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_ac9677fe529597c5baf28a5411c371642}{name}};}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}status"{}}]\ =\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_ac1624947c8625381147272dcce847e8d}{StatusToString}}(\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a8cbd0125811fa0b8087e9b0f15e4d7c6}{status}});}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}message"{}}]\ =\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a23381f7343c8683c16973b2d7933cf27}{message}};}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}responseTime"{}}]\ =\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a0c48d23adcd043d8df2f444c610bc8e9}{responseTime}}.count();}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}timestamp"{}}]\ =\ std::chrono::duration\_cast<std::chrono::seconds>(\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_afb06847822fea478cbe20eb3cf8f227b}{timestamp}}.time\_since\_epoch()).count();}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (!\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a7e7240d7af2abe6025bcda11a9c2c4fc}{details}}.empty())}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}details"{}}]\ =\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a7e7240d7af2abe6025bcda11a9c2c4fc}{details}};}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ j;}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_ac1624947c8625381147272dcce847e8d}{StatusToString}}(\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{HealthStatus}}\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a8cbd0125811fa0b8087e9b0f15e4d7c6}{status}})}
+\DoxyCodeLine{00057\ \ \ \ \ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a8cbd0125811fa0b8087e9b0f15e4d7c6}{status}})}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6af068ebe4133e3e6563080836268ea979}{HealthStatus::HEALTHY}}:}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}healthy"{}};}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed}{HealthStatus::DEGRADED}}:}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}degraded"{}};}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{HealthStatus::UNHEALTHY}}:}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}unhealthy"{}};}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}unknown"{}};}
+\DoxyCodeLine{00068\ \ \ \ \ \}}
+\DoxyCodeLine{00069\ \};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00074\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_afbf1da7d3f3e4b31c1e96fd4d04b87c5}{HealthCheck}}}
+\DoxyCodeLine{00075\ \{}
+\DoxyCodeLine{00076\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00077\ \ \ \ \ \textcolor{keyword}{explicit}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_afbf1da7d3f3e4b31c1e96fd4d04b87c5}{HealthCheck}}(\textcolor{keyword}{const}\ std::string\&\ name)\ :\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_a382d5ab51c1806241ccbbcbafe0c8599}{name\_}}(name)\ \{\}}
+\DoxyCodeLine{00078\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_ac4e9c8f35d5f93924cda620a0ab3c658}{\string~HealthCheck}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00079\ }
+\DoxyCodeLine{00084\ \ \ \ \ \textcolor{keyword}{virtual}\ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{HealthCheckResult}}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_a02255d78577a3ca0476d444900677085}{Check}}()\ =\ 0;}
+\DoxyCodeLine{00085\ }
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_aa2fea5a1ec2d033eefc0347d4703436c}{GetName}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_a382d5ab51c1806241ccbbcbafe0c8599}{name\_}};\ \}}
+\DoxyCodeLine{00087\ }
+\DoxyCodeLine{00088\ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00089\ \ \ \ \ std::string\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_a382d5ab51c1806241ccbbcbafe0c8599}{name\_}};}
+\DoxyCodeLine{00090\ \};}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00095\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1monitoring_1_1_blockchain_health_check_adb6c89dcc701bbff3970a6a0b111333a}{BlockchainHealthCheck}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_afbf1da7d3f3e4b31c1e96fd4d04b87c5}{HealthCheck}}}
+\DoxyCodeLine{00096\ \{}
+\DoxyCodeLine{00097\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00098\ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_blockchain_health_check_adb6c89dcc701bbff3970a6a0b111333a}{BlockchainHealthCheck}}(std::function<uint32\_t()>\ getHeight,\ std::function<uint32\_t()>\ getHeaderHeight)}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_afbf1da7d3f3e4b31c1e96fd4d04b87c5}{HealthCheck}}(\textcolor{stringliteral}{"{}blockchain"{}}),\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_blockchain_health_check_a8c1c2035ba39e0eff4c24e20de8a1bb3}{getHeight\_}}(getHeight),\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_blockchain_health_check_aab8eef71139163ea9369c70d02661276}{getHeaderHeight\_}}(getHeaderHeight)}
+\DoxyCodeLine{00100\ \ \ \ \ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \}}
+\DoxyCodeLine{00102\ }
+\DoxyCodeLine{00103\ \ \ \ \ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{HealthCheckResult}}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_blockchain_health_check_a6759a952dd27598b8bd35e091f0649b5}{Check}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00104\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ start\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{HealthCheckResult}}\ result;}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_ac9677fe529597c5baf28a5411c371642}{name}}\ =\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_a382d5ab51c1806241ccbbcbafe0c8599}{name\_}};}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_afb06847822fea478cbe20eb3cf8f227b}{timestamp}}\ =\ std::chrono::system\_clock::now();}
+\DoxyCodeLine{00109\ }
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ height\ =\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_blockchain_health_check_a8c1c2035ba39e0eff4c24e20de8a1bb3}{getHeight\_}}();}
+\DoxyCodeLine{00113\ \ \ \ \ \ \ \ \ \ \ \ \ uint32\_t\ headerHeight\ =\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_blockchain_health_check_aab8eef71139163ea9369c70d02661276}{getHeaderHeight\_}}();}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a7e7240d7af2abe6025bcda11a9c2c4fc}{details}}[\textcolor{stringliteral}{"{}height"{}}]\ =\ std::to\_string(height);}
+\DoxyCodeLine{00116\ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a7e7240d7af2abe6025bcda11a9c2c4fc}{details}}[\textcolor{stringliteral}{"{}headerHeight"{}}]\ =\ std::to\_string(headerHeight);}
+\DoxyCodeLine{00117\ }
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Check\ if\ syncing}}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (height\ ==\ 0)}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00121\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a8cbd0125811fa0b8087e9b0f15e4d7c6}{status}}\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{HealthStatus::UNHEALTHY}};}
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a23381f7343c8683c16973b2d7933cf27}{message}}\ =\ \textcolor{stringliteral}{"{}Blockchain\ not\ initialized"{}};}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00124\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (headerHeight\ >\ height\ +\ 100)}
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a8cbd0125811fa0b8087e9b0f15e4d7c6}{status}}\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed}{HealthStatus::DEGRADED}};}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a23381f7343c8683c16973b2d7933cf27}{message}}\ =\ \textcolor{stringliteral}{"{}Blockchain\ syncing"{}};}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a7e7240d7af2abe6025bcda11a9c2c4fc}{details}}[\textcolor{stringliteral}{"{}syncProgress"{}}]\ =\ std::to\_string((height\ *\ 100.0)\ /\ headerHeight)\ +\ \textcolor{stringliteral}{"{}\%"{}};}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a8cbd0125811fa0b8087e9b0f15e4d7c6}{status}}\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6af068ebe4133e3e6563080836268ea979}{HealthStatus::HEALTHY}};}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a23381f7343c8683c16973b2d7933cf27}{message}}\ =\ \textcolor{stringliteral}{"{}Blockchain\ synced"{}};}
+\DoxyCodeLine{00134\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&\ e)}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00138\ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a8cbd0125811fa0b8087e9b0f15e4d7c6}{status}}\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{HealthStatus::UNHEALTHY}};}
+\DoxyCodeLine{00139\ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a23381f7343c8683c16973b2d7933cf27}{message}}\ =\ \textcolor{stringliteral}{"{}Failed\ to\ check\ blockchain:\ "{}}\ +\ std::string(e.what());}
+\DoxyCodeLine{00140\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00141\ }
+\DoxyCodeLine{00142\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ end\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{00143\ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a0c48d23adcd043d8df2f444c610bc8e9}{responseTime}}\ =\ std::chrono::duration\_cast<std::chrono::milliseconds>(end\ -\/\ start);}
+\DoxyCodeLine{00144\ }
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00146\ \ \ \ \ \}}
+\DoxyCodeLine{00147\ }
+\DoxyCodeLine{00148\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00149\ \ \ \ \ std::function<uint32\_t()>\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_blockchain_health_check_a8c1c2035ba39e0eff4c24e20de8a1bb3}{getHeight\_}};}
+\DoxyCodeLine{00150\ \ \ \ \ std::function<uint32\_t()>\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_blockchain_health_check_aab8eef71139163ea9369c70d02661276}{getHeaderHeight\_}};}
+\DoxyCodeLine{00151\ \};}
+\DoxyCodeLine{00152\ }
+\DoxyCodeLine{00156\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1monitoring_1_1_p2_p_health_check_a94da473f79f686f6d12a72f31a938fe2}{P2PHealthCheck}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_afbf1da7d3f3e4b31c1e96fd4d04b87c5}{HealthCheck}}}
+\DoxyCodeLine{00157\ \{}
+\DoxyCodeLine{00158\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00159\ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_p2_p_health_check_a94da473f79f686f6d12a72f31a938fe2}{P2PHealthCheck}}(std::function<\textcolor{keywordtype}{size\_t}()>\ getPeerCount,\ \textcolor{keywordtype}{size\_t}\ minPeers\ =\ 3)}
+\DoxyCodeLine{00160\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_afbf1da7d3f3e4b31c1e96fd4d04b87c5}{HealthCheck}}(\textcolor{stringliteral}{"{}p2p"{}}),\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_p2_p_health_check_a471c97da4bb83078d2eb1c96f1e2ddf6}{getPeerCount\_}}(getPeerCount),\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_p2_p_health_check_a1a5df40c7f4599cc1cc1fe62db903762}{minPeers\_}}(minPeers)}
+\DoxyCodeLine{00161\ \ \ \ \ \{}
+\DoxyCodeLine{00162\ \ \ \ \ \}}
+\DoxyCodeLine{00163\ }
+\DoxyCodeLine{00164\ \ \ \ \ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{HealthCheckResult}}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_p2_p_health_check_af7c456ae1f6181c6db52e3f637953d66}{Check}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00165\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00166\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ start\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{00167\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{HealthCheckResult}}\ result;}
+\DoxyCodeLine{00168\ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_ac9677fe529597c5baf28a5411c371642}{name}}\ =\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_a382d5ab51c1806241ccbbcbafe0c8599}{name\_}};}
+\DoxyCodeLine{00169\ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_afb06847822fea478cbe20eb3cf8f227b}{timestamp}}\ =\ std::chrono::system\_clock::now();}
+\DoxyCodeLine{00170\ }
+\DoxyCodeLine{00171\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00172\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00173\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ peerCount\ =\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_p2_p_health_check_a471c97da4bb83078d2eb1c96f1e2ddf6}{getPeerCount\_}}();}
+\DoxyCodeLine{00174\ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a7e7240d7af2abe6025bcda11a9c2c4fc}{details}}[\textcolor{stringliteral}{"{}peerCount"{}}]\ =\ std::to\_string(peerCount);}
+\DoxyCodeLine{00175\ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a7e7240d7af2abe6025bcda11a9c2c4fc}{details}}[\textcolor{stringliteral}{"{}minPeers"{}}]\ =\ std::to\_string(\mbox{\hyperlink{classneo_1_1monitoring_1_1_p2_p_health_check_a1a5df40c7f4599cc1cc1fe62db903762}{minPeers\_}});}
+\DoxyCodeLine{00176\ }
+\DoxyCodeLine{00177\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (peerCount\ ==\ 0)}
+\DoxyCodeLine{00178\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00179\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a8cbd0125811fa0b8087e9b0f15e4d7c6}{status}}\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{HealthStatus::UNHEALTHY}};}
+\DoxyCodeLine{00180\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a23381f7343c8683c16973b2d7933cf27}{message}}\ =\ \textcolor{stringliteral}{"{}No\ peers\ connected"{}};}
+\DoxyCodeLine{00181\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00182\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (peerCount\ <\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_p2_p_health_check_a1a5df40c7f4599cc1cc1fe62db903762}{minPeers\_}})}
+\DoxyCodeLine{00183\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00184\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a8cbd0125811fa0b8087e9b0f15e4d7c6}{status}}\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed}{HealthStatus::DEGRADED}};}
+\DoxyCodeLine{00185\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a23381f7343c8683c16973b2d7933cf27}{message}}\ =\ \textcolor{stringliteral}{"{}Insufficient\ peers"{}};}
+\DoxyCodeLine{00186\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00187\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00188\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00189\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a8cbd0125811fa0b8087e9b0f15e4d7c6}{status}}\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6af068ebe4133e3e6563080836268ea979}{HealthStatus::HEALTHY}};}
+\DoxyCodeLine{00190\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a23381f7343c8683c16973b2d7933cf27}{message}}\ =\ \textcolor{stringliteral}{"{}P2P\ network\ healthy"{}};}
+\DoxyCodeLine{00191\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00192\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00193\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&\ e)}
+\DoxyCodeLine{00194\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00195\ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a8cbd0125811fa0b8087e9b0f15e4d7c6}{status}}\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{HealthStatus::UNHEALTHY}};}
+\DoxyCodeLine{00196\ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a23381f7343c8683c16973b2d7933cf27}{message}}\ =\ \textcolor{stringliteral}{"{}Failed\ to\ check\ P2P:\ "{}}\ +\ std::string(e.what());}
+\DoxyCodeLine{00197\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00198\ }
+\DoxyCodeLine{00199\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ end\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{00200\ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a0c48d23adcd043d8df2f444c610bc8e9}{responseTime}}\ =\ std::chrono::duration\_cast<std::chrono::milliseconds>(end\ -\/\ start);}
+\DoxyCodeLine{00201\ }
+\DoxyCodeLine{00202\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00203\ \ \ \ \ \}}
+\DoxyCodeLine{00204\ }
+\DoxyCodeLine{00205\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00206\ \ \ \ \ std::function<size\_t()>\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_p2_p_health_check_a471c97da4bb83078d2eb1c96f1e2ddf6}{getPeerCount\_}};}
+\DoxyCodeLine{00207\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_p2_p_health_check_a1a5df40c7f4599cc1cc1fe62db903762}{minPeers\_}};}
+\DoxyCodeLine{00208\ \};}
+\DoxyCodeLine{00209\ }
+\DoxyCodeLine{00213\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1monitoring_1_1_memory_health_check_aaed72354312081af4b9cb69444197f44}{MemoryHealthCheck}}\ :\ \textcolor{keyword}{public}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_afbf1da7d3f3e4b31c1e96fd4d04b87c5}{HealthCheck}}}
+\DoxyCodeLine{00214\ \{}
+\DoxyCodeLine{00215\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00216\ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_memory_health_check_aaed72354312081af4b9cb69444197f44}{MemoryHealthCheck}}(std::function<\textcolor{keywordtype}{size\_t}()>\ getMemoryUsage,\ \textcolor{keywordtype}{size\_t}\ maxMemoryMB\ =\ 8192)}
+\DoxyCodeLine{00217\ \ \ \ \ \ \ \ \ :\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_afbf1da7d3f3e4b31c1e96fd4d04b87c5}{HealthCheck}}(\textcolor{stringliteral}{"{}memory"{}}),\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_memory_health_check_afb97a25d3b7a41733f23397b5bb6faed}{getMemoryUsage\_}}(getMemoryUsage),\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_memory_health_check_ab2dd8166fed95de8ced75d215aff64f4}{maxMemoryMB\_}}(maxMemoryMB)}
+\DoxyCodeLine{00218\ \ \ \ \ \{}
+\DoxyCodeLine{00219\ \ \ \ \ \}}
+\DoxyCodeLine{00220\ }
+\DoxyCodeLine{00221\ \ \ \ \ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{HealthCheckResult}}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_memory_health_check_a92dd3f355474dfb114f0489228d66b92}{Check}}()\textcolor{keyword}{\ override}}
+\DoxyCodeLine{00222\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00223\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ start\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{00224\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result}{HealthCheckResult}}\ result;}
+\DoxyCodeLine{00225\ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_ac9677fe529597c5baf28a5411c371642}{name}}\ =\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_a382d5ab51c1806241ccbbcbafe0c8599}{name\_}};}
+\DoxyCodeLine{00226\ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_afb06847822fea478cbe20eb3cf8f227b}{timestamp}}\ =\ std::chrono::system\_clock::now();}
+\DoxyCodeLine{00227\ }
+\DoxyCodeLine{00228\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{try}}
+\DoxyCodeLine{00229\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00230\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{size\_t}\ memoryMB\ =\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_memory_health_check_afb97a25d3b7a41733f23397b5bb6faed}{getMemoryUsage\_}}()\ /\ (1024\ *\ 1024);}
+\DoxyCodeLine{00231\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{double}\ usagePercent\ =\ (memoryMB\ *\ 100.0)\ /\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_memory_health_check_ab2dd8166fed95de8ced75d215aff64f4}{maxMemoryMB\_}};}
+\DoxyCodeLine{00232\ }
+\DoxyCodeLine{00233\ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a7e7240d7af2abe6025bcda11a9c2c4fc}{details}}[\textcolor{stringliteral}{"{}memoryMB"{}}]\ =\ std::to\_string(memoryMB);}
+\DoxyCodeLine{00234\ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a7e7240d7af2abe6025bcda11a9c2c4fc}{details}}[\textcolor{stringliteral}{"{}maxMemoryMB"{}}]\ =\ std::to\_string(\mbox{\hyperlink{classneo_1_1monitoring_1_1_memory_health_check_ab2dd8166fed95de8ced75d215aff64f4}{maxMemoryMB\_}});}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a7e7240d7af2abe6025bcda11a9c2c4fc}{details}}[\textcolor{stringliteral}{"{}usagePercent"{}}]\ =\ std::to\_string(usagePercent);}
+\DoxyCodeLine{00236\ }
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (usagePercent\ >\ 95)}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00239\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a8cbd0125811fa0b8087e9b0f15e4d7c6}{status}}\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{HealthStatus::UNHEALTHY}};}
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a23381f7343c8683c16973b2d7933cf27}{message}}\ =\ \textcolor{stringliteral}{"{}Memory\ usage\ critical"{}};}
+\DoxyCodeLine{00241\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00242\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (usagePercent\ >\ 80)}
+\DoxyCodeLine{00243\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00244\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a8cbd0125811fa0b8087e9b0f15e4d7c6}{status}}\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed}{HealthStatus::DEGRADED}};}
+\DoxyCodeLine{00245\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a23381f7343c8683c16973b2d7933cf27}{message}}\ =\ \textcolor{stringliteral}{"{}Memory\ usage\ high"{}};}
+\DoxyCodeLine{00246\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00247\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}}
+\DoxyCodeLine{00248\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a8cbd0125811fa0b8087e9b0f15e4d7c6}{status}}\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6af068ebe4133e3e6563080836268ea979}{HealthStatus::HEALTHY}};}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a23381f7343c8683c16973b2d7933cf27}{message}}\ =\ \textcolor{stringliteral}{"{}Memory\ usage\ normal"{}};}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00253\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{catch}\ (\textcolor{keyword}{const}\ std::exception\&\ e)}
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00255\ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a8cbd0125811fa0b8087e9b0f15e4d7c6}{status}}\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{HealthStatus::UNHEALTHY}};}
+\DoxyCodeLine{00256\ \ \ \ \ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a23381f7343c8683c16973b2d7933cf27}{message}}\ =\ \textcolor{stringliteral}{"{}Failed\ to\ check\ memory:\ "{}}\ +\ std::string(e.what());}
+\DoxyCodeLine{00257\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00258\ }
+\DoxyCodeLine{00259\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ end\ =\ std::chrono::steady\_clock::now();}
+\DoxyCodeLine{00260\ \ \ \ \ \ \ \ \ result.\mbox{\hyperlink{structneo_1_1monitoring_1_1_health_check_result_a0c48d23adcd043d8df2f444c610bc8e9}{responseTime}}\ =\ std::chrono::duration\_cast<std::chrono::milliseconds>(end\ -\/\ start);}
+\DoxyCodeLine{00261\ }
+\DoxyCodeLine{00262\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ result;}
+\DoxyCodeLine{00263\ \ \ \ \ \}}
+\DoxyCodeLine{00264\ }
+\DoxyCodeLine{00265\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00266\ \ \ \ \ std::function<size\_t()>\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_memory_health_check_afb97a25d3b7a41733f23397b5bb6faed}{getMemoryUsage\_}};}
+\DoxyCodeLine{00267\ \ \ \ \ \textcolor{keywordtype}{size\_t}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_memory_health_check_ab2dd8166fed95de8ced75d215aff64f4}{maxMemoryMB\_}};}
+\DoxyCodeLine{00268\ \};}
+\DoxyCodeLine{00269\ }
+\DoxyCodeLine{00273\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_aec039dcac386996229b097a498e4443a}{HealthCheckManager}}}
+\DoxyCodeLine{00274\ \{}
+\DoxyCodeLine{00275\ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00276\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_aec039dcac386996229b097a498e4443a}{HealthCheckManager}}\&\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a45451b46e9f157c1aac566ed47ea6dbe}{GetInstance}}()}
+\DoxyCodeLine{00277\ \ \ \ \ \{}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_aec039dcac386996229b097a498e4443a}{HealthCheckManager}}\ instance;}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ instance;}
+\DoxyCodeLine{00280\ \ \ \ \ \}}
+\DoxyCodeLine{00281\ }
+\DoxyCodeLine{00286\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a14417bb7c286d4c09681096f64409593}{RegisterHealthCheck}}(std::shared\_ptr<HealthCheck>\ check)}
+\DoxyCodeLine{00287\ \ \ \ \ \{}
+\DoxyCodeLine{00288\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_aa048b07dd0408119a1d6a0afdbd38e76}{mutex\_}});}
+\DoxyCodeLine{00289\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a94e16fdf33779d40389c50c83919e75f}{checks\_}}[check-\/>GetName()]\ =\ check;}
+\DoxyCodeLine{00290\ \ \ \ \ \}}
+\DoxyCodeLine{00291\ }
+\DoxyCodeLine{00296\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{HealthStatus}}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a3d125cb4c74084bc2a35c801a41748f9}{RunChecks}}()}
+\DoxyCodeLine{00297\ \ \ \ \ \{}
+\DoxyCodeLine{00298\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_aa048b07dd0408119a1d6a0afdbd38e76}{mutex\_}});}
+\DoxyCodeLine{00299\ }
+\DoxyCodeLine{00300\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a10d636a6d01000b36b5f8a37df9f048b}{lastResults\_}}.clear();}
+\DoxyCodeLine{00301\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{HealthStatus}}\ overallStatus\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6af068ebe4133e3e6563080836268ea979}{HealthStatus::HEALTHY}};}
+\DoxyCodeLine{00302\ }
+\DoxyCodeLine{00303\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [name,\ check]\ :\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a94e16fdf33779d40389c50c83919e75f}{checks\_}})}
+\DoxyCodeLine{00304\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00305\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ result\ =\ check-\/>Check();}
+\DoxyCodeLine{00306\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a10d636a6d01000b36b5f8a37df9f048b}{lastResults\_}}[name]\ =\ result;}
+\DoxyCodeLine{00307\ }
+\DoxyCodeLine{00308\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Update\ overall\ status}}
+\DoxyCodeLine{00309\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.status\ ==\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{HealthStatus::UNHEALTHY}})}
+\DoxyCodeLine{00310\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00311\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ overallStatus\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{HealthStatus::UNHEALTHY}};}
+\DoxyCodeLine{00312\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00313\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (result.status\ ==\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed}{HealthStatus::DEGRADED}}\ \&\&\ overallStatus\ !=\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{HealthStatus::UNHEALTHY}})}
+\DoxyCodeLine{00314\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00315\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ overallStatus\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed}{HealthStatus::DEGRADED}};}
+\DoxyCodeLine{00316\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00317\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00319\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a9c0ab383c0527cf9aa43e9d8d7332253}{lastCheckTime\_}}\ =\ std::chrono::system\_clock::now();}
+\DoxyCodeLine{00320\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ overallStatus;}
+\DoxyCodeLine{00321\ \ \ \ \ \}}
+\DoxyCodeLine{00322\ }
+\DoxyCodeLine{00327\ \ \ \ \ std::unordered\_map<std::string,\ HealthCheckResult>\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a12a2d894750b517e51ec64556bbcf5f6}{GetLastResults}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00328\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00329\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_aa048b07dd0408119a1d6a0afdbd38e76}{mutex\_}});}
+\DoxyCodeLine{00330\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a10d636a6d01000b36b5f8a37df9f048b}{lastResults\_}};}
+\DoxyCodeLine{00331\ \ \ \ \ \}}
+\DoxyCodeLine{00332\ }
+\DoxyCodeLine{00337\ \ \ \ \ nlohmann::json\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_adfa138fe6a2f56d0d39205790921d231}{GetHealthJson}}()}
+\DoxyCodeLine{00338\ \ \ \ \ \{}
+\DoxyCodeLine{00339\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a3d125cb4c74084bc2a35c801a41748f9}{RunChecks}}();\ \ \textcolor{comment}{//\ Update\ results}}
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00341\ \ \ \ \ \ \ \ \ std::lock\_guard<std::mutex>\ lock(\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_aa048b07dd0408119a1d6a0afdbd38e76}{mutex\_}});}
+\DoxyCodeLine{00342\ }
+\DoxyCodeLine{00343\ \ \ \ \ \ \ \ \ nlohmann::json\ j;}
+\DoxyCodeLine{00344\ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}status"{}}]\ =\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a5a85c9067a7f615391fee60ea0abbe34}{StatusToString}}(\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_abcb5eff45855095d49b5787701daeb37}{GetOverallStatus}}());}
+\DoxyCodeLine{00345\ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}timestamp"{}}]\ =\ std::chrono::duration\_cast<std::chrono::seconds>(\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a9c0ab383c0527cf9aa43e9d8d7332253}{lastCheckTime\_}}.time\_since\_epoch()).count();}
+\DoxyCodeLine{00346\ }
+\DoxyCodeLine{00347\ \ \ \ \ \ \ \ \ nlohmann::json\ checks\ =\ \mbox{\hyperlink{classbasic__json_a5299b166ebd27030235e2314a0cf5882}{nlohmann::json::array}}();}
+\DoxyCodeLine{00348\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [name,\ result]\ :\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a10d636a6d01000b36b5f8a37df9f048b}{lastResults\_}})}
+\DoxyCodeLine{00349\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00350\ \ \ \ \ \ \ \ \ \ \ \ \ checks.push\_back(result.ToJson());}
+\DoxyCodeLine{00351\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00352\ \ \ \ \ \ \ \ \ j[\textcolor{stringliteral}{"{}checks"{}}]\ =\ checks;}
+\DoxyCodeLine{00353\ }
+\DoxyCodeLine{00354\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ j;}
+\DoxyCodeLine{00355\ \ \ \ \ \}}
+\DoxyCodeLine{00356\ }
+\DoxyCodeLine{00361\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a549d8037f290f7a400593b76f833338c}{StartPeriodicChecks}}(std::chrono::seconds\ interval\ =\ std::chrono::seconds(30))}
+\DoxyCodeLine{00362\ \ \ \ \ \{}
+\DoxyCodeLine{00363\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_ae83ad8a08ee275eeda09d519c4082898}{running\_}})\ \textcolor{keywordflow}{return};}
+\DoxyCodeLine{00364\ }
+\DoxyCodeLine{00365\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_ae83ad8a08ee275eeda09d519c4082898}{running\_}}\ =\ \textcolor{keyword}{true};}
+\DoxyCodeLine{00366\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a7019f65649b4eec700239abc1c7e1c1a}{checkThread\_}}\ =\ std::thread(}
+\DoxyCodeLine{00367\ \ \ \ \ \ \ \ \ \ \ \ \ [\textcolor{keyword}{this},\ interval]()}
+\DoxyCodeLine{00368\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00369\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{while}\ (\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_ae83ad8a08ee275eeda09d519c4082898}{running\_}})}
+\DoxyCodeLine{00370\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00371\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a3d125cb4c74084bc2a35c801a41748f9}{RunChecks}}();}
+\DoxyCodeLine{00372\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ std::this\_thread::sleep\_for(interval);}
+\DoxyCodeLine{00373\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00374\ \ \ \ \ \ \ \ \ \ \ \ \ \});}
+\DoxyCodeLine{00375\ \ \ \ \ \}}
+\DoxyCodeLine{00376\ }
+\DoxyCodeLine{00380\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a476148f8aac7e979cddb7e3d81cbde3a}{StopPeriodicChecks}}()}
+\DoxyCodeLine{00381\ \ \ \ \ \{}
+\DoxyCodeLine{00382\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_ae83ad8a08ee275eeda09d519c4082898}{running\_}}\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00383\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (\mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a7019f65649b4eec700239abc1c7e1c1a}{checkThread\_}}.joinable())}
+\DoxyCodeLine{00384\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00385\ \ \ \ \ \ \ \ \ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a7019f65649b4eec700239abc1c7e1c1a}{checkThread\_}}.join();}
+\DoxyCodeLine{00386\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00387\ \ \ \ \ \}}
+\DoxyCodeLine{00388\ }
+\DoxyCodeLine{00389\ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a54f1dfd4eaa7d6b7aa41ad168992cfa1}{\string~HealthCheckManager}}()\ \{\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a476148f8aac7e979cddb7e3d81cbde3a}{StopPeriodicChecks}}();\ \}}
+\DoxyCodeLine{00390\ }
+\DoxyCodeLine{00391\ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00392\ \ \ \ \ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_aec039dcac386996229b097a498e4443a}{HealthCheckManager}}()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00393\ }
+\DoxyCodeLine{00394\ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{HealthStatus}}\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_abcb5eff45855095d49b5787701daeb37}{GetOverallStatus}}()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00395\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00396\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{HealthStatus}}\ overall\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6af068ebe4133e3e6563080836268ea979}{HealthStatus::HEALTHY}};}
+\DoxyCodeLine{00397\ }
+\DoxyCodeLine{00398\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (\textcolor{keyword}{const}\ \textcolor{keyword}{auto}\&\ [name,\ result]\ :\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a10d636a6d01000b36b5f8a37df9f048b}{lastResults\_}})}
+\DoxyCodeLine{00399\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00400\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}\ (result.status\ ==\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{HealthStatus::UNHEALTHY}})}
+\DoxyCodeLine{00401\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00402\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{HealthStatus::UNHEALTHY}};}
+\DoxyCodeLine{00403\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00404\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{else}\ \textcolor{keywordflow}{if}\ (result.status\ ==\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed}{HealthStatus::DEGRADED}})}
+\DoxyCodeLine{00405\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00406\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ overall\ =\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed}{HealthStatus::DEGRADED}};}
+\DoxyCodeLine{00407\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00408\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00409\ }
+\DoxyCodeLine{00410\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ overall;}
+\DoxyCodeLine{00411\ \ \ \ \ \}}
+\DoxyCodeLine{00412\ }
+\DoxyCodeLine{00413\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a5a85c9067a7f615391fee60ea0abbe34}{StatusToString}}(\mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6}{HealthStatus}}\ status)}
+\DoxyCodeLine{00414\ \ \ \ \ \{}
+\DoxyCodeLine{00415\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (status)}
+\DoxyCodeLine{00416\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00417\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6af068ebe4133e3e6563080836268ea979}{HealthStatus::HEALTHY}}:}
+\DoxyCodeLine{00418\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}healthy"{}};}
+\DoxyCodeLine{00419\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a0021017005f0e5134b204c2e69d3d4ed}{HealthStatus::DEGRADED}}:}
+\DoxyCodeLine{00420\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}degraded"{}};}
+\DoxyCodeLine{00421\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ \mbox{\hyperlink{namespaceneo_1_1monitoring_a62c61cfb061a12cf29014289da7366e6a7438a7e4e4f36f04fda32fa100121e47}{HealthStatus::UNHEALTHY}}:}
+\DoxyCodeLine{00422\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}unhealthy"{}};}
+\DoxyCodeLine{00423\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00424\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ \textcolor{stringliteral}{"{}unknown"{}};}
+\DoxyCodeLine{00425\ \ \ \ \ \}}
+\DoxyCodeLine{00426\ }
+\DoxyCodeLine{00427\ \ \ \ \ std::unordered\_map<std::string,\ std::shared\_ptr<HealthCheck>>\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a94e16fdf33779d40389c50c83919e75f}{checks\_}};}
+\DoxyCodeLine{00428\ \ \ \ \ std::unordered\_map<std::string,\ HealthCheckResult>\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a10d636a6d01000b36b5f8a37df9f048b}{lastResults\_}};}
+\DoxyCodeLine{00429\ \ \ \ \ std::chrono::system\_clock::time\_point\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a9c0ab383c0527cf9aa43e9d8d7332253}{lastCheckTime\_}};}
+\DoxyCodeLine{00430\ }
+\DoxyCodeLine{00431\ \ \ \ \ std::atomic<bool>\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_ae83ad8a08ee275eeda09d519c4082898}{running\_}}\{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00432\ \ \ \ \ std::thread\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_a7019f65649b4eec700239abc1c7e1c1a}{checkThread\_}};}
+\DoxyCodeLine{00433\ \ \ \ \ \textcolor{keyword}{mutable}\ std::mutex\ \mbox{\hyperlink{classneo_1_1monitoring_1_1_health_check_manager_aa048b07dd0408119a1d6a0afdbd38e76}{mutex\_}};}
+\DoxyCodeLine{00434\ \};}
+\DoxyCodeLine{00435\ }
+\DoxyCodeLine{00436\ \}\ \ \textcolor{comment}{//\ namespace\ neo::monitoring}}
+
+\end{DoxyCode}

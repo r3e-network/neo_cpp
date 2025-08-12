@@ -1,0 +1,42 @@
+digraph "neo::cli::WalletCommands::RegisterCommands"
+{
+ // LATEX_PDF_SIZE
+  bgcolor="transparent";
+  edge [fontname=Helvetica,fontsize=10,labelfontname=Helvetica,labelfontsize=10];
+  node [fontname=Helvetica,fontsize=10,shape=box,height=0.2,width=0.4];
+  rankdir="LR";
+  Node1 [id="Node000001",label="neo::cli::WalletCommands\l::RegisterCommands",height=0.2,width=0.4,color="gray40", fillcolor="grey60", style="filled", fontcolor="black",tooltip="Registers the commands."];
+  Node1 -> Node2 [id="edge21_Node000001_Node000002",color="steelblue1",style="solid",tooltip=" "];
+  Node2 [id="Node000002",label="neo::cli::WalletCommands\l::HandleCloseWallet",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cli_1_1_wallet_commands.html#a2c9b8319304d87be5212757ccd733a3e",tooltip="Handles the closewallet command."];
+  Node1 -> Node3 [id="edge22_Node000001_Node000003",color="steelblue1",style="solid",tooltip=" "];
+  Node3 [id="Node000003",label="neo::cli::WalletCommands\l::HandleOpenWallet",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cli_1_1_wallet_commands.html#aaa716ea98beaeb39c43bcdd1802bb377",tooltip="Handles the openwallet command."];
+  Node3 -> Node4 [id="edge23_Node000003_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node4 [id="Node000004",label="neo::cli::ConsoleHelper\l::Error",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cli_1_1_console_helper.html#ac3ec7b1362555499592739354105f6f1",tooltip="Print an error message."];
+  Node4 -> Node5 [id="edge24_Node000004_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node5 [id="Node000005",label="neo::cli::ConsoleHelper\l::ResetColor",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cli_1_1_console_helper.html#aa19a32aa086b8165b918589106658595",tooltip="Reset console text color to default."];
+  Node4 -> Node6 [id="edge25_Node000004_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node6 [id="Node000006",label="neo::cli::ConsoleHelper\l::SetColor",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cli_1_1_console_helper.html#ad263bec77ecce8013dddb817efef151f",tooltip="Set console text color."];
+  Node3 -> Node7 [id="edge26_Node000003_Node000007",color="steelblue1",style="solid",tooltip=" "];
+  Node7 [id="Node000007",label="neo::cli::ConsoleHelper\l::Info",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cli_1_1_console_helper.html#a6d48e1c45f338bd842bf7fa6bf00b0d9",tooltip="Print an informational message."];
+  Node7 -> Node5 [id="edge27_Node000007_Node000005",color="steelblue1",style="solid",tooltip=" "];
+  Node7 -> Node6 [id="edge28_Node000007_Node000006",color="steelblue1",style="solid",tooltip=" "];
+  Node3 -> Node8 [id="edge29_Node000003_Node000008",color="steelblue1",style="solid",tooltip=" "];
+  Node8 [id="Node000008",label="neo::cli::ConsoleHelper\l::ReadPassword",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cli_1_1_console_helper.html#a9ae9feae6c7d9484b9e06e5c5947357f",tooltip="Read a password from console (hidden input)"];
+  Node1 -> Node9 [id="edge30_Node000001_Node000009",color="steelblue1",style="solid",tooltip=" "];
+  Node9 [id="Node000009",label="neo::cli::WalletCommands\l::HandleShowAddress",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cli_1_1_wallet_commands.html#ae0c7d6886fc5dbd79af37647e2d79ce2",tooltip="Handles the showaddress command."];
+  Node9 -> Node4 [id="edge31_Node000009_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node10 [id="edge32_Node000001_Node000010",color="steelblue1",style="solid",tooltip=" "];
+  Node10 [id="Node000010",label="neo::cli::WalletCommands\l::HandleShowBalance",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cli_1_1_wallet_commands.html#a7cb8386c7ab058a9003e650aa0f47d6e",tooltip="Handles the showbalance command."];
+  Node10 -> Node4 [id="edge33_Node000010_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node10 -> Node11 [id="edge34_Node000010_Node000011",color="steelblue1",style="solid",tooltip=" "];
+  Node11 [id="Node000011",label="neo::io::UInt160::Parse",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_u_int160.html#aff15950166fb8a9a018e85e419500115",tooltip="Parses a hexadecimal string into a UInt160."];
+  Node11 -> Node12 [id="edge35_Node000011_Node000012",color="steelblue1",style="solid",tooltip=" "];
+  Node12 [id="Node000012",label="neo::io::UInt160::TryParse",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_u_int160.html#ab05ad86c095702985a3c48b025c6e0bc",tooltip="Tries to parse a hexadecimal string into a UInt160."];
+  Node12 -> Node13 [id="edge36_Node000012_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node13 [id="Node000013",label="neo::io::UInt160::UInt160",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1io_1_1_u_int160.html#a975ac19e433b0ceb17f5b56454667fa5",tooltip="Constructs a UInt160 initialized to zero."];
+  Node11 -> Node13 [id="edge37_Node000011_Node000013",color="steelblue1",style="solid",tooltip=" "];
+  Node1 -> Node14 [id="edge38_Node000001_Node000014",color="steelblue1",style="solid",tooltip=" "];
+  Node14 [id="Node000014",label="neo::cli::WalletCommands\l::HandleTransfer",height=0.2,width=0.4,color="grey40", fillcolor="white", style="filled",URL="$classneo_1_1cli_1_1_wallet_commands.html#a3e6a0294ba34c943747cab9d0af5baad",tooltip="Handles the transfer command."];
+  Node14 -> Node4 [id="edge39_Node000014_Node000004",color="steelblue1",style="solid",tooltip=" "];
+  Node14 -> Node11 [id="edge40_Node000014_Node000011",color="steelblue1",style="solid",tooltip=" "];
+}

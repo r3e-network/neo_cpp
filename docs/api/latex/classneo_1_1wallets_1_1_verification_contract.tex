@@ -1,0 +1,392 @@
+\doxysection{neo\+::wallets\+::Verification\+Contract Class Reference}
+\hypertarget{classneo_1_1wallets_1_1_verification_contract}{}\label{classneo_1_1wallets_1_1_verification_contract}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+
+
+Represents a verification contract in a wallet.  
+
+
+
+
+{\ttfamily \#include $<$verification\+\_\+contract.\+h$>$}
+
+
+
+Inheritance diagram for neo\+::wallets\+::Verification\+Contract\+:
+% FIG 0
+
+
+Collaboration diagram for neo\+::wallets\+::Verification\+Contract\+:
+% FIG 1
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_aa5bdaadb47e18489ff05aa778172c0d9}{Verification\+Contract}} ()
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1wallets_1_1_verification_contract}{Verification\+Contract}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_aff0982ddb9aa32a6100aedb5bed15b23}{Verification\+Contract}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{smartcontract\+::\+Contract}} \&contract)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1wallets_1_1_verification_contract}{Verification\+Contract} with the specified contract. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_a181a9e5136ff0cdffcaaf22252feacbf}{Verification\+Contract}} (const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&public\+Key)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1wallets_1_1_verification_contract}{Verification\+Contract} with the specified public key. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_a86b4893ae4baaf1e32b8b1250f9d86e0}{Verification\+Contract}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \&public\+Keys, int m)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1wallets_1_1_verification_contract}{Verification\+Contract} with the specified public keys and signature count. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{smartcontract\+::\+Contract}} \& \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_acc467180677257634fe4ba6fb29e6de4}{Get\+Contract}} () const
+\begin{DoxyCompactList}\small\item\em Gets the contract. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_acc127040b07ce1ed23afa5a63145038b}{Set\+Contract}} (const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{smartcontract\+::\+Contract}} \&contract)
+\begin{DoxyCompactList}\small\item\em Sets the contract. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_a58693f445f9918324e162970d5b2631e}{Get\+Script\+Hash}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script hash of the contract. \end{DoxyCompactList}\item 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \& \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_a20335247dabe04dbd247fb673e04b26c}{Get\+Public\+Keys}} () const
+\begin{DoxyCompactList}\small\item\em Gets the public keys. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_aa70695f90ee1fe7fbf107ece4361a01c}{Set\+Public\+Keys}} (const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \&public\+Keys)
+\begin{DoxyCompactList}\small\item\em Sets the public keys. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::string $>$ \& \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_a4bb03e29ee247a9330c45988ed193364}{Get\+Parameter\+Names}} () const
+\begin{DoxyCompactList}\small\item\em Gets the parameter names. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_af15e3b3437741ed79bdfbbf069b8f0aa}{Set\+Parameter\+Names}} (const std\+::vector$<$ std\+::string $>$ \&parameter\+Names)
+\begin{DoxyCompactList}\small\item\em Sets the parameter names. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_a0cca444ca1577787ab1698d167e9d4be}{GetM}} () const
+\begin{DoxyCompactList}\small\item\em Gets the minimum number of signatures required. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_a32fffbf206ba560c2fb62d0486498584}{SetM}} (int m)
+\begin{DoxyCompactList}\small\item\em Sets the minimum number of signatures required. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_aa6c081a5647a6eb50ce3a295f2cff8c9}{Is\+Signature\+Contract}} () const
+\begin{DoxyCompactList}\small\item\em Determines whether the contract is a signature contract. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_adc164022125e2e2ed18ef1fe25a335fe}{Is\+Multi\+Sig\+Contract}} () const
+\begin{DoxyCompactList}\small\item\em Determines whether the contract is a multi-\/signature contract. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_a9aa8de57dcfd730a30948de94856478e}{Serialize\+Json}} (\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&writer) const override
+\begin{DoxyCompactList}\small\item\em Serializes the \doxylink{classneo_1_1wallets_1_1_verification_contract}{Verification\+Contract} to a JSON writer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_ac7263cf513837c203a0182adaa19e294}{Deserialize\+Json}} (const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&reader) override
+\begin{DoxyCompactList}\small\item\em Deserializes the \doxylink{classneo_1_1wallets_1_1_verification_contract}{Verification\+Contract} from a JSON reader. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+virtual \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a4a736d9c5fd6c1f7c3ff1446d3107bec}{\texorpdfstring{$\sim$}{\string~}\+IJson\+Serializable}} ()=default
+\begin{DoxyCompactList}\small\item\em Virtual destructor. \end{DoxyCompactList}\item 
+nlohmann\+::json \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_aa7b0939a11f2a7a601ebc27694a1c57b}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5c3e94c664db11ac3381da5ca264f2ce}{Deserialize\+From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a5d5de8fddda8d58153e7d1d630b7b521}{To\+Json\+String}} (bool pretty=false) const
+\begin{DoxyCompactList}\small\item\em Serializes the object to a JSON string. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_af930c77e7a52f0d37c11c95e8481b7ce}{Deserialize\+From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{smartcontract\+::\+Contract}} \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_a6ddc54de9c9be39f5b3c903d4ef7dcb1}{contract\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_a1e7c3771c65c8a9fb3644922be506adc}{public\+Keys\+\_\+}}
+\item 
+std\+::vector$<$ std\+::string $>$ \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_a6c3be6fad301e955f4aaad922d201c4c}{parameter\+Names\+\_\+}}
+\item 
+int \mbox{\hyperlink{classneo_1_1wallets_1_1_verification_contract_ae3a86a29874b128bbff1270312c40c26}{m\+\_\+}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Static Public Member Functions inherited from \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable}{neo\+::io\+::\+IJson\+Serializable}}}
+\begin{DoxyCompactItemize}
+\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a1d48462d46c9631fb1305589886fea2e}{From\+Json}} (const nlohmann\+::json \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON object. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\static T \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a034551e70546f4135353dccca394c6d8}{From\+Json\+String}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Deserializes an object from a JSON string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a verification contract in a wallet. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_aa5bdaadb47e18489ff05aa778172c0d9}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!VerificationContract@{VerificationContract}}
+\index{VerificationContract@{VerificationContract}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{VerificationContract()}{VerificationContract()}\hspace{0.1cm}{\footnotesize\ttfamily [1/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_aa5bdaadb47e18489ff05aa778172c0d9} 
+neo\+::wallets\+::\+Verification\+Contract\+::\+Verification\+Contract (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Constructs an empty \doxylink{classneo_1_1wallets_1_1_verification_contract}{Verification\+Contract}. 
+
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_aff0982ddb9aa32a6100aedb5bed15b23}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!VerificationContract@{VerificationContract}}
+\index{VerificationContract@{VerificationContract}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{VerificationContract()}{VerificationContract()}\hspace{0.1cm}{\footnotesize\ttfamily [2/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_aff0982ddb9aa32a6100aedb5bed15b23} 
+neo\+::wallets\+::\+Verification\+Contract\+::\+Verification\+Contract (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{smartcontract\+::\+Contract}} \&}]{contract}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1wallets_1_1_verification_contract}{Verification\+Contract} with the specified contract. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em contract} & The contract. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_a181a9e5136ff0cdffcaaf22252feacbf}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!VerificationContract@{VerificationContract}}
+\index{VerificationContract@{VerificationContract}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{VerificationContract()}{VerificationContract()}\hspace{0.1cm}{\footnotesize\ttfamily [3/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_a181a9e5136ff0cdffcaaf22252feacbf} 
+neo\+::wallets\+::\+Verification\+Contract\+::\+Verification\+Contract (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} \&}]{public\+Key}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [explicit]}}
+
+
+
+Constructs a \doxylink{classneo_1_1wallets_1_1_verification_contract}{Verification\+Contract} with the specified public key. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em public\+Key} & The public key. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_a86b4893ae4baaf1e32b8b1250f9d86e0}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!VerificationContract@{VerificationContract}}
+\index{VerificationContract@{VerificationContract}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{VerificationContract()}{VerificationContract()}\hspace{0.1cm}{\footnotesize\ttfamily [4/4]}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_a86b4893ae4baaf1e32b8b1250f9d86e0} 
+neo\+::wallets\+::\+Verification\+Contract\+::\+Verification\+Contract (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \&}]{public\+Keys}{, }\item[{int}]{m}{}\end{DoxyParamCaption})}
+
+
+
+Constructs a \doxylink{classneo_1_1wallets_1_1_verification_contract}{Verification\+Contract} with the specified public keys and signature count. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em public\+Keys} & The public keys. \\
+\hline
+{\em m} & The minimum number of signatures required. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 4
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_ac7263cf513837c203a0182adaa19e294}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!DeserializeJson@{DeserializeJson}}
+\index{DeserializeJson@{DeserializeJson}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{DeserializeJson()}{DeserializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_ac7263cf513837c203a0182adaa19e294} 
+void neo\+::wallets\+::\+Verification\+Contract\+::\+Deserialize\+Json (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_json_reader}{io\+::\+Json\+Reader}} \&}]{reader}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Deserializes the \doxylink{classneo_1_1wallets_1_1_verification_contract}{Verification\+Contract} from a JSON reader. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em reader} & The JSON reader. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a0c4c0b6278c315475a142d0c1dab3d7c}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_acc467180677257634fe4ba6fb29e6de4}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!GetContract@{GetContract}}
+\index{GetContract@{GetContract}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{GetContract()}{GetContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_acc467180677257634fe4ba6fb29e6de4} 
+const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{smartcontract\+::\+Contract}} \& neo\+::wallets\+::\+Verification\+Contract\+::\+Get\+Contract (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the contract. 
+
+\begin{DoxyReturn}{Returns}
+The contract. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_a0cca444ca1577787ab1698d167e9d4be}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!GetM@{GetM}}
+\index{GetM@{GetM}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{GetM()}{GetM()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_a0cca444ca1577787ab1698d167e9d4be} 
+int neo\+::wallets\+::\+Verification\+Contract\+::\+GetM (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the minimum number of signatures required. 
+
+\begin{DoxyReturn}{Returns}
+The minimum number of signatures required. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_a4bb03e29ee247a9330c45988ed193364}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!GetParameterNames@{GetParameterNames}}
+\index{GetParameterNames@{GetParameterNames}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{GetParameterNames()}{GetParameterNames()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_a4bb03e29ee247a9330c45988ed193364} 
+const std\+::vector$<$ std\+::string $>$ \& neo\+::wallets\+::\+Verification\+Contract\+::\+Get\+Parameter\+Names (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the parameter names. 
+
+\begin{DoxyReturn}{Returns}
+The parameter names. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_a20335247dabe04dbd247fb673e04b26c}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!GetPublicKeys@{GetPublicKeys}}
+\index{GetPublicKeys@{GetPublicKeys}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{GetPublicKeys()}{GetPublicKeys()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_a20335247dabe04dbd247fb673e04b26c} 
+const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \& neo\+::wallets\+::\+Verification\+Contract\+::\+Get\+Public\+Keys (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the public keys. 
+
+\begin{DoxyReturn}{Returns}
+The public keys. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_a58693f445f9918324e162970d5b2631e}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!GetScriptHash@{GetScriptHash}}
+\index{GetScriptHash@{GetScriptHash}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{GetScriptHash()}{GetScriptHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_a58693f445f9918324e162970d5b2631e} 
+\mbox{\hyperlink{classneo_1_1io_1_1_u_int160}{io\+::\+UInt160}} neo\+::wallets\+::\+Verification\+Contract\+::\+Get\+Script\+Hash (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the script hash of the contract. 
+
+\begin{DoxyReturn}{Returns}
+The script hash. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_adc164022125e2e2ed18ef1fe25a335fe}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!IsMultiSigContract@{IsMultiSigContract}}
+\index{IsMultiSigContract@{IsMultiSigContract}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{IsMultiSigContract()}{IsMultiSigContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_adc164022125e2e2ed18ef1fe25a335fe} 
+bool neo\+::wallets\+::\+Verification\+Contract\+::\+Is\+Multi\+Sig\+Contract (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Determines whether the contract is a multi-\/signature contract. 
+
+\begin{DoxyReturn}{Returns}
+True if the contract is a multi-\/signature contract, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_aa6c081a5647a6eb50ce3a295f2cff8c9}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!IsSignatureContract@{IsSignatureContract}}
+\index{IsSignatureContract@{IsSignatureContract}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{IsSignatureContract()}{IsSignatureContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_aa6c081a5647a6eb50ce3a295f2cff8c9} 
+bool neo\+::wallets\+::\+Verification\+Contract\+::\+Is\+Signature\+Contract (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Determines whether the contract is a signature contract. 
+
+\begin{DoxyReturn}{Returns}
+True if the contract is a signature contract, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_a9aa8de57dcfd730a30948de94856478e}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!SerializeJson@{SerializeJson}}
+\index{SerializeJson@{SerializeJson}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{SerializeJson()}{SerializeJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_a9aa8de57dcfd730a30948de94856478e} 
+void neo\+::wallets\+::\+Verification\+Contract\+::\+Serialize\+Json (\begin{DoxyParamCaption}\item[{\mbox{\hyperlink{classneo_1_1io_1_1_json_writer}{io\+::\+Json\+Writer}} \&}]{writer}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Serializes the \doxylink{classneo_1_1wallets_1_1_verification_contract}{Verification\+Contract} to a JSON writer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em writer} & The JSON writer. \\
+\hline
+\end{DoxyParams}
+
+
+Implements \mbox{\hyperlink{classneo_1_1io_1_1_i_json_serializable_a24e73cdab4962eb9fba7a7defd3c17bf}{neo\+::io\+::\+IJson\+Serializable}}.
+
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_acc127040b07ce1ed23afa5a63145038b}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!SetContract@{SetContract}}
+\index{SetContract@{SetContract}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{SetContract()}{SetContract()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_acc127040b07ce1ed23afa5a63145038b} 
+void neo\+::wallets\+::\+Verification\+Contract\+::\+Set\+Contract (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{smartcontract\+::\+Contract}} \&}]{contract}{}\end{DoxyParamCaption})}
+
+
+
+Sets the contract. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em contract} & The contract. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_a32fffbf206ba560c2fb62d0486498584}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!SetM@{SetM}}
+\index{SetM@{SetM}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{SetM()}{SetM()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_a32fffbf206ba560c2fb62d0486498584} 
+void neo\+::wallets\+::\+Verification\+Contract\+::\+SetM (\begin{DoxyParamCaption}\item[{int}]{m}{}\end{DoxyParamCaption})}
+
+
+
+Sets the minimum number of signatures required. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em m} & The minimum number of signatures required. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_af15e3b3437741ed79bdfbbf069b8f0aa}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!SetParameterNames@{SetParameterNames}}
+\index{SetParameterNames@{SetParameterNames}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{SetParameterNames()}{SetParameterNames()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_af15e3b3437741ed79bdfbbf069b8f0aa} 
+void neo\+::wallets\+::\+Verification\+Contract\+::\+Set\+Parameter\+Names (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::string $>$ \&}]{parameter\+Names}{}\end{DoxyParamCaption})}
+
+
+
+Sets the parameter names. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em parameter\+Names} & The parameter names. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_aa70695f90ee1fe7fbf107ece4361a01c}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!SetPublicKeys@{SetPublicKeys}}
+\index{SetPublicKeys@{SetPublicKeys}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{SetPublicKeys()}{SetPublicKeys()}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_aa70695f90ee1fe7fbf107ece4361a01c} 
+void neo\+::wallets\+::\+Verification\+Contract\+::\+Set\+Public\+Keys (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ \mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}} $>$ \&}]{public\+Keys}{}\end{DoxyParamCaption})}
+
+
+
+Sets the public keys. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em public\+Keys} & The public keys. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_a6ddc54de9c9be39f5b3c903d4ef7dcb1}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!contract\_@{contract\_}}
+\index{contract\_@{contract\_}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{contract\_}{contract\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_a6ddc54de9c9be39f5b3c903d4ef7dcb1} 
+\mbox{\hyperlink{classneo_1_1smartcontract_1_1_contract}{smartcontract\+::\+Contract}} neo\+::wallets\+::\+Verification\+Contract\+::contract\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_ae3a86a29874b128bbff1270312c40c26}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!m\_@{m\_}}
+\index{m\_@{m\_}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{m\_}{m\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_ae3a86a29874b128bbff1270312c40c26} 
+int neo\+::wallets\+::\+Verification\+Contract\+::m\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_a6c3be6fad301e955f4aaad922d201c4c}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!parameterNames\_@{parameterNames\_}}
+\index{parameterNames\_@{parameterNames\_}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{parameterNames\_}{parameterNames\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_a6c3be6fad301e955f4aaad922d201c4c} 
+std\+::vector$<$std\+::string$>$ neo\+::wallets\+::\+Verification\+Contract\+::parameter\+Names\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1wallets_1_1_verification_contract_a1e7c3771c65c8a9fb3644922be506adc}\index{neo::wallets::VerificationContract@{neo::wallets::VerificationContract}!publicKeys\_@{publicKeys\_}}
+\index{publicKeys\_@{publicKeys\_}!neo::wallets::VerificationContract@{neo::wallets::VerificationContract}}
+\doxysubsubsection{\texorpdfstring{publicKeys\_}{publicKeys\_}}
+{\footnotesize\ttfamily \label{classneo_1_1wallets_1_1_verification_contract_a1e7c3771c65c8a9fb3644922be506adc} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1cryptography_1_1ecc_1_1_e_c_point}{cryptography\+::ecc\+::\+ECPoint}}$>$ neo\+::wallets\+::\+Verification\+Contract\+::public\+Keys\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/wallets/\mbox{\hyperlink{verification__contract_8h}{verification\+\_\+contract.\+h}}\item 
+src/wallets/\mbox{\hyperlink{verification__contract_8cpp}{verification\+\_\+contract.\+cpp}}\end{DoxyCompactItemize}

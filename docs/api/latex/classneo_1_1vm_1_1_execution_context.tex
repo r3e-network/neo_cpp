@@ -1,0 +1,923 @@
+\doxysection{neo\+::vm\+::Execution\+Context Class Reference}
+\hypertarget{classneo_1_1vm_1_1_execution_context}{}\label{classneo_1_1vm_1_1_execution_context}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+
+
+Represents a frame in the VM execution stack.  
+
+
+
+
+{\ttfamily \#include $<$execution\+\_\+context.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::vm\+::Execution\+Context\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_aba08d68bca5d4c4282a3eca460df0c6f}{Execution\+Context}} (const \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}} \&script, int32\+\_\+t rvcount=-\/1)
+\begin{DoxyCompactList}\small\item\em Constructs a new \doxylink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a0a4d4c73dcf26ba10246427fc564f309}{Get\+Script}} () const
+\begin{DoxyCompactList}\small\item\em Gets the script. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_aa549d6eff2b85a9e6c66a442037b3144}{Get\+Instruction\+Pointer}} () const
+\begin{DoxyCompactList}\small\item\em Gets the instruction pointer. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_aa92a6eb56527a3cbf911c408037f1ea1}{Set\+Instruction\+Pointer}} (int32\+\_\+t instruction\+Pointer)
+\begin{DoxyCompactList}\small\item\em Sets the instruction pointer. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ad46483c8a94013c51f1b5cad3e7c812b}{Get\+Current\+Position}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current position. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code}} \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a306b1dcd015b3617bee518c27a25c3a1}{Get\+Next\+Instruction\+Op\+Code}} () const
+\begin{DoxyCompactList}\small\item\em Gets the next instruction opcode. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a61e441785dee502d46e3f615b9332c76}{Get\+Next\+Instruction\+Object}} () const
+\begin{DoxyCompactList}\small\item\em Gets the next instruction object. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a83515d6064b5e2bdee76502d7ce20c1e}{Move\+Next}} ()
+\begin{DoxyCompactList}\small\item\em Moves to the next instruction. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a449a6bda6f6c3126f9eb7dd8782e9f45}{Get\+Current\+Instruction}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current instruction. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a627f20e646c1c252c4dcb29ba48660d8}{Get\+RVCount}} () const
+\begin{DoxyCompactList}\small\item\em Gets the RVCount. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a54018cb5bf0d14352f5cdef23e1e6f3a}{Get\+Static\+Fields}} () const
+\begin{DoxyCompactList}\small\item\em Gets the static fields. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ac91c9a2c635b0195d4b59306ebe7e580}{Get\+Local\+Variables}} () const
+\begin{DoxyCompactList}\small\item\em Gets the local variables. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a6102aa974dc646a1dfc55617c24624b3}{Get\+Arguments}} () const
+\begin{DoxyCompactList}\small\item\em Gets the arguments. \end{DoxyCompactList}\item 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \& \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_aa3f0b42abf68ab879f659a7df75df4ea}{Get\+Evaluation\+Stack}} () const
+\begin{DoxyCompactList}\small\item\em Gets the evaluation stack. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_aa6a38303f7f1ed244c409fe8d2596b1c}{Get\+Try\+Count}} () const
+\begin{DoxyCompactList}\small\item\em Gets the try count. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\std\+::shared\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ab638c497af5af1a22cb5e387312171cf}{Get\+State}} (std\+::function$<$ std\+::shared\+\_\+ptr$<$ T $>$()$>$ factory)
+\begin{DoxyCompactList}\small\item\em Gets a state object of the specified type. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename T$>$ }\\std\+::shared\+\_\+ptr$<$ T $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ad11cd70d576e0482e6eb5f3bc676f618}{Get\+State}} ()
+\begin{DoxyCompactList}\small\item\em Gets a state object of the specified type. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a26a5d4ce5732eec67c6b23d35f9e09b0}{Initialize\+Static\+Fields}} (int32\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Initializes the static fields. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a223e30367293d9938e6dbd4e24c77069}{Get\+Static\+Field}} (int32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets a static field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a832c2f5535d8b7c019e3b4d692d78000}{Set\+Static\+Field}} (int32\+\_\+t index, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item)
+\begin{DoxyCompactList}\small\item\em Sets a static field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a219d110ea2913de64df702414bc42774}{Initialize\+Local\+Variables}} (int32\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Initializes the local variables. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a6bd7763e948ab3052f6affc82c323b0b}{Set\+Local\+Variables}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \&variables)
+\begin{DoxyCompactList}\small\item\em Sets the local variables. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a095ed2c2be085d256a8c63c456697479}{Set\+Arguments}} (const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \&arguments)
+\begin{DoxyCompactList}\small\item\em Sets the arguments. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a26a406b9cbd7bb883bd1efaa877ccff3}{Initialize\+Local\+Variables}} (int32\+\_\+t local\+Count, int32\+\_\+t argument\+Count)
+\begin{DoxyCompactList}\small\item\em Initializes the local variables and arguments. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a74f35f3488e24ef34f272c302bafb6f6}{Initialize\+Arguments}} (int32\+\_\+t count)
+\begin{DoxyCompactList}\small\item\em Initializes the arguments. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a43686f03e22a16ca74e5f9fc4bc98bc3}{Load\+Local\+Variable}} (int32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Loads a local variable. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a9a687c1313839ab255421c7e5cfdacbc}{Store\+Local\+Variable}} (int32\+\_\+t index, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item)
+\begin{DoxyCompactList}\small\item\em Stores a local variable. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ad27bcc06590e0f413083d9a0be6409c9}{Load\+Argument}} (int32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Loads an argument. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a08f93b562ddfc1ee1082af2f201b913b}{Store\+Argument}} (int32\+\_\+t index, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item)
+\begin{DoxyCompactList}\small\item\em Stores an argument. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a830b9ce8f059b83200f099f58aa89936}{Load\+Static\+Field}} (int32\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Loads a static field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a5212e7a1c896fcf310d743de6ca5c991}{Store\+Static\+Field}} (int32\+\_\+t index, std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item)
+\begin{DoxyCompactList}\small\item\em Stores a static field. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ad1554da2b9a026e84808153d8d4c821d}{Push}} (std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ item)
+\begin{DoxyCompactList}\small\item\em Pushes an item onto the evaluation stack. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a70bded0f390d335569c242c8d0adc97a}{Pop}} ()
+\begin{DoxyCompactList}\small\item\em Pops an item from the evaluation stack. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a23e3cd191337e28e4fd7bc01484d115b}{Peek}} (int32\+\_\+t index=0) const
+\begin{DoxyCompactList}\small\item\em Peeks at an item on the evaluation stack. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_aa36f616837e5765bef1933c4851ff2bc}{Clear\+Stack}} ()
+\begin{DoxyCompactList}\small\item\em Clears the evaluation stack. \end{DoxyCompactList}\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a66f775f55ad049e1d3363a6a0bf8b511}{Get\+Stack\+Size}} () const
+\begin{DoxyCompactList}\small\item\em Gets the stack size. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ac77dc27e31e1ae14079e678c2c14a76a}{Enter\+Try}} (int32\+\_\+t catch\+Offset, int32\+\_\+t finally\+Offset, int32\+\_\+t end\+Offset)
+\begin{DoxyCompactList}\small\item\em Enters a try block. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_acea366a518c54b310d63c235f3bd0d3b}{Exit\+Try}} ()
+\begin{DoxyCompactList}\small\item\em Exits a try block. \end{DoxyCompactList}\item 
+std\+::optional$<$ int32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a6006ad2bbf4a58dbc8586d4a36e8d392}{Get\+Catch\+Offset}} () const
+\begin{DoxyCompactList}\small\item\em Gets the catch offset. \end{DoxyCompactList}\item 
+std\+::optional$<$ int32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a4bad517f5be0b5dc11855e091326b573}{Get\+Finally\+Offset}} () const
+\begin{DoxyCompactList}\small\item\em Gets the finally offset. \end{DoxyCompactList}\item 
+std\+::optional$<$ int32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a380d0f66ceec91f2fdb60477ded76416}{Get\+End\+Offset}} () const
+\begin{DoxyCompactList}\small\item\em Gets the end offset. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context}{Exception\+Handling\+Context}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a85f288e7495784b6f4601fea4e81402c}{Get\+Current\+Try}} ()
+\begin{DoxyCompactList}\small\item\em Gets the current try context. \end{DoxyCompactList}\item 
+const \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context}{Exception\+Handling\+Context}} \& \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a22f6d8a9a9782e1341c0614546f8f8b6}{Get\+Current\+Try}} () const
+\begin{DoxyCompactList}\small\item\em Gets the current try context. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a70d021df421652a4414c20ac85cbca59}{Set\+Try\+State}} (int32\+\_\+t catch\+Position, int32\+\_\+t finally\+Position)
+\begin{DoxyCompactList}\small\item\em Sets the try state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a8bdf0d533ec82945eb171c07ddbdedd3}{Clear\+Try\+State}} ()
+\begin{DoxyCompactList}\small\item\em Clears the try state. \end{DoxyCompactList}\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_ac5d0fce38731fe74f73b6c2bbb8c9804}{Clone}} (int32\+\_\+t initial\+Position=-\/1) const
+\begin{DoxyCompactList}\small\item\em Clones the context. \end{DoxyCompactList}\item 
+const std\+::vector$<$ int32\+\_\+t $>$ \& \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a857e29498595467ea0d57e35b73ea32d}{Get\+Call\+Table}} () const
+\begin{DoxyCompactList}\small\item\em Gets the call table. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}} \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_aed5781915c45456f8b9517286aff827e}{script\+\_\+}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a71553d333528202372ce310c3dc9824a}{instruction\+Pointer\+\_\+}}
+\item 
+int32\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a75e060ca9e31730dc849b96e4ad2126f}{rvcount\+\_\+}}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_adf5629b9a338f0d52c63e25d60f8da1a}{static\+Fields\+\_\+}}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a4a98c70eb76498c3ae07769e19a194d7}{local\+Variables\+\_\+}}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a5d2fc87474562891e096cd77b6bd92ac}{arguments\+\_\+}}
+\item 
+std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a430917719fc777eb34a018f7c50818ac}{evaluation\+Stack\+\_\+}}
+\item 
+std\+::vector$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context}{Exception\+Handling\+Context}} $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a7264888c99aa65f74a54f48db3cbd0ed}{try\+Stack\+\_\+}}
+\item 
+std\+::vector$<$ int32\+\_\+t $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a6b6460a5a627ce9245704afac9783dbe}{call\+Table\+\_\+}}
+\item 
+std\+::unordered\+\_\+map$<$ std\+::type\+\_\+index, std\+::any $>$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context_a04cdf63c59804953340d3dc3a8656dc3}{states\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Represents a frame in the VM execution stack. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_aba08d68bca5d4c4282a3eca460df0c6f}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!ExecutionContext@{ExecutionContext}}
+\index{ExecutionContext@{ExecutionContext}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{ExecutionContext()}{ExecutionContext()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_aba08d68bca5d4c4282a3eca460df0c6f} 
+neo\+::vm\+::\+Execution\+Context\+::\+Execution\+Context (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}} \&}]{script}{, }\item[{int32\+\_\+t}]{rvcount}{ = {\ttfamily -\/1}}\end{DoxyParamCaption})}
+
+
+
+Constructs a new \doxylink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em script} & The script. \\
+\hline
+{\em rvcount} & The number of values that the context should return when it is unloaded. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_aa36f616837e5765bef1933c4851ff2bc}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!ClearStack@{ClearStack}}
+\index{ClearStack@{ClearStack}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{ClearStack()}{ClearStack()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_aa36f616837e5765bef1933c4851ff2bc} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Clear\+Stack (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clears the evaluation stack. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a8bdf0d533ec82945eb171c07ddbdedd3}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!ClearTryState@{ClearTryState}}
+\index{ClearTryState@{ClearTryState}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{ClearTryState()}{ClearTryState()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a8bdf0d533ec82945eb171c07ddbdedd3} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Clear\+Try\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Clears the try state. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_context_ac5d0fce38731fe74f73b6c2bbb8c9804}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!Clone@{Clone}}
+\index{Clone@{Clone}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{Clone()}{Clone()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_ac5d0fce38731fe74f73b6c2bbb8c9804} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_execution_context}{Execution\+Context}} $>$ neo\+::vm\+::\+Execution\+Context\+::\+Clone (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{initial\+Position}{ = {\ttfamily -\/1}}\end{DoxyParamCaption}) const}
+
+
+
+Clones the context. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em initial\+Position} & The initial position. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The cloned context. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_ac77dc27e31e1ae14079e678c2c14a76a}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!EnterTry@{EnterTry}}
+\index{EnterTry@{EnterTry}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{EnterTry()}{EnterTry()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_ac77dc27e31e1ae14079e678c2c14a76a} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Enter\+Try (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{catch\+Offset}{, }\item[{int32\+\_\+t}]{finally\+Offset}{, }\item[{int32\+\_\+t}]{end\+Offset}{}\end{DoxyParamCaption})}
+
+
+
+Enters a try block. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em catch\+Offset} & The catch offset. \\
+\hline
+{\em finally\+Offset} & The finally offset. \\
+\hline
+{\em end\+Offset} & The end offset. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_acea366a518c54b310d63c235f3bd0d3b}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!ExitTry@{ExitTry}}
+\index{ExitTry@{ExitTry}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{ExitTry()}{ExitTry()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_acea366a518c54b310d63c235f3bd0d3b} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Exit\+Try (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Exits a try block. 
+
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a6102aa974dc646a1dfc55617c24624b3}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetArguments@{GetArguments}}
+\index{GetArguments@{GetArguments}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetArguments()}{GetArguments()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a6102aa974dc646a1dfc55617c24624b3} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \& neo\+::vm\+::\+Execution\+Context\+::\+Get\+Arguments (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the arguments. 
+
+\begin{DoxyReturn}{Returns}
+The arguments. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a857e29498595467ea0d57e35b73ea32d}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetCallTable@{GetCallTable}}
+\index{GetCallTable@{GetCallTable}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetCallTable()}{GetCallTable()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a857e29498595467ea0d57e35b73ea32d} 
+const std\+::vector$<$ int32\+\_\+t $>$ \& neo\+::vm\+::\+Execution\+Context\+::\+Get\+Call\+Table (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the call table. 
+
+\begin{DoxyReturn}{Returns}
+The call table. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a6006ad2bbf4a58dbc8586d4a36e8d392}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetCatchOffset@{GetCatchOffset}}
+\index{GetCatchOffset@{GetCatchOffset}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetCatchOffset()}{GetCatchOffset()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a6006ad2bbf4a58dbc8586d4a36e8d392} 
+std\+::optional$<$ int32\+\_\+t $>$ neo\+::vm\+::\+Execution\+Context\+::\+Get\+Catch\+Offset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the catch offset. 
+
+\begin{DoxyReturn}{Returns}
+The catch offset. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a449a6bda6f6c3126f9eb7dd8782e9f45}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetCurrentInstruction@{GetCurrentInstruction}}
+\index{GetCurrentInstruction@{GetCurrentInstruction}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetCurrentInstruction()}{GetCurrentInstruction()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a449a6bda6f6c3126f9eb7dd8782e9f45} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}} $>$ neo\+::vm\+::\+Execution\+Context\+::\+Get\+Current\+Instruction (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the current instruction. 
+
+\begin{DoxyReturn}{Returns}
+The current instruction. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_ad46483c8a94013c51f1b5cad3e7c812b}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetCurrentPosition@{GetCurrentPosition}}
+\index{GetCurrentPosition@{GetCurrentPosition}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetCurrentPosition()}{GetCurrentPosition()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_ad46483c8a94013c51f1b5cad3e7c812b} 
+int32\+\_\+t neo\+::vm\+::\+Execution\+Context\+::\+Get\+Current\+Position (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the current position. 
+
+\begin{DoxyReturn}{Returns}
+The current position. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a85f288e7495784b6f4601fea4e81402c}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetCurrentTry@{GetCurrentTry}}
+\index{GetCurrentTry@{GetCurrentTry}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetCurrentTry()}{GetCurrentTry()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a85f288e7495784b6f4601fea4e81402c} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context}{Exception\+Handling\+Context}} \& neo\+::vm\+::\+Execution\+Context\+::\+Get\+Current\+Try (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Gets the current try context. 
+
+\begin{DoxyReturn}{Returns}
+The current try context. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a22f6d8a9a9782e1341c0614546f8f8b6}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetCurrentTry@{GetCurrentTry}}
+\index{GetCurrentTry@{GetCurrentTry}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetCurrentTry()}{GetCurrentTry()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a22f6d8a9a9782e1341c0614546f8f8b6} 
+const \mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context}{Exception\+Handling\+Context}} \& neo\+::vm\+::\+Execution\+Context\+::\+Get\+Current\+Try (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the current try context. 
+
+\begin{DoxyReturn}{Returns}
+The current try context. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a380d0f66ceec91f2fdb60477ded76416}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetEndOffset@{GetEndOffset}}
+\index{GetEndOffset@{GetEndOffset}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetEndOffset()}{GetEndOffset()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a380d0f66ceec91f2fdb60477ded76416} 
+std\+::optional$<$ int32\+\_\+t $>$ neo\+::vm\+::\+Execution\+Context\+::\+Get\+End\+Offset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the end offset. 
+
+\begin{DoxyReturn}{Returns}
+The end offset. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_aa3f0b42abf68ab879f659a7df75df4ea}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetEvaluationStack@{GetEvaluationStack}}
+\index{GetEvaluationStack@{GetEvaluationStack}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetEvaluationStack()}{GetEvaluationStack()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_aa3f0b42abf68ab879f659a7df75df4ea} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \& neo\+::vm\+::\+Execution\+Context\+::\+Get\+Evaluation\+Stack (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the evaluation stack. 
+
+\begin{DoxyReturn}{Returns}
+The evaluation stack. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a4bad517f5be0b5dc11855e091326b573}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetFinallyOffset@{GetFinallyOffset}}
+\index{GetFinallyOffset@{GetFinallyOffset}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetFinallyOffset()}{GetFinallyOffset()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a4bad517f5be0b5dc11855e091326b573} 
+std\+::optional$<$ int32\+\_\+t $>$ neo\+::vm\+::\+Execution\+Context\+::\+Get\+Finally\+Offset (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the finally offset. 
+
+\begin{DoxyReturn}{Returns}
+The finally offset. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_aa549d6eff2b85a9e6c66a442037b3144}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetInstructionPointer@{GetInstructionPointer}}
+\index{GetInstructionPointer@{GetInstructionPointer}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetInstructionPointer()}{GetInstructionPointer()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_aa549d6eff2b85a9e6c66a442037b3144} 
+int32\+\_\+t neo\+::vm\+::\+Execution\+Context\+::\+Get\+Instruction\+Pointer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the instruction pointer. 
+
+\begin{DoxyReturn}{Returns}
+The instruction pointer. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_ac91c9a2c635b0195d4b59306ebe7e580}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetLocalVariables@{GetLocalVariables}}
+\index{GetLocalVariables@{GetLocalVariables}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetLocalVariables()}{GetLocalVariables()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_ac91c9a2c635b0195d4b59306ebe7e580} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \& neo\+::vm\+::\+Execution\+Context\+::\+Get\+Local\+Variables (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the local variables. 
+
+\begin{DoxyReturn}{Returns}
+The local variables. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a61e441785dee502d46e3f615b9332c76}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetNextInstructionObject@{GetNextInstructionObject}}
+\index{GetNextInstructionObject@{GetNextInstructionObject}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetNextInstructionObject()}{GetNextInstructionObject()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a61e441785dee502d46e3f615b9332c76} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_instruction}{Instruction}} $>$ neo\+::vm\+::\+Execution\+Context\+::\+Get\+Next\+Instruction\+Object (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the next instruction object. 
+
+\begin{DoxyReturn}{Returns}
+The next instruction object. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a306b1dcd015b3617bee518c27a25c3a1}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetNextInstructionOpCode@{GetNextInstructionOpCode}}
+\index{GetNextInstructionOpCode@{GetNextInstructionOpCode}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetNextInstructionOpCode()}{GetNextInstructionOpCode()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a306b1dcd015b3617bee518c27a25c3a1} 
+\mbox{\hyperlink{namespaceneo_1_1vm_ad4e3ad2b6850f2875ba920c31e5902c8}{Op\+Code}} neo\+::vm\+::\+Execution\+Context\+::\+Get\+Next\+Instruction\+Op\+Code (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the next instruction opcode. 
+
+\begin{DoxyReturn}{Returns}
+The next instruction opcode. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a627f20e646c1c252c4dcb29ba48660d8}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetRVCount@{GetRVCount}}
+\index{GetRVCount@{GetRVCount}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetRVCount()}{GetRVCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a627f20e646c1c252c4dcb29ba48660d8} 
+int32\+\_\+t neo\+::vm\+::\+Execution\+Context\+::\+Get\+RVCount (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the RVCount. 
+
+\begin{DoxyReturn}{Returns}
+The RVCount. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a0a4d4c73dcf26ba10246427fc564f309}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetScript@{GetScript}}
+\index{GetScript@{GetScript}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetScript()}{GetScript()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a0a4d4c73dcf26ba10246427fc564f309} 
+const \mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}} \& neo\+::vm\+::\+Execution\+Context\+::\+Get\+Script (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the script. 
+
+\begin{DoxyReturn}{Returns}
+The script. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a66f775f55ad049e1d3363a6a0bf8b511}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetStackSize@{GetStackSize}}
+\index{GetStackSize@{GetStackSize}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetStackSize()}{GetStackSize()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a66f775f55ad049e1d3363a6a0bf8b511} 
+int32\+\_\+t neo\+::vm\+::\+Execution\+Context\+::\+Get\+Stack\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the stack size. 
+
+\begin{DoxyReturn}{Returns}
+The stack size. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_ad11cd70d576e0482e6eb5f3bc676f618}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetState@{GetState}}
+\index{GetState@{GetState}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_ad11cd70d576e0482e6eb5f3bc676f618} 
+template$<$typename T$>$ \\
+std\+::shared\+\_\+ptr$<$ T $>$ neo\+::vm\+::\+Execution\+Context\+::\+Get\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a state object of the specified type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of the state object. \\
+\hline
+\end{DoxyTemplParams}
+\begin{DoxyReturn}{Returns}
+The state object. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1vm_1_1_execution_context_ab638c497af5af1a22cb5e387312171cf}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetState@{GetState}}
+\index{GetState@{GetState}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetState()}{GetState()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_ab638c497af5af1a22cb5e387312171cf} 
+template$<$typename T$>$ \\
+std\+::shared\+\_\+ptr$<$ T $>$ neo\+::vm\+::\+Execution\+Context\+::\+Get\+State (\begin{DoxyParamCaption}\item[{std\+::function$<$ std\+::shared\+\_\+ptr$<$ T $>$()$>$}]{factory}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets a state object of the specified type. 
+
+
+\begin{DoxyTemplParams}{Template Parameters}
+{\em T} & The type of the state object. \\
+\hline
+\end{DoxyTemplParams}
+
+\begin{DoxyParams}{Parameters}
+{\em factory} & A factory function to create the state object if it doesn\textquotesingle{}t exist. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The state object. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a223e30367293d9938e6dbd4e24c77069}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetStaticField@{GetStaticField}}
+\index{GetStaticField@{GetStaticField}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetStaticField()}{GetStaticField()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a223e30367293d9938e6dbd4e24c77069} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ neo\+::vm\+::\+Execution\+Context\+::\+Get\+Static\+Field (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a static field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The static field. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a54018cb5bf0d14352f5cdef23e1e6f3a}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetStaticFields@{GetStaticFields}}
+\index{GetStaticFields@{GetStaticFields}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetStaticFields()}{GetStaticFields()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a54018cb5bf0d14352f5cdef23e1e6f3a} 
+const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \& neo\+::vm\+::\+Execution\+Context\+::\+Get\+Static\+Fields (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the static fields. 
+
+\begin{DoxyReturn}{Returns}
+The static fields. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_aa6a38303f7f1ed244c409fe8d2596b1c}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!GetTryCount@{GetTryCount}}
+\index{GetTryCount@{GetTryCount}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{GetTryCount()}{GetTryCount()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_aa6a38303f7f1ed244c409fe8d2596b1c} 
+int32\+\_\+t neo\+::vm\+::\+Execution\+Context\+::\+Get\+Try\+Count (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the try count. 
+
+\begin{DoxyReturn}{Returns}
+The try count. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a74f35f3488e24ef34f272c302bafb6f6}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!InitializeArguments@{InitializeArguments}}
+\index{InitializeArguments@{InitializeArguments}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{InitializeArguments()}{InitializeArguments()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a74f35f3488e24ef34f272c302bafb6f6} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Initialize\+Arguments (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{count}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em count} & The count. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a219d110ea2913de64df702414bc42774}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!InitializeLocalVariables@{InitializeLocalVariables}}
+\index{InitializeLocalVariables@{InitializeLocalVariables}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{InitializeLocalVariables()}{InitializeLocalVariables()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a219d110ea2913de64df702414bc42774} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Initialize\+Local\+Variables (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{count}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the local variables. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em count} & The count. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a26a406b9cbd7bb883bd1efaa877ccff3}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!InitializeLocalVariables@{InitializeLocalVariables}}
+\index{InitializeLocalVariables@{InitializeLocalVariables}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{InitializeLocalVariables()}{InitializeLocalVariables()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a26a406b9cbd7bb883bd1efaa877ccff3} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Initialize\+Local\+Variables (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{local\+Count}{, }\item[{int32\+\_\+t}]{argument\+Count}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the local variables and arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em local\+Count} & The local variable count. \\
+\hline
+{\em argument\+Count} & The argument count. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a26a5d4ce5732eec67c6b23d35f9e09b0}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!InitializeStaticFields@{InitializeStaticFields}}
+\index{InitializeStaticFields@{InitializeStaticFields}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{InitializeStaticFields()}{InitializeStaticFields()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a26a5d4ce5732eec67c6b23d35f9e09b0} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Initialize\+Static\+Fields (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{count}{}\end{DoxyParamCaption})}
+
+
+
+Initializes the static fields. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em count} & The count. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_ad27bcc06590e0f413083d9a0be6409c9}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!LoadArgument@{LoadArgument}}
+\index{LoadArgument@{LoadArgument}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{LoadArgument()}{LoadArgument()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_ad27bcc06590e0f413083d9a0be6409c9} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ neo\+::vm\+::\+Execution\+Context\+::\+Load\+Argument (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Loads an argument. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The argument. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a43686f03e22a16ca74e5f9fc4bc98bc3}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!LoadLocalVariable@{LoadLocalVariable}}
+\index{LoadLocalVariable@{LoadLocalVariable}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{LoadLocalVariable()}{LoadLocalVariable()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a43686f03e22a16ca74e5f9fc4bc98bc3} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ neo\+::vm\+::\+Execution\+Context\+::\+Load\+Local\+Variable (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Loads a local variable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The local variable. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a830b9ce8f059b83200f099f58aa89936}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!LoadStaticField@{LoadStaticField}}
+\index{LoadStaticField@{LoadStaticField}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{LoadStaticField()}{LoadStaticField()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a830b9ce8f059b83200f099f58aa89936} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ neo\+::vm\+::\+Execution\+Context\+::\+Load\+Static\+Field (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index}{}\end{DoxyParamCaption}) const}
+
+
+
+Loads a static field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The static field. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a83515d6064b5e2bdee76502d7ce20c1e}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!MoveNext@{MoveNext}}
+\index{MoveNext@{MoveNext}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{MoveNext()}{MoveNext()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a83515d6064b5e2bdee76502d7ce20c1e} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Move\+Next (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Moves to the next instruction. 
+
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a23e3cd191337e28e4fd7bc01484d115b}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!Peek@{Peek}}
+\index{Peek@{Peek}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{Peek()}{Peek()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a23e3cd191337e28e4fd7bc01484d115b} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ neo\+::vm\+::\+Execution\+Context\+::\+Peek (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index}{ = {\ttfamily 0}}\end{DoxyParamCaption}) const}
+
+
+
+Peeks at an item on the evaluation stack. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The item. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a70bded0f390d335569c242c8d0adc97a}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!Pop@{Pop}}
+\index{Pop@{Pop}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{Pop()}{Pop()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a70bded0f390d335569c242c8d0adc97a} 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ neo\+::vm\+::\+Execution\+Context\+::\+Pop (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Pops an item from the evaluation stack. 
+
+\begin{DoxyReturn}{Returns}
+The item. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_ad1554da2b9a026e84808153d8d4c821d}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!Push@{Push}}
+\index{Push@{Push}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{Push()}{Push()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_ad1554da2b9a026e84808153d8d4c821d} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Push (\begin{DoxyParamCaption}\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Pushes an item onto the evaluation stack. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em item} & The item. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a095ed2c2be085d256a8c63c456697479}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!SetArguments@{SetArguments}}
+\index{SetArguments@{SetArguments}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{SetArguments()}{SetArguments()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a095ed2c2be085d256a8c63c456697479} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Set\+Arguments (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \&}]{arguments}{}\end{DoxyParamCaption})}
+
+
+
+Sets the arguments. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em arguments} & The arguments. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_aa92a6eb56527a3cbf911c408037f1ea1}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!SetInstructionPointer@{SetInstructionPointer}}
+\index{SetInstructionPointer@{SetInstructionPointer}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{SetInstructionPointer()}{SetInstructionPointer()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_aa92a6eb56527a3cbf911c408037f1ea1} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Set\+Instruction\+Pointer (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{instruction\+Pointer}{}\end{DoxyParamCaption})}
+
+
+
+Sets the instruction pointer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em instruction\+Pointer} & The instruction pointer. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a6bd7763e948ab3052f6affc82c323b0b}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!SetLocalVariables@{SetLocalVariables}}
+\index{SetLocalVariables@{SetLocalVariables}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{SetLocalVariables()}{SetLocalVariables()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a6bd7763e948ab3052f6affc82c323b0b} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Set\+Local\+Variables (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$ $>$ \&}]{variables}{}\end{DoxyParamCaption})}
+
+
+
+Sets the local variables. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em variables} & The local variables. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a832c2f5535d8b7c019e3b4d692d78000}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!SetStaticField@{SetStaticField}}
+\index{SetStaticField@{SetStaticField}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{SetStaticField()}{SetStaticField()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a832c2f5535d8b7c019e3b4d692d78000} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Set\+Static\+Field (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Sets a static field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+{\em item} & The item. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a70d021df421652a4414c20ac85cbca59}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!SetTryState@{SetTryState}}
+\index{SetTryState@{SetTryState}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{SetTryState()}{SetTryState()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a70d021df421652a4414c20ac85cbca59} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Set\+Try\+State (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{catch\+Position}{, }\item[{int32\+\_\+t}]{finally\+Position}{}\end{DoxyParamCaption})}
+
+
+
+Sets the try state. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em catch\+Position} & The catch position. \\
+\hline
+{\em finally\+Position} & The finally position. \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a08f93b562ddfc1ee1082af2f201b913b}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!StoreArgument@{StoreArgument}}
+\index{StoreArgument@{StoreArgument}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{StoreArgument()}{StoreArgument()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a08f93b562ddfc1ee1082af2f201b913b} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Store\+Argument (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Stores an argument. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+{\em item} & The item. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a9a687c1313839ab255421c7e5cfdacbc}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!StoreLocalVariable@{StoreLocalVariable}}
+\index{StoreLocalVariable@{StoreLocalVariable}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{StoreLocalVariable()}{StoreLocalVariable()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a9a687c1313839ab255421c7e5cfdacbc} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Store\+Local\+Variable (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Stores a local variable. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+{\em item} & The item. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a5212e7a1c896fcf310d743de6ca5c991}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!StoreStaticField@{StoreStaticField}}
+\index{StoreStaticField@{StoreStaticField}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{StoreStaticField()}{StoreStaticField()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a5212e7a1c896fcf310d743de6ca5c991} 
+void neo\+::vm\+::\+Execution\+Context\+::\+Store\+Static\+Field (\begin{DoxyParamCaption}\item[{int32\+\_\+t}]{index}{, }\item[{std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}} $>$}]{item}{}\end{DoxyParamCaption})}
+
+
+
+Stores a static field. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+{\em item} & The item. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a5d2fc87474562891e096cd77b6bd92ac}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!arguments\_@{arguments\_}}
+\index{arguments\_@{arguments\_}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{arguments\_}{arguments\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a5d2fc87474562891e096cd77b6bd92ac} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}}$>$ $>$ neo\+::vm\+::\+Execution\+Context\+::arguments\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a6b6460a5a627ce9245704afac9783dbe}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!callTable\_@{callTable\_}}
+\index{callTable\_@{callTable\_}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{callTable\_}{callTable\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a6b6460a5a627ce9245704afac9783dbe} 
+std\+::vector$<$int32\+\_\+t$>$ neo\+::vm\+::\+Execution\+Context\+::call\+Table\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a430917719fc777eb34a018f7c50818ac}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!evaluationStack\_@{evaluationStack\_}}
+\index{evaluationStack\_@{evaluationStack\_}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{evaluationStack\_}{evaluationStack\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a430917719fc777eb34a018f7c50818ac} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}}$>$ $>$ neo\+::vm\+::\+Execution\+Context\+::evaluation\+Stack\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a71553d333528202372ce310c3dc9824a}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!instructionPointer\_@{instructionPointer\_}}
+\index{instructionPointer\_@{instructionPointer\_}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{instructionPointer\_}{instructionPointer\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a71553d333528202372ce310c3dc9824a} 
+int32\+\_\+t neo\+::vm\+::\+Execution\+Context\+::instruction\+Pointer\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a4a98c70eb76498c3ae07769e19a194d7}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!localVariables\_@{localVariables\_}}
+\index{localVariables\_@{localVariables\_}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{localVariables\_}{localVariables\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a4a98c70eb76498c3ae07769e19a194d7} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}}$>$ $>$ neo\+::vm\+::\+Execution\+Context\+::local\+Variables\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a75e060ca9e31730dc849b96e4ad2126f}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!rvcount\_@{rvcount\_}}
+\index{rvcount\_@{rvcount\_}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{rvcount\_}{rvcount\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a75e060ca9e31730dc849b96e4ad2126f} 
+int32\+\_\+t neo\+::vm\+::\+Execution\+Context\+::rvcount\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_context_aed5781915c45456f8b9517286aff827e}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!script\_@{script\_}}
+\index{script\_@{script\_}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{script\_}{script\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_aed5781915c45456f8b9517286aff827e} 
+\mbox{\hyperlink{classneo_1_1vm_1_1_script}{Script}} neo\+::vm\+::\+Execution\+Context\+::script\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a04cdf63c59804953340d3dc3a8656dc3}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!states\_@{states\_}}
+\index{states\_@{states\_}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{states\_}{states\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a04cdf63c59804953340d3dc3a8656dc3} 
+std\+::unordered\+\_\+map$<$std\+::type\+\_\+index, std\+::any$>$ neo\+::vm\+::\+Execution\+Context\+::states\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_context_adf5629b9a338f0d52c63e25d60f8da1a}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!staticFields\_@{staticFields\_}}
+\index{staticFields\_@{staticFields\_}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{staticFields\_}{staticFields\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_adf5629b9a338f0d52c63e25d60f8da1a} 
+std\+::vector$<$std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1vm_1_1_stack_item}{Stack\+Item}}$>$ $>$ neo\+::vm\+::\+Execution\+Context\+::static\+Fields\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1_execution_context_a7264888c99aa65f74a54f48db3cbd0ed}\index{neo::vm::ExecutionContext@{neo::vm::ExecutionContext}!tryStack\_@{tryStack\_}}
+\index{tryStack\_@{tryStack\_}!neo::vm::ExecutionContext@{neo::vm::ExecutionContext}}
+\doxysubsubsection{\texorpdfstring{tryStack\_}{tryStack\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1_execution_context_a7264888c99aa65f74a54f48db3cbd0ed} 
+std\+::vector$<$\mbox{\hyperlink{classneo_1_1vm_1_1_exception_handling_context}{Exception\+Handling\+Context}}$>$ neo\+::vm\+::\+Execution\+Context\+::try\+Stack\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/vm/\mbox{\hyperlink{execution__context_8h}{execution\+\_\+context.\+h}}\item 
+src/vm/\mbox{\hyperlink{execution__context_8cpp}{execution\+\_\+context.\+cpp}}\end{DoxyCompactItemize}

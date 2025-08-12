@@ -1,0 +1,535 @@
+\doxysection{neo\+::Settings Class Reference}
+\hypertarget{classneo_1_1_settings}{}\label{classneo_1_1_settings}\index{neo::Settings@{neo::Settings}}
+
+
+Complete configuration settings for the Neo node.  
+
+
+
+
+{\ttfamily \#include $<$settings.\+h$>$}
+
+
+
+Collaboration diagram for neo\+::Settings\+:
+% FIG 0
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1_settings_a050f89106d4bbb62c7f48b94d4a7cb57}{Settings}} ()
+\begin{DoxyCompactList}\small\item\em Default constructor with default settings. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1_settings_a997e9607f7b44003552bd174568a7bf8}{Settings}} (const \mbox{\hyperlink{classneo_1_1_settings}{Settings}} \&other)
+\begin{DoxyCompactList}\small\item\em Copy constructor. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1_settings}{Settings}} \& \mbox{\hyperlink{classneo_1_1_settings_a564e958d1b49bd6bba3e5ea312deb953}{operator=}} (const \mbox{\hyperlink{classneo_1_1_settings}{Settings}} \&other)
+\begin{DoxyCompactList}\small\item\em Assignment operator. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1_settings_a8928acd828496b864832dd86e471d043}{Save}} (const std\+::string \&config\+Path) const
+\begin{DoxyCompactList}\small\item\em Saves current settings to a JSON configuration file. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1_settings_adf9f2d53ae2841ff3c76304b57de7860}{To\+Json}} () const
+\begin{DoxyCompactList}\small\item\em Converts settings to JSON string. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1_settings_a76be1a138c74d06b5eead9d1eaa90219}{Validate}} () const
+\begin{DoxyCompactList}\small\item\em Validates the configuration settings. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_settings_affeb74edfe28dd06e36160d9426612f4}{Merge}} (const \mbox{\hyperlink{classneo_1_1_settings}{Settings}} \&other, bool overwrite\+Existing=true)
+\begin{DoxyCompactList}\small\item\em Merges settings from another settings object. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1_settings_a4a0c0bbb3ce921621532592a818fb7dd}{To\+String}} () const
+\begin{DoxyCompactList}\small\item\em Gets a string representation of the settings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{classneo_1_1_settings}{Settings}} \mbox{\hyperlink{classneo_1_1_settings_ac5b73c24e0ae25059f8901d530a4a86c}{Load}} (const std\+::string \&config\+Path)
+\begin{DoxyCompactList}\small\item\em Loads settings from a JSON configuration file. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1_settings}{Settings}} \mbox{\hyperlink{classneo_1_1_settings_a9b1a44d4a69d6c95c2e7e0857bb46254}{Load\+From\+Json}} (const std\+::string \&json\+Content)
+\begin{DoxyCompactList}\small\item\em Loads settings from a JSON string. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1_settings}{Settings}} \mbox{\hyperlink{classneo_1_1_settings_a543a708d60877755bbce9d4414ebc014}{Get\+Default}} ()
+\begin{DoxyCompactList}\small\item\em Gets the default settings. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1_settings}{Settings}} \mbox{\hyperlink{classneo_1_1_settings_a9900fa217b264bf82e576317a9946774}{Create\+Main\+Net\+Settings}} ()
+\begin{DoxyCompactList}\small\item\em Creates settings for Main\+Net. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1_settings}{Settings}} \mbox{\hyperlink{classneo_1_1_settings_af1d6a005ec7b878c99149017083474d0}{Create\+Test\+Net\+Settings}} ()
+\begin{DoxyCompactList}\small\item\em Creates settings for Test\+Net. \end{DoxyCompactList}\item 
+static \mbox{\hyperlink{classneo_1_1_settings}{Settings}} \mbox{\hyperlink{classneo_1_1_settings_ad2a527e13c085c8c37266ab8a625c6ef}{Create\+Development\+Settings}} ()
+\begin{DoxyCompactList}\small\item\em Creates settings for development/local testing. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+std\+::shared\+\_\+ptr$<$ \mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}} $>$ \mbox{\hyperlink{classneo_1_1_settings_a9af5459cf8ba9dc1f4cc53f21d615b7a}{Protocol}}
+\begin{DoxyCompactList}\small\item\em Protocol configuration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1_storage_settings}{Storage\+Settings}} \mbox{\hyperlink{classneo_1_1_settings_ad4d66a356d23443d99000dcb98a21b3e}{Storage}}
+\begin{DoxyCompactList}\small\item\em Storage configuration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1_rpc_settings}{Rpc\+Settings}} \mbox{\hyperlink{classneo_1_1_settings_ac35029a4c17a0d48175d9e54d0356a5f}{RPC}}
+\begin{DoxyCompactList}\small\item\em RPC server configuration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1_p2_p_settings}{P2\+PSettings}} \mbox{\hyperlink{classneo_1_1_settings_a071e9b765cbcaf56479d371726ec2d5b}{P2P}}
+\begin{DoxyCompactList}\small\item\em P2P network configuration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1_application_settings}{Application\+Settings}} \mbox{\hyperlink{classneo_1_1_settings_a586c18a03fc261e8494a5c249b0452f4}{Application}}
+\begin{DoxyCompactList}\small\item\em Application configuration. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{structneo_1_1_plugin_settings}{Plugin\+Settings}} \mbox{\hyperlink{classneo_1_1_settings_aa4c23bb6ee92286a6b9c14a63da74730}{Plugins}}
+\begin{DoxyCompactList}\small\item\em Plugin configuration. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{classneo_1_1_settings_a71761b287e22fb18bac37bf2bb153081}{Load\+Protocol\+Settings}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Loads protocol settings from JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_settings_ab2b1cc519ccfaf1a5844a3cb3437978d}{Load\+Storage\+Settings}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Loads storage settings from JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_settings_a9b60702dc1344d62cee63db522b366bf}{Load\+Rpc\+Settings}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Loads RPC settings from JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_settings_a31a7cf3e47f4550594438b13de65cb41}{Load\+P2\+PSettings}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Loads P2P settings from JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_settings_aaab3df748e5f8ab173ac093d92205dcc}{Load\+Application\+Settings}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Loads application settings from JSON. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{classneo_1_1_settings_a76de31443d29aa9a2b372d7a66a29476}{Load\+Plugin\+Settings}} (const std\+::string \&\mbox{\hyperlink{json_8hpp_ae6eede511f01c9f33342044d36a388fa}{json}})
+\begin{DoxyCompactList}\small\item\em Loads plugin settings from JSON. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1_settings_a996baf26d8c37889d8f4b83a5d202296}{Validate\+Storage\+Settings}} () const
+\begin{DoxyCompactList}\small\item\em Validates storage settings. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1_settings_add60da0239bc8cc055c4debc9ef55725}{Validate\+Rpc\+Settings}} () const
+\begin{DoxyCompactList}\small\item\em Validates RPC settings. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1_settings_a03979a8ab1b14c57dde5b797ae6064dc}{Validate\+P2\+PSettings}} () const
+\begin{DoxyCompactList}\small\item\em Validates P2P settings. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1_settings_ad3fe612df6be7c9750f97235eb8d6e19}{Validate\+Application\+Settings}} () const
+\begin{DoxyCompactList}\small\item\em Validates application settings. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Complete configuration settings for the Neo node. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1_settings_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1_settings_a050f89106d4bbb62c7f48b94d4a7cb57}\index{neo::Settings@{neo::Settings}!Settings@{Settings}}
+\index{Settings@{Settings}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{Settings()}{Settings()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a050f89106d4bbb62c7f48b94d4a7cb57} 
+neo\+::\+Settings\+::\+Settings (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Default constructor with default settings. 
+
+\Hypertarget{classneo_1_1_settings_a997e9607f7b44003552bd174568a7bf8}\index{neo::Settings@{neo::Settings}!Settings@{Settings}}
+\index{Settings@{Settings}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{Settings()}{Settings()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a997e9607f7b44003552bd174568a7bf8} 
+neo\+::\+Settings\+::\+Settings (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_settings}{Settings}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Copy constructor. 
+
+Here is the call graph for this function\+:
+% FIG 1
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1_settings_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1_settings_ad2a527e13c085c8c37266ab8a625c6ef}\index{neo::Settings@{neo::Settings}!CreateDevelopmentSettings@{CreateDevelopmentSettings}}
+\index{CreateDevelopmentSettings@{CreateDevelopmentSettings}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{CreateDevelopmentSettings()}{CreateDevelopmentSettings()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_ad2a527e13c085c8c37266ab8a625c6ef} 
+\mbox{\hyperlink{classneo_1_1_settings}{Settings}} neo\+::\+Settings\+::\+Create\+Development\+Settings (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates settings for development/local testing. 
+
+\begin{DoxyReturn}{Returns}
+Development settings 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1_settings_a9900fa217b264bf82e576317a9946774}\index{neo::Settings@{neo::Settings}!CreateMainNetSettings@{CreateMainNetSettings}}
+\index{CreateMainNetSettings@{CreateMainNetSettings}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{CreateMainNetSettings()}{CreateMainNetSettings()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a9900fa217b264bf82e576317a9946774} 
+\mbox{\hyperlink{classneo_1_1_settings}{Settings}} neo\+::\+Settings\+::\+Create\+Main\+Net\+Settings (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates settings for Main\+Net. 
+
+\begin{DoxyReturn}{Returns}
+Main\+Net settings 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 3
+\Hypertarget{classneo_1_1_settings_af1d6a005ec7b878c99149017083474d0}\index{neo::Settings@{neo::Settings}!CreateTestNetSettings@{CreateTestNetSettings}}
+\index{CreateTestNetSettings@{CreateTestNetSettings}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{CreateTestNetSettings()}{CreateTestNetSettings()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_af1d6a005ec7b878c99149017083474d0} 
+\mbox{\hyperlink{classneo_1_1_settings}{Settings}} neo\+::\+Settings\+::\+Create\+Test\+Net\+Settings (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates settings for Test\+Net. 
+
+\begin{DoxyReturn}{Returns}
+Test\+Net settings 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 4
+\Hypertarget{classneo_1_1_settings_a543a708d60877755bbce9d4414ebc014}\index{neo::Settings@{neo::Settings}!GetDefault@{GetDefault}}
+\index{GetDefault@{GetDefault}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{GetDefault()}{GetDefault()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a543a708d60877755bbce9d4414ebc014} 
+\mbox{\hyperlink{classneo_1_1_settings}{Settings}} neo\+::\+Settings\+::\+Get\+Default (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the default settings. 
+
+\begin{DoxyReturn}{Returns}
+Default settings object 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 5
+\Hypertarget{classneo_1_1_settings_ac5b73c24e0ae25059f8901d530a4a86c}\index{neo::Settings@{neo::Settings}!Load@{Load}}
+\index{Load@{Load}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{Load()}{Load()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_ac5b73c24e0ae25059f8901d530a4a86c} 
+\mbox{\hyperlink{classneo_1_1_settings}{Settings}} neo\+::\+Settings\+::\+Load (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{config\+Path}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Loads settings from a JSON configuration file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config\+Path} & Path to the configuration file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{classneo_1_1_settings}{Settings} object loaded from file, or default settings if file not found 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 6
+\Hypertarget{classneo_1_1_settings_aaab3df748e5f8ab173ac093d92205dcc}\index{neo::Settings@{neo::Settings}!LoadApplicationSettings@{LoadApplicationSettings}}
+\index{LoadApplicationSettings@{LoadApplicationSettings}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{LoadApplicationSettings()}{LoadApplicationSettings()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_aaab3df748e5f8ab173ac093d92205dcc} 
+void neo\+::\+Settings\+::\+Load\+Application\+Settings (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Loads application settings from JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & JSON object containing application settings \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 7
+\Hypertarget{classneo_1_1_settings_a9b1a44d4a69d6c95c2e7e0857bb46254}\index{neo::Settings@{neo::Settings}!LoadFromJson@{LoadFromJson}}
+\index{LoadFromJson@{LoadFromJson}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{LoadFromJson()}{LoadFromJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a9b1a44d4a69d6c95c2e7e0857bb46254} 
+\mbox{\hyperlink{classneo_1_1_settings}{Settings}} neo\+::\+Settings\+::\+Load\+From\+Json (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{json\+Content}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Loads settings from a JSON string. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json\+Content} & JSON configuration content \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\doxylink{classneo_1_1_settings}{Settings} object parsed from JSON 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 8
+\Hypertarget{classneo_1_1_settings_a31a7cf3e47f4550594438b13de65cb41}\index{neo::Settings@{neo::Settings}!LoadP2PSettings@{LoadP2PSettings}}
+\index{LoadP2PSettings@{LoadP2PSettings}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{LoadP2PSettings()}{LoadP2PSettings()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a31a7cf3e47f4550594438b13de65cb41} 
+void neo\+::\+Settings\+::\+Load\+P2\+PSettings (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Loads P2P settings from JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & JSON object containing P2P settings \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 9
+\Hypertarget{classneo_1_1_settings_a76de31443d29aa9a2b372d7a66a29476}\index{neo::Settings@{neo::Settings}!LoadPluginSettings@{LoadPluginSettings}}
+\index{LoadPluginSettings@{LoadPluginSettings}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{LoadPluginSettings()}{LoadPluginSettings()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a76de31443d29aa9a2b372d7a66a29476} 
+void neo\+::\+Settings\+::\+Load\+Plugin\+Settings (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Loads plugin settings from JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & JSON object containing plugin settings \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1_settings_a71761b287e22fb18bac37bf2bb153081}\index{neo::Settings@{neo::Settings}!LoadProtocolSettings@{LoadProtocolSettings}}
+\index{LoadProtocolSettings@{LoadProtocolSettings}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{LoadProtocolSettings()}{LoadProtocolSettings()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a71761b287e22fb18bac37bf2bb153081} 
+void neo\+::\+Settings\+::\+Load\+Protocol\+Settings (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Loads protocol settings from JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & JSON object containing protocol settings \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1_settings_a9b60702dc1344d62cee63db522b366bf}\index{neo::Settings@{neo::Settings}!LoadRpcSettings@{LoadRpcSettings}}
+\index{LoadRpcSettings@{LoadRpcSettings}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{LoadRpcSettings()}{LoadRpcSettings()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a9b60702dc1344d62cee63db522b366bf} 
+void neo\+::\+Settings\+::\+Load\+Rpc\+Settings (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Loads RPC settings from JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & JSON object containing RPC settings \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 10
+\Hypertarget{classneo_1_1_settings_ab2b1cc519ccfaf1a5844a3cb3437978d}\index{neo::Settings@{neo::Settings}!LoadStorageSettings@{LoadStorageSettings}}
+\index{LoadStorageSettings@{LoadStorageSettings}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{LoadStorageSettings()}{LoadStorageSettings()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_ab2b1cc519ccfaf1a5844a3cb3437978d} 
+void neo\+::\+Settings\+::\+Load\+Storage\+Settings (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{json}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Loads storage settings from JSON. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em json} & JSON object containing storage settings \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 11
+\Hypertarget{classneo_1_1_settings_affeb74edfe28dd06e36160d9426612f4}\index{neo::Settings@{neo::Settings}!Merge@{Merge}}
+\index{Merge@{Merge}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{Merge()}{Merge()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_affeb74edfe28dd06e36160d9426612f4} 
+void neo\+::\+Settings\+::\+Merge (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_settings}{Settings}} \&}]{other}{, }\item[{bool}]{overwrite\+Existing}{ = {\ttfamily true}}\end{DoxyParamCaption})}
+
+
+
+Merges settings from another settings object. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The settings to merge from \\
+\hline
+{\em overwrite\+Existing} & Whether to overwrite existing values \\
+\hline
+\end{DoxyParams}
+Here is the call graph for this function\+:
+% FIG 12
+\Hypertarget{classneo_1_1_settings_a564e958d1b49bd6bba3e5ea312deb953}\index{neo::Settings@{neo::Settings}!operator=@{operator=}}
+\index{operator=@{operator=}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{operator=()}{operator=()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a564e958d1b49bd6bba3e5ea312deb953} 
+\mbox{\hyperlink{classneo_1_1_settings}{Settings}} \& neo\+::\+Settings\+::operator= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1_settings}{Settings}} \&}]{other}{}\end{DoxyParamCaption})}
+
+
+
+Assignment operator. 
+
+Here is the call graph for this function\+:
+% FIG 13
+\Hypertarget{classneo_1_1_settings_a8928acd828496b864832dd86e471d043}\index{neo::Settings@{neo::Settings}!Save@{Save}}
+\index{Save@{Save}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{Save()}{Save()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a8928acd828496b864832dd86e471d043} 
+bool neo\+::\+Settings\+::\+Save (\begin{DoxyParamCaption}\item[{const std\+::string \&}]{config\+Path}{}\end{DoxyParamCaption}) const}
+
+
+
+Saves current settings to a JSON configuration file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em config\+Path} & Path to save the configuration file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if successful, false otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 14
+\Hypertarget{classneo_1_1_settings_adf9f2d53ae2841ff3c76304b57de7860}\index{neo::Settings@{neo::Settings}!ToJson@{ToJson}}
+\index{ToJson@{ToJson}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{ToJson()}{ToJson()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_adf9f2d53ae2841ff3c76304b57de7860} 
+std\+::string neo\+::\+Settings\+::\+To\+Json (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Converts settings to JSON string. 
+
+\begin{DoxyReturn}{Returns}
+JSON representation of the settings 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_settings_a4a0c0bbb3ce921621532592a818fb7dd}\index{neo::Settings@{neo::Settings}!ToString@{ToString}}
+\index{ToString@{ToString}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a4a0c0bbb3ce921621532592a818fb7dd} 
+std\+::string neo\+::\+Settings\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets a string representation of the settings. 
+
+\begin{DoxyReturn}{Returns}
+String representation for debugging 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_settings_a76be1a138c74d06b5eead9d1eaa90219}\index{neo::Settings@{neo::Settings}!Validate@{Validate}}
+\index{Validate@{Validate}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{Validate()}{Validate()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a76be1a138c74d06b5eead9d1eaa90219} 
+bool neo\+::\+Settings\+::\+Validate (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Validates the configuration settings. 
+
+\begin{DoxyReturn}{Returns}
+true if settings are valid, false otherwise 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 15
+\Hypertarget{classneo_1_1_settings_ad3fe612df6be7c9750f97235eb8d6e19}\index{neo::Settings@{neo::Settings}!ValidateApplicationSettings@{ValidateApplicationSettings}}
+\index{ValidateApplicationSettings@{ValidateApplicationSettings}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{ValidateApplicationSettings()}{ValidateApplicationSettings()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_ad3fe612df6be7c9750f97235eb8d6e19} 
+bool neo\+::\+Settings\+::\+Validate\+Application\+Settings (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Validates application settings. 
+
+\begin{DoxyReturn}{Returns}
+true if valid, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_settings_a03979a8ab1b14c57dde5b797ae6064dc}\index{neo::Settings@{neo::Settings}!ValidateP2PSettings@{ValidateP2PSettings}}
+\index{ValidateP2PSettings@{ValidateP2PSettings}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{ValidateP2PSettings()}{ValidateP2PSettings()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a03979a8ab1b14c57dde5b797ae6064dc} 
+bool neo\+::\+Settings\+::\+Validate\+P2\+PSettings (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Validates P2P settings. 
+
+\begin{DoxyReturn}{Returns}
+true if valid, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_settings_add60da0239bc8cc055c4debc9ef55725}\index{neo::Settings@{neo::Settings}!ValidateRpcSettings@{ValidateRpcSettings}}
+\index{ValidateRpcSettings@{ValidateRpcSettings}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{ValidateRpcSettings()}{ValidateRpcSettings()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_add60da0239bc8cc055c4debc9ef55725} 
+bool neo\+::\+Settings\+::\+Validate\+Rpc\+Settings (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Validates RPC settings. 
+
+\begin{DoxyReturn}{Returns}
+true if valid, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1_settings_a996baf26d8c37889d8f4b83a5d202296}\index{neo::Settings@{neo::Settings}!ValidateStorageSettings@{ValidateStorageSettings}}
+\index{ValidateStorageSettings@{ValidateStorageSettings}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{ValidateStorageSettings()}{ValidateStorageSettings()}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a996baf26d8c37889d8f4b83a5d202296} 
+bool neo\+::\+Settings\+::\+Validate\+Storage\+Settings (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+Validates storage settings. 
+
+\begin{DoxyReturn}{Returns}
+true if valid, false otherwise 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1_settings_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1_settings_a586c18a03fc261e8494a5c249b0452f4}\index{neo::Settings@{neo::Settings}!Application@{Application}}
+\index{Application@{Application}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{Application}{Application}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a586c18a03fc261e8494a5c249b0452f4} 
+\mbox{\hyperlink{structneo_1_1_application_settings}{Application\+Settings}} neo\+::\+Settings\+::\+Application}
+
+
+
+Application configuration. 
+
+\Hypertarget{classneo_1_1_settings_a071e9b765cbcaf56479d371726ec2d5b}\index{neo::Settings@{neo::Settings}!P2P@{P2P}}
+\index{P2P@{P2P}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{P2P}{P2P}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a071e9b765cbcaf56479d371726ec2d5b} 
+\mbox{\hyperlink{structneo_1_1_p2_p_settings}{P2\+PSettings}} neo\+::\+Settings\+::\+P2P}
+
+
+
+P2P network configuration. 
+
+\Hypertarget{classneo_1_1_settings_aa4c23bb6ee92286a6b9c14a63da74730}\index{neo::Settings@{neo::Settings}!Plugins@{Plugins}}
+\index{Plugins@{Plugins}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{Plugins}{Plugins}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_aa4c23bb6ee92286a6b9c14a63da74730} 
+\mbox{\hyperlink{structneo_1_1_plugin_settings}{Plugin\+Settings}} neo\+::\+Settings\+::\+Plugins}
+
+
+
+Plugin configuration. 
+
+\Hypertarget{classneo_1_1_settings_a9af5459cf8ba9dc1f4cc53f21d615b7a}\index{neo::Settings@{neo::Settings}!Protocol@{Protocol}}
+\index{Protocol@{Protocol}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{Protocol}{Protocol}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_a9af5459cf8ba9dc1f4cc53f21d615b7a} 
+std\+::shared\+\_\+ptr$<$\mbox{\hyperlink{classneo_1_1_protocol_settings}{Protocol\+Settings}}$>$ neo\+::\+Settings\+::\+Protocol}
+
+
+
+Protocol configuration. 
+
+\Hypertarget{classneo_1_1_settings_ac35029a4c17a0d48175d9e54d0356a5f}\index{neo::Settings@{neo::Settings}!RPC@{RPC}}
+\index{RPC@{RPC}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{RPC}{RPC}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_ac35029a4c17a0d48175d9e54d0356a5f} 
+\mbox{\hyperlink{structneo_1_1_rpc_settings}{Rpc\+Settings}} neo\+::\+Settings\+::\+RPC}
+
+
+
+RPC server configuration. 
+
+\Hypertarget{classneo_1_1_settings_ad4d66a356d23443d99000dcb98a21b3e}\index{neo::Settings@{neo::Settings}!Storage@{Storage}}
+\index{Storage@{Storage}!neo::Settings@{neo::Settings}}
+\doxysubsubsection{\texorpdfstring{Storage}{Storage}}
+{\footnotesize\ttfamily \label{classneo_1_1_settings_ad4d66a356d23443d99000dcb98a21b3e} 
+\mbox{\hyperlink{structneo_1_1_storage_settings}{Storage\+Settings}} neo\+::\+Settings\+::\+Storage}
+
+
+
+Storage configuration. 
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/\mbox{\hyperlink{settings_8h}{settings.\+h}}\item 
+src/\mbox{\hyperlink{settings_8cpp}{settings.\+cpp}}\end{DoxyCompactItemize}

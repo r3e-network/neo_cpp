@@ -1,0 +1,253 @@
+\doxysection{neo\+::vm\+::internal\+::Byte\+Span Class Reference}
+\hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span}{}\label{classneo_1_1vm_1_1internal_1_1_byte_span}\index{neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}}
+
+
+A non-\/owning view of a byte array.  
+
+
+
+
+{\ttfamily \#include $<$byte\+\_\+span.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span_aa90e0e5146a5337613ad2e1f1a0f6134}{Byte\+Span}} () noexcept
+\begin{DoxyCompactList}\small\item\em Constructs an empty \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span_a7cc1e30ec313c5fd2049616af2d6b934}{Byte\+Span}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t size) noexcept
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span} from a pointer and size. \end{DoxyCompactList}\item 
+{\footnotesize template$<$typename Allocator$>$ }\\\mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span_a44f93cc61e91095e5260f2736f577fa4}{Byte\+Span}} (const std\+::vector$<$ uint8\+\_\+t, Allocator $>$ \&data) noexcept
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span} from a vector. \end{DoxyCompactList}\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span_aa633924554bcd3ac7f256af27baf2a51}{Size}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets the size of the \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span_a593703aa084cdeca3af4a10c269175b4}{Is\+Empty}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Checks if the \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span} is empty. \end{DoxyCompactList}\item 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span_a690a0de1603b45a3d1572f0a25830e21}{Data}} () const noexcept
+\begin{DoxyCompactList}\small\item\em Gets a pointer to the data. \end{DoxyCompactList}\item 
+uint8\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span_a677ca5daef2100cd89565badb8bcbe5b}{operator\mbox{[}$\,$\mbox{]}}} (size\+\_\+t index) const
+\begin{DoxyCompactList}\small\item\em Gets the byte at the specified index. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span_aa67ee7f6c05dd62b66000e3a06838a70}{operator==}} (const \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}} \&other) const noexcept
+\begin{DoxyCompactList}\small\item\em Compares this \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span} with another \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span_a72633727e58f6b56f8174db81c5c9852}{operator!=}} (const \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}} \&other) const noexcept
+\begin{DoxyCompactList}\small\item\em Compares this \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span} with another \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}} \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span_ad25ba0bbbd4693f1ac58a2eaedc56cca}{Slice}} (size\+\_\+t start, size\+\_\+t length) const
+\begin{DoxyCompactList}\small\item\em Creates a new \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span} that is a slice of this \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}. \end{DoxyCompactList}\item 
+std\+::string \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span_aaf621a80e9372cb675b022a670a0e9af}{To\+Hex\+String}} () const
+\begin{DoxyCompactList}\small\item\em Converts the \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span} to a hexadecimal string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span_a99f8dc5617f1a34cd42af599376b0513}{data\+\_\+}}
+\item 
+size\+\_\+t \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span_afc51a30026cf478908331593d3cd767a}{size\+\_\+}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+A non-\/owning view of a byte array. 
+
+\label{doc-constructors}
+\Hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span_aa90e0e5146a5337613ad2e1f1a0f6134}\index{neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}!ByteSpan@{ByteSpan}}
+\index{ByteSpan@{ByteSpan}!neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{ByteSpan()}{ByteSpan()}\hspace{0.1cm}{\footnotesize\ttfamily [1/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1internal_1_1_byte_span_aa90e0e5146a5337613ad2e1f1a0f6134} 
+neo\+::vm\+::internal\+::\+Byte\+Span\+::\+Byte\+Span (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Constructs an empty \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}. 
+
+\Hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span_a7cc1e30ec313c5fd2049616af2d6b934}\index{neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}!ByteSpan@{ByteSpan}}
+\index{ByteSpan@{ByteSpan}!neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{ByteSpan()}{ByteSpan()}\hspace{0.1cm}{\footnotesize\ttfamily [2/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1internal_1_1_byte_span_a7cc1e30ec313c5fd2049616af2d6b934} 
+neo\+::vm\+::internal\+::\+Byte\+Span\+::\+Byte\+Span (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Constructs a \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span} from a pointer and size. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Pointer to the data. \\
+\hline
+{\em size} & Size of the data. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span_a44f93cc61e91095e5260f2736f577fa4}\index{neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}!ByteSpan@{ByteSpan}}
+\index{ByteSpan@{ByteSpan}!neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{ByteSpan()}{ByteSpan()}\hspace{0.1cm}{\footnotesize\ttfamily [3/3]}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1internal_1_1_byte_span_a44f93cc61e91095e5260f2736f577fa4} 
+template$<$typename Allocator$>$ \\
+neo\+::vm\+::internal\+::\+Byte\+Span\+::\+Byte\+Span (\begin{DoxyParamCaption}\item[{const std\+::vector$<$ uint8\+\_\+t, Allocator $>$ \&}]{data}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Constructs a \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span} from a vector. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Vector containing the data. \\
+\hline
+\end{DoxyParams}
+
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span_a690a0de1603b45a3d1572f0a25830e21}\index{neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}!Data@{Data}}
+\index{Data@{Data}!neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{Data()}{Data()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1internal_1_1_byte_span_a690a0de1603b45a3d1572f0a25830e21} 
+const uint8\+\_\+t \texorpdfstring{$\ast$}{*} neo\+::vm\+::internal\+::\+Byte\+Span\+::\+Data (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets a pointer to the data. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to the data. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span_a593703aa084cdeca3af4a10c269175b4}\index{neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}!IsEmpty@{IsEmpty}}
+\index{IsEmpty@{IsEmpty}!neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{IsEmpty()}{IsEmpty()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1internal_1_1_byte_span_a593703aa084cdeca3af4a10c269175b4} 
+bool neo\+::vm\+::internal\+::\+Byte\+Span\+::\+Is\+Empty (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Checks if the \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span} is empty. 
+
+\begin{DoxyReturn}{Returns}
+True if the \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span} is empty, false otherwise. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span_a72633727e58f6b56f8174db81c5c9852}\index{neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}!operator"!=@{operator"!=}}
+\index{operator"!=@{operator"!=}!neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{operator"!=()}{operator!=()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1internal_1_1_byte_span_a72633727e58f6b56f8174db81c5c9852} 
+bool neo\+::vm\+::internal\+::\+Byte\+Span\+::operator!= (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Compares this \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span} with another \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Byte\+Spans are not equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span_aa67ee7f6c05dd62b66000e3a06838a70}\index{neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}!operator==@{operator==}}
+\index{operator==@{operator==}!neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1internal_1_1_byte_span_aa67ee7f6c05dd62b66000e3a06838a70} 
+bool neo\+::vm\+::internal\+::\+Byte\+Span\+::operator== (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}} \&}]{other}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Compares this \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span} with another \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em other} & The other \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the Byte\+Spans are equal, false otherwise. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span_a677ca5daef2100cd89565badb8bcbe5b}\index{neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}!operator\mbox{[}\mbox{]}@{operator[]}}
+\index{operator\mbox{[}\mbox{]}@{operator[]}!neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{operator[]()}{operator[]()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1internal_1_1_byte_span_a677ca5daef2100cd89565badb8bcbe5b} 
+uint8\+\_\+t neo\+::vm\+::internal\+::\+Byte\+Span\+::operator\mbox{[}$\,$\mbox{]} (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{index}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Gets the byte at the specified index. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em index} & The index. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The byte at the specified index. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span_aa633924554bcd3ac7f256af27baf2a51}\index{neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}!Size@{Size}}
+\index{Size@{Size}!neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{Size()}{Size()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1internal_1_1_byte_span_aa633924554bcd3ac7f256af27baf2a51} 
+size\+\_\+t neo\+::vm\+::internal\+::\+Byte\+Span\+::\+Size (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [noexcept]}}
+
+
+
+Gets the size of the \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}. 
+
+\begin{DoxyReturn}{Returns}
+The size of the \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}. 
+\end{DoxyReturn}
+\Hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span_ad25ba0bbbd4693f1ac58a2eaedc56cca}\index{neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}!Slice@{Slice}}
+\index{Slice@{Slice}!neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{Slice()}{Slice()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1internal_1_1_byte_span_ad25ba0bbbd4693f1ac58a2eaedc56cca} 
+\mbox{\hyperlink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}} neo\+::vm\+::internal\+::\+Byte\+Span\+::\+Slice (\begin{DoxyParamCaption}\item[{size\+\_\+t}]{start}{, }\item[{size\+\_\+t}]{length}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Creates a new \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span} that is a slice of this \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em start} & The start index. \\
+\hline
+{\em length} & The length of the slice. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+A new \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span} that is a slice of this \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 2
+\Hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span_aaf621a80e9372cb675b022a670a0e9af}\index{neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}!ToHexString@{ToHexString}}
+\index{ToHexString@{ToHexString}!neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{ToHexString()}{ToHexString()}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1internal_1_1_byte_span_aaf621a80e9372cb675b022a670a0e9af} 
+std\+::string neo\+::vm\+::internal\+::\+Byte\+Span\+::\+To\+Hex\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+Converts the \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span} to a hexadecimal string. 
+
+\begin{DoxyReturn}{Returns}
+The hexadecimal string representation of the \doxylink{classneo_1_1vm_1_1internal_1_1_byte_span}{Byte\+Span}. 
+\end{DoxyReturn}
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span_a99f8dc5617f1a34cd42af599376b0513}\index{neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}!data\_@{data\_}}
+\index{data\_@{data\_}!neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{data\_}{data\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1internal_1_1_byte_span_a99f8dc5617f1a34cd42af599376b0513} 
+const uint8\+\_\+t\texorpdfstring{$\ast$}{*} neo\+::vm\+::internal\+::\+Byte\+Span\+::data\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1vm_1_1internal_1_1_byte_span_afc51a30026cf478908331593d3cd767a}\index{neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}!size\_@{size\_}}
+\index{size\_@{size\_}!neo::vm::internal::ByteSpan@{neo::vm::internal::ByteSpan}}
+\doxysubsubsection{\texorpdfstring{size\_}{size\_}}
+{\footnotesize\ttfamily \label{classneo_1_1vm_1_1internal_1_1_byte_span_afc51a30026cf478908331593d3cd767a} 
+size\+\_\+t neo\+::vm\+::internal\+::\+Byte\+Span\+::size\+\_\+\hspace{0.3cm}{\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/vm/internal/\mbox{\hyperlink{vm_2internal_2byte__span_8h}{byte\+\_\+span.\+h}}\end{DoxyCompactItemize}

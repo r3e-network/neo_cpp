@@ -1,0 +1,155 @@
+\doxysection{neo\+::cryptography\+::Murmur32 Class Reference}
+\hypertarget{classneo_1_1cryptography_1_1_murmur32}{}\label{classneo_1_1cryptography_1_1_murmur32}\index{neo::cryptography::Murmur32@{neo::cryptography::Murmur32}}
+
+
+\doxylink{classneo_1_1cryptography_1_1_murmur32}{Murmur32} hash algorithm implementation.  
+
+
+
+
+{\ttfamily \#include $<$murmur32.\+h$>$}
+
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static uint32\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_ac440591c72d6243ee431348f4457593a}{Hash}} (const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&data, uint32\+\_\+t seed=0)
+\begin{DoxyCompactList}\small\item\em Computes \doxylink{classneo_1_1cryptography_1_1_murmur32}{Murmur32} hash of the given data. \end{DoxyCompactList}\item 
+static uint32\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_a4d0a6618e13b8f590b7e7ad8be607236}{Hash}} (const uint8\+\_\+t \texorpdfstring{$\ast$}{*}data, size\+\_\+t len, uint32\+\_\+t seed=0)
+\begin{DoxyCompactList}\small\item\em Computes \doxylink{classneo_1_1cryptography_1_1_murmur32}{Murmur32} hash of the given data. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static uint32\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_a5c2116e49d8f3a96968c8ebc41804432}{Rotate\+Left}} (uint32\+\_\+t value, int shift)
+\item 
+static uint32\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_a75df524ba96ad6ba17ee674fe18e847c}{Finalize\+Hash}} (uint32\+\_\+t hash, size\+\_\+t len)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Private Attributes}
+\begin{DoxyCompactItemize}
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_a3d849ed22775782f28f13b01816b7442}{c1}} = 0xcc9e2d51
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_ae5ee15b26b8fa313d6395ff3d5d6681a}{c2}} = 0x1b873593
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_ab01ec2577ad4739f5157ac885c508cd1}{r1}} = 15
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_ada4ab562856828023a211b24f8cb6952}{r2}} = 13
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_ab31dadb0b58d16aa0f5463b64ed86c1f}{m}} = 5
+\item 
+static constexpr uint32\+\_\+t \mbox{\hyperlink{classneo_1_1cryptography_1_1_murmur32_a55e9c14e5ca318d09e2e0dac66613015}{n}} = 0xe6546b64
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\doxylink{classneo_1_1cryptography_1_1_murmur32}{Murmur32} hash algorithm implementation. 
+
+This class provides Murmur\+Hash32 implementation compatible with the Neo C\# reference implementation. 
+
+\label{doc-func-members}
+\Hypertarget{classneo_1_1cryptography_1_1_murmur32_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_murmur32_a75df524ba96ad6ba17ee674fe18e847c}\index{neo::cryptography::Murmur32@{neo::cryptography::Murmur32}!FinalizeHash@{FinalizeHash}}
+\index{FinalizeHash@{FinalizeHash}!neo::cryptography::Murmur32@{neo::cryptography::Murmur32}}
+\doxysubsubsection{\texorpdfstring{FinalizeHash()}{FinalizeHash()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_murmur32_a75df524ba96ad6ba17ee674fe18e847c} 
+uint32\+\_\+t neo\+::cryptography\+::\+Murmur32\+::\+Finalize\+Hash (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{hash}{, }\item[{size\+\_\+t}]{len}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1_murmur32_ac440591c72d6243ee431348f4457593a}\index{neo::cryptography::Murmur32@{neo::cryptography::Murmur32}!Hash@{Hash}}
+\index{Hash@{Hash}!neo::cryptography::Murmur32@{neo::cryptography::Murmur32}}
+\doxysubsubsection{\texorpdfstring{Hash()}{Hash()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_murmur32_ac440591c72d6243ee431348f4457593a} 
+uint32\+\_\+t neo\+::cryptography\+::\+Murmur32\+::\+Hash (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{classneo_1_1io_1_1_byte_span}{io\+::\+Byte\+Span}} \&}]{data}{, }\item[{uint32\+\_\+t}]{seed}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes \doxylink{classneo_1_1cryptography_1_1_murmur32}{Murmur32} hash of the given data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & The data to hash. \\
+\hline
+{\em seed} & The seed value (default\+: 0). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 32-\/bit hash value. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 0
+\Hypertarget{classneo_1_1cryptography_1_1_murmur32_a4d0a6618e13b8f590b7e7ad8be607236}\index{neo::cryptography::Murmur32@{neo::cryptography::Murmur32}!Hash@{Hash}}
+\index{Hash@{Hash}!neo::cryptography::Murmur32@{neo::cryptography::Murmur32}}
+\doxysubsubsection{\texorpdfstring{Hash()}{Hash()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_murmur32_a4d0a6618e13b8f590b7e7ad8be607236} 
+uint32\+\_\+t neo\+::cryptography\+::\+Murmur32\+::\+Hash (\begin{DoxyParamCaption}\item[{const uint8\+\_\+t \texorpdfstring{$\ast$}{*}}]{data}{, }\item[{size\+\_\+t}]{len}{, }\item[{uint32\+\_\+t}]{seed}{ = {\ttfamily 0}}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Computes \doxylink{classneo_1_1cryptography_1_1_murmur32}{Murmur32} hash of the given data. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em data} & Pointer to the data. \\
+\hline
+{\em len} & Length of the data in bytes. \\
+\hline
+{\em seed} & The seed value (default\+: 0). \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+The 32-\/bit hash value. 
+\end{DoxyReturn}
+Here is the call graph for this function\+:
+% FIG 1
+\Hypertarget{classneo_1_1cryptography_1_1_murmur32_a5c2116e49d8f3a96968c8ebc41804432}\index{neo::cryptography::Murmur32@{neo::cryptography::Murmur32}!RotateLeft@{RotateLeft}}
+\index{RotateLeft@{RotateLeft}!neo::cryptography::Murmur32@{neo::cryptography::Murmur32}}
+\doxysubsubsection{\texorpdfstring{RotateLeft()}{RotateLeft()}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_murmur32_a5c2116e49d8f3a96968c8ebc41804432} 
+uint32\+\_\+t neo\+::cryptography\+::\+Murmur32\+::\+Rotate\+Left (\begin{DoxyParamCaption}\item[{uint32\+\_\+t}]{value}{, }\item[{int}]{shift}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [private]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{classneo_1_1cryptography_1_1_murmur32_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{classneo_1_1cryptography_1_1_murmur32_a3d849ed22775782f28f13b01816b7442}\index{neo::cryptography::Murmur32@{neo::cryptography::Murmur32}!c1@{c1}}
+\index{c1@{c1}!neo::cryptography::Murmur32@{neo::cryptography::Murmur32}}
+\doxysubsubsection{\texorpdfstring{c1}{c1}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_murmur32_a3d849ed22775782f28f13b01816b7442} 
+uint32\+\_\+t neo\+::cryptography\+::\+Murmur32\+::c1 = 0xcc9e2d51\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1_murmur32_ae5ee15b26b8fa313d6395ff3d5d6681a}\index{neo::cryptography::Murmur32@{neo::cryptography::Murmur32}!c2@{c2}}
+\index{c2@{c2}!neo::cryptography::Murmur32@{neo::cryptography::Murmur32}}
+\doxysubsubsection{\texorpdfstring{c2}{c2}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_murmur32_ae5ee15b26b8fa313d6395ff3d5d6681a} 
+uint32\+\_\+t neo\+::cryptography\+::\+Murmur32\+::c2 = 0x1b873593\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1_murmur32_ab31dadb0b58d16aa0f5463b64ed86c1f}\index{neo::cryptography::Murmur32@{neo::cryptography::Murmur32}!m@{m}}
+\index{m@{m}!neo::cryptography::Murmur32@{neo::cryptography::Murmur32}}
+\doxysubsubsection{\texorpdfstring{m}{m}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_murmur32_ab31dadb0b58d16aa0f5463b64ed86c1f} 
+uint32\+\_\+t neo\+::cryptography\+::\+Murmur32\+::m = 5\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1_murmur32_a55e9c14e5ca318d09e2e0dac66613015}\index{neo::cryptography::Murmur32@{neo::cryptography::Murmur32}!n@{n}}
+\index{n@{n}!neo::cryptography::Murmur32@{neo::cryptography::Murmur32}}
+\doxysubsubsection{\texorpdfstring{n}{n}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_murmur32_a55e9c14e5ca318d09e2e0dac66613015} 
+uint32\+\_\+t neo\+::cryptography\+::\+Murmur32\+::n = 0xe6546b64\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1_murmur32_ab01ec2577ad4739f5157ac885c508cd1}\index{neo::cryptography::Murmur32@{neo::cryptography::Murmur32}!r1@{r1}}
+\index{r1@{r1}!neo::cryptography::Murmur32@{neo::cryptography::Murmur32}}
+\doxysubsubsection{\texorpdfstring{r1}{r1}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_murmur32_ab01ec2577ad4739f5157ac885c508cd1} 
+uint32\+\_\+t neo\+::cryptography\+::\+Murmur32\+::r1 = 15\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+\Hypertarget{classneo_1_1cryptography_1_1_murmur32_ada4ab562856828023a211b24f8cb6952}\index{neo::cryptography::Murmur32@{neo::cryptography::Murmur32}!r2@{r2}}
+\index{r2@{r2}!neo::cryptography::Murmur32@{neo::cryptography::Murmur32}}
+\doxysubsubsection{\texorpdfstring{r2}{r2}}
+{\footnotesize\ttfamily \label{classneo_1_1cryptography_1_1_murmur32_ada4ab562856828023a211b24f8cb6952} 
+uint32\+\_\+t neo\+::cryptography\+::\+Murmur32\+::r2 = 13\hspace{0.3cm}{\ttfamily [static]}, {\ttfamily [constexpr]}, {\ttfamily [private]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/neo/cryptography/\mbox{\hyperlink{murmur32_8h}{murmur32.\+h}}\item 
+src/cryptography/\mbox{\hyperlink{murmur32_8cpp}{murmur32.\+cpp}}\end{DoxyCompactItemize}

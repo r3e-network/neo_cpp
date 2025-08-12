@@ -1,0 +1,58 @@
+\doxysection{src/smartcontract/application\+\_\+engine.cpp File Reference}
+\hypertarget{application__engine_8cpp}{}\label{application__engine_8cpp}\index{src/smartcontract/application\_engine.cpp@{src/smartcontract/application\_engine.cpp}}
+{\ttfamily \#include $<$neo/ledger/block.\+h$>$}\newline
+{\ttfamily \#include $<$neo/ledger/signer.\+h$>$}\newline
+{\ttfamily \#include $<$neo/ledger/transaction.\+h$>$}\newline
+{\ttfamily \#include $<$neo/network/p2p/payloads/neo3\+\_\+transaction.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/application\+\_\+engine.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/native/contract\+\_\+management.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/native/gas\+\_\+token.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/native/ledger\+\_\+contract.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/native/native\+\_\+contract.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/native/neo\+\_\+token.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/native/policy\+\_\+contract.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/native/role\+\_\+management.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$neo/cryptography/hash.\+h$>$}\newline
+{\ttfamily \#include $<$neo/io/binary\+\_\+reader.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/contract\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/native/crypto\+\_\+lib.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/native/name\+\_\+service.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/native/notary.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/native/oracle\+\_\+contract.\+h$>$}\newline
+{\ttfamily \#include $<$neo/smartcontract/native/std\+\_\+lib.\+h$>$}\newline
+{\ttfamily \#include $<$neo/vm/script\+\_\+builder.\+h$>$}\newline
+{\ttfamily \#include $<$sstream$>$}\newline
+Include dependency graph for application\+\_\+engine.\+cpp\+:
+% FIG 0
+\doxysubsubsection*{Namespaces}
+\begin{DoxyCompactItemize}
+\item 
+namespace \mbox{\hyperlink{namespaceneo}{neo}}
+\item 
+namespace \mbox{\hyperlink{namespaceneo_1_1smartcontract}{neo\+::smartcontract}}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Macros}
+\begin{DoxyCompactItemize}
+\item 
+\#define \mbox{\hyperlink{application__engine_8cpp_ad9c73bc78b8b2564e47a037b5a6ca226}{LOG\+\_\+\+ERROR}}(msg, ...)
+\end{DoxyCompactItemize}
+
+
+\label{doc-define-members}
+\Hypertarget{application__engine_8cpp_doc-define-members}
+\doxysubsection{Macro Definition Documentation}
+\Hypertarget{application__engine_8cpp_ad9c73bc78b8b2564e47a037b5a6ca226}\index{application\_engine.cpp@{application\_engine.cpp}!LOG\_ERROR@{LOG\_ERROR}}
+\index{LOG\_ERROR@{LOG\_ERROR}!application\_engine.cpp@{application\_engine.cpp}}
+\doxysubsubsection{\texorpdfstring{LOG\_ERROR}{LOG\_ERROR}}
+{\footnotesize\ttfamily \label{application__engine_8cpp_ad9c73bc78b8b2564e47a037b5a6ca226} 
+\#define LOG\+\_\+\+ERROR(\begin{DoxyParamCaption}\item[{}]{msg}{, }\item[{}]{}...{}\end{DoxyParamCaption})}
+
+{\bfseries Value\+:}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \textcolor{keywordflow}{do}\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ std::cerr\ <<\ \textcolor{stringliteral}{"{}ERROR:\ "{}}\ <<\ msg\ <<\ std::endl;\ \(\backslash\)}
+\DoxyCodeLine{\ \ \ \ \}\ \textcolor{keywordflow}{while}\ (0)}
+
+\end{DoxyCode}
