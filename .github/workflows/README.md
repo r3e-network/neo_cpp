@@ -1,23 +1,55 @@
 # GitHub Actions Workflows
 
+## Overview
+All workflows are configured with:
+- **30-minute timeout** to prevent stuck jobs
+- **Concurrency controls** to cancel old runs when new commits are pushed  
+- **Latest action versions** (v4) for optimal performance
+- **Cross-platform support** for Linux and macOS
+
 ## Active Workflows
 
-### 1. `release-ultra-simple.yml` 
+### 1. `ci.yml` - Continuous Integration
+**Purpose**: Build and test on multiple platforms
+**Trigger**: Push/PR to main, master, develop
+**Matrix**: Ubuntu (latest, 22.04), Debug/Release builds
+**Features**: ccache, parallel builds, test execution
+
+### 2. `test.yml` - Test Suite  
+**Purpose**: Comprehensive test execution with coverage
+**Trigger**: Push/PR to main branches, manual dispatch
+**Coverage**: Unit tests, integration tests, coverage reports
+**Upload**: Test results and coverage to Codecov
+
+### 3. `build-test.yml` - Build Validation
+**Purpose**: Basic build and test validation
+**Trigger**: Push/PR to main branches
+**Platform**: Ubuntu latest
+**Quick**: Fast feedback for commits
+
+### 4. `release.yml` - Multi-Platform Release
 **Purpose**: Create releases with binaries for all platforms
-**Trigger**: Push tags `v*.*.*` or manual
-**Status**: Primary release mechanism
+**Trigger**: Release branches, version tags, manual
+**Platforms**: Linux and macOS
+**Artifacts**: Packaged binaries with documentation
 
-### 2. `build-test.yml`
-**Purpose**: Basic CI build and test on push/PR
-**Trigger**: Push to master, Pull requests
-**Status**: Active for CI
+### 5. `release-build.yml` - Release Builder
+**Purpose**: Simplified release build process
+**Trigger**: Release branches, tags, manual
+**Output**: Linux x64 binaries
+**Features**: Automatic GitHub release creation
 
-### 3. `quality-gates-lite.yml`
-**Purpose**: Quick quality checks
-**Trigger**: Push to master
-**Status**: Active, consistently passing
+### 6. `ci-cd-optimized.yml` - Optimized Pipeline
+**Purpose**: Fast CI/CD with smart caching
+**Trigger**: Push/PR to main branches, tags
+**Features**: Quick validation, parallel jobs, build caching
 
-## Archived Workflows
+### 7. `quality-gates.yml` - Quality Checks
+**Purpose**: Code quality and security validation  
+**Trigger**: Push/PR, weekly schedule, manual
+**Checks**: Linting, formatting, security scanning
+
+## Configuration
 
 ### `release.yml` (Original)
 - Complex but feature-complete

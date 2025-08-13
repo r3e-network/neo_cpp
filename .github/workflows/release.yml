@@ -2,25 +2,30 @@ name: Release
 
 on:
   push:
+    branches:
+      - 'release/v*'
     tags:
-      - 'v*.*.*'
+      - 'v*'
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to release (e.g., v1.0.0)'
+        description: 'Version to release (e.g., v1.2.0)'
         required: true
         type: string
 
+# Cancel previous runs
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: true
+
 permissions:
   contents: write
-  packages: write
-  attestations: write
-  id-token: write
 
 jobs:
   create-release:
     name: Create Release
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     outputs:
       upload_url: ${{ steps.create_release.outputs.upload_url }}
       version: ${{ steps.get_version.outputs.version }}

@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, master, develop ]
+  pull_request:
+    branches: [ main, master, develop ]
+  workflow_dispatch:
+
+# Cancel previous runs when new commit is pushed
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-test:
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, ubuntu-22.04]
+        build_type: [Debug, Release]
+        
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          
+      - name: Setup ccache
+        uses: hendrikmuhs/ccache-action@v1.2
+        with:
+          key: ${{ runner.os }}-${{ matrix.build_type }}
+          
+      - name: Install dependencies (Ubuntu)
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            cmake \
+            ninja-build \
+            libssl-dev \
+            libboost-all-dev \
+            libgtest-dev
+            
+      - name: Configure CMake
+        run: |
+          cmake -B build \
+            -G Ninja \
+            -DCMAKE_BUILD_TYPE=${{ matrix.build_type }} \
+            -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
+            -DNEO_BUILD_TESTS=ON \
+            -DNEO_BUILD_EXAMPLES=OFF \
+            -DNEO_BUILD_TOOLS=OFF \
+            -DNEO_BUILD_APPS=ON \
+            -DNEO_BUILD_SHARED=ON \
+            -DNEO_BUILD_STATIC=OFF \
+            -DNEO_USE_MEMORY_STORE=ON \
+            -DNEO_USE_ROCKSDB=OFF \
+            -DNEO_USE_LEVELDB=OFF
+            
+      - name: Build
+        run: cmake --build build --parallel
+        
+      - name: Run tests
+        if: matrix.build_type == 'Debug'
+        run: |
+          cd build
+          ctest --output-on-failure --parallel
+          
+      - name: Upload artifacts
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: build-logs-${{ matrix.os }}-${{ matrix.build_type }}
+          path: |
+            build/CMakeFiles/CMakeOutput.log
+            build/CMakeFiles/CMakeError.log
+            build/Testing/Temporary/
