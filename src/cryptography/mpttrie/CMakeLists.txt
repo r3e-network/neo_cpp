@@ -20,7 +20,6 @@ target_include_directories(neo_mpttrie
 # Link dependencies
 target_link_libraries(neo_mpttrie
     PUBLIC
-        neo_cryptography
         neo_io
         neo_persistence
 )

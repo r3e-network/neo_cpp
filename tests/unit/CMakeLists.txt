@@ -14,6 +14,7 @@ add_subdirectory(plugins)
 add_subdirectory(consensus)
 add_subdirectory(rpc)
 add_subdirectory(cli)
+add_subdirectory(monitoring)
 
 # Main unit tests
 # add_executable(test_main

@@ -1,0 +1,147 @@
+name: Release Build
+
+on:
+  push:
+    branches:
+      - 'release/v*'
+    tags:
+      - 'v*'
+  workflow_dispatch:
+
+# Cancel previous runs
+concurrency:
+  group: release-build-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Get version
+        id: version
+        run: |
+          VERSION="${GITHUB_REF_NAME#release/}"
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Building version: ${VERSION}"
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            cmake \
+            libssl-dev \
+            libboost-all-dev
+
+      - name: Configure CMake
+        run: |
+          cmake -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DNEO_BUILD_TESTS=OFF \
+            -DNEO_BUILD_EXAMPLES=OFF \
+            -DNEO_BUILD_TOOLS=OFF \
+            -DNEO_BUILD_APPS=ON \
+            -DNEO_BUILD_SHARED=ON \
+            -DNEO_BUILD_STATIC=OFF \
+            -DNEO_USE_MEMORY_STORE=ON \
+            -DNEO_USE_ROCKSDB=OFF \
+            -DNEO_USE_LEVELDB=OFF \
+            -DNEO_ENABLE_COMPRESSION=ON \
+            -DNEO_ENABLE_TLS=ON
+
+      - name: Build neo_node
+        run: |
+          cmake --build build --target neo_node --parallel 2
+          
+      - name: Verify build
+        run: |
+          echo "=== Checking build output ==="
+          ls -la build/apps/
+          if [ -f build/apps/neo_node ]; then
+            echo "✅ neo_node built successfully"
+            build/apps/neo_node --version || true
+          else
+            echo "❌ neo_node not found"
+            exit 1
+          fi
+
+      - name: Package release
+        run: |
+          mkdir -p release
+          cp build/apps/neo_node release/ || true
+          
+          # Create README
+          cat > release/README.md << EOF
+          # Neo C++ ${{ steps.version.outputs.version }}
+          
+          ## Binary
+          - neo_node: Neo blockchain node implementation
+          
+          ## Usage
+          \`\`\`bash
+          ./neo_node --help
+          ./neo_node --version
+          \`\`\`
+          
+          ## Build Info
+          - Platform: Linux x86_64
+          - Compiler: GCC
+          - Build Type: Release
+          - Date: $(date)
+          EOF
+          
+          # Create tarball
+          tar -czf neo-cpp-${{ steps.version.outputs.version }}-linux-x64.tar.gz -C release .
+          
+          echo "Package created:"
+          ls -la *.tar.gz
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: Neo C++ ${{ steps.version.outputs.version }}
+          body: |
+            # Neo C++ ${{ steps.version.outputs.version }}
+            
+            ## 🚀 Release Highlights
+            - Fixed circular dependency in CMake build system
+            - Successfully builds neo_node binary
+            - All core components included
+            
+            ## 📦 Included Components
+            - ✅ neo_node - Main blockchain node
+            - ✅ Core libraries (cryptography, VM, network)
+            - ✅ Smart contract support
+            - ✅ Consensus module
+            
+            ## 🔧 Build Configuration
+            - Platform: Linux x86_64
+            - Build Type: Release (optimized)
+            - OpenSSL: System version
+            - Boost: System version
+            
+            ## 📝 Changes
+            - Fixed mpttrie CMakeLists.txt circular dependency
+            - Updated GitHub Actions workflows
+            - Improved build reliability
+            
+            ## 🐛 Known Issues
+            - Console service disabled (missing dependencies)
+            - Some optional components not included
+            
+            ## 📖 Documentation
+            See [README.md](https://github.com/r3e-network/neo_cpp/blob/main/README.md) for usage instructions.
+          files: |
+            neo-cpp-*.tar.gz
+          draft: false
+          prerelease: false

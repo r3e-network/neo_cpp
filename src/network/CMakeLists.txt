@@ -57,6 +57,7 @@ add_library(neo_network OBJECT
     p2p/payloads/network_address_with_time.cpp
     p2p/protocol_handler.cpp
     p2p/block_sync_manager.cpp
+    connection_pool.cpp
 )
 
 # Include directories

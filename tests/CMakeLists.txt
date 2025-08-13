@@ -21,6 +21,8 @@ if(GTest_FOUND OR TARGET gtest)
     add_subdirectory(unit)
     add_subdirectory(integration)
     add_subdirectory(plugins)
+    add_subdirectory(security)
+    add_subdirectory(performance)
 endif()
 
 

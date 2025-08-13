@@ -1,286 +1,174 @@
 /**
  * @file rate_limiter.h
- * @brief Rate Limiter
- * @author Neo C++ Team
- * @date 2025
- * @copyright MIT License
+ * @brief RPC Rate Limiter to prevent DoS attacks
  */
 
 #pragma once
 
 #include <chrono>
-#include <deque>
-#include <memory>
+#include <unordered_map>
 #include <mutex>
 #include <string>
-#include <unordered_map>
+#include <deque>
 
-namespace neo::rpc
-{
+namespace neo {
+namespace rpc {
 
 /**
  * @brief Token bucket rate limiter for RPC endpoints
  */
-class RateLimiter
-{
-   public:
-    struct Config
-    {
-        size_t requestsPerSecond = 10;
-        size_t requestsPerMinute = 300;
-        size_t burstSize = 20;
-        bool enabled = true;
+class RateLimiter {
+public:
+    struct Config {
+        size_t requests_per_second;      // Default: 10 requests per second
+        size_t burst_size;               // Allow burst of 20 requests
+        size_t requests_per_minute;     // Max 100 requests per minute
+        bool enable_ip_limiting;       // Limit per IP address
+        bool enable_method_limiting;   // Limit per method
+        
+        Config() 
+            : requests_per_second(10)
+            , burst_size(20)
+            , requests_per_minute(100)
+            , enable_ip_limiting(true)
+            , enable_method_limiting(true) {}
     };
 
-    explicit RateLimiter(const Config& config) : config_(config), tokens_(config_.burstSize) {}
-    explicit RateLimiter() : config_(Config{}), tokens_(config_.burstSize) {}
+private:
+    struct TokenBucket {
+        size_t tokens;
+        std::chrono::steady_clock::time_point last_refill;
+        std::deque<std::chrono::steady_clock::time_point> minute_window;
+        
+        TokenBucket(size_t initial_tokens) 
+            : tokens(initial_tokens)
+            , last_refill(std::chrono::steady_clock::now()) {}
+    };
+
+    Config config_;
+    mutable std::mutex mutex_;
+    std::unordered_map<std::string, TokenBucket> ip_buckets_;
+    std::unordered_map<std::string, TokenBucket> method_buckets_;
+    TokenBucket global_bucket_;
+
+public:
+    explicit RateLimiter(const Config& config = Config())
+        : config_(config)
+        , global_bucket_(config.burst_size) {}
 
     /**
-     * @brief Check if a request is allowed
-     * @param clientId Client identifier (IP address)
+     * @brief Check if request is allowed
+     * @param ip_address Client IP address
      * @param method RPC method name
-     * @return true if allowed, false if rate limited
+     * @return true if request is allowed, false if rate limited
      */
-    bool IsAllowed(const std::string& clientId, const std::string& method = "")
-    {
-        if (!config_.enabled) return true;
-
+    bool AllowRequest(const std::string& ip_address, const std::string& method) {
         std::lock_guard<std::mutex> lock(mutex_);
-
+        
         auto now = std::chrono::steady_clock::now();
-
-        // Get or create client state
-        auto& client = clients_[clientId];
-
-        // Clean old requests
-        CleanOldRequests(client, now);
-
-        // Check per-second limit
-        auto oneSecondAgo = now - std::chrono::seconds(1);
-        size_t recentRequests = 0;
-        for (const auto& timestamp : client.requests)
-        {
-            if (timestamp > oneSecondAgo)
-            {
-                recentRequests++;
+        
+        // Check global rate limit
+        if (!CheckAndConsumeBucket(global_bucket_, now)) {
+            return false;
+        }
+        
+        // Check IP-based rate limit
+        if (config_.enable_ip_limiting && !ip_address.empty()) {
+            auto& bucket = GetOrCreateBucket(ip_buckets_, ip_address);
+            if (!CheckAndConsumeBucket(bucket, now)) {
+                return false;
             }
         }
-
-        if (recentRequests >= config_.requestsPerSecond)
-        {
-            return false;
+        
+        // Check method-based rate limit
+        if (config_.enable_method_limiting && !method.empty()) {
+            auto& bucket = GetOrCreateBucket(method_buckets_, method);
+            if (!CheckAndConsumeBucket(bucket, now)) {
+                return false;
+            }
         }
+        
+        return true;
+    }
 
-        // Check per-minute limit
-        if (client.requests.size() >= config_.requestsPerMinute)
-        {
-            return false;
+    /**
+     * @brief Reset rate limiter for specific IP
+     * @param ip_address IP address to reset
+     */
+    void ResetIP(const std::string& ip_address) {
+        std::lock_guard<std::mutex> lock(mutex_);
+        ip_buckets_.erase(ip_address);
+    }
+
+    /**
+     * @brief Get current statistics
+     */
+    struct Stats {
+        size_t total_requests = 0;
+        size_t blocked_requests = 0;
+        size_t unique_ips = 0;
+    };
+
+    Stats GetStats() const {
+        std::lock_guard<std::mutex> lock(mutex_);
+        Stats stats;
+        stats.unique_ips = ip_buckets_.size();
+        // Additional stats can be tracked if needed
+        return stats;
+    }
+
+private:
+    TokenBucket& GetOrCreateBucket(std::unordered_map<std::string, TokenBucket>& buckets, 
+                                   const std::string& key) {
+        auto it = buckets.find(key);
+        if (it == buckets.end()) {
+            it = buckets.emplace(key, TokenBucket(config_.burst_size)).first;
         }
+        return it->second;
+    }
 
-        // Token bucket check
-        RefillTokens(now);
-        if (tokens_ > 0)
-        {
-            tokens_--;
-            client.requests.push_back(now);
+    bool CheckAndConsumeBucket(TokenBucket& bucket, 
+                               const std::chrono::steady_clock::time_point& now) {
+        // Refill tokens based on time elapsed
+        RefillTokens(bucket, now);
+        
+        // Check minute window
+        CleanMinuteWindow(bucket, now);
+        if (bucket.minute_window.size() >= config_.requests_per_minute) {
+            return false; // Exceeded minute limit
+        }
+        
+        // Check if we have tokens
+        if (bucket.tokens > 0) {
+            bucket.tokens--;
+            bucket.minute_window.push_back(now);
             return true;
         }
-
+        
         return false;
     }
 
-    /**
-     * @brief Get current rate limit status for a client
-     * @param clientId Client identifier
-     * @return Remaining requests in current window
-     */
-    size_t GetRemainingRequests(const std::string& clientId)
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-
-        auto it = clients_.find(clientId);
-        if (it == clients_.end())
-        {
-            return config_.requestsPerMinute;
-        }
-
-        auto now = std::chrono::steady_clock::now();
-        CleanOldRequests(it->second, now);
-
-        return config_.requestsPerMinute - it->second.requests.size();
-    }
-
-    /**
-     * @brief Reset rate limit for a specific client
-     * @param clientId Client identifier
-     */
-    void ResetClient(const std::string& clientId)
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-        clients_.erase(clientId);
-    }
-
-    /**
-     * @brief Reset all rate limits
-     */
-    void ResetAll()
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-        clients_.clear();
-        tokens_ = config_.burstSize;
-    }
-
-    /**
-     * @brief Update rate limiter configuration
-     * @param config New configuration
-     */
-    void UpdateConfig(const Config& config)
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-        config_ = config;
-        tokens_ = std::min(tokens_, config.burstSize);
-    }
-
-   private:
-    struct ClientState
-    {
-        std::deque<std::chrono::steady_clock::time_point> requests;
-    };
-
-    void CleanOldRequests(ClientState& client, const std::chrono::steady_clock::time_point& now)
-    {
-        auto oneMinuteAgo = now - std::chrono::minutes(1);
-
-        while (!client.requests.empty() && client.requests.front() < oneMinuteAgo)
-        {
-            client.requests.pop_front();
+    void RefillTokens(TokenBucket& bucket, 
+                     const std::chrono::steady_clock::time_point& now) {
+        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(
+            now - bucket.last_refill).count();
+        
+        // Refill tokens based on elapsed time
+        size_t tokens_to_add = (elapsed * config_.requests_per_second) / 1000;
+        if (tokens_to_add > 0) {
+            bucket.tokens = std::min(bucket.tokens + tokens_to_add, config_.burst_size);
+            bucket.last_refill = now;
         }
     }
 
-    void RefillTokens(const std::chrono::steady_clock::time_point& now)
-    {
-        if (lastRefill_ == std::chrono::steady_clock::time_point{})
-        {
-            lastRefill_ = now;
-            return;
-        }
-
-        auto elapsed = std::chrono::duration_cast<std::chrono::milliseconds>(now - lastRefill_);
-        auto tokensToAdd = (elapsed.count() * config_.requestsPerSecond) / 1000;
-
-        if (tokensToAdd > 0)
-        {
-            tokens_ = std::min(tokens_ + static_cast<size_t>(tokensToAdd), config_.burstSize);
-            lastRefill_ = now;
+    void CleanMinuteWindow(TokenBucket& bucket, 
+                           const std::chrono::steady_clock::time_point& now) {
+        auto minute_ago = now - std::chrono::minutes(1);
+        while (!bucket.minute_window.empty() && bucket.minute_window.front() < minute_ago) {
+            bucket.minute_window.pop_front();
         }
     }
-
-    Config config_;
-    std::unordered_map<std::string, ClientState> clients_;
-    size_t tokens_;
-    std::chrono::steady_clock::time_point lastRefill_;
-    mutable std::mutex mutex_;
 };
 
-/**
- * @brief Method-specific rate limiter with different limits per method
- */
-class MethodRateLimiter
-{
-   public:
-    struct MethodConfig
-    {
-        size_t requestsPerSecond = 10;
-        size_t requestsPerMinute = 300;
-        bool enabled = true;
-    };
-
-    MethodRateLimiter()
-    {
-        // Set default limits for different method categories
-        SetMethodLimit("sendrawtransaction", {1, 10, true});     // Very restrictive
-        SetMethodLimit("invokefunction", {5, 100, true});        // Moderate
-        SetMethodLimit("invokescript", {5, 100, true});          // Moderate
-        SetMethodLimit("getblock", {10, 300, true});             // Standard
-        SetMethodLimit("getblockcount", {30, 1000, true});       // Lenient
-        SetMethodLimit("getconnectioncount", {30, 1000, true});  // Lenient
-    }
-
-    /**
-     * @brief Check if a request is allowed
-     * @param clientId Client identifier
-     * @param method RPC method name
-     * @return true if allowed, false if rate limited
-     */
-    bool IsAllowed(const std::string& clientId, const std::string& method)
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-
-        // Get method-specific limiter or use default
-        auto it = methodLimiters_.find(method);
-        if (it != methodLimiters_.end())
-        {
-            return it->second->IsAllowed(clientId, method);
-        }
-
-        return defaultLimiter_->IsAllowed(clientId, method);
-    }
-
-    /**
-     * @brief Set rate limit for a specific method
-     * @param method Method name
-     * @param config Rate limit configuration
-     */
-    void SetMethodLimit(const std::string& method, const MethodConfig& config)
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-
-        RateLimiter::Config limiterConfig;
-        limiterConfig.requestsPerSecond = config.requestsPerSecond;
-        limiterConfig.requestsPerMinute = config.requestsPerMinute;
-        limiterConfig.burstSize = config.requestsPerSecond * 2;
-        limiterConfig.enabled = config.enabled;
-
-        methodLimiters_[method] = std::make_unique<RateLimiter>(limiterConfig);
-    }
-
-    /**
-     * @brief Set default rate limit for methods without specific limits
-     * @param config Rate limit configuration
-     */
-    void SetDefaultLimit(const MethodConfig& config)
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-
-        RateLimiter::Config limiterConfig;
-        limiterConfig.requestsPerSecond = config.requestsPerSecond;
-        limiterConfig.requestsPerMinute = config.requestsPerMinute;
-        limiterConfig.burstSize = config.requestsPerSecond * 2;
-        limiterConfig.enabled = config.enabled;
-
-        defaultLimiter_ = std::make_unique<RateLimiter>(limiterConfig);
-    }
-
-    /**
-     * @brief Reset rate limits for a specific client
-     * @param clientId Client identifier
-     */
-    void ResetClient(const std::string& clientId)
-    {
-        std::lock_guard<std::mutex> lock(mutex_);
-
-        for (auto& [method, limiter] : methodLimiters_)
-        {
-            limiter->ResetClient(clientId);
-        }
-        defaultLimiter_->ResetClient(clientId);
-    }
-
-   private:
-    std::unordered_map<std::string, std::unique_ptr<RateLimiter>> methodLimiters_;
-    std::unique_ptr<RateLimiter> defaultLimiter_ =
-        std::make_unique<RateLimiter>(RateLimiter::Config{10, 300, 20, true});
-    mutable std::mutex mutex_;
-};
-
-}  // namespace neo::rpc
+} // namespace rpc
+} // namespace neo

@@ -13,6 +13,7 @@
 #include <neo/ledger/transaction_pool_manager.h>
 #include <neo/network/p2p/local_node.h>
 #include <neo/persistence/data_cache.h>
+#include <neo/rpc/rate_limiter.h>
 
 #include <atomic>
 #include <chrono>
@@ -40,6 +41,12 @@ struct RpcConfig
     bool enable_authentication{false};
     std::string username;
     std::string password;
+    
+    // Rate limiting configuration
+    bool enable_rate_limiting{true};
+    size_t rate_limit_requests_per_second{10};
+    size_t rate_limit_burst_size{20};
+    size_t rate_limit_requests_per_minute{100};
 };
 
 /**

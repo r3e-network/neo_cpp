@@ -8,6 +8,7 @@ add_executable(test_ledger
     # test_json_serialization.cpp # Disabled - ToJson/DeserializeFromJson methods not yet implemented
     test_header_cache.cpp
     # test_memory_pool_all_methods_complete.cpp # Disabled - uses Neo3 APIs not yet implemented
+    test_blockchain_cache.cpp  # New blockchain cache tests
 )
 
 # Include directories

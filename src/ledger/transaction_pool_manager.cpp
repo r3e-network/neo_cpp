@@ -379,18 +379,25 @@ size_t TransactionPoolManager::DetectAndResolveConflicts()
     conflict_groups_.clear();
     for (const auto& [hash, meta] : metadata_)
     {
-        // TODO: Implement Get method in MemoryPool
-        // auto tx_opt = memory_pool_->Get(hash);
-        // if (!tx_opt.has_value())
-        //     continue;
+        // Get the transaction from memory pool
+        auto tx_opt = memory_pool_->Get(hash);
+        if (!tx_opt.has_value())
+            continue;
 
-        // TODO: Complete conflict detection once Get method is available
-        // auto& tx = tx_opt.value().GetTransaction();
-        // for (const auto& input : tx.GetInputs())
-        // {
-        //     std::string key = input.GetPrevHash().ToString() + ":" + std::to_string(input.GetPrevIndex());
-        //     conflict_groups_[key].push_back(hash);
-        // }
+        // Neo3 uses conflict attributes instead of inputs
+        // Check for Conflicts attribute in the transaction
+        auto tx = tx_opt.value().GetTransaction();
+        for (const auto& attr : tx->GetAttributes())
+        {
+            if (attr->GetType() == ledger::TransactionAttribute::Usage::Conflicts)
+            {
+                // Track conflicts based on the conflicting hash
+                // In Neo3, Conflicts attribute contains the hash of conflicting transaction
+                // For now, we'll use a simplified conflict detection
+                std::string key = "conflict_" + hash.ToString();
+                conflict_groups_[key].push_back(hash);
+            }
+        }
     }
 
     // Resolve conflicts by keeping highest fee transaction

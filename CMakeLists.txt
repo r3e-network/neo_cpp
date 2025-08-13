@@ -23,6 +23,7 @@ option(NEO_USE_VCPKG "Use vcpkg for dependencies" ON)
 option(NEO_PRODUCTION_BUILD "Enable production optimizations" OFF)
 option(NEO_ENABLE_PROFILING "Enable profiling support" OFF)
 option(NEO_ENABLE_SANITIZERS "Enable address and UB sanitizers" OFF)
+option(ENABLE_COVERAGE "Enable code coverage reporting" OFF)
 
 # Include CMake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake")
@@ -31,6 +32,7 @@ include(BuildOptions)    # Include build configuration options
 include(SetupCompiler)
 include(FindDependencies)
 include(SetupTesting)
+include(CodeCoverage)    # Code coverage configuration
 
 # Export compile commands for clang-tidy
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
