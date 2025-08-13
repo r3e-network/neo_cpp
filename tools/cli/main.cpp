@@ -503,28 +503,25 @@ int main(int argc, char* argv[])
     // Parse command line arguments
     std::vector<std::string> args(argv + 1, argv + argc);
 
-    if (args.empty())
+    // Show help if no arguments or help requested
+    if (args.empty() || 
+        (args.size() > 0 && (args[0] == "help" || args[0] == "--help" || args[0] == "-h")))
     {
-        std::cout << "Usage: neo_cli [command]" << std::endl;
+        std::cout << "Usage: neo_cli [command] [options]" << std::endl;
         std::cout << "Commands:" << std::endl;
-        std::cout << "  help - Show this help message" << std::endl;
-        std::cout << "  version - Show version information" << std::endl;
-        std::cout << "  start - Start the Neo node" << std::endl;
-        std::cout << "  stop - Stop the Neo node" << std::endl;
+        std::cout << "  help, --help, -h     Show this help message" << std::endl;
+        std::cout << "  version, --version   Show version information" << std::endl;
+        std::cout << "  start                Start the Neo node" << std::endl;
+        std::cout << "  stop                 Stop the Neo node" << std::endl;
+        std::cout << "\nOptions:" << std::endl;
+        std::cout << "  --config <path>      Specify configuration file" << std::endl;
+        std::cout << "  --rpc-port <port>    Set RPC port (default: 10332)" << std::endl;
+        std::cout << "  --p2p-port <port>    Set P2P port (default: 10333)" << std::endl;
         return 0;
     }
 
     // Process commands
-    if (args[0] == "help")
-    {
-        std::cout << "Usage: neo_cli [command]" << std::endl;
-        std::cout << "Commands:" << std::endl;
-        std::cout << "  help - Show this help message" << std::endl;
-        std::cout << "  version - Show version information" << std::endl;
-        std::cout << "  start - Start the Neo node" << std::endl;
-        std::cout << "  stop - Stop the Neo node" << std::endl;
-    }
-    else if (args[0] == "version")
+    if (args[0] == "version" || args[0] == "--version")
     {
         std::cout << "Neo C++ CLI v0.1.0" << std::endl;
     }

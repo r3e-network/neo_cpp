@@ -1,0 +1,58 @@
+{
+  "ApplicationConfiguration": {
+    "Network": "mainnet",
+    "AddressVersion": 53,
+    "Storage": {
+      "Engine": "rocksdb",
+      "Path": "/var/lib/neo/chain",
+      "Options": {
+        "WriteBufferSize": 67108864,
+        "MaxOpenFiles": 1000,
+        "BlockCacheSize": 134217728,
+        "CompressionEnabled": true
+      }
+    },
+    "P2P": {
+      "Port": 10333,
+      "MaxConnections": 100,
+      "MinDesiredConnections": 10,
+      "MaxConnectionsPerAddress": 3,
+      "SeedList": [
+        "34.124.145.177:10332",
+        "35.238.26.128:10332",
+        "35.192.59.217:10332"
+      ]
+    },
+    "RPC": {
+      "Enabled": true,
+      "Port": 10334,
+      "SslEnabled": false,
+      "MaxConcurrentConnections": 40,
+      "MaxIteratorResultItems": 100,
+      "MaxFindResultItems": 100,
+      "MaxGasInvoke": 100000000,
+      "EnableCorsAllowOrigin": false
+    },
+    "UnlockWallet": {
+      "Path": "",
+      "Password": "",
+      "IsActive": false
+    },
+    "Logging": {
+      "Level": "info",
+      "Path": "/var/log/neo",
+      "ConsoleEnabled": true,
+      "FileEnabled": true,
+      "MaxFileSize": 10485760,
+      "MaxFiles": 10
+    },
+    "Performance": {
+      "MaxTransactionsPerBlock": 500,
+      "MaxFreeTransactionsPerBlock": 20,
+      "MaxFreeTransactionSize": 1024,
+      "FeePerExtraByte": 0.00001,
+      "BlockCacheSize": 1000,
+      "MemoryPoolSize": 50000
+    }
+  }
+}

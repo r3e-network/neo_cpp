@@ -1,5 +1,10 @@
 cmake_minimum_required(VERSION 3.20)
 
+# Set CMake policies to avoid warnings
+if(POLICY CMP0167)
+    cmake_policy(SET CMP0167 NEW)  # Use new FindBoost module behavior
+endif()
+
 project(neo-cpp VERSION 1.0.0 LANGUAGES CXX)
 
 # Set C++20 standard

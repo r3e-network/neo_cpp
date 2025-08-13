@@ -327,8 +327,21 @@ class NeoNode
 
 static void PrintUsage()
 {
+    std::cout << "Neo C++ Node v1.2.0\n"
+              << "Usage: neo_node [--help] [--version] [--config <path>]\n"
+              << "\nOptions:\n"
+              << "  --help, -h       Show this help message\n"
+              << "  --version, -v    Show version information\n"
+              << "  --config <path>  Specify configuration file path\n" << std::endl;
+}
+
+static void PrintVersion()
+{
     std::cout << "Neo C++ Node\n"
-              << "Usage: neo_node [--help] [--config <path>]" << std::endl;
+              << "Version: 1.2.0\n"
+              << "Build Date: " << __DATE__ << " " << __TIME__ << "\n"
+              << "Protocol Version: 3.6.0\n"
+              << "Network ID: 860833102\n" << std::endl;
 }
 
 int main(int argc, char* argv[])
@@ -347,6 +360,11 @@ int main(int argc, char* argv[])
             if (arg == "--help" || arg == "-h")
             {
                 PrintUsage();
+                return 0;
+            }
+            else if (arg == "--version" || arg == "-v")
+            {
+                PrintVersion();
                 return 0;
             }
             if (arg == "--config" && i + 1 < argc)

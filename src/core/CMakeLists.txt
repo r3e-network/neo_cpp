@@ -1,5 +1,10 @@
 # Core module CMakeLists.txt
 
+# Set policy for FindBoost module
+if(POLICY CMP0167)
+    cmake_policy(SET CMP0167 NEW)
+endif()
+
 # Find required dependencies
 find_package(Boost REQUIRED)
 
