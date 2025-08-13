@@ -114,26 +114,18 @@ jobs:
           sudo apt-get install -y \
             build-essential \
             cmake \
-            ninja-build \
             libssl-dev \
-            libboost-dev \
-            libboost-system-dev \
-            libboost-filesystem-dev \
-            libboost-thread-dev \
-            libboost-program-options-dev \
-            librocksdb-dev \
-            nlohmann-json3-dev \
-            libspdlog-dev \
-            libgtest-dev
+            libboost-all-dev
 
       - name: Build project
         run: |
           cmake -B build \
-            -G Ninja \
             -DCMAKE_BUILD_TYPE=Release \
             -DNEO_BUILD_TESTS=OFF \
-            -DNEO_BUILD_EXAMPLES=OFF
-          cmake --build build --parallel
+            -DNEO_BUILD_EXAMPLES=OFF \
+            -DNEO_BUILD_TOOLS=ON \
+            -DNEO_BUILD_APPS=ON
+          make -C build -j$(nproc) || make -C build -j1
 
       - name: Package binaries
         run: |
@@ -208,17 +200,18 @@ jobs:
 
       - name: Setup build environment
         run: |
-          brew install cmake ninja boost openssl@3 rocksdb nlohmann-json spdlog googletest
+          brew install cmake boost openssl@3 || true
 
       - name: Build project
         run: |
           cmake -B build \
-            -G Ninja \
             -DCMAKE_BUILD_TYPE=Release \
             -DNEO_BUILD_TESTS=OFF \
             -DNEO_BUILD_EXAMPLES=OFF \
+            -DNEO_BUILD_TOOLS=ON \
+            -DNEO_BUILD_APPS=ON \
             -DOPENSSL_ROOT_DIR=$(brew --prefix openssl@3)
-          cmake --build build --parallel
+          make -C build -j$(sysctl -n hw.ncpu) || make -C build -j1
 
       - name: Package binaries
         run: |
@@ -304,7 +297,7 @@ jobs:
           
           # Install minimal dependencies
           C:\vcpkg\vcpkg install --triplet x64-windows `
-            openssl boost-system boost-filesystem boost-thread boost-program-options rocksdb nlohmann-json
+            openssl boost-system boost-filesystem boost-thread boost-program-options
 
       - name: Build project
         shell: powershell

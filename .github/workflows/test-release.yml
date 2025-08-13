@@ -46,7 +46,10 @@ jobs:
         run: |
           cmake -B build \
             -DCMAKE_BUILD_TYPE=Release \
-            -DBUILD_TESTS=ON
+            -DNEO_BUILD_TESTS=ON \
+            -DNEO_BUILD_EXAMPLES=OFF \
+            -DNEO_BUILD_TOOLS=ON \
+            -DNEO_BUILD_APPS=ON
 
       - name: Build
         run: |
