@@ -5,6 +5,7 @@ add_library(neo_rpc OBJECT
     rpc_server_impl.cpp      # RpcServer class implementation
     rpc_server_unified.cpp  # Complete unified RPC server implementation
     rpc_methods_complete.cpp
+    metrics_endpoint.cpp     # Metrics endpoint for performance monitoring
     # rpc_server_stub.cpp  # Replaced with unified implementation
 )
 
@@ -22,6 +23,7 @@ target_link_libraries(neo_rpc PUBLIC
     neo_persistence
     neo_ledger
     neo_smartcontract
+    neo_monitoring
 )
 
 # Link httplib if available

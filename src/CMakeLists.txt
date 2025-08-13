@@ -4,6 +4,7 @@ add_subdirectory(cryptography)
 add_subdirectory(io)
 add_subdirectory(json)
 add_subdirectory(logging)
+add_subdirectory(monitoring)
 add_subdirectory(extensions)
 # add_subdirectory(console_service) # Temporarily disabled
 add_subdirectory(console_service) # Re-enabled after fixing compilation issues
@@ -37,6 +38,7 @@ add_library(neo_cpp
     $<TARGET_OBJECTS:neo_io>
     $<TARGET_OBJECTS:neo_json>
     $<TARGET_OBJECTS:neo_logging>
+    $<TARGET_OBJECTS:neo_monitoring>
     $<TARGET_OBJECTS:neo_extensions>
     # $<TARGET_OBJECTS:neo_console_service> # Re-disabled due to missing dependencies
     $<TARGET_OBJECTS:neo_persistence>
