@@ -11,6 +11,7 @@ add_executable(test_integration
     test_p2p_blockchain_integration.cpp
     test_p2p_connectivity_comprehensive.cpp
     test_block_sync_comprehensive.cpp
+    test_block_sync_fixed.cpp
     test_block_execution_comprehensive.cpp
     test_state_updates_comprehensive.cpp
     test_neo_node_complete_integration.cpp
