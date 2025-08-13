@@ -351,7 +351,7 @@ public:
             
             // Also cache transactions in the block
             for (const auto& tx : block->GetTransactions()) {
-                CacheTransaction(tx);
+                CacheTransaction(std::make_shared<Transaction>(tx));
             }
         }
     }
