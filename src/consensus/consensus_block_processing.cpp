@@ -8,6 +8,7 @@
 
 #include <neo/consensus/consensus_service.h>
 #include <neo/cryptography/ecc/secp256r1.h>
+#include <neo/logging/console_logger.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
@@ -98,7 +99,7 @@ void ConsensusService::ProcessBlock(std::shared_ptr<ledger::Block> block)
         lastBlockTime_ = GetCurrentTimestamp();
 
         // Log block
-        std::cout << "Block " << block->GetIndex() << " added to blockchain" << std::endl;
+        NEO_LOG_DEBUG("Block " + std::to_string(block->GetIndex()) + " added to blockchain");
 
         // Notify block added
         node_->OnBlockAdded(block);
@@ -106,7 +107,7 @@ void ConsensusService::ProcessBlock(std::shared_ptr<ledger::Block> block)
     catch (const std::exception& ex)
     {
         // Log error
-        std::cerr << "Failed to process block: " << ex.what() << std::endl;
+        NEO_LOG_ERROR(std::string("Failed to process block: ") + ex.what());
 
         // Reset consensus
         Reset();

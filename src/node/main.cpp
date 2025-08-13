@@ -11,6 +11,7 @@
  */
 
 #include <neo/node/neo_node.h>
+#include <neo/logging/console_logger.h>
 
 #include <atomic>
 #include <chrono>
@@ -27,7 +28,7 @@ std::shared_ptr<neo::node::NeoNode> g_neoNode;
 
 void SignalHandler(int signal)
 {
-    std::cout << "\nReceived signal " << signal << ", initiating graceful shutdown..." << std::endl;
+    NEO_LOG_INFO("Received signal " + std::to_string(signal) + ", initiating graceful shutdown...");
     g_shutdownRequested = true;
 
     if (g_neoNode)
@@ -46,10 +47,10 @@ int main(int argc, char* argv[])
 {
     try
     {
-        std::cout << "Neo C++ Blockchain Node v1.0.0" << std::endl;
-        std::cout << "Production-ready implementation matching C# Neo node" << std::endl;
-        std::cout << "Copyright (c) 2024 Neo C++ Development Team" << std::endl;
-        std::cout << std::endl;
+        NEO_LOG_INFO("Neo C++ Blockchain Node v1.0.0");
+        NEO_LOG_INFO("Production-ready implementation matching C# Neo node");
+        NEO_LOG_INFO("Copyright (c) 2024 Neo C++ Development Team");
+        NEO_LOG_INFO("");
 
         // Parse command line arguments
         std::string configPath = "config.json";
@@ -68,11 +69,11 @@ int main(int argc, char* argv[])
             }
             else if (arg == "--help" || arg == "-h")
             {
-                std::cout << "Usage: " << argv[0] << " [options]" << std::endl;
-                std::cout << "Options:" << std::endl;
-                std::cout << "  --config <path>   Configuration file path (default: config.json)" << std::endl;
-                std::cout << "  --datadir <path>  Data directory path (default: ./data)" << std::endl;
-                std::cout << "  --help, -h        Show this help message" << std::endl;
+                NEO_LOG_INFO(std::string("Usage: ") + argv[0] + " [options]");
+                NEO_LOG_INFO("Options:");
+                NEO_LOG_INFO("  --config <path>   Configuration file path (default: config.json)");
+                NEO_LOG_INFO("  --datadir <path>  Data directory path (default: ./data)");
+                NEO_LOG_INFO("  --help, -h        Show this help message");
                 return 0;
             }
         }

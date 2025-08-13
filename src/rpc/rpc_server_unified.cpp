@@ -122,7 +122,7 @@ class RpcServerImpl
     void HandleRpcRequest(const httplib::Request& req, httplib::Response& res)
     {
         // Rate limiting check
-        if (rateLimiter_ && !rateLimiter_->IsAllowed(req.remote_addr))
+        if (rateLimiter_ && !rateLimiter_->AllowRequest(req.remote_addr, ""))
         {
             res.status = 429;  // Too Many Requests
             res.set_content("{\"error\":\"Rate limit exceeded\"}", "application/json");

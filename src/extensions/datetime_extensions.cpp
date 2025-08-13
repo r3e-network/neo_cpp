@@ -56,30 +56,53 @@ uint64_t DateTimeExtensions::FromISO8601String(const std::string& iso8601)
 {
     struct tm tm = {};
 
+    // Use safer string parsing with bounds checking
+    int year = 0, month = 0, day = 0, hour = 0, min = 0, sec = 0;
+    
     // Try to parse ISO 8601 format: YYYY-MM-DDTHH:MM:SSZ
-    int year, month, day, hour, min, sec;
-    if (sscanf(iso8601.c_str(), "%d-%d-%dT%d:%d:%dZ", &year, &month, &day, &hour, &min, &sec) == 6)
+    std::istringstream iss(iso8601);
+    char sep1, sep2, sep3, sep4, sep5;
+    
+    // Try format with 'T' and 'Z'
+    iss >> year >> sep1 >> month >> sep2 >> day >> sep3 >> hour >> sep4 >> min >> sep5 >> sec;
+    
+    if (iss && sep1 == '-' && sep2 == '-' && sep3 == 'T' && sep4 == ':' && sep5 == ':')
     {
-        tm.tm_year = year - 1900;
-        tm.tm_mon = month - 1;
-        tm.tm_mday = day;
-        tm.tm_hour = hour;
-        tm.tm_min = min;
-        tm.tm_sec = sec;
-    }
-    // Try alternative format without 'T' and 'Z'
-    else if (sscanf(iso8601.c_str(), "%d-%d-%d %d:%d:%d", &year, &month, &day, &hour, &min, &sec) == 6)
-    {
-        tm.tm_year = year - 1900;
-        tm.tm_mon = month - 1;
-        tm.tm_mday = day;
-        tm.tm_hour = hour;
-        tm.tm_min = min;
-        tm.tm_sec = sec;
+        // Validate ranges
+        if (year >= 1900 && year <= 3000 && month >= 1 && month <= 12 && 
+            day >= 1 && day <= 31 && hour >= 0 && hour <= 23 && 
+            min >= 0 && min <= 59 && sec >= 0 && sec <= 59)
+        {
+            tm.tm_year = year - 1900;
+            tm.tm_mon = month - 1;
+            tm.tm_mday = day;
+            tm.tm_hour = hour;
+            tm.tm_min = min;
+            tm.tm_sec = sec;
+        }
     }
     else
     {
-        throw std::invalid_argument("Invalid ISO 8601 date format");
+        // Try alternative format without 'T' and 'Z'
+        iss.clear();
+        iss.str(iso8601);
+        iss >> year >> sep1 >> month >> sep2 >> day >> hour >> sep4 >> min >> sep5 >> sec;
+        
+        if (iss && sep1 == '-' && sep2 == '-' && sep4 == ':' && sep5 == ':')
+        {
+            // Validate ranges
+            if (year >= 1900 && year <= 3000 && month >= 1 && month <= 12 && 
+                day >= 1 && day <= 31 && hour >= 0 && hour <= 23 && 
+                min >= 0 && min <= 59 && sec >= 0 && sec <= 59)
+            {
+                tm.tm_year = year - 1900;
+                tm.tm_mon = month - 1;
+                tm.tm_mday = day;
+                tm.tm_hour = hour;
+                tm.tm_min = min;
+                tm.tm_sec = sec;
+            }
+        }
     }
 
     // Convert to time_t (assuming UTC)
