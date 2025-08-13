@@ -11,6 +11,47 @@ else()
 endif()
 
 # =============================================================================
+# Help Target - List all available custom targets
+# =============================================================================
+
+add_custom_target(help-targets
+    COMMAND ${CMAKE_COMMAND} -E echo "Available custom targets for Neo C++:"
+    COMMAND ${CMAKE_COMMAND} -E echo ""
+    COMMAND ${CMAKE_COMMAND} -E echo "Running Targets:"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make run           - Run Neo node with default TestNet settings"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make run-mainnet   - Run Neo node on MainNet"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make run-testnet   - Run Neo node on TestNet"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make run-private   - Run private network"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make run-rpc       - Start RPC server"
+    COMMAND ${CMAKE_COMMAND} -E echo ""
+    COMMAND ${CMAKE_COMMAND} -E echo "Testing Targets:"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make test          - Run all tests"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make test-all      - Run all tests with output on failure"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make test-unit     - Run unit tests only"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make test-verbose  - Run tests with verbose output"
+    COMMAND ${CMAKE_COMMAND} -E echo ""
+    COMMAND ${CMAKE_COMMAND} -E echo "Code Quality Targets:"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make format        - Format code with clang-format"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make format-check  - Check code format without modifying"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make tidy          - Run clang-tidy"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make check         - Run all code quality checks"
+    COMMAND ${CMAKE_COMMAND} -E echo ""
+    COMMAND ${CMAKE_COMMAND} -E echo "Build Targets:"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make libs          - Build core libraries only"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make examples      - Build and run examples"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make bench         - Run benchmarks"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make docs          - Generate documentation with Doxygen"
+    COMMAND ${CMAKE_COMMAND} -E echo ""
+    COMMAND ${CMAKE_COMMAND} -E echo "Utility Targets:"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make clean         - Clean build files"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make clean-all     - Clean everything including cache"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make install       - Install Neo C++"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make help          - Show all targets"
+    COMMAND ${CMAKE_COMMAND} -E echo "  make help-targets  - Show this help message"
+    COMMENT "Showing available custom targets..."
+)
+
+# =============================================================================
 # Testing Targets
 # =============================================================================
 
@@ -91,6 +132,15 @@ add_custom_target(check
 # Running Applications
 # =============================================================================
 
+# Main run target - runs the node with default settings
+if(NEO_BUILD_APPS)
+    add_custom_target(run
+        COMMAND $<TARGET_FILE:neo_node> --config ${CMAKE_SOURCE_DIR}/config/testnet.json
+        DEPENDS neo_node
+        COMMENT "Starting Neo node with default settings (TestNet)..."
+    )
+endif()
+
 # Run Neo node targets (only if neo_node will be built)
 if(NEO_BUILD_APPS)
     # Run Neo node (mainnet)
@@ -151,6 +201,16 @@ endif()
 # =============================================================================
 # Build Utilities
 # =============================================================================
+
+# Clean everything including CMake cache
+add_custom_target(clean-all
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/CMakeFiles
+    COMMAND ${CMAKE_COMMAND} -E remove ${CMAKE_BINARY_DIR}/CMakeCache.txt
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/Testing
+    COMMAND ${CMAKE_COMMAND} -E remove_directory ${CMAKE_BINARY_DIR}/_deps
+    COMMAND ${CMAKE_COMMAND} -E echo "Cleaned all build files and cache"
+    COMMENT "Cleaning all build files and CMake cache..."
+)
 
 # Build core libraries only
 add_custom_target(libs
