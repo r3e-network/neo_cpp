@@ -1,0 +1,262 @@
+name: Optimized CI/CD Pipeline
+
+on:
+  push:
+    branches: [master]
+    tags: ['v*']
+  pull_request:
+    branches: [master]
+  workflow_dispatch:
+    inputs:
+      create_release:
+        description: 'Create a release'
+        required: false
+        default: false
+        type: boolean
+
+# Cancel previous runs
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  # Quick validation for all pushes
+  validate:
+    name: Quick Validation
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: false  # Don't need submodules for validation
+          
+      - name: Cache build
+        uses: actions/cache@v3
+        with:
+          path: |
+            build
+            ~/.ccache
+          key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-build-
+            
+      - name: Quick build test
+        run: |
+          # Just verify it compiles
+          cmake -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DNEO_BUILD_TESTS=OFF \
+            -DNEO_BUILD_EXAMPLES=OFF
+          cmake --build build --target neo_cli_tool --parallel
+          
+      - name: Check binary
+        run: |
+          if [ -f build/tools/neo_cli_tool ]; then
+            echo "✅ Build successful"
+            build/tools/neo_cli_tool --version || true
+          else
+            echo "❌ Build failed"
+            exit 1
+          fi
+
+  # Full build only for tags and manual triggers
+  build-release:
+    name: Build Release Binaries
+    if: startsWith(github.ref, 'refs/tags/v') || github.event.inputs.create_release == 'true'
+    needs: validate
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-20.04
+            name: linux
+            archive: tar.gz
+          - os: macos-12
+            name: macos
+            archive: tar.gz
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
+    
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          submodules: recursive
+          
+      - name: Get version
+        id: version
+        run: |
+          if [[ "${{ github.ref }}" == refs/tags/* ]]; then
+            VERSION=${GITHUB_REF#refs/tags/}
+          else
+            VERSION="v0.0.0-dev"
+          fi
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          
+      - name: Setup Linux dependencies
+        if: runner.os == 'Linux'
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            cmake \
+            ninja-build \
+            libssl-dev \
+            libboost-dev \
+            libboost-system-dev \
+            libboost-filesystem-dev \
+            libboost-thread-dev \
+            libboost-program-options-dev
+            
+      - name: Setup macOS dependencies  
+        if: runner.os == 'macOS'
+        run: |
+          brew install cmake ninja boost openssl@3
+          
+      - name: Cache build
+        uses: actions/cache@v3
+        with:
+          path: |
+            build
+            ~/.ccache
+          key: ${{ matrix.os }}-release-${{ hashFiles('**/CMakeLists.txt') }}
+          restore-keys: |
+            ${{ matrix.os }}-release-
+            
+      - name: Configure CMake
+        run: |
+          cmake -B build \
+            -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DNEO_BUILD_TESTS=OFF \
+            -DNEO_BUILD_EXAMPLES=OFF \
+            ${{ runner.os == 'macOS' && '-DOPENSSL_ROOT_DIR=$(brew --prefix openssl@3)' || '' }}
+            
+      - name: Build
+        run: |
+          cmake --build build --parallel
+          
+      - name: Package binaries
+        run: |
+          # Create package directory
+          mkdir -p neo-cpp-${{ steps.version.outputs.version }}/bin
+          mkdir -p neo-cpp-${{ steps.version.outputs.version }}/config
+          
+          # Copy binaries with correct names
+          if [ -f build/apps/neo_node ]; then
+            cp build/apps/neo_node neo-cpp-${{ steps.version.outputs.version }}/bin/neo-node
+          fi
+          if [ -f build/tools/neo_cli_tool ]; then
+            cp build/tools/neo_cli_tool neo-cpp-${{ steps.version.outputs.version }}/bin/neo-cli
+          fi
+          if [ -f build/tools/test_rpc_server ]; then
+            cp build/tools/test_rpc_server neo-cpp-${{ steps.version.outputs.version }}/bin/neo-rpc
+          fi
+          
+          # Copy configs
+          cp -r config/* neo-cpp-${{ steps.version.outputs.version }}/config/ || true
+          
+          # Create README
+          cat > neo-cpp-${{ steps.version.outputs.version }}/README.md << 'EOF'
+          # Neo C++ ${{ steps.version.outputs.version }}
+          Platform: ${{ matrix.name }}
+          
+          ## Usage
+          ./bin/neo-node --config config/testnet.json
+          ./bin/neo-cli --help
+          EOF
+          
+          # Create archive
+          tar -czf neo-cpp-${{ matrix.name }}-${{ steps.version.outputs.version }}.tar.gz neo-cpp-${{ steps.version.outputs.version }}
+          
+          # Generate checksum
+          shasum -a 256 neo-cpp-${{ matrix.name }}-${{ steps.version.outputs.version }}.tar.gz > neo-cpp-${{ matrix.name }}-${{ steps.version.outputs.version }}.tar.gz.sha256
+          
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: neo-cpp-${{ matrix.name }}
+          path: |
+            neo-cpp-${{ matrix.name }}-*.tar.gz
+            neo-cpp-${{ matrix.name }}-*.tar.gz.sha256
+
+  # Create release if tagged
+  release:
+    name: Create Release
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build-release
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    
+    steps:
+      - uses: actions/checkout@v4
+        
+      - name: Download all artifacts
+        uses: actions/download-artifact@v3
+        with:
+          path: artifacts
+          
+      - name: Prepare release files
+        run: |
+          mkdir -p release
+          find artifacts -type f \( -name "*.tar.gz" -o -name "*.sha256" \) -exec cp {} release/ \;
+          ls -la release/
+          
+      - name: Generate release notes
+        run: |
+          cat > RELEASE_NOTES.md << 'EOF'
+          # Neo C++ ${GITHUB_REF#refs/tags/}
+          
+          ## Downloads
+          - Linux: neo-cpp-linux-*.tar.gz
+          - macOS: neo-cpp-macos-*.tar.gz
+          
+          ## What's Changed
+          See commit history for details.
+          
+          ## Installation
+          ```bash
+          tar -xzf neo-cpp-*.tar.gz
+          cd neo-cpp-*/
+          ./bin/neo-node --config config/testnet.json
+          ```
+          EOF
+          
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Neo C++ ${GITHUB_REF#refs/tags/}
+          body_path: RELEASE_NOTES.md
+          files: release/*
+          fail_on_unmatched_files: false
+
+  # Simple Docker build
+  docker:
+    name: Docker Image
+    if: github.ref == 'refs/heads/master' || startsWith(github.ref, 'refs/tags/v')
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    
+    steps:
+      - uses: actions/checkout@v4
+        
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+        
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Build and push
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          file: ./Dockerfile.simplified
+          push: true
+          tags: |
+            ghcr.io/${{ github.repository_owner }}/neo-cpp:latest
+            ghcr.io/${{ github.repository_owner }}/neo-cpp:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
