@@ -1,3 +1,11 @@
+/**
+ * @file verification_contract.cpp
+ * @brief Verification Contract
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/smartcontract/contract.h>
 #include <neo/vm/opcode.h>
 #include <neo/vm/script_builder.h>

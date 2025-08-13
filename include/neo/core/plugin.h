@@ -1,3 +1,11 @@
+/**
+ * @file plugin.h
+ * @brief Plugin
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <functional>

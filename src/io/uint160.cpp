@@ -1,3 +1,11 @@
+/**
+ * @file uint160.cpp
+ * @brief 160-bit unsigned integer type
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/base58.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>

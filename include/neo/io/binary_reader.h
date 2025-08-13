@@ -1,3 +1,11 @@
+/**
+ * @file binary_reader.h
+ * @brief Binary Reader
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/byte_vector.h>

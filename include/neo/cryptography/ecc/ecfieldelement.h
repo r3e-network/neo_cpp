@@ -1,3 +1,11 @@
+/**
+ * @file ecfieldelement.h
+ * @brief Ecfieldelement
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/extensions/biginteger_extensions.h>

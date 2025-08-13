@@ -1,3 +1,11 @@
+/**
+ * @file jump_table.cpp
+ * @brief Jump Table
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/vm/exceptions.h>
 #include <neo/vm/execution_engine.h>
 #include <neo/vm/jump_table.h>

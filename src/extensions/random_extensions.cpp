@@ -1,3 +1,11 @@
+/**
+ * @file random_extensions.cpp
+ * @brief Random Extensions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/extensions/datetime_extensions.h>
 #include <neo/extensions/random_extensions.h>
 

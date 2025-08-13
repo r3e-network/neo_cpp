@@ -1,3 +1,11 @@
+/**
+ * @file rocksdb_store.cpp
+ * @brief RocksDB storage backend
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/error_recovery.h>
 #include <neo/core/exceptions.h>
 #include <neo/core/validation.h>

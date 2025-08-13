@@ -1,3 +1,11 @@
+/**
+ * @file mempool.cpp
+ * @brief Resource pooling
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/config/protocol_settings.h>
 #include <neo/ledger/memory_pool.h>
 #include <neo/ledger/neo_system.h>

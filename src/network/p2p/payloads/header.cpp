@@ -1,3 +1,11 @@
+/**
+ * @file header.cpp
+ * @brief Header
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/crypto.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>

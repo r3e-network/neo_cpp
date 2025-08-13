@@ -1,3 +1,11 @@
+/**
+ * @file store_cache.h
+ * @brief Caching mechanisms
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/persistence/data_cache.h>

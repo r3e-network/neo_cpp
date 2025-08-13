@@ -1,3 +1,11 @@
+/**
+ * @file iinteroperable.h
+ * @brief Iinteroperable
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <memory>

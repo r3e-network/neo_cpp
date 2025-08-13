@@ -1,4 +1,10 @@
-// Plugin registration temporarily disabled
+/**
+ * @file plugin_registration.cpp
+ * @brief Plugin Registration
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
 
 namespace neo::plugins
 {

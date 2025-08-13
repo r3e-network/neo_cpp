@@ -1,3 +1,11 @@
+/**
+ * @file statistics_plugin.h
+ * @brief Statistics Plugin
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/json.h>

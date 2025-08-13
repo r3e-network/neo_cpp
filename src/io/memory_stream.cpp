@@ -1,3 +1,11 @@
+/**
+ * @file memory_stream.cpp
+ * @brief Stream processing
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/io/memory_stream.h>
 
 #include <algorithm>

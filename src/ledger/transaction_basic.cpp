@@ -1,3 +1,11 @@
+/**
+ * @file transaction_basic.cpp
+ * @brief Transaction types and processing
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/ledger/signer.h>
 #include <neo/ledger/transaction.h>
 #include <neo/ledger/transaction_attribute.h>

@@ -1,3 +1,11 @@
+/**
+ * @file string_intern.cpp
+ * @brief String Intern
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/core/string_intern.h>
 

@@ -1,3 +1,11 @@
+/**
+ * @file transaction_attribute_type.h
+ * @brief Transaction types and processing
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstdint>

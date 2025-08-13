@@ -1,3 +1,11 @@
+/**
+ * @file syscalls.cpp
+ * @brief Syscalls
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/interop_service.h>
 #include <neo/vm/execution_engine.h>

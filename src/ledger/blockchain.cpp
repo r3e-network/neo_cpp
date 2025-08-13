@@ -1,3 +1,13 @@
+/**
+ * @file blockchain.cpp
+ * @brief Implementation of the core blockchain processing engine
+ * @details Handles block validation, persistence, transaction processing,
+ *          and consensus integration for the Neo blockchain.
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/neo_system.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
@@ -16,35 +26,51 @@
 
 namespace neo::ledger
 {
-// Static blockchain scripts for OnPersist and PostPersist
+// Static blockchain scripts for native contract callbacks
+// These scripts are executed for every block to trigger native contract logic
+
+/// @brief Script executed before block persistence
+/// @details Calls System.Contract.NativeOnPersist for all native contracts
 static const std::vector<uint8_t> ON_PERSIST_SCRIPT = {
     0x41, 0x9e, 0xd8, 0x5e, 0x10  // SYSCALL System.Contract.NativeOnPersist
 };
 
+/// @brief Script executed after block persistence
+/// @details Calls System.Contract.NativePostPersist for finalization
 static const std::vector<uint8_t> POST_PERSIST_SCRIPT = {
     0x41, 0x9f, 0xd8, 0x5e, 0x10  // SYSCALL System.Contract.NativePostPersist
 };
 
 Blockchain::Blockchain(std::shared_ptr<NeoSystem> system)
     : system_(system)
-      // , header_cache_(std::make_shared<HeaderCache>())  // Disabled since network module is disabled
+      // Note: header_cache_ initialization disabled - network module not available
       ,
       data_cache_(system->GetStoreView()),
       extensible_whitelist_cached_(false),
       running_(false)
 {
+    // Validate system parameter
     if (!system_)
     {
         throw std::invalid_argument("NeoSystem cannot be null");
     }
-}
+    
+    // Initialize with system's data cache for blockchain state access
+    // The data_cache_ provides persistent storage through RocksDB backend
 
-Blockchain::~Blockchain() { Stop(); }
+Blockchain::~Blockchain() 
+{ 
+    // Ensure clean shutdown of processing threads
+    Stop(); 
+}
 
 void Blockchain::Initialize()
 {
+    // Acquire exclusive lock for initialization
     std::unique_lock<std::shared_mutex> lock(blockchain_mutex_);
 
+    // Check if genesis block exists, create if not
+    // Genesis block is the foundation of the blockchain
     if (!IsGenesisBlockInitialized())
     {
         InitializeGenesisBlock();

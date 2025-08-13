@@ -1,3 +1,11 @@
+/**
+ * @file dbft_consensus.h
+ * @brief Dbft Consensus
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/uint160.h>

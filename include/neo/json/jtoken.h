@@ -1,3 +1,11 @@
+/**
+ * @file jtoken.h
+ * @brief Jtoken
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cmath>

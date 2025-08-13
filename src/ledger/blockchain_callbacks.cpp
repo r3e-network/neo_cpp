@@ -1,3 +1,11 @@
+/**
+ * @file blockchain_callbacks.cpp
+ * @brief Core blockchain implementation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/ledger/blockchain_callbacks.h>
 
 #include <iostream>

@@ -1,3 +1,11 @@
+/**
+ * @file health_check.h
+ * @brief Health Check
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <atomic>

@@ -1,3 +1,11 @@
+/**
+ * @file error_recovery.cpp
+ * @brief Error Recovery
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/error_recovery.h>
 #include <neo/core/exceptions.h>
 

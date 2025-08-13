@@ -1,3 +1,11 @@
+/**
+ * @file hardfork.cpp
+ * @brief Hardfork
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/hardfork.h>
 
 #include <stdexcept>

@@ -1,3 +1,11 @@
+/**
+ * @file execution_context.cpp
+ * @brief Execution Context
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/vm/compound_items.h>
 #include <neo/vm/exception_handling_context.h>
 #include <neo/vm/exceptions.h>

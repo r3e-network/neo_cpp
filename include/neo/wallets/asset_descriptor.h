@@ -1,3 +1,11 @@
+/**
+ * @file asset_descriptor.h
+ * @brief Asset Descriptor
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/config/protocol_settings.h>

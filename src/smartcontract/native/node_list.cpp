@@ -1,3 +1,11 @@
+/**
+ * @file node_list.cpp
+ * @brief Node List
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/smartcontract/native/role_management.h>
 
 #include <algorithm>

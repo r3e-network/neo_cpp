@@ -1,3 +1,11 @@
+/**
+ * @file safe_math.h
+ * @brief Safe Math
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <limits>

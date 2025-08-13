@@ -1,3 +1,11 @@
+/**
+ * @file script_builder.h
+ * @brief Builder pattern implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/binary_writer.h>

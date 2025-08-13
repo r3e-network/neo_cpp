@@ -1,3 +1,11 @@
+/**
+ * @file gas_token.h
+ * @brief GAS utility token contract
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/uint160.h>

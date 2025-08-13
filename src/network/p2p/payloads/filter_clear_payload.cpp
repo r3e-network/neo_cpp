@@ -1,3 +1,11 @@
+/**
+ * @file filter_clear_payload.cpp
+ * @brief Filter Clear Payload
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/network/p2p/payloads/filter_clear_payload.h>
 
 namespace neo::network::p2p::payloads

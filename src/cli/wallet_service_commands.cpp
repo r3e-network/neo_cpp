@@ -1,3 +1,11 @@
+/**
+ * @file wallet_service_commands.cpp
+ * @brief Service implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cli/console_helper.h>
 #include <neo/cli/wallet_commands.h>
 #include <neo/io/uint160.h>

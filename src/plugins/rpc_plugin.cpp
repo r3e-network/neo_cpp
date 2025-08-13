@@ -1,3 +1,11 @@
+/**
+ * @file rpc_plugin.cpp
+ * @brief Rpc Plugin
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/plugins/rpc_plugin.h>
 
 #include <iostream>

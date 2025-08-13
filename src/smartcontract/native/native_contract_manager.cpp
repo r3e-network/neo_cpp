@@ -1,3 +1,11 @@
+/**
+ * @file native_contract_manager.cpp
+ * @brief Native contract implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/smartcontract/native/contract_management.h>
 #include <neo/smartcontract/native/crypto_lib.h>
 #include <neo/smartcontract/native/gas_token.h>

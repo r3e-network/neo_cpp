@@ -1,3 +1,11 @@
+/**
+ * @file tcp_client.cpp
+ * @brief Tcp Client
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/logging/logger.h>
 #include <neo/network/tcp_client.h>
 

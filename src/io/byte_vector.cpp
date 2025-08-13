@@ -1,3 +1,11 @@
+/**
+ * @file byte_vector.cpp
+ * @brief Byte Vector
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/extensions/base64.h>
 #include <neo/extensions/integer_extensions.h>
 #include <neo/io/byte_vector.h>

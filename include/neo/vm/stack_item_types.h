@@ -1,3 +1,11 @@
+/**
+ * @file stack_item_types.h
+ * @brief Type definitions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstdint>

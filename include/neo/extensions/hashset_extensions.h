@@ -1,3 +1,11 @@
+/**
+ * @file hashset_extensions.h
+ * @brief Hashing algorithms
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <algorithm>

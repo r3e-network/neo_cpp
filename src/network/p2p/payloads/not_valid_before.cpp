@@ -1,3 +1,11 @@
+/**
+ * @file not_valid_before.cpp
+ * @brief Not Valid Before
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/network/p2p/payloads/not_valid_before.h>
 
 namespace neo::network::p2p::payloads

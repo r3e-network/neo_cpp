@@ -1,3 +1,11 @@
+/**
+ * @file transaction_router.cpp
+ * @brief Transaction types and processing
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/io/uint256.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/mempool.h>

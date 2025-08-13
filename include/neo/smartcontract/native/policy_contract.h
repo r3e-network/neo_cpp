@@ -1,3 +1,11 @@
+/**
+ * @file policy_contract.h
+ * @brief Policy Contract
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/smartcontract/native/native_contract.h>

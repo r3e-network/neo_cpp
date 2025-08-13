@@ -1,3 +1,11 @@
+/**
+ * @file trie.cpp
+ * @brief Trie
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/hash.h>
 #include <neo/cryptography/mpttrie/trie.h>
 #include <neo/io/byte_span.h>

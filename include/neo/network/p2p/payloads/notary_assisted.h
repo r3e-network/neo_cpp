@@ -1,3 +1,11 @@
+/**
+ * @file notary_assisted.h
+ * @brief Notary Assisted
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/binary_reader.h>

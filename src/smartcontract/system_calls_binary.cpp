@@ -1,3 +1,11 @@
+/**
+ * @file system_calls_binary.cpp
+ * @brief System Calls Binary
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/io/byte_vector.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/binary_serializer.h>

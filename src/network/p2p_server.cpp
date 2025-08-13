@@ -1,3 +1,11 @@
+/**
+ * @file p2p_server.cpp
+ * @brief Peer-to-peer networking
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/common/logging.h>
 #include <neo/cryptography/crypto.h>
 #include <neo/network/p2p/payloads/addr_payload.h>

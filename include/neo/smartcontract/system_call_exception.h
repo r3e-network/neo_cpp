@@ -1,3 +1,11 @@
+/**
+ * @file system_call_exception.h
+ * @brief System Call Exception
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <stdexcept>

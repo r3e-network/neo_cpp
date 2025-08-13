@@ -1,3 +1,11 @@
+/**
+ * @file node_capability.cpp
+ * @brief Node Capability
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/network/p2p/node_capability.h>
 
 namespace neo::network::p2p

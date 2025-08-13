@@ -1,3 +1,11 @@
+/**
+ * @file extensible_payload.cpp
+ * @brief Extensible Payload
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/crypto.h>
 #include <neo/extensions/integer_extensions.h>
 #include <neo/io/binary_reader.h>

@@ -1,3 +1,11 @@
+/**
+ * @file jarray.h
+ * @brief Jarray
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/json/jtoken.h>

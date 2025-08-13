@@ -1,3 +1,11 @@
+/**
+ * @file jobject.h
+ * @brief Jobject
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/json/jtoken.h>

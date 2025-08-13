@@ -1,3 +1,11 @@
+/**
+ * @file script.cpp
+ * @brief Script
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/io/binary_reader.h>
 #include <neo/io/memory_stream.h>
 #include <neo/vm/exceptions.h>

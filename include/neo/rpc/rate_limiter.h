@@ -1,3 +1,11 @@
+/**
+ * @file rate_limiter.h
+ * @brief Rate Limiter
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <chrono>

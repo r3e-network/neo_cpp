@@ -1,3 +1,11 @@
+/**
+ * @file contract_management.h
+ * @brief Contract Management
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/byte_vector.h>

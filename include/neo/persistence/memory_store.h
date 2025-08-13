@@ -1,3 +1,11 @@
+/**
+ * @file memory_store.h
+ * @brief Memory Store
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/byte_vector.h>

@@ -1,3 +1,11 @@
+/**
+ * @file transaction_commands.cpp
+ * @brief Transaction types and processing
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cli/command_handler.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>

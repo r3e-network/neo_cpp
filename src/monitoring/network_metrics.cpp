@@ -1,3 +1,11 @@
+/**
+ * @file network_metrics.cpp
+ * @brief Performance metrics collection
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/monitoring/network_metrics.h>
 
 namespace neo::monitoring {

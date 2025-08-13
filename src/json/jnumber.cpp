@@ -1,3 +1,11 @@
+/**
+ * @file jnumber.cpp
+ * @brief Jnumber
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/json/jnumber.h>
 
 #include <cmath>

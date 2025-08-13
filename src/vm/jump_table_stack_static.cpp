@@ -1,3 +1,11 @@
+/**
+ * @file jump_table_stack_static.cpp
+ * @brief Jump Table Stack Static
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/vm/compound_items.h>
 #include <neo/vm/exceptions.h>
 #include <neo/vm/execution_engine.h>

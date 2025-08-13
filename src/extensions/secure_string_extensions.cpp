@@ -1,3 +1,11 @@
+/**
+ * @file secure_string_extensions.cpp
+ * @brief Secure String Extensions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/hash.h>
 #include <neo/extensions/secure_string_extensions.h>
 #include <neo/io/byte_vector.h>

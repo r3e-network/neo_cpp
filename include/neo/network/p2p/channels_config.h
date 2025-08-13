@@ -1,3 +1,11 @@
+/**
+ * @file channels_config.h
+ * @brief Configuration management
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/network/ip_endpoint.h>

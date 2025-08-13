@@ -1,3 +1,11 @@
+/**
+ * @file blockchain_metrics.cpp
+ * @brief Core blockchain implementation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/monitoring/blockchain_metrics.h>
 
 namespace neo::monitoring {

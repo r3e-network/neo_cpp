@@ -1,3 +1,11 @@
+/**
+ * @file base_commands.cpp
+ * @brief Base Commands
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cli/base_commands.h>
 #include <neo/cli/console_helper.h>
 

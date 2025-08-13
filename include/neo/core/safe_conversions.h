@@ -1,3 +1,11 @@
+/**
+ * @file safe_conversions.h
+ * @brief Safe Conversions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <charconv>

@@ -1,3 +1,11 @@
+/**
+ * @file pool_item.cpp
+ * @brief Resource pooling
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/ledger/pool_item.h>
 
 namespace neo::ledger

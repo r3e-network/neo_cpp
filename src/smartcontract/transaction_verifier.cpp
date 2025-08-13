@@ -1,3 +1,11 @@
+/**
+ * @file transaction_verifier.cpp
+ * @brief Transaction types and processing
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/protocol_constants.h>
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/ecc/ecpoint.h>

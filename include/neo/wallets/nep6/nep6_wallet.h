@@ -1,3 +1,11 @@
+/**
+ * @file nep6_wallet.h
+ * @brief Nep6 Wallet
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/cryptography/key_pair.h>

@@ -1,3 +1,11 @@
+/**
+ * @file consensus_payload_helper.cpp
+ * @brief Helper utilities
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/consensus/consensus_payload_helper.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/memory_stream.h>

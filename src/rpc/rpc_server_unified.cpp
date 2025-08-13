@@ -1,3 +1,11 @@
+/**
+ * @file rpc_server_unified.cpp
+ * @brief JSON-RPC server implementation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <httplib.h>
 #include <neo/core/logging.h>
 #include <neo/ledger/blockchain.h>

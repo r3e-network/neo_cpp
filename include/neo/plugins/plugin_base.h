@@ -1,3 +1,11 @@
+/**
+ * @file plugin_base.h
+ * @brief Plugin Base
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/node/neo_system.h>

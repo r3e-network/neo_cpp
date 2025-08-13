@@ -1,3 +1,11 @@
+/**
+ * @file local_node_messaging.cpp
+ * @brief Local Node Messaging
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/network/message.h>
 #include <neo/network/p2p/local_node.h>
 #include <neo/network/p2p/payloads/addr_payload.h>

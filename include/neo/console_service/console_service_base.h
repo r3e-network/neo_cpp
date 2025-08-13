@@ -1,3 +1,11 @@
+/**
+ * @file console_service_base.h
+ * @brief Service implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/console_service/command_token.h>

@@ -1,3 +1,11 @@
+/**
+ * @file rpc_methods.cpp
+ * @brief Rpc Methods
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/ledger/signer.h>
 #include <neo/persistence/storage_key.h>
 #include <neo/rpc/rpc_methods.h>

@@ -1,3 +1,11 @@
+/**
+ * @file reject_payload.h
+ * @brief Reject Payload
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/binary_reader.h>

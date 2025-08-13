@@ -1,3 +1,11 @@
+/**
+ * @file task_manager.cpp
+ * @brief Management components
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint256.h>
 #include <neo/ledger/blockchain.h>

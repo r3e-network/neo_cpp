@@ -1,3 +1,11 @@
+/**
+ * @file evaluation_stack.h
+ * @brief Evaluation Stack
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/vm/stack_item.h>

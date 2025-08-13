@@ -1,3 +1,11 @@
+/**
+ * @file oracle_response_code.h
+ * @brief Oracle Response Code
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstdint>

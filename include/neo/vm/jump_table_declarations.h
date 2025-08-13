@@ -1,3 +1,11 @@
+/**
+ * @file jump_table_declarations.h
+ * @brief Jump Table Declarations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 namespace neo::vm

@@ -1,3 +1,11 @@
+/**
+ * @file memory_pool_enhanced.cpp
+ * @brief Transaction memory pool management
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/ledger/event_system.h>
 #include <neo/ledger/memory_pool.h>
 

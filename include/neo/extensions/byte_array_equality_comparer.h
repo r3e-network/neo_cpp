@@ -1,3 +1,11 @@
+/**
+ * @file byte_array_equality_comparer.h
+ * @brief Byte Array Equality Comparer
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/byte_span.h>

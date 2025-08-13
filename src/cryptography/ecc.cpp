@@ -1,3 +1,11 @@
+/**
+ * @file ecc.cpp
+ * @brief Elliptic curve cryptography
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/ecc.h>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/cryptography/hash.h>

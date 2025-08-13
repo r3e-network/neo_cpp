@@ -1,3 +1,11 @@
+/**
+ * @file murmur32.cpp
+ * @brief Murmur32
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/murmur32.h>
 
 #include <cstring>

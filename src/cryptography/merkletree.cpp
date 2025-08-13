@@ -1,3 +1,11 @@
+/**
+ * @file merkletree.cpp
+ * @brief Merkletree
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/hash.h>
 #include <neo/cryptography/merkletree.h>
 #include <neo/io/byte_vector.h>

@@ -1,3 +1,11 @@
+/**
+ * @file std_lib.cpp
+ * @brief Std Lib
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <algorithm>
 // #include <codecvt> // Removed - using manual UTF-8 parsing instead
 #include <neo/cryptography/base58.h>

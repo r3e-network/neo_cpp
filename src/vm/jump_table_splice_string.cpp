@@ -1,3 +1,11 @@
+/**
+ * @file jump_table_splice_string.cpp
+ * @brief Jump Table Splice String
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/vm/compound_items.h>
 #include <neo/vm/exceptions.h>
 #include <neo/vm/execution_engine.h>

@@ -1,3 +1,11 @@
+/**
+ * @file circuit_breaker.h
+ * @brief Circuit Breaker
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <atomic>

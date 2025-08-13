@@ -1,3 +1,11 @@
+/**
+ * @file binary_serializer.cpp
+ * @brief Binary Serializer
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/smartcontract/binary_serializer.h>
 #include <neo/vm/compound_items.h>
 #include <neo/vm/stack_item.h>

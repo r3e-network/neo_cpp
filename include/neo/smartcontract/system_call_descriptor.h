@@ -1,3 +1,11 @@
+/**
+ * @file system_call_descriptor.h
+ * @brief System Call Descriptor
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/smartcontract/call_flags.h>

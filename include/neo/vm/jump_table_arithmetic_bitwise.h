@@ -1,3 +1,11 @@
+/**
+ * @file jump_table_arithmetic_bitwise.h
+ * @brief Jump Table Arithmetic Bitwise
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/vm/jump_table.h>

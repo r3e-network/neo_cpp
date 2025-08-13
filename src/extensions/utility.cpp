@@ -1,3 +1,11 @@
+/**
+ * @file utility.cpp
+ * @brief Utility
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/extensions/utility.h>
 
 #include <algorithm>

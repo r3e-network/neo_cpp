@@ -1,3 +1,11 @@
+/**
+ * @file jump_table_control.h
+ * @brief Jump Table Control
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 // This file exists for backward compatibility

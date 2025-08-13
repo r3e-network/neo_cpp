@@ -1,3 +1,11 @@
+/**
+ * @file verack_payload.h
+ * @brief Verack Payload
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/network/p2p/ipayload.h>

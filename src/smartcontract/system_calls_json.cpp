@@ -1,3 +1,11 @@
+/**
+ * @file system_calls_json.cpp
+ * @brief JSON serialization utilities
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/system_calls.h>
 #include <neo/vm/compound_items.h>

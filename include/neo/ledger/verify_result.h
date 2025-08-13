@@ -1,3 +1,11 @@
+/**
+ * @file verify_result.h
+ * @brief Verify Result
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 namespace neo::ledger

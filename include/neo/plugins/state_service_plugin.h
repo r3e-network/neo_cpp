@@ -1,3 +1,11 @@
+/**
+ * @file state_service_plugin.h
+ * @brief Service implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/uint256.h>

@@ -1,3 +1,11 @@
+/**
+ * @file rpc_client.cpp
+ * @brief Rpc Client
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <httplib.h>
 #include <neo/core/safe_conversions.h>
 #include <neo/cryptography/base64.h>

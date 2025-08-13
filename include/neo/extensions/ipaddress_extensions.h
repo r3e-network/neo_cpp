@@ -1,3 +1,11 @@
+/**
+ * @file ipaddress_extensions.h
+ * @brief Ipaddress Extensions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <array>

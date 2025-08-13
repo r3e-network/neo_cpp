@@ -1,3 +1,11 @@
+/**
+ * @file ipayload.h
+ * @brief Ipayload
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/ijson_serializable.h>

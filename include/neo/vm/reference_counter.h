@@ -1,3 +1,11 @@
+/**
+ * @file reference_counter.h
+ * @brief Reference Counter
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <list>

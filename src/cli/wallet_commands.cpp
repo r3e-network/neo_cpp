@@ -1,3 +1,11 @@
+/**
+ * @file wallet_commands.cpp
+ * @brief Wallet Commands
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cli/command_handler.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/neo_token.h>

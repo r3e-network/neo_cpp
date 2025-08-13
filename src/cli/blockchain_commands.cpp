@@ -1,3 +1,11 @@
+/**
+ * @file blockchain_commands.cpp
+ * @brief Core blockchain implementation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cli/blockchain_commands.h>
 #include <neo/cli/console_helper.h>
 #include <neo/io/uint256.h>

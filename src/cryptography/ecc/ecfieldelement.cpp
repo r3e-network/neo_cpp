@@ -1,3 +1,11 @@
+/**
+ * @file ecfieldelement.cpp
+ * @brief Ecfieldelement
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/ecc/ecfieldelement.h>
 
 #include <stdexcept>

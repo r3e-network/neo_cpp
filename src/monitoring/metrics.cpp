@@ -1,3 +1,11 @@
+/**
+ * @file metrics.cpp
+ * @brief Performance metrics collection
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/monitoring/metrics.h>
 #include <sstream>
 #include <iomanip>

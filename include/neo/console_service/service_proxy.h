@@ -1,3 +1,11 @@
+/**
+ * @file service_proxy.h
+ * @brief Service implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <functional>

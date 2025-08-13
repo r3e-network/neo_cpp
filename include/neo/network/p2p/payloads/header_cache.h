@@ -1,3 +1,11 @@
+/**
+ * @file header_cache.h
+ * @brief Caching mechanisms
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/uint256.h>

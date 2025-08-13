@@ -1,3 +1,11 @@
+/**
+ * @file console_service_base.cpp
+ * @brief Service implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/console_service/console_service_base.h>
 #include <neo/core/safe_conversions.h>
 

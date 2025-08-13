@@ -1,3 +1,11 @@
+/**
+ * @file application_engine_core.cpp
+ * @brief Smart contract execution engine
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/hash.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/persistence/storage_key.h>

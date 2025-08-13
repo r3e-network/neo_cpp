@@ -1,5 +1,10 @@
-// Build support file to ensure neo_ledger library is not empty
-// This prevents CMake build issues with empty libraries
+/**
+ * @file ledger_dummy.cpp
+ * @brief Ledger Dummy
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
 
 namespace neo::ledger
 {

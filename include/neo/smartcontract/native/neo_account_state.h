@@ -1,3 +1,11 @@
+/**
+ * @file neo_account_state.h
+ * @brief Neo Account State
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/cryptography/ecc/ecpoint.h>

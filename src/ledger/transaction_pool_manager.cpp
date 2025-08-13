@@ -1,3 +1,11 @@
+/**
+ * @file transaction_pool_manager.cpp
+ * @brief Transaction types and processing
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/ledger/transaction_pool_manager.h>
 #include <neo/logging/logger.h>
 

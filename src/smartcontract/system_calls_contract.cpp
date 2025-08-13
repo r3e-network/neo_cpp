@@ -1,3 +1,11 @@
+/**
+ * @file system_calls_contract.cpp
+ * @brief System Calls Contract
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/protocol_constants.h>
 #include <neo/cryptography/hash.h>
 #include <neo/smartcontract/application_engine.h>

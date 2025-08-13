@@ -1,3 +1,11 @@
+/**
+ * @file local_node_handlers.cpp
+ * @brief Event and message handlers
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/consensus/consensus_message.h>
 #include <neo/core/logging.h>
 #include <neo/ledger/blockchain.h>

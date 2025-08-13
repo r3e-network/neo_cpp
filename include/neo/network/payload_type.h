@@ -1,3 +1,11 @@
+/**
+ * @file payload_type.h
+ * @brief Payload Type
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstdint>

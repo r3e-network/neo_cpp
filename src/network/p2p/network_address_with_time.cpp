@@ -1,3 +1,11 @@
+/**
+ * @file network_address_with_time.cpp
+ * @brief Network Address With Time
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/network/p2p/network_address_with_time.h>
 
 namespace neo::network::p2p

@@ -1,3 +1,11 @@
+/**
+ * @file secp256r1_simple.cpp
+ * @brief Secp256r1 Simple
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/ecc/keypair.h>
 #include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/cryptography/hash.h>

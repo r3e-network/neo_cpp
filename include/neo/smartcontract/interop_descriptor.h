@@ -1,13 +1,10 @@
-// Copyright (C) 2015-2025 The Neo Project.
-//
-// interop_descriptor.h file belongs to the neo project and is free
-// software distributed under the MIT software license, see the
-// accompanying file LICENSE in the main directory of the
-// repository or http://www.opensource.org/licenses/mit-license.php
-// for more details.
-//
-// Redistribution and use in source and binary forms with or without
-// modifications are permitted.
+/**
+ * @file interop_descriptor.h
+ * @brief Interop Descriptor
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
 
 #ifndef NEO_SMARTCONTRACT_INTEROP_DESCRIPTOR_H
 #define NEO_SMARTCONTRACT_INTEROP_DESCRIPTOR_H

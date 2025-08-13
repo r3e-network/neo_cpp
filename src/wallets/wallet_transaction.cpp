@@ -1,3 +1,11 @@
+/**
+ * @file wallet_transaction.cpp
+ * @brief Transaction types and processing
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/wallets/wallet_transaction.h>
 
 namespace neo::wallets

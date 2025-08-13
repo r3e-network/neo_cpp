@@ -1,3 +1,11 @@
+/**
+ * @file cli.cpp
+ * @brief Cli
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cli/cli.h>
 #include <neo/cli/command_handler.h>
 

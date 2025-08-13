@@ -1,3 +1,11 @@
+/**
+ * @file exceptions.cpp
+ * @brief Exception types
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/exceptions.h>
 
 #include <sstream>

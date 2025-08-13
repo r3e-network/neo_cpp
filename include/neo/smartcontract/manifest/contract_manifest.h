@@ -1,3 +1,11 @@
+/**
+ * @file contract_manifest.h
+ * @brief Contract Manifest
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/serializable.h>

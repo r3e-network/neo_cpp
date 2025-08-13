@@ -1,3 +1,11 @@
+/**
+ * @file rpc_server_plugin.h
+ * @brief JSON-RPC server implementation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/plugins/plugin_base.h>

@@ -1,3 +1,11 @@
+/**
+ * @file collection_extensions.cpp
+ * @brief Collection Extensions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/extensions/collection_extensions.h>
 
 namespace neo::extensions

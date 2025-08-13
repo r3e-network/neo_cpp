@@ -1,3 +1,11 @@
+/**
+ * @file state_synchronization_manager.cpp
+ * @brief Management components
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/hash.h>
 #include <neo/ledger/state_synchronization_manager.h>
 #include <neo/logging/logger.h>

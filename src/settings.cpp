@@ -1,3 +1,11 @@
+/**
+ * @file settings.cpp
+ * @brief Configuration settings
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/logging/logger.h>
 #include <neo/protocol_settings.h>
 #include <neo/settings.h>

@@ -1,3 +1,11 @@
+/**
+ * @file local_node_connection.cpp
+ * @brief Local Node Connection
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/network/ip_endpoint.h>
 #include <neo/network/p2p/local_node.h>
 #include <neo/network/p2p/remote_node.h>

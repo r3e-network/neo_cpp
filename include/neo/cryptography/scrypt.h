@@ -1,3 +1,11 @@
+/**
+ * @file scrypt.h
+ * @brief Scrypt
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstdint>

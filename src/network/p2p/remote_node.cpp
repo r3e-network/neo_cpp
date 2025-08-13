@@ -1,3 +1,11 @@
+/**
+ * @file remote_node.cpp
+ * @brief Remote Node
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/io/byte_vector.h>
 #include <neo/network/ip_endpoint.h>

@@ -1,3 +1,11 @@
+/**
+ * @file murmur3.cpp
+ * @brief Murmur3
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/murmur3.h>
 
 #include <cstring>

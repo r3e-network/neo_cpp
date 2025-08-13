@@ -1,3 +1,11 @@
+/**
+ * @file logging.cpp
+ * @brief Logging
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 
 #include <filesystem>

@@ -1,3 +1,11 @@
+/**
+ * @file policy_contract.cpp
+ * @brief Policy Contract
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/extensions/biginteger_extensions.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>

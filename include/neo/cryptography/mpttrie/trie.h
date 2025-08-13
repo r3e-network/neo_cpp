@@ -1,3 +1,11 @@
+/**
+ * @file trie.h
+ * @brief Trie
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/cryptography/mpttrie/cache.h>

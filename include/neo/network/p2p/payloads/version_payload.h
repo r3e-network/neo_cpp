@@ -1,3 +1,11 @@
+/**
+ * @file version_payload.h
+ * @brief Version Payload
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/binary_reader.h>

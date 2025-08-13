@@ -1,3 +1,11 @@
+/**
+ * @file wallet.cpp
+ * @brief Wallet
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/io/json.h>
 #include <neo/wallets/wallet.h>

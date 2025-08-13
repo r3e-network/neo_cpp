@@ -1,3 +1,11 @@
+/**
+ * @file leveldb_store.h
+ * @brief Leveldb Store
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <leveldb/cache.h>

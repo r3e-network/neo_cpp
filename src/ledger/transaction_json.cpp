@@ -1,3 +1,11 @@
+/**
+ * @file transaction_json.cpp
+ * @brief Transaction types and processing
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/hash.h>
 #include <neo/io/json_reader.h>
 #include <neo/io/json_writer.h>

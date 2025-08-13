@@ -1,3 +1,11 @@
+/**
+ * @file jarray.cpp
+ * @brief Jarray
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/json/jarray.h>
 
 #include <stdexcept>

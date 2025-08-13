@@ -1,3 +1,11 @@
+/**
+ * @file statistics_plugin_factory.cpp
+ * @brief Factory pattern implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/plugins/statistics/statistics_plugin.h>
 #include <neo/plugins/statistics/statistics_plugin_factory.h>
 

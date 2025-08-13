@@ -1,3 +1,11 @@
+/**
+ * @file interop_service.cpp
+ * @brief Service implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/cryptography/hash.h>
 #include <neo/smartcontract/application_engine.h>

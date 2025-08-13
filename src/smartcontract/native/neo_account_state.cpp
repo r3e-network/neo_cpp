@@ -1,3 +1,11 @@
+/**
+ * @file neo_account_state.cpp
+ * @brief Neo Account State
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/smartcontract/native/neo_account_state.h>

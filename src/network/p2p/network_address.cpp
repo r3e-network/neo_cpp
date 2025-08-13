@@ -1,3 +1,11 @@
+/**
+ * @file network_address.cpp
+ * @brief Network Address
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/network/p2p/network_address.h>
 
 #include <algorithm>

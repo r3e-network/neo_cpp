@@ -1,3 +1,11 @@
+/**
+ * @file get_headers_payload.h
+ * @brief Get Headers Payload
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/network/p2p/payloads/get_blocks_payload.h>

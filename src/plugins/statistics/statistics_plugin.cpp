@@ -1,3 +1,11 @@
+/**
+ * @file statistics_plugin.cpp
+ * @brief Statistics Plugin
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/plugins/statistics/statistics_plugin.h>
 
 #include <iostream>

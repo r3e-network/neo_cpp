@@ -1,3 +1,11 @@
+/**
+ * @file lz4.h
+ * @brief Lz4
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/byte_span.h>

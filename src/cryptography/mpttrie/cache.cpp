@@ -1,3 +1,11 @@
+/**
+ * @file cache.cpp
+ * @brief Caching mechanisms
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/mpttrie/cache.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>

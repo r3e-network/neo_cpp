@@ -1,3 +1,11 @@
+/**
+ * @file plugin_manager.cpp
+ * @brief Management components
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/plugins/plugin.h>
 #include <neo/plugins/plugin_manager.h>
 #include <neo/rpc/rpc_server.h>

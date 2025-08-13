@@ -1,3 +1,11 @@
+/**
+ * @file rpc_validation.h
+ * @brief Rpc Validation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/core/safe_conversions.h>

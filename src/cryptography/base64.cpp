@@ -1,3 +1,11 @@
+/**
+ * @file base64.cpp
+ * @brief Base64
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/base64.h>
 #include <openssl/bio.h>
 #include <openssl/buffer.h>

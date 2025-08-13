@@ -1,3 +1,11 @@
+/**
+ * @file keccak256_simple.cpp
+ * @brief Elliptic curve cryptography
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/hash.h>
 
 #include <array>

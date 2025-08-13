@@ -1,3 +1,11 @@
+/**
+ * @file jobject.cpp
+ * @brief Jobject
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/json/jobject.h>
 
 namespace neo::json

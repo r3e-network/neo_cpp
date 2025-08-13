@@ -1,3 +1,11 @@
+/**
+ * @file jump_table_slot_argument.h
+ * @brief Jump Table Slot Argument
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/vm/jump_table.h>

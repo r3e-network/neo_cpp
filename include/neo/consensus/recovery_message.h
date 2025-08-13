@@ -1,3 +1,11 @@
+/**
+ * @file recovery_message.h
+ * @brief Network message handling
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/consensus/change_view_message.h>

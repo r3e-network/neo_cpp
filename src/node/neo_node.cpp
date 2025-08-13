@@ -1,3 +1,11 @@
+/**
+ * @file neo_node.cpp
+ * @brief Neo Node
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/node/neo_node.h>
 
 #include <chrono>

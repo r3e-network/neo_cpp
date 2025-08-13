@@ -1,3 +1,11 @@
+/**
+ * @file helper.cpp
+ * @brief Helper utilities
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/base58.h>
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/hash.h>

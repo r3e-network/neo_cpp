@@ -1,3 +1,11 @@
+/**
+ * @file console_command_attribute.h
+ * @brief Console Command Attribute
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <string>

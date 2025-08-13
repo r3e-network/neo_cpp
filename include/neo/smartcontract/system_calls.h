@@ -1,3 +1,11 @@
+/**
+ * @file system_calls.h
+ * @brief System Calls
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/smartcontract/application_engine.h>

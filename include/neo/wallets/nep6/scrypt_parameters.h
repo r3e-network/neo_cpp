@@ -1,3 +1,11 @@
+/**
+ * @file scrypt_parameters.h
+ * @brief Scrypt Parameters
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/json_serializable.h>

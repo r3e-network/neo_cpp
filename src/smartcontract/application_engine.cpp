@@ -1,3 +1,11 @@
+/**
+ * @file application_engine.cpp
+ * @brief Smart contract execution engine
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/ledger/block.h>
 #include <neo/ledger/signer.h>
 #include <neo/ledger/transaction.h>

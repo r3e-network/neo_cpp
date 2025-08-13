@@ -1,3 +1,11 @@
+/**
+ * @file tcp_connection.cpp
+ * @brief TCP network connections
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/io/byte_vector.h>
 #include <neo/network/p2p/message.h>

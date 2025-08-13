@@ -1,3 +1,11 @@
+/**
+ * @file not_found_payload.h
+ * @brief Not Found Payload
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/network/p2p/payloads/inv_payload.h>

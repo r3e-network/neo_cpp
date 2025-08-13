@@ -1,3 +1,11 @@
+/**
+ * @file tcp_client.h
+ * @brief Tcp Client
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/network/ip_endpoint.h>

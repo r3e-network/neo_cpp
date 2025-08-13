@@ -1,3 +1,11 @@
+/**
+ * @file wallet_commands.h
+ * @brief Wallet Commands
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/cli/main_service.h>

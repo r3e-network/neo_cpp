@@ -1,3 +1,11 @@
+/**
+ * @file plugin_base.cpp
+ * @brief Plugin Base
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/plugins/plugin_base.h>
 
 namespace neo::plugins

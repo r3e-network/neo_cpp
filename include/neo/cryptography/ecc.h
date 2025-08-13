@@ -1,3 +1,11 @@
+/**
+ * @file ecc.h
+ * @brief Elliptic curve cryptography
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 // Include the actual ECC implementations from the ecc subdirectory

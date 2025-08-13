@@ -1,5 +1,10 @@
-// Concrete implementations for abstract payload methods
-// This file provides concrete implementations for payload classes
+/**
+ * @file payload_fixes.cpp
+ * @brief Payload Fixes
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
 
 #include <neo/cryptography/crypto.h>
 #include <neo/io/json_reader.h>

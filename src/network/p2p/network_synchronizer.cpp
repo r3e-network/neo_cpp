@@ -1,3 +1,11 @@
+/**
+ * @file network_synchronizer.cpp
+ * @brief Synchronization primitives
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/hash.h>
 #include <neo/network/p2p/message.h>
 #include <neo/network/p2p/message_command.h>

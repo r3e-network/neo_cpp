@@ -1,3 +1,11 @@
+/**
+ * @file high_priority.h
+ * @brief High Priority
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/binary_reader.h>

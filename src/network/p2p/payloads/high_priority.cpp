@@ -1,3 +1,11 @@
+/**
+ * @file high_priority.cpp
+ * @brief High Priority
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/network/p2p/payloads/high_priority.h>
 
 namespace neo::network::p2p::payloads

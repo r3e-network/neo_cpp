@@ -1,3 +1,11 @@
+/**
+ * @file execution_engine.h
+ * @brief Execution Engine
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/vm/execution_context.h>

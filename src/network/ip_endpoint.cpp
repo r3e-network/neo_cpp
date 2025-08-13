@@ -1,3 +1,11 @@
+/**
+ * @file ip_endpoint.cpp
+ * @brief Ip Endpoint
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/network/ip_endpoint.h>

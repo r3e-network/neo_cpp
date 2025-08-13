@@ -1,3 +1,11 @@
+/**
+ * @file witness_rule.cpp
+ * @brief Witness Rule
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/ledger/witness_rule.h>
 
 #include <stdexcept>

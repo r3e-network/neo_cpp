@@ -1,3 +1,11 @@
+/**
+ * @file conflicts.cpp
+ * @brief Conflicts
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/network/p2p/payloads/conflicts.h>
 
 namespace neo::network::p2p::payloads

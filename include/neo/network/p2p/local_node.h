@@ -1,3 +1,11 @@
+/**
+ * @file local_node.h
+ * @brief Local Node
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/byte_vector.h>

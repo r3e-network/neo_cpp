@@ -1,3 +1,11 @@
+/**
+ * @file debugger.cpp
+ * @brief Debugger
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/vm/debugger.h>
 
 namespace neo::vm

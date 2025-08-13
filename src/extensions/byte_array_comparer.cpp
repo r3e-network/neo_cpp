@@ -1,3 +1,11 @@
+/**
+ * @file byte_array_comparer.cpp
+ * @brief Byte Array Comparer
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/extensions/byte_array_comparer.h>
 
 #include <algorithm>

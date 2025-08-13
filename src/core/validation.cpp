@@ -1,3 +1,11 @@
+/**
+ * @file validation.cpp
+ * @brief Validation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/validation.h>
 
 #include <algorithm>

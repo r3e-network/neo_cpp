@@ -1,3 +1,11 @@
+/**
+ * @file store_factory.h
+ * @brief Factory pattern implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/persistence/istore.h>

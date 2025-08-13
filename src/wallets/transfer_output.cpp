@@ -1,3 +1,11 @@
+/**
+ * @file transfer_output.cpp
+ * @brief Transfer Output
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/wallets/transfer_output.h>
 
 #include <sstream>

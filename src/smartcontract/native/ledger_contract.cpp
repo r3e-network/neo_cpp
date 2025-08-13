@@ -1,3 +1,11 @@
+/**
+ * @file ledger_contract.cpp
+ * @brief Ledger Contract
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/hardfork.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>

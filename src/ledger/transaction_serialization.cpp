@@ -1,3 +1,11 @@
+/**
+ * @file transaction_serialization.cpp
+ * @brief Transaction types and processing
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/config/protocol_settings.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>

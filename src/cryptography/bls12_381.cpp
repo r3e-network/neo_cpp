@@ -1,3 +1,11 @@
+/**
+ * @file bls12_381.cpp
+ * @brief Bls12 381
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/bls12_381.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/byte_vector.h>

@@ -1,3 +1,11 @@
+/**
+ * @file compound_items.cpp
+ * @brief Compound Items
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/vm/compound_items.h>
 #include <neo/vm/exceptions.h>
 #include <neo/vm/reference_counter.h>

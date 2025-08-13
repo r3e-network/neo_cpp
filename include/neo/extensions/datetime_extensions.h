@@ -1,3 +1,11 @@
+/**
+ * @file datetime_extensions.h
+ * @brief Datetime Extensions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <chrono>

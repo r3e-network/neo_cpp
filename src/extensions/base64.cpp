@@ -1,3 +1,11 @@
+/**
+ * @file base64.cpp
+ * @brief Base64
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/extensions/base64.h>
 
 #include <cctype>

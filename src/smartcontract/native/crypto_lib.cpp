@@ -1,3 +1,11 @@
+/**
+ * @file crypto_lib.cpp
+ * @brief Cryptographic operations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/ecc/eccurve.h>
 #include <neo/cryptography/ecc/ecpoint.h>

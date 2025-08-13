@@ -1,3 +1,11 @@
+/**
+ * @file wallet.h
+ * @brief Wallet
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/cryptography/ecc/keypair.h>

@@ -55,6 +55,38 @@ A high-performance, production-ready C++ implementation of the Neo blockchain pr
 
 **✅ DEPLOYMENT READY** - The Neo C++ implementation is complete, tested, and ready for Neo N3 testnet deployment. All native contracts, consensus mechanisms, and protocol features are fully operational.
 
+## 📦 Releases
+
+### Latest Release
+[![GitHub Release](https://img.shields.io/github/v/release/r3e-network/neo_cpp)](https://github.com/r3e-network/neo_cpp/releases/latest)
+[![Docker Image](https://img.shields.io/badge/docker-ghcr.io%2Fr3e--network%2Fneo--cpp-blue)](https://github.com/r3e-network/neo_cpp/pkgs/container/neo-cpp)
+
+Pre-built binaries are available for:
+- **Linux** (x64) - Ubuntu 20.04+
+- **macOS** (x64) - macOS 12+
+- **Windows** (x64) - Windows 10/11
+- **Docker** - Multi-architecture (amd64, arm64)
+
+### Download
+
+```bash
+# Linux
+wget https://github.com/r3e-network/neo_cpp/releases/latest/download/neo-node-linux-x64.tar.gz
+tar -xzf neo-node-linux-x64.tar.gz
+./neo-node-linux-x64/start-mainnet.sh
+
+# macOS
+wget https://github.com/r3e-network/neo_cpp/releases/latest/download/neo-node-macos-x64.tar.gz
+tar -xzf neo-node-macos-x64.tar.gz
+./neo-node-macos-x64/start-mainnet.sh
+
+# Docker
+docker pull ghcr.io/r3e-network/neo-cpp:latest
+docker run -it ghcr.io/r3e-network/neo-cpp:latest
+```
+
+For release process and version management, see [RELEASE_PROCESS.md](docs/RELEASE_PROCESS.md).
+
 ## Getting Started
 
 ### Prerequisites

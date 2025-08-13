@@ -1,3 +1,11 @@
+/**
+ * @file consensus_payload_helper.h
+ * @brief Helper utilities
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/consensus/consensus_message.h>

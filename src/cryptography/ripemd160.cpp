@@ -1,3 +1,11 @@
+/**
+ * @file ripemd160.cpp
+ * @brief Ripemd160
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/hash.h>
 #include <neo/cryptography/ripemd160managed.h>
 

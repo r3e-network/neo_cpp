@@ -1,3 +1,11 @@
+/**
+ * @file consensus_state.cpp
+ * @brief Consensus State
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/consensus/consensus_state.h>
 
 #include <algorithm>

@@ -1,3 +1,11 @@
+/**
+ * @file main_service.cpp
+ * @brief Service implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cli/main_service.h>
 #include <neo/cli/type_converters.h>
 #include <neo/cryptography/ecc/ec_point.h>

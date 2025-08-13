@@ -1,3 +1,11 @@
+/**
+ * @file p2p_server.h
+ * @brief Peer-to-peer networking
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/uint256.h>

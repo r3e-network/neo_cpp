@@ -1,3 +1,11 @@
+/**
+ * @file blockchain_execution.cpp
+ * @brief Core blockchain implementation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/ledger/blockchain_execution.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/native/contract_management.h>

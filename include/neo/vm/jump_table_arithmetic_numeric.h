@@ -1,3 +1,11 @@
+/**
+ * @file jump_table_arithmetic_numeric.h
+ * @brief Jump Table Arithmetic Numeric
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/vm/jump_table.h>

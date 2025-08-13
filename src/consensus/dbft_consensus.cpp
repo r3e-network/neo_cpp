@@ -1,3 +1,11 @@
+/**
+ * @file dbft_consensus.cpp
+ * @brief Dbft Consensus
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/common/safe_math.h>
 #include <neo/consensus/consensus_message.h>
 #include <neo/consensus/dbft_consensus.h>

@@ -1,3 +1,11 @@
+/**
+ * @file inv_payload.cpp
+ * @brief Inv Payload
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/network/p2p/payloads/inv_payload.h>
 
 #include <stdexcept>

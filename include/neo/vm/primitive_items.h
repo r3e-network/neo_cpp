@@ -1,3 +1,11 @@
+/**
+ * @file primitive_items.h
+ * @brief Primitive Items
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/vm/stack_item.h>

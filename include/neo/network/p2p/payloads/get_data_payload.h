@@ -1,3 +1,11 @@
+/**
+ * @file get_data_payload.h
+ * @brief Get Data Payload
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/network/p2p/payloads/inv_payload.h>

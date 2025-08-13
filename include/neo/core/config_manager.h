@@ -1,3 +1,11 @@
+/**
+ * @file config_manager.h
+ * @brief Management components
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstdlib>

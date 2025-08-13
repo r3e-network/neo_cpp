@@ -1,3 +1,11 @@
+/**
+ * @file rpc_request.h
+ * @brief Rpc Request
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <nlohmann/json.hpp>

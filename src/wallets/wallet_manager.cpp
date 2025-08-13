@@ -1,3 +1,11 @@
+/**
+ * @file wallet_manager.cpp
+ * @brief Management components
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/wallets/wallet_manager.h>
 
 #include <iostream>

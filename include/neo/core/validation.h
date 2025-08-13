@@ -1,3 +1,11 @@
+/**
+ * @file validation.h
+ * @brief Validation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/core/exceptions.h>

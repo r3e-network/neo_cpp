@@ -1,3 +1,11 @@
+/**
+ * @file fixed8.h
+ * @brief Fixed-point decimal type
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstdint>

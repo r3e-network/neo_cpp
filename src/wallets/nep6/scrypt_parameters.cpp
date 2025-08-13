@@ -1,3 +1,11 @@
+/**
+ * @file scrypt_parameters.cpp
+ * @brief Scrypt Parameters
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/wallets/nep6/scrypt_parameters.h>
 
 namespace neo::wallets::nep6

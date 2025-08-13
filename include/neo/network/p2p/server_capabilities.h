@@ -1,3 +1,11 @@
+/**
+ * @file server_capabilities.h
+ * @brief Server Capabilities
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstdint>

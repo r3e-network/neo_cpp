@@ -1,3 +1,11 @@
+/**
+ * @file byte_span.h
+ * @brief Byte Span
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstdint>

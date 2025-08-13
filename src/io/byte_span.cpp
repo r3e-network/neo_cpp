@@ -1,3 +1,11 @@
+/**
+ * @file byte_span.cpp
+ * @brief Byte Span
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/io/byte_span.h>
 
 #include <iomanip>

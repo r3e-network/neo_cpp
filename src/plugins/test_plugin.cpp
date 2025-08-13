@@ -1,3 +1,11 @@
+/**
+ * @file test_plugin.cpp
+ * @brief Unit tests
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/plugins/test_plugin.h>
 
 #include <iostream>

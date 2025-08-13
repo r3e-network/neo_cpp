@@ -1,3 +1,11 @@
+/**
+ * @file block_sync_manager.cpp
+ * @brief Block structure and validation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/core/neo_system.h>
 #include <neo/ledger/blockchain.h>

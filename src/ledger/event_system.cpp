@@ -1,3 +1,11 @@
+/**
+ * @file event_system.cpp
+ * @brief Event handling
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/neo_system.h>
 #include <neo/ledger/block.h>
 #include <neo/ledger/event_system.h>

@@ -1,3 +1,11 @@
+/**
+ * @file protocol_handler.cpp
+ * @brief Event and message handlers
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/memory_stream.h>

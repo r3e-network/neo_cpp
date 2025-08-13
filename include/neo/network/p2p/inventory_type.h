@@ -1,3 +1,11 @@
+/**
+ * @file inventory_type.h
+ * @brief Inventory Type
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstdint>

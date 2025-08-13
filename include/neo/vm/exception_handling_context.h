@@ -1,3 +1,11 @@
+/**
+ * @file exception_handling_context.h
+ * @brief Exception Handling Context
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/vm/stack_item.h>

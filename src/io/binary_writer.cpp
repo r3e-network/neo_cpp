@@ -1,3 +1,11 @@
+/**
+ * @file binary_writer.cpp
+ * @brief Binary Writer
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/io/binary_writer.h>
 #include <neo/io/iserializable.h>
 

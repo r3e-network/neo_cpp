@@ -1,3 +1,11 @@
+/**
+ * @file recovery_request.h
+ * @brief Recovery Request
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/consensus/consensus_message.h>

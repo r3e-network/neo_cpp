@@ -1,3 +1,11 @@
+/**
+ * @file json_serializer.cpp
+ * @brief JSON serialization utilities
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/base64.h>
 #include <neo/smartcontract/json_serializer.h>
 #include <neo/vm/compound_items.h>

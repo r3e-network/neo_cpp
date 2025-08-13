@@ -1,3 +1,11 @@
+/**
+ * @file get_block_by_index_payload.cpp
+ * @brief Block structure and validation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/network/p2p/payloads/get_block_by_index_payload.h>
 
 namespace neo::network::p2p::payloads

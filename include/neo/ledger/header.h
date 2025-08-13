@@ -1,3 +1,11 @@
+/**
+ * @file header.h
+ * @brief Header
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/config/protocol_settings.h>

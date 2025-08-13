@@ -1,3 +1,11 @@
+/**
+ * @file neo_system.h
+ * @brief Main Neo system coordinator
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/ledger/blockchain.h>

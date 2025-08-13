@@ -1,3 +1,11 @@
+/**
+ * @file merkletree.h
+ * @brief Merkletree
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/uint256.h>

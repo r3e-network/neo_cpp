@@ -1,3 +1,11 @@
+/**
+ * @file command_token.cpp
+ * @brief Command Token
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/console_service/command_token.h>
 
 #include <sstream>

@@ -1,3 +1,11 @@
+/**
+ * @file rpc_client.h
+ * @brief Rpc Client
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/json/json.h>

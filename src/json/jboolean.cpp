@@ -1,3 +1,11 @@
+/**
+ * @file jboolean.cpp
+ * @brief Jboolean
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/json/jboolean.h>
 
 namespace neo::json

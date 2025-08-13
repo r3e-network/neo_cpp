@@ -1,3 +1,11 @@
+/**
+ * @file crypto_lib.h
+ * @brief Cryptographic operations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/smartcontract/native/native_contract.h>

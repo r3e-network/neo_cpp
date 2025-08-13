@@ -1,3 +1,11 @@
+/**
+ * @file state_service_plugin.cpp
+ * @brief Service implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/merkle_tree.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>

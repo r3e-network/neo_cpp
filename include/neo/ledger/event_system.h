@@ -1,3 +1,11 @@
+/**
+ * @file event_system.h
+ * @brief Event handling
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <functional>

@@ -1,3 +1,11 @@
+/**
+ * @file neo_token_candidate.cpp
+ * @brief NEO governance token contract
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/ecc/ec_point.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>

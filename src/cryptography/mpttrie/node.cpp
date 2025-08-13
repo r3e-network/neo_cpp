@@ -1,3 +1,11 @@
+/**
+ * @file node.cpp
+ * @brief Node
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/hash.h>
 #include <neo/cryptography/mpttrie/node.h>
 #include <neo/io/binary_reader.h>

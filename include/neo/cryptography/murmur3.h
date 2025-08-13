@@ -1,3 +1,11 @@
+/**
+ * @file murmur3.h
+ * @brief Murmur3
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/byte_span.h>

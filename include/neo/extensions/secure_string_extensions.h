@@ -1,3 +1,11 @@
+/**
+ * @file secure_string_extensions.h
+ * @brief Secure String Extensions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstring>

@@ -1,3 +1,11 @@
+/**
+ * @file jtoken.cpp
+ * @brief Jtoken
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/json/jarray.h>
 #include <neo/json/jboolean.h>
 #include <neo/json/jnumber.h>

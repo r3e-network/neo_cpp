@@ -1,3 +1,11 @@
+/**
+ * @file console_command_attribute.cpp
+ * @brief Console Command Attribute
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/console_service/console_command_attribute.h>
 
 namespace neo::console_service

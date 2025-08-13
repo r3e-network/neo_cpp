@@ -1,3 +1,11 @@
+/**
+ * @file eccurve.h
+ * @brief Elliptic curve cryptography
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/cryptography/ecc/ec_point.h>

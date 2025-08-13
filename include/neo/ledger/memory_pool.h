@@ -1,3 +1,13 @@
+/**
+ * @file memory_pool.h
+ * @brief Transaction memory pool implementation for pending transactions
+ * @details Manages unconfirmed transactions waiting to be included in blocks,
+ *          with prioritization based on fees and verification status.
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/uint256.h>
@@ -15,23 +25,42 @@
 namespace neo::ledger
 {
 /**
- * @brief Transaction memory pool for pending transactions
- * This matches the C# Neo MemoryPool architecture with sorted/unsorted/unverified pools
+ * @class MemoryPool
+ * @brief Transaction memory pool for pending transactions awaiting block inclusion
+ * @details Implements a multi-tier pool system matching the C# Neo architecture:
+ *          - Sorted pool: Verified transactions ordered by fee per byte
+ *          - Unsorted pool: Verified transactions awaiting sorting
+ *          - Unverified pool: Transactions pending verification
+ * 
+ * Transactions flow: Unverified → Unsorted → Sorted → Block
+ * 
+ * @thread_safety Thread-safe using reader-writer locks
+ * @performance Optimized for high-throughput transaction processing
+ * @security Prevents double-spending and invalid transaction inclusion
  */
 class MemoryPool
 {
    private:
+    /// @brief Reader-writer lock for thread-safe access
     mutable std::shared_mutex mutex_;
 
     // Main transaction pools (matches C# Neo architecture)
-    std::unordered_map<io::UInt256, PoolItem> unsorted_transactions_;    // Dictionary<UInt256, PoolItem>
-    std::set<PoolItem> sorted_transactions_;                             // SortedSet<PoolItem>
-    std::unordered_map<io::UInt256, PoolItem> unverified_transactions_;  // Dictionary<UInt256, PoolItem>
+    /// @brief Verified transactions not yet sorted by priority
+    std::unordered_map<io::UInt256, PoolItem> unsorted_transactions_;
+    
+    /// @brief Verified transactions sorted by fee per byte (highest first)
+    std::set<PoolItem> sorted_transactions_;
+    
+    /// @brief Transactions awaiting verification
+    std::unordered_map<io::UInt256, PoolItem> unverified_transactions_;
 
+    /// @brief Maximum number of verified transactions to hold
     size_t max_capacity_;
+    
+    /// @brief Maximum number of unverified transactions to hold
     size_t max_unverified_capacity_;
 
-    // Transaction verification function
+    /// @brief Transaction verification callback function
     std::function<bool(const network::p2p::payloads::Neo3Transaction&)> verifier_;
 
     // Note: Event handlers moved to static event system for C# compatibility
@@ -39,61 +68,87 @@ class MemoryPool
 
    public:
     /**
-     * @brief Constructor
-     * @param max_capacity Maximum number of verified transactions to hold
-     * @param max_unverified_capacity Maximum number of unverified transactions to hold
+     * @brief Constructs a memory pool with specified capacities
+     * @param max_capacity Maximum verified transactions (default: 50000)
+     * @param max_unverified_capacity Maximum unverified transactions (default: 5000)
+     * @details Capacities prevent memory exhaustion from transaction spam
+     * @post Pool is initialized and ready to accept transactions
      */
     explicit MemoryPool(size_t max_capacity = 50000, size_t max_unverified_capacity = 5000);
 
     /**
-     * @brief Set transaction verifier function
-     * @param verifier Function to verify transactions
+     * @brief Sets the transaction verification callback
+     * @param verifier Function that validates transaction correctness
+     * @details Verifier should check signatures, balances, and script validity
+     * @pre verifier must not be null
+     * @thread_safety Thread-safe, can be called while pool is active
      */
     void SetVerifier(std::function<bool(const network::p2p::payloads::Neo3Transaction&)> verifier);
 
     /**
-     * @brief Try to add transaction to pool
-     * @param transaction Transaction to add
-     * @return true if transaction was added, false otherwise
+     * @brief Attempts to add a transaction to the pool
+     * @param transaction The transaction to add
+     * @return true if successfully added, false if rejected or duplicate
+     * @details Transaction is added to unverified pool first, then verified
+     * @note Emits TransactionAdded event on success
+     * @complexity O(log n) for sorted pool insertion
      */
     bool TryAdd(const network::p2p::payloads::Neo3Transaction& transaction);
 
     /**
-     * @brief Remove transaction from pool
-     * @param hash Transaction hash to remove
+     * @brief Removes a transaction from the pool
+     * @param hash Hash of the transaction to remove
+     * @details Removes from all pools (sorted, unsorted, unverified)
+     * @note Typically called when transaction is included in a block
+     * @complexity O(log n) for sorted pool removal
      */
     void Remove(const io::UInt256& hash);
 
     /**
-     * @brief Check if transaction exists in pool
-     * @param hash Transaction hash to check
-     * @return true if transaction exists
+     * @brief Checks if a transaction exists in any pool
+     * @param hash Hash of the transaction to check
+     * @return true if transaction is in any pool (verified or unverified)
+     * @thread_safety Thread-safe, uses shared lock
+     * @complexity O(1) average case
      */
     bool Contains(const io::UInt256& hash) const;
 
     /**
-     * @brief Get transaction by hash
-     * @param hash Transaction hash
+     * @brief Retrieves a transaction by its hash
+     * @param hash Hash of the transaction to retrieve
      * @return Pointer to transaction if found, nullptr otherwise
+     * @warning Returned pointer is only valid while pool lock is held
+     * @thread_safety Thread-safe, uses shared lock
+     * @complexity O(1) average case
      */
     const network::p2p::payloads::Neo3Transaction* GetTransaction(const io::UInt256& hash) const;
 
     /**
-     * @brief Get all verified transactions sorted by fee per byte (highest first)
-     * @return Vector of transactions sorted by priority
+     * @brief Gets all verified transactions sorted by priority
+     * @return Vector of transactions ordered by fee per byte (highest first)
+     * @details Used by consensus nodes to select transactions for blocks
+     * @thread_safety Thread-safe, uses shared lock
+     * @complexity O(n) where n is number of sorted transactions
      */
     std::vector<network::p2p::payloads::Neo3Transaction> GetSortedTransactions() const;
 
     /**
-     * @brief Get all unverified transactions
+     * @brief Gets all transactions awaiting verification
      * @return Vector of unverified transactions
+     * @details Used for re-verification attempts after state changes
+     * @thread_safety Thread-safe, uses shared lock
+     * @complexity O(n) where n is number of unverified transactions
      */
     std::vector<network::p2p::payloads::Neo3Transaction> GetUnverifiedTransactions() const;
 
     /**
-     * @brief Get transactions for block creation
-     * @param max_count Maximum number of transactions to return
-     * @return Vector of highest priority transactions
+     * @brief Selects highest priority transactions for block creation
+     * @param max_count Maximum transactions to include
+     * @return Vector of transactions optimized for maximum fees
+     * @details Selects from sorted pool to maximize block fees
+     * @pre max_count should respect block size limits
+     * @thread_safety Thread-safe, uses shared lock
+     * @complexity O(min(n, max_count)) where n is pool size
      */
     std::vector<network::p2p::payloads::Neo3Transaction> GetTransactionsForBlock(size_t max_count) const;
 

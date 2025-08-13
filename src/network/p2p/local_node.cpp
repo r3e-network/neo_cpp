@@ -1,3 +1,11 @@
+/**
+ * @file local_node.cpp
+ * @brief Local Node
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/io/byte_vector.h>
 #include <neo/io/uint256.h>

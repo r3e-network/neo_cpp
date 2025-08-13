@@ -1,3 +1,11 @@
+/**
+ * @file stack_item.h
+ * @brief Stack Item
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/byte_vector.h>

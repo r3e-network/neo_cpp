@@ -1,3 +1,11 @@
+/**
+ * @file prepare_request.cpp
+ * @brief Prepare Request
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/consensus/prepare_request.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>

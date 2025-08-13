@@ -1,3 +1,11 @@
+/**
+ * @file data_cache.cpp
+ * @brief Data caching layer
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/persistence/data_cache.h>
 

@@ -1,3 +1,11 @@
+/**
+ * @file channels_config.cpp
+ * @brief Configuration management
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/network/ip_address.h>
 #include <neo/network/ip_endpoint.h>
 #include <neo/network/p2p/channels_config.h>

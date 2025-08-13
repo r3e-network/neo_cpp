@@ -1,3 +1,11 @@
+/**
+ * @file rpc_server_stub.cpp
+ * @brief JSON-RPC server implementation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/io/json.h>
 #include <neo/rpc/rpc_server.h>

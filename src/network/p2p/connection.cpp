@@ -1,3 +1,11 @@
+/**
+ * @file connection.cpp
+ * @brief Connection
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/network/p2p/connection.h>
 
 #include <chrono>

@@ -1,3 +1,11 @@
+/**
+ * @file role_management.cpp
+ * @brief Role Management
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>

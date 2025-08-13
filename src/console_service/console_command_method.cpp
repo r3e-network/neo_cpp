@@ -1,3 +1,11 @@
+/**
+ * @file console_command_method.cpp
+ * @brief Console Command Method
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/console_service/console_command_method.h>
 
 namespace neo::console_service

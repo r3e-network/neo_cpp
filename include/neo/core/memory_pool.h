@@ -1,3 +1,11 @@
+/**
+ * @file memory_pool.h
+ * @brief Transaction memory pool management
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <atomic>

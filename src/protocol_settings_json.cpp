@@ -1,3 +1,11 @@
+/**
+ * @file protocol_settings_json.cpp
+ * @brief JSON serialization utilities
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/ecc/ec_point.h>
 #include <neo/hardfork.h>
 #include <neo/protocol_settings.h>

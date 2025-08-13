@@ -1,3 +1,11 @@
+/**
+ * @file command_line_options.h
+ * @brief Command Line Options
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <string>

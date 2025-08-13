@@ -1,3 +1,11 @@
+/**
+ * @file metrics_collector.h
+ * @brief Performance metrics collection
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <atomic>

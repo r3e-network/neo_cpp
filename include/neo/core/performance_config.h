@@ -1,3 +1,11 @@
+/**
+ * @file performance_config.h
+ * @brief Configuration management
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstddef>

@@ -1,3 +1,11 @@
+/**
+ * @file hash_index_state.h
+ * @brief Hashing algorithms
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/binary_reader.h>

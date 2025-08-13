@@ -1,3 +1,11 @@
+/**
+ * @file blockchain_utils.cpp
+ * @brief Core blockchain implementation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/crypto/ecc/ecc_point.h>
 #include <neo/io/binary_writer.h>
 #include <neo/ledger/blockchain.h>

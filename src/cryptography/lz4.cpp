@@ -1,3 +1,11 @@
+/**
+ * @file lz4.cpp
+ * @brief Lz4
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/lz4.h>
 
 #include <algorithm>

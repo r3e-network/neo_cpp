@@ -1,3 +1,11 @@
+/**
+ * @file native_contract_manager.h
+ * @brief Native contract implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/uint160.h>

@@ -1,3 +1,11 @@
+/**
+ * @file main_service_wallet.cpp
+ * @brief Service implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cli/console_helper.h>
 #include <neo/cli/main_service.h>
 #include <neo/smartcontract/native/gas_token.h>

@@ -1,3 +1,11 @@
+/**
+ * @file integer_extensions.cpp
+ * @brief Integer Extensions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/extensions/integer_extensions.h>
 
 #include <cstring>

@@ -1,3 +1,11 @@
+/**
+ * @file filter_load_payload.h
+ * @brief Filter Load Payload
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/binary_reader.h>

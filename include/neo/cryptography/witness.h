@@ -1,3 +1,11 @@
+/**
+ * @file witness.h
+ * @brief Witness
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/byte_vector.h>

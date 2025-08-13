@@ -1,3 +1,11 @@
+/**
+ * @file peer_discovery_service.h
+ * @brief Service implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/ijson_serializable.h>

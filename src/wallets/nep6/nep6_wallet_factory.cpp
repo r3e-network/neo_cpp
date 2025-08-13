@@ -1,3 +1,11 @@
+/**
+ * @file nep6_wallet_factory.cpp
+ * @brief Factory pattern implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/wallets/nep6/nep6_wallet.h>
 #include <neo/wallets/nep6/nep6_wallet_factory.h>
 

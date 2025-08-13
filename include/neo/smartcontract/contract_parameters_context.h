@@ -1,3 +1,11 @@
+/**
+ * @file contract_parameters_context.h
+ * @brief Contract Parameters Context
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/cryptography/ecc/ecpoint.h>

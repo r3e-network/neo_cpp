@@ -1,3 +1,11 @@
+/**
+ * @file neo_token_committee.h
+ * @brief NEO governance token contract
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/smartcontract/native/neo_token.h>

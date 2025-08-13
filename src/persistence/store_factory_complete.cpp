@@ -1,3 +1,11 @@
+/**
+ * @file store_factory_complete.cpp
+ * @brief Factory pattern implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/persistence/memory_store.h>
 #include <neo/persistence/store_factory.h>

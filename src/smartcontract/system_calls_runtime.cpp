@@ -1,3 +1,11 @@
+/**
+ * @file system_calls_runtime.cpp
+ * @brief System Calls Runtime
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/protocol_constants.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/system_call_constants.h>

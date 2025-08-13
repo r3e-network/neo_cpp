@@ -1,3 +1,11 @@
+/**
+ * @file nep6_wallet.cpp
+ * @brief Nep6 Wallet
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/cryptography/hash.h>
 #include <neo/cryptography/scrypt.h>

@@ -1,3 +1,11 @@
+/**
+ * @file keypair.cpp
+ * @brief Keypair
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/ecc/keypair.h>
 #include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/cryptography/hash.h>

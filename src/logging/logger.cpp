@@ -1,3 +1,11 @@
+/**
+ * @file logger.cpp
+ * @brief Logging infrastructure
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/logging/logger.h>
 
 #include <iostream>

@@ -1,3 +1,11 @@
+/**
+ * @file storage_iterator.cpp
+ * @brief Persistent storage management
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/smartcontract/storage_iterator.h>
 
 #include <stdexcept>

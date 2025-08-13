@@ -1,3 +1,11 @@
+/**
+ * @file native_contract.cpp
+ * @brief Native contract implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/hash.h>
 #include <neo/persistence/storage_item.h>
 #include <neo/persistence/storage_key.h>

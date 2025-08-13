@@ -1,3 +1,11 @@
+/**
+ * @file bls12_381.h
+ * @brief Bls12 381
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/byte_span.h>

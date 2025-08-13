@@ -1,3 +1,11 @@
+/**
+ * @file neo_node_initialization.cpp
+ * @brief Initialization logic
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/node/neo_node.h>
 
 #include <exception>

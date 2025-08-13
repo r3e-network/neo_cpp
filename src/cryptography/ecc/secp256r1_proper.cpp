@@ -1,13 +1,10 @@
-// Copyright (C) 2015-2025 The Neo Project.
-//
-// secp256r1_proper.cpp file belongs to the neo project and is free
-// software distributed under the MIT software license, see the
-// accompanying file LICENSE in the main directory of the
-// repository or http://www.opensource.org/licenses/mit-license.php
-// for more details.
-//
-// Redistribution and use in source and binary forms with or without
-// modifications are permitted.
+/**
+ * @file secp256r1_proper.cpp
+ * @brief Secp256r1 Proper
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
 
 #include <neo/cryptography/aes.h>
 #include <neo/cryptography/base58.h>

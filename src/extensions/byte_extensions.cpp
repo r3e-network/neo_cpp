@@ -1,3 +1,11 @@
+/**
+ * @file byte_extensions.cpp
+ * @brief Byte Extensions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/extensions/byte_extensions.h>
 
 #include <algorithm>

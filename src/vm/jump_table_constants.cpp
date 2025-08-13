@@ -1,3 +1,11 @@
+/**
+ * @file jump_table_constants.cpp
+ * @brief Constant definitions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/vm/compound_items.h>
 #include <neo/vm/exceptions.h>
 #include <neo/vm/execution_engine.h>

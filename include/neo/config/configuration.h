@@ -1,3 +1,11 @@
+/**
+ * @file configuration.h
+ * @brief Configuration management
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/cryptography/ecc_point.h>

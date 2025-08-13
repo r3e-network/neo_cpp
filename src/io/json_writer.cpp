@@ -1,3 +1,11 @@
+/**
+ * @file json_writer.cpp
+ * @brief JSON serialization utilities
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/io/ijson_serializable.h>
 #include <neo/io/json_writer.h>
 

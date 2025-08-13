@@ -1,3 +1,11 @@
+/**
+ * @file main_service.h
+ * @brief Service implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/cli/command_line_options.h>

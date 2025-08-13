@@ -1,3 +1,11 @@
+/**
+ * @file role_management.h
+ * @brief Role Management
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/cryptography/ecc/ecpoint.h>

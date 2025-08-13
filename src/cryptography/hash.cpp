@@ -1,3 +1,11 @@
+/**
+ * @file hash.cpp
+ * @brief Hashing algorithms
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/hash.h>
 #include <openssl/evp.h>
 #include <openssl/ripemd.h>

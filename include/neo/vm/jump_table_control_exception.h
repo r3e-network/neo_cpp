@@ -1,3 +1,11 @@
+/**
+ * @file jump_table_control_exception.h
+ * @brief Jump Table Control Exception
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/vm/jump_table.h>

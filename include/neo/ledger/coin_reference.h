@@ -1,3 +1,11 @@
+/**
+ * @file coin_reference.h
+ * @brief Coin Reference
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/ijson_serializable.h>

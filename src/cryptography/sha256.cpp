@@ -1,3 +1,11 @@
+/**
+ * @file sha256.cpp
+ * @brief Sha256
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/hash.h>
 #include <openssl/sha.h>
 

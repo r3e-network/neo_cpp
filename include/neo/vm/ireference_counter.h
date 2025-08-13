@@ -1,3 +1,11 @@
+/**
+ * @file ireference_counter.h
+ * @brief Ireference Counter
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <memory>

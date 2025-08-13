@@ -1,3 +1,11 @@
+/**
+ * @file health_checks.h
+ * @brief Health Checks
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/monitoring/metrics.h>

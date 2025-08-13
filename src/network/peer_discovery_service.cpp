@@ -1,3 +1,11 @@
+/**
+ * @file peer_discovery_service.cpp
+ * @brief Service implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/logging/logger.h>
 #include <neo/network/network_address.h>
 #include <neo/network/p2p_server.h>

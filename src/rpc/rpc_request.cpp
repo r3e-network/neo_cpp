@@ -1,3 +1,11 @@
+/**
+ * @file rpc_request.cpp
+ * @brief Rpc Request
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/rpc/rpc_request.h>
 
 namespace neo::rpc

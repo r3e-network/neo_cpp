@@ -1,3 +1,11 @@
+/**
+ * @file message_simple.cpp
+ * @brief Network message handling
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/io/binary_writer.h>
 #include <neo/network/p2p/message.h>

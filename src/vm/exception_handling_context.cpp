@@ -1,3 +1,11 @@
+/**
+ * @file exception_handling_context.cpp
+ * @brief Exception Handling Context
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/vm/exception_handling_context.h>
 
 namespace neo::vm

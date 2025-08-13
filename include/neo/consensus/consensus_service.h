@@ -1,3 +1,14 @@
+/**
+ * @file consensus_service.h
+ * @brief Neo dBFT consensus service implementation
+ * @details This file contains the ConsensusService class which implements
+ *          the delegated Byzantine Fault Tolerance (dBFT) consensus mechanism
+ *          for the Neo blockchain.
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/consensus/change_view_message.h>
@@ -26,75 +37,114 @@
 #include <unordered_set>
 #include <vector>
 
+/**
+ * @namespace neo::consensus
+ * @brief Contains dBFT consensus implementation components
+ * @details This namespace includes all classes related to the delegated
+ *          Byzantine Fault Tolerance consensus mechanism, including
+ *          message types, consensus context, and service implementation.
+ */
 namespace neo::consensus
 {
 /**
- * @brief Represents the consensus service.
+ * @class ConsensusService
+ * @brief Implements the dBFT consensus mechanism for block production
+ * @details The ConsensusService manages the consensus process including:
+ *          - Validator coordination and communication
+ *          - Block proposal creation and validation
+ *          - Consensus message processing (PrepareRequest, PrepareResponse, Commit)
+ *          - View change management for fault tolerance
+ *          - Recovery from network partitions
+ * 
+ * @thread_safety Thread-safe for all public methods
+ * @performance Optimized for low-latency block production (15 second blocks)
+ * @security Byzantine fault tolerant up to f = (n-1)/3 faulty nodes
  */
 class ConsensusService
 {
    public:
     /**
-     * @brief Constructs a ConsensusService.
-     * @param neoSystem The Neo system.
-     * @param keyPair The key pair.
+     * @brief Constructs a ConsensusService instance
+     * @param neoSystem The Neo system instance containing blockchain and network
+     * @param keyPair The validator's key pair for signing consensus messages
+     * @pre neoSystem must be initialized
+     * @pre keyPair must be a valid validator key
+     * @throws std::invalid_argument if neoSystem is null or keyPair is invalid
      */
     ConsensusService(std::shared_ptr<node::NeoSystem> neoSystem, const cryptography::ecc::KeyPair& keyPair);
 
     /**
-     * @brief Destructor.
+     * @brief Destructor
+     * @details Ensures proper cleanup of consensus threads and resources
+     * @post All consensus threads are stopped and resources released
      */
     ~ConsensusService();
 
     /**
-     * @brief Starts the service.
+     * @brief Starts the consensus service and begins block production
+     * @details Initializes consensus state and starts the consensus thread
+     * @pre Service must not be already running
+     * @post Service is running and participating in consensus
+     * @throws std::runtime_error if service is already running
      */
     void Start();
 
     /**
-     * @brief Stops the service.
+     * @brief Stops the consensus service gracefully
+     * @details Completes current consensus round and stops all threads
+     * @post Service is stopped and can be restarted
+     * @note This method blocks until service is fully stopped
      */
     void Stop();
 
     /**
-     * @brief Checks if the service is running.
-     * @return True if the service is running, false otherwise.
+     * @brief Checks if the consensus service is currently running
+     * @return true if service is active and participating in consensus
+     * @thread_safety Thread-safe, can be called from any thread
      */
     bool IsRunning() const;
 
     /**
-     * @brief Gets the validators.
-     * @return The validators.
+     * @brief Gets the current set of consensus validators
+     * @return Vector of validator public keys (EC points)
+     * @details Validators are ordered by their voting weight
+     * @thread_safety Thread-safe, returns const reference
      */
     const std::vector<cryptography::ecc::ECPoint>& GetValidators() const;
 
     /**
-     * @brief Gets the validator index.
-     * @return The validator index.
+     * @brief Gets this node's index in the validator set
+     * @return Index in the validator array, or UINT16_MAX if not a validator
+     * @details Index is determined by the node's public key position
      */
     uint16_t GetValidatorIndex() const;
 
     /**
-     * @brief Gets the primary index.
-     * @return The primary index.
+     * @brief Gets the current primary (speaker) validator index
+     * @return Index of the primary validator for current view
+     * @details Primary rotates based on formula: (blockIndex - viewNumber) % validatorCount
      */
     uint16_t GetPrimaryIndex() const;
 
     /**
-     * @brief Gets the view number.
-     * @return The view number.
+     * @brief Gets the current consensus view number
+     * @return Current view (increments on view change/timeout)
+     * @details View changes occur when consensus cannot be reached
      */
     uint8_t GetViewNumber() const;
 
     /**
-     * @brief Gets the block index.
-     * @return The block index.
+     * @brief Gets the block index being consensused
+     * @return Height of the block currently being produced
+     * @details This is always current blockchain height + 1
      */
     uint32_t GetBlockIndex() const;
 
     /**
-     * @brief Gets the key pair.
-     * @return The key pair.
+     * @brief Gets the validator's key pair
+     * @return Reference to the cryptographic key pair
+     * @warning Handle with care - contains private key
+     * @thread_safety Thread-safe, returns const reference
      */
     const cryptography::ecc::KeyPair& GetKeyPair() const;
 

@@ -1,3 +1,11 @@
+/**
+ * @file recovery_message_stub.cpp
+ * @brief Network message handling
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/consensus/recovery_message.h>
 
 namespace neo::consensus

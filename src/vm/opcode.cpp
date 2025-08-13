@@ -1,3 +1,11 @@
+/**
+ * @file opcode.cpp
+ * @brief VM operation codes
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/vm/opcode.h>
 
 #include <string>

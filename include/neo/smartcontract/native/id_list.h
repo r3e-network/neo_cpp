@@ -1,3 +1,11 @@
+/**
+ * @file id_list.h
+ * @brief Id List
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/binary_reader.h>

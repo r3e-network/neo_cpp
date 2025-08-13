@@ -1,3 +1,11 @@
+/**
+ * @file type_converters.cpp
+ * @brief Type conversion utilities
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cli/type_converters.h>
 #include <neo/core/safe_conversions.h>
 #include <neo/io/uint160.h>

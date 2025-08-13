@@ -1,3 +1,11 @@
+/**
+ * @file ordered_dictionary.h
+ * @brief Ordered Dictionary
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <stdexcept>

@@ -1,3 +1,11 @@
+/**
+ * @file execution_engine_limits.h
+ * @brief Execution Engine Limits
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstdint>

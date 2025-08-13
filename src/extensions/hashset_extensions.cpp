@@ -1,3 +1,11 @@
+/**
+ * @file hashset_extensions.cpp
+ * @brief Hashing algorithms
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/extensions/hashset_extensions.h>
 
 // HashSetExtensions is a header-only template library

@@ -1,3 +1,11 @@
+/**
+ * @file thread_safe_queue.h
+ * @brief Queue data structures
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <condition_variable>

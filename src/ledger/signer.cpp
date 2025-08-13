@@ -1,3 +1,11 @@
+/**
+ * @file signer.cpp
+ * @brief Signer
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/ledger/signer.h>
 
 #include <stdexcept>

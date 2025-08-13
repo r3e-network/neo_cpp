@@ -1,3 +1,11 @@
+/**
+ * @file consensus_context.cpp
+ * @brief Consensus Context
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/consensus/change_view_message.h>
 #include <neo/consensus/commit_message.h>
 #include <neo/consensus/consensus_context.h>

@@ -1,3 +1,11 @@
+/**
+ * @file jstring.cpp
+ * @brief Jstring
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/json/jstring.h>
 
 #include <iomanip>

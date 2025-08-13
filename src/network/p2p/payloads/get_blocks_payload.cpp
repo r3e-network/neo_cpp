@@ -1,3 +1,11 @@
+/**
+ * @file get_blocks_payload.cpp
+ * @brief Block structure and validation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/network/p2p/payloads/get_blocks_payload.h>
 
 #include <stdexcept>

@@ -1,3 +1,11 @@
+/**
+ * @file biginteger_extensions.cpp
+ * @brief Biginteger Extensions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/extensions/biginteger_extensions.h>
 
 #include <algorithm>

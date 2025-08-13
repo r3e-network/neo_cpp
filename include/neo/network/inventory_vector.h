@@ -1,3 +1,11 @@
+/**
+ * @file inventory_vector.h
+ * @brief Inventory Vector
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/iserializable.h>

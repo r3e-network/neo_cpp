@@ -1,3 +1,11 @@
+/**
+ * @file asset_descriptor.cpp
+ * @brief Asset Descriptor
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/smartcontract/native/contract_management.h>
 #include <neo/wallets/asset_descriptor.h>
 

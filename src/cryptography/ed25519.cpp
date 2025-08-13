@@ -1,3 +1,11 @@
+/**
+ * @file ed25519.cpp
+ * @brief Ed25519
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/ed25519.h>
 #include <neo/cryptography/hash.h>
 

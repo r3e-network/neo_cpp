@@ -1,3 +1,11 @@
+/**
+ * @file consensus_block_processing.cpp
+ * @brief Block structure and validation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/consensus/consensus_service.h>
 #include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/cryptography/hash.h>

@@ -1,3 +1,11 @@
+/**
+ * @file prometheus_exporter.h
+ * @brief Prometheus Exporter
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <httplib.h>

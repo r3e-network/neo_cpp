@@ -1,3 +1,11 @@
+/**
+ * @file assembly_extensions.cpp
+ * @brief Assembly Extensions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/extensions/assembly_extensions.h>
 
 #include <cstring>

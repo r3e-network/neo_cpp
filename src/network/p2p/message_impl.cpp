@@ -1,3 +1,11 @@
+/**
+ * @file message_impl.cpp
+ * @brief Network message handling
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>

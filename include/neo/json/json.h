@@ -1,3 +1,11 @@
+/**
+ * @file json.h
+ * @brief JSON serialization utilities
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 // Redirect to the main JSON interfaces

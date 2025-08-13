@@ -1,3 +1,11 @@
+/**
+ * @file ijson_serializable.h
+ * @brief Serialization interfaces
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <nlohmann/json.hpp>

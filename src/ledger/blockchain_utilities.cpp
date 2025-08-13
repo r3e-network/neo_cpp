@@ -1,3 +1,11 @@
+/**
+ * @file blockchain_utilities.cpp
+ * @brief Core blockchain implementation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/ledger/blockchain.h>
 

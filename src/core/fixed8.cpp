@@ -1,3 +1,11 @@
+/**
+ * @file fixed8.cpp
+ * @brief Fixed-point decimal type
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/big_decimal.h>
 #include <neo/core/fixed8.h>
 

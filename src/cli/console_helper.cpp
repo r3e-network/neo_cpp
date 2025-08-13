@@ -1,3 +1,11 @@
+/**
+ * @file console_helper.cpp
+ * @brief Helper utilities
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cli/console_helper.h>
 
 #include <iostream>

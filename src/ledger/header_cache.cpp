@@ -1,3 +1,11 @@
+/**
+ * @file header_cache.cpp
+ * @brief Caching mechanisms
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/ledger/header_cache.h>
 
 #include <algorithm>

@@ -1,3 +1,11 @@
+/**
+ * @file command_token.h
+ * @brief Command Token
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <memory>

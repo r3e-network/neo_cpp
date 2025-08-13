@@ -1,3 +1,11 @@
+/**
+ * @file jump_table_splice_buffer.h
+ * @brief Buffer management
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/vm/jump_table.h>

@@ -1,3 +1,11 @@
+/**
+ * @file execution_engine.cpp
+ * @brief Execution Engine
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/hash.h>
 #include <neo/vm/compound_items.h>
 #include <neo/vm/exceptions.h>

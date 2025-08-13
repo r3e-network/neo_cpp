@@ -1,3 +1,11 @@
+/**
+ * @file transaction_cache.h
+ * @brief Transaction types and processing
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/caching/lru_cache.h>

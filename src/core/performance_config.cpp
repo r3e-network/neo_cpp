@@ -1,3 +1,11 @@
+/**
+ * @file performance_config.cpp
+ * @brief Configuration management
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/core/performance_config.h>
 

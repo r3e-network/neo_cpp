@@ -1,3 +1,11 @@
+/**
+ * @file ipaddress_extensions.cpp
+ * @brief Ipaddress Extensions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/extensions/ipaddress_extensions.h>
 
 #include <algorithm>

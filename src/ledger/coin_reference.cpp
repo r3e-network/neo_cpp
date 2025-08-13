@@ -1,3 +1,11 @@
+/**
+ * @file coin_reference.cpp
+ * @brief Coin Reference
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>
 #include <neo/io/json_reader.h>

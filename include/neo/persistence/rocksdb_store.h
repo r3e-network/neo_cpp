@@ -1,3 +1,11 @@
+/**
+ * @file rocksdb_store.h
+ * @brief RocksDB storage backend
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/core/logging.h>

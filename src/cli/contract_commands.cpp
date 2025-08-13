@@ -1,3 +1,11 @@
+/**
+ * @file contract_commands.cpp
+ * @brief Contract Commands
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cli/command_handler.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>

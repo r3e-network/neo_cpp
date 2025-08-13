@@ -1,3 +1,11 @@
+/**
+ * @file payload_factory.cpp
+ * @brief Factory pattern implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/network/p2p/payloads/addr_payload.h>
 #include <neo/network/p2p/payloads/block_payload.h>

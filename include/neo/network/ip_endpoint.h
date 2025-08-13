@@ -1,3 +1,11 @@
+/**
+ * @file ip_endpoint.h
+ * @brief Ip Endpoint
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/iserializable.h>

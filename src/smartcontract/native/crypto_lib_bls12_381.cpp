@@ -1,3 +1,11 @@
+/**
+ * @file crypto_lib_bls12_381.cpp
+ * @brief Cryptographic operations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/bls12_381.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>

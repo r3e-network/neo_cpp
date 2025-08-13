@@ -1,3 +1,11 @@
+/**
+ * @file contract_permission.h
+ * @brief Contract Permission
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/cryptography/ecc/ecpoint.h>

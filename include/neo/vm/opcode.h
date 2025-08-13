@@ -1,3 +1,11 @@
+/**
+ * @file opcode.h
+ * @brief VM operation codes
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstdint>

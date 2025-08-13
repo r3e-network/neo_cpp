@@ -1,3 +1,11 @@
+/**
+ * @file recovery_message.cpp
+ * @brief Network message handling
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/consensus/consensus_message.h>
 #include <neo/consensus/recovery_message.h>
 #include <neo/io/binary_reader.h>

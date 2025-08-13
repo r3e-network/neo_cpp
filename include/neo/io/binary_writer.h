@@ -1,3 +1,11 @@
+/**
+ * @file binary_writer.h
+ * @brief Binary Writer
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/byte_span.h>

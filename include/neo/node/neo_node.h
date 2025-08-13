@@ -1,3 +1,11 @@
+/**
+ * @file neo_node.h
+ * @brief Neo Node
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <atomic>

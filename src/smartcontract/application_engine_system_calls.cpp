@@ -1,3 +1,11 @@
+/**
+ * @file application_engine_system_calls.cpp
+ * @brief Smart contract execution engine
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/system_call_exception.h>
 #include <neo/smartcontract/system_calls.h>

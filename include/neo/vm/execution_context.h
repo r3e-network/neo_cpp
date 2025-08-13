@@ -1,3 +1,11 @@
+/**
+ * @file execution_context.h
+ * @brief Execution Context
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/vm/exception_handling_context.h>

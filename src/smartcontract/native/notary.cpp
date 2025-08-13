@@ -1,3 +1,11 @@
+/**
+ * @file notary.cpp
+ * @brief Notary
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/crypto.h>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/hardfork.h>

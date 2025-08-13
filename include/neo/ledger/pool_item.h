@@ -1,3 +1,11 @@
+/**
+ * @file pool_item.h
+ * @brief Resource pooling
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/uint256.h>

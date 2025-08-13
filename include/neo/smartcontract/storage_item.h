@@ -1,3 +1,11 @@
+/**
+ * @file storage_item.h
+ * @brief Persistent storage management
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 // Forward declaration header for smartcontract storage item

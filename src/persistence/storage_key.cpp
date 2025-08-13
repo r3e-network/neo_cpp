@@ -1,13 +1,10 @@
-// Copyright (C) 2015-2025 The Neo Project.
-//
-// storage_key_proper.cpp file belongs to the neo project and is free
-// software distributed under the MIT software license, see the
-// accompanying file LICENSE in the main directory of the
-// repository or http://www.opensource.org/licenses/mit-license.php
-// for more details.
-//
-// Redistribution and use in source and binary forms with or without
-// modifications are permitted.
+/**
+ * @file storage_key.cpp
+ * @brief Persistent storage management
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
 
 #include <neo/io/memory_stream.h>
 #include <neo/persistence/data_cache.h>

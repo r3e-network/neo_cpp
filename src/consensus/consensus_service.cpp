@@ -1,3 +1,13 @@
+/**
+ * @file consensus_service.cpp
+ * @brief Implementation of the dBFT consensus service
+ * @details Manages validator coordination, block proposals, and consensus
+ *          message processing for the delegated Byzantine Fault Tolerance protocol.
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/consensus/consensus_service.h>
 #include <neo/cryptography/ecc/secp256r1.h>
 #include <neo/cryptography/hash.h>
@@ -23,29 +33,40 @@ ConsensusService::ConsensusService(std::shared_ptr<node::NeoSystem> neoSystem,
       lastBlockTime_(0),
       running_(false)
 {
+    // Initialize validator set from blockchain state
+    // Validators are elected based on NEO token votes
     InitializeValidators();
 }
 
-ConsensusService::~ConsensusService() { Stop(); }
+ConsensusService::~ConsensusService() 
+{ 
+    // Ensure consensus thread is properly terminated
+    Stop(); 
+}
 
 void ConsensusService::Start()
 {
+    // Prevent double-start
     if (running_) return;
 
+    // Set running flag and start consensus thread
     running_ = true;
     consensusThread_ = std::thread(&ConsensusService::RunConsensus, this);
 
-    // Register message handler
+    // Register handler for consensus protocol messages
+    // Messages include PrepareRequest, PrepareResponse, Commit, ChangeView
     node_->RegisterMessageHandler(
         network::p2p::MessageCommand::Consensus,
         [this](const network::Message& message, const cryptography::ecc::ECPoint& sender)
         {
             try
             {
+                // Deserialize consensus message from network payload
                 std::istringstream stream(std::string(reinterpret_cast<const char*>(message.GetPayload().Data()),
                                                       message.GetPayload().Size()));
                 io::BinaryReader reader(stream);
 
+                // Parse the consensus message based on type
                 auto consensusMessage = std::shared_ptr<ConsensusMessage>();
 
                 // Read message type

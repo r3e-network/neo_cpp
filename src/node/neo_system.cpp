@@ -1,3 +1,11 @@
+/**
+ * @file neo_system.cpp
+ * @brief Main Neo system coordinator
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/logging/logger.h>
 #include <neo/node/neo_system.h>
 #include <neo/persistence/leveldb_store.h>

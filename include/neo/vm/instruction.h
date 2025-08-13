@@ -1,3 +1,11 @@
+/**
+ * @file instruction.h
+ * @brief Instruction
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/vm/internal/byte_span.h>

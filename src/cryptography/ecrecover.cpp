@@ -1,3 +1,11 @@
+/**
+ * @file ecrecover.cpp
+ * @brief Ecrecover
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/cryptography/ecrecover.h>

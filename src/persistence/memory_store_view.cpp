@@ -1,3 +1,11 @@
+/**
+ * @file memory_store_view.cpp
+ * @brief Memory Store View
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/persistence/memory_store_view.h>
 
 #include <map>

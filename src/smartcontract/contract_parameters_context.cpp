@@ -1,3 +1,11 @@
+/**
+ * @file contract_parameters_context.cpp
+ * @brief Contract Parameters Context
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/base64.h>
 #include <neo/cryptography/crypto.h>
 #include <neo/io/binary_reader.h>

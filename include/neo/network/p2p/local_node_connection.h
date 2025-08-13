@@ -1,3 +1,11 @@
+/**
+ * @file local_node_connection.h
+ * @brief Local Node Connection
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <memory>

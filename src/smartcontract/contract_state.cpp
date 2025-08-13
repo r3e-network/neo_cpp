@@ -1,3 +1,11 @@
+/**
+ * @file contract_state.cpp
+ * @brief Contract State
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/hash.h>
 #include <neo/io/binary_reader.h>
 #include <neo/io/binary_writer.h>

@@ -1,3 +1,11 @@
+/**
+ * @file service_proxy.cpp
+ * @brief Service implementations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/console_service/service_proxy.h>
 #include <neo/io/uint160.h>
 #include <neo/logging/logger.h>

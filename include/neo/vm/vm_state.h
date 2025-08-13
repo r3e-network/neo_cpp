@@ -1,3 +1,11 @@
+/**
+ * @file vm_state.h
+ * @brief Virtual machine implementation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstdint>

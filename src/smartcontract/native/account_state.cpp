@@ -1,3 +1,11 @@
+/**
+ * @file account_state.cpp
+ * @brief Account State
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/smartcontract/native/account_state.h>
 #include <neo/vm/compound_items.h>
 

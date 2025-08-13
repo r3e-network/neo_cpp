@@ -1,3 +1,11 @@
+/**
+ * @file neo3_transaction_alias.h
+ * @brief Transaction types and processing
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/network/p2p/payloads/neo3_transaction.h>

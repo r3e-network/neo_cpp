@@ -1,3 +1,11 @@
+/**
+ * @file neo_system_stub.cpp
+ * @brief Main Neo system coordinator
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/logging.h>
 #include <neo/io/uint256.h>
 #include <neo/node/neo_system.h>

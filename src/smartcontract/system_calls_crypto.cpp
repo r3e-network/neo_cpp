@@ -1,3 +1,11 @@
+/**
+ * @file system_calls_crypto.cpp
+ * @brief Cryptographic operations
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/protocol_constants.h>
 #include <neo/cryptography/bls12_381.h>
 #include <neo/cryptography/crypto.h>

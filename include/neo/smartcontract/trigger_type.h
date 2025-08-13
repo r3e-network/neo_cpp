@@ -1,3 +1,11 @@
+/**
+ * @file trigger_type.h
+ * @brief Trigger Type
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstdint>

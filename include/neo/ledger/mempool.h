@@ -1,3 +1,11 @@
+/**
+ * @file mempool.h
+ * @brief Resource pooling
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 // Compatibility header - includes memory_pool.h

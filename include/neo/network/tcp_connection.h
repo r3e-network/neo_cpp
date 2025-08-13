@@ -1,3 +1,11 @@
+/**
+ * @file tcp_connection.h
+ * @brief TCP network connections
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/network/ip_endpoint.h>

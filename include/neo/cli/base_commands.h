@@ -1,3 +1,11 @@
+/**
+ * @file base_commands.h
+ * @brief Base Commands
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/cli/main_service.h>

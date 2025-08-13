@@ -1,3 +1,11 @@
+/**
+ * @file byte_vector.h
+ * @brief Byte Vector
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/byte_span.h>

@@ -1,3 +1,11 @@
+/**
+ * @file remote_node.h
+ * @brief Remote Node
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/byte_vector.h>

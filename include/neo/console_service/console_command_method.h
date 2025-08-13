@@ -1,3 +1,11 @@
+/**
+ * @file console_command_method.h
+ * @brief Console Command Method
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <functional>

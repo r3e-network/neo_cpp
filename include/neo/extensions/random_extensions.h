@@ -1,3 +1,11 @@
+/**
+ * @file random_extensions.h
+ * @brief Random Extensions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/byte_vector.h>

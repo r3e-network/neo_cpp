@@ -1,3 +1,11 @@
+/**
+ * @file addr_payload.cpp
+ * @brief Addr Payload
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/network/p2p/payloads/addr_payload.h>
 
 #include <stdexcept>

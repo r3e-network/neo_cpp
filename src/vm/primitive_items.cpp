@@ -1,3 +1,11 @@
+/**
+ * @file primitive_items.cpp
+ * @brief Primitive Items
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/vm/exceptions.h>
 #include <neo/vm/primitive_items.h>
 

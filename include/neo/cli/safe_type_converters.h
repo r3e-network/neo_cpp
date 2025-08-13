@@ -1,3 +1,11 @@
+/**
+ * @file safe_type_converters.h
+ * @brief Type conversion utilities
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <any>

@@ -1,3 +1,11 @@
+/**
+ * @file rpc_methods_complete.cpp
+ * @brief Rpc Methods Complete
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cryptography/base64.h>
 #include <neo/io/binary_writer.h>
 #include <neo/rpc/rpc_methods.h>

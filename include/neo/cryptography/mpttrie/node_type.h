@@ -1,3 +1,11 @@
+/**
+ * @file node_type.h
+ * @brief Node Type
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstdint>

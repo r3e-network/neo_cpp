@@ -1,3 +1,11 @@
+/**
+ * @file id_list.cpp
+ * @brief Id List
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/smartcontract/native/id_list.h>
 
 #include <algorithm>

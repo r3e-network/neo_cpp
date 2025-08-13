@@ -1,3 +1,11 @@
+/**
+ * @file jump_table_type.h
+ * @brief Jump Table Type
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/vm/instruction.h>

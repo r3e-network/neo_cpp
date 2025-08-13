@@ -1,3 +1,11 @@
+/**
+ * @file byte_extensions.h
+ * @brief Byte Extensions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <cstdint>

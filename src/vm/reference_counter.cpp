@@ -1,3 +1,11 @@
+/**
+ * @file reference_counter.cpp
+ * @brief Reference Counter
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/vm/reference_counter.h>
 #include <neo/vm/stack_item.h>
 

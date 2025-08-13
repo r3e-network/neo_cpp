@@ -1,3 +1,11 @@
+/**
+ * @file protocol_settings.cpp
+ * @brief Configuration settings
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/core/protocol_settings.h>
 #include <neo/cryptography/helper.h>
 #include <neo/io/json.h>

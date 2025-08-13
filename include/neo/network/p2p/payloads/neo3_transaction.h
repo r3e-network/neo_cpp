@@ -1,3 +1,11 @@
+/**
+ * @file neo3_transaction.h
+ * @brief Transaction types and processing
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/common/safe_math.h>

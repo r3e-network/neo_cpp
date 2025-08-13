@@ -1,3 +1,11 @@
+/**
+ * @file node_commands.cpp
+ * @brief Node Commands
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/cli/console_helper.h>
 #include <neo/cli/node_commands.h>
 

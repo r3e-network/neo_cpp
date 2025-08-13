@@ -1,3 +1,11 @@
+/**
+ * @file string_extensions.cpp
+ * @brief String Extensions
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/extensions/byte_extensions.h>
 #include <neo/extensions/string_extensions.h>
 

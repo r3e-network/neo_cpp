@@ -1,3 +1,11 @@
+/**
+ * @file block.h
+ * @brief Block structure and validation
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/iserializable.h>

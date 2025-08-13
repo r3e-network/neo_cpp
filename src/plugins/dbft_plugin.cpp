@@ -1,3 +1,11 @@
+/**
+ * @file dbft_plugin.cpp
+ * @brief Dbft Plugin
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/consensus/consensus_service.h>
 #include <neo/cryptography/ecc/key_pair.h>
 #include <neo/plugins/dbft_plugin.h>

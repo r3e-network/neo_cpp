@@ -1,3 +1,11 @@
+/**
+ * @file peer_list.h
+ * @brief Peer List
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #pragma once
 
 #include <neo/io/binary_reader.h>

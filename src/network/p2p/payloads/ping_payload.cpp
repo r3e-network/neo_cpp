@@ -1,3 +1,11 @@
+/**
+ * @file ping_payload.cpp
+ * @brief Ping Payload
+ * @author Neo C++ Team
+ * @date 2025
+ * @copyright MIT License
+ */
+
 #include <neo/network/p2p/payloads/ping_payload.h>
 
 #include <chrono>
