@@ -5,7 +5,7 @@ if(POLICY CMP0167)
     cmake_policy(SET CMP0167 NEW)  # Use new FindBoost module behavior
 endif()
 
-project(neo-cpp VERSION 1.0.0 LANGUAGES CXX)
+project(neo-cpp VERSION 1.2.0 LANGUAGES CXX)
 
 # Set C++20 standard
 set(CMAKE_CXX_STANDARD 20)
