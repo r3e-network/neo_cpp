@@ -749,10 +749,22 @@ size_t NeoSystem::ProcessBlocksBatch(const std::vector<std::shared_ptr<ledger::B
                     }
 
                     // Verify previous block hash linkage
-                    if (block->GetIndex() > 0 && block->GetPrevHash() != blockchain_->GetCurrentBlockHash())
+                    if (block->GetIndex() > 0)
                     {
-                        LOG_ERROR("Previous block hash mismatch at height {}", block->GetIndex());
-                        continue;
+                        // Check if blockchain is initialized before accessing it
+                        if (blockchain_)
+                        {
+                            if (block->GetPrevHash() != blockchain_->GetCurrentBlockHash())
+                            {
+                                LOG_ERROR("Previous block hash mismatch at height {}", block->GetIndex());
+                                continue;
+                            }
+                        }
+                        else
+                        {
+                            // Without blockchain, we can't verify previous hash linkage
+                            LOG_WARNING("Blockchain not initialized - skipping previous hash verification");
+                        }
                     }
 
                     // Verify merkle root
@@ -917,10 +929,20 @@ size_t NeoSystem::ProcessBlocksBatch(const std::vector<std::shared_ptr<ledger::B
 
         auto end_time = std::chrono::high_resolution_clock::now();
         auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end_time - start_time);
-        double blocks_per_second = (processed * 1000.0) / duration.count();
-
-        LOG_INFO("Processed " + std::to_string(processed) + " blocks in " + std::to_string(duration.count()) + "ms (" +
-                 std::to_string(blocks_per_second) + " blocks/sec)");
+        
+        // Avoid division by zero when processing is very fast
+        double blocks_per_second = 0.0;
+        if (duration.count() > 0)
+        {
+            blocks_per_second = (processed * 1000.0) / duration.count();
+            LOG_INFO("Processed " + std::to_string(processed) + " blocks in " + std::to_string(duration.count()) + "ms (" +
+                     std::to_string(blocks_per_second) + " blocks/sec)");
+        }
+        else
+        {
+            // Processing was too fast to measure (< 1ms)
+            LOG_INFO("Processed " + std::to_string(processed) + " blocks in < 1ms");
+        }
 
         return processed;
     }

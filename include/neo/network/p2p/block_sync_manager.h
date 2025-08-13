@@ -149,6 +149,12 @@ class BlockSyncManager
      */
     SyncStats GetStats() const;
 
+    /**
+     * @brief Flushes any pending blocks for immediate processing
+     * Useful for testing or when shutting down
+     */
+    void FlushPendingBlocks();
+
    private:
     // Core components
     std::shared_ptr<NeoSystem> system_;

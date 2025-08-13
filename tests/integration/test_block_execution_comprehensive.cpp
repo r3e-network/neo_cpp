@@ -103,8 +103,9 @@ protected:
             block->AddTransaction(*tx);
         }
         
-        // Update merkle root
-        // MerkleRoot calculation would be done automatically
+        // Calculate and set merkle root
+        auto merkleRoot = block->ComputeMerkleRoot();
+        block->SetMerkleRoot(merkleRoot);
         
         // Add witness
         auto witness = std::make_shared<Witness>();

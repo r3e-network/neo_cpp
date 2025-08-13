@@ -75,17 +75,21 @@ void BlockSyncManager::Stop()
 
     LOG_INFO("Stopping block synchronization manager");
 
+    // First, signal all threads to stop
     running_ = false;
     processingRunning_ = false;
+    
+    // Wake up all waiting threads
     syncCv_.notify_all();
     batchCv_.notify_all();
 
+    // Join sync thread first
     if (syncThread_.joinable())
     {
         syncThread_.join();
     }
 
-    // Stop all processing threads
+    // Then stop all processing threads
     for (auto& thread : processingThreads_)
     {
         if (thread.joinable())
@@ -94,6 +98,15 @@ void BlockSyncManager::Stop()
         }
     }
     processingThreads_.clear();
+
+    // Clear any remaining batches
+    {
+        std::lock_guard<std::mutex> lock(batchMutex_);
+        while (!blockBatches_.empty())
+        {
+            blockBatches_.pop();
+        }
+    }
 
     syncState_ = SyncState::Idle;
 
@@ -750,6 +763,13 @@ void BlockSyncManager::ProcessingThreadWorker()
         {
             try
             {
+                // Check if system is still valid before processing
+                if (!system_)
+                {
+                    LOG_WARNING("System pointer is null, skipping batch processing");
+                    break;
+                }
+                
                 // Process batch using high-performance batch processing
                 size_t processed = system_->ProcessBlocksBatch(batch);
 
@@ -794,6 +814,40 @@ void BlockSyncManager::EnqueueBlockBatch(std::vector<std::shared_ptr<ledger::Blo
     }
 
     batchCv_.notify_one();
+}
+
+void BlockSyncManager::FlushPendingBlocks()
+{
+    LOG_INFO("FlushPendingBlocks called");
+    
+    std::vector<std::shared_ptr<ledger::Block>> batchToProcess;
+    
+    {
+        std::lock_guard<std::mutex> lock(pendingBlocksMutex_);
+        LOG_INFO("Pending blocks count: " + std::to_string(pendingBlocks_.size()));
+        if (!pendingBlocks_.empty())
+        {
+            // Move all pending blocks to processing batch
+            batchToProcess = std::move(pendingBlocks_);
+            pendingBlocks_.clear();
+            pendingBlocks_.reserve(BATCH_COLLECTION_SIZE);
+        }
+    }
+    
+    if (!batchToProcess.empty())
+    {
+        // Sort blocks by height for sequential processing
+        std::sort(batchToProcess.begin(), batchToProcess.end(),
+                  [](const auto& a, const auto& b) { return a->GetIndex() < b->GetIndex(); });
+        
+        // Store size before moving
+        size_t batchSize = batchToProcess.size();
+        
+        // Enqueue batch for processing
+        EnqueueBlockBatch(std::move(batchToProcess));
+        
+        LOG_INFO("Flushed " + std::to_string(batchSize) + " pending blocks for processing");
+    }
 }
 
 }  // namespace neo::network::p2p
