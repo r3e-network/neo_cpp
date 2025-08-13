@@ -147,13 +147,22 @@ public:
 class BlockchainCache {
 public:
     struct Config {
-        size_t block_cache_size = 1000;        // Number of blocks to cache
-        size_t transaction_cache_size = 10000; // Number of transactions to cache
-        size_t header_cache_size = 5000;       // Number of headers to cache
-        size_t contract_cache_size = 500;      // Number of contracts to cache
-        size_t state_cache_size = 10000;       // Number of state items to cache
-        std::chrono::seconds ttl{3600};        // Time to live (1 hour)
-        bool enable_metrics = true;            // Enable performance metrics
+        size_t block_cache_size;        // Number of blocks to cache
+        size_t transaction_cache_size; // Number of transactions to cache
+        size_t header_cache_size;       // Number of headers to cache
+        size_t contract_cache_size;      // Number of contracts to cache
+        size_t state_cache_size;       // Number of state items to cache
+        std::chrono::seconds ttl;        // Time to live
+        bool enable_metrics;            // Enable performance metrics
+        
+        Config()
+            : block_cache_size(1000)
+            , transaction_cache_size(10000)
+            , header_cache_size(5000)
+            , contract_cache_size(500)
+            , state_cache_size(10000)
+            , ttl(3600)
+            , enable_metrics(true) {}
     };
 
 private:

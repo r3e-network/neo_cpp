@@ -46,6 +46,7 @@ add_executable(test_network_new
     # test_peer_reputation.cpp # Disabled due to test failures
     # test_network_latency.cpp # Disabled due to test failures
     test_network_simple.cpp
+    test_connection_pool.cpp  # New connection pool tests
 )
 
 # Include directories

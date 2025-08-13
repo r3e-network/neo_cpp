@@ -43,6 +43,12 @@ class PoolItem
      * @return The transaction.
      */
     std::shared_ptr<Transaction> GetTransaction() const;
+    
+    /**
+     * @brief Gets the transaction as shared_ptr for event system.
+     * @return The transaction pointer.
+     */
+    std::shared_ptr<Transaction> GetTransactionPtr() const { return transaction_; }
 
     /**
      * @brief Gets the timestamp when the item was added to the pool.

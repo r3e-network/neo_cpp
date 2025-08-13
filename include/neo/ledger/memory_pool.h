@@ -13,6 +13,7 @@
 #include <neo/io/uint256.h>
 #include <neo/ledger/event_system.h>
 #include <neo/ledger/pool_item.h>
+#include <neo/ledger/transaction.h>
 #include <neo/network/p2p/payloads/neo3_transaction.h>
 
 #include <functional>
@@ -122,6 +123,16 @@ class MemoryPool
      * @complexity O(1) average case
      */
     const network::p2p::payloads::Neo3Transaction* GetTransaction(const io::UInt256& hash) const;
+
+    /**
+     * @brief Gets a pool item by its hash
+     * @param hash Hash of the transaction to retrieve
+     * @return Optional PoolItem if found
+     * @details Returns the complete PoolItem with transaction and metadata
+     * @thread_safety Thread-safe, uses shared lock
+     * @complexity O(1) average case
+     */
+    std::optional<PoolItem> Get(const io::UInt256& hash) const;
 
     /**
      * @brief Gets all verified transactions sorted by priority
