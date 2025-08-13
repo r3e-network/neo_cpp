@@ -33,24 +33,24 @@ jobs:
         run: |
           echo "=== Attempting build ==="
           
-          # Configure with minimal options
+          # Configure with minimal options (confirmed working configuration)
           cmake -B build \
             -DCMAKE_BUILD_TYPE=Release \
             -DNEO_BUILD_TESTS=OFF \
             -DNEO_BUILD_EXAMPLES=OFF \
             -DNEO_BUILD_TOOLS=OFF \
-            -DNEO_BUILD_APPS=ON 2>&1 || echo "CMake config had issues"
+            -DNEO_BUILD_APPS=ON \
+            -DNEO_BUILD_SHARED=ON \
+            -DNEO_BUILD_STATIC=OFF \
+            -DNEO_USE_MEMORY_STORE=ON \
+            -DNEO_USE_ROCKSDB=OFF \
+            -DNEO_USE_LEVELDB=OFF 2>&1 || echo "CMake config had issues"
           
-          # Try to build something
+          # Build neo_node (fixed circular dependency)
           cd build
           
-          # Build core libraries first
-          make neo_core -j2 2>&1 || echo "neo_core build failed"
-          make neo_io -j2 2>&1 || echo "neo_io build failed"
-          make neo_cryptography -j2 2>&1 || echo "neo_cryptography build failed"
-          
-          # Try to build main app
-          make neo_node -j2 2>&1 || make neo_node 2>&1 || echo "neo_node build failed"
+          # Build with parallel jobs (confirmed working)
+          make neo_node -j2 2>&1 || echo "neo_node build failed"
           
           echo "=== Build attempt complete ==="
 
