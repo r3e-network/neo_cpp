@@ -1,0 +1,117 @@
+name: Basic Release
+
+on:
+  push:
+    branches:
+      - 'release/v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  create-release:
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Get version
+        id: version
+        run: |
+          VERSION="${GITHUB_REF_NAME#release/}"
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Version: ${VERSION}"
+
+      - name: Install build essentials
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake libssl-dev
+
+      - name: Try minimal build
+        continue-on-error: true
+        run: |
+          echo "=== Attempting build ==="
+          
+          # Configure with minimal options
+          cmake -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DNEO_BUILD_TESTS=OFF \
+            -DNEO_BUILD_EXAMPLES=OFF \
+            -DNEO_BUILD_TOOLS=OFF \
+            -DNEO_BUILD_APPS=ON 2>&1 || echo "CMake config had issues"
+          
+          # Try to build something
+          cd build
+          
+          # Build core libraries first
+          make neo_core -j2 2>&1 || echo "neo_core build failed"
+          make neo_io -j2 2>&1 || echo "neo_io build failed"
+          make neo_cryptography -j2 2>&1 || echo "neo_cryptography build failed"
+          
+          # Try to build main app
+          make neo_node -j2 2>&1 || make neo_node 2>&1 || echo "neo_node build failed"
+          
+          echo "=== Build attempt complete ==="
+
+      - name: Check what was built
+        run: |
+          echo "=== Looking for built files ==="
+          find . -name "*.a" -o -name "*.so" 2>/dev/null | head -20 || echo "No libraries found"
+          find . -type f -name "neo_*" 2>/dev/null | head -20 || echo "No neo executables found"
+          
+          # Create a summary file
+          echo "# Build Summary" > build_summary.txt
+          echo "Date: $(date)" >> build_summary.txt
+          echo "Version: ${{ steps.version.outputs.version }}" >> build_summary.txt
+          echo "" >> build_summary.txt
+          echo "## Files Found:" >> build_summary.txt
+          find build -type f -name "*.a" 2>/dev/null | wc -l | xargs echo "Libraries: " >> build_summary.txt
+          find build -type f -executable 2>/dev/null | wc -l | xargs echo "Executables: " >> build_summary.txt
+
+      - name: Create minimal package
+        run: |
+          mkdir -p release
+          
+          # Copy any neo executables if they exist
+          find build -type f -name "neo_*" -executable -exec cp {} release/ \; 2>/dev/null || true
+          
+          # Copy libraries if they exist
+          find build -name "*.a" -exec cp {} release/ \; 2>/dev/null || true
+          
+          # Add build summary
+          cp build_summary.txt release/ || true
+          
+          # Create archive (even if empty)
+          tar -czf neo-cpp-${{ steps.version.outputs.version }}-attempt.tar.gz release/
+          
+          echo "Archive created: neo-cpp-${{ steps.version.outputs.version }}-attempt.tar.gz"
+          ls -la *.tar.gz
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ steps.version.outputs.version }}
+          name: Neo C++ ${{ steps.version.outputs.version }}
+          body: |
+            # Neo C++ ${{ steps.version.outputs.version }}
+            
+            Release created from branch: ${{ github.ref_name }}
+            
+            ## Build Status
+            This release was created with a basic build attempt.
+            Check the artifacts to see what was successfully built.
+            
+            ## Known Issues
+            - Some components may not have built successfully
+            - This is a minimal release for testing purposes
+            
+            ## Next Steps
+            - Download the artifact to see what was built
+            - Check build_summary.txt for details
+          files: |
+            neo-cpp-*.tar.gz
+            build_summary.txt
+          draft: false
+          prerelease: true
+        continue-on-error: true
