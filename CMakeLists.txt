@@ -27,6 +27,9 @@ include(SetupCompiler)
 include(FindDependencies)
 include(SetupTesting)
 
+# Export compile commands for clang-tidy
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 # Include GoogleTest if not found
 if(NEO_BUILD_TESTS AND NOT TARGET GTest::gtest)
     if(EXISTS ${CMAKE_SOURCE_DIR}/third_party/googletest/CMakeLists.txt)
@@ -94,6 +97,9 @@ install(FILES
     "${CMAKE_CURRENT_BINARY_DIR}/neo-config-version.cmake"
     DESTINATION "${CMAKE_INSTALL_LIBDIR}/cmake/neo"
 )
+
+# Include custom targets (Makefile compatibility)
+include(CustomTargets)
 
 # Summary
 message(STATUS "Neo C++ Configuration Summary:")
