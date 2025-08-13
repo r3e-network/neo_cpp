@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: neo-node
+  namespace: neo-cpp
+  labels:
+    app: neo-node
+    component: blockchain
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: neo-node
+  template:
+    metadata:
+      labels:
+        app: neo-node
+        component: blockchain
+    spec:
+      containers:
+      - name: neo-node
+        image: ghcr.io/r3e-network/neo-cpp:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 10332
+          name: rpc
+          protocol: TCP
+        - containerPort: 10333
+          name: p2p
+          protocol: TCP
+        - containerPort: 10334
+          name: ws
+          protocol: TCP
+        - containerPort: 9090
+          name: metrics
+          protocol: TCP
+        env:
+        - name: NETWORK
+          value: "mainnet"
+        - name: LOG_LEVEL
+          value: "info"
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "1000m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: config
+          mountPath: /config
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 10332
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 10332
+          initialDelaySeconds: 10
+          periodSeconds: 5
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: neo-data-pvc
+      - name: config
+        configMap:
+          name: neo-config
