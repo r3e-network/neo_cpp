@@ -121,6 +121,7 @@ jobs:
             libboost-filesystem-dev \
             libboost-thread-dev \
             libboost-program-options-dev \
+            librocksdb-dev \
             nlohmann-json3-dev \
             libspdlog-dev \
             libgtest-dev
@@ -207,7 +208,7 @@ jobs:
 
       - name: Setup build environment
         run: |
-          brew install cmake ninja boost openssl@3 nlohmann-json spdlog googletest
+          brew install cmake ninja boost openssl@3 rocksdb nlohmann-json spdlog googletest
 
       - name: Build project
         run: |
@@ -303,7 +304,7 @@ jobs:
           
           # Install minimal dependencies
           C:\vcpkg\vcpkg install --triplet x64-windows `
-            openssl boost-system boost-filesystem boost-thread boost-program-options nlohmann-json
+            openssl boost-system boost-filesystem boost-thread boost-program-options rocksdb nlohmann-json
 
       - name: Build project
         shell: powershell

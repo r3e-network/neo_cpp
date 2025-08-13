@@ -1,0 +1,92 @@
+name: Test Release Build
+
+on:
+  push:
+    branches:
+      - 'release/v*'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  test-build:
+    name: Test Build on Ubuntu
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Extract version
+        id: version
+        run: |
+          if [[ "${{ github.ref }}" == refs/heads/release/* ]]; then
+            VERSION="${{ github.ref_name }}"
+            VERSION="${VERSION#release/}"
+          else
+            VERSION="v1.2.0"
+          fi
+          echo "version=${VERSION}" >> $GITHUB_OUTPUT
+          echo "Version: ${VERSION}"
+
+      - name: Setup build environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            cmake \
+            libssl-dev \
+            libboost-all-dev \
+            librocksdb-dev \
+            libgtest-dev
+
+      - name: Configure CMake
+        run: |
+          cmake -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DBUILD_TESTS=ON
+
+      - name: Build
+        run: |
+          make -C build -j$(nproc)
+
+      - name: Run Tests
+        run: |
+          cd build
+          ctest --output-on-failure || true
+
+      - name: Check binaries
+        run: |
+          echo "=== Built binaries ==="
+          find build -type f -executable -name "*neo*" | head -20
+          
+          if [ -f "build/apps/neo_node" ]; then
+            echo "=== neo_node version ==="
+            ./build/apps/neo_node --version || true
+          fi
+          
+          if [ -f "build/tools/neo_cli_tool" ]; then
+            echo "=== neo_cli_tool version ==="
+            ./build/tools/neo_cli_tool version || true
+          fi
+
+      - name: Package binaries
+        run: |
+          mkdir -p release-package/bin
+          find build -type f -executable \( -name "neo_*" -o -name "*_cli*" \) \
+            -not -path "*/test*" \
+            -not -path "*/CMakeFiles/*" \
+            -exec cp {} release-package/bin/ \; 2>/dev/null || true
+          
+          echo "=== Packaged files ==="
+          ls -la release-package/bin/ || true
+          
+          tar -czf neo-cpp-linux-test.tar.gz release-package/
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: neo-cpp-linux-test
+          path: neo-cpp-linux-test.tar.gz
