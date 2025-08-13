@@ -21,6 +21,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          fetch-depth: 0
       
       - name: Setup C++ Environment
         uses: aminya/setup-cpp@v1
@@ -59,6 +62,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          fetch-depth: 0
       
       - name: Setup Git Configuration
         run: |
@@ -100,6 +106,9 @@ jobs:
     needs: [code-quality]
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          fetch-depth: 0
       
       - name: Setup Build Environment
         run: |
@@ -143,6 +152,9 @@ jobs:
     needs: [build-test]
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          fetch-depth: 0
       
       - name: Setup Performance Environment
         run: |
@@ -182,6 +194,9 @@ jobs:
     needs: [security-scan, build-test]
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          fetch-depth: 0
       
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v2
@@ -226,6 +241,9 @@ jobs:
     needs: [docker-build]
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          fetch-depth: 0
       
       - name: Setup Test Network
         run: |
@@ -331,6 +349,9 @@ jobs:
     if: github.event_name == 'schedule'
     steps:
       - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+          fetch-depth: 0
       
       - name: Run Extended Performance Tests
         run: |
