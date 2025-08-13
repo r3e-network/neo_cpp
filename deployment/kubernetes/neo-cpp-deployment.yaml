@@ -1,0 +1,400 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: neo-cpp
+  labels:
+    name: neo-cpp
+    environment: production
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: neo-config
+  namespace: neo-cpp
+data:
+  config.json: |
+    {
+      "ApplicationConfiguration": {
+        "Storage": {
+          "Engine": "RocksDB",
+          "Path": "/data/chain"
+        },
+        "P2P": {
+          "Port": 10333,
+          "WsPort": 10334,
+          "MaxPeers": 50,
+          "MinDesiredConnections": 10
+        },
+        "RPC": {
+          "Port": 10332,
+          "MaxGasInvoke": 50000000,
+          "MaxIteratorResultItems": 100,
+          "MaxStackSize": 2048
+        },
+        "UnlockWallet": {
+          "Path": "/wallet/node-wallet.json",
+          "IsActive": false
+        }
+      },
+      "ProtocolConfiguration": {
+        "Network": 860833102,
+        "AddressVersion": 53,
+        "MillisecondsPerBlock": 15000,
+        "MaxTransactionsPerBlock": 512,
+        "MemoryPoolMaxTransactions": 50000,
+        "MaxTraceableBlocks": 2102400,
+        "InitialGasDistribution": 5200000000000000,
+        "ValidatorsCount": 7
+      }
+    }
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: neo-secrets
+  namespace: neo-cpp
+type: Opaque
+stringData:
+  wallet-password: "changeme"
+  rpc-user: "neo"
+  rpc-password: "changeme"
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: neo-data-pvc
+  namespace: neo-cpp
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 100Gi
+  storageClassName: fast-ssd
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo-rpc
+  namespace: neo-cpp
+  labels:
+    app: neo-cpp
+    component: rpc
+spec:
+  type: LoadBalancer
+  ports:
+    - port: 10332
+      targetPort: 10332
+      protocol: TCP
+      name: rpc
+    - port: 10334
+      targetPort: 10334
+      protocol: TCP
+      name: websocket
+  selector:
+    app: neo-cpp
+    component: node
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo-p2p
+  namespace: neo-cpp
+  labels:
+    app: neo-cpp
+    component: p2p
+spec:
+  type: NodePort
+  ports:
+    - port: 10333
+      targetPort: 10333
+      protocol: TCP
+      name: p2p
+      nodePort: 30333
+  selector:
+    app: neo-cpp
+    component: node
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo-metrics
+  namespace: neo-cpp
+  labels:
+    app: neo-cpp
+    component: metrics
+spec:
+  type: ClusterIP
+  ports:
+    - port: 9090
+      targetPort: 9090
+      protocol: TCP
+      name: metrics
+  selector:
+    app: neo-cpp
+    component: node
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: neo-node
+  namespace: neo-cpp
+  labels:
+    app: neo-cpp
+    component: node
+spec:
+  serviceName: neo-p2p
+  replicas: 3
+  selector:
+    matchLabels:
+      app: neo-cpp
+      component: node
+  template:
+    metadata:
+      labels:
+        app: neo-cpp
+        component: node
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "9090"
+        prometheus.io/path: "/metrics"
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1000
+        fsGroup: 1000
+      initContainers:
+      - name: init-genesis
+        image: busybox:1.35
+        command: ['sh', '-c', 'if [ ! -f /data/chain/CURRENT ]; then echo "Initializing blockchain data..."; fi']
+        volumeMounts:
+        - name: data
+          mountPath: /data
+      containers:
+      - name: neo-cpp
+        image: ghcr.io/r3e-network/neo-cpp:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 10332
+          name: rpc
+        - containerPort: 10333
+          name: p2p
+        - containerPort: 10334
+          name: websocket
+        - containerPort: 9090
+          name: metrics
+        env:
+        - name: NEO_NETWORK
+          value: "mainnet"
+        - name: NEO_LOG_LEVEL
+          value: "info"
+        - name: NEO_PROMETHEUS_ENABLED
+          value: "true"
+        - name: NEO_WALLET_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: neo-secrets
+              key: wallet-password
+        resources:
+          requests:
+            memory: "2Gi"
+            cpu: "2"
+          limits:
+            memory: "4Gi"
+            cpu: "4"
+        volumeMounts:
+        - name: config
+          mountPath: /config
+        - name: data
+          mountPath: /data
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 10332
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /ready
+            port: 10332
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 10332
+          initialDelaySeconds: 0
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 30
+      volumes:
+      - name: config
+        configMap:
+          name: neo-config
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: fast-ssd
+      resources:
+        requests:
+          storage: 100Gi
+
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: neo-hpa
+  namespace: neo-cpp
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: StatefulSet
+    name: neo-node
+  minReplicas: 3
+  maxReplicas: 10
+  metrics:
+  - type: Resource
+    resource:
+      name: cpu
+      target:
+        type: Utilization
+        averageUtilization: 70
+  - type: Resource
+    resource:
+      name: memory
+      target:
+        type: Utilization
+        averageUtilization: 80
+  - type: Pods
+    pods:
+      metric:
+        name: neo_tps
+      target:
+        type: AverageValue
+        averageValue: "5000"
+  behavior:
+    scaleUp:
+      stabilizationWindowSeconds: 60
+      policies:
+      - type: Percent
+        value: 100
+        periodSeconds: 60
+      - type: Pods
+        value: 2
+        periodSeconds: 60
+      selectPolicy: Max
+    scaleDown:
+      stabilizationWindowSeconds: 300
+      policies:
+      - type: Percent
+        value: 50
+        periodSeconds: 60
+      - type: Pods
+        value: 1
+        periodSeconds: 60
+      selectPolicy: Min
+
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: neo-pdb
+  namespace: neo-cpp
+spec:
+  minAvailable: 2
+  selector:
+    matchLabels:
+      app: neo-cpp
+      component: node
+
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: neo-network-policy
+  namespace: neo-cpp
+spec:
+  podSelector:
+    matchLabels:
+      app: neo-cpp
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: neo-cpp
+    ports:
+    - protocol: TCP
+      port: 10333
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: monitoring
+    ports:
+    - protocol: TCP
+      port: 9090
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          name: ingress-nginx
+    ports:
+    - protocol: TCP
+      port: 10332
+    - protocol: TCP
+      port: 10334
+  egress:
+  - to:
+    - podSelector:
+        matchLabels:
+          app: neo-cpp
+    ports:
+    - protocol: TCP
+      port: 10333
+  - to:
+    - namespaceSelector: {}
+    ports:
+    - protocol: TCP
+      port: 53
+    - protocol: UDP
+      port: 53
+  - to:
+    - ipBlock:
+        cidr: 0.0.0.0/0
+        except:
+        - 169.254.169.254/32
+    ports:
+    - protocol: TCP
+      port: 10333
+
+---
+apiVersion: v1
+kind: ServiceMonitor
+metadata:
+  name: neo-metrics
+  namespace: neo-cpp
+  labels:
+    app: neo-cpp
+spec:
+  selector:
+    matchLabels:
+      app: neo-cpp
+      component: metrics
+  endpoints:
+  - port: metrics
+    interval: 15s
+    path: /metrics

@@ -1,0 +1,143 @@
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+  external_labels:
+    monitor: 'neo-cpp-monitor'
+    environment: 'production'
+
+# Alertmanager configuration
+alerting:
+  alertmanagers:
+    - static_configs:
+        - targets:
+          - alertmanager:9093
+      timeout: 10s
+      api_version: v2
+
+# Load rules once and periodically evaluate them
+rule_files:
+  - "alerts/*.yml"
+  - "rules/*.yml"
+
+# Scrape configurations
+scrape_configs:
+  # Neo C++ nodes metrics
+  - job_name: 'neo-cpp-nodes'
+    metrics_path: /metrics
+    scrape_interval: 10s
+    static_configs:
+      - targets:
+        - 'neo-node-1:9090'
+        - 'neo-node-2:9090'
+        - 'neo-node-3:9090'
+        - 'neo-node-4:9090'
+        labels:
+          group: 'validators'
+      - targets:
+        - 'neo-node-5:9090'
+        - 'neo-node-6:9090'
+        labels:
+          group: 'observers'
+    
+    # Relabeling to extract node ID from target
+    relabel_configs:
+      - source_labels: [__address__]
+        regex: '(neo-node-\d+):\d+'
+        target_label: node_id
+        replacement: '$1'
+
+  # RPC endpoints monitoring
+  - job_name: 'neo-rpc'
+    metrics_path: /metrics
+    scrape_interval: 30s
+    static_configs:
+      - targets:
+        - 'neo-node-1:10332'
+        - 'neo-node-2:10332'
+        - 'neo-node-3:10332'
+        labels:
+          service: 'rpc'
+
+  # Node exporter for system metrics
+  - job_name: 'node-exporter'
+    static_configs:
+      - targets: ['node-exporter:9100']
+        labels:
+          group: 'infrastructure'
+
+  # Docker containers monitoring
+  - job_name: 'cadvisor'
+    static_configs:
+      - targets: ['cadvisor:8080']
+        labels:
+          group: 'containers'
+
+  # Prometheus self-monitoring
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  # Grafana monitoring
+  - job_name: 'grafana'
+    static_configs:
+      - targets: ['grafana:3000']
+
+  # AlertManager monitoring
+  - job_name: 'alertmanager'
+    static_configs:
+      - targets: ['alertmanager:9093']
+
+# Service discovery for Kubernetes deployment
+  - job_name: 'kubernetes-pods'
+    kubernetes_sd_configs:
+      - role: pod
+        namespaces:
+          names:
+            - neo-cpp
+    relabel_configs:
+      # Only keep pods with prometheus annotations
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_scrape]
+        action: keep
+        regex: true
+      # Use custom metrics path if specified
+      - source_labels: [__meta_kubernetes_pod_annotation_prometheus_io_path]
+        action: replace
+        target_label: __metrics_path__
+        regex: (.+)
+      # Use custom port if specified
+      - source_labels: [__address__, __meta_kubernetes_pod_annotation_prometheus_io_port]
+        action: replace
+        regex: ([^:]+)(?::\d+)?;(\d+)
+        replacement: $1:$2
+        target_label: __address__
+      # Add pod labels
+      - action: labelmap
+        regex: __meta_kubernetes_pod_label_(.+)
+      # Add pod name
+      - source_labels: [__meta_kubernetes_pod_name]
+        action: replace
+        target_label: pod_name
+      # Add namespace
+      - source_labels: [__meta_kubernetes_namespace]
+        action: replace
+        target_label: namespace
+
+# Remote write configuration for long-term storage
+remote_write:
+  - url: "http://cortex:9009/api/prom/push"
+    queue_config:
+      capacity: 10000
+      max_shards: 30
+      min_shards: 1
+      max_samples_per_send: 5000
+      batch_send_deadline: 5s
+      min_backoff: 30ms
+      max_backoff: 100ms
+    metadata_config:
+      send: true
+      send_interval: 1m
+
+# Remote read configuration
+remote_read:
+  - url: "http://cortex:9009/api/prom/read"
+    read_recent: true

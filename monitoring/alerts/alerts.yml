@@ -1,0 +1,378 @@
+groups:
+  # Core blockchain alerts
+  - name: blockchain
+    interval: 30s
+    rules:
+      - alert: BlockProductionStopped
+        expr: increase(neo_block_height[5m]) == 0
+        for: 5m
+        labels:
+          severity: critical
+          component: consensus
+          category: blockchain
+        annotations:
+          summary: "Block production has stopped"
+          description: "No new blocks have been produced for 5 minutes. Current height: {{ $value }}"
+          runbook_url: "https://docs.neo.org/runbooks/block-production-stopped"
+      
+      - alert: BlockHeightDivergence
+        expr: (max(neo_block_height) - min(neo_block_height)) > 5
+        for: 3m
+        labels:
+          severity: warning
+          component: consensus
+          category: blockchain
+        annotations:
+          summary: "Block height divergence detected"
+          description: "Nodes have divergent block heights. Max difference: {{ $value }} blocks"
+      
+      - alert: ConsensusFailure
+        expr: neo_consensus_failures_total > 0
+        for: 1m
+        labels:
+          severity: critical
+          component: consensus
+          category: blockchain
+        annotations:
+          summary: "Consensus failure detected"
+          description: "Consensus mechanism has failed {{ $value }} times"
+      
+      - alert: ViewChangesExcessive
+        expr: rate(neo_view_changes_total[5m]) > 0.5
+        for: 5m
+        labels:
+          severity: warning
+          component: consensus
+          category: blockchain
+        annotations:
+          summary: "Excessive view changes"
+          description: "View changes occurring too frequently: {{ $value }} per second"
+
+  # Performance alerts
+  - name: performance
+    interval: 15s
+    rules:
+      - alert: LowTransactionThroughput
+        expr: rate(neo_transactions_processed_total[5m]) * 60 < 1000
+        for: 10m
+        labels:
+          severity: warning
+          component: performance
+          category: performance
+        annotations:
+          summary: "Transaction throughput below threshold"
+          description: "Current TPS: {{ $value | printf \"%.2f\" }}, threshold: 1000"
+      
+      - alert: HighTransactionLatency
+        expr: histogram_quantile(0.95, rate(neo_rpc_duration_seconds_bucket[5m])) > 0.5
+        for: 5m
+        labels:
+          severity: high
+          component: rpc
+          category: performance
+        annotations:
+          summary: "High RPC response latency"
+          description: "P95 latency: {{ $value | printf \"%.3f\" }}s (threshold: 500ms)"
+      
+      - alert: MempoolCongestion
+        expr: neo_mempool_size > 10000
+        for: 5m
+        labels:
+          severity: warning
+          component: mempool
+          category: performance
+        annotations:
+          summary: "Mempool congestion detected"
+          description: "Mempool size: {{ $value }}, threshold: 10000"
+      
+      - alert: SlowBlockProcessing
+        expr: neo_block_processing_time_seconds > 5
+        for: 3m
+        labels:
+          severity: warning
+          component: blockchain
+          category: performance
+        annotations:
+          summary: "Slow block processing"
+          description: "Block processing time: {{ $value }}s (threshold: 5s)"
+
+  # Resource alerts
+  - name: resources
+    interval: 30s
+    rules:
+      - alert: HighMemoryUsage
+        expr: (process_resident_memory_bytes / 1024 / 1024 / 1024) > 3
+        for: 5m
+        labels:
+          severity: warning
+          component: system
+          category: resources
+        annotations:
+          summary: "High memory usage on {{ $labels.node_id }}"
+          description: "Memory usage: {{ $value | printf \"%.2f\" }}GB (threshold: 3GB)"
+      
+      - alert: HighCPUUsage
+        expr: rate(process_cpu_seconds_total[5m]) * 100 > 80
+        for: 10m
+        labels:
+          severity: warning
+          component: system
+          category: resources
+        annotations:
+          summary: "High CPU usage on {{ $labels.node_id }}"
+          description: "CPU usage: {{ $value | printf \"%.2f\" }}% (threshold: 80%)"
+      
+      - alert: DiskSpaceWarning
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 < 20
+        for: 5m
+        labels:
+          severity: warning
+          component: system
+          category: resources
+        annotations:
+          summary: "Low disk space on {{ $labels.instance }}"
+          description: "Available disk space: {{ $value | printf \"%.2f\" }}% (threshold: 20%)"
+      
+      - alert: DiskSpaceCritical
+        expr: (node_filesystem_avail_bytes{mountpoint="/"} / node_filesystem_size_bytes{mountpoint="/"}) * 100 < 10
+        for: 1m
+        labels:
+          severity: critical
+          component: system
+          category: resources
+        annotations:
+          summary: "Critical disk space on {{ $labels.instance }}"
+          description: "Available disk space: {{ $value | printf \"%.2f\" }}% (threshold: 10%)"
+
+  # Network alerts
+  - name: network
+    interval: 30s
+    rules:
+      - alert: LowPeerCount
+        expr: neo_peers_current < 3
+        for: 5m
+        labels:
+          severity: warning
+          component: p2p
+          category: network
+        annotations:
+          summary: "Low peer count on {{ $labels.node_id }}"
+          description: "Connected peers: {{ $value }} (minimum: 3)"
+      
+      - alert: NoPeers
+        expr: neo_peers_current == 0
+        for: 2m
+        labels:
+          severity: critical
+          component: p2p
+          category: network
+        annotations:
+          summary: "No peers connected on {{ $labels.node_id }}"
+          description: "Node has no peer connections"
+      
+      - alert: NetworkPartition
+        expr: count(up{job="neo-cpp-nodes"}) - count(up{job="neo-cpp-nodes"} == 1) > 0
+        for: 3m
+        labels:
+          severity: critical
+          component: network
+          category: network
+        annotations:
+          summary: "Network partition detected"
+          description: "{{ $value }} nodes are unreachable"
+      
+      - alert: HighNetworkLatency
+        expr: neo_peer_latency_ms > 500
+        for: 5m
+        labels:
+          severity: warning
+          component: p2p
+          category: network
+        annotations:
+          summary: "High network latency"
+          description: "Peer latency: {{ $value }}ms (threshold: 500ms)"
+
+  # Security alerts
+  - name: security
+    interval: 30s
+    rules:
+      - alert: SecurityViolation
+        expr: neo_security_violations_total > 0
+        for: 1m
+        labels:
+          severity: critical
+          component: security
+          category: security
+        annotations:
+          summary: "Security violation detected"
+          description: "{{ $value }} security violations detected"
+          action: "Investigate immediately and check security logs"
+      
+      - alert: InvalidBlockAttempt
+        expr: rate(neo_invalid_blocks_total[5m]) > 0
+        for: 1m
+        labels:
+          severity: high
+          component: security
+          category: security
+        annotations:
+          summary: "Invalid block submission attempts"
+          description: "Rate: {{ $value | printf \"%.3f\" }} invalid blocks/sec"
+      
+      - alert: SuspiciousTransactionPattern
+        expr: rate(neo_suspicious_transactions_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+          component: security
+          category: security
+        annotations:
+          summary: "Suspicious transaction pattern detected"
+          description: "Rate: {{ $value | printf \"%.3f\" }} suspicious tx/sec"
+      
+      - alert: UnauthorizedAccess
+        expr: neo_unauthorized_access_attempts_total > 5
+        for: 1m
+        labels:
+          severity: high
+          component: security
+          category: security
+        annotations:
+          summary: "Multiple unauthorized access attempts"
+          description: "{{ $value }} unauthorized access attempts"
+
+  # Availability alerts
+  - name: availability
+    interval: 30s
+    rules:
+      - alert: NodeDown
+        expr: up{job="neo-cpp-nodes"} == 0
+        for: 1m
+        labels:
+          severity: critical
+          component: node
+          category: availability
+        annotations:
+          summary: "Node {{ $labels.node_id }} is down"
+          description: "Node has been unreachable for 1 minute"
+          action: "Check node health and restart if necessary"
+      
+      - alert: RPCEndpointDown
+        expr: up{job="neo-rpc"} == 0
+        for: 2m
+        labels:
+          severity: high
+          component: rpc
+          category: availability
+        annotations:
+          summary: "RPC endpoint down on {{ $labels.instance }}"
+          description: "RPC endpoint has been unreachable for 2 minutes"
+      
+      - alert: PrometheusDown
+        expr: up{job="prometheus"} == 0
+        for: 1m
+        labels:
+          severity: high
+          component: monitoring
+          category: availability
+        annotations:
+          summary: "Prometheus monitoring is down"
+          description: "Prometheus has been unreachable for 1 minute"
+      
+      - alert: MultiplNodesDown
+        expr: count(up{job="neo-cpp-nodes"} == 0) > 1
+        for: 1m
+        labels:
+          severity: critical
+          component: cluster
+          category: availability
+        annotations:
+          summary: "Multiple nodes are down"
+          description: "{{ $value }} nodes are currently down"
+          action: "Critical: Check cluster health immediately"
+
+  # Data integrity alerts
+  - name: data_integrity
+    interval: 60s
+    rules:
+      - alert: DataCorruption
+        expr: neo_data_corruption_detected > 0
+        for: 1m
+        labels:
+          severity: critical
+          component: storage
+          category: data
+        annotations:
+          summary: "Data corruption detected"
+          description: "Data corruption detected on {{ $labels.node_id }}"
+          action: "Stop node immediately and investigate"
+      
+      - alert: StateMismatch
+        expr: neo_state_hash_mismatch > 0
+        for: 2m
+        labels:
+          severity: high
+          component: state
+          category: data
+        annotations:
+          summary: "State hash mismatch"
+          description: "State hash mismatch detected between nodes"
+      
+      - alert: DatabaseError
+        expr: rate(neo_database_errors_total[5m]) > 0.1
+        for: 5m
+        labels:
+          severity: warning
+          component: database
+          category: data
+        annotations:
+          summary: "Database errors occurring"
+          description: "Database error rate: {{ $value | printf \"%.3f\" }}/sec"
+
+  # Application-specific alerts
+  - name: application
+    interval: 30s
+    rules:
+      - alert: HighErrorRate
+        expr: rate(neo_errors_total[5m]) > 0.05
+        for: 5m
+        labels:
+          severity: warning
+          component: application
+          category: errors
+        annotations:
+          summary: "High application error rate"
+          description: "Error rate: {{ $value | printf \"%.3f\" }}/sec (threshold: 0.05/sec)"
+      
+      - alert: RestartLoop
+        expr: increase(neo_process_start_time_seconds[1h]) > 3
+        for: 1m
+        labels:
+          severity: high
+          component: application
+          category: stability
+        annotations:
+          summary: "Node restart loop detected"
+          description: "Node {{ $labels.node_id }} has restarted {{ $value }} times in the last hour"
+      
+      - alert: ConfigurationError
+        expr: neo_configuration_errors > 0
+        for: 1m
+        labels:
+          severity: high
+          component: configuration
+          category: application
+        annotations:
+          summary: "Configuration error detected"
+          description: "Configuration errors: {{ $value }}"
+      
+      - alert: VersionMismatch
+        expr: count(count by (version) (neo_node_info)) > 1
+        for: 10m
+        labels:
+          severity: warning
+          component: deployment
+          category: application
+        annotations:
+          summary: "Version mismatch across nodes"
+          description: "Multiple versions detected in the cluster"

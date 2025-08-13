@@ -1,0 +1,287 @@
+version: '3.8'
+
+services:
+  # Neo C++ Node 1 (Validator)
+  neo-node-1:
+    image: ghcr.io/r3e-network/neo-cpp:latest
+    container_name: neo-node-1
+    hostname: neo-node-1
+    ports:
+      - "10332:10332"  # RPC
+      - "10333:10333"  # P2P
+      - "10334:10334"  # WebSocket
+      - "9090:9090"    # Metrics
+    environment:
+      - NEO_NETWORK=testnet
+      - NEO_NODE_ID=node-1
+      - NEO_LOG_LEVEL=info
+      - NEO_PROMETHEUS_ENABLED=true
+      - NEO_CONSENSUS_ENABLED=true
+      - NEO_VALIDATOR_INDEX=0
+    volumes:
+      - ./data/node1:/data
+      - ./config/node1:/config
+      - ./wallets/node1:/wallets
+    networks:
+      neo-network:
+        ipv4_address: 172.20.0.11
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:10332/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '1'
+          memory: 1G
+
+  # Neo C++ Node 2 (Validator)
+  neo-node-2:
+    image: ghcr.io/r3e-network/neo-cpp:latest
+    container_name: neo-node-2
+    hostname: neo-node-2
+    ports:
+      - "10342:10332"  # RPC
+      - "10343:10333"  # P2P
+      - "10344:10334"  # WebSocket
+      - "9091:9090"    # Metrics
+    environment:
+      - NEO_NETWORK=testnet
+      - NEO_NODE_ID=node-2
+      - NEO_LOG_LEVEL=info
+      - NEO_PROMETHEUS_ENABLED=true
+      - NEO_CONSENSUS_ENABLED=true
+      - NEO_VALIDATOR_INDEX=1
+      - NEO_SEED_NODES=neo-node-1:10333
+    volumes:
+      - ./data/node2:/data
+      - ./config/node2:/config
+      - ./wallets/node2:/wallets
+    networks:
+      neo-network:
+        ipv4_address: 172.20.0.12
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:10332/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    depends_on:
+      - neo-node-1
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '1'
+          memory: 1G
+
+  # Neo C++ Node 3 (Validator)
+  neo-node-3:
+    image: ghcr.io/r3e-network/neo-cpp:latest
+    container_name: neo-node-3
+    hostname: neo-node-3
+    ports:
+      - "10352:10332"  # RPC
+      - "10353:10333"  # P2P
+      - "10354:10334"  # WebSocket
+      - "9092:9090"    # Metrics
+    environment:
+      - NEO_NETWORK=testnet
+      - NEO_NODE_ID=node-3
+      - NEO_LOG_LEVEL=info
+      - NEO_PROMETHEUS_ENABLED=true
+      - NEO_CONSENSUS_ENABLED=true
+      - NEO_VALIDATOR_INDEX=2
+      - NEO_SEED_NODES=neo-node-1:10333,neo-node-2:10333
+    volumes:
+      - ./data/node3:/data
+      - ./config/node3:/config
+      - ./wallets/node3:/wallets
+    networks:
+      neo-network:
+        ipv4_address: 172.20.0.13
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:10332/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    depends_on:
+      - neo-node-1
+      - neo-node-2
+    deploy:
+      resources:
+        limits:
+          cpus: '2'
+          memory: 2G
+        reservations:
+          cpus: '1'
+          memory: 1G
+
+  # Neo C++ Node 4 (Non-validator)
+  neo-node-4:
+    image: ghcr.io/r3e-network/neo-cpp:latest
+    container_name: neo-node-4
+    hostname: neo-node-4
+    ports:
+      - "10362:10332"  # RPC
+      - "10363:10333"  # P2P
+      - "10364:10334"  # WebSocket
+      - "9093:9090"    # Metrics
+    environment:
+      - NEO_NETWORK=testnet
+      - NEO_NODE_ID=node-4
+      - NEO_LOG_LEVEL=info
+      - NEO_PROMETHEUS_ENABLED=true
+      - NEO_CONSENSUS_ENABLED=false
+      - NEO_SEED_NODES=neo-node-1:10333,neo-node-2:10333,neo-node-3:10333
+    volumes:
+      - ./data/node4:/data
+      - ./config/node4:/config
+    networks:
+      neo-network:
+        ipv4_address: 172.20.0.14
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:10332/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    restart: unless-stopped
+    depends_on:
+      - neo-node-1
+      - neo-node-2
+      - neo-node-3
+    deploy:
+      resources:
+        limits:
+          cpus: '1'
+          memory: 1G
+        reservations:
+          cpus: '0.5'
+          memory: 512M
+
+  # Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: neo-prometheus
+    ports:
+      - "9000:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./monitoring/alerts:/etc/prometheus/alerts
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/usr/share/prometheus/console_libraries'
+      - '--web.console.templates=/usr/share/prometheus/consoles'
+      - '--web.enable-lifecycle'
+    networks:
+      neo-network:
+        ipv4_address: 172.20.0.20
+    restart: unless-stopped
+    depends_on:
+      - neo-node-1
+      - neo-node-2
+      - neo-node-3
+      - neo-node-4
+
+  # Grafana
+  grafana:
+    image: grafana/grafana:latest
+    container_name: neo-grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=grafana-clock-panel,grafana-simple-json-datasource
+    volumes:
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+      - grafana-data:/var/lib/grafana
+    networks:
+      neo-network:
+        ipv4_address: 172.20.0.21
+    restart: unless-stopped
+    depends_on:
+      - prometheus
+
+  # AlertManager
+  alertmanager:
+    image: prom/alertmanager:latest
+    container_name: neo-alertmanager
+    ports:
+      - "9093:9093"
+    volumes:
+      - ./monitoring/alertmanager.yml:/etc/alertmanager/alertmanager.yml
+      - alertmanager-data:/alertmanager
+    command:
+      - '--config.file=/etc/alertmanager/alertmanager.yml'
+      - '--storage.path=/alertmanager'
+    networks:
+      neo-network:
+        ipv4_address: 172.20.0.22
+    restart: unless-stopped
+
+  # Node Exporter (for host metrics)
+  node-exporter:
+    image: prom/node-exporter:latest
+    container_name: neo-node-exporter
+    ports:
+      - "9100:9100"
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /:/rootfs:ro
+    command:
+      - '--path.procfs=/host/proc'
+      - '--path.sysfs=/host/sys'
+      - '--collector.filesystem.mount-points-exclude=^/(sys|proc|dev|host|etc)($$|/)'
+    networks:
+      neo-network:
+        ipv4_address: 172.20.0.23
+    restart: unless-stopped
+
+  # Nginx Load Balancer
+  nginx:
+    image: nginx:alpine
+    container_name: neo-nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    networks:
+      neo-network:
+        ipv4_address: 172.20.0.30
+    restart: unless-stopped
+    depends_on:
+      - neo-node-1
+      - neo-node-2
+      - neo-node-3
+      - neo-node-4
+
+networks:
+  neo-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
+
+volumes:
+  prometheus-data:
+  grafana-data:
+  alertmanager-data:

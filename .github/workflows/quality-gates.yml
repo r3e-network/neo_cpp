@@ -1,0 +1,345 @@
+name: Quality Gates CI/CD
+
+on:
+  push:
+    branches: [ master, develop, release/* ]
+  pull_request:
+    branches: [ master, develop ]
+  schedule:
+    - cron: '0 0 * * *'  # Daily security scan
+
+env:
+  DOCKER_REGISTRY: ghcr.io
+  IMAGE_NAME: neo-cpp
+  COVERAGE_THRESHOLD: 85
+  PERFORMANCE_THRESHOLD: 5000
+
+jobs:
+  # Gate 1: Code Quality
+  code-quality:
+    name: Code Quality Gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup C++ Environment
+        uses: aminya/setup-cpp@v1
+        with:
+          compiler: gcc-11
+          cmake: true
+          ninja: true
+          conan: true
+          cppcheck: true
+          clangtidy: true
+          clangformat: true
+      
+      - name: Run Linting
+        run: |
+          echo "Running clang-format check..."
+          find . -name "*.cpp" -o -name "*.h" | xargs clang-format --dry-run --Werror
+          
+      - name: Run Static Analysis
+        run: |
+          echo "Running cppcheck..."
+          cppcheck --enable=all --error-exitcode=1 --suppress=missingInclude src/ include/
+          
+      - name: Check Cyclomatic Complexity
+        run: |
+          echo "Checking code complexity..."
+          lizard -l cpp -C 10 -w src/
+          
+      - name: Check Code Duplication
+        run: |
+          echo "Checking for duplicate code..."
+          jscpd src/ --min-tokens 50 --reporters "console" --exitCode 1
+
+  # Gate 2: Security Scanning
+  security-scan:
+    name: Security Gate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Run Trivy Security Scan
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: 'fs'
+          scan-ref: '.'
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
+          
+      - name: Run Semgrep
+        uses: returntocorp/semgrep-action@v1
+        with:
+          config: >-
+            p/security-audit
+            p/owasp-top-ten
+            p/cpp
+            
+      - name: Check for Secrets
+        uses: trufflesecurity/trufflehog@main
+        with:
+          path: ./
+          base: ${{ github.event.repository.default_branch }}
+          
+      - name: Dependency Check
+        run: |
+          echo "Checking dependencies for vulnerabilities..."
+          # Add dependency scanning tool here
+
+  # Gate 3: Build & Test
+  build-test:
+    name: Build & Test Gate
+    runs-on: ubuntu-latest
+    needs: [code-quality]
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Build Environment
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y build-essential cmake libssl-dev libboost-all-dev
+          
+      - name: Configure CMake
+        run: |
+          cmake -B build -DCMAKE_BUILD_TYPE=Release -DENABLE_TESTS=ON -DENABLE_COVERAGE=ON
+          
+      - name: Build
+        run: |
+          cmake --build build --config Release --parallel $(nproc)
+          echo "Build completed in $SECONDS seconds"
+          
+      - name: Run Unit Tests
+        run: |
+          cd build
+          ctest --output-on-failure --parallel $(nproc)
+          
+      - name: Generate Coverage Report
+        run: |
+          cd build
+          lcov --capture --directory . --output-file coverage.info
+          lcov --remove coverage.info '/usr/*' --output-file coverage.info
+          lcov --list coverage.info
+          
+      - name: Check Coverage Threshold
+        run: |
+          COVERAGE=$(lcov --summary coverage.info 2>&1 | grep -Po 'lines......: \K[0-9.]+')
+          echo "Coverage: $COVERAGE%"
+          if (( $(echo "$COVERAGE < $COVERAGE_THRESHOLD" | bc -l) )); then
+            echo "Coverage $COVERAGE% is below threshold $COVERAGE_THRESHOLD%"
+            exit 1
+          fi
+
+  # Gate 4: Performance Testing
+  performance-test:
+    name: Performance Gate
+    runs-on: ubuntu-latest
+    needs: [build-test]
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Performance Environment
+        run: |
+          sudo apt-get install -y apache2-utils wrk
+          cmake -B build -DCMAKE_BUILD_TYPE=Release
+          cmake --build build --config Release
+          
+      - name: Start Node
+        run: |
+          ./build/apps/neo_node --config test/config/performance.json &
+          sleep 10
+          
+      - name: Run Load Test
+        run: |
+          echo "Running load test..."
+          wrk -t12 -c400 -d30s --latency http://localhost:10332/
+          
+      - name: Run TPS Test
+        run: |
+          echo "Testing transaction throughput..."
+          ./scripts/tps_test.sh
+          TPS=$(cat tps_result.txt)
+          echo "TPS: $TPS"
+          if [ "$TPS" -lt "$PERFORMANCE_THRESHOLD" ]; then
+            echo "TPS $TPS is below threshold $PERFORMANCE_THRESHOLD"
+            exit 1
+          fi
+          
+      - name: Memory Leak Check
+        run: |
+          valgrind --leak-check=full --error-exitcode=1 ./build/apps/neo_node --test-mode
+
+  # Gate 5: Container Build
+  docker-build:
+    name: Container Gate
+    runs-on: ubuntu-latest
+    needs: [security-scan, build-test]
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v2
+        
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ${{ env.DOCKER_REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+          
+      - name: Build Docker Image
+        uses: docker/build-push-action@v4
+        with:
+          context: .
+          file: ./Dockerfile
+          push: false
+          tags: ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+          
+      - name: Check Image Size
+        run: |
+          docker images --format "table {{.Repository}}:{{.Tag}}\\t{{.Size}}"
+          SIZE=$(docker images --format "{{.Size}}" | head -1 | sed 's/MB//')
+          if [ "$SIZE" -gt "100" ]; then
+            echo "Docker image size ${SIZE}MB exceeds 100MB limit"
+            exit 1
+          fi
+          
+      - name: Security Scan Container
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ env.DOCKER_REGISTRY }}/${{ github.repository }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          severity: 'CRITICAL,HIGH'
+          exit-code: '1'
+
+  # Gate 6: Integration Testing
+  integration-test:
+    name: Integration Gate
+    runs-on: ubuntu-latest
+    needs: [docker-build]
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Setup Test Network
+        run: |
+          docker-compose -f test/docker-compose.yml up -d
+          sleep 30
+          
+      - name: Run Integration Tests
+        run: |
+          ./scripts/integration_test.sh
+          
+      - name: Test Consensus
+        run: |
+          ./scripts/consensus_test.sh
+          
+      - name: Test Network Partition
+        run: |
+          ./scripts/partition_test.sh
+          
+      - name: Collect Logs
+        if: failure()
+        run: |
+          docker-compose -f test/docker-compose.yml logs > integration_logs.txt
+          
+      - name: Upload Logs
+        if: failure()
+        uses: actions/upload-artifact@v3
+        with:
+          name: integration-logs
+          path: integration_logs.txt
+
+  # Gate Decision
+  quality-gate-decision:
+    name: Quality Gate Decision
+    runs-on: ubuntu-latest
+    needs: [code-quality, security-scan, build-test, performance-test, docker-build, integration-test]
+    if: always()
+    steps:
+      - name: Check Gate Status
+        run: |
+          echo "=== Quality Gate Summary ==="
+          echo "Code Quality: ${{ needs.code-quality.result }}"
+          echo "Security: ${{ needs.security-scan.result }}"
+          echo "Build & Test: ${{ needs.build-test.result }}"
+          echo "Performance: ${{ needs.performance-test.result }}"
+          echo "Docker: ${{ needs.docker-build.result }}"
+          echo "Integration: ${{ needs.integration-test.result }}"
+          
+          if [ "${{ needs.code-quality.result }}" != "success" ] || \
+             [ "${{ needs.security-scan.result }}" != "success" ] || \
+             [ "${{ needs.build-test.result }}" != "success" ] || \
+             [ "${{ needs.performance-test.result }}" != "success" ] || \
+             [ "${{ needs.docker-build.result }}" != "success" ] || \
+             [ "${{ needs.integration-test.result }}" != "success" ]; then
+            echo "❌ Quality gates failed"
+            exit 1
+          else
+            echo "✅ All quality gates passed"
+          fi
+          
+      - name: Generate Report
+        run: |
+          cat > gate-report.md << EOF
+          # Quality Gate Report
+          
+          **Date**: $(date)
+          **Commit**: ${{ github.sha }}
+          **Branch**: ${{ github.ref }}
+          
+          ## Gate Results
+          | Gate | Status |
+          |------|--------|
+          | Code Quality | ${{ needs.code-quality.result }} |
+          | Security | ${{ needs.security-scan.result }} |
+          | Build & Test | ${{ needs.build-test.result }} |
+          | Performance | ${{ needs.performance-test.result }} |
+          | Docker | ${{ needs.docker-build.result }} |
+          | Integration | ${{ needs.integration-test.result }} |
+          
+          ## Next Steps
+          - Review any failed gates
+          - Address issues before merge
+          - Rerun pipeline after fixes
+          EOF
+          
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('gate-report.md', 'utf8');
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: report
+            })
+
+  # Nightly Performance Baseline
+  nightly-performance:
+    name: Nightly Performance Baseline
+    runs-on: ubuntu-latest
+    if: github.event_name == 'schedule'
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Run Extended Performance Tests
+        run: |
+          ./scripts/extended_performance_test.sh
+          
+      - name: Store Baseline Metrics
+        run: |
+          echo "Storing performance baseline..."
+          # Store metrics in S3 or artifact storage
+          
+      - name: Generate Performance Report
+        run: |
+          ./scripts/generate_performance_report.sh > performance_report.html
+          
+      - name: Send Report
+        run: |
+          # Email or post to monitoring dashboard
+          echo "Performance report generated"

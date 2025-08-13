@@ -1,0 +1,238 @@
+global:
+  # SMTP configuration
+  smtp_smarthost: 'smtp.gmail.com:587'
+  smtp_from: 'neo-cpp-alerts@example.com'
+  smtp_auth_username: 'neo-cpp-alerts@example.com'
+  smtp_auth_password: 'your-app-password'
+  smtp_require_tls: true
+
+  # Slack configuration
+  slack_api_url: 'YOUR_SLACK_WEBHOOK_URL'
+
+  # Global settings
+  resolve_timeout: 5m
+  http_config:
+    follow_redirects: true
+
+# Templates for notifications
+templates:
+  - '/etc/alertmanager/templates/*.tmpl'
+
+# Route tree for alerts
+route:
+  # Default receiver
+  receiver: 'default-receiver'
+  
+  # Group alerts by these labels
+  group_by: ['alertname', 'cluster', 'service', 'severity']
+  
+  # Wait before sending group notification
+  group_wait: 30s
+  
+  # Wait before sending notification about new alerts in group
+  group_interval: 5m
+  
+  # Wait before repeating notification
+  repeat_interval: 4h
+  
+  # Child routes for specific alert routing
+  routes:
+    # Critical alerts - immediate notification
+    - match:
+        severity: critical
+      receiver: 'critical-receiver'
+      group_wait: 10s
+      group_interval: 1m
+      repeat_interval: 1h
+      continue: true
+    
+    # Security alerts
+    - match_re:
+        alertname: '^Security.*'
+      receiver: 'security-receiver'
+      group_wait: 10s
+      repeat_interval: 2h
+    
+    # Performance alerts
+    - match:
+        category: performance
+      receiver: 'performance-receiver'
+      group_wait: 1m
+      group_interval: 5m
+      repeat_interval: 6h
+    
+    # Consensus alerts
+    - match:
+        component: consensus
+      receiver: 'consensus-receiver'
+      group_wait: 30s
+      repeat_interval: 2h
+    
+    # Development/test environment alerts (less urgent)
+    - match:
+        environment: development
+      receiver: 'dev-receiver'
+      group_wait: 5m
+      group_interval: 15m
+      repeat_interval: 12h
+    
+    # Infrastructure alerts
+    - match:
+        group: infrastructure
+      receiver: 'infra-receiver'
+      group_interval: 10m
+      repeat_interval: 4h
+
+# Inhibition rules to suppress certain alerts
+inhibit_rules:
+  # Suppress warnings when critical alert is firing
+  - source_match:
+      severity: 'critical'
+    target_match:
+      severity: 'warning'
+    equal: ['alertname', 'cluster', 'service']
+  
+  # Suppress info alerts when warning is firing
+  - source_match:
+      severity: 'warning'
+    target_match:
+      severity: 'info'
+    equal: ['alertname', 'cluster', 'service']
+  
+  # Suppress node-specific alerts when whole cluster is down
+  - source_match:
+      alertname: 'ClusterDown'
+    target_match_re:
+      alertname: 'Node.*'
+    equal: ['cluster']
+
+# Receivers configuration
+receivers:
+  # Default receiver
+  - name: 'default-receiver'
+    email_configs:
+      - to: 'ops-team@example.com'
+        send_resolved: true
+        headers:
+          Subject: '[Neo C++] {{ .GroupLabels.alertname }} - {{ .Status }}'
+        html: |
+          <h2>Alert: {{ .GroupLabels.alertname }}</h2>
+          <p><b>Status:</b> {{ .Status }}</p>
+          <p><b>Severity:</b> {{ .CommonLabels.severity }}</p>
+          <h3>Alerts:</h3>
+          {{ range .Alerts }}
+          <hr>
+          <p><b>{{ .Labels.alertname }}</b></p>
+          <p>{{ .Annotations.summary }}</p>
+          <p>{{ .Annotations.description }}</p>
+          <p><b>Labels:</b></p>
+          <ul>
+          {{ range .Labels.SortedPairs }}
+            <li>{{ .Name }}: {{ .Value }}</li>
+          {{ end }}
+          </ul>
+          {{ end }}
+    
+    slack_configs:
+      - channel: '#neo-cpp-alerts'
+        send_resolved: true
+        title: 'Neo C++ Alert'
+        text: '{{ range .Alerts }}{{ .Annotations.summary }}{{ end }}'
+  
+  # Critical alerts receiver
+  - name: 'critical-receiver'
+    pagerduty_configs:
+      - service_key: 'YOUR_PAGERDUTY_SERVICE_KEY'
+        description: '{{ .GroupLabels.alertname }}'
+        details:
+          severity: '{{ .CommonLabels.severity }}'
+          cluster: '{{ .CommonLabels.cluster }}'
+          message: '{{ range .Alerts }}{{ .Annotations.description }}{{ end }}'
+    
+    email_configs:
+      - to: 'critical-alerts@example.com,oncall@example.com'
+        send_resolved: true
+        headers:
+          Subject: '[CRITICAL] Neo C++ - {{ .GroupLabels.alertname }}'
+          Priority: 'Urgent'
+    
+    slack_configs:
+      - channel: '#critical-alerts'
+        send_resolved: true
+        color: 'danger'
+        title: ':rotating_light: CRITICAL ALERT'
+        text: |
+          *Alert:* {{ .GroupLabels.alertname }}
+          *Severity:* CRITICAL
+          {{ range .Alerts }}
+          *Summary:* {{ .Annotations.summary }}
+          *Description:* {{ .Annotations.description }}
+          {{ end }}
+  
+  # Security alerts receiver
+  - name: 'security-receiver'
+    email_configs:
+      - to: 'security-team@example.com'
+        send_resolved: true
+        headers:
+          Subject: '[SECURITY] Neo C++ - {{ .GroupLabels.alertname }}'
+          X-Priority: '1'
+    
+    slack_configs:
+      - channel: '#security-alerts'
+        send_resolved: true
+        color: 'danger'
+        title: ':shield: Security Alert'
+        text: |
+          *Alert:* {{ .GroupLabels.alertname }}
+          {{ range .Alerts }}
+          {{ .Annotations.description }}
+          {{ end }}
+    
+    webhook_configs:
+      - url: 'http://security-scanner:8080/webhook'
+        send_resolved: false
+  
+  # Performance alerts receiver
+  - name: 'performance-receiver'
+    email_configs:
+      - to: 'performance-team@example.com'
+        send_resolved: true
+    
+    slack_configs:
+      - channel: '#performance'
+        send_resolved: true
+        color: 'warning'
+        title: ':chart_with_downwards_trend: Performance Alert'
+  
+  # Consensus alerts receiver
+  - name: 'consensus-receiver'
+    email_configs:
+      - to: 'blockchain-team@example.com'
+        send_resolved: true
+        headers:
+          Subject: '[CONSENSUS] Neo C++ - {{ .GroupLabels.alertname }}'
+    
+    slack_configs:
+      - channel: '#blockchain-alerts'
+        send_resolved: true
+        color: '{{ if eq .Status "firing" }}warning{{ else }}good{{ end }}'
+        title: ':link: Consensus Alert'
+  
+  # Infrastructure alerts receiver
+  - name: 'infra-receiver'
+    email_configs:
+      - to: 'infra-team@example.com'
+        send_resolved: true
+    
+    slack_configs:
+      - channel: '#infrastructure'
+        send_resolved: true
+  
+  # Development environment receiver (low priority)
+  - name: 'dev-receiver'
+    slack_configs:
+      - channel: '#dev-alerts'
+        send_resolved: false
+        title: '[DEV] {{ .GroupLabels.alertname }}'
+        text: '{{ .CommonAnnotations.summary }}'
