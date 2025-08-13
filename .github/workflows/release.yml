@@ -76,12 +76,12 @@ jobs:
 
       - name: Create Release
         id: create_release
-        uses: actions/create-release@v1
+        uses: softprops/action-gh-release@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ steps.get_version.outputs.version }}
-          release_name: Neo C++ Node ${{ steps.get_version.outputs.version }}
+          name: Neo C++ Node ${{ steps.get_version.outputs.version }}
           body: |
             ${{ steps.changelog.outputs.changelog }}
             
@@ -392,8 +392,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          C:\vcpkg\vcpkg install --triplet x64-windows `
-            openssl boost-all rocksdb nlohmann-json spdlog gtest
+          C:\vcpkg\vcpkg install --triplet x64-windows openssl boost-system boost-filesystem boost-thread nlohmann-json
 
       - name: Configure CMake
         run: |
@@ -401,9 +400,7 @@ jobs:
             -DCMAKE_BUILD_TYPE=Release `
             -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake `
             -DNEO_BUILD_TESTS=OFF `
-            -DNEO_BUILD_APPS=ON `
-            -DNEO_BUILD_TOOLS=ON `
-            -DNEO_ENABLE_OPTIMIZATION=ON
+            -DNEO_USE_MINIMAL_DEPENDENCIES=ON
 
       - name: Build
         run: |
