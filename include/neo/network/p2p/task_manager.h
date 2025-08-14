@@ -102,6 +102,8 @@ class TaskManager
     std::shared_ptr<ledger::MemoryPool> memPool_;
     std::unordered_map<io::UInt256, std::chrono::system_clock::time_point> blockTasks_;
     std::unordered_map<io::UInt256, std::chrono::system_clock::time_point> transactionTasks_;
+    std::unordered_map<io::UInt256, std::chrono::system_clock::time_point> pendingBlockRequests_;
+    std::unordered_map<io::UInt256, std::chrono::system_clock::time_point> pendingTransactionRequests_;
     mutable std::mutex tasksMutex_;
     std::atomic<bool> running_;
     std::thread taskThread_;

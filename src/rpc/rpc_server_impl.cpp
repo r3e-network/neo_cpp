@@ -216,16 +216,20 @@ void RpcServer::InitializeHandlers()
             if (param.IsString())
             {
                 // Block hash provided
-                // TODO: Implement block retrieval from DataCache by hash
-                // auto hash = io::UInt256::Parse(param.GetString());
-                // block = GetBlockFromDataCache(blockchain_, hash);
+                auto hash = io::UInt256::Parse(param.GetString());
+                if (blockchain_)
+                {
+                    block = blockchain_->GetBlock(hash);
+                }
             }
             else if (param.IsNumber())
             {
                 // Block index provided
-                // TODO: Implement block retrieval from DataCache by index
-                // uint32_t index = static_cast<uint32_t>(param.GetInt64());
-                // block = GetBlockFromDataCache(blockchain_, index);
+                uint32_t index = static_cast<uint32_t>(param.GetInt64());
+                if (blockchain_)
+                {
+                    block = blockchain_->GetBlock(index);
+                }
             }
 
             if (block)
@@ -357,9 +361,8 @@ void RpcServer::ServerLoop()
         std::this_thread::sleep_for(std::chrono::milliseconds(100));
 
         // Process RPC requests - actual HTTP handling is done by httplib
-        // This loop maintains server state
-        // TODO: Implement request queue processing if needed
-        // ProcessQueuedRequests();
+        // This loop maintains server state and handles cleanup
+        // The httplib server handles request queueing internally
     }
 }
 

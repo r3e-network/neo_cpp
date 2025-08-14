@@ -173,17 +173,31 @@ void LocalNode::ProcessConsensusMessage(RemoteNode* remoteNode, const payloads::
     {
         try
         {
-            // TODO: Process consensus message when ConsensusService is fully implemented
-            // consensus->ProcessMessage(remoteNode->GetRemoteEndPoint(), payload.GetData());
+            // Process consensus message
+            consensus::ConsensusMessage consensusMsg;
+            consensusMsg.Deserialize(io::ByteSpan(data.data(), data.size()));
+            
+            // Validate the message
+            if (consensusMsg.Verify())
+            {
+                // Forward to consensus service
+                consensus->OnConsensusMessage(consensusMsg);
+                
+                // Relay to other nodes if needed
+                if (consensusMsg.ShouldRelay())
+                {
+                    RelayExtensiblePayload(std::make_shared<payloads::ExtensiblePayload>(payload));
+                }
+            }
+            else
+            {
+                LOG_WARNING("Invalid consensus message received");
+            }
         }
         catch (const std::exception& e)
         {
             LOG_WARNING("Failed to process consensus message: {}", e.what());
         }
-    }
-    else
-    {
-        LOG_DEBUG("Consensus service not available");
     }
 }
 
@@ -202,8 +216,28 @@ void LocalNode::ProcessStateServiceMessage(RemoteNode* remoteNode, const payload
     // Process state service message
     try
     {
-        // TODO: Process extensible message when StateService is fully implemented
-        // stateService->ProcessMessage(remoteNode->GetRemoteEndPoint(), payload.GetData());
+        // Process state service message (state root synchronization)
+        auto data = payload.GetData();
+        if (!data.empty())
+        {
+            // Parse state root message
+            ledger::StateRoot stateRoot;
+            stateRoot.Deserialize(io::ByteSpan(data.data(), data.size()));
+            
+            // Verify state root signature
+            if (stateRoot.Verify())
+            {
+                // Process the state root
+                stateService->ProcessStateRoot(stateRoot);
+                
+                // Relay to other nodes if valid
+                RelayExtensiblePayload(std::make_shared<payloads::ExtensiblePayload>(payload));
+            }
+            else
+            {
+                LOG_WARNING("Invalid state root message received");
+            }
+        }
     }
     catch (const std::exception& e)
     {

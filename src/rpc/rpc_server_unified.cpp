@@ -103,9 +103,17 @@ class RpcServerImpl
         httpServer_->Get("/health",
                          [this](const httplib::Request& req, httplib::Response& res)
                          {
+                             std::string networkName = "mainnet";
+                             if (neoSystem_) {
+                                 auto networkId = neoSystem_->GetNetworkId();
+                                 if (networkId == 860833102) networkName = "mainnet";
+                                 else if (networkId == 877933390) networkName = "testnet";
+                                 else networkName = "private";
+                             }
                              nlohmann::json response = {
-                                 {"status", "healthy"}, {"version", "1.0.0"}, {"network", "mainnet"}
-                                 // TODO: Get network name from NeoSystem when available
+                                 {"status", "healthy"}, 
+                                 {"version", "1.2.0"}, 
+                                 {"network", networkName}
                              };
                              res.set_content(response.dump(), "application/json");
                          });
@@ -328,13 +336,12 @@ class RpcServerImpl
         return {{"blockchain",
                  {
                      {"height", blockchain ? blockchain->GetHeight() : 0},
-                     {"header_height", blockchain ? blockchain->GetHeight() : 0}
-                     // TODO: Implement separate header height tracking
+                     {"header_height", blockchain ? blockchain->GetHeaderHeight() : 0}
                  }},
                 {"mempool",
                  {
-                     {"size", mempool ? mempool->GetSize() : 0}, {"verified", mempool ? mempool->GetSize() : 0}
-                     // TODO: Track verified transactions separately
+                     {"size", mempool ? mempool->GetSize() : 0}, 
+                     {"verified", mempool ? mempool->GetVerifiedCount() : 0}
                  }},
                 {"rpc",
                  {{"requests_total", requestCount_.load()},

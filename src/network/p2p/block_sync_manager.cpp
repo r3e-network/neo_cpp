@@ -590,12 +590,11 @@ void BlockSyncManager::ProcessOrphanBlocks()
         auto it = orphanBlocks_.begin();
         while (it != orphanBlocks_.end())
         {
-            // TODO: Check if we have the parent block
-            if (false)  // blockchain_->ContainsBlock(it->second->GetPrevHash())
+            // Check if we have the parent block
+            if (blockchain_ && blockchain_->ContainsBlock(it->second->GetPrevHash()))
             {
                 // Parent is now available, try to add this block
-                // TODO: Add block to blockchain
-                if (false)  // blockchain_->AddBlock(it->second)
+                if (blockchain_->AddBlock(*it->second))
                 {
                     LOG_DEBUG("Successfully added orphan block at height {}", it->second->GetIndex());
                     it = orphanBlocks_.erase(it);

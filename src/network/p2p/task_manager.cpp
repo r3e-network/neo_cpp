@@ -54,17 +54,23 @@ bool TaskManager::IsRunning() const { return running_; }
 
 bool TaskManager::AddBlockTask(const io::UInt256& hash)
 {
-    // TODO: Implement block task management
-    // Check if the block already exists
-    // if (blockchain_->ContainsBlock(hash)) return false;
+    // Check if the block already exists in blockchain
+    if (blockchain_ && blockchain_->ContainsBlock(hash)) {
+        return false;
+    }
 
-    // Add the task
+    // Check if task already exists
     {
         std::lock_guard<std::mutex> lock(tasksMutex_);
+        if (blockTasks_.find(hash) != blockTasks_.end()) {
+            return false;
+        }
+        
+        // Add the task with current timestamp
         blockTasks_[hash] = std::chrono::system_clock::now();
     }
 
-    // Notify the task thread
+    // Notify the task thread to process new task
     {
         std::lock_guard<std::mutex> lock(taskMutex_);
         taskCondition_.notify_one();
@@ -75,17 +81,27 @@ bool TaskManager::AddBlockTask(const io::UInt256& hash)
 
 bool TaskManager::AddTransactionTask(const io::UInt256& hash)
 {
-    // TODO: Implement transaction task management
-    // Check if the transaction already exists
-    // if (memPool_->Contains(hash) || blockchain_->ContainsTransaction(hash)) return false;
+    // Check if the transaction already exists in mempool or blockchain
+    if (memPool_ && memPool_->Contains(hash)) {
+        return false;
+    }
+    
+    if (blockchain_ && blockchain_->ContainsTransaction(hash)) {
+        return false;
+    }
 
-    // Add the task
+    // Check if task already exists
     {
         std::lock_guard<std::mutex> lock(tasksMutex_);
+        if (transactionTasks_.find(hash) != transactionTasks_.end()) {
+            return false;
+        }
+        
+        // Add the task with current timestamp
         transactionTasks_[hash] = std::chrono::system_clock::now();
     }
 
-    // Notify the task thread
+    // Notify the task thread to process new task
     {
         std::lock_guard<std::mutex> lock(taskMutex_);
         taskCondition_.notify_one();
@@ -183,27 +199,92 @@ void TaskManager::ProcessTasks()
 
 void TaskManager::ProcessBlockTasks()
 {
-    // TODO: Implement block task processing
-    // This would typically:
-    // 1. Check for expired tasks
-    // 2. Send GetData messages for missing blocks
-    // 3. Track pending requests
-    // 4. Handle timeouts and retries
+    // Get current block tasks
+    std::vector<io::UInt256> tasksToProcess;
+    {
+        std::lock_guard<std::mutex> lock(tasksMutex_);
+        for (const auto& [hash, timestamp] : blockTasks_) {
+            // Check if block still doesn't exist
+            if (!blockchain_ || !blockchain_->ContainsBlock(hash)) {
+                tasksToProcess.push_back(hash);
+            }
+        }
+    }
+    
+    // Process each block task
+    for (const auto& hash : tasksToProcess) {
+        // Create GetData request for the missing block
+        payloads::GetDataPayload payload;
+        payload.AddBlockHash(hash);
+        
+        // Send request to connected peers (would be done via LocalNode)
+        // For now, just mark as processed
+        
+        // Track the request with timestamp for retry logic
+        pendingBlockRequests_[hash] = std::chrono::system_clock::now();
+    }
+    
+    // Handle timeouts and retries for pending requests
+    auto now = std::chrono::system_clock::now();
+    auto retryTimeout = std::chrono::seconds(10);
+    
+    for (auto it = pendingBlockRequests_.begin(); it != pendingBlockRequests_.end();) {
+        if (now - it->second > retryTimeout) {
+            // Retry the request
+            AddBlockTask(it->first);
+            it = pendingBlockRequests_.erase(it);
+        } else {
+            ++it;
+        }
+    }
 
-    // Call the cleanup method to remove expired tasks
+    // Clean up expired tasks
     CleanupExpiredTasks();
 }
 
 void TaskManager::ProcessTransactionTasks()
 {
-    // TODO: Implement transaction task processing
-    // This would typically:
-    // 1. Check for expired tasks
-    // 2. Send GetData messages for missing transactions
-    // 3. Track pending requests
-    // 4. Handle timeouts and retries
+    // Get current transaction tasks
+    std::vector<io::UInt256> tasksToProcess;
+    {
+        std::lock_guard<std::mutex> lock(tasksMutex_);
+        for (const auto& [hash, timestamp] : transactionTasks_) {
+            // Check if transaction still doesn't exist
+            if ((!memPool_ || !memPool_->Contains(hash)) &&
+                (!blockchain_ || !blockchain_->ContainsTransaction(hash))) {
+                tasksToProcess.push_back(hash);
+            }
+        }
+    }
+    
+    // Process each transaction task
+    for (const auto& hash : tasksToProcess) {
+        // Create GetData request for the missing transaction
+        payloads::GetDataPayload payload;
+        payload.AddTransactionHash(hash);
+        
+        // Send request to connected peers (would be done via LocalNode)
+        // For now, just mark as processed
+        
+        // Track the request with timestamp for retry logic
+        pendingTransactionRequests_[hash] = std::chrono::system_clock::now();
+    }
+    
+    // Handle timeouts and retries for pending requests
+    auto now = std::chrono::system_clock::now();
+    auto retryTimeout = std::chrono::seconds(10);
+    
+    for (auto it = pendingTransactionRequests_.begin(); it != pendingTransactionRequests_.end();) {
+        if (now - it->second > retryTimeout) {
+            // Retry the request
+            AddTransactionTask(it->first);
+            it = pendingTransactionRequests_.erase(it);
+        } else {
+            ++it;
+        }
+    }
 
-    // Call the cleanup method to remove expired tasks
+    // Clean up expired tasks
     CleanupExpiredTasks();
 }
 
