@@ -53,6 +53,12 @@ if(NEO_BUILD_TESTS)
     add_subdirectory(tests)
 endif()
 
+# Benchmarks
+option(NEO_BUILD_BENCHMARKS "Build performance benchmarks" ON)
+if(NEO_BUILD_BENCHMARKS)
+    add_subdirectory(benchmarks)
+endif()
+
 # Examples can be disabled to stabilize builds
 if(NEO_BUILD_EXAMPLES)
     add_subdirectory(examples)
