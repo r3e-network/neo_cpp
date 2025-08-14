@@ -14,15 +14,18 @@
 using namespace neo::network;
 using namespace std::chrono_literals;
 
+// Mock IO context for testing
+static boost::asio::io_context test_io_context;
+
 class MockConnection : public TcpConnection {
 public:
     MockConnection(bool healthy = true) 
-        : TcpConnection(nullptr, nullptr), healthy_(healthy), closed_(false) {
+        : TcpConnection(test_io_context), healthy_(healthy), closed_(false) {
         connection_id_ = next_id_++;
     }
     
-    bool IsHealthy() const override { return healthy_ && !closed_; }
-    void Close() override { closed_ = true; }
+    bool IsHealthy() const { return healthy_ && !closed_; }
+    void Close() { closed_ = true; }
     bool IsClosed() const { return closed_; }
     int GetId() const { return connection_id_; }
     
@@ -58,7 +61,7 @@ TEST_F(ConnectionPoolTest, BasicPoolingLifecycle) {
     
     // Verify pool is running
     auto stats = pool_->GetStats();
-    EXPECT_EQ(stats.total_created, 0);
+    EXPECT_EQ(stats.total_connections, 0);
     EXPECT_EQ(stats.active_connections, 0);
     
     // Stop the pool
