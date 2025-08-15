@@ -43,7 +43,6 @@ jobs:
           libgmock-dev \
           nlohmann-json3-dev \
           libspdlog-dev \
-          librocksdb-dev \
           libboost-all-dev \
           libfmt-dev
     
@@ -58,6 +57,8 @@ jobs:
           -DNEO_BUILD_TOOLS=OFF \
           -DNEO_BUILD_APPS=OFF \
           -DNEO_USE_VCPKG=OFF \
+          -DNEO_USE_ROCKSDB=OFF \
+          -DNEO_USE_MEMORY_STORE=ON \
           || echo "Configuration completed with warnings"
     
     - name: Build Core Libraries

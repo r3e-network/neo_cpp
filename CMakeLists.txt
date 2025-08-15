@@ -19,6 +19,15 @@ option(NEO_BUILD_TOOLS "Build CLI tools" ON)
 option(NEO_BUILD_APPS "Build applications" ON)
 option(NEO_USE_VCPKG "Use vcpkg for dependencies" ON)
 
+# Library build options
+option(NEO_BUILD_SHARED "Build shared libraries" OFF)
+option(NEO_BUILD_STATIC "Build static libraries" ON)
+
+# Storage backend options
+option(NEO_USE_MEMORY_STORE "Use memory storage backend" ON)
+option(NEO_USE_ROCKSDB "Use RocksDB storage backend" OFF)
+option(NEO_USE_LEVELDB "Use LevelDB storage backend" OFF)
+
 # Production build options
 option(NEO_PRODUCTION_BUILD "Enable production optimizations" OFF)
 option(NEO_ENABLE_PROFILING "Enable profiling support" OFF)

@@ -44,7 +44,6 @@ jobs:
           cmake \
           libssl-dev \
           libboost-all-dev \
-          librocksdb-dev \
           libgtest-dev \
           lcov
     
@@ -52,7 +51,7 @@ jobs:
       if: runner.os == 'macOS'
       run: |
         brew update
-        brew install cmake openssl boost rocksdb googletest lcov
+        brew install cmake openssl boost googletest lcov
     
     - name: Configure CMake
       run: |
@@ -61,7 +60,9 @@ jobs:
         cmake .. \
           -DCMAKE_BUILD_TYPE=${{ matrix.build-type }} \
           -DCMAKE_C_COMPILER=${{ matrix.compiler }} \
-          -DCMAKE_CXX_COMPILER=${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }}
+          -DCMAKE_CXX_COMPILER=${{ matrix.compiler == 'gcc' && 'g++' || 'clang++' }} \
+          -DNEO_USE_ROCKSDB=OFF \
+          -DNEO_USE_MEMORY_STORE=ON
     
     - name: Build
       run: |
