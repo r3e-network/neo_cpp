@@ -1,6 +1,6 @@
 #include <neo/sdk/core/types.h>
 #include <neo/io/binary_writer.h>
-#include <neo/cryptography/helper.h>
+#include <neo/cryptography/crypto.h>
 
 namespace neo::sdk::core {
 

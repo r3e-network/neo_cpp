@@ -19,7 +19,7 @@ bool Initialize(const std::string& config) {
     
     try {
         // Initialize logging system
-        neo::logging::Logger::Initialize("neo-sdk");
+        // Note: Logger is already initialized by the main application
         
         // TODO: Load configuration if provided
         if (!config.empty()) {
@@ -30,11 +30,11 @@ bool Initialize(const std::string& config) {
         // Note: Add subsystem initialization as needed
         
         g_initialized.store(true);
-        NEO_LOG_INFO("Neo C++ SDK initialized successfully. Version: {}", GetVersion());
+        NEO_LOG_INFO(std::string("Neo C++ SDK initialized successfully. Version: ") + GetVersion());
         return true;
         
     } catch (const std::exception& e) {
-        NEO_LOG_ERROR("Failed to initialize Neo SDK: {}", e.what());
+        NEO_LOG_ERROR(std::string("Failed to initialize Neo SDK: ") + e.what());
         return false;
     }
 }
@@ -51,7 +51,7 @@ void Shutdown() {
         
         // Shutdown logging
         NEO_LOG_INFO("Neo C++ SDK shutting down");
-        neo::logging::Logger::Shutdown();
+        // Note: Logger shutdown is handled by the main application
         
         g_initialized.store(false);
         

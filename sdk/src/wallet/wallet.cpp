@@ -1,6 +1,6 @@
 #include <neo/sdk/wallet/wallet.h>
-#include <neo/wallets/nep6_wallet.h>
-#include <neo/cryptography/helper.h>
+#include <neo/wallets/nep6/nep6_wallet.h>
+#include <neo/cryptography/crypto.h>
 #include <neo/logging/logger.h>
 #include <fstream>
 #include <memory>
@@ -38,7 +38,7 @@ std::shared_ptr<Wallet> Wallet::Create(
         
         // Save to file
         if (!wallet->Save()) {
-            NEO_LOG_ERROR("Failed to save new wallet to: {}", path);
+            NEO_LOG_ERROR(std::string("Failed to save new wallet to: ") + path);
             return nullptr;
         }
         
@@ -46,7 +46,7 @@ std::shared_ptr<Wallet> Wallet::Create(
         return wallet;
         
     } catch (const std::exception& e) {
-        NEO_LOG_ERROR("Failed to create wallet: {}", e.what());
+        NEO_LOG_ERROR(std::string("Failed to create wallet: ") + e.what());
         return nullptr;
     }
 }
@@ -74,7 +74,7 @@ std::shared_ptr<Wallet> Wallet::Open(
         return wallet;
         
     } catch (const std::exception& e) {
-        NEO_LOG_ERROR("Failed to open wallet: {}", e.what());
+        NEO_LOG_ERROR(std::string("Failed to open wallet: ") + e.what());
         throw;
     }
 }
@@ -100,7 +100,7 @@ Account Wallet::CreateAccount(const std::string& label) {
         return account;
         
     } catch (const std::exception& e) {
-        NEO_LOG_ERROR("Failed to create account: {}", e.what());
+        NEO_LOG_ERROR(std::string("Failed to create account: ") + e.what());
         throw;
     }
 }
@@ -125,7 +125,7 @@ Account Wallet::ImportAccount(const std::string& wif, const std::string& label) 
         return account;
         
     } catch (const std::exception& e) {
-        NEO_LOG_ERROR("Failed to import account from WIF: {}", e.what());
+        NEO_LOG_ERROR(std::string("Failed to import account from WIF: ") + e.what());
         throw;
     }
 }
@@ -144,7 +144,7 @@ Account Wallet::ImportAccount(const std::vector<uint8_t>& privateKey, const std:
         return ImportAccount(wif, label);
         
     } catch (const std::exception& e) {
-        NEO_LOG_ERROR("Failed to import account from private key: {}", e.what());
+        NEO_LOG_ERROR(std::string("Failed to import account from private key: ") + e.what());
         throw;
     }
 }
@@ -193,7 +193,7 @@ bool Wallet::DeleteAccount(const std::string& address) {
         }
         return result;
     } catch (const std::exception& e) {
-        NEO_LOG_ERROR("Failed to delete account: {}", e.what());
+        NEO_LOG_ERROR(std::string("Failed to delete account: ") + e.what());
         return false;
     }
 }
@@ -246,7 +246,7 @@ bool Wallet::Save() {
     try {
         return impl_->nep6Wallet->Save(impl_->path, impl_->password);
     } catch (const std::exception& e) {
-        NEO_LOG_ERROR("Failed to save wallet: {}", e.what());
+        NEO_LOG_ERROR(std::string("Failed to save wallet: ") + e.what());
         return false;
     }
 }
@@ -259,7 +259,7 @@ bool Wallet::SaveAs(const std::string& path) {
         }
         return result;
     } catch (const std::exception& e) {
-        NEO_LOG_ERROR("Failed to save wallet as: {}", e.what());
+        NEO_LOG_ERROR(std::string("Failed to save wallet as: ") + e.what());
         return false;
     }
 }
@@ -301,7 +301,7 @@ bool Wallet::ChangePassword(const std::string& oldPassword, const std::string& n
         }
         return result;
     } catch (const std::exception& e) {
-        NEO_LOG_ERROR("Failed to change password: {}", e.what());
+        NEO_LOG_ERROR(std::string("Failed to change password: ") + e.what());
         return false;
     }
 }
@@ -323,7 +323,7 @@ std::vector<uint8_t> Wallet::Sign(
         return keyPair.Sign(message);
         
     } catch (const std::exception& e) {
-        NEO_LOG_ERROR("Failed to sign message: {}", e.what());
+        NEO_LOG_ERROR(std::string("Failed to sign message: ") + e.what());
         throw;
     }
 }
@@ -344,7 +344,7 @@ bool Wallet::SignTransaction(std::shared_ptr<core::Transaction> transaction) {
         return true;  // Placeholder
         
     } catch (const std::exception& e) {
-        NEO_LOG_ERROR("Failed to sign transaction: {}", e.what());
+        NEO_LOG_ERROR(std::string("Failed to sign transaction: ") + e.what());
         return false;
     }
 }

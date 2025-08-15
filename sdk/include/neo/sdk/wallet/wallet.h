@@ -2,7 +2,7 @@
 
 #include <neo/sdk/core/types.h>
 #include <neo/sdk/wallet/account.h>
-#include <neo/wallets/nep6_wallet.h>
+#include <neo/wallets/nep6/nep6_wallet.h>
 #include <memory>
 #include <vector>
 #include <string>
