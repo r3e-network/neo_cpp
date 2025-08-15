@@ -74,6 +74,12 @@ if(NEO_BUILD_APPS)
     add_subdirectory(apps)
 endif()
 
+# SDK subdirectory
+option(NEO_BUILD_SDK "Build Neo C++ SDK" ON)
+if(NEO_BUILD_SDK)
+    add_subdirectory(sdk)
+endif()
+
 # Plugin system (temporarily disabled due to namespace conflicts)
 # add_subdirectory(plugins)
 
@@ -123,3 +129,4 @@ message(STATUS "  Tests: ${NEO_BUILD_TESTS}")
 message(STATUS "  Examples: ${NEO_BUILD_EXAMPLES}")
 message(STATUS "  Tools: ${NEO_BUILD_TOOLS}")
 message(STATUS "  Apps: ${NEO_BUILD_APPS}")
+message(STATUS "  SDK: ${NEO_BUILD_SDK}")

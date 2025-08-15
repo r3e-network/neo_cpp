@@ -37,6 +37,11 @@ class StorageItem : public io::ISerializable
     explicit StorageItem(const io::ByteVector& value);
 
     /**
+     * @brief Virtual destructor.
+     */
+    virtual ~StorageItem() = default;
+
+    /**
      * @brief Gets the value.
      * @return The value.
      */

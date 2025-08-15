@@ -109,7 +109,7 @@ UInt256 UInt256::FromLittleEndianString(const std::string& hex_string)
 std::string UInt256::ToString(bool reverse) const
 {
     std::stringstream ss;
-    ss << std::hex << std::setfill('0');
+    ss << std::hex << std::nouppercase << std::setfill('0');  // Use lowercase for C# compatibility
 
     if (reverse)
     {

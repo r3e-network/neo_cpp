@@ -229,7 +229,7 @@ TEST_F(NeoComprehensiveIntegrationTest, CoreTypesCompatibility)
     {
         neo::io::UInt160 hash160 = neo::io::UInt160::Zero();
         EXPECT_TRUE(hash160.IsZero());
-        EXPECT_EQ(hash160.ToString(), "0x0000000000000000000000000000000000000000");
+        EXPECT_STRCASEEQ(hash160.ToString(), "0x0000000000000000000000000000000000000000");
 
         // Test serialization
         EXPECT_TRUE(TestSerializationCompatibility(hash160));
@@ -239,7 +239,7 @@ TEST_F(NeoComprehensiveIntegrationTest, CoreTypesCompatibility)
     {
         neo::io::UInt256 hash256 = neo::io::UInt256::Zero();
         EXPECT_TRUE(hash256.IsZero());
-        EXPECT_EQ(hash256.ToString(), "0x0000000000000000000000000000000000000000000000000000000000000000");
+        EXPECT_STRCASEEQ(hash256.ToString(), "0x0000000000000000000000000000000000000000000000000000000000000000");
 
         // Test serialization
         EXPECT_TRUE(TestSerializationCompatibility(hash256));

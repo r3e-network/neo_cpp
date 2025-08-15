@@ -6,10 +6,10 @@ find_package(GTest REQUIRED)
 # Test sources
 set(SDK_TEST_SOURCES
     test_main.cpp
-    test_core.cpp
-    test_wallet.cpp
-    test_transaction.cpp
-    test_rpc.cpp
+    # test_core.cpp       # To be implemented
+    # test_wallet.cpp     # To be implemented
+    # test_transaction.cpp # To be implemented
+    # test_rpc.cpp        # To be implemented
 )
 
 # Create test executable

@@ -5,6 +5,7 @@ add_subdirectory(opcodes)
 add_executable(test_vm
     test_vm_main.cpp
     test_vm_simple.cpp
+    test_vm_comprehensive.cpp  # Comprehensive tests for coverage
     # test_vm_basic.cpp # Has compilation issues with ByteStringItem
     # test_stack_item.cpp # Needs API updates
     # test_execution_engine.cpp # Needs API updates

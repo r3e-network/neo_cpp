@@ -2,6 +2,8 @@
 add_library(neo_cryptography OBJECT
     hash.cpp
     crypto.cpp
+    crypto_modern.cpp
+    crypto_wrappers.cpp
     ecc.cpp
     ecc/ecpoint.cpp
     ecc/ecdsa.cpp

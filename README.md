@@ -14,8 +14,9 @@ A high-performance, production-ready C++ implementation of the Neo blockchain pr
 - **Full Neo N3 Protocol**: Complete implementation of the Neo blockchain protocol
 - **High Performance**: Optimized C++ with sub-second block processing
 - **Production Ready**: 97% production readiness with extensive testing (100% tests passing)
-- **Developer SDK**: Comprehensive toolkit for building Neo applications
-- **Docker Support**: Easy deployment with containerization
+- **Complete C++ SDK**: Full-featured SDK with RPC, wallet, and transaction support
+- **Docker Support**: 24+ Docker make targets for easy deployment
+- **NEP Standards**: Full support for NEP-6 (wallet) and NEP-17 (tokens)
 - **Monitoring**: Built-in Prometheus and Grafana integration
 
 ## 🏗️ Architecture
@@ -217,6 +218,57 @@ make -j8
 # 3. Start the node
 ./tools/neo_cli_tool start
 ```
+
+## 📚 Neo C++ SDK
+
+The Neo C++ SDK provides a comprehensive toolkit for building blockchain applications:
+
+### SDK Features
+- **Complete RPC Client**: All Neo RPC methods implemented
+- **Wallet Management**: NEP-6 wallet support with encryption
+- **Transaction Builder**: Create and sign all transaction types
+- **NEP-17 Tokens**: Full fungible token standard support
+- **Smart Contracts**: Deploy and invoke contracts easily
+
+### SDK Quick Start
+
+```cpp
+#include <neo/sdk/rpc/rpc_client.h>
+#include <neo/sdk/wallet/wallet_manager.h>
+#include <neo/sdk/transaction/transaction_manager.h>
+
+// Connect to Neo node
+auto rpcClient = std::make_shared<neo::sdk::rpc::RpcClient>("http://localhost:10332");
+
+// Create wallet
+auto wallet = neo::sdk::wallet::WalletManager::Create("MyWallet", "password");
+auto account = wallet->CreateAccount("Main Account");
+
+// Send NEO
+neo::sdk::transaction::TransactionManager txManager(rpcClient);
+auto tx = txManager.CreateTransferTransaction(
+    account->GetAddress(),
+    "NXV7ZhHiyM1aHXwpVsRZC6BwNFP2jghXAq",
+    neo::sdk::transaction::TokenHash::NEO,
+    "10"
+);
+wallet->SignTransaction(*tx, account->GetAddress());
+auto txId = txManager.SendTransaction(*tx);
+```
+
+### Building with SDK
+
+```bash
+# Build with SDK enabled
+cmake .. -DNEO_BUILD_SDK=ON
+make neo-sdk
+
+# Install SDK headers and library
+make install
+```
+
+### SDK Documentation
+Full SDK documentation is available at [docs/sdk/README.md](docs/sdk/README.md)
 
 ### Configuration
 

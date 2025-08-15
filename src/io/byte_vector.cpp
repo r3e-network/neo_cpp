@@ -80,7 +80,7 @@ ByteVector ByteVector::FromUInt32(uint32_t value)
 
 std::string ByteVector::ToHexString(const ByteSpan& span)
 {
-    static const char* hexChars = "0123456789ABCDEF";
+    static const char* hexChars = "0123456789abcdef";  // Match C# Neo lowercase
     std::string result;
     result.reserve(span.Size() * 2);
 

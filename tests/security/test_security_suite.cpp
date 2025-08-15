@@ -455,25 +455,24 @@ TEST_F(SecurityTest, MemoryPoolSizeLimits)
 TEST_F(SecurityTest, PreventResourceExhaustion)
 {
     // Test connection limits
-    network::ConnectionPool conn_pool;
     network::ConnectionPool::Config config;
     config.max_connections = 10;
-    conn_pool.Initialize(config);
+    network::ConnectionPool conn_pool(config);
     
-    std::vector<network::ConnectionPool::ConnectionHandle> handles;
+    std::vector<std::shared_ptr<network::TcpConnection>> connections;
     
     // Try to exhaust connections
     for (int i = 0; i < 20; ++i)
     {
-        auto handle = conn_pool.GetConnection();
-        if (handle)
+        auto conn = conn_pool.GetConnection("localhost", 8080 + i);
+        if (conn)
         {
-            handles.push_back(std::move(handle));
+            connections.push_back(conn);
         }
     }
     
     // Should be limited to max_connections
-    EXPECT_LE(handles.size(), 10);
+    EXPECT_LE(connections.size(), 10);
 }
 
 // ============================================================================

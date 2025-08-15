@@ -1,0 +1,11 @@
+--- a/src/io/byte_span.cpp
++++ b/src/io/byte_span.cpp
+@@ -15,7 +15,7 @@ ByteSpan::ByteSpan(const std::vector<uint8_t>& data) : data_(data.data()), siz
+ 
+ std::string ByteSpan::ToHexString() const
+ {
+-    static const char* hexChars = "0123456789ABCDEF";
++    static const char* hexChars = "0123456789abcdef";  // Match C# Neo lowercase
+     std::string result;
+     result.reserve(size_ * 2);
+     

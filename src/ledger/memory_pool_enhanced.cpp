@@ -12,6 +12,7 @@
 #include <algorithm>
 #include <chrono>
 #include <numeric>
+#include <optional>
 
 namespace neo::ledger
 {
@@ -84,6 +85,27 @@ bool MemoryPool::Contains(const io::UInt256& hash) const
     std::shared_lock<std::shared_mutex> lock(mutex_);
     return unsorted_transactions_.find(hash) != unsorted_transactions_.end() ||
            unverified_transactions_.find(hash) != unverified_transactions_.end();
+}
+
+std::optional<PoolItem> MemoryPool::Get(const io::UInt256& hash) const
+{
+    std::shared_lock<std::shared_mutex> lock(mutex_);
+    
+    // Check verified pool first
+    auto it = unsorted_transactions_.find(hash);
+    if (it != unsorted_transactions_.end())
+    {
+        return it->second;
+    }
+    
+    // Check unverified pool
+    auto unverified_it = unverified_transactions_.find(hash);
+    if (unverified_it != unverified_transactions_.end())
+    {
+        return unverified_it->second;
+    }
+    
+    return std::nullopt;
 }
 
 const network::p2p::payloads::Neo3Transaction* MemoryPool::GetTransaction(const io::UInt256& hash) const

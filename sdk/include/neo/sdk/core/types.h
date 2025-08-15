@@ -6,7 +6,7 @@
 #include <neo/io/uint256.h>
 #include <neo/io/uint160.h>
 #include <neo/cryptography/ecc/ec_point.h>
-#include <neo/core/transaction.h>
+#include <neo/ledger/transaction.h>
 #include <neo/ledger/block.h>
 #include <neo/ledger/header.h>
 
@@ -16,11 +16,11 @@ namespace neo::sdk::core {
 using UInt256 = neo::io::UInt256;
 using UInt160 = neo::io::UInt160;
 using ECPoint = neo::cryptography::ECPoint;
-using Transaction = neo::core::Transaction;
+using Transaction = neo::ledger::Transaction;
 using Block = neo::ledger::Block;
 using Header = neo::ledger::Header;
-using Witness = neo::core::Witness;
-using Signer = neo::core::Signer;
+using Witness = neo::ledger::Witness;
+using Signer = neo::ledger::Signer;
 
 // Additional SDK-specific types
 struct UTXO {

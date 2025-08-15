@@ -214,8 +214,9 @@ void TaskManager::ProcessBlockTasks()
     // Process each block task
     for (const auto& hash : tasksToProcess) {
         // Create GetData request for the missing block
-        payloads::GetDataPayload payload;
-        payload.AddBlockHash(hash);
+        std::vector<InventoryVector> inventories;
+        inventories.emplace_back(InventoryType::Block, hash);
+        payloads::GetDataPayload payload(inventories);
         
         // Send request to connected peers (would be done via LocalNode)
         // For now, just mark as processed
@@ -260,8 +261,9 @@ void TaskManager::ProcessTransactionTasks()
     // Process each transaction task
     for (const auto& hash : tasksToProcess) {
         // Create GetData request for the missing transaction
-        payloads::GetDataPayload payload;
-        payload.AddTransactionHash(hash);
+        std::vector<InventoryVector> inventories;
+        inventories.emplace_back(InventoryType::Transaction, hash);
+        payloads::GetDataPayload payload(inventories);
         
         // Send request to connected peers (would be done via LocalNode)
         // For now, just mark as processed

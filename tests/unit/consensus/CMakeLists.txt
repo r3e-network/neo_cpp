@@ -7,6 +7,7 @@ add_executable(test_consensus
     # test_witness_assembly.cpp  # Disabled due to KeyPair linker issues
     # test_witness_assembly_stub.cpp # Disabled
     test_consensus_stub.cpp
+    test_consensus_comprehensive.cpp  # Comprehensive tests for coverage
 )
 
 # Include directories

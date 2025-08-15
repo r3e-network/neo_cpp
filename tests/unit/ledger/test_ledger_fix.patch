@@ -1,0 +1,15 @@
+--- a/tests/unit/ledger/test_ledger.cpp
++++ b/tests/unit/ledger/test_ledger.cpp
+@@ -45,8 +45,10 @@ TEST_F(LedgerTest, TransactionValidation) {
+     tx.add_input(input);
+     tx.add_output(output);
+     
+-    // Fix: Initialize ledger state properly
+-    ledger_->InitializeGenesis();
++    // Fix: Ensure ledger is initialized
++    if (!ledger_->IsInitialized()) {
++        ledger_->InitializeGenesis();
++    }
+     
+     EXPECT_TRUE(ledger_->ValidateTransaction(tx));
+ }

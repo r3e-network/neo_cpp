@@ -24,14 +24,15 @@ set(NEO_SDK_SOURCES
     src/core/blockchain.cpp
     src/core/types.cpp
     src/wallet/wallet.cpp
-    # src/wallet/account.cpp  # To be implemented
+    src/wallet_manager.cpp  # Complete wallet manager implementation
     src/tx/transaction_builder.cpp
+    src/transaction_manager.cpp  # Complete transaction manager implementation
     # src/contract/contract_deployer.cpp  # To be implemented
     # src/contract/contract_invoker.cpp  # To be implemented
-    # src/contract/nep17_token.cpp  # To be implemented
-    src/rpc/rpc_client.cpp
+    src/nep17_token.cpp  # NEP-17 token implementation
+    src/rpc_client.cpp  # Full RPC client implementation
     # src/network/network_client.cpp  # To be implemented
-    # src/crypto/keypair.cpp  # To be implemented
+    # src/crypto/keypair.cpp  # Integrated in wallet_manager.cpp
     # src/crypto/hash.cpp  # To be implemented
     # src/storage/blockchain_storage.cpp  # To be implemented
     # src/utils/converter.cpp  # To be implemented
@@ -43,8 +44,10 @@ set(NEO_SDK_HEADERS
     include/neo/sdk/core/blockchain.h
     include/neo/sdk/core/types.h
     include/neo/sdk/wallet/wallet.h
+    include/neo/sdk/wallet/wallet_manager.h  # Complete wallet manager
     include/neo/sdk/wallet/account.h
     include/neo/sdk/tx/transaction_builder.h
+    include/neo/sdk/transaction/transaction_manager.h  # Complete transaction manager
     include/neo/sdk/contract/contract_deployer.h
     include/neo/sdk/contract/contract_invoker.h
     include/neo/sdk/contract/nep17_token.h
@@ -54,6 +57,7 @@ set(NEO_SDK_HEADERS
     include/neo/sdk/crypto/hash.h
     include/neo/sdk/storage/blockchain_storage.h
     include/neo/sdk/utils/converter.h
+    include/neo/sdk/types/common.h  # Common types
 )
 
 # Create SDK library
@@ -80,15 +84,30 @@ target_include_directories(neo-sdk
 # Find required packages
 find_package(CURL REQUIRED)
 find_package(nlohmann_json QUIET)
+find_package(OpenSSL REQUIRED)
+
+# Try to find libscrypt (optional)
+find_package(PkgConfig QUIET)
+if(PKG_CONFIG_FOUND)
+    pkg_check_modules(LIBSCRYPT libscrypt)
+endif()
 
 # Link with neo_cpp library and dependencies
 target_link_libraries(neo-sdk
     PUBLIC
         neo_cpp
         CURL::libcurl
+        OpenSSL::SSL
+        OpenSSL::Crypto
     PRIVATE
         $<$<TARGET_EXISTS:nlohmann_json::nlohmann_json>:nlohmann_json::nlohmann_json>
 )
+
+# Link libscrypt if found
+if(LIBSCRYPT_FOUND)
+    target_link_libraries(neo-sdk PRIVATE ${LIBSCRYPT_LIBRARIES})
+    target_compile_definitions(neo-sdk PRIVATE HAS_LIBSCRYPT=1)
+endif()
 
 # Set properties
 set_target_properties(neo-sdk PROPERTIES

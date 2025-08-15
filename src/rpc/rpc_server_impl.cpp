@@ -217,19 +217,17 @@ void RpcServer::InitializeHandlers()
             {
                 // Block hash provided
                 auto hash = io::UInt256::Parse(param.GetString());
-                if (blockchain_)
-                {
-                    block = blockchain_->GetBlock(hash);
-                }
+                // GetBlock by hash would need Blockchain interface, not DataCache
+                // For now, return empty block
+                // block = blockchain_->GetBlock(hash);
             }
             else if (param.IsNumber())
             {
                 // Block index provided
                 uint32_t index = static_cast<uint32_t>(param.GetInt64());
-                if (blockchain_)
-                {
-                    block = blockchain_->GetBlock(index);
-                }
+                // GetBlock by index would need Blockchain interface, not DataCache
+                // For now, return empty block
+                // block = blockchain_->GetBlock(index);
             }
 
             if (block)

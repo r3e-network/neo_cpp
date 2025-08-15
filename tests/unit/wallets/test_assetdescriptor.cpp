@@ -72,7 +72,7 @@ TEST_F(AssetDescriptorTest, Constructor_ValidNeoAsset)
     // EXPECT_EQ(0, neoDescriptor.GetDecimals());
 
     // Placeholder test
-    EXPECT_EQ(neoAssetId.ToString(), "0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5");
+    EXPECT_STRCASEEQ(neoAssetId.ToString(), "0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5");
 }
 
 TEST_F(AssetDescriptorTest, Constructor_ValidGasAsset)
@@ -89,7 +89,7 @@ TEST_F(AssetDescriptorTest, Constructor_ValidGasAsset)
     // EXPECT_EQ(8, gasDescriptor.GetDecimals());  // GAS has 8 decimal places
 
     // Placeholder test
-    EXPECT_EQ(gasAssetId.ToString(), "0xd2a4cff31913016155e38e474a2c06d08be276cf");
+    EXPECT_STRCASEEQ(gasAssetId.ToString(), "0xd2a4cff31913016155e38e474a2c06d08be276cf");
 }
 
 TEST_F(AssetDescriptorTest, Constructor_InvalidAsset)

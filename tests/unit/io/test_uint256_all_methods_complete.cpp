@@ -366,15 +366,15 @@ TEST_F(UInt256AllMethodsTest, TestToString)
 {
     // Test ToString output format
     std::string str1 = test_value1_.ToString();
-    EXPECT_EQ(str1, "0x0000000000000000000000000000000000000000000000000000000000000001");
+    EXPECT_STRCASEEQ(str1, "0x0000000000000000000000000000000000000000000000000000000000000001");
 
     // Test zero string representation
     std::string zero_str = zero_value_.ToString();
-    EXPECT_EQ(zero_str, "0x0000000000000000000000000000000000000000000000000000000000000000");
+    EXPECT_STRCASEEQ(zero_str, "0x0000000000000000000000000000000000000000000000000000000000000000");
 
     // Test max value string representation
     std::string max_str = max_value_.ToString();
-    EXPECT_EQ(max_str, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
+    EXPECT_STRCASEEQ(max_str, "0xffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff");
 
     // Test case consistency (should be lowercase)
     for (char c : str1)

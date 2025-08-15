@@ -24,7 +24,7 @@ namespace crypto {
 io::UInt160 Hash160_Modern(const io::ByteSpan& data)
 {
     // First compute SHA256
-    io::UInt256 sha256Hash = Hash256(data);
+    io::UInt256 sha256Hash = cryptography::Crypto::Hash256(data);
     
     // Use EVP API for RIPEMD160 (OpenSSL 3.0+ compatible)
     EVP_MD_CTX* ctx = EVP_MD_CTX_new();

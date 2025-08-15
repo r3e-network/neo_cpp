@@ -350,11 +350,9 @@ void MainService::OnExit() { running_ = false; }
 
 void MainService::OnClear()
 {
-#ifdef _WIN32
-    system("cls");
-#else
-    system("clear");
-#endif
+    // Use ANSI escape sequence instead of system() calls for security
+    // This prevents command injection vulnerabilities
+    std::cout << "\033[2J\033[H" << std::flush;
 }
 
 void MainService::OnVersion() { ConsoleHelper::Info("Neo C++ CLI v1.0.0"); }

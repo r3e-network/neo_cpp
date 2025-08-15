@@ -1,100 +1,37 @@
 ---
-# NEO C++ Clang-Tidy Configuration
-# Configured for modern C++17/20 code with production standards
-
 Checks: >
   -*,
   bugprone-*,
-  -bugprone-easily-swappable-parameters,
-  -bugprone-narrowing-conversions,
   cert-*,
-  -cert-err58-cpp,
   clang-analyzer-*,
-  concurrency-*,
   cppcoreguidelines-*,
-  -cppcoreguidelines-avoid-magic-numbers,
-  -cppcoreguidelines-pro-bounds-constant-array-index,
-  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
-  -cppcoreguidelines-non-private-member-variables-in-classes,
   misc-*,
-  -misc-non-private-member-variables-in-classes,
   modernize-*,
-  -modernize-use-trailing-return-type,
   performance-*,
-  portability-*,
   readability-*,
+  -modernize-use-trailing-return-type,
   -readability-magic-numbers,
-  -readability-identifier-length,
+  -cppcoreguidelines-avoid-magic-numbers
 
-WarningsAsErrors: ''
+WarningsAsErrors: >
+  bugprone-*,
+  cert-err*,
+  cert-mem*,
+  cert-oop*,
+  performance-*
 
 HeaderFilterRegex: '.*'
 
-AnalyzeTemporaryDtors: false
-
-FormatStyle: none
-
 CheckOptions:
-  # Allow variadic templates and parameter packs
-  - key: cppcoreguidelines-pro-type-vararg.AllowVariadic
-    value: true
-  
-  # Allow underscore in variable names (for unused structured bindings)
-  - key: readability-identifier-naming.VariableCase
-    value: CamelCase
-  - key: readability-identifier-naming.VariableIgnoredRegexp
-    value: '^_$'
-  
-  # Allow catch-all exception handlers
-  - key: bugprone-empty-catch.AllowCatchAll
-    value: true
-  
-  # Modern C++ settings
-  - key: modernize-use-override.IgnoreDestructors
-    value: false
-  - key: modernize-use-nullptr.NullMacros
-    value: 'NULL'
-  - key: modernize-loop-convert.MinConfidence
-    value: reasonable
-  - key: modernize-pass-by-value.IncludeStyle
-    value: google
-  
-  # Performance settings
-  - key: performance-unnecessary-value-param.IncludeStyle
-    value: google
-  - key: performance-move-const-arg.CheckTriviallyCopyableMove
-    value: true
-  
-  # Naming conventions
   - key: readability-identifier-naming.ClassCase
-    value: CamelCase
-  - key: readability-identifier-naming.StructCase
-    value: CamelCase
-  - key: readability-identifier-naming.EnumCase
     value: CamelCase
   - key: readability-identifier-naming.FunctionCase
     value: CamelCase
-  - key: readability-identifier-naming.ParameterCase
+  - key: readability-identifier-naming.VariableCase
     value: lower_case
-  - key: readability-identifier-naming.MemberCase
-    value: lower_case
-  - key: readability-identifier-naming.MemberSuffix
-    value: '_'
   - key: readability-identifier-naming.ConstantCase
     value: UPPER_CASE
-  - key: readability-identifier-naming.GlobalConstantCase
-    value: UPPER_CASE
-  
-  # Complexity thresholds
-  - key: readability-function-cognitive-complexity.Threshold
-    value: 25
-  - key: readability-function-cognitive-complexity.IgnoreTemplateInstantiations
-    value: true
-
-# Exclude third-party code
-ExcludePatterns:
-  - 'include/neo/nlohmann/.*'
-  - 'include/nlohmann/.*'
-  - 'third_party/.*'
-  - 'build/.*'
-  - 'tests/.*'
+  - key: readability-function-size.LineThreshold
+    value: '100'
+  - key: readability-function-size.StatementThreshold
+    value: '50'

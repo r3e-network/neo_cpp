@@ -9,8 +9,8 @@ set(PERSISTENCE_SOURCES
     store_factory_complete.cpp
 )
 
-# Add RocksDB store
-find_package(RocksDB REQUIRED)
+# Add RocksDB store if available
+find_package(RocksDB QUIET)
 if(RocksDB_FOUND)
     list(APPEND PERSISTENCE_SOURCES rocksdb_store.cpp)
     message(STATUS "RocksDB found - enabling RocksDB storage backend")
@@ -35,5 +35,5 @@ if(RocksDB_FOUND)
     target_compile_definitions(neo_persistence PUBLIC NEO_HAS_ROCKSDB)
     message(STATUS "RocksDB integration enabled")
 else()
-    message(FATAL_ERROR "RocksDB is required but not found")
+    message(STATUS "Using memory store only - RocksDB not found")
 endif()
