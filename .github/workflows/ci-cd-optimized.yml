@@ -33,6 +33,17 @@ jobs:
           key: ${{ runner.os }}-build-${{ hashFiles('**/CMakeLists.txt') }}
           restore-keys: |
             ${{ runner.os }}-build-
+      
+      - name: Install minimal dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            cmake \
+            libssl-dev \
+            libboost-system-dev \
+            libboost-filesystem-dev \
+            libboost-thread-dev
             
       - name: Quick build test
         run: |
