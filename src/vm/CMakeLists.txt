@@ -1,5 +1,6 @@
 # Create the VM library
 add_library(neo_vm OBJECT
+    vm.cpp
     stack_item.cpp
     primitive_items.cpp
     compound_items.cpp

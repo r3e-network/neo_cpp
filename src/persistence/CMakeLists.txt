@@ -7,6 +7,7 @@ set(PERSISTENCE_SOURCES
     data_cache.cpp
     store_cache_complete.cpp
     store_factory_complete.cpp
+    snapshot.cpp
 )
 
 # Add RocksDB store if available
