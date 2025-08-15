@@ -33,6 +33,7 @@ include(SetupCompiler)
 include(FindDependencies)
 include(SetupTesting)
 include(CodeCoverage)    # Code coverage configuration
+include(Docker)          # Docker integration targets
 
 # Export compile commands for clang-tidy
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)

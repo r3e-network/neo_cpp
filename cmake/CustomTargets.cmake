@@ -242,16 +242,7 @@ add_custom_target(bench
 # Coverage
 # =============================================================================
 
-if(CMAKE_BUILD_TYPE STREQUAL "Debug" AND NEO_BUILD_TESTS)
-    add_custom_target(coverage
-        COMMAND ${CMAKE_CTEST_COMMAND} --output-on-failure
-        COMMAND lcov --capture --directory . --output-file coverage.info
-        COMMAND lcov --remove coverage.info '/usr/*' --output-file coverage.info
-        COMMAND lcov --list coverage.info
-        WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
-        COMMENT "Generating test coverage report..."
-    )
-endif()
+# Coverage target is defined in CodeCoverage.cmake when ENABLE_COVERAGE is ON
 
 # =============================================================================
 # Documentation
@@ -326,39 +317,14 @@ add_custom_target(deploy
 )
 
 # =============================================================================
-# Docker Targets
+# Docker Targets - Moved to Docker.cmake for comprehensive Docker support
 # =============================================================================
-
-# Build Docker image
-add_custom_target(docker
-    COMMAND docker build
-            --build-arg VERSION=${PROJECT_VERSION}
-            --build-arg BUILD_TYPE=${CMAKE_BUILD_TYPE}
-            -t neo-cpp:${PROJECT_VERSION}
-            -t neo-cpp:latest
-            -f ${CMAKE_SOURCE_DIR}/Dockerfile .
-    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
-    COMMENT "Building Docker image..."
-)
-
-# Run Docker container
-add_custom_target(docker-run
-    COMMAND docker run -it --rm
-            --name neo-node
-            -p 10332:10332
-            -p 10333:10333
-            -p 10334:10334
-            -v neo-data:/data
-            -e NETWORK=mainnet
-            neo-cpp:latest
-    COMMENT "Running Neo node in Docker..."
-)
-
-# Run tests in Docker
-add_custom_target(docker-test
-    COMMAND docker run --rm neo-cpp:latest make test
-    COMMENT "Running tests in Docker..."
-)
+# Docker targets are now provided by cmake/Docker.cmake which includes:
+# - docker, docker-nocache, docker-multiplatform (build targets)
+# - docker-run-mainnet, docker-run-testnet, docker-run-private (run targets)
+# - docker-compose-up, docker-compose-down (orchestration targets)
+# - docker-push, docker-pull, docker-tag (registry targets)
+# - Run 'make docker-help' to see all available Docker targets
 
 # =============================================================================
 # Utility Targets

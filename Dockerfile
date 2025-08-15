@@ -84,6 +84,9 @@ EXPOSE 10332 10333 10334 20332 20333 20334
 HEALTHCHECK --interval=30s --timeout=10s --start-period=60s --retries=3 \
     CMD neo-cli rpc getblockcount || exit 1
 
-# Entry point
-ENTRYPOINT ["neo-node"]
-CMD ["--config", "/etc/neo/config.json"]
+# Entry point with script for network selection
+COPY docker-entrypoint.sh /usr/local/bin/
+RUN chmod +x /usr/local/bin/docker-entrypoint.sh
+
+ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
+CMD ["mainnet"]
