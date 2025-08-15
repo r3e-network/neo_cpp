@@ -9,6 +9,7 @@
 #ifndef NEO_VM_VM_H
 #define NEO_VM_VM_H
 
+#include <neo/vm/vm_state.h>
 #include <memory>
 #include <vector>
 #include <string>
@@ -21,17 +22,6 @@ namespace neo::vm
 class StackItem;
 class ExecutionContext;
 
-/**
- * @enum VMState
- * @brief Virtual machine execution states
- */
-enum class VMState
-{
-    NONE,
-    HALT,
-    FAULT,
-    BREAK
-};
 
 /**
  * @class VirtualMachine

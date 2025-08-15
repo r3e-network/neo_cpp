@@ -46,7 +46,7 @@ bool VirtualMachine::LoadScript(const std::vector<uint8_t>& script)
     {
         auto scriptObj = std::make_shared<Script>(script);
         pImpl->loadedScripts.push_back(scriptObj);
-        pImpl->engine->LoadScript(scriptObj);
+        pImpl->engine->LoadScript(*scriptObj);
         return true;
     }
     catch (const std::exception& e)
@@ -65,7 +65,7 @@ bool VirtualMachine::Execute()
     try
     {
         pImpl->engine->Execute();
-        return pImpl->engine->State() == VMState::HALT;
+        return pImpl->engine->GetState() == VMState::Halt;
     }
     catch (const std::exception& e)
     {
@@ -77,18 +77,18 @@ VMState VirtualMachine::GetState() const
 {
     if (!pImpl->engine)
     {
-        return VMState::FAULT;
+        return VMState::Fault;
     }
-    return pImpl->engine->State();
+    return pImpl->engine->GetState();
 }
 
 std::shared_ptr<StackItem> VirtualMachine::GetResult() const
 {
-    if (!pImpl->engine || pImpl->engine->ResultStack().Count() == 0)
+    if (!pImpl->engine || pImpl->engine->GetResultStack().empty())
     {
         return nullptr;
     }
-    return pImpl->engine->ResultStack().Peek();
+    return pImpl->engine->GetResultStack().front();
 }
 
 void VirtualMachine::Reset()
@@ -103,7 +103,8 @@ uint64_t VirtualMachine::GetGasConsumed() const
     {
         return 0;
     }
-    return pImpl->engine->GasConsumed();
+    // Gas consumption tracking not directly available in current API
+    return 0;
 }
 
 void VirtualMachine::SetGasLimit(uint64_t limit)
@@ -131,7 +132,7 @@ bool VirtualMachine::LoadContext(const ExecutionContext& context)
 
 std::string VirtualMachine::GetErrorMessage() const
 {
-    if (!pImpl->engine || pImpl->engine->State() != VMState::FAULT)
+    if (!pImpl->engine || pImpl->engine->GetState() != VMState::Fault)
     {
         return "";
     }
@@ -158,23 +159,23 @@ bool VirtualMachine::VerifyScript(const std::vector<uint8_t>& script)
             OpCode opcode = static_cast<OpCode>(script[i]);
             
             // Check if opcode is valid
-            if (opcode > OpCode::ENDFINALLY)
+            if (static_cast<uint8_t>(opcode) > static_cast<uint8_t>(OpCode::ENDFINALLY))
             {
                 return false;
             }
             
             // Skip operands based on opcode
-            switch (opcode)
+            switch (static_cast<uint8_t>(opcode))
             {
-                case OpCode::PUSHDATA1:
+                case static_cast<uint8_t>(OpCode::PUSHDATA1):
                     if (i + 1 >= script.size()) return false;
                     i += 2 + script[i + 1];
                     break;
-                case OpCode::PUSHDATA2:
+                case static_cast<uint8_t>(OpCode::PUSHDATA2):
                     if (i + 2 >= script.size()) return false;
                     i += 3 + (script[i + 1] | (script[i + 2] << 8));
                     break;
-                case OpCode::PUSHDATA4:
+                case static_cast<uint8_t>(OpCode::PUSHDATA4):
                     if (i + 4 >= script.size()) return false;
                     i += 5 + (script[i + 1] | (script[i + 2] << 8) | 
                              (script[i + 3] << 16) | (script[i + 4] << 24));
@@ -260,7 +261,7 @@ std::shared_ptr<StackItem> VirtualMachine::DeserializeStackItem(const std::vecto
             {
                 value |= static_cast<int64_t>(data[offset + i]) << (i * 8);
             }
-            return StackItem::CreateInteger(value);
+            return StackItem::Create(value);
         }
         case StackItemType::ByteString:
         {
@@ -281,7 +282,7 @@ std::shared_ptr<StackItem> VirtualMachine::DeserializeStackItem(const std::vecto
             return StackItem::CreateBoolean(data[offset] != 0);
         }
         default:
-            return StackItem::CreateNull();
+            return StackItem::CreateMap();
     }
 }
 
