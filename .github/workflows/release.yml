@@ -1,580 +1,280 @@
-name: Release
+name: Release Build
 
 on:
   push:
-    branches:
-      - 'release/v*'
     tags:
       - 'v*'
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to release (e.g., v1.2.0)'
+        description: 'Version to release (e.g., v2.0.0)'
         required: true
-        type: string
-
-# Cancel previous runs
-concurrency:
-  group: release-${{ github.ref }}
-  cancel-in-progress: true
-
-permissions:
-  contents: write
+        default: 'v2.0.0'
 
 jobs:
-  create-release:
-    name: Create Release
-    runs-on: ubuntu-latest
-    timeout-minutes: 30
-    outputs:
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-      version: ${{ steps.get_version.outputs.version }}
-      release_id: ${{ steps.create_release.outputs.id }}
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          submodules: recursive
-
-      - name: Get version
-        id: get_version
-        run: |
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            VERSION="${{ github.event.inputs.version }}"
-          else
-            VERSION=${GITHUB_REF#refs/tags/}
-          fi
-          echo "version=${VERSION}" >> $GITHUB_OUTPUT
-          echo "Version: ${VERSION}"
-
-      - name: Generate changelog
-        id: changelog
-        run: |
-          # Generate changelog from git history
-          echo "# Release ${VERSION}" > RELEASE_NOTES.md
-          echo "" >> RELEASE_NOTES.md
-          echo "## What's Changed" >> RELEASE_NOTES.md
-          echo "" >> RELEASE_NOTES.md
-          
-          # Get commits since last tag
-          LAST_TAG=$(git describe --tags --abbrev=0 HEAD^ 2>/dev/null || echo "")
-          if [ -n "$LAST_TAG" ]; then
-            git log --pretty=format:"- %s (%h)" ${LAST_TAG}..HEAD >> RELEASE_NOTES.md
-          else
-            git log --pretty=format:"- %s (%h)" --max-count=50 >> RELEASE_NOTES.md
-          fi
-          
-          echo "" >> RELEASE_NOTES.md
-          echo "## Statistics" >> RELEASE_NOTES.md
-          echo "- Commits: $(git rev-list --count ${LAST_TAG}..HEAD 2>/dev/null || echo 'N/A')" >> RELEASE_NOTES.md
-          echo "- Files changed: $(git diff --shortstat ${LAST_TAG}..HEAD 2>/dev/null | awk '{print $1}' || echo 'N/A')" >> RELEASE_NOTES.md
-          
-          # Set changelog as output
-          {
-            echo 'changelog<<EOF'
-            cat RELEASE_NOTES.md
-            echo EOF
-          } >> $GITHUB_OUTPUT
-        env:
-          VERSION: ${{ steps.get_version.outputs.version }}
-
-      - name: Create Release
-        id: create_release
-        uses: softprops/action-gh-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ steps.get_version.outputs.version }}
-          name: Neo C++ Node ${{ steps.get_version.outputs.version }}
-          body: |
-            ${{ steps.changelog.outputs.changelog }}
-            
-            ## Installation
-            
-            Download the appropriate binary for your platform from the assets below.
-            
-            ### Linux
-            ```bash
-            wget https://github.com/${{ github.repository }}/releases/download/${{ steps.get_version.outputs.version }}/neo-node-linux-x64.tar.gz
-            tar -xzf neo-node-linux-x64.tar.gz
-            cd neo-node-linux-x64
-            ./neo-node --help
-            ```
-            
-            ### macOS
-            ```bash
-            wget https://github.com/${{ github.repository }}/releases/download/${{ steps.get_version.outputs.version }}/neo-node-macos-x64.tar.gz
-            tar -xzf neo-node-macos-x64.tar.gz
-            cd neo-node-macos-x64
-            ./neo-node --help
-            ```
-            
-            ### Windows
-            Download `neo-node-windows-x64.zip` and extract to your desired location.
-            
-            ## Docker
-            ```bash
-            docker pull ghcr.io/${{ github.repository_owner }}/neo-cpp:${{ steps.get_version.outputs.version }}
-            docker run -it ghcr.io/${{ github.repository_owner }}/neo-cpp:${{ steps.get_version.outputs.version }}
-            ```
-            
-            ## Checksums
-            SHA256 checksums are available in `checksums.txt`
-          draft: true
-          prerelease: false
-
   build-linux:
-    name: Build Linux Binary
-    needs: create-release
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        arch: [x64, arm64]
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - name: Setup build environment
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y \
-            cmake \
-            build-essential \
-            libssl-dev \
-            libboost-all-dev \
-            librocksdb-dev \
-            nlohmann-json3-dev \
-            libspdlog-dev \
-            libgtest-dev \
-            ccache \
-            ninja-build
-
-      - name: Setup ccache
-        uses: hendrikmuhs/ccache-action@v1.2
-        with:
-          key: linux-x64-release
-
-      - name: Configure CMake
-        run: |
-          cmake -B build \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_C_COMPILER_LAUNCHER=ccache \
-            -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
-            -DNEO_BUILD_TESTS=OFF \
-            -DNEO_BUILD_APPS=ON \
-            -DNEO_BUILD_TOOLS=ON \
-            -DNEO_ENABLE_OPTIMIZATION=ON \
-            -G Ninja
-
-      - name: Build
-        run: |
-          cmake --build build --config Release --parallel $(nproc)
-
-      - name: Run basic tests
-        run: |
-          build/apps/neo_node --version || true
-          build/tools/neo_cli_tool --help || true
-
-      - name: Strip binaries
-        run: |
-          strip build/apps/neo_node || true
-          strip build/tools/neo_cli_tool || true
-          strip build/apps/neo_cli || true
-
-      - name: Package binaries
-        run: |
-          mkdir -p neo-node-linux-x64/bin
-          mkdir -p neo-node-linux-x64/config
-          mkdir -p neo-node-linux-x64/scripts
-          
-          # Copy main binaries
-          cp build/apps/neo_node neo-node-linux-x64/bin/neo-node || echo "neo_node not found"
-          cp build/tools/neo_cli_tool neo-node-linux-x64/bin/neo-cli || echo "neo_cli_tool not found"
-          cp build/apps/neo_cli neo-node-linux-x64/bin/neo-cli-legacy 2>/dev/null || echo "neo_cli not found"
-          
-          # Copy configuration files
-          cp -r config/* neo-node-linux-x64/config/ 2>/dev/null || echo "config dir not found"
-          
-          # Copy documentation
-          cp README.md LICENSE neo-node-linux-x64/
-          cp PROJECT_STATUS.md neo-node-linux-x64/ 2>/dev/null || true
-          
-          # Create startup scripts
-          cat > neo-node-linux-x64/start-mainnet.sh << 'EOF'
-          #!/bin/bash
-          cd "$(dirname "$0")"
-          ./bin/neo-node --config config/mainnet.json "$@"
-          EOF
-          chmod +x neo-node-linux-x64/start-mainnet.sh
-          
-          cat > neo-node-linux-x64/start-testnet.sh << 'EOF'
-          #!/bin/bash
-          cd "$(dirname "$0")"
-          ./bin/neo-node --config config/testnet.json "$@"
-          EOF
-          chmod +x neo-node-linux-x64/start-testnet.sh
-          
-          # Create systemd service file
-          cat > neo-node-linux-x64/neo-node.service << 'EOF'
-          [Unit]
-          Description=Neo C++ Node
-          After=network.target
-          
-          [Service]
-          Type=simple
-          User=neo
-          WorkingDirectory=/opt/neo-node
-          ExecStart=/opt/neo-node/bin/neo-node --config /opt/neo-node/config/mainnet.json
-          Restart=on-failure
-          RestartSec=10
-          
-          [Install]
-          WantedBy=multi-user.target
-          EOF
-          
-          # Create archive
-          tar -czf neo-node-linux-x64.tar.gz neo-node-linux-x64
-          
-          # Create checksum
-          sha256sum neo-node-linux-x64.tar.gz > neo-node-linux-x64.tar.gz.sha256
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: ./neo-node-linux-x64.tar.gz
-          asset_name: neo-node-linux-x64.tar.gz
-          asset_content_type: application/gzip
-
-      - name: Upload Checksum
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: ./neo-node-linux-x64.tar.gz.sha256
-          asset_name: neo-node-linux-x64.tar.gz.sha256
-          asset_content_type: text/plain
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          build-essential \
+          cmake \
+          libboost-all-dev \
+          libssl-dev \
+          librocksdb-dev \
+          libgtest-dev \
+          libbenchmark-dev \
+          ninja-build
+    
+    - name: Configure CMake
+      run: |
+        cmake -B build \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DBUILD_TESTS=ON \
+          -DBUILD_BENCHMARKS=ON \
+          -G Ninja
+    
+    - name: Build
+      run: cmake --build build --config Release
+    
+    - name: Run tests
+      run: |
+        cd build
+        ctest --output-on-failure -C Release
+    
+    - name: Package binaries
+      run: |
+        mkdir -p neo-cpp-linux-${{ matrix.arch }}
+        cp build/apps/neo_cli neo-cpp-linux-${{ matrix.arch }}/
+        cp build/apps/neo_node neo-cpp-linux-${{ matrix.arch }}/
+        cp build/tools/* neo-cpp-linux-${{ matrix.arch }}/ || true
+        cp -r config neo-cpp-linux-${{ matrix.arch }}/
+        cp README.md LICENSE CHANGELOG.md neo-cpp-linux-${{ matrix.arch }}/
+        tar czf neo-cpp-linux-${{ matrix.arch }}.tar.gz neo-cpp-linux-${{ matrix.arch }}
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: neo-cpp-linux-${{ matrix.arch }}
+        path: neo-cpp-linux-${{ matrix.arch }}.tar.gz
 
   build-macos:
-    name: Build macOS Binary
-    needs: create-release
-    runs-on: macos-12
+    runs-on: macos-latest
+    strategy:
+      matrix:
+        arch: [x64, arm64]
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - name: Setup build environment
-        run: |
-          brew install cmake openssl boost rocksdb nlohmann-json spdlog googletest ccache ninja
-
-      - name: Setup ccache
-        uses: hendrikmuhs/ccache-action@v1.2
-        with:
-          key: macos-x64-release
-
-      - name: Configure CMake
-        run: |
-          cmake -B build \
-            -DCMAKE_BUILD_TYPE=Release \
-            -DCMAKE_C_COMPILER_LAUNCHER=ccache \
-            -DCMAKE_CXX_COMPILER_LAUNCHER=ccache \
-            -DNEO_BUILD_TESTS=OFF \
-            -DNEO_BUILD_APPS=ON \
-            -DNEO_BUILD_TOOLS=ON \
-            -DNEO_ENABLE_OPTIMIZATION=ON \
-            -G Ninja
-
-      - name: Build
-        run: |
-          cmake --build build --config Release --parallel $(sysctl -n hw.ncpu)
-
-      - name: Test binaries
-        run: |
-          build/apps/neo_node --version || true
-          build/tools/neo_cli_tool --help || true
-
-      - name: Package binaries
-        run: |
-          mkdir -p neo-node-macos-x64/bin
-          mkdir -p neo-node-macos-x64/config
-          
-          # Copy binaries
-          cp build/apps/neo_node neo-node-macos-x64/bin/neo-node || echo "neo_node not found"
-          cp build/tools/neo_cli_tool neo-node-macos-x64/bin/neo-cli || echo "neo_cli_tool not found"
-          
-          # Copy configuration
-          cp -r config/* neo-node-macos-x64/config/ 2>/dev/null || echo "config dir not found"
-          
-          # Copy documentation
-          cp README.md LICENSE neo-node-macos-x64/
-          
-          # Create startup scripts
-          cat > neo-node-macos-x64/start-mainnet.sh << 'EOF'
-          #!/bin/bash
-          cd "$(dirname "$0")"
-          ./bin/neo-node --config config/mainnet.json "$@"
-          EOF
-          chmod +x neo-node-macos-x64/start-mainnet.sh
-          
-          cat > neo-node-macos-x64/start-testnet.sh << 'EOF'
-          #!/bin/bash
-          cd "$(dirname "$0")"
-          ./bin/neo-node --config config/testnet.json "$@"
-          EOF
-          chmod +x neo-node-macos-x64/start-testnet.sh
-          
-          # Create LaunchAgent plist
-          cat > neo-node-macos-x64/com.neo.node.plist << 'EOF'
-          <?xml version="1.0" encoding="UTF-8"?>
-          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
-          <plist version="1.0">
-          <dict>
-              <key>Label</key>
-              <string>com.neo.node</string>
-              <key>ProgramArguments</key>
-              <array>
-                  <string>/usr/local/neo-node/bin/neo-node</string>
-                  <string>--config</string>
-                  <string>/usr/local/neo-node/config/mainnet.json</string>
-              </array>
-              <key>RunAtLoad</key>
-              <true/>
-              <key>KeepAlive</key>
-              <true/>
-          </dict>
-          </plist>
-          EOF
-          
-          # Create archive
-          tar -czf neo-node-macos-x64.tar.gz neo-node-macos-x64
-          
-          # Create checksum
-          shasum -a 256 neo-node-macos-x64.tar.gz > neo-node-macos-x64.tar.gz.sha256
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: ./neo-node-macos-x64.tar.gz
-          asset_name: neo-node-macos-x64.tar.gz
-          asset_content_type: application/gzip
-
-      - name: Upload Checksum
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: ./neo-node-macos-x64.tar.gz.sha256
-          asset_name: neo-node-macos-x64.tar.gz.sha256
-          asset_content_type: text/plain
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    
+    - name: Install dependencies
+      run: |
+        brew install \
+          cmake \
+          boost \
+          openssl \
+          rocksdb \
+          googletest \
+          google-benchmark \
+          ninja
+    
+    - name: Configure CMake
+      run: |
+        cmake -B build \
+          -DCMAKE_BUILD_TYPE=Release \
+          -DCMAKE_OSX_ARCHITECTURES=${{ matrix.arch == 'arm64' && 'arm64' || 'x86_64' }} \
+          -DBUILD_TESTS=ON \
+          -DBUILD_BENCHMARKS=ON \
+          -G Ninja
+    
+    - name: Build
+      run: cmake --build build --config Release
+    
+    - name: Run tests
+      run: |
+        cd build
+        ctest --output-on-failure -C Release
+    
+    - name: Package binaries
+      run: |
+        mkdir -p neo-cpp-macos-${{ matrix.arch }}
+        cp build/apps/neo_cli neo-cpp-macos-${{ matrix.arch }}/
+        cp build/apps/neo_node neo-cpp-macos-${{ matrix.arch }}/
+        cp build/tools/* neo-cpp-macos-${{ matrix.arch }}/ || true
+        cp -r config neo-cpp-macos-${{ matrix.arch }}/
+        cp README.md LICENSE CHANGELOG.md neo-cpp-macos-${{ matrix.arch }}/
+        tar czf neo-cpp-macos-${{ matrix.arch }}.tar.gz neo-cpp-macos-${{ matrix.arch }}
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: neo-cpp-macos-${{ matrix.arch }}
+        path: neo-cpp-macos-${{ matrix.arch }}.tar.gz
 
   build-windows:
-    name: Build Windows Binary
-    needs: create-release
-    runs-on: windows-2022
+    runs-on: windows-latest
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
+    - uses: actions/checkout@v4
+      with:
+        submodules: recursive
+    
+    - name: Install dependencies
+      run: |
+        choco install cmake ninja
+        vcpkg install boost-all:x64-windows
+        vcpkg install openssl:x64-windows
+        vcpkg install rocksdb:x64-windows
+        vcpkg install gtest:x64-windows
+        vcpkg install benchmark:x64-windows
+    
+    - name: Configure CMake
+      run: |
+        cmake -B build `
+          -DCMAKE_BUILD_TYPE=Release `
+          -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" `
+          -DBUILD_TESTS=ON `
+          -DBUILD_BENCHMARKS=ON `
+          -G "Visual Studio 17 2022" `
+          -A x64
+    
+    - name: Build
+      run: cmake --build build --config Release
+    
+    - name: Run tests
+      run: |
+        cd build
+        ctest --output-on-failure -C Release
+    
+    - name: Package binaries
+      run: |
+        New-Item -ItemType Directory -Path neo-cpp-windows-x64
+        Copy-Item build/apps/Release/neo_cli.exe neo-cpp-windows-x64/
+        Copy-Item build/apps/Release/neo_node.exe neo-cpp-windows-x64/
+        Copy-Item build/tools/Release/*.exe neo-cpp-windows-x64/ -ErrorAction SilentlyContinue
+        Copy-Item -Recurse config neo-cpp-windows-x64/
+        Copy-Item README.md, LICENSE, CHANGELOG.md neo-cpp-windows-x64/
+        Compress-Archive -Path neo-cpp-windows-x64 -DestinationPath neo-cpp-windows-x64.zip
+    
+    - name: Upload artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: neo-cpp-windows-x64
+        path: neo-cpp-windows-x64.zip
 
-      - name: Setup MSVC
-        uses: microsoft/setup-msbuild@v2
-
-      - name: Install vcpkg
-        run: |
-          git clone https://github.com/Microsoft/vcpkg.git C:\vcpkg
-          C:\vcpkg\bootstrap-vcpkg.bat
-          C:\vcpkg\vcpkg integrate install
-
-      - name: Install dependencies
-        run: |
-          C:\vcpkg\vcpkg install --triplet x64-windows openssl boost-system boost-filesystem boost-thread nlohmann-json
-
-      - name: Configure CMake
-        run: |
-          cmake -B build `
-            -DCMAKE_BUILD_TYPE=Release `
-            -DCMAKE_TOOLCHAIN_FILE=C:\vcpkg\scripts\buildsystems\vcpkg.cmake `
-            -DNEO_BUILD_TESTS=OFF `
-            -DNEO_USE_MINIMAL_DEPENDENCIES=ON
-
-      - name: Build
-        run: |
-          cmake --build build --config Release --parallel
-
-      - name: Package binaries
-        shell: bash
-        run: |
-          mkdir -p neo-node-windows-x64/bin
-          mkdir -p neo-node-windows-x64/config
-          
-          # Copy binaries (with .exe extension)
-          cp build/apps/Release/neo_node.exe neo-node-windows-x64/bin/neo-node.exe 2>/dev/null || echo "neo_node.exe not found"
-          cp build/tools/Release/neo_cli_tool.exe neo-node-windows-x64/bin/neo-cli.exe 2>/dev/null || echo "neo_cli_tool.exe not found"
-          
-          # Copy dependencies
-          cp C:/vcpkg/installed/x64-windows/bin/*.dll neo-node-windows-x64/bin/ 2>/dev/null || true
-          
-          # Copy configuration
-          cp -r config/* neo-node-windows-x64/config/ 2>/dev/null || echo "config dir not found"
-          
-          # Copy documentation
-          cp README.md LICENSE neo-node-windows-x64/
-          
-          # Create batch files
-          cat > neo-node-windows-x64/start-mainnet.bat << 'EOF'
-          @echo off
-          cd /d "%~dp0"
-          bin\neo-node.exe --config config\mainnet.json %*
-          EOF
-          
-          cat > neo-node-windows-x64/start-testnet.bat << 'EOF'
-          @echo off
-          cd /d "%~dp0"
-          bin\neo-node.exe --config config\testnet.json %*
-          EOF
-          
-          # Create PowerShell scripts
-          cat > neo-node-windows-x64/start-mainnet.ps1 << 'EOF'
-          Set-Location -Path $PSScriptRoot
-          & ".\bin\neo-node.exe" --config ".\config\mainnet.json" $args
-          EOF
-          
-          cat > neo-node-windows-x64/start-testnet.ps1 << 'EOF'
-          Set-Location -Path $PSScriptRoot
-          & ".\bin\neo-node.exe" --config ".\config\testnet.json" $args
-          EOF
-
-      - name: Create ZIP archive
-        run: |
-          Compress-Archive -Path neo-node-windows-x64 -DestinationPath neo-node-windows-x64.zip
-
-      - name: Create checksum
-        shell: bash
-        run: |
-          sha256sum neo-node-windows-x64.zip > neo-node-windows-x64.zip.sha256
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: ./neo-node-windows-x64.zip
-          asset_name: neo-node-windows-x64.zip
-          asset_content_type: application/zip
-
-      - name: Upload Checksum
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: ./neo-node-windows-x64.zip.sha256
-          asset_name: neo-node-windows-x64.zip.sha256
-          asset_content_type: text/plain
-
-  build-docker:
-    name: Build and Push Docker Image
-    needs: create-release
+  create-release:
+    needs: [build-linux, build-macos, build-windows]
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          submodules: recursive
-
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v3
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Log in to GitHub Container Registry
-        uses: docker/login-action@v3
-        with:
-          registry: ghcr.io
-          username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Extract metadata
-        id: meta
-        uses: docker/metadata-action@v5
-        with:
-          images: ghcr.io/${{ github.repository_owner }}/neo-cpp
-          tags: |
-            type=ref,event=tag
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}.{{minor}}
-            type=semver,pattern={{major}}
-            type=raw,value=latest,enable={{is_default_branch}}
-
-      - name: Build and push Docker image
-        uses: docker/build-push-action@v5
-        with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          build-args: |
-            VERSION=${{ needs.create-release.outputs.version }}
-
-  create-checksums:
-    name: Create Combined Checksums
-    needs: [create-release, build-linux, build-macos, build-windows]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Download checksums
-        run: |
-          # Create checksums file
-          echo "# Neo C++ ${{ needs.create-release.outputs.version }} Checksums" > checksums.txt
-          echo "" >> checksums.txt
-          echo "SHA256 checksums for release artifacts:" >> checksums.txt
-          echo "" >> checksums.txt
-          
-          # Download individual checksum files and combine
-          for file in neo-node-linux-x64.tar.gz.sha256 neo-node-macos-x64.tar.gz.sha256 neo-node-windows-x64.zip.sha256; do
-            wget -q "https://github.com/${{ github.repository }}/releases/download/${{ needs.create-release.outputs.version }}/${file}" || true
-            if [ -f "${file}" ]; then
-              cat "${file}" >> checksums.txt
-            fi
-          done
-
-      - name: Upload combined checksums
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ needs.create-release.outputs.upload_url }}
-          asset_path: ./checksums.txt
-          asset_name: checksums.txt
-          asset_content_type: text/plain
-
-  publish-release:
-    name: Publish Release
-    needs: [create-release, build-linux, build-macos, build-windows, build-docker, create-checksums]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Publish release
-        uses: actions/github-script@v7
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            github.rest.repos.updateRelease({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              release_id: ${{ needs.create-release.outputs.release_id }},
-              draft: false
-            })
+    - uses: actions/checkout@v4
+    
+    - name: Download all artifacts
+      uses: actions/download-artifact@v3
+      with:
+        path: artifacts
+    
+    - name: Display structure of downloaded files
+      run: ls -R artifacts
+    
+    - name: Get version
+      id: get_version
+      run: |
+        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+          echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
+        else
+          echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
+        fi
+    
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ steps.get_version.outputs.VERSION }}
+        release_name: Neo C++ ${{ steps.get_version.outputs.VERSION }}
+        body_path: RELEASE_NOTES_v2.0.0.md
+        draft: false
+        prerelease: false
+    
+    - name: Upload Linux x64 Binary
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: artifacts/neo-cpp-linux-x64/neo-cpp-linux-x64.tar.gz
+        asset_name: neo-cpp-${{ steps.get_version.outputs.VERSION }}-linux-x64.tar.gz
+        asset_content_type: application/gzip
+    
+    - name: Upload Linux ARM64 Binary
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: artifacts/neo-cpp-linux-arm64/neo-cpp-linux-arm64.tar.gz
+        asset_name: neo-cpp-${{ steps.get_version.outputs.VERSION }}-linux-arm64.tar.gz
+        asset_content_type: application/gzip
+    
+    - name: Upload macOS x64 Binary
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: artifacts/neo-cpp-macos-x64/neo-cpp-macos-x64.tar.gz
+        asset_name: neo-cpp-${{ steps.get_version.outputs.VERSION }}-macos-x64.tar.gz
+        asset_content_type: application/gzip
+    
+    - name: Upload macOS ARM64 Binary
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: artifacts/neo-cpp-macos-arm64/neo-cpp-macos-arm64.tar.gz
+        asset_name: neo-cpp-${{ steps.get_version.outputs.VERSION }}-macos-arm64.tar.gz
+        asset_content_type: application/gzip
+    
+    - name: Upload Windows x64 Binary
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: artifacts/neo-cpp-windows-x64/neo-cpp-windows-x64.zip
+        asset_name: neo-cpp-${{ steps.get_version.outputs.VERSION }}-windows-x64.zip
+        asset_content_type: application/zip
+    
+    - name: Generate SHA256 checksums
+      run: |
+        cd artifacts
+        find . -type f \( -name "*.tar.gz" -o -name "*.zip" \) -exec sha256sum {} \; > ../checksums.txt
+        cd ..
+        cat checksums.txt
+    
+    - name: Upload checksums
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: checksums.txt
+        asset_name: neo-cpp-${{ steps.get_version.outputs.VERSION }}-checksums.txt
+        asset_content_type: text/plain
