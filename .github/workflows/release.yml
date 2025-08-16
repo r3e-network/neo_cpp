@@ -1,4 +1,4 @@
-name: Release Build
+name: Release
 
 on:
   push:
@@ -7,274 +7,113 @@ on:
   workflow_dispatch:
     inputs:
       version:
-        description: 'Version to release (e.g., v2.0.0)'
+        description: 'Version to release (e.g., v1.0.0)'
         required: true
-        default: 'v2.0.0'
+        type: string
 
 jobs:
-  build-linux:
-    runs-on: ubuntu-latest
+  build-release:
+    name: Build Release (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 45
+    
     strategy:
       matrix:
-        arch: [x64, arm64]
-    
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    
-    - name: Install dependencies
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y \
-          build-essential \
-          cmake \
-          libboost-all-dev \
-          libssl-dev \
-          librocksdb-dev \
-          libgtest-dev \
-          libbenchmark-dev \
-          ninja-build
-    
-    - name: Configure CMake
-      run: |
-        cmake -B build \
-          -DCMAKE_BUILD_TYPE=Release \
-          -DBUILD_TESTS=ON \
-          -DBUILD_BENCHMARKS=ON \
-          -G Ninja
-    
-    - name: Build
-      run: cmake --build build --config Release
-    
-    - name: Run tests
-      run: |
-        cd build
-        ctest --output-on-failure -C Release
-    
-    - name: Package binaries
-      run: |
-        mkdir -p neo-cpp-linux-${{ matrix.arch }}
-        cp build/apps/neo_cli neo-cpp-linux-${{ matrix.arch }}/
-        cp build/apps/neo_node neo-cpp-linux-${{ matrix.arch }}/
-        cp build/tools/* neo-cpp-linux-${{ matrix.arch }}/ || true
-        cp -r config neo-cpp-linux-${{ matrix.arch }}/
-        cp README.md LICENSE CHANGELOG.md neo-cpp-linux-${{ matrix.arch }}/
-        tar czf neo-cpp-linux-${{ matrix.arch }}.tar.gz neo-cpp-linux-${{ matrix.arch }}
-    
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: neo-cpp-linux-${{ matrix.arch }}
-        path: neo-cpp-linux-${{ matrix.arch }}.tar.gz
+        os: [ubuntu-latest, macos-latest]
+        include:
+          - os: ubuntu-latest
+            asset_name: neo-cpp-linux-x64
+          - os: macos-latest
+            asset_name: neo-cpp-macos-x64
 
-  build-macos:
-    runs-on: macos-latest
-    strategy:
-      matrix:
-        arch: [x64, arm64]
-    
     steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    
-    - name: Install dependencies
-      run: |
-        brew install \
-          cmake \
-          boost \
-          openssl \
-          rocksdb \
-          googletest \
-          google-benchmark \
-          ninja
-    
-    - name: Configure CMake
-      run: |
-        cmake -B build \
-          -DCMAKE_BUILD_TYPE=Release \
-          -DCMAKE_OSX_ARCHITECTURES=${{ matrix.arch == 'arm64' && 'arm64' || 'x86_64' }} \
-          -DBUILD_TESTS=ON \
-          -DBUILD_BENCHMARKS=ON \
-          -G Ninja
-    
-    - name: Build
-      run: cmake --build build --config Release
-    
-    - name: Run tests
-      run: |
-        cd build
-        ctest --output-on-failure -C Release
-    
-    - name: Package binaries
-      run: |
-        mkdir -p neo-cpp-macos-${{ matrix.arch }}
-        cp build/apps/neo_cli neo-cpp-macos-${{ matrix.arch }}/
-        cp build/apps/neo_node neo-cpp-macos-${{ matrix.arch }}/
-        cp build/tools/* neo-cpp-macos-${{ matrix.arch }}/ || true
-        cp -r config neo-cpp-macos-${{ matrix.arch }}/
-        cp README.md LICENSE CHANGELOG.md neo-cpp-macos-${{ matrix.arch }}/
-        tar czf neo-cpp-macos-${{ matrix.arch }}.tar.gz neo-cpp-macos-${{ matrix.arch }}
-    
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: neo-cpp-macos-${{ matrix.arch }}
-        path: neo-cpp-macos-${{ matrix.arch }}.tar.gz
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
 
-  build-windows:
-    runs-on: windows-latest
-    
-    steps:
-    - uses: actions/checkout@v4
-      with:
-        submodules: recursive
-    
-    - name: Install dependencies
-      run: |
-        choco install cmake ninja
-        vcpkg install boost-all:x64-windows
-        vcpkg install openssl:x64-windows
-        vcpkg install rocksdb:x64-windows
-        vcpkg install gtest:x64-windows
-        vcpkg install benchmark:x64-windows
-    
-    - name: Configure CMake
-      run: |
-        cmake -B build `
-          -DCMAKE_BUILD_TYPE=Release `
-          -DCMAKE_TOOLCHAIN_FILE="$env:VCPKG_ROOT/scripts/buildsystems/vcpkg.cmake" `
-          -DBUILD_TESTS=ON `
-          -DBUILD_BENCHMARKS=ON `
-          -G "Visual Studio 17 2022" `
-          -A x64
-    
-    - name: Build
-      run: cmake --build build --config Release
-    
-    - name: Run tests
-      run: |
-        cd build
-        ctest --output-on-failure -C Release
-    
-    - name: Package binaries
-      run: |
-        New-Item -ItemType Directory -Path neo-cpp-windows-x64
-        Copy-Item build/apps/Release/neo_cli.exe neo-cpp-windows-x64/
-        Copy-Item build/apps/Release/neo_node.exe neo-cpp-windows-x64/
-        Copy-Item build/tools/Release/*.exe neo-cpp-windows-x64/ -ErrorAction SilentlyContinue
-        Copy-Item -Recurse config neo-cpp-windows-x64/
-        Copy-Item README.md, LICENSE, CHANGELOG.md neo-cpp-windows-x64/
-        Compress-Archive -Path neo-cpp-windows-x64 -DestinationPath neo-cpp-windows-x64.zip
-    
-    - name: Upload artifacts
-      uses: actions/upload-artifact@v3
-      with:
-        name: neo-cpp-windows-x64
-        path: neo-cpp-windows-x64.zip
+      - name: Setup build environment (Ubuntu)
+        if: startsWith(matrix.os, 'ubuntu')
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y \
+            build-essential \
+            cmake \
+            libssl-dev \
+            libboost-all-dev \
+            liblz4-dev \
+            libsnappy-dev \
+            ninja-build
+
+      - name: Setup build environment (macOS)
+        if: startsWith(matrix.os, 'macos')
+        run: |
+          brew update
+          brew install cmake boost openssl@3 lz4 snappy ninja
+
+      - name: Configure CMake
+        run: |
+          cmake -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DBUILD_TESTS=OFF \
+            -DCMAKE_INSTALL_PREFIX=install \
+            -GNinja
+
+      - name: Build
+        run: cmake --build build --config Release
+
+      - name: Install
+        run: cmake --install build
+
+      - name: Package
+        run: |
+          tar -czf ${{ matrix.asset_name }}.tar.gz -C install .
+          ls -lah *.tar.gz
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ matrix.asset_name }}
+          path: ${{ matrix.asset_name }}.tar.gz
 
   create-release:
-    needs: [build-linux, build-macos, build-windows]
+    name: Create Release
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
+    needs: build-release
+    if: startsWith(github.ref, 'refs/tags/')
     
     steps:
-    - uses: actions/checkout@v4
-    
-    - name: Download all artifacts
-      uses: actions/download-artifact@v3
-      with:
-        path: artifacts
-    
-    - name: Display structure of downloaded files
-      run: ls -R artifacts
-    
-    - name: Get version
-      id: get_version
-      run: |
-        if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-          echo "VERSION=${{ github.event.inputs.version }}" >> $GITHUB_OUTPUT
-        else
-          echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_OUTPUT
-        fi
-    
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ steps.get_version.outputs.VERSION }}
-        release_name: Neo C++ ${{ steps.get_version.outputs.VERSION }}
-        body_path: RELEASE_NOTES_v2.0.0.md
-        draft: false
-        prerelease: false
-    
-    - name: Upload Linux x64 Binary
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: artifacts/neo-cpp-linux-x64/neo-cpp-linux-x64.tar.gz
-        asset_name: neo-cpp-${{ steps.get_version.outputs.VERSION }}-linux-x64.tar.gz
-        asset_content_type: application/gzip
-    
-    - name: Upload Linux ARM64 Binary
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: artifacts/neo-cpp-linux-arm64/neo-cpp-linux-arm64.tar.gz
-        asset_name: neo-cpp-${{ steps.get_version.outputs.VERSION }}-linux-arm64.tar.gz
-        asset_content_type: application/gzip
-    
-    - name: Upload macOS x64 Binary
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: artifacts/neo-cpp-macos-x64/neo-cpp-macos-x64.tar.gz
-        asset_name: neo-cpp-${{ steps.get_version.outputs.VERSION }}-macos-x64.tar.gz
-        asset_content_type: application/gzip
-    
-    - name: Upload macOS ARM64 Binary
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: artifacts/neo-cpp-macos-arm64/neo-cpp-macos-arm64.tar.gz
-        asset_name: neo-cpp-${{ steps.get_version.outputs.VERSION }}-macos-arm64.tar.gz
-        asset_content_type: application/gzip
-    
-    - name: Upload Windows x64 Binary
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: artifacts/neo-cpp-windows-x64/neo-cpp-windows-x64.zip
-        asset_name: neo-cpp-${{ steps.get_version.outputs.VERSION }}-windows-x64.zip
-        asset_content_type: application/zip
-    
-    - name: Generate SHA256 checksums
-      run: |
-        cd artifacts
-        find . -type f \( -name "*.tar.gz" -o -name "*.zip" \) -exec sha256sum {} \; > ../checksums.txt
-        cd ..
-        cat checksums.txt
-    
-    - name: Upload checksums
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: checksums.txt
-        asset_name: neo-cpp-${{ steps.get_version.outputs.VERSION }}-checksums.txt
-        asset_content_type: text/plain
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Download artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: Neo C++ ${{ github.ref_name }}
+          body: |
+            ## Neo C++ ${{ github.ref_name }}
+            
+            ### Downloads
+            - Linux x64: `neo-cpp-linux-x64.tar.gz`
+            - macOS x64: `neo-cpp-macos-x64.tar.gz`
+            
+            ### Installation
+            ```bash
+            tar -xzf neo-cpp-<platform>.tar.gz
+            ./bin/neo_node --help
+            ```
+            
+            ### What's Changed
+            See [CHANGELOG.md](https://github.com/r3e-network/neo_cpp/blob/master/CHANGELOG.md) for details.
+          draft: false
+          prerelease: false
+          files: |
+            artifacts/**/*.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

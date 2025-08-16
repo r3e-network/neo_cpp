@@ -1,128 +1,138 @@
 # GitHub Actions Workflows
 
-## Overview
-All workflows are configured with:
-- **30-minute timeout** to prevent stuck jobs
-- **Concurrency controls** to cancel old runs when new commits are pushed  
-- **Latest action versions** (v4) for optimal performance
-- **Cross-platform support** for Linux and macOS
-
 ## Active Workflows
 
-### 1. `ci.yml` - Continuous Integration
-**Purpose**: Build and test on multiple platforms
-**Trigger**: Push/PR to main, master, develop
-**Matrix**: Ubuntu (latest, 22.04), Debug/Release builds
-**Features**: ccache, parallel builds, test execution
+### 1. `ci.yml` - Main CI/CD Pipeline
+**Purpose**: Primary continuous integration for all commits
+**Triggers**: 
+- Push to main/master/develop branches
+- Pull requests
+- Manual dispatch
 
-### 2. `test.yml` - Test Suite  
-**Purpose**: Comprehensive test execution with coverage
-**Trigger**: Push/PR to main branches, manual dispatch
-**Coverage**: Unit tests, integration tests, coverage reports
-**Upload**: Test results and coverage to Codecov
+**Features**:
+- Multi-platform builds (Ubuntu latest, Ubuntu 22.04, macOS)
+- Parallel test execution
+- Code quality checks (formatting, static analysis)
+- Build caching for faster runs
+- 30-minute timeout
 
-### 3. `build-test.yml` - Build Validation
-**Purpose**: Basic build and test validation
-**Trigger**: Push/PR to main branches
-**Platform**: Ubuntu latest
-**Quick**: Fast feedback for commits
+**Jobs**:
+- `build-and-test`: Compile and run tests on all platforms
+- `code-quality`: Static analysis and formatting checks
+- `build-status`: Summary of build results
 
-### 4. `release.yml` - Multi-Platform Release
-**Purpose**: Create releases with binaries for all platforms
-**Trigger**: Release branches, version tags, manual
-**Platforms**: Linux and macOS
-**Artifacts**: Packaged binaries with documentation
+### 2. `release.yml` - Release Management
+**Purpose**: Create official releases with binaries
+**Triggers**:
+- Push tags starting with 'v' (e.g., v1.0.0)
+- Manual dispatch with version input
 
-### 5. `release-build.yml` - Release Builder
-**Purpose**: Simplified release build process
-**Trigger**: Release branches, tags, manual
-**Output**: Linux x64 binaries
-**Features**: Automatic GitHub release creation
+**Features**:
+- Multi-platform release builds (Linux, macOS)
+- Automatic GitHub release creation
+- Binary artifacts packaging
+- Release notes generation
 
-### 6. `ci-cd-optimized.yml` - Optimized Pipeline
-**Purpose**: Fast CI/CD with smart caching
-**Trigger**: Push/PR to main branches, tags
-**Features**: Quick validation, parallel jobs, build caching
+**Jobs**:
+- `build-release`: Build binaries for each platform
+- `create-release`: Create GitHub release with artifacts
 
-### 7. `quality-gates.yml` - Quality Checks
-**Purpose**: Code quality and security validation  
-**Trigger**: Push/PR, weekly schedule, manual
-**Checks**: Linting, formatting, security scanning
+## Archived Workflows
 
-## Configuration
+The following workflows have been archived to `archived/` directory to reduce clutter:
+- `build-test.yml` - Redundant with main CI
+- `ci-cd-optimized.yml` - Merged into main CI
+- `ci-full-tests.yml` - Integrated into main CI
+- `ci-simple.yml` - Replaced by main CI
+- `test.yml` - Duplicate functionality
+- `quality-gates.yml` - Integrated into main CI
+- `release-build.yml` - Replaced by simplified release.yml
 
-### `release.yml` (Original)
-- Complex but feature-complete
-- Has dependency issues
-- Keep for reference only
+## Usage
 
-### `release-simplified.yml` 
-- Intermediate solution
-- Partially working
-- Backup option if ultra-simple fails
+### Running CI
+CI runs automatically on:
+- Every push to main/master/develop
+- Every pull request
 
-## Disabled Workflows
-
-The following workflows have been disabled (renamed to `.disabled`):
-- `build-test-simple.yml.disabled` - Redundant
-- `build-test-fixed.yml.disabled` - Not needed
-- `c-cpp.yml.disabled` - Duplicate CI
-- `validate-all.yml.disabled` - Infrastructure issues
-- `quality-gates.yml.disabled` - Too complex
-- `security.yml.disabled` - Not configured
-- `ci.yml.disabled` - Duplicate
-
-## Quick Commands
-
-### Create a Release
+Manual trigger:
 ```bash
-# Option 1: Use workflow
-gh workflow run release-ultra-simple.yml -f tag=v1.0.0
-
-# Option 2: Local build
-./scripts/local-release.sh v1.0.0
+gh workflow run ci.yml
 ```
 
-### Check Workflow Status
+### Creating a Release
+1. **Via Git tag**:
 ```bash
-# List recent runs
-gh run list --limit=10
+git tag v1.0.0
+git push origin v1.0.0
+```
 
-# View specific workflow
+2. **Via GitHub CLI**:
+```bash
+gh workflow run release.yml -f version=v1.0.0
+```
+
+3. **Via GitHub UI**:
+- Go to Actions tab
+- Select "Release" workflow
+- Click "Run workflow"
+- Enter version (e.g., v1.0.0)
+
+### Monitoring Workflows
+
+**List recent runs**:
+```bash
+gh run list --limit 10
+```
+
+**View specific run**:
+```bash
 gh run view [RUN_ID]
+```
 
-# Cancel stuck workflow
+**View logs**:
+```bash
+gh run view [RUN_ID] --log
+```
+
+**Cancel stuck workflow**:
+```bash
 gh run cancel [RUN_ID]
 ```
 
-### Monitor Releases
-```bash
-# List releases
-gh release list
+## Best Practices
 
-# View release
-gh release view v1.0.0
-```
+1. **Keep it simple**: Two main workflows cover all needs
+2. **Fast feedback**: CI provides quick validation
+3. **Reliable releases**: Automated release process
+4. **Resource efficiency**: Build caching and parallel jobs
+5. **Timeout protection**: 30-45 minute limits prevent stuck jobs
 
 ## Troubleshooting
 
-### If workflows are stuck in queue:
-1. Cancel the run: `gh run cancel [RUN_ID]`
-2. Use local build instead: `./scripts/local-release.sh`
-3. Manually upload: `gh release upload v1.0.0 *.tar.gz`
+### Build Failures
+- Check logs for specific error messages
+- Ensure all dependencies are correctly specified
+- Verify CMake configuration
 
-### If builds fail:
-1. Check logs: `gh run view [RUN_ID] --log`
-2. Use minimal dependencies in CMake
-3. Try local build as fallback
+### Test Failures
+- Tests run with `continue-on-error` to complete all tests
+- Check uploaded test artifacts for details
+- Run tests locally to reproduce issues
 
-## Best Practices
+### Release Issues
+- Ensure tag follows `v*` pattern (e.g., v1.0.0)
+- Verify GitHub token permissions
+- Check artifact upload succeeded
 
-1. **Keep it simple**: Fewer workflows = fewer problems
-2. **Local fallback**: Always have a local build option
-3. **Monitor queues**: Cancel stuck jobs after 10 minutes
-4. **Use caching**: Speed up builds when possible
-5. **Document everything**: Keep this README updated
+## Configuration
+
+All workflows use:
+- **Latest action versions** (v4/v5)
+- **Concurrency control** to cancel old runs
+- **Timeout limits** to prevent hanging
+- **Matrix builds** for cross-platform support
+- **Caching** for faster builds
 
 ---
-*Last Updated: August 13, 2025*
+*Last Updated: August 2024*
