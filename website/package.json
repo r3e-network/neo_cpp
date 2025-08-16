@@ -1,0 +1,39 @@
+{
+  "name": "neo-cpp-website",
+  "version": "1.0.0",
+  "description": "Official website and documentation for Neo C++ blockchain implementation",
+  "private": true,
+  "scripts": {
+    "serve": "npx serve . -p 8000",
+    "serve:watch": "npx browser-sync start --server --files '**/*.html' '**/*.css' '**/*.js'",
+    "test:links": "npx linkinator . --recurse --skip 'https://github.com/*' --skip 'https://discord.gg/*'",
+    "test:html": "npx html-validate '**/*.html'",
+    "test:lighthouse": "npx lighthouse http://localhost:8000 --output=html --output-path=./lighthouse-report.html",
+    "deploy:netlify": "netlify deploy --prod --dir=.",
+    "deploy:preview": "netlify deploy --dir=."
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/r3e-network/neo_cpp"
+  },
+  "keywords": [
+    "neo",
+    "blockchain",
+    "cpp",
+    "documentation",
+    "website"
+  ],
+  "author": "Neo C++ Team",
+  "license": "MIT",
+  "devDependencies": {
+    "serve": "^14.2.0",
+    "browser-sync": "^2.29.3",
+    "linkinator": "^5.0.0",
+    "html-validate": "^8.7.0",
+    "lighthouse": "^11.0.0",
+    "netlify-cli": "^17.0.0"
+  },
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

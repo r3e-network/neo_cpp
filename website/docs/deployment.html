@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deployment Guide - Neo C++ Documentation</title>
+    
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/docs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo">
+                    <svg class="logo-icon" viewBox="0 0 40 40" width="40" height="40">
+                        <path d="M20 5L35 15V25L20 35L5 25V15L20 5Z" fill="currentColor"/>
+                    </svg>
+                    <span class="logo-text">Neo C++</span>
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="getting-started.html" class="nav-link active">Docs</a></li>
+                    <li><a href="api-reference.html" class="nav-link">API</a></li>
+                    <li><a href="../examples/" class="nav-link">Examples</a></li>
+                    <li><a href="https://github.com/r3e-network/neo_cpp" class="nav-link github-link">
+                        <i class="fab fa-github"></i> GitHub
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="docs-layout">
+        <aside class="docs-sidebar">
+            <div class="sidebar-section">
+                <h4>Deployment</h4>
+                <ul>
+                    <li><a href="#overview" class="sidebar-link active">Overview</a></li>
+                    <li><a href="#requirements" class="sidebar-link">Requirements</a></li>
+                    <li><a href="#docker" class="sidebar-link">Docker</a></li>
+                    <li><a href="#kubernetes" class="sidebar-link">Kubernetes</a></li>
+                    <li><a href="#cloud" class="sidebar-link">Cloud Providers</a></li>
+                    <li><a href="#systemd" class="sidebar-link">Systemd</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h4>Configuration</h4>
+                <ul>
+                    <li><a href="#network-config" class="sidebar-link">Network Setup</a></li>
+                    <li><a href="#storage-config" class="sidebar-link">Storage</a></li>
+                    <li><a href="#security" class="sidebar-link">Security</a></li>
+                    <li><a href="#monitoring" class="sidebar-link">Monitoring</a></li>
+                    <li><a href="#backup" class="sidebar-link">Backup</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h4>Operations</h4>
+                <ul>
+                    <li><a href="#scaling" class="sidebar-link">Scaling</a></li>
+                    <li><a href="#updates" class="sidebar-link">Updates</a></li>
+                    <li><a href="#troubleshooting" class="sidebar-link">Troubleshooting</a></li>
+                    <li><a href="#best-practices" class="sidebar-link">Best Practices</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="docs-content">
+            <div class="docs-header">
+                <h1>Production Deployment Guide</h1>
+                <p class="docs-description">
+                    Deploy and operate Neo C++ nodes in production environments
+                </p>
+            </div>
+
+            <!-- Overview -->
+            <section id="overview" class="docs-section">
+                <h2>Deployment Overview</h2>
+                <p>
+                    This guide covers deploying Neo C++ nodes in production environments, including
+                    containerized deployments, cloud platforms, and bare metal installations.
+                </p>
+                
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <strong>Deployment Options:</strong>
+                        <ul>
+                            <li><strong>Docker</strong> - Single container deployment</li>
+                            <li><strong>Kubernetes</strong> - Orchestrated container clusters</li>
+                            <li><strong>Cloud Providers</strong> - AWS, Azure, GCP</li>
+                            <li><strong>Bare Metal</strong> - Direct installation on servers</li>
+                            <li><strong>Hybrid</strong> - Mix of cloud and on-premise</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Requirements -->
+            <section id="requirements" class="docs-section">
+                <h2>Production Requirements</h2>
+                
+                <h3>Hardware Requirements</h3>
+                <table class="docs-table">
+                    <thead>
+                        <tr>
+                            <th>Component</th>
+                            <th>Minimum</th>
+                            <th>Recommended</th>
+                            <th>High Performance</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>CPU</td>
+                            <td>4 cores @ 2.0 GHz</td>
+                            <td>8 cores @ 3.0 GHz</td>
+                            <td>16+ cores @ 3.5 GHz</td>
+                        </tr>
+                        <tr>
+                            <td>RAM</td>
+                            <td>8 GB</td>
+                            <td>16 GB</td>
+                            <td>32+ GB</td>
+                        </tr>
+                        <tr>
+                            <td>Storage</td>
+                            <td>100 GB SSD</td>
+                            <td>500 GB NVMe</td>
+                            <td>1+ TB NVMe</td>
+                        </tr>
+                        <tr>
+                            <td>Network</td>
+                            <td>100 Mbps</td>
+                            <td>1 Gbps</td>
+                            <td>10 Gbps</td>
+                        </tr>
+                        <tr>
+                            <td>IOPS</td>
+                            <td>3,000</td>
+                            <td>10,000</td>
+                            <td>50,000+</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>Network Requirements</h3>
+                <ul>
+                    <li>Static IP address (recommended)</li>
+                    <li>Open ports: 10333 (P2P), 10334 (RPC), 10335 (WebSocket)</li>
+                    <li>Low latency connection to other nodes (&lt;100ms)</li>
+                    <li>Unrestricted outbound connections</li>
+                    <li>DDoS protection (recommended)</li>
+                </ul>
+
+                <h3>Operating System</h3>
+                <ul>
+                    <li>Ubuntu 20.04 LTS or newer</li>
+                    <li>Debian 10 or newer</li>
+                    <li>RHEL 8 or newer</li>
+                    <li>Alpine Linux 3.14+ (for containers)</li>
+                </ul>
+            </section>
+
+            <!-- Docker Deployment -->
+            <section id="docker" class="docs-section">
+                <h2>Docker Deployment</h2>
+                
+                <h3>Official Docker Image</h3>
+                <pre><code class="language-bash"># Pull latest image
+docker pull neocpp/node:latest
+
+# Run with persistent storage
+docker run -d \
+  --name neo-node \
+  --restart unless-stopped \
+  -p 10333:10333 \
+  -p 10334:10334 \
+  -v /data/neo:/data \
+  -v /data/neo/logs:/logs \
+  neocpp/node:latest \
+  --config /data/config.json</code></pre>
+
+                <h3>Docker Compose Production Setup</h3>
+                <pre><code class="language-yaml"># docker-compose.yml
+version: '3.8'
+
+services:
+  neo-node:
+    image: neocpp/node:latest
+    container_name: neo-mainnet
+    restart: unless-stopped
+    ports:
+      - "10333:10333"  # P2P
+      - "10334:10334"  # RPC
+      - "10335:10335"  # WebSocket
+    volumes:
+      - neo-data:/data
+      - neo-logs:/logs
+      - ./config/mainnet.json:/config/config.json:ro
+    environment:
+      - NEO_NETWORK=mainnet
+      - NEO_LOG_LEVEL=INFO
+      - NEO_MAX_CONNECTIONS=40
+    deploy:
+      resources:
+        limits:
+          cpus: '4'
+          memory: 8G
+        reservations:
+          cpus: '2'
+          memory: 4G
+    healthcheck:
+      test: ["CMD", "neo-cli", "state"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "100m"
+        max-file: "10"
+
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: neo-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus-data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: neo-grafana
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    volumes:
+      - grafana-data:/var/lib/grafana
+      - ./grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./grafana/datasources:/etc/grafana/provisioning/datasources
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=redis-datasource
+
+volumes:
+  neo-data:
+  neo-logs:
+  prometheus-data:
+  grafana-data:</code></pre>
+
+                <h3>Building Custom Docker Image</h3>
+                <pre><code class="language-dockerfile"># Dockerfile
+FROM ubuntu:20.04 AS builder
+
+# Build dependencies
+RUN apt-get update && apt-get install -y \
+    build-essential \
+    cmake \
+    git \
+    libssl-dev \
+    libboost-all-dev
+
+# Clone and build
+WORKDIR /build
+COPY . .
+RUN cmake -B build -DCMAKE_BUILD_TYPE=Release
+RUN cmake --build build --parallel
+
+# Runtime image
+FROM ubuntu:20.04
+
+RUN apt-get update && apt-get install -y \
+    libssl1.1 \
+    libboost-system1.71.0 \
+    libboost-filesystem1.71.0 \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY --from=builder /build/build/neo_node /usr/local/bin/
+COPY --from=builder /build/build/neo_cli /usr/local/bin/
+
+EXPOSE 10333 10334 10335
+
+VOLUME ["/data", "/logs"]
+
+ENTRYPOINT ["neo_node"]
+CMD ["--config", "/data/config.json"]</code></pre>
+            </section>
+
+            <!-- Kubernetes -->
+            <section id="kubernetes" class="docs-section">
+                <h2>Kubernetes Deployment</h2>
+                
+                <h3>StatefulSet Configuration</h3>
+                <pre><code class="language-yaml"># neo-statefulset.yaml
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: neo-node
+  namespace: neo
+spec:
+  serviceName: neo-node
+  replicas: 3
+  selector:
+    matchLabels:
+      app: neo-node
+  template:
+    metadata:
+      labels:
+        app: neo-node
+    spec:
+      containers:
+      - name: neo-node
+        image: neocpp/node:latest
+        ports:
+        - containerPort: 10333
+          name: p2p
+        - containerPort: 10334
+          name: rpc
+        - containerPort: 10335
+          name: websocket
+        env:
+        - name: NEO_NETWORK
+          value: "mainnet"
+        - name: NEO_NODE_ID
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.name
+        resources:
+          requests:
+            memory: "4Gi"
+            cpu: "2"
+          limits:
+            memory: "8Gi"
+            cpu: "4"
+        volumeMounts:
+        - name: data
+          mountPath: /data
+        - name: config
+          mountPath: /config
+        livenessProbe:
+          exec:
+            command:
+            - neo-cli
+            - state
+          initialDelaySeconds: 60
+          periodSeconds: 30
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 10334
+          initialDelaySeconds: 30
+          periodSeconds: 10
+      volumes:
+      - name: config
+        configMap:
+          name: neo-config
+  volumeClaimTemplates:
+  - metadata:
+      name: data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: fast-ssd
+      resources:
+        requests:
+          storage: 500Gi</code></pre>
+
+                <h3>Service Configuration</h3>
+                <pre><code class="language-yaml"># neo-service.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo-node
+  namespace: neo
+spec:
+  type: LoadBalancer
+  selector:
+    app: neo-node
+  ports:
+  - name: p2p
+    port: 10333
+    targetPort: 10333
+  - name: rpc
+    port: 10334
+    targetPort: 10334
+  - name: websocket
+    port: 10335
+    targetPort: 10335
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: neo-node-headless
+  namespace: neo
+spec:
+  type: ClusterIP
+  clusterIP: None
+  selector:
+    app: neo-node
+  ports:
+  - name: p2p
+    port: 10333</code></pre>
+
+                <h3>Helm Chart</h3>
+                <pre><code class="language-bash"># Install with Helm
+helm repo add neo https://charts.neo.org
+helm repo update
+
+# Deploy with custom values
+helm install neo-mainnet neo/neo-node \
+  --namespace neo \
+  --create-namespace \
+  --set network=mainnet \
+  --set replicas=3 \
+  --set persistence.size=500Gi \
+  --set resources.requests.memory=4Gi \
+  --set resources.requests.cpu=2</code></pre>
+            </section>
+
+            <!-- Cloud Providers -->
+            <section id="cloud" class="docs-section">
+                <h2>Cloud Provider Deployment</h2>
+                
+                <h3>AWS Deployment</h3>
+                <pre><code class="language-bash"># Using AWS EC2
+aws ec2 run-instances \
+  --image-id ami-0c55b159cbfafe1f0 \
+  --instance-type m5.xlarge \
+  --key-name neo-key \
+  --security-group-ids sg-neo-node \
+  --block-device-mappings file://block-devices.json \
+  --user-data file://user-data.sh
+
+# User data script
+#!/bin/bash
+apt-get update
+apt-get install -y docker.io
+docker run -d \
+  --name neo-node \
+  --restart always \
+  -p 10333:10333 \
+  -p 10334:10334 \
+  -v /data:/data \
+  neocpp/node:latest</code></pre>
+
+                <h3>Azure Deployment</h3>
+                <pre><code class="language-bash"># Using Azure Container Instances
+az container create \
+  --resource-group neo-rg \
+  --name neo-mainnet \
+  --image neocpp/node:latest \
+  --cpu 4 \
+  --memory 8 \
+  --ports 10333 10334 10335 \
+  --azure-file-volume-account-name neostorage \
+  --azure-file-volume-account-key $STORAGE_KEY \
+  --azure-file-volume-share-name neo-data \
+  --azure-file-volume-mount-path /data</code></pre>
+
+                <h3>Google Cloud Platform</h3>
+                <pre><code class="language-bash"># Using GKE
+gcloud container clusters create neo-cluster \
+  --num-nodes=3 \
+  --machine-type=n2-standard-4 \
+  --disk-size=500 \
+  --disk-type=pd-ssd \
+  --zone=us-central1-a
+
+# Deploy application
+kubectl apply -f neo-deployment.yaml</code></pre>
+            </section>
+
+            <!-- Systemd -->
+            <section id="systemd" class="docs-section">
+                <h2>Systemd Service</h2>
+                
+                <h3>Service Configuration</h3>
+                <pre><code class="language-ini"># /etc/systemd/system/neo-node.service
+[Unit]
+Description=Neo C++ Node
+Documentation=https://docs.neo.org
+After=network.target
+
+[Service]
+Type=simple
+User=neo
+Group=neo
+WorkingDirectory=/opt/neo
+ExecStart=/opt/neo/bin/neo_node --config /opt/neo/config/mainnet.json
+ExecStop=/bin/kill -SIGTERM $MAINPID
+Restart=always
+RestartSec=10
+StandardOutput=append:/var/log/neo/node.log
+StandardError=append:/var/log/neo/error.log
+
+# Security
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/opt/neo/data /var/log/neo
+
+# Resource Limits
+LimitNOFILE=65536
+LimitNPROC=4096
+MemoryMax=8G
+CPUQuota=400%
+
+[Install]
+WantedBy=multi-user.target</code></pre>
+
+                <h3>Installation Script</h3>
+                <pre><code class="language-bash">#!/bin/bash
+# install-neo-node.sh
+
+# Create user
+useradd -r -s /bin/false neo
+
+# Create directories
+mkdir -p /opt/neo/{bin,config,data}
+mkdir -p /var/log/neo
+
+# Download and extract
+wget https://github.com/r3e-network/neo_cpp/releases/latest/download/neo-cpp-linux.tar.gz
+tar -xzf neo-cpp-linux.tar.gz -C /opt/neo/bin/
+
+# Set permissions
+chown -R neo:neo /opt/neo /var/log/neo
+chmod 755 /opt/neo/bin/neo_node
+
+# Install service
+cp neo-node.service /etc/systemd/system/
+systemctl daemon-reload
+systemctl enable neo-node
+systemctl start neo-node
+
+# Check status
+systemctl status neo-node</code></pre>
+            </section>
+
+            <!-- Configuration -->
+            <section id="network-config" class="docs-section">
+                <h2>Network Configuration</h2>
+                
+                <h3>Firewall Rules</h3>
+                <pre><code class="language-bash"># UFW (Ubuntu)
+ufw allow 10333/tcp comment 'Neo P2P'
+ufw allow 10334/tcp comment 'Neo RPC'
+ufw allow 10335/tcp comment 'Neo WebSocket'
+
+# iptables
+iptables -A INPUT -p tcp --dport 10333 -j ACCEPT
+iptables -A INPUT -p tcp --dport 10334 -j ACCEPT
+iptables -A INPUT -p tcp --dport 10335 -j ACCEPT
+
+# Save rules
+iptables-save > /etc/iptables/rules.v4</code></pre>
+
+                <h3>Load Balancer Configuration</h3>
+                <pre><code class="language-nginx"># nginx.conf
+upstream neo_rpc {
+    least_conn;
+    server neo1.example.com:10334 weight=1 max_fails=3 fail_timeout=30s;
+    server neo2.example.com:10334 weight=1 max_fails=3 fail_timeout=30s;
+    server neo3.example.com:10334 weight=1 max_fails=3 fail_timeout=30s;
+}
+
+server {
+    listen 443 ssl http2;
+    server_name rpc.example.com;
+    
+    ssl_certificate /etc/ssl/certs/neo.crt;
+    ssl_certificate_key /etc/ssl/private/neo.key;
+    
+    location / {
+        proxy_pass http://neo_rpc;
+        proxy_http_version 1.1;
+        proxy_set_header Upgrade $http_upgrade;
+        proxy_set_header Connection "upgrade";
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_connect_timeout 60s;
+        proxy_send_timeout 60s;
+        proxy_read_timeout 60s;
+    }
+}</code></pre>
+            </section>
+
+            <!-- Storage Configuration -->
+            <section id="storage-config" class="docs-section">
+                <h2>Storage Configuration</h2>
+                
+                <h3>Storage Backend Options</h3>
+                <pre><code class="language-json">{
+  "Storage": {
+    "Engine": "RocksDB",
+    "Path": "/data/blockchain",
+    "Options": {
+      "CreateIfMissing": true,
+      "MaxOpenFiles": 5000,
+      "WriteBufferSize": 67108864,
+      "MaxWriteBufferNumber": 3,
+      "TargetFileSizeBase": 67108864,
+      "CompressionType": "lz4",
+      "BlockCache": 536870912,
+      "FilterPolicy": "bloom:10"
+    }
+  }
+}</code></pre>
+
+                <h3>Backup Strategy</h3>
+                <pre><code class="language-bash">#!/bin/bash
+# backup-neo-node.sh
+
+BACKUP_DIR="/backup/neo"
+DATA_DIR="/opt/neo/data"
+TIMESTAMP=$(date +%Y%m%d_%H%M%S)
+
+# Stop writes
+neo-cli suspend
+
+# Create backup
+tar -czf "$BACKUP_DIR/neo-backup-$TIMESTAMP.tar.gz" \
+  -C "$DATA_DIR" .
+
+# Resume operations
+neo-cli resume
+
+# Upload to S3
+aws s3 cp "$BACKUP_DIR/neo-backup-$TIMESTAMP.tar.gz" \
+  s3://neo-backups/mainnet/
+
+# Clean old backups (keep 7 days)
+find "$BACKUP_DIR" -name "neo-backup-*.tar.gz" -mtime +7 -delete</code></pre>
+            </section>
+
+            <!-- Security -->
+            <section id="security" class="docs-section">
+                <h2>Security Configuration</h2>
+                
+                <h3>TLS/SSL Setup</h3>
+                <pre><code class="language-json">{
+  "RPC": {
+    "Enabled": true,
+    "Port": 10334,
+    "SSL": {
+      "Enabled": true,
+      "CertFile": "/etc/neo/certs/server.crt",
+      "KeyFile": "/etc/neo/certs/server.key",
+      "ClientAuth": true,
+      "CAFile": "/etc/neo/certs/ca.crt"
+    }
+  }
+}</code></pre>
+
+                <h3>Access Control</h3>
+                <pre><code class="language-json">{
+  "RPC": {
+    "Authentication": {
+      "Enabled": true,
+      "Type": "Bearer",
+      "Tokens": [
+        {
+          "Name": "admin",
+          "Token": "your-secure-token-here",
+          "Permissions": ["*"]
+        },
+        {
+          "Name": "readonly",
+          "Token": "readonly-token",
+          "Permissions": ["get*", "invoke*"]
+        }
+      ]
+    },
+    "RateLimiting": {
+      "Enabled": true,
+      "RequestsPerSecond": 100,
+      "BurstSize": 200
+    }
+  }
+}</code></pre>
+
+                <div class="warning-box">
+                    <i class="fas fa-shield-alt"></i>
+                    <div>
+                        <strong>Security Best Practices:</strong>
+                        <ul>
+                            <li>Always use TLS for RPC endpoints</li>
+                            <li>Implement rate limiting</li>
+                            <li>Use firewalls to restrict access</li>
+                            <li>Regularly update node software</li>
+                            <li>Monitor for suspicious activity</li>
+                            <li>Use separate accounts for services</li>
+                            <li>Enable audit logging</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Monitoring -->
+            <section id="monitoring" class="docs-section">
+                <h2>Monitoring Setup</h2>
+                
+                <h3>Prometheus Configuration</h3>
+                <pre><code class="language-yaml"># prometheus.yml
+global:
+  scrape_interval: 15s
+  evaluation_interval: 15s
+
+scrape_configs:
+  - job_name: 'neo-node'
+    static_configs:
+      - targets: ['localhost:9100']
+    metrics_path: /metrics
+    
+  - job_name: 'neo-rpc'
+    static_configs:
+      - targets: ['localhost:10334']
+    metrics_path: /metrics</code></pre>
+
+                <h3>Key Metrics to Monitor</h3>
+                <ul>
+                    <li>Block height and sync status</li>
+                    <li>Transaction pool size</li>
+                    <li>Peer connection count</li>
+                    <li>RPC request rate and latency</li>
+                    <li>CPU and memory usage</li>
+                    <li>Disk I/O and space</li>
+                    <li>Network bandwidth</li>
+                </ul>
+
+                <h3>Alerting Rules</h3>
+                <pre><code class="language-yaml"># alerts.yml
+groups:
+  - name: neo_alerts
+    rules:
+    - alert: NodeNotSyncing
+      expr: neo_block_height - neo_best_known_block > 10
+      for: 5m
+      annotations:
+        summary: "Node is not syncing"
+        
+    - alert: LowPeerCount
+      expr: neo_peer_count < 3
+      for: 10m
+      annotations:
+        summary: "Low peer connections"
+        
+    - alert: HighMemoryUsage
+      expr: process_resident_memory_bytes > 7e9
+      for: 5m
+      annotations:
+        summary: "High memory usage"</code></pre>
+            </section>
+
+            <!-- Best Practices -->
+            <section id="best-practices" class="docs-section">
+                <h2>Best Practices</h2>
+                
+                <h3>Production Checklist</h3>
+                <ul class="checklist">
+                    <li>✅ Use dedicated hardware or VMs</li>
+                    <li>✅ Configure automatic restarts</li>
+                    <li>✅ Implement proper logging</li>
+                    <li>✅ Set up monitoring and alerting</li>
+                    <li>✅ Configure regular backups</li>
+                    <li>✅ Use TLS for all endpoints</li>
+                    <li>✅ Implement rate limiting</li>
+                    <li>✅ Set resource limits</li>
+                    <li>✅ Configure firewall rules</li>
+                    <li>✅ Document recovery procedures</li>
+                    <li>✅ Test disaster recovery</li>
+                    <li>✅ Keep software updated</li>
+                </ul>
+
+                <h3>Performance Optimization</h3>
+                <ul>
+                    <li>Use NVMe SSDs for storage</li>
+                    <li>Allocate sufficient memory for caching</li>
+                    <li>Configure connection pooling</li>
+                    <li>Use load balancing for RPC</li>
+                    <li>Enable compression for storage</li>
+                    <li>Optimize network MTU size</li>
+                    <li>Use dedicated network interfaces</li>
+                </ul>
+
+                <h3>High Availability Setup</h3>
+                <pre><code class="language-plaintext">
+┌─────────────────────────────────────────┐
+│            Load Balancer                 │
+│         (HAProxy/NGINX/ALB)              │
+└────────────┬────────────┬────────────┬──┘
+             │            │            │
+        ┌────▼───┐   ┌────▼───┐   ┌────▼───┐
+        │ Node 1 │   │ Node 2 │   │ Node 3 │
+        │  Active│   │  Active│   │  Active│
+        └────┬───┘   └────┬───┘   └────┬───┘
+             │            │            │
+        ┌────▼────────────▼────────────▼───┐
+        │      Shared Storage (Optional)    │
+        │         (NFS/GlusterFS)           │
+        └───────────────────────────────────┘
+</code></pre>
+            </section>
+
+            <!-- Troubleshooting -->
+            <section id="troubleshooting" class="docs-section">
+                <h2>Troubleshooting</h2>
+                
+                <h3>Common Issues</h3>
+                
+                <h4>Node Not Syncing</h4>
+                <pre><code class="language-bash"># Check peer connections
+neo-cli show peers
+
+# Check block height
+neo-cli getblockcount
+
+# Check logs
+tail -f /var/log/neo/node.log | grep ERROR
+
+# Restart with clean peers
+neo-cli clear-peers
+systemctl restart neo-node</code></pre>
+
+                <h4>High Memory Usage</h4>
+                <pre><code class="language-bash"># Check memory usage
+ps aux | grep neo_node
+free -h
+
+# Adjust cache settings
+neo-cli set-cache-size 512
+
+# Restart with memory limits
+systemctl edit neo-node
+# Add: MemoryMax=6G</code></pre>
+
+                <h4>RPC Not Responding</h4>
+                <pre><code class="language-bash"># Check if port is listening
+netstat -tlnp | grep 10334
+
+# Test RPC locally
+curl -X POST http://localhost:10334 \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"getblockcount","params":[],"id":1}'
+
+# Check firewall
+ufw status
+iptables -L -n</code></pre>
+
+                <div class="info-box">
+                    <i class="fas fa-tools"></i>
+                    <div>
+                        <strong>Diagnostic Commands:</strong>
+                        <pre><code class="language-bash"># System diagnostics
+neo-cli diagnose --full
+
+# Export metrics
+neo-cli export-metrics > metrics.json
+
+# Generate debug report
+neo-cli debug-report > debug.tar.gz</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Next Steps -->
+            <section class="docs-section">
+                <h2>Next Steps</h2>
+                
+                <div class="next-steps-grid">
+                    <a href="monitoring.html" class="next-step-card">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Monitoring Guide</h3>
+                        <p>Set up comprehensive monitoring</p>
+                    </a>
+                    
+                    <a href="security.html" class="next-step-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Security Guide</h3>
+                        <p>Harden your deployment</p>
+                    </a>
+                    
+                    <a href="scaling.html" class="next-step-card">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                        <h3>Scaling Guide</h3>
+                        <p>Scale your infrastructure</p>
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Neo C++ Project. Released under the MIT License.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/r3e-network/neo_cpp">GitHub</a>
+                    <a href="https://discord.gg/neo">Discord</a>
+                    <a href="https://neo.org">Neo.org</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-docker.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-nginx.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/docs.js"></script>
+</body>
+</html>

@@ -1,0 +1,29 @@
+# Netlify Redirects Configuration
+
+# Main redirects
+/docs              /docs/getting-started.html    301
+/api               /docs/api-reference.html      301
+/guide             /docs/getting-started.html    301
+/documentation     /docs/getting-started.html    301
+/sdk               /docs/sdk-guide.html          301
+
+# Pretty URLs (remove .html extension)
+/docs/getting-started     /docs/getting-started.html     200
+/docs/api-reference       /docs/api-reference.html       200
+/docs/architecture        /docs/architecture.html        200
+/docs/sdk-guide          /docs/sdk-guide.html           200
+/docs/deployment         /docs/deployment.html          200
+
+# Old documentation URLs (if migrating)
+/old-docs/*        /docs/:splat                   301
+
+# GitHub redirect
+/github            https://github.com/r3e-network/neo_cpp    302
+/repo              https://github.com/r3e-network/neo_cpp    302
+
+# Discord community
+/discord           https://discord.gg/neo         302
+/community         https://discord.gg/neo         302
+
+# Default 404 (must be last)
+/*                 /404.html                      404

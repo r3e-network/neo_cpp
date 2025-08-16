@@ -1,0 +1,115 @@
+# Netlify Configuration for Neo C++ Website
+
+[build]
+  # Directory to publish (relative to base directory)
+  publish = "."
+  
+  # No build command needed for static site
+  command = "echo 'No build required for static site'"
+
+# Headers for security and performance
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()"
+
+# Cache control for static assets
+[[headers]]
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/js/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# Cache control for HTML pages (shorter cache)
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+[[headers]]
+  for = "/docs/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=3600, must-revalidate"
+
+# Redirects
+[[redirects]]
+  from = "/docs"
+  to = "/docs/getting-started.html"
+  status = 301
+
+[[redirects]]
+  from = "/api"
+  to = "/docs/api-reference.html"
+  status = 301
+
+[[redirects]]
+  from = "/guide"
+  to = "/docs/getting-started.html"
+  status = 301
+
+# Custom 404 page
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404
+
+# Enable pretty URLs (remove .html extension)
+[[redirects]]
+  from = "/docs/getting-started"
+  to = "/docs/getting-started.html"
+  status = 200
+
+[[redirects]]
+  from = "/docs/api-reference"
+  to = "/docs/api-reference.html"
+  status = 200
+
+[[redirects]]
+  from = "/docs/architecture"
+  to = "/docs/architecture.html"
+  status = 200
+
+[[redirects]]
+  from = "/docs/sdk-guide"
+  to = "/docs/sdk-guide.html"
+  status = 200
+
+[[redirects]]
+  from = "/docs/deployment"
+  to = "/docs/deployment.html"
+  status = 200
+
+# Environment variables (if needed)
+[context.production.environment]
+  NODE_ENV = "production"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "development"
+
+# Plugins (optional but recommended)
+[[plugins]]
+  package = "@netlify/plugin-lighthouse"
+  
+  [plugins.inputs]
+    # Audit performance, accessibility, best practices, SEO
+    output_path = "reports/lighthouse.html"
+
+[[plugins]]
+  package = "netlify-plugin-checklinks"
+  
+  [plugins.inputs]
+    # Check for broken links
+    skipPatterns = ["https://github.com/*", "https://discord.gg/*"]

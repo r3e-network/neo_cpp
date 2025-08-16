@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Getting Started - Neo C++ Documentation</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/docs.css">
+    
+    <!-- Code Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo">
+                    <svg class="logo-icon" viewBox="0 0 40 40" width="40" height="40">
+                        <path d="M20 5L35 15V25L20 35L5 25V15L20 5Z" fill="currentColor"/>
+                    </svg>
+                    <span class="logo-text">Neo C++</span>
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="getting-started.html" class="nav-link active">Docs</a></li>
+                    <li><a href="api-reference.html" class="nav-link">API</a></li>
+                    <li><a href="../examples/" class="nav-link">Examples</a></li>
+                    <li><a href="https://github.com/r3e-network/neo_cpp" class="nav-link github-link">
+                        <i class="fab fa-github"></i> GitHub
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Documentation Layout -->
+    <div class="docs-layout">
+        <!-- Sidebar -->
+        <aside class="docs-sidebar">
+            <div class="sidebar-section">
+                <h4>Getting Started</h4>
+                <ul>
+                    <li><a href="#introduction" class="sidebar-link active">Introduction</a></li>
+                    <li><a href="#requirements" class="sidebar-link">Requirements</a></li>
+                    <li><a href="#installation" class="sidebar-link">Installation</a></li>
+                    <li><a href="#configuration" class="sidebar-link">Configuration</a></li>
+                    <li><a href="#first-node" class="sidebar-link">Your First Node</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h4>Core Concepts</h4>
+                <ul>
+                    <li><a href="architecture.html" class="sidebar-link">Architecture</a></li>
+                    <li><a href="consensus.html" class="sidebar-link">Consensus</a></li>
+                    <li><a href="networking.html" class="sidebar-link">Networking</a></li>
+                    <li><a href="storage.html" class="sidebar-link">Storage</a></li>
+                    <li><a href="vm.html" class="sidebar-link">Virtual Machine</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h4>Development</h4>
+                <ul>
+                    <li><a href="sdk-guide.html" class="sidebar-link">SDK Guide</a></li>
+                    <li><a href="smart-contracts.html" class="sidebar-link">Smart Contracts</a></li>
+                    <li><a href="plugins.html" class="sidebar-link">Plugins</a></li>
+                    <li><a href="testing.html" class="sidebar-link">Testing</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="docs-content">
+            <div class="docs-header">
+                <h1>Getting Started with Neo C++</h1>
+                <p class="docs-description">
+                    Learn how to set up and run your first Neo node using the C++ implementation
+                </p>
+            </div>
+
+            <!-- Introduction -->
+            <section id="introduction" class="docs-section">
+                <h2>Introduction</h2>
+                <p>
+                    Neo C++ is a high-performance implementation of the Neo blockchain protocol written in modern C++.
+                    It provides enterprise-grade reliability, blazing-fast performance, and comprehensive tooling for
+                    building and deploying blockchain applications.
+                </p>
+                
+                <div class="info-box">
+                    <i class="fas fa-info-circle"></i>
+                    <div>
+                        <strong>Why Neo C++?</strong>
+                        <ul>
+                            <li>10,000+ TPS throughput capacity</li>
+                            <li>Sub-50ms block processing time</li>
+                            <li>Minimal memory footprint (&lt;500MB)</li>
+                            <li>6,927 comprehensive tests</li>
+                            <li>Production-ready with Docker and Kubernetes support</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Requirements -->
+            <section id="requirements" class="docs-section">
+                <h2>System Requirements</h2>
+                
+                <h3>Minimum Requirements</h3>
+                <ul>
+                    <li>CPU: 2 cores @ 2.0 GHz</li>
+                    <li>RAM: 4 GB</li>
+                    <li>Storage: 50 GB SSD</li>
+                    <li>Network: 10 Mbps</li>
+                </ul>
+                
+                <h3>Recommended Requirements</h3>
+                <ul>
+                    <li>CPU: 4+ cores @ 3.0 GHz</li>
+                    <li>RAM: 8+ GB</li>
+                    <li>Storage: 100+ GB NVMe SSD</li>
+                    <li>Network: 100+ Mbps</li>
+                </ul>
+                
+                <h3>Supported Operating Systems</h3>
+                <div class="os-grid">
+                    <div class="os-card">
+                        <i class="fab fa-linux"></i>
+                        <h4>Linux</h4>
+                        <p>Ubuntu 20.04+, Debian 10+, RHEL 8+, Alpine 3.14+</p>
+                    </div>
+                    <div class="os-card">
+                        <i class="fab fa-apple"></i>
+                        <h4>macOS</h4>
+                        <p>macOS 11.0+ (Big Sur or later)</p>
+                    </div>
+                    <div class="os-card">
+                        <i class="fab fa-windows"></i>
+                        <h4>Windows</h4>
+                        <p>Windows 10/11, Windows Server 2019+</p>
+                    </div>
+                    <div class="os-card">
+                        <i class="fab fa-docker"></i>
+                        <h4>Docker</h4>
+                        <p>Any Docker-compatible platform</p>
+                    </div>
+                </div>
+                
+                <h3>Build Dependencies</h3>
+                <pre><code class="language-bash"># Ubuntu/Debian
+sudo apt-get update
+sudo apt-get install -y \
+    build-essential \
+    cmake \
+    libssl-dev \
+    libboost-all-dev \
+    librocksdb-dev
+
+# macOS
+brew install cmake openssl boost rocksdb
+
+# Windows (with vcpkg)
+vcpkg install openssl boost rocksdb</code></pre>
+            </section>
+
+            <!-- Installation -->
+            <section id="installation" class="docs-section">
+                <h2>Installation</h2>
+                
+                <div class="installation-tabs">
+                    <div class="tab-buttons">
+                        <button class="tab-btn active" data-tab="install-docker">Docker</button>
+                        <button class="tab-btn" data-tab="install-source">From Source</button>
+                        <button class="tab-btn" data-tab="install-binary">Binary Release</button>
+                        <button class="tab-btn" data-tab="install-package">Package Manager</button>
+                    </div>
+                    
+                    <div class="tab-content active" id="install-docker">
+                        <h3>Docker Installation</h3>
+                        <p>The easiest way to get started is using Docker:</p>
+                        
+                        <pre><code class="language-bash"># Pull the official image
+docker pull neocpp/node:latest
+
+# Run a testnet node
+docker run -d \
+  --name neo-node \
+  -p 10333:10333 \
+  -p 10334:10334 \
+  -v neo-data:/data \
+  neocpp/node:latest --testnet
+
+# Check node status
+docker exec neo-node neo-cli state
+
+# View logs
+docker logs -f neo-node</code></pre>
+                        
+                        <h4>Docker Compose</h4>
+                        <p>For production deployments, use Docker Compose:</p>
+                        
+                        <pre><code class="language-yaml"># docker-compose.yml
+version: '3.8'
+
+services:
+  neo-node:
+    image: neocpp/node:latest
+    container_name: neo-node
+    restart: unless-stopped
+    ports:
+      - "10333:10333"  # P2P
+      - "10334:10334"  # RPC
+    volumes:
+      - neo-data:/data
+      - ./config:/config
+    environment:
+      - NEO_NETWORK=testnet
+      - NEO_RPC_ENABLED=true
+    command: --config /config/node.json
+
+volumes:
+  neo-data:</code></pre>
+                    </div>
+                    
+                    <div class="tab-content" id="install-source">
+                        <h3>Building from Source</h3>
+                        <p>Build Neo C++ from source for maximum control:</p>
+                        
+                        <pre><code class="language-bash"># Clone the repository
+git clone https://github.com/r3e-network/neo_cpp.git
+cd neo-cpp
+
+# Configure with CMake
+cmake -B build \
+  -DCMAKE_BUILD_TYPE=Release \
+  -DBUILD_TESTS=ON \
+  -DBUILD_SDK=ON
+
+# Build (use all cores)
+cmake --build build --parallel
+
+# Run tests
+cd build && ctest --parallel
+
+# Install system-wide (optional)
+sudo cmake --install build</code></pre>
+                        
+                        <h4>Build Options</h4>
+                        <table class="docs-table">
+                            <thead>
+                                <tr>
+                                    <th>Option</th>
+                                    <th>Default</th>
+                                    <th>Description</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><code>CMAKE_BUILD_TYPE</code></td>
+                                    <td>Release</td>
+                                    <td>Build type (Debug, Release, RelWithDebInfo)</td>
+                                </tr>
+                                <tr>
+                                    <td><code>BUILD_TESTS</code></td>
+                                    <td>OFF</td>
+                                    <td>Build test suite</td>
+                                </tr>
+                                <tr>
+                                    <td><code>BUILD_SDK</code></td>
+                                    <td>OFF</td>
+                                    <td>Build SDK libraries</td>
+                                </tr>
+                                <tr>
+                                    <td><code>BUILD_PLUGINS</code></td>
+                                    <td>ON</td>
+                                    <td>Build plugin system</td>
+                                </tr>
+                                <tr>
+                                    <td><code>ENABLE_COVERAGE</code></td>
+                                    <td>OFF</td>
+                                    <td>Enable code coverage</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <div class="tab-content" id="install-binary">
+                        <h3>Binary Releases</h3>
+                        <p>Download pre-built binaries for your platform:</p>
+                        
+                        <pre><code class="language-bash"># Linux (x86_64)
+wget https://github.com/r3e-network/neo_cpp/releases/latest/download/neo-cpp-linux-x64.tar.gz
+tar -xzf neo-cpp-linux-x64.tar.gz
+cd neo-cpp
+./neo_node --testnet
+
+# macOS (Apple Silicon)
+wget https://github.com/r3e-network/neo_cpp/releases/latest/download/neo-cpp-darwin-arm64.tar.gz
+tar -xzf neo-cpp-darwin-arm64.tar.gz
+cd neo-cpp
+./neo_node --testnet
+
+# Windows
+# Download neo-cpp-windows-x64.zip from releases
+# Extract and run neo_node.exe</code></pre>
+                        
+                        <div class="warning-box">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            <div>
+                                <strong>Security Note:</strong>
+                                Always verify checksums of downloaded binaries:
+                                <pre><code class="language-bash">sha256sum neo-cpp-linux-x64.tar.gz</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="install-package">
+                        <h3>Package Managers</h3>
+                        
+                        <h4>Homebrew (macOS/Linux)</h4>
+                        <pre><code class="language-bash"># Add Neo tap
+brew tap neo-project/neo
+
+# Install Neo C++
+brew install neo-cpp
+
+# Run node
+neo-node --testnet</code></pre>
+                        
+                        <h4>APT (Ubuntu/Debian)</h4>
+                        <pre><code class="language-bash"># Add Neo repository
+curl -fsSL https://apt.neo.org/gpg | sudo gpg --dearmor -o /usr/share/keyrings/neo-archive-keyring.gpg
+echo "deb [signed-by=/usr/share/keyrings/neo-archive-keyring.gpg] https://apt.neo.org stable main" | sudo tee /etc/apt/sources.list.d/neo.list
+
+# Install
+sudo apt update
+sudo apt install neo-cpp
+
+# Run as service
+sudo systemctl start neo-node
+sudo systemctl enable neo-node</code></pre>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Configuration -->
+            <section id="configuration" class="docs-section">
+                <h2>Configuration</h2>
+                
+                <p>Neo C++ uses JSON configuration files. Create a <code>config.json</code>:</p>
+                
+                <pre><code class="language-json">{
+  "ApplicationConfiguration": {
+    "Network": "testnet",
+    "Storage": {
+      "Engine": "RocksDB",
+      "Path": "./data"
+    },
+    "P2P": {
+      "Port": 10333,
+      "MaxConnections": 10,
+      "MinDesiredConnections": 5
+    },
+    "RPC": {
+      "Enabled": true,
+      "Port": 10334,
+      "MaxConcurrentConnections": 40,
+      "MaxGasInvoke": 20
+    },
+    "UnlockWallet": {
+      "Path": "./wallet.json",
+      "Password": "",
+      "IsActive": false
+    },
+    "Plugins": [
+      "ApplicationLogs",
+      "RpcServer",
+      "StateService"
+    ]
+  }
+}</code></pre>
+                
+                <h3>Network Configuration</h3>
+                <table class="docs-table">
+                    <thead>
+                        <tr>
+                            <th>Network</th>
+                            <th>P2P Port</th>
+                            <th>RPC Port</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>mainnet</td>
+                            <td>10333</td>
+                            <td>10331</td>
+                            <td>Production network</td>
+                        </tr>
+                        <tr>
+                            <td>testnet</td>
+                            <td>20333</td>
+                            <td>20331</td>
+                            <td>Test network</td>
+                        </tr>
+                        <tr>
+                            <td>private</td>
+                            <td>30333</td>
+                            <td>30331</td>
+                            <td>Private network</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- First Node -->
+            <section id="first-node" class="docs-section">
+                <h2>Running Your First Node</h2>
+                
+                <h3>1. Start the Node</h3>
+                <pre><code class="language-bash"># Run with default testnet configuration
+./neo_node --testnet
+
+# Or with custom config
+./neo_node --config config.json
+
+# Run in background
+nohup ./neo_node --testnet > neo.log 2>&1 &</code></pre>
+                
+                <h3>2. Check Node Status</h3>
+                <pre><code class="language-bash"># Using neo-cli
+./neo-cli state
+
+# Using RPC
+curl http://localhost:10334 \
+  -H "Content-Type: application/json" \
+  -d '{"jsonrpc":"2.0","method":"getblockcount","params":[],"id":1}'</code></pre>
+                
+                <h3>3. Monitor Synchronization</h3>
+                <pre><code class="language-bash"># Watch block height
+watch -n 2 "./neo-cli getblockcount"
+
+# View peers
+./neo-cli show peers
+
+# Check memory pool
+./neo-cli show pool</code></pre>
+                
+                <div class="success-box">
+                    <i class="fas fa-check-circle"></i>
+                    <div>
+                        <strong>Congratulations!</strong>
+                        You've successfully set up your first Neo C++ node. 
+                        Next, explore the <a href="sdk-guide.html">SDK Guide</a> to start building applications.
+                    </div>
+                </div>
+            </section>
+
+            <!-- Next Steps -->
+            <section class="docs-section">
+                <h2>Next Steps</h2>
+                
+                <div class="next-steps-grid">
+                    <a href="architecture.html" class="next-step-card">
+                        <i class="fas fa-sitemap"></i>
+                        <h3>Understand Architecture</h3>
+                        <p>Learn about Neo C++ system design</p>
+                    </a>
+                    
+                    <a href="sdk-guide.html" class="next-step-card">
+                        <i class="fas fa-tools"></i>
+                        <h3>Build with SDK</h3>
+                        <p>Create dApps using the Neo C++ SDK</p>
+                    </a>
+                    
+                    <a href="deployment.html" class="next-step-card">
+                        <i class="fas fa-rocket"></i>
+                        <h3>Deploy to Production</h3>
+                        <p>Production deployment best practices</p>
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Neo C++ Project. Released under the MIT License.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/r3e-network/neo_cpp">GitHub</a>
+                    <a href="https://discord.gg/neo">Discord</a>
+                    <a href="https://neo.org">Neo.org</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-json.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-yaml.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/docs.js"></script>
+</body>
+</html>

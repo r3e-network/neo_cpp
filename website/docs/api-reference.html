@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Reference - Neo C++ Documentation</title>
+    
+    <link rel="icon" type="image/svg+xml" href="../assets/favicon.svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/animations.css">
+    <link rel="stylesheet" href="../css/responsive.css">
+    <link rel="stylesheet" href="../css/docs.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+</head>
+<body>
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="../index.html" class="logo">
+                    <svg class="logo-icon" viewBox="0 0 40 40" width="40" height="40">
+                        <path d="M20 5L35 15V25L20 35L5 25V15L20 5Z" fill="currentColor"/>
+                    </svg>
+                    <span class="logo-text">Neo C++</span>
+                </a>
+                
+                <ul class="nav-menu">
+                    <li><a href="../index.html" class="nav-link">Home</a></li>
+                    <li><a href="getting-started.html" class="nav-link">Docs</a></li>
+                    <li><a href="api-reference.html" class="nav-link active">API</a></li>
+                    <li><a href="../examples/" class="nav-link">Examples</a></li>
+                    <li><a href="https://github.com/r3e-network/neo_cpp" class="nav-link github-link">
+                        <i class="fab fa-github"></i> GitHub
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="docs-layout">
+        <aside class="docs-sidebar">
+            <div class="sidebar-section">
+                <h4>SDK Classes</h4>
+                <ul>
+                    <li><a href="#wallet" class="sidebar-link active">Wallet</a></li>
+                    <li><a href="#account" class="sidebar-link">Account</a></li>
+                    <li><a href="#transaction" class="sidebar-link">Transaction</a></li>
+                    <li><a href="#rpc-client" class="sidebar-link">RPC Client</a></li>
+                    <li><a href="#contract" class="sidebar-link">Contract</a></li>
+                    <li><a href="#nep17" class="sidebar-link">NEP-17 Token</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h4>Core Classes</h4>
+                <ul>
+                    <li><a href="#blockchain" class="sidebar-link">Blockchain</a></li>
+                    <li><a href="#block" class="sidebar-link">Block</a></li>
+                    <li><a href="#consensus" class="sidebar-link">Consensus</a></li>
+                    <li><a href="#vm" class="sidebar-link">Virtual Machine</a></li>
+                    <li><a href="#storage" class="sidebar-link">Storage</a></li>
+                </ul>
+            </div>
+            
+            <div class="sidebar-section">
+                <h4>Utilities</h4>
+                <ul>
+                    <li><a href="#crypto" class="sidebar-link">Cryptography</a></li>
+                    <li><a href="#hash" class="sidebar-link">Hash Functions</a></li>
+                    <li><a href="#converter" class="sidebar-link">Converters</a></li>
+                </ul>
+            </div>
+        </aside>
+
+        <main class="docs-content">
+            <div class="docs-header">
+                <h1>Neo C++ API Reference</h1>
+                <p class="docs-description">
+                    Complete API documentation for Neo C++ SDK and core components
+                </p>
+            </div>
+
+            <!-- Wallet API -->
+            <section id="wallet" class="docs-section">
+                <h2>neo::sdk::Wallet</h2>
+                <p>Manages NEP-6 compliant wallets with account management and transaction signing.</p>
+                
+                <h3>Include</h3>
+                <pre><code class="language-cpp">#include &lt;neo/sdk/wallet/wallet.h&gt;</code></pre>
+                
+                <h3>Constructor</h3>
+                <pre><code class="language-cpp">Wallet();
+Wallet(const std::string& name);
+Wallet(const std::filesystem::path& path, const std::string& password);</code></pre>
+                
+                <h3>Methods</h3>
+                
+                <h4>Create()</h4>
+                <pre><code class="language-cpp">void Create(const std::string& name);</code></pre>
+                <p>Creates a new wallet with the specified name.</p>
+                
+                <h4>CreateAccount()</h4>
+                <pre><code class="language-cpp">Account CreateAccount();
+Account CreateAccount(const std::string& label);</code></pre>
+                <p>Creates a new account in the wallet with an optional label.</p>
+                
+                <h4>ImportAccount()</h4>
+                <pre><code class="language-cpp">Account ImportAccount(const std::string& wif);
+Account ImportAccount(const PrivateKey& privateKey);</code></pre>
+                <p>Imports an account from WIF or private key.</p>
+                
+                <h4>Save()</h4>
+                <pre><code class="language-cpp">void Save(const std::filesystem::path& path, const std::string& password);</code></pre>
+                <p>Saves the wallet to a file encrypted with the password.</p>
+                
+                <h4>Load()</h4>
+                <pre><code class="language-cpp">static Wallet Load(const std::filesystem::path& path, const std::string& password);</code></pre>
+                <p>Loads a wallet from an encrypted file.</p>
+                
+                <h4>GetAccounts()</h4>
+                <pre><code class="language-cpp">std::vector&lt;Account&gt; GetAccounts() const;</code></pre>
+                <p>Returns all accounts in the wallet.</p>
+                
+                <h4>GetDefaultAccount()</h4>
+                <pre><code class="language-cpp">Account GetDefaultAccount() const;</code></pre>
+                <p>Returns the default account of the wallet.</p>
+                
+                <h3>Example</h3>
+                <pre><code class="language-cpp">// Create a new wallet
+neo::sdk::Wallet wallet("MyWallet");
+
+// Create a new account
+auto account = wallet.CreateAccount("Main Account");
+std::cout << "Address: " << account.Address() << std::endl;
+
+// Import from WIF
+auto imported = wallet.ImportAccount("L1QqQJnpBwbsPGAuutuzPTac8piqvbR1HRjrY5qHup48TBCBFe4g");
+
+// Save encrypted wallet
+wallet.Save("wallet.json", "strongPassword123");
+
+// Load existing wallet
+auto loaded = Wallet::Load("wallet.json", "strongPassword123");</code></pre>
+            </section>
+
+            <!-- Account API -->
+            <section id="account" class="docs-section">
+                <h2>neo::sdk::Account</h2>
+                <p>Represents a blockchain account with address and key management.</p>
+                
+                <h3>Include</h3>
+                <pre><code class="language-cpp">#include &lt;neo/sdk/wallet/account.h&gt;</code></pre>
+                
+                <h3>Methods</h3>
+                
+                <h4>Address()</h4>
+                <pre><code class="language-cpp">std::string Address() const;</code></pre>
+                <p>Returns the Neo address of the account.</p>
+                
+                <h4>GetScriptHash()</h4>
+                <pre><code class="language-cpp">UInt160 GetScriptHash() const;</code></pre>
+                <p>Returns the script hash of the account.</p>
+                
+                <h4>GetPublicKey()</h4>
+                <pre><code class="language-cpp">ECPoint GetPublicKey() const;</code></pre>
+                <p>Returns the public key of the account.</p>
+                
+                <h4>Sign()</h4>
+                <pre><code class="language-cpp">std::vector&lt;uint8_t&gt; Sign(const std::vector&lt;uint8_t&gt;& message) const;</code></pre>
+                <p>Signs a message with the account's private key.</p>
+                
+                <h4>Export()</h4>
+                <pre><code class="language-cpp">std::string Export() const;</code></pre>
+                <p>Exports the account as WIF (Wallet Import Format).</p>
+            </section>
+
+            <!-- Transaction API -->
+            <section id="transaction" class="docs-section">
+                <h2>neo::sdk::TransactionBuilder</h2>
+                <p>Builds and signs blockchain transactions.</p>
+                
+                <h3>Include</h3>
+                <pre><code class="language-cpp">#include &lt;neo/sdk/tx/transaction_builder.h&gt;</code></pre>
+                
+                <h3>Methods</h3>
+                
+                <h4>From()</h4>
+                <pre><code class="language-cpp">TransactionBuilder& From(const Account& account);</code></pre>
+                <p>Sets the sender account for the transaction.</p>
+                
+                <h4>To()</h4>
+                <pre><code class="language-cpp">TransactionBuilder& To(const std::string& address);</code></pre>
+                <p>Sets the recipient address.</p>
+                
+                <h4>Amount()</h4>
+                <pre><code class="language-cpp">TransactionBuilder& Amount(int64_t amount, const std::string& asset = "NEO");</code></pre>
+                <p>Sets the transfer amount and asset type.</p>
+                
+                <h4>WithScript()</h4>
+                <pre><code class="language-cpp">TransactionBuilder& WithScript(const std::vector&lt;uint8_t&gt;& script);</code></pre>
+                <p>Adds a custom script to the transaction.</p>
+                
+                <h4>WithGas()</h4>
+                <pre><code class="language-cpp">TransactionBuilder& WithGas(int64_t systemFee, int64_t networkFee);</code></pre>
+                <p>Sets the gas fees for the transaction.</p>
+                
+                <h4>Sign()</h4>
+                <pre><code class="language-cpp">TransactionBuilder& Sign(const PrivateKey& key);</code></pre>
+                <p>Signs the transaction with the provided private key.</p>
+                
+                <h4>Build()</h4>
+                <pre><code class="language-cpp">Transaction Build();</code></pre>
+                <p>Builds and returns the complete transaction.</p>
+                
+                <h3>Example</h3>
+                <pre><code class="language-cpp">// Build a NEO transfer transaction
+auto tx = neo::sdk::TransactionBuilder()
+    .From(account)
+    .To("NXjtqYERuvSWGawjVux8UerNejvwdYg7eE")
+    .Amount(100, "NEO")
+    .WithGas(1000000, 500000)
+    .Sign(account.GetPrivateKey())
+    .Build();
+
+// Send via RPC
+rpcClient.SendRawTransaction(tx);</code></pre>
+            </section>
+
+            <!-- RPC Client API -->
+            <section id="rpc-client" class="docs-section">
+                <h2>neo::sdk::RpcClient</h2>
+                <p>JSON-RPC client for interacting with Neo nodes.</p>
+                
+                <h3>Include</h3>
+                <pre><code class="language-cpp">#include &lt;neo/sdk/rpc/rpc_client.h&gt;</code></pre>
+                
+                <h3>Constructor</h3>
+                <pre><code class="language-cpp">RpcClient(const std::string& url);
+RpcClient(const std::string& host, uint16_t port);</code></pre>
+                
+                <h3>Methods</h3>
+                
+                <h4>GetBlockCount()</h4>
+                <pre><code class="language-cpp">uint32_t GetBlockCount();</code></pre>
+                <p>Returns the current block height.</p>
+                
+                <h4>GetBlock()</h4>
+                <pre><code class="language-cpp">Block GetBlock(uint32_t index);
+Block GetBlock(const UInt256& hash);</code></pre>
+                <p>Retrieves a block by index or hash.</p>
+                
+                <h4>GetTransaction()</h4>
+                <pre><code class="language-cpp">Transaction GetTransaction(const UInt256& hash);</code></pre>
+                <p>Retrieves a transaction by hash.</p>
+                
+                <h4>GetBalance()</h4>
+                <pre><code class="language-cpp">int64_t GetBalance(const std::string& address, const std::string& asset = "NEO");</code></pre>
+                <p>Gets the balance of an address for a specific asset.</p>
+                
+                <h4>SendRawTransaction()</h4>
+                <pre><code class="language-cpp">UInt256 SendRawTransaction(const Transaction& tx);</code></pre>
+                <p>Broadcasts a signed transaction to the network.</p>
+                
+                <h4>InvokeScript()</h4>
+                <pre><code class="language-cpp">InvokeResult InvokeScript(const std::vector&lt;uint8_t&gt;& script);</code></pre>
+                <p>Invokes a script without broadcasting.</p>
+                
+                <h4>GetApplicationLog()</h4>
+                <pre><code class="language-cpp">ApplicationLog GetApplicationLog(const UInt256& txHash);</code></pre>
+                <p>Gets the application log for a transaction.</p>
+                
+                <h3>Example</h3>
+                <pre><code class="language-cpp">// Connect to testnet
+neo::sdk::RpcClient client("http://seed1.neo.org:20332");
+
+// Get blockchain info
+auto height = client.GetBlockCount();
+std::cout << "Current height: " << height << std::endl;
+
+// Get latest block
+auto block = client.GetBlock(height - 1);
+std::cout << "Block hash: " << block.Hash.ToString() << std::endl;
+std::cout << "Transactions: " << block.Transactions.size() << std::endl;
+
+// Check balance
+auto balance = client.GetBalance("NXjtqYERuvSWGawjVux8UerNejvwdYg7eE", "NEO");
+std::cout << "Balance: " << balance << " NEO" << std::endl;</code></pre>
+            </section>
+
+            <!-- Contract API -->
+            <section id="contract" class="docs-section">
+                <h2>neo::sdk::ContractInvoker</h2>
+                <p>Invokes and deploys smart contracts.</p>
+                
+                <h3>Include</h3>
+                <pre><code class="language-cpp">#include &lt;neo/sdk/contract/contract_invoker.h&gt;</code></pre>
+                
+                <h3>Methods</h3>
+                
+                <h4>LoadNEF()</h4>
+                <pre><code class="language-cpp">void LoadNEF(const std::filesystem::path& path);</code></pre>
+                <p>Loads a NEF (Neo Executable Format) file.</p>
+                
+                <h4>LoadManifest()</h4>
+                <pre><code class="language-cpp">void LoadManifest(const std::filesystem::path& path);</code></pre>
+                <p>Loads a contract manifest file.</p>
+                
+                <h4>Deploy()</h4>
+                <pre><code class="language-cpp">DeploymentBuilder Deploy();</code></pre>
+                <p>Creates a deployment builder for the contract.</p>
+                
+                <h4>Invoke()</h4>
+                <pre><code class="language-cpp">InvocationBuilder Invoke(const std::string& method);</code></pre>
+                <p>Creates an invocation builder for a contract method.</p>
+                
+                <h3>Example</h3>
+                <pre><code class="language-cpp">// Deploy a smart contract
+neo::sdk::ContractInvoker contract;
+contract.LoadNEF("mycontract.nef");
+contract.LoadManifest("mycontract.manifest.json");
+
+auto deployment = contract.Deploy()
+    .WithSigner(account)
+    .WithGas(10000000)
+    .Send(rpcClient);
+
+std::cout << "Contract deployed: " << deployment.ContractHash << std::endl;
+
+// Invoke contract method
+auto result = contract.Invoke("transfer")
+    .WithArgs(fromAddress, toAddress, amount)
+    .WithSigner(account)
+    .Send(rpcClient);
+
+std::cout << "TX: " << result.TransactionHash << std::endl;</code></pre>
+            </section>
+
+            <!-- NEP-17 Token API -->
+            <section id="nep17" class="docs-section">
+                <h2>neo::sdk::NEP17Token</h2>
+                <p>Interface for NEP-17 standard tokens (fungible tokens).</p>
+                
+                <h3>Include</h3>
+                <pre><code class="language-cpp">#include &lt;neo/sdk/contract/nep17_token.h&gt;</code></pre>
+                
+                <h3>Constructor</h3>
+                <pre><code class="language-cpp">NEP17Token(const UInt160& scriptHash, RpcClient& client);</code></pre>
+                
+                <h3>Methods</h3>
+                
+                <h4>Symbol()</h4>
+                <pre><code class="language-cpp">std::string Symbol();</code></pre>
+                <p>Returns the token symbol.</p>
+                
+                <h4>Decimals()</h4>
+                <pre><code class="language-cpp">uint8_t Decimals();</code></pre>
+                <p>Returns the number of decimals.</p>
+                
+                <h4>TotalSupply()</h4>
+                <pre><code class="language-cpp">BigInteger TotalSupply();</code></pre>
+                <p>Returns the total token supply.</p>
+                
+                <h4>BalanceOf()</h4>
+                <pre><code class="language-cpp">BigInteger BalanceOf(const std::string& address);</code></pre>
+                <p>Returns the token balance of an address.</p>
+                
+                <h4>Transfer()</h4>
+                <pre><code class="language-cpp">TransactionBuilder Transfer(const Account& from, const std::string& to, const BigInteger& amount);</code></pre>
+                <p>Creates a transfer transaction.</p>
+                
+                <h3>Example</h3>
+                <pre><code class="language-cpp">// Connect to GAS token
+neo::sdk::RpcClient client("http://localhost:10334");
+neo::sdk::NEP17Token gas(GAS_SCRIPT_HASH, client);
+
+// Get token info
+std::cout << "Symbol: " << gas.Symbol() << std::endl;
+std::cout << "Decimals: " << (int)gas.Decimals() << std::endl;
+std::cout << "Total Supply: " << gas.TotalSupply() << std::endl;
+
+// Check balance
+auto balance = gas.BalanceOf("NXjtqYERuvSWGawjVux8UerNejvwdYg7eE");
+std::cout << "Balance: " << balance << std::endl;
+
+// Transfer tokens
+auto tx = gas.Transfer(account, "NTrezR3C4X8aMLVg7vozt5wguyNfFhwuFx", 1000000000)
+    .Sign(account.GetPrivateKey())
+    .Build();
+
+client.SendRawTransaction(tx);</code></pre>
+            </section>
+
+            <!-- Blockchain Core API -->
+            <section id="blockchain" class="docs-section">
+                <h2>neo::ledger::Blockchain</h2>
+                <p>Core blockchain management and state.</p>
+                
+                <h3>Include</h3>
+                <pre><code class="language-cpp">#include &lt;neo/ledger/blockchain.h&gt;</code></pre>
+                
+                <h3>Methods</h3>
+                
+                <h4>GetHeight()</h4>
+                <pre><code class="language-cpp">uint32_t GetHeight() const;</code></pre>
+                <p>Returns the current blockchain height.</p>
+                
+                <h4>GetBlock()</h4>
+                <pre><code class="language-cpp">std::shared_ptr&lt;Block&gt; GetBlock(uint32_t index);
+std::shared_ptr&lt;Block&gt; GetBlock(const UInt256& hash);</code></pre>
+                <p>Retrieves a block from the blockchain.</p>
+                
+                <h4>GetTransaction()</h4>
+                <pre><code class="language-cpp">std::shared_ptr&lt;Transaction&gt; GetTransaction(const UInt256& hash);</code></pre>
+                <p>Retrieves a transaction from the blockchain.</p>
+                
+                <h4>GetMemoryPool()</h4>
+                <pre><code class="language-cpp">MemoryPool& GetMemoryPool();</code></pre>
+                <p>Returns the memory pool of pending transactions.</p>
+                
+                <h4>VerifyWitness()</h4>
+                <pre><code class="language-cpp">bool VerifyWitness(const UInt160& scriptHash, const Witness& witness, 
+                   int64_t gas, uint32_t maxItems);</code></pre>
+                <p>Verifies a witness script.</p>
+            </section>
+
+            <!-- Cryptography API -->
+            <section id="crypto" class="docs-section">
+                <h2>Cryptography Functions</h2>
+                <p>Cryptographic utilities and functions.</p>
+                
+                <h3>Include</h3>
+                <pre><code class="language-cpp">#include &lt;neo/cryptography/crypto.h&gt;
+#include &lt;neo/cryptography/hash.h&gt;</code></pre>
+                
+                <h3>Hash Functions</h3>
+                
+                <h4>SHA256</h4>
+                <pre><code class="language-cpp">UInt256 SHA256(const std::vector&lt;uint8_t&gt;& data);
+UInt256 SHA256(const std::string& str);</code></pre>
+                
+                <h4>RIPEMD160</h4>
+                <pre><code class="language-cpp">UInt160 RIPEMD160(const std::vector&lt;uint8_t&gt;& data);</code></pre>
+                
+                <h4>Hash256</h4>
+                <pre><code class="language-cpp">UInt256 Hash256(const std::vector&lt;uint8_t&gt;& data);</code></pre>
+                <p>Double SHA256 hash.</p>
+                
+                <h4>Hash160</h4>
+                <pre><code class="language-cpp">UInt160 Hash160(const std::vector&lt;uint8_t&gt;& data);</code></pre>
+                <p>SHA256 followed by RIPEMD160.</p>
+                
+                <h3>ECDSA</h3>
+                
+                <h4>Sign</h4>
+                <pre><code class="language-cpp">std::vector&lt;uint8_t&gt; Sign(const std::vector&lt;uint8_t&gt;& message, 
+                          const PrivateKey& key);</code></pre>
+                
+                <h4>Verify</h4>
+                <pre><code class="language-cpp">bool Verify(const std::vector&lt;uint8_t&gt;& message, 
+            const std::vector&lt;uint8_t&gt;& signature, 
+            const ECPoint& publicKey);</code></pre>
+                
+                <h3>Encoding</h3>
+                
+                <h4>Base58</h4>
+                <pre><code class="language-cpp">std::string Base58Encode(const std::vector&lt;uint8_t&gt;& data);
+std::vector&lt;uint8_t&gt; Base58Decode(const std::string& encoded);</code></pre>
+                
+                <h4>Base64</h4>
+                <pre><code class="language-cpp">std::string Base64Encode(const std::vector&lt;uint8_t&gt;& data);
+std::vector&lt;uint8_t&gt; Base64Decode(const std::string& encoded);</code></pre>
+                
+                <h3>Example</h3>
+                <pre><code class="language-cpp">// Hash operations
+auto hash = neo::crypto::SHA256("Hello Neo");
+auto hash160 = neo::crypto::Hash160(publicKey.ToArray());
+
+// ECDSA signing
+neo::crypto::PrivateKey privateKey;
+auto signature = neo::crypto::Sign(message, privateKey);
+
+// Verification
+auto publicKey = privateKey.GetPublicKey();
+bool valid = neo::crypto::Verify(message, signature, publicKey);
+
+// Encoding
+auto encoded = neo::crypto::Base58Encode(data);
+auto decoded = neo::crypto::Base58Decode(encoded);</code></pre>
+            </section>
+
+            <!-- Error Codes -->
+            <section class="docs-section">
+                <h2>Error Codes</h2>
+                
+                <table class="docs-table">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Name</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>-100</td>
+                            <td>INVALID_PARAMS</td>
+                            <td>Invalid parameters provided</td>
+                        </tr>
+                        <tr>
+                            <td>-101</td>
+                            <td>INSUFFICIENT_FUNDS</td>
+                            <td>Insufficient balance for operation</td>
+                        </tr>
+                        <tr>
+                            <td>-102</td>
+                            <td>INVALID_SIGNATURE</td>
+                            <td>Invalid transaction signature</td>
+                        </tr>
+                        <tr>
+                            <td>-103</td>
+                            <td>INVALID_CONTRACT</td>
+                            <td>Invalid contract or script</td>
+                        </tr>
+                        <tr>
+                            <td>-104</td>
+                            <td>INVALID_TRANSACTION</td>
+                            <td>Invalid transaction format</td>
+                        </tr>
+                        <tr>
+                            <td>-200</td>
+                            <td>RPC_ERROR</td>
+                            <td>RPC communication error</td>
+                        </tr>
+                        <tr>
+                            <td>-201</td>
+                            <td>NETWORK_ERROR</td>
+                            <td>Network connectivity issue</td>
+                        </tr>
+                        <tr>
+                            <td>-300</td>
+                            <td>VM_FAULT</td>
+                            <td>Virtual machine execution fault</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <!-- Next Steps -->
+            <section class="docs-section">
+                <h2>Additional Resources</h2>
+                
+                <div class="next-steps-grid">
+                    <a href="sdk-guide.html" class="next-step-card">
+                        <i class="fas fa-book"></i>
+                        <h3>SDK Guide</h3>
+                        <p>Complete SDK tutorial</p>
+                    </a>
+                    
+                    <a href="../examples/" class="next-step-card">
+                        <i class="fas fa-code"></i>
+                        <h3>Examples</h3>
+                        <p>Working code examples</p>
+                    </a>
+                    
+                    <a href="https://github.com/r3e-network/neo_cpp" class="next-step-card">
+                        <i class="fab fa-github"></i>
+                        <h3>Source Code</h3>
+                        <p>Browse the repository</p>
+                    </a>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>&copy; 2024 Neo C++ Project. Released under the MIT License.</p>
+                <div class="footer-links">
+                    <a href="https://github.com/r3e-network/neo_cpp">GitHub</a>
+                    <a href="https://discord.gg/neo">Discord</a>
+                    <a href="https://neo.org">Neo.org</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/docs.js"></script>
+</body>
+</html>

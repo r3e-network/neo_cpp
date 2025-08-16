@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Neo C++ - High-performance blockchain implementation in modern C++">
+    <meta name="keywords" content="Neo, blockchain, C++, cryptocurrency, smart contracts, dApps">
+    <title>Neo C++ - High-Performance Blockchain Implementation</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <link rel="stylesheet" href="css/premium-effects.css">
+    
+    <!-- Code Highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    
+    <!-- Loader (loads first for smooth experience) -->
+    <script src="js/loader.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="container">
+            <div class="nav-wrapper">
+                <a href="#" class="logo">
+                    <svg class="logo-icon" viewBox="0 0 40 40" width="40" height="40">
+                        <path d="M20 5L35 15V25L20 35L5 25V15L20 5Z" fill="currentColor"/>
+                    </svg>
+                    <span class="logo-text">Neo C++</span>
+                </a>
+                
+                <button class="mobile-toggle" id="mobile-menu-toggle" aria-label="Toggle menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                
+                <ul class="nav-menu" id="nav-menu">
+                    <li><a href="#features" class="nav-link">Features</a></li>
+                    <li><a href="#quickstart" class="nav-link">Quick Start</a></li>
+                    <li><a href="#documentation" class="nav-link">Docs</a></li>
+                    <li><a href="#examples" class="nav-link">Examples</a></li>
+                    <li><a href="#performance" class="nav-link">Performance</a></li>
+                    <li><a href="https://github.com/r3e-network/neo_cpp" class="nav-link github-link">
+                        <i class="fab fa-github"></i> GitHub
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1 class="hero-title animate-on-scroll">
+                        <span class="gradient-text">Neo C++</span>
+                        <br>
+                        <span class="hero-subtitle-dynamic"></span>
+                    </h1>
+                    <p class="hero-description animate-on-scroll">
+                        Production-ready C++ implementation of the Neo blockchain protocol.
+                        Built for speed, reliability, and enterprise-grade deployments.
+                    </p>
+                    <div class="hero-stats animate-on-scroll">
+                        <div class="stat">
+                            <span class="stat-value"><span class="counter" data-target="100" data-duration="2000">0</span>%</span>
+                            <span class="stat-label">Production Ready</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value counter" data-target="6927" data-duration="2500">0</span>
+                            <span class="stat-label">Tests</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-value">&lt;<span class="counter" data-target="50" data-duration="2000">0</span>ms</span>
+                            <span class="stat-label">Block Time</span>
+                        </div>
+                    </div>
+                    <div class="hero-actions animate-on-scroll">
+                        <a href="#quickstart" class="btn btn-primary">
+                            <i class="fas fa-rocket"></i> Get Started
+                        </a>
+                        <a href="https://github.com/r3e-network/neo_cpp" class="btn btn-secondary">
+                            <i class="fab fa-github"></i> View on GitHub
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="code-preview parallax animate-on-scroll" data-speed="0.3">
+                        <div class="code-header">
+                            <span class="code-title">main.cpp</span>
+                            <div class="code-actions">
+                                <span class="dot red"></span>
+                                <span class="dot yellow"></span>
+                                <span class="dot green"></span>
+                            </div>
+                        </div>
+                        <pre><code class="language-cpp">// Initialize Neo Node
+#include &lt;neo/node.h&gt;
+#include &lt;neo/consensus.h&gt;
+
+int main() {
+    neo::Node node;
+    node.LoadConfig("testnet.json");
+    node.Start();
+    
+    // Join consensus
+    neo::Consensus consensus(node);
+    consensus.Start();
+    
+    node.Run();
+    return 0;
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="hero-bg parallax" data-speed="0.5">
+            <div class="gradient-orb orb-1"></div>
+            <div class="gradient-orb orb-2"></div>
+            <div class="grid-pattern"></div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Enterprise-Grade Features</h2>
+                <p class="section-description">
+                    Built from the ground up for performance, reliability, and scalability
+                </p>
+            </div>
+            
+            <div class="features-grid animate-on-scroll">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-tachometer-alt"></i>
+                    </div>
+                    <h3>Blazing Fast</h3>
+                    <p>Optimized C++ implementation with sub-50ms block processing and 10,000+ TPS capacity.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>Battle-Tested</h3>
+                    <p>6,927 comprehensive tests covering unit, integration, performance, and stress scenarios.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-cubes"></i>
+                    </div>
+                    <h3>Modular Design</h3>
+                    <p>Clean architecture with separated concerns for consensus, networking, storage, and VM.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-plug"></i>
+                    </div>
+                    <h3>Plugin System</h3>
+                    <p>Extensible plugin architecture for custom functionality without modifying core code.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>Developer SDK</h3>
+                    <p>Comprehensive SDK for building dApps with wallet, transaction, and smart contract support.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3>Production Ready</h3>
+                    <p>Docker support, systemd integration, monitoring, and automated deployment scripts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Start Section -->
+    <section class="quickstart" id="quickstart">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Quick Start</h2>
+                <p class="section-description">Get up and running in minutes</p>
+            </div>
+            
+            <div class="quickstart-content">
+                <div class="quickstart-tabs">
+                    <button class="tab-btn active" data-tab="docker">Docker</button>
+                    <button class="tab-btn" data-tab="source">From Source</button>
+                    <button class="tab-btn" data-tab="binary">Binary Release</button>
+                </div>
+                
+                <div class="tab-content active" id="docker">
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Pull the Docker image
+docker pull neocpp/node:latest
+
+# Run a testnet node
+docker run -d \
+  --name neo-node \
+  -p 10333:10333 \
+  -p 10334:10334 \
+  -v neo-data:/data \
+  neocpp/node:latest --testnet
+
+# Check node status
+docker exec neo-node neo-cli state</code></pre>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="source">
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Clone the repository
+git clone https://github.com/r3e-network/neo_cpp.git
+cd neo-cpp
+
+# Build with CMake
+cmake -B build -DCMAKE_BUILD_TYPE=Release
+cmake --build build --parallel
+
+# Run the node
+./build/apps/neo_node --config testnet.json</code></pre>
+                    </div>
+                </div>
+                
+                <div class="tab-content" id="binary">
+                    <div class="code-block">
+                        <pre><code class="language-bash"># Download the latest release
+wget https://github.com/r3e-network/neo_cpp/releases/latest/download/neo-cpp-linux.tar.gz
+
+# Extract the archive
+tar -xzf neo-cpp-linux.tar.gz
+cd neo-cpp
+
+# Run the node
+./neo_node --testnet</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Documentation Section -->
+    <section class="documentation" id="documentation">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Comprehensive Documentation</h2>
+                <p class="section-description">Everything you need to build with Neo C++</p>
+            </div>
+            
+            <div class="docs-grid animate-on-scroll">
+                <a href="docs/getting-started.html" class="doc-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-book"></i>
+                    </div>
+                    <h3>Getting Started</h3>
+                    <p>Installation, configuration, and your first node</p>
+                    <span class="doc-link">Read Guide →</span>
+                </a>
+                
+                <a href="docs/api-reference.html" class="doc-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3>API Reference</h3>
+                    <p>Complete API documentation with examples</p>
+                    <span class="doc-link">Browse API →</span>
+                </a>
+                
+                <a href="docs/architecture.html" class="doc-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-sitemap"></i>
+                    </div>
+                    <h3>Architecture</h3>
+                    <p>System design and component overview</p>
+                    <span class="doc-link">Learn More →</span>
+                </a>
+                
+                <a href="docs/sdk-guide.html" class="doc-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-tools"></i>
+                    </div>
+                    <h3>SDK Guide</h3>
+                    <p>Build dApps with the Neo C++ SDK</p>
+                    <span class="doc-link">Start Building →</span>
+                </a>
+                
+                <a href="docs/deployment.html" class="doc-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <h3>Deployment</h3>
+                    <p>Production deployment and operations</p>
+                    <span class="doc-link">Deploy Now →</span>
+                </a>
+                
+                <a href="docs/contributing.html" class="doc-card">
+                    <div class="doc-icon">
+                        <i class="fas fa-hands-helping"></i>
+                    </div>
+                    <h3>Contributing</h3>
+                    <p>Join the Neo C++ development community</p>
+                    <span class="doc-link">Contribute →</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Examples Section -->
+    <section class="examples" id="examples">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Code Examples</h2>
+                <p class="section-description">Learn by example with real-world use cases</p>
+            </div>
+            
+            <div class="examples-grid animate-on-scroll">
+                <div class="example-card">
+                    <h3>Create a Wallet</h3>
+                    <pre><code class="language-cpp">#include &lt;neo/sdk/wallet.h&gt;
+
+// Create a new wallet
+neo::Wallet wallet;
+wallet.Create("MyWallet");
+
+// Generate new account
+auto account = wallet.CreateAccount();
+std::cout << "Address: " << account.Address() << std::endl;
+
+// Save wallet
+wallet.Save("wallet.json", "password");</code></pre>
+                </div>
+                
+                <div class="example-card">
+                    <h3>Send Transaction</h3>
+                    <pre><code class="language-cpp">#include &lt;neo/sdk/transaction.h&gt;
+
+// Build transaction
+neo::TransactionBuilder tx;
+tx.From(account)
+  .To("NXjtqYERuvSWGawjVux8UerNejvwdYg7eE")
+  .Amount(100, neo::GAS)
+  .Sign(privateKey);
+
+// Send to network
+auto hash = client.SendTransaction(tx);
+std::cout << "TX: " << hash << std::endl;</code></pre>
+                </div>
+                
+                <div class="example-card">
+                    <h3>Deploy Smart Contract</h3>
+                    <pre><code class="language-cpp">#include &lt;neo/sdk/contract.h&gt;
+
+// Load contract
+neo::Contract contract;
+contract.LoadNEF("contract.nef");
+contract.LoadManifest("contract.manifest.json");
+
+// Deploy to blockchain
+auto deployment = contract.Deploy()
+  .WithSigner(account)
+  .WithGas(1000)
+  .Send(client);
+
+std::cout << "Contract: " << deployment.Hash() << std::endl;</code></pre>
+                </div>
+                
+                <div class="example-card">
+                    <h3>Query Blockchain</h3>
+                    <pre><code class="language-cpp">#include &lt;neo/sdk/rpc.h&gt;
+
+// Connect to RPC
+neo::RpcClient client("http://localhost:10334");
+
+// Get blockchain info
+auto height = client.GetBlockCount();
+auto block = client.GetBlock(height - 1);
+
+std::cout << "Height: " << height << std::endl;
+std::cout << "TX Count: " << block.Transactions.size() << std::endl;</code></pre>
+                </div>
+            </div>
+            
+            <div class="examples-cta">
+                <a href="examples/" class="btn btn-primary">View All Examples</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Performance Section -->
+    <section class="performance" id="performance">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <h2 class="section-title">Benchmark Results</h2>
+                <p class="section-description">Industry-leading performance metrics</p>
+            </div>
+            
+            <div class="performance-grid animate-on-scroll">
+                <div class="benchmark-card">
+                    <h3>Transaction Processing</h3>
+                    <div class="benchmark-chart">
+                        <div class="chart-bar" style="--value: 95">
+                            <span class="bar-label"><span class="counter" data-target="10000" data-duration="3000">0</span>+ TPS</span>
+                        </div>
+                    </div>
+                    <p>Sustained throughput under load</p>
+                </div>
+                
+                <div class="benchmark-card">
+                    <h3>Block Validation</h3>
+                    <div class="benchmark-chart">
+                        <div class="chart-bar" style="--value: 98">
+                            <span class="bar-label">&lt;<span class="counter" data-target="50" data-duration="2000">0</span>ms</span>
+                        </div>
+                    </div>
+                    <p>Average block processing time</p>
+                </div>
+                
+                <div class="benchmark-card">
+                    <h3>Memory Usage</h3>
+                    <div class="benchmark-chart">
+                        <div class="chart-bar" style="--value: 85">
+                            <span class="bar-label">&lt;<span class="counter" data-target="500" data-duration="2500">0</span>MB</span>
+                        </div>
+                    </div>
+                    <p>Typical memory footprint</p>
+                </div>
+                
+                <div class="benchmark-card">
+                    <h3>Sync Speed</h3>
+                    <div class="benchmark-chart">
+                        <div class="chart-bar" style="--value: 92">
+                            <span class="bar-label"><span class="counter" data-target="1000" data-duration="2500">0</span> blocks/sec</span>
+                        </div>
+                    </div>
+                    <p>Fast blockchain synchronization</p>
+                </div>
+            </div>
+            
+            <div class="performance-details">
+                <p>
+                    <i class="fas fa-info-circle"></i>
+                    Benchmarks performed on AWS c5.2xlarge instance with NVMe SSD storage.
+                    <a href="docs/benchmarks.html">View detailed results →</a>
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Ready to Build?</h2>
+                <p>Join the Neo ecosystem with the fastest C++ implementation</p>
+                <div class="cta-actions">
+                    <a href="#quickstart" class="btn btn-primary btn-lg">
+                        <i class="fas fa-download"></i> Download Neo C++
+                    </a>
+                    <a href="https://discord.gg/neo" class="btn btn-secondary btn-lg">
+                        <i class="fab fa-discord"></i> Join Community
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Neo C++</h4>
+                    <p>High-performance blockchain implementation</p>
+                    <div class="social-links">
+                        <a href="https://github.com/r3e-network/neo_cpp"><i class="fab fa-github"></i></a>
+                        <a href="https://twitter.com/neo_blockchain"><i class="fab fa-twitter"></i></a>
+                        <a href="https://discord.gg/neo"><i class="fab fa-discord"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Documentation</h4>
+                    <ul>
+                        <li><a href="docs/getting-started.html">Getting Started</a></li>
+                        <li><a href="docs/api-reference.html">API Reference</a></li>
+                        <li><a href="docs/architecture.html">Architecture</a></li>
+                        <li><a href="docs/sdk-guide.html">SDK Guide</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Community</h4>
+                    <ul>
+                        <li><a href="https://github.com/r3e-network/neo_cpp">GitHub</a></li>
+                        <li><a href="https://discord.gg/neo">Discord</a></li>
+                        <li><a href="https://neo.org">Neo.org</a></li>
+                        <li><a href="docs/contributing.html">Contributing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Resources</h4>
+                    <ul>
+                        <li><a href="examples/">Examples</a></li>
+                        <li><a href="docs/benchmarks.html">Benchmarks</a></li>
+                        <li><a href="https://github.com/r3e-network/neo_cpp/releases">Releases</a></li>
+                        <li><a href="docs/changelog.html">Changelog</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2024 Neo C++ Project. Released under the MIT License.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-cpp.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-bash.min.js"></script>
+    <script src="js/main-enhanced.js"></script>
+</body>
+</html>
