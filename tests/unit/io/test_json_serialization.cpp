@@ -120,9 +120,9 @@ TEST(JsonSerializationTest, SerializeDeserialize)
     EXPECT_EQ(json["int32"], -1234567890);
     EXPECT_EQ(json["int64"], -1234567890123456789LL);
     EXPECT_EQ(json["string"], "Hello, world!");
-    EXPECT_EQ(json["bytes"], "0123456789ABCDEF");
-    EXPECT_EQ(json["uint160"], "0123456789ABCDEF0123456789ABCDEF01234567");
-    EXPECT_EQ(json["uint256"], "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
+    EXPECT_EQ(json["bytes"], "0123456789abcdef");
+    EXPECT_EQ(json["uint160"], "0123456789abcdef0123456789abcdef01234567");
+    EXPECT_EQ(json["uint256"], "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef");
     EXPECT_EQ(json["fixed8"], "123.45678");
     EXPECT_EQ(json["children"].size(), 1);
     EXPECT_EQ(json["children"][0]["bool"], false);
@@ -144,10 +144,10 @@ TEST(JsonSerializationTest, SerializeDeserialize)
     EXPECT_EQ(deserialized.int32Value, -1234567890);
     EXPECT_EQ(deserialized.int64Value, -1234567890123456789LL);
     EXPECT_EQ(deserialized.stringValue, "Hello, world!");
-    EXPECT_EQ(deserialized.bytesValue.AsSpan().ToHexString(), "0123456789ABCDEF");
-    EXPECT_EQ(deserialized.uint160Value.ToHexString(), "0123456789ABCDEF0123456789ABCDEF01234567");
+    EXPECT_EQ(deserialized.bytesValue.AsSpan().ToHexString(), "0123456789abcdef");
+    EXPECT_EQ(deserialized.uint160Value.ToHexString(), "0123456789abcdef0123456789abcdef01234567");
     EXPECT_EQ(deserialized.uint256Value.ToHexString(),
-              "0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF");
+              "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef");
     EXPECT_EQ(deserialized.fixed8Value.ToString(), "123.45678");
     EXPECT_EQ(deserialized.children.size(), 1);
     EXPECT_EQ(deserialized.children[0].boolValue, false);

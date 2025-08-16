@@ -28,7 +28,8 @@ namespace ledger {
 template<typename Key, typename Value>
 class LRUCache {
 private:
-    using KeyValuePair = std::pair<Key, Value>;
+    using ValuePtr = std::shared_ptr<Value>;
+    using KeyValuePair = std::pair<Key, ValuePtr>;
     using ListIterator = typename std::list<KeyValuePair>::iterator;
 
     size_t capacity_;
@@ -59,10 +60,8 @@ public:
         
         hits_.fetch_add(1);
         
-        // Move to front (most recently used)
-        // Note: This requires mutable or const_cast in const method
-        // For thread safety, we'll return without updating position in const Get
-        return std::make_shared<Value>(it->second->second);
+        // Return the shared_ptr directly
+        return it->second->second;
     }
 
     /**
@@ -70,7 +69,7 @@ public:
      * @param key Key to store
      * @param value Value to store
      */
-    void Put(const Key& key, const Value& value) {
+    void Put(const Key& key, const std::shared_ptr<Value>& value) {
         std::unique_lock lock(mutex_);
         
         auto it = index_.find(key);
@@ -237,8 +236,9 @@ public:
     void CacheBlock(const std::shared_ptr<Block>& block) {
         if (!block) return;
         
-        block_cache_.Put(block->GetHash(), *block);
-        height_to_hash_cache_.Put(block->GetIndex(), block->GetHash());
+        block_cache_.Put(block->GetHash(), block);
+        auto hash_ptr = std::make_shared<io::UInt256>(block->GetHash());
+        height_to_hash_cache_.Put(block->GetIndex(), hash_ptr);
         
         // Update current block if newer
         {
@@ -272,7 +272,7 @@ public:
      */
     void CacheTransaction(const std::shared_ptr<Transaction>& tx) {
         if (!tx) return;
-        transaction_cache_.Put(tx->GetHash(), *tx);
+        transaction_cache_.Put(tx->GetHash(), tx);
     }
 
     /**

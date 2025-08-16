@@ -173,7 +173,7 @@ TEST_F(P2PSyncExecutionTest, TestTransactionExecution)
         false // Not test mode
     );
     
-    // Execute empty script (simplified for test)
+    // Execute empty script for test
     engine->LoadScript(std::vector<uint8_t>{0x51}); // PUSH1 opcode
     auto execResult = engine->Execute();
     

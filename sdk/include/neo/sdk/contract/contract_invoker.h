@@ -189,7 +189,7 @@ public:
      * @param contractHash Contract script hash
      * @return Contract state information
      */
-    core::ContractState GetContractState(const core::UInt160& contractHash);
+    // core::ContractState GetContractState(const core::UInt160& contractHash);
 
     /**
      * @brief Build invocation script

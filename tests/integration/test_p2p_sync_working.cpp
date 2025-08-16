@@ -203,7 +203,7 @@ TEST_F(P2PSyncWorkingTest, TestBatchProcessingWithoutBlockchain)
     }
     
     // Batch processing can succeed even without full blockchain initialization
-    // It will do simplified storage operations
+    // Storage operations for testing
     size_t processed = system->ProcessBlocksBatch(blocks);
     EXPECT_GT(processed, 0); // Should process at least some blocks
 }

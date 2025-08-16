@@ -1,6 +1,6 @@
 /**
  * @file test_consensus_comprehensive.cpp
- * @brief Comprehensive unit tests for consensus module to increase coverage
+ * @brief Comprehensive consensus tests for Neo dBFT 2.0
  */
 
 #include <gtest/gtest.h>
@@ -13,538 +13,479 @@
 #include <neo/consensus/prepare_response.h>
 #include <neo/consensus/recovery_message.h>
 #include <neo/consensus/recovery_request.h>
-#include <neo/core/unit256.h>
-#include <neo/io/byte_vector.h>
-#include <neo/wallets/key_pair.h>
-#include <vector>
+#include <neo/ledger/blockchain.h>
+#include <neo/cryptography/key_pair.h>
+#include <neo/wallets/wallet.h>
 #include <memory>
-#include <chrono>
-#include <thread>
+#include <vector>
 
 using namespace neo::consensus;
-using namespace neo::core;
-using namespace neo::io;
+using namespace neo::cryptography;
+using namespace neo::ledger;
 using namespace neo::wallets;
 
 class ConsensusComprehensiveTest : public ::testing::Test {
 protected:
+    std::unique_ptr<ConsensusContext> context_;
+    std::unique_ptr<ConsensusService> service_;
+    std::unique_ptr<Blockchain> blockchain_;
+    std::vector<std::unique_ptr<KeyPair>> validators_;
+    
     void SetUp() override {
-        // Initialize test context
-        context_ = std::make_unique<ConsensusContext>();
+        // Initialize blockchain
+        blockchain_ = std::make_unique<Blockchain>();
+        
+        // Create validator keys
+        for (int i = 0; i < 7; ++i) {
+            validators_.push_back(std::make_unique<KeyPair>());
+        }
+        
+        // Initialize consensus context
+        context_ = std::make_unique<ConsensusContext>(blockchain_.get());
+        
+        // Initialize consensus service
+        service_ = std::make_unique<ConsensusService>(
+            blockchain_.get(),
+            nullptr,  // network
+            validators_[0].get()  // primary validator
+        );
     }
     
     void TearDown() override {
+        service_.reset();
         context_.reset();
+        blockchain_.reset();
     }
-    
-    std::unique_ptr<ConsensusContext> context_;
 };
 
 // ============================================================================
-// ConsensusContext Tests
+// Basic Consensus Tests
 // ============================================================================
 
 TEST_F(ConsensusComprehensiveTest, ConsensusContext_Initialization) {
-    EXPECT_EQ(context_->ViewNumber, 0u);
-    EXPECT_EQ(context_->BlockIndex, 0u);
+    EXPECT_NE(context_, nullptr);
+    EXPECT_EQ(context_->ViewNumber(), 0);
     EXPECT_FALSE(context_->IsPrimary());
     EXPECT_FALSE(context_->IsBackup());
-    EXPECT_EQ(context_->MyIndex, -1);
+    EXPECT_EQ(context_->CountCommitted(), 0);
+    EXPECT_EQ(context_->CountFailed(), 0);
 }
 
 TEST_F(ConsensusComprehensiveTest, ConsensusContext_Reset) {
-    // Modify context
-    context_->ViewNumber = 5;
-    context_->BlockIndex = 100;
-    context_->MyIndex = 2;
+    context_->SetViewNumber(5);
+    context_->Reset(0);
     
-    // Reset context
-    context_->Reset(101);
-    
-    EXPECT_EQ(context_->ViewNumber, 0u);
-    EXPECT_EQ(context_->BlockIndex, 101u);
-    EXPECT_EQ(context_->MyIndex, 2); // MyIndex should be preserved
+    EXPECT_EQ(context_->ViewNumber(), 0);
+    EXPECT_EQ(context_->CountCommitted(), 0);
+    EXPECT_EQ(context_->CountFailed(), 0);
 }
 
-TEST_F(ConsensusComprehensiveTest, ConsensusContext_ChangeView) {
-    context_->ViewNumber = 0;
+TEST_F(ConsensusComprehensiveTest, ConsensusService_Start) {
+    service_->Start();
+    EXPECT_TRUE(service_->IsStarted());
     
-    // Change view
-    context_->ChangeView(1);
-    EXPECT_EQ(context_->ViewNumber, 1u);
-    
-    // Change view again
-    context_->ChangeView(3);
-    EXPECT_EQ(context_->ViewNumber, 3u);
-}
-
-TEST_F(ConsensusComprehensiveTest, ConsensusContext_PrimaryIndex) {
-    context_->ViewNumber = 0;
-    auto primaryIndex = context_->GetPrimaryIndex(7); // 7 validators
-    EXPECT_GE(primaryIndex, 0);
-    EXPECT_LT(primaryIndex, 7);
-    
-    // Primary should change with view number
-    context_->ViewNumber = 1;
-    auto newPrimaryIndex = context_->GetPrimaryIndex(7);
-    EXPECT_GE(newPrimaryIndex, 0);
-    EXPECT_LT(newPrimaryIndex, 7);
-}
-
-TEST_F(ConsensusComprehensiveTest, ConsensusContext_ValidatorTracking) {
-    // Add validators
-    context_->Validators.resize(4);
-    for (size_t i = 0; i < 4; ++i) {
-        context_->Validators[i].Index = i;
-        context_->Validators[i].PublicKey = KeyPair().PublicKey();
-    }
-    
-    EXPECT_EQ(context_->Validators.size(), 4u);
-    EXPECT_EQ(context_->Validators[0].Index, 0u);
-    EXPECT_EQ(context_->Validators[3].Index, 3u);
+    service_->Stop();
+    EXPECT_FALSE(service_->IsStarted());
 }
 
 // ============================================================================
-// ConsensusMessage Tests
+// View Change Tests
 // ============================================================================
 
-TEST_F(ConsensusComprehensiveTest, ConsensusMessage_Construction) {
-    ConsensusMessage msg;
-    msg.Type = ConsensusMessageType::PrepareRequest;
-    msg.ViewNumber = 1;
-    msg.BlockIndex = 100;
-    msg.ValidatorIndex = 2;
+TEST_F(ConsensusComprehensiveTest, ViewChange_InitiateViewChange) {
+    uint8_t initial_view = context_->ViewNumber();
     
-    EXPECT_EQ(msg.Type, ConsensusMessageType::PrepareRequest);
-    EXPECT_EQ(msg.ViewNumber, 1u);
-    EXPECT_EQ(msg.BlockIndex, 100u);
-    EXPECT_EQ(msg.ValidatorIndex, 2);
-}
-
-TEST_F(ConsensusComprehensiveTest, ConsensusMessage_Serialization) {
-    ConsensusMessage msg;
-    msg.Type = ConsensusMessageType::PrepareResponse;
-    msg.ViewNumber = 5;
-    msg.BlockIndex = 200;
-    msg.ValidatorIndex = 3;
-    
-    auto size = msg.GetSize();
-    EXPECT_GT(size, 0u);
-    EXPECT_LT(size, 1024u); // Reasonable size limit
-}
-
-TEST_F(ConsensusComprehensiveTest, ConsensusMessage_Types) {
-    EXPECT_NE(ConsensusMessageType::ChangeView, ConsensusMessageType::PrepareRequest);
-    EXPECT_NE(ConsensusMessageType::PrepareRequest, ConsensusMessageType::PrepareResponse);
-    EXPECT_NE(ConsensusMessageType::PrepareResponse, ConsensusMessageType::Commit);
-    EXPECT_NE(ConsensusMessageType::Commit, ConsensusMessageType::RecoveryRequest);
-    EXPECT_NE(ConsensusMessageType::RecoveryRequest, ConsensusMessageType::RecoveryMessage);
-}
-
-// ============================================================================
-// ChangeView Tests
-// ============================================================================
-
-TEST_F(ConsensusComprehensiveTest, ChangeView_Construction) {
+    // Create change view message
     ChangeView cv;
-    cv.ViewNumber = 2;
-    cv.Timestamp = 1234567890;
+    cv.ViewNumber = initial_view + 1;
+    cv.Timestamp = std::chrono::system_clock::now().time_since_epoch().count();
     cv.Reason = ChangeViewReason::Timeout;
     
-    EXPECT_EQ(cv.ViewNumber, 2u);
-    EXPECT_EQ(cv.Timestamp, 1234567890u);
-    EXPECT_EQ(cv.Reason, ChangeViewReason::Timeout);
+    // Process change view
+    context_->ProcessChangeView(cv);
+    
+    // Verify view change initiated
+    EXPECT_GT(context_->ViewNumber(), initial_view);
 }
 
-TEST_F(ConsensusComprehensiveTest, ChangeView_Reasons) {
-    EXPECT_NE(ChangeViewReason::Timeout, ChangeViewReason::TxNotFound);
-    EXPECT_NE(ChangeViewReason::TxNotFound, ChangeViewReason::InvalidBlock);
-    EXPECT_NE(ChangeViewReason::InvalidBlock, ChangeViewReason::InvalidSignature);
+TEST_F(ConsensusComprehensiveTest, ViewChange_MultipleChangeViews) {
+    std::vector<ChangeView> changes;
+    
+    // Create multiple change view requests from different validators
+    for (size_t i = 0; i < validators_.size(); ++i) {
+        ChangeView cv;
+        cv.ViewNumber = 1;
+        cv.ValidatorIndex = i;
+        cv.Timestamp = std::chrono::system_clock::now().time_since_epoch().count();
+        cv.Reason = ChangeViewReason::Timeout;
+        changes.push_back(cv);
+    }
+    
+    // Process change views
+    for (const auto& cv : changes) {
+        context_->ProcessChangeView(cv);
+    }
+    
+    // Should trigger view change after f+1 requests (f=2 for 7 validators)
+    EXPECT_GE(context_->CountChangeViews(), 3);
+}
+
+TEST_F(ConsensusComprehensiveTest, ViewChange_InvalidViewNumber) {
+    uint8_t current_view = context_->ViewNumber();
+    
+    // Try to change to a lower view number
+    ChangeView cv;
+    cv.ViewNumber = current_view - 1;
+    cv.Timestamp = std::chrono::system_clock::now().time_since_epoch().count();
+    
+    // Should reject invalid view change
+    EXPECT_FALSE(context_->ProcessChangeView(cv));
 }
 
 // ============================================================================
-// PrepareRequest Tests
+// Prepare Request/Response Tests
 // ============================================================================
 
-TEST_F(ConsensusComprehensiveTest, PrepareRequest_Construction) {
+TEST_F(ConsensusComprehensiveTest, PrepareRequest_Creation) {
     PrepareRequest req;
-    req.Version = 1;
     req.ViewNumber = 0;
+    req.BlockIndex = 1;
     req.Timestamp = std::chrono::system_clock::now().time_since_epoch().count();
     req.Nonce = 12345;
     
-    // Set block hash
-    UInt256 blockHash;
-    blockHash.Fill(0xAA);
-    req.BlockHash = blockHash;
-    
-    EXPECT_EQ(req.Version, 1u);
-    EXPECT_EQ(req.ViewNumber, 0u);
-    EXPECT_EQ(req.Nonce, 12345u);
-    EXPECT_EQ(req.BlockHash, blockHash);
+    EXPECT_EQ(req.ViewNumber, 0);
+    EXPECT_EQ(req.BlockIndex, 1);
+    EXPECT_EQ(req.Nonce, 12345);
+    EXPECT_GT(req.Timestamp, 0);
 }
 
-TEST_F(ConsensusComprehensiveTest, PrepareRequest_TransactionHashes) {
+TEST_F(ConsensusComprehensiveTest, PrepareResponse_Processing) {
+    // Create prepare request first
     PrepareRequest req;
+    req.ViewNumber = 0;
+    req.BlockIndex = 1;
+    context_->ProcessPrepareRequest(req);
     
-    // Add transaction hashes
-    for (int i = 0; i < 5; ++i) {
-        UInt256 txHash;
-        txHash.Fill(i);
-        req.TransactionHashes.push_back(txHash);
+    // Create prepare responses
+    std::vector<PrepareResponse> responses;
+    for (size_t i = 0; i < validators_.size(); ++i) {
+        PrepareResponse resp;
+        resp.ViewNumber = 0;
+        resp.BlockIndex = 1;
+        resp.ValidatorIndex = i;
+        responses.push_back(resp);
     }
     
-    EXPECT_EQ(req.TransactionHashes.size(), 5u);
-    EXPECT_EQ(req.TransactionHashes[0][0], 0);
-    EXPECT_EQ(req.TransactionHashes[4][0], 4);
-}
-
-// ============================================================================
-// PrepareResponse Tests
-// ============================================================================
-
-TEST_F(ConsensusComprehensiveTest, PrepareResponse_Construction) {
-    PrepareResponse resp;
-    resp.ViewNumber = 1;
-    resp.ValidatorIndex = 3;
+    // Process responses
+    for (const auto& resp : responses) {
+        context_->ProcessPrepareResponse(resp);
+    }
     
-    UInt256 blockHash;
-    blockHash.Fill(0xBB);
-    resp.BlockHash = blockHash;
-    
-    EXPECT_EQ(resp.ViewNumber, 1u);
-    EXPECT_EQ(resp.ValidatorIndex, 3);
-    EXPECT_EQ(resp.BlockHash, blockHash);
-}
-
-TEST_F(ConsensusComprehensiveTest, PrepareResponse_Signature) {
-    PrepareResponse resp;
-    
-    // Set signature (mock)
-    ByteVector signature(64, 0xFF);
-    resp.Signature = signature;
-    
-    EXPECT_EQ(resp.Signature.Size(), 64u);
-    EXPECT_EQ(resp.Signature[0], 0xFF);
+    // Check if prepared (need 2f+1 responses)
+    EXPECT_GE(context_->CountPrepared(), 5);
 }
 
 // ============================================================================
 // Commit Tests
 // ============================================================================
 
-TEST_F(ConsensusComprehensiveTest, Commit_Construction) {
+TEST_F(ConsensusComprehensiveTest, Commit_Processing) {
+    // Setup: Process prepare phase first
+    PrepareRequest req;
+    req.ViewNumber = 0;
+    req.BlockIndex = 1;
+    context_->ProcessPrepareRequest(req);
+    
+    // Create commit messages
+    std::vector<Commit> commits;
+    for (size_t i = 0; i < validators_.size(); ++i) {
+        Commit commit;
+        commit.ViewNumber = 0;
+        commit.BlockIndex = 1;
+        commit.ValidatorIndex = i;
+        commit.Signature = ByteVector(64, 0xFF); // Mock signature
+        commits.push_back(commit);
+    }
+    
+    // Process commits
+    for (const auto& commit : commits) {
+        context_->ProcessCommit(commit);
+    }
+    
+    // Check if committed (need 2f+1 commits)
+    EXPECT_GE(context_->CountCommitted(), 5);
+}
+
+TEST_F(ConsensusComprehensiveTest, Commit_InvalidSignature) {
     Commit commit;
-    commit.ViewNumber = 2;
-    commit.ValidatorIndex = 1;
+    commit.ViewNumber = 0;
+    commit.BlockIndex = 1;
+    commit.Signature = ByteVector(); // Empty signature
     
-    ByteVector signature(64, 0xCC);
-    commit.Signature = signature;
-    
-    EXPECT_EQ(commit.ViewNumber, 2u);
-    EXPECT_EQ(commit.ValidatorIndex, 1);
-    EXPECT_EQ(commit.Signature.Size(), 64u);
+    // Should reject commit with invalid signature
+    EXPECT_FALSE(context_->ProcessCommit(commit));
 }
 
 // ============================================================================
-// RecoveryRequest Tests
+// Recovery Tests
 // ============================================================================
 
-TEST_F(ConsensusComprehensiveTest, RecoveryRequest_Construction) {
+TEST_F(ConsensusComprehensiveTest, RecoveryRequest_Creation) {
     RecoveryRequest req;
-    req.ViewNumber = 3;
-    req.Timestamp = 9876543210;
+    req.ViewNumber = 2;
+    req.Timestamp = std::chrono::system_clock::now().time_since_epoch().count();
     
-    EXPECT_EQ(req.ViewNumber, 3u);
-    EXPECT_EQ(req.Timestamp, 9876543210u);
+    EXPECT_EQ(req.ViewNumber, 2);
+    EXPECT_GT(req.Timestamp, 0);
 }
 
-// ============================================================================
-// RecoveryMessage Tests
-// ============================================================================
-
-TEST_F(ConsensusComprehensiveTest, RecoveryMessage_Construction) {
+TEST_F(ConsensusComprehensiveTest, RecoveryMessage_Processing) {
     RecoveryMessage msg;
-    msg.ViewNumber = 4;
-    msg.BlockIndex = 500;
+    msg.ViewNumber = 1;
+    msg.BlockIndex = 100;
     
     // Add change view messages
     for (int i = 0; i < 3; ++i) {
         ChangeView cv;
-        cv.ViewNumber = i;
-        cv.Reason = ChangeViewReason::Timeout;
-        msg.ChangeViewMessages.push_back(cv);
+        cv.ViewNumber = 1;
+        cv.ValidatorIndex = i;
+        msg.ChangeViews.push_back(cv);
     }
     
-    EXPECT_EQ(msg.ViewNumber, 4u);
-    EXPECT_EQ(msg.BlockIndex, 500u);
-    EXPECT_EQ(msg.ChangeViewMessages.size(), 3u);
-}
-
-TEST_F(ConsensusComprehensiveTest, RecoveryMessage_PrepareMessages) {
-    RecoveryMessage msg;
-    
-    // Add prepare request
+    // Add prepare messages
     PrepareRequest req;
-    req.ViewNumber = 0;
-    msg.PrepareRequestMessage = std::make_shared<PrepareRequest>(req);
+    req.ViewNumber = 1;
+    req.BlockIndex = 100;
+    msg.PrepareRequest = std::make_optional(req);
     
-    // Add prepare responses
-    for (int i = 0; i < 3; ++i) {
-        PrepareResponse resp;
-        resp.ValidatorIndex = i;
-        msg.PrepareResponseMessages.push_back(resp);
+    // Process recovery message
+    context_->ProcessRecoveryMessage(msg);
+    
+    // Verify recovery processed
+    EXPECT_EQ(context_->ViewNumber(), msg.ViewNumber);
+}
+
+// ============================================================================
+// Byzantine Fault Tolerance Tests
+// ============================================================================
+
+TEST_F(ConsensusComprehensiveTest, ByzantineFaultTolerance_OneThirdFault) {
+    // With 7 validators, can tolerate 2 byzantine nodes (f = floor((n-1)/3))
+    int total_validators = 7;
+    int byzantine_nodes = 2;
+    int honest_nodes = total_validators - byzantine_nodes;
+    
+    // Need 2f+1 = 5 honest nodes for consensus
+    EXPECT_GE(honest_nodes, 2 * byzantine_nodes + 1);
+}
+
+TEST_F(ConsensusComprehensiveTest, ByzantineFaultTolerance_MessageValidation) {
+    // Test duplicate message rejection
+    PrepareResponse resp;
+    resp.ViewNumber = 0;
+    resp.BlockIndex = 1;
+    resp.ValidatorIndex = 0;
+    
+    // First message should be accepted
+    EXPECT_TRUE(context_->ProcessPrepareResponse(resp));
+    
+    // Duplicate should be rejected
+    EXPECT_FALSE(context_->ProcessPrepareResponse(resp));
+}
+
+// ============================================================================
+// Primary Selection Tests
+// ============================================================================
+
+TEST_F(ConsensusComprehensiveTest, PrimarySelection_RoundRobin) {
+    // Primary should rotate in round-robin fashion
+    for (uint8_t view = 0; view < validators_.size(); ++view) {
+        uint8_t primary_index = context_->GetPrimaryIndex(view);
+        EXPECT_EQ(primary_index, view % validators_.size());
+    }
+}
+
+TEST_F(ConsensusComprehensiveTest, PrimarySelection_AfterViewChange) {
+    uint8_t initial_primary = context_->GetPrimaryIndex(0);
+    
+    // Change view
+    context_->SetViewNumber(1);
+    uint8_t new_primary = context_->GetPrimaryIndex(1);
+    
+    // Primary should change
+    EXPECT_NE(initial_primary, new_primary);
+}
+
+// ============================================================================
+// Timeout Tests
+// ============================================================================
+
+TEST_F(ConsensusComprehensiveTest, Timeout_PrepareTimeout) {
+    // Set prepare timeout
+    auto timeout = std::chrono::seconds(15);
+    context_->SetPrepareTimeout(timeout);
+    
+    // Start timer
+    auto start = std::chrono::steady_clock::now();
+    context_->StartPrepareTimer();
+    
+    // Check if timeout triggers view change
+    bool timeout_triggered = context_->CheckPrepareTimeout();
+    
+    // Initially should not timeout
+    EXPECT_FALSE(timeout_triggered);
+}
+
+TEST_F(ConsensusComprehensiveTest, Timeout_CommitTimeout) {
+    // Set commit timeout
+    auto timeout = std::chrono::seconds(15);
+    context_->SetCommitTimeout(timeout);
+    
+    // Check commit timeout
+    bool timeout_triggered = context_->CheckCommitTimeout();
+    
+    // Initially should not timeout
+    EXPECT_FALSE(timeout_triggered);
+}
+
+// ============================================================================
+// Block Creation Tests
+// ============================================================================
+
+TEST_F(ConsensusComprehensiveTest, BlockCreation_ValidBlock) {
+    // Create block proposal
+    auto block = context_->CreateBlock();
+    
+    EXPECT_NE(block, nullptr);
+    EXPECT_EQ(block->Index, blockchain_->GetHeight() + 1);
+    EXPECT_GT(block->Timestamp, 0);
+}
+
+TEST_F(ConsensusComprehensiveTest, BlockCreation_WithTransactions) {
+    // Add mock transactions to mempool
+    std::vector<Transaction> transactions;
+    for (int i = 0; i < 10; ++i) {
+        Transaction tx;
+        tx.Nonce = i;
+        transactions.push_back(tx);
     }
     
-    EXPECT_NE(msg.PrepareRequestMessage, nullptr);
-    EXPECT_EQ(msg.PrepareResponseMessages.size(), 3u);
+    // Create block with transactions
+    auto block = context_->CreateBlock(transactions);
+    
+    EXPECT_NE(block, nullptr);
+    EXPECT_EQ(block->Transactions.size(), transactions.size());
 }
 
 // ============================================================================
-// ConsensusService Tests
+// Message Serialization Tests
 // ============================================================================
 
-TEST_F(ConsensusComprehensiveTest, ConsensusService_Construction) {
-    ConsensusService service;
+TEST_F(ConsensusComprehensiveTest, MessageSerialization_ChangeView) {
+    ChangeView original;
+    original.ViewNumber = 5;
+    original.Timestamp = 1234567890;
+    original.Reason = ChangeViewReason::Timeout;
     
-    EXPECT_FALSE(service.IsRunning());
-    EXPECT_EQ(service.GetViewNumber(), 0u);
+    // Serialize
+    ByteVector serialized = original.Serialize();
+    
+    // Deserialize
+    ChangeView deserialized;
+    deserialized.Deserialize(serialized);
+    
+    // Verify
+    EXPECT_EQ(original.ViewNumber, deserialized.ViewNumber);
+    EXPECT_EQ(original.Timestamp, deserialized.Timestamp);
+    EXPECT_EQ(original.Reason, deserialized.Reason);
 }
 
-TEST_F(ConsensusComprehensiveTest, ConsensusService_StartStop) {
-    ConsensusService service;
+TEST_F(ConsensusComprehensiveTest, MessageSerialization_PrepareRequest) {
+    PrepareRequest original;
+    original.ViewNumber = 3;
+    original.BlockIndex = 1000;
+    original.Timestamp = 9876543210;
+    original.Nonce = 42;
     
-    // Start service
-    service.Start();
-    EXPECT_TRUE(service.IsRunning());
+    // Serialize
+    ByteVector serialized = original.Serialize();
     
-    // Stop service
-    service.Stop();
-    EXPECT_FALSE(service.IsRunning());
-}
-
-TEST_F(ConsensusComprehensiveTest, ConsensusService_MessageHandling) {
-    ConsensusService service;
-    service.Start();
+    // Deserialize
+    PrepareRequest deserialized;
+    deserialized.Deserialize(serialized);
     
-    // Create a prepare request message
-    ConsensusMessage msg;
-    msg.Type = ConsensusMessageType::PrepareRequest;
-    msg.ViewNumber = 0;
-    msg.BlockIndex = 100;
-    
-    // Process message (would require proper implementation)
-    bool processed = service.ProcessMessage(msg);
-    EXPECT_TRUE(processed || !processed); // Depends on implementation
-    
-    service.Stop();
+    // Verify
+    EXPECT_EQ(original.ViewNumber, deserialized.ViewNumber);
+    EXPECT_EQ(original.BlockIndex, deserialized.BlockIndex);
+    EXPECT_EQ(original.Timestamp, deserialized.Timestamp);
+    EXPECT_EQ(original.Nonce, deserialized.Nonce);
 }
 
 // ============================================================================
-// Consensus State Machine Tests
+// State Machine Tests
 // ============================================================================
-
-TEST_F(ConsensusComprehensiveTest, StateMachine_InitialState) {
-    context_->State = ConsensusState::Initial;
-    EXPECT_EQ(context_->State, ConsensusState::Initial);
-}
 
 TEST_F(ConsensusComprehensiveTest, StateMachine_StateTransitions) {
-    // Initial -> Primary
-    context_->State = ConsensusState::Initial;
-    context_->TransitionTo(ConsensusState::Primary);
-    EXPECT_EQ(context_->State, ConsensusState::Primary);
+    // Initial state
+    EXPECT_EQ(context_->GetState(), ConsensusState::Initial);
     
-    // Primary -> RequestSent
-    context_->TransitionTo(ConsensusState::RequestSent);
-    EXPECT_EQ(context_->State, ConsensusState::RequestSent);
+    // Transition to backup
+    context_->ChangeState(ConsensusState::Backup);
+    EXPECT_EQ(context_->GetState(), ConsensusState::Backup);
     
-    // RequestSent -> SignatureSent
-    context_->TransitionTo(ConsensusState::SignatureSent);
-    EXPECT_EQ(context_->State, ConsensusState::SignatureSent);
+    // Transition to primary
+    context_->ChangeState(ConsensusState::Primary);
+    EXPECT_EQ(context_->GetState(), ConsensusState::Primary);
     
-    // SignatureSent -> BlockSent
-    context_->TransitionTo(ConsensusState::BlockSent);
-    EXPECT_EQ(context_->State, ConsensusState::BlockSent);
+    // Transition to request sent
+    context_->ChangeState(ConsensusState::RequestSent);
+    EXPECT_EQ(context_->GetState(), ConsensusState::RequestSent);
+    
+    // Transition to committed
+    context_->ChangeState(ConsensusState::BlockSent);
+    EXPECT_EQ(context_->GetState(), ConsensusState::BlockSent);
+}
+
+TEST_F(ConsensusComprehensiveTest, StateMachine_InvalidTransitions) {
+    // Set to committed state
+    context_->ChangeState(ConsensusState::BlockSent);
+    
+    // Should not allow transition back to initial
+    EXPECT_FALSE(context_->CanTransitionTo(ConsensusState::Initial));
 }
 
 // ============================================================================
-// Consensus Timing Tests
+// Performance Tests
 // ============================================================================
 
-TEST_F(ConsensusComprehensiveTest, Timing_TimeoutCalculation) {
-    // Test timeout calculation for different view numbers
-    uint32_t timeout0 = context_->GetTimeout(0);
-    uint32_t timeout1 = context_->GetTimeout(1);
-    uint32_t timeout2 = context_->GetTimeout(2);
-    
-    EXPECT_GT(timeout0, 0u);
-    EXPECT_GE(timeout1, timeout0);
-    EXPECT_GE(timeout2, timeout1);
-}
-
-TEST_F(ConsensusComprehensiveTest, Timing_TimerManagement) {
-    context_->StartTimer(1000); // 1 second
-    EXPECT_TRUE(context_->IsTimerRunning());
-    
-    context_->StopTimer();
-    EXPECT_FALSE(context_->IsTimerRunning());
-}
-
-// ============================================================================
-// Fault Tolerance Tests
-// ============================================================================
-
-TEST_F(ConsensusComprehensiveTest, FaultTolerance_ByzantineNodes) {
-    // Test f calculation for different validator counts
-    EXPECT_EQ(context_->GetMaxFaultyNodes(4), 1);  // f = (4-1)/3 = 1
-    EXPECT_EQ(context_->GetMaxFaultyNodes(7), 2);  // f = (7-1)/3 = 2
-    EXPECT_EQ(context_->GetMaxFaultyNodes(10), 3); // f = (10-1)/3 = 3
-}
-
-TEST_F(ConsensusComprehensiveTest, FaultTolerance_QuorumSize) {
-    // Test M calculation (minimum nodes for consensus)
-    EXPECT_EQ(context_->GetQuorumSize(4), 3);   // M = 4 - f = 4 - 1 = 3
-    EXPECT_EQ(context_->GetQuorumSize(7), 5);   // M = 7 - f = 7 - 2 = 5
-    EXPECT_EQ(context_->GetQuorumSize(10), 7);  // M = 10 - f = 10 - 3 = 7
-}
-
-// ============================================================================
-// Consensus Message Validation Tests
-// ============================================================================
-
-TEST_F(ConsensusComprehensiveTest, Validation_MessageSignature) {
-    ConsensusMessage msg;
-    msg.Type = ConsensusMessageType::PrepareResponse;
-    msg.ViewNumber = 0;
-    msg.ValidatorIndex = 1;
-    
-    // Create mock signature
-    ByteVector signature(64, 0xAA);
-    msg.Signature = signature;
-    
-    // Validation would require crypto implementation
-    bool isValid = msg.VerifySignature();
-    EXPECT_TRUE(isValid || !isValid); // Depends on implementation
-}
-
-TEST_F(ConsensusComprehensiveTest, Validation_BlockProposal) {
-    PrepareRequest req;
-    req.Version = 1;
-    req.ViewNumber = 0;
-    
-    UInt256 blockHash;
-    blockHash.Fill(0xBB);
-    req.BlockHash = blockHash;
-    
-    // Validation would check block validity
-    bool isValid = req.ValidateBlock();
-    EXPECT_TRUE(isValid || !isValid); // Depends on implementation
-}
-
-// ============================================================================
-// Performance and Stress Tests
-// ============================================================================
-
-TEST_F(ConsensusComprehensiveTest, Performance_MessageProcessing) {
-    ConsensusService service;
-    service.Start();
-    
+TEST_F(ConsensusComprehensiveTest, Performance_MessageProcessingThroughput) {
     auto start = std::chrono::high_resolution_clock::now();
     
     // Process many messages
     for (int i = 0; i < 1000; ++i) {
-        ConsensusMessage msg;
-        msg.Type = ConsensusMessageType::PrepareResponse;
-        msg.ViewNumber = i % 10;
-        msg.ValidatorIndex = i % 4;
-        
-        service.ProcessMessage(msg);
+        PrepareResponse resp;
+        resp.ViewNumber = 0;
+        resp.BlockIndex = 1;
+        resp.ValidatorIndex = i % validators_.size();
+        context_->ProcessPrepareResponse(resp);
     }
     
-    auto duration = std::chrono::high_resolution_clock::now() - start;
-    auto ms = std::chrono::duration_cast<std::chrono::milliseconds>(duration).count();
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
     
-    // Should process messages quickly
-    EXPECT_LT(ms, 1000); // Less than 1 second for 1000 messages
-    
-    service.Stop();
+    // Should process 1000 messages in under 100ms
+    EXPECT_LT(duration.count(), 100);
 }
 
-TEST_F(ConsensusComprehensiveTest, Stress_ConcurrentMessages) {
-    ConsensusService service;
-    service.Start();
+TEST_F(ConsensusComprehensiveTest, Performance_BlockCreationTime) {
+    auto start = std::chrono::high_resolution_clock::now();
     
-    std::vector<std::thread> threads;
-    std::atomic<int> processedCount{0};
+    // Create block
+    auto block = context_->CreateBlock();
     
-    // Launch multiple threads sending messages
-    for (int t = 0; t < 5; ++t) {
-        threads.emplace_back([&service, &processedCount, t]() {
-            for (int i = 0; i < 100; ++i) {
-                ConsensusMessage msg;
-                msg.Type = ConsensusMessageType::PrepareResponse;
-                msg.ViewNumber = i;
-                msg.ValidatorIndex = t;
-                
-                if (service.ProcessMessage(msg)) {
-                    processedCount++;
-                }
-                
-                std::this_thread::sleep_for(std::chrono::microseconds(100));
-            }
-        });
-    }
+    auto end = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
     
-    // Wait for all threads
-    for (auto& t : threads) {
-        t.join();
-    }
-    
-    // Should handle concurrent messages
-    EXPECT_GT(processedCount.load(), 0);
-    
-    service.Stop();
-}
-
-// ============================================================================
-// Edge Cases and Error Handling
-// ============================================================================
-
-TEST_F(ConsensusComprehensiveTest, EdgeCase_EmptyValidatorSet) {
-    context_->Validators.clear();
-    
-    // Should handle empty validator set gracefully
-    auto primaryIndex = context_->GetPrimaryIndex(0);
-    EXPECT_EQ(primaryIndex, -1); // Invalid index
-    
-    auto quorum = context_->GetQuorumSize(0);
-    EXPECT_EQ(quorum, 0);
-}
-
-TEST_F(ConsensusComprehensiveTest, EdgeCase_InvalidViewNumber) {
-    ConsensusMessage msg;
-    msg.ViewNumber = std::numeric_limits<uint32_t>::max();
-    
-    // Should handle max view number
-    EXPECT_EQ(msg.ViewNumber, std::numeric_limits<uint32_t>::max());
-    
-    // Test view change with max value
-    context_->ViewNumber = msg.ViewNumber - 1;
-    context_->ChangeView(msg.ViewNumber);
-    EXPECT_EQ(context_->ViewNumber, msg.ViewNumber);
-}
-
-TEST_F(ConsensusComprehensiveTest, ErrorHandling_InvalidMessage) {
-    ConsensusService service;
-    service.Start();
-    
-    // Create invalid message (invalid type)
-    ConsensusMessage msg;
-    msg.Type = static_cast<ConsensusMessageType>(0xFF);
-    
-    // Should reject invalid message
-    bool processed = service.ProcessMessage(msg);
-    EXPECT_FALSE(processed);
-    
-    service.Stop();
+    // Block creation should be fast
+    EXPECT_LT(duration.count(), 50);
 }

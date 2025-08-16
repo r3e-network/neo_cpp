@@ -1,4 +1,5 @@
 #include <neo/sdk/core/blockchain.h>
+#include <mutex>
 #include <neo/ledger/blockchain.h>
 #include <neo/logging/logger.h>
 
@@ -6,12 +7,22 @@ namespace neo::sdk::core {
 
 // Static blockchain instance accessor
 static neo::ledger::Blockchain* GetBlockchainInstance() {
-    // This would typically get the singleton blockchain instance
-    // For now, returning nullptr as placeholder
-    // In real implementation, this would connect to the node's blockchain
+    // Get the singleton blockchain instance
     static neo::ledger::Blockchain* instance = nullptr;
+    static std::once_flag init_flag;
+    
+    std::call_once(init_flag, []() {
+        try {
+            // Initialize blockchain instance connection
+            // This connects to the running node's blockchain
+            instance = &neo::ledger::Blockchain::GetInstance();
+        } catch (const std::exception& e) {
+            NEO_LOG_ERROR(std::string("Failed to initialize blockchain: ") + e.what());
+        }
+    });
+    
     if (!instance) {
-        NEO_LOG_WARN("Blockchain instance not initialized. Using mock data.");
+        NEO_LOG_ERROR("Blockchain instance not available");
     }
     return instance;
 }
@@ -24,8 +35,11 @@ std::shared_ptr<Block> Blockchain::GetBlock(const UInt256& hash) {
     
     try {
         // Query blockchain for block
-        // return blockchain->GetBlock(hash);
-        return nullptr;  // Placeholder
+        auto block = blockchain->GetBlock(hash);
+        if (!block) {
+            NEO_LOG_DEBUG("Block not found for hash: " + hash.ToString());
+        }
+        return block;
     } catch (const std::exception& e) {
         NEO_LOG_ERROR(std::string("Failed to get block by hash: ") + e.what());
         return nullptr;
@@ -40,8 +54,11 @@ std::shared_ptr<Block> Blockchain::GetBlock(uint32_t height) {
     
     try {
         // Query blockchain for block at height
-        // return blockchain->GetBlock(height);
-        return nullptr;  // Placeholder
+        auto block = blockchain->GetBlock(height);
+        if (!block) {
+            NEO_LOG_DEBUG("Block not found at height: " + std::to_string(height));
+        }
+        return block;
     } catch (const std::exception& e) {
         NEO_LOG_ERROR(std::string("Failed to get block by height ") + std::to_string(height) + ": " + e.what());
         return nullptr;
@@ -56,8 +73,11 @@ std::shared_ptr<Transaction> Blockchain::GetTransaction(const UInt256& hash) {
     
     try {
         // Query blockchain for transaction
-        // return blockchain->GetTransaction(hash);
-        return nullptr;  // Placeholder
+        auto tx = blockchain->GetTransaction(hash);
+        if (!tx) {
+            NEO_LOG_DEBUG("Transaction not found: " + hash.ToString());
+        }
+        return tx;
     } catch (const std::exception& e) {
         NEO_LOG_ERROR(std::string("Failed to get transaction: ") + e.what());
         return nullptr;
@@ -72,8 +92,7 @@ uint32_t Blockchain::GetCurrentHeight() {
     
     try {
         // Get current blockchain height
-        // return blockchain->GetHeight();
-        return 0;  // Placeholder
+        return blockchain->GetHeight();
     } catch (const std::exception& e) {
         NEO_LOG_ERROR(std::string("Failed to get current height: ") + e.what());
         return 0;
@@ -88,8 +107,11 @@ std::shared_ptr<Header> Blockchain::GetHeader(uint32_t height) {
     
     try {
         // Get header at height
-        // return blockchain->GetHeader(height);
-        return nullptr;  // Placeholder
+        auto header = blockchain->GetHeader(height);
+        if (!header) {
+            NEO_LOG_DEBUG("Header not found at height: " + std::to_string(height));
+        }
+        return header;
     } catch (const std::exception& e) {
         NEO_LOG_ERROR(std::string("Failed to get header at height ") + std::to_string(height) + ": " + e.what());
         return nullptr;
@@ -104,8 +126,7 @@ UInt256 Blockchain::GetBestBlockHash() {
     
     try {
         // Get best block hash
-        // return blockchain->GetBestBlockHash();
-        return UInt256();  // Placeholder
+        return blockchain->GetBestBlockHash();
     } catch (const std::exception& e) {
         NEO_LOG_ERROR(std::string("Failed to get best block hash: ") + e.what());
         return UInt256();
@@ -120,8 +141,7 @@ bool Blockchain::ContainsBlock(const UInt256& hash) {
     
     try {
         // Check if block exists
-        // return blockchain->ContainsBlock(hash);
-        return false;  // Placeholder
+        return blockchain->ContainsBlock(hash);
     } catch (const std::exception& e) {
         NEO_LOG_ERROR(std::string("Failed to check block existence: ") + e.what());
         return false;
@@ -136,8 +156,7 @@ bool Blockchain::ContainsTransaction(const UInt256& hash) {
     
     try {
         // Check if transaction exists
-        // return blockchain->ContainsTransaction(hash);
-        return false;  // Placeholder
+        return blockchain->ContainsTransaction(hash);
     } catch (const std::exception& e) {
         NEO_LOG_ERROR(std::string("Failed to check transaction existence: ") + e.what());
         return false;

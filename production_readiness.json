@@ -1,0 +1,609 @@
+{
+  "module_status": {
+    "core": {
+      "status": "WARNING",
+      "critical_count": 0,
+      "warning_count": 35,
+      "minor_count": 35,
+      "issues": [
+        {
+          "type": "todo",
+          "line": 146,
+          "text": "double BigDecimal::ToDouble() const",
+          "file": "src/core/big_decimal.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 111,
+          "text": "if (level_ <= LogLevel::Debug)",
+          "file": "src/core/logging.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 113,
+          "text": "LOG_DEBUG(\"Starting operation: {}\", operation_);",
+          "file": "src/core/logging.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 122,
+          "text": "if (level_ <= LogLevel::Debug)",
+          "file": "src/core/logging.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 124,
+          "text": "LOG_DEBUG(\"Operation '{}' completed in {} \u00b5s\", operation_, duration);",
+          "file": "src/core/logging.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 140,
+          "text": "case LogLevel::Debug:",
+          "file": "src/core/logging.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 141,
+          "text": "LOG_DEBUG(\"{}\", full_message);",
+          "file": "src/core/logging.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 23,
+          "text": "// Use BigDecimal's native ToDouble() method for efficient conversion",
+          "file": "src/core/fixed8.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 24,
+          "text": "double decimal_value = value.ToDouble();",
+          "file": "src/core/fixed8.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 350,
+          "text": "LOG_DEBUG(\"Plugins stopped successfully\");",
+          "file": "src/core/neo_system.cpp"
+        }
+      ],
+      "metrics": {
+        "cpp_files": 14
+      },
+      "test_count": 79,
+      "has_tests": true
+    },
+    "cryptography": {
+      "status": "WARNING",
+      "critical_count": 0,
+      "warning_count": 4,
+      "minor_count": 4,
+      "issues": [
+        {
+          "type": "todo",
+          "line": 26,
+          "text": "#define LOG_DEBUG(msg, ...)          \\",
+          "file": "src/cryptography/mpttrie/trie.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 29,
+          "text": "/* Debug logging disabled */ \\",
+          "file": "src/cryptography/mpttrie/trie.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 237,
+          "text": "LOG_DEBUG(\"Runtime error in Trie::TryGetInternal: {}\", e.what());",
+          "file": "src/cryptography/mpttrie/trie.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 242,
+          "text": "LOG_DEBUG(\"Exception in Trie::TryGetInternal: {}\", e.what());",
+          "file": "src/cryptography/mpttrie/trie.cpp"
+        }
+      ],
+      "metrics": {
+        "cpp_files": 35
+      },
+      "test_count": 483,
+      "has_tests": true
+    },
+    "network": {
+      "status": "CRITICAL",
+      "critical_count": 2,
+      "warning_count": 152,
+      "minor_count": 156,
+      "issues": [
+        {
+          "type": "todo",
+          "line": 358,
+          "text": "NEO_LOG(NEO_DEBUG, \"Received GetAddr message from peer\");",
+          "file": "src/network/p2p_server.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 410,
+          "text": "NEO_LOG(NEO_DEBUG, \"Received Addr message with \" << addrPayload->GetAddressList().size()",
+          "file": "src/network/p2p_server.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 482,
+          "text": "NEO_LOG(NEO_DEBUG, \"Sent verack to peer\");",
+          "file": "src/network/p2p_server.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 592,
+          "text": "NEO_LOG(NEO_DEBUG, \"Received verack from peer: \" << peer->GetUserAgent());",
+          "file": "src/network/p2p_server.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 623,
+          "text": "NEO_LOG(NEO_DEBUG, \"Received GetData message from peer\");",
+          "file": "src/network/p2p_server.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 639,
+          "text": "NEO_LOG(NEO_DEBUG, \"Processing GetData request for hash: \" << hash.ToString());",
+          "file": "src/network/p2p_server.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 791,
+          "text": "NEO_LOG(NEO_DEBUG, \"Received ping from peer: \" << peer->GetUserAgent());",
+          "file": "src/network/p2p_server.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 797,
+          "text": "NEO_LOG(NEO_DEBUG, \"Sent pong to peer: \" << peer->GetUserAgent());",
+          "file": "src/network/p2p_server.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 810,
+          "text": "NEO_LOG(NEO_DEBUG, \"Received pong from peer: \" << peer->GetUserAgent());",
+          "file": "src/network/p2p_server.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 887,
+          "text": "NEO_LOG(NEO_DEBUG, \"Sent version message to peer\");",
+          "file": "src/network/p2p_server.cpp"
+        }
+      ],
+      "metrics": {
+        "cpp_files": 61
+      },
+      "test_count": 756,
+      "has_tests": true
+    },
+    "consensus": {
+      "status": "WARNING",
+      "critical_count": 0,
+      "warning_count": 26,
+      "minor_count": 26,
+      "issues": [
+        {
+          "type": "todo",
+          "line": 115,
+          "text": "LOG_DEBUG(\"Consensus not running, ignoring message\");",
+          "file": "src/consensus/dbft_consensus.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 123,
+          "text": "LOG_DEBUG(\"Ignoring message for block height {} (current: {})\", message.GetBlockIndex(), current_block_index);",
+          "file": "src/consensus/dbft_consensus.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 138,
+          "text": "LOG_DEBUG(\"Ignoring message for old view {} (current: {})\", message.GetViewNumber(), current_view);",
+          "file": "src/consensus/dbft_consensus.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 169,
+          "text": "LOG_DEBUG(\"Memory pool not available\");",
+          "file": "src/consensus/dbft_consensus.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 264,
+          "text": "LOG_DEBUG(\"Starting new consensus round\");",
+          "file": "src/consensus/dbft_consensus.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 337,
+          "text": "LOG_DEBUG(\"Processing prepare request from validator {}\", message.GetValidatorIndex());",
+          "file": "src/consensus/dbft_consensus.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 380,
+          "text": "LOG_DEBUG(\"Found transaction {} in memory pool\", tx_hash.ToString());",
+          "file": "src/consensus/dbft_consensus.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 385,
+          "text": "LOG_DEBUG(\"Verified {} transactions for consensus\", txs.size());",
+          "file": "src/consensus/dbft_consensus.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 400,
+          "text": "LOG_DEBUG(\"Sending prepare response\");",
+          "file": "src/consensus/dbft_consensus.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 421,
+          "text": "LOG_DEBUG(\"Processing prepare response from validator {}\", message.GetValidatorIndex());",
+          "file": "src/consensus/dbft_consensus.cpp"
+        }
+      ],
+      "metrics": {
+        "cpp_files": 17
+      },
+      "test_count": 151,
+      "has_tests": true
+    },
+    "vm": {
+      "status": "WARNING",
+      "critical_count": 0,
+      "warning_count": 21,
+      "minor_count": 21,
+      "issues": [
+        {
+          "type": "todo",
+          "line": 2,
+          "text": "* @file debugger.cpp",
+          "file": "src/vm/debugger.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 3,
+          "text": "* @brief Debugger",
+          "file": "src/vm/debugger.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 9,
+          "text": "#include <neo/vm/debugger.h>",
+          "file": "src/vm/debugger.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 13,
+          "text": "Debugger::Debugger(ExecutionEngine& engine) : engine_(engine)",
+          "file": "src/vm/debugger.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 13,
+          "text": "Debugger::Debugger(ExecutionEngine& engine) : engine_(engine)",
+          "file": "src/vm/debugger.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 16,
+          "text": "// Initialize the engine to Break state for debugging",
+          "file": "src/vm/debugger.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 23,
+          "text": "VMState Debugger::Execute()",
+          "file": "src/vm/debugger.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 30,
+          "text": "VMState Debugger::StepInto()",
+          "file": "src/vm/debugger.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 32,
+          "text": "// If not in Break state, initialize to Break for debugging",
+          "file": "src/vm/debugger.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 49,
+          "text": "// Return to Break state for debugging unless we've halted or faulted",
+          "file": "src/vm/debugger.cpp"
+        }
+      ],
+      "metrics": {
+        "cpp_files": 42
+      },
+      "test_count": 635,
+      "has_tests": true
+    },
+    "smart_contract": {
+      "status": "CRITICAL",
+      "critical_count": 1,
+      "warning_count": 22,
+      "minor_count": 23,
+      "issues": [
+        {
+          "type": "todo",
+          "line": 33,
+          "text": "#ifndef LOG_DEBUG",
+          "file": "src/smartcontract/transaction_verifier.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 34,
+          "text": "#define LOG_DEBUG(fmt, ...) ((void)0)",
+          "file": "src/smartcontract/transaction_verifier.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 435,
+          "text": "LOG_DEBUG(\"Using cached verification result for tx {}\", cacheKey);",
+          "file": "src/smartcontract/transaction_verifier.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 440,
+          "text": "LOG_DEBUG(\"Cache miss for transaction verification: {}\", cacheKey);",
+          "file": "src/smartcontract/transaction_verifier.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 447,
+          "text": "LOG_DEBUG(\"Using cached verification result for tx {}\", cacheKey);",
+          "file": "src/smartcontract/transaction_verifier.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 460,
+          "text": "LOG_DEBUG(\"Cache miss for transaction verification: {}\", cacheKey);",
+          "file": "src/smartcontract/transaction_verifier.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 529,
+          "text": "LOG_DEBUG(\"Recorded gas consumption in histogram: {} gas units\", totalGasConsumed);",
+          "file": "src/smartcontract/transaction_verifier.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 546,
+          "text": "LOG_DEBUG(\"Cached verification result for transaction: {}\", transaction.GetHash().ToString());",
+          "file": "src/smartcontract/transaction_verifier.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 597,
+          "text": "neo::logging::Logger::GetDefault().Debug(\"TransactionVerifier\",",
+          "file": "src/smartcontract/transaction_verifier.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 702,
+          "text": "neo::logging::Logger::GetDefault().Debug(\"TransactionVerifier\",",
+          "file": "src/smartcontract/transaction_verifier.cpp"
+        }
+      ],
+      "metrics": {
+        "cpp_files": 57
+      },
+      "test_count": 0,
+      "has_tests": false
+    },
+    "ledger": {
+      "status": "CRITICAL",
+      "critical_count": 1,
+      "warning_count": 17,
+      "minor_count": 20,
+      "issues": [
+        {
+          "type": "todo",
+          "line": 61,
+          "text": "LOG_DEBUG(\"Transaction already in blockchain\");",
+          "file": "src/ledger/transaction_validator.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 67,
+          "text": "LOG_DEBUG(\"Transaction already in mempool\");",
+          "file": "src/ledger/transaction_validator.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 111,
+          "text": "LOG_DEBUG(\"Transaction {} validation successful\", tx.GetHash().ToString());",
+          "file": "src/ledger/transaction_validator.cpp"
+        },
+        {
+          "type": "stub",
+          "line": 3,
+          "text": "* @brief Ledger Dummy",
+          "file": "src/ledger/ledger_dummy.cpp"
+        },
+        {
+          "type": "empty_function",
+          "line": 13,
+          "text": "{",
+          "file": "src/ledger/ledger_dummy.cpp"
+        },
+        {
+          "type": "stub_file",
+          "line": 0,
+          "text": "File name indicates stub: ledger_dummy.cpp",
+          "file": "src/ledger/ledger_dummy.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 74,
+          "text": "neo::logging::Logger::Instance().Debug(\"TxPool\", \"Transaction already in pool: \" + hash.ToString());",
+          "file": "src/ledger/transaction_pool_manager.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 329,
+          "text": "neo::logging::Logger::Instance().Debug(\"TxPool\", \"Validated transaction: \" + hash.ToString());",
+          "file": "src/ledger/transaction_pool_manager.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 511,
+          "text": "neo::logging::Logger::Instance().Debug(",
+          "file": "src/ledger/transaction_pool_manager.cpp"
+        },
+        {
+          "type": "deprecated",
+          "line": 46,
+          "text": "// Legacy Neo 2.x attribute handling",
+          "file": "src/ledger/transaction_attribute.cpp"
+        }
+      ],
+      "metrics": {
+        "cpp_files": 35
+      },
+      "test_count": 377,
+      "has_tests": true
+    },
+    "wallet": {
+      "status": "READY",
+      "critical_count": 0,
+      "warning_count": 0,
+      "minor_count": 0,
+      "issues": [],
+      "metrics": {
+        "cpp_files": 14
+      },
+      "test_count": 54,
+      "has_tests": true
+    },
+    "rpc": {
+      "status": "CRITICAL",
+      "critical_count": 9,
+      "warning_count": 3,
+      "minor_count": 13,
+      "issues": [
+        {
+          "type": "stub",
+          "line": 334,
+          "text": "{\"header_height\", blockchain ? blockchain->GetHeight() : 0}  // Using GetHeight as placeholder",
+          "file": "src/rpc/rpc_server_unified.cpp"
+        },
+        {
+          "type": "stub",
+          "line": 338,
+          "text": "{\"size\", 0},  // Placeholder - mempool methods need implementation",
+          "file": "src/rpc/rpc_server_unified.cpp"
+        },
+        {
+          "type": "stub",
+          "line": 339,
+          "text": "{\"verified\", 0}  // Placeholder - mempool methods need implementation",
+          "file": "src/rpc/rpc_server_unified.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 761,
+          "text": "LOG_DEBUG(\"Address validation failed: {}\", e.what());",
+          "file": "src/rpc/rpc_methods.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 766,
+          "text": "LOG_DEBUG(\"Runtime error during address validation: {}\", e.what());",
+          "file": "src/rpc/rpc_methods.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 771,
+          "text": "LOG_DEBUG(\"Exception during address validation: {}\", e.what());",
+          "file": "src/rpc/rpc_methods.cpp"
+        },
+        {
+          "type": "stub",
+          "line": 19,
+          "text": "// Stub implementation to prevent hanging",
+          "file": "src/rpc/rpc_server_stub.cpp"
+        },
+        {
+          "type": "stub",
+          "line": 27,
+          "text": "LOG_INFO(\"RPC Server stub initialized (httplib not available)\");",
+          "file": "src/rpc/rpc_server_stub.cpp"
+        },
+        {
+          "type": "stub",
+          "line": 36,
+          "text": "LOG_INFO(\"RPC Server stub started (not actually listening)\");",
+          "file": "src/rpc/rpc_server_stub.cpp"
+        },
+        {
+          "type": "stub",
+          "line": 45,
+          "text": "LOG_INFO(\"RPC Server stub stopped\");",
+          "file": "src/rpc/rpc_server_stub.cpp"
+        }
+      ],
+      "metrics": {
+        "cpp_files": 13
+      },
+      "test_count": 129,
+      "has_tests": true
+    },
+    "storage": {
+      "status": "WARNING",
+      "critical_count": 0,
+      "warning_count": 2,
+      "minor_count": 2,
+      "issues": [
+        {
+          "type": "todo",
+          "line": 120,
+          "text": "logger_->Debug(\"Opening existing column family: {}\", cf_name);",
+          "file": "src/persistence/rocksdb_store.cpp"
+        },
+        {
+          "type": "todo",
+          "line": 551,
+          "text": "logger_->Debug(\"RocksDB flush completed\");",
+          "file": "src/persistence/rocksdb_store.cpp"
+        }
+      ],
+      "metrics": {
+        "cpp_files": 9
+      },
+      "test_count": 0,
+      "has_tests": false
+    },
+    "plugins": {
+      "status": "READY",
+      "critical_count": 0,
+      "warning_count": 0,
+      "minor_count": 0,
+      "issues": [],
+      "metrics": {
+        "cpp_files": 13
+      },
+      "test_count": 55,
+      "has_tests": true
+    }
+  },
+  "metrics": {
+    "total_files": 310,
+    "total_lines": 83122,
+    "classes": 45,
+    "functions": 302,
+    "tests": 0
+  },
+  "timestamp": "2025-08-16T15:47:25.803702"
+}

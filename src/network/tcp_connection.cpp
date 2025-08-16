@@ -154,6 +154,11 @@ void TcpConnection::SetConnectionClosedCallback(std::function<void()> callback)
     connectionClosedCallback_ = std::move(callback);
 }
 
+bool TcpConnection::IsConnected() const 
+{ 
+    return socket_.is_open() && running_; 
+}
+
 void TcpConnection::ReadMessage()
 {
     if (!running_ || !socket_.is_open()) return;

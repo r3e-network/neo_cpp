@@ -55,8 +55,7 @@ if [ "$PLATFORM" = "macos" ]; then
         -DBUILD_BENCHMARKS=ON \
         -DBUILD_EXAMPLES=ON \
         -DBUILD_TOOLS=ON \
-        -DBUILD_SDK=ON \
-        -G Ninja
+        -DBUILD_SDK=ON
 elif [ "$PLATFORM" = "linux" ]; then
     cmake .. \
         -DCMAKE_BUILD_TYPE=Release \
@@ -64,8 +63,7 @@ elif [ "$PLATFORM" = "linux" ]; then
         -DBUILD_BENCHMARKS=ON \
         -DBUILD_EXAMPLES=ON \
         -DBUILD_TOOLS=ON \
-        -DBUILD_SDK=ON \
-        -G Ninja
+        -DBUILD_SDK=ON
 else
     echo "Windows builds should use build_release.bat"
     exit 1

@@ -294,7 +294,7 @@ TEST_F(UT_NeoToken, Transfer_ValidationChecks)
 {
     // Test: Transfer validation checks
 
-    // Create a mock application engine (simplified for testing)
+    // Create a mock application engine for testing
     // In real tests, this would need proper setup
     ApplicationEngine engine;
 

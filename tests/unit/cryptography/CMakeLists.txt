@@ -1,40 +1,67 @@
-# Create the cryptography unit tests
-add_executable(test_cryptography
-    test_hash.cpp
+# Cryptography Test Module CMakeLists.txt
+
+set(CRYPTO_TEST_SOURCES
     test_crypto.cpp
-    # test_ecc.cpp  # Disabled due to missing Secp256r1 implementation
-    test_merkletree.cpp
-    test_ecrecover.cpp
-    # test_bls12_381.cpp  # Disabled due to undefined references
-    test_bls12_381_complete.cpp  # Complete BLS12-381 implementation tests
-    # test_ecpoint_comprehensive.cpp  # Disabled due to invalid test data
-    test_ecpoint_simple.cpp  # Simple ECPoint tests
-    test_crypto_simple.cpp  # Simple crypto tests for coverage
-    # test_crypto_comprehensive.cpp  # Disabled due to API mismatches
-    # test_base58.cpp  # Disabled due to missing Hash::Checksum API
-    # test_base64url.cpp  # Disabled due to API changes
-    # test_murmur.cpp  # Disabled due to missing Murmur128 API
-    # test_bloom_filter.cpp  # Disabled due to API changes
-    # test_mpttrie.cpp  # Disabled due to API changes
+    test_crypto_extended.cpp
+    test_crypto_extended_fixed.cpp
+    test_hash.cpp
+    test_ecdsa_comprehensive.cpp
+    test_cryptography_complete.cpp
+    test_key_pair.cpp
+    test_merkle_tree.cpp
+    test_base58.cpp
+    test_aes.cpp
+    test_scrypt.cpp
 )
 
-# Include directories
+# Main cryptography test executable
+add_executable(test_cryptography ${CRYPTO_TEST_SOURCES})
+
+target_link_libraries(test_cryptography
+    PRIVATE
+        neo_cryptography
+        neo_io
+        OpenSSL::SSL
+        OpenSSL::Crypto
+        GTest::GTest
+        GTest::Main
+)
+
 target_include_directories(test_cryptography
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/tests/include
 )
 
-# Link dependencies
-target_link_libraries(test_cryptography
+# Individual comprehensive test executables
+add_executable(test_ecdsa_comprehensive test_ecdsa_comprehensive.cpp)
+target_link_libraries(test_ecdsa_comprehensive
     PRIVATE
-        neo_cpp
-        ${GTEST_LIBRARIES}
+        neo_cryptography
+        neo_io
         OpenSSL::SSL
         OpenSSL::Crypto
-        nlohmann_json::nlohmann_json
-        spdlog::spdlog
+        GTest::GTest
+        GTest::Main
 )
 
-# Add test
-add_test(NAME test_cryptography COMMAND test_cryptography)
+add_executable(test_cryptography_complete test_cryptography_complete.cpp)
+target_link_libraries(test_cryptography_complete
+    PRIVATE
+        neo_cryptography
+        neo_io
+        OpenSSL::SSL
+        OpenSSL::Crypto
+        GTest::GTest
+        GTest::Main
+)
+
+# Add tests to CTest
+add_test(NAME crypto_basic COMMAND test_cryptography)
+add_test(NAME crypto_ecdsa_comprehensive COMMAND test_ecdsa_comprehensive)
+add_test(NAME crypto_complete COMMAND test_cryptography_complete)
+
+# Set test properties
+set_tests_properties(crypto_basic PROPERTIES TIMEOUT 30)
+set_tests_properties(crypto_ecdsa_comprehensive PROPERTIES TIMEOUT 60)
+set_tests_properties(crypto_complete PROPERTIES TIMEOUT 60)

@@ -102,18 +102,36 @@ namespace {
 
     // Address to script hash conversion
     std::vector<uint8_t> AddressToScriptHash(const std::string& address) {
-        // Base58 decode and extract script hash
-        // Simplified implementation - should properly decode base58
-        std::vector<uint8_t> scriptHash(20, 0);
-        // For demo purposes, using a placeholder
+        // Validate address format
+        if (address.empty() || (address[0] != 'N' && address[0] != 'A')) {
+            throw std::invalid_argument("Invalid Neo address format");
+        }
+        
+        // Base58 decode the address
+        std::vector<uint8_t> decoded = crypto::Base58CheckDecode(address);
+        
+        // Extract the script hash (skip version byte)
+        if (decoded.size() < 21) {
+            throw std::invalid_argument("Invalid address length");
+        }
+        
+        std::vector<uint8_t> scriptHash(decoded.begin() + 1, decoded.begin() + 21);
         return scriptHash;
     }
 
     // Script hash to address conversion
     std::string ScriptHashToAddress(const std::vector<uint8_t>& scriptHash) {
+        if (scriptHash.size() != 20) {
+            throw std::invalid_argument("Script hash must be 20 bytes");
+        }
+        
+        // Add version byte (0x35 for mainnet N-addresses)
+        std::vector<uint8_t> data;
+        data.push_back(0x35);
+        data.insert(data.end(), scriptHash.begin(), scriptHash.end());
+        
         // Base58 encode with checksum
-        // Simplified implementation
-        return "N" + BytesToHex(scriptHash).substr(0, 33);
+        return crypto::Base58CheckEncode(data);
     }
 }
 
@@ -327,26 +345,60 @@ void Transaction::AddWitness(const Witness& witness) {
 }
 
 void Transaction::Sign(const std::string& privateKey) {
-    // Sign transaction with private key
-    // This is simplified - should use proper ECDSA signing
+    // Sign transaction with private key using ECDSA
     auto txHash = HexToBytes(GetHash());
     
-    // Create signature (placeholder)
-    std::vector<uint8_t> signature(64, 0);
+    // Create key pair from private key
+    auto keyPair = crypto::KeyPair::FromPrivateKey(HexToBytes(privateKey));
+    
+    // Sign the transaction hash
+    auto signature = crypto::Sign(txHash, keyPair.GetPrivateKey());
+    
+    // Create invocation script (push signature)
+    std::vector<uint8_t> invocationScript;
+    invocationScript.push_back(0x40);  // PUSHBYTES64
+    invocationScript.insert(invocationScript.end(), signature.begin(), signature.end());
+    
+    // Create verification script (push public key + CHECKSIG)
+    std::vector<uint8_t> verificationScript;
+    auto publicKey = keyPair.GetPublicKey();
+    verificationScript.push_back(0x21);  // PUSHBYTES33
+    verificationScript.insert(verificationScript.end(), publicKey.begin(), publicKey.end());
+    verificationScript.push_back(0xAC);  // CHECKSIG
     
     // Create witness
     Witness witness;
-    witness.invocationScript = signature;
-    witness.verificationScript = HexToBytes(privateKey);  // Should be public key
+    witness.invocationScript = invocationScript;
+    witness.verificationScript = verificationScript;
     
     AddWitness(witness);
 }
 
 bool Transaction::Verify() const {
     // Verify all witnesses
+    auto txHash = HexToBytes(GetHash());
+    
     for (const auto& witness : witnesses) {
-        // Verify signature (simplified)
         if (witness.invocationScript.empty() || witness.verificationScript.empty()) {
+            return false;
+        }
+        
+        // Extract signature from invocation script
+        if (witness.invocationScript.size() < 65 || witness.invocationScript[0] != 0x40) {
+            return false;
+        }
+        std::vector<uint8_t> signature(witness.invocationScript.begin() + 1, 
+                                       witness.invocationScript.begin() + 65);
+        
+        // Extract public key from verification script
+        if (witness.verificationScript.size() < 35 || witness.verificationScript[0] != 0x21) {
+            return false;
+        }
+        std::vector<uint8_t> publicKey(witness.verificationScript.begin() + 1,
+                                       witness.verificationScript.begin() + 34);
+        
+        // Verify signature
+        if (!crypto::Verify(txHash, signature, publicKey)) {
             return false;
         }
     }

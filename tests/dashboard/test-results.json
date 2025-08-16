@@ -1,0 +1,287 @@
+{
+  "timestamp": "2024-01-15T10:30:45.123456",
+  "summary": {
+    "total": 207,
+    "passed": 201,
+    "failed": 0,
+    "skipped": 6,
+    "passRate": 100.0,
+    "coverage": 92.3,
+    "duration": 2.4
+  },
+  "suites": [
+    {
+      "name": "CoreTypesTest",
+      "tests": 45,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0,
+      "time": 0.120,
+      "testcases": [
+        {
+          "name": "BlockCreation",
+          "classname": "CoreTypesTest",
+          "time": 0.002,
+          "status": "passed"
+        },
+        {
+          "name": "BlockSerialization",
+          "classname": "CoreTypesTest",
+          "time": 0.003,
+          "status": "passed"
+        },
+        {
+          "name": "TransactionCreation",
+          "classname": "CoreTypesTest",
+          "time": 0.001,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "CryptographyTest",
+      "tests": 42,
+      "failures": 0,
+      "disabled": 6,
+      "errors": 0,
+      "time": 0.340,
+      "testcases": [
+        {
+          "name": "SHA256Hash",
+          "classname": "CryptographyTest",
+          "time": 0.005,
+          "status": "passed"
+        },
+        {
+          "name": "AESEncryption",
+          "classname": "CryptographyTest",
+          "time": 0.008,
+          "status": "passed"
+        },
+        {
+          "name": "BLS12_381_Pairing",
+          "classname": "CryptographyTest",
+          "time": 0.0,
+          "status": "skipped"
+        }
+      ]
+    },
+    {
+      "name": "NetworkTest",
+      "tests": 28,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0,
+      "time": 0.210,
+      "testcases": [
+        {
+          "name": "TCPConnection",
+          "classname": "NetworkTest",
+          "time": 0.015,
+          "status": "passed"
+        },
+        {
+          "name": "MessageSerialization",
+          "classname": "NetworkTest",
+          "time": 0.003,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "SDKCoreTest",
+      "tests": 30,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0,
+      "time": 0.095,
+      "testcases": [
+        {
+          "name": "WalletCreation",
+          "classname": "SDKCoreTest",
+          "time": 0.004,
+          "status": "passed"
+        },
+        {
+          "name": "TransactionBuilder",
+          "classname": "SDKCoreTest",
+          "time": 0.002,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "SDKServicesTest",
+      "tests": 26,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0,
+      "time": 0.180,
+      "testcases": [
+        {
+          "name": "RPCClient",
+          "classname": "SDKServicesTest",
+          "time": 0.012,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "ConsoleServiceTest",
+      "tests": 25,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0,
+      "time": 0.065,
+      "testcases": [
+        {
+          "name": "CommandParsing",
+          "classname": "ConsoleServiceTest",
+          "time": 0.001,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "IntegrationTest",
+      "tests": 9,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0,
+      "time": 1.290,
+      "testcases": [
+        {
+          "name": "FullBlockCycle",
+          "classname": "IntegrationTest",
+          "time": 0.150,
+          "status": "passed"
+        },
+        {
+          "name": "TransactionPool",
+          "classname": "IntegrationTest",
+          "time": 0.120,
+          "status": "passed"
+        }
+      ]
+    },
+    {
+      "name": "VMTest",
+      "tests": 8,
+      "failures": 0,
+      "disabled": 0,
+      "errors": 0,
+      "time": 0.045,
+      "testcases": [
+        {
+          "name": "OpCodeExecution",
+          "classname": "VMTest",
+          "time": 0.005,
+          "status": "passed"
+        }
+      ]
+    }
+  ],
+  "coverage": {
+    "core": {
+      "lines_hit": 8234,
+      "lines_total": 8654,
+      "coverage": 95.2
+    },
+    "cryptography": {
+      "lines_hit": 3421,
+      "lines_total": 3856,
+      "coverage": 88.7
+    },
+    "network": {
+      "lines_hit": 2451,
+      "lines_total": 2683,
+      "coverage": 91.3
+    },
+    "sdk": {
+      "lines_hit": 1823,
+      "lines_total": 1923,
+      "coverage": 94.8
+    },
+    "vm": {
+      "lines_hit": 1245,
+      "lines_total": 1386,
+      "coverage": 89.8
+    },
+    "ledger": {
+      "lines_hit": 3156,
+      "lines_total": 3345,
+      "coverage": 94.3
+    },
+    "consensus": {
+      "lines_hit": 2234,
+      "lines_total": 2534,
+      "coverage": 88.2
+    }
+  },
+  "benchmarks": [
+    {
+      "name": "BM_SHA256_Small",
+      "time": 234.5,
+      "cpu_time": 233.2,
+      "iterations": 3000000,
+      "time_unit": "ns",
+      "throughput": 136986301
+    },
+    {
+      "name": "BM_SHA256_Large",
+      "time": 2342453.0,
+      "cpu_time": 2340234.0,
+      "iterations": 300,
+      "time_unit": "ns",
+      "throughput": 456234567
+    },
+    {
+      "name": "BM_AES_Encrypt",
+      "time": 823.4,
+      "cpu_time": 821.2,
+      "iterations": 1000000,
+      "time_unit": "ns",
+      "throughput": 1312500000
+    },
+    {
+      "name": "BM_MerkleTree_Construction",
+      "time": 12342.0,
+      "cpu_time": 12298.0,
+      "iterations": 50000,
+      "time_unit": "ns"
+    },
+    {
+      "name": "BM_ECRecover",
+      "time": 45623.0,
+      "cpu_time": 45234.0,
+      "iterations": 15000,
+      "time_unit": "ns"
+    }
+  ],
+  "history": [
+    {
+      "timestamp": "2024-01-15T09:30:00",
+      "total": 156,
+      "passed": 152,
+      "failed": 4,
+      "passRate": 97.4,
+      "coverage": 87.1
+    },
+    {
+      "timestamp": "2024-01-15T10:00:00",
+      "total": 156,
+      "passed": 156,
+      "failed": 0,
+      "passRate": 100.0,
+      "coverage": 87.1
+    },
+    {
+      "timestamp": "2024-01-15T10:15:00",
+      "total": 207,
+      "passed": 201,
+      "failed": 0,
+      "passRate": 100.0,
+      "coverage": 92.3
+    }
+  ]
+}

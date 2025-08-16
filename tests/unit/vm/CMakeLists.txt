@@ -1,63 +1,47 @@
-# Add subdirectory for opcode tests
-add_subdirectory(opcodes)
+# VM Test Module CMakeLists.txt
 
-# Create the VM unit tests
-add_executable(test_vm
-    test_vm_main.cpp
-    test_vm_simple.cpp
-    test_vm_comprehensive.cpp  # Comprehensive tests for coverage
-    # test_vm_basic.cpp # Has compilation issues with ByteStringItem
-    # test_stack_item.cpp # Needs API updates
-    # test_execution_engine.cpp # Needs API updates
-    # The following tests are pending implementation:
-    # test_script.cpp
-    # test_vm_json.cpp
-    # test_lte_gte.cpp # Disabled due to test failures
-    # vm_json_test_base.cpp
-    # test_debugger.cpp
-    # test_evaluation_stack.cpp
-    # test_execution_context_state.cpp
-    # test_struct.cpp
-    # test_slot.cpp
-    # test_try_catch.cpp
-    # test_reference_counter.cpp
-    # test_script_builder.cpp
-    # test_script_converter.cpp
-    # Disabled - these use APIs that don't exist yet:
-    # test_script_builder_all_methods_complete.cpp
-    # test_vm_json_all_methods_complete.cpp
-    # test_evaluation_stack_all_methods_complete.cpp
-    # test_stack_item_all_methods_complete.cpp
-    # test_debugger_all_methods_complete.cpp
-    # test_reference_counter_all_methods_complete.cpp
-    # test_script_all_methods_complete.cpp
-    # test_struct_all_methods_complete.cpp
-    # test_slot_all_methods_complete.cpp
-    # test_execution_context_all_methods_complete.cpp
+set(VM_TEST_SOURCES
+    test_vm.cpp
+    test_vm_basic.cpp
+    test_vm_comprehensive.cpp
+    test_vm_opcodes_complete.cpp
+    test_script_builder.cpp
+    test_stack_item.cpp
+    test_execution_engine.cpp
 )
 
-# Include directories
+# Main VM test executable
+add_executable(test_vm ${VM_TEST_SOURCES})
+
+target_link_libraries(test_vm
+    PRIVATE
+        neo_vm
+        neo_io
+        neo_cryptography
+        GTest::GTest
+        GTest::Main
+)
+
 target_include_directories(test_vm
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/tests/include
 )
 
-# Link dependencies
-target_link_libraries(test_vm
+# Individual test executable for comprehensive opcode tests
+add_executable(test_vm_opcodes_complete test_vm_opcodes_complete.cpp)
+target_link_libraries(test_vm_opcodes_complete
     PRIVATE
-        neo_cpp
-        ${GTEST_LIBRARIES}
+        neo_vm
+        neo_io
+        GTest::GTest
+        GTest::Main
 )
 
-# Copy test data files to the build directory
-# NOTE: Commented out because Tests directory doesn't exist
-# add_custom_command(TARGET test_vm POST_BUILD
-#     COMMAND ${CMAKE_COMMAND} -E copy_directory
-#     ${CMAKE_SOURCE_DIR}/Tests
-#     ${CMAKE_CURRENT_BINARY_DIR}/Tests
-#     COMMENT "Copying test data files to build directory"
-# )
+# Add tests to CTest
+add_test(NAME vm_basic COMMAND test_vm)
+add_test(NAME vm_opcodes_complete COMMAND test_vm_opcodes_complete)
 
-# Add test
-add_test(NAME test_vm COMMAND test_vm)
+# Set test properties
+set_tests_properties(vm_basic PROPERTIES TIMEOUT 30)
+set_tests_properties(vm_opcodes_complete PROPERTIES TIMEOUT 60)

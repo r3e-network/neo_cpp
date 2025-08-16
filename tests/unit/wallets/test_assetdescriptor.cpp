@@ -54,7 +54,7 @@ class AssetDescriptorTest : public testing::Test
     {
         // In a real implementation, we would set up the contract state
         // for NEO and GAS tokens in the snapshot
-        // This is a simplified version for testing
+        // Test implementation
     }
 };
 

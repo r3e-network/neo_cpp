@@ -1,22 +1,28 @@
 #include <neo/sdk/tx/transaction_builder.h>
-#include <neo/core/transaction.h>
+#include <neo/ledger/transaction.h>
+#include <neo/ledger/signer.h>
+#include <neo/ledger/witness.h>
+#include <neo/ledger/transaction_attribute.h>
+#include <neo/smartcontract/contract_parameter.h>
 #include <neo/vm/script_builder.h>
 #include <neo/logging/logger.h>
 #include <neo/io/binary_writer.h>
+#include <neo/io/uint160.h>
+#include <neo/io/uint256.h>
 
 namespace neo::sdk::tx {
 
 // Asset script hashes (MainNet)
-static const core::UInt160 NEO_TOKEN = core::UInt160::Parse("0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5");
-static const core::UInt160 GAS_TOKEN = core::UInt160::Parse("0xd2a4cff31913016155e38e474a2c06d08be276cf");
+static const io::UInt160 NEO_TOKEN = io::UInt160::Parse("0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5");
+static const io::UInt160 GAS_TOKEN = io::UInt160::Parse("0xd2a4cff31913016155e38e474a2c06d08be276cf");
 
 class TransactionBuilder::Impl {
 public:
-    std::unique_ptr<core::Transaction> transaction;
+    std::unique_ptr<ledger::Transaction> transaction;
     std::vector<uint8_t> script;
     
     Impl() {
-        transaction = std::make_unique<core::Transaction>();
+        transaction = std::make_unique<ledger::Transaction>();
         transaction->SetVersion(0);
         transaction->SetNonce(static_cast<uint32_t>(std::rand()));
     }
@@ -29,11 +35,11 @@ public:
 TransactionBuilder::TransactionBuilder() : impl_(std::make_unique<Impl>()) {}
 TransactionBuilder::~TransactionBuilder() = default;
 
-TransactionBuilder& TransactionBuilder::SetSender(const core::UInt160& sender) {
+TransactionBuilder& TransactionBuilder::SetSender(const io::UInt160& sender) {
     // Add sender as first signer with fee-only scope
-    core::Signer signer;
-    signer.account = sender;
-    signer.scopes = 0x01;  // FeeOnly scope
+    ledger::Signer signer;
+    signer.account_ = sender;
+    signer.scopes_ = static_cast<ledger::WitnessScope>(0x01);  // FeeOnly scope
     
     auto signers = impl_->transaction->GetSigners();
     if (signers.empty()) {
@@ -61,10 +67,10 @@ TransactionBuilder& TransactionBuilder::SetValidUntilBlock(uint32_t block) {
     return *this;
 }
 
-TransactionBuilder& TransactionBuilder::AddAttribute(const core::TransactionAttribute& attr) {
+TransactionBuilder& TransactionBuilder::AddAttribute(const ledger::TransactionAttribute& attr) {
     auto attributes = impl_->transaction->GetAttributes();
     // Convert SDK attribute to core attribute
-    neo::core::TransactionAttribute coreAttr;
+    ledger::TransactionAttribute coreAttr;
     coreAttr.usage = attr.usage;
     coreAttr.data = attr.data;
     attributes.push_back(coreAttr);
@@ -72,14 +78,14 @@ TransactionBuilder& TransactionBuilder::AddAttribute(const core::TransactionAttr
     return *this;
 }
 
-TransactionBuilder& TransactionBuilder::AddWitness(const core::Witness& witness) {
+TransactionBuilder& TransactionBuilder::AddWitness(const ledger::Witness& witness) {
     auto witnesses = impl_->transaction->GetWitnesses();
     witnesses.push_back(witness);
     impl_->transaction->SetWitnesses(witnesses);
     return *this;
 }
 
-TransactionBuilder& TransactionBuilder::AddSigner(const core::Signer& signer) {
+TransactionBuilder& TransactionBuilder::AddSigner(const ledger::Signer& signer) {
     auto signers = impl_->transaction->GetSigners();
     signers.push_back(signer);
     impl_->transaction->SetSigners(signers);
@@ -92,9 +98,9 @@ TransactionBuilder& TransactionBuilder::SetScript(const std::vector<uint8_t>& sc
 }
 
 TransactionBuilder& TransactionBuilder::InvokeContract(
-    const core::UInt160& scriptHash,
+    const io::UInt160& scriptHash,
     const std::string& method,
-    const std::vector<core::ContractParameter>& params) {
+    const std::vector<smartcontract::ContractParameter>& params) {
     
     neo::vm::ScriptBuilder sb;
     
@@ -102,29 +108,29 @@ TransactionBuilder& TransactionBuilder::InvokeContract(
     for (auto it = params.rbegin(); it != params.rend(); ++it) {
         const auto& param = *it;
         switch (param.type) {
-            case core::ContractParameter::INTEGER:
+            case smartcontract::ContractParameter::INTEGER:
                 sb.EmitPush(*reinterpret_cast<const int64_t*>(param.value.data()));
                 break;
-            case core::ContractParameter::BOOLEAN:
+            case smartcontract::ContractParameter::BOOLEAN:
                 sb.EmitPush(param.value[0] != 0);
                 break;
-            case core::ContractParameter::STRING:
+            case smartcontract::ContractParameter::STRING:
                 sb.EmitPush(std::string(param.value.begin(), param.value.end()));
                 break;
-            case core::ContractParameter::HASH160:
-                sb.EmitPush(core::UInt160(param.value));
+            case smartcontract::ContractParameter::HASH160:
+                sb.EmitPush(io::UInt160::FromBytes(param.value));
                 break;
-            case core::ContractParameter::HASH256:
-                sb.EmitPush(core::UInt256(param.value));
+            case smartcontract::ContractParameter::HASH256:
+                sb.EmitPush(io::UInt256::FromBytes(param.value));
                 break;
-            case core::ContractParameter::BYTE_ARRAY:
+            case smartcontract::ContractParameter::BYTE_ARRAY:
                 sb.EmitPush(param.value);
                 break;
-            case core::ContractParameter::VOID:
+            case smartcontract::ContractParameter::VOID:
                 sb.Emit(neo::vm::OpCode::PUSHNULL);
                 break;
             default:
-                NEO_LOG_WARNING("Unsupported parameter type: {}", param.type);
+                NEO_LOG_ERROR(std::string("Unsupported parameter type: ") + param.type);
                 break;
         }
     }
@@ -135,72 +141,73 @@ TransactionBuilder& TransactionBuilder::InvokeContract(
     // Emit method name
     sb.EmitPush(method);
     
-    // Emit contract call
-    sb.EmitAppCall(scriptHash);
+    // Emit contract call (use SYSCALL with contract hash)
+    sb.Emit(neo::vm::OpCode::SYSCALL);
+    sb.EmitPush(scriptHash.ToArray());
     
     impl_->AppendScript(sb.ToArray());
     return *this;
 }
 
 TransactionBuilder& TransactionBuilder::Transfer(
-    const core::UInt160& from,
-    const core::UInt160& to,
+    const io::UInt160& from,
+    const io::UInt160& to,
     const std::string& asset,
     uint64_t amount) {
     
     // Determine token contract
-    core::UInt160 tokenHash;
+    io::UInt160 tokenHash;
     if (asset == "NEO") {
         tokenHash = NEO_TOKEN;
     } else if (asset == "GAS") {
         tokenHash = GAS_TOKEN;
     } else {
         // Assume it's a script hash
-        tokenHash = core::UInt160::Parse(asset);
+        tokenHash = io::UInt160::Parse(asset);
     }
     
     // Build transfer invocation
     return InvokeContract(tokenHash, "transfer", {
-        core::ContractParameter::FromHash160(from),
-        core::ContractParameter::FromHash160(to),
-        core::ContractParameter::FromInteger(amount),
-        core::ContractParameter::Null()  // No data
+        smartcontract::ContractParameter::FromHash160(from),
+        smartcontract::ContractParameter::FromHash160(to),
+        smartcontract::ContractParameter::FromInteger(amount),
+        smartcontract::ContractParameter::Null()  // No data
     });
 }
 
 TransactionBuilder& TransactionBuilder::TransferWithData(
-    const core::UInt160& from,
-    const core::UInt160& to,
+    const io::UInt160& from,
+    const io::UInt160& to,
     const std::string& asset,
     uint64_t amount,
     const std::vector<uint8_t>& data) {
     
     // Determine token contract
-    core::UInt160 tokenHash;
+    io::UInt160 tokenHash;
     if (asset == "NEO") {
         tokenHash = NEO_TOKEN;
     } else if (asset == "GAS") {
         tokenHash = GAS_TOKEN;
     } else {
-        tokenHash = core::UInt160::Parse(asset);
+        tokenHash = io::UInt160::Parse(asset);
     }
     
     // Build transfer invocation with data
     return InvokeContract(tokenHash, "transfer", {
-        core::ContractParameter::FromHash160(from),
-        core::ContractParameter::FromHash160(to),
-        core::ContractParameter::FromInteger(amount),
-        core::ContractParameter::FromByteArray(data)
+        smartcontract::ContractParameter::FromHash160(from),
+        smartcontract::ContractParameter::FromHash160(to),
+        smartcontract::ContractParameter::FromInteger(amount),
+        smartcontract::ContractParameter::FromByteArray(data)
     });
 }
 
 TransactionBuilder& TransactionBuilder::AddCosigner(
-    const core::UInt160& account,
+    const io::UInt160& account,
     uint8_t scopes) {
     
-    core::Signer signer;
-    signer.account = account;
-    signer.scopes = scopes;
+    ledger::Signer signer;
+    signer.account_ = account;
+    signer.scopes_ = static_cast<ledger::WitnessScope>(scopes);
     return AddSigner(signer);
 }
 
@@ -209,7 +216,7 @@ TransactionBuilder& TransactionBuilder::SetNonce(uint32_t nonce) {
     return *this;
 }
 
-std::shared_ptr<core::Transaction> TransactionBuilder::Build() {
+std::shared_ptr<ledger::Transaction> TransactionBuilder::Build() {
     // Set the script
     impl_->transaction->SetScript(impl_->script);
     
@@ -223,10 +230,10 @@ std::shared_ptr<core::Transaction> TransactionBuilder::Build() {
     }
     
     // Return a copy of the transaction
-    return std::make_shared<core::Transaction>(*impl_->transaction);
+    return std::make_shared<ledger::Transaction>(*impl_->transaction);
 }
 
-std::shared_ptr<core::Transaction> TransactionBuilder::BuildAndSign(wallet::Wallet& wallet) {
+std::shared_ptr<ledger::Transaction> TransactionBuilder::BuildAndSign(wallet::Wallet& wallet) {
     auto tx = Build();
     
     // Sign with wallet
@@ -247,7 +254,7 @@ uint64_t TransactionBuilder::CalculateNetworkFee() const {
     // Base fee + size * fee per byte + signature verification cost
     
     // Estimate transaction size
-    auto tx = std::make_shared<core::Transaction>(*impl_->transaction);
+    auto tx = std::make_shared<ledger::Transaction>(*impl_->transaction);
     tx->SetScript(impl_->script);
     auto size = tx->ToArray().size();
     
@@ -264,7 +271,7 @@ uint64_t TransactionBuilder::CalculateNetworkFee() const {
 uint64_t TransactionBuilder::EstimateSystemFee() const {
     // This would require RPC connection to invoke the script
     // and get the actual gas consumption
-    NEO_LOG_WARNING("System fee estimation requires RPC connection. Using default.");
+    NEO_LOG_ERROR("System fee estimation requires RPC connection. Using default.");
     return 1000000;  // Default 0.01 GAS
 }
 

@@ -52,17 +52,17 @@ TEST(CryptoTest, PBKDF2)
     ByteVector salt = ByteVector(ByteSpan(reinterpret_cast<const uint8_t*>("salt"), 4));
 
     ByteVector key = Crypto::PBKDF2(password.AsSpan(), salt.AsSpan(), 1, 32);
-    EXPECT_EQ(key.ToHexString(), "120FB6CFFCF8B32C43E7225256C4F837A86548C92CCC35480805987CB70BE17B");
+    EXPECT_EQ(key.ToHexString(), "120fb6cffcf8b32c43e7225256c4f837a86548c92ccc35480805987cb70be17b");
 
     // Different iterations
     ByteVector key2 = Crypto::PBKDF2(password.AsSpan(), salt.AsSpan(), 2, 32);
     EXPECT_NE(key, key2);
-    EXPECT_EQ(key2.ToHexString(), "AE4D0C95AF6B46D32D0ADFF928F06DD02A303F8EF3C251DFD6E2D85A95474C43");
+    EXPECT_EQ(key2.ToHexString(), "ae4d0c95af6b46d32d0adff928f06dd02a303f8ef3c251dfd6e2d85a95474c43");
 
     // Different key length
     ByteVector key3 = Crypto::PBKDF2(password.AsSpan(), salt.AsSpan(), 1, 16);
     EXPECT_EQ(key3.Size(), 16);
-    EXPECT_EQ(key3.ToHexString(), "120FB6CFFCF8B32C43E7225256C4F837");
+    EXPECT_EQ(key3.ToHexString(), "120fb6cffcf8b32c43e7225256c4f837");
 }
 
 TEST(CryptoTest, HmacSha256)
@@ -72,7 +72,7 @@ TEST(CryptoTest, HmacSha256)
     ByteVector data = ByteVector(ByteSpan(reinterpret_cast<const uint8_t*>("Hi There"), 8));
 
     ByteVector hmac = Crypto::HmacSha256(key.AsSpan(), data.AsSpan());
-    EXPECT_EQ(hmac.ToHexString(), "B0344C61D8DB38535CA8AFCEAF0BF12B881DC200C9833DA726E9376C2E32CFF7");
+    EXPECT_EQ(hmac.ToHexString(), "b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7");
 
     // Empty key
     ByteVector emptyKey;

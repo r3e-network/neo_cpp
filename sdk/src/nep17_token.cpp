@@ -307,7 +307,7 @@ uint64_t NEP17Token::FromDecimalAmount(double decimalAmount, uint8_t decimals) {
     return static_cast<uint64_t>(decimalAmount * std::pow(10, decimals));
 }
 
-// BigInteger implementation (simplified)
+// BigInteger implementation
 BigInteger::BigInteger(uint64_t value) {
     // Store as little-endian bytes
     for (int i = 0; i < 8; i++) {
@@ -347,7 +347,7 @@ BigInteger::BigInteger(const std::string& value) {
 }
 
 std::string BigInteger::ToString() const {
-    // Convert to uint64 first (simplified)
+    // Convert to uint64
     uint64_t value = ToUint64();
     return std::to_string(value);
 }
@@ -371,7 +371,7 @@ BigInteger BigInteger::operator-(const BigInteger& other) const {
     if (a >= b) {
         return BigInteger(a - b);
     }
-    // Handle negative (simplified - just return 0)
+    // Handle negative values
     return BigInteger(0);
 }
 

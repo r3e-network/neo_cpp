@@ -33,36 +33,52 @@ target_link_libraries(test_network
 add_test(NAME test_network COMMAND test_network)
 endif()  # End of disabled network tests
 
-# New network tests (placeholders for missing functionality)
-add_executable(test_network_new
-    # test_message_serialization.cpp # Disabled due to test failures
-    # test_peer_discovery.cpp # Disabled due to test failures
-    # test_connection_management.cpp # Disabled due to test failures
-    # test_protocol_negotiation.cpp # Disabled due to test failures
-    # test_malformed_messages.cpp # Disabled due to test failures
-    # test_p2p_capabilities.cpp # Disabled due to test failures
-    # test_network_addresses.cpp # Disabled due to test failures
-    # test_message_flooding.cpp # Disabled due to test failures
-    # test_peer_reputation.cpp # Disabled due to test failures
-    # test_network_latency.cpp # Disabled due to test failures
+# Network Test Module CMakeLists.txt
+
+set(NETWORK_TEST_SOURCES
     test_network_simple.cpp
-    test_connection_pool.cpp  # New connection pool tests
-    test_network_comprehensive.cpp  # Comprehensive tests for coverage
+    test_network_extended.cpp
+    test_p2p_complete.cpp
+    test_connection_pool.cpp
+    test_message_handler.cpp
+    test_peer_manager.cpp
+    test_protocol_handler.cpp
+    test_network_comprehensive.cpp
 )
 
-# Include directories
-target_include_directories(test_network_new
+# Main network test executable
+add_executable(test_network ${NETWORK_TEST_SOURCES})
+
+target_link_libraries(test_network
+    PRIVATE
+        neo_network
+        neo_io
+        neo_cryptography
+        GTest::GTest
+        GTest::Main
+)
+
+target_include_directories(test_network
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/tests/include
 )
 
-# Link dependencies
-target_link_libraries(test_network_new
+# Individual comprehensive test executable
+add_executable(test_p2p_complete test_p2p_complete.cpp)
+target_link_libraries(test_p2p_complete
     PRIVATE
-        neo_cpp
-        ${GTEST_LIBRARIES}
+        neo_network
+        neo_io
+        neo_cryptography
+        GTest::GTest
+        GTest::Main
 )
 
-# Add test
-add_test(NAME test_network_new COMMAND test_network_new)
+# Add tests to CTest
+add_test(NAME network_basic COMMAND test_network)
+add_test(NAME network_p2p_complete COMMAND test_p2p_complete)
+
+# Set test properties
+set_tests_properties(network_basic PROPERTIES TIMEOUT 30)
+set_tests_properties(network_p2p_complete PROPERTIES TIMEOUT 60)

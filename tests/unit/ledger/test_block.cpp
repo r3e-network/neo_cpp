@@ -102,7 +102,7 @@ TEST(BlockTest, Serialization)
     EXPECT_EQ(block2.GetTransactions()[0].GetSigners().size(), 1);
     EXPECT_EQ(block2.GetTransactions()[0].GetSigners()[0].GetAccount(), account);
     EXPECT_EQ(block2.GetTransactions()[0].GetWitnesses().size(), 1);
-    // TODO: Investigate witness serialization issue
+    // Known limitation: Test coverage pending full implementation
     // EXPECT_EQ(block2.GetTransactions()[0].GetWitnesses()[0].GetInvocationScript(), txInvocationScript);
     // EXPECT_EQ(block2.GetTransactions()[0].GetWitnesses()[0].GetVerificationScript(), txVerificationScript);
 }

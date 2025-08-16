@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites tests="56" failures="2" disabled="1" errors="0" time="0.01" timestamp="2025-08-15T18:07:46.163" name="AllTests">
+  <testsuite name="HashTest" tests="6" failures="0" disabled="0" skipped="0" errors="0" time="0.001" timestamp="2025-08-15T18:07:46.163">
+    <testcase name="Sha256" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_hash.cpp" line="8" status="run" result="completed" time="0.001" timestamp="2025-08-15T18:07:46.163" classname="HashTest" />
+    <testcase name="Ripemd160" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_hash.cpp" line="21" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.165" classname="HashTest" />
+    <testcase name="Hash256" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_hash.cpp" line="34" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.165" classname="HashTest" />
+    <testcase name="Hash160" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_hash.cpp" line="52" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.165" classname="HashTest" />
+    <testcase name="Keccak256" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_hash.cpp" line="70" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.165" classname="HashTest" />
+    <testcase name="Murmur32" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_hash.cpp" line="95" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.165" classname="HashTest" />
+  </testsuite>
+  <testsuite name="CryptoTest" tests="5" failures="2" disabled="0" skipped="0" errors="0" time="0." timestamp="2025-08-15T18:07:46.165">
+    <testcase name="GenerateRandomBytes" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto.cpp" line="8" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.165" classname="CryptoTest" />
+    <testcase name="AesEncryptDecrypt" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto.cpp" line="22" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.166" classname="CryptoTest" />
+    <testcase name="PBKDF2" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto.cpp" line="48" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.166" classname="CryptoTest">
+      <failure message="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto.cpp:55&#x0A;Expected equality of these values:&#x0A;  key.ToHexString()&#x0A;    Which is: &quot;120fb6cffcf8b32c43e7225256c4f837a86548c92ccc35480805987cb70be17b&quot;&#x0A;  &quot;120FB6CFFCF8B32C43E7225256C4F837A86548C92CCC35480805987CB70BE17B&quot;&#x0A;" type=""><![CDATA[/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto.cpp:55
+Expected equality of these values:
+  key.ToHexString()
+    Which is: "120fb6cffcf8b32c43e7225256c4f837a86548c92ccc35480805987cb70be17b"
+  "120FB6CFFCF8B32C43E7225256C4F837A86548C92CCC35480805987CB70BE17B"
+]]></failure>
+      <failure message="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto.cpp:60&#x0A;Expected equality of these values:&#x0A;  key2.ToHexString()&#x0A;    Which is: &quot;ae4d0c95af6b46d32d0adff928f06dd02a303f8ef3c251dfd6e2d85a95474c43&quot;&#x0A;  &quot;AE4D0C95AF6B46D32D0ADFF928F06DD02A303F8EF3C251DFD6E2D85A95474C43&quot;&#x0A;" type=""><![CDATA[/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto.cpp:60
+Expected equality of these values:
+  key2.ToHexString()
+    Which is: "ae4d0c95af6b46d32d0adff928f06dd02a303f8ef3c251dfd6e2d85a95474c43"
+  "AE4D0C95AF6B46D32D0ADFF928F06DD02A303F8EF3C251DFD6E2D85A95474C43"
+]]></failure>
+      <failure message="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto.cpp:65&#x0A;Expected equality of these values:&#x0A;  key3.ToHexString()&#x0A;    Which is: &quot;120fb6cffcf8b32c43e7225256c4f837&quot;&#x0A;  &quot;120FB6CFFCF8B32C43E7225256C4F837&quot;&#x0A;" type=""><![CDATA[/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto.cpp:65
+Expected equality of these values:
+  key3.ToHexString()
+    Which is: "120fb6cffcf8b32c43e7225256c4f837"
+  "120FB6CFFCF8B32C43E7225256C4F837"
+]]></failure>
+    </testcase>
+    <testcase name="HmacSha256" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto.cpp" line="68" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.166" classname="CryptoTest">
+      <failure message="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto.cpp:75&#x0A;Expected equality of these values:&#x0A;  hmac.ToHexString()&#x0A;    Which is: &quot;b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7&quot;&#x0A;  &quot;B0344C61D8DB38535CA8AFCEAF0BF12B881DC200C9833DA726E9376C2E32CFF7&quot;&#x0A;" type=""><![CDATA[/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto.cpp:75
+Expected equality of these values:
+  hmac.ToHexString()
+    Which is: "b0344c61d8db38535ca8afceaf0bf12b881dc200c9833da726e9376c2e32cff7"
+  "B0344C61D8DB38535CA8AFCEAF0BF12B881DC200C9833DA726E9376C2E32CFF7"
+]]></failure>
+    </testcase>
+    <testcase name="Base64EncodeDecode" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto.cpp" line="88" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.166" classname="CryptoTest" />
+  </testsuite>
+  <testsuite name="MerkleTreeTest" tests="4" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2025-08-15T18:07:46.166">
+    <testcase name="ComputeRootEmpty" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_merkletree.cpp" line="9" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.166" classname="MerkleTreeTest" />
+    <testcase name="ComputeRootSingle" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_merkletree.cpp" line="16" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.166" classname="MerkleTreeTest" />
+    <testcase name="ComputeRootPair" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_merkletree.cpp" line="25" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.166" classname="MerkleTreeTest" />
+    <testcase name="BuildAndDepthFirstSearch" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_merkletree.cpp" line="42" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.166" classname="MerkleTreeTest" />
+  </testsuite>
+  <testsuite name="ECRecoverTest" tests="6" failures="0" disabled="0" skipped="0" errors="0" time="0.007" timestamp="2025-08-15T18:07:46.166">
+    <testcase name="TestBasicRecovery" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_ecrecover.cpp" line="22" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.166" classname="ECRecoverTest" />
+    <testcase name="TestKnownVectors" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_ecrecover.cpp" line="46" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.166" classname="ECRecoverTest" />
+    <testcase name="TestInvalidInputs" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_ecrecover.cpp" line="70" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.167" classname="ECRecoverTest" />
+    <testcase name="TestEdgeCases" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_ecrecover.cpp" line="96" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.167" classname="ECRecoverTest" />
+    <testcase name="TestRecoveryConsistency" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_ecrecover.cpp" line="154" status="run" result="completed" time="0.004" timestamp="2025-08-15T18:07:46.167" classname="ECRecoverTest" />
+    <testcase name="TestDifferentMessagesProduceDifferentResults" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_ecrecover.cpp" line="191" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.172" classname="ECRecoverTest" />
+  </testsuite>
+  <testsuite name="BLS12381CompleteTest" tests="14" failures="0" disabled="1" skipped="6" errors="0" time="0." timestamp="2025-08-15T18:07:46.173">
+    <testcase name="G1PointConstruction" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp" line="28" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.173" classname="BLS12381CompleteTest" />
+    <testcase name="G1PointArithmetic" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp" line="61" status="run" result="skipped" time="0." timestamp="2025-08-15T18:07:46.173" classname="BLS12381CompleteTest">
+      <skipped message="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp:66&#x0A;BLS12-381 arithmetic operations need proper implementation&#x0A;"><![CDATA[/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp:66
+BLS12-381 arithmetic operations need proper implementation
+]]></skipped>
+    </testcase>
+    <testcase name="G2PointConstruction" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp" line="102" status="run" result="skipped" time="0." timestamp="2025-08-15T18:07:46.173" classname="BLS12381CompleteTest">
+      <skipped message="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp:105&#x0A;G2Point serialization needs proper implementation&#x0A;"><![CDATA[/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp:105
+G2Point serialization needs proper implementation
+]]></skipped>
+    </testcase>
+    <testcase name="G2PointArithmetic" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp" line="140" status="run" result="skipped" time="0." timestamp="2025-08-15T18:07:46.173" classname="BLS12381CompleteTest">
+      <skipped message="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp:143&#x0A;BLS12-381 arithmetic operations need proper implementation&#x0A;"><![CDATA[/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp:143
+BLS12-381 arithmetic operations need proper implementation
+]]></skipped>
+    </testcase>
+    <testcase name="GTPointOperations" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp" line="172" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.173" classname="BLS12381CompleteTest" />
+    <testcase name="PairingOperations" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp" line="193" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.173" classname="BLS12381CompleteTest" />
+    <testcase name="BLSSignatures" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp" line="228" status="run" result="skipped" time="0." timestamp="2025-08-15T18:07:46.173" classname="BLS12381CompleteTest">
+      <skipped message="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp:231&#x0A;BLS signature operations need proper implementation&#x0A;"><![CDATA[/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp:231
+BLS signature operations need proper implementation
+]]></skipped>
+    </testcase>
+    <testcase name="HashToG1" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp" line="298" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="BLS12381CompleteTest" />
+    <testcase name="HelperFunctions" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp" line="317" status="run" result="skipped" time="0." timestamp="2025-08-15T18:07:46.174" classname="BLS12381CompleteTest">
+      <skipped message="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp:320&#x0A;BLS12-381 helper functions need proper implementation&#x0A;"><![CDATA[/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp:320
+BLS12-381 helper functions need proper implementation
+]]></skipped>
+    </testcase>
+    <testcase name="EdgeCases" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp" line="372" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="BLS12381CompleteTest" />
+    <testcase name="DISABLED_PerformanceBenchmarks" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp" line="395" status="notrun" result="suppressed" time="0." timestamp="1970-01-01T08:00:00.000" classname="BLS12381CompleteTest" />
+    <testcase name="NeoProtocolCompatibility" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp" line="444" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="BLS12381CompleteTest" />
+    <testcase name="FieldArithmeticConsistency" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp" line="473" status="run" result="skipped" time="0." timestamp="2025-08-15T18:07:46.174" classname="BLS12381CompleteTest">
+      <skipped message="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp:476&#x0A;BLS12-381 field arithmetic needs proper implementation&#x0A;"><![CDATA[/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp:476
+BLS12-381 field arithmetic needs proper implementation
+]]></skipped>
+    </testcase>
+    <testcase name="ExtensionMethods" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_bls12_381_complete.cpp" line="504" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="BLS12381CompleteTest" />
+  </testsuite>
+  <testsuite name="ECPointSimpleTest" tests="1" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2025-08-15T18:07:46.174">
+    <testcase name="BasicTests" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_ecpoint_simple.cpp" line="6" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="ECPointSimpleTest" />
+  </testsuite>
+  <testsuite name="CryptoSimpleTest" tests="20" failures="0" disabled="0" skipped="0" errors="0" time="0." timestamp="2025-08-15T18:07:46.174">
+    <testcase name="SHA256_Basic" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="28" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="SHA256_Empty" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="34" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="Hash256_Basic" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="40" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="RIPEMD160_Basic" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="46" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="Hash160_Basic" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="52" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="GenerateRandomBytes_Size" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="62" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="GenerateRandomBytes_Uniqueness" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="72" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="HmacSha256_Basic" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="80" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="Sha256_Standalone" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="89" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="UInt256_DefaultConstructor" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="99" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="UInt256_Parse" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="104" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="UInt256_Comparison" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="110" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="UInt160_DefaultConstructor" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="123" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="UInt160_Parse" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="128" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="ByteVector_InitializerList" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="138" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="ByteVector_Append" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="145" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="ByteVector_ToHexString" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="154" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="ByteVector_FromHexString" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="160" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="EdgeCase_EmptyInput" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="173" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+    <testcase name="EdgeCase_SingleByte" file="/Users/jinghuiliao/git/r3e/neo_cpp/tests/unit/cryptography/test_crypto_simple.cpp" line="183" status="run" result="completed" time="0." timestamp="2025-08-15T18:07:46.174" classname="CryptoSimpleTest" />
+  </testsuite>
+</testsuites>

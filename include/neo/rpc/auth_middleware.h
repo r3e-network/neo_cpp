@@ -17,6 +17,7 @@ public:
     std::string GenerateToken(const std::string& user_id);
     bool ValidateToken(const std::string& token);
     void RevokeToken(const std::string& token);
+    std::string ExtractUser(const std::string& token);
     
 private:
     std::string secret_key_;

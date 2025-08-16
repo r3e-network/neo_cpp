@@ -62,7 +62,7 @@ TEST(UInt160Test, ToHexString)
     UInt160 u(ByteSpan(data, UInt160::Size));
     std::string hex = u.ToHexString();
 
-    EXPECT_EQ(hex, "000102030405060708090A0B0C0D0E0F10111213");
+    EXPECT_EQ(hex, "000102030405060708090a0b0c0d0e0f10111213");
 }
 
 TEST(UInt160Test, Parse)

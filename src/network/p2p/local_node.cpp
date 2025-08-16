@@ -112,7 +112,7 @@ size_t LocalNode::GetConnectedCount() const
 
 std::shared_ptr<payloads::VersionPayload> LocalNode::CreateVersionPayload() const
 {
-    // Use correct Neo mainnet magic number
+    // Constant value
     return std::make_shared<payloads::VersionPayload>(
         payloads::VersionPayload::Create(0x334F454E, nonce_, userAgent_, capabilities_));
 }

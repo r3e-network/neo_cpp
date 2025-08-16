@@ -7,7 +7,7 @@ using namespace neo::network;
 
 TEST(NetworkIntegrationTest, TestP2PServerInitialization)
 {
-    // P2PServer requires multiple parameters - skip this test for now
+    // P2PServer requires multiple parameters - test pending implementation
     // boost::asio::io_context ioContext;
     // IPEndPoint endpoint("127.0.0.1", 10333);
     // auto server = std::make_shared<P2PServer>(ioContext, endpoint, "test-agent", 0);

@@ -1,0 +1,389 @@
+==============================================
+Neo C++ Production Readiness Test Suite
+==============================================
+
+[1;33mBuilding Neo C++ with all tests...[0m
+-- Found ccache: /opt/homebrew/bin/ccache
+-- Using default ccache directory: /Users/jinghuiliao/git/r3e/neo_cpp/.ccache
+-- Ccache stats:
+Local storage:
+  Cache size (GB): 0.0 / 5.0 ( 0.00%)
+
+-- Using bundled nlohmann/json
+-- Found spdlog - using full logging capabilities
+-- Found Boost: 1.88.0
+-- Found httplib header at /Users/jinghuiliao/git/r3e/neo_cpp/third_party/httplib
+-- Testing enabled - Google Test found
+-- Code coverage reporting enabled
+-- Docker support enabled. Run 'make docker-help' for available targets.
+-- Logging: Using spdlog for advanced logging
+-- RocksDB found - enabling RocksDB storage backend
+-- RocksDB integration enabled
+-- GTest found via find_package - unit tests will be built
+-- Google Benchmark found, building benchmarks
+-- Neo C++ SDK Configuration:
+--   Version: 1.0.0
+--   Build type: Debug
+--   Shared library: ON
+--   Examples: ON
+--   Tests: ON
+--   Documentation: OFF
+-- Custom targets loaded. Run 'cmake --build . --target help' to see all available targets
+-- Neo C++ Configuration Summary:
+--   Build Type: Debug
+--   C++ Standard: 20
+--   Tests: ON
+--   Examples: ON
+--   Tools: ON
+--   Apps: ON
+--   SDK: ON
+-- Configuring done (0.2s)
+CMake Error at tests/unit/cryptography/CMakeLists.txt:18 (add_executable):
+  Cannot find source file:
+
+    test_cryptography_complete.cpp
+
+
+CMake Error at tests/unit/io/CMakeLists.txt:20 (add_executable):
+  Cannot find source file:
+
+    test_binary_reader.cpp
+
+
+CMake Error at tests/unit/network/CMakeLists.txt:50 (add_executable):
+  Cannot find source file:
+
+    test_message_handler.cpp
+
+
+CMake Error at tests/unit/ledger/CMakeLists.txt:17 (add_executable):
+  Cannot find source file:
+
+    test_blockchain_complete.cpp
+
+
+CMake Error at tests/unit/vm/CMakeLists.txt:14 (add_executable):
+  Cannot find source file:
+
+    test_vm.cpp
+
+
+CMake Error at tests/integration/CMakeLists.txt:17 (add_executable):
+  Cannot find source file:
+
+    test_consensus_integration.cpp
+
+
+CMake Error at tests/performance/CMakeLists.txt:17 (add_executable):
+  Cannot find source file:
+
+    benchmark_vm_execution.cpp
+
+
+CMake Error at benchmarks/CMakeLists.txt:32 (add_executable):
+  Cannot find source file:
+
+    micro_benchmarks.cpp
+
+
+CMake Error at benchmarks/CMakeLists.txt:45 (add_executable):
+  Cannot find source file:
+
+    benchmark_runner.cpp
+
+
+CMake Error at tests/unit/cryptography/CMakeLists.txt:20 (target_link_libraries):
+  Target "test_cryptography" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/unit/cryptography/CMakeLists.txt:38 (target_link_libraries):
+  Target "test_ecdsa_comprehensive" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/unit/cryptography/CMakeLists.txt:49 (target_link_libraries):
+  Target "test_cryptography_complete" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/unit/io/CMakeLists.txt:22 (target_link_libraries):
+  Target "test_io" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/unit/io/CMakeLists.txt:42 (target_link_libraries):
+  Target "test_io_extended" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/unit/network/CMakeLists.txt:52 (target_link_libraries):
+  Target "test_network" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/unit/network/CMakeLists.txt:69 (target_link_libraries):
+  Target "test_p2p_complete" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/unit/ledger/CMakeLists.txt:19 (target_link_libraries):
+  Target "test_ledger" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/unit/ledger/CMakeLists.txt:37 (target_link_libraries):
+  Target "test_transaction_complete" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/unit/ledger/CMakeLists.txt:47 (target_link_libraries):
+  Target "test_blockchain_complete" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/unit/vm/CMakeLists.txt:16 (target_link_libraries):
+  Target "test_vm" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/unit/vm/CMakeLists.txt:33 (target_link_libraries):
+  Target "test_vm_opcodes_complete" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/unit/smartcontract/CMakeLists.txt:17 (target_link_libraries):
+  Target "test_smartcontract" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/unit/smartcontract/CMakeLists.txt:36 (target_link_libraries):
+  Target "test_native_contracts_complete" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/unit/smartcontract/CMakeLists.txt:47 (target_link_libraries):
+  Target "test_nep_standards_complete" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/unit/consensus/CMakeLists.txt:18 (target_link_libraries):
+  Target "test_consensus" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/unit/consensus/CMakeLists.txt:37 (target_link_libraries):
+  Target "test_consensus_complete" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/integration/CMakeLists.txt:19 (target_link_libraries):
+  Target "test_integration" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/integration/CMakeLists.txt:41 (target_link_libraries):
+  Target "test_e2e_scenarios" links to:
+
+    GTest::GTest
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/performance/CMakeLists.txt:19 (target_link_libraries):
+  Target "test_performance" links to:
+
+    benchmark::benchmark
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/performance/CMakeLists.txt:41 (target_link_libraries):
+  Target "benchmark_crypto_only" links to:
+
+    benchmark::benchmark
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+CMake Error at tests/performance/CMakeLists.txt:50 (target_link_libraries):
+  Target "benchmark_vm_only" links to:
+
+    benchmark::benchmark
+
+  but the target was not found.  Possible reasons include:
+
+    * There is a typo in the target name.
+    * A find_package call is missing for an IMPORTED target.
+    * An ALIAS target is missing.
+
+
+
+-- Generating done (0.5s)
+CMake Warning:
+  Manually-specified variables were not used by the project:
+
+    BUILD_BENCHMARKS
+    BUILD_FUZZ_TESTS
+
+
+CMake Generate step failed.  Build files cannot be regenerated correctly.

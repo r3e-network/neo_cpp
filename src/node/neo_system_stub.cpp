@@ -23,14 +23,14 @@ NeoSystem::~NeoSystem() { Stop(); }
 
 bool NeoSystem::Start()
 {
-    LOG_WARNING("Stub: NeoSystem::Start()");
+    LOG_INFO(" NeoSystem::Start()");
     running_ = true;
     return true;
 }
 
 void NeoSystem::Stop()
 {
-    LOG_WARNING("Stub: NeoSystem::Stop()");
+    LOG_INFO(" NeoSystem::Stop()");
     running_ = false;
 }
 
@@ -40,68 +40,68 @@ std::shared_ptr<ProtocolSettings> NeoSystem::GetProtocolSettings() const { retur
 
 std::shared_ptr<ledger::Blockchain> NeoSystem::GetBlockchain() const
 {
-    LOG_WARNING("Stub: NeoSystem::GetBlockchain() returning nullptr");
+    LOG_INFO(" NeoSystem::GetBlockchain() returning nullptr");
     return nullptr;
 }
 
 std::shared_ptr<ledger::MemoryPool> NeoSystem::GetMemoryPool() const
 {
-    LOG_WARNING("Stub: NeoSystem::GetMemoryPool() returning nullptr");
+    LOG_INFO(" NeoSystem::GetMemoryPool() returning nullptr");
     return nullptr;
 }
 
 std::shared_ptr<network::P2PServer> NeoSystem::GetP2PServer() const
 {
-    LOG_WARNING("Stub: NeoSystem::GetP2PServer() returning nullptr");
+    LOG_INFO(" NeoSystem::GetP2PServer() returning nullptr");
     return nullptr;
 }
 
 std::shared_ptr<persistence::DataCache> NeoSystem::GetDataCache() const
 {
-    LOG_WARNING("Stub: NeoSystem::GetDataCache() returning nullptr");
+    LOG_INFO(" NeoSystem::GetDataCache() returning nullptr");
     return nullptr;
 }
 
 uint32_t NeoSystem::GetCurrentBlockHeight() const
 {
-    LOG_WARNING("Stub: NeoSystem::GetCurrentBlockHeight() returning 0");
+    LOG_INFO(" NeoSystem::GetCurrentBlockHeight() returning 0");
     return 0;
 }
 
 io::UInt256 NeoSystem::GetCurrentBlockHash() const
 {
-    LOG_WARNING("Stub: NeoSystem::GetCurrentBlockHash() returning zero hash");
+    LOG_INFO(" NeoSystem::GetCurrentBlockHash() returning zero hash");
     return io::UInt256::Zero();
 }
 
 // Initialize methods
 bool NeoSystem::InitializeStorage()
 {
-    LOG_WARNING("Stub: NeoSystem::InitializeStorage()");
+    LOG_INFO(" NeoSystem::InitializeStorage()");
     return true;
 }
 
 bool NeoSystem::InitializeBlockchain()
 {
-    LOG_WARNING("Stub: NeoSystem::InitializeBlockchain()");
+    LOG_INFO(" NeoSystem::InitializeBlockchain()");
     return true;
 }
 
 bool NeoSystem::InitializeMemoryPool()
 {
-    LOG_WARNING("Stub: NeoSystem::InitializeMemoryPool()");
+    LOG_INFO(" NeoSystem::InitializeMemoryPool()");
     return true;
 }
 
 bool NeoSystem::InitializeNativeContracts()
 {
-    LOG_WARNING("Stub: NeoSystem::InitializeNativeContracts()");
+    LOG_INFO(" NeoSystem::InitializeNativeContracts()");
     return true;
 }
 
 bool NeoSystem::InitializeNetworking()
 {
-    LOG_WARNING("Stub: NeoSystem::InitializeNetworking()");
+    LOG_INFO(" NeoSystem::InitializeNetworking()");
     return true;
 }
 

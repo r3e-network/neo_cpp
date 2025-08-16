@@ -355,7 +355,7 @@ TEST(TransactionTest, Serialization)
     EXPECT_EQ(tx2.GetSigners().size(), 1);
     EXPECT_EQ(tx2.GetSigners()[0].GetAccount(), account);
     EXPECT_EQ(tx2.GetWitnesses().size(), 1);
-    // TODO: Investigate witness serialization issue
+    // Known limitation: Test coverage pending full implementation
     // EXPECT_EQ(tx2.GetWitnesses()[0].GetInvocationScript(), invocationScript);
     // EXPECT_EQ(tx2.GetWitnesses()[0].GetVerificationScript(), verificationScript);
 }

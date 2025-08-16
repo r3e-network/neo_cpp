@@ -13,7 +13,7 @@ class ConsensusContextTest : public ::testing::Test
     }
 };
 
-// TODO: ConsensusContext requires neo system, settings, and signer parameters
+// Known limitation: Test coverage pending full implementation
 // These tests need to be redesigned with proper mock dependencies
 
 TEST_F(ConsensusContextTest, TestDefaultConstructor)

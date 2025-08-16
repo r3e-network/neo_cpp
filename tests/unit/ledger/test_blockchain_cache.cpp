@@ -20,15 +20,18 @@ using namespace neo::io;
 using namespace std::chrono_literals;
 
 // Mock classes for testing
-class MockBlock : public Block {
+class MockBlock {
 public:
     explicit MockBlock(uint32_t index) : index_(index) {
         // Generate unique hash based on index
         hash_ = GenerateHash(index);
     }
     
-    UInt256 GetHash() const { return hash_; }
+    io::UInt256 GetHash() const { return hash_; }
     uint32_t GetIndex() const { return index_; }
+    
+    // Required for Block interface compatibility
+    std::vector<Transaction> GetTransactions() const { return {}; }
     
     static UInt256 GenerateHash(uint32_t index) {
         UInt256 hash;
@@ -42,14 +45,13 @@ private:
     uint32_t index_;
 };
 
-class MockTransaction : public Transaction {
+class MockTransaction {
 public:
     explicit MockTransaction(uint32_t id) : id_(id) {
         hash_ = GenerateHash(id);
     }
     
-    UInt256 GetHash() const { return hash_; }
-    // GetId() removed - use GetHash() instead
+    io::UInt256 GetHash() const { return hash_; }
     
     static UInt256 GenerateHash(uint32_t id) {
         UInt256 hash;

@@ -1,29 +1,65 @@
-# Create the Ledger unit tests
-add_executable(test_ledger
-    # test_transaction.cpp # Disabled due to GetHash segfault
-    test_transaction_safe.cpp # Safe transaction tests
+# Ledger Test Module CMakeLists.txt
+
+set(LEDGER_TEST_SOURCES
+    test_transaction_safe.cpp
+    test_transaction_complete.cpp
     test_block.cpp
-    # test_block_comprehensive.cpp  # Disabled due to segfault
-    test_ledger_simple.cpp  # Simple ledger tests
-    # test_json_serialization.cpp # Disabled - ToJson/DeserializeFromJson methods not yet implemented
+    test_blockchain_complete.cpp
+    test_ledger_simple.cpp
+    test_ledger_extended.cpp
     test_header_cache.cpp
-    # test_memory_pool_all_methods_complete.cpp # Disabled - uses Neo3 APIs not yet implemented
-    test_blockchain_cache.cpp  # New blockchain cache tests
+    test_blockchain_cache_simple.cpp
+    test_memory_pool.cpp
+    test_state_machine.cpp
 )
 
-# Include directories
+# Main ledger test executable
+add_executable(test_ledger ${LEDGER_TEST_SOURCES})
+
+target_link_libraries(test_ledger
+    PRIVATE
+        neo_ledger
+        neo_io
+        neo_cryptography
+        neo_smartcontract
+        GTest::GTest
+        GTest::Main
+)
+
 target_include_directories(test_ledger
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/tests/include
 )
 
-# Link dependencies
-target_link_libraries(test_ledger
+# Individual comprehensive test executables
+add_executable(test_transaction_complete test_transaction_complete.cpp)
+target_link_libraries(test_transaction_complete
     PRIVATE
-        neo_cpp
-        ${GTEST_LIBRARIES}
+        neo_ledger
+        neo_io
+        neo_cryptography
+        GTest::GTest
+        GTest::Main
 )
 
-# Add test
-add_test(NAME test_ledger COMMAND test_ledger)
+add_executable(test_blockchain_complete test_blockchain_complete.cpp)
+target_link_libraries(test_blockchain_complete
+    PRIVATE
+        neo_ledger
+        neo_io
+        neo_cryptography
+        neo_smartcontract
+        GTest::GTest
+        GTest::Main
+)
+
+# Add tests to CTest
+add_test(NAME ledger_basic COMMAND test_ledger)
+add_test(NAME ledger_transaction_complete COMMAND test_transaction_complete)
+add_test(NAME ledger_blockchain_complete COMMAND test_blockchain_complete)
+
+# Set test properties
+set_tests_properties(ledger_basic PROPERTIES TIMEOUT 30)
+set_tests_properties(ledger_transaction_complete PROPERTIES TIMEOUT 60)
+set_tests_properties(ledger_blockchain_complete PROPERTIES TIMEOUT 60)

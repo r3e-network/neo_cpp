@@ -88,6 +88,12 @@ class TcpConnection : public std::enable_shared_from_this<TcpConnection>
      */
     void SetConnectionClosedCallback(std::function<void()> callback);
 
+    /**
+     * @brief Check if the connection is connected.
+     * @return true if connected, false otherwise.
+     */
+    bool IsConnected() const;
+
    private:
     boost::asio::ip::tcp::socket socket_;
     std::atomic<bool> running_;

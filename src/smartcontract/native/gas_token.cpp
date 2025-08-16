@@ -488,7 +488,9 @@ bool GasToken::PostPersist(ApplicationEngine& engine)
 
                 // Create script hash for the committee member
                 auto redeemScript = neo::cryptography::Crypto::CreateSignatureRedeemScript(rewardedMember);
-                auto memberScriptHash = neo::wallets::Helper::ToScriptHash(redeemScript.AsSpan());
+                // Hash the redeem script to get the script hash
+                auto sha256Hash = neo::cryptography::Hash::Sha256(redeemScript.AsSpan());
+                auto memberScriptHash = neo::cryptography::Hash::Ripemd160(io::ByteSpan(sha256Hash.ToArray().Data(), 32));
 
                 // Mint GAS reward to the committee member
                 if (gasPerBlock > 0)

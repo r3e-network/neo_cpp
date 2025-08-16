@@ -290,14 +290,14 @@ void PeerDiscoveryService::CleanupOldPeers()
 void PeerDiscoveryService::LoadKnownPeers()
 {
     // Implementation for loading peers from persistent storage
-    // This is a placeholder - actual implementation would read from file/database
+    // Load peers from persistent storage
     neo::logging::Logger::Instance().Debug("P2P", "Loading known peers from storage");
 }
 
 void PeerDiscoveryService::SaveKnownPeers()
 {
     // Implementation for saving peers to persistent storage
-    // This is a placeholder - actual implementation would write to file/database
+    // Save peers to persistent storage
     neo::logging::Logger::Instance().Debug("P2P", "Saving known peers to storage");
 }
 

@@ -160,4 +160,27 @@ std::vector<unsigned char> AuthMiddleware::Base64Decode(const std::string& encod
     return result;
 }
 
+std::string AuthMiddleware::ExtractUser(const std::string& token) {
+    std::string payload;
+    if (!VerifyJWT(token, payload)) {
+        return "";
+    }
+    
+    // Parse payload to extract user
+    Json::Value root;
+    Json::CharReaderBuilder builder;
+    std::string errors;
+    std::istringstream stream(payload);
+    
+    if (!Json::parseFromStream(builder, stream, &root, &errors)) {
+        return "";
+    }
+    
+    if (root.isMember("sub")) {
+        return root["sub"].asString();
+    }
+    
+    return "";
+}
+
 } // namespace neo::rpc

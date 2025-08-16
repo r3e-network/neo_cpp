@@ -353,7 +353,7 @@ TEST_F(UInt160ComprehensiveTest, AddressConversion)
         EXPECT_EQ(back_to_address, test_address);
     } catch (const std::exception&) {
         // Address conversion not implemented or test address invalid
-        // This is acceptable for now
+        // This behavior is expected
         SUCCEED();
     }
 }

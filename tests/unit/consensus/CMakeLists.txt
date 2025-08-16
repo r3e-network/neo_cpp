@@ -1,29 +1,53 @@
-# Create the consensus unit tests
-add_executable(test_consensus
-    # test_consensus_message.cpp # Disabled due to failures
-    # test_consensus_context.cpp # Disabled due to failures
-    # test_consensus_service.cpp # Disabled due to failures
-    # test_primary_index_calculation.cpp # Disabled due to failures
-    # test_witness_assembly.cpp  # Disabled due to KeyPair linker issues
-    # test_witness_assembly_stub.cpp # Disabled
-    test_consensus_stub.cpp
-    test_consensus_comprehensive.cpp  # Comprehensive tests for coverage
+# Consensus Test Module CMakeLists.txt
+
+set(CONSENSUS_TEST_SOURCES
+    test_consensus_basic.cpp
+    test_consensus_extended.cpp
+    test_consensus_message.cpp
+    test_consensus_context.cpp
+    test_consensus_service.cpp
+    test_primary_index_calculation.cpp
+    test_byzantine_fault_tolerance.cpp
+    test_view_change_recovery.cpp
+    test_witness_assembly.cpp
 )
 
-# Include directories
+# Main consensus test executable
+add_executable(test_consensus ${CONSENSUS_TEST_SOURCES})
+
+target_link_libraries(test_consensus
+    PRIVATE
+        neo_consensus
+        neo_ledger
+        neo_network
+        neo_cryptography
+        neo_wallets
+        GTest::GTest
+        GTest::Main
+)
+
 target_include_directories(test_consensus
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/tests/include
 )
 
-# Link dependencies
-target_link_libraries(test_consensus
+# Individual comprehensive test executable
+add_executable(test_consensus_complete test_consensus_complete.cpp)
+target_link_libraries(test_consensus_complete
     PRIVATE
-        neo_cpp
-        neo_wallets
-        ${GTEST_LIBRARIES}
+        neo_consensus
+        neo_ledger
+        neo_network
+        neo_cryptography
+        GTest::GTest
+        GTest::Main
 )
 
-# Add test
-add_test(NAME test_consensus COMMAND test_consensus)
+# Add tests to CTest
+add_test(NAME consensus_basic COMMAND test_consensus)
+add_test(NAME consensus_complete COMMAND test_consensus_complete)
+
+# Set test properties
+set_tests_properties(consensus_basic PROPERTIES TIMEOUT 30)
+set_tests_properties(consensus_complete PROPERTIES TIMEOUT 60)

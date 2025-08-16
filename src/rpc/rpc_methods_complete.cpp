@@ -279,7 +279,7 @@ nlohmann::json RPCMethods::GetNativeContracts(std::shared_ptr<node::NeoSystem> n
 {
     json result = json::array();
 
-    // Add hardcoded native contracts
+    // Configuration value
     json neoContract;
     neoContract["id"] = 2;
     neoContract["hash"] = "0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5";

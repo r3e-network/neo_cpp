@@ -1,36 +1,61 @@
-# Create the integration tests
-add_executable(test_integration
-    test_integration_main.cpp  # Main function with signal handling
-    # test_blockchain.cpp # Disabled due to failures
-    # test_network.cpp # Disabled due to failures
-    # test_rpc.cpp # Disabled due to failures
-    # test_smartcontract.cpp # Disabled due to DataCache instantiation issue
-    test_smartcontract_simple.cpp
-    test_p2p_sync_working.cpp
-    test_p2p_block_sync_integration.cpp
-    test_p2p_blockchain_integration.cpp
-    test_p2p_connectivity_comprehensive.cpp
-    test_block_sync_comprehensive.cpp
-    test_block_sync_fixed.cpp
-    test_block_execution_comprehensive.cpp
-    test_state_updates_comprehensive.cpp
-    test_neo_node_complete_integration.cpp
-    test_neo_capabilities_integration.cpp
+# Integration Test Module CMakeLists.txt
+
+set(INTEGRATION_TEST_SOURCES
+    test_blockchain_persistence.cpp
+    test_end_to_end_scenarios.cpp
+    test_consensus_integration.cpp
+    test_network_sync.cpp
+    test_smart_contract_deployment.cpp
+    test_token_transfers.cpp
+    test_multi_node_consensus.cpp
+    test_state_synchronization.cpp
+    test_oracle_integration.cpp
+    test_full_node_validation.cpp
 )
 
-# Include directories
+# Main integration test executable
+add_executable(test_integration ${INTEGRATION_TEST_SOURCES})
+
+target_link_libraries(test_integration
+    PRIVATE
+        neo_ledger
+        neo_consensus
+        neo_network
+        neo_smartcontract
+        neo_vm
+        neo_cryptography
+        neo_wallets
+        neo_io
+        GTest::GTest
+        GTest::Main
+)
+
 target_include_directories(test_integration
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/tests/include
 )
 
-# Link dependencies
-target_link_libraries(test_integration
+# Individual end-to-end test executable
+add_executable(test_e2e_scenarios test_end_to_end_scenarios.cpp)
+target_link_libraries(test_e2e_scenarios
     PRIVATE
-        neo_cpp
-        ${GTEST_LIBRARIES}
+        neo_ledger
+        neo_consensus
+        neo_network
+        neo_smartcontract
+        neo_vm
+        neo_cryptography
+        neo_wallets
+        neo_io
+        GTest::GTest
+        GTest::Main
 )
 
-# Add test
-add_test(NAME test_integration COMMAND test_integration)
+# Add tests to CTest
+add_test(NAME integration_basic COMMAND test_integration)
+add_test(NAME integration_e2e COMMAND test_e2e_scenarios)
+
+# Set test properties (longer timeouts for integration tests)
+set_tests_properties(integration_basic PROPERTIES TIMEOUT 120)
+set_tests_properties(integration_e2e PROPERTIES TIMEOUT 180)

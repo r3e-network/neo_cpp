@@ -1,61 +1,65 @@
-# Add subdirectories
-add_subdirectory(native)
+# SmartContract Test Module CMakeLists.txt
 
-# Create the smartcontract unit tests
-add_executable(test_smartcontract
-    # test_contract.cpp # Disabled due to segfault
-    # test_application_engine.cpp # Disabled due to segfault
-    # test_contract_state.cpp # Disabled due to segfault
-    # test_transaction_verifier.cpp # Disabled due to segfault
-    # test_nef_file.cpp # Disabled due to segfault
-    # test_contract_parameters_context.cpp # Disabled due to segfault
-    test_smartcontract_simple.cpp
-    # test_interop_service_all_methods_complete.cpp  # TODO: Missing dependencies
-    # test_json_serializer_all_methods_complete.cpp  # TODO: Abstract DataCache issue
+set(SMARTCONTRACT_TEST_SOURCES
+    test_smartcontract_extended.cpp
+    test_application_engine.cpp
+    test_contract_manifest.cpp
+    test_contract_state.cpp
+    test_interop_service.cpp
+    test_contract.cpp
+    test_native_contract.cpp
+    test_storage.cpp
 )
 
-# Include directories
+# Main smartcontract test executable
+add_executable(test_smartcontract ${SMARTCONTRACT_TEST_SOURCES})
+
+target_link_libraries(test_smartcontract
+    PRIVATE
+        neo_smartcontract
+        neo_vm
+        neo_ledger
+        neo_io
+        neo_cryptography
+        GTest::GTest
+        GTest::Main
+)
+
 target_include_directories(test_smartcontract
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        ${CMAKE_SOURCE_DIR}/tests/include
 )
 
-# Link dependencies
-target_link_libraries(test_smartcontract
+# Individual comprehensive test executables
+add_executable(test_native_contracts_complete test_native_contracts_complete.cpp)
+target_link_libraries(test_native_contracts_complete
     PRIVATE
-        neo_cpp
-        ${GTEST_LIBRARIES}
+        neo_smartcontract
+        neo_vm
+        neo_ledger
+        neo_io
+        GTest::GTest
+        GTest::Main
 )
 
-# Add test
-add_test(NAME test_smartcontract COMMAND test_smartcontract)
-
-# New smartcontract tests
-add_executable(test_smartcontract_new
-    test_contract_manifest.cpp
-    test_contract_permissions.cpp
-    test_contract_groups.cpp
-    test_contract_abi.cpp
-    test_contract_events.cpp
-    test_contract_methods.cpp
-    test_contract_parameters.cpp
-    test_interop_service.cpp
-)
-
-# Include directories
-target_include_directories(test_smartcontract_new
+add_executable(test_nep_standards_complete test_nep_standards_complete.cpp)
+target_link_libraries(test_nep_standards_complete
     PRIVATE
-        ${CMAKE_SOURCE_DIR}/include
-        ${CMAKE_CURRENT_SOURCE_DIR}
+        neo_smartcontract
+        neo_vm
+        neo_ledger
+        neo_io
+        GTest::GTest
+        GTest::Main
 )
 
-# Link dependencies
-target_link_libraries(test_smartcontract_new
-    PRIVATE
-        neo_cpp
-        ${GTEST_LIBRARIES}
-)
+# Add tests to CTest
+add_test(NAME smartcontract_basic COMMAND test_smartcontract)
+add_test(NAME smartcontract_native_complete COMMAND test_native_contracts_complete)
+add_test(NAME smartcontract_nep_complete COMMAND test_nep_standards_complete)
 
-# Add test
-add_test(NAME test_smartcontract_new COMMAND test_smartcontract_new)
+# Set test properties
+set_tests_properties(smartcontract_basic PROPERTIES TIMEOUT 30)
+set_tests_properties(smartcontract_native_complete PROPERTIES TIMEOUT 60)
+set_tests_properties(smartcontract_nep_complete PROPERTIES TIMEOUT 60)

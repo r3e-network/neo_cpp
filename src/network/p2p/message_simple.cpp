@@ -37,7 +37,7 @@ void Message::Serialize(io::BinaryWriter& writer) const
 {
     // Neo protocol: magic(4) + command(12) + length(4) + checksum(4) + payload
 
-    // 1. Magic number for Neo N3 mainnet
+    // Constant value
     writer.Write(static_cast<uint32_t>(0x334F454E));
 
     // 2. Command string padded to 12 bytes

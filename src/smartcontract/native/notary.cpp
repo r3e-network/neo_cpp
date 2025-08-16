@@ -123,7 +123,9 @@ bool Notary::OnPersist(ApplicationEngine& engine)
     for (const auto& notary : notaries)
     {
         auto redeemScript = cryptography::Crypto::CreateSignatureRedeemScript(notary);
-        auto scriptHash = neo::wallets::Helper::ToScriptHash(redeemScript.AsSpan());
+        // Hash the redeem script to get the script hash
+        auto sha256Hash = cryptography::Hash::Sha256(redeemScript.AsSpan());
+        auto scriptHash = cryptography::Hash::Ripemd160(io::ByteSpan(sha256Hash.ToArray().Data(), 32));
         auto gasToken = GasToken::GetInstance();
         gasToken->Mint(engine, scriptHash, singleReward, false);
     }

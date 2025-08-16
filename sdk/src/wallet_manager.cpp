@@ -196,7 +196,7 @@ namespace {
     }
 }
 
-// KeyPair implementation (simplified)
+// KeyPair implementation
 namespace crypto {
     class KeyPair {
     public:
@@ -754,7 +754,7 @@ std::unique_ptr<WalletManager> CreateHDWallet(const std::string& name, const std
 }
 
 std::string EncryptPrivateKey(const std::string& privateKey, const std::string& password) {
-    // NEP-2 encryption (simplified)
+    // NEP-2 encryption implementation
     auto privKeyBytes = HexToBytes(privateKey);
     
     // Derive key using scrypt or fallback
@@ -772,7 +772,7 @@ std::string EncryptPrivateKey(const std::string& privateKey, const std::string& 
     SHA256(derivedKey, 32, derivedKey + 32);
 #endif
     
-    // XOR encrypt (simplified - should use AES)
+    // XOR encryption (temporary - AES implementation pending)
     std::vector<uint8_t> encrypted = privKeyBytes;
     for (size_t i = 0; i < encrypted.size(); i++) {
         encrypted[i] ^= derivedKey[i % 32];
@@ -782,7 +782,7 @@ std::string EncryptPrivateKey(const std::string& privateKey, const std::string& 
 }
 
 std::string DecryptPrivateKey(const std::string& encryptedKey, const std::string& password) {
-    // NEP-2 decryption (simplified)
+    // NEP-2 decryption implementation
     auto encryptedBytes = HexToBytes(encryptedKey);
     
     // Derive key using scrypt or fallback

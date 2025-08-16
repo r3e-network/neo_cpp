@@ -5,7 +5,7 @@ add_library(neo_consensus OBJECT
     dbft_consensus.cpp
     consensus_state.cpp
     consensus_message.cpp
-    recovery_message_stub.cpp  # Stub implementation for RecoveryMessage
+    recovery_message.cpp  # Full implementation for RecoveryMessage
 )
 
 # Set include directories

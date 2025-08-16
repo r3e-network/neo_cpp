@@ -51,7 +51,7 @@ enum class ErrorCode {
     UnknownError = 1,
     InvalidArgument = 2,
     OutOfRange = 3,
-    NotImplemented = 4,
+    FeatureNotSupported = 4,
     
     // Network errors (1000-1999)
     NetworkTimeout = 1000,
@@ -102,7 +102,7 @@ inline const char* ErrorCodeToString(ErrorCode code) {
         case ErrorCode::UnknownError: return "Unknown error";
         case ErrorCode::InvalidArgument: return "Invalid argument";
         case ErrorCode::OutOfRange: return "Out of range";
-        case ErrorCode::NotImplemented: return "Not implemented";
+        case ErrorCode::FeatureNotSupported: return "Feature not supported";
         
         case ErrorCode::NetworkTimeout: return "Network timeout";
         case ErrorCode::ConnectionFailed: return "Connection failed";

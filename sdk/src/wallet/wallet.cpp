@@ -1,5 +1,6 @@
 #include <neo/sdk/wallet/wallet.h>
 #include <neo/wallets/nep6/nep6_wallet.h>
+#include <neo/wallets/helper.h>
 #include <neo/cryptography/crypto.h>
 #include <neo/logging/logger.h>
 #include <fstream>
@@ -10,12 +11,12 @@ namespace neo::sdk::wallet {
 // Private implementation class
 class Wallet::Impl {
 public:
-    std::unique_ptr<neo::wallets::NEP6Wallet> nep6Wallet;
+    std::unique_ptr<neo::wallets::nep6::NEP6Wallet> nep6Wallet;
     std::string path;
     std::string password;
     bool isLocked = false;
     
-    Impl() : nep6Wallet(std::make_unique<neo::wallets::NEP6Wallet>()) {}
+    Impl() : nep6Wallet(std::make_unique<neo::wallets::nep6::NEP6Wallet>()) {}
 };
 
 // Constructor
@@ -34,7 +35,7 @@ std::shared_ptr<Wallet> Wallet::Create(
         
         // Create new NEP6 wallet
         wallet->impl_->nep6Wallet->SetName(name);
-        wallet->impl_->nep6Wallet->SetVersion("1.0");
+        wallet->impl_->nep6Wallet->SetVersion(1);
         
         // Save to file
         if (!wallet->Save()) {
@@ -42,7 +43,7 @@ std::shared_ptr<Wallet> Wallet::Create(
             return nullptr;
         }
         
-        NEO_LOG_INFO("Created new wallet: {}", path);
+        NEO_LOG_INFO(std::string("Created new wallet: ") + path);
         return wallet;
         
     } catch (const std::exception& e) {
@@ -68,9 +69,10 @@ std::shared_ptr<Wallet> Wallet::Open(
         wallet->impl_->password = password;
         
         // Load NEP6 wallet from file
-        wallet->impl_->nep6Wallet = neo::wallets::NEP6Wallet::FromFile(path, password);
+        wallet->impl_->nep6Wallet = std::make_unique<neo::wallets::nep6::NEP6Wallet>();
+        wallet->impl_->nep6Wallet->Load(path);
         
-        NEO_LOG_INFO("Opened wallet: {}", path);
+        NEO_LOG_INFO(std::string("Opened wallet: ") + path);
         return wallet;
         
     } catch (const std::exception& e) {
@@ -90,13 +92,16 @@ Account Wallet::CreateAccount(const std::string& label) {
         auto keyPair = neo::cryptography::KeyPair::Generate();
         
         // Create NEP6 account
-        auto nep6Account = impl_->nep6Wallet->CreateAccount(keyPair, label);
+        auto nep6Account = impl_->nep6Wallet->CreateAccount(impl_->password);
+        if (!label.empty()) {
+            nep6Account->SetLabel(label);
+        }
         
         // Convert to SDK account
         Account account;
         // account.SetFromNEP6(nep6Account);
         
-        NEO_LOG_INFO("Created new account with label: {}", label);
+        NEO_LOG_INFO(std::string("Created new account with label: ") + label);
         return account;
         
     } catch (const std::exception& e) {

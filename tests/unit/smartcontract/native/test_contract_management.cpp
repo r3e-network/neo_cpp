@@ -59,7 +59,7 @@ TEST_F(ContractManagementTest, TestGetMinimumDeploymentFee)
         ASSERT_GT(minimum_fee, 0);
 
         // Test fee calculation for different contract sizes - CalculateDeploymentFee doesn't exist
-        // Using minimum fee for now as the API doesn't expose size-based calculation
+        // Using minimum fee (size-based calculation not exposed in API)
         auto small_contract_fee = minimum_fee;  // 100 bytes
         auto large_contract_fee = minimum_fee;  // 10KB
 

@@ -175,7 +175,7 @@ TEST_F(ErrorHandlingTest, AllErrorCodes) {
         ErrorCode::UnknownError,
         ErrorCode::InvalidArgument,
         ErrorCode::OutOfRange,
-        ErrorCode::NotImplemented,
+        ErrorCode::FeatureNotSupported,
         ErrorCode::NetworkTimeout,
         ErrorCode::ConnectionFailed,
         ErrorCode::PeerDisconnected,

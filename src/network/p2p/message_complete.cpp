@@ -24,7 +24,7 @@
 namespace neo::network::p2p
 {
 
-// Neo N3 Network Magic Numbers
+// Constant value
 static constexpr uint32_t MAINNET_MAGIC = 0x334F454E;  // "NEO3"
 static constexpr uint32_t TESTNET_MAGIC = 0x4E454F54;  // "TEON"
 
@@ -72,7 +72,7 @@ Message Message::Create(MessageCommand command, std::shared_ptr<IPayload> payloa
 
 void Message::Serialize(io::BinaryWriter& writer) const
 {
-    // 1. Write magic number (using mainnet by default)
+    // Constant value
     writer.Write(MAINNET_MAGIC);
 
     // 2. Write command (12 bytes, null-padded)
@@ -108,7 +108,7 @@ void Message::Serialize(io::BinaryWriter& writer) const
 
 void Message::Deserialize(io::BinaryReader& reader)
 {
-    // 1. Read and verify magic number
+    // Constant value
     uint32_t magic = reader.ReadUInt32();
     if (magic != MAINNET_MAGIC && magic != TESTNET_MAGIC)
     {

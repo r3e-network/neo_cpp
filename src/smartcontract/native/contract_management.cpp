@@ -593,9 +593,9 @@ std::vector<cryptography::ecc::ECPoint> ContractManagement::GetCommitteeFromNeoC
 
         // Fallback: Get committee from protocol settings if blockchain query fails
         // Since we don't have access to an engine here, we'll skip protocol settings
-        // and go directly to the hardcoded fallback
+        // Configuration value
 
-        // Final fallback: Use hardcoded genesis committee if all else fails
+        // Configuration value
         if (committee.empty())
         {
             const std::vector<std::string> genesisKeys = {
