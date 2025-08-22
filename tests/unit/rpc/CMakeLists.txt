@@ -23,3 +23,13 @@ target_link_libraries(test_rpc
 
 # Add test
 add_test(NAME test_rpc COMMAND test_rpc)
+
+# Additional comprehensive test
+add_executable(test_rpc_comprehensive_converted test_rpc_comprehensive_converted.cpp)
+target_link_libraries(test_rpc_comprehensive_converted
+    PRIVATE
+        neo_core
+        gtest
+        gtest_main
+)
+add_test(NAME test_rpc_comprehensive_converted COMMAND test_rpc_comprehensive_converted)

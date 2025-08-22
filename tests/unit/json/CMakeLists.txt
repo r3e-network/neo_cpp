@@ -24,3 +24,13 @@ target_include_directories(test_json
 
 # Add test to CTest
 add_test(NAME JsonTests COMMAND test_json)
+
+# Additional comprehensive test
+add_executable(test_json_comprehensive_converted test_json_comprehensive_converted.cpp)
+target_link_libraries(test_json_comprehensive_converted
+    PRIVATE
+        neo_core
+        gtest
+        gtest_main
+)
+add_test(NAME test_json_comprehensive_converted COMMAND test_json_comprehensive_converted)
