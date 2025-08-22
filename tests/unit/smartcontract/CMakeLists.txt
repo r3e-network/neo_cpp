@@ -21,8 +21,8 @@ target_link_libraries(test_smartcontract
         neo_ledger
         neo_io
         neo_cryptography
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 target_include_directories(test_smartcontract
@@ -39,8 +39,8 @@ target_link_libraries(test_native_contracts_complete
         neo_vm
         neo_ledger
         neo_io
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 add_executable(test_nep_standards_complete test_nep_standards_complete.cpp)
@@ -50,8 +50,8 @@ target_link_libraries(test_nep_standards_complete
         neo_vm
         neo_ledger
         neo_io
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 # Add tests to CTest

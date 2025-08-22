@@ -22,8 +22,8 @@ target_link_libraries(test_consensus
         neo_network
         neo_cryptography
         neo_wallets
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 target_include_directories(test_consensus
@@ -40,8 +40,8 @@ target_link_libraries(test_consensus_complete
         neo_ledger
         neo_network
         neo_cryptography
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 # Add tests to CTest

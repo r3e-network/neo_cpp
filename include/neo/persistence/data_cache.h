@@ -109,7 +109,7 @@ class StoreCache : public DataCache
      * @param key The key to look up.
      * @return The storage item if found, std::nullopt otherwise.
      */
-    std::optional<StorageItem> TryGet(const StorageKey& key) const override;
+    std::optional<StorageItem> TryGetValue(const StorageKey& key) const override;
 
     /**
      * @brief Gets a pointer to a storage item from the cache.

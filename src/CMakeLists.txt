@@ -7,7 +7,7 @@ add_subdirectory(logging)
 add_subdirectory(monitoring)
 add_subdirectory(extensions)
 # add_subdirectory(console_service) # Temporarily disabled
-add_subdirectory(console_service) # Re-enabled after fixing compilation issues
+# add_subdirectory(console_service) # Disabled - not critical for core node functionality
 # add_subdirectory(console_service) # Re-disabled due to missing dependencies
 add_subdirectory(persistence)
 add_subdirectory(network) # Re-enabling to fix compilation errors
@@ -40,7 +40,7 @@ add_library(neo_cpp
     $<TARGET_OBJECTS:neo_logging>
     $<TARGET_OBJECTS:neo_monitoring>
     $<TARGET_OBJECTS:neo_extensions>
-    # $<TARGET_OBJECTS:neo_console_service> # Re-disabled due to missing dependencies
+    # $<TARGET_OBJECTS:neo_console_service> # Disabled - not critical for core functionality
     $<TARGET_OBJECTS:neo_persistence>
     $<TARGET_OBJECTS:neo_network> # Re-enabled to fix issues
     $<TARGET_OBJECTS:neo_ledger>
@@ -64,8 +64,12 @@ target_link_libraries(neo_cpp
         OpenSSL::SSL
         OpenSSL::Crypto
         nlohmann_json::nlohmann_json
-        spdlog::spdlog
 )
+
+# Link spdlog only if available
+if(spdlog_FOUND)
+    target_link_libraries(neo_cpp PUBLIC spdlog::spdlog)
+endif()
 
 # Link RocksDB if found
 if(RocksDB_FOUND)

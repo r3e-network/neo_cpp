@@ -41,8 +41,8 @@ set(NETWORK_TEST_SOURCES
     test_p2p_complete.cpp
     test_connection_pool.cpp
     test_message_handler.cpp
-    test_peer_manager.cpp
-    test_protocol_handler.cpp
+    # test_peer_manager.cpp  # Missing file
+    # test_protocol_handler.cpp  # Missing file
     test_network_comprehensive.cpp
 )
 
@@ -54,8 +54,8 @@ target_link_libraries(test_network
         neo_network
         neo_io
         neo_cryptography
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 target_include_directories(test_network
@@ -71,8 +71,8 @@ target_link_libraries(test_p2p_complete
         neo_network
         neo_io
         neo_cryptography
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 # Add tests to CTest

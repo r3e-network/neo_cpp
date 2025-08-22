@@ -18,8 +18,8 @@ target_link_libraries(test_vm
         neo_vm
         neo_io
         neo_cryptography
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 target_include_directories(test_vm
@@ -34,8 +34,8 @@ target_link_libraries(test_vm_opcodes_complete
     PRIVATE
         neo_vm
         neo_io
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 # Add tests to CTest

@@ -1,12 +1,12 @@
 # Create the plugins unit tests
 add_executable(test_plugins
-    # test_plugins.cpp # Disabled due to missing implementations
+    test_plugins.cpp  # Use existing file
     # test_rpc_server_plugin.cpp # Disabled due to missing implementations
     # test_application_logs_plugin.cpp # Disabled due to missing implementations
     # test_state_service_plugin.cpp # Disabled due to missing implementations
     # test_dbft_plugin.cpp  # Disabled due to header compatibility issues
     # test_dbft_plugin_stub.cpp # Disabled - using single stub
-    test_plugins_stub.cpp
+    # test_plugins_stub.cpp  # Missing file
 )
 
 # Include directories

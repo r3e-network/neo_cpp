@@ -76,6 +76,7 @@ target_link_libraries(neo_network
         neo_ledger
         neo_persistence
         neo_logging
+        z  # Add zlib for compression functions
 )
 
 if(Boost_FOUND)

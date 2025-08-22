@@ -39,7 +39,7 @@ class MemoryStoreView : public StoreView
     virtual ~MemoryStoreView() = default;
 
     // StoreView interface implementation
-    std::optional<StorageItem> TryGet(const StorageKey& key) const override;
+    std::optional<StorageItem> TryGetValue(const StorageKey& key) const override;
     std::shared_ptr<StorageItem> TryGet(const StorageKey& key) override;
     std::shared_ptr<StorageItem> GetAndChange(const StorageKey& key,
                                               std::function<std::shared_ptr<StorageItem>()> factory = nullptr) override;

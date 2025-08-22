@@ -11,6 +11,7 @@
 #include <algorithm>
 #include <cstring>
 #include <stdexcept>
+#include <unordered_map>
 
 namespace neo::cryptography
 {

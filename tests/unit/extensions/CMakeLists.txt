@@ -8,8 +8,8 @@ add_executable(test_extensions
 target_link_libraries(test_extensions
     PRIVATE
         neo_cpp
-        GTest::gtest
-        GTest::gtest_main
+        gtest
+        gtest_main
 )
 
 target_include_directories(test_extensions

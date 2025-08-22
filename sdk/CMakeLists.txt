@@ -24,6 +24,7 @@ set(NEO_SDK_SOURCES
     src/core/blockchain.cpp
     src/core/types.cpp
     src/wallet/wallet.cpp
+    src/wallet/account.cpp  # Add account implementation
     # src/wallet_manager.cpp  # Disabled - missing crypto.h header
     src/tx/transaction_builder.cpp
     # src/transaction_manager.cpp  # Disabled - compilation errors

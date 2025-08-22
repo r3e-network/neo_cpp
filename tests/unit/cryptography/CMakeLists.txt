@@ -7,10 +7,10 @@ set(CRYPTO_TEST_SOURCES
     test_hash.cpp
     test_ecdsa_comprehensive.cpp
     test_cryptography_complete.cpp
-    test_key_pair.cpp
+    # test_key_pair.cpp  # Missing file
     test_merkle_tree.cpp
     test_base58.cpp
-    test_aes.cpp
+    # test_aes.cpp  # Missing file
     test_scrypt.cpp
 )
 
@@ -23,14 +23,15 @@ target_link_libraries(test_cryptography
         neo_io
         OpenSSL::SSL
         OpenSSL::Crypto
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 target_include_directories(test_cryptography
     PRIVATE
         ${CMAKE_SOURCE_DIR}/include
         ${CMAKE_SOURCE_DIR}/tests/include
+        ${CMAKE_SOURCE_DIR}/third_party/googletest/googletest/include
 )
 
 # Individual comprehensive test executables
@@ -41,8 +42,8 @@ target_link_libraries(test_ecdsa_comprehensive
         neo_io
         OpenSSL::SSL
         OpenSSL::Crypto
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 add_executable(test_cryptography_complete test_cryptography_complete.cpp)
@@ -52,8 +53,8 @@ target_link_libraries(test_cryptography_complete
         neo_io
         OpenSSL::SSL
         OpenSSL::Crypto
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 # Add tests to CTest

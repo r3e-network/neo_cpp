@@ -13,8 +13,8 @@ add_executable(vm_tests
 target_link_libraries(vm_tests
     PRIVATE
         neo_vm
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 # Add test

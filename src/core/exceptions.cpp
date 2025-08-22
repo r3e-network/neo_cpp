@@ -13,9 +13,9 @@
 namespace neo::core
 {
 
-std::string NeoException::ErrorCodeToString(ErrorCode code)
+std::string NeoException::ErrorCodeToString(NeoException::ErrorCode code)
 {
-    static const std::unordered_map<ErrorCode, std::string> error_code_names = {
+    static const std::unordered_map<NeoException::ErrorCode, std::string> error_code_names = {
         // General errors
         {ErrorCode::UNKNOWN_ERROR, "UNKNOWN_ERROR"},
         {ErrorCode::INVALID_ARGUMENT, "INVALID_ARGUMENT"},
@@ -91,7 +91,7 @@ std::string NeoException::ErrorCodeToString(ErrorCode code)
     return "UNKNOWN_ERROR_CODE(" + std::to_string(static_cast<uint32_t>(code)) + ")";
 }
 
-std::string NeoException::FormatMessage(ErrorCode code, const std::string& message, const std::string& context)
+std::string NeoException::FormatMessage(NeoException::ErrorCode code, const std::string& message, const std::string& context)
 {
     std::ostringstream oss;
     oss << "[" << ErrorCodeToString(code) << ":" << static_cast<uint32_t>(code) << "] " << message;

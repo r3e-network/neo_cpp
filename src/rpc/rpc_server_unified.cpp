@@ -6,7 +6,7 @@
  * @copyright MIT License
  */
 
-#include <httplib.h>
+#include "../../third_party/httplib/httplib.h"
 #include <neo/core/logging.h>
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/mempool.h>

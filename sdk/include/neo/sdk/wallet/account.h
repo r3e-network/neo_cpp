@@ -15,6 +15,14 @@ public:
     Account();
     ~Account();
     
+    // Copy constructor and assignment operator
+    Account(const Account& other);
+    Account& operator=(const Account& other);
+    
+    // Move constructor and assignment operator
+    Account(Account&& other) noexcept;
+    Account& operator=(Account&& other) noexcept;
+    
     /**
      * @brief Get the account address
      */

@@ -108,6 +108,19 @@ class CLI
      * @return The command help.
      */
     const std::unordered_map<std::string, std::string>& GetCommandHelp() const;
+    
+    /**
+     * @brief Handle blockchain import command
+     * @param args Command arguments
+     * @return True if successful
+     */
+    bool HandleImportBlockchain(const std::vector<std::string>& args);
+    
+    /**
+     * @brief Get blockchain instance
+     * @return Blockchain instance
+     */
+    std::shared_ptr<ledger::Blockchain> GetBlockchain();
 
    private:
     std::shared_ptr<node::NeoSystem> neoSystem_;

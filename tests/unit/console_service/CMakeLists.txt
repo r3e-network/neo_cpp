@@ -8,8 +8,8 @@ add_executable(test_console_service
 
 target_link_libraries(test_console_service
     PRIVATE
-        GTest::gtest
-        GTest::gtest_main
+        gtest
+        gtest_main
 )
 
 target_include_directories(test_console_service

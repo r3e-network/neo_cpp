@@ -9,9 +9,12 @@
 #include <neo/core/protocol_settings.h>
 #include <neo/cryptography/helper.h>
 #include <neo/io/json.h>
+#include <neo/ledger/transaction.h>
+#include <neo/ledger/block.h>
 
 #include <fstream>
 #include <sstream>
+#include <chrono>
 
 namespace neo::core
 {
@@ -212,16 +215,92 @@ std::optional<NativeContract> ProtocolSettings::GetNativeContract(const io::UInt
 
 bool ProtocolSettings::ValidateTransaction(const void* tx, uint32_t height) const
 {
-    // Basic transaction validation rules
-    // This would validate against protocol rules at given height
-    return true;  // Simplified
+    if (!tx) {
+        return false;
+    }
+    
+    // Cast to transaction pointer (assuming it's a Neo transaction)
+    const auto* transaction = static_cast<const ledger::Transaction*>(tx);
+    
+    // Validate transaction version (Neo N3 uses version 0)
+    if (transaction->GetVersion() != 0) {
+        return false;
+    }
+    
+    // Check ValidUntilBlock
+    if (transaction->GetValidUntilBlock() <= height || 
+        transaction->GetValidUntilBlock() > height + max_valid_until_block_increment_) {
+        return false;
+    }
+    
+    // Validate system fee (must be non-negative)
+    if (transaction->GetSystemFee() < 0) {
+        return false;
+    }
+    
+    // Validate network fee (must be non-negative)
+    if (transaction->GetNetworkFee() < 0) {
+        return false;
+    }
+    
+    // Check transaction size limits
+    auto tx_size = transaction->GetSize();
+    if (tx_size > 102400) { // 100KB max transaction size
+        return false;
+    }
+    
+    // Validate attributes count
+    if (transaction->GetAttributes().size() > 16) {
+        return false;
+    }
+    
+    // Validate signers count
+    if (transaction->GetSigners().size() == 0 || transaction->GetSigners().size() > 16) {
+        return false;
+    }
+    
+    return true;
 }
 
 bool ProtocolSettings::ValidateBlock(const void* block) const
 {
-    // Basic block validation rules
-    // This would validate against protocol rules
-    return true;  // Simplified
+    if (!block) {
+        return false;
+    }
+    
+    // Cast to block pointer
+    const auto* neo_block = static_cast<const ledger::Block*>(block);
+    
+    // Validate block version (Neo N3 uses version 0)
+    if (neo_block->GetVersion() != 0) {
+        return false;
+    }
+    
+    // Check transaction count limits
+    if (neo_block->GetTransactions().size() > max_transactions_per_block_) {
+        return false;
+    }
+    
+    // Validate block size (blocks should not exceed 1MB)
+    auto block_size = neo_block->GetSize();
+    if (block_size > 1048576) { // 1MB max block size
+        return false;
+    }
+    
+    // Check timestamp validity (basic range check)
+    auto timestamp = neo_block->GetTimestamp();
+    auto current_time = std::chrono::duration_cast<std::chrono::milliseconds>(
+        std::chrono::system_clock::now().time_since_epoch()).count();
+    
+    // Block timestamp should not be too far in the future
+    if (timestamp > current_time + 900000) { // 15 minutes tolerance
+        return false;
+    }
+    
+    // Block index should be sequential (can't validate without blockchain context)
+    // This would need blockchain instance to verify against previous block
+    
+    return true;
 }
 
 uint64_t ProtocolSettings::CalculateSystemFee(uint32_t size) const { return size * fee_per_byte_; }

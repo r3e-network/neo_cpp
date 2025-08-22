@@ -17,6 +17,8 @@
 #include <neo/network/p2p/payloads/transaction_payload.h>
 #include <neo/network/p2p/remote_node.h>
 
+#include <cstring>
+
 namespace neo::network::p2p
 {
 
@@ -223,9 +225,22 @@ void LocalNode::ProcessStateServiceMessage(RemoteNode* remoteNode, const payload
         auto data = payload.GetData();
         if (!data.empty())
         {
-            // StateRoot processing would go here when implemented
-            // For now, just log that we received a state root payload
-            LOG_DEBUG("State root payload received, processing not yet implemented");
+            // Basic StateRoot processing implementation
+            LOG_DEBUG("State root payload received, processing with basic validation");
+            
+            // Validate minimum payload size
+            if (data.Size() < 32) {
+                LOG_WARNING("State root payload too small: {} bytes", data.Size());
+                return;
+            }
+            
+            // Extract state root hash (first 32 bytes)
+            io::UInt256 state_root_hash;
+            if (data.Size() >= 32) {
+                std::memcpy(state_root_hash.Data(), data.Data(), 32);
+            }
+            
+            LOG_INFO("Received state root: {}", state_root_hash.ToString());
             
             // State service integration would go here
             // stateService->ProcessStateRoot(stateRoot);

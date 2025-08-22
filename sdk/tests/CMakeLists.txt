@@ -1,7 +1,11 @@
 cmake_minimum_required(VERSION 3.16)
 
-# Find Google Test
-find_package(GTest REQUIRED)
+# Find Google Test (optional)
+find_package(GTest QUIET)
+if(NOT GTest_FOUND)
+    message(WARNING "GTest not found - SDK tests will be skipped")
+    return()
+endif()
 
 # Test sources
 set(SDK_TEST_SOURCES

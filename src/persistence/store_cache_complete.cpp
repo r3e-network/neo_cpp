@@ -32,7 +32,7 @@ StoreCache::StoreCache(std::shared_ptr<IStoreSnapshot> snapshot) : store_(*snaps
     }
 }
 
-std::optional<StorageItem> StoreCache::TryGet(const StorageKey& key) const
+std::optional<StorageItem> StoreCache::TryGetValue(const StorageKey& key) const
 {
     // Check tracked items first
     auto it = items_.find(key);
@@ -331,7 +331,9 @@ void StoreCache::Commit()
 uint32_t StoreCache::GetCurrentBlockIndex() const
 {
     StorageKey key(0, io::ByteVector::Parse("00"));  // Block height key
-    auto item = TryGet(key);
+    auto item_opt = TryGetValue(key);
+    if (!item_opt.has_value()) return 0;
+    auto item = std::make_shared<StorageItem>(item_opt.value());
     if (item && item->GetValue().Size() >= 4)
     {
         return *reinterpret_cast<const uint32_t*>(item->GetValue().Data());
@@ -472,13 +474,10 @@ std::vector<StorageKey> StoreCache::GetDeletedItems() const
 
 bool StoreCache::TryGet(const StorageKey& key, StorageItem& item) const
 {
-    auto result = TryGet(key);
-    if (result)
-    {
-        item = *result;
-        return true;
-    }
-    return false;
+    auto result_opt = TryGetValue(key);
+    if (!result_opt.has_value()) return false;
+    item = result_opt.value();
+    return true;
 }
 
 std::shared_ptr<IStoreSnapshot> StoreCache::GetStore() const { return snapshot_; }

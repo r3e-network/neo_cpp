@@ -13,7 +13,7 @@
 
 namespace neo::persistence
 {
-std::optional<StorageItem> MemoryStoreView::TryGet(const StorageKey& key) const
+std::optional<StorageItem> MemoryStoreView::TryGetValue(const StorageKey& key) const
 {
     auto it = storage_.find(key);
     if (it != storage_.end())

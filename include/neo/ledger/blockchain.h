@@ -61,6 +61,15 @@ namespace neo::ledger
 // Forward declarations
 class MemoryPool;
 
+}  // namespace neo::ledger
+
+namespace neo::network::p2p::payloads { 
+    class ExtensiblePayload;
+    class HeaderCache;
+}
+
+namespace neo::ledger {
+
 // Note: Block class is defined in this namespace as neo::ledger::Block
 // Note: Header type alias is defined in header.h as alias for BlockHeader
 
@@ -348,13 +357,75 @@ class Blockchain
      * @brief Gets the header cache.
      * @return The header cache.
      */
-    std::shared_ptr<network::p2p::payloads::HeaderCache> GetHeaderCache() const { return header_cache_; }
+    std::shared_ptr<neo::network::p2p::payloads::HeaderCache> GetHeaderCache() const { return header_cache_; }
 
     /**
      * @brief Gets the Neo system.
      * @return The Neo system.
      */
     std::shared_ptr<NeoSystem> GetSystem() const { return system_; }
+
+    // ========== MISSING C# METHODS - ADDING FOR EXACT COMPATIBILITY ==========
+    
+    /**
+     * @brief Main message processing method (C# OnReceive equivalent)
+     * @param message The message to process
+     */
+    void ProcessMessage(const void* message);
+    
+    /**
+     * @brief Process extensible payload (C# method)
+     * @param payload The extensible payload to process
+     * @return Verification result
+     */
+    VerifyResult OnNewExtensiblePayload(const network::p2p::payloads::ExtensiblePayload& payload);
+    
+    /**
+     * @brief Re-verify inventories (C# method)
+     * @param inventories List of inventories to re-verify
+     */
+    void ReverifyInventories(const std::vector<void*>& inventories);
+    
+    /**
+     * @brief Send relay result (C# method)  
+     * @param inventory The inventory that was relayed
+     * @param result The relay result
+     */
+    void SendRelayResult(const void* inventory, VerifyResult result);
+    
+    /**
+     * @brief Handle pre-verification completion (C# method)
+     * @param transaction The transaction that completed pre-verification
+     * @param result The verification result
+     */
+    void OnPreverifyCompleted(std::shared_ptr<Transaction> transaction, VerifyResult result);
+    
+    // Static event system to match C# exactly
+    /**
+     * @brief Global committing event (C# static event equivalent)
+     */
+    static void InvokeCommitting(std::shared_ptr<Block> block, 
+                                std::shared_ptr<persistence::DataCache> snapshot,
+                                const std::vector<ApplicationExecuted>& app_executed);
+    
+    /**
+     * @brief Global committed event (C# static event equivalent)  
+     */
+    static void InvokeCommitted(std::shared_ptr<Block> block);
+    
+    // Actor pattern compatibility methods
+    /**
+     * @brief Create Props for actor system (C# method)
+     * @param system The Neo system
+     * @return Actor props for blockchain
+     */
+    static void* CreateProps(std::shared_ptr<NeoSystem> system);
+    
+    /**
+     * @brief Get best block hash (C# property equivalent)
+     * @return The best block hash
+     */
+    io::UInt256 GetBestBlockHash() const { return GetCurrentBlockHash(); }
 
    private:
     /**
@@ -407,7 +478,7 @@ class Blockchain
     std::shared_ptr<NeoSystem> system_;
     
     /// @brief Cache for block headers
-    std::shared_ptr<network::p2p::payloads::HeaderCache> header_cache_;
+    std::shared_ptr<neo::network::p2p::payloads::HeaderCache> header_cache_;
     
     /// @brief Main data cache for blockchain state
     std::shared_ptr<persistence::DataCache> data_cache_;

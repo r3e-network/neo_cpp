@@ -4,13 +4,13 @@ set(INTEGRATION_TEST_SOURCES
     test_blockchain_persistence.cpp
     test_end_to_end_scenarios.cpp
     test_consensus_integration.cpp
-    test_network_sync.cpp
-    test_smart_contract_deployment.cpp
-    test_token_transfers.cpp
-    test_multi_node_consensus.cpp
-    test_state_synchronization.cpp
-    test_oracle_integration.cpp
-    test_full_node_validation.cpp
+    # test_network_sync.cpp  # Missing file
+    # test_smart_contract_deployment.cpp  # Missing file
+    # test_token_transfers.cpp  # Missing file
+    # test_multi_node_consensus.cpp  # Missing file
+    # test_state_synchronization.cpp  # Missing file
+    # test_oracle_integration.cpp  # Missing file
+    # test_full_node_validation.cpp  # Missing file
 )
 
 # Main integration test executable
@@ -26,8 +26,8 @@ target_link_libraries(test_integration
         neo_cryptography
         neo_wallets
         neo_io
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 target_include_directories(test_integration
@@ -48,8 +48,8 @@ target_link_libraries(test_e2e_scenarios
         neo_cryptography
         neo_wallets
         neo_io
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 # Add tests to CTest

@@ -15,8 +15,8 @@ target_include_directories(test_monitoring
 target_link_libraries(test_monitoring
     PRIVATE
         neo_cpp
-        GTest::gtest
-        GTest::gtest_main
+        gtest
+        gtest_main
 )
 
 # Add test

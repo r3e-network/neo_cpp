@@ -77,7 +77,7 @@ class StoreView
      * @param key The key.
      * @return The storage item, or std::nullopt if not found.
      */
-    virtual std::optional<StorageItem> TryGet(const StorageKey& key) const = 0;
+    virtual std::optional<StorageItem> TryGetValue(const StorageKey& key) const = 0;
 
     /**
      * @brief Gets a pointer to a storage item by key.

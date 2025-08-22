@@ -9,8 +9,8 @@ set(LEDGER_TEST_SOURCES
     test_ledger_extended.cpp
     test_header_cache.cpp
     test_blockchain_cache_simple.cpp
-    test_memory_pool.cpp
-    test_state_machine.cpp
+    test_memory_pool_all_methods_complete.cpp  # Use existing file
+    # test_state_machine.cpp  # Missing file
 )
 
 # Main ledger test executable
@@ -22,8 +22,8 @@ target_link_libraries(test_ledger
         neo_io
         neo_cryptography
         neo_smartcontract
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 target_include_directories(test_ledger
@@ -39,8 +39,8 @@ target_link_libraries(test_transaction_complete
         neo_ledger
         neo_io
         neo_cryptography
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 add_executable(test_blockchain_complete test_blockchain_complete.cpp)
@@ -50,8 +50,8 @@ target_link_libraries(test_blockchain_complete
         neo_io
         neo_cryptography
         neo_smartcontract
-        GTest::GTest
-        GTest::Main
+        gtest
+        gtest_main
 )
 
 # Add tests to CTest

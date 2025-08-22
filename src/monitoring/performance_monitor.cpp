@@ -359,7 +359,7 @@ void PerformanceMonitor::CollectSystemMetrics() {
         system_metrics_.memory_available_bytes = info.freeram;
     }
     
-    // Get CPU usage (simplified)
+    // Get CPU usage using /proc/stat
     static uint64_t prev_idle = 0, prev_total = 0;
     std::ifstream stat_file("/proc/stat");
     if (stat_file.is_open()) {

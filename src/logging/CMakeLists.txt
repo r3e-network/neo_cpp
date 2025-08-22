@@ -21,8 +21,8 @@ target_include_directories(neo_logging
         ${CMAKE_CURRENT_SOURCE_DIR}
 )
 
-# Find spdlog
-find_package(spdlog REQUIRED)
+# Find spdlog (optional)
+find_package(spdlog QUIET)
 if(spdlog_FOUND)
     # Link dependencies - spdlog is available
     target_link_libraries(neo_logging
@@ -33,7 +33,9 @@ if(spdlog_FOUND)
     target_compile_definitions(neo_logging PUBLIC NEO_HAS_SPDLOG)
     message(STATUS "Logging: Using spdlog for advanced logging")
 else()
-    message(FATAL_ERROR "spdlog is required but not found")
+    # Use minimal logging implementation
+    message(STATUS "Logging: Using minimal logging (spdlog not found)")
+    target_compile_definitions(neo_logging PUBLIC NEO_MINIMAL_LOGGING)
 endif()
 
 # Compiler-specific options

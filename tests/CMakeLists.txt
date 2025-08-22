@@ -4,7 +4,7 @@ if(GTest_FOUND)
     include(GoogleTest)
     enable_testing()
     # Make GoogleTest available to all tests
-    set(GTEST_LIBRARIES GTest::gtest GTest::gtest_main GTest::gmock GTest::gmock_main)
+    set(GTEST_LIBRARIES gtest gtest_main gmock gmock_main)
     message(STATUS "GTest found via find_package - unit tests will be built")
 elseif(TARGET gtest)
     # GoogleTest was added as a subdirectory
