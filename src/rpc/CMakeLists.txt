@@ -2,7 +2,7 @@
 
 # Create RPC library
 add_library(neo_rpc OBJECT
-    rpc_server_stub.cpp                 # Working RPC server implementation
+    rpc_server.cpp                      # Main RPC server implementation
     # rpc_server_complete_production.cpp  # Disabled due to JsonValue API issues
     # rpc_methods_complete.cpp            # Disabled temporarily
     # metrics_endpoint.cpp               # Disabled temporarily due to dependencies
