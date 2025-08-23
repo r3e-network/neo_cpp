@@ -4,64 +4,55 @@
 
 | Metric | C# Tests | C++ Tests | Coverage |
 |--------|----------|-----------|----------|
-| **Total Tests** | 1484 | 4648 | 46.8% |
+| **Total Tests** | 1515 | 5291 | 48.4% |
 | **Categories** | 11 | 12 | - |
 
 ## Category Coverage
 
 | Category | C# Tests | C++ Tests | Coverage | Status |
 |----------|----------|-----------|----------|--------|
-| **Consensus** | 6 | 121 | 0.0% | ❌ |
-| **Cryptography** | 211 | 442 | 37.9% | ❌ |
+| **Consensus** | 6 | 169 | 100.0% | ✅ |
+| **Cryptography** | 211 | 495 | 37.9% | ❌ |
 | **Extensions** | 0 | 54 | 100.0% | ✅ |
-| **IO** | 261 | 1200 | 44.4% | ❌ |
-| **Json** | 92 | 108 | 31.5% | ❌ |
-| **Ledger** | 94 | 211 | 52.1% | ❌ |
-| **Network** | 104 | 529 | 57.7% | ❌ |
-| **Other** | 164 | 429 | 47.6% | ❌ |
-| **Persistence** | 45 | 150 | 31.1% | ❌ |
-| **RPC** | 63 | 140 | 17.5% | ❌ |
-| **SmartContract** | 333 | 1078 | 59.2% | ❌ |
-| **Wallet** | 111 | 186 | 54.1% | ❌ |
+| **IO** | 261 | 1291 | 46.4% | ❌ |
+| **Json** | 92 | 113 | 31.5% | ❌ |
+| **Ledger** | 94 | 237 | 60.6% | ❌ |
+| **Network** | 104 | 629 | 57.7% | ❌ |
+| **Other** | 200 | 497 | 51.5% | ❌ |
+| **Persistence** | 45 | 154 | 33.3% | ❌ |
+| **RPC** | 67 | 183 | 16.4% | ❌ |
+| **SmartContract** | 324 | 1229 | 58.6% | ❌ |
+| **Wallet** | 111 | 240 | 55.0% | ❌ |
 
 ## Missing Test Conversions
 
-### Consensus (6 missing)
-
-- `TestConsensusServiceCreation`
-- `TestConsensusServiceStart`
-- `TestConsensusServiceReceivesBlockchainMessages`
-- `TestConsensusServiceHandlesExtensiblePayload`
-- `TestConsensusServiceHandlesValidConsensusMessage`
-- `TestConsensusServiceRejectsInvalidPayload`
-
 ### Cryptography (131 missing)
 
-- `TestToBytes`
-- `TestFromBytes`
-- `TestFromBytesWideR2`
-- `TestFromBytesWideNegativeOne`
-- `TestFromBytesWideMaximum`
-- `TestSquaring`
-- `TestInversion`
-- `TestInvertIsPow`
-- `TestSqrt`
-- `TestFromRaw`
+- `TestAddCheck`
+- `TestBloomFIlterConstructorGetKMTweak`
+- `TestGetBits`
+- `TestInvalidArguments`
+- `DeriveKeyTest`
+- `TestTrim`
+- `TestBase58CheckDecode`
+- `TestMurmurReadOnlySpan`
+- `TestSha512`
+- `TestTest`
 - ... and 121 more
 
-### IO (145 missing)
+### IO (140 missing)
 
 - `Test_StackItemState`
 - `Test_ExecutionState`
-- `TestGetVarSizeInt`
-- `TestGetVarSizeGeneric`
-- `TestToTimestampMS`
-- `TestGetVarSizeString`
-- `TestGetVarSizeInt`
-- `TestGetStrictUTF8String`
-- `TestTrimStartIgnoreCase`
-- `TestGetVarSizeGeneric`
-- ... and 135 more
+- `TestIsReadOnly`
+- `TestSetAndGetItem`
+- `TestGetKeys`
+- `TestGetValues`
+- `TestTryGetValue`
+- `TestCollectionAddAndContains`
+- `TestCollectionCopyTo`
+- `TestCollectionRemove`
+- ... and 130 more
 
 ### Json (63 missing)
 
@@ -77,27 +68,27 @@
 - `TestAddNullValues`
 - ... and 53 more
 
-### Ledger (45 missing)
+### Ledger (37 missing)
 
-- `TestGetBlock_Genesis`
-- `TestGetBlock_NoTransactions`
-- `TestGetBlockCount`
-- `TestGetBlockHeaderCount`
-- `TestGetBlockHeader`
-- `TestGetContractState`
 - `TestGetContractState_Native_CaseInsensitive`
 - `TestGetContractState_InvalidFormat`
-- `TestGetRawMemPool`
 - `TestGetRawMemPool_Empty`
-- ... and 35 more
+- `TestGetRawMemPool_MixedVerifiedUnverified`
+- `TestGetRawTransaction`
+- `TestGetRawTransaction_Confirmed`
+- `TestGetStorage`
+- `TestFindStorage`
+- `TestStorage_NativeContractName`
+- `TestFindStorage_Pagination`
+- ... and 27 more
 
 ### Network (44 missing)
 
 - `GetTimeOut`
 - `NoService`
-- `TestDefaults`
 - `RemoteNode_Test_Abort_DifferentNetwork`
 - `RemoteNode_Test_Accept_IfSameNetwork`
+- `TestDefaults`
 - `TaskManager_Test_IsHighPriority`
 - `RemoteNode_Test_IsHighPriority`
 - `Size_Get`
@@ -105,49 +96,49 @@
 - `Size_Get`
 - ... and 34 more
 
-### Other (86 missing)
+### Other (97 missing)
 
-- `TestGetAccountStatus`
-- `TestGetVsockAddress`
-- `TestInvalidEndpoint`
-- `TestMinimumValidatorConsensus`
-- `TestMaximumByzantineFailures`
-- `TestStressConsensusMultipleRounds`
-- `TestLargeTransactionSetConsensus`
-- `TestConcurrentViewChanges`
-- `TestPrimaryFailureDuringConsensus`
-- `TestByzantineValidatorSendsConflictingMessages`
-- ... and 76 more
+- `TestFilter`
+- `TestCachedFind_Between`
+- `TestCachedFind_Last`
+- `TestCachedFind_Empty`
+- `TestBigDecimalConstructor`
+- `TestGetDecimals`
+- `TestGernerator1`
+- `TestGernerator2`
+- `TestGernerator3`
+- `TestOperatorEqual`
+- ... and 87 more
 
-### Persistence (31 missing)
+### Persistence (30 missing)
 
 - `TestLevelDbDatabase`
 - `TestLevelDb`
 - `TestRocksDb`
-- `TestAddInternal`
-- `TestDeleteInternal`
-- `TestFindInternal`
-- `TestGetInternal`
-- `TestTryGetInternal`
-- `TestUpdateInternal`
-- `TestCacheOverrideIssue2572`
-- ... and 21 more
+- `TestImplicit`
+- `TestGeneratorAndDispose`
+- `TestKeyAndValueAndNext`
+- `TestReadOnlyStoreView`
+- `TestAccessByKey`
+- `TestAccessByNotFoundKey`
+- `TestAccessByDeletedKey`
+- ... and 20 more
 
-### RPC (52 missing)
+### RPC (56 missing)
 
-- `TestCheckAuth_ValidCredentials_ReturnsTrue`
-- `TestCheckAuth`
-- `TestDuplicateTransactionErrorCode`
-- `TestTargetInvocationExceptionUnwrapping`
-- `TestDynamicInvokeDelegateExceptionUnwrapping`
-- `TestAggregateExceptionUnwrapping`
-- `TestUInt160`
-- `TestUInt256`
-- `TestInteger`
-- `TestBoolean`
-- ... and 42 more
+- `TestRpcStack`
+- `TestGetKeyPair`
+- `TestTransactionAttribute`
+- `TestWitnessRule`
+- `TestToBigInteger`
+- `TestConstructorByUrlAndDispose`
+- `TestConstructorWithBasicAuth`
+- `TestGetPeers_NoUnconnected`
+- `TestGetPeers_NoConnected`
+- `TestGetVersion_HardforksStructure`
+- ... and 46 more
 
-### SmartContract (136 missing)
+### SmartContract (134 missing)
 
 - `TestMinIntegerAbs`
 - `TestInvokeFunction`
@@ -159,9 +150,9 @@
 - `TestInvokeFunction_InvalidWitnessInvocation`
 - `TestInvokeFunction_InvalidWitnessVerification`
 - `TestInvokeFunction_InvalidContractParameter`
-- ... and 126 more
+- ... and 124 more
 
-### Wallet (51 missing)
+### Wallet (50 missing)
 
 - `TestOpenInvalidWallet`
 - `TestDumpPrivKey`
@@ -173,26 +164,25 @@
 - `TestGetWalletBalance_InvalidAssetIdFormat`
 - `TestGetWalletUnclaimedGas`
 - `TestImportPrivKey`
-- ... and 41 more
+- ... and 40 more
 
 
 ## Recommendations
 
 ### Priority Actions
-1. **Current Coverage**: 46.8%
+1. **Current Coverage**: 48.4%
 2. **Target Coverage**: 90%+
-3. **Tests to Convert**: 790
+3. **Tests to Convert**: 782
 
 ### Priority Categories for Conversion
 
-- **Consensus**: 0.0% coverage (6 tests missing)
-- **RPC**: 17.5% coverage (52 tests missing)
-- **Persistence**: 31.1% coverage (31 tests missing)
+- **RPC**: 16.4% coverage (56 tests missing)
 - **Json**: 31.5% coverage (63 tests missing)
+- **Persistence**: 33.3% coverage (30 tests missing)
 - **Cryptography**: 37.9% coverage (131 tests missing)
-- **IO**: 44.4% coverage (145 tests missing)
-- **Other**: 47.6% coverage (86 tests missing)
-- **Ledger**: 52.1% coverage (45 tests missing)
-- **Wallet**: 54.1% coverage (51 tests missing)
+- **IO**: 46.4% coverage (140 tests missing)
+- **Other**: 51.5% coverage (97 tests missing)
+- **Wallet**: 55.0% coverage (50 tests missing)
 - **Network**: 57.7% coverage (44 tests missing)
-- **SmartContract**: 59.2% coverage (136 tests missing)
+- **SmartContract**: 58.6% coverage (134 tests missing)
+- **Ledger**: 60.6% coverage (37 tests missing)
