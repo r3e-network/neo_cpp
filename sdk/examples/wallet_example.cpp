@@ -31,9 +31,32 @@ int main(int argc, char* argv[]) {
         
         // 1. Create a new wallet
         std::cout << "1. Creating new wallet..." << std::endl;
+        
+        // Get password from environment variable or prompt user
+        std::string wallet_password = std::getenv("WALLET_PASSWORD") ? 
+            std::getenv("WALLET_PASSWORD") : "";
+        
+        if (wallet_password.empty())
+        {
+            std::cout << "Enter wallet password: ";
+            std::getline(std::cin, wallet_password);
+            
+            if (wallet_password.empty())
+            {
+                std::cerr << "ERROR: Wallet password cannot be empty" << std::endl;
+                return 1;
+            }
+            
+            if (wallet_password.length() < 8)
+            {
+                std::cerr << "ERROR: Wallet password must be at least 8 characters" << std::endl;
+                return 1;
+            }
+        }
+        
         auto wallet = wallet::Wallet::Create(
             "example_wallet.json",
-            "MySecurePassword123!",
+            wallet_password,
             "Example Wallet"
         );
         std::cout << "   Wallet created: " << wallet->GetName() << std::endl;
@@ -90,7 +113,7 @@ int main(int argc, char* argv[]) {
         wallet->Lock();
         std::cout << "   Wallet locked: " << (wallet->IsLocked() ? "Yes" : "No") << std::endl;
         
-        bool unlocked = wallet->Unlock("MySecurePassword123!");
+        bool unlocked = wallet->Unlock(wallet_password);
         std::cout << "   Unlock successful: " << (unlocked ? "Yes" : "No") << std::endl;
         std::cout << "   Wallet locked: " << (wallet->IsLocked() ? "Yes" : "No") << std::endl << std::endl;
         
@@ -106,7 +129,7 @@ int main(int argc, char* argv[]) {
         
         // 9. Open existing wallet
         std::cout << "9. Opening existing wallet..." << std::endl;
-        auto wallet2 = wallet::Wallet::Open("example_wallet.json", "MySecurePassword123!");
+        auto wallet2 = wallet::Wallet::Open("example_wallet.json", wallet_password);
         std::cout << "   Wallet opened: " << wallet2->GetName() << std::endl;
         std::cout << "   Accounts: " << wallet2->GetAccounts().size() << std::endl << std::endl;
         

@@ -22,7 +22,24 @@ int main(int argc, char* argv[]) {
         
         // 1. Setup wallet
         std::cout << "1. Setting up wallet..." << std::endl;
-        auto wallet = wallet::Wallet::Create("tx_wallet.json", "Password123!", "Transaction Wallet");
+        
+        // Get password from environment variable or prompt user
+        std::string wallet_password = std::getenv("WALLET_PASSWORD") ? 
+            std::getenv("WALLET_PASSWORD") : "";
+        
+        if (wallet_password.empty())
+        {
+            std::cout << "Enter wallet password: ";
+            std::getline(std::cin, wallet_password);
+            
+            if (wallet_password.empty() || wallet_password.length() < 8)
+            {
+                std::cerr << "ERROR: Wallet password must be at least 8 characters" << std::endl;
+                return 1;
+            }
+        }
+        
+        auto wallet = wallet::Wallet::Create("tx_wallet.json", wallet_password, "Transaction Wallet");
         auto account = wallet->CreateAccount("Main Account");
         std::cout << "   Account created: " << account.GetAddress() << std::endl << std::endl;
         

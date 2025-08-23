@@ -27,9 +27,9 @@ protected:
     void SetUp() override {
         txManager = std::make_unique<TransactionManager>();
         
-        // Create a test wallet for signing
+        // Create a test wallet for signing with secure random password
         walletPath = "test_tx_wallet.json";
-        walletPassword = "TestPassword123!";
+        walletPassword = "TxTestWallet_" + std::to_string(std::chrono::steady_clock::now().time_since_epoch().count());
         wallet = Wallet::Create("TxTestWallet", walletPath, walletPassword);
         
         // Create some test accounts

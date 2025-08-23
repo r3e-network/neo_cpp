@@ -99,7 +99,7 @@ int BlockHeader::GetSize() const
            sizeof(uint32_t) +         // Index
            sizeof(uint8_t) +          // PrimaryIndex
            20 +                       // NextConsensus (UInt160.Length)
-           (1 + witness_.GetSize());  // Witness (1 byte for count + witness size)
+           (1 + static_cast<size_t>(witness_.GetSize()));  // Witness (1 byte for count + witness size)
 }
 
 bool BlockHeader::Verify() const

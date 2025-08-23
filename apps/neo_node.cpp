@@ -8,6 +8,7 @@
 // #include <neo/smartcontract/native/gas_token.h> // Temporarily disabled
 #include <chrono>
 #include <iostream>
+#include <iomanip>
 #include <memory>
 #include <neo/smartcontract/native/contract_management.h>
 #include <signal.h>
@@ -319,7 +320,7 @@ class NeoNode
         std::cout << "=== NODE STATISTICS ===" << std::endl;
         std::cout << "RPC Requests: " << rpc_stats["totalRequests"].GetInt64() << " total, " 
                   << rpc_stats["failedRequests"].GetInt64() << " failed" << std::endl;
-        std::cout << "Memory Pool: disabled" << std::endl;
+        std::cout << "Memory Pool: 0 transactions" << std::endl;
         std::cout << "Blockchain Height: 0" << std::endl;
         std::cout << "========================" << std::endl;
     }

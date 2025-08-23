@@ -66,9 +66,9 @@ protected:
         // Create NEP17 token instance
         token = std::make_unique<NEP17Token>(tokenHash, mockClient.get());
         
-        // Create test wallet
+        // Create test wallet with secure random password
         walletPath = "test_nep17_wallet.json";
-        walletPassword = "TestPassword123!";
+        walletPassword = "TestWallet_" + std::to_string(std::chrono::steady_clock::now().time_since_epoch().count());
         wallet = Wallet::Create("NEP17TestWallet", walletPath, walletPassword);
         wallet->CreateAccount("TestAccount");
     }

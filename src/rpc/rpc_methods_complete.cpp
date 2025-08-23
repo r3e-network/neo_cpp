@@ -24,7 +24,7 @@ nlohmann::json RPCMethods::GetVersion(std::shared_ptr<node::NeoSystem> neoSystem
 
     json protocol;
     protocol["addressversion"] = 53;
-    protocol["network"] = 894710606;
+    protocol["network"] = 860833102;
     protocol["validatorscount"] = 7;
     protocol["msperblock"] = 15000;
     protocol["maxtraceableblocks"] = 2102400;
@@ -53,7 +53,37 @@ nlohmann::json RPCMethods::GetBlock(std::shared_ptr<node::NeoSystem> neoSystem, 
     {
         throw std::runtime_error("Missing block identifier parameter");
     }
-    return nullptr;
+    
+    try {
+        auto blockchain = neoSystem->GetBlockchain();
+        if (!blockchain) {
+            throw std::runtime_error("Blockchain not available");
+        }
+        
+        // Handle both block index (number) and block hash (string)
+        std::shared_ptr<ledger::Block> block;
+        if (params[0].is_number()) {
+            uint32_t index = params[0].get<uint32_t>();
+            block = blockchain->GetBlock(index);
+        } else if (params[0].is_string()) {
+            std::string hashStr = params[0].get<std::string>();
+            io::UInt256 hash;
+            if (hash.TryParse(hashStr)) {
+                block = blockchain->GetBlock(hash);
+            }
+        }
+        
+        if (!block) {
+            return json(nullptr);
+        }
+        
+        // Convert block to JSON with verbose details
+        bool verbose = params.size() > 1 ? params[1].get<bool>() : true;
+        return block->ToJson(verbose);
+        
+    } catch (const std::exception& e) {
+        throw std::runtime_error("Failed to get block: " + std::string(e.what()));
+    }
 }
 
 nlohmann::json RPCMethods::GetBlockHash(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)

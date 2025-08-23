@@ -28,7 +28,7 @@ io::UInt256 Block::CalculateHash() const { return header_.GetHash(); }
 
 uint32_t Block::GetSize() const
 {
-    uint32_t size = header_.GetSize();
+    uint32_t size = static_cast<uint32_t>(header_.GetSize());
 
     // Transactions size
     size += sizeof(uint32_t);  // transaction count

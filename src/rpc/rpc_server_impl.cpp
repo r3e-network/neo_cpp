@@ -279,7 +279,7 @@ void RpcServer::InitializeHandlers()
 
         io::JsonValue protocol = io::JsonValue::CreateObject();
         protocol.AddMember("addressversion", 53);
-        protocol.AddMember("network", 860833102);  // TestNet
+        protocol.AddMember("network", 860833102);  // MainNet
         protocol.AddMember("validatorscount", 7);
         protocol.AddMember("msperblock", 15000);
         protocol.AddMember("maxtraceableblocks", 2102400);

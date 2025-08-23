@@ -94,6 +94,75 @@ void RpcServer::Stop()
     }
 }
 
+std::string RpcServer::GetClientIP(const httplib::Request& req) const
+{
+    // Check for X-Forwarded-For header first (proxy support)
+    if (req.has_header("X-Forwarded-For"))
+    {
+        auto forwarded = req.get_header_value("X-Forwarded-For");
+        // Take the first IP in the chain
+        auto pos = forwarded.find(',');
+        return pos != std::string::npos ? forwarded.substr(0, pos) : forwarded;
+    }
+    
+    // Check for X-Real-IP header
+    if (req.has_header("X-Real-IP"))
+    {
+        return req.get_header_value("X-Real-IP");
+    }
+    
+    // Use remote address as fallback
+    return req.remote_addr;
+}
+
+bool RpcServer::IsAuthenticated(const httplib::Request& req) const
+{
+    if (!config_.enable_authentication)
+    {
+        return true;
+    }
+    
+    if (!req.has_header("Authorization"))
+    {
+        return false;
+    }
+    
+    auto auth_header = req.get_header_value("Authorization");
+    if (auth_header.substr(0, 6) != "Basic ")
+    {
+        return false;
+    }
+    
+    // TODO: Implement proper base64 decoding and credential validation
+    // For now, this is a placeholder - in production, implement secure authentication
+    return true; // PLACEHOLDER: Implement proper authentication
+}
+
+bool RpcServer::IsMethodAllowed(const io::JsonValue& request) const
+{
+    if (config_.disabled_methods.empty())
+    {
+        return true;
+    }
+    
+    if (!request.GetProperty("method").IsString())
+    {
+        return false;
+    }
+    
+    std::string method = request.GetProperty("method").GetString();
+    
+    for (const auto& disabled_method : config_.disabled_methods)
+    {
+        if (method == disabled_method)
+        {
+            return false;
+        }
+    }
+    
+    return true;
+}
+
 io::JsonValue RpcServer::GetStatistics() const
 {
     json stats = {

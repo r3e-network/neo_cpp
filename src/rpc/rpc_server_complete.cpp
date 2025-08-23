@@ -140,7 +140,7 @@ io::JsonValue RpcServer::ProcessRequest(const io::JsonValue& request)
             version_obj["useragent"] = "/NEO:3.0.0/";
             version_obj["protocol"] = json::object();
             version_obj["protocol"]["addressversion"] = 53;
-            version_obj["protocol"]["network"] = 894710606;
+            version_obj["protocol"]["network"] = 860833102;
             version_obj["protocol"]["validatorscount"] = 7;
             version_obj["protocol"]["msperblock"] = 15000;
             version_obj["protocol"]["maxtraceableblocks"] = 2102400;

@@ -19,10 +19,13 @@
 #include <thread>
 #include <unordered_map>
 #include <vector>
+#include <mutex>
+#include <queue>
 
 // Forward declarations
 namespace neo::ledger { class Blockchain; }
 namespace neo::network::p2p { class LocalNode; }
+namespace httplib { class Request; }
 
 namespace neo::rpc
 {
@@ -33,20 +36,19 @@ struct RpcConfig
 {
     std::string bind_address{"127.0.0.1"};
     uint16_t port{10332};
-    size_t max_concurrent_requests{100};
-    size_t max_request_size{10 * 1024 * 1024};  // 10MB
-    std::chrono::seconds request_timeout{30};
+    uint32_t max_concurrent_requests{100};
+    uint32_t max_request_size{10 * 1024 * 1024};  // 10MB
+    uint32_t request_timeout_seconds{30};
     bool enable_cors{true};
     std::vector<std::string> allowed_origins{"*"};
     bool enable_authentication{false};
     std::string username;
     std::string password;
+    std::vector<std::string> disabled_methods;
     
     // Rate limiting configuration
     bool enable_rate_limiting{true};
-    size_t rate_limit_requests_per_second{10};
-    size_t rate_limit_burst_size{20};
-    size_t rate_limit_requests_per_minute{100};
+    uint32_t max_requests_per_second{100};
 };
 
 /**
@@ -60,9 +62,15 @@ using RpcMethodHandler = std::function<io::JsonValue(const io::JsonValue& params
 class RpcServer
 {
    private:
+    class RateLimiter;
+    
+   private:
     RpcConfig config_;
     std::shared_ptr<ledger::Blockchain> blockchain_;
     std::shared_ptr<network::p2p::LocalNode> local_node_;
+    std::unique_ptr<RateLimiter> rate_limiter_;
+    std::shared_ptr<core::Logger> logger_;
+    std::thread server_thread_;
     
     // Statistics
     std::atomic<bool> running_{false};
@@ -120,6 +128,26 @@ class RpcServer
      * @brief Initialize all RPC method handlers
      */
     void InitializeHandlers();
+    
+    /**
+     * @brief Process RPC request
+     */
+    io::JsonValue ProcessRequest(const io::JsonValue& request);
+    
+    /**
+     * @brief Get client IP address from request
+     */
+    std::string GetClientIP(const httplib::Request& req) const;
+    
+    /**
+     * @brief Check if request is authenticated
+     */
+    bool IsAuthenticated(const httplib::Request& req) const;
+    
+    /**
+     * @brief Check if RPC method is allowed
+     */
+    bool IsMethodAllowed(const io::JsonValue& request) const;
 };
 
 /**
