@@ -80,10 +80,18 @@ endif()
 # Link Boost if found
 if(Boost_FOUND)
     target_link_libraries(neo_cpp PUBLIC
-        Boost::system
-        Boost::filesystem
-        Boost::thread
+        Boost::boost
     )
+    # Try to link specific components if available
+    if(TARGET Boost::system)
+        target_link_libraries(neo_cpp PUBLIC Boost::system)
+    endif()
+    if(TARGET Boost::filesystem) 
+        target_link_libraries(neo_cpp PUBLIC Boost::filesystem)
+    endif()
+    if(TARGET Boost::thread)
+        target_link_libraries(neo_cpp PUBLIC Boost::thread)
+    endif()
     target_compile_definitions(neo_cpp PUBLIC NEO_HAS_BOOST)
 endif()
 

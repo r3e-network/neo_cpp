@@ -80,11 +80,14 @@ target_link_libraries(neo_network
 )
 
 if(Boost_FOUND)
-    target_link_libraries(neo_network
-        PUBLIC
-            Boost::system
-            Boost::thread
-    )
+    target_link_libraries(neo_network PUBLIC Boost::boost)
+    # Try to link specific components if available
+    if(TARGET Boost::system)
+        target_link_libraries(neo_network PUBLIC Boost::system)
+    endif()
+    if(TARGET Boost::thread)
+        target_link_libraries(neo_network PUBLIC Boost::thread)
+    endif()
     target_compile_definitions(neo_network PUBLIC NEO_HAS_BOOST)
 else()
     message(WARNING "Boost not found - network features may be limited")

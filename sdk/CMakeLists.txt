@@ -83,9 +83,16 @@ target_include_directories(neo-sdk
 )
 
 # Find required packages
-find_package(CURL REQUIRED)
+find_package(CURL QUIET)
 find_package(nlohmann_json QUIET)
 find_package(OpenSSL REQUIRED)
+
+# Check if CURL was found and set flag
+if(CURL_FOUND)
+    message(STATUS "CURL found - HTTP client functionality enabled")
+else()
+    message(WARNING "CURL not found - HTTP client functionality will be limited")
+endif()
 
 # Try to find libscrypt (optional)
 find_package(PkgConfig QUIET)
@@ -97,12 +104,17 @@ endif()
 target_link_libraries(neo-sdk
     PUBLIC
         neo_cpp
-        CURL::libcurl
         OpenSSL::SSL
         OpenSSL::Crypto
     PRIVATE
         $<$<TARGET_EXISTS:nlohmann_json::nlohmann_json>:nlohmann_json::nlohmann_json>
 )
+
+# Link CURL if found
+if(CURL_FOUND)
+    target_link_libraries(neo-sdk PUBLIC CURL::libcurl)
+    target_compile_definitions(neo-sdk PRIVATE HAS_CURL=1)
+endif()
 
 # Link libscrypt if found
 if(LIBSCRYPT_FOUND)
