@@ -55,7 +55,7 @@ jobs:
         if: startsWith(matrix.os, 'macos')
         run: |
           brew update
-          brew install cmake boost openssl@3 curl lz4 snappy ninja
+          brew install cmake boost openssl@3 curl lz4 snappy ninja pkg-config
 
       - name: Cache build
         uses: actions/cache@v4

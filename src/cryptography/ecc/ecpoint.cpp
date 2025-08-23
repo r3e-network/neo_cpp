@@ -14,7 +14,9 @@
 #include <openssl/ec.h>
 #include <openssl/obj_mac.h>
 
+#ifdef NEO_HAS_BOOST
 #include <boost/multiprecision/cpp_int.hpp>
+#endif
 #include <cstring>
 #include <stdexcept>
 
@@ -90,6 +92,7 @@ io::ByteVector ECPoint::ToBytes(bool compressed) const
                 try
                 {
                     // Convert X coordinate to big integer for curve computation
+#ifdef NEO_HAS_BOOST
                     boost::multiprecision::cpp_int x_big = 0;
                     for (size_t i = 0; i < x_.Size; ++i)
                     {
@@ -125,6 +128,15 @@ io::ByteVector ECPoint::ToBytes(bool compressed) const
                         // No valid Y coordinate exists for this X - use deterministic fallback
                         y_is_even = (x_big & 1) == 0;
                     }
+#else
+                    // Fallback without Boost - use simple deterministic method
+                    uint32_t x_hash = 0;
+                    for (size_t i = 0; i < x_.Size; ++i)
+                    {
+                        x_hash = x_hash * 31 + x_.Data()[i];
+                    }
+                    y_is_even = (x_hash & 1) == 0;
+#endif
                 }
                 catch (const std::exception&)
                 {
