@@ -3,11 +3,11 @@
 # Create RPC library
 add_library(neo_rpc OBJECT
     rpc_server.cpp                      # Main RPC server implementation
-    # rpc_server_complete_production.cpp  # Disabled due to JsonValue API issues
-    # rpc_methods_complete.cpp            # Disabled temporarily
-    # metrics_endpoint.cpp               # Disabled temporarily due to dependencies
-    # rpc_server_unified.cpp             # Disabled due to template compilation issues
-    # rpc_server_impl.cpp                # Disabled due to method signature mismatches
+    rpc_methods_complete.cpp            # Re-enabled full RPC methods
+    # rpc_server_complete_production.cpp
+    # metrics_endpoint.cpp
+    # rpc_server_unified.cpp
+    # rpc_server_impl.cpp
 )
 
 # Set include directories
@@ -27,8 +27,12 @@ target_link_libraries(neo_rpc PUBLIC
     neo_monitoring
 )
 
-# Link httplib if available
-if(httplib_FOUND)
+# Link httplib if available (support both package and header-only detection)
+if(HTTPLIB_FOUND)
+    # Header-only usage; target may not exist
+    target_compile_definitions(neo_rpc PUBLIC NEO_HAS_HTTPLIB)
+elseif(httplib_FOUND)
+    # Found via find_package with target
     target_link_libraries(neo_rpc PUBLIC httplib::httplib)
     target_compile_definitions(neo_rpc PUBLIC NEO_HAS_HTTPLIB)
 endif()

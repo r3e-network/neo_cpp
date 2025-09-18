@@ -7,6 +7,7 @@
  */
 
 #include <neo/plugins/plugin.h>
+#include <neo/plugins/plugin_base.h>
 #include <neo/plugins/plugin_manager.h>
 #include <neo/rpc/rpc_server.h>
 
@@ -39,7 +40,8 @@ std::shared_ptr<Plugin> PluginManager::GetPlugin(const std::string& name) const
 }
 
 bool PluginManager::LoadPlugins(std::shared_ptr<node::NeoSystem> neoSystem,
-                                const std::unordered_map<std::string, std::string>& settings)
+                                const std::unordered_map<std::string, std::string>& settings,
+                                std::shared_ptr<rpc::RpcServer> rpcServer)
 {
     bool result = true;
 
@@ -53,6 +55,14 @@ bool PluginManager::LoadPlugins(std::shared_ptr<node::NeoSystem> neoSystem,
             // Initialize plugin
             if (plugin->Initialize(neoSystem, settings))
             {
+                // Inject RPC server when available and plugin supports it
+                if (rpcServer)
+                {
+                    if (auto* base = dynamic_cast<neo::plugins::PluginBase*>(plugin.get()))
+                    {
+                        base->SetRPCServer(rpcServer);
+                    }
+                }
                 plugins_.push_back(plugin);
                 std::cout << "Loaded plugin: " << plugin->GetName() << " v" << plugin->GetVersion() << " by "
                           << plugin->GetAuthor() << std::endl;

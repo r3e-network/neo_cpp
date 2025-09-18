@@ -88,7 +88,13 @@ class PluginBase : public Plugin
      * @brief Checks if the plugin is running.
      * @return True if the plugin is running, false otherwise.
      */
-    bool IsRunning() const override;
+   bool IsRunning() const override;
+
+   public:
+    /**
+     * @brief Inject the RPC server instance for plugins that expose RPC.
+     */
+    void SetRPCServer(std::shared_ptr<rpc::RpcServer> server);
 
    protected:
     /**
@@ -120,7 +126,7 @@ class PluginBase : public Plugin
      * @brief Gets the RPC server.
      * @return The RPC server.
      */
-    std::shared_ptr<rpc::RpcServer> GetRPCServer() const;
+   std::shared_ptr<rpc::RpcServer> GetRPCServer() const;
 
    private:
     std::string name_;

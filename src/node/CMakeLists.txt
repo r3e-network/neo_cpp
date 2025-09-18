@@ -1,12 +1,11 @@
 # Node component CMakeLists.txt
 
-# Collect node source files
+# Collect node source files (enable real NeoSystem)
 set(NODE_SOURCES
-    neo_system_stub.cpp
-    # neo_system.cpp # Disabled - has LevelDB dependencies
-    # neo_node.cpp # Disabled - has LevelDB dependencies
-    # neo_node_initialization.cpp # Disabled - has LevelDB dependencies
-    # neo_node_processing.cpp # Disabled - has LevelDB dependencies
+    neo_system.cpp
+    # neo_node.cpp
+    # neo_node_initialization.cpp
+    # neo_node_processing.cpp
 )
 
 # Create node core object library

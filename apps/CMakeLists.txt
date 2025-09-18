@@ -12,3 +12,9 @@ target_include_directories(neo_node PRIVATE ${CMAKE_SOURCE_DIR}/include)
 
 # Install only the canonical node
 install(TARGETS neo_node RUNTIME DESTINATION bin)
+
+# Optionally build CLI application (disabled by default until refactor aligns managers)
+option(NEO_BUILD_CLI "Build neo-cli application" OFF)
+if(NEO_BUILD_CLI)
+  add_subdirectory(neo-cli)
+endif()

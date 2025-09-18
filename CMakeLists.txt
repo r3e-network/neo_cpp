@@ -83,8 +83,8 @@ if(NEO_BUILD_APPS)
     add_subdirectory(apps)
 endif()
 
-# SDK subdirectory
-option(NEO_BUILD_SDK "Build Neo C++ SDK" ON)
+# SDK subdirectory (disabled by default to stabilize core build)
+option(NEO_BUILD_SDK "Build Neo C++ SDK" OFF)
 if(NEO_BUILD_SDK)
     add_subdirectory(sdk)
 endif()

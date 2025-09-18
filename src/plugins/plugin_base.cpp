@@ -69,4 +69,6 @@ bool PluginBase::OnStop() { return true; }
 std::shared_ptr<node::NeoSystem> PluginBase::GetNeoSystem() const { return neoSystem_; }
 
 std::shared_ptr<rpc::RpcServer> PluginBase::GetRPCServer() const { return rpcServer_; }
+
+void PluginBase::SetRPCServer(std::shared_ptr<rpc::RpcServer> server) { rpcServer_ = std::move(server); }
 }  // namespace neo::plugins

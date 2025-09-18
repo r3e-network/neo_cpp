@@ -20,7 +20,8 @@ if(NOT spdlog_FOUND)
     target_compile_definitions(spdlog::spdlog INTERFACE NEO_MINIMAL_LOGGING)
     message(STATUS "spdlog not found - using minimal logging")
 else()
-    # Add HAS_SPDLOG definition when spdlog is found
+    # Ensure consistent macro across all translation units
+    add_compile_definitions(NEO_HAS_SPDLOG)
     add_compile_definitions(HAS_SPDLOG)
     message(STATUS "Found spdlog - using full logging capabilities")
 endif()

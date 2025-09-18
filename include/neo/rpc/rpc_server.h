@@ -25,7 +25,11 @@
 // Forward declarations
 namespace neo::ledger { class Blockchain; }
 namespace neo::network::p2p { class LocalNode; }
-namespace httplib { class Request; }
+namespace httplib {
+class Request;
+class Server;
+}
+namespace neo { class NeoSystem; }
 
 namespace neo::rpc
 {
@@ -55,6 +59,8 @@ struct RpcConfig
  * @brief RPC method handler function type
  */
 using RpcMethodHandler = std::function<io::JsonValue(const io::JsonValue& params)>;
+using RpcRequestHandler = std::function<io::JsonValue(const std::string& method,
+                                                     const io::JsonValue& params)>;
 
 /**
  * @brief JSON-RPC 2.0 server implementation for Neo
@@ -62,15 +68,17 @@ using RpcMethodHandler = std::function<io::JsonValue(const io::JsonValue& params
 class RpcServer
 {
    private:
-    class RateLimiter;
-    
-   private:
     RpcConfig config_;
     std::shared_ptr<ledger::Blockchain> blockchain_;
     std::shared_ptr<network::p2p::LocalNode> local_node_;
-    std::unique_ptr<RateLimiter> rate_limiter_;
+    std::shared_ptr<NeoSystem> neo_system_;
     std::shared_ptr<core::Logger> logger_;
     std::thread server_thread_;
+   std::shared_ptr<httplib::Server> http_server_;
+   std::atomic<bool> started_{false};
+    mutable std::mutex methods_mutex_;
+    std::unordered_map<std::string, RpcMethodHandler> plugin_methods_;
+    RpcRequestHandler plugin_handler_{};
     
     // Statistics
     std::atomic<bool> running_{false};
@@ -84,6 +92,11 @@ class RpcServer
      * @param config Server configuration
      */
     explicit RpcServer(const RpcConfig& config);
+    
+    /**
+     * @brief Construct RPC server with NeoSystem
+     */
+    RpcServer(const RpcConfig& config, std::shared_ptr<NeoSystem> neo_system);
     
     /**
      * @brief Construct RPC server with dependencies
@@ -123,6 +136,12 @@ class RpcServer
      */
     io::JsonValue GetStatistics() const;
 
+    // Plugin integration
+    void RegisterRequestHandler(RpcRequestHandler handler);
+    void UnregisterRequestHandler();
+    void RegisterMethod(const std::string& name, RpcMethodHandler handler);
+    void UnregisterMethod(const std::string& name);
+
    private:
     /**
      * @brief Initialize all RPC method handlers
@@ -135,12 +154,12 @@ class RpcServer
     io::JsonValue ProcessRequest(const io::JsonValue& request);
     
     /**
-     * @brief Get client IP address from request
+     * @brief Get client IP address from request (enabled when HTTP server is available)
      */
     std::string GetClientIP(const httplib::Request& req) const;
     
     /**
-     * @brief Check if request is authenticated
+     * @brief Check if request is authenticated (enabled when HTTP server is available)
      */
     bool IsAuthenticated(const httplib::Request& req) const;
     
@@ -148,6 +167,22 @@ class RpcServer
      * @brief Check if RPC method is allowed
      */
     bool IsMethodAllowed(const io::JsonValue& request) const;
+
+    /**
+     * @brief Validate a JSON-RPC 2.0 request
+     * @return Empty string if valid, or error message
+     */
+    std::string ValidateRequest(const io::JsonValue& request);
+
+    /**
+     * @brief Create a JSON-RPC success response
+     */
+    io::JsonValue CreateResponse(const io::JsonValue& id, const io::JsonValue& result);
+
+    /**
+     * @brief Create a JSON-RPC error response
+     */
+    io::JsonValue CreateErrorResponse(const io::JsonValue& id, int code, const std::string& message);
 };
 
 /**

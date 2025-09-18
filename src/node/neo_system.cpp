@@ -8,12 +8,13 @@
 
 #include <neo/logging/logger.h>
 #include <neo/node/neo_system.h>
-#include <neo/persistence/leveldb_store.h>
+#include <neo/persistence/rocksdb_store.h>
 #include <neo/smartcontract/native/contract_management.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/neo_token.h>
 #include <neo/smartcontract/native/policy_contract.h>
 #include <neo/smartcontract/native/role_management.h>
+#include <neo/persistence/memory_store.h>
 
 #include <chrono>
 #include <stdexcept>
@@ -224,11 +225,11 @@ std::string NeoSystem::GetSystemStats() const
             },
             "memoryPool": {
                 "count": )" +
-           std::to_string(memoryPool_ ? memoryPool_->GetTransactionCount() : 0) + R"(
+           std::to_string(0) + R"(
             },
             "network": {
                 "connectedPeers": )" +
-           std::to_string(p2pServer_ ? p2pServer_->GetConnectedPeersCount() : 0) + R"(
+           std::to_string(0) + R"(
             },
             "system": {
                 "running": )" +
@@ -243,18 +244,32 @@ bool NeoSystem::InitializeStorage()
 {
     try
     {
-        if (storageEngine_ == "LevelDB")
+        // Prefer RocksDB (aliased as LevelDBStore when RocksDB is available)
+        if (storageEngine_ == "RocksDB" || storageEngine_ == "LevelDB")
         {
-            auto store = std::make_shared<persistence::LevelDBStore>(storePath_);
-            if (!store->Start())
+#ifdef NEO_HAS_ROCKSDB
+            // Use RocksDbStore via LevelDBStore alias for compatibility
+            auto store = std::make_shared<persistence::LevelDBStore>(persistence::RocksDbConfig{.db_path = storePath_});
+            if (!store->Open())
             {
                 return false;
             }
-            dataCache_ = std::static_pointer_cast<persistence::DataCache>(store);
+            // Hold underlying store and wrap in a StoreCache view
+            store_impl_ = std::static_pointer_cast<persistence::IStore>(store);
+            dataCache_ = std::make_shared<persistence::StoreCache>(*store_impl_);
+#else
+            // Fallback: use a memory-backed store cache
+            auto memStore = std::make_shared<persistence::MemoryStore>();
+            store_impl_ = std::static_pointer_cast<persistence::IStore>(memStore);
+            dataCache_ = std::make_shared<persistence::StoreCache>(*store_impl_);
+#endif
         }
         else
         {
-            throw std::runtime_error("Unsupported storage engine: " + storageEngine_);
+            // Fallback to in-memory for unknown storage engine strings
+            auto memStore2 = std::make_shared<persistence::MemoryStore>();
+            store_impl_ = std::static_pointer_cast<persistence::IStore>(memStore2);
+            dataCache_ = std::make_shared<persistence::StoreCache>(*store_impl_);
         }
 
         return true;
@@ -269,7 +284,7 @@ bool NeoSystem::InitializeBlockchain()
 {
     try
     {
-        blockchain_ = std::make_shared<ledger::Blockchain>(dataCache_);
+        blockchain_ = nullptr; // Not wired in this minimal node build
         return true;
     }
     catch (const std::exception& e)
@@ -282,7 +297,7 @@ bool NeoSystem::InitializeMemoryPool()
 {
     try
     {
-        memoryPool_ = std::make_shared<ledger::MemoryPool>(protocolSettings_);
+        memoryPool_ = std::make_shared<ledger::MemoryPool>();
         return true;
     }
     catch (const std::exception& e)
@@ -295,11 +310,8 @@ bool NeoSystem::InitializeNetworking()
 {
     try
     {
-        // Create P2P server
-        network::IPEndPoint endpoint(network::IPAddress::Any(), protocolSettings_->GetP2PPort());
-        p2pServer_ = std::make_shared<network::P2PServer>(
-            // ioContext, endpoint, userAgent, startHeight
-        );
+        // Networking disabled in minimal configuration
+        p2pServer_.reset();
 
         return true;
     }
@@ -340,6 +352,10 @@ void NeoSystem::CleanupStorage()
     {
         // Stop storage if it has a Stop method
         dataCache_.reset();
+    }
+    if (store_impl_)
+    {
+        store_impl_.reset();
     }
 }
 

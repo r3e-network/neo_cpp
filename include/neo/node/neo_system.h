@@ -197,6 +197,7 @@ class NeoSystem
     // Core components
     std::shared_ptr<ProtocolSettings> protocolSettings_;
     std::shared_ptr<persistence::DataCache> dataCache_;
+    std::shared_ptr<persistence::IStore> store_impl_;
     std::shared_ptr<ledger::Blockchain> blockchain_;
     std::shared_ptr<ledger::MemoryPool> memoryPool_;
     std::shared_ptr<network::P2PServer> p2pServer_;

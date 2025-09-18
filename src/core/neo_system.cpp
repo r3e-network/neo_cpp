@@ -249,6 +249,24 @@ std::unique_ptr<persistence::StoreCache> NeoSystem::store_view() const
     return std::make_unique<persistence::StoreCache>(*store_);
 }
 
+void NeoSystem::EnsureBlockchainInitialized()
+{
+    if (!blockchain_)
+    {
+        try
+        {
+            auto self = shared_from_this();
+            blockchain_ = std::make_unique<ledger::Blockchain>(self);
+            blockchain_->Initialize();
+            blockchain_->Start();
+        }
+        catch (const std::exception& e)
+        {
+            LOG_WARNING("Failed to initialize Blockchain: {}", e.what());
+        }
+    }
+}
+
 void NeoSystem::load_plugins() { initialize_plugins(); }
 
 void NeoSystem::add_service(std::shared_ptr<void> service)

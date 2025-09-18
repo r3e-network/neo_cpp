@@ -63,7 +63,8 @@ class PluginManager
      * @return True if the plugins were loaded, false otherwise.
      */
     bool LoadPlugins(std::shared_ptr<node::NeoSystem> neoSystem,
-                     const std::unordered_map<std::string, std::string>& settings);
+                     const std::unordered_map<std::string, std::string>& settings,
+                     std::shared_ptr<rpc::RpcServer> rpcServer = nullptr);
 
     /**
      * @brief Starts plugins.

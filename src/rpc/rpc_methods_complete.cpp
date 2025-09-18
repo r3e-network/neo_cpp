@@ -9,12 +9,17 @@
 #include <neo/cryptography/base64.h>
 #include <neo/io/binary_writer.h>
 #include <neo/rpc/rpc_methods.h>
+#include <neo/ledger/blockchain.h>
+#include <neo/ledger/block.h>
+#include <neo/smartcontract/contract.h>
+#include <neo/smartcontract/native/native_contract_manager.h>
+#include <neo/wallets/helper.h>
 
 namespace neo::rpc
 {
 using json = nlohmann::json;
 
-nlohmann::json RPCMethods::GetVersion(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetVersion(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     json result;
     result["tcpport"] = 10333;
@@ -37,7 +42,7 @@ nlohmann::json RPCMethods::GetVersion(std::shared_ptr<node::NeoSystem> neoSystem
     return result;
 }
 
-nlohmann::json RPCMethods::GetBlockCount(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetBlockCount(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     auto blockchain = neoSystem->GetBlockchain();
     if (!blockchain)
@@ -47,7 +52,7 @@ nlohmann::json RPCMethods::GetBlockCount(std::shared_ptr<node::NeoSystem> neoSys
     return blockchain->GetCurrentBlockIndex() + 1;
 }
 
-nlohmann::json RPCMethods::GetBlock(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetBlock(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -68,7 +73,7 @@ nlohmann::json RPCMethods::GetBlock(std::shared_ptr<node::NeoSystem> neoSystem, 
         } else if (params[0].is_string()) {
             std::string hashStr = params[0].get<std::string>();
             io::UInt256 hash;
-            if (hash.TryParse(hashStr)) {
+            if (io::UInt256::TryParse(hashStr, hash)) {
                 block = blockchain->GetBlock(hash);
             }
         }
@@ -79,14 +84,14 @@ nlohmann::json RPCMethods::GetBlock(std::shared_ptr<node::NeoSystem> neoSystem, 
         
         // Convert block to JSON with verbose details
         bool verbose = params.size() > 1 ? params[1].get<bool>() : true;
-        return block->ToJson(verbose);
+        return BlockToJson(block, verbose);
         
     } catch (const std::exception& e) {
         throw std::runtime_error("Failed to get block: " + std::string(e.what()));
     }
 }
 
-nlohmann::json RPCMethods::GetBlockHash(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetBlockHash(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -104,16 +109,60 @@ nlohmann::json RPCMethods::GetBlockHash(std::shared_ptr<node::NeoSystem> neoSyst
     return hash.ToString();
 }
 
-nlohmann::json RPCMethods::GetBlockHeader(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetBlockHeader(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
         throw std::runtime_error("Missing block identifier parameter");
     }
-    return nullptr;
+    auto blockchain = neoSystem->GetBlockchain();
+    if (!blockchain)
+    {
+        throw std::runtime_error("Blockchain not available");
+    }
+
+    std::shared_ptr<ledger::Header> header;
+    if (params[0].is_number())
+    {
+        uint32_t index = params[0].get<uint32_t>();
+        header = blockchain->GetBlockHeader(index);
+    }
+    else if (params[0].is_string())
+    {
+        std::string h = params[0].get<std::string>();
+        io::UInt256 hash;
+        if (io::UInt256::TryParse(h, hash))
+        {
+            header = blockchain->GetBlockHeader(hash);
+        }
+    }
+
+    if (!header) return nullptr;
+
+    bool verbose = params.size() > 1 ? params[1].get<bool>() : true;
+    if (!verbose)
+    {
+        std::stringstream ss;
+        io::BinaryWriter writer(ss);
+        header->Serialize(writer);
+        std::string data = ss.str();
+        return cryptography::Base64::Encode(
+            io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
+    }
+
+    json result;
+    result["hash"] = header->GetHash().ToString();
+    result["version"] = header->GetVersion();
+    result["previousblockhash"] = header->GetPrevHash().ToString();
+    result["merkleroot"] = header->GetMerkleRoot().ToString();
+    result["time"] = header->GetTimestamp();
+    result["index"] = header->GetIndex();
+    result["primary"] = header->GetPrimaryIndex();
+    result["nextconsensus"] = header->GetNextConsensus().ToString();
+    return result;
 }
 
-nlohmann::json RPCMethods::GetRawMemPool(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetRawMemPool(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     auto memPool = neoSystem->GetMemPool();
     if (!memPool)
@@ -126,26 +175,61 @@ nlohmann::json RPCMethods::GetRawMemPool(std::shared_ptr<node::NeoSystem> neoSys
     return result;
 }
 
-nlohmann::json RPCMethods::GetRawTransaction(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetRawTransaction(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
         throw std::runtime_error("Missing transaction hash parameter");
     }
-    return nullptr;
+    auto blockchain = neoSystem->GetBlockchain();
+    if (!blockchain)
+    {
+        throw std::runtime_error("Blockchain not available");
+    }
+
+    io::UInt256 hash;
+    if (!io::UInt256::TryParse(params[0].get<std::string>(), hash))
+    {
+        throw std::runtime_error("Invalid transaction hash");
+    }
+
+    auto tx = blockchain->GetTransaction(hash);
+    if (!tx) return nullptr;
+
+    bool verbose = params.size() > 1 ? params[1].get<bool>() : true;
+    if (verbose)
+    {
+        return TransactionToJson(tx, true);
+    }
+    else
+    {
+        std::stringstream ss;
+        io::BinaryWriter writer(ss);
+        tx->Serialize(writer);
+        std::string data = ss.str();
+        return cryptography::Base64::Encode(
+            io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
+    }
 }
 
-nlohmann::json RPCMethods::GetTransactionHeight(std::shared_ptr<node::NeoSystem> neoSystem,
+nlohmann::json RPCMethods::GetTransactionHeight(std::shared_ptr<neo::NeoSystem> neoSystem,
                                                 const nlohmann::json& params)
 {
     if (params.empty())
     {
         throw std::runtime_error("Missing transaction hash parameter");
     }
-    return nullptr;
+    auto blockchain = neoSystem->GetBlockchain();
+    if (!blockchain)
+    {
+        throw std::runtime_error("Blockchain not available");
+    }
+    io::UInt256 hash;
+    if (!io::UInt256::TryParse(params[0].get<std::string>(), hash)) return -1;
+    return blockchain->GetTransactionHeight(hash);
 }
 
-nlohmann::json RPCMethods::SendRawTransaction(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::SendRawTransaction(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -154,7 +238,7 @@ nlohmann::json RPCMethods::SendRawTransaction(std::shared_ptr<node::NeoSystem> n
     return false;
 }
 
-nlohmann::json RPCMethods::InvokeFunction(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::InvokeFunction(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.size() < 2)
     {
@@ -170,7 +254,7 @@ nlohmann::json RPCMethods::InvokeFunction(std::shared_ptr<node::NeoSystem> neoSy
     return result;
 }
 
-nlohmann::json RPCMethods::InvokeScript(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::InvokeScript(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -186,7 +270,7 @@ nlohmann::json RPCMethods::InvokeScript(std::shared_ptr<node::NeoSystem> neoSyst
     return result;
 }
 
-nlohmann::json RPCMethods::GetContractState(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetContractState(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -195,7 +279,7 @@ nlohmann::json RPCMethods::GetContractState(std::shared_ptr<node::NeoSystem> neo
     return nullptr;
 }
 
-nlohmann::json RPCMethods::GetUnclaimedGas(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetUnclaimedGas(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -204,47 +288,40 @@ nlohmann::json RPCMethods::GetUnclaimedGas(std::shared_ptr<node::NeoSystem> neoS
     return "0";
 }
 
-nlohmann::json RPCMethods::GetConnectionCount(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetConnectionCount(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
-    auto localNode = neoSystem->GetLocalNode();
-    if (!localNode)
-    {
-        return 0;
-    }
-    return localNode->GetConnectedPeersCount();
+    (void)neoSystem;
+    (void)params;
+    return 0;
 }
 
-nlohmann::json RPCMethods::GetPeers(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetPeers(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     json result;
     result["unconnected"] = json::array();
     result["bad"] = json::array();
     result["connected"] = json::array();
-
-    auto localNode = neoSystem->GetLocalNode();
-    if (localNode)
-    {
-        // LocalNode would need to expose peer information
-    }
+    (void)neoSystem;
+    (void)params;
 
     return result;
 }
 
-nlohmann::json RPCMethods::GetCommittee(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetCommittee(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     json result = json::array();
     // Would need to query NeoToken native contract
     return result;
 }
 
-nlohmann::json RPCMethods::GetValidators(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetValidators(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     json result = json::array();
     // Would need to query NeoToken native contract
     return result;
 }
 
-nlohmann::json RPCMethods::GetNextBlockValidators(std::shared_ptr<node::NeoSystem> neoSystem,
+nlohmann::json RPCMethods::GetNextBlockValidators(std::shared_ptr<neo::NeoSystem> neoSystem,
                                                   const nlohmann::json& params)
 {
     json result = json::array();
@@ -252,7 +329,7 @@ nlohmann::json RPCMethods::GetNextBlockValidators(std::shared_ptr<node::NeoSyste
     return result;
 }
 
-nlohmann::json RPCMethods::GetBestBlockHash(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetBestBlockHash(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     auto blockchain = neoSystem->GetBlockchain();
     if (!blockchain)
@@ -265,7 +342,7 @@ nlohmann::json RPCMethods::GetBestBlockHash(std::shared_ptr<node::NeoSystem> neo
     return hash.ToString();
 }
 
-nlohmann::json RPCMethods::GetBlockHeaderCount(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetBlockHeaderCount(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     auto blockchain = neoSystem->GetBlockchain();
     if (!blockchain)
@@ -275,7 +352,7 @@ nlohmann::json RPCMethods::GetBlockHeaderCount(std::shared_ptr<node::NeoSystem> 
     return blockchain->GetCurrentBlockIndex() + 1;
 }
 
-nlohmann::json RPCMethods::GetStorage(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetStorage(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.size() < 2)
     {
@@ -284,7 +361,7 @@ nlohmann::json RPCMethods::GetStorage(std::shared_ptr<node::NeoSystem> neoSystem
     return nullptr;
 }
 
-nlohmann::json RPCMethods::FindStorage(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::FindStorage(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.size() < 2)
     {
@@ -298,38 +375,42 @@ nlohmann::json RPCMethods::FindStorage(std::shared_ptr<node::NeoSystem> neoSyste
     return result;
 }
 
-nlohmann::json RPCMethods::GetCandidates(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetCandidates(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     json result = json::array();
     // Would need to query NeoToken native contract
     return result;
 }
 
-nlohmann::json RPCMethods::GetNativeContracts(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::GetNativeContracts(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
+    (void)neoSystem;
     json result = json::array();
 
-    // Configuration value
-    json neoContract;
-    neoContract["id"] = 2;
-    neoContract["hash"] = "0xef4073a0f2b305a38ec4050e4d3d28bc40ea63f5";
-    neoContract["nef"] = json::object();
-    neoContract["manifest"] = json::object();
-    neoContract["manifest"]["name"] = "NeoToken";
-    result.push_back(neoContract);
+    auto& mgr = neo::smartcontract::native::NativeContractManager::GetInstance();
+    for (const auto& contract : mgr.GetContracts())
+    {
+        json c;
+        c["id"] = static_cast<int64_t>(contract->GetId());
+        c["hash"] = contract->GetScriptHash().ToString();
 
-    json gasContract;
-    gasContract["id"] = -6;
-    gasContract["hash"] = "0xd2a4cff31913016155e38e474a2c06d08be276cf";
-    gasContract["nef"] = json::object();
-    gasContract["manifest"] = json::object();
-    gasContract["manifest"]["name"] = "GasToken";
-    result.push_back(gasContract);
+        // Minimal NEF representation
+        c["nef"] = json::object();
+        c["nef"]["magic"] = 0x3346454E;  // 'NEF3'
+        c["nef"]["compiler"] = "neo-cpp";
+        c["nef"]["tokens"] = json::array();
+        c["nef"]["script"] = "";
+        c["nef"]["checksum"] = 0;
 
+        // Manifest basics
+        c["manifest"] = json::object();
+        c["manifest"]["name"] = contract->GetName();
+        result.push_back(std::move(c));
+    }
     return result;
 }
 
-nlohmann::json RPCMethods::SubmitBlock(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::SubmitBlock(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -338,35 +419,30 @@ nlohmann::json RPCMethods::SubmitBlock(std::shared_ptr<node::NeoSystem> neoSyste
     return false;
 }
 
-nlohmann::json RPCMethods::ValidateAddress(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::ValidateAddress(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
         throw std::runtime_error("Missing address parameter");
     }
-
     json result;
-    result["address"] = params[0];
-    result["isvalid"] = false;
-
-    try
+    std::string address = params[0].get<std::string>();
+    result["address"] = address;
+    bool ok = neo::wallets::Helper::IsValidAddress(address);
+    result["isvalid"] = ok;
+    if (ok)
     {
-        auto address = params[0].get<std::string>();
-        // Basic validation - check if it can be parsed
-        if (address.length() == 34 && address[0] == 'N')
+        try
         {
-            result["isvalid"] = true;
+            auto scriptHash = neo::wallets::Helper::ToScriptHash(address);
+            result["scriptHash"] = scriptHash.ToString();
         }
+        catch (...) {}
     }
-    catch (...)
-    {
-        // Invalid address
-    }
-
     return result;
 }
 
-nlohmann::json RPCMethods::TraverseIterator(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::TraverseIterator(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.size() < 2)
     {
@@ -380,7 +456,7 @@ nlohmann::json RPCMethods::TraverseIterator(std::shared_ptr<node::NeoSystem> neo
     return result;
 }
 
-nlohmann::json RPCMethods::TerminateSession(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+nlohmann::json RPCMethods::TerminateSession(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
 {
     if (params.empty())
     {
@@ -389,7 +465,7 @@ nlohmann::json RPCMethods::TerminateSession(std::shared_ptr<node::NeoSystem> neo
     return true;
 }
 
-nlohmann::json RPCMethods::InvokeContractVerify(std::shared_ptr<node::NeoSystem> neoSystem,
+nlohmann::json RPCMethods::InvokeContractVerify(std::shared_ptr<neo::NeoSystem> neoSystem,
                                                 const nlohmann::json& params)
 {
     if (params.empty())
@@ -404,6 +480,23 @@ nlohmann::json RPCMethods::InvokeContractVerify(std::shared_ptr<node::NeoSystem>
     result["stack"] = json::array();
 
     return result;
+}
+
+nlohmann::json RPCMethods::GetStateRoot(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+{
+    // Placeholder: return null state root when not wired
+    nlohmann::json result;
+    result["index"] = 0;
+    result["roothash"] = "0x" + std::string(64, '0');
+    return result;
+}
+
+nlohmann::json RPCMethods::GetState(std::shared_ptr<neo::NeoSystem> neoSystem, const nlohmann::json& params)
+{
+    // Expected params: [contractHash, key]
+    if (params.size() < 2) throw std::runtime_error("Missing required parameters");
+    // Not wired to actual contract storage; return null
+    return nullptr;
 }
 
 // Private helper methods

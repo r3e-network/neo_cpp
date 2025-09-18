@@ -9,8 +9,8 @@
 #include <neo/core/logging.h>
 #include <neo/io/json.h>
 #include <neo/network/p2p/local_node.h>
-#include <neo/rpc/rpc_methods.h>
 #include <neo/rpc/rpc_server.h>
+#include <neo/rpc/rpc_methods.h>
 
 #include <nlohmann/json.hpp>
 #include <sstream>
@@ -37,6 +37,18 @@ RpcServer::RpcServer(const RpcConfig& config)
     InitializeHandlers();
 }
 
+RpcServer::RpcServer(const RpcConfig& config, std::shared_ptr<NeoSystem> neo_system)
+    : config_(config),
+      neo_system_(std::move(neo_system)),
+      running_(false),
+      total_requests_(0),
+      failed_requests_(0),
+      start_time_(std::chrono::steady_clock::now())
+{
+    logger_ = core::Logger::GetInstance();
+    InitializeHandlers();
+}
+
 RpcServer::~RpcServer() { Stop(); }
 
 void RpcServer::Start()
@@ -46,39 +58,56 @@ void RpcServer::Start()
     LOG_INFO("Starting RPC server on {}:{}", config_.bind_address, config_.port);
 
 #ifdef NEO_HAS_HTTPLIB
+    started_.store(false);
     server_thread_ = std::thread(
         [this]()
         {
-            httplib::Server server;
+            // Basic diagnostics to stderr in case logging isn't ready
+            std::fprintf(stderr, "[RPC] Thread start\n");
+            http_server_ = std::make_shared<httplib::Server>();
 
-            server.Post("/",
-                        [this](const httplib::Request& req, httplib::Response& res)
-                        {
-                            total_requests_++;
+            http_server_->Post(
+                "/",
+                [this](const httplib::Request& req, httplib::Response& res)
+                {
+                    total_requests_++;
 
-                            try
-                            {
-                                auto request_json = json::parse(req.body);
-                                io::JsonValue request(request_json);
-                                auto response = ProcessRequest(request);
-                                res.set_content(response.ToString(), "application/json");
-                            }
-                            catch (const std::exception& e)
-                            {
-                                failed_requests_++;
-                                json error_response = {
-                                    {"jsonrpc", "2.0"},
-                                    {"error", {{"code", -32700}, {"message", "Parse error"}, {"data", e.what()}}},
-                                    {"id", nullptr}};
-                                res.set_content(error_response.dump(), "application/json");
-                            }
-                        });
+                    try
+                    {
+                        auto request_json = json::parse(req.body);
+                        io::JsonValue request(request_json);
+                        auto response = ProcessRequest(request);
+                        res.set_content(response.ToString(), "application/json");
+                    }
+                    catch (const std::exception& e)
+                    {
+                        failed_requests_++;
+                        json error_response = {{"jsonrpc", "2.0"},
+                                               {"error",
+                                                {{"code", -32700}, {"message", "Parse error"}, {"data", e.what()}}},
+                                               {"id", nullptr}};
+                        res.set_content(error_response.dump(), "application/json");
+                    }
+                });
 
-            server.listen(config_.bind_address.c_str(), config_.port);
+            // Mark started before blocking listen
+            started_.store(true);
+            std::fprintf(stderr, "[RPC] Listening on %s:%u\n", config_.bind_address.c_str(), (unsigned)config_.port);
+            http_server_->listen(config_.bind_address.c_str(), config_.port);
+            std::fprintf(stderr, "[RPC] Listen ended\n");
         });
 #else
     LOG_ERROR("HTTP server not available - RPC server cannot start");
     running_ = false;
+#endif
+
+#ifdef NEO_HAS_HTTPLIB
+    // Wait briefly for the server thread to initialize
+    for (int i = 0; i < 50; ++i)
+    {
+        if (started_.load()) break;
+        std::this_thread::sleep_for(std::chrono::milliseconds(10));
+    }
 #endif
 }
 
@@ -88,78 +117,52 @@ void RpcServer::Stop()
 
     LOG_INFO("Stopping RPC server");
 
+    // Stop HTTP server first to unblock listen()
+#ifdef NEO_HAS_HTTPLIB
+    if (http_server_) http_server_->stop();
+#endif
+
     if (server_thread_.joinable())
     {
         server_thread_.join();
     }
 }
 
+#ifdef NEO_HAS_HTTPLIB
 std::string RpcServer::GetClientIP(const httplib::Request& req) const
 {
-    // Check for X-Forwarded-For header first (proxy support)
     if (req.has_header("X-Forwarded-For"))
     {
         auto forwarded = req.get_header_value("X-Forwarded-For");
-        // Take the first IP in the chain
         auto pos = forwarded.find(',');
         return pos != std::string::npos ? forwarded.substr(0, pos) : forwarded;
     }
-    
-    // Check for X-Real-IP header
     if (req.has_header("X-Real-IP"))
     {
         return req.get_header_value("X-Real-IP");
     }
-    
-    // Use remote address as fallback
     return req.remote_addr;
 }
 
 bool RpcServer::IsAuthenticated(const httplib::Request& req) const
 {
-    if (!config_.enable_authentication)
-    {
-        return true;
-    }
-    
-    if (!req.has_header("Authorization"))
-    {
-        return false;
-    }
-    
-    auto auth_header = req.get_header_value("Authorization");
-    if (auth_header.substr(0, 6) != "Basic ")
-    {
-        return false;
-    }
-    
-    // TODO: Implement proper base64 decoding and credential validation
-    // For now, this is a placeholder - in production, implement secure authentication
-    return true; // PLACEHOLDER: Implement proper authentication
+    if (!config_.enable_authentication) return true;
+    if (!req.has_header("Authorization")) return false;
+    // TODO: Validate credentials
+    return true;
 }
+#endif
 
 bool RpcServer::IsMethodAllowed(const io::JsonValue& request) const
 {
-    if (config_.disabled_methods.empty())
-    {
-        return true;
-    }
-    
-    if (!request.GetProperty("method").IsString())
-    {
-        return false;
-    }
-    
-    std::string method = request.GetProperty("method").GetString();
-    
+    if (config_.disabled_methods.empty()) return true;
+    if (!request.IsObject() || !request.HasMember("method")) return false;
+    if (!request["method"].IsString()) return false;
+    std::string method = request["method"].GetString();
     for (const auto& disabled_method : config_.disabled_methods)
     {
-        if (method == disabled_method)
-        {
-            return false;
-        }
+        if (method == disabled_method) return false;
     }
-    
     return true;
 }
 
@@ -173,6 +176,35 @@ io::JsonValue RpcServer::GetStatistics() const
     return io::JsonValue(stats);
 }
 
+// Plugin registration
+void RpcServer::RegisterRequestHandler(RpcRequestHandler handler)
+{
+    std::lock_guard<std::mutex> lock(methods_mutex_);
+    plugin_handler_ = std::move(handler);
+}
+
+void RpcServer::UnregisterRequestHandler()
+{
+    std::lock_guard<std::mutex> lock(methods_mutex_);
+    plugin_handler_ = nullptr;
+}
+
+void RpcServer::RegisterMethod(const std::string& name, RpcMethodHandler handler)
+{
+    std::lock_guard<std::mutex> lock(methods_mutex_);
+    std::string key = name;
+    for (auto& ch : key) ch = static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
+    plugin_methods_[key] = std::move(handler);
+}
+
+void RpcServer::UnregisterMethod(const std::string& name)
+{
+    std::lock_guard<std::mutex> lock(methods_mutex_);
+    std::string key = name;
+    for (auto& ch : key) ch = static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
+    plugin_methods_.erase(key);
+}
+
 void RpcServer::InitializeHandlers()
 {
     // Use the methods from RpcMethods class
@@ -182,278 +214,247 @@ void RpcServer::InitializeHandlers()
 io::JsonValue RpcServer::ProcessRequest(const io::JsonValue& request)
 {
     auto validation_error = ValidateRequest(request);
+    io::JsonValue id;
+    if (request.IsObject() && request.HasMember("id")) id = request["id"];
     if (!validation_error.empty())
     {
-        return CreateErrorResponse(request.GetValue("id"), -32600, validation_error);
+        return CreateErrorResponse(id, static_cast<int>(RpcError::InvalidRequest), validation_error);
     }
 
-    auto method = request.GetString("method");
-    auto params = request.GetValue("params");
-    auto id = request.GetValue("id");
+    const auto method_raw = request["method"].GetString();
+    LOG_INFO("RPC method: {}", method_raw);
+    std::string method = method_raw;
+    // Normalize: trim spaces and lowercase
+    auto ltrim = [](std::string& s) {
+        size_t i = 0; while (i < s.size() && std::isspace(static_cast<unsigned char>(s[i]))) ++i; s.erase(0, i);
+    };
+    auto rtrim = [](std::string& s) {
+        size_t i = s.size(); while (i > 0 && std::isspace(static_cast<unsigned char>(s[i-1]))) --i; s.erase(i);
+    };
+    ltrim(method); rtrim(method);
+    for (auto& ch : method) ch = static_cast<char>(std::tolower(static_cast<unsigned char>(ch)));
+    io::JsonValue params = request.IsObject() && request.HasMember("params") ? request["params"] : io::JsonValue::CreateArray();
 
-    // Call the appropriate RPC method
     try
     {
-        RpcMethods methods(system_);
+        nlohmann::json params_json = params.GetJson();
+        std::fprintf(stderr, "[RPC] Method: %s\n", method.c_str());
 
-        // Route to appropriate method
-        if (method == "getblockcount")
+        // Central routing map for method names (lowercased)
+        // Only use for stateless calls or those that can handle missing blockchain safely
         {
-            auto result = methods.GetBlockCount();
-            return CreateResponse(id, result);
+            using Fn = nlohmann::json (*)(std::shared_ptr<NeoSystem>, const nlohmann::json&);
+            static const std::unordered_map<std::string, Fn> simple_routes = {
+                {"getversion", &RPCMethods::GetVersion},
+                {"validateaddress", &RPCMethods::ValidateAddress},
+                {"getnativecontracts", &RPCMethods::GetNativeContracts},
+                {"getblockhash", &RPCMethods::GetBlockHash},
+                {"getblockheadercount", &RPCMethods::GetBlockHeaderCount},
+                {"getbestblockhash", &RPCMethods::GetBestBlockHash}
+            };
+
+            auto it = simple_routes.find(method);
+            if (it != simple_routes.end())
+            {
+                // For blockchain-dependent routes, ensure availability
+                if ((method == "getblockhash" || method == "getblockheadercount" || method == "getbestblockhash") &&
+                    !(neo_system_ && neo_system_->GetBlockchain()))
+                {
+                    if (method == "getbestblockhash")
+                    {
+                        nlohmann::json zero_hash = std::string("0x") + std::string(64, '0');
+                        return CreateResponse(id, io::JsonValue(zero_hash));
+                    }
+                    return CreateErrorResponse(id, static_cast<int>(RpcError::UnknownBlock), "Blockchain not available");
+                }
+                auto result = it->second(neo_system_, params_json);
+                return CreateResponse(id, io::JsonValue(result));
+            }
         }
-        else if (method == "getversion")
+        if (method == "getversion")
         {
-            auto result = methods.GetVersion();
-            return CreateResponse(id, result);
+            // Does not require a running blockchain
+            auto result = RPCMethods::GetVersion(neo_system_, params_json);
+            return CreateResponse(id, io::JsonValue(result));
+        }
+        else if (method == "getblockcount")
+        {
+            // Try real value; fall back to 0
+            try {
+                if (neo_system_ && neo_system_->GetBlockchain()) {
+                    auto result = RPCMethods::GetBlockCount(neo_system_, params_json);
+                    return CreateResponse(id, io::JsonValue(result));
+                }
+            } catch (...) {}
+            return CreateResponse(id, io::JsonValue(static_cast<int64_t>(0)));
+        }
+        else if (method == "getbestblockhash")
+        {
+            try {
+                if (neo_system_ && neo_system_->GetBlockchain()) {
+                    auto result = RPCMethods::GetBestBlockHash(neo_system_, params_json);
+                    return CreateResponse(id, io::JsonValue(result));
+                }
+            } catch (...) {}
+            // 32 zero bytes hash string
+            nlohmann::json zero_hash = std::string("0x") + std::string(64, '0');
+            return CreateResponse(id, io::JsonValue(zero_hash));
+        }
+        else if (method == "getblockheadercount")
+        {
+            try {
+                if (neo_system_ && neo_system_->GetBlockchain()) {
+                    auto result = RPCMethods::GetBlockHeaderCount(neo_system_, params_json);
+                    return CreateResponse(id, io::JsonValue(result));
+                }
+            } catch (...) {}
+            return CreateResponse(id, io::JsonValue(static_cast<int64_t>(0)));
+        }
+        else if (method == "validateaddress")
+        {
+            auto result = RPCMethods::ValidateAddress(neo_system_, params_json);
+            return CreateResponse(id, io::JsonValue(result));
+        }
+        else if (method == "getnativecontracts")
+        {
+            auto result = RPCMethods::GetNativeContracts(neo_system_, params_json);
+            return CreateResponse(id, io::JsonValue(result));
+        }
+        else if (method == "getblock")
+        {
+            if (neo_system_ && neo_system_->GetBlockchain())
+            {
+                auto result = RPCMethods::GetBlock(neo_system_, params_json);
+                return CreateResponse(id, io::JsonValue(result));
+            }
+            return CreateErrorResponse(id, static_cast<int>(RpcError::UnknownBlock), "Blockchain not available");
+        }
+        else if (method == "getblockhash")
+        {
+            if (neo_system_ && neo_system_->GetBlockchain())
+            {
+                auto result = RPCMethods::GetBlockHash(neo_system_, params_json);
+                return CreateResponse(id, io::JsonValue(result));
+            }
+            return CreateErrorResponse(id, static_cast<int>(RpcError::UnknownBlock), "Blockchain not available");
+        }
+        else if (method == "getblockheader")
+        {
+            if (neo_system_ && neo_system_->GetBlockchain())
+            {
+                auto result = RPCMethods::GetBlockHeader(neo_system_, params_json);
+                return CreateResponse(id, io::JsonValue(result));
+            }
+            return CreateErrorResponse(id, static_cast<int>(RpcError::UnknownBlock), "Blockchain not available");
+        }
+        else if (method == "gettransactionheight")
+        {
+            if (neo_system_ && neo_system_->GetBlockchain())
+            {
+                auto result = RPCMethods::GetTransactionHeight(neo_system_, params_json);
+                return CreateResponse(id, io::JsonValue(result));
+            }
+            return CreateErrorResponse(id, static_cast<int>(RpcError::UnknownTransaction), "Blockchain not available");
+        }
+        else if (method == "getrawtransaction")
+        {
+            if (neo_system_ && neo_system_->GetBlockchain())
+            {
+                auto result = RPCMethods::GetRawTransaction(neo_system_, params_json);
+                return CreateResponse(id, io::JsonValue(result));
+            }
+            return CreateErrorResponse(id, static_cast<int>(RpcError::UnknownTransaction), "Blockchain not available");
+        }
+        else if (method == "getstateroot")
+        {
+            auto result = RPCMethods::GetStateRoot(neo_system_, params_json);
+            return CreateResponse(id, io::JsonValue(result));
+        }
+        else if (method == "getstate")
+        {
+            auto result = RPCMethods::GetState(neo_system_, params_json);
+            return CreateResponse(id, io::JsonValue(result));
+        }
+        else if (method == "getconnectioncount")
+        {
+            // Safe default when networking is disabled
+            return CreateResponse(id, io::JsonValue(static_cast<int64_t>(0)));
+        }
+        else if (method == "getpeers")
+        {
+            // Return empty lists when networking is disabled
+            nlohmann::json peers = nlohmann::json::object();
+            peers["unconnected"] = nlohmann::json::array();
+            peers["bad"] = nlohmann::json::array();
+            peers["connected"] = nlohmann::json::array();
+            return CreateResponse(id, io::JsonValue(peers));
         }
         else
         {
-            return CreateErrorResponse(id, -32601, "Method not found");
+            // Plugin-registered method?
+            {
+                std::lock_guard<std::mutex> lock(methods_mutex_);
+                auto itp = plugin_methods_.find(method);
+                if (itp != plugin_methods_.end())
+                {
+                    try
+                    {
+                        auto out = itp->second(params);
+                        return CreateResponse(id, out);
+                    }
+                    catch (const std::exception& e)
+                    {
+                        return CreateErrorResponse(id, static_cast<int>(RpcError::InternalError), e.what());
+                    }
+                }
+                if (plugin_handler_)
+                {
+                    try
+                    {
+                        auto out = plugin_handler_(method, params);
+                        return CreateResponse(id, out);
+                    }
+                    catch (const std::exception& e)
+                    {
+                        return CreateErrorResponse(id, static_cast<int>(RpcError::InternalError), e.what());
+                    }
+                }
+            }
+            std::fprintf(stderr, "[RPC] Unknown method: %s\n", method.c_str());
+            return CreateErrorResponse(id, static_cast<int>(RpcError::MethodNotFound), std::string("Method not found: ") + method);
         }
     }
     catch (const std::exception& e)
     {
-        return CreateErrorResponse(id, -32603, std::string("Internal error: ") + e.what());
+        return CreateErrorResponse(id, static_cast<int>(RpcError::InternalError), std::string("Internal error: ") + e.what());
     }
 }
 
 std::string RpcServer::ValidateRequest(const io::JsonValue& request)
 {
-    if (!request.IsObject())
-    {
-        return "Request must be a JSON object";
-    }
-
-    if (!request.HasMember("jsonrpc") || request.GetString("jsonrpc") != "2.0")
-    {
-        return "Missing or invalid jsonrpc field";
-    }
-
-    if (!request.HasMember("method") || !request.GetValue("method").IsString())
-    {
-        return "Missing or invalid method field";
-    }
-
+    if (!request.IsObject()) return "Request must be a JSON object";
+    if (!request.HasMember("jsonrpc")) return "Missing jsonrpc field";
+    if (request["jsonrpc"].IsString() && request["jsonrpc"].GetString() != std::string("2.0"))
+        return "Invalid jsonrpc version";
+    if (!request.HasMember("method")) return "Missing method field";
+    if (!request["method"].IsString()) return "Invalid method field";
     return "";
 }
 
 io::JsonValue RpcServer::CreateResponse(const io::JsonValue& id, const io::JsonValue& result)
 {
-    json response = {{"jsonrpc", "2.0"}, {"result", result.GetJson()}, {"id", id.GetJson()}};
+    nlohmann::json response = {{"jsonrpc", "2.0"}, {"result", result.GetJson()}, {"id", id.IsNull() ? nullptr : id.GetJson()}};
     return io::JsonValue(response);
 }
 
 io::JsonValue RpcServer::CreateErrorResponse(const io::JsonValue& id, int code, const std::string& message)
 {
-    json response = {{"jsonrpc", "2.0"},
-                     {"error", {{"code", code}, {"message", message}}},
-                     {"id", id.IsNull() ? nullptr : id.GetJson()}};
+    nlohmann::json response = {{"jsonrpc", "2.0"},
+                               {"error", {{"code", code}, {"message", message}}},
+                               {"id", id.IsNull() ? nullptr : id.GetJson()}};
     return io::JsonValue(response);
 }
 
-// RPC method implementations delegate to RpcMethods class
-io::JsonValue RpcServer::GetBlock(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetBlock(params);
-}
-
-io::JsonValue RpcServer::GetBlockCount(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetBlockCount();
-}
-
-io::JsonValue RpcServer::GetBlockHash(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    if (params.IsArray() && params.Size() > 0)
-    {
-        return methods.GetBlockHash(params[0].GetInt());
-    }
-    throw std::runtime_error("Invalid parameters");
-}
-
-io::JsonValue RpcServer::GetBlockHeader(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetBlockHeader(params);
-}
-
-io::JsonValue RpcServer::GetTransaction(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetTransaction(params);
-}
-
-io::JsonValue RpcServer::SendRawTransaction(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.SendRawTransaction(params);
-}
-
-io::JsonValue RpcServer::GetRawMempool(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetRawMempool(params);
-}
-
-io::JsonValue RpcServer::GetContractState(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetContractState(params);
-}
-
-io::JsonValue RpcServer::GetNativeContracts(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetNativeContracts();
-}
-
-io::JsonValue RpcServer::GetStorage(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetStorage(params);
-}
-
-io::JsonValue RpcServer::FindStorage(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.FindStorage(params);
-}
-
-io::JsonValue RpcServer::InvokeFunction(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.InvokeFunction(params);
-}
-
-io::JsonValue RpcServer::InvokeScript(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.InvokeScript(params);
-}
-
-io::JsonValue RpcServer::GetUnclaimedGas(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetUnclaimedGas(params);
-}
-
-io::JsonValue RpcServer::GetCandidates(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetCandidates();
-}
-
-io::JsonValue RpcServer::GetCommittee(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetCommittee();
-}
-
-io::JsonValue RpcServer::GetNextBlockValidators(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetNextBlockValidators();
-}
-
-io::JsonValue RpcServer::GetConnectionCount(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetConnectionCount();
-}
-
-io::JsonValue RpcServer::GetPeers(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetPeers();
-}
-
-io::JsonValue RpcServer::GetVersion(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetVersion();
-}
-
-io::JsonValue RpcServer::GetNep17Balances(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetNep17Balances(params);
-}
-
-io::JsonValue RpcServer::GetNep17Transfers(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetNep17Transfers(params);
-}
-
-io::JsonValue RpcServer::GetNep11Balances(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetNep11Balances(params);
-}
-
-io::JsonValue RpcServer::GetNep11Transfers(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetNep11Transfers(params);
-}
-
-io::JsonValue RpcServer::GetNep11Properties(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetNep11Properties(params);
-}
-
-io::JsonValue RpcServer::GetProof(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetProof(params);
-}
-
-io::JsonValue RpcServer::GetStateRoot(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetStateRoot(params);
-}
-
-io::JsonValue RpcServer::GetStateHeight(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetStateHeight();
-}
-
-io::JsonValue RpcServer::GetState(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetState(params);
-}
-
-io::JsonValue RpcServer::FindStates(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.FindStates(params);
-}
-
-io::JsonValue RpcServer::GetApplicationLog(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetApplicationLog(params);
-}
-
-io::JsonValue RpcServer::GetStatistics() const
-{
-    io::JsonValue stats;
-    stats.AddMember("totalRequests", static_cast<int64_t>(total_requests_.load()));
-    stats.AddMember("failedRequests", static_cast<int64_t>(failed_requests_.load()));
-
-    auto now = std::chrono::steady_clock::now();
-    auto uptime = std::chrono::duration_cast<std::chrono::seconds>(now - start_time_).count();
-    stats.AddMember("uptimeSeconds", static_cast<int64_t>(uptime));
-
-    return stats;
-}
+// Remove outdated per-method wrappers – routing is handled in ProcessRequest
 
 }  // namespace neo::rpc

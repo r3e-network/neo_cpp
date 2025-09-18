@@ -458,6 +458,13 @@ class NeoSystem : public std::enable_shared_from_this<NeoSystem>
     std::unique_ptr<network::p2p::LocalNode> local_node_;
     std::unique_ptr<network::p2p::TaskManager> task_manager_;
     ledger::Block* genesis_block_ = nullptr;
+
+   public:
+    /**
+     * @brief Lazily create and initialize the blockchain instance if missing.
+     *        Safe to call after constructing NeoSystem via shared_ptr.
+     */
+    void EnsureBlockchainInitialized();
 };
 
 }  // namespace neo

@@ -99,7 +99,8 @@ std::shared_ptr<Block> Blockchain::GetBlock(const io::UInt256& hash) const
     // Load from storage
     if (!data_cache_) return nullptr;
 
-    persistence::StorageKey key(0, io::ByteVector(hash.AsSpan()));
+    // Ledger contract stores full blocks under contract id -4 with prefix 0x05
+    auto key = persistence::StorageKey::Create(static_cast<int32_t>(-4), static_cast<uint8_t>(0x05), hash);
     auto item = data_cache_->TryGet(key);
     if (!item) return nullptr;
 
@@ -135,22 +136,19 @@ io::UInt256 Blockchain::GetBlockHash(uint32_t index) const
 {
     if (!data_cache_) return io::UInt256::Zero();
 
-    // Create key for block hash lookup
-    io::ByteVector keyData;
-    keyData.Push(0x01);  // Block hash prefix
-    keyData.Reserve(keyData.Size() + 4);
-    for (int i = 0; i < 4; i++)
+    // First, try to find in block cache by index (useful at genesis)
+    for (const auto& [h, blk] : block_cache_)
     {
-        keyData.Push(static_cast<uint8_t>((index >> (i * 8)) & 0xFF));
+        if (blk && blk->GetIndex() == index)
+        {
+            return h;
+        }
     }
 
-    persistence::StorageKey key(0, keyData);
+    // Ledger contract index -> hash mapping uses contract id -4, prefix 0x09
+    auto key = persistence::StorageKey::Create(static_cast<int32_t>(-4), static_cast<uint8_t>(0x09), index);
     auto item = data_cache_->TryGet(key);
-    if (!item || item->GetValue().Size() != 32)
-    {
-        return io::UInt256::Zero();
-    }
-
+    if (!item || item->GetValue().Size() != 32) return io::UInt256::Zero();
     return io::UInt256(item->GetValue().AsSpan());
 }
 
@@ -187,19 +185,23 @@ std::shared_ptr<Transaction> Blockchain::GetTransaction(const io::UInt256& hash)
 {
     if (!data_cache_) return nullptr;
 
-    // Create key for transaction lookup
-    io::ByteVector keyData;
-    keyData.Push(0x02);  // Transaction prefix
-    keyData.Append(hash.AsSpan());
-
-    persistence::StorageKey key(0, keyData);
+    // Transactions are stored under LedgerContract with prefix 0x01
+    auto key = persistence::StorageKey::Create(static_cast<int32_t>(-4), static_cast<uint8_t>(0x01), hash);
     auto item = data_cache_->TryGet(key);
     if (!item) return nullptr;
 
-    // The item contains the block index where the transaction is stored
-    // Transaction retrieval requires loading the containing block from storage
-    // Return nullptr to indicate transaction not found in current snapshot
-    return nullptr;
+    try
+    {
+        auto tx = std::make_shared<Transaction>();
+        io::BinaryReader reader(item->GetValue().AsSpan());
+        tx->Deserialize(reader);
+        return tx;
+    }
+    catch (const std::exception& e)
+    {
+        LOG_ERROR("Failed to deserialize transaction {}: {}", hash.ToString(), e.what());
+        return nullptr;
+    }
 }
 
 // Get transaction height
@@ -207,15 +209,10 @@ int32_t Blockchain::GetTransactionHeight(const io::UInt256& hash) const
 {
     if (!data_cache_) return -1;
 
-    // Create key for transaction height lookup
-    io::ByteVector keyData;
-    keyData.Push(0x02);  // Transaction prefix
-    keyData.Append(hash.AsSpan());
-
-    persistence::StorageKey key(0, keyData);
+    // Transaction height stored under LedgerContract (prefix 0x02)
+    auto key = persistence::StorageKey::Create(static_cast<int32_t>(-4), static_cast<uint8_t>(0x02), hash);
     auto item = data_cache_->TryGet(key);
     if (!item || item->GetValue().Size() < 4) return -1;
-
     return *reinterpret_cast<const int32_t*>(item->GetValue().Data());
 }
 
@@ -231,15 +228,11 @@ std::shared_ptr<smartcontract::ContractState> Blockchain::GetContract(const io::
 bool Blockchain::ContainsBlock(const io::UInt256& hash) const
 {
     // Check cache first
-    if (block_cache_.find(hash) != block_cache_.end())
-    {
-        return true;
-    }
+    if (block_cache_.find(hash) != block_cache_.end()) return true;
 
-    // Check storage
+    // Check storage (LedgerContract block prefix 0x05)
     if (!data_cache_) return false;
-
-    persistence::StorageKey key(0, io::ByteVector(hash.AsSpan()));
+    auto key = persistence::StorageKey::Create(static_cast<int32_t>(-4), static_cast<uint8_t>(0x05), hash);
     return data_cache_->TryGet(key) != nullptr;
 }
 
@@ -247,12 +240,8 @@ bool Blockchain::ContainsBlock(const io::UInt256& hash) const
 bool Blockchain::ContainsTransaction(const io::UInt256& hash) const
 {
     if (!data_cache_) return false;
-
-    io::ByteVector keyData;
-    keyData.Push(0x02);  // Transaction prefix
-    keyData.Append(hash.AsSpan());
-
-    persistence::StorageKey key(0, keyData);
+    // Transaction content prefix 0x01
+    auto key = persistence::StorageKey::Create(static_cast<int32_t>(-4), static_cast<uint8_t>(0x01), hash);
     return data_cache_->TryGet(key) != nullptr;
 }
 
@@ -376,40 +365,117 @@ void Blockchain::PersistBlock(std::shared_ptr<Block> block)
     // Fire committing event
     FireCommittingEvent(block, snapshot, appExecuted);
 
-    // Store block
-    persistence::StorageKey blockKey(0, io::ByteVector(block->GetHash().AsSpan()));
-    std::stringstream ss;
-    io::BinaryWriter writer(ss);
-    block->Serialize(writer);
-    std::string blockData = ss.str();
-    persistence::StorageItem blockItem(io::ByteVector(std::vector<uint8_t>(blockData.begin(), blockData.end())));
-    snapshot->Add(blockKey, blockItem);
-
-    // Update block height
-    persistence::StorageKey heightKey(0, io::ByteVector::Parse("00"));
-    io::ByteVector heightData;
-    heightData.Reserve(4);
-    uint32_t height = block->GetIndex();
-    for (int i = 0; i < 4; i++)
+    // Let native contracts (LedgerContract, etc.) write their storage via OnPersist (already executed)
+    // Now execute PostPersist to update current block state (hash + height)
+    try
     {
-        heightData.Push(static_cast<uint8_t>((height >> (i * 8)) & 0xFF));
+        auto nativeContracts = smartcontract::native::NativeContractManager::GetInstance().GetContracts();
+        for (const auto& contract : nativeContracts)
+        {
+            try
+            {
+                auto engine = std::make_shared<smartcontract::ApplicationEngine>(
+                    smartcontract::TriggerType::PostPersist, static_cast<const io::ISerializable*>(nullptr), snapshot,
+                    block.get(), 0);
+                engine->Execute();
+            }
+            catch (const std::exception& e)
+            {
+                LOG_ERROR("Error executing PostPersist for contract {}: {}", contract->GetName(), e.what());
+            }
+        }
     }
-    persistence::StorageItem heightItem(heightData);
-    snapshot->Add(heightKey, heightItem);
-
-    // Store block hash by index
-    io::ByteVector hashKeyData;
-    hashKeyData.Push(0x01);  // Block hash prefix
-    for (int i = 0; i < 4; i++)
+    catch (const std::exception& e)
     {
-        hashKeyData.Push(static_cast<uint8_t>((height >> (i * 8)) & 0xFF));
+        LOG_ERROR("PostPersist execution failed: {}", e.what());
     }
-    persistence::StorageKey hashKey(0, hashKeyData);
-    persistence::StorageItem hashItem(io::ByteVector(block->GetHash().AsSpan()));
-    snapshot->Add(hashKey, hashItem);
 
-    // Commit changes
-    snapshot->Commit();
+    // Commit changes (includes native contract OnPersist/PostPersist storage updates)
+    // Ensure essential LedgerContract keys exist even if native contracts are not fully wired
+    try
+    {
+        // Use a write cache bound to the underlying store for direct writes
+        persistence::StoreCache write_cache(*system_->GetStore());
+
+        // Persist full block by hash
+        {
+            auto blockKey = persistence::StorageKey::Create(static_cast<int32_t>(-4),    // Ledger contract ID
+                                                            static_cast<uint8_t>(0x05),  // Block prefix
+                                                            block->GetHash());
+            if (!write_cache.Contains(blockKey))
+            {
+                io::ByteVector blockData;
+                io::BinaryWriter writer(blockData);
+                block->Serialize(writer);
+                persistence::StorageItem blockItem(blockData);
+                write_cache.Add(blockKey, blockItem);
+            }
+        }
+
+        // Persist index -> hash mapping
+        {
+            auto indexKey = persistence::StorageKey::Create(static_cast<int32_t>(-4),    // Ledger contract ID
+                                                            static_cast<uint8_t>(0x09),  // Block index prefix
+                                                            static_cast<uint32_t>(block->GetIndex()));
+            if (!write_cache.Contains(indexKey))
+            {
+                io::ByteVector hashData(32);
+                std::memcpy(hashData.Data(), block->GetHash().Data(), 32);
+                persistence::StorageItem hashItem(hashData);
+                write_cache.Add(indexKey, hashItem);
+            }
+        }
+
+        // Update current block height
+        {
+            auto heightKey = persistence::StorageKey::Create(static_cast<int32_t>(-4),    // Ledger contract ID
+                                                             static_cast<uint8_t>(0x0C)); // Current block prefix
+            io::ByteVector heightData(sizeof(uint32_t));
+            *reinterpret_cast<uint32_t*>(heightData.Data()) = block->GetIndex();
+            persistence::StorageItem heightItem(heightData);
+            if (write_cache.Contains(heightKey))
+                write_cache.Update(heightKey, heightItem);
+            else
+                write_cache.Add(heightKey, heightItem);
+        }
+
+        // Persist transactions (content and height)
+        for (const auto& tx : block->GetTransactions())
+        {
+            // Content under prefix 0x01
+            auto txKey = persistence::StorageKey::Create(static_cast<int32_t>(-4), static_cast<uint8_t>(0x01),
+                                                         tx.GetHash());
+            if (!write_cache.Contains(txKey))
+            {
+                io::ByteVector txData;
+                io::BinaryWriter txWriter(txData);
+                tx.Serialize(txWriter);
+                persistence::StorageItem txItem(txData);
+                write_cache.Add(txKey, txItem);
+            }
+
+            // Height under prefix 0x02
+            auto txHeightKey =
+                persistence::StorageKey::Create(static_cast<int32_t>(-4), static_cast<uint8_t>(0x02), tx.GetHash());
+            io::ByteVector hData(sizeof(int32_t));
+            *reinterpret_cast<int32_t*>(hData.Data()) = static_cast<int32_t>(block->GetIndex());
+            persistence::StorageItem hItem(hData);
+            if (write_cache.Contains(txHeightKey))
+                write_cache.Update(txHeightKey, hItem);
+            else
+                write_cache.Add(txHeightKey, hItem);
+        }
+
+        // Commit both native-contract writes and direct key writes
+        snapshot->Commit();
+        write_cache.Commit();
+    }
+    catch (const std::exception& e)
+    {
+        LOG_WARNING("Fallback key writes failed during PersistBlock: {}", e.what());
+        // Still commit native-contract writes to avoid losing state
+        snapshot->Commit();
+    }
 
     // Fire committed event
     FireCommittedEvent(block);
