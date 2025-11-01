@@ -6,18 +6,37 @@
  * @copyright MIT License
  */
 
-#include <neo/core/logging.h>
+#include <neo/cryptography/base64.h>
+#include <neo/io/binary_reader.h>
+#include <neo/io/binary_writer.h>
 #include <neo/io/json.h>
+#include <neo/io/json_writer.h>
+#include <neo/io/uint160.h>
+#include <neo/io/uint256.h>
+#include <neo/core/neo_system.h>
+#include <neo/ledger/block.h>
+#include <neo/ledger/blockchain.h>
+#include <neo/ledger/memory_pool.h>
+#include <neo/ledger/transaction.h>
 #include <neo/network/p2p/local_node.h>
-#include <neo/rpc/rpc_methods.h>
+#include <neo/network/p2p/peer.h>
+#include <neo/network/p2p/peer_list.h>
+#include <neo/cryptography/ecc/ecpoint.h>
+#include <neo/persistence/storage_item.h>
+#include <neo/persistence/storage_key.h>
 #include <neo/rpc/rpc_server.h>
+#include <neo/smartcontract/contract_state.h>
+#include <neo/smartcontract/native/native_contract_manager.h>
+#include <neo/smartcontract/native/neo_token.h>
+#include <neo/smartcontract/native/role_management.h>
 
 #include <nlohmann/json.hpp>
 #include <sstream>
 #include <thread>
 
-#ifdef NEO_HAS_HTTPLIB
+#if defined(NEO_HAS_HTTPLIB) || defined(HAS_HTTPLIB)
 #include <httplib.h>
+#define NEO_RPC_HAS_HTTPLIB
 #endif
 
 namespace neo::rpc
@@ -31,10 +50,13 @@ RpcServer::RpcServer(const RpcConfig& config)
       failed_requests_(0),
       start_time_(std::chrono::steady_clock::now())
 {
-    // Initialize logger properly
-    logger_ = core::Logger::GetInstance();
+    logger_ = &logging::Logger::Instance();
+}
 
-    InitializeHandlers();
+RpcServer::RpcServer(const RpcConfig& config, std::shared_ptr<NeoSystem> system)
+    : RpcServer(config)
+{
+    system_ = std::move(system);
 }
 
 RpcServer::~RpcServer() { Stop(); }
@@ -43,9 +65,10 @@ void RpcServer::Start()
 {
     if (running_.exchange(true)) return;
 
-    LOG_INFO("Starting RPC server on {}:{}", config_.bind_address, config_.port);
+    const std::string message = "Starting RPC server on " + config_.bind_address + ":" + std::to_string(config_.port);
+    logger_->Info(message);
 
-#ifdef NEO_HAS_HTTPLIB
+#ifdef NEO_RPC_HAS_HTTPLIB
     server_thread_ = std::thread(
         [this]()
         {
@@ -77,7 +100,7 @@ void RpcServer::Start()
             server.listen(config_.bind_address.c_str(), config_.port);
         });
 #else
-    LOG_ERROR("HTTP server not available - RPC server cannot start");
+    logger_->Error("HTTP server not available - RPC server cannot start");
     running_ = false;
 #endif
 }
@@ -86,14 +109,19 @@ void RpcServer::Stop()
 {
     if (!running_.exchange(false)) return;
 
-    LOG_INFO("Stopping RPC server");
+    logger_->Info("Stopping RPC server");
 
+#ifdef NEO_RPC_HAS_HTTPLIB
     if (server_thread_.joinable())
     {
         server_thread_.join();
     }
+#endif
 }
 
+bool RpcServer::IsRunning() const { return running_.load(); }
+
+#ifdef NEO_RPC_HAS_HTTPLIB
 std::string RpcServer::GetClientIP(const httplib::Request& req) const
 {
     // Check for X-Forwarded-For header first (proxy support)
@@ -137,6 +165,7 @@ bool RpcServer::IsAuthenticated(const httplib::Request& req) const
     // For now, this is a placeholder - in production, implement secure authentication
     return true; // PLACEHOLDER: Implement proper authentication
 }
+#endif
 
 bool RpcServer::IsMethodAllowed(const io::JsonValue& request) const
 {
@@ -144,14 +173,14 @@ bool RpcServer::IsMethodAllowed(const io::JsonValue& request) const
     {
         return true;
     }
-    
-    if (!request.GetProperty("method").IsString())
+
+    auto methodValue = request.GetValue("method");
+    if (!methodValue.IsString())
     {
         return false;
     }
-    
-    std::string method = request.GetProperty("method").GetString();
-    
+
+    const std::string method = methodValue.GetString();
     for (const auto& disabled_method : config_.disabled_methods)
     {
         if (method == disabled_method)
@@ -159,7 +188,7 @@ bool RpcServer::IsMethodAllowed(const io::JsonValue& request) const
             return false;
         }
     }
-    
+
     return true;
 }
 
@@ -173,44 +202,995 @@ io::JsonValue RpcServer::GetStatistics() const
     return io::JsonValue(stats);
 }
 
-void RpcServer::InitializeHandlers()
-{
-    // Use the methods from RpcMethods class
-    // Initialize with essential RPC methods - additional methods can be registered as needed
-}
-
 io::JsonValue RpcServer::ProcessRequest(const io::JsonValue& request)
 {
-    auto validation_error = ValidateRequest(request);
+    const auto validation_error = ValidateRequest(request);
     if (!validation_error.empty())
     {
         return CreateErrorResponse(request.GetValue("id"), -32600, validation_error);
     }
 
-    auto method = request.GetString("method");
-    auto params = request.GetValue("params");
     auto id = request.GetValue("id");
 
-    // Call the appropriate RPC method
+    if (!IsMethodAllowed(request))
+    {
+        return CreateErrorResponse(id, -32601, "Method not allowed");
+    }
+
+    const auto methodValue = request.GetValue("method");
+    const std::string method = methodValue.IsString() ? methodValue.GetString() : std::string();
+
     try
     {
-        RpcMethods methods(system_);
+        if (!system_)
+        {
+            return CreateErrorResponse(id, -32603, "Node system not available");
+        }
 
-        // Route to appropriate method
+        auto params = request.HasMember("params") ? request.GetValue("params") : io::JsonValue::CreateArray();
+
         if (method == "getblockcount")
         {
-            auto result = methods.GetBlockCount();
+            const uint32_t height = system_->GetCurrentBlockHeight();
+            io::JsonValue result;
+            result.SetInt64(static_cast<int64_t>(height) + 1);
             return CreateResponse(id, result);
         }
-        else if (method == "getversion")
+        if (method == "getversion")
         {
-            auto result = methods.GetVersion();
+            const auto& settings = system_->settings();
+            json versionJson = {
+                {"useragent", "NeoCppNode/0.1"},
+                {"protocol", settings.GetNetwork()},
+                {"port", config_.port}};
+            return CreateResponse(id, io::JsonValue(versionJson));
+        }
+        if (method == "getblockhash")
+        {
+            if (!params.IsArray() || params.Size() == 0 || !params[0].IsNumber())
+            {
+                return CreateErrorResponse(id, -32602, "Invalid params");
+            }
+            const uint32_t index = static_cast<uint32_t>(params[0].GetInt64());
+            auto blockchain = system_->GetBlockchain();
+            if (!blockchain)
+            {
+                return CreateErrorResponse(id, -32603, "Blockchain unavailable");
+            }
+            const auto hash = blockchain->GetBlockHash(index);
+            if (hash.IsZero())
+            {
+                return CreateErrorResponse(id, -100, "Unknown block");
+            }
+            io::JsonValue result;
+            result.SetString(hash.ToString());
             return CreateResponse(id, result);
         }
-        else
+        if (method == "getbestblockhash")
         {
-            return CreateErrorResponse(id, -32601, "Method not found");
+            auto blockchain = system_->GetBlockchain();
+            if (!blockchain)
+            {
+                return CreateErrorResponse(id, -32603, "Blockchain unavailable");
+            }
+            const uint32_t height = system_->GetCurrentBlockHeight();
+            const auto hash = blockchain->GetBlockHash(height);
+            if (hash.IsZero())
+            {
+                return CreateErrorResponse(id, -104, "Unknown block");
+            }
+            io::JsonValue result;
+            result.SetString(hash.ToString());
+            return CreateResponse(id, result);
         }
+        if (method == "getblock")
+        {
+            if (!params.IsArray() || params.Size() == 0)
+            {
+                return CreateErrorResponse(id, -32602, "Invalid params");
+            }
+
+            auto blockchain = system_->GetBlockchain();
+            if (!blockchain)
+            {
+                return CreateErrorResponse(id, -32603, "Blockchain unavailable");
+            }
+
+            std::shared_ptr<ledger::Block> block;
+            const auto target = params[0];
+            if (target.IsString())
+            {
+                io::UInt256 hash;
+                try
+                {
+                    hash = io::UInt256::FromString(target.GetString());
+                }
+                catch (const std::exception&)
+                {
+                    return CreateErrorResponse(id, -32602, "Invalid block hash");
+                }
+                block = blockchain->GetBlock(hash);
+            }
+            else if (target.IsNumber())
+            {
+                const uint32_t index = static_cast<uint32_t>(target.GetInt64());
+                auto hash = blockchain->GetBlockHash(index);
+                if (!hash.IsZero())
+                {
+                    block = blockchain->GetBlock(hash);
+                }
+            }
+            else
+            {
+                return CreateErrorResponse(id, -32602, "Invalid params");
+            }
+
+            if (!block)
+            {
+                return CreateErrorResponse(id, -100, "Unknown block");
+            }
+
+            bool verbose = false;
+            if (params.Size() > 1 && params[1].IsBoolean())
+            {
+                verbose = params[1].GetBoolean();
+            }
+
+            if (!verbose)
+            {
+                std::ostringstream stream;
+                io::BinaryWriter writer(stream);
+                block->Serialize(writer);
+                const auto data = stream.str();
+                std::string encoded = cryptography::Base64::Encode(
+                    io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
+                io::JsonValue result;
+                result.SetString(encoded);
+                return CreateResponse(id, result);
+            }
+
+            nlohmann::json blockJson;
+            {
+                io::JsonWriter headerWriter(blockJson);
+                block->GetHeader().SerializeJson(headerWriter);
+            }
+            nlohmann::json txArray = nlohmann::json::array();
+            for (const auto& tx : block->GetTransactions())
+            {
+                nlohmann::json txJson;
+                io::JsonWriter txWriter(txJson);
+                tx.SerializeJson(txWriter);
+                txArray.push_back(std::move(txJson));
+            }
+            blockJson["tx"] = std::move(txArray);
+            return CreateResponse(id, io::JsonValue(blockJson));
+        }
+        if (method == "getblockheader")
+        {
+            if (!params.IsArray() || params.Size() == 0)
+            {
+                return CreateErrorResponse(id, -32602, "Invalid params");
+            }
+
+            auto blockchain = system_->GetBlockchain();
+            if (!blockchain)
+            {
+                return CreateErrorResponse(id, -32603, "Blockchain unavailable");
+            }
+
+            std::shared_ptr<ledger::Block> block;
+            const auto target = params[0];
+            if (target.IsString())
+            {
+                io::UInt256 hash;
+                try
+                {
+                    hash = io::UInt256::FromString(target.GetString());
+                }
+                catch (const std::exception&)
+                {
+                    return CreateErrorResponse(id, -32602, "Invalid block hash");
+                }
+                block = blockchain->GetBlock(hash);
+            }
+            else if (target.IsNumber())
+            {
+                const uint32_t index = static_cast<uint32_t>(target.GetInt64());
+                auto hash = blockchain->GetBlockHash(index);
+                if (!hash.IsZero())
+                {
+                    block = blockchain->GetBlock(hash);
+                }
+            }
+            else
+            {
+                return CreateErrorResponse(id, -32602, "Invalid params");
+            }
+
+            if (!block)
+            {
+                return CreateErrorResponse(id, -100, "Unknown block");
+            }
+
+            nlohmann::json headerJson;
+            io::JsonWriter writer(headerJson);
+            block->GetHeader().SerializeJson(writer);
+            headerJson.erase("tx");
+            return CreateResponse(id, io::JsonValue(headerJson));
+        }
+        if (method == "getcontractstate")
+        {
+            if (!params.IsArray() || params.Size() == 0 || !params[0].IsString())
+            {
+                return CreateErrorResponse(id, -32602, "Invalid params");
+            }
+
+            io::UInt160 script_hash;
+            try
+            {
+                script_hash = io::UInt160::FromString(params[0].GetString());
+            }
+            catch (const std::exception&)
+            {
+                return CreateErrorResponse(id, -32602, "Invalid contract hash");
+            }
+
+            auto blockchain = system_->GetBlockchain();
+            if (!blockchain)
+            {
+                return CreateErrorResponse(id, -32603, "Blockchain unavailable");
+            }
+
+            auto contract = blockchain->GetContract(script_hash);
+            if (!contract)
+            {
+                return CreateErrorResponse(id, static_cast<int>(RpcError::UnknownContract), "Contract not found");
+            }
+
+            nlohmann::json contract_json;
+            contract_json["id"] = contract->GetId();
+            contract_json["updatecounter"] = contract->GetUpdateCounter();
+            contract_json["hash"] = contract->GetScriptHash().ToString();
+
+            const auto& script_bytes = contract->GetScript();
+            std::string script_base64;
+            if (!script_bytes.empty())
+            {
+                script_base64 = cryptography::Base64::Encode(
+                    io::ByteSpan(reinterpret_cast<const uint8_t*>(script_bytes.Data()), script_bytes.Size()));
+            }
+            contract_json["script"] = script_base64;
+
+            const auto& manifest = contract->GetManifest();
+            if (!manifest.empty())
+            {
+                try
+                {
+                    contract_json["manifest"] = nlohmann::json::parse(manifest);
+                }
+                catch (const std::exception&)
+                {
+                    contract_json["manifest"] = manifest;
+                }
+            }
+            else
+            {
+                contract_json["manifest"] = nlohmann::json::object();
+            }
+
+            return CreateResponse(id, io::JsonValue(contract_json));
+        }
+        if (method == "getstorage")
+        {
+            if (!params.IsArray() || params.Size() < 2 || !params[0].IsString() || !params[1].IsString())
+            {
+                return CreateErrorResponse(id, -32602, "Invalid params");
+            }
+
+            io::UInt160 script_hash;
+            try
+            {
+                script_hash = io::UInt160::FromString(params[0].GetString());
+            }
+            catch (const std::exception&)
+            {
+                return CreateErrorResponse(id, -32602, "Invalid contract hash");
+            }
+
+            const auto key_bytes = cryptography::Base64::Decode(params[1].GetString());
+
+            auto blockchain = system_->GetBlockchain();
+            if (!blockchain)
+            {
+                return CreateErrorResponse(id, -32603, "Blockchain unavailable");
+            }
+
+            auto contract = blockchain->GetContract(script_hash);
+            if (!contract)
+            {
+                return CreateErrorResponse(id, static_cast<int>(RpcError::UnknownContract), "Contract not found");
+            }
+
+            auto snapshot = system_->GetSnapshot();
+            if (!snapshot)
+            {
+                return CreateErrorResponse(id, -32603, "Snapshot unavailable");
+            }
+
+            persistence::StorageKey storage_key(contract->GetId(), key_bytes);
+            auto item = snapshot->TryGet(storage_key);
+            if (!item)
+            {
+                io::JsonValue result;
+                result.SetNull();
+                return CreateResponse(id, result);
+            }
+
+            const auto value_base64 = cryptography::Base64::Encode(item->GetValue().AsSpan());
+            io::JsonValue result;
+            result.SetString(value_base64);
+            return CreateResponse(id, result);
+        }
+        if (method == "findstorage")
+        {
+            if (!params.IsArray() || params.Size() < 2 || !params[0].IsString() || !params[1].IsString())
+            {
+                return CreateErrorResponse(id, -32602, "Invalid params");
+            }
+
+            io::UInt160 script_hash;
+            try
+            {
+                script_hash = io::UInt160::FromString(params[0].GetString());
+            }
+            catch (const std::exception&)
+            {
+                return CreateErrorResponse(id, -32602, "Invalid contract hash");
+            }
+
+            const auto prefix_bytes = cryptography::Base64::Decode(params[1].GetString());
+
+            auto blockchain = system_->GetBlockchain();
+            if (!blockchain)
+            {
+                return CreateErrorResponse(id, -32603, "Blockchain unavailable");
+            }
+
+            auto contract = blockchain->GetContract(script_hash);
+            if (!contract)
+            {
+                return CreateErrorResponse(id, static_cast<int>(RpcError::UnknownContract), "Contract not found");
+            }
+
+            auto snapshot = system_->GetSnapshot();
+            if (!snapshot)
+            {
+                return CreateErrorResponse(id, -32603, "Snapshot unavailable");
+            }
+
+            persistence::StorageKey prefix_key(contract->GetId(), prefix_bytes);
+            const auto entries = snapshot->Find(&prefix_key);
+
+            nlohmann::json result;
+            result["results"] = nlohmann::json::array();
+            result["firstproofpair"] = nullptr;
+            result["truncated"] = false;
+
+            for (const auto& entry : entries)
+            {
+                const auto& storage_key = entry.first;
+                const auto& storage_item = entry.second;
+
+                nlohmann::json item;
+                item["key"] = cryptography::Base64::Encode(storage_key.GetKey().AsSpan());
+                item["value"] = cryptography::Base64::Encode(storage_item.GetValue().AsSpan());
+                result["results"].push_back(std::move(item));
+            }
+
+            return CreateResponse(id, io::JsonValue(result));
+        }
+        if (method == "getblockheadercount")
+        {
+            const uint32_t height = system_->GetCurrentBlockHeight();
+            io::JsonValue result;
+            result.SetInt64(static_cast<int64_t>(height) + 1);
+            return CreateResponse(id, result);
+        }
+        if (method == "getconnectioncount")
+        {
+            size_t connection_count = 0;
+            if (auto* local_node = system_->GetLocalNode())
+            {
+                connection_count = local_node->GetConnectedCount();
+            }
+
+            io::JsonValue result;
+            result.SetInt64(static_cast<int64_t>(connection_count));
+            return CreateResponse(id, result);
+        }
+        if (method == "getpeers")
+        {
+            nlohmann::json result;
+            result["connected"] = nlohmann::json::array();
+            result["unconnected"] = nlohmann::json::array();
+            result["bad"] = nlohmann::json::array();
+
+            if (auto* local_node = system_->GetLocalNode())
+            {
+                const auto peers = local_node->GetConnectedNodes();
+                for (const auto* peer : peers)
+                {
+                    if (!peer) continue;
+
+                    nlohmann::json peer_json;
+                    const auto endpoint = peer->GetRemoteEndPoint();
+                    peer_json["address"] = endpoint.ToString();
+                    peer_json["port"] = endpoint.GetPort();
+                    peer_json["isConnected"] = peer->IsConnected();
+
+                    if (auto connection = peer->GetConnection())
+                    {
+                        peer_json["lastMessageReceived"] =
+                            static_cast<int64_t>(connection->GetLastMessageReceived());
+                        peer_json["lastMessageSent"] =
+                            static_cast<int64_t>(connection->GetLastMessageSent());
+                        peer_json["ping"] = static_cast<int64_t>(connection->GetPingTime());
+                        peer_json["bytesSent"] = static_cast<int64_t>(connection->GetBytesSent());
+                        peer_json["bytesReceived"] = static_cast<int64_t>(connection->GetBytesReceived());
+                    }
+
+                    result["connected"].push_back(std::move(peer_json));
+                }
+
+                auto& peer_list = local_node->GetPeerList();
+
+                const auto append_peer = [](nlohmann::json& array, const network::p2p::Peer& peer)
+                {
+                    nlohmann::json entry;
+                    entry["address"] = peer.GetEndPoint().ToString();
+                    entry["port"] = peer.GetEndPoint().GetPort();
+                    entry["lastSeen"] = static_cast<int64_t>(peer.GetLastSeenTime());
+                    entry["lastConnection"] = static_cast<int64_t>(peer.GetLastConnectionTime());
+                    entry["attempts"] = static_cast<int64_t>(peer.GetConnectionAttempts());
+                    entry["version"] = peer.GetVersion();
+                    array.push_back(std::move(entry));
+                };
+
+                for (const auto& peer : peer_list.GetUnconnectedPeers())
+                {
+                    append_peer(result["unconnected"], peer);
+                }
+
+                for (const auto& peer : peer_list.GetBadPeers())
+                {
+                    append_peer(result["bad"], peer);
+                }
+            }
+
+            return CreateResponse(id, io::JsonValue(result));
+        }
+        if (method == "getcommittee")
+        {
+            auto neo_token = system_->GetNeoToken();
+            if (!neo_token)
+            {
+                return CreateErrorResponse(id, -32603, "Native contracts unavailable");
+            }
+
+            auto snapshot = system_->GetSnapshot();
+            if (!snapshot)
+            {
+                return CreateErrorResponse(id, -32603, "Snapshot unavailable");
+            }
+
+            const auto committee = neo_token->GetCommittee(snapshot);
+            nlohmann::json committee_json = nlohmann::json::array();
+            for (const auto& member : committee)
+            {
+                committee_json.push_back(member.ToString());
+            }
+
+            return CreateResponse(id, io::JsonValue(committee_json));
+        }
+        if (method == "getvalidators")
+        {
+            auto role_management = system_->GetRoleManagement();
+            if (!role_management)
+            {
+                return CreateErrorResponse(id, -32603, "Role management unavailable");
+            }
+
+            auto snapshot = system_->GetSnapshot();
+            if (!snapshot)
+            {
+                return CreateErrorResponse(id, -32603, "Snapshot unavailable");
+            }
+
+            const auto current_height = system_->GetCurrentBlockHeight();
+            const auto validators = role_management->GetDesignatedByRole(
+                snapshot, smartcontract::native::RoleManagement::ROLE_STATE_VALIDATOR, current_height + 1);
+
+            nlohmann::json result = nlohmann::json::array();
+            for (const auto& validator : validators)
+            {
+                nlohmann::json entry;
+                entry["publickey"] = validator.ToString();
+                entry["votes"] = 0;
+                entry["active"] = true;
+                result.push_back(std::move(entry));
+            }
+
+            return CreateResponse(id, io::JsonValue(result));
+        }
+        if (method == "getcandidates")
+        {
+            auto neo_token = system_->GetNeoToken();
+            if (!neo_token)
+            {
+                return CreateErrorResponse(id, -32603, "Native contracts unavailable");
+            }
+
+            auto snapshot = system_->GetSnapshot();
+            if (!snapshot)
+            {
+                return CreateErrorResponse(id, -32603, "Snapshot unavailable");
+            }
+
+            const auto candidates = neo_token->GetCandidates(snapshot);
+            nlohmann::json result = nlohmann::json::array();
+            for (const auto& candidate : candidates)
+            {
+                nlohmann::json entry;
+                entry["publickey"] = candidate.first.ToString();
+                entry["votes"] = candidate.second.votes;
+                entry["active"] = candidate.second.registered;
+                result.push_back(std::move(entry));
+            }
+
+            return CreateResponse(id, io::JsonValue(result));
+        }
+        if (method == "getnextblockvalidators")
+        {
+            auto neo_token = system_->GetNeoToken();
+            if (!neo_token)
+            {
+                return CreateErrorResponse(id, -32603, "Native contracts unavailable");
+            }
+
+            auto snapshot = system_->GetSnapshot();
+            if (!snapshot)
+            {
+                return CreateErrorResponse(id, -32603, "Snapshot unavailable");
+            }
+
+            const int validators_count = system_->settings().GetValidatorsCount();
+            const auto validators = neo_token->GetNextBlockValidators(snapshot, validators_count);
+
+            nlohmann::json result = nlohmann::json::array();
+            for (const auto& validator : validators)
+            {
+                result.push_back(validator.ToString());
+            }
+
+            return CreateResponse(id, io::JsonValue(result));
+        }
+        if (method == "getaccountstate")
+        {
+            if (!params.IsArray() || params.Size() == 0 || !params[0].IsString())
+            {
+                return CreateErrorResponse(id, -32602, "Invalid params");
+            }
+
+            io::UInt160 account_hash;
+            try
+            {
+                account_hash = io::UInt160::FromString(params[0].GetString());
+            }
+            catch (const std::exception&)
+            {
+                return CreateErrorResponse(id, -32602, "Invalid account address");
+            }
+
+            auto neo_token = system_->GetNeoToken();
+            if (!neo_token)
+            {
+                return CreateErrorResponse(id, -32603, "Native contracts unavailable");
+            }
+
+            auto snapshot = system_->GetSnapshot();
+            if (!snapshot)
+            {
+                return CreateErrorResponse(id, -32603, "Snapshot unavailable");
+            }
+
+            try
+            {
+                const auto state = neo_token->GetAccountState(snapshot, account_hash);
+                nlohmann::json result;
+                result["address"] = account_hash.ToString();
+                result["balance"] = state.balance;
+                result["balanceheight"] = state.balanceHeight;
+                result["lastgaspervote"] = state.lastGasPerVote;
+                if (!state.voteTo.IsInfinity())
+                {
+                    result["voteto"] = state.voteTo.ToString();
+                }
+                else
+                {
+                    result["voteto"] = nullptr;
+                }
+
+                return CreateResponse(id, io::JsonValue(result));
+            }
+            catch (const std::exception& e)
+            {
+                return CreateErrorResponse(id, static_cast<int>(RpcError::Unknown), std::string("Failed to get account state: ") + e.what());
+            }
+        }
+        if (method == "getnativecontracts")
+        {
+            nlohmann::json result = nlohmann::json::array();
+            auto& manager = smartcontract::native::NativeContractManager::GetInstance();
+            const auto& contracts = manager.GetContracts();
+
+            for (const auto& contract : contracts)
+            {
+                if (!contract) continue;
+
+                nlohmann::json contract_json;
+                contract_json["id"] = contract->GetId();
+                contract_json["hash"] = contract->GetScriptHash().ToString();
+
+                nlohmann::json nef = nlohmann::json::object();
+                nef["magic"] = 0x3346454E;
+                nef["compiler"] = contract->GetName();
+                nef["tokens"] = nlohmann::json::array();
+                nef["script"] = "";
+                nef["checksum"] = 0;
+                contract_json["nef"] = std::move(nef);
+
+                nlohmann::json manifest = nlohmann::json::object();
+                manifest["name"] = contract->GetName();
+                manifest["groups"] = nlohmann::json::array();
+                manifest["supportedstandards"] = nlohmann::json::array();
+                nlohmann::json abi = nlohmann::json::object();
+                abi["methods"] = nlohmann::json::array();
+                abi["events"] = nlohmann::json::array();
+                manifest["abi"] = std::move(abi);
+                manifest["permissions"] = nlohmann::json::array();
+                manifest["trusts"] = nlohmann::json::array();
+                manifest["extra"] = nullptr;
+                contract_json["manifest"] = std::move(manifest);
+
+                result.push_back(std::move(contract_json));
+            }
+
+            return CreateResponse(id, io::JsonValue(result));
+        }
+        if (method == "getgasperblock")
+        {
+            auto neo_token = system_->GetNeoToken();
+            if (!neo_token)
+            {
+                return CreateErrorResponse(id, -32603, "Native contracts unavailable");
+            }
+
+            auto snapshot = system_->GetSnapshot();
+            if (!snapshot)
+            {
+                return CreateErrorResponse(id, -32603, "Snapshot unavailable");
+            }
+
+            const auto gas_per_block = neo_token->GetGasPerBlock(snapshot);
+            io::JsonValue result;
+            result.SetInt64(static_cast<int64_t>(gas_per_block));
+            return CreateResponse(id, result);
+        }
+        if (method == "getunclaimedgas")
+        {
+            if (!params.IsArray() || params.Size() == 0 || !params[0].IsString())
+            {
+                return CreateErrorResponse(id, -32602, "Invalid params");
+            }
+
+            io::UInt160 account;
+            try
+            {
+                account = io::UInt160::FromString(params[0].GetString());
+            }
+            catch (const std::exception&)
+            {
+                return CreateErrorResponse(id, -32602, "Invalid account address");
+            }
+
+            auto neo_token = system_->GetNeoToken();
+            if (!neo_token)
+            {
+                return CreateErrorResponse(id, -32603, "Native contracts unavailable");
+            }
+
+            auto snapshot = system_->GetSnapshot();
+            if (!snapshot)
+            {
+                return CreateErrorResponse(id, -32603, "Snapshot unavailable");
+            }
+
+            uint32_t end_height = system_->GetCurrentBlockHeight();
+            if (params.Size() > 1 && params[1].IsNumber())
+            {
+                const int64_t provided = params[1].GetInt64();
+                if (provided < 0)
+                {
+                    return CreateErrorResponse(id, -32602, "Invalid end height");
+                }
+                end_height = static_cast<uint32_t>(provided);
+            }
+
+            const auto unclaimed = neo_token->GetUnclaimedGas(snapshot, account, end_height);
+
+            nlohmann::json result;
+            result["address"] = account.ToString();
+            result["unclaimed"] = unclaimed;
+            result["endheight"] = end_height;
+
+            return CreateResponse(id, io::JsonValue(result));
+        }
+        if (method == "getrawmempool")
+        {
+            const bool include_unverified = params.IsArray() && params.Size() > 0 && params[0].IsBoolean() &&
+                                            params[0].GetBoolean();
+            auto mempool = system_->GetMemPool();
+
+            if (!include_unverified)
+            {
+                io::JsonValue result = io::JsonValue::CreateArray();
+                if (mempool)
+                {
+                    const auto transactions = mempool->GetSortedTransactions();
+                    for (const auto& tx : transactions)
+                    {
+                        result.PushBack(tx.GetHash().ToString());
+                    }
+                }
+                return CreateResponse(id, result);
+            }
+
+            nlohmann::json result_json;
+            result_json["height"] = system_->GetCurrentBlockHeight();
+            nlohmann::json verified = nlohmann::json::array();
+            nlohmann::json unverified = nlohmann::json::array();
+
+            if (mempool)
+            {
+                for (const auto& tx : mempool->GetSortedTransactions())
+                {
+                    verified.push_back(tx.GetHash().ToString());
+                }
+                for (const auto& tx : mempool->GetUnverifiedTransactions())
+                {
+                    unverified.push_back(tx.GetHash().ToString());
+                }
+            }
+
+            result_json["verified"] = std::move(verified);
+            result_json["unverified"] = std::move(unverified);
+            return CreateResponse(id, io::JsonValue(result_json));
+        }
+        if (method == "getrawtransaction")
+        {
+            if (!params.IsArray() || params.Size() == 0 || !params[0].IsString())
+            {
+                return CreateErrorResponse(id, -32602, "Invalid params");
+            }
+
+            io::UInt256 hash;
+            try
+            {
+                hash = io::UInt256::FromString(params[0].GetString());
+            }
+            catch (const std::exception&)
+            {
+                return CreateErrorResponse(id, -32602, "Invalid transaction hash");
+            }
+
+            bool verbose = false;
+            if (params.Size() > 1 && params[1].IsBoolean())
+            {
+                verbose = params[1].GetBoolean();
+            }
+
+            std::shared_ptr<ledger::Transaction> transaction;
+
+            if (auto mempool = system_->GetMemPool())
+            {
+                if (const auto* pool_tx = mempool->GetTransaction(hash))
+                {
+                    transaction = std::make_shared<ledger::Transaction>(*pool_tx);
+                }
+            }
+
+            if (!transaction)
+            {
+                auto blockchain = system_->GetBlockchain();
+                if (!blockchain)
+                {
+                    return CreateErrorResponse(id, -32603, "Blockchain unavailable");
+                }
+                transaction = blockchain->GetTransaction(hash);
+            }
+
+            if (!transaction)
+            {
+                return CreateErrorResponse(id, static_cast<int>(RpcError::UnknownTransaction), "Transaction not found");
+            }
+
+            if (!verbose)
+            {
+                std::ostringstream stream;
+                io::BinaryWriter writer(stream);
+                transaction->Serialize(writer);
+                const auto data = stream.str();
+                const std::string encoded = cryptography::Base64::Encode(
+                    io::ByteSpan(reinterpret_cast<const uint8_t*>(data.data()), data.size()));
+                io::JsonValue result;
+                result.SetString(encoded);
+                return CreateResponse(id, result);
+            }
+
+            nlohmann::json tx_json;
+            io::JsonWriter writer(tx_json);
+            transaction->SerializeJson(writer);
+            return CreateResponse(id, io::JsonValue(tx_json));
+        }
+        if (method == "gettransactionheight")
+        {
+            if (!params.IsArray() || params.Size() == 0 || !params[0].IsString())
+            {
+                return CreateErrorResponse(id, -32602, "Invalid params");
+            }
+
+            io::UInt256 hash;
+            try
+            {
+                hash = io::UInt256::FromString(params[0].GetString());
+            }
+            catch (const std::exception&)
+            {
+                return CreateErrorResponse(id, -32602, "Invalid transaction hash");
+            }
+
+            auto blockchain = system_->GetBlockchain();
+            if (!blockchain)
+            {
+                return CreateErrorResponse(id, -32603, "Blockchain unavailable");
+            }
+
+            const int32_t height = blockchain->GetTransactionHeight(hash);
+            if (height < 0)
+            {
+                return CreateErrorResponse(id, static_cast<int>(RpcError::UnknownTransaction), "Transaction not found");
+            }
+
+            io::JsonValue result;
+            result.SetInt64(static_cast<int64_t>(height));
+            return CreateResponse(id, result);
+        }
+        if (method == "sendrawtransaction")
+        {
+            if (!params.IsArray() || params.Size() == 0 || !params[0].IsString())
+            {
+                return CreateErrorResponse(id, -32602, "Invalid params");
+            }
+
+            auto mempool = system_->GetMemPool();
+            auto blockchain = system_->GetBlockchain();
+            if (!mempool || !blockchain)
+            {
+                return CreateErrorResponse(id, -32603, "Node services unavailable");
+            }
+
+            try
+            {
+                const auto raw = cryptography::Base64::Decode(params[0].GetString());
+                std::istringstream stream(std::string(reinterpret_cast<const char*>(raw.Data()), raw.Size()));
+                io::BinaryReader reader(stream);
+
+                ledger::Transaction tx;
+                tx.Deserialize(reader);
+                const auto& hash = tx.GetHash();
+
+                if (blockchain->ContainsTransaction(hash))
+                {
+                    return CreateErrorResponse(id, static_cast<int>(RpcError::Unknown), "Transaction already exists");
+                }
+
+                if (!mempool->TryAdd(tx))
+                {
+                    return CreateErrorResponse(id, static_cast<int>(RpcError::PolicyFailed),
+                                               "Transaction rejected by policy");
+                }
+
+                nlohmann::json result = {{"hash", hash.ToString()}};
+                return CreateResponse(id, io::JsonValue(result));
+            }
+            catch (const std::exception& e)
+            {
+                return CreateErrorResponse(id, -32602, std::string("Invalid transaction data: ") + e.what());
+            }
+        }
+        if (method == "submitblock")
+        {
+            if (!params.IsArray() || params.Size() == 0 || !params[0].IsString())
+            {
+                return CreateErrorResponse(id, -32602, "Invalid params");
+            }
+
+            auto blockchain = system_->GetBlockchain();
+            if (!blockchain)
+            {
+                return CreateErrorResponse(id, -32603, "Blockchain unavailable");
+            }
+
+            try
+            {
+                const auto raw = cryptography::Base64::Decode(params[0].GetString());
+                std::istringstream stream(std::string(reinterpret_cast<const char*>(raw.Data()), raw.Size()));
+                io::BinaryReader reader(stream);
+
+                auto block = std::make_shared<ledger::Block>();
+                block->Deserialize(reader);
+
+                ledger::ImportData import_data;
+                import_data.blocks.push_back(block);
+                import_data.verify = true;
+
+                if (!blockchain->ImportBlocks(import_data))
+                {
+                    return CreateErrorResponse(id, static_cast<int>(RpcError::PolicyFailed),
+                                               "Block rejected by blockchain");
+                }
+
+                nlohmann::json result = {{"hash", block->GetHash().ToString()}};
+                return CreateResponse(id, io::JsonValue(result));
+            }
+            catch (const std::exception& e)
+            {
+                return CreateErrorResponse(id, -32602, std::string("Invalid block data: ") + e.what());
+            }
+        }
+        if (method == "validateaddress")
+        {
+            if (!params.IsArray() || params.Size() == 0 || !params[0].IsString())
+            {
+                return CreateErrorResponse(id, -32602, "Invalid params");
+            }
+
+            const std::string address = params[0].GetString();
+            bool is_valid = false;
+
+            try
+            {
+                io::UInt160::FromAddress(address);
+                is_valid = true;
+            }
+            catch (...)
+            {
+                try
+                {
+                    io::UInt160::FromString(address);
+                    is_valid = true;
+                }
+                catch (...)
+                {
+                    is_valid = false;
+                }
+            }
+
+            nlohmann::json result = {{"address", address}, {"isvalid", is_valid}};
+            return CreateResponse(id, io::JsonValue(result));
+        }
+
+        return CreateErrorResponse(id, -32601, "RPC method not implemented");
     }
     catch (const std::exception& e)
     {
@@ -218,19 +1198,21 @@ io::JsonValue RpcServer::ProcessRequest(const io::JsonValue& request)
     }
 }
 
-std::string RpcServer::ValidateRequest(const io::JsonValue& request)
+std::string RpcServer::ValidateRequest(const io::JsonValue& request) const
 {
     if (!request.IsObject())
     {
         return "Request must be a JSON object";
     }
 
-    if (!request.HasMember("jsonrpc") || request.GetString("jsonrpc") != "2.0")
+    auto jsonrpc = request.GetValue("jsonrpc");
+    if (!jsonrpc.IsString() || jsonrpc.GetString() != "2.0")
     {
         return "Missing or invalid jsonrpc field";
     }
 
-    if (!request.HasMember("method") || !request.GetValue("method").IsString())
+    auto method = request.GetValue("method");
+    if (!method.IsString())
     {
         return "Missing or invalid method field";
     }
@@ -238,13 +1220,13 @@ std::string RpcServer::ValidateRequest(const io::JsonValue& request)
     return "";
 }
 
-io::JsonValue RpcServer::CreateResponse(const io::JsonValue& id, const io::JsonValue& result)
+io::JsonValue RpcServer::CreateResponse(const io::JsonValue& id, const io::JsonValue& result) const
 {
     json response = {{"jsonrpc", "2.0"}, {"result", result.GetJson()}, {"id", id.GetJson()}};
     return io::JsonValue(response);
 }
 
-io::JsonValue RpcServer::CreateErrorResponse(const io::JsonValue& id, int code, const std::string& message)
+io::JsonValue RpcServer::CreateErrorResponse(const io::JsonValue& id, int code, const std::string& message) const
 {
     json response = {{"jsonrpc", "2.0"},
                      {"error", {{"code", code}, {"message", message}}},
@@ -252,208 +1234,9 @@ io::JsonValue RpcServer::CreateErrorResponse(const io::JsonValue& id, int code, 
     return io::JsonValue(response);
 }
 
-// RPC method implementations delegate to RpcMethods class
-io::JsonValue RpcServer::GetBlock(const io::JsonValue& params)
+void RpcServer::SetSystem(std::shared_ptr<NeoSystem> system)
 {
-    RpcMethods methods(system_);
-    return methods.GetBlock(params);
-}
-
-io::JsonValue RpcServer::GetBlockCount(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetBlockCount();
-}
-
-io::JsonValue RpcServer::GetBlockHash(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    if (params.IsArray() && params.Size() > 0)
-    {
-        return methods.GetBlockHash(params[0].GetInt());
-    }
-    throw std::runtime_error("Invalid parameters");
-}
-
-io::JsonValue RpcServer::GetBlockHeader(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetBlockHeader(params);
-}
-
-io::JsonValue RpcServer::GetTransaction(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetTransaction(params);
-}
-
-io::JsonValue RpcServer::SendRawTransaction(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.SendRawTransaction(params);
-}
-
-io::JsonValue RpcServer::GetRawMempool(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetRawMempool(params);
-}
-
-io::JsonValue RpcServer::GetContractState(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetContractState(params);
-}
-
-io::JsonValue RpcServer::GetNativeContracts(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetNativeContracts();
-}
-
-io::JsonValue RpcServer::GetStorage(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetStorage(params);
-}
-
-io::JsonValue RpcServer::FindStorage(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.FindStorage(params);
-}
-
-io::JsonValue RpcServer::InvokeFunction(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.InvokeFunction(params);
-}
-
-io::JsonValue RpcServer::InvokeScript(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.InvokeScript(params);
-}
-
-io::JsonValue RpcServer::GetUnclaimedGas(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetUnclaimedGas(params);
-}
-
-io::JsonValue RpcServer::GetCandidates(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetCandidates();
-}
-
-io::JsonValue RpcServer::GetCommittee(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetCommittee();
-}
-
-io::JsonValue RpcServer::GetNextBlockValidators(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetNextBlockValidators();
-}
-
-io::JsonValue RpcServer::GetConnectionCount(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetConnectionCount();
-}
-
-io::JsonValue RpcServer::GetPeers(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetPeers();
-}
-
-io::JsonValue RpcServer::GetVersion(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetVersion();
-}
-
-io::JsonValue RpcServer::GetNep17Balances(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetNep17Balances(params);
-}
-
-io::JsonValue RpcServer::GetNep17Transfers(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetNep17Transfers(params);
-}
-
-io::JsonValue RpcServer::GetNep11Balances(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetNep11Balances(params);
-}
-
-io::JsonValue RpcServer::GetNep11Transfers(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetNep11Transfers(params);
-}
-
-io::JsonValue RpcServer::GetNep11Properties(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetNep11Properties(params);
-}
-
-io::JsonValue RpcServer::GetProof(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetProof(params);
-}
-
-io::JsonValue RpcServer::GetStateRoot(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetStateRoot(params);
-}
-
-io::JsonValue RpcServer::GetStateHeight(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetStateHeight();
-}
-
-io::JsonValue RpcServer::GetState(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetState(params);
-}
-
-io::JsonValue RpcServer::FindStates(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.FindStates(params);
-}
-
-io::JsonValue RpcServer::GetApplicationLog(const io::JsonValue& params)
-{
-    RpcMethods methods(system_);
-    return methods.GetApplicationLog(params);
-}
-
-io::JsonValue RpcServer::GetStatistics() const
-{
-    io::JsonValue stats;
-    stats.AddMember("totalRequests", static_cast<int64_t>(total_requests_.load()));
-    stats.AddMember("failedRequests", static_cast<int64_t>(failed_requests_.load()));
-
-    auto now = std::chrono::steady_clock::now();
-    auto uptime = std::chrono::duration_cast<std::chrono::seconds>(now - start_time_).count();
-    stats.AddMember("uptimeSeconds", static_cast<int64_t>(uptime));
-
-    return stats;
+    system_ = std::move(system);
 }
 
 }  // namespace neo::rpc
