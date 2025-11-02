@@ -63,3 +63,5 @@ add_test(NAME smartcontract_nep_complete COMMAND test_nep_standards_complete)
 set_tests_properties(smartcontract_basic PROPERTIES TIMEOUT 30)
 set_tests_properties(smartcontract_native_complete PROPERTIES TIMEOUT 60)
 set_tests_properties(smartcontract_nep_complete PROPERTIES TIMEOUT 60)
+
+neo_add_test(test_application_engine_stack test_application_engine_stack.cpp)
