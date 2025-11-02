@@ -81,13 +81,13 @@ class ApplicationEngine : public vm::ExecutionEngine
      * @brief Gets the gas consumed.
      * @return The gas consumed.
      */
-    int64_t GetGasConsumed() const { return gas_consumed_; }
+    int64_t GetGasConsumed() const { return gasConsumed_; }
 
     /**
      * @brief Gets the gas remaining.
      * @return The gas remaining.
      */
-    int64_t GetGasLeft() const { return gas_limit_ - gas_consumed_; }
+    int64_t GetGasLeft() const { return gasLeft_; }
 
     /**
      * @brief Gets the trigger type.
@@ -172,7 +172,7 @@ class ApplicationEngine : public vm::ExecutionEngine
      * @brief Loads a script.
      * @param script The script to load.
      */
-    void LoadScript(const std::vector<uint8_t>& script);
+    void LoadScript(const std::vector<uint8_t>& script, int32_t offset = 0);
 
     /**
      * @brief Adds a log entry.
@@ -457,13 +457,10 @@ class ApplicationEngine : public vm::ExecutionEngine
     TriggerType trigger_;
     const io::ISerializable* container_;
     std::shared_ptr<persistence::DataCache> snapshot_;
-    const ledger::Block* persisting_block_;
-    const ledger::Block* persistingBlock_;  // Alternative naming for compatibility
-    int64_t gas_limit_;
-    int64_t gas_consumed_;
-    int64_t gasConsumed_;  // Alternative naming for compatibility
-    int64_t gasLeft_;
-    neo::vm::VMState state_;
+    const ledger::Block* persistingBlock_ = nullptr;
+    int64_t gasConsumed_ = 0;
+    int64_t gasLeft_ = TestModeGas;
+    neo::vm::VMState state_{neo::vm::VMState::None};
     std::vector<LogEntry> logs_;
     std::vector<NotifyEntry> notifications_;
     int64_t gasPrice_ = 1000;
@@ -472,8 +469,8 @@ class ApplicationEngine : public vm::ExecutionEngine
     int64_t networkFeePerByte_ = 1000;
     ProtocolSettings protocolSettings_;
     std::string exception_;
-    std::vector<io::UInt160> scriptHashes_;                      // Stack of script hashes for context tracking
-    std::unordered_map<io::UInt160, int64_t> invocationCounts_;  // Track invocation counts per script
+    std::vector<io::UInt160> scriptHashes_;
+    std::unordered_map<io::UInt160, int64_t> invocationCounts_;
 
     std::unordered_map<std::string, SystemCallDescriptor> systemCalls_;
 

@@ -37,7 +37,7 @@ TEST_F(ApplicationEngineTest, Constructor)
     EXPECT_EQ(engine_->GetSnapshot(), snapshot_);
     EXPECT_EQ(engine_->GetPersistingBlock(), nullptr);
     EXPECT_EQ(engine_->GetGasConsumed(), 0);
-    EXPECT_EQ(engine_->GetGasLeft(), -1);
+    EXPECT_EQ(engine_->GetGasLeft(), ApplicationEngine::TestModeGas);
     EXPECT_EQ(engine_->GetCurrentScriptHash(), UInt160());
     EXPECT_EQ(engine_->GetCallingScriptHash(), UInt160());
     EXPECT_EQ(engine_->GetEntryScriptHash(), UInt160());
@@ -61,6 +61,10 @@ TEST_F(ApplicationEngineTest, LoadScript)
     auto actualScript = engine_->GetCurrentContext().GetScript().GetScript();
     EXPECT_EQ(actualScript.Size(), script.size());
     EXPECT_TRUE(std::equal(actualScript.begin(), actualScript.end(), script.Data()));
+
+    auto engineScript = engine_->GetScript();
+    EXPECT_EQ(engineScript.Size(), script.Size());
+    EXPECT_TRUE(std::equal(engineScript.begin(), engineScript.end(), script.Data()));
 }
 
 TEST_F(ApplicationEngineTest, Execute)
