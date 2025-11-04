@@ -38,12 +38,10 @@ auto& Logger() { return *core::Logger::GetInstance(); }
 
 ConsensusService::ConsensusService(std::shared_ptr<core::ProtocolSettings> protocolSettings,
                                    std::shared_ptr<ledger::Blockchain> blockchain,
-                                   std::shared_ptr<ledger::MemoryPool> memoryPool,
-                                   std::shared_ptr<network::p2p::P2PServer> p2pServer)
+                                   std::shared_ptr<ledger::MemoryPool> memoryPool)
     : protocolSettings_(std::move(protocolSettings)),
       blockchain_(std::move(blockchain)),
-      memoryPool_(std::move(memoryPool)),
-      p2pServer_(std::move(p2pServer))
+      memoryPool_(std::move(memoryPool))
 {
     if (!protocolSettings_) throw std::invalid_argument("ConsensusService requires protocol settings");
     if (!blockchain_) throw std::invalid_argument("ConsensusService requires blockchain instance");
@@ -88,7 +86,36 @@ void ConsensusService::Start()
     network::p2p::LocalNode::GetInstance().SetConsensusService(shared_from_this());
 
     Logger().Info("Consensus service started with {} validators", validators_.size());
+    return;
 }
+
+bool ConsensusService::StartManually()
+{
+    std::lock_guard<std::mutex> lock(mutex_);
+    if (running_) return true;
+
+    EnsureConsensusInitialised();
+
+    if (!consensus_)
+    {
+        Logger().Error("ConsensusService failed to initialise DbftConsensus engine");
+        return false;
+    }
+
+    EnsureTransactionSubscription();
+
+    running_ = true;
+    consensus_->Start();
+
+    network::p2p::LocalNode::GetInstance().SetConsensusService(shared_from_this());
+
+    Logger().Info("Consensus service started manually with {} validators", validators_.size());
+    return true;
+}
+
+bool ConsensusService::IsAutoStartEnabled() const { return autoStart_.load(); }
+
+void ConsensusService::SetAutoStartEnabled(bool value) { autoStart_.store(value); }
 
 void ConsensusService::Stop()
 {
@@ -97,6 +124,22 @@ void ConsensusService::Stop()
 
     running_ = false;
     if (consensus_) consensus_->Stop();
+
+    if (transaction_subscription_registered_)
+    {
+        ledger::MemoryPoolEvents::UnsubscribeTransactionAdded(transaction_added_handler_);
+        transaction_subscription_registered_ = false;
+    }
+
+    if (transaction_removed_subscription_registered_)
+    {
+        ledger::MemoryPoolEvents::UnsubscribeTransactionRemoved(transaction_removed_handler_);
+        transaction_removed_subscription_registered_ = false;
+    }
+    transaction_added_handler_ = nullptr;
+    transaction_removed_handler_ = nullptr;
+
+    consensus_.reset();
 
     Logger().Info("Consensus service stopped");
 }

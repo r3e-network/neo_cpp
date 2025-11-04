@@ -35,17 +35,14 @@ class MemoryPool;
 class Block;
 }  // namespace ledger
 
-namespace network
+namespace network::p2p
 {
-namespace p2p
-{
-class P2PServer;
+class LocalNode;
 namespace payloads
 {
 class ExtensiblePayload;
 }  // namespace payloads
-}  // namespace p2p
-}  // namespace network
+}  // namespace network::p2p
 
 namespace cryptography::ecc
 {
@@ -112,8 +109,7 @@ class ConsensusService : public std::enable_shared_from_this<ConsensusService>
      * @param p2pServer P2P server used for broadcasting consensus payloads.
      */
     ConsensusService(std::shared_ptr<core::ProtocolSettings> protocolSettings,
-                     std::shared_ptr<ledger::Blockchain> blockchain, std::shared_ptr<ledger::MemoryPool> memoryPool,
-                     std::shared_ptr<network::p2p::P2PServer> p2pServer);
+                     std::shared_ptr<ledger::Blockchain> blockchain, std::shared_ptr<ledger::MemoryPool> memoryPool);
 
     /**
      * @brief Inject the validator key pair used for signing consensus payloads.
@@ -129,6 +125,15 @@ class ConsensusService : public std::enable_shared_from_this<ConsensusService>
      * @brief Stop the consensus service.
      */
     void Stop();
+
+    /**
+     * @brief Manually start consensus when auto-start is disabled.
+     * @return true if consensus transitions to running state.
+     */
+    bool StartManually();
+
+    bool IsAutoStartEnabled() const;
+    void SetAutoStartEnabled(bool value);
 
     /**
      * @brief Returns true when consensus threads are running.
@@ -180,14 +185,13 @@ class ConsensusService : public std::enable_shared_from_this<ConsensusService>
     std::shared_ptr<core::ProtocolSettings> protocolSettings_;
     std::shared_ptr<ledger::Blockchain> blockchain_;
     std::shared_ptr<ledger::MemoryPool> memoryPool_;
-    std::shared_ptr<network::p2p::P2PServer> p2pServer_;
-
     std::shared_ptr<DbftConsensus> consensus_;
     std::vector<cryptography::ecc::ECPoint> validators_;
     std::vector<io::UInt160> validatorHashes_;
     std::unique_ptr<cryptography::ecc::KeyPair> keyPair_;
     io::UInt160 nodeScriptHash_;
     std::atomic<bool> missing_key_warning_emitted_{false};
+    std::atomic<bool> autoStart_{false};
 
     mutable std::mutex mutex_;
     std::atomic<bool> running_{false};

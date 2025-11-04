@@ -9,13 +9,18 @@
 #include <neo/node/neo_node.h>
 
 #include <neo/core/configuration_manager.h>
+#include <neo/core/protocol_settings.h>
 #include <neo/cryptography/ecc/keypair.h>
 #include <neo/io/byte_vector.h>
-
-#include <neo/consensus/consensus_service.h>
+#include <neo/network/ip_address.h>
+#include <neo/network/ip_endpoint.h>
+#include <neo/rpc/rpc_server.h>
 
 #include <exception>
+#include <nlohmann/json.hpp>
 
+namespace neo::node
+{
 namespace
 {
 bool LooksLikeWIF(const std::string& key)
@@ -24,99 +29,100 @@ bool LooksLikeWIF(const std::string& key)
 }
 }
 
-namespace neo::node
-{
 void NeoNode::InitializeLogging()
 {
-    logger_ = logging::Logger::GetInstance();
-    logger_->SetLevel(logging::LogLevel::Info);
+    logger_ = logging::Logger::Create("neo-node");
+    if (!logger_)
+    {
+        logger_ = std::shared_ptr<logging::Logger>(&logging::Logger::Instance(), [](logging::Logger*) {});
+    }
+    logger_->SetLevel(logging::Logger::Level::Info);
     logger_->Info("Neo C++ Node starting up...");
 }
 
-bool NeoNode::LoadProtocolSettings()
+bool NeoNode::LoadSettings()
 {
     try
     {
-        protocolSettings_ = ProtocolSettings::Load(configPath_);
-        if (!protocolSettings_)
+        settings_ = Settings::Load(configPath_);
+
+        if (!dataPath_.empty())
         {
-            logger_->Warning("Failed to load config from {}, using defaults", configPath_);
-            protocolSettings_ = std::make_unique<ProtocolSettings>(ProtocolSettings::GetDefault());
+            settings_.Storage.Path = dataPath_;
+            settings_.Application.DataPath = dataPath_;
         }
+
+        if (!settings_.Protocol)
+        {
+            logger_->Warning(std::string("Protocol settings missing in ") + configPath_ + ", using defaults");
+            settings_.Protocol = std::make_shared<ProtocolSettings>(ProtocolSettings::GetDefault());
+        }
+
+        protocolSettings_ = settings_.Protocol;
 
         auto& configManager = core::ConfigurationManager::GetInstance();
         if (!configManager.LoadFromFile(configPath_))
         {
-            logger_->Warning("Failed to load extended configuration from {}", configPath_);
+            logger_->Warning(std::string("Failed to load extended configuration from ") + configPath_);
         }
+        consensusAutoStart_ = configManager.GetConsensusConfig().auto_start;
+
+        auto coreSettings = std::make_shared<core::ProtocolSettings>();
+        nlohmann::json protocolJson;
+        protocolJson["Magic"] = protocolSettings_->GetNetwork();
+        protocolJson["AddressVersion"] = protocolSettings_->GetAddressVersion();
+        protocolJson["MillisecondsPerBlock"] = protocolSettings_->GetMillisecondsPerBlock();
+        protocolJson["MaxTransactionsPerBlock"] = protocolSettings_->GetMaxTransactionsPerBlock();
+        protocolJson["MemoryPoolMaxTransactions"] = protocolSettings_->GetMemoryPoolMaxTransactions();
+        protocolJson["MaxTraceableBlocks"] = protocolSettings_->GetMaxTraceableBlocks();
+        protocolJson["MaxValidUntilBlockIncrement"] = protocolSettings_->GetMaxValidUntilBlockIncrement();
+        protocolJson["ValidatorsCount"] = static_cast<uint32_t>(protocolSettings_->GetValidatorsCount());
+
+        const auto appendPoints =
+            [](const std::vector<cryptography::ecc::ECPoint>& points)
+            {
+                std::vector<std::string> hex;
+                hex.reserve(points.size());
+                for (const auto& point : points)
+                {
+                    hex.push_back(point.ToHex());
+                }
+                return hex;
+            };
+
+        protocolJson["StandbyCommittee"] = appendPoints(protocolSettings_->GetStandbyCommittee());
+        protocolJson["StandbyValidators"] = appendPoints(protocolSettings_->GetStandbyValidators());
+        protocolJson["SeedList"] = protocolSettings_->GetSeedList();
+
+        if (!coreSettings->LoadFromJson(protocolJson.dump()))
+        {
+            logger_->Warning("Failed to synchronise core protocol settings; using defaults");
+        }
+
+        core::ProtocolSettingsSingleton::Initialize(coreSettings);
 
         logger_->Info("Protocol settings loaded successfully");
         return true;
     }
     catch (const std::exception& e)
     {
-        logger_->Error("Failed to load protocol settings: {}", e.what());
+        logger_->Error(std::string("Failed to load node settings: ") + e.what());
         return false;
     }
 }
 
-bool NeoNode::InitializeStorage()
+bool NeoNode::InitializeNeoSystem()
 {
     try
     {
-        store_ = std::make_shared<persistence::LevelDBStore>(dataPath_);
-        logger_->Info("Storage initialized at: {}", dataPath_);
+        neoSystem_ = std::make_shared<NeoSystem>(protocolSettings_, settings_.Storage.Engine, settings_.Storage.Path);
+        logger_->Info("Neo system prepared with storage engine '" + settings_.Storage.Engine + "' at " +
+                      settings_.Storage.Path);
         return true;
     }
     catch (const std::exception& e)
     {
-        logger_->Error("Failed to initialize storage: {}", e.what());
-        return false;
-    }
-}
-
-bool NeoNode::InitializeBlockchain()
-{
-    try
-    {
-        blockchain_ = std::make_shared<ledger::Blockchain>(protocolSettings_, store_);
-        memoryPool_ = std::make_shared<ledger::MemoryPool>(protocolSettings_);
-
-        logger_->Info("Blockchain initialized");
-        return true;
-    }
-    catch (const std::exception& e)
-    {
-        logger_->Error("Failed to initialize blockchain: {}", e.what());
-        return false;
-    }
-}
-
-bool NeoNode::InitializeSmartContracts()
-{
-    try
-    {
-        // Initialize application engine
-        applicationEngine_ = std::make_shared<smartcontract::ApplicationEngine>(protocolSettings_, blockchain_);
-
-        // Initialize native contracts
-        gasToken_ = smartcontract::native::GasToken::GetInstance();
-        neoToken_ = smartcontract::native::NeoToken::GetInstance();
-        policyContract_ = smartcontract::native::PolicyContract::GetInstance();
-        roleManagement_ = smartcontract::native::RoleManagement::GetInstance();
-
-        // Register native contracts with application engine
-        applicationEngine_->RegisterNativeContract(gasToken_);
-        applicationEngine_->RegisterNativeContract(neoToken_);
-        applicationEngine_->RegisterNativeContract(policyContract_);
-        applicationEngine_->RegisterNativeContract(roleManagement_);
-
-        logger_->Info("Smart contract system initialized");
-        return true;
-    }
-    catch (const std::exception& e)
-    {
-        logger_->Error("Failed to initialize smart contracts: {}", e.what());
+        logger_->Error(std::string("Failed to initialize Neo system: ") + e.what());
         return false;
     }
 }
@@ -125,45 +131,81 @@ bool NeoNode::InitializeNetwork()
 {
     try
     {
-        // Create P2P server
-        auto listenEndpoint = network::IPEndPoint(network::IPAddress::Any(), protocolSettings_->GetP2PPort());
+        network::IPEndPoint tcpEndpoint;
+        std::string tcpAddress = settings_.P2P.BindAddress.empty() ? "0.0.0.0" : settings_.P2P.BindAddress;
+        std::string tcpEndpointString = tcpAddress + ":" + std::to_string(settings_.P2P.Port);
 
-        p2pServer_ = std::make_shared<network::P2PServer>(listenEndpoint, protocolSettings_, blockchain_, memoryPool_);
+        if (!network::IPEndPoint::TryParse(tcpEndpointString, tcpEndpoint))
+        {
+            tcpEndpoint = network::IPEndPoint(network::IPAddress::Any(), static_cast<uint16_t>(settings_.P2P.Port));
+        }
 
-        // Create peer discovery service
-        peerDiscovery_ = std::make_shared<network::PeerDiscoveryService>(protocolSettings_, p2pServer_);
+        networkConfig_.SetTcp(tcpEndpoint);
+        networkConfig_.SetMinDesiredConnections(static_cast<uint32_t>(settings_.P2P.MinDesiredConnections));
+        networkConfig_.SetMaxConnections(static_cast<uint32_t>(settings_.P2P.MaxConnections));
+        networkConfig_.SetMaxConnectionsPerAddress(static_cast<uint32_t>(settings_.P2P.MaxConnectionsPerAddress));
 
-        logger_->Info("Network layer initialized");
+        std::vector<network::IPEndPoint> seeds;
+        seeds.reserve(settings_.P2P.Seeds.size());
+        for (const auto& seed : settings_.P2P.Seeds)
+        {
+            network::IPEndPoint endpoint;
+            if (network::IPEndPoint::TryParse(seed, endpoint))
+            {
+                seeds.push_back(endpoint);
+            }
+        }
+        if (!seeds.empty())
+        {
+            networkConfig_.SetSeedList(seeds);
+        }
+
+        if (neoSystem_)
+        {
+            neoSystem_->SetNetworkConfig(networkConfig_);
+        }
+
+        logger_->Info("Network configuration prepared (P2P port " +
+                      std::to_string(tcpEndpoint.GetPort()) + ")");
         return true;
     }
     catch (const std::exception& e)
     {
-        logger_->Error("Failed to initialize network: {}", e.what());
+        logger_->Error(std::string("Failed to configure network: ") + e.what());
         return false;
     }
 }
 
-bool NeoNode::InitializeRPC()
+bool NeoNode::InitializeRpcServer()
 {
     try
     {
-        if (protocolSettings_->IsRpcEnabled())
-        {
-            rpcServer_ = std::make_shared<rpc::RpcServer>(protocolSettings_->GetRpcPort(), blockchain_, memoryPool_,
-                                                          applicationEngine_);
-
-            logger_->Info("RPC server initialized on port {}", protocolSettings_->GetRpcPort());
-        }
-        else
+        if (!settings_.RPC.Enabled)
         {
             logger_->Info("RPC server disabled");
+            rpcServer_.reset();
+            return true;
         }
 
+        rpc::RpcConfig config;
+        config.bind_address = settings_.RPC.BindAddress;
+        config.port = static_cast<uint16_t>(settings_.RPC.Port);
+        config.max_concurrent_requests = static_cast<uint32_t>(settings_.RPC.MaxConnections);
+        config.request_timeout_seconds =
+            settings_.RPC.RequestTimeoutMs > 0 ? static_cast<uint32_t>(settings_.RPC.RequestTimeoutMs / 1000)
+                                               : config.request_timeout_seconds;
+        config.enable_cors = settings_.RPC.EnableCors;
+        config.allowed_origins = settings_.RPC.AllowedOrigins;
+
+        rpcServer_ = std::make_shared<rpc::RpcServer>(config, neoSystem_);
+
+        logger_->Info("RPC server configured on " + config.bind_address + ":" + std::to_string(config.port));
         return true;
     }
     catch (const std::exception& e)
     {
-        logger_->Error("Failed to initialize RPC: {}", e.what());
+        logger_->Error(std::string("Failed to initialize RPC server: ") + e.what());
+        rpcServer_.reset();
         return false;
     }
 }
@@ -172,55 +214,75 @@ bool NeoNode::InitializeConsensus()
 {
     try
     {
-        if (protocolSettings_->IsConsensusEnabled())
+        if (consensusService_)
         {
-            consensusService_ =
-                std::make_shared<consensus::ConsensusService>(protocolSettings_, blockchain_, memoryPool_, p2pServer_);
+            return true;
+        }
 
-            const auto& consensusConfig = core::ConfigurationManager::GetInstance().GetConsensusConfig();
-            std::unique_ptr<cryptography::ecc::KeyPair> consensusKey;
+        const auto& consensusConfig = core::ConfigurationManager::GetInstance().GetConsensusConfig();
+        if (!consensusConfig.enabled)
+        {
+            logger_->Info("Consensus service disabled");
+            consensusService_.reset();
+            consensusAutoStart_ = false;
+            return true;
+        }
 
-            if (!consensusConfig.private_key.empty())
+        if (!blockchain_ || !memoryPool_)
+        {
+            logger_->Error("Consensus configuration enabled but blockchain or memory pool is unavailable");
+            return false;
+        }
+
+        auto coreSettings = core::ProtocolSettingsSingleton::GetInstance();
+        if (!coreSettings)
+        {
+            coreSettings = std::make_shared<core::ProtocolSettings>();
+            core::ProtocolSettingsSingleton::Initialize(coreSettings);
+        }
+
+        consensusService_ =
+            std::make_shared<consensus::ConsensusService>(coreSettings, blockchain_, memoryPool_);
+
+        consensusService_->SetAutoStartEnabled(consensusAutoStart_);
+        network::p2p::LocalNode::GetInstance().SetConsensusService(consensusService_);
+
+        if (!consensusConfig.private_key.empty())
+        {
+            try
             {
-                try
+                std::unique_ptr<cryptography::ecc::KeyPair> consensusKey;
+                if (LooksLikeWIF(consensusConfig.private_key))
                 {
-                    if (LooksLikeWIF(consensusConfig.private_key))
-                    {
-                        consensusKey = cryptography::ecc::KeyPair::FromWIF(consensusConfig.private_key);
-                    }
-                    else
-                    {
-                        auto rawKey = io::ByteVector::FromHexString(consensusConfig.private_key);
-                        consensusKey = std::make_unique<cryptography::ecc::KeyPair>(rawKey);
-                    }
+                    consensusKey = cryptography::ecc::KeyPair::FromWIF(consensusConfig.private_key);
                 }
-                catch (const std::exception& ex)
+                else
                 {
-                    logger_->Warning("Failed to parse consensus private key: {}", ex.what());
+                    auto rawKey = io::ByteVector::FromHexString(consensusConfig.private_key);
+                    consensusKey = std::make_unique<cryptography::ecc::KeyPair>(rawKey);
+                }
+
+                if (consensusKey)
+                {
+                    consensusService_->SetKeyPair(std::move(consensusKey));
                 }
             }
-
-            if (consensusKey)
+            catch (const std::exception& ex)
             {
-                consensusService_->SetKeyPair(std::move(consensusKey));
+                logger_->Warning("Failed to parse consensus private key: " + std::string(ex.what()));
             }
-            else if (!consensusConfig.private_key.empty())
-            {
-                logger_->Warning("Consensus private key configuration present but unusable; node will not sign consensus payloads");
-            }
-
-            logger_->Info("Consensus service initialized");
         }
         else
         {
-            logger_->Info("Consensus service disabled");
+            logger_->Warning("Consensus enabled but no private key configured; node will not sign payloads");
         }
 
         return true;
     }
     catch (const std::exception& e)
     {
-        logger_->Error("Failed to initialize consensus: {}", e.what());
+        logger_->Error(std::string("Failed to initialise consensus: ") + e.what());
+        consensusService_.reset();
         return false;
     }
 }

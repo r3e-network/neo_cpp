@@ -7,10 +7,10 @@
  */
 
 #include <neo/node/neo_node.h>
+#include <neo/core/configuration_manager.h>
 
 #include <chrono>
 #include <exception>
-#include <iostream>
 
 namespace neo::node
 {
@@ -34,52 +34,27 @@ bool NeoNode::Initialize()
     {
         logger_->Info("Initializing Neo C++ Node...");
 
-        // Load protocol settings
-        if (!LoadProtocolSettings())
+        if (!LoadSettings())
         {
-            logger_->Error("Failed to load protocol settings");
+            logger_->Error("Failed to load node settings");
             return false;
         }
 
-        // Initialize storage
-        if (!InitializeStorage())
+        if (!InitializeNeoSystem())
         {
-            logger_->Error("Failed to initialize storage");
+            logger_->Error("Failed to initialize core Neo system");
             return false;
         }
 
-        // Initialize blockchain
-        if (!InitializeBlockchain())
-        {
-            logger_->Error("Failed to initialize blockchain");
-            return false;
-        }
-
-        // Initialize smart contract system
-        if (!InitializeSmartContracts())
-        {
-            logger_->Error("Failed to initialize smart contracts");
-            return false;
-        }
-
-        // Initialize network layer
         if (!InitializeNetwork())
         {
-            logger_->Error("Failed to initialize network");
+            logger_->Error("Failed to configure network");
             return false;
         }
 
-        // Initialize RPC server
-        if (!InitializeRPC())
+        if (!InitializeRpcServer())
         {
-            logger_->Error("Failed to initialize RPC server");
-            return false;
-        }
-
-        // Initialize consensus
-        if (!InitializeConsensus())
-        {
-            logger_->Error("Failed to initialize consensus");
+            logger_->Error("Failed to set up RPC server");
             return false;
         }
 
@@ -88,7 +63,7 @@ bool NeoNode::Initialize()
     }
     catch (const std::exception& e)
     {
-        logger_->Error("Exception during initialization: {}", e.what());
+        logger_->Error(std::string("Exception during initialization: ") + e.what());
         return false;
     }
 }
@@ -105,72 +80,89 @@ bool NeoNode::Start()
     {
         logger_->Info("Starting Neo C++ Node...");
 
-        // Start storage
-        if (!store_->Start())
+        if (!neoSystem_)
         {
-            logger_->Error("Failed to start storage");
+            logger_->Error("Neo system not initialized");
             return false;
         }
 
-        // Start blockchain
-        if (!blockchain_->Start())
+        if (!neoSystem_->Start())
         {
-            logger_->Error("Failed to start blockchain");
+            logger_->Error("Failed to start Neo system");
             return false;
         }
 
-        // Start memory pool
-        if (!memoryPool_->Start())
+        blockchain_ = neoSystem_->GetBlockchain();
+        memoryPool_ = neoSystem_->GetMemoryPool();
+        localNode_ = neoSystem_->GetLocalNode();
+
+        if (!blockchain_ || !memoryPool_)
         {
-            logger_->Error("Failed to start memory pool");
+            logger_->Error("Neo system not fully initialised (blockchain or mempool missing)");
             return false;
         }
 
-        // Start network layer
-        if (!p2pServer_->Start())
+        if (localNode_)
         {
-            logger_->Error("Failed to start P2P server");
+            if (!localNode_->IsRunning() && !localNode_->Start(networkConfig_))
+            {
+                logger_->Error("Failed to start local P2P node");
+                return false;
+            }
+        }
+        else
+        {
+            logger_->Warning("Local node instance unavailable; network services are disabled");
+        }
+
+        if (!InitializeConsensus())
+        {
+            logger_->Error("Consensus initialization failed");
             return false;
         }
 
-        if (!peerDiscovery_->Start())
+        if (consensusService_)
         {
-            logger_->Error("Failed to start peer discovery");
-            return false;
+            consensusAutoStart_ = core::ConfigurationManager::GetInstance().GetConsensusConfig().auto_start;
+            if (!localNode_ || !localNode_->IsRunning())
+            {
+                logger_->Warning("Consensus configured but local node is not running; skipping consensus start");
+            }
+            else if (consensusAutoStart_)
+            {
+                consensusService_->SetAutoStartEnabled(true);
+                consensusService_->Start();
+                logger_->Info("Consensus service started with " +
+                              std::to_string(consensusService_->GetValidators().size()) + " validators");
+            }
+            else
+            {
+                consensusService_->SetAutoStartEnabled(false);
+                logger_->Info("Consensus service initialised but auto-start disabled");
+            }
         }
 
-        // Start RPC server
-        if (rpcServer_ && !rpcServer_->Start())
+        if (rpcServer_)
         {
-            logger_->Error("Failed to start RPC server");
-            return false;
-        }
-
-        // Start consensus
-        if (consensusService_ && !consensusService_->Start())
-        {
-            logger_->Error("Failed to start consensus service");
-            return false;
+            rpcServer_->Start();
         }
 
         running_ = true;
+        shutdownRequested_ = false;
 
         // Start main processing thread
         mainThread_ = std::thread(&NeoNode::MainLoop, this);
 
         logger_->Info("Neo C++ Node started successfully");
-        logger_->Info("Network: {}", protocolSettings_->GetNetwork());
-        logger_->Info("P2P Port: {}", p2pServer_->GetListenPort());
-        if (rpcServer_)
-        {
-            logger_->Info("RPC Port: {}", rpcServer_->GetPort());
-        }
+        const auto networkMagic = protocolSettings_ ? protocolSettings_->GetNetwork() : 0;
+        logger_->Info("Network magic: " + std::to_string(networkMagic));
+        logger_->Info("P2P Port: " + std::to_string(networkConfig_.GetTcp().GetPort()));
 
         return true;
     }
     catch (const std::exception& e)
     {
-        logger_->Error("Exception during startup: {}", e.what());
+        logger_->Error(std::string("Exception during startup: ") + e.what());
         return false;
     }
 }
@@ -187,59 +179,43 @@ void NeoNode::Stop()
 
     try
     {
-        // Stop consensus first
+        if (mainThread_.joinable())
+        {
+            mainThread_.join();
+        }
+
         if (consensusService_)
         {
             consensusService_->Stop();
+            consensusService_.reset();
         }
+        network::p2p::LocalNode::GetInstance().SetConsensusService(nullptr);
 
-        // Stop RPC server
         if (rpcServer_)
         {
             rpcServer_->Stop();
         }
 
-        // Stop network layer
-        if (peerDiscovery_)
+        if (localNode_ && localNode_->IsRunning())
         {
-            peerDiscovery_->Stop();
+            localNode_->Stop();
         }
 
-        if (p2pServer_)
+        if (neoSystem_)
         {
-            p2pServer_->Stop();
+            neoSystem_->Stop();
         }
 
-        // Stop memory pool
-        if (memoryPool_)
-        {
-            memoryPool_->Stop();
-        }
-
-        // Stop blockchain
-        if (blockchain_)
-        {
-            blockchain_->Stop();
-        }
-
-        // Stop storage
-        if (store_)
-        {
-            store_->Stop();
-        }
-
-        // Wait for main thread to finish
-        if (mainThread_.joinable())
-        {
-            mainThread_.join();
-        }
+        blockchain_.reset();
+        memoryPool_.reset();
+        localNode_.reset();
 
         running_ = false;
         logger_->Info("Neo C++ Node stopped successfully");
     }
     catch (const std::exception& e)
     {
-        logger_->Error("Exception during shutdown: {}", e.what());
+        logger_->Error(std::string("Exception during shutdown: ") + e.what());
     }
 }
 
@@ -247,7 +223,75 @@ bool NeoNode::IsRunning() const { return running_; }
 
 uint32_t NeoNode::GetBlockHeight() const { return blockchain_ ? blockchain_->GetHeight() : 0; }
 
-size_t NeoNode::GetConnectedPeersCount() const { return p2pServer_ ? p2pServer_->GetConnectedPeersCount() : 0; }
+size_t NeoNode::GetConnectedPeersCount() const
+{
+    return localNode_ ? localNode_->GetConnectedCount() : 0;
+}
 
-size_t NeoNode::GetMemoryPoolCount() const { return memoryPool_ ? memoryPool_->GetTransactionCount() : 0; }
+size_t NeoNode::GetMemoryPoolCount() const { return memoryPool_ ? memoryPool_->GetSize() : 0; }
+
+bool NeoNode::StartConsensusManually()
+{
+    if (!running_)
+    {
+        logger_->Warning("Cannot start consensus manually when node is not running");
+        return false;
+    }
+
+    if (!consensusService_)
+    {
+        logger_->Warning("Consensus service not initialised; ensure consensus is enabled in configuration");
+        return false;
+    }
+
+    if (!localNode_ || !localNode_->IsRunning())
+    {
+        logger_->Warning("Local node is not running; start networking before enabling consensus");
+        return false;
+    }
+
+    if (consensusService_->StartManually())
+    {
+        logger_->Info("Consensus service started manually");
+        return true;
+    }
+
+    logger_->Warning("Consensus service failed to start manually");
+    return false;
+}
+
+bool NeoNode::RestartConsensus()
+{
+    if (!running_)
+    {
+        logger_->Warning("Cannot restart consensus when node is not running");
+        return false;
+    }
+
+    if (!consensusService_)
+    {
+        logger_->Warning("Consensus service not initialised; ensure consensus is enabled in configuration");
+        return false;
+    }
+
+    if (!localNode_ || !localNode_->IsRunning())
+    {
+        logger_->Warning("Local node is not running; cannot restart consensus");
+        return false;
+    }
+
+    if (consensusService_->IsRunning())
+    {
+        consensusService_->Stop();
+    }
+
+    if (consensusService_->StartManually())
+    {
+        logger_->Info("Consensus service restarted successfully");
+        return true;
+    }
+
+    logger_->Error("Consensus service restart failed");
+    return false;
+}
 }  // namespace neo::node

@@ -37,7 +37,7 @@ struct NativeContract
 {
     std::string name;
     io::UInt160 hash;
-    uint32_t id;
+    int32_t id;
     std::string nef_file;
     std::string manifest;
 };

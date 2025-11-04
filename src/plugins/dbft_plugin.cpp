@@ -136,4 +136,10 @@ bool DBFTPlugin::IsConsensusRunning() const
     std::lock_guard<std::mutex> lock(mutex_);
     return consensusService_ != nullptr;
 }
+
+void DBFTPlugin::SetConsensusAutoStart(bool value)
+{
+    std::lock_guard<std::mutex> lock(mutex_);
+    autoStart_ = value;
+}
 }  // namespace neo::plugins

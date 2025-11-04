@@ -4,6 +4,7 @@
 #include <neo/consensus/consensus_service.h>
 #include <neo/network/p2p/local_node.h>
 #include <neo/node/neo_system.h>
+#include <neo/rpc/error_codes.h>
 
 #include <limits>
 #include <mutex>
@@ -205,6 +206,83 @@ nlohmann::json RPCMethods::GetConsensusState(std::shared_ptr<node::NeoSystem> ne
     result["validators"] = std::move(validators);
 
     return result;
+}
+
+nlohmann::json RPCMethods::StartConsensus(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+{
+    (void)neoSystem;
+    if (params.is_array() && !params.empty())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "startconsensus does not accept parameters");
+    }
+
+    auto& localNode = network::p2p::LocalNode::GetInstance();
+    auto consensus = localNode.GetConsensusService();
+    if (!consensus)
+    {
+        throw RpcException(ErrorCode::ConsensusError, "Consensus service unavailable");
+    }
+
+    if (!localNode.IsRunning())
+    {
+        throw RpcException(ErrorCode::ConsensusError, "Local node is not running");
+    }
+
+    const bool started = consensus->StartManually();
+    return started && consensus->IsRunning();
+}
+
+nlohmann::json RPCMethods::StopConsensus(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+{
+    (void)neoSystem;
+    if (params.is_array() && !params.empty())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "stopconsensus does not accept parameters");
+    }
+
+    auto& localNode = network::p2p::LocalNode::GetInstance();
+    auto consensus = localNode.GetConsensusService();
+    if (!consensus)
+    {
+        throw RpcException(ErrorCode::ConsensusError, "Consensus service unavailable");
+    }
+
+    const bool wasRunning = consensus->IsRunning();
+    if (wasRunning)
+    {
+        consensus->Stop();
+    }
+    return wasRunning;
+}
+
+nlohmann::json RPCMethods::RestartConsensus(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params)
+{
+    (void)neoSystem;
+    if (params.is_array() && !params.empty())
+    {
+        throw RpcException(ErrorCode::InvalidParams, "restartconsensus does not accept parameters");
+    }
+
+    auto& localNode = network::p2p::LocalNode::GetInstance();
+    auto consensus = localNode.GetConsensusService();
+    if (!consensus)
+    {
+        throw RpcException(ErrorCode::ConsensusError, "Consensus service unavailable");
+    }
+
+    if (!localNode.IsRunning())
+    {
+        throw RpcException(ErrorCode::ConsensusError, "Local node is not running");
+    }
+
+    const bool wasRunning = consensus->IsRunning();
+    if (wasRunning)
+    {
+        consensus->Stop();
+    }
+
+    const bool started = consensus->StartManually();
+    return started && consensus->IsRunning();
 }
 
 void RPCMethods::SetConsensusServiceOverrideForTesting(std::optional<consensus::ConsensusService::Status> status,

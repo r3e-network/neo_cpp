@@ -83,6 +83,8 @@ else()
     add_compile_definitions(HAS_HTTPLIB)
 endif()
 
+find_package(ZLIB REQUIRED)
+
 # Common libraries
 set(NEO_COMMON_LIBRARIES
     ${CMAKE_THREAD_LIBS_INIT}
@@ -94,4 +96,5 @@ set(NEO_COMMON_LIBRARIES
     ${ROCKSDB_LIBRARIES}
     ${BOOST_LIBRARIES}
     ${HTTPLIB_LIBRARIES}
+    ZLIB::ZLIB
 )

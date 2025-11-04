@@ -214,6 +214,21 @@ class RPCMethods
      */
     static nlohmann::json GetConsensusState(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
 
+    /**
+     * @brief Starts consensus manually.
+     */
+    static nlohmann::json StartConsensus(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
+    /**
+     * @brief Stops the consensus service.
+     */
+    static nlohmann::json StopConsensus(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
+    /**
+     * @brief Restarts the consensus service.
+     */
+    static nlohmann::json RestartConsensus(std::shared_ptr<node::NeoSystem> neoSystem, const nlohmann::json& params);
+
     static void SetConsensusServiceOverrideForTesting(
         std::optional<consensus::ConsensusService::Status> status,
         std::vector<io::UInt160> validatorHashes = {});

@@ -7,10 +7,11 @@
  */
 
 #include <neo/core/protocol_settings.h>
-#include <neo/cryptography/helper.h>
-#include <neo/io/json.h>
+#include <neo/cryptography/ecc/ecpoint.h>
 #include <neo/ledger/transaction.h>
 #include <neo/ledger/block.h>
+
+#include <nlohmann/json.hpp>
 
 #include <fstream>
 #include <sstream>
@@ -71,7 +72,7 @@ bool ProtocolSettings::LoadFromJson(const std::string& json)
 {
     try
     {
-        auto config = io::Json::Parse(json);
+        auto config = nlohmann::json::parse(json);
 
         // Network settings
         if (config.contains("Magic"))
@@ -85,9 +86,10 @@ bool ProtocolSettings::LoadFromJson(const std::string& json)
         }
 
         // Consensus settings
-        if (config.contains("StandbyValidators"))
+        if (config.contains("StandbyValidators") && config["StandbyValidators"].is_array())
         {
             std::vector<std::string> validators;
+            validators.reserve(config["StandbyValidators"].size());
             for (const auto& v : config["StandbyValidators"])
             {
                 validators.push_back(v.get<std::string>());
@@ -139,16 +141,16 @@ bool ProtocolSettings::LoadFromJson(const std::string& json)
         }
 
         // Hardforks
-        if (config.contains("Hardforks"))
+        if (config.contains("Hardforks") && config["Hardforks"].is_object())
         {
-            for (const auto& [name, height] : config["Hardforks"].items())
+            for (const auto& [name, value] : config["Hardforks"].items())
             {
-                hardforks_.push_back({name, height.get<uint32_t>()});
+                hardforks_.push_back({name, value.get<uint32_t>()});
             }
         }
 
         // Seed nodes
-        if (config.contains("SeedList"))
+        if (config.contains("SeedList") && config["SeedList"].is_array())
         {
             seed_nodes_.clear();
             for (const auto& seed : config["SeedList"])
@@ -482,8 +484,14 @@ void ProtocolSettings::LoadStandbyValidators(const std::vector<std::string>& pub
 
     for (const auto& key_str : public_keys)
     {
-        auto key_bytes = cryptography::Helper::HexToBytes(key_str);
-        standby_validators_.emplace_back(key_bytes);
+        try
+        {
+            standby_validators_.push_back(cryptography::ecc::ECPoint::Parse(key_str));
+        }
+        catch (const std::exception&)
+        {
+            standby_validators_.emplace_back();
+        }
     }
 }
 

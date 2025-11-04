@@ -7,10 +7,15 @@
  */
 
 #include <neo/console_service/service_proxy.h>
+#include <neo/core/configuration_manager.h>
+#include <neo/consensus/consensus_service.h>
 #include <neo/io/uint160.h>
 #include <neo/logging/logger.h>
+#include <neo/network/p2p/local_node.h>
 #include <neo/node/neo_system.h>
 #include <neo/persistence/data_cache.h>
+#include <neo/rpc/error_codes.h>
+#include <neo/rpc/rpc_methods.h>
 #include <neo/smartcontract/application_engine.h>
 #include <neo/smartcontract/native/gas_token.h>
 #include <neo/smartcontract/native/native_contract.h>
@@ -25,6 +30,25 @@
 
 namespace neo::console_service
 {
+namespace
+{
+std::string ConsensusPhaseToString(consensus::ConsensusPhase phase)
+{
+    switch (phase)
+    {
+        case consensus::ConsensusPhase::Initial: return "Initial";
+        case consensus::ConsensusPhase::Primary: return "Primary";
+        case consensus::ConsensusPhase::Backup: return "Backup";
+        case consensus::ConsensusPhase::RequestSent: return "RequestSent";
+        case consensus::ConsensusPhase::RequestReceived: return "RequestReceived";
+        case consensus::ConsensusPhase::SignatureSent: return "SignatureSent";
+        case consensus::ConsensusPhase::BlockSent: return "BlockSent";
+        case consensus::ConsensusPhase::ViewChanging: return "ViewChanging";
+        default: return "Unknown";
+    }
+}
+}  // namespace
+
 ServiceProxy::ServiceProxy(std::shared_ptr<neo::node::NeoSystem> system) : neoSystem_(system) {}
 
 std::shared_ptr<ServiceProxy> ServiceProxy::Create(std::shared_ptr<neo::node::NeoSystem> system)
@@ -796,12 +820,166 @@ std::string ServiceProxy::HandleConsensusCommands(const std::string& command)
         std::string cmd, subcmd;
         iss >> cmd >> subcmd;
 
-        if (subcmd == "start" || subcmd == "stop" || subcmd == "status")
+        const auto lowercase = [](std::string value)
         {
-            return "Consensus command '" + subcmd + "' recognized. Implementation requires consensus service.";
+            std::transform(value.begin(), value.end(), value.begin(),
+                           [](unsigned char c) { return static_cast<char>(std::tolower(c)); });
+            return value;
+        };
+
+        subcmd = lowercase(subcmd);
+
+        const auto helpMessage =
+            "Consensus commands:\n"
+            "  consensus start      Start consensus manually (requires local node running)\n"
+            "  consensus stop       Stop the consensus service\n"
+            "  consensus restart    Restart consensus (stop + start)\n"
+            "  consensus status     Show consensus status snapshot\n"
+            "  consensus autostart <on|off>  Toggle automatic consensus start";
+
+        if (subcmd.empty() || subcmd == "help")
+        {
+            return helpMessage;
         }
 
-        return "Unknown consensus subcommand: " + subcmd;
+        auto& localNode = neo::network::p2p::LocalNode::GetInstance();
+        auto consensus = localNode.GetConsensusService();
+        const bool autoStart = consensus ? consensus->IsAutoStartEnabled() : false;
+
+        if (subcmd == "start")
+        {
+            try
+            {
+                if (!consensus)
+                {
+                    return "Consensus service unavailable";
+                }
+
+                if (!localNode.IsRunning())
+                {
+                    return "Local node is not running; start networking first";
+                }
+
+                return consensus->StartManually() ? "Consensus started" : "Consensus start failed";
+            }
+            catch (const neo::rpc::RpcException& ex)
+            {
+                return std::string("Consensus start error: ") + ex.GetMessage();
+            }
+            catch (const std::exception& ex)
+            {
+                return std::string("Consensus start exception: ") + ex.what();
+            }
+        }
+        if (subcmd == "stop")
+        {
+            try
+            {
+                if (consensus && consensus->IsRunning())
+                {
+                    consensus->Stop();
+                    return "Consensus stopped";
+                }
+                return "Consensus already stopped";
+            }
+            catch (const neo::rpc::RpcException& ex)
+            {
+                return std::string("Consensus stop error: ") + ex.GetMessage();
+            }
+            catch (const std::exception& ex)
+            {
+                return std::string("Consensus stop exception: ") + ex.what();
+            }
+        }
+        if (subcmd == "restart")
+        {
+            try
+            {
+                if (!consensus)
+                {
+                    return "Consensus service unavailable";
+                }
+
+                if (!localNode.IsRunning())
+                {
+                    return "Local node is not running; start networking first";
+                }
+
+                if (consensus->IsRunning())
+                {
+                    consensus->Stop();
+                }
+
+                return consensus->StartManually() ? "Consensus restarted" : "Consensus restart failed";
+            }
+            catch (const neo::rpc::RpcException& ex)
+            {
+                return std::string("Consensus restart error: ") + ex.GetMessage();
+            }
+            catch (const std::exception& ex)
+            {
+                return std::string("Consensus restart exception: ") + ex.what();
+            }
+        }
+        if (subcmd == "status")
+        {
+            try
+            {
+                if (!consensus)
+                {
+                    return "Consensus service unavailable";
+                }
+
+                auto status = consensus->GetStatus();
+                std::ostringstream result;
+                result << "Consensus Status\n";
+                result << " Running: " << (status.running ? "Yes" : "No") << "\n";
+                result << " Block: " << status.blockIndex << "\n";
+                result << " View: " << status.viewNumber << "\n";
+                result << " Phase: " << ConsensusPhaseToString(status.phase) << "\n";
+                result << " AutoStart: " << (autoStart ? "Enabled" : "Disabled");
+                return result.str();
+            }
+            catch (const neo::rpc::RpcException& ex)
+            {
+                return std::string("Consensus status error: ") + ex.GetMessage();
+            }
+            catch (const std::exception& ex)
+            {
+                return std::string("Consensus status exception: ") + ex.what();
+            }
+        }
+
+        if (subcmd == "autostart")
+        {
+            std::string mode;
+            iss >> mode;
+            mode = lowercase(mode);
+
+            if (!consensus)
+            {
+                return "Consensus service unavailable";
+            }
+
+            if (mode.empty())
+            {
+                return std::string("AutoStart is currently ") + (autoStart ? "enabled" : "disabled");
+            }
+
+            const bool enable = (mode == "on" || mode == "true" || mode == "1" || mode == "enable");
+            const bool disable = (mode == "off" || mode == "false" || mode == "0" || mode == "disable");
+
+            if (!enable && !disable)
+            {
+                return "Usage: consensus autostart <on|off>";
+            }
+
+            consensus->SetAutoStartEnabled(enable);
+            core::ConfigurationManager::GetInstance().GetConsensusConfig().auto_start = enable;
+            return std::string("Consensus auto-start ") + (enable ? "enabled" : "disabled");
+        }
+
+        return "Unknown consensus subcommand: " + subcmd + "\n\n" + helpMessage;
     }
     catch (const std::exception& e)
     {

@@ -18,16 +18,12 @@
 #include <neo/ledger/blockchain.h>
 #include <neo/ledger/mempool.h>
 #include <neo/logging/logger.h>
-#include <neo/network/p2p_server.h>
-#include <neo/network/peer_discovery_service.h>
-#include <neo/persistence/rocksdb_store.h>
+#include <neo/network/p2p/channels_config.h>
+#include <neo/network/p2p/local_node.h>
+#include <neo/node/neo_system.h>
 #include <neo/protocol_settings.h>
 #include <neo/rpc/rpc_server.h>
-#include <neo/smartcontract/application_engine.h>
-#include <neo/smartcontract/native/gas_token.h>
-#include <neo/smartcontract/native/neo_token.h>
-#include <neo/smartcontract/native/policy_contract.h>
-#include <neo/smartcontract/native/role_management.h>
+#include <neo/settings.h>
 
 namespace neo::node
 {
@@ -41,33 +37,26 @@ class NeoNode
 {
    private:
     // Core configuration
-    std::shared_ptr<ProtocolSettings> protocolSettings_;
     std::string configPath_;
     std::string dataPath_;
+    Settings settings_;
+    std::shared_ptr<ProtocolSettings> protocolSettings_;
+    network::p2p::ChannelsConfig networkConfig_;
 
     // Core blockchain components
-    std::shared_ptr<persistence::LevelDBStore> store_;
     std::shared_ptr<ledger::Blockchain> blockchain_;
     std::shared_ptr<ledger::MemoryPool> memoryPool_;
 
-    // Network layer
-    std::shared_ptr<network::P2PServer> p2pServer_;
-    std::shared_ptr<network::PeerDiscoveryService> peerDiscovery_;
-
-    // Smart contract system
-    std::shared_ptr<smartcontract::ApplicationEngine> applicationEngine_;
-
-    // Native contracts
-    std::shared_ptr<smartcontract::native::GasToken> gasToken_;
-    std::shared_ptr<smartcontract::native::NeoToken> neoToken_;
-    std::shared_ptr<smartcontract::native::PolicyContract> policyContract_;
-    std::shared_ptr<smartcontract::native::RoleManagement> roleManagement_;
+    // System wrapper
+    std::shared_ptr<NeoSystem> neoSystem_;
+    std::shared_ptr<network::p2p::LocalNode> localNode_;
 
     // RPC and API
     std::shared_ptr<rpc::RpcServer> rpcServer_;
 
     // Consensus
     std::shared_ptr<consensus::ConsensusService> consensusService_;
+    bool consensusAutoStart_{false};
 
     // Runtime state
     std::atomic<bool> running_;
@@ -131,22 +120,40 @@ class NeoNode
      */
     size_t GetMemoryPoolCount() const;
 
+    /**
+     * @brief Get the consensus service instance (may be null)
+     * @return Consensus service shared pointer
+     */
+    std::shared_ptr<consensus::ConsensusService> GetConsensusService() const { return consensusService_; }
+
+    /**
+     * @brief Manually start consensus when auto-start is disabled.
+     * @return true if consensus successfully starts.
+     */
+    bool StartConsensusManually();
+
+    /**
+     * @brief Restart consensus service.
+     * @return true if restart succeeds.
+     */
+    bool RestartConsensus();
+
+    /**
+     * @brief Indicates whether consensus is configured to auto-start.
+     */
+    bool IsConsensusAutoStartEnabled() const { return consensusAutoStart_; }
+
    private:
     // Initialization methods (implemented in neo_node_initialization.cpp)
     void InitializeLogging();
-    bool LoadProtocolSettings();
-    bool InitializeStorage();
-    bool InitializeBlockchain();
-    bool InitializeSmartContracts();
+    bool LoadSettings();
+    bool InitializeNeoSystem();
     bool InitializeNetwork();
-    bool InitializeRPC();
+    bool InitializeRpcServer();
     bool InitializeConsensus();
 
     // Processing methods (implemented in neo_node_processing.cpp)
     void MainLoop();
-    void ProcessBlockchain();
-    void ProcessMemoryPool();
-    void ProcessNetwork();
     void ReportStatus();
     size_t GetMemoryUsage() const;
 };

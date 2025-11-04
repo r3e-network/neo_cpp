@@ -24,6 +24,7 @@ add_library(neo_core OBJECT
     performance_config.cpp # Performance optimization settings
     string_intern.cpp      # String interning for efficiency
     ../settings.cpp        # Settings implementation
+    protocol_settings.cpp
     ../protocol_settings.cpp
     ../protocol_settings_json.cpp
     ../hardfork.cpp

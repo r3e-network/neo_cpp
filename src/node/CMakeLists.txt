@@ -3,9 +3,9 @@
 # Collect node source files (enable real NeoSystem)
 set(NODE_SOURCES
     neo_system.cpp
-    # neo_node.cpp
-    # neo_node_initialization.cpp
-    # neo_node_processing.cpp
+    neo_node.cpp
+    neo_node_initialization.cpp
+    neo_node_processing.cpp
 )
 
 # Create node core object library
@@ -18,6 +18,7 @@ target_link_libraries(neo_node_core
         neo_ledger
         neo_network
         neo_persistence
+        neo_rpc
 )
 
 # Set target properties

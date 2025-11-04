@@ -49,6 +49,16 @@ class DBFTPlugin : public PluginBase
      */
     bool IsConsensusRunning() const;
 
+    /**
+     * @brief Returns whether consensus is configured to auto start.
+     */
+    bool IsConsensusAutoStart() const { return autoStart_; }
+
+    /**
+     * @brief Sets auto-start flag for consensus.
+     */
+    void SetConsensusAutoStart(bool value);
+
    protected:
     /**
      * @brief Initializes the plugin.
